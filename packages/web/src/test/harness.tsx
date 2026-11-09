@@ -18,7 +18,7 @@ export function startApi(opts: { waive?: boolean } = {}) {
   const failNext: Array<{ re: RegExp; left: number; status: number }> = [];
   const loseNext: Array<{ re: RegExp; left: number }> = [];
   const dropNext: Array<{ re: RegExp; left: number }> = [];
-  const holds: Array<{ re: RegExp; left: number; gate: Promise<void>; open: () => void; seen: number }> = [];
+  const holds: Array<{ re: RegExp; left: number; gate: Promise<void>; open: () => void; seen: number; fail: boolean }> = [];
   const stalls: RegExp[] = [];
   const calls: string[] = [];
   const aborted = (init: RequestInit) =>
@@ -52,6 +52,7 @@ export function startApi(opts: { waive?: boolean } = {}) {
       hold.left--;
       hold.seen++;
       await Promise.race([hold.gate, aborted(init)]); // the server has already answered; only the delivery is late
+      if (hold.fail) throw new TypeError("delivery failed");
     }
     const ln = loseNext.find((f) => f.left > 0 && f.re.test(label));
     if (ln) {
@@ -82,9 +83,17 @@ export function startApi(opts: { waive?: boolean } = {}) {
     hold: (re: RegExp, n = 1) => {
       let open!: () => void;
       const gate = new Promise<void>((r) => (open = r));
-      const h = { re, left: n, gate, open, seen: 0 };
+      const h = { re, left: n, gate, open, seen: 0, fail: false };
       holds.push(h);
-      return { release: () => open(), seen: () => h.seen };
+      return {
+        release: () => open(),
+        /** Release, but the reply never arrives: the page sees a network failure. */
+        releaseAsFailure: () => {
+          h.fail = true;
+          open();
+        },
+        seen: () => h.seen,
+      };
     },
     /** Matching requests never answer; they end only when the page aborts or times them out. */
     stall: (re: RegExp) => void stalls.push(re),

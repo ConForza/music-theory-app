@@ -365,6 +365,21 @@ describe("P2: registration recovery", () => {
     expect((await api.me()).user).toMatchObject({ email: ADA.email, isGuest: false });
   });
 
+  it("reply lost AND the follow-up session check fails: a later retry still recovers instead of being stranded", async () => {
+    const h = startApi();
+    const user = userEvent.setup();
+    renderApp("/");
+    await toAccountForm(user);
+    await fill(user);
+    h.loseNext(/POST \/api\/auth\/register/, 1); // the account is created, reply and cookie lost
+    h.dropNext(/GET \/api\/me$/, 1); // ...and the session check that follows fails at the network too
+    await user.click(screen.getByRole("button", { name: "Create account" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(/couldn't confirm/i);
+    await user.click(screen.getByRole("button", { name: "Create account" })); // server says email_taken; the form re-checks, then signs in
+    await screen.findByRole("region", { name: /Treble clef: notes on the lines/ });
+    expect((await api.me()).user).toMatchObject({ email: ADA.email, isGuest: false });
+  });
+
   it("network down while creating: nothing is created, a later retry succeeds once", async () => {
     const h = startApi();
     const user = userEvent.setup();
@@ -639,6 +654,70 @@ describe("P5: settings never show an unsaved value as saved", () => {
     expect(h.calls.filter((c) => c === "PATCH /api/me/profile")).toHaveLength(before + 3);
   });
 
+  it("a failed nickname save puts the saved nickname back in the field; Retry saves what was typed", async () => {
+    const h = startApi();
+    const user = userEvent.setup();
+    renderApp("/");
+    await toSettings(user);
+    const field = screen.getByLabelText("Nickname") as HTMLInputElement;
+    const before = field.value;
+    await user.clear(field);
+    await user.type(field, "Grace");
+    h.failNext(patchSettings, 1);
+    await user.click(screen.getByRole("button", { name: "Save nickname" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(/nickname wasn't saved/i);
+    expect((screen.getByLabelText("Nickname") as HTMLInputElement).value).toBe(before);
+    expect((await api.me()).user.displayName).toBe(before);
+    await user.click(screen.getByRole("button", { name: "Try again" }));
+    await waitFor(async () => expect((await api.me()).user.displayName).toBe("Grace"));
+    expect((screen.getByLabelText("Nickname") as HTMLInputElement).value).toBe("Grace");
+    expect(screen.queryByRole("alert")).toBeNull();
+  });
+
+  it("two queued nickname saves, the first succeeding and the second failing: the field shows the confirmed one, and Retry works", async () => {
+    const h = startApi();
+    const user = userEvent.setup();
+    renderApp("/");
+    await toSettings(user);
+    const field = () => screen.getByLabelText("Nickname") as HTMLInputElement;
+    const slow = h.hold(patchSettings); // N1 is in flight (and slow)
+    await user.clear(field());
+    await user.type(field(), "Nia");
+    await user.click(screen.getByRole("button", { name: "Save nickname" }));
+    await waitFor(() => expect(slow.seen()).toBe(1));
+    h.failNext(patchSettings, 1); // N2 will be the next request sent, and it fails
+    await user.clear(field());
+    await user.type(field(), "Nora");
+    await user.click(screen.getByRole("button", { name: "Save nickname" })); // queued behind N1
+    slow.release();
+    expect(await screen.findByRole("alert")).toHaveTextContent(/nickname wasn't saved/i);
+    const server = (await api.me()).user.displayName;
+    expect(server).toBe("Nia");
+    expect(field().value).toBe(server); // not the original nickname, which is older than what the server holds
+    await user.click(screen.getByRole("button", { name: "Try again" }));
+    await waitFor(async () => expect((await api.me()).user.displayName).toBe("Nora"));
+    expect(field().value).toBe("Nora");
+    expect(screen.queryByRole("alert")).toBeNull();
+  });
+
+  it("a newer edit typed while a nickname save fails is not overwritten by the rollback", async () => {
+    const h = startApi();
+    const user = userEvent.setup();
+    renderApp("/");
+    await toSettings(user);
+    const field = () => screen.getByLabelText("Nickname") as HTMLInputElement;
+    const slow = h.hold(patchSettings);
+    await user.clear(field());
+    await user.type(field(), "Nora");
+    await user.click(screen.getByRole("button", { name: "Save nickname" }));
+    await waitFor(() => expect(slow.seen()).toBe(1));
+    await user.clear(field());
+    await user.type(field(), "Newer"); // typed while the save is still pending
+    slow.releaseAsFailure(); // the pending save now fails at the network
+    expect(await screen.findByRole("alert")).toHaveTextContent(/nickname wasn't saved/i);
+    expect(field().value).toBe("Newer"); // the rollback does not overwrite what the learner typed since
+  });
+
   it("a failure of the first queued save reverts it while the second still saves", async () => {
     const h = startApi();
     const user = userEvent.setup();
@@ -828,6 +907,7 @@ describe("lesson hints and feedback are announced politely", () => {
     h.setOffline(false);
     await user.click(screen.getByRole("button", { name: "Need a hint?" }));
     await waitFor(() => expect(hintRegion()).toHaveTextContent(/Hint 1:/));
+    expect(screen.queryByRole("alert")).toBeNull(); // the old "didn't load" message is gone once the hint loads
   });
 
   it("the answer verdict is spoken from one region that stays mounted, for right and wrong answers and for network errors", async () => {
