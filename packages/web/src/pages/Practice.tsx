@@ -109,6 +109,8 @@ export function PracticeMore() {
   const [error, setError] = useState<ApiFailure | null>(null);
   const [count, setCount] = useState(0);
   const next = useCallback(() => {
+    // A retry starts clean: an earlier failure must not hide the new question (review R11).
+    setError(null);
     setItem(null);
     api.generate(templateId).then(setItem, (e: unknown) => setError(e instanceof ApiFailure ? e : new ApiFailure(0, "network", "Could not create a question.")));
   }, [templateId]);

@@ -147,3 +147,28 @@ describe("R7: every scheduled note stays cancellable", () => {
     expect(stops.every((s) => s.stop <= 0.2 + 1e-9)).toBe(true);
   });
 });
+
+describe("R11: practice generation recovers after a failed attempt", () => {
+  it("503 generation_failed → Try again → 200 shows the question and removes the error", async () => {
+    const { startApi, renderApp } = await import("./harness");
+    startApi();
+    await fetch("/api/auth/guest", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
+    await fetch("/api/me/profile", { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ onboarded: true, experience: "new" }) });
+    const real = globalThis.fetch;
+    let failed = false;
+    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      if (!failed && String(input).includes("/api/practice/generate")) {
+        failed = true;
+        return new Response(JSON.stringify({ error: { code: "generation_failed", message: "We couldn't make that question just now. Try another one." } }), { status: 503 });
+      }
+      return real(input, init);
+    }) as typeof fetch;
+    const user = userEvent.setup();
+    renderApp("/practice/more/t.g1.note-read");
+    expect(await screen.findByRole("alert")).toHaveTextContent(/couldn't make that question/);
+    await user.click(screen.getByRole("button", { name: "Try again" }));
+    expect(await screen.findByRole("heading", { level: 1, name: /Name this note/ })).toBeInTheDocument();
+    expect(screen.queryByText(/couldn't make that question/)).toBeNull();
+    globalThis.fetch = real;
+  });
+});
