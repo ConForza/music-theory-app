@@ -209,6 +209,7 @@ export function Question({
   async function hint() {
     if (hintBusy.current || hints.length >= item.hintCount) return;
     hintBusy.current = true;
+    setError(null); // a retry replaces the earlier "hint didn't load" message
     try {
       const r = await send.hint(item.id, hints.length + 1);
       setHints((h) => {

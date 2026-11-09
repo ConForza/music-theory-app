@@ -47,11 +47,18 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
       }
       // The earlier reply was lost with no session to show for it, so the account may already be this person's.
       // Signing in with the very same details settles it; a guest's session is never swapped this way.
-      if (err instanceof ApiFailure && err.code === "email_taken" && doubt.current === "none") {
-        try {
-          return await api.login({ email, password });
-        } catch {
-          /* not theirs: fall through to the plain "already registered" message */
+      if (err instanceof ApiFailure && err.code === "email_taken" && doubt.current !== null) {
+        // An earlier reply was lost. If the session check that followed also failed, ask again now that we can reach
+        // the server, so a transient failure there cannot strand the learner. Only a confirmed no-session state may
+        // sign in with the typed details; a guest's session is never swapped.
+        const found = await sessionAfterDoubt();
+        if (found) return found;
+        if (doubt.current === "none") {
+          try {
+            return await api.login({ email, password });
+          } catch {
+            /* not theirs: fall through to the plain "already registered" message */
+          }
         }
       }
       throw err;

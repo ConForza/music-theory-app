@@ -129,3 +129,40 @@ describe("retrying a registration whose response was lost", () => {
     expect((await reg(g, "ada")).status).toBe(409);
   });
 });
+
+describe("limiter memory is bounded", () => {
+  it("never holds more than maxKeys entries, even when every key is live", async () => {
+    const { RateLimiter } = await import("../src/auth.ts");
+    const limiter = new RateLimiter(10, 15 * 60_000, 100);
+    for (let i = 0; i < 1000; i++) limiter.check(`k${i}`, 1_000); // all within one window: none expired
+    const size = (limiter as unknown as { hits: Map<string, unknown> }).hits.size;
+    expect(size).toBeLessThanOrEqual(100);
+    expect(() => limiter.check("k999", 1_001)).not.toThrow(); // the newest keys are still tracked
+  });
+  it("still counts a key correctly while under the cap", async () => {
+    const { RateLimiter } = await import("../src/auth.ts");
+    const limiter = new RateLimiter(3, 60_000, 100);
+    for (let i = 0; i < 3; i++) limiter.check("a", 1);
+    expect(() => limiter.check("a", 2)).toThrow(/Too many/);
+  });
+});
+
+describe("limiter eviction only ever makes room for a new key", () => {
+  it("does not delete an existing key's window at capacity: its limit still applies", async () => {
+    const { RateLimiter } = await import("../src/auth.ts");
+    const l = new RateLimiter(1, 60_000, 2);
+    l.check("a", 1000);
+    l.check("b", 1000);
+    expect(() => l.check("a", 1001)).toThrow(/Too many/); // `a` is oldest, but it is not being inserted
+    expect(() => l.check("b", 1001)).toThrow(/Too many/);
+  });
+  it("evicts the oldest live key only when a genuinely new key arrives", async () => {
+    const { RateLimiter } = await import("../src/auth.ts");
+    const l = new RateLimiter(1, 60_000, 2);
+    l.check("a", 1000);
+    l.check("b", 1000);
+    l.check("c", 1001); // new key: `a` (oldest) makes room
+    expect(() => l.check("b", 1002)).toThrow(/Too many/);
+    expect(() => l.check("a", 1002)).not.toThrow(); // forgotten, starts a fresh window
+  });
+});
