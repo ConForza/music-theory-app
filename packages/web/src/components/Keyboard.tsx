@@ -1,9 +1,15 @@
 import { useEffect, useRef } from "react";
 import { diatonic, parsePitch } from "../lib/music";
+import { ScrollCueText, useScrollCue } from "./ScrollCue";
 
 const WHITE = ["C", "D", "E", "F", "G", "A", "B"];
 // black key sits after these white keys
 const BLACK_AFTER: Record<string, string> = { C: "C#", D: "D#", F: "F#", G: "G#", A: "A#" };
+const FLAT_OF: Record<string, string> = { "C#": "D♭", "D#": "E♭", "F#": "G♭", "G#": "A♭", "A#": "B♭" };
+
+/** Accessible name: written pitch and octave for every key ("G4", "C4, middle C", "F♯4 / G♭4"), so octaves are never ambiguous. */
+export const whiteKeyLabel = (pitch: string) => `${pitch}${pitch === "C4" ? ", middle C" : ""}`;
+export const blackKeyLabel = (sharp: string, octave: number) => `${sharp.replace("#", "♯")}${octave} / ${FLAT_OF[sharp]}${octave}`;
 
 /** A playable on-screen piano. Keys are buttons (keyboard and touch); sound is optional and handled by `onPlay`. */
 export function Keyboard({ from, to, highlight = [], onPlay }: { from: string; to: string; highlight?: string[]; onPlay: (pitch: string) => void }) {
@@ -16,6 +22,7 @@ export function Keyboard({ from, to, highlight = [], onPlay }: { from: string; t
     whites.push({ step, octave, pitch: `${step}${octave}` });
   }
   const scroller = useRef<HTMLDivElement>(null);
+  const cue = useScrollCue(scroller, [from, to]);
   const first = highlight[0];
   useEffect(() => {
     const el = scroller.current;
@@ -24,22 +31,27 @@ export function Keyboard({ from, to, highlight = [], onPlay }: { from: string; t
   }, [first]);
 
   return (
-    <div className="keyboard-scroll" ref={scroller} role="group" aria-label="Piano keyboard. Each key plays its note." tabIndex={-1}>
-      <div className="keyboard" style={{ ["--keys" as string]: whites.length }}>
-        {whites.map((k) => {
-          const black = BLACK_AFTER[k.step];
-          const lit = highlight.includes(k.pitch);
-          return (
-            <div className="key-slot" key={k.pitch}>
-              <button type="button" data-pitch={k.pitch} className={`key white${lit ? " is-lit" : ""}`} aria-label={`${k.step}${k.pitch === "C4" ? ", middle C" : ""}`} onClick={() => onPlay(k.pitch)}>
-                <span className="key-name" aria-hidden="true">{k.step}{k.step === "C" ? k.octave : ""}</span>
-              </button>
-              {black && k.pitch !== whites[whites.length - 1]!.pitch && (
-                <button type="button" className="key black" aria-label={`${black.replace("#", " sharp")}${k.octave}`} onClick={() => onPlay(`${black}${k.octave}`)} />
-              )}
-            </div>
-          );
-        })}
+    <div className={`keyboard-wrap${cue.left ? " more-left" : ""}${cue.right ? " more-right" : ""}`}>
+      <ScrollCueText left={cue.left} right={cue.right} what="keys" />
+      <div className="keyboard-frame">
+        <div className="keyboard-scroll" ref={scroller} role="group" aria-label="Piano keyboard. Each key plays its note." tabIndex={-1}>
+          <div className="keyboard" style={{ ["--keys" as string]: whites.length }}>
+            {whites.map((k) => {
+              const black = BLACK_AFTER[k.step];
+              const lit = highlight.includes(k.pitch);
+              return (
+                <div className="key-slot" key={k.pitch}>
+                  <button type="button" data-pitch={k.pitch} className={`key white${lit ? " is-lit" : ""}`} aria-label={whiteKeyLabel(k.pitch)} onClick={() => onPlay(k.pitch)}>
+                    <span className="key-name" aria-hidden="true">{k.step}{k.step === "C" ? k.octave : ""}</span>
+                  </button>
+                  {black && k.pitch !== whites[whites.length - 1]!.pitch && (
+                    <button type="button" className="key black" aria-label={blackKeyLabel(black, k.octave)} onClick={() => onPlay(`${black}${k.octave}`)} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

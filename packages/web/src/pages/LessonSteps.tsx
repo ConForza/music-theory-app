@@ -158,12 +158,22 @@ export function Question({
     setResponse(null);
   }
 
+  // One hint request at a time, stored by level, so a double tap can neither show a hint twice nor skip a level.
+  const hintBusy = useRef(false);
   async function hint() {
+    if (hintBusy.current || hints.length >= item.hintCount) return;
+    hintBusy.current = true;
     try {
       const r = await api.hint(nodeId, item.id, hints.length + 1);
-      setHints((h) => [...h, r.hint]);
+      setHints((h) => {
+        const next = [...h];
+        next[r.level - 1] = r.hint;
+        return next;
+      });
     } catch (e) {
-      setError(e instanceof ApiFailure ? e.message : "No hint available.");
+      setError(e instanceof ApiFailure ? (e.isNetwork ? "That hint didn't load. Check your connection and try again." : e.message) : "No hint available.");
+    } finally {
+      hintBusy.current = false;
     }
   }
 
@@ -179,29 +189,38 @@ export function Question({
         </form>
         {item.hintCount > 0 && !result && (
           <div className="hints">
-            {hints.map((h, i) => <p key={i} className="tip"><Icon name="bulb" size={20} /> {h}</p>)}
-            {hints.length < item.hintCount && <button type="button" className="btn btn-ghost btn-small" onClick={hint}>{hints.length ? "Another hint" : "Need a hint?"}</button>}
+            {/* Always mounted so assistive technology is already watching it when a hint arrives; only the new paragraph is read out. */}
+            <div className="hint-list" role="status" aria-live="polite" aria-atomic="false">
+              {hints.map((h, i) => <p key={i} className="tip"><Icon name="bulb" size={20} /><span className="visually-hidden">Hint {i + 1}: </span> {h}</p>)}
+            </div>
+            {/* Stays in place (disabled, not removed) after the last hint so keyboard focus is not dropped. */}
+            <button type="button" className="btn btn-ghost btn-small" onClick={hint} aria-disabled={hints.length >= item.hintCount || undefined}>
+              {hints.length >= item.hintCount ? "No more hints" : hints.length ? "Another hint" : "Need a hint?"}
+            </button>
           </div>
         )}
         {error && <p className="form-error" role="alert">{error}</p>}
       </section>
-      {result ? (
-        <ActionBar tone={result.correct ? "good" : "try"}>
-          <div className="feedback" role="status">
-            <p className="feedback-title"><Icon name={result.correct ? "check" : "info"} size={24} strokeWidth={3} /> {result.correct ? "Correct!" : "Not quite"}</p>
-            <p>{result.message}</p>
-          </div>
-          {result.correct ? (
-            <button ref={feedbackBtn} className="btn btn-primary btn-large" onClick={onCorrect}>Continue</button>
-          ) : (
-            <button ref={feedbackBtn} className="btn btn-primary btn-large" onClick={again}>Try again</button>
+      <ActionBar tone={result ? (result.correct ? "good" : "try") : undefined}>
+        {/* One live region that is always mounted, so the verdict is spoken when it fills in (focus also moves to the next button). */}
+        <div className="feedback" role="status" aria-live="polite">
+          {result && (
+            <>
+              <p className="feedback-title"><Icon name={result.correct ? "check" : "info"} size={24} strokeWidth={3} /> {result.correct ? "Correct!" : "Not quite"}</p>
+              <p>{result.message}</p>
+            </>
           )}
-        </ActionBar>
-      ) : (
-        <ActionBar>
-          <button type="submit" form="answer-form" className="btn btn-primary btn-large" disabled={!response || busy}>{busy ? "Checking…" : "Check"}</button>
-        </ActionBar>
-      )}
+        </div>
+        {result ? (
+          result.correct ? (
+            <button key="continue" ref={feedbackBtn} className="btn btn-primary btn-large" onClick={onCorrect}>Continue</button>
+          ) : (
+            <button key="again" ref={feedbackBtn} className="btn btn-primary btn-large" onClick={again}>Try again</button>
+          )
+        ) : (
+          <button key="check" type="submit" form="answer-form" className="btn btn-primary btn-large" disabled={!response || busy}>{busy ? "Checking…" : "Check"}</button>
+        )}
+      </ActionBar>
     </>
   );
 }

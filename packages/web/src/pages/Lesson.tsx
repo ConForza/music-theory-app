@@ -26,7 +26,8 @@ export function resumeIndex(lesson: LearnerLesson, run: RunState): number {
 export function Lesson() {
   const { nodeId = "" } = useParams();
   const nav = useNavigate();
-  const { refreshProgress, reloadAll } = useApp();
+  const { me, refreshProgress, reloadAll } = useApp();
+  const userId = me?.user.id; // a different learner means a different lesson run: everything below restarts for them
   const data = useCourseData();
   const [load, setLoad] = useState<Load>({ status: "loading" });
   const [idx, setIdx] = useState(0);
@@ -44,6 +45,7 @@ export function Lesson() {
     (async () => {
       try {
         const lesson = await api.lesson(nodeId);
+        if (!live) return; // the learner (or lesson) changed while loading: never start a run on their behalf
         const run = await api.start(nodeId);
         if (!live) return;
         const start = resumeIndex(lesson, run);
@@ -57,7 +59,7 @@ export function Lesson() {
     return () => {
       live = false;
     };
-  }, [nodeId, attempt]);
+  }, [nodeId, attempt, userId]);
 
   const node = data.status === "ready" ? data.nodes.get(nodeId) : undefined;
   const total = load.status === "ready" ? 3 + load.lesson.items.length + 1 : 1;
@@ -88,7 +90,7 @@ export function Lesson() {
     return () => {
       live = false;
     };
-  }, [finishing, nodeId, refreshProgress, finishTry]);
+  }, [finishing, nodeId, refreshProgress, finishTry, userId]);
 
   const lockedTitles = useMemo(() => {
     if (load.status !== "error" || load.error.code !== "locked" || data.status !== "ready") return null;

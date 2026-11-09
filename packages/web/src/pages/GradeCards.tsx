@@ -7,11 +7,14 @@ export function GradeCards({
   progress,
   selected,
   onPick,
+  saving = null,
 }: {
   course: CourseView;
   progress?: CourseData["progress"] | Overview;
   selected: number | null;
   onPick: (grade: number) => void;
+  /** The grade being saved right now; the cards are inert until it settles. */
+  saving?: number | null;
 }) {
   return (
     <ul className="grade-cards">
@@ -20,7 +23,7 @@ export function GradeCards({
         const lessons = w.nodes.filter((n) => n.type === "lesson" && !n.optional).length;
         return (
           <li key={w.grade}>
-            <button type="button" className={`grade-card${selected === w.grade ? " is-selected" : ""}`} data-grade={w.grade} aria-pressed={selected === w.grade} onClick={() => onPick(w.grade)}>
+            <button type="button" className={`grade-card${selected === w.grade ? " is-selected" : ""}`} data-grade={w.grade} aria-pressed={selected === w.grade} aria-busy={saving === w.grade || undefined} aria-disabled={saving !== null || undefined} onClick={() => onPick(w.grade)}>
               <span className="grade-num" aria-hidden="true">{w.grade}</span>
               <span className="grade-text">
                 <strong>Grade {w.grade}: {w.learnerTitle}</strong>
