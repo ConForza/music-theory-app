@@ -779,7 +779,7 @@ export const NotationScore = z
             label: NonEmpty,
             instrument: z.string().optional(),
             /** Transposing instruments: written pitch is shown; `transposition` gives sounding offset. */
-            transposition: z.object({ interval: z.string().regex(/^(d|m|M|P|A)\d{1,2}$/), direction: z.enum(["up", "down"]) }).strict().optional(),
+            transposition: z.object({ interval: z.string().regex(/^(d|m|M|P|A)[1-9]\d?$/), direction: z.enum(["up", "down"]) }).strict().optional(),
             music: NotationFragment,
           })
           .strict(),
@@ -794,7 +794,7 @@ export type NotationScore = z.infer<typeof NotationScore>;
 
 export const IntervalCode = z
   .string()
-  .regex(/^(\d{1,2}|c?(dd|d|m|M|P|A|AA)\d{1,2})$/, { message: 'Interval code like "5" (number only), "M3", "P12" or "cP5" (compound 5th)' });
+  .regex(/^([1-9]\d?|c?(dd|d|m|M|P|A|AA)[1-9]\d?)$/, { message: 'Interval code like "5" (number only), "M3", "P12" or "cP5" (compound 5th); numbers start at 1' });
 const Option = z.object({ id: NonEmpty, label: NonEmpty }).strict();
 
 const ChoiceAnswer = z
@@ -848,7 +848,7 @@ const PitchSequenceAnswer = z
       z
         .object({
           rule: z.literal("transpose"),
-          interval: z.string().regex(/^(d|m|M|P|A)\d{1,2}$/),
+          interval: z.string().regex(/^(d|m|M|P|A)[1-9]\d?$/),
           direction: z.enum(["up", "down"]),
           sourceKey: KeyName,
         })

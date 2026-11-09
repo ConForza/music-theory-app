@@ -56,7 +56,11 @@ function semitonesFor(interval: Interval): number {
 export function intervalBetween(a: Pitch, b: Pitch): Interval {
   let lower = a;
   let upper = b;
-  if (diatonicNumber(b) < diatonicNumber(a)) {
+  // Measure from the lower note. For a unison/octave spelling (same letter position), the lower note
+  // is the one that sounds lower, so C#–C and C–C# are both an augmented 1st (never "diminished").
+  const da = diatonicNumber(a);
+  const db = diatonicNumber(b);
+  if (db < da || (db === da && chromaticNumber(b) < chromaticNumber(a))) {
     lower = b;
     upper = a;
   }
@@ -99,6 +103,7 @@ export function parseInterval(text: string): Interval {
   const m = /^(dd|d|m|M|P|A|AA)(\d{1,2})$/.exec(text.trim());
   if (!m) throw new Error(`Cannot parse interval "${text}"`);
   const interval = { quality: m[1] as IntervalQuality, number: Number(m[2]) };
+  if (interval.number < 1) throw new Error(`Interval number must be at least 1 (got "${text}")`);
   semitonesFor(interval); // validates quality/number combination
   return interval;
 }
