@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
 import { RequireAuth, PublicOnly } from "./components/Guards";
-import { NotFoundView, Shell } from "./components/Shell";
+import { Loading, NotFoundView, Shell } from "./components/Shell";
 import { Grades } from "./pages/Grades";
 import { Learn } from "./pages/Learn";
 import { Lesson } from "./pages/Lesson";
@@ -14,11 +14,17 @@ import { Unit } from "./pages/Unit";
 import { Welcome } from "./pages/Welcome";
 import { useApp } from "./state/app";
 
-export function App() {
+/** The front door: wait to learn who is signed in, then go to their path or the welcome page. */
+function Home() {
   const { me } = useApp();
+  if (me === undefined) return <Loading />;
+  return <Navigate to={me ? "/learn" : "/welcome"} replace />;
+}
+
+export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={me ? "/learn" : "/welcome"} replace />} />
+      <Route path="/" element={<Home />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route element={<PublicOnly />}>
         <Route path="/signin" element={<SignIn />} />

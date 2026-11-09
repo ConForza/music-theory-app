@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { diatonic, parsePitch, semitones } from "../lib/music";
 import { playSemitones } from "../lib/audio";
+import { ScrollCueText, useScrollCue } from "./ScrollCue";
 
 const WHITE = ["C", "D", "E", "F", "G", "A", "B"];
 const BLACK_AFTER: Record<string, [string, string]> = { C: ["C♯", "D♭"], D: ["D♯", "E♭"], F: ["F♯", "G♭"], G: ["G♯", "A♭"], A: ["A♯", "B♭"] };
+
+/** Accessible name: written pitch and octave for every key ("G4", "C4, middle C", "F♯4 / G♭4"), so octaves are never ambiguous. */
+export const whiteKeyLabel = (pitch: string) => `${pitch}${pitch === "C4" ? ", middle C" : ""}`;
+export const blackKeyLabel = (sharp: string, flat: string, octave: number) => `${sharp}${octave} / ${flat}${octave}`;
 
 export interface KeyInfo {
   key: number;
@@ -64,6 +69,7 @@ export function Keyboard({
   const whites = keys.filter((k) => k.white);
   const lit = new Set(highlight.map((p) => semitones(parsePitch(p))));
   const scroller = useRef<HTMLDivElement>(null);
+  const cue = useScrollCue(scroller, [from, to]);
   const [focusKey, setFocusKey] = useState<number>(() => selected[0] ?? [...lit][0] ?? whites[0]!.key);
   const first = selected[0] ?? [...lit][0];
   useEffect(() => {
@@ -74,7 +80,7 @@ export function Keyboard({
 
   const press = (k: KeyInfo) => {
     if (disabled) return;
-    if (sound) playSemitones(k.key);
+    if (sound && !onPlay) playSemitones(k.key); // a legacy onPlay callback owns the sound itself, so it is never doubled
     onPress?.(k.key);
     if (onPlay) {
       const step = k.white ? k.name : k.name[0]!;
@@ -94,8 +100,7 @@ export function Keyboard({
       scroller.current?.querySelector<HTMLElement>(`[data-key="${next.key}"]`)?.focus();
     }
   };
-  const nameOf = (k: KeyInfo) =>
-    k.white ? (k.key === 48 ? "C, middle C" : `${k.name}, octave ${k.octave}`) : `${k.name.replace("♯", " sharp").replace("♭", " flat").replace(" / ", " or ")}, octave ${k.octave}`;
+  const nameOf = (k: KeyInfo) => (k.white ? whiteKeyLabel(`${k.name}${k.octave}`) : blackKeyLabel(k.name.split(" / ")[0]!, k.name.split(" / ")[1]!, k.octave));
   const button = (k: KeyInfo) => {
     const isSel = selected.includes(k.key);
     const mark = marks?.[k.key];
@@ -118,17 +123,22 @@ export function Keyboard({
     );
   };
   return (
-    <div className="keyboard-scroll" ref={scroller} role="group" aria-label={`${label}. Use the arrow keys to move between keys and Enter to press.`}>
-      <div className="keyboard" style={{ ["--keys" as string]: whites.length }}>
-        {whites.map((w) => {
-          const black = keys.find((k) => !k.white && k.key === w.key + 1);
-          return (
-            <div className="key-slot" key={w.key}>
-              {button(w)}
-              {black && button(black)}
-            </div>
-          );
-        })}
+    <div className={`keyboard-wrap${cue.left ? " more-left" : ""}${cue.right ? " more-right" : ""}`}>
+      <ScrollCueText left={cue.left} right={cue.right} what="keys" />
+      <div className="keyboard-frame">
+        <div className="keyboard-scroll" ref={scroller} role="group" aria-label={`${label}. Use the arrow keys to move between keys and Enter to press.`}>
+          <div className="keyboard" style={{ ["--keys" as string]: whites.length }}>
+            {whites.map((w) => {
+              const black = keys.find((k) => !k.white && k.key === w.key + 1);
+              return (
+                <div className="key-slot" key={w.key}>
+                  {button(w)}
+                  {black && button(black)}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

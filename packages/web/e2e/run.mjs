@@ -108,7 +108,7 @@ async function journey(p) {
   await shot(page, p.name, "06-teach");
   await page.getByRole("button", { name: "Next" }).click();
   await page.getByRole("heading", { name: "See it, hear it" }).waitFor();
-  await page.getByRole("button", { name: /^G, / }).or(page.getByRole("button", { name: "G", exact: true })).first().click();
+  await page.getByRole("button", { name: /^G\d$/ }).first().click(); // keys are named by pitch and octave, e.g. "G4"
   await noOverflow(page, "demo");
   await shot(page, p.name, "07-demo");
   await page.getByRole("button", { name: "Try some questions" }).click();

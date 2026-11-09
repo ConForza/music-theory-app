@@ -23,7 +23,7 @@
     "build": "npm run build -w @mtp/web",
     "dev": "concurrently -k -n api,web \"npm run dev -w @mtp/api\" \"npm run dev -w @mtp/web\"",
     "start": "npm run start -w @mtp/api",
-    "e2e": "npm run e2e -w @mtp/web && npm run e2e:brief03 -w @mtp/web"
+    "e2e": "npm run e2e -w @mtp/web"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

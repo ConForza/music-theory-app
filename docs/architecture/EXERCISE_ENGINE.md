@@ -187,12 +187,19 @@ All of these use native radios, checkboxes and buttons, with 44px+ targets and s
 
 | Suite | Count | What |
 |---|---|---|
-| `curriculum` | 413 | Brief 01 validator tests plus rule golden tables, rhythm/accidental/chromatic cases and properties |
-| `engine` | 214 | registry coverage; every authored item (fixtures, lessons, standalone, showcase) graded correct/incorrect with no answer leaks; 25 seeds per generator template (deterministic, valid, solvable); golden grading cases; malformed-answer safety; determinism property |
-| `api` | 48 | Brief 02 suites plus engine integration, practice lab, idempotency, cross-account isolation, tampered/stale ids, reveal policy, lesson-progress isolation |
-| `web` (Vitest + axe) | 42 | Brief 02 journeys plus input regressions, stave bar-state reading, mark alignment, layout |
+| `curriculum` | 417 | Brief 01 validator tests plus rule golden tables, rhythm/accidental/chromatic cases and properties |
+| `engine` | 225 | registry coverage; every authored item (fixtures, lessons, standalone, showcase) graded correct/incorrect with no answer leaks; 25 seeds per generator template (deterministic, valid, solvable); golden grading cases; malformed-answer safety; determinism property |
+| `api` | 62 | Brief 02 suites plus engine integration, practice lab, idempotency, cross-account isolation, tampered/stale ids, reveal policy, lesson-progress isolation |
+| `web` (Vitest + axe) | 92 | Brief 02 journeys and follow-up regressions plus input regressions, stave bar-state reading, mark alignment, layout, and `integration.test.tsx` (practice calls bound to the learner who began them) |
 | `e2e/run.mjs` | Brief 02 journeys | unchanged, passing |
+| `e2e/followup.mjs` | Brief 02 follow-up journeys | account switching, onboarding recovery, piano accessibility, hint/feedback announcements; passing |
 | `e2e/brief03.mjs` | 59 + 59 + 33 + 26 questions | every demonstration item answered through the real controls on desktop (axe on each) and 320px; subsets on iPhone and iPad; the submitted request compared with the engine's answer; wrong-answer explanation and retry; keyboard-only; 200% text at 320px; dark mode (axe); reduced motion; the Grade 5 lesson end to end |
+
+### Integration with Brief 02 follow-up (PR #5)
+
+* The practice API calls (`practice`, `practiceSet`, `generate`, `practiceAttempt`, `practiceHint`) are bound to the signed-in learner's identity scope exactly like the lesson calls. A delayed practice answer from learner A is cancelled, never retried, when B signs in (tests: `integration.test.tsx`, both before-commit and after-commit reply loss, checked against the persisted export).
+* `Keyboard` combines the Brief 03 interactive keyboard with the shared scroll cue and pitch-and-octave accessible names; `Question` uses the persistent hint and verdict live regions, level-keyed hints and the one-hint-at-a-time guard for lessons and practice alike.
+* `npm run e2e` runs `run.mjs`, `followup.mjs` and `brief03.mjs`. The navigation now has five tabs (Practice added), so the tab bar uses five columns.
 
 ## 10. Limitations and outstanding review
 

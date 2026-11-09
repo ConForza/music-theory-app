@@ -64,21 +64,84 @@ export class ApiFailure extends Error {
   get isNetwork() {
     return this.status === 0;
   }
+  /** The request was cancelled on purpose; its outcome should be ignored, not shown. */
+  get isAborted() {
+    return this.code === "aborted";
+  }
 }
 
-async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
+/**
+ * The signed-in learner a request belongs to. Every account-bound call captures the current scope when it starts; when
+ * the learner changes the scope ends, which cancels what is in flight and stops any retry from being sent. An operation
+ * begun for one learner can therefore never be dispatched, or retried, under the next learner's session cookie.
+ */
+export interface IdentityScope {
+  readonly ctl: AbortController;
+}
+let scope: IdentityScope = { ctl: new AbortController() };
+/** The app calls this whenever the signed-in learner changes (including to signed out). */
+export function endIdentityScope() {
+  scope.ctl.abort();
+  scope = { ctl: new AbortController() };
+}
+const cancelled = () => new ApiFailure(0, "aborted", "That request was cancelled.");
+
+export interface RequestOptions {
+  /** The learner this request is for. Omit for sign-in/out and other calls that create or end an identity. */
+  scope?: IdentityScope;
+  /** Cancels the request; the caller then ignores the outcome. */
+  signal?: AbortSignal;
+  /** Give up after this long (default 20s) so a stalled connection becomes an error the learner can retry. */
+  timeoutMs?: number;
+}
+
+async function request<T>(method: string, path: string, body?: unknown, opts: RequestOptions = {}): Promise<T> {
+  if (opts.scope?.ctl.signal.aborted) throw cancelled(); // checked before every dispatch
+  const ctl = new AbortController();
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    ctl.abort();
+  }, opts.timeoutMs ?? 20_000);
+  const onAbort = () => ctl.abort();
+  const signals = [opts.signal, opts.scope?.ctl.signal].filter((x): x is AbortSignal => !!x);
+  for (const sig of signals) {
+    if (sig.aborted) ctl.abort();
+    else sig.addEventListener("abort", onAbort, { once: true });
+  }
+  try {
+    return await send<T>(method, path, body, ctl.signal, () => timedOut);
+  } finally {
+    clearTimeout(timer);
+    for (const sig of signals) sig.removeEventListener("abort", onAbort);
+  }
+}
+
+async function send<T>(method: string, path: string, body: unknown, signal: AbortSignal, timedOut: () => boolean): Promise<T> {
+  const fail = () =>
+    timedOut()
+      ? new ApiFailure(0, "timeout", "The server took too long to respond. Check your connection and try again.")
+      : signal.aborted
+        ? new ApiFailure(0, "aborted", "That request was cancelled.")
+        : new ApiFailure(0, "network", "You appear to be offline. Check your connection and try again.");
   let res: Response;
   try {
     res = await fetch(path, {
       method,
       credentials: "same-origin",
+      signal,
       headers: body !== undefined ? { "content-type": "application/json" } : undefined,
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
   } catch {
-    throw new ApiFailure(0, "network", "You appear to be offline. Check your connection and try again.");
+    throw fail();
   }
-  const text = await res.text();
+  let text: string;
+  try {
+    text = await res.text();
+  } catch {
+    throw fail();
+  }
   let data: unknown;
   try {
     data = text ? JSON.parse(text) : undefined;
@@ -93,43 +156,73 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
   return data as T;
 }
 
-/** POSTs that are safe to repeat (attempt ids make them idempotent) are retried on network failure. */
-async function retrying<T>(fn: () => Promise<T>, tries = 3): Promise<T> {
+/**
+ * POSTs that are safe to repeat (attempt ids make them idempotent) are retried on network failure, but only for the
+ * learner who started them: the scope is checked before every dispatch and wakes the backoff the moment it ends.
+ */
+async function retrying<T>(sc: IdentityScope, fn: () => Promise<T>, tries = 3): Promise<T> {
   for (let i = 1; ; i++) {
+    if (sc.ctl.signal.aborted) throw cancelled();
     try {
       return await fn();
     } catch (e) {
-      if (!(e instanceof ApiFailure) || !e.isNetwork || i >= tries) throw e;
-      await new Promise((r) => setTimeout(r, 400 * i));
+      if (!(e instanceof ApiFailure) || !e.isNetwork || e.isAborted || i >= tries) throw e;
+      await new Promise<void>((resolve) => {
+        const t = setTimeout(done, 400 * i);
+        function done() {
+          clearTimeout(t);
+          sc.ctl.signal.removeEventListener("abort", done);
+          resolve();
+        }
+        sc.ctl.signal.addEventListener("abort", done, { once: true });
+      });
     }
   }
 }
 
+const L = (id: string) => `/api/lessons/${encodeURIComponent(id)}`;
+
 export const api = {
-  me: () => request<Me>("GET", "/api/me"),
+  // Identity calls: they start or end a scope, so they are not bound to one.
+  me: (signal?: AbortSignal) => request<Me>("GET", "/api/me", undefined, { signal }),
   guest: () => request<Me>("POST", "/api/auth/guest", {}),
+  // Not auto-retried: the form decides, after checking who is signed in (see AccountForm). A retry from the same
+  // session is still safe, because the server answers it with the same account instead of creating another.
   register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
   login: (b: { email: string; password: string }) => request<Me>("POST", "/api/auth/login", b),
   logout: () => request<{ ok: true }>("POST", "/api/auth/logout", {}),
-  patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
-    request<Me>("PATCH", "/api/me/profile", b),
-  exportData: () => request<unknown>("GET", "/api/me/export"),
-  deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me"),
   course: () => request<CourseView>("GET", "/api/course"),
-  progress: () => request<Overview>("GET", "/api/progress"),
-  lesson: (id: string) => request<LearnerLesson>("GET", `/api/lessons/${encodeURIComponent(id)}`),
-  start: (id: string) => retrying(() => request<RunState>("POST", `/api/lessons/${encodeURIComponent(id)}/start`, {})),
-  setPhase: (id: string, phase: string) => request<unknown>("PUT", `/api/lessons/${encodeURIComponent(id)}/phase`, { phase }),
-  hint: (id: string, itemId: string, level: number) =>
-    request<{ hint: string; level: number }>("POST", `/api/lessons/${encodeURIComponent(id)}/hint`, { itemId, level }),
-  attempt: (id: string, attemptId: string, itemId: string, response: AnswerResponse) =>
-    retrying(() => request<AttemptResult>("POST", `/api/lessons/${encodeURIComponent(id)}/attempts`, { attemptId, itemId, response })),
-  practice: () => request<PracticeCatalogue>("GET", "/api/practice"),
-  practiceSet: (id: string) => request<PracticeSet>("GET", `/api/practice/sets/${encodeURIComponent(id)}`),
-  generate: (templateId: string, seed?: number) => request<GeneratedItem>("POST", "/api/practice/generate", { templateId, ...(seed !== undefined ? { seed } : {}) }),
-  practiceAttempt: (attemptId: string, itemId: string, response: AnswerResponse) =>
-    retrying(() => request<AttemptResult>("POST", "/api/practice/attempts", { attemptId, itemId, response })),
-  practiceHint: (itemId: string, level: number) => request<{ hint: string; level: number }>("POST", "/api/practice/hint", { itemId, level }),
-  complete: (id: string) =>
-    retrying(() => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `/api/lessons/${encodeURIComponent(id)}/complete`, {})),
+  // Everything below acts on the current learner's data and is bound to the learner who started it.
+  patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
+    request<Me>("PATCH", "/api/me/profile", b, { scope }),
+  exportData: () => request<unknown>("GET", "/api/me/export", undefined, { scope }),
+  deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me", undefined, { scope }),
+  progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal, scope }),
+  lesson: (id: string) => request<LearnerLesson>("GET", L(id), undefined, { scope }),
+  start: (id: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<RunState>("POST", `${L(id)}/start`, {}, { scope: sc }));
+  },
+  setPhase: (id: string, phase: string) => request<unknown>("PUT", `${L(id)}/phase`, { phase }, { scope }),
+  hint: (id: string, itemId: string, level: number) => request<{ hint: string; level: number }>("POST", `${L(id)}/hint`, { itemId, level }, { scope }),
+  attempt: (id: string, attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<AttemptResult>("POST", `${L(id)}/attempts`, { attemptId, itemId, response }, { scope: sc }));
+  },
+  // Practice lab (Brief 03): same account binding as lessons, so a delayed practice request or retry from one learner
+  // can never be dispatched under the next learner's session.
+  practice: () => request<PracticeCatalogue>("GET", "/api/practice", undefined, { scope }),
+  practiceSet: (id: string) => request<PracticeSet>("GET", `/api/practice/sets/${encodeURIComponent(id)}`, undefined, { scope }),
+  generate: (templateId: string, seed?: number) =>
+    request<GeneratedItem>("POST", "/api/practice/generate", { templateId, ...(seed !== undefined ? { seed } : {}) }, { scope }),
+  practiceAttempt: (attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<AttemptResult>("POST", "/api/practice/attempts", { attemptId, itemId, response }, { scope: sc }));
+  },
+  practiceHint: (itemId: string, level: number) =>
+    request<{ hint: string; level: number }>("POST", "/api/practice/hint", { itemId, level }, { scope }),
+  complete: (id: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `${L(id)}/complete`, {}, { scope: sc }));
+  },
 };

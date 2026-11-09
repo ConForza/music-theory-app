@@ -17,6 +17,7 @@ const app = createApp({
   course: loadCourse(),
   secureCookies: process.env.MTP_SECURE_COOKIES === "1",
   waiveUnwrittenPrerequisites: process.env.MTP_WAIVE_UNWRITTEN !== "0",
+  trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0,
   allowedOrigins: (process.env.MTP_ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
 });
 createHttpServer(app, staticDir).listen(port, () => console.log(`Music Theory Path listening on http://localhost:${port} (db: ${dbPath})`));

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { api, ApiFailure } from "../api/client";
+import { api } from "../api/client";
+import { saveFailure } from "../lib/errors";
 import { Icon } from "../components/Icon";
 import { ErrorState, Loading } from "../components/Shell";
 import { useApp } from "../state/app";
@@ -19,39 +20,64 @@ export function Onboarding() {
   const [grade, setGrade] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const lock = useRef(false);
+  const retry = useRef<(() => Promise<void>) | null>(null);
 
   if (course.status === "loading") return <Loading />;
   if (course.status === "error") return <ErrorState error={course.error} onRetry={reloadAll} />;
 
+  /** The one place a profile is saved at the end of onboarding. Throws on failure so every path can report it. */
   async function finish(exp: Experience, g: number) {
     await updateProfile({ experience: exp, selectedGrade: g, onboarded: true });
     nav("/learn", { replace: true });
   }
 
-  async function chooseGrade(g: number) {
-    setGrade(g);
-    if (me) {
-      setBusy(true);
-      try {
-        await finish(experience ?? "some", g);
-      } catch (e) {
-        setError(e instanceof ApiFailure ? e.message : "Couldn't save that. Please try again.");
-        setBusy(false);
-      }
-    } else setStep("account");
-  }
-
-  async function asGuest() {
+  /** Run an onboarding save with a lock, an error message and a retry that repeats exactly the same save. */
+  async function save(action: () => Promise<void>, what: string) {
+    if (lock.current) return;
+    lock.current = true;
+    retry.current = () => save(action, what);
     setBusy(true);
     setError(null);
     try {
-      setMe(await api.guest());
-      await finish(experience!, grade!);
+      await action();
     } catch (e) {
-      setError(e instanceof ApiFailure ? e.message : "Couldn't start. Please try again.");
+      setError(saveFailure(e, what));
+    } finally {
+      lock.current = false;
       setBusy(false);
     }
   }
+
+  function chooseGrade(g: number) {
+    if (busy) return;
+    setGrade(g);
+    if (me) void save(() => finish(experience ?? "some", g), `Grade ${g}`);
+    else setStep("account");
+  }
+
+  function chooseNew() {
+    if (busy) return;
+    setExperience("new");
+    setGrade(1);
+    if (me) void save(() => finish("new", 1), "your choice");
+    else setStep("account");
+  }
+
+  function asGuest() {
+    void save(async () => {
+      // The guest session is created once; if saving fails afterwards a retry only repeats the save.
+      if (!me) setMe(await api.guest());
+      await finish(experience!, grade!);
+    }, "your setup");
+  }
+
+  const retryBox = error && (
+    <div className="form-error" role="alert">
+      <p>{error}</p>
+      <button type="button" className="btn btn-ghost btn-small" onClick={() => void retry.current?.()} disabled={busy}>Try again</button>
+    </div>
+  );
 
   const stepNo = step === "experience" ? 1 : step === "grade" ? 2 : experience === "new" ? 2 : 3;
   const stepTotal = experience === "new" ? 2 : 3;
@@ -60,7 +86,7 @@ export function Onboarding() {
     <main className="onboarding" id="main" tabIndex={-1}>
       <header className="onboarding-head">
         {step !== "experience" ? (
-          <button className="icon-btn" aria-label="Back" onClick={() => setStep(step === "account" && experience === "some" ? "grade" : "experience")}>
+          <button className="icon-btn" aria-label="Back" onClick={() => { setError(null); setStep(step === "account" && experience === "some" ? "grade" : "experience"); }}>
             <Icon name="back" />
           </button>
         ) : (
@@ -75,15 +101,17 @@ export function Onboarding() {
         <section aria-labelledby="q1">
           <h1 id="q1">How much music theory do you know?</h1>
           <div className="choice-cards">
-            <button className="choice-card" onClick={() => { setExperience("new"); setGrade(1); if (me) void finish("new", 1); else setStep("account"); }}>
+            <button className="choice-card" onClick={chooseNew} aria-disabled={busy || undefined}>
               <strong>New to music theory</strong>
               <span>Start at Grade 1 and learn the musical alphabet before the tricky parts.</span>
             </button>
-            <button className="choice-card" onClick={() => { setExperience("some"); setStep("grade"); }}>
+            <button className="choice-card" onClick={() => { if (busy) return; setError(null); setExperience("some"); setStep("grade"); }} aria-disabled={busy || undefined}>
               <strong>I already know some theory</strong>
               <span>Choose the grade that suits you. You can change it any time.</span>
             </button>
           </div>
+          {busy && <Loading label="Saving…" />}
+          {retryBox}
           <p className="fine-print">The five grades are learning milestones, not official certificates.</p>
         </section>
       )}
@@ -92,8 +120,8 @@ export function Onboarding() {
         <section aria-labelledby="q2">
           <h1 id="q2">Where would you like to begin?</h1>
           <p className="lede-small">Each grade is its own world. Grade 1 is the gentle start; later grades build on it. A placement check is planned for a later release.</p>
-          <GradeCards course={course.data} selected={grade} onPick={chooseGrade} />
-          {error && <p className="form-error" role="alert">{error}</p>}
+          <GradeCards course={course.data} selected={grade} saving={busy ? grade : null} onPick={chooseGrade} />
+          {retryBox}
           {busy && <Loading label="Saving…" />}
         </section>
       )}
@@ -106,7 +134,7 @@ export function Onboarding() {
           <div className="or"><span>or</span></div>
           <button className="btn btn-quiet btn-large" onClick={asGuest} disabled={busy}>Try it as a guest</button>
           <p className="fine-print">Guest progress stays with this browser. You can turn it into an account from your profile at any time and keep everything you've done. <Link to="/signin">Sign in instead</Link></p>
-          {error && <p className="form-error" role="alert">{error}</p>}
+          {retryBox}
         </section>
       )}
     </main>

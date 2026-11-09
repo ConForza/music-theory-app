@@ -36,5 +36,5 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Browser journeys (Brief 02 app + Brief 03 exercise engine; phone, small phone, tablet, desktop, keyboard, dark, zoom)
+      - name: Browser journeys (Brief 02 app, Brief 02 follow-up, Brief 03 exercise engine; phone, small phone, tablet, desktop, keyboard, dark, zoom)
         run: npm run e2e
