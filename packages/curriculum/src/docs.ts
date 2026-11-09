@@ -13,6 +13,9 @@ const HEADER = (source: string) =>
 const BEGIN = "<!-- BEGIN GENERATED: book-classification -->";
 const END = "<!-- END GENERATED: book-classification -->";
 
+/** Generated docs are compared and spliced independent of checkout line endings (core.autocrlf). */
+export const normaliseEol = (s: string) => s.replace(/\r\n?/g, "\n");
+
 const esc = (s: string) => s.replace(/\|/g, "\\|").replace(/\n/g, " ");
 const list = (xs: string[]) => (xs.length ? xs.map((x) => `\`${x}\``).join(", ") : "—");
 const short = (id: string) => id.replace("abrsm2020.", "");
@@ -145,15 +148,15 @@ function bookClassificationBlock(ix: CurriculumIndex): string {
   return out.join("\n");
 }
 
-export function renderDocs(c: Curriculum): Map<string, string> {
+export function renderDocs(c: Curriculum, repoRoot = REPO_ROOT): Map<string, string> {
   const ix = buildIndex(c);
   const docs = new Map<string, string>();
   docs.set("docs/curriculum/COVERAGE_MATRIX.md", coverageMatrix(ix));
   docs.set("docs/curriculum/CURRICULUM_CROSSWALK.md", crosswalk(ix));
   docs.set("docs/curriculum/LEARNING_PATH.md", learningPath(ix));
-  const gapsPath = join(REPO_ROOT, "docs/curriculum/SYLLABUS_GAPS.md");
+  const gapsPath = join(repoRoot, "docs/curriculum/SYLLABUS_GAPS.md");
   if (existsSync(gapsPath)) {
-    const current = readFileSync(gapsPath, "utf8");
+    const current = normaliseEol(readFileSync(gapsPath, "utf8"));
     const start = current.indexOf(BEGIN);
     const end = current.indexOf(END);
     if (start >= 0 && end > start) {
@@ -165,7 +168,7 @@ export function renderDocs(c: Curriculum): Map<string, string> {
 
 export function writeDocs(c: Curriculum, repoRoot = REPO_ROOT): string[] {
   const written: string[] = [];
-  for (const [rel, text] of renderDocs(c)) {
+  for (const [rel, text] of renderDocs(c, repoRoot)) {
     const p = join(repoRoot, rel);
     mkdirSync(dirname(p), { recursive: true });
     writeFileSync(p, text);
@@ -176,9 +179,9 @@ export function writeDocs(c: Curriculum, repoRoot = REPO_ROOT): string[] {
 
 export function checkDocs(c: Curriculum, repoRoot = REPO_ROOT): string[] {
   const stale: string[] = [];
-  for (const [rel, text] of renderDocs(c)) {
+  for (const [rel, text] of renderDocs(c, repoRoot)) {
     const p = join(repoRoot, rel);
-    if (!existsSync(p) || readFileSync(p, "utf8") !== text) stale.push(rel);
+    if (!existsSync(p) || normaliseEol(readFileSync(p, "utf8")) !== normaliseEol(text)) stale.push(rel);
   }
   return stale;
 }

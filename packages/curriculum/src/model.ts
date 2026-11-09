@@ -1,5 +1,6 @@
 import type { Curriculum } from "./load.ts";
 import type {
+  ExerciseBinding,
   AssessmentTemplate,
   Concept,
   ExerciseFamily,
@@ -45,7 +46,7 @@ function resolveUnlocks(nodes: Array<PathNode & { grade: number; order: number }
   });
 }
 
-const RANK = {
+export const RANK = {
   intervalQuality: ["number-only", "number-and-quality"],
   intervalLowerNote: ["tonic", "any-diatonic", "any"],
   degreeNaming: ["number", "technical"],
@@ -180,4 +181,91 @@ export function outcomesTaughtBefore(ix: CurriculumIndex, node: OrderedNode, inc
     if (an) add(an);
   }
   return out;
+}
+
+export function templateIdsOf(node: PathNode): string[] {
+  return node.exercises.map((e) => e.templateId);
+}
+
+const NUMERIC_DIMS = new Set(["maxDots", "maxLedgerLines"]);
+
+/** Intersection of two scopes: arrays ∩, numbers min, booleans and, ordinals the lower rank. */
+export function intersectScope(a: MusicScope, b: MusicScope): MusicScope {
+  const out: Record<string, unknown> = { ...a };
+  for (const [k, v] of Object.entries(b)) {
+    const prev = (a as Record<string, unknown>)[k];
+    if (prev === undefined) {
+      out[k] = v;
+    } else if (Array.isArray(v)) {
+      out[k] = (prev as unknown[]).filter((x) => (v as unknown[]).includes(x));
+    } else if (typeof v === "number") {
+      out[k] = Math.min(prev as number, v);
+    } else if (typeof v === "boolean") {
+      out[k] = Boolean(prev) && v;
+    } else if (typeof v === "string" && k in RANK) {
+      const ranks = RANK[k as keyof typeof RANK] as readonly string[];
+      out[k] = ranks.indexOf(prev as string) <= ranks.indexOf(v) ? prev : v;
+    }
+  }
+  return out as MusicScope;
+}
+
+/**
+ * The musical values a node may use: the grade's cumulative scope, minus every value whose
+ * introducing concept (content/syllabus/scope-concepts.json) is not yet taught at this node.
+ */
+export function taughtScope(ix: CurriculumIndex, node: OrderedNode): MusicScope {
+  const available = conceptsAvailableAt(ix, node, true);
+  const grade = (ix.cumulativeScope.get(node.grade) ?? {}) as Record<string, unknown>;
+  const intros = ix.c.scopeIntroductions.introductions;
+  const ok = (dim: string, value: unknown) => {
+    const rule = intros.find((r) => r.dimension === dim && r.value === value);
+    return !rule || available.has(rule.conceptId);
+  };
+  const out: Record<string, unknown> = {};
+  for (const [dim, value] of Object.entries(grade)) {
+    if (Array.isArray(value)) {
+      out[dim] = value.filter((v) => ok(dim, v));
+    } else if (NUMERIC_DIMS.has(dim)) {
+      let max = value as number;
+      for (const r of intros) {
+        if (r.dimension === dim && typeof r.value === "number" && r.value <= max && !available.has(r.conceptId)) max = r.value - 1;
+      }
+      out[dim] = Math.max(0, max);
+    } else if (typeof value === "boolean") {
+      out[dim] = value && ok(dim, true);
+    } else if (typeof value === "string" && dim in RANK) {
+      const ranks = RANK[dim as keyof typeof RANK] as readonly string[];
+      let best: string | undefined;
+      for (const r of ranks.slice(0, ranks.indexOf(value) + 1)) if (ok(dim, r)) best = r;
+      if (best) out[dim] = best;
+    }
+  }
+  return out as MusicScope;
+}
+
+/** What an item generated or authored for this binding may contain. */
+export function effectiveScope(ix: CurriculumIndex, node: OrderedNode, binding: ExerciseBinding): MusicScope {
+  return intersectScope(taughtScope(ix, node), binding.scope);
+}
+
+/** Bind a template to a node: concepts already taught, and every template dimension narrowed to taught values. */
+export function deriveBinding(ix: CurriculumIndex, node: OrderedNode, templateId: string): ExerciseBinding {
+  const t = ix.templates.get(templateId);
+  if (!t) throw new Error(`Unknown template ${templateId}`);
+  const available = conceptsAvailableAt(ix, node, true);
+  const taught = taughtScope(ix, node) as Record<string, unknown>;
+  const scope: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(t.scope)) {
+    const lim = taught[k];
+    if (Array.isArray(v)) scope[k] = (v as unknown[]).filter((x) => Array.isArray(lim) && (lim as unknown[]).includes(x));
+    else if (typeof v === "number") scope[k] = Math.min(v, typeof lim === "number" ? lim : 0);
+    else if (typeof v === "boolean") scope[k] = v && lim === true;
+    else if (typeof v === "string" && k in RANK) {
+      if (lim === undefined) continue; // reported by the validator as untaught
+      const ranks = RANK[k as keyof typeof RANK] as readonly string[];
+      scope[k] = ranks.indexOf(v) <= ranks.indexOf(lim as string) ? v : lim;
+    }
+  }
+  return { templateId, conceptIds: t.conceptIds.filter((c) => available.has(c)), scope: scope as MusicScope };
 }

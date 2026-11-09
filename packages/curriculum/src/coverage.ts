@@ -1,4 +1,4 @@
-import type { CurriculumIndex } from "./model.ts";
+import { templateIdsOf, type CurriculumIndex } from "./model.ts";
 
 export interface OutcomeCoverage {
   outcomeId: string;
@@ -30,15 +30,15 @@ export function computeCoverage(ix: CurriculumIndex): OutcomeCoverage[] {
     const targeting = [...ix.templates.values()].filter((t) => t.outcomeIds.includes(o.id)).map((t) => t.id);
     const practiceNodes = ix.nodes
       .filter((n) => (n.type === "lesson" || n.type === "practice") && n.grade >= o.grade)
-      .filter((n) => n.exerciseTemplateIds.some((t) => targeting.includes(t)))
+      .filter((n) => templateIdsOf(n).some((t) => targeting.includes(t)))
       .filter((n) => n.type === "lesson" ? n.outcomeIds.includes(o.id) : n.reviewOutcomeIds.includes(o.id))
       .map((n) => n.id);
     const practiceTemplates = targeting.filter((t) =>
-      ix.nodes.some((n) => practiceNodes.includes(n.id) && n.exerciseTemplateIds.includes(t)),
+      ix.nodes.some((n) => practiceNodes.includes(n.id) && templateIdsOf(n).includes(t)),
     );
     const reviewNodes = ix.nodes
       .filter((n) => n.type === "review" && n.reviewOutcomeIds.includes(o.id))
-      .filter((n) => n.exerciseTemplateIds.some((t) => targeting.includes(t)))
+      .filter((n) => templateIdsOf(n).some((t) => targeting.includes(t)))
       .map((n) => n.id);
     const assessments = [...ix.assessments.values()]
       .filter((a) => a.sections.some((s) => s.outcomeIds.includes(o.id) && s.templateIds.some((t) => targeting.includes(t))))

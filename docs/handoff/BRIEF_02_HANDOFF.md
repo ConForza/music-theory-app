@@ -14,7 +14,8 @@
 | Node kinds | `type`: `lesson`, `practice`, `review`, `unit_challenge`, `grade_assessment`, `enrichment` | Render all six. `contentStatus: "planned"` nodes have no content yet, so show a clear "coming soon" state, never a blank screen or dead end. |
 | Sample unit for the vertical slice | `G1-U3` (keyboard and stave), with `G1-U3-L03` fully authored | The Brief 05 vertical slice should complete `G1-U3`. Until then, `G1-U3-L03` is the only playable lesson. |
 | Lesson player data | `LessonContent` (see [LESSON_FORMAT.md](../architecture/LESSON_FORMAT.md)) | Eight parts in order: objective → explanation → demonstration → guided → independent → feedback → completion → spaced review. |
-| Progress persistence fields | `ExerciseItem.id`, `templateId`, `templateVersion`, `seed`, `evidence`; `PathNode.contentVersion` | Store these with every attempt so later content changes never rewrite history (Brief 04). |
+| Progress persistence fields | `ExerciseItem.id`, `templateId`, `templateVersion`, `seed`, `evidence`; `PathNode.contentVersion` | Store these with every attempt so later content changes never rewrite history (Brief 04). The node's `contentVersion` identifies the delivered lesson and always equals its LessonContent version (validated). |
+| Exercises on a node | `nodes[].exercises[]` (bindings) and `effectiveScope(node, binding)` from `@mtp/curriculum` | Never sample a template at its full grade scope: the binding limits it to what the learner has been taught. |
 | Policy defaults | `content/policy/progression.json` (provisional) | XP ≠ mastery. Grade completion needs the grade assessment. Never derive unlocks or results from client-supplied XP. |
 
 ## Constraints you must keep

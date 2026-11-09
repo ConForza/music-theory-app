@@ -150,7 +150,7 @@ describe("prerequisite and path rules", () => {
 
   it("fails when a lesson has no practice", () => {
     const codes = mutate((c) => {
-      node(c, "G3-U3-L01").exerciseTemplateIds = [];
+      node(c, "G3-U3-L01").exercises = [];
     });
     expect(codes).toContain("LESSON_WITHOUT_PRACTICE");
   });
@@ -216,7 +216,7 @@ describe("exercise and grade-scope rules", () => {
 
   it("fails when a lesson uses a template from a later grade", () => {
     const codes = mutate((c) => {
-      node(c, "G2-U5-L01").exerciseTemplateIds.push("t.g3.interval-quality");
+      node(c, "G2-U5-L01").exercises.push({ templateId: "t.g3.interval-quality", conceptIds: ["c.intervals.quality-perfect"], scope: {} });
     });
     expect(codes).toContain("TEMPLATE_BEYOND_GRADE");
   });
@@ -288,7 +288,7 @@ describe("musical verification of authored content", () => {
 
   it("detects a note that needs a written accidental", () => {
     const codes = mutate((c) => {
-      const ev = c.items[0]!.content.item.music!.measures[0]!.events[3]!;
+      const ev = c.items[0]!.content.item.music!.measures[0]!.events![3]!;
       if (ev.kind === "note") delete ev.writtenAccidental;
     });
     expect(codes).toContain("ACCIDENTAL_MISSING");
@@ -296,8 +296,8 @@ describe("musical verification of authored content", () => {
 
   it("detects a bar that does not add up", () => {
     const codes = mutate((c) => {
-      const ev = lesson(c, "G5-U4-L06").independent[0]!.music!.measures[1]!.events[1]!;
-      ev.duration = { value: "crotchet", dots: 0 };
+      const ev = lesson(c, "G5-U4-L06").independent[0]!.music!.measures[1]!.events![1]!;
+      if (ev.kind === "note") ev.duration = { value: "crotchet", dots: 0 };
     });
     expect(codes).toContain("BAR_DURATION");
   });
@@ -314,7 +314,7 @@ describe("musical verification of authored content", () => {
   it("detects Grade 1 content beyond the one-ledger-line limit", () => {
     const codes = mutate((c) => {
       const item = lesson(c, "G1-U3-L03").independent[0]!;
-      const ev = item.music!.measures[0]!.events[0]!;
+      const ev = item.music!.measures[0]!.events![0]!;
       if (ev.kind === "note") ev.pitch = "A3";
       if (item.answer.kind === "pitch") item.answer.accepted = ["A3"];
     });
@@ -361,5 +361,103 @@ describe("provenance and release claims", () => {
   it("the release gate currently fails, because nothing has been teacher-reviewed", () => {
     const codes = validateCurriculum(structuredClone(base), { release: true, repoRoot: cleanRoot }).errors.map((e) => e.code);
     expect(codes).toEqual(expect.arrayContaining(["RELEASE_TEACHER_REVIEW", "RELEASE_OUTCOMES_UNREVIEWED", "RELEASE_TEMPLATES_UNREVIEWED"]));
+  });
+});
+
+describe("review regressions (R3–R7)", () => {
+  it("R3: a lesson binding narrows a reusable template to what has been taught", () => {
+    const b = node(base, "G1-U1-L01").exercises.find((e) => e.templateId === "t.g1.note-value")!;
+    expect(b.scope.noteValues).toEqual(["semibreve", "minim", "crotchet"]);
+    expect(b.conceptIds).toEqual(["c.rhythm.values-long"]);
+    const codes = mutate((c) => {
+      node(c, "G1-U1-L01").exercises[0]!.scope.noteValues!.push("quaver");
+    });
+    expect(codes).toContain("BINDING_SCOPE_UNTAUGHT");
+  });
+
+  it("R3: a binding may not claim a concept that is not yet taught", () => {
+    const codes = mutate((c) => {
+      node(c, "G1-U1-L01").exercises[0]!.conceptIds.push("c.rhythm.rests");
+    });
+    expect(codes).toContain("TEMPLATE_CONCEPT_UNTAUGHT");
+  });
+
+  it("R3: a bass-clef item in the treble-clef lesson is rejected (bass clef is taught later)", () => {
+    const codes = mutate((c) => {
+      const item = lesson(c, "G1-U3-L03").guided[0]!;
+      item.music = { ...item.music!, clef: "bass", measures: [{ events: [{ kind: "note", pitch: "B2", duration: { value: "semibreve", dots: 0 } }] }] };
+      if (item.answer.kind === "pitch") item.answer.accepted = ["B2"];
+    });
+    expect(codes).toContain("FRAGMENT_SCOPE");
+  });
+
+  it("R3: a written F double sharp in Grade 1 is rejected", () => {
+    const codes = mutate((c) => {
+      const item = lesson(c, "G1-U3-L03").guided[0]!;
+      item.music = { ...item.music!, measures: [{ events: [{ kind: "note", pitch: "Fx4", writtenAccidental: "double-sharp", duration: { value: "semibreve", dots: 0 } }] }] };
+      if (item.answer.kind === "pitch") item.answer.accepted = ["Fx4"];
+    });
+    expect(codes).toContain("FRAGMENT_SCOPE");
+  });
+
+  it("R4: an extra wrong accepted alternative is rejected (note reading)", () => {
+    const codes = mutate((c) => {
+      const item = lesson(c, "G1-U3-L03").guided[0]!;
+      if (item.answer.kind === "pitch") item.answer.accepted.push("C4");
+    });
+    expect(codes).toContain("ANSWER_MISMATCH");
+  });
+
+  it("R4: an extra wrong accepted sequence is rejected (transposition)", () => {
+    const codes = mutate((c) => {
+      const item = c.items[0]!.content.item;
+      if (item.answer.kind === "pitch-sequence") item.answer.accepted.push(["C4"]);
+    });
+    expect(codes).toContain("ANSWER_MISMATCH");
+  });
+
+  it("R4: a genuinely equivalent alternative is still allowed", () => {
+    const codes = mutate((c) => {
+      const item = lesson(c, "G1-U3-L03").guided[0]!;
+      if (item.answer.kind === "pitch") item.answer.accepted.push("G5"); // octave-insensitive letter reading
+    });
+    expect(codes).toEqual([]);
+  });
+
+  it("R4: a staff-position answer must list every valid position and nothing else", () => {
+    expect(
+      mutate((c) => {
+        const item = lesson(c, "G1-U3-L03").independent[2]!;
+        if (item.answer.kind === "staff-position") item.answer.accepted.push("F4"); // F4 is a space note
+      }),
+    ).toContain("ANSWER_MISMATCH");
+  });
+
+  it("R6: lesson content and path node versions must agree", () => {
+    const codes = mutate((c) => {
+      lesson(c, "G1-U3-L03").contentVersion = 2;
+    });
+    expect(codes).toContain("LESSON_VERSION_MISMATCH");
+  });
+
+  it("R7: Windows-style content paths are normalised", async () => {
+    const { toPosixPath } = await import("../src/load.ts");
+    expect(toPosixPath("lessons\\G1-U3-L03.json")).toBe("lessons/G1-U3-L03.json");
+    const codes = mutate((c) => {
+      c.lessons[0]!.file = "lessons\\G1-U3-L03.json";
+      node(c, "G1-U3-L03").contentRef = "lessons\\G1-U3-L03.json";
+    });
+    expect(codes).toEqual([]);
+  });
+
+  it("R7: generated-doc checks ignore CRLF line endings", async () => {
+    const { renderDocs, checkDocs } = await import("../src/docs.ts");
+    const { mkdirSync, copyFileSync } = await import("node:fs");
+    const { REPO_ROOT } = await import("../src/load.ts");
+    const dir = mkdtempSync(join(tmpdir(), "mtp-crlf-"));
+    mkdirSync(join(dir, "docs/curriculum"), { recursive: true });
+    copyFileSync(join(REPO_ROOT, "docs/curriculum/SYLLABUS_GAPS.md"), join(dir, "docs/curriculum/SYLLABUS_GAPS.md"));
+    for (const [rel, text] of renderDocs(base, dir)) writeFileSync(join(dir, rel), text.replace(/\n/g, "\r\n"));
+    expect(checkDocs(base, dir)).toEqual([]);
   });
 });

@@ -40,15 +40,52 @@
       "measures": [
         {
           "events": [
-            { "kind": "note", "pitch": "F#4", "duration": { "value": "crotchet", "dots": 0 } },
-            { "kind": "note", "pitch": "A4", "duration": { "value": "crotchet", "dots": 0 } },
-            { "kind": "note", "pitch": "D5", "duration": { "value": "crotchet", "dots": 0 } }
+            {
+              "kind": "note",
+              "pitch": "F#4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
           ]
         },
         {
           "events": [
-            { "kind": "note", "pitch": "E5", "duration": { "value": "minim", "dots": 0 }, "label": "X" },
-            { "kind": "note", "pitch": "D5", "duration": { "value": "crotchet", "dots": 0 }, "label": "Y" }
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "label": "X"
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "label": "Y"
+            }
           ]
         }
       ],
@@ -60,7 +97,10 @@
       "Try each pairing. V–I is a perfect cadence. ii–I, ii–IV and V–IV are not cadences, so they are crossed out.",
       "Play V–I under the melody (optional sound) and see the finished-sounding perfect cadence."
     ],
-    "audio": { "playback": "synth-generated", "optional": true },
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
     "textAlternative": "The chord grid is also presented as a table: for each marked note, the chords containing it; then the list of pairs with 'cadence' or 'not a cadence' beside each."
   },
   "guided": [
@@ -72,16 +112,34 @@
       "evidence": "learning",
       "prompt": "In G major, which of these chords contain the note C? Choose all that apply.",
       "answer": {
-        "kind": "choice",
+        "kind": "multi-choice",
         "options": [
-          { "id": "I", "label": "I (G–B–D)" },
-          { "id": "ii", "label": "ii (A–C–E)" },
-          { "id": "IV", "label": "IV (C–E–G)" },
-          { "id": "V", "label": "V (D–F♯–A)" }
+          {
+            "id": "I",
+            "label": "I (G–B–D)"
+          },
+          {
+            "id": "ii",
+            "label": "ii (A–C–E)"
+          },
+          {
+            "id": "IV",
+            "label": "IV (C–E–G)"
+          },
+          {
+            "id": "V",
+            "label": "V (D–F♯–A)"
+          }
         ],
-        "correctOptionIds": ["ii", "IV"]
+        "correctOptionIds": [
+          "ii",
+          "IV"
+        ]
       },
-      "hints": ["Spell each chord out and look for C.", "Two of the chords contain C."],
+      "hints": [
+        "Spell each chord out and look for C.",
+        "Two of the chords contain C."
+      ],
       "feedback": {
         "correct": "Yes — C is in ii (A–C–E) and in IV (C–E–G).",
         "mistakes": {
@@ -101,13 +159,27 @@
       "answer": {
         "kind": "choice",
         "options": [
-          { "id": "perfect", "label": "Perfect" },
-          { "id": "plagal", "label": "Plagal" },
-          { "id": "imperfect", "label": "Imperfect" }
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
         ],
-        "correctOptionIds": ["perfect"]
+        "correctOptionIds": [
+          "perfect"
+        ]
       },
-      "hints": ["Which chord does it end on?", "Ending on I from V…"],
+      "hints": [
+        "Which chord does it end on?",
+        "Ending on I from V…"
+      ],
       "feedback": {
         "correct": "Right — V–I is a perfect cadence.",
         "mistakes": {
@@ -134,30 +206,118 @@
         "measures": [
           {
             "events": [
-              { "kind": "note", "pitch": "G4", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "B4", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "D5", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "B4", "duration": { "value": "crotchet", "dots": 0 } }
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
             ]
           },
           {
             "events": [
-              { "kind": "note", "pitch": "C5", "duration": { "value": "minim", "dots": 0 }, "label": "A" },
-              { "kind": "note", "pitch": "A4", "duration": { "value": "minim", "dots": 0 }, "label": "B" }
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "B"
+              }
             ]
           },
           {
             "events": [
-              { "kind": "note", "pitch": "B4", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "D5", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "C5", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "A4", "duration": { "value": "crotchet", "dots": 0 } }
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
             ]
           },
           {
             "events": [
-              { "kind": "note", "pitch": "F#4", "duration": { "value": "minim", "dots": 0 }, "label": "C" },
-              { "kind": "note", "pitch": "G4", "duration": { "value": "minim", "dots": 0 }, "label": "D" }
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "D"
+              }
             ]
           }
         ],
@@ -167,17 +327,69 @@
         "kind": "chord-progression",
         "key": "G major",
         "points": [
-          { "label": "A", "melodyPitches": ["C5"], "accepted": ["ii", "IV"] },
-          { "label": "B", "melodyPitches": ["A4"], "accepted": ["V"] },
-          { "label": "C", "melodyPitches": ["F#4"], "accepted": ["V"] },
-          { "label": "D", "melodyPitches": ["G4"], "accepted": ["I"] }
+          {
+            "label": "A",
+            "melodyPitches": [
+              "C5"
+            ],
+            "accepted": [
+              "ii",
+              "IV"
+            ]
+          },
+          {
+            "label": "B",
+            "melodyPitches": [
+              "A4"
+            ],
+            "accepted": [
+              "V"
+            ]
+          },
+          {
+            "label": "C",
+            "melodyPitches": [
+              "F#4"
+            ],
+            "accepted": [
+              "V"
+            ]
+          },
+          {
+            "label": "D",
+            "melodyPitches": [
+              "G4"
+            ],
+            "accepted": [
+              "I"
+            ]
+          }
         ],
         "cadences": [
-          { "labels": ["A", "B"], "acceptedTypes": ["imperfect"] },
-          { "labels": ["C", "D"], "acceptedTypes": ["perfect"] }
+          {
+            "labels": [
+              "A",
+              "B"
+            ],
+            "acceptedTypes": [
+              "imperfect"
+            ]
+          },
+          {
+            "labels": [
+              "C",
+              "D"
+            ],
+            "acceptedTypes": [
+              "perfect"
+            ]
+          }
         ]
       },
-      "hints": ["List the chords that contain each marked note.", "Bar 2 ends on chord V; bar 4 ends on chord I."],
+      "hints": [
+        "List the chords that contain each marked note.",
+        "Bar 2 ends on chord V; bar 4 ends on chord I."
+      ],
       "feedback": {
         "correct": "Excellent. A can be ii or IV — both contain C and both lead to V — so A–B is an imperfect cadence. C must be V (only V contains F♯) and D is I, so C–D is a perfect cadence.",
         "mistakes": {
@@ -204,16 +416,60 @@
         "measures": [
           {
             "events": [
-              { "kind": "note", "pitch": "F4", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "A4", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "C5", "duration": { "value": "crotchet", "dots": 0 } },
-              { "kind": "note", "pitch": "A4", "duration": { "value": "crotchet", "dots": 0 } }
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
             ]
           },
           {
             "events": [
-              { "kind": "note", "pitch": "Bb4", "duration": { "value": "minim", "dots": 0 }, "label": "A" },
-              { "kind": "note", "pitch": "A4", "duration": { "value": "minim", "dots": 0 }, "label": "B" }
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "B"
+              }
             ]
           }
         ],
@@ -223,12 +479,41 @@
         "kind": "chord-progression",
         "key": "F major",
         "points": [
-          { "label": "A", "melodyPitches": ["Bb4"], "accepted": ["IV"] },
-          { "label": "B", "melodyPitches": ["A4"], "accepted": ["I"] }
+          {
+            "label": "A",
+            "melodyPitches": [
+              "Bb4"
+            ],
+            "accepted": [
+              "IV"
+            ]
+          },
+          {
+            "label": "B",
+            "melodyPitches": [
+              "A4"
+            ],
+            "accepted": [
+              "I"
+            ]
+          }
         ],
-        "cadences": [{ "labels": ["A", "B"], "acceptedTypes": ["plagal"] }]
+        "cadences": [
+          {
+            "labels": [
+              "A",
+              "B"
+            ],
+            "acceptedTypes": [
+              "plagal"
+            ]
+          }
+        ]
       },
-      "hints": ["Which chords contain A? Only one of I, ii, IV, V does.", "Then which chord containing B♭ can come before it as a cadence?"],
+      "hints": [
+        "Which chords contain A? Only one of I, ii, IV, V does.",
+        "Then which chord containing B♭ can come before it as a cadence?"
+      ],
       "feedback": {
         "correct": "Correct — B (A) is only in chord I, and of the chords containing B♭ (ii and IV) only IV makes a cadence with I: a plagal cadence.",
         "mistakes": {
@@ -249,11 +534,22 @@
       "answer": {
         "kind": "choice",
         "options": [
-          { "id": "perfect", "label": "Perfect" },
-          { "id": "plagal", "label": "Plagal" },
-          { "id": "imperfect", "label": "Imperfect" }
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
         ],
-        "correctOptionIds": ["imperfect"]
+        "correctOptionIds": [
+          "imperfect"
+        ]
       },
       "feedback": {
         "correct": "Yes — any cadence ending on V is imperfect.",
@@ -270,20 +566,36 @@
     "If several chords fit and still make a cadence, every one of them is correct."
   ],
   "spacedReview": [
-    { "templateId": "t.g5.cadence-chords", "afterDays": 2 },
-    { "templateId": "t.g5.cadence-identify", "afterDays": 5 },
-    { "templateId": "t.g5.cadence-chords", "afterDays": 12 }
+    {
+      "templateId": "t.g5.cadence-chords",
+      "afterDays": 2
+    },
+    {
+      "templateId": "t.g5.cadence-identify",
+      "afterDays": 5
+    },
+    {
+      "templateId": "t.g5.cadence-chords",
+      "afterDays": 12
+    }
   ],
   "mastery": {
-    "conceptIds": ["c.cadences.chord-choice"],
+    "conceptIds": [
+      "c.cadences.chord-choice"
+    ],
     "countsAsEvidence": "independent-steps-only",
     "completion": "Complete when all steps have been attempted. Mastery evidence comes only from first-attempt, hint-free independent steps; a hinted answer is recorded as learning, not mastery."
   },
   "provenance": {
     "authoredBy": "Music Theory Path curriculum team (Brief 01 example)",
     "originality": "original",
-    "bookSectionIds": ["fs.g5.s11"],
-    "outcomeIds": ["abrsm2020.g5.10", "abrsm2020.g5.11"],
+    "bookSectionIds": [
+      "fs.g5.s11"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.10",
+      "abrsm2020.g5.11"
+    ],
     "notes": "All melodies are newly composed for this lesson. Accepted answers are re-derived by the curriculum validator from the melody notes and the cadence rules, so they cannot silently drift."
   }
 }

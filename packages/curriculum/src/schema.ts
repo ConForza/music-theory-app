@@ -113,6 +113,12 @@ export const MusicScope = z
     ornaments: z.array(OrnamentName).optional(),
     degreeNaming: DegreeNaming.optional(),
     doubleAccidentals: z.boolean().optional(),
+    /** Single sharps, flats and naturals (written or from a key signature) may appear. */
+    accidentals: z.boolean().optional(),
+    /** Key signatures may be shown. */
+    keySignatures: z.boolean().optional(),
+    rests: z.boolean().optional(),
+    ties: z.boolean().optional(),
   })
   .strict();
 export type MusicScope = z.infer<typeof MusicScope>;
@@ -131,6 +137,26 @@ export type GradeScope = z.infer<typeof GradeScope>;
 
 export const GradeScopeFile = z
   .object({ schemaVersion: z.literal(1), grades: z.array(GradeScope).length(5) })
+  .strict();
+
+export const SCOPE_DIMENSIONS = [
+  "keys", "minorForms", "timeSignatures", "noteValues", "maxDots", "tuplets", "clefs", "maxLedgerLines",
+  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "chordDegrees", "inversions",
+  "cadenceTypes", "cadenceKeys", "instrumentTranspositions", "octaveTranspositionClefs", "ornaments", "degreeNaming",
+  "doubleAccidentals", "accidentals", "keySignatures", "rests", "ties",
+] as const;
+
+/**
+ * Which concept must have been taught before a musical value may appear in an exercise.
+ * Arrays: the listed value. Numbers: any value >= threshold. Booleans: true. Ordinals: that rank or higher.
+ */
+export const ScopeIntroduction = z
+  .object({ dimension: z.enum(SCOPE_DIMENSIONS), value: z.union([z.string(), z.number(), z.boolean()]), conceptId: ConceptId })
+  .strict();
+export type ScopeIntroduction = z.infer<typeof ScopeIntroduction>;
+
+export const ScopeIntroductionsFile = z
+  .object({ schemaVersion: z.literal(1), introductions: z.array(ScopeIntroduction).min(1) })
   .strict();
 
 // ---------------------------------------------------------------------------
@@ -463,6 +489,11 @@ export type Unit = z.infer<typeof Unit>;
 export const NodeType = z.enum(["lesson", "practice", "review", "unit_challenge", "grade_assessment", "enrichment"]);
 export type NodeType = z.infer<typeof NodeType>;
 
+export const ExerciseBinding = z
+  .object({ templateId: TemplateId, conceptIds: z.array(ConceptId).min(1), scope: MusicScope })
+  .strict();
+export type ExerciseBinding = z.infer<typeof ExerciseBinding>;
+
 export const PathNode = z
   .object({
     id: NodeId,
@@ -475,7 +506,13 @@ export const PathNode = z
     outcomeIds: z.array(OutcomeId).default([]),
     /** Practice/review nodes: outcomes being revisited (must already have been taught). */
     reviewOutcomeIds: z.array(OutcomeId).default([]),
-    exerciseTemplateIds: z.array(TemplateId).default([]),
+    /**
+     * Exercise bindings: a reusable template narrowed to what has been taught at this node.
+     * `conceptIds` are the template concepts exercised here (all must already be taught); `scope`
+     * narrows every dimension the template declares. Items and generators are limited to
+     * effectiveScope(node, template) — see model.ts.
+     */
+    exercises: z.array(ExerciseBinding).default([]),
     assessmentId: AssessmentId.optional(),
     /** Nodes that must be completed first. Omitted = the previous node in the grade. */
     unlockAfter: z.array(NodeId).optional(),
@@ -607,24 +644,104 @@ export type ProgressionPolicy = z.infer<typeof ProgressionPolicy>;
 // Lesson content and exercise items
 // ---------------------------------------------------------------------------
 
+// ---- Notation contract (renderer-independent) ------------------------------
+//
+// A fragment is a single stave: clef, optional key/time signature and measures. A measure holds
+// either one sequence of events or several voices (each must fill the bar). Events are notes,
+// chords (simultaneous pitches sharing one duration), rests, or tuplet groups. Beam flags record
+// the grouping a learner sees or edits; ties, slurs, articulations, ornament signs and grace notes
+// carry the signs the exercise families need. Durations are exact: tuplets scale their members
+// by normal/actual, and a whole-bar rest lasts exactly one bar of the current time signature.
+
 export const Duration = z
   .object({ value: NoteValueName, dots: z.number().int().min(0).max(2).default(0) })
   .strict();
 
-export const NotationEvent = z.discriminatedUnion("kind", [
-  z
-    .object({
-      kind: z.literal("note"),
-      pitch: PitchName,
-      duration: Duration,
-      /** Accidental printed before this note (otherwise derived from key signature/bar state). */
-      writtenAccidental: z.enum(["sharp", "flat", "natural", "double-sharp", "double-flat"]).optional(),
-      tieToNext: z.boolean().optional(),
-      label: z.string().max(3).optional(),
-    })
-    .strict(),
-  z.object({ kind: z.literal("rest"), duration: Duration }).strict(),
-]);
+export const WrittenAccidental = z.enum(["sharp", "flat", "natural", "double-sharp", "double-flat"]);
+export const Articulation = z.enum(["staccato", "staccatissimo", "semi-staccato", "accent", "strong-accent", "tenuto", "fermata"]);
+export const BeamFlag = z.enum(["begin", "continue", "end"]);
+
+const SoundingFields = {
+  duration: Duration,
+  /** Tie into the next event of the same voice; that event must repeat the same pitch(es). */
+  tieToNext: z.boolean().optional(),
+  /** Beam membership, in event order: begin … continue … end. Absent = not beamed. */
+  beam: BeamFlag.optional(),
+  slur: z.enum(["start", "stop"]).optional(),
+  articulations: z.array(Articulation).optional(),
+  /** Ornament sign written above the note (symbol form). */
+  ornament: OrnamentName.optional(),
+  /** Small notes before the main note; they take no time in the bar. */
+  grace: z
+    .object({ kind: z.enum(["acciaccatura", "appoggiatura"]), pitches: z.array(PitchName).min(1) })
+    .strict()
+    .optional(),
+  dynamic: z.string().max(12).optional(),
+  /** Marker referenced by a prompt (e.g. "A", "x"). */
+  label: z.string().max(3).optional(),
+};
+
+export const NoteEvent = z
+  .object({
+    kind: z.literal("note"),
+    pitch: PitchName,
+    /** Accidental printed before this note (otherwise derived from key signature/bar state). */
+    writtenAccidental: WrittenAccidental.optional(),
+    ...SoundingFields,
+  })
+  .strict();
+
+export const ChordEvent = z
+  .object({
+    kind: z.literal("chord"),
+    notes: z
+      .array(z.object({ pitch: PitchName, writtenAccidental: WrittenAccidental.optional() }).strict())
+      .min(2),
+    ...SoundingFields,
+  })
+  .strict();
+
+export const RestEvent = z
+  .object({
+    kind: z.literal("rest"),
+    duration: Duration,
+    /** A whole-bar rest (semibreve rest symbol, breve rest in 4/2) lasts exactly one bar. */
+    wholeBar: z.boolean().optional(),
+    beam: BeamFlag.optional(),
+    articulations: z.array(z.literal("fermata")).optional(),
+    label: z.string().max(3).optional(),
+  })
+  .strict();
+
+const InnerEvent = z.discriminatedUnion("kind", [NoteEvent, ChordEvent, RestEvent]);
+
+export const TupletEvent = z
+  .object({
+    kind: z.literal("tuplet"),
+    /** `actual` notes in the time of `normal` notes of the written value (3:2 triplet, 2:3 duplet, 5:4 …). */
+    actual: z.number().int().min(2).max(15),
+    normal: z.number().int().min(1).max(16),
+    events: z.array(InnerEvent).min(1),
+    label: z.string().max(3).optional(),
+  })
+  .strict();
+
+export const NotationEvent = z.discriminatedUnion("kind", [NoteEvent, ChordEvent, RestEvent, TupletEvent]);
+export type NotationEvent = z.infer<typeof NotationEvent>;
+
+export const Voice = z
+  .object({ id: z.string().regex(/^[a-z0-9]+$/), stem: z.enum(["up", "down", "auto"]).default("auto"), events: z.array(NotationEvent).min(1) })
+  .strict();
+
+export const Measure = z
+  .object({
+    events: z.array(NotationEvent).min(1).optional(),
+    voices: z.array(Voice).min(2).optional(),
+    barline: z.enum(["single", "double", "final", "repeat-start", "repeat-end"]).optional(),
+  })
+  .strict()
+  .refine((m) => (m.events ? 1 : 0) + (m.voices ? 1 : 0) === 1, { message: "A measure has either events or voices (not both)" });
+export type Measure = z.infer<typeof Measure>;
 
 export const NotationFragment = z
   .object({
@@ -633,45 +750,91 @@ export const NotationFragment = z
     showKeySignature: z.boolean().default(true),
     timeSignature: TimeSignatureName.optional(),
     tempoText: z.string().optional(),
-    measures: z.array(z.object({ events: z.array(NotationEvent).min(1) }).strict()).min(1),
+    measures: z.array(Measure).min(1),
     /** Text description for screen readers and no-graphics mode. */
     textAlternative: NonEmpty,
   })
   .strict();
 export type NotationFragment = z.infer<typeof NotationFragment>;
 
-export const AnswerSpec = z.discriminatedUnion("kind", [
-  z
-    .object({
-      kind: z.literal("choice"),
-      options: z.array(z.object({ id: NonEmpty, label: NonEmpty }).strict()).min(2),
-      correctOptionIds: z.array(NonEmpty).min(1),
-    })
-    .strict(),
-  z
-    .object({
-      kind: z.literal("staff-position"),
-      clef: ClefName,
-      /** Accepted written pitches. With octaveSensitive=false, any octave of the spelling is accepted. */
-      accepted: z.array(PitchName).min(1),
-      octaveSensitive: z.boolean(),
-    })
-    .strict(),
-  z
-    .object({
-      kind: z.literal("pitch"),
-      accepted: z.array(PitchName).min(1),
-      octaveSensitive: z.boolean(),
-      spellingSensitive: z.boolean(),
-    })
-    .strict(),
-  z
-    .object({
-      kind: z.literal("pitch-sequence"),
-      clef: ClefName,
-      key: KeyName,
-      accepted: z.array(z.array(PitchName).min(1)).min(1),
-      derivation: z
+/** Several staves sounding together (short score, open score, a passage for instruments). */
+export const NotationScore = z
+  .object({
+    staves: z
+      .array(
+        z
+          .object({
+            id: z.string().regex(/^[a-z0-9-]+$/),
+            label: NonEmpty,
+            instrument: z.string().optional(),
+            /** Transposing instruments: written pitch is shown; `transposition` gives sounding offset. */
+            transposition: z.object({ interval: z.string().regex(/^(d|m|M|P|A)\d{1,2}$/), direction: z.enum(["up", "down"]) }).strict().optional(),
+            music: NotationFragment,
+          })
+          .strict(),
+      )
+      .min(2),
+    textAlternative: NonEmpty,
+  })
+  .strict();
+export type NotationScore = z.infer<typeof NotationScore>;
+
+// ---- Answer contracts: one typed variant per answer kind ----------------------
+
+export const IntervalCode = z
+  .string()
+  .regex(/^(\d{1,2}|c?(dd|d|m|M|P|A|AA)\d{1,2})$/, { message: 'Interval code like "5" (number only), "M3", "P12" or "cP5" (compound 5th)' });
+const Option = z.object({ id: NonEmpty, label: NonEmpty }).strict();
+
+const ChoiceAnswer = z
+  .object({ kind: z.literal("choice"), options: z.array(Option).min(2), correctOptionIds: z.array(NonEmpty).length(1) })
+  .strict();
+const MultiChoiceAnswer = z
+  .object({ kind: z.literal("multi-choice"), options: z.array(Option).min(2), correctOptionIds: z.array(NonEmpty).min(1) })
+  .strict();
+
+const PitchAnswer = z
+  .object({
+    kind: z.literal("pitch"),
+    /** Every accepted alternative must be correct under the spelling/octave policy (validated). */
+    accepted: z.array(PitchName).min(1),
+    octaveSensitive: z.boolean(),
+    spellingSensitive: z.boolean(),
+    /** For keyboard/enharmonic tasks without a shown note: the pitch the task is about. */
+    reference: PitchName.optional(),
+    /** "same-sound": accepted answers must sound like `reference`; "different-spelling": and be spelt differently. */
+    relation: z.enum(["same", "same-sound", "different-spelling"]).default("same"),
+  })
+  .strict();
+
+const StaffPositionAnswer = z
+  .object({
+    kind: z.literal("staff-position"),
+    clef: ClefName,
+    /** What the learner is asked to place; the validator derives every position satisfying it. */
+    target: z
+      .object({
+        step: z.enum(["A", "B", "C", "D", "E", "F", "G"]),
+        alter: z.number().int().min(-2).max(2).default(0),
+        position: z.enum(["line", "space", "any"]).default("any"),
+        maxLedgerLines: z.number().int().min(0).max(6).default(0),
+        octave: z.number().int().optional(),
+      })
+      .strict(),
+    accepted: z.array(PitchName).min(1),
+    octaveSensitive: z.boolean(),
+  })
+  .strict();
+
+const ScaleForm = z.enum(["major", "harmonic", "melodic"]);
+const PitchSequenceAnswer = z
+  .object({
+    kind: z.literal("pitch-sequence"),
+    clef: ClefName,
+    key: KeyName.optional(),
+    accepted: z.array(z.array(PitchName).min(1)).min(1),
+    derivation: z.discriminatedUnion("rule", [
+      z
         .object({
           rule: z.literal("transpose"),
           interval: z.string().regex(/^(d|m|M|P|A)\d{1,2}$/),
@@ -679,35 +842,165 @@ export const AnswerSpec = z.discriminatedUnion("kind", [
           sourceKey: KeyName,
         })
         .strict(),
-    })
-    .strict(),
-  z
-    .object({
-      kind: z.literal("chord-progression"),
-      key: KeyName,
-      points: z
-        .array(
-          z
-            .object({
-              label: z.string().regex(/^[A-Z]$/),
-              melodyPitches: z.array(PitchName).min(1),
-              accepted: z.array(RomanName).min(1),
-            })
-            .strict(),
-        )
-        .min(1),
-      /** Pairs of labels that form cadences, with the cadence type(s) that a correct answer produces. */
-      cadences: z
-        .array(
-          z
-            .object({ labels: z.tuple([z.string(), z.string()]), acceptedTypes: z.array(CadenceName).min(1) })
-            .strict(),
-        )
-        .default([]),
-    })
-    .strict(),
+      z
+        .object({
+          rule: z.literal("scale"),
+          key: KeyName,
+          form: ScaleForm,
+          direction: z.enum(["ascending", "descending", "ascending-descending"]),
+          start: PitchName,
+        })
+        .strict(),
+      z.object({ rule: z.literal("chromatic"), start: PitchName, direction: z.enum(["ascending", "descending"]) }).strict(),
+    ]),
+  })
+  .strict();
+
+const RhythmAnswer = z
+  .object({
+    kind: z.literal("rhythm"),
+    task: z.enum(["complete-bar", "regroup", "place-barlines", "equivalent-value", "add-tuplet"]),
+    timeSignature: TimeSignatureName.optional(),
+    /** For equivalent-value: total length in semibreves as a fraction [numerator, denominator]. */
+    target: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
+    /** Events supplied to the learner; complete-bar answers must start with them. */
+    given: z.array(NotationEvent).optional(),
+    /** Reference correct answers (one or more bars). */
+    accepted: z.array(z.array(Measure).min(1)).min(1),
+    /** True when the grader accepts any answer satisfying the rules, not only the listed references. */
+    acceptAnyRuleCompliant: z.boolean(),
+  })
+  .strict();
+
+const TimeSignatureAnswer = z.object({ kind: z.literal("time-signature"), accepted: z.array(TimeSignatureName).min(1) }).strict();
+
+const KeySignatureAnswer = z
+  .object({
+    kind: z.literal("key-signature"),
+    task: z.enum(["name-key", "write-signature"]),
+    clef: ClefName,
+    /** Keys whose signature is correct. For name-key without mode context, both relatives may be listed. */
+    accepted: z.array(KeyName).min(1),
+  })
+  .strict();
+
+const IntervalAnswer = z
+  .object({
+    kind: z.literal("interval"),
+    task: z.enum(["identify", "build"]),
+    key: KeyName.optional(),
+    lower: PitchName,
+    /** identify: the upper note shown. */
+    upper: PitchName.optional(),
+    /** build: interval and direction to construct from `lower`. */
+    target: IntervalCode.optional(),
+    direction: z.enum(["up", "down"]).optional(),
+    acceptedIntervals: z.array(IntervalCode).optional(),
+    acceptedPitches: z.array(PitchName).optional(),
+  })
+  .strict()
+  .refine((a) => (a.task === "identify" ? Boolean(a.upper && a.acceptedIntervals?.length) : Boolean(a.target && a.direction && a.acceptedPitches?.length)), {
+    message: "identify needs upper + acceptedIntervals; build needs target + direction + acceptedPitches",
+  });
+
+const ChordId = z.object({ roman: RomanName, inversion: InversionName }).strict();
+const ChordAnswer = z
+  .object({
+    kind: z.literal("chord"),
+    task: z.enum(["identify", "build"]),
+    key: KeyName,
+    /** identify: chord notes (bass first is not required); omitted = the single chord event in `music`. */
+    pitches: z.array(PitchName).min(3).optional(),
+    target: ChordId.optional(),
+    acceptedChords: z.array(ChordId).optional(),
+    /** build: example correct voicings; the grader accepts any voicing with the right notes and bass. */
+    acceptedVoicings: z.array(z.array(PitchName).min(3)).optional(),
+  })
+  .strict()
+  .refine((a) => (a.task === "identify" ? Boolean(a.acceptedChords?.length) : Boolean(a.target && a.acceptedVoicings?.length)), {
+    message: "identify needs acceptedChords; build needs target + acceptedVoicings",
+  });
+
+const OrnamentAnswer = z
+  .object({
+    kind: z.literal("ornament-sign"),
+    task: z.enum(["name-sign", "replace-written-out"]),
+    /** name-sign: the sign shown. */
+    sign: OrnamentName.optional(),
+    /** replace-written-out: the written-out figure and its main note. */
+    mainNote: PitchName.optional(),
+    writtenOut: z.array(PitchName).min(2).optional(),
+    accepted: z.array(OrnamentName).min(1),
+  })
+  .strict()
+  .refine((a) => (a.task === "name-sign" ? Boolean(a.sign) : Boolean(a.mainNote && a.writtenOut)), {
+    message: "name-sign needs sign; replace-written-out needs mainNote + writtenOut",
+  });
+
+const ChordProgressionAnswer = z
+  .object({
+    kind: z.literal("chord-progression"),
+    key: KeyName,
+    points: z
+      .array(
+        z
+          .object({
+            label: z.string().regex(/^[A-Z]$/),
+            melodyPitches: z.array(PitchName).min(1),
+            accepted: z.array(RomanName).min(1),
+          })
+          .strict(),
+      )
+      .min(1),
+    /** Pairs of labels that form cadences, with the cadence type(s) that a correct answer produces. */
+    cadences: z
+      .array(z.object({ labels: z.tuple([z.string(), z.string()]), acceptedTypes: z.array(CadenceName).min(1) }).strict())
+      .default([]),
+  })
+  .strict();
+
+export const SimpleAnswerSpec = z.discriminatedUnion("kind", [
+  ChoiceAnswer,
+  MultiChoiceAnswer,
+  PitchAnswer,
+  StaffPositionAnswer,
+  PitchSequenceAnswer,
+  RhythmAnswer,
+  TimeSignatureAnswer,
+  KeySignatureAnswer,
+  IntervalAnswer,
+  ChordAnswer,
+  OrnamentAnswer,
+  ChordProgressionAnswer,
+]);
+export type SimpleAnswerSpec = z.infer<typeof SimpleAnswerSpec>;
+
+const CompositeAnswer = z
+  .object({
+    kind: z.literal("composite"),
+    parts: z
+      .array(z.object({ id: z.string().regex(/^[a-z0-9-]+$/), prompt: NonEmpty, answer: SimpleAnswerSpec }).strict())
+      .min(2),
+  })
+  .strict();
+
+export const AnswerSpec = z.discriminatedUnion("kind", [
+  ChoiceAnswer,
+  MultiChoiceAnswer,
+  PitchAnswer,
+  StaffPositionAnswer,
+  PitchSequenceAnswer,
+  RhythmAnswer,
+  TimeSignatureAnswer,
+  KeySignatureAnswer,
+  IntervalAnswer,
+  ChordAnswer,
+  OrnamentAnswer,
+  ChordProgressionAnswer,
+  CompositeAnswer,
 ]);
 export type AnswerSpec = z.infer<typeof AnswerSpec>;
+
 
 export const ExerciseItem = z
   .object({
@@ -719,6 +1012,8 @@ export const ExerciseItem = z
     evidence: z.enum(["learning", "independent"]),
     prompt: NonEmpty,
     music: NotationFragment.optional(),
+    /** Multi-stave music (e.g. SATB or a short score) for score-observation items. */
+    score: NotationScore.optional(),
     answer: AnswerSpec,
     hints: z.array(NonEmpty).default([]),
     feedback: z

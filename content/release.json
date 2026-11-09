@@ -1,11 +1,19 @@
 {
   "schemaVersion": 1,
   "id": "mtp-curriculum",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
   "createdAt": "2026-11-09",
   "publishedAt": null,
-  "scope": { "grades": [1, 2, 3, 4, 5] },
+  "scope": {
+    "grades": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
   "syllabus": {
     "authorityId": "abrsm2020",
     "publisher": "ABRSM (Associated Board of the Royal Schools of Music)",
@@ -42,6 +50,11 @@
       "version": "0.1.0",
       "date": "2026-11-09",
       "summary": "Brief 01: first curriculum audit, outcome decomposition, learning graph, schemas and validator."
+    },
+    {
+      "version": "0.2.0",
+      "date": "2026-11-09",
+      "summary": "Review corrections: typed answer contracts for every exercise family (with scale/chromatic derivations), notation for tuplets, beams, chords, voices, whole-bar rests and annotations, lesson-level exercise bindings with taught-scope enforcement, verification of every accepted alternative, tied accidentals, lesson/node version agreement, platform-independent paths and line endings."
     }
   ]
 }

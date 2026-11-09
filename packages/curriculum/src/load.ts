@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { z } from "zod";
 import {
@@ -12,6 +12,7 @@ import {
   GradeWorld,
   LessonContent,
   ProgressionPolicy,
+  ScopeIntroductionsFile,
   SourceBookFile,
   StandaloneItemFile,
   SyllabusFile,
@@ -31,6 +32,7 @@ export interface Curriculum {
   release: z.infer<typeof CurriculumRelease>;
   syllabus: z.infer<typeof SyllabusFile>;
   scope: z.infer<typeof GradeScopeFile>;
+  scopeIntroductions: z.infer<typeof ScopeIntroductionsFile>;
   engine: z.infer<typeof EngineFile>;
   families: z.infer<typeof FamiliesFile>;
   templates: z.infer<typeof TemplatesFile>[];
@@ -45,6 +47,11 @@ export interface Curriculum {
 
 export const DEFAULT_CONTENT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../content");
 export const REPO_ROOT = resolve(DEFAULT_CONTENT_ROOT, "..");
+
+/** Logical content paths always use "/" regardless of platform (Windows path.relative returns "\\"). */
+export function toPosixPath(p: string): string {
+  return p.split(sep).join("/").replace(/\\/g, "/");
+}
 
 function readJson(path: string): unknown {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -65,7 +72,7 @@ function listJson(dir: string): string[] {
 export function loadCurriculum(root: string = DEFAULT_CONTENT_ROOT): { curriculum?: Curriculum; issues: Issue[] } {
   const issues: Issue[] = [];
   const parse = <S extends z.ZodTypeAny>(schema: S, path: string): z.infer<S> | undefined => {
-    const where = relative(root, path) || path;
+    const where = toPosixPath(relative(root, path) || path);
     if (!existsSync(path)) {
       issues.push({ code: "MISSING_FILE", severity: "error", message: "Required content file is missing", where });
       return undefined;
@@ -100,6 +107,7 @@ export function loadCurriculum(root: string = DEFAULT_CONTENT_ROOT): { curriculu
   const release = parse(CurriculumRelease, join(root, "release.json"));
   const syllabus = parse(SyllabusFile, join(root, "syllabus/abrsm-2020-outcomes.json"));
   const scope = parse(GradeScopeFile, join(root, "syllabus/grade-scope.json"));
+  const scopeIntroductions = parse(ScopeIntroductionsFile, join(root, "syllabus/scope-concepts.json"));
   const engine = parse(EngineFile, join(root, "engine/engine.json"));
   const families = parse(FamiliesFile, join(root, "exercises/families.json"));
   const book = parse(SourceBookFile, join(root, "source-book/first-steps-sections.json"));
@@ -109,17 +117,17 @@ export function loadCurriculum(root: string = DEFAULT_CONTENT_ROOT): { curriculu
   const worlds = many(GradeWorld, "path");
   const assessments = many(AssessmentsFile, "assessments");
   const lessons = listJson(join(root, "lessons"))
-    .map((p) => ({ file: relative(root, p), content: parse(LessonContent, p) }))
+    .map((p) => ({ file: toPosixPath(relative(root, p)), content: parse(LessonContent, p) }))
     .filter((x): x is { file: string; content: z.infer<typeof LessonContent> } => x.content !== undefined);
   const items = listJson(join(root, "exercises/items"))
-    .map((p) => ({ file: relative(root, p), content: parse(StandaloneItemFile, p) }))
+    .map((p) => ({ file: toPosixPath(relative(root, p)), content: parse(StandaloneItemFile, p) }))
     .filter((x): x is { file: string; content: z.infer<typeof StandaloneItemFile> } => x.content !== undefined);
 
-  if (!release || !syllabus || !scope || !engine || !families || !book || !policy || issues.some((i) => i.severity === "error")) {
+  if (!release || !syllabus || !scope || !scopeIntroductions || !engine || !families || !book || !policy || issues.some((i) => i.severity === "error")) {
     return { issues };
   }
   return {
-    curriculum: { root, release, syllabus, scope, engine, families, templates, concepts, worlds, assessments, book, policy, lessons, items },
+    curriculum: { root, release, syllabus, scope, scopeIntroductions, engine, families, templates, concepts, worlds, assessments, book, policy, lessons, items },
     issues,
   };
 }

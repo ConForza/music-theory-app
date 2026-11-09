@@ -1,12 +1,15 @@
 import { existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { computeCoverage } from "./coverage.ts";
-import { loadCurriculum, REPO_ROOT, type Curriculum, type Issue } from "./load.ts";
+import { loadCurriculum, REPO_ROOT, toPosixPath, type Curriculum, type Issue } from "./load.ts";
 import {
   buildIndex,
   conceptsAvailableAt,
+  RANK,
   outcomesTaughtBefore,
   scopeViolations,
+  taughtScope,
+  templateIdsOf,
   type CurriculumIndex,
 } from "./model.ts";
 import { classifyTimeSignature, formatKey, keysUpTo, parseKey, sameKey } from "./music/index.ts";
@@ -159,7 +162,10 @@ function checkReferences(ix: CurriculumIndex, err: Reporter) {
     n.conceptIds.forEach((x) => ref("concept", x, n.id));
     n.outcomeIds.forEach((x) => ref("outcome", x, n.id));
     n.reviewOutcomeIds.forEach((x) => ref("outcome", x, n.id));
-    n.exerciseTemplateIds.forEach((x) => ref("template", x, n.id));
+    n.exercises.forEach((b) => {
+      ref("template", b.templateId, n.id);
+      b.conceptIds.forEach((x) => ref("concept", x, `${n.id} → ${b.templateId}`));
+    });
     n.bookSectionIds.forEach((x) => ref("book", x, n.id));
     (n.unlockAfter ?? []).forEach((x) => ref("node", x, n.id));
     if (n.assessmentId) ref("assessment", n.assessmentId, n.id);
@@ -229,6 +235,37 @@ function checkScopeTables(ix: CurriculumIndex, err: Reporter, warn: Reporter) {
       if (Array.isArray(v)) {
         const dup = v.filter((x) => ((prev as Record<string, unknown[]>)[k] ?? []).includes(x));
         if (dup.length) warn("SCOPE_REDUNDANT", `grade-scope ${g.grade}`, `${k} re-adds ${dup.join(", ")}`);
+      }
+    }
+  }
+  // Every musical value in a grade's scope must name the concept that introduces it, and that
+  // concept must belong to the grade where the value first enters the scope.
+  const intros = ix.c.scopeIntroductions.introductions;
+  for (const r of intros) {
+    const cc = ix.concepts.get(r.conceptId);
+    if (!cc) {
+      err("UNKNOWN_REF", `scope-concepts ${r.dimension}=${String(r.value)}`, `Unknown concept ${r.conceptId}`);
+      continue;
+    }
+    let firstGrade: number | undefined;
+    for (const g of [1, 2, 3, 4, 5]) {
+      const v = (ix.cumulativeScope.get(g) as Record<string, unknown> | undefined)?.[r.dimension];
+      const present = Array.isArray(v) ? v.includes(r.value) : typeof v === "number" ? typeof r.value === "number" && v >= r.value : typeof v === "boolean" ? v === r.value : typeof v === "string" && r.dimension in RANK ? (RANK[r.dimension as keyof typeof RANK] as readonly string[]).indexOf(v) >= (RANK[r.dimension as keyof typeof RANK] as readonly string[]).indexOf(String(r.value)) : false;
+      if (present) {
+        firstGrade = g;
+        break;
+      }
+    }
+    if (firstGrade === undefined) warn("SCOPE_INTRO_UNUSED", `scope-concepts ${r.dimension}=${String(r.value)}`, "Value never appears in any grade scope");
+    else if (cc.grade !== firstGrade) err("SCOPE_INTRO_GRADE", `scope-concepts ${r.dimension}=${String(r.value)}`, `Value enters scope at Grade ${firstGrade} but ${r.conceptId} is a Grade ${cc.grade} concept`);
+  }
+  for (const g of ix.c.scope.grades) {
+    for (const [dim, v] of Object.entries(g.adds)) {
+      const values = Array.isArray(v) ? v : typeof v === "boolean" && v ? [true] : [];
+      for (const value of values) {
+        if (!intros.some((r) => r.dimension === dim && r.value === value)) {
+          err("SCOPE_VALUE_UNMAPPED", `grade-scope ${g.grade}`, `${dim}=${String(value)} has no introducing concept in scope-concepts.json`);
+        }
       }
     }
   }
@@ -303,7 +340,7 @@ function checkPath(ix: CurriculumIndex, err: Reporter, warn: Reporter) {
     if (n.type === "lesson") {
       if (n.conceptIds.length === 0) err("LESSON_WITHOUT_CONCEPT", n.id, "A lesson must teach at least one concept");
       if (n.outcomeIds.length === 0) err("LESSON_WITHOUT_OUTCOME", n.id, "A required lesson must serve at least one official outcome");
-      if (n.exerciseTemplateIds.length === 0) err("LESSON_WITHOUT_PRACTICE", n.id, "A lesson must include practice exercises");
+      if (n.exercises.length === 0) err("LESSON_WITHOUT_PRACTICE", n.id, "A lesson must include practice exercises");
       for (const o of n.outcomeIds) {
         const oc = ix.outcomes.get(o);
         if (oc && oc.grade > n.grade) err("OUTCOME_BEYOND_GRADE", n.id, `Lesson targets later-grade outcome ${o}`);
@@ -315,11 +352,11 @@ function checkPath(ix: CurriculumIndex, err: Reporter, warn: Reporter) {
     }
     if (n.type === "practice" || n.type === "review") {
       if (n.reviewOutcomeIds.length === 0) err("REVIEW_WITHOUT_OUTCOMES", n.id, "Practice/review nodes must list the outcomes they revisit");
-      if (n.exerciseTemplateIds.length === 0) err("REVIEW_WITHOUT_TEMPLATES", n.id, "Practice/review nodes need exercise templates");
+      if (n.exercises.length === 0) err("REVIEW_WITHOUT_TEMPLATES", n.id, "Practice/review nodes need exercise templates");
       const taught = outcomesTaughtBefore(ix, n, false);
       for (const o of n.reviewOutcomeIds) if (!taught.has(o)) err("REVIEW_UNTAUGHT", n.id, `Reviews ${o}, which has not been taught before this node`);
       for (const o of n.reviewOutcomeIds) {
-        const covered = n.exerciseTemplateIds.some((t) => ix.templates.get(t)?.outcomeIds.includes(o));
+        const covered = templateIdsOf(n).some((t) => ix.templates.get(t)?.outcomeIds.includes(o));
         if (!covered) err("REVIEW_OUTCOME_WITHOUT_TEMPLATE", n.id, `No listed template exercises ${o}`);
       }
     }
@@ -331,14 +368,26 @@ function checkPath(ix: CurriculumIndex, err: Reporter, warn: Reporter) {
         if (a.grade !== n.grade || a.unitId !== n.unitId) err("ASSESSMENT_PLACEMENT", n.id, `Assessment ${a.id} belongs to grade ${a.grade} / ${a.unitId}`);
       }
     }
-    for (const t of n.exerciseTemplateIds) {
-      const tpl = ix.templates.get(t);
+    // Exercise bindings: each reusable template is narrowed to what has been taught at this node.
+    const taught = taughtScope(ix, n);
+    const avail = conceptsAvailableAt(ix, n, true);
+    const seenBindings = new Set<string>();
+    for (const b of n.exercises) {
+      const tpl = ix.templates.get(b.templateId);
       if (!tpl) continue;
-      if (tpl.grade > n.grade) err("TEMPLATE_BEYOND_GRADE", n.id, `Uses Grade ${tpl.grade} template ${t}`);
-      if (n.type === "lesson" || n.type === "enrichment") {
-        const avail = conceptsAvailableAt(ix, n, true);
-        if (!tpl.conceptIds.some((x) => avail.has(x))) err("TEMPLATE_CONCEPT_UNTAUGHT", n.id, `Template ${t} exercises no concept taught by this point`);
+      const where = `${n.id} → ${b.templateId}`;
+      if (seenBindings.has(b.templateId)) err("DUPLICATE_BINDING", where, "Template bound twice on one node");
+      seenBindings.add(b.templateId);
+      if (tpl.grade > n.grade) err("TEMPLATE_BEYOND_GRADE", n.id, `Uses Grade ${tpl.grade} template ${b.templateId}`);
+      for (const x of b.conceptIds) {
+        if (!tpl.conceptIds.includes(x)) err("BINDING_CONCEPT_NOT_IN_TEMPLATE", where, `${x} is not a concept of the template`);
+        if (!avail.has(x)) err("TEMPLATE_CONCEPT_UNTAUGHT", where, `Binding exercises ${x}, which is not taught by this point`);
       }
+      for (const k of Object.keys(tpl.scope)) {
+        if (!(k in b.scope)) err("BINDING_SCOPE_IMPLICIT", where, `Binding must state its narrowing of template dimension "${k}"`);
+      }
+      for (const v of scopeViolations(b.scope, tpl.scope)) err("BINDING_WIDENS_TEMPLATE", where, v);
+      for (const v of scopeViolations(b.scope, taught)) err("BINDING_SCOPE_UNTAUGHT", where, `Not yet taught at ${n.id}: ${v}`);
     }
   }
 
@@ -373,7 +422,7 @@ function checkPath(ix: CurriculumIndex, err: Reporter, warn: Reporter) {
 
 function checkTemplates(ix: CurriculumIndex, err: Reporter, warn: Reporter) {
   const used = new Set([
-    ...ix.nodes.flatMap((n) => n.exerciseTemplateIds),
+    ...ix.nodes.flatMap((n) => templateIdsOf(n)),
     ...[...ix.assessments.values()].flatMap((a) => a.sections.flatMap((s) => s.templateIds)),
   ]);
   for (const t of ix.templates.values()) {
@@ -429,6 +478,16 @@ function checkAssessments(ix: CurriculumIndex, err: Reporter) {
       }
       for (const o of s.outcomeIds) {
         if (!s.templateIds.some((t) => ix.templates.get(t)?.outcomeIds.includes(o))) err("ASSESSMENT_OUTCOME_WITHOUT_TEMPLATE", `${a.id}#${s.id}`, `No template in the section assesses ${o}`);
+      }
+    }
+    const anode = ix.nodes.find((n) => n.assessmentId === a.id);
+    if (anode) {
+      const avail = conceptsAvailableAt(ix, anode, true);
+      for (const s of a.sections) {
+        for (const t of s.templateIds) {
+          const tpl = ix.templates.get(t);
+          if (tpl && !tpl.conceptIds.some((x) => avail.has(x))) err("ASSESSMENT_TEMPLATE_UNTAUGHT", `${a.id}#${s.id}`, `Template ${t} exercises nothing taught before this assessment`);
+        }
       }
     }
     if (a.kind === "grade_assessment") {
@@ -568,11 +627,14 @@ function checkProvenance(ix: CurriculumIndex, repoRoot: string, err: Reporter) {
   for (const l of ix.c.lessons) {
     const node = ix.nodeById.get(l.content.lessonId);
     if (!node) err("LESSON_CONTENT_ORPHAN", l.file, `No path node ${l.content.lessonId}`);
-    else if (node.contentRef !== l.file) err("LESSON_CONTENT_LINK", l.file, `Node ${node.id} has contentRef ${String(node.contentRef)}`);
+    else if (toPosixPath(node.contentRef ?? "") !== toPosixPath(l.file)) err("LESSON_CONTENT_LINK", l.file, `Node ${node.id} has contentRef ${String(node.contentRef)}`);
     if (l.content.id !== `lc.${l.content.lessonId}`) err("LESSON_CONTENT_ID", l.file, "Lesson content id must be lc.<lessonId>");
+    if (node && node.contentVersion !== l.content.contentVersion) {
+      err("LESSON_VERSION_MISMATCH", l.file, `LessonContent v${l.content.contentVersion} but path node ${node.id} is v${node.contentVersion}; the node's contentVersion identifies delivered content and must match`);
+    }
   }
   for (const n of ix.nodes) {
-    if (n.contentRef && !ix.c.lessons.some((l) => l.file === n.contentRef)) err("LESSON_CONTENT_MISSING", n.id, `contentRef ${n.contentRef} not found`);
+    if (n.contentRef && !ix.c.lessons.some((l) => toPosixPath(l.file) === toPosixPath(n.contentRef!))) err("LESSON_CONTENT_MISSING", n.id, `contentRef ${n.contentRef} not found`);
     if ((n.contentStatus === "example" || n.contentStatus === "approved") && !n.contentRef) err("LESSON_CONTENT_MISSING", n.id, `contentStatus ${n.contentStatus} needs a contentRef`);
   }
 }

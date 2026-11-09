@@ -24,14 +24,17 @@ Every lesson in every grade uses the same eight-part format, which `LessonConten
   "seed": null,                              // null = fixed authored item; integer = reproducible generator seed
   "evidence": "learning" | "independent",
   "prompt": "…original wording…",
-  "music": { NotationFragment },             // clef, key, time signature, measures, events, textAlternative
-  "answer": { AnswerSpec },                  // choice | pitch | staff-position | pitch-sequence | chord-progression
+  "music": { NotationFragment },             // clef, key, time signature, measures (events or voices), textAlternative
+  "score": { NotationScore },                // optional multi-stave music (SATB, passages)
+  "answer": { AnswerSpec },                  // one typed variant per family answer kind (see ARCHITECTURE.md §5)
   "hints": ["…"],
   "feedback": { "correct": "…", "mistakes": { "<category>": "…" }, "fallback": "…" }
 }
 ```
 
 - **Written pitch** is always spelt (`C#5` ≠ `Db5`). `octaveSensitive` and `spellingSensitive` are explicit.
+- **Every accepted alternative is checked.** Adding a wrong alternative to `accepted` fails validation; genuinely equivalent alternatives (e.g. any octave in an octave-insensitive reading task, both spellings in a "same sound" keyboard task) pass.
+- **Items stay inside what has been taught.** Lesson items must use a template bound on the node, and their notation and answers must fit `effectiveScope(node, binding)`. A bass-clef note in the treble-clef lesson, or a double sharp in Grade 1, fails validation.
 - **Multiple valid answers.** `chord-progression` lists every accepted chord per point, and the validator re-derives that set from the melody notes and the cadence rules. Missing alternatives therefore fail the build, as do invalid chords. Grouping and bar-completion templates declare that every convention-compliant answer is accepted.
 - **Derived answers.** For transposition, the validator recomputes the transposed key and every note from the source melody and the stated interval. For note reading, it compares with the note actually shown. Every fragment is also checked for bar totals, written-accidental consistency (key signature + bar state) and grade scope (clefs, keys, values, ledger lines).
 - **Accessibility.** Every family declares a screen-reader equivalent, a no-sound path and a no-colour path, and every interaction is keyboard-operable. Accessible alternatives earn equal mastery weight.
@@ -44,6 +47,7 @@ A template is a grade-specific specialisation of a family: original prompt patte
 
 1. Pick the path node. Its objective, concepts, outcomes and templates are already defined, so change them only with a recorded reason.
 2. Write original explanations and examples. Use the book only to check the topic and its order. Never paraphrase its prose or copy its examples.
-3. Use only templates listed on the node, and only mistake categories from their families.
-4. Run `npm run check`. Musical answers are re-derived automatically wherever the answer kind allows.
-5. Set `contentStatus: "draft"`, then request teacher review. Only reviewed content becomes `approved`.
+3. Use only templates bound on the node (`exercises[]`), stay within each binding's scope, and use only mistake categories from their families.
+4. Keep the node's `contentVersion` and the LessonContent `contentVersion` equal.
+5. Run `npm run check`. Musical answers are re-derived automatically for every answer kind.
+6. Set `contentStatus: "draft"`, then request teacher review. Only reviewed content becomes `approved`.
