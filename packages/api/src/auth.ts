@@ -114,7 +114,16 @@ export class RateLimiter {
     private maxKeys = 10_000,
   ) {}
   check(key: string, at = Date.now()) {
-    if (this.hits.size >= this.maxKeys) for (const [k, v] of this.hits) if (v.reset <= at) this.hits.delete(k); // bound memory
+    if (this.hits.size >= this.maxKeys) {
+      // Bound memory: drop expired windows first, then, if live keys alone fill the map, the oldest ones (Map keeps
+      // insertion order). Evicting a live key forgets its count, which only matters to an attacker already holding
+      // `maxKeys` distinct keys; unbounded growth would hand the same attacker a memory-exhaustion attack instead.
+      for (const [k, v] of this.hits) if (v.reset <= at) this.hits.delete(k);
+      for (const k of this.hits.keys()) {
+        if (this.hits.size < this.maxKeys) break;
+        this.hits.delete(k);
+      }
+    }
     const h = this.hits.get(key);
     if (!h || h.reset <= at) {
       this.hits.set(key, { count: 1, reset: at + this.windowMs });

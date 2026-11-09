@@ -129,3 +129,20 @@ describe("retrying a registration whose response was lost", () => {
     expect((await reg(g, "ada")).status).toBe(409);
   });
 });
+
+describe("limiter memory is bounded", () => {
+  it("never holds more than maxKeys entries, even when every key is live", async () => {
+    const { RateLimiter } = await import("../src/auth.ts");
+    const limiter = new RateLimiter(10, 15 * 60_000, 100);
+    for (let i = 0; i < 1000; i++) limiter.check(`k${i}`, 1_000); // all within one window: none expired
+    const size = (limiter as unknown as { hits: Map<string, unknown> }).hits.size;
+    expect(size).toBeLessThanOrEqual(100);
+    expect(() => limiter.check("k999", 1_001)).not.toThrow(); // the newest keys are still tracked
+  });
+  it("still counts a key correctly while under the cap", async () => {
+    const { RateLimiter } = await import("../src/auth.ts");
+    const limiter = new RateLimiter(3, 60_000, 100);
+    for (let i = 0; i < 3; i++) limiter.check("a", 1);
+    expect(() => limiter.check("a", 2)).toThrow(/Too many/);
+  });
+});

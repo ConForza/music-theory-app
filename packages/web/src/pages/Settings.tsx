@@ -103,7 +103,16 @@ export function Settings() {
 
       <section className="card" aria-labelledby="who-h">
         <h2 id="who-h">About you</h2>
-        <form className="form" onSubmit={(e) => { e.preventDefault(); void track("name", "your nickname", () => updateProfile({ displayName: name })); }}>
+        <form className="form" onSubmit={(e) => { e.preventDefault(); const attempted = name;
+            const confirmed = me!.user.displayName;
+            // The field shows what is being saved, and goes back to the saved nickname if the save fails (Retry shows it again).
+            void track("name", "your nickname", () => {
+              setName(attempted);
+              return updateProfile({ displayName: attempted }).catch((err: unknown) => {
+                setName(confirmed);
+                throw err;
+              });
+            }); }}>
           <label>Nickname<input value={name} maxLength={30} onChange={(e) => setName(e.target.value)} /></label>
           <button className="btn btn-ghost" disabled={!name.trim() || name === me!.user.displayName}>Save nickname</button>
         </form>
