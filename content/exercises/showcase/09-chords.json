@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "id": "s.chords",
+  "title": "Chords and inversions",
+  "summary": "Build tonic and primary triads, and name chords and their positions.",
+  "grade": 1,
+  "order": 9,
+  "familyIds": [
+    "fam.triad-chord"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path content team (Brief 03)",
+    "originality": "original",
+    "notes": "Items drawn from the seeded generators with a teaching-point filter, then fixed. Music and answers come from the rule engine; prompts and feedback are original."
+  },
+  "review": {
+    "status": "pending",
+    "reviewedBy": null
+  },
+  "items": [
+    {
+      "id": "i.showcase.chords.1",
+      "templateId": "t.g1.tonic-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write the tonic triad of F major in the treble clef, in root position, using accidentals.",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "F major",
+        "target": {
+          "roman": "I",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "F4",
+            "A4",
+            "C5"
+          ]
+        ]
+      },
+      "hints": [
+        "Use degrees 1, 3 and 5.",
+        "Chord I is built on degree 1 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Yes: the tonic, the 3rd and the 5th.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.showcase.chords.2",
+      "templateId": "t.g4.primary-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write chord V of E major in the treble clef (root position).",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "E major",
+        "target": {
+          "roman": "V",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "B3",
+            "D#4",
+            "F#4"
+          ]
+        ]
+      },
+      "hints": [
+        "Count up 1-3-5 from the root.",
+        "Chord V is built on degree 5 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Correct primary triad.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.showcase.chords.3",
+      "templateId": "t.g5.chord-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this chord in G minor: give its Roman numeral and position (for example, IVb).",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "Eb2"
+                  },
+                  {
+                    "pitch": "G2"
+                  },
+                  {
+                    "pitch": "C3"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A chord in the bass clef, G minor: E♭, G, C from the bottom up.",
+        "key": "G minor"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "G minor",
+        "acceptedChords": [
+          {
+            "roman": "IV",
+            "inversion": "b"
+          }
+        ]
+      },
+      "hints": [
+        "Find the root, then the bass.",
+        "Rearrange the notes into a stack of 3rds to find the root, then look at the lowest note for the position."
+      ],
+      "feedback": {
+        "correct": "Right. The 3rd in the bass makes it a b chord.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.showcase.chords.4",
+      "templateId": "t.g5.chord-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write chord IVc of F major in the bass clef (second inversion (c): the 5th in the bass).",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "F major",
+        "target": {
+          "roman": "IV",
+          "inversion": "c"
+        },
+        "acceptedVoicings": [
+          [
+            "F2",
+            "Bb2",
+            "D3"
+          ]
+        ]
+      },
+      "hints": [
+        "Put the right note in the bass first.",
+        "Chord IV is built on degree 4 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Correct. Any spacing works as long as the 5th is the lowest note.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    }
+  ],
+  "practice": [
+    {
+      "templateId": "t.g5.chord-identify",
+      "label": "More chords"
+    }
+  ]
+}

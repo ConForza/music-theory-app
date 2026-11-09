@@ -158,7 +158,7 @@ const noteRead: Gen = (c) => {
   const sign = p.alter ? `, with a ${SIGN_WORD[p.alter]} sign in front of it` : "";
   return {
     prompt: p.alter ? "Name this note, including its sharp, flat or natural." : "Name this note.",
-    music: frag(clef, [{ events: [note(p)] }], `A ${clef}-clef stave with one semibreve on the ${describePosition(pos)}${sign}.`),
+    music: frag(clef, [{ events: [note(p)] }], `${clef === "alto" ? "An" : "A"} ${clef}-clef stave with one semibreve on the ${describePosition(pos)}${sign}.`),
     answer: { kind: "pitch", accepted: [F(p)], octaveSensitive: c.template.acceptance.octaveSensitive, spellingSensitive: true, relation: "same" },
     hints: [`The note is on the ${describePosition(pos)}. The bottom line of the ${clef} clef is ${FC(naturalAt(clef, 0))}: count up (or down) one letter for each line and space.`],
   };
@@ -295,7 +295,7 @@ const accidentalState: Gen = (c) => {
   const describe = (m: Measure, bi: number) =>
     `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step} ${describePosition(staffPosition(clef, P(e.pitch)))}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}${e.label ? " (marked *)" : ""}${e.tieToNext ? " tied over" : ""}` : "rest")).join(", ") + ".";
   const sig = music.keySignature(key);
-  f.textAlternative = `${clef} clef, key signature: ${sig.count ? `${sig.count} ${sig.type}` : "none"}, ${ts}. ${f.measures.map(describe).join(" ")}`;
+  f.textAlternative = `${clef} clef, key signature: ${sig.count ? `${sig.count} ${sig.count === 1 ? sig.type.slice(0, -1) : sig.type}` : "none"}, ${ts}. ${f.measures.map(describe).join(" ")}`;
   return {
     prompt: "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
     music: f,
@@ -335,9 +335,9 @@ const scaleBuild: Gen = (c) => {
     const start: Pitch = { ...key.tonic, octave: direction === "descending" ? octave + 1 : octave };
     const notes = deriveScale(keyText, form, direction, start);
     if (!fits(clef, notes, max)) continue;
-    const formName = form === "major" ? "" : `${form} minor `;
+    const scaleName = form === "major" ? `scale of ${keyName(keyText)}` : `${nameOf(key.tonic)} ${form} minor scale`;
     return {
-      prompt: `Write the ${formName}scale of ${keyName(keyText)}${form === "major" ? "" : ""}, ${direction.replace("-", " then ")}, in the ${clef} clef. Use accidentals instead of a key signature. The first note is written for you.`,
+      prompt: `Write the ${scaleName}, ${direction.replace("-", " then ")}, in the ${clef} clef. Use accidentals instead of a key signature. The first note is written for you.`,
       answer: { kind: "pitch-sequence", clef, key: keyText, accepted: [notes.map(F)], derivation: { rule: "scale", key: keyText, form, direction, start: F(start) } },
       hints: [form === "major" ? "Major pattern: tone, tone, semitone, tone, tone, tone, semitone." : form === "harmonic" ? "Harmonic minor: the key-signature notes with the 7th raised a semitone, going up and coming down." : "Melodic minor raises the 6th and 7th going up, and lowers them again coming down."],
     };
@@ -394,6 +394,7 @@ const chromatic: Gen = (c) => {
   for (let i = 0; i < 6; i++) {
     const step = c.rng.pick(music.STEPS);
     const start: Pitch = { step, alter: c.rng.pick([0, 0, 1, -1]), octave: c.rng.pick([3, 4]) };
+    if ((start.alter === 1 && (step === "E" || step === "B")) || (start.alter === -1 && (step === "C" || step === "F"))) continue;
     const notes = music.chromaticFrom(start, direction);
     if (!fits(clef, notes, max)) continue;
     return {
@@ -426,7 +427,7 @@ const interval: Gen = (c) => {
     const accepted = iv.number > 8 ? [code, `c${iv.quality}${iv.number - 7}`] : [code];
     return {
       prompt: iv.number > 8 ? "Name this compound interval (for example, major 10th or compound major 3rd)." : "Name this interval: give its quality and number (for example, major 3rd).",
-      music: frag(clef, [{ events: [note(lower), note(upper)] }], `Two semibreves in the ${clef} clef, one after the other: ${nameOf(lower)} then ${nameOf(upper)} above it.`),
+      music: frag(clef, [{ events: [note(lower), note(upper)] }], `Two semibreves in the ${clef} clef, one after the other: ${pretty(F(lower))} then ${pretty(F(upper))} above it.`),
       answer: { kind: "interval", task: "identify", lower: F(lower), upper: F(upper), acceptedIntervals: accepted },
       hints: ["Count the letter names from the lower note to the upper note (both included) for the number. Then compare the top note with the major scale of the lower note."],
     };
@@ -459,7 +460,7 @@ const interval: Gen = (c) => {
     }
     return {
       prompt: withQuality ? `Name this interval (quality and number). ${sigText}` : `Give the number of this interval (for example, 3rd). ${sigText}`,
-      music: frag(clef, [{ events: [note(lower), note(upper)] }], `Two semibreves in the ${clef} clef: ${nameOf(lower)}, then ${nameOf(upper)} above it.`),
+      music: frag(clef, [{ events: [note(lower), note(upper)] }], `Two semibreves in the ${clef} clef: ${pretty(F(lower))}, then ${pretty(F(upper))} above it.`),
       answer: { kind: "interval", task: "identify", key: keyText, lower: F(lower), upper: F(upper), acceptedIntervals: [withQuality ? ivCode : String(iv.number)] },
       hints: ["Count every letter name from the bottom note to the top note, including both."],
     };
@@ -662,6 +663,7 @@ const timeSignature: Gen = (c) => {
   // Ambiguity: reject when the grouping would also be correct in another time signature with the same bar length.
   const rivals = (c.scope.timeSignatures ?? []).filter((t) => t !== ts && music.equals(music.barCapacity(music.parseTimeSignature(t)), cap));
   if (rivals.some((t) => bars.every((b) => music.checkBarAnyPattern(b as unknown as music.REvent[], t).issues.length === 0))) return null;
+  if (bars.flat().length < 5) return null; // too few notes to show the beat grouping
   const measures = bars.map((events) => ({ events: events! }));
   return {
     prompt: "Add the time signature to this rhythm.",

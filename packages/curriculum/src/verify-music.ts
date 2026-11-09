@@ -743,5 +743,20 @@ export function verifyLessonMusic(ix: CurriculumIndex): Issue[] {
     if (tpl) for (const o of content.outcomeIds) if (!tpl.outcomeIds.includes(o)) report("PROVENANCE_OUTCOME", file, `${o} is not targeted by ${tpl.id}`);
     issues.push(...verifyStandaloneItem(ix, content.item, `${file}#${content.item.id}`));
   }
+  for (const { file, content } of ix.c.showcase) {
+    const fams = new Set<string>();
+    for (const it of content.items) {
+      issues.push(...verifyStandaloneItem(ix, it, `${file}#${it.id}`));
+      const tpl = ix.templates.get(it.templateId);
+      if (tpl) fams.add(tpl.familyId);
+    }
+    for (const f of content.familyIds) if (!fams.has(f)) report("SHOWCASE_FAMILY", file, `Set lists ${f} but has no item from that family`);
+    for (const f of fams) if (!content.familyIds.includes(f)) report("SHOWCASE_FAMILY", file, `Item family ${f} is not listed in familyIds`);
+    for (const p of content.practice) if (!ix.templates.has(p.templateId)) report("UNKNOWN_REF", file, `Practice template ${p.templateId} not found`);
+  }
+  if (ix.c.showcase.length) {
+    const covered = new Set(ix.c.showcase.flatMap((x) => x.content.items).map((it) => ix.templates.get(it.templateId)?.familyId));
+    for (const f of ix.c.families.families) if (!covered.has(f.id)) report("SHOWCASE_COVERAGE", "exercises/showcase", `No demonstration item for ${f.id}`);
+  }
   return issues;
 }
