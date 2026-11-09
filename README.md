@@ -4,9 +4,11 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 > **Not affiliated with or endorsed by ABRSM.** The app teaches towards the published ABRSM Grades 1–5 theory syllabus. Its practice assessments are not official examinations.
 
-## Status — Brief 01 (curriculum architecture)
+## Status — Brief 02 (application foundation)
 
-This repository currently contains the **curriculum foundation** only. There is no app UI yet (that starts with Brief 02).
+The repository now contains the **student app** (React + Vite), a **backend** (accounts, sessions, path state, lesson progress on SQLite) and the Brief 01 curriculum foundation. One demonstration lesson is playable end to end (Grade 1, *Treble clef: notes on the lines*); every other node shows as *Coming soon*. See [docs/architecture/APP_ARCHITECTURE.md](docs/architecture/APP_ARCHITECTURE.md), [docs/PRIVACY_PLAN.md](docs/PRIVACY_PLAN.md) and the original briefs in [docs/development](docs/development/).
+
+### Curriculum foundation (Brief 01)
 
 | Deliverable | Location |
 |---|---|
@@ -27,8 +29,11 @@ This repository currently contains the **curriculum foundation** only. There is 
 ## Commands
 
 ```bash
-npm ci                    # Node ≥ 20
-npm run check             # typecheck + validate + docs:check + tests
+npm ci                    # Node ≥ 22.13
+npm run dev               # API :8787 + web :5173 (open http://localhost:5173)
+npm run build && npm start  # production-like, one server on :8787
+npm run e2e               # real-browser journeys (after build; needs Playwright Chromium)
+npm run check             # typecheck + lint + validate + docs:check + tests + build
 npm run validate          # curriculum rules (coverage, prerequisites, grade scope, music verification, IP)
 npm run validate:release  # release gate — fails until teacher sign-off
 npm run docs:generate     # regenerate the generated docs after editing content
@@ -39,6 +44,8 @@ npm run bundle            # dist/curriculum.json (single-file snapshot)
 
 - `content/` — the curriculum as schema-validated JSON (source of truth). See [content/README.md](content/README.md).
 - `packages/curriculum/` — `@mtp/curriculum`: schema, loader, validator, reference music rules, doc generator.
+- `packages/api/` — `@mtp/api`: accounts, sessions, course projection, path state, progress, migrations.
+- `packages/web/` — `@mtp/web`: the student app and browser journeys.
 - `docs/` — architecture, curriculum audit and handoffs.
 
 The user-supplied reference book and any other copyrighted material must **never** be committed (`*.pdf` is ignored and rejected by the validator).

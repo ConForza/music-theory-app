@@ -1,0 +1,27 @@
+{
+  "name": "@mtp/api",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Music Theory Path backend: accounts, sessions, curriculum-derived path state and lesson progress (SQLite).",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "start": "node --disable-warning=ExperimentalWarning --import tsx src/main.ts",
+    "dev": "node --disable-warning=ExperimentalWarning --import tsx --watch src/main.ts"
+  },
+  "dependencies": {
+    "@mtp/curriculum": "0.1.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.6.3",
+    "vitest": "^5.1.0"
+  }
+}

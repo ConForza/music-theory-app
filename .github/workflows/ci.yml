@@ -18,8 +18,23 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Typecheck, validate curriculum, check generated docs, run tests
+      - name: Typecheck, lint, validate curriculum, check generated docs, run tests, build
         run: npm run check
       - name: Release gate (informational — expected to fail until teacher sign-off)
         run: npm run validate:release
         continue-on-error: true
+
+  browser:
+    runs-on: ubuntu-latest
+    needs: curriculum
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Browser journeys (phone, small phone, tablet, desktop, keyboard, offline, zoom)
+        run: npm run e2e

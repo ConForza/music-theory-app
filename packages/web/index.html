@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12131c" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Music Theory Path: short, friendly lessons that take you from your first notes to Grade 5 theory." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Music Theory Path</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      try {
+        var t = localStorage.getItem("mtp.theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+        var m = localStorage.getItem("mtp.motion");
+        if (m === "reduce" || m === "full") document.documentElement.dataset.motion = m;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Music Theory Path needs JavaScript to run lessons.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

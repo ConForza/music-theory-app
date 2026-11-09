@@ -2,13 +2,13 @@
   "name": "music-theory-path",
   "private": true,
   "version": "0.1.0",
-  "description": "Music Theory Path \u2014 Duolingo-inspired music theory course, Grades 1\u20135 (curriculum architecture phase).",
+  "description": "Music Theory Path — Duolingo-inspired music theory course, Grades 1–5.",
   "license": "UNLICENSED",
   "workspaces": [
     "packages/*"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=22.13"
   },
   "scripts": {
     "typecheck": "npm run typecheck --workspaces --if-present",
@@ -17,7 +17,20 @@
     "validate:release": "npm run validate:release -w @mtp/curriculum",
     "docs:generate": "npm run docs:generate -w @mtp/curriculum",
     "docs:check": "npm run docs:check -w @mtp/curriculum",
-    "check": "npm run typecheck && npm run validate && npm run docs:check && npm test",
-    "bundle": "npm run bundle -w @mtp/curriculum"
+    "check": "npm run typecheck && npm run lint && npm run validate && npm run docs:check && npm test && npm run build",
+    "bundle": "npm run bundle -w @mtp/curriculum",
+    "lint": "eslint .",
+    "build": "npm run build -w @mtp/web",
+    "dev": "concurrently -k -n api,web \"npm run dev -w @mtp/api\" \"npm run dev -w @mtp/web\"",
+    "start": "npm run start -w @mtp/api",
+    "e2e": "npm run e2e -w @mtp/web"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^10.0.7",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "typescript-eslint": "^8.72.1"
   }
 }
