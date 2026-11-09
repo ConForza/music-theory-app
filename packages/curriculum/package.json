@@ -1,0 +1,29 @@
+{
+  "name": "@mtp/curriculum",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Curriculum schema, content loader, music reference rules and coverage validator for Music Theory Path.",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "validate": "tsx src/cli.ts validate",
+    "validate:release": "tsx src/cli.ts validate --release",
+    "docs:generate": "tsx src/cli.ts docs --write",
+    "docs:check": "tsx src/cli.ts docs --check",
+    "bundle": "tsx src/cli.ts bundle --out ../../dist/curriculum.json"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.6.3",
+    "vitest": "^5.1.0"
+  }
+}

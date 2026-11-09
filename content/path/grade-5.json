@@ -1,0 +1,4704 @@
+{
+  "schemaVersion": 1,
+  "grade": 5,
+  "title": "Grade 5",
+  "learnerTitle": "Harmony and the Score",
+  "summary": "Irregular time, tenor clef, four clefs, keys to six sharps/flats, all intervals, transposing instruments, inversions, cadences, ornaments, voices, instruments and score observation.",
+  "units": [
+    {
+      "id": "G5-U1",
+      "grade": 5,
+      "sequence": 1,
+      "title": "Irregular time and divisions",
+      "learnerTitle": "Fives and sevens",
+      "summary": "5/4, 7/4, 5/8, 7/8 and irregular divisions of simple time values.",
+      "bookSectionIds": [
+        "fs.g5.s01",
+        "fs.g5.s02"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G5-U2",
+      "grade": 5,
+      "sequence": 2,
+      "title": "Tenor clef and the four clefs",
+      "learnerTitle": "Four clefs",
+      "summary": "Tenor clef, reading four clefs and octave transposition between any clefs.",
+      "bookSectionIds": [
+        "fs.g5.s03"
+      ],
+      "refinements": [
+        "Instrument transposition (book §12) moves to G5-U3 so that it follows the six-accidental keys and chromatic-interval spelling it depends on."
+      ]
+    },
+    {
+      "id": "G5-U3",
+      "grade": 5,
+      "sequence": 3,
+      "title": "Six-accidental keys, all intervals and transposing instruments",
+      "learnerTitle": "Keys, intervals and transposing",
+      "summary": "F♯/G♭ major, D♯/E♭ minor; chromatic and compound intervals; written and concert pitch.",
+      "bookSectionIds": [
+        "fs.g5.s04",
+        "fs.g5.s05",
+        "fs.g5.s06",
+        "fs.g5.s07",
+        "fs.g5.s12"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G5-U4",
+      "grade": 5,
+      "sequence": 4,
+      "title": "Inversions, chords and cadences",
+      "learnerTitle": "Harmony",
+      "summary": "Root position and inversions of I, ii, IV, V; cadences; chords at cadence points.",
+      "bookSectionIds": [
+        "fs.g5.s08",
+        "fs.g5.s09",
+        "fs.g5.s10",
+        "fs.g5.s11"
+      ],
+      "refinements": [
+        "The Ic–V (six-four, five-three) progression and approach chords are optional enrichment linked to the core chord and cadence lessons."
+      ]
+    },
+    {
+      "id": "G5-U5",
+      "grade": 5,
+      "sequence": 5,
+      "title": "Ornaments, voices, instruments and the score",
+      "learnerTitle": "The score in context",
+      "summary": "Ornaments, replacing written-out ornaments, voices, instruments and sound production, Grade 5 terms, score observation.",
+      "bookSectionIds": [
+        "fs.g5.s13",
+        "fs.g5.s14",
+        "fs.g5.s15"
+      ],
+      "refinements": [
+        "Book §13 (SATB short/open score transcription) is optional enrichment; voice types are taught as core."
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "G5-U1-L01",
+      "type": "lesson",
+      "unitId": "G5-U1",
+      "title": "Quintuple and septuple time",
+      "objective": "Read 5/4, 7/4, 5/8 and 7/8 as combinations of two- and three-beat groups.",
+      "conceptIds": [
+        "c.metre.irregular"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.time-signature",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s01"
+      ]
+    },
+    {
+      "id": "G5-U1-L02",
+      "type": "lesson",
+      "unitId": "G5-U1",
+      "title": "Grouping in irregular time",
+      "objective": "Group notes and rests by the stated sub-groups in irregular bars.",
+      "conceptIds": [
+        "c.metre.irregular-grouping"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.irregular-grouping",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s01"
+      ]
+    },
+    {
+      "id": "G5-U1-L03",
+      "type": "lesson",
+      "unitId": "G5-U1",
+      "title": "Irregular divisions",
+      "objective": "Read groups of 5, 6, 7 or 9 notes in the time of a beat and choose the written value.",
+      "conceptIds": [
+        "c.rhythm.irregular-divisions"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.irregular-division",
+          "conceptIds": [
+            "c.rhythm.irregular-divisions"
+          ],
+          "scope": {
+            "tuplets": [
+              "irregular",
+              "triplet",
+              "duplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s02"
+      ]
+    },
+    {
+      "id": "G5-U1-P1",
+      "type": "practice",
+      "unitId": "G5-U1",
+      "title": "Practice: Fives and sevens",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.01",
+        "abrsm2020.g5.02"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.time-signature",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-grouping",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-division",
+          "conceptIds": [
+            "c.rhythm.irregular-divisions"
+          ],
+          "scope": {
+            "tuplets": [
+              "irregular",
+              "triplet",
+              "duplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U1-R1",
+      "type": "review",
+      "unitId": "G5-U1",
+      "title": "Review: Grade 4 foundations",
+      "objective": "Revisit earlier material so it stays fresh.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.02",
+        "abrsm2020.g4.03",
+        "abrsm2020.g4.04",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.06",
+        "abrsm2020.g4.07",
+        "abrsm2020.g4.08",
+        "abrsm2020.g4.09",
+        "abrsm2020.g4.10",
+        "abrsm2020.g4.11",
+        "abrsm2020.g4.12",
+        "abrsm2020.g4.13",
+        "abrsm2020.g4.14",
+        "abrsm2020.g4.15",
+        "abrsm2020.g4.16",
+        "abrsm2020.g4.17",
+        "abrsm2020.g4.18"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g4.time-signature",
+          "conceptIds": [
+            "c.metre.regular-all"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.regular-grouping",
+          "conceptIds": [
+            "c.metre.regular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "4/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.breve-double-dot",
+          "conceptIds": [
+            "c.rhythm.breve",
+            "c.rhythm.double-dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "breve",
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 2
+          }
+        },
+        {
+          "templateId": "t.g4.duplet",
+          "conceptIds": [
+            "c.rhythm.duplets"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/4",
+              "3/4",
+              "2/4"
+            ],
+            "tuplets": [
+              "duplet",
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.double-accidental",
+          "conceptIds": [
+            "c.accidentals.double"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto"
+            ],
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g4.enharmonic",
+          "conceptIds": [
+            "c.accidentals.enharmonic"
+          ],
+          "scope": {
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g4.alto-read",
+          "conceptIds": [
+            "c.clefs.alto",
+            "c.keys.signatures-alto"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "alto"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g4.alto-write",
+          "conceptIds": [
+            "c.clefs.alto"
+          ],
+          "scope": {
+            "clefs": [
+              "alto"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g4.same-pitch",
+          "conceptIds": [
+            "c.clefs.same-pitch-three"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "alto",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g4.octave-transpose-alto",
+          "conceptIds": [
+            "c.transposition.octave-alto"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto"
+            ],
+            "maxLedgerLines": 3,
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass",
+              "alto"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.scale-build",
+          "conceptIds": [
+            "c.scales.keys-five-sharps",
+            "c.scales.keys-five-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g4.key-signature",
+          "conceptIds": [
+            "c.scales.keys-five-sharps",
+            "c.scales.keys-five-flats",
+            "c.keys.signatures-alto"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.technical-names",
+          "conceptIds": [
+            "c.scales.technical-names"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "degreeNaming": "technical"
+          }
+        },
+        {
+          "templateId": "t.g4.chromatic-scale",
+          "conceptIds": [
+            "c.scales.chromatic"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": false
+          }
+        },
+        {
+          "templateId": "t.g4.interval-diatonic",
+          "conceptIds": [
+            "c.intervals.any-diatonic",
+            "c.intervals.augmented-diminished"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any-diatonic",
+            "compoundIntervals": false
+          }
+        },
+        {
+          "templateId": "t.g4.primary-triad",
+          "conceptIds": [
+            "c.chords.primary-triads"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g4.chord-in-passage",
+          "conceptIds": [
+            "c.chords.root-position-chords",
+            "c.chords.identify-in-passage"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "chordDegrees": [
+              "I",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.ornament-name",
+          "conceptIds": [
+            "c.ornaments.signs"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g4.instruments",
+          "conceptIds": [
+            "c.instruments.orchestra",
+            "c.instruments.techniques"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g4.terms",
+          "conceptIds": [
+            "c.terms.g4",
+            "c.instruments.techniques"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g4.passage",
+          "conceptIds": [
+            "c.context.passage-g4"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any-diatonic",
+            "chordDegrees": [
+              "I",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U1-C",
+      "type": "unit_challenge",
+      "unitId": "G5-U1",
+      "title": "Unit challenge: Fives and sevens",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g5-u1",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G5-U2-L01",
+      "type": "lesson",
+      "unitId": "G5-U2",
+      "title": "The tenor clef",
+      "objective": "Read and write notes in the tenor clef, with middle C on the fourth line.",
+      "conceptIds": [
+        "c.clefs.tenor"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.03"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.tenor-read",
+          "conceptIds": [
+            "c.clefs.tenor"
+          ],
+          "scope": {
+            "clefs": [
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s03"
+      ]
+    },
+    {
+      "id": "G5-U2-L02",
+      "type": "lesson",
+      "unitId": "G5-U2",
+      "title": "Reading four clefs",
+      "objective": "Identify notes in treble, alto, tenor and bass clefs, including key signatures in each.",
+      "conceptIds": [
+        "c.clefs.four-clefs"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.four-clef-read",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s03"
+      ]
+    },
+    {
+      "id": "G5-U2-L03",
+      "type": "lesson",
+      "unitId": "G5-U2",
+      "title": "Octave transposition between any clefs",
+      "objective": "Transpose a melody an octave higher or lower into any other clef.",
+      "conceptIds": [
+        "c.transposition.octave-any"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.05"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.octave-transpose",
+          "conceptIds": [
+            "c.transposition.octave-any"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 9,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s03"
+      ]
+    },
+    {
+      "id": "G5-U2-P1",
+      "type": "practice",
+      "unitId": "G5-U2",
+      "title": "Practice: Four clefs",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.03",
+        "abrsm2020.g5.04",
+        "abrsm2020.g5.05"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.tenor-read",
+          "conceptIds": [
+            "c.clefs.tenor"
+          ],
+          "scope": {
+            "clefs": [
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.four-clef-read",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.octave-transpose",
+          "conceptIds": [
+            "c.transposition.octave-any"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U2-R1",
+      "type": "review",
+      "unitId": "G5-U2",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.01",
+        "abrsm2020.g5.02"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.time-signature",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-grouping",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-division",
+          "conceptIds": [
+            "c.rhythm.irregular-divisions"
+          ],
+          "scope": {
+            "tuplets": [
+              "irregular",
+              "triplet",
+              "duplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U2-C",
+      "type": "unit_challenge",
+      "unitId": "G5-U2",
+      "title": "Unit challenge: Four clefs",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g5-u2",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G5-U3-L01",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "F sharp major and D sharp minor",
+      "objective": "Build F♯ major and D♯ minor (both forms) and write their key signatures in all clefs.",
+      "conceptIds": [
+        "c.scales.keys-six-sharps"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.scale-build",
+          "conceptIds": [
+            "c.scales.keys-six-sharps"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "D# minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "D# minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s04"
+      ]
+    },
+    {
+      "id": "G5-U3-L02",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "G flat major and E flat minor",
+      "objective": "Build G♭ major and E♭ minor and see that they are enharmonic with F♯ major and D♯ minor.",
+      "conceptIds": [
+        "c.scales.keys-six-flats"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.scale-build",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats",
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s05"
+      ]
+    },
+    {
+      "id": "G5-U3-L03",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "Chromatic intervals",
+      "objective": "Name intervals whose notes are not in one scale, such as augmented 6ths and diminished 6ths.",
+      "conceptIds": [
+        "c.intervals.chromatic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.interval-any",
+          "conceptIds": [
+            "c.intervals.chromatic",
+            "c.intervals.any-diatonic"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": false,
+            "chromaticIntervals": true,
+            "doubleAccidentals": true
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s06"
+      ]
+    },
+    {
+      "id": "G5-U3-L04",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "Compound intervals",
+      "objective": "Name intervals larger than an octave as compound or by number (e.g. 12th).",
+      "conceptIds": [
+        "c.intervals.compound"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.interval-compound",
+          "conceptIds": [
+            "c.intervals.compound"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s07"
+      ]
+    },
+    {
+      "id": "G5-U3-L05",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "Written pitch and concert pitch",
+      "objective": "Explain why some instruments sound at a different pitch from the written note.",
+      "conceptIds": [
+        "c.transposition.concert-pitch"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.concert-pitch"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s12"
+      ]
+    },
+    {
+      "id": "G5-U3-L06",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "Transposing for B flat, A and F instruments",
+      "objective": "Transpose a short melody between concert and written pitch, adjusting the key signature and accidentals.",
+      "conceptIds": [
+        "c.transposition.instrument"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.concert-pitch",
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 10,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s12"
+      ]
+    },
+    {
+      "id": "G5-U3-P1",
+      "type": "practice",
+      "unitId": "G5-U3",
+      "title": "Practice: Keys, intervals and transposing",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.04",
+        "abrsm2020.g5.08",
+        "abrsm2020.g5.06"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.scale-build",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats",
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.interval-any",
+          "conceptIds": [
+            "c.intervals.chromatic",
+            "c.intervals.any-diatonic"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.interval-compound",
+          "conceptIds": [
+            "c.intervals.compound"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true
+          }
+        },
+        {
+          "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.concert-pitch",
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U3-R1",
+      "type": "review",
+      "unitId": "G5-U3",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.01",
+        "abrsm2020.g5.02",
+        "abrsm2020.g5.03",
+        "abrsm2020.g5.04",
+        "abrsm2020.g5.05"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.time-signature",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-grouping",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-division",
+          "conceptIds": [
+            "c.rhythm.irregular-divisions"
+          ],
+          "scope": {
+            "tuplets": [
+              "irregular",
+              "triplet",
+              "duplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.tenor-read",
+          "conceptIds": [
+            "c.clefs.tenor"
+          ],
+          "scope": {
+            "clefs": [
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.four-clef-read",
+          "conceptIds": [
+            "c.clefs.four-clefs",
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.octave-transpose",
+          "conceptIds": [
+            "c.transposition.octave-any"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats",
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U3-C",
+      "type": "unit_challenge",
+      "unitId": "G5-U3",
+      "title": "Unit challenge: Keys, intervals and transposing",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g5-u3",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G5-U4-L01",
+      "type": "lesson",
+      "unitId": "G5-U4",
+      "title": "Inversions of triads",
+      "objective": "Recognise root position (5/3), first inversion (6/3) and second inversion (6/4).",
+      "conceptIds": [
+        "c.chords.inversions"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.chord-identify",
+          "conceptIds": [
+            "c.chords.inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "chordDegrees": [
+              "I",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s08"
+      ]
+    },
+    {
+      "id": "G5-U4-L02",
+      "type": "lesson",
+      "unitId": "G5-U4",
+      "title": "The supertonic chord",
+      "objective": "Build ii in major and minor keys, noting that it is diminished in minor keys.",
+      "conceptIds": [
+        "c.chords.supertonic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.chord-build",
+          "conceptIds": [
+            "c.chords.supertonic"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.chord-identify",
+          "conceptIds": [
+            "c.chords.inversions",
+            "c.chords.supertonic"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s09"
+      ]
+    },
+    {
+      "id": "G5-U4-L03",
+      "type": "lesson",
+      "unitId": "G5-U4",
+      "title": "Identifying chords and inversions",
+      "objective": "Identify I, ii, IV and V in any position in any Grade 5 key.",
+      "conceptIds": [
+        "c.chords.identify-inversions"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.chord-identify",
+          "conceptIds": [
+            "c.chords.inversions",
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.chord-build",
+          "conceptIds": [
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "doubleAccidentals": true
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s09"
+      ]
+    },
+    {
+      "id": "G5-U4-L04",
+      "type": "lesson",
+      "unitId": "G5-U4",
+      "title": "Perfect, plagal and imperfect cadences",
+      "objective": "Recognise the three cadences by their chords in C, G, D and F major.",
+      "conceptIds": [
+        "c.cadences.types"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.cadence-identify",
+          "conceptIds": [
+            "c.cadences.types"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s11"
+      ]
+    },
+    {
+      "id": "G5-U4-L05",
+      "type": "lesson",
+      "unitId": "G5-U4",
+      "title": "Hearing and finding cadences",
+      "objective": "Identify cadences at the ends of phrases in short original passages.",
+      "conceptIds": [
+        "c.cadences.recognise"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.cadence-identify",
+          "conceptIds": [
+            "c.cadences.types",
+            "c.cadences.recognise"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s11"
+      ]
+    },
+    {
+      "id": "G5-U4-L06",
+      "type": "lesson",
+      "unitId": "G5-U4",
+      "title": "Choosing chords at cadence points",
+      "objective": "Choose chords that fit marked melody notes and make the intended cadence.",
+      "conceptIds": [
+        "c.cadences.chord-choice"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.10",
+        "abrsm2020.g5.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.cadence-chords",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.cadence-identify",
+          "conceptIds": [
+            "c.cadences.types",
+            "c.cadences.recognise"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 10,
+      "contentVersion": 1,
+      "contentStatus": "example",
+      "bookSectionIds": [
+        "fs.g5.s11"
+      ],
+      "contentRef": "lessons/G5-U4-L06.json"
+    },
+    {
+      "id": "G5-U4-E1",
+      "type": "enrichment",
+      "unitId": "G5-U4",
+      "title": "The six-four, five-three progression",
+      "objective": "Optional: recognise Ic–V over the dominant bass.",
+      "conceptIds": [
+        "c.chords.cadential-six-four"
+      ],
+      "outcomeIds": [],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.chord-identify",
+          "conceptIds": [
+            "c.chords.inversions",
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        }
+      ],
+      "unlockAfter": [
+        "G5-U4-L03"
+      ],
+      "optional": true,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s10"
+      ]
+    },
+    {
+      "id": "G5-U4-E2",
+      "type": "enrichment",
+      "unitId": "G5-U4",
+      "title": "Approach chords",
+      "objective": "Optional: choose a chord before a two-chord cadence.",
+      "conceptIds": [
+        "c.cadences.approach-chord"
+      ],
+      "outcomeIds": [],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.cadence-chords",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        }
+      ],
+      "unlockAfter": [
+        "G5-U4-L06"
+      ],
+      "optional": true,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s11"
+      ]
+    },
+    {
+      "id": "G5-U4-P1",
+      "type": "practice",
+      "unitId": "G5-U4",
+      "title": "Practice: Harmony",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.09",
+        "abrsm2020.g5.11",
+        "abrsm2020.g5.10"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.chord-identify",
+          "conceptIds": [
+            "c.chords.inversions",
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.chord-build",
+          "conceptIds": [
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.cadence-identify",
+          "conceptIds": [
+            "c.cadences.types",
+            "c.cadences.recognise"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.cadence-chords",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U4-R1",
+      "type": "review",
+      "unitId": "G5-U4",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.01",
+        "abrsm2020.g5.02",
+        "abrsm2020.g5.03",
+        "abrsm2020.g5.04",
+        "abrsm2020.g5.05",
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.08",
+        "abrsm2020.g5.06"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.time-signature",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-grouping",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-division",
+          "conceptIds": [
+            "c.rhythm.irregular-divisions"
+          ],
+          "scope": {
+            "tuplets": [
+              "irregular",
+              "triplet",
+              "duplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.tenor-read",
+          "conceptIds": [
+            "c.clefs.tenor"
+          ],
+          "scope": {
+            "clefs": [
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.four-clef-read",
+          "conceptIds": [
+            "c.clefs.four-clefs",
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.octave-transpose",
+          "conceptIds": [
+            "c.transposition.octave-any"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.concert-pitch",
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.scale-build",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats",
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.interval-any",
+          "conceptIds": [
+            "c.intervals.chromatic",
+            "c.intervals.any-diatonic"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.interval-compound",
+          "conceptIds": [
+            "c.intervals.compound"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U4-C",
+      "type": "unit_challenge",
+      "unitId": "G5-U4",
+      "title": "Unit challenge: Harmony",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g5-u4",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G5-U5-L01",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "What ornaments sound like",
+      "objective": "Understand how each ornament is usually performed (for recognition, not for writing out).",
+      "conceptIds": [
+        "c.ornaments.patterns"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.ornament-replace",
+          "conceptIds": [
+            "c.ornaments.patterns"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s14"
+      ]
+    },
+    {
+      "id": "G5-U5-L02",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "Replacing written-out ornaments",
+      "objective": "Replace a written-out ornament with the correct sign.",
+      "conceptIds": [
+        "c.ornaments.replace-with-sign"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.ornament-replace",
+          "conceptIds": [
+            "c.ornaments.patterns",
+            "c.ornaments.replace-with-sign"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s14"
+      ]
+    },
+    {
+      "id": "G5-U5-L03",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "Voices",
+      "objective": "Name the voice types and order them by range.",
+      "conceptIds": [
+        "c.voices.types"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.14"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.voices",
+          "conceptIds": [
+            "c.voices.types"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s13",
+        "fs.g5.s15"
+      ]
+    },
+    {
+      "id": "G5-U5-L04",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "How instruments make their sound",
+      "objective": "Explain the basic way each family produces sound and the clefs each instrument uses.",
+      "conceptIds": [
+        "c.instruments.sound-production"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.sound-production"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s15"
+      ]
+    },
+    {
+      "id": "G5-U5-L05",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "More instruments",
+      "objective": "Recognise additional orchestral, percussion and non-orchestral instruments and keyboard directions.",
+      "conceptIds": [
+        "c.instruments.extended"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.sound-production",
+            "c.instruments.extended"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s15"
+      ]
+    },
+    {
+      "id": "G5-U5-L06",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "Grade 5 terms",
+      "objective": "Understand the Grade 5 terms, including German directions.",
+      "conceptIds": [
+        "c.terms.g5"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.terms",
+          "conceptIds": [
+            "c.terms.g5"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s15"
+      ]
+    },
+    {
+      "id": "G5-U5-L07",
+      "type": "lesson",
+      "unitId": "G5-U5",
+      "title": "Exploring a score",
+      "objective": "Answer general musical observation questions about an original short score.",
+      "conceptIds": [
+        "c.context.score-g5"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.16",
+        "abrsm2020.g1.21"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.score",
+          "conceptIds": [
+            "c.context.score-g5"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 10,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s15"
+      ]
+    },
+    {
+      "id": "G5-U5-E1",
+      "type": "enrichment",
+      "unitId": "G5-U5",
+      "title": "Voices in short and open score",
+      "objective": "Optional: see how four voice parts are laid out on two staves or four.",
+      "conceptIds": [
+        "c.voices.satb-scores"
+      ],
+      "outcomeIds": [],
+      "reviewOutcomeIds": [],
+      "exercises": [],
+      "unlockAfter": [
+        "G5-U5-L03"
+      ],
+      "optional": true,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s13"
+      ]
+    },
+    {
+      "id": "G5-U5-P1",
+      "type": "practice",
+      "unitId": "G5-U5",
+      "title": "Practice: The score in context",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.13",
+        "abrsm2020.g5.14",
+        "abrsm2020.g5.15",
+        "abrsm2020.g5.12",
+        "abrsm2020.g5.16",
+        "abrsm2020.g1.21"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g5.ornament-replace",
+          "conceptIds": [
+            "c.ornaments.patterns",
+            "c.ornaments.replace-with-sign"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.voices",
+          "conceptIds": [
+            "c.voices.types"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.sound-production",
+            "c.instruments.extended"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.terms",
+          "conceptIds": [
+            "c.terms.g5"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.score",
+          "conceptIds": [
+            "c.context.score-g5"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U5-R1",
+      "type": "review",
+      "unitId": "G5-U5",
+      "title": "Grade review",
+      "objective": "Cumulative spaced review of the whole grade before the unit challenge and grade assessment.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g5.01",
+        "abrsm2020.g5.02",
+        "abrsm2020.g5.03",
+        "abrsm2020.g5.04",
+        "abrsm2020.g5.05",
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.08",
+        "abrsm2020.g5.06",
+        "abrsm2020.g5.09",
+        "abrsm2020.g5.11",
+        "abrsm2020.g5.10",
+        "abrsm2020.g5.13",
+        "abrsm2020.g5.14",
+        "abrsm2020.g5.15",
+        "abrsm2020.g5.12",
+        "abrsm2020.g5.16",
+        "abrsm2020.g1.21"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g1.melody",
+          "conceptIds": [
+            "c.context.melody-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g2.melody",
+          "conceptIds": [
+            "c.context.melody-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.melody",
+          "conceptIds": [
+            "c.context.melody-g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g4.passage",
+          "conceptIds": [
+            "c.context.passage-g4"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any-diatonic",
+            "chordDegrees": [
+              "I",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.time-signature",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-grouping",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.irregular-division",
+          "conceptIds": [
+            "c.rhythm.irregular-divisions"
+          ],
+          "scope": {
+            "tuplets": [
+              "irregular",
+              "triplet",
+              "duplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.tenor-read",
+          "conceptIds": [
+            "c.clefs.tenor"
+          ],
+          "scope": {
+            "clefs": [
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.four-clef-read",
+          "conceptIds": [
+            "c.clefs.four-clefs",
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g5.octave-transpose",
+          "conceptIds": [
+            "c.transposition.octave-any"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.concert-pitch",
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.scale-build",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.key-signature",
+          "conceptIds": [
+            "c.scales.keys-six-sharps",
+            "c.scales.keys-six-flats",
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.interval-any",
+          "conceptIds": [
+            "c.intervals.chromatic",
+            "c.intervals.any-diatonic"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.interval-compound",
+          "conceptIds": [
+            "c.intervals.compound"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 3,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true
+          }
+        },
+        {
+          "templateId": "t.g5.chord-identify",
+          "conceptIds": [
+            "c.chords.inversions",
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.chord-build",
+          "conceptIds": [
+            "c.chords.supertonic",
+            "c.chords.identify-inversions"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.cadence-identify",
+          "conceptIds": [
+            "c.cadences.types",
+            "c.cadences.recognise"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.cadence-chords",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.ornament-replace",
+          "conceptIds": [
+            "c.ornaments.patterns",
+            "c.ornaments.replace-with-sign"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g5.voices",
+          "conceptIds": [
+            "c.voices.types"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.sound-production",
+            "c.instruments.extended"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.terms",
+          "conceptIds": [
+            "c.terms.g5"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.score",
+          "conceptIds": [
+            "c.context.score-g5"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": true,
+            "chromaticIntervals": true,
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a",
+              "b",
+              "c"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G5-U5-C",
+      "type": "unit_challenge",
+      "unitId": "G5-U5",
+      "title": "Unit challenge: The score in context",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g5-u5",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G5-A",
+      "type": "grade_assessment",
+      "unitId": null,
+      "title": "Grade 5 assessment",
+      "objective": "An independent, hint-free assessment that samples every Grade 5 outcome and earlier essentials.",
+      "assessmentId": "a.g5",
+      "optional": false,
+      "estimatedMinutes": 25,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "music-theory-path",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Music Theory Path \u2014 Duolingo-inspired music theory course, Grades 1\u20135 (curriculum architecture phase).",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "validate": "npm run validate -w @mtp/curriculum",
+    "validate:release": "npm run validate:release -w @mtp/curriculum",
+    "docs:generate": "npm run docs:generate -w @mtp/curriculum",
+    "docs:check": "npm run docs:check -w @mtp/curriculum",
+    "check": "npm run typecheck && npm run validate && npm run docs:check && npm test",
+    "bundle": "npm run bundle -w @mtp/curriculum"
+  }
+}

@@ -1,0 +1,1606 @@
+[
+  {
+    "id": "i.fixture.choice",
+    "templateId": "t.g1.terms",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "choice",
+      "options": [
+        {
+          "id": "a",
+          "label": "slow"
+        },
+        {
+          "id": "b",
+          "label": "fast"
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "opposite-meaning": "Opposite."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.note-value",
+    "templateId": "t.g1.tie-dot",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "rhythm",
+      "task": "equivalent-value",
+      "target": [
+        3,
+        4
+      ],
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "dot-misread": "Dot."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.bar-builder",
+    "templateId": "t.g1.bar-complete",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "rhythm",
+      "task": "complete-bar",
+      "timeSignature": "3/4",
+      "given": [
+        {
+          "kind": "note",
+          "pitch": "B4",
+          "duration": {
+            "value": "crotchet",
+            "dots": 0
+          }
+        }
+      ],
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "bar-underfull": "Short."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.time-signature",
+    "templateId": "t.g1.time-signature",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "time-signature",
+      "accepted": [
+        "3/4"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "beat-count-wrong": "Count."
+      },
+      "fallback": "Not quite."
+    },
+    "music": {
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 1
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Fixture music."
+    }
+  },
+  {
+    "id": "i.fixture.barlines",
+    "templateId": "t.g1.barlines",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "rhythm",
+      "task": "place-barlines",
+      "timeSignature": "2/4",
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": false
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "bar-overfull": "Long."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.grouping",
+    "templateId": "t.g1.grouping",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "rhythm",
+      "task": "regroup",
+      "timeSignature": "4/4",
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "beam-across-middle": "Middle."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.tuplet",
+    "templateId": "t.g2.triplet",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "rhythm",
+      "task": "add-tuplet",
+      "timeSignature": "2/4",
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "C5",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "C5",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "C5",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": false
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "tuplet-number-wrong": "Number."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.note-read",
+    "templateId": "t.g1.note-read",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch",
+      "accepted": [
+        "D3"
+      ],
+      "octaveSensitive": false,
+      "spellingSensitive": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "clef-confusion": "Clef."
+      },
+      "fallback": "Not quite."
+    },
+    "music": {
+      "clef": "bass",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "D3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Fixture music."
+    }
+  },
+  {
+    "id": "i.fixture.note-write",
+    "templateId": "t.g1.note-write",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "staff-position",
+      "clef": "bass",
+      "target": {
+        "step": "C",
+        "alter": 0,
+        "position": "any",
+        "maxLedgerLines": 1
+      },
+      "accepted": [
+        "C3",
+        "C4"
+      ],
+      "octaveSensitive": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "wrong-octave": "Octave."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.keyboard",
+    "templateId": "t.g1.keyboard",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch",
+      "reference": "F#4",
+      "relation": "same-sound",
+      "accepted": [
+        "F#4",
+        "Gb4"
+      ],
+      "octaveSensitive": false,
+      "spellingSensitive": false
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "black-key-neighbour": "Side."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.accidental-state",
+    "templateId": "t.g1.accidental-state",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch",
+      "accepted": [
+        "F#4"
+      ],
+      "octaveSensitive": true,
+      "spellingSensitive": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "accidental-forgotten": "Lasts."
+      },
+      "fallback": "Not quite."
+    },
+    "music": {
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "F#4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "writtenAccidental": "sharp"
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F#4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "label": "*"
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Fixture music.",
+      "timeSignature": "4/4"
+    }
+  },
+  {
+    "id": "i.fixture.scale-melodic",
+    "templateId": "t.g3.scale-build-minor",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch-sequence",
+      "clef": "treble",
+      "key": "D minor",
+      "accepted": [
+        [
+          "D4",
+          "E4",
+          "F4",
+          "G4",
+          "A4",
+          "B4",
+          "C#5",
+          "D5",
+          "C5",
+          "Bb4",
+          "A4",
+          "G4",
+          "F4",
+          "E4",
+          "D4"
+        ]
+      ],
+      "derivation": {
+        "rule": "scale",
+        "key": "D minor",
+        "form": "melodic",
+        "direction": "ascending-descending",
+        "start": "D4"
+      }
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "melodic-descent-not-restored": "Restore."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.scale-harmonic-desc",
+    "templateId": "t.g4.scale-build",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch-sequence",
+      "clef": "treble",
+      "key": "G# minor",
+      "accepted": [
+        [
+          "G#5",
+          "Fx5",
+          "E5",
+          "D#5",
+          "C#5",
+          "B4",
+          "A#4",
+          "G#4"
+        ]
+      ],
+      "derivation": {
+        "rule": "scale",
+        "key": "G# minor",
+        "form": "harmonic",
+        "direction": "descending",
+        "start": "G#5"
+      }
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "letter-skipped-or-repeated": "Letters."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.key-signature-write",
+    "templateId": "t.g2.key-signature",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "key-signature",
+      "task": "write-signature",
+      "clef": "bass",
+      "accepted": [
+        "A major"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "wrong-order": "Order."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.key-signature-name",
+    "templateId": "t.g2.key-signature",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "key-signature",
+      "task": "name-key",
+      "clef": "treble",
+      "accepted": [
+        "F major",
+        "D minor"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "relative-confusion": "Relative."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.degree",
+    "templateId": "t.g1.degree",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "choice",
+      "options": [
+        {
+          "id": "3",
+          "label": "3rd"
+        },
+        {
+          "id": "5",
+          "label": "5th"
+        }
+      ],
+      "correctOptionIds": [
+        "5"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "off-by-one": "Count."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.interval-number",
+    "templateId": "t.g1.interval-number",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "interval",
+      "task": "identify",
+      "key": "G major",
+      "lower": "G4",
+      "upper": "D5",
+      "acceptedIntervals": [
+        "5"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "counted-one-end-only": "Both."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.interval-compound",
+    "templateId": "t.g5.interval-compound",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "interval",
+      "task": "identify",
+      "lower": "C4",
+      "upper": "E5",
+      "acceptedIntervals": [
+        "M10",
+        "cM3"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "compound-arithmetic": "7."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.interval-build",
+    "templateId": "t.g5.interval-any",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "interval",
+      "task": "build",
+      "lower": "Ab4",
+      "target": "A6",
+      "direction": "up",
+      "acceptedPitches": [
+        "F#5"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "enharmonic-spelling": "Letters."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.chord-identify",
+    "templateId": "t.g5.chord-identify",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "chord",
+      "task": "identify",
+      "key": "D major",
+      "pitches": [
+        "F#3",
+        "A3",
+        "D4",
+        "F#4"
+      ],
+      "acceptedChords": [
+        {
+          "roman": "I",
+          "inversion": "b"
+        }
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "inversion-misread": "Bass."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.chord-build",
+    "templateId": "t.g5.chord-build",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "chord",
+      "task": "build",
+      "key": "C major",
+      "target": {
+        "roman": "ii",
+        "inversion": "c"
+      },
+      "acceptedVoicings": [
+        [
+          "A3",
+          "D4",
+          "F4"
+        ],
+        [
+          "A2",
+          "F3",
+          "D4"
+        ]
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "inversion-misread": "Bass."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.tonic-triad",
+    "templateId": "t.g1.tonic-triad",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "chord",
+      "task": "identify",
+      "key": "C major",
+      "acceptedChords": [
+        {
+          "roman": "I",
+          "inversion": "a"
+        }
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "note-missing": "Notes."
+      },
+      "fallback": "Not quite."
+    },
+    "music": {
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Fixture music."
+    }
+  },
+  {
+    "id": "i.fixture.cadence",
+    "templateId": "t.g5.cadence-chords",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "chord-progression",
+      "key": "C major",
+      "points": [
+        {
+          "label": "A",
+          "melodyPitches": [
+            "F4"
+          ],
+          "accepted": [
+            "IV"
+          ]
+        },
+        {
+          "label": "B",
+          "melodyPitches": [
+            "E4"
+          ],
+          "accepted": [
+            "I"
+          ]
+        }
+      ],
+      "cadences": [
+        {
+          "labels": [
+            "A",
+            "B"
+          ],
+          "acceptedTypes": [
+            "plagal"
+          ]
+        }
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "non-cadential-pair": "Cadence."
+      },
+      "fallback": "Not quite."
+    },
+    "music": {
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "label": "A"
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "B"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Fixture music.",
+      "timeSignature": "4/4",
+      "key": "C major"
+    }
+  },
+  {
+    "id": "i.fixture.octave-transpose",
+    "templateId": "t.g3.octave-transpose",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch-sequence",
+      "clef": "bass",
+      "key": "G major",
+      "accepted": [
+        [
+          "G3",
+          "B3",
+          "D4"
+        ]
+      ],
+      "derivation": {
+        "rule": "transpose",
+        "interval": "P8",
+        "direction": "down",
+        "sourceKey": "G major"
+      }
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "wrong-octave": "Octave."
+      },
+      "fallback": "Not quite."
+    },
+    "music": {
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Fixture music.",
+      "timeSignature": "3/4",
+      "key": "G major"
+    }
+  },
+  {
+    "id": "i.fixture.chromatic",
+    "templateId": "t.g4.chromatic-scale",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch-sequence",
+      "clef": "treble",
+      "accepted": [
+        [
+          "C4",
+          "C#4",
+          "D4",
+          "D#4",
+          "E4",
+          "F4",
+          "F#4",
+          "G4",
+          "G#4",
+          "A4",
+          "A#4",
+          "B4",
+          "C5"
+        ],
+        [
+          "C4",
+          "Db4",
+          "D4",
+          "Eb4",
+          "E4",
+          "F4",
+          "Gb4",
+          "G4",
+          "Ab4",
+          "A4",
+          "Bb4",
+          "B4",
+          "C5"
+        ]
+      ],
+      "derivation": {
+        "rule": "chromatic",
+        "start": "C4",
+        "direction": "ascending"
+      }
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "letter-used-three-times": "Twice."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.enharmonic",
+    "templateId": "t.g4.enharmonic",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "pitch",
+      "reference": "C4",
+      "relation": "different-spelling",
+      "accepted": [
+        "B#3",
+        "Dbb4"
+      ],
+      "octaveSensitive": true,
+      "spellingSensitive": true
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "same-spelling-given": "Different."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.ornament-replace",
+    "templateId": "t.g5.ornament-replace",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "ornament-sign",
+      "task": "replace-written-out",
+      "mainNote": "D5",
+      "writtenOut": [
+        "D5",
+        "E5",
+        "D5"
+      ],
+      "accepted": [
+        "upper-mordent"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "upper-lower-mordent-swap": "Direction."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.ornament-turn",
+    "templateId": "t.g5.ornament-replace",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "ornament-sign",
+      "task": "replace-written-out",
+      "mainNote": "C5",
+      "writtenOut": [
+        "D5",
+        "C5",
+        "B4",
+        "C5"
+      ],
+      "accepted": [
+        "turn"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "turn-inverted": "Start above."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.ornament-name",
+    "templateId": "t.g4.ornament-name",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "ornament-sign",
+      "task": "name-sign",
+      "sign": "trill",
+      "accepted": [
+        "trill"
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "trill-mordent-confusion": "Length."
+      },
+      "fallback": "Not quite."
+    }
+  },
+  {
+    "id": "i.fixture.score",
+    "templateId": "t.g5.score",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "Fixture prompt.",
+    "answer": {
+      "kind": "composite",
+      "parts": [
+        {
+          "id": "first-chord",
+          "prompt": "Name the first chord.",
+          "answer": {
+            "kind": "chord",
+            "task": "identify",
+            "key": "C major",
+            "pitches": [
+              "C3",
+              "G3",
+              "C5",
+              "E5"
+            ],
+            "acceptedChords": [
+              {
+                "roman": "I",
+                "inversion": "a"
+              }
+            ]
+          }
+        },
+        {
+          "id": "second-chord",
+          "prompt": "Name the second chord.",
+          "answer": {
+            "kind": "chord",
+            "task": "identify",
+            "key": "C major",
+            "pitches": [
+              "G2",
+              "G3",
+              "B4",
+              "D5"
+            ],
+            "acceptedChords": [
+              {
+                "roman": "V",
+                "inversion": "a"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cadence",
+          "prompt": "Which cadence ends on chord V?",
+          "answer": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "perfect",
+                "label": "Perfect"
+              },
+              {
+                "id": "imperfect",
+                "label": "Imperfect"
+              }
+            ],
+            "correctOptionIds": [
+              "imperfect"
+            ]
+          }
+        },
+        {
+          "id": "interval",
+          "prompt": "Name the interval between alto and soprano on beat 1.",
+          "answer": {
+            "kind": "interval",
+            "task": "identify",
+            "key": "C major",
+            "lower": "C5",
+            "upper": "E5",
+            "acceptedIntervals": [
+              "M3"
+            ]
+          }
+        }
+      ]
+    },
+    "hints": [],
+    "feedback": {
+      "correct": "Correct.",
+      "mistakes": {
+        "evidence-misread": "Look again."
+      },
+      "fallback": "Not quite."
+    },
+    "score": {
+      "staves": [
+        {
+          "id": "upper",
+          "label": "Soprano and alto",
+          "music": {
+            "clef": "treble",
+            "showKeySignature": true,
+            "measures": [
+              {
+                "voices": [
+                  {
+                    "id": "s",
+                    "stem": "up",
+                    "events": [
+                      {
+                        "kind": "note",
+                        "pitch": "E5",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "pitch": "D5",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "a",
+                    "stem": "down",
+                    "events": [
+                      {
+                        "kind": "note",
+                        "pitch": "C5",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "pitch": "B4",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "textAlternative": "Fixture music.",
+            "timeSignature": "4/4",
+            "key": "C major"
+          }
+        },
+        {
+          "id": "lower",
+          "label": "Tenor and bass",
+          "music": {
+            "clef": "bass",
+            "showKeySignature": true,
+            "measures": [
+              {
+                "voices": [
+                  {
+                    "id": "t",
+                    "stem": "up",
+                    "events": [
+                      {
+                        "kind": "note",
+                        "pitch": "G3",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "pitch": "G3",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "b",
+                    "stem": "down",
+                    "events": [
+                      {
+                        "kind": "note",
+                        "pitch": "C3",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "pitch": "G2",
+                        "duration": {
+                          "value": "minim",
+                          "dots": 0
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "textAlternative": "Fixture music.",
+            "timeSignature": "4/4",
+            "key": "C major"
+          }
+        }
+      ],
+      "textAlternative": "Two staves, four voices, one bar in C major: chord C-G-C-E then G-G-B-D."
+    }
+  }
+]

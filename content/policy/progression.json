@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "status": "provisional",
+  "xp": {
+    "perNodeType": {
+      "lesson": 10,
+      "practice": 8,
+      "review": 8,
+      "unit_challenge": 15,
+      "grade_assessment": 25,
+      "enrichment": 5
+    },
+    "firstCompletionOnly": false,
+    "dailyCapPerNode": 2,
+    "note": "XP measures engagement only. It never unlocks grades, never counts as mastery and never appears in readiness estimates. Each award has a unique source-event key; replays earn XP at most twice per node per day."
+  },
+  "mastery": {
+    "states": [
+      "new",
+      "learning",
+      "practising",
+      "proficient",
+      "mastered",
+      "review_due"
+    ],
+    "evidenceCounts": [
+      "independent-step",
+      "practice-item",
+      "review-item",
+      "assessment-item"
+    ],
+    "evidenceExcluded": [
+      "hinted-step",
+      "guided-step",
+      "worked-example",
+      "retry-after-reveal"
+    ],
+    "thresholds": {
+      "proficient": {
+        "minIndependentCorrect": 4,
+        "minDistinctTemplates": 2
+      },
+      "mastered": {
+        "minIndependentCorrect": 8,
+        "minDistinctTemplates": 2,
+        "minDaysSinceFirstEvidence": 3,
+        "requiresDelayedReview": true
+      }
+    },
+    "note": "Thresholds are placeholders for Brief 04 to tune empirically and confirm with a teacher. Accessible alternative interactions carry the same evidence weight."
+  },
+  "review": {
+    "intervalsDays": [
+      1,
+      3,
+      7,
+      14,
+      30,
+      60
+    ],
+    "lapseResetsTo": 1,
+    "note": "Per-concept spaced review. A wrong review answer triggers a worked explanation and a short remedial step before rescheduling."
+  },
+  "unlocking": {
+    "lesson": "A node unlocks when every node in its unlockAfter list is complete (default: the previous required lesson, practice or review node). Unlocked nodes can always be replayed.",
+    "unit": "The first lesson of a unit unlocks after the previous unit's review node. Unit challenges are mastery evidence and do not gate the next unit.",
+    "grade": "A grade world unlocks when the previous grade's teaching path is complete, or through placement (Brief 10). Learners may always start lower without penalty.",
+    "gradeCompletion": "An in-app grade badge requires passing the grade assessment, which independently samples every outcome introduced at that grade. XP and lesson completion never award it."
+  },
+  "readiness": {
+    "passThresholdPercent": 66,
+    "note": "Configurable in-app readiness default. It is not presented as an official ABRSM pass mark."
+  }
+}
