@@ -91,7 +91,7 @@ export function Notation({ fragment, size = "normal", highlight, marks, onActiva
   return (
     <figure className={`notation notation-${size}`}>
       <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)" aria-describedby={desc}>
-        <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px)} role="img" aria-label={fragment.textAlternative} className="notation-svg fit">
+        <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px)} role={onActivate ? "group" : "img"} aria-label={fragment.textAlternative} className="notation-svg fit">
           <StaveSvg layout={layout} highlight={highlight} marks={marks} onActivate={onActivate} overlay={overlay} px={px} />
         </svg>
       </div>
@@ -102,7 +102,7 @@ export function Notation({ fragment, size = "normal", highlight, marks, onActiva
 }
 
 /** Several staves (short score, open score, transposing parts) aligned bar by bar, with a brace or bracket and labels. */
-export function ScoreView({ score, size = "compact", highlight }: { score: NotationScore; size?: keyof typeof PX; highlight?: string[] }) {
+export function ScoreView({ score, size = "normal", highlight }: { score: NotationScore; size?: keyof typeof PX; highlight?: string[] }) {
   const desc = useId();
   const sl = useMemo(() => layoutScore(score), [score]);
   const px = PX[size];
@@ -124,12 +124,12 @@ export function ScoreView({ score, size = "compact", highlight }: { score: Notat
           )}
           {sl.staves.map((s) => (
             <g key={s.id}>
-              <text x={1.6} y={s.offset - 2 + 0.6} className="n-stave-label">{s.label.length > 6 ? s.label.slice(0, 5) + "." : s.label}</text>
               <StaveSvg layout={s.layout} offsetY={s.offset} highlight={highlight} px={px} />
             </g>
           ))}
         </svg>
       </div>
+      <figcaption className="notation-caption">Staves from the top: {score.staves.map((s) => s.label).join(", ")}</figcaption>
       <p id={desc} className="visually-hidden">{score.textAlternative}</p>
     </figure>
   );

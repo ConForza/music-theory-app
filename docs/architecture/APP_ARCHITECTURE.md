@@ -32,7 +32,7 @@ packages/web         React app                                                  
 
 * XP is never an input. A node unlocks only when every id in its `unlockAfter` is **completed**, and completion is decided by the server from recorded attempts.
 * **Preview policy** (`waiveUnwrittenPrerequisites`, on by default): Brief 01 delivered one playable Grade 1 lesson (`G1-U3-L03`), and its prerequisites are unwritten, so nobody could ever complete them. A prerequisite whose content does not exist is therefore treated as not blocking. It never waives a prerequisite that is playable, so the gate engages automatically as Briefs 05–09 add lessons. Set `MTP_WAIVE_UNWRITTEN=0` to run strict. The UI says so ("Early preview…").
-* Lessons the player cannot run stay `coming_soon`. Only answer kinds the Brief 02 grader supports are playable (`choice`, letter-name `pitch`, `staff-position` on treble/bass). All six questions of the sample lesson qualify. Anything else is filtered out in `course.ts`, never shown half-working.
+* Lessons the player cannot run stay `coming_soon`. Since Brief 03 every answer kind is playable (see [EXERCISE_ENGINE.md](EXERCISE_ENGINE.md)); an item the engine cannot present is still filtered out in `course.ts`, never shown half-working.
 
 ## Data model (`migrations/001_init.sql`)
 
@@ -58,13 +58,13 @@ Attempt ids are UUIDs, and an id is an immutable command: the client freezes `{i
 
 `state/app.tsx` (session, course, progress, settings applied to `<html>`), `components/` (shell, path, node, sheet, notation, keyboard, legend), `pages/` (welcome, onboarding, sign-in, learn, grades, unit, lesson player + steps, profile, progress, settings), `lib/` (path view model, music helpers, WebAudio synth). Settings (theme, motion, sound) are stored on the profile and mirrored in `localStorage` to avoid a flash.
 
-The notation component (`Staff.tsx`) is a deliberately small SVG renderer for treble and bass clefs (notes, chords, simple rests, ledger lines, time signature). It sits behind the `NotationFragment` contract so Brief 03 can swap in the full engine. Clefs it cannot draw fall back to the fragment's `textAlternative`.
+Notation is drawn by the Brief 03 renderer (`components/notation`, Bravura SMuFL glyphs, all four clefs and multi-stave scores); `Staff.tsx` remains as a thin compatibility wrapper. Answer controls live in `components/exercise`, and the practice lab in `pages/Practice.tsx`. See [EXERCISE_ENGINE.md](EXERCISE_ENGINE.md).
 
 ## Extension points for later briefs
 
 | Brief | Where it plugs in |
 |---|---|
-| 03 Exercise engine | Replace `grade.ts` and `inputFor` in `course.ts` with the engine's graders keyed by `engine.json`; replace `Staff.tsx`/`Keyboard.tsx` renderers; add input components in `LessonSteps.tsx` `Input`. The response/attempt/idempotency plumbing stays. |
+| 03 Exercise engine | **Done.** `grade.ts` delegates to `@mtp/engine` within the node binding's effective scope; `course.ts` uses the engine's `inputFor`; the practice lab adds `/api/practice/*` and `practice_attempts` (migration 002). See [EXERCISE_ENGINE.md](EXERCISE_ENGINE.md). |
 | 04 Progression | `attempts` already carries template/content/curriculum versions, evidence level and hint use. XP, streaks and mastery are derived from this log by new tables/services; `computeNodeStates` stays the single authority for unlocking. Add review scheduling beside `last_stats`. |
 | 05–09 Content | Add `LessonContent` files and set `contentRef`/`contentStatus` on nodes; they appear on the path automatically. Turn `waiveUnwrittenPrerequisites` off when a grade is complete. |
 | 10 Placement | `profiles.experience` records the learner's declared level; placement should write completion through the same server-verified route. |

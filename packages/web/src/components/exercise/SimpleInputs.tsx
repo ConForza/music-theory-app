@@ -2,7 +2,7 @@
  * Selection-style answer inputs. Every control is a native radio/checkbox/button, so touch, mouse, keyboard
  * and screen readers all work the same way; selected state is shown by outline and weight, not colour alone.
  */
-import { useId, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import type { ItemInput, LearnerResponse } from "@mtp/engine";
 import { Keyboard } from "../Keyboard";
 import { Notation } from "../notation/Notation";
@@ -148,7 +148,7 @@ export function TimeSignatureInput({ input, value, onChange, disabled, name }: I
 export function KeyNameInput({ input, value, onChange, disabled, name }: InputProps<"key-name", "key-name">) {
   const desc = useId();
   return (
-    <div className="key-name">
+    <div className="keyname-input">
       {input.signature && (
         <Notation
           size="large"
@@ -179,9 +179,14 @@ const ORD = (n: number) => (n === 1 ? "unison" : n === 8 ? "octave" : n === 15 ?
 const QUAL: Record<string, string> = { d: "diminished", m: "minor", M: "major", P: "perfect", A: "augmented" };
 
 export function IntervalNameInput({ input, value, onChange, disabled, name }: InputProps<"interval-name", "interval-name">) {
-  const n = value?.number ?? null;
-  const q = value?.quality ?? null;
-  const emit = (num: number | null, qual: string | null) => onChange(num ? ({ kind: "interval-name", number: num, ...(input.qualities && qual ? { quality: qual } : {}) } as R<"interval-name">) : null);
+  // Partial choices (a quality before a number) are kept locally until the answer is complete.
+  const [partial, setPartial] = useState<{ n: number | null; q: string | null }>({ n: value?.number ?? null, q: value?.quality ?? null });
+  const n = partial.n;
+  const q = partial.q;
+  const emit = (num: number | null, qual: string | null) => {
+    setPartial({ n: num, q: qual });
+    onChange(num && (!input.qualities || qual) ? ({ kind: "interval-name", number: num, ...(input.qualities && qual ? { quality: qual } : {}) } as R<"interval-name">) : null);
+  };
   const numbers = Array.from({ length: input.maxNumber - (input.compound ? 0 : 0) }, (_, i) => i + 1).filter((x) => x >= 1);
   return (
     <div className="interval-name">
@@ -194,9 +199,13 @@ export function IntervalNameInput({ input, value, onChange, disabled, name }: In
 
 const INV_TEXT: Record<string, string> = { a: "a — root position (root in the bass)", b: "b — first inversion (3rd in the bass)", c: "c — second inversion (5th in the bass)" };
 export function ChordNameInput({ input, value, onChange, disabled, name }: InputProps<"chord-name", "chord-name">) {
-  const roman = value?.roman ?? null;
-  const inv = value?.inversion ?? (input.inversions.length === 1 ? input.inversions[0]! : null);
-  const emit = (r: string | null, i: string | null) => onChange(r && i ? ({ kind: "chord-name", roman: r, inversion: i } as R<"chord-name">) : null);
+  const [partial, setPartial] = useState<{ r: string | null; i: string | null }>({ r: value?.roman ?? null, i: value?.inversion ?? (input.inversions.length === 1 ? input.inversions[0]! : null) });
+  const roman = partial.r;
+  const inv = partial.i;
+  const emit = (r: string | null, i: string | null) => {
+    setPartial({ r, i });
+    onChange(r && i ? ({ kind: "chord-name", roman: r, inversion: i } as R<"chord-name">) : null);
+  };
   return (
     <div className="chord-name">
       <Radios legend="Chord (Roman numeral)" options={input.romans.map((r) => ({ id: r, label: r }))} value={roman} onSelect={(r) => emit(r, inv)} disabled={disabled} name={`${name}-r`} columns="letters" />

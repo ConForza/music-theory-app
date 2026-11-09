@@ -275,7 +275,7 @@ input:focus-visible { outline-offset: 0; border-color: var(--focus); }
 @media (min-width: 560px) { .unit-row { grid-template-columns: minmax(0, 1fr) auto; align-items: center; } .unit-row-side { flex-direction: column; align-items: flex-end; } }
 
 /* Lesson player */
-.player { min-height: 100dvh; display: flex; flex-direction: column; background: var(--bg); }
+.player { min-height: 100dvh; display: flex; flex-direction: column; background: var(--bg); overflow-x: clip; }
 .player-bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 0.5rem; padding: max(0.5rem, env(safe-area-inset-top)) 0.75rem 0.5rem; background: var(--bg); max-width: 44rem; width: 100%; margin: 0 auto; }
 .player-body { flex: 1; display: flex; flex-direction: column; width: 100%; max-width: 44rem; margin: 0 auto; animation: slidein 0.28s ease-out; }
 @keyframes slidein { from { transform: translateX(18px); } }
@@ -406,7 +406,7 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .hint-line { color: var(--muted); font-size: 0.98rem; margin: 0.2rem 0 0.4rem; font-weight: 700; }
 .answer-echo { margin: 0.6rem 0 0; color: var(--muted); }
 .answer-echo strong { color: var(--ink); font-size: 1.15rem; }
-.note-name, .ts-input, .interval-name, .chord-name, .key-name, .progression, .keyboard-answer, .sequence-answer { display: grid; gap: 0.6rem; min-width: 0; }
+.note-name, .ts-input, .interval-name, .chord-name, .keyname-input, .progression, .keyboard-answer, .sequence-answer { display: grid; gap: 0.6rem; min-width: 0; }
 .stepper { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
 .stepper output { font-weight: 900; font-size: 1.2rem; min-width: 4ch; text-align: center; }
 .stepper .icon-btn, .editor-nudge .icon-btn { background: var(--surface); border: 2px solid var(--line-strong); box-shadow: 0 3px 0 var(--line-strong); color: var(--ink); width: 52px; height: 52px; font-size: 1.2rem; font-weight: 900; }
@@ -415,7 +415,7 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .music-view > .notation { width: 100%; }
 .listen { justify-self: end; }
 .stave-editor { display: grid; gap: 0.7rem; min-width: 0; }
-.stave-editor-stave { background: var(--surface); border-radius: var(--radius); padding: 0.4rem 0.5rem; box-shadow: var(--shadow); overflow-x: auto; cursor: pointer; display: flex; justify-content: safe center; touch-action: pan-x; -webkit-overflow-scrolling: touch; }
+.stave-editor-stave { overflow-y: hidden; background: var(--surface); border-radius: var(--radius); padding: 0.4rem 0.5rem; box-shadow: var(--shadow); overflow-x: auto; cursor: pointer; display: flex; justify-content: safe center; touch-action: pan-x; -webkit-overflow-scrolling: touch; }
 .stave-editor-stave:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .stave-editor-stave svg { flex: none; display: block; color: var(--ink); }
 .editor-tools { display: grid; gap: 0.6rem; }
@@ -430,7 +430,7 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .bar-meter.is-over { border-color: var(--danger); color: var(--danger); }
 .bar-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.5rem; }
-.palette-btn { appearance: none; font: inherit; display: grid; justify-items: center; gap: 0.1rem; min-height: 76px; padding: 0.4rem 0.3rem; border-radius: 14px; border: 2px solid var(--line-strong); background: var(--surface); color: var(--ink); box-shadow: 0 3px 0 var(--line-strong); cursor: pointer; }
+.palette-btn { overflow: hidden; appearance: none; font: inherit; display: grid; justify-items: center; gap: 0.1rem; min-height: 76px; padding: 0.4rem 0.3rem; border-radius: 14px; border: 2px solid var(--line-strong); background: var(--surface); color: var(--ink); box-shadow: 0 3px 0 var(--line-strong); cursor: pointer; }
 .palette-btn:active { transform: translateY(2px); }
 .palette-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .palette-btn .smufl-inline { font-size: 2.6rem; height: 2.6rem; }
@@ -438,7 +438,7 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .palette-tools { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .join-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem; padding: 0.4rem; background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); }
 .join-cell { display: inline-flex; align-items: center; gap: 0.15rem; }
-.join-note { min-width: 34px; height: 48px; display: grid; place-items: center; }
+.join-note { min-width: 34px; max-width: 44px; height: 48px; display: grid; place-items: center; overflow: hidden; pointer-events: none; }
 .join-note .smufl-inline { font-size: 2.2rem; height: 2.2rem; padding-top: 0.3em; }
 .join-btn { appearance: none; font: inherit; min-width: 44px; min-height: 48px; border-radius: 10px; border: 2px dashed var(--line-strong); background: var(--surface-2); color: var(--muted); font-weight: 900; font-size: 1.2rem; cursor: pointer; }
 .join-btn.is-joined { border-style: solid; border-color: var(--brand); background: var(--brand-soft); color: var(--brand-strong); }
@@ -477,3 +477,7 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 }
 .signs .smufl-inline { padding-top: 0; height: auto; transform: translateY(0.12em); }
 .notation-svg.fit { height: auto; }
+.palette-btn > *, .join-btn > *, .key > * { pointer-events: none; }
+/* Keep focused or scrolled-to controls clear of the sticky header and answer bar (WCAG 2.4.11). */
+html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
+.option > span, .option > span * { pointer-events: none; }

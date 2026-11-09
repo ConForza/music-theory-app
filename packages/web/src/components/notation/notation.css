@@ -1,5 +1,5 @@
 .notation { margin: 0; min-width: 0; max-width: 100%; }
-.notation-scroll { overflow-x: auto; background: var(--surface); border-radius: var(--radius); padding: 0.4rem 0.6rem; box-shadow: var(--shadow); display: flex; justify-content: safe center; -webkit-overflow-scrolling: touch; }
+.notation-scroll { overflow-x: auto; overflow-y: hidden; background: var(--surface); border-radius: var(--radius); padding: 0.4rem 0.6rem; box-shadow: var(--shadow); display: flex; justify-content: safe center; -webkit-overflow-scrolling: touch; }
 .notation-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .notation-svg { display: block; flex: none; color: var(--ink); overflow: visible; }
 .notation-caption { color: var(--muted); font-size: 0.95rem; margin-top: 0.4rem; text-align: center; }

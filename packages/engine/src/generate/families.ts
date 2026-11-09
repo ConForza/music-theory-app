@@ -475,9 +475,10 @@ const triadChord: Gen = (c) => {
   const inversions = (c.scope.inversions?.length ? c.scope.inversions : ["a"]) as Array<"a" | "b" | "c">;
   const roman = c.rng.pick(romans);
   const inversion = c.rng.pick(inversions);
-  const clef = clefOf(c);
-  const max = maxLedger(c);
   const identify = c.template.mode === "identify" || c.template.mode === "apply-in-context";
+  // A build item has no music of its own, so its answer stave uses the scope's first clef: the prompt must match.
+  const clef = identify ? clefOf(c) : ((c.scope.clefs?.[0] ?? "treble") as Clef);
+  const max = maxLedger(c);
   for (const o of c.rng.shuffle([2, 3, 4])) {
     const voicing = music.voiceTriad(key, roman, inversion, o);
     if (!fits(clef, voicing, max) || voicing.some((p) => staffPosition(clef, p) < -2 * max - 1 || staffPosition(clef, p) > 8 + 2 * max + 1)) continue;

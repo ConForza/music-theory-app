@@ -194,7 +194,8 @@ export function StaveEditor({ clef, mode, keyName, maxLedgerLines, accidentals, 
         onKeyDown={onKey}
       >
         <svg viewBox={`0 ${top} ${width} ${bottom - top}`} style={{ touchAction: "none", width: "100%", maxWidth: `${width * px}px`, minWidth: `${Math.round(width * px * 0.75)}px` }} onPointerDown={fromPointer} aria-hidden="true" className="notation-svg fit">
-          <StaveSvg layout={layout} marks={marks?.map((m) => ({ ...m, index: m.index + (mode === "sequence" ? givenWritten.length : 0) }))} px={px} />
+          {/* Marks index the whole submitted sequence, given notes included, exactly as drawn. */}
+          <StaveSvg layout={layout} marks={marks} px={px} />
           {mode === "signature" &&
             value.map((w, i) => (
               <text key={i} x={startX + i * 1.05} y={-w.pos / 2} className="n-smufl n-glyph" fontSize={4}>{SIGN_GLYPH[w.sign === "b" ? "flat" : "sharp"].ch}</text>

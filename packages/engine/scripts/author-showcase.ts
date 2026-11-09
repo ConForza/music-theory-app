@@ -189,6 +189,36 @@ const sets: Set[] = [
       { t: "t.g5.voices", correct: "Correct voice." },
       { t: "t.g1.melody", correct: "All three answers are right. Well observed!" },
     ],
+    extra: [
+      {
+        id: "i.showcase.instruments-and-score.9",
+        templateId: "t.g5.score",
+        templateVersion: 1,
+        seed: null,
+        evidence: "learning",
+        prompt: "This short score ends a piece in C major. Look at both staves and answer the questions.",
+        score: {
+          staves: [
+            { id: "upper", label: "Right hand", music: { presentation: "stave", clef: "treble", key: "C major", showKeySignature: true, timeSignature: "4/4", measures: [
+              { events: [{ kind: "chord", notes: [{ pitch: "G4" }, { pitch: "C5" }, { pitch: "E5" }], duration: { value: "minim", dots: 0 }, label: "A" }, { kind: "chord", notes: [{ pitch: "G4" }, { pitch: "B4" }, { pitch: "D5" }], duration: { value: "minim", dots: 0 }, label: "B" }] },
+              { events: [{ kind: "chord", notes: [{ pitch: "G4" }, { pitch: "C5" }, { pitch: "E5" }], duration: { value: "semibreve", dots: 0 }, label: "C" }], barline: "final" },
+            ], textAlternative: "Right hand, treble clef: chord G4 C5 E5 (A), chord G4 B4 D5 (B), then chord G4 C5 E5 (C)." } },
+            { id: "lower", label: "Left hand", music: { presentation: "stave", clef: "bass", key: "C major", showKeySignature: true, timeSignature: "4/4", measures: [
+              { events: [{ kind: "note", pitch: "C3", duration: { value: "minim", dots: 0 } }, { kind: "note", pitch: "G2", duration: { value: "minim", dots: 0 } }] },
+              { events: [{ kind: "note", pitch: "C3", duration: { value: "semibreve", dots: 0 } }], barline: "final" },
+            ], textAlternative: "Left hand, bass clef: C3, G2, then C3." } },
+          ],
+          textAlternative: "A two-stave piano short score in C major, 4/4, two bars. Chord A: C3 in the bass with G4 C5 E5 above. Chord B: G2 in the bass with G4 B4 D5 above. Chord C: C3 in the bass with G4 C5 E5 above.",
+        },
+        answer: { kind: "composite", parts: [
+          { id: "chord-a", prompt: "Name chord A (Roman numeral and position).", answer: { kind: "chord", task: "identify", key: "C major", pitches: ["C3", "G4", "C5", "E5"], acceptedChords: [{ roman: "I", inversion: "a" }] } },
+          { id: "chord-b", prompt: "Name chord B.", answer: { kind: "chord", task: "identify", key: "C major", pitches: ["G2", "G4", "B4", "D5"], acceptedChords: [{ roman: "V", inversion: "a" }] } },
+          { id: "cadence", prompt: "Which cadence do chords B and C make?", answer: { kind: "choice", options: [{ id: "perfect", label: "Perfect" }, { id: "plagal", label: "Plagal" }, { id: "imperfect", label: "Imperfect" }], correctOptionIds: ["perfect"] } },
+        ] },
+        hints: ["Find each chord's root by stacking its notes in 3rds; the left-hand note is the bass."],
+        feedback: { correct: "All three right: I, V, then I again makes a perfect cadence.", mistakes: { "evidence-misread": "Read the notes of both staves together: the left-hand note is the bass of each chord." }, fallback: "Name each chord from all its notes (both staves), then name the cadence from the last two chords." },
+      },
+    ],
     practice: [{ templateId: "t.g1.melody", label: "Another melody" }],
   },
 ];
