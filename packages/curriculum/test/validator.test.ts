@@ -461,3 +461,94 @@ describe("review regressions (R3–R7)", () => {
     expect(checkDocs(base, dir)).toEqual([]);
   });
 });
+
+describe("re-review regressions (C1, C2)", () => {
+  const crotchet = { kind: "note" as const, pitch: "B4", duration: { value: "crotchet" as const, dots: 0 } };
+  const minim = { kind: "note" as const, pitch: "B4", duration: { value: "minim" as const, dots: 0 } };
+  const rhythmLine = (events: unknown[]) => ({ presentation: "rhythm-line", clef: "treble", showKeySignature: false, measures: [{ events }], textAlternative: "A rhythm shown on a single line." });
+
+  /** A complete, schema-valid lesson for the very first node, before any clef has been taught. */
+  function firstLesson() {
+    const item = (id: string, evidence: "learning" | "independent", answer: unknown, music?: unknown) => ({
+      id: `i.g1-u1-l01.${id}`,
+      templateId: "t.g1.note-value",
+      templateVersion: 1,
+      seed: null,
+      evidence,
+      prompt: "Original prompt.",
+      ...(music ? { music } : {}),
+      answer,
+      hints: [],
+      feedback: { correct: "Yes.", mistakes: { "halved-or-doubled": "Count it in crotchet beats." }, fallback: "Not quite." },
+    });
+    return {
+      schemaVersion: 1,
+      id: "lc.G1-U1-L01",
+      lessonId: "G1-U1-L01",
+      contentVersion: 1,
+      locale: "en-GB",
+      objective: { statement: "Compare crotchets, minims and semibreves by how many beats they last.", successCriteria: ["I can say how many beats each note lasts."] },
+      explanation: [{ kind: "text", text: "A crotchet lasts one beat; a minim lasts two." }],
+      demonstration: {
+        widget: "rhythm",
+        music: rhythmLine([crotchet, crotchet, minim]),
+        steps: ["Tap along: one, one, two-beat note."],
+        audio: { playback: "synth-generated", optional: true },
+        textAlternative: "Two crotchets then a minim, shown as a rhythm without a stave.",
+      },
+      guided: [item("guided-1", "learning", { kind: "choice", options: [{ id: "1", label: "1 beat" }, { id: "2", label: "2 beats" }], correctOptionIds: ["2"] })],
+      independent: [
+        item("independent-1", "independent", { kind: "rhythm", task: "equivalent-value", target: [1, 2], accepted: [[{ events: [minim] }]], acceptAnyRuleCompliant: true }, rhythmLine([crotchet, crotchet])),
+        item("independent-2", "independent", { kind: "choice", options: [{ id: "c", label: "Crotchet" }, { id: "s", label: "Semibreve" }], correctOptionIds: ["s"] }),
+      ],
+      recap: ["Crotchet 1 beat, minim 2, semibreve 4."],
+      spacedReview: [{ templateId: "t.g1.note-value", afterDays: 1 }],
+      mastery: { conceptIds: ["c.rhythm.values-long"], countsAsEvidence: "independent-steps-only", completion: "All steps attempted." },
+      provenance: { authoredBy: "test", originality: "original", bookSectionIds: ["fs.g1.s01"], outcomeIds: ["abrsm2020.g1.01"], notes: "Regression fixture." },
+    };
+  }
+
+  async function withFirstLesson(edit: (l: ReturnType<typeof firstLesson>) => void = () => {}) {
+    const { LessonContent } = await import("../src/schema.ts");
+    return mutate((c) => {
+      const raw = firstLesson();
+      edit(raw);
+      c.lessons.push({ file: "lessons/G1-U1-L01.json", content: LessonContent.parse(raw) });
+      const n = node(c, "G1-U1-L01");
+      n.contentRef = "lessons/G1-U1-L01.json";
+      n.contentStatus = "example";
+    });
+  }
+
+  it("C1: a complete first-lesson rhythm demonstration validates before any clef is taught", async () => {
+    expect(await withFirstLesson()).toEqual([]);
+  });
+
+  it("C1: the same demonstration presented as stave notation still requires a taught clef", async () => {
+    expect(await withFirstLesson((l) => (l.demonstration.music.presentation = "stave"))).toContain("FRAGMENT_SCOPE");
+  });
+
+  it("C1: rhythm-line content is still limited to the rhythm taught so far", async () => {
+    const quaver = { kind: "note", pitch: "B4", duration: { value: "quaver", dots: 0 } };
+    expect(await withFirstLesson((l) => (l.demonstration.music = rhythmLine([quaver, quaver, minim]) as never))).toContain("FRAGMENT_SCOPE");
+  });
+
+  it("C1: a rhythm line must use a single display pitch", async () => {
+    expect(await withFirstLesson((l) => (l.demonstration.music = rhythmLine([crotchet, { ...crotchet, pitch: "D5" }, minim]) as never))).toContain("RHYTHM_LINE_PITCHED");
+  });
+
+  it("C1: keyboard presentations need no clef, but black keys wait until they are taught", async () => {
+    const { checkFragment } = await import("../src/verify-music.ts");
+    const { buildIndex, taughtScope } = await import("../src/model.ts");
+    const ix = buildIndex(base);
+    const scope = taughtScope(ix, ix.nodeById.get("G1-U3-L01")!); // keyboard lesson, before clefs and accidentals
+    const kb = (pitch: string) => ({ presentation: "keyboard" as const, clef: "treble" as const, showKeySignature: false, measures: [{ events: [{ kind: "note" as const, pitch, duration: { value: "crotchet" as const, dots: 0 } }] }], textAlternative: "x" });
+    const run = (p: string) => {
+      const out: string[] = [];
+      checkFragment(kb(p), scope, "kb", (code) => out.push(code));
+      return out;
+    };
+    expect(run("C4")).toEqual([]);
+    expect(run("C#4")).toContain("FRAGMENT_SCOPE");
+  });
+});

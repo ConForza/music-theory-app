@@ -120,7 +120,15 @@ export function pitchedEvents(music: NotationFragment): Inner[] {
 /** Checks bar totals, ties, accidentals, beams and grade/lesson scope of one stave. */
 export function checkFragment(music: NotationFragment, scope: MusicScope, where: string, report: Report) {
   const sc = scope;
-  if (!(sc.clefs ?? []).includes(music.clef)) report("FRAGMENT_SCOPE", where, `Clef ${music.clef} is not in scope here`);
+  const presentation = music.presentation ?? "stave";
+  // The clef is only assessed knowledge when the fragment is shown as normal stave notation.
+  if (presentation === "stave" && !(sc.clefs ?? []).includes(music.clef)) report("FRAGMENT_SCOPE", where, `Clef ${music.clef} is not in scope here`);
+  if (presentation === "rhythm-line") {
+    if (music.key) report("RHYTHM_LINE_PITCHED", where, "A rhythm-line fragment is unpitched and cannot have a key");
+    const pitches = new Set(pitchedEvents(music).flatMap((e) => pitchesOf(e).map((n) => n.pitch)));
+    if (pitches.size > 1) report("RHYTHM_LINE_PITCHED", where, `A rhythm-line fragment must use one display pitch for every note (found ${[...pitches].join(", ")})`);
+    if (pitchedEvents(music).some((e) => e.kind === "chord")) report("RHYTHM_LINE_PITCHED", where, "A rhythm-line fragment cannot contain chords");
+  }
   if (music.key && !(sc.keys ?? []).includes(music.key)) report("FRAGMENT_SCOPE", where, `Key ${music.key} is not in scope here`);
   const showsSignature = Boolean(music.key) && music.showKeySignature !== false && keyFifths(parseKey(music.key!)) !== 0;
   if (showsSignature && !sc.keySignatures) report("FRAGMENT_SCOPE", where, "Key signatures are not in scope here");
@@ -191,6 +199,12 @@ export function checkFragment(music: NotationFragment, scope: MusicScope, where:
       }
       for (const n of notes) {
         const p = parsePitch(n.pitch);
+        if (presentation === "rhythm-line") continue; // display pitch only: nothing pitch-related is assessed
+        if (presentation === "keyboard") {
+          if (p.alter !== 0 && !sc.blackKeys) report("FRAGMENT_SCOPE", where, `${label}: ${n.pitch} is a black key, which is not in scope here`);
+          if (Math.abs(p.alter) === 2 && !sc.doubleAccidentals) report("FRAGMENT_SCOPE", where, `${label}: ${n.pitch} uses a double accidental, which is not in scope here`);
+          continue; // no stave: clef, ledger lines and written accidentals do not apply
+        }
         const lines = ledgerLines(music.clef, p);
         if (lines > (sc.maxLedgerLines ?? 0)) report("FRAGMENT_SCOPE", where, `${label}: ${n.pitch} needs ${lines} ledger line(s) (limit ${sc.maxLedgerLines ?? 0})`);
         if (p.alter !== 0 && !sc.accidentals) report("FRAGMENT_SCOPE", where, `${label}: ${n.pitch} uses an accidental, which is not in scope here`);
@@ -235,11 +249,20 @@ function intervalFromCode(code: string): { interval?: Interval; numberOnly?: num
 }
 
 /** Pitch classes of every form of the key's scale (major, or harmonic/melodic/natural minor). */
-function scaleMembers(key: Key): PitchClass[] {
-  const forms = key.mode === "major" ? (["major"] as const) : (["harmonic", "melodic-ascending", "melodic-descending"] as const);
+type MinorScaleForm = "harmonic" | "melodic-ascending" | "melodic-descending";
+
+/** Scale forms a task may draw on: the major scale, or the minor forms allowed by the effective scope. */
+export function allowedForms(key: Key, sc: MusicScope, specific?: MinorScaleForm): Array<"major" | MinorScaleForm> {
+  if (key.mode === "major") return ["major"];
+  const allowed: MinorScaleForm[] = [];
+  if ((sc.minorForms ?? []).includes("harmonic")) allowed.push("harmonic");
+  if ((sc.minorForms ?? []).includes("melodic")) allowed.push("melodic-ascending", "melodic-descending");
+  return specific ? allowed.filter((f) => f === specific) : allowed;
+}
+
+function scaleMembers(key: Key, forms: Array<"major" | MinorScaleForm>): PitchClass[] {
   return forms.flatMap((f) => scale(key, f));
 }
-const inKey = (key: Key, p: PitchClass) => scaleMembers(key).some((x) => samePitchClassSpelling(x, p));
 
 function identifyChord(key: Key, pitches: Pitch[]): { roman: string; inversion: string } | null {
   for (const r of ROMANS) {
@@ -433,7 +456,8 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       if (a.task === "equivalent-value" && !a.target) report("RHYTHM_TARGET", where, "equivalent-value needs a target");
       if (a.task !== "equivalent-value" && !ts) report("RHYTHM_TARGET", where, `${a.task} needs a time signature`);
       a.accepted.forEach((measures, i) => {
-        const frag: NotationFragment = { clef: music?.clef ?? "treble", showKeySignature: false, measures, textAlternative: "answer", ...(a.task !== "equivalent-value" && ts ? { timeSignature: ts } : {}) };
+        // Rhythm answers are unpitched: check them as a rhythm line so no clef or pitch knowledge is assumed.
+        const frag: NotationFragment = { presentation: "rhythm-line", clef: music?.clef ?? "treble", showKeySignature: false, measures, textAlternative: "answer", ...(a.task !== "equivalent-value" && ts ? { timeSignature: ts } : {}) };
         checkFragment(frag, { ...sc, keys: sc.keys }, `${where}#accepted[${i}]`, report);
         if (a.task === "equivalent-value" && a.target) {
           const total = measures.flatMap(voicesOf).reduce((s, v) => add(s, voiceDuration(v, undefined)), frac(0));
@@ -485,6 +509,13 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       const key = a.key ? parseKey(a.key) : undefined;
       if (a.key) keyInScope(a.key);
       const lower = parsePitch(a.lower);
+      // Diatonic membership uses only the scale forms this task may draw on (e.g. harmonic minor only at Grade 2).
+      const forms = key ? allowedForms(key, sc, a.minorForm) : [];
+      if (key && key.mode === "minor" && forms.length === 0) {
+        report("ANSWER_SCOPE", where, a.minorForm ? `${a.minorForm} minor is not in scope here` : "No minor scale form is in scope here");
+      }
+      const members = key ? scaleMembers(key, forms) : [];
+      const inKey = (p: PitchClass) => members.some((x) => samePitchClassSpelling(x, p));
       const checkScopeFor = (upperPitch: Pitch, iv: Interval) => {
         if (iv.number > 8 && !sc.compoundIntervals) report("ANSWER_SCOPE", where, "Compound intervals are not in scope here");
         const mode = sc.intervalLowerNote;
@@ -492,7 +523,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         if (mode === "tonic" && (!key || !samePitchClassSpelling(lower, key.tonic))) report("ANSWER_SCOPE", where, "At this point the lower note must be the tonic of the stated key");
         if (mode === "tonic" || mode === "any-diatonic") {
           if (!key) report("ANSWER_SCOPE", where, "A key is required for diatonic interval tasks");
-          else if (!inKey(key, lower) || !inKey(key, upperPitch)) report("ANSWER_SCOPE", where, `${formatPitch(lower)}–${formatPitch(upperPitch)} is not diatonic in ${a.key}; chromatic intervals are not in scope here`);
+          else if (!inKey(lower) || !inKey(upperPitch)) report("ANSWER_SCOPE", where, `${formatPitch(lower)}–${formatPitch(upperPitch)} is not in the ${forms.join("/")} form(s) of ${a.key} allowed here`);
         }
         if (Math.abs(upperPitch.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, "Double accidentals are not in scope here");
       };
@@ -531,18 +562,31 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
           return;
         }
         const { interval, numberOnly } = built;
-        let derived: Pitch;
+        let derivedSet: Pitch[];
         if (numberOnly !== undefined) {
           if (!key) {
             report("ANSWER_UNVERIFIABLE", where, "Building an interval by number needs a key");
             return;
           }
+          // The upper note is the scale note on that letter in each allowed form (harmonic minor raises the
+          // 7th; melodic minor allows both raised and unraised 6th/7th). Every such spelling must be accepted.
           const d = diatonicNumber(lower) + (a.direction === "up" ? 1 : -1) * (numberOnly - 1);
           const probe = pitchFromNumbers(d, 0);
-          derived = { step: probe.step, alter: signatureAlter(key, probe.step), octave: probe.octave };
-        } else derived = transpose(lower, interval!, a.direction!);
-        checkScopeFor(derived, intervalBetween(lower, derived));
-        for (const acc of a.acceptedPitches ?? []) if (!samePitch(parsePitch(acc), derived)) report("ANSWER_MISMATCH", where, `Accepted ${acc}; derived ${formatPitch(derived)}`);
+          const alters = Array.from(new Set(members.filter((m) => m.step === probe.step).map((m) => m.alter)));
+          derivedSet = alters.map((alter) => ({ step: probe.step, alter, octave: probe.octave }));
+          if (!derivedSet.length) {
+            report("ANSWER_UNSOLVABLE", where, `No allowed scale note on ${probe.step}`);
+            return;
+          }
+        } else derivedSet = [transpose(lower, interval!, a.direction!)];
+        for (const dp of derivedSet) checkScopeFor(dp, intervalBetween(lower, dp));
+        const accepted = (a.acceptedPitches ?? []).map(parsePitch);
+        for (const acc of accepted) {
+          if (!derivedSet.some((dp) => samePitch(dp, acc))) report("ANSWER_MISMATCH", where, `Accepted ${formatPitch(acc)}; derived ${derivedSet.map(formatPitch).join(" or ")}`);
+        }
+        for (const dp of derivedSet) {
+          if (!accepted.some((acc) => samePitch(dp, acc))) report("ANSWER_MISMATCH", where, `Valid answer ${formatPitch(dp)} is not accepted (allowed forms: ${forms.join("/") || "major"})`);
+        }
       }
       return;
     }

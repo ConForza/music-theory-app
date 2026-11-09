@@ -113,8 +113,10 @@ export const MusicScope = z
     ornaments: z.array(OrnamentName).optional(),
     degreeNaming: DegreeNaming.optional(),
     doubleAccidentals: z.boolean().optional(),
-    /** Single sharps, flats and naturals (written or from a key signature) may appear. */
+    /** Single sharps, flats and naturals (written or from a key signature) may appear on a stave. */
     accidentals: z.boolean().optional(),
+    /** Black keys (sharps/flats) may appear in keyboard presentations. */
+    blackKeys: z.boolean().optional(),
     /** Key signatures may be shown. */
     keySignatures: z.boolean().optional(),
     rests: z.boolean().optional(),
@@ -143,7 +145,7 @@ export const SCOPE_DIMENSIONS = [
   "keys", "minorForms", "timeSignatures", "noteValues", "maxDots", "tuplets", "clefs", "maxLedgerLines",
   "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "chordDegrees", "inversions",
   "cadenceTypes", "cadenceKeys", "instrumentTranspositions", "octaveTranspositionClefs", "ornaments", "degreeNaming",
-  "doubleAccidentals", "accidentals", "keySignatures", "rests", "ties",
+  "doubleAccidentals", "accidentals", "blackKeys", "keySignatures", "rests", "ties",
 ] as const;
 
 /**
@@ -743,8 +745,17 @@ export const Measure = z
   .refine((m) => (m.events ? 1 : 0) + (m.voices ? 1 : 0) === 1, { message: "A measure has either events or voices (not both)" });
 export type Measure = z.infer<typeof Measure>;
 
+/**
+ * How a fragment is presented. "stave": normal notation (clef reading is part of the task).
+ * "rhythm-line": unpitched single-line rhythm display; the clef and pitches are display conventions
+ * only, so no clef, key or pitch knowledge is assumed. "keyboard": pitches shown on a keyboard, not
+ * a stave; no clef or ledger-line knowledge is assumed.
+ */
+export const Presentation = z.enum(["stave", "rhythm-line", "keyboard"]);
+
 export const NotationFragment = z
   .object({
+    presentation: Presentation.default("stave"),
     clef: ClefName,
     key: KeyName.optional(),
     showKeySignature: z.boolean().default(true),
@@ -895,6 +906,11 @@ const IntervalAnswer = z
     /** build: interval and direction to construct from `lower`. */
     target: IntervalCode.optional(),
     direction: z.enum(["up", "down"]).optional(),
+    /**
+     * Minor keys: the scale form the task refers to. When omitted, every form allowed by the effective
+     * scope counts, and a numbered build must accept the note from each allowed form.
+     */
+    minorForm: z.enum(["harmonic", "melodic-ascending", "melodic-descending"]).optional(),
     acceptedIntervals: z.array(IntervalCode).optional(),
     acceptedPitches: z.array(PitchName).optional(),
   })

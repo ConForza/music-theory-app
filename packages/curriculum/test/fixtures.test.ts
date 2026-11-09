@@ -157,3 +157,38 @@ describe("derived answers catch wrong content in every answer kind", () => {
     expect(codes(a)).toContain("ANSWER_MISMATCH");
   });
 });
+
+describe("re-review C2: interval checks honour the allowed minor forms", () => {
+  const interval = (templateId: string, answer: Record<string, unknown>) =>
+    ExerciseItem.parse({
+      id: "i.fixture.minor-interval",
+      templateId,
+      templateVersion: 1,
+      seed: null,
+      evidence: "independent",
+      prompt: "x",
+      answer: { kind: "interval", key: "A minor", lower: "A4", ...answer },
+      hints: [],
+      feedback: { correct: "Yes.", mistakes: { "counted-one-end-only": "Count both notes." }, fallback: "No." },
+    });
+
+  it("Grade 2 (harmonic only): the melodic-minor sixth F# is rejected; F natural is accepted", () => {
+    expect(codes(interval("t.g2.interval-number", { task: "identify", upper: "F#5", acceptedIntervals: ["6"] }))).toContain("ANSWER_SCOPE");
+    expect(codes(interval("t.g2.interval-number", { task: "identify", upper: "F5", acceptedIntervals: ["6"] }))).toEqual([]);
+  });
+
+  it("Grade 2 (harmonic only): a seventh above the tonic is the raised G#", () => {
+    expect(codes(interval("t.g2.interval-number", { task: "build", target: "7", direction: "up", acceptedPitches: ["G#5"] }))).toEqual([]);
+    expect(codes(interval("t.g2.interval-number", { task: "build", target: "7", direction: "up", acceptedPitches: ["G5"] }))).toContain("ANSWER_MISMATCH");
+  });
+
+  it("Grade 3 (both forms): a numbered seventh must accept G and G#, unless the form is stated", () => {
+    expect(codes(interval("t.g3.interval-quality", { task: "build", target: "7", direction: "up", acceptedPitches: ["G5", "G#5"] }))).toEqual([]);
+    expect(codes(interval("t.g3.interval-quality", { task: "build", target: "7", direction: "up", acceptedPitches: ["G#5"] }))).toContain("ANSWER_MISMATCH");
+    expect(codes(interval("t.g3.interval-quality", { task: "build", target: "7", direction: "up", minorForm: "harmonic", acceptedPitches: ["G#5"] }))).toEqual([]);
+  });
+
+  it("a stated minor form outside the scope is rejected", () => {
+    expect(codes(interval("t.g2.interval-number", { task: "identify", upper: "F#5", minorForm: "melodic-ascending", acceptedIntervals: ["6"] }))).toContain("ANSWER_SCOPE");
+  });
+});
