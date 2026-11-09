@@ -674,6 +674,50 @@ describe("P5: settings never show an unsaved value as saved", () => {
     expect(screen.queryByRole("alert")).toBeNull();
   });
 
+  it("two queued nickname saves, the first succeeding and the second failing: the field shows the confirmed one, and Retry works", async () => {
+    const h = startApi();
+    const user = userEvent.setup();
+    renderApp("/");
+    await toSettings(user);
+    const field = () => screen.getByLabelText("Nickname") as HTMLInputElement;
+    const slow = h.hold(patchSettings); // N1 is in flight (and slow)
+    await user.clear(field());
+    await user.type(field(), "Nia");
+    await user.click(screen.getByRole("button", { name: "Save nickname" }));
+    await waitFor(() => expect(slow.seen()).toBe(1));
+    h.failNext(patchSettings, 1); // N2 will be the next request sent, and it fails
+    await user.clear(field());
+    await user.type(field(), "Nora");
+    await user.click(screen.getByRole("button", { name: "Save nickname" })); // queued behind N1
+    slow.release();
+    expect(await screen.findByRole("alert")).toHaveTextContent(/nickname wasn't saved/i);
+    const server = (await api.me()).user.displayName;
+    expect(server).toBe("Nia");
+    expect(field().value).toBe(server); // not the original nickname, which is older than what the server holds
+    await user.click(screen.getByRole("button", { name: "Try again" }));
+    await waitFor(async () => expect((await api.me()).user.displayName).toBe("Nora"));
+    expect(field().value).toBe("Nora");
+    expect(screen.queryByRole("alert")).toBeNull();
+  });
+
+  it("a newer edit typed while a nickname save fails is not overwritten by the rollback", async () => {
+    const h = startApi();
+    const user = userEvent.setup();
+    renderApp("/");
+    await toSettings(user);
+    const field = () => screen.getByLabelText("Nickname") as HTMLInputElement;
+    const slow = h.hold(patchSettings);
+    await user.clear(field());
+    await user.type(field(), "Nora");
+    await user.click(screen.getByRole("button", { name: "Save nickname" }));
+    await waitFor(() => expect(slow.seen()).toBe(1));
+    await user.clear(field());
+    await user.type(field(), "Newer"); // typed while the save is still pending
+    slow.releaseAsFailure(); // the pending save now fails at the network
+    expect(await screen.findByRole("alert")).toHaveTextContent(/nickname wasn't saved/i);
+    expect(field().value).toBe("Newer"); // the rollback does not overwrite what the learner typed since
+  });
+
   it("a failure of the first queued save reverts it while the second still saves", async () => {
     const h = startApi();
     const user = userEvent.setup();

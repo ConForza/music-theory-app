@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { api, ApiFailure, type Settings as SettingsT } from "../api/client";
 import { SignOutButton } from "../components/SignOutButton";
@@ -26,6 +26,10 @@ export function Settings() {
   const nav = useNavigate();
   const s = me!.profile.settings;
   const [name, setName] = useState(me!.user.displayName);
+  const nameNow = useRef(name); // what the field shows right now, readable from async callbacks
+  nameNow.current = name;
+  const confirmedName = useRef(me!.user.displayName); // the last nickname the server confirmed
+  confirmedName.current = me!.user.displayName;
   const [msg, setMsg] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -104,14 +108,21 @@ export function Settings() {
       <section className="card" aria-labelledby="who-h">
         <h2 id="who-h">About you</h2>
         <form className="form" onSubmit={(e) => { e.preventDefault(); const attempted = name;
-            const confirmed = me!.user.displayName;
-            // The field shows what is being saved, and goes back to the saved nickname if the save fails (Retry shows it again).
+            // The field shows what is being saved. If the save fails it goes back to the LATEST confirmed nickname (read when
+            // the failure happens, since earlier queued saves may have succeeded meanwhile), unless the learner has already
+            // typed something newer. Retry shows the attempted value again.
             void track("name", "your nickname", () => {
               setName(attempted);
-              return updateProfile({ displayName: attempted }).catch((err: unknown) => {
-                setName(confirmed);
-                throw err;
-              });
+              return updateProfile({ displayName: attempted }).then(
+                (saved) => {
+                  confirmedName.current = saved.user.displayName;
+                  return saved;
+                },
+                (err: unknown) => {
+                  if (nameNow.current === attempted) setName(confirmedName.current);
+                  throw err;
+                },
+              );
             }); }}>
           <label>Nickname<input value={name} maxLength={30} onChange={(e) => setName(e.target.value)} /></label>
           <button className="btn btn-ghost" disabled={!name.trim() || name === me!.user.displayName}>Save nickname</button>
