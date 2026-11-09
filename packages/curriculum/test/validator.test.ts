@@ -435,7 +435,7 @@ describe("review regressions (R3–R7)", () => {
 
   it("R6: lesson content and path node versions must agree", () => {
     const codes = mutate((c) => {
-      lesson(c, "G1-U3-L03").contentVersion = 2;
+      lesson(c, "G1-U3-L03").contentVersion += 1;
     });
     expect(codes).toContain("LESSON_VERSION_MISMATCH");
   });
