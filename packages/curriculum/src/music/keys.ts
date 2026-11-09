@@ -117,3 +117,24 @@ export function keysUpTo(maxAccidentals: number): Key[] {
 export function sameKey(a: Key, b: Key): boolean {
   return a.mode === b.mode && a.tonic.step === b.tonic.step && a.tonic.alter === b.tonic.alter;
 }
+
+export const TECHNICAL_NAMES = ["tonic", "supertonic", "mediant", "subdominant", "dominant", "submediant", "leading note"] as const;
+
+/**
+ * Degree (1–7) of a spelt pitch class in a key, or null when it is not a note of any allowed form of the
+ * scale. Minor keys accept the notes of each given form (e.g. both 6ths and 7ths when melodic is in scope).
+ */
+export function degreeOf(key: Key, pc: PitchClass, forms: ScaleForm[] = [key.mode === "major" ? "major" : "harmonic"]): number | null {
+  for (const f of forms) {
+    const notes = scale(key, f);
+    const ordered = f === "melodic-descending" ? [...notes].reverse() : notes;
+    const i = ordered.slice(0, 7).findIndex((n) => n.step === pc.step && n.alter === pc.alter);
+    if (i >= 0) return i + 1;
+  }
+  return null;
+}
+
+/** All major and minor keys with up to seven sharps or flats, in circle-of-fifths order. */
+export function allKeys(): Key[] {
+  return keysUpTo(7).sort((a, b) => keyFifths(a) - keyFifths(b) || (a.mode === "major" ? -1 : 1));
+}

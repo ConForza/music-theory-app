@@ -14,6 +14,8 @@ import {
   barCapacity,
   chromaticNumber,
   classifyCadence,
+  classifyOrnamentFigure,
+  identifyTriad,
   diatonicNumber,
   dotted,
   enharmonic,
@@ -39,7 +41,6 @@ import {
   signatureAlter,
   staffPosition,
   transpose,
-  triad,
   triadContains,
   type Fraction,
   type Interval,
@@ -50,7 +51,6 @@ import {
 import type { AnswerSpec, ExerciseItem, Measure, MusicScope, NotationEvent, NotationFragment, NotationScore, SimpleAnswerSpec } from "./schema.ts";
 
 const ROMANS = ["I", "ii", "IV", "V"] as const;
-const INVERSIONS = ["a", "b", "c"] as const;
 const ACCIDENTAL_ALTER: Record<string, number> = { sharp: 1, flat: -1, natural: 0, "double-sharp": 2, "double-flat": -2 };
 const BEAMABLE = new Set(["quaver", "semiquaver", "demisemiquaver"]);
 
@@ -265,31 +265,15 @@ function scaleMembers(key: Key, forms: Array<"major" | MinorScaleForm>): PitchCl
 }
 
 function identifyChord(key: Key, pitches: Pitch[]): { roman: string; inversion: string } | null {
-  for (const r of ROMANS) {
-    const t = triad(key, r);
-    const allIn = pitches.every((p) => t.some((x) => samePitchClassSpelling(x, p)));
-    const allPresent = t.every((x) => pitches.some((p) => samePitchClassSpelling(x, p)));
-    if (allIn && allPresent) {
-      const bass = [...pitches].sort((a, b) => chromaticNumber(a) - chromaticNumber(b) || diatonicNumber(a) - diatonicNumber(b))[0]!;
-      const idx = t.findIndex((x) => samePitchClassSpelling(x, bass));
-      return { roman: r, inversion: INVERSIONS[idx]! };
-    }
-  }
-  return null;
+  return identifyTriad(key, pitches, ROMANS);
 }
 
 function classifyOrnament(main: Pitch, figure: Pitch[]): string | null {
-  const steps = figure.map((p) => diatonicNumber(p) - diatonicNumber(main));
-  const is = (pattern: number[]) => steps.length === pattern.length && steps.every((s, i) => s === pattern[i]);
-  if (is([0, 1, 0])) return "upper-mordent";
-  if (is([0, -1, 0])) return "lower-mordent";
-  if (is([1, 0, -1, 0]) || is([0, 1, 0, -1, 0])) return "turn";
-  const core = steps.slice(-2).join() === "-1,0" ? steps.slice(0, -2) : steps;
-  if (core.length >= 4 && core.every((s, i) => s === (core[0] === 1 ? (i % 2 === 0 ? 1 : 0) : i % 2 === 0 ? 0 : 1))) return "trill";
-  return null;
+  const shape = classifyOrnamentFigure(main, figure);
+  return shape === "inverted-turn" ? null : shape;
 }
 
-function deriveScale(keyName: string, form: "major" | "harmonic" | "melodic", direction: string, start: Pitch): Pitch[] {
+export function deriveScale(keyName: string, form: "major" | "harmonic" | "melodic", direction: string, start: Pitch): Pitch[] {
   const key = parseKey(keyName);
   const asc = scale(key, form === "major" ? "major" : form === "harmonic" ? "harmonic" : "melodic-ascending");
   const withOctaves = (pcs: PitchClass[], from: Pitch, step: 1 | -1) => {
