@@ -187,6 +187,119 @@ describe("P1: a slow progress reply never reaches another learner", () => {
   });
 });
 
+describe("P1b: an operation begun for one learner is never sent, or retried, as another", () => {
+  const firstItem = (h: ReturnType<typeof startApi>) => h.course.lesson(LESSON)!.items[0]!.id;
+  const G = { kind: "pitch-letter", letter: "G" } as const;
+
+  /** B has an open run and no answers; A has an open run. The browser is left signed in as nobody. */
+  async function twoLearnersWithOpenRuns(h: ReturnType<typeof startApi>) {
+    await makeAccount(h, ADA, false);
+    await makeAccount(h, BEN, false);
+    for (const who of [ADA, BEN]) {
+      await api.login(creds(who));
+      await api.start(LESSON);
+      await api.logout();
+    }
+  }
+  const bState = async () => {
+    await api.login(creds(BEN));
+    const exp = (await api.exportData()) as { attempts: unknown[]; lessonProgress: unknown[] };
+    const prog = await api.progress();
+    return { attempts: exp.attempts, lessonProgress: exp.lessonProgress, completed: prog.totals.lessonsCompleted };
+  };
+
+  it.each([
+    ["before the server committed it", (h: ReturnType<typeof startApi>) => h.dropNext(/POST .*\/attempts/, 1)],
+    ["after the server committed it but the reply was lost", (h: ReturnType<typeof startApi>) => h.loseNext(/POST .*\/attempts/, 1)],
+  ])("A's answer whose delivery fails %s is not retried under B", async (_n, breakIt) => {
+    const h = startApi();
+    await twoLearnersWithOpenRuns(h);
+    const probe = (() => {
+      let app!: ReturnType<typeof useApp>;
+      function P() {
+        app = useApp();
+        return <p data-testid="who">{app.me?.user.displayName ?? "nobody"}</p>;
+      }
+      render(<AppProvider><P /></AppProvider>);
+      return () => app;
+    })();
+    await waitFor(() => expect(screen.getByTestId("who")).toHaveTextContent("nobody"));
+    await act(async () => probe().setMe(await api.login(creds(ADA))));
+    const before = await (async () => {
+      const exp = (await api.exportData()) as { attempts: unknown[] };
+      return exp.attempts.length;
+    })();
+    breakIt(h);
+    const sent = api.attempt(LESSON, crypto.randomUUID(), firstItem(h), G); // fails once; a retry is now waiting out its backoff
+    const outcome = sent.then(() => "sent", (e: ApiFailure) => e.code);
+    await waitFor(() => expect(h.calls.filter((c) => /POST .*\/attempts/.test(c))).toHaveLength(1));
+    // the learner changes (A leaves, B signs in) while that retry is pending, as with SPA navigation
+    await act(async () => probe().setMe(null));
+    await act(async () => probe().setMe(await api.login(creds(BEN))));
+    await act(async () => void (await new Promise((r) => setTimeout(r, 1500)))); // longer than the retry backoff
+    expect(await outcome).toBe("aborted");
+    expect(h.calls.filter((c) => /POST .*\/attempts/.test(c))).toHaveLength(1); // never re-dispatched
+    const b = await bState();
+    expect(b.attempts).toEqual([]);
+    expect(b.completed).toBe(0);
+    void before;
+  });
+
+  it("the same learner's genuine retry still recovers, with the same answer id (no double count)", async () => {
+    const h = startApi();
+    await makeAccount(h, ADA, false);
+    await api.login(creds(ADA));
+    await api.start(LESSON);
+    h.loseNext(/POST .*\/attempts/, 1); // committed, reply lost
+    const id = crypto.randomUUID();
+    const r = await api.attempt(LESSON, id, firstItem(h), G);
+    expect(r.correct).toBe(true);
+    expect(((await api.exportData()) as { attempts: unknown[] }).attempts).toHaveLength(1);
+  });
+
+  it("a lesson that finishes loading for A after B signed in does not start a run on A's behalf", async () => {
+    const h = startApi();
+    await makeAccount(h, ADA, false);
+    await makeAccount(h, BEN, false);
+    await api.login(creds(ADA));
+    let app!: ReturnType<typeof useApp>;
+    function Expose() {
+      app = useApp();
+      return null;
+    }
+    const { MemoryRouter } = await import("react-router");
+    const { App } = await import("../App");
+    render(
+      <MemoryRouter initialEntries={[`/lesson/${LESSON}`]}>
+        <AppProvider>
+          <Expose />
+          <App />
+        </AppProvider>
+      </MemoryRouter>,
+    );
+    await waitFor(() => expect(app?.me?.user.displayName).toBe("Ada"));
+    // A's lesson request is already on the wire when the next one is held; hold the NEXT lesson load instead
+    cleanup();
+    h.calls.length = 0;
+    const slow = h.hold(new RegExp(`GET /api/lessons/${LESSON}$`));
+    render(
+      <MemoryRouter initialEntries={[`/lesson/${LESSON}`]}>
+        <AppProvider>
+          <Expose />
+          <App />
+        </AppProvider>
+      </MemoryRouter>,
+    );
+    await waitFor(() => expect(slow.seen()).toBe(1)); // A is opening the lesson; its reply is delayed
+    await act(async () => app.setMe(await api.login(creds(BEN)))); // B signs in meanwhile
+    await waitFor(() => expect(h.calls.filter((c) => /POST .*\/start$/.test(c)).length).toBeGreaterThanOrEqual(1));
+    const startsBefore = h.calls.filter((c) => /POST .*\/start$/.test(c)).length;
+    slow.release(); // A's lesson reply arrives now
+    await act(async () => void (await new Promise((r) => setTimeout(r, 300))));
+    expect(h.calls.filter((c) => /POST .*\/start$/.test(c)).length).toBe(startsBefore); // A's chain added no start
+  });
+});
+
 describe("P2: registration recovery", () => {
   async function toAccountForm(user: User) {
     await user.click(await screen.findByRole("link", { name: "Get started" }));

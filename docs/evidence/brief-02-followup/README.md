@@ -9,6 +9,7 @@ Screenshots in this folder are from that run.
 | Journey | Where |
 | --- | --- |
 | Guest completes lesson → refresh → upgrade → sign out → sign in: completion and progress intact | e2e (iPhone 14) + `followup.test.tsx` |
+| An answer begun for A whose delivery fails (before or after the server committed it) is never retried under B after SPA navigation; B's exported attempts stay empty | e2e (both variants; fail with the fix removed) + `P1b` state tests |
 | Slow progress reply for account A arriving after account B signed in never shows A's data | e2e + 6 state tests (fail without the fix) |
 | Registration: reply lost, setup PATCH failing, offline, refresh mid-onboarding: one account, truthful messages | e2e + 7 UI tests + API tests |
 | Grade change / onboarding save failing (500, offline, stalled, slow): no navigation, old grade shown, retry | e2e + UI tests |

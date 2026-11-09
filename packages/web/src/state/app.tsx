@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { api, ApiFailure, type CourseView, type Me, type Overview, type Settings } from "../api/client";
+import { api, ApiFailure, endIdentityScope, type CourseView, type Me, type Overview, type Settings } from "../api/client";
 import { setSoundEnabled } from "../lib/audio";
 
 type Load<T> = { status: "loading" } | { status: "error"; error: ApiFailure } | { status: "ready"; data: T };
@@ -78,6 +78,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const userId = m?.user.id ?? null;
     if (userId !== identity.current.userId) {
       identity.current = { userId, epoch: identity.current.epoch + 1 };
+      endIdentityScope(); // cancel everything in flight for the old learner and stop their retries
       progressCtl.current?.abort();
       progressCtl.current = null;
       setPending([]);

@@ -194,6 +194,59 @@ await journey("rapid switching between two accounts with a slow progress reply n
   await ctx.close();
 });
 
+for (const mode of ["before the server commits it", "after the server committed it (reply lost)"]) {
+  await journey(`A's answer with delivery failing ${mode} is never replayed under B after SPA account switch`, async () => {
+    const emails = { a: uniq("replay-a"), b: uniq("replay-b") };
+    for (const e of Object.values(emails)) {
+      // each learner has an open run (the lesson was opened) and no answers
+      const { ctx, page } = await newPage(desktop);
+      await guestStart(page);
+      await page.goto("/lesson/G1-U3-L03");
+      await page.getByRole("button", { name: "Let's go" }).waitFor();
+      await page.goto("/profile");
+      await register(page, { email: e, button: "Create my account" });
+      await page.getByText("Guest profile", { exact: true }).waitFor({ state: "detached" });
+      await ctx.close();
+    }
+    const { ctx, page } = await newPage(desktop);
+    let attempts = 0;
+    let release;
+    const gate = new Promise((r) => (release = r));
+    await page.route("**/api/lessons/*/attempts", async (route) => {
+      attempts++;
+      if (attempts > 1) return route.continue(); // any retry would go through to the server
+      if (mode.startsWith("after")) await route.fetch(); // the server commits A's answer...
+      await gate; // ...but the reply (or the request itself) is held
+      await route.abort("failed");
+    });
+    await signIn(page, emails.a);
+    await page.getByRole("link", { name: /^(Start|Continue)/ }).first().click();
+    await page.getByRole("button", { name: /Let's go|Continue/ }).first().click();
+    await page.getByRole("button", { name: "Next" }).click();
+    await page.getByRole("button", { name: "Try some questions" }).click();
+    await page.locator("label.option", { hasText: /^G$/ }).click();
+    await page.getByRole("button", { name: "Check" }).click();
+    await sleep(300);
+    // SPA navigation only (no document reload): close lesson, profile, sign out, sign in as B
+    await page.getByRole("button", { name: /Close lesson/ }).click();
+    await page.getByRole("link", { name: "Profile" }).click();
+    await page.getByRole("button", { name: "Sign out" }).click();
+    await page.waitForURL("**/welcome");
+    await page.getByRole("link", { name: "I already have an account" }).click();
+    await page.getByLabel("Email").fill(emails.b);
+    await page.getByLabel("Password").fill(PASSWORD);
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.waitForURL("**/learn");
+    release(); // A's delivery now fails; a retry would use B's cookie
+    await sleep(3000); // longer than the whole retry schedule (400 ms + 800 ms)
+    const exp = await (await page.request.get("/api/me/export")).json();
+    assert.deepEqual(exp.attempts, [], "B must have no attempts");
+    assert.equal(exp.user.email, emails.b);
+    assert.equal(attempts, 1, `the answer must not be re-sent (requests seen: ${attempts})`);
+    await ctx.close();
+  });
+}
+
 await journey("registration recovery: setup save fails, reply lost, offline; one account, no false 'failed' message", async () => {
   const { ctx, page } = await newPage(desktop);
   const email = uniq("recover");

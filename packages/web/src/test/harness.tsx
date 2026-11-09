@@ -17,6 +17,7 @@ export function startApi(opts: { waive?: boolean } = {}) {
   // Targeted faults, matched on "METHOD /path": fail before the server sees it, lose the reply after, hold the reply, or never answer.
   const failNext: Array<{ re: RegExp; left: number; status: number }> = [];
   const loseNext: Array<{ re: RegExp; left: number }> = [];
+  const dropNext: Array<{ re: RegExp; left: number }> = [];
   const holds: Array<{ re: RegExp; left: number; gate: Promise<void>; open: () => void; seen: number }> = [];
   const stalls: RegExp[] = [];
   const calls: string[] = [];
@@ -34,6 +35,11 @@ export function startApi(opts: { waive?: boolean } = {}) {
     const headers = new Headers(init.headers);
     if (cookie) headers.set("cookie", cookie);
     if (stalls.some((re) => re.test(label))) return aborted(init);
+    const dn = dropNext.find((f) => f.left > 0 && f.re.test(label));
+    if (dn) {
+      dn.left--;
+      throw new TypeError("network error before the server saw the request");
+    }
     const ff = failNext.find((f) => f.left > 0 && f.re.test(label));
     if (ff) {
       ff.left--;
@@ -69,6 +75,8 @@ export function startApi(opts: { waive?: boolean } = {}) {
     /** Fail the next `n` matching requests with `status` before the server sees them. */
     failNext: (re: RegExp, n = 1, status = 500) => void failNext.push({ re, left: n, status }),
     /** The server handles the next `n` matching requests (and sets any cookie), but the reply never reaches the page. */
+    /** The next `n` matching requests fail at the network, before the server sees them. */
+    dropNext: (re: RegExp, n = 1) => void dropNext.push({ re, left: n }),
     loseNext: (re: RegExp, n = 1) => void loseNext.push({ re, left: n }),
     /** Delay delivery of the next `n` matching replies until release() is called. */
     hold: (re: RegExp, n = 1) => {
