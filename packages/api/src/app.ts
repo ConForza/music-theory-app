@@ -1,6 +1,7 @@
 import { z } from "zod";
 import * as auth from "./auth.ts";
 import { COOKIE, RateLimiter } from "./auth.ts";
+import { clientKey } from "./net.ts";
 import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import { ApiError } from "./errors.ts";
@@ -24,6 +25,16 @@ export interface AppOptions {
   waiveUnwrittenPrerequisites?: boolean;
   /** Origins allowed for state-changing requests besides the request's own host. */
   allowedOrigins?: string[];
+  /**
+   * How many reverse proxies we run in front of this process (0 = none, the default). Only then is `x-forwarded-for`
+   * read, and only the entry that many hops from the right. See docs/development/DEPLOYMENT.md.
+   */
+  trustedProxyHops?: number;
+}
+
+/** What the HTTP server knows about the connection; never taken from request headers. */
+export interface Connection {
+  remoteAddress?: string;
 }
 
 const Email = z.string().trim().toLowerCase().email().max(254);
@@ -59,6 +70,8 @@ interface Ctx {
   token?: string;
   body: () => Promise<unknown>;
   cookies: string[];
+  /** Rate-limiting identity of the caller, derived from the connection (see net.ts). */
+  client: string;
 }
 type Handler = (ctx: Ctx) => Promise<unknown> | unknown;
 interface Route {
@@ -80,7 +93,11 @@ function parseCookies(header: string | null): Record<string, string> {
 export function createApp(opts: AppOptions) {
   const { db, course } = opts;
   const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true });
-  const limiter = new RateLimiter();
+  // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
+  // limited per address with headroom for a classroom or household sharing one; the caps are per process.
+  const loginLimiter = new RateLimiter(10);
+  const loginIpLimiter = new RateLimiter(60);
+  const registerLimiter = new RateLimiter(20);
   const routes: Route[] = [];
   const route = (method: string, path: string, needsAuth: boolean, handler: Handler) =>
     routes.push({ method, pattern: new RegExp(`^${path.replace(/:[a-zA-Z]+/g, "([^/]+)")}$`), needsAuth, handler });
@@ -122,8 +139,18 @@ export function createApp(opts: AppOptions) {
 
   route("POST", "/api/auth/register", false, async (ctx) => {
     const body = parse(z.object({ email: Email, password: Password, displayName: DisplayName }).strict(), await ctx.body());
-    limiter.check(`reg:${ctx.req.headers.get("x-forwarded-for") ?? "local"}`);
-    if (auth.findByEmail(db, body.email)) throw new ApiError(409, "email_taken", "That email is already registered. Try signing in.");
+    registerLimiter.check(`reg:${ctx.client}`);
+    const existing = auth.findByEmail(db, body.email);
+    if (existing) {
+      // A retry of a registration whose response was lost: the caller's own session already belongs to this account (a
+      // guest upgraded in place), and the same password proves it is the same request. Answer as the first call did,
+      // creating nothing. A caller with no session, or another account's, still gets email_taken and must sign in.
+      if (ctx.user?.id === existing.id) {
+        loginLimiter.check(`login:${body.email}`);
+        if (existing.passwordHash && (await auth.verifyPassword(body.password, existing.passwordHash))) return me(ctx.user);
+      }
+      throw new ApiError(409, "email_taken", "That email is already registered. Try signing in.");
+    }
     const passwordHash = await auth.hashPassword(body.password);
     if (ctx.user?.isGuest) {
       // Upgrade in place: the guest's progress stays attached to the same learner.
@@ -137,7 +164,8 @@ export function createApp(opts: AppOptions) {
 
   route("POST", "/api/auth/login", false, async (ctx) => {
     const body = parse(z.object({ email: Email, password: z.string().min(1).max(128) }).strict(), await ctx.body());
-    limiter.check(`login:${body.email}`);
+    loginIpLimiter.check(`loginip:${ctx.client}`);
+    loginLimiter.check(`login:${body.email}`);
     const found = auth.findByEmail(db, body.email);
     // Same error and similar work whether or not the account exists.
     const ok = found?.passwordHash ? await auth.verifyPassword(body.password, found.passwordHash) : (await auth.hashPassword(body.password), false);
@@ -221,7 +249,7 @@ export function createApp(opts: AppOptions) {
     return origin === url.origin || (opts.allowedOrigins ?? []).includes(origin);
   };
 
-  async function fetch(req: Request): Promise<Response> {
+  async function fetch(req: Request, conn: Connection = {}): Promise<Response> {
     const url = new URL(req.url);
     const headers = new Headers({ "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
     const cookies: string[] = [];
@@ -250,6 +278,7 @@ export function createApp(opts: AppOptions) {
         user,
         token,
         cookies,
+        client: clientKey(req.headers, conn.remoteAddress, opts.trustedProxyHops ?? 0),
         body: async () => {
           const text = await req.text();
           if (text.length > 65536) throw new ApiError(413, "too_large", "Request too large.");

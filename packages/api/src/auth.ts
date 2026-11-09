@@ -111,8 +111,10 @@ export class RateLimiter {
   constructor(
     private max = 10,
     private windowMs = 15 * 60_000,
+    private maxKeys = 10_000,
   ) {}
   check(key: string, at = Date.now()) {
+    if (this.hits.size >= this.maxKeys) for (const [k, v] of this.hits) if (v.reset <= at) this.hits.delete(k); // bound memory
     const h = this.hits.get(key);
     if (!h || h.reset <= at) {
       this.hits.set(key, { count: 1, reset: at + this.windowMs });

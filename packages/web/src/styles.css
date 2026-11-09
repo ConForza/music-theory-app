@@ -300,11 +300,14 @@ details > summary { cursor: pointer; min-height: 44px; display: flex; align-item
 .action-bar.tone-good { background: var(--good-soft); border-color: var(--good); }
 .action-bar.tone-try { background: var(--try-soft); border-color: var(--try); }
 .feedback { width: 100%; }
+.feedback:empty { height: 0; margin-top: -0.6rem; }
 .feedback p { margin: 0 0 0.25rem; }
 .feedback-title { display: flex; gap: 0.4rem; align-items: center; font-weight: 900; font-size: 1.2rem; }
 .tone-good .feedback { color: var(--good); }
 .tone-try .feedback { color: var(--try); }
 .hints { display: grid; gap: 0.5rem; justify-items: start; }
+.hint-list { display: grid; gap: 0.5rem; width: 100%; }
+.hints button[aria-disabled="true"] { opacity: 0.6; cursor: default; }
 
 /* Answer inputs */
 .options { border: 0; padding: 0; margin: 0; display: grid; gap: 0.7rem; min-width: 0; }
@@ -343,6 +346,14 @@ details > summary { cursor: pointer; min-height: 44px; display: flex; align-item
 .staff-event.is-lit .staff-stem { stroke: var(--brand); }
 .is-playable { cursor: pointer; }
 g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.keyboard-wrap { min-width: 0; max-width: 100%; }
+.keyboard-frame { position: relative; min-width: 0; }
+/* Edge fades say "there is more this way" without hiding keys; they let touches through and only show while there is more to scroll to. */
+.keyboard-frame::before, .keyboard-frame::after { content: ""; position: absolute; top: 0; bottom: 0.75rem; width: 28px; pointer-events: none; z-index: 3; opacity: 0; transition: opacity 0.15s; }
+.keyboard-frame::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+.keyboard-frame::after { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+.keyboard-wrap.more-left .keyboard-frame::before, .keyboard-wrap.more-right .keyboard-frame::after { opacity: 1; }
+.scroll-cue { margin: 0 0 0.35rem; text-align: center; font-size: 0.9rem; font-weight: 700; color: var(--muted); }
 .keyboard-scroll { overflow-x: auto; padding: 0.25rem 0 0.75rem; -webkit-overflow-scrolling: touch; }
 .keyboard { display: flex; width: max-content; margin: 0 auto; padding: 0 2px; }
 .key-slot { position: relative; width: 46px; flex: none; }

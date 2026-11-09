@@ -53,21 +53,62 @@ export class ApiFailure extends Error {
   get isNetwork() {
     return this.status === 0;
   }
+  /** The request was cancelled on purpose; its outcome should be ignored, not shown. */
+  get isAborted() {
+    return this.code === "aborted";
+  }
 }
 
-async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
+export interface RequestOptions {
+  /** Cancels the request; the caller then ignores the outcome. */
+  signal?: AbortSignal;
+  /** Give up after this long (default 20s) so a stalled connection becomes an error the learner can retry. */
+  timeoutMs?: number;
+}
+
+async function request<T>(method: string, path: string, body?: unknown, opts: RequestOptions = {}): Promise<T> {
+  const ctl = new AbortController();
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    ctl.abort();
+  }, opts.timeoutMs ?? 20_000);
+  const onAbort = () => ctl.abort();
+  if (opts.signal?.aborted) ctl.abort();
+  else opts.signal?.addEventListener("abort", onAbort, { once: true });
+  try {
+    return await send<T>(method, path, body, ctl.signal, () => timedOut);
+  } finally {
+    clearTimeout(timer);
+    opts.signal?.removeEventListener("abort", onAbort);
+  }
+}
+
+async function send<T>(method: string, path: string, body: unknown, signal: AbortSignal, timedOut: () => boolean): Promise<T> {
+  const fail = () =>
+    timedOut()
+      ? new ApiFailure(0, "timeout", "The server took too long to respond. Check your connection and try again.")
+      : signal.aborted
+        ? new ApiFailure(0, "aborted", "That request was cancelled.")
+        : new ApiFailure(0, "network", "You appear to be offline. Check your connection and try again.");
   let res: Response;
   try {
     res = await fetch(path, {
       method,
       credentials: "same-origin",
+      signal,
       headers: body !== undefined ? { "content-type": "application/json" } : undefined,
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
   } catch {
-    throw new ApiFailure(0, "network", "You appear to be offline. Check your connection and try again.");
+    throw fail();
   }
-  const text = await res.text();
+  let text: string;
+  try {
+    text = await res.text();
+  } catch {
+    throw fail();
+  }
   let data: unknown;
   try {
     data = text ? JSON.parse(text) : undefined;
@@ -88,15 +129,17 @@ async function retrying<T>(fn: () => Promise<T>, tries = 3): Promise<T> {
     try {
       return await fn();
     } catch (e) {
-      if (!(e instanceof ApiFailure) || !e.isNetwork || i >= tries) throw e;
+      if (!(e instanceof ApiFailure) || !e.isNetwork || e.isAborted || i >= tries) throw e;
       await new Promise((r) => setTimeout(r, 400 * i));
     }
   }
 }
 
 export const api = {
-  me: () => request<Me>("GET", "/api/me"),
+  me: (signal?: AbortSignal) => request<Me>("GET", "/api/me", undefined, { signal }),
   guest: () => request<Me>("POST", "/api/auth/guest", {}),
+  // Not auto-retried: the form decides, after checking who is signed in (see AccountForm). A retry from the same
+  // session is still safe, because the server answers it with the same account instead of creating another.
   register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
   login: (b: { email: string; password: string }) => request<Me>("POST", "/api/auth/login", b),
   logout: () => request<{ ok: true }>("POST", "/api/auth/logout", {}),
@@ -105,7 +148,7 @@ export const api = {
   exportData: () => request<unknown>("GET", "/api/me/export"),
   deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me"),
   course: () => request<CourseView>("GET", "/api/course"),
-  progress: () => request<Overview>("GET", "/api/progress"),
+  progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal }),
   lesson: (id: string) => request<LearnerLesson>("GET", `/api/lessons/${encodeURIComponent(id)}`),
   start: (id: string) => retrying(() => request<RunState>("POST", `/api/lessons/${encodeURIComponent(id)}/start`, {})),
   setPhase: (id: string, phase: string) => request<unknown>("PUT", `/api/lessons/${encodeURIComponent(id)}/phase`, { phase }),

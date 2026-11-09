@@ -49,7 +49,7 @@ Attempt ids are UUIDs, and an id is an immutable command: the client freezes `{i
 ## Accounts and security
 
 * Guest (`POST /api/auth/guest`) or account (`register`, `login`, `logout`). Registering while a guest **upgrades the same user row**, so progress is kept. Signing in to an existing account from a guest session does not merge guest progress, which avoids cross-account contamination (known limitation).
-* Passwords: scrypt with a per-user salt. Sessions: 256-bit random token in an `HttpOnly; SameSite=Lax` cookie (`Secure` when `MTP_SECURE_COOKIES=1`); only its SHA-256 is stored. Unsafe methods require JSON and a same-origin `Origin` (or one in `MTP_ALLOWED_ORIGINS`). Credential endpoints are rate-limited per email/IP (per process). Login errors are identical for unknown account and wrong password.
+* Passwords: scrypt with a per-user salt. Sessions: 256-bit random token in an `HttpOnly; SameSite=Lax` cookie (`Secure` when `MTP_SECURE_COOKIES=1`); only its SHA-256 is stored. Unsafe methods require JSON and a same-origin `Origin` (or one in `MTP_ALLOWED_ORIGINS`). Credential endpoints are rate-limited (per process): sign-in per email and, more loosely, per address; registration per address. The address comes from the TCP connection, never from `x-forwarded-for` unless `MTP_TRUST_PROXY_HOPS` says how many proxies are ours (see [DEPLOYMENT.md](../development/DEPLOYMENT.md)). Login errors are identical for unknown account and wrong password.
 * Sign-out reports success only after the server has invalidated the session; on failure the learner stays signed in with a visible retry.
 * `GET /api/me/export` and `DELETE /api/me` give export and deletion; deletion cascades through every table.
 * Client-supplied values never set completion, grades or hint usage: hints are served by the API so "hint-free" is recorded by the server.
@@ -79,4 +79,4 @@ npm run check      # typecheck, lint, curriculum validation, generated-doc check
 npm run e2e        # real-browser journeys (needs `npm run build` and Playwright's Chromium)
 ```
 
-Environment: `PORT`, `MTP_DB` (SQLite path), `MTP_STATIC_DIR`, `MTP_SECURE_COOKIES`, `MTP_ALLOWED_ORIGINS`, `MTP_WAIVE_UNWRITTEN`.
+Environment: `PORT`, `MTP_DB` (SQLite path), `MTP_STATIC_DIR`, `MTP_SECURE_COOKIES`, `MTP_ALLOWED_ORIGINS`, `MTP_WAIVE_UNWRITTEN`, `MTP_TRUST_PROXY_HOPS`.

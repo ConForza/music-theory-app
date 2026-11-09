@@ -38,7 +38,7 @@ export function createHttpServer(app: App, staticDir?: string): Server {
       const url = new URL(req.url ?? "/", `${proto}://${host}`);
       let response: Response;
       if (url.pathname.startsWith("/api/")) {
-        response = await app.fetch(await toRequest(req, `${proto}://${host}`));
+        response = await app.fetch(await toRequest(req, `${proto}://${host}`), { remoteAddress: req.socket.remoteAddress });
       } else if (staticDir) {
         response = serveStatic(staticDir, url.pathname);
       } else {

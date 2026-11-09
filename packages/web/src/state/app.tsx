@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { api, ApiFailure, type CourseView, type Me, type Overview, type Settings } from "../api/client";
 import { setSoundEnabled } from "../lib/audio";
 
@@ -13,7 +13,8 @@ interface AppState {
   setMe: (m: Me | null) => void;
   refreshProgress: () => Promise<void>;
   reloadAll: () => void;
-  updateProfile: (patch: Parameters<typeof api.patchProfile>[0]) => Promise<Me>;
+  /** Resolves with the saved profile, rejects (and shows nothing as saved) if the server did not confirm it. */
+  updateProfile: (patch: Parameters<typeof api.patchProfile>[0], opts?: { optimistic?: boolean }) => Promise<Me>;
   signOut: () => Promise<void>;
 }
 
@@ -40,75 +41,150 @@ export function applySettings(s: Settings) {
   }
 }
 
+type ProfilePatch = Parameters<typeof api.patchProfile>[0];
+
+/** What the screen would show if `patch` were saved. Used only for edits that are visibly pending. */
+function applyPatch(m: Me, patch: ProfilePatch): Me {
+  const { settings, displayName, ...rest } = patch;
+  return {
+    user: displayName ? { ...m.user, displayName } : m.user,
+    profile: { ...m.profile, ...rest, settings: { ...m.profile.settings, ...(settings ?? {}) } },
+  };
+}
+
+const failure = (e: unknown, fallback: string) => (e instanceof ApiFailure ? e : new ApiFailure(0, "network", fallback));
+
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [me, setMeState] = useState<Me | null | undefined>(undefined);
+  // `confirmed` is what the server last told us. `pending` are edits shown optimistically while they are in flight; they
+  // are layered over `confirmed` and removed the moment their request settles, so a failed save simply disappears.
+  const [confirmed, setConfirmed] = useState<Me | null | undefined>(undefined);
+  const [pending, setPending] = useState<Array<{ id: number; patch: ProfilePatch }>>([]);
   const [meError, setMeError] = useState<ApiFailure | null>(null);
   const [course, setCourse] = useState<Load<CourseView>>({ status: "loading" });
   const [progress, setProgress] = useState<AppState["progress"]>({ status: "signed-out" });
   const [tick, setTick] = useState(0);
 
-  const setMe = useCallback((m: Me | null) => {
-    setMeState(m);
-    if (m) applySettings(m.profile.settings);
-    else setProgress({ status: "signed-out" });
+  // Who the screen belongs to. `epoch` changes whenever the signed-in learner changes (including to signed out); any
+  // asynchronous result started under an older epoch is discarded instead of being committed.
+  const identity = useRef<{ userId: string | null; epoch: number }>({ userId: null, epoch: 0 });
+  const sessionGen = useRef(0); // bumped by every explicit sign-in/out so a slow initial /api/me cannot undo it
+  const progressCtl = useRef<AbortController | null>(null);
+  const progressSeq = useRef(0);
+  const writeQueue = useRef<Promise<unknown>>(Promise.resolve());
+  const patchId = useRef(0);
+
+  /** Make `m` the current learner. Anything that belonged to a different learner is cleared in the same render. */
+  const commit = useCallback((m: Me | null) => {
+    const userId = m?.user.id ?? null;
+    if (userId !== identity.current.userId) {
+      identity.current = { userId, epoch: identity.current.epoch + 1 };
+      progressCtl.current?.abort();
+      progressCtl.current = null;
+      setPending([]);
+      setProgress(userId ? { status: "loading" } : { status: "signed-out" });
+    }
+    setConfirmed(m);
   }, []);
+
+  const setMe = useCallback(
+    (m: Me | null) => {
+      sessionGen.current++;
+      commit(m);
+    },
+    [commit],
+  );
+
+  const me = useMemo(() => (confirmed && pending.length ? pending.reduce((m, p) => applyPatch(m, p.patch), confirmed) : confirmed), [confirmed, pending]);
+
+  const settingsKey = me ? JSON.stringify(me.profile.settings) : null;
+  useEffect(() => {
+    if (me) applySettings(me.profile.settings);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- keyed on the settings values, not the Me object
+  }, [settingsKey]);
 
   useEffect(() => {
     let live = true;
+    const gen = sessionGen.current;
+    const current = () => live && sessionGen.current === gen;
     setMeError(null);
     api.me().then(
-      (m) => live && setMe(m),
+      (m) => current() && commit(m),
       (e: unknown) => {
-        if (!live) return;
-        if (e instanceof ApiFailure && e.status === 401) setMe(null);
+        if (!current()) return;
+        if (e instanceof ApiFailure && e.status === 401) commit(null);
         else {
-          setMeError(e instanceof ApiFailure ? e : new ApiFailure(0, "network", "Could not reach the server."));
-          setMeState(null);
+          setMeError(failure(e, "Could not reach the server."));
+          commit(null);
         }
       },
     );
     return () => {
       live = false;
     };
-  }, [setMe, tick]);
+  }, [commit, tick]);
 
   useEffect(() => {
     let live = true;
     setCourse({ status: "loading" });
     api.course().then(
       (data) => live && setCourse({ status: "ready", data }),
-      (error: unknown) => live && setCourse({ status: "error", error: error instanceof ApiFailure ? error : new ApiFailure(0, "network", "Could not load the course.") }),
+      (error: unknown) => live && setCourse({ status: "error", error: failure(error, "Could not load the course.") }),
     );
     return () => {
       live = false;
     };
   }, [tick]);
 
-  const userId = me?.user.id;
+  /** Reload the signed-in learner's progress. Only the newest request for the current learner may write state. */
   const refreshProgress = useCallback(async () => {
+    const { userId, epoch } = identity.current;
     if (!userId) return;
+    progressCtl.current?.abort();
+    const ctl = new AbortController();
+    progressCtl.current = ctl;
+    const seq = ++progressSeq.current;
+    const stale = () => identity.current.epoch !== epoch || progressSeq.current !== seq;
     try {
-      const data = await api.progress();
-      setProgress({ status: "ready", data });
+      const data = await api.progress(ctl.signal);
+      if (!stale()) setProgress({ status: "ready", data });
     } catch (e) {
-      setProgress({ status: "error", error: e instanceof ApiFailure ? e : new ApiFailure(0, "network", "Could not load your progress.") });
+      if (!stale()) setProgress({ status: "error", error: failure(e, "Could not load your progress.") });
     }
-  }, [userId]);
+  }, []);
 
+  const userId = me?.user.id;
   useEffect(() => {
     if (!userId) return;
     setProgress({ status: "loading" });
     void refreshProgress();
   }, [userId, refreshProgress, tick]);
 
-  const updateProfile = useCallback(
-    async (patch: Parameters<typeof api.patchProfile>[0]) => {
-      const next = await api.patchProfile(patch);
-      setMe(next);
-      return next;
-    },
-    [setMe],
-  );
+  /**
+   * Save a profile change. Saves run one at a time, in the order requested, so a slow earlier response can never
+   * overwrite a newer choice. With `optimistic` the change is shown at once and withdrawn if the save fails; either way
+   * the screen only ever treats the server's reply as saved. A save queued for one learner is dropped, not sent, if the
+   * learner has changed by the time its turn comes.
+   */
+  const updateProfile = useCallback(async (patch: ProfilePatch, opts: { optimistic?: boolean } = {}) => {
+    const epoch = identity.current.epoch;
+    const id = ++patchId.current;
+    if (opts.optimistic) setPending((p) => [...p, { id, patch }]);
+    const cancelled = () => new ApiFailure(0, "cancelled", "You were signed out before that could be saved.");
+    const run = async () => {
+      try {
+        if (identity.current.epoch !== epoch) throw cancelled();
+        const next = await api.patchProfile(patch);
+        if (identity.current.epoch !== epoch) throw cancelled();
+        setConfirmed(next);
+        return next;
+      } finally {
+        if (opts.optimistic) setPending((p) => p.filter((x) => x.id !== id));
+      }
+    };
+    const result = writeQueue.current.then(run, run);
+    writeQueue.current = result.catch(() => undefined);
+    return result;
+  }, []);
 
   // Only report signed-out once the server has invalidated the session (or says there is none). A failure is thrown
   // to the caller, who keeps the learner signed in and shows a retry: the cookie still works until logout succeeds.
