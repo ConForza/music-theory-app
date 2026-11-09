@@ -3,9 +3,13 @@ import { Link } from "react-router";
 import { api, ApiFailure, type AnswerResponse, type AttemptResult, type CompletionSummary, type LearnerItem, type LearnerLesson } from "../api/client";
 import { Icon } from "../components/Icon";
 import { Keyboard } from "../components/Keyboard";
-import { StaffPicker, StaffView, pitchesOf } from "../components/Staff";
-import { cue, playPitch, playSequence } from "../lib/audio";
+import { pitchesOf } from "../components/Staff";
+import { Notation, ScoreView } from "../components/notation/Notation";
+import { playbackEvents } from "../components/notation/layout";
+import { AnswerInput, isComplete } from "../components/exercise/AnswerInput";
+import { cue, playPitch, playTimed, stopAll } from "../lib/audio";
 import { diatonic, parsePitch, pitchAt } from "../lib/music";
+import type { NotationFragment } from "@mtp/curriculum";
 
 export function Step({ title, children, eyebrow }: { title: string; children: ReactNode; eyebrow?: string }) {
   const h = useRef<HTMLHeadingElement>(null);
@@ -45,7 +49,7 @@ export function Teach({ lesson, onNext }: { lesson: LearnerLesson; onNext: () =>
           {lesson.explanation.map((b, i) =>
             b.kind === "notation" ? (
               <figure key={i} className="teach-notation">
-                <StaffView fragment={b.music} onPlay={(p) => playPitch(p)} />
+                <MusicView fragment={b.music} />
                 <figcaption>{b.caption}</figcaption>
               </figure>
             ) : (
@@ -62,6 +66,31 @@ export function Teach({ lesson, onNext }: { lesson: LearnerLesson; onNext: () =>
   );
 }
 
+/** Notation (or a keyboard picture) with optional sound: tap a note to hear it, or play the whole example in time. */
+export function MusicView({ fragment, marks, size }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large" }) {
+  const [lit, setLit] = useState<string[]>([]);
+  useEffect(() => () => stopAll(), []);
+  if (fragment.presentation === "keyboard") {
+    const notes = pitchesOf(fragment);
+    const ds = notes.map((p) => diatonic(parsePitch(p)));
+    const from = pitchAt(Math.floor(Math.min(...ds) / 7) * 7);
+    const to = pitchAt((Math.floor(Math.max(...ds) / 7) + 1) * 7);
+    return (
+      <figure className="notation">
+        <Keyboard from={from} to={to} highlight={notes} label="Keyboard picture: the highlighted keys are the ones in the question" />
+        <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>
+      </figure>
+    );
+  }
+  const play = () => playTimed(playbackEvents(fragment), (id) => setLit(id ? [id] : []));
+  return (
+    <div className="music-view">
+      <Notation fragment={fragment} highlight={lit} marks={marks} size={size} onActivate={(ev) => { stopAll(); ev.pitches.forEach((p) => playPitch(p, 0.9)); setLit([ev.id]); window.setTimeout(() => setLit([]), 600); }} />
+      <button type="button" className="btn btn-ghost btn-small listen" onClick={play}><Icon name="speaker" size={18} /> Listen</button>
+    </div>
+  );
+}
+
 export function Demo({ lesson, onNext }: { lesson: LearnerLesson; onNext: () => void }) {
   const d = lesson.demonstration;
   const [lit, setLit] = useState<string[]>([]);
@@ -71,7 +100,10 @@ export function Demo({ lesson, onNext }: { lesson: LearnerLesson; onNext: () => 
   const showKeys = d.widget === "keyboard" || d.widget === "staff-and-keyboard";
   const from = pitchAt(Math.floor(Math.min(...ds) / 7) * 7);
   const to = pitchAt((Math.floor(Math.max(...ds) / 7) + 1) * 7);
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(() => () => {
+    timers.current.forEach(clearTimeout);
+    stopAll();
+  }, []);
 
   const play = (p: string) => {
     playPitch(p);
@@ -79,18 +111,18 @@ export function Demo({ lesson, onNext }: { lesson: LearnerLesson; onNext: () => 
     timers.current.push(window.setTimeout(() => setLit([]), 700));
   };
   const playAll = () => {
-    playSequence(notes);
-    notes.forEach((p, i) => {
-      timers.current.push(window.setTimeout(() => setLit([p]), i * 550));
+    const evs = playbackEvents(d.music);
+    playTimed(evs, (id) => {
+      const ev = evs.find((e) => e.id === id);
+      setLit(ev ? ev.pitches : []);
     });
-    timers.current.push(window.setTimeout(() => setLit([]), notes.length * 550 + 200));
   };
 
   return (
     <>
       <Step title="See it, hear it" eyebrow="Try it">
         <p className="lede-small">Tap the notes or the keys. Sound is optional: everything is described in words too.</p>
-        {d.widget !== "keyboard" && <StaffView fragment={d.music} highlight={lit} onPlay={play} />}
+        {d.widget !== "keyboard" && <Notation fragment={d.music} highlight={lit} onActivate={(ev) => ev.pitches.forEach(play)} />}
         {showKeys && <Keyboard from={from} to={to} highlight={lit.length ? lit : notes.slice(0, 1)} onPlay={play} />}
         <button type="button" className="btn btn-ghost" onClick={playAll}><Icon name="speaker" size={20} /> Play all the notes</button>
         <ol className="demo-steps">{d.steps.map((s) => <li key={s}>{s}</li>)}</ol>
@@ -107,19 +139,32 @@ export function ActionBar({ children, tone }: { children: ReactNode; tone?: "goo
 
 const newId = () => (globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(16)}-${Math.random().toString(16).slice(2)}`);
 
+export interface QuestionApi {
+  attempt: (attemptId: string, itemId: string, response: AnswerResponse) => Promise<AttemptResult>;
+  hint: (itemId: string, level: number) => Promise<{ hint: string; level: number }>;
+}
+
 export function Question({
   nodeId,
   item,
   index,
   total,
   onCorrect,
+  source,
+  eyebrow,
+  continueLabel = "Continue",
 }: {
   nodeId: string;
   item: LearnerItem;
   index: number;
   total: number;
   onCorrect: () => void;
+  /** Where answers go (defaults to the lesson attempts API). */
+  source?: QuestionApi;
+  eyebrow?: string;
+  continueLabel?: string;
 }) {
+  const send: QuestionApi = source ?? { attempt: (id, itemId, r) => api.attempt(nodeId, id, itemId, r), hint: (itemId, level) => api.hint(nodeId, itemId, level) };
   const [response, setResponse] = useState<AnswerResponse | null>(null);
   const [result, setResult] = useState<AttemptResult | null>(null);
   const [hints, setHints] = useState<string[]>([]);
@@ -141,7 +186,7 @@ export function Question({
     try {
       const answer = JSON.stringify(response);
       if (pending.current?.answer !== answer) pending.current = { id: newId(), answer };
-      const r = await api.attempt(nodeId, pending.current.id, item.id, response);
+      const r = await send.attempt(pending.current.id, item.id, response);
       pending.current = null;
       setResult(r);
       cue(r.correct ? "correct" : "wrong");
@@ -153,29 +198,30 @@ export function Question({
   }
 
   function again() {
+    // Keep the learner's work so they can fix it rather than start again.
     pending.current = null;
     setResult(null);
-    setResponse(null);
+    if (item.input.kind === "choice" || item.input.kind === "pitch-letter") setResponse(null);
   }
 
   async function hint() {
     try {
-      const r = await api.hint(nodeId, item.id, hints.length + 1);
+      const r = await send.hint(item.id, hints.length + 1);
       setHints((h) => [...h, r.hint]);
     } catch (e) {
       setError(e instanceof ApiFailure ? e.message : "No hint available.");
     }
   }
 
-  const locked = busy || result !== null;
   return (
     <>
       <section className="lesson-step question" aria-labelledby="q-title">
-        <p className="eyebrow">{item.section === "guided" ? "Guided practice" : "Your turn"} · Question {index} of {total}</p>
+        <p className="eyebrow">{eyebrow ?? (item.section === "guided" ? "Guided practice" : "Your turn")} · Question {index} of {total}</p>
         <h1 id="q-title" className="q-prompt" tabIndex={-1}>{item.prompt}</h1>
-        {item.music && item.input.kind !== "staff-position" && <StaffView fragment={item.music} />}
+        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} />}
+        {item.score && <ScoreView score={item.score} />}
         <form onSubmit={(e) => { e.preventDefault(); void check(); }} id="answer-form">
-          <Input item={item} response={response} onChange={setResponse} disabled={locked} />
+          <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct)} marks={result?.marks} parts={result?.parts} />
         </form>
         {item.hintCount > 0 && !result && (
           <div className="hints">
@@ -190,56 +236,21 @@ export function Question({
           <div className="feedback" role="status">
             <p className="feedback-title"><Icon name={result.correct ? "check" : "info"} size={24} strokeWidth={3} /> {result.correct ? "Correct!" : "Not quite"}</p>
             <p>{result.message}</p>
+            {!result.correct && result.reason && result.reason !== result.message && <p className="feedback-reason">{result.reason}</p>}
+            {!result.correct && result.solution && <p className="feedback-solution"><strong>The answer: </strong>{result.solution}</p>}
           </div>
           {result.correct ? (
-            <button ref={feedbackBtn} className="btn btn-primary btn-large" onClick={onCorrect}>Continue</button>
+            <button ref={feedbackBtn} className="btn btn-primary btn-large" onClick={onCorrect}>{continueLabel}</button>
           ) : (
             <button ref={feedbackBtn} className="btn btn-primary btn-large" onClick={again}>Try again</button>
           )}
         </ActionBar>
       ) : (
         <ActionBar>
-          <button type="submit" form="answer-form" className="btn btn-primary btn-large" disabled={!response || busy}>{busy ? "Checking…" : "Check"}</button>
+          <button type="submit" form="answer-form" className="btn btn-primary btn-large" disabled={!isComplete(item.input, response) || busy}>{busy ? "Checking…" : "Check"}</button>
         </ActionBar>
       )}
     </>
-  );
-}
-
-function Input({ item, response, onChange, disabled }: { item: LearnerItem; response: AnswerResponse | null; onChange: (r: AnswerResponse) => void; disabled: boolean }) {
-  const input = item.input;
-  if (input.kind === "staff-position") {
-    return (
-      <StaffPicker
-        clef={input.clef}
-        maxLedgerLines={input.maxLedgerLines}
-        disabled={disabled}
-        value={response?.kind === "staff-position" ? response.pitch : null}
-        onChange={(pitch) => onChange({ kind: "staff-position", pitch })}
-      />
-    );
-  }
-  const options =
-    input.kind === "pitch-letter"
-      ? ["A", "B", "C", "D", "E", "F", "G"].map((l) => ({ id: l, label: l }))
-      : input.options;
-  const value = response?.kind === "pitch-letter" ? response.letter : response?.kind === "choice" ? response.optionId : null;
-  return (
-    <fieldset className={`options${input.kind === "pitch-letter" ? " letters" : ""}`} disabled={disabled}>
-      <legend className="visually-hidden">{input.kind === "pitch-letter" ? "Choose the note name" : "Choose an answer"}</legend>
-      {options.map((o) => (
-        <label key={o.id} className={value === o.id ? "option is-selected" : "option"}>
-          <input
-            type="radio"
-            name={`answer-${item.id}`}
-            value={o.id}
-            checked={value === o.id}
-            onChange={() => onChange(input.kind === "pitch-letter" ? { kind: "pitch-letter", letter: o.id } : { kind: "choice", optionId: o.id })}
-          />
-          <span>{o.label}</span>
-        </label>
-      ))}
-    </fieldset>
   );
 }
 

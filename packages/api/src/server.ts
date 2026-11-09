@@ -12,6 +12,9 @@ const TYPES: Record<string, string> = {
   ".png": "image/png",
   ".ico": "image/x-icon",
   ".webmanifest": "application/manifest+json",
+  ".woff2": "font/woff2",
+  ".map": "application/json",
+  ".txt": "text/plain; charset=utf-8",
 };
 
 async function toRequest(req: IncomingMessage, origin: string): Promise<Request> {
@@ -64,7 +67,8 @@ function serveStatic(root: string, pathname: string): Response {
   const rel = normalize(decodeURIComponent(pathname)).replace(/^(\.\.[/\\])+/, "");
   let file = join(root, rel);
   if (!file.startsWith(root)) return new Response("Forbidden", { status: 403 });
-  const isAsset = extname(file) !== "";
+  // Only real asset types are 404 when missing; any other path (e.g. /practice/s.scales) is an app route.
+  const isAsset = extname(file) in TYPES;
   if (!existsSync(file) || statSync(file).isDirectory()) {
     if (isAsset) return new Response("Not found", { status: 404 });
     file = join(root, "index.html"); // SPA fallback

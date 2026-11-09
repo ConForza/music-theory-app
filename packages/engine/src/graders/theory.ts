@@ -14,18 +14,8 @@ const fmt = (p: Pitch) => pretty(formatPitch(p));
 
 // ---- key signatures -----------------------------------------------------
 
-/** Conventional written positions of the sharps and flats in each clef. */
-export const SIGNATURE_PLACEMENT: Record<music.Clef, { sharps: string[]; flats: string[] }> = {
-  treble: { sharps: ["F#5", "C#5", "G#5", "D#5", "A#4", "E#5", "B#4"], flats: ["Bb4", "Eb5", "Ab4", "Db5", "Gb4", "Cb5", "Fb4"] },
-  bass: { sharps: ["F#3", "C#3", "G#3", "D#3", "A#2", "E#3", "B#2"], flats: ["Bb2", "Eb3", "Ab2", "Db3", "Gb2", "Cb3", "Fb2"] },
-  alto: { sharps: ["F#4", "C#4", "G#4", "D#4", "A#3", "E#4", "B#3"], flats: ["Bb3", "Eb4", "Ab3", "Db4", "Gb3", "Cb4", "Fb3"] },
-  tenor: { sharps: ["F#3", "C#4", "G#3", "D#4", "A#3", "E#4", "B#3"], flats: ["Bb3", "Eb4", "Ab3", "Db4", "Gb3", "Cb4", "Fb3"] },
-};
-export function signaturePitches(key: music.Key, clef: music.Clef): string[] {
-  const f = keyFifths(key);
-  if (f === 0) return [];
-  return f > 0 ? SIGNATURE_PLACEMENT[clef].sharps.slice(0, f) : SIGNATURE_PLACEMENT[clef].flats.slice(0, -f);
-}
+export const SIGNATURE_PLACEMENT = music.SIGNATURE_PLACEMENT;
+export const signaturePitches = music.signaturePitches;
 
 export const gradeKeySignature: Grader<AnswerOf<"key-signature">> = (_c, a, r) => {
   const want = parseKey(a.accepted[0]!);

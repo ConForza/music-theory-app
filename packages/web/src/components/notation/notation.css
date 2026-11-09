@@ -1,0 +1,23 @@
+.notation { margin: 0; min-width: 0; max-width: 100%; }
+.notation-scroll { overflow-x: auto; background: var(--surface); border-radius: var(--radius); padding: 0.4rem 0.6rem; box-shadow: var(--shadow); display: flex; justify-content: safe center; -webkit-overflow-scrolling: touch; }
+.notation-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.notation-svg { display: block; flex: none; color: var(--ink); overflow: visible; }
+.notation-caption { color: var(--muted); font-size: 0.95rem; margin-top: 0.4rem; text-align: center; }
+.n-smufl { font-family: "Bravura"; fill: currentColor; dominant-baseline: alphabetic; }
+.n-line, .n-stem { stroke: currentColor; }
+.n-beam { fill: currentColor; }
+.n-tie, .n-bracket { stroke: currentColor; }
+.n-label { font: 800 1.8px var(--font); fill: currentColor; }
+.n-stave-label { font: 700 1.3px var(--font); fill: var(--muted); }
+.n-mark { font: 900 2px var(--font); }
+.n-mark.is-right { fill: var(--good); }
+.n-mark.is-wrong { fill: var(--danger); }
+.is-lit .n-smufl, .is-lit .n-stem, .is-lit .n-beam { fill: var(--brand); stroke: var(--brand); color: var(--brand); }
+.is-lit .n-line, .is-lit .n-stem { stroke: var(--brand); }
+.is-wrong .n-head { fill: var(--danger); }
+.is-right .n-head { fill: var(--good); }
+.n-event { cursor: pointer; }
+.n-event:focus { outline: none; }
+.n-event:focus-visible rect { fill: color-mix(in srgb, var(--focus) 18%, transparent); }
+.n-ghost .n-smufl { fill: var(--muted); opacity: 0.55; }
+.n-cursor { fill: color-mix(in srgb, var(--brand) 14%, transparent); }

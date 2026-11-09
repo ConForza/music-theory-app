@@ -514,8 +514,8 @@ const cadence: Gen = (c) => {
   if (!pairs.length) return null;
   const [r1, r2, type] = c.rng.pick(pairs);
   if (c.template.id.includes("identify")) {
-    const v1 = music.voiceTriad(key, r1, "a", 3);
-    const v2 = music.voiceTriad(key, r2, "a", 3);
+    const v1 = music.voiceTriad(key, r1, "a", 4);
+    const v2 = music.voiceTriad(key, r2, "a", 4);
     const ev = (v: Pitch[]): NotationEvent => ({ kind: "chord", notes: v.map((p) => ({ pitch: F(p) })), duration: { value: "minim", dots: 0 } }) as NotationEvent;
     return {
       prompt: `These two chords end a phrase in ${keyName(keyText)}. Which cadence do they make?`,
@@ -706,7 +706,7 @@ const barBuilder: Gen = (c) => {
     return rest as NotationEvent;
   })];
   return {
-    prompt: `Complete this bar of ${ts}. Keep the ${k === 1 ? "note" : "notes"} given and add notes or rests so the bar adds up exactly. Group them so the beats are clear.`,
+    prompt: `Complete this bar of ${ts}. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.`,
     answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given, accepted: [[{ events: full }]], acceptAnyRuleCompliant: true },
     hints: [`${ts} has ${music.describeMetre(music.metreStructure(ts))} in each bar.`],
   };

@@ -1,4 +1,5 @@
-import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary } from "@mtp/api";
+import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService } from "@mtp/api";
+import type { LearnerResponse } from "@mtp/engine";
 
 export type { CourseView, LearnerLesson, RunState, CompletionSummary };
 export type Overview = ReturnType<ProgressService["overview"]>;
@@ -31,14 +32,24 @@ export interface Me {
 export interface AttemptResult {
   correct: boolean;
   category: string | null;
+  /** Authored feedback for the diagnosed mistake (or the general message). */
   message: string;
+  /** Why this particular answer is wrong, from the music rules (never gives the answer away). */
+  reason?: string | null;
+  /** Per-note marks for sequences and progressions. */
+  marks?: Array<{ index: number; ok: boolean }>;
+  /** Per-part results for multi-part questions. */
+  parts?: Array<{ id: string; correct: boolean; reason: string | null }>;
+  /** The worked answer, revealed by the server after repeated wrong attempts. */
+  solution?: string;
   attemptNumber: number;
   replayed: boolean;
 }
-export type AnswerResponse =
-  | { kind: "choice"; optionId: string }
-  | { kind: "pitch-letter"; letter: string }
-  | { kind: "staff-position"; pitch: string };
+/** Every answer shape the engine accepts (see @mtp/engine responses). Never carries correctness. */
+export type AnswerResponse = LearnerResponse;
+export type PracticeCatalogue = ReturnType<PracticeService["catalogue"]>;
+export type PracticeSet = ReturnType<PracticeService["set"]>;
+export type GeneratedItem = ReturnType<PracticeService["generate"]>;
 
 /** An error the UI can show: HTTP failures carry the server's code, network failures have status 0. */
 export class ApiFailure extends Error {
@@ -113,6 +124,12 @@ export const api = {
     request<{ hint: string; level: number }>("POST", `/api/lessons/${encodeURIComponent(id)}/hint`, { itemId, level }),
   attempt: (id: string, attemptId: string, itemId: string, response: AnswerResponse) =>
     retrying(() => request<AttemptResult>("POST", `/api/lessons/${encodeURIComponent(id)}/attempts`, { attemptId, itemId, response })),
+  practice: () => request<PracticeCatalogue>("GET", "/api/practice"),
+  practiceSet: (id: string) => request<PracticeSet>("GET", `/api/practice/sets/${encodeURIComponent(id)}`),
+  generate: (templateId: string, seed?: number) => request<GeneratedItem>("POST", "/api/practice/generate", { templateId, ...(seed !== undefined ? { seed } : {}) }),
+  practiceAttempt: (attemptId: string, itemId: string, response: AnswerResponse) =>
+    retrying(() => request<AttemptResult>("POST", "/api/practice/attempts", { attemptId, itemId, response })),
+  practiceHint: (itemId: string, level: number) => request<{ hint: string; level: number }>("POST", "/api/practice/hint", { itemId, level }),
   complete: (id: string) =>
     retrying(() => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `/api/lessons/${encodeURIComponent(id)}/complete`, {})),
 };

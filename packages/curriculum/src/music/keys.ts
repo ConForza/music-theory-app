@@ -138,3 +138,18 @@ export function degreeOf(key: Key, pc: PitchClass, forms: ScaleForm[] = [key.mod
 export function allKeys(): Key[] {
   return keysUpTo(7).sort((a, b) => keyFifths(a) - keyFifths(b) || (a.mode === "major" ? -1 : 1));
 }
+
+/** Conventional written positions of the sharps and flats of a key signature in each clef (letter, sign, octave). */
+export const SIGNATURE_PLACEMENT: Record<"treble" | "bass" | "alto" | "tenor", { sharps: string[]; flats: string[] }> = {
+  treble: { sharps: ["F#5", "C#5", "G#5", "D#5", "A#4", "E#5", "B#4"], flats: ["Bb4", "Eb5", "Ab4", "Db5", "Gb4", "Cb5", "Fb4"] },
+  bass: { sharps: ["F#3", "C#3", "G#3", "D#3", "A#2", "E#3", "B#2"], flats: ["Bb2", "Eb3", "Ab2", "Db3", "Gb2", "Cb3", "Fb2"] },
+  alto: { sharps: ["F#4", "C#4", "G#4", "D#4", "A#3", "E#4", "B#3"], flats: ["Bb3", "Eb4", "Ab3", "Db4", "Gb3", "Cb4", "Fb3"] },
+  tenor: { sharps: ["F#3", "C#4", "G#3", "D#4", "A#3", "E#4", "B#3"], flats: ["Bb3", "Eb4", "Ab3", "Db4", "Gb3", "Cb4", "Fb3"] },
+};
+
+/** The written key-signature accidentals of a key in a clef, in order. */
+export function signaturePitches(key: Key, clef: "treble" | "bass" | "alto" | "tenor"): string[] {
+  const f = keyFifths(key);
+  if (f === 0) return [];
+  return f > 0 ? SIGNATURE_PLACEMENT[clef].sharps.slice(0, f) : SIGNATURE_PLACEMENT[clef].flats.slice(0, -f);
+}
