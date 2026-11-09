@@ -1,8 +1,9 @@
 import type { Db } from "./db.ts";
 import { tx } from "./db.ts";
 import { ApiError } from "./errors.ts";
+import type { ExerciseItem } from "@mtp/curriculum";
 import type { Course, LearnerLesson } from "./course.ts";
-import { gradeResponse, type GradeResult, type Response } from "./grade.ts";
+import { gradeResponse, revealSolution, type GradeResult, type Response } from "./grade.ts";
 import { computeNodeStates, nextNodeForGrade, type NodeProgress, type PathPolicy, type ProgressRow } from "./path-state.ts";
 
 const now = () => new Date().toISOString();
@@ -201,19 +202,12 @@ export class ProgressService {
       if (prior.node_id !== nodeId || prior.item_id !== itemId || prior.run !== row.run || prior.response !== JSON.stringify(response)) {
         throw new ApiError(409, "attempt_conflict", "That attempt id was already used for a different answer. Check again to send a new one.");
       }
-      return this.result(item, prior.correct === 1, prior.mistake_category, prior.attempt_number, true);
+      // Grading is deterministic, so the explanation can be recomputed; the stored verdict stays authoritative.
+      const again = gradeResponse(this.course.ix, item, response, this.course.scopeFor(nodeId, item));
+      return this.result(item, prior.correct === 1, prior.mistake_category, prior.attempt_number, true, again, nodeId);
     }
 
-    let graded: GradeResult;
-    try {
-      graded = gradeResponse(item, response);
-    } catch {
-      throw new ApiError(400, "bad_response", "That answer does not fit this question.");
-    }
-    if (response.kind === "choice") {
-      const ids = lesson.items.find((i) => i.id === itemId)?.input;
-      if (ids?.kind === "choice" && !ids.options.some((o) => o.id === response.optionId)) throw new ApiError(400, "bad_response", "Unknown option.");
-    }
+    const graded: GradeResult = gradeResponse(this.course.ix, item, response, this.course.scopeFor(nodeId, item));
     const number = tx(this.db, () => {
       const n =
         (this.db
@@ -231,12 +225,24 @@ export class ProgressService {
       this.db.prepare("UPDATE lesson_progress SET updated_at = ? WHERE user_id = ? AND node_id = ?").run(now(), userId, nodeId);
       return n;
     });
-    return this.result(item, graded.correct, graded.category, number, false);
+    return this.result(item, graded.correct, graded.category, number, false, graded, nodeId);
   }
 
-  private result(item: { feedback: { correct: string; mistakes: Record<string, string>; fallback: string } }, correct: boolean, category: string | null, attemptNumber: number, replayed: boolean) {
-    const message = correct ? item.feedback.correct : category && item.feedback.mistakes[category] ? item.feedback.mistakes[category]! : item.feedback.fallback;
-    return { correct, category, message, attemptNumber, replayed };
+  private result(item: ExerciseItem, correct: boolean, category: string | null, attemptNumber: number, replayed: boolean, graded: GradeResult, nodeId: string) {
+    const message = correct ? item.feedback.correct : category && category === graded.category ? graded.message : category && item.feedback.mistakes[category] ? item.feedback.mistakes[category]! : item.feedback.fallback;
+    const solution = revealSolution(this.course.ix, item, this.course.scopeFor(nodeId, item), correct, attemptNumber);
+    return {
+      correct,
+      category,
+      message,
+      /** Why THIS answer is wrong (engine explanation); never gives the answer away. */
+      reason: correct ? null : graded.reason,
+      ...(graded.marks ? { marks: graded.marks } : {}),
+      ...(graded.parts ? { parts: graded.parts.map((p) => ({ id: p.id, correct: p.correct, reason: p.reason })) } : {}),
+      ...(solution ? { solution } : {}),
+      attemptNumber,
+      replayed,
+    };
   }
 
   /**

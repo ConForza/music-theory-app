@@ -1,91 +1,30 @@
-import { music, type ExerciseItem } from "@mtp/curriculum";
+import type { CurriculumIndex, ExerciseItem, MusicScope } from "@mtp/curriculum";
+import { EngineError, gradeItem, solutionFor, type GradeResult, type LearnerResponse } from "@mtp/engine";
+import { ApiError } from "./errors.ts";
 
-/** What the learner submits. Validated by the HTTP layer before reaching here. */
-export type Response =
-  | { kind: "choice"; optionId: string }
-  | { kind: "pitch-letter"; letter: string }
-  | { kind: "staff-position"; pitch: string };
+/** What the learner submits (validated by the engine's response schema). */
+export type Response = LearnerResponse;
+export type { GradeResult };
 
-export interface GradeResult {
-  correct: boolean;
-  /** Mistake category id when diagnosable and the item authored feedback for it. */
-  category: string | null;
-  /** Learner-facing explanation (authored). */
-  message: string;
-}
+/** After this many wrong attempts at one question, the server also returns the worked answer. */
+export const REVEAL_AFTER_WRONG = 3;
 
-const LETTERS = "CDEFGAB";
-// Diatonic index (octave * 7 + letter) of the bottom line of each clef.
-const BOTTOM_LINE: Record<string, number> = { treble: 4 * 7 + 2 /* E4 */, bass: 2 * 7 + 4 /* G2 */ };
-
-const dia = (p: string) => music.diatonicNumber(music.parsePitch(p));
-const letterAt = (d: number) => LETTERS[((d % 7) + 7) % 7]!;
-
-/** Minimal Brief 02 grader. Brief 03 replaces this behind the grader contracts in content/engine/engine.json. */
-export function gradeResponse(item: ExerciseItem, r: Response): GradeResult {
-  const a = item.answer;
-  let correct: boolean;
-  let category: string | null = null;
-
-  if (a.kind === "choice" && r.kind === "choice") {
-    correct = a.correctOptionIds.includes(r.optionId);
-  } else if (a.kind === "pitch" && r.kind === "pitch-letter") {
-    const want = new Set(a.accepted.map((p) => music.parsePitch(p).step));
-    correct = want.has(r.letter as never);
-    if (!correct) category = diagnosePitch(item, r.letter);
-  } else if (a.kind === "staff-position" && r.kind === "staff-position") {
-    correct = a.accepted.some((p) => music.samePitch(music.parsePitch(p), music.parsePitch(r.pitch)));
-    if (!correct) category = diagnoseStaff(item, r.pitch);
-  } else {
-    throw new Error("Response kind does not match the item");
-  }
-
-  const mistakes = item.feedback.mistakes;
-  if (!correct && category && !(category in mistakes)) category = null;
-  return {
-    correct,
-    category,
-    message: correct ? item.feedback.correct : category ? (mistakes[category] as string) : item.feedback.fallback,
-  };
-}
-
-function shownPitch(item: ExerciseItem): { pitch: string; clef: string } | undefined {
-  const first = item.music?.measures[0]?.events?.[0];
-  if (!first || first.kind !== "note") return undefined;
-  return { pitch: first.pitch, clef: item.music!.clef };
-}
-
-function diagnosePitch(item: ExerciseItem, letter: string): string | null {
-  const shown = shownPitch(item);
-  if (!shown || item.answer.kind !== "pitch") return null;
-  const want = music.parsePitch(item.answer.accepted[0]!);
-  const gap = Math.abs(LETTERS.indexOf(letter) - LETTERS.indexOf(want.step));
-  const bottom = BOTTOM_LINE[shown.clef];
-  if (bottom !== undefined) {
-    const pos = dia(shown.pitch) - bottom;
-    if (pos >= 0 && pos <= 8) {
-      if (letter === letterAt(bottom + 8 - pos)) return "counted-from-top";
-      const other = shown.clef === "treble" ? BOTTOM_LINE.bass! : BOTTOM_LINE.treble!;
-      if (letter === letterAt(other + pos)) return "clef-confusion";
+/**
+ * Grade through the Brief 03 engine. Deterministic and side-effect free; never trusts any correctness claim
+ * from the client (the response schema has no such field). Bad answers become a 400 and record nothing.
+ */
+export function gradeResponse(ix: CurriculumIndex, item: ExerciseItem, response: unknown, scope?: MusicScope): GradeResult {
+  try {
+    return gradeItem(ix, item, response, scope);
+  } catch (e) {
+    if (e instanceof EngineError && (e.code === "malformed_response" || e.code === "response_mismatch")) {
+      throw new ApiError(400, "bad_response", "That answer does not fit this question.");
     }
+    throw e;
   }
-  if (gap === 1 || gap === 6) return "off-by-step";
-  return null;
 }
 
-/** Each category is emitted only when the submitted note itself establishes it; otherwise the item's general fallback is used. */
-function diagnoseStaff(item: ExerciseItem, pitch: string): string | null {
-  if (item.answer.kind !== "staff-position") return null;
-  const a = item.answer;
-  const bottom = BOTTOM_LINE[a.clef]!;
-  const pos = dia(pitch) - bottom;
-  const got = music.parsePitch(pitch);
-  // Right letter, wrong octave.
-  if (a.accepted.some((p) => music.parsePitch(p).step === got.step)) return "wrong-octave";
-  // The note sits on the other kind of position (line/space) than the task asked for.
-  if (a.target.position !== "any" && (a.target.position === "line") !== (Math.abs(pos) % 2 === 0)) return "line-space-swap";
-  // The exact mirror image of the correct position: the learner counted from the top.
-  const wantPos = dia(a.accepted[0]!) - bottom;
-  if (pos >= 0 && pos <= 8 && pos === 8 - wantPos) return "counted-from-top";
-  return null;
+export function revealSolution(ix: CurriculumIndex, item: ExerciseItem, scope: MusicScope | undefined, correct: boolean, attemptNumber: number): string | undefined {
+  if (correct || attemptNumber < REVEAL_AFTER_WRONG) return undefined;
+  return solutionFor(ix, item, scope);
 }

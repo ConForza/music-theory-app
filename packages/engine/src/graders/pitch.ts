@@ -108,13 +108,13 @@ export const gradeStaffPosition: Grader<AnswerOf<"staff-position">> = (c, a, r) 
   if (got.step === t.step) {
     const lines = ledgerLines(a.clef, got);
     if (lines > Math.min(t.maxLedgerLines, c.scope.maxLedgerLines ?? 9)) return wrong("ledger-miscount", `${where} That needs more ledger lines than this question allows.`);
-    if (t.position !== "any" && (t.position === "line") !== (pos % 2 === 0)) return wrong("line-space-swap", `${where} The question asks for a ${t.position} note.`);
-    return wrong("wrong-octave", `${where} The letter is right, but choose the other ${t.step}.`);
+    return wrong("wrong-octave", `${where} The letter is right, but choose the other ${t.step}${t.position !== "any" ? ` (the one on a ${t.position})` : ""}.`);
   }
+  // Only categories the submitted note itself proves (Brief 02 review R6): parity first, then mirror counting, then clefs.
   const validPos = valid.map((v) => staffPosition(a.clef, v));
-  if (CLEFS.some((o) => o !== a.clef && valid.some((v) => staffPosition(o, v) === pos))) return wrong("clef-confusion", `${where} That place would be ${t.step} in a different clef.`);
+  if (t.position !== "any" && (t.position === "line") !== (((pos % 2) + 2) % 2 === 0)) return wrong("line-space-swap", `${where} The question asks for a note on a ${t.position}.`);
   if (pos >= 0 && pos <= 8 && validPos.includes(8 - pos)) return wrong("counted-from-top", where);
-  if (t.position !== "any" && validPos.some((q) => Math.abs(q - pos) === 1)) return wrong("line-space-swap", where);
+  if (CLEFS.some((o) => o !== a.clef && naturalAt(o, pos).step === t.step)) return wrong("clef-confusion", `${where} That place would be ${t.step} in a different clef.`);
   if (validPos.some((q) => Math.abs(q - pos) === 2) && ledgerLines(a.clef, got) > 0) return wrong("ledger-miscount", where);
   return wrong(null, where);
 };

@@ -364,7 +364,7 @@ describe("feedback only states what the submitted note proves (review R6)", () =
     ["i.g1-u3-l03.independent-4", "G4"],
   ])("%s: every wrong position gets a message its category justifies", (id, right) => {
     for (const p of pitches) {
-      const r = gradeResponse(item(id), { kind: "staff-position", pitch: p });
+      const r = gradeResponse(course.ix, item(id), { kind: "staff-position", pitch: p }, course.scopeFor(LESSON, item(id)));
       expect(r.correct, p).toBe(p === right);
       if (r.correct) continue;
       if (r.category === "line-space-swap") expect(onLine(p), `${p} is on a line`).toBe(false);
@@ -376,7 +376,7 @@ describe("feedback only states what the submitted note proves (review R6)", () =
   });
 
   it("does not tell a learner who placed C5 that their note is an F in the bottom space", () => {
-    const r = gradeResponse(item("i.g1-u3-l03.independent-3"), { kind: "staff-position", pitch: "C5" });
+    const r = gradeResponse(course.ix, item("i.g1-u3-l03.independent-3"), { kind: "staff-position", pitch: "C5" }, course.scopeFor(LESSON, item("i.g1-u3-l03.independent-3")));
     expect(r.correct).toBe(false);
     expect(r.message).not.toMatch(/bottom space/);
     expect(r.message).toMatch(/space/);

@@ -4,5 +4,6 @@ export * from "./db.ts";
 export * from "./grade.ts";
 export * from "./path-state.ts";
 export * from "./progress.ts";
+export * from "./practice.ts";
 export * from "./server.ts";
 export { ApiError } from "./errors.ts";
