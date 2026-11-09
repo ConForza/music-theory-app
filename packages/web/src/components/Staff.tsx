@@ -35,6 +35,10 @@ function layout(f: NotationFragment) {
   return { placed, bars, width: x + 14 };
 }
 
+/** Stems point up for notes below the middle line (position 4), down from the middle line up; chords use their span. */
+export const stemUpFor = (posList: number[]) => posList.length === 0 || Math.max(...posList) + Math.min(...posList) < 8;
+const STEM = 7; // stem length in positions beyond the outer notehead
+
 export function pitchesOf(f: NotationFragment): string[] {
   return layout(f).placed.flatMap((p) => p.pitches);
 }
@@ -68,8 +72,14 @@ export function StaffView({
   const bottom = BOTTOM_LINE[clef];
   const { placed, bars, width } = layout(fragment);
   const positions = placed.flatMap((p) => p.pitches.map((q) => diatonic(parsePitch(q)) - bottom));
-  const topPos = Math.max(8, ...positions) + 3;
-  const botPos = Math.min(0, ...positions) - 4;
+  // Stem tips (and flags) are part of the drawing, so they count towards the bounds.
+  const reach = placed.flatMap((p) => {
+    if (p.rest || p.value === "semibreve") return [];
+    const pos = p.pitches.map((q) => diatonic(parsePitch(q)) - bottom);
+    return stemUpFor(pos) ? [Math.max(...pos) + STEM + (p.value === "quaver" || p.value === "semiquaver" ? 3 : 0)] : [Math.min(...pos) - STEM - (p.value === "quaver" || p.value === "semiquaver" ? 3 : 0)];
+  });
+  const topPos = Math.max(8, ...positions, ...reach) + 3;
+  const botPos = Math.min(0, ...positions, ...reach) - 4;
   const y = (pos: number) => (topPos - pos) * H;
   const height = (topPos - botPos) * H;
   const scale = size === "compact" ? 0.9 : 1.2;
@@ -94,7 +104,7 @@ export function StaffView({
               for (let l = 10; l <= pos; l += 2) ledgers.push(l);
               for (let l = -2; l >= pos; l -= 2) ledgers.push(l);
             }
-            const stemUp = posList.length ? Math.max(...posList) + Math.min(...posList) < 16 : true;
+            const stemUp = stemUpFor(posList);
             const label = p.rest ? `${p.value} rest` : `${p.value} on ${posList.map(positionName).join(" and ")}`;
             const g = (
               <g className={`staff-event${lit ? " is-lit" : ""}${onPlay && !p.rest ? " is-playable" : ""}`}>
@@ -141,7 +151,7 @@ function Heads({ p, posList, stemUp, y }: { p: Placed; posList: number[]; stemUp
   const lo = Math.min(...posList);
   const sx = stemUp ? p.x + 6 : p.x - 6;
   const y1 = y(stemUp ? lo : hi);
-  const y2 = y(stemUp ? hi + 7 : lo - 7);
+  const y2 = y(stemUp ? hi + STEM : lo - STEM);
   return (
     <>
       {stem && <line x1={sx} x2={sx} y1={y1} y2={y2} className="staff-stem" />}

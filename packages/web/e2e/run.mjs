@@ -298,6 +298,80 @@ async function extras() {
   await noOverflow(sp, "onboarding at 200% text");
   await small.close();
 }
+// Signed-in screens at 320px with text enlarged to 200%: no sideways scroll, no clipped tabs, no label on top of a button
+async function largeText() {
+  const ctx = await browser.newContext({ baseURL: base, viewport: { width: 320, height: 640 } });
+  const page = await ctx.newPage();
+  await page.addInitScript(() => document.addEventListener("DOMContentLoaded", () => (document.documentElement.style.fontSize = "200%")));
+  await page.goto("/onboarding");
+  await page.getByRole("button", { name: /New to music theory/ }).click();
+  await page.getByRole("button", { name: "Try it as a guest" }).click();
+  await page.waitForURL("**/learn");
+  for (const path of ["/learn", "/grades", "/unit/G1-U3", "/progress", "/profile", "/settings"]) {
+    await page.goto(path);
+    await page.locator("main h1, main h2").first().waitFor();
+    await page.waitForTimeout(300);
+    await noOverflow(page, `${path} at 200% text`);
+    const clipped = await page.evaluate(() =>
+      [...document.querySelectorAll(".tab")].filter((t) => {
+        const r = t.getBoundingClientRect();
+        return t.scrollWidth > t.clientWidth + 1 || r.left < -1 || r.right > innerWidth + 1 || r.bottom > innerHeight + 1;
+      }).map((t) => t.textContent),
+    );
+    assert.deepEqual(clipped, [], `${path}: tab labels clipped at 200% text`);
+  }
+  await page.goto("/learn");
+  await page.locator(".node-label").first().waitFor();
+  const overlaps = await page.evaluate(() => {
+    const boxes = [...document.querySelectorAll(".node-slot")].map((slot) => ({
+      id: slot.querySelector("[data-node]")?.getAttribute("data-node"),
+      node: slot.querySelector(".node").getBoundingClientRect(),
+      label: slot.querySelector(".node-label").getBoundingClientRect(),
+    }));
+    const hit = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+    const out = [];
+    for (const a of boxes) for (const b of boxes) {
+      if (a !== b && (hit(a.label, b.node) || hit(a.label, b.label))) out.push(`${a.id} label over ${b.id}`);
+    }
+    return out;
+  });
+  assert.deepEqual(overlaps, [], "path labels overlap other nodes at 200% text");
+  await ctx.close();
+}
+
+// Each grade world has its own palette, in light and dark, with readable contrast
+async function palettes() {
+  const lum = ([r, g, b]) => [r, g, b].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0);
+  const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+  const rgb = (c) => c.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number);
+  for (const scheme of ["light", "dark"]) {
+    const ctx = await browser.newContext({ baseURL: base, viewport: { width: 400, height: 800 }, colorScheme: scheme });
+    const page = await ctx.newPage();
+    await page.goto("/onboarding");
+    await page.getByRole("button", { name: /already know some theory/ }).click();
+    await page.locator(".grade-card").first().waitFor();
+    const badges = await page.$$eval(".grade-num", (els) => els.map((e) => { const c = getComputedStyle(e); return { bg: c.backgroundColor, fg: c.color }; }));
+    assert.equal(badges.length, 5);
+    assert.equal(new Set(badges.map((b) => b.bg)).size, 5, `${scheme}: grade worlds share a colour: ${badges.map((b) => b.bg)}`);
+    for (const b of badges) assert.ok(contrast(rgb(b.bg), rgb(b.fg)) >= 4.5, `${scheme}: low contrast ${b.fg} on ${b.bg}`);
+    await ctx.close();
+  }
+}
+
+try {
+  await largeText();
+  log("✓ signed-in screens at 200% text");
+} catch (e) {
+  failures++;
+  console.error(`✗ large text: ${e.stack ?? e}`);
+}
+try {
+  await palettes();
+  log("✓ five distinct world palettes (light and dark)");
+} catch (e) {
+  failures++;
+  console.error(`✗ palettes: ${e.stack ?? e}`);
+}
 try {
   await extras();
   log("✓ keyboard / reduced motion / guest upgrade / offline retry / large text");

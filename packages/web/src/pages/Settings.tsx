@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { api, ApiFailure, type Settings as SettingsT } from "../api/client";
+import { SignOutButton } from "../components/SignOutButton";
 import { useApp } from "../state/app";
 
 function Segmented<T extends string>({ legend, value, options, onChange }: { legend: string; value: T; options: Array<{ v: T; label: string }>; onChange: (v: T) => void }) {
@@ -20,7 +21,7 @@ function Segmented<T extends string>({ legend, value, options, onChange }: { leg
 }
 
 export function Settings() {
-  const { me, updateProfile, signOut, setMe } = useApp();
+  const { me, updateProfile, setMe } = useApp();
   const nav = useNavigate();
   const s = me!.profile.settings;
   const [name, setName] = useState(me!.user.displayName);
@@ -102,7 +103,7 @@ export function Settings() {
         </div>
       </section>
 
-      <button type="button" className="btn btn-quiet" onClick={() => void signOut().then(() => nav("/welcome", { replace: true }))}>Sign out</button>
+      <SignOutButton />
       <p className="fine-print">Music Theory Path is independent and not affiliated with or endorsed by ABRSM. Practice material is not an official examination.</p>
     </div>
   );

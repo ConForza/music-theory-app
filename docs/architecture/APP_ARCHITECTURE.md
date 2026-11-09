@@ -40,16 +40,17 @@ packages/web         React app                                                  
 
 ### Runs, completion and replays
 
-A **run** is one play-through. `start` is idempotent: it resumes the open run, or opens a new run if the last one finished or the lesson's `contentVersion` changed under it (old attempts stay in the log under their own run/version). `complete` succeeds only when every playable question has a correct attempt in the current run; completion is sticky (`completed_at`) so a replay never re-locks dependents. If the content later moves to a newer version, the node stays completed and shows **Review available**; finishing a replay refreshes the completed version.
+A **run** is one play-through. `start` is idempotent: it resumes the open run, or opens a new run if the last one finished or the lesson's `contentVersion` changed under it (old attempts stay in the log under their own run/version). `complete` succeeds only when the open run belongs to the lesson version being served (otherwise 409 `stale_lesson`, nothing is written) and every playable question has a correct attempt in that run; the check and the write share one transaction, and an unchanged resumed run keeps the curriculum version it started under; completion is sticky (`completed_at`) so a replay never re-locks dependents. If the content later moves to a newer version, the node stays completed and shows **Review available**; finishing a replay refreshes the completed version.
 
 ### Idempotency and retries
 
-Attempt ids are UUIDs generated per submit and reused by the client on retry. The server returns the stored result for a repeated id and records nothing new; reusing an id for a different question is a 409. Another learner's id never collides (key is `(user_id, id)`).
+Attempt ids are UUIDs, and an id is an immutable command: the client freezes `{id, answer}` while a request is unresolved and resends exactly that on retry, but takes a fresh id if the learner changes their answer. The server returns the stored result only for the same question, run and answer, and records nothing new; any other reuse of an id is a 409 `attempt_conflict`. Another learner's id never collides (key is `(user_id, id)`).
 
 ## Accounts and security
 
 * Guest (`POST /api/auth/guest`) or account (`register`, `login`, `logout`). Registering while a guest **upgrades the same user row**, so progress is kept. Signing in to an existing account from a guest session does not merge guest progress, which avoids cross-account contamination (known limitation).
 * Passwords: scrypt with a per-user salt. Sessions: 256-bit random token in an `HttpOnly; SameSite=Lax` cookie (`Secure` when `MTP_SECURE_COOKIES=1`); only its SHA-256 is stored. Unsafe methods require JSON and a same-origin `Origin` (or one in `MTP_ALLOWED_ORIGINS`). Credential endpoints are rate-limited per email/IP (per process). Login errors are identical for unknown account and wrong password.
+* Sign-out reports success only after the server has invalidated the session; on failure the learner stays signed in with a visible retry.
 * `GET /api/me/export` and `DELETE /api/me` give export and deletion; deletion cascades through every table.
 * Client-supplied values never set completion, grades or hint usage: hints are served by the API so "hint-free" is recorded by the server.
 

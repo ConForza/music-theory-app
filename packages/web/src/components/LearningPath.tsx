@@ -6,40 +6,38 @@ import { PathNodeButton } from "./PathNodeButton";
 import { NodeSheet } from "./NodeSheet";
 import { describeNode } from "../lib/pathView";
 
-const ROW = 150;
+// Rows flow naturally (a row is as tall as its label), so enlarged text can never make labels collide.
+// Horizontal positions are fractions of the column width.
 const WIDTH = 320;
 const SWAY = [0, 46, 66, 46, 0, -46, -66, -46];
 
 const cx = (i: number) => WIDTH / 2 + (SWAY[i % SWAY.length] ?? 0);
-const cy = (i: number) => 52 + i * ROW;
 
-/** Smooth connector through node centres; solid where the learner has passed. */
-function Connectors({ nodes, done }: { nodes: CourseNode[]; done: boolean[] }) {
-  const height = cy(nodes.length - 1) + 70;
+/** Smooth connector from this node's centre to the next one; solid where the learner has passed. Drawn inside each row, so it
+ *  stretches with the row however tall the label (and the learner's text size) makes it. */
+function Connector({ from, to, done }: { from: number; to: number; done: boolean }) {
+  const [x0, x1] = [cx(from), cx(to)];
   return (
-    <svg className="connectors" viewBox={`0 0 ${WIDTH} ${height}`} preserveAspectRatio="none" aria-hidden="true" style={{ height }}>
-      {nodes.slice(0, -1).map((n, i) => {
-        const [x0, y0, x1, y1] = [cx(i), cy(i), cx(i + 1), cy(i + 1)];
-        const mid = (y0 + y1) / 2;
-        return <path key={n.id} d={`M ${x0} ${y0} C ${x0} ${mid}, ${x1} ${mid}, ${x1} ${y1}`} className={done[i] ? "link is-done" : "link"} vectorEffect="non-scaling-stroke" />;
-      })}
+    <svg className="connector" viewBox={`0 0 ${WIDTH} 1`} preserveAspectRatio="none" aria-hidden="true">
+      <path d={`M ${x0} 0 C ${x0} 0.5, ${x1} 0.5, ${x1} 1`} className={done ? "link is-done" : "link"} vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }
 
 function NodeColumn({ data, nodes, currentId, onInfo }: { data: CourseData; nodes: CourseNode[]; currentId: string | null; onInfo: (id: string) => void }) {
-  const done = nodes.map((n) => data.progress.nodes[n.id]?.state === "completed");
   return (
-    <ol className="nodes" style={{ height: cy(nodes.length - 1) + 70 }}>
-      <Connectors nodes={nodes} done={done} />
+    <ol className="nodes">
       {nodes.map((n, i) => {
         const v = describeNode(n, data.progress.nodes[n.id]);
         const current = n.id === currentId;
         return (
-          <li key={n.id} className="node-slot" style={{ left: `${(cx(i) / WIDTH) * 100}%`, top: cy(i) }}>
-            {current && <span className="bubble" aria-hidden="true">{v.status === "in_progress" ? "Continue" : "Start"}</span>}
-            <PathNodeButton node={n} progress={data.progress.nodes[n.id]} current={current} onInfo={onInfo} />
-            <span className="node-label">{n.title}</span>
+          <li key={n.id} className="node-row">
+            {i < nodes.length - 1 && <Connector from={i} to={i + 1} done={data.progress.nodes[n.id]?.state === "completed"} />}
+            <div className="node-slot" style={{ ["--x" as string]: (cx(i) / WIDTH) * 100 }}>
+              {current && <span className="bubble" aria-hidden="true">{v.status === "in_progress" ? "Continue" : "Start"}</span>}
+              <PathNodeButton node={n} progress={data.progress.nodes[n.id]} current={current} onInfo={onInfo} />
+              <span className="node-label">{n.title}</span>
+            </div>
           </li>
         );
       })}

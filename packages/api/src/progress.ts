@@ -194,11 +194,12 @@ export class ProgressService {
     if (!item) throw new ApiError(404, "not_found", "Unknown question.");
 
     const prior = this.db.prepare("SELECT * FROM attempts WHERE user_id = ? AND id = ?").get(userId, attemptId) as
-      | { node_id: string; item_id: string; correct: number; mistake_category: string | null; attempt_number: number }
+      | { node_id: string; item_id: string; run: number; response: string; correct: number; mistake_category: string | null; attempt_number: number }
       | undefined;
     if (prior) {
-      if (prior.node_id !== nodeId || prior.item_id !== itemId) {
-        throw new ApiError(409, "attempt_conflict", "That attempt id was already used for a different question.");
+      // An id is an immutable command: same question, same run, same answer. Anything else is a client bug or a replay attack.
+      if (prior.node_id !== nodeId || prior.item_id !== itemId || prior.run !== row.run || prior.response !== JSON.stringify(response)) {
+        throw new ApiError(409, "attempt_conflict", "That attempt id was already used for a different answer. Check again to send a new one.");
       }
       return this.result(item, prior.correct === 1, prior.mistake_category, prior.attempt_number, true);
     }
@@ -226,7 +227,7 @@ export class ProgressService {
           `INSERT INTO attempts (user_id,id,node_id,run,item_id,template_id,template_version,content_version,curriculum_version,evidence,response,correct,mistake_category,hints_used,attempt_number,created_at)
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         )
-        .run(userId, attemptId, nodeId, row.run, itemId, item.templateId, item.templateVersion, row.content_version, this.course.version, item.evidence, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, n, now());
+        .run(userId, attemptId, nodeId, row.run, itemId, item.templateId, item.templateVersion, row.content_version, row.curriculum_version, item.evidence, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, n, now());
       this.db.prepare("UPDATE lesson_progress SET updated_at = ? WHERE user_id = ? AND node_id = ?").run(now(), userId, nodeId);
       return n;
     });
@@ -244,26 +245,29 @@ export class ProgressService {
    */
   complete(userId: string, nodeId: string): CompletionSummary & { alreadyComplete: boolean } {
     const lesson = this.openableLesson(userId, nodeId);
-    const row = this.row(userId, nodeId);
-    if (!row) throw new ApiError(409, "not_started", "Start the lesson first.");
-    if (!row.run_open) {
-      const stored = this.db.prepare("SELECT last_stats FROM lesson_progress WHERE user_id = ? AND node_id = ?").get(userId, nodeId) as { last_stats: string };
-      const stats = JSON.parse(stored.last_stats) as CompletionSummary;
-      return { ...stats, nextNodeId: this.nextAfter(userId, nodeId), alreadyComplete: true };
-    }
-    const run = this.runState(userId, nodeId);
-    const missing = lesson.items.filter((i) => !run.items[i.id]?.correct).map((i) => i.id);
-    if (missing.length) throw new ApiError(409, "incomplete", "Some questions still need an answer.", { missing });
-    const t = now();
-    const summary = {
-      questions: lesson.items.length,
-      firstTryCorrect: lesson.items.filter((i) => run.items[i.id]?.firstTry).length,
-      hintsUsed: Object.values(run.items).reduce((a, s) => a + s.hintsUsed, 0),
-      completedAt: t,
-    };
-    tx(this.db, () => {
-      const cur = this.row(userId, nodeId)!;
-      const stale = (cur.completed_content_version ?? 0) < lesson.contentVersion;
+    const closed = tx(this.db, () => {
+      const row = this.row(userId, nodeId);
+      if (!row) throw new ApiError(409, "not_started", "Start the lesson first.");
+      if (!row.run_open) {
+        const stored = this.db.prepare("SELECT last_stats FROM lesson_progress WHERE user_id = ? AND node_id = ?").get(userId, nodeId) as { last_stats: string };
+        return { ...(JSON.parse(stored.last_stats) as Omit<CompletionSummary, "nextNodeId">), alreadyComplete: true };
+      }
+      // The open run must belong to the lesson as it is served now; old answers never complete newer material.
+      if (row.content_version !== lesson.contentVersion) {
+        throw new ApiError(409, "stale_lesson", "This lesson was updated since you started it. Reload to begin the new version.");
+      }
+      const run = this.runState(userId, nodeId);
+      const missing = lesson.items.filter((i) => !run.items[i.id]?.correct).map((i) => i.id);
+      if (missing.length) throw new ApiError(409, "incomplete", "Some questions still need an answer.", { missing });
+      const t = now();
+      const summary = {
+        questions: lesson.items.length,
+        firstTryCorrect: lesson.items.filter((i) => run.items[i.id]?.firstTry).length,
+        hintsUsed: Object.values(run.items).reduce((acc, s) => acc + s.hintsUsed, 0),
+        completedAt: t,
+      };
+      const stale = (row.completed_content_version ?? 0) < lesson.contentVersion;
+      // An unchanged resumed run keeps the curriculum version it started under (row.curriculum_version).
       this.db
         .prepare(
           `UPDATE lesson_progress SET run_open = 0, updated_at = ?, last_stats = ?,
@@ -272,9 +276,10 @@ export class ProgressService {
              completed_curriculum_version = CASE WHEN completed_at IS NULL OR ? THEN ? ELSE completed_curriculum_version END
            WHERE user_id = ? AND node_id = ?`,
         )
-        .run(t, JSON.stringify(summary), stale ? 1 : 0, t, stale ? 1 : 0, lesson.contentVersion, stale ? 1 : 0, this.course.version, userId, nodeId);
+        .run(t, JSON.stringify(summary), stale ? 1 : 0, t, stale ? 1 : 0, row.content_version, stale ? 1 : 0, row.curriculum_version, userId, nodeId);
+      return { ...summary, alreadyComplete: false };
     });
-    return { ...summary, nextNodeId: this.nextAfter(userId, nodeId), alreadyComplete: false };
+    return { ...closed, nextNodeId: this.nextAfter(userId, nodeId) };
   }
 
   private nextAfter(userId: string, nodeId: string): string | null {

@@ -73,17 +73,18 @@ function diagnosePitch(item: ExerciseItem, letter: string): string | null {
   return null;
 }
 
+/** Each category is emitted only when the submitted note itself establishes it; otherwise the item's general fallback is used. */
 function diagnoseStaff(item: ExerciseItem, pitch: string): string | null {
   if (item.answer.kind !== "staff-position") return null;
   const a = item.answer;
   const bottom = BOTTOM_LINE[a.clef]!;
   const pos = dia(pitch) - bottom;
   const got = music.parsePitch(pitch);
+  // Right letter, wrong octave.
   if (a.accepted.some((p) => music.parsePitch(p).step === got.step)) return "wrong-octave";
-  if (a.target.position !== "any") {
-    const onLine = Math.abs(pos) % 2 === 0;
-    if ((a.target.position === "line") !== onLine) return "line-space-swap";
-  }
+  // The note sits on the other kind of position (line/space) than the task asked for.
+  if (a.target.position !== "any" && (a.target.position === "line") !== (Math.abs(pos) % 2 === 0)) return "line-space-swap";
+  // The exact mirror image of the correct position: the learner counted from the top.
   const wantPos = dia(a.accepted[0]!) - bottom;
   if (pos >= 0 && pos <= 8 && pos === 8 - wantPos) return "counted-from-top";
   return null;

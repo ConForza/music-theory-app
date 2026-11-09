@@ -110,8 +110,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [setMe],
   );
 
+  // Only report signed-out once the server has invalidated the session (or says there is none). A failure is thrown
+  // to the caller, who keeps the learner signed in and shows a retry: the cookie still works until logout succeeds.
   const signOut = useCallback(async () => {
-    await api.logout().catch(() => undefined);
+    try {
+      await api.logout();
+    } catch (e) {
+      if (!(e instanceof ApiFailure && e.status === 401)) throw e;
+    }
     setMe(null);
   }, [setMe]);
 

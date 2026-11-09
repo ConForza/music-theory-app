@@ -125,8 +125,9 @@ export function Question({
   const [hints, setHints] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // One id per submit; reused if the request has to be repeated, so a retry can never double-count.
-  const attemptId = useRef(newId());
+  // The submitted command (id + exact answer) is frozen until the server answers. A genuine retry resends the same
+  // id and answer, so it can never double-count; a changed answer gets a fresh id, so it can never borrow an earlier result.
+  const pending = useRef<{ id: string; answer: string } | null>(null);
   const feedbackBtn = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -138,7 +139,10 @@ export function Question({
     setBusy(true);
     setError(null);
     try {
-      const r = await api.attempt(nodeId, attemptId.current, item.id, response);
+      const answer = JSON.stringify(response);
+      if (pending.current?.answer !== answer) pending.current = { id: newId(), answer };
+      const r = await api.attempt(nodeId, pending.current.id, item.id, response);
+      pending.current = null;
       setResult(r);
       cue(r.correct ? "correct" : "wrong");
     } catch (e) {
@@ -149,7 +153,7 @@ export function Question({
   }
 
   function again() {
-    attemptId.current = newId();
+    pending.current = null;
     setResult(null);
     setResponse(null);
   }

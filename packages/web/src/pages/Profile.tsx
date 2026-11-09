@@ -1,10 +1,11 @@
 import { Link } from "react-router";
 import { Icon } from "../components/Icon";
+import { SignOutButton } from "../components/SignOutButton";
 import { useApp, useCourseData } from "../state/app";
 import { RegisterForm } from "./AccountForm";
 
 export function Profile() {
-  const { me, signOut, refreshProgress } = useApp();
+  const { me, refreshProgress } = useApp();
   const data = useCourseData();
   const { user, profile } = me!;
   const world = data.status === "ready" ? data.course.worlds[profile.selectedGrade - 1] : undefined;
@@ -46,7 +47,7 @@ export function Profile() {
         <p>We keep only a nickname, your sign-in details and your lesson answers. There are no public profiles, leaderboards or adverts, and you can download or delete everything in Settings.</p>
       </section>
 
-      <button type="button" className="btn btn-quiet" onClick={() => void signOut()}>Sign out</button>
+      <SignOutButton />
     </div>
   );
 }

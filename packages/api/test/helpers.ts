@@ -36,6 +36,21 @@ export function setup(opts: { waive?: boolean } = {}) {
   return { db, app, client: () => new Client(app) };
 }
 
+/** Simulate a content deployment: the same database served by a course whose lesson (and release) have moved on. */
+export function deployNewContent(db: ReturnType<typeof openDb>, nodeId = LESSON) {
+  const base = sharedCourse();
+  const next: Course = {
+    ...base,
+    version: "9.9.9",
+    nodes: base.nodes.map((n) => (n.id === nodeId ? { ...n, contentVersion: n.contentVersion + 1 } : n)),
+    lesson: (id) => {
+      const l = base.lesson(id);
+      return l && id === nodeId ? { ...l, contentVersion: l.contentVersion + 1 } : l;
+    },
+  };
+  return createApp({ db, course: next, waiveUnwrittenPrerequisites: true });
+}
+
 export const email = (n: string) => `${n}@example.com`;
 export async function register(c: Client, name = "ada", password = "correct horse battery") {
   return c.post("/api/auth/register", { email: email(name), password, displayName: name });

@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { computeNodeStates } from "../src/path-state.ts";
-import { LESSON, correctResponse, playThrough, register, setup, sharedCourse } from "./helpers.ts";
+import { Client, LESSON, correctResponse, deployNewContent, playThrough, register, setup, sharedCourse } from "./helpers.ts";
+import { gradeResponse } from "../src/grade.ts";
 
 const course = sharedCourse();
 const L = (c: ReturnType<ReturnType<typeof setup>["client"]>) => ({
   start: () => c.post(`/api/lessons/${LESSON}/start`),
-  attempt: (itemId: string, response: unknown, attemptId = crypto.randomUUID()) => c.post(`/api/lessons/${LESSON}/attempts`, { attemptId, itemId, response }),
+  attempt: (itemId: string, response: unknown, attemptId: string = crypto.randomUUID()) => c.post(`/api/lessons/${LESSON}/attempts`, { attemptId, itemId, response }),
   complete: () => c.post(`/api/lessons/${LESSON}/complete`),
 });
 
@@ -215,7 +216,7 @@ describe("resume and interruption", () => {
     await L(c).attempt("i.g1-u3-l03.guided-1", correctResponse(course, LESSON, "i.g1-u3-l03.guided-1"));
     db.prepare("UPDATE lesson_progress SET content_version = 0").run(); // simulate: learner started on an older version
     const run = (await c.post(`/api/lessons/${LESSON}/start`)).body;
-    expect(run).toMatchObject({ run: 2, phase: "intro", contentVersion: 1 });
+    expect(run).toMatchObject({ run: 2, phase: "intro", contentVersion: course.lesson(LESSON)!.contentVersion });
     expect(Object.keys(run.items)).toHaveLength(0);
     expect((db.prepare("SELECT COUNT(*) AS n FROM attempts").get() as { n: number }).n).toBe(1);
   });
@@ -263,5 +264,121 @@ describe("data isolation between students", () => {
     expect((await bob.get("/api/progress")).body.nodes[LESSON].state).toBe("in_progress");
     const exp = (await bob.get("/api/me/export")).body;
     expect(JSON.stringify(exp)).not.toContain("ada@example.com");
+  });
+});
+
+describe("content changes and completion (review R2)", () => {
+  it("refuses to complete an open run begun on an older lesson version, without upgrading anything", async () => {
+    const { client, db } = setup();
+    const c = client();
+    await register(c);
+    await c.post(`/api/lessons/${LESSON}/start`);
+    for (const it of course.lesson(LESSON)!.items) await L(c).attempt(it.id, correctResponse(course, LESSON, it.id));
+    // deployment happens while the learner's completion is still pending
+    const next = new Client(deployNewContent(db));
+    next.cookie = c.cookie;
+    const r = await next.post(`/api/lessons/${LESSON}/complete`); // note: no start first
+    expect(r.status).toBe(409);
+    expect(r.body.error.code).toBe("stale_lesson");
+    const row = db.prepare("SELECT run_open, completed_at, completed_content_version, completed_curriculum_version FROM lesson_progress").get() as Record<string, unknown>;
+    expect(row).toMatchObject({ run_open: 1, completed_at: null, completed_content_version: null, completed_curriculum_version: null });
+    // attempts are still there; starting again begins a clean run of the new version
+    const run = (await next.post(`/api/lessons/${LESSON}/start`)).body;
+    expect(run).toMatchObject({ run: 2, contentVersion: course.lesson(LESSON)!.contentVersion + 1 });
+    expect((db.prepare("SELECT COUNT(*) AS n FROM attempts").get() as { n: number }).n).toBe(6);
+  });
+
+  it("keeps an earned completion, flagged for review, and stamps the run's own curriculum version", async () => {
+    const { client, db } = setup();
+    const c = client();
+    await register(c);
+    await playThrough(c, course);
+    const before = db.prepare("SELECT completed_content_version, completed_curriculum_version FROM lesson_progress").get() as Record<string, unknown>;
+    const next = new Client(deployNewContent(db));
+    next.cookie = c.cookie;
+    const p = (await next.get("/api/progress")).body.nodes[LESSON];
+    expect(p).toMatchObject({ state: "completed", reviewAvailable: true });
+    expect(db.prepare("SELECT completed_content_version, completed_curriculum_version FROM lesson_progress").get()).toEqual(before);
+    // an unchanged run resumed across a release bump keeps the version it started under
+    const { client: c2, db: db2 } = setup();
+    const d = c2();
+    await register(d, "bea");
+    await d.post(`/api/lessons/${LESSON}/start`);
+    for (const it of course.lesson(LESSON)!.items) await L(d).attempt(it.id, correctResponse(course, LESSON, it.id));
+    const bumped = new Client(createReleaseBump(db2));
+    bumped.cookie = d.cookie;
+    expect((await bumped.post(`/api/lessons/${LESSON}/complete`)).status).toBe(200);
+    expect((db2.prepare("SELECT completed_curriculum_version AS v FROM lesson_progress").get() as { v: string }).v).toBe(course.version);
+  });
+});
+
+function createReleaseBump(db: ReturnType<typeof setup>["db"]) {
+  return deployNewContentReleaseOnly(db);
+}
+import { createApp } from "../src/app.ts";
+function deployNewContentReleaseOnly(db: ReturnType<typeof setup>["db"]) {
+  return createApp({ db, course: { ...course, version: "9.9.9" }, waiveUnwrittenPrerequisites: true });
+}
+
+describe("attempt ids are immutable commands (review R3)", () => {
+  it("replays an identical retry, but refuses the same id for a different answer", async () => {
+    const { client, db } = setup();
+    const c = client();
+    await register(c);
+    const l = L(c);
+    await l.start();
+    const id = crypto.randomUUID();
+    const first = await l.attempt("i.g1-u3-l03.guided-1", { kind: "pitch-letter", letter: "G" }, id);
+    expect(first.body.correct).toBe(true);
+    // the response was lost; the learner changed their mind and the UI (wrongly) reused the id
+    const changed = await l.attempt("i.g1-u3-l03.guided-1", { kind: "pitch-letter", letter: "A" }, id);
+    expect(changed.status).toBe(409);
+    expect(changed.body.error.code).toBe("attempt_conflict");
+    expect((await l.attempt("i.g1-u3-l03.guided-1", { kind: "pitch-letter", letter: "G" }, id)).body).toMatchObject({ correct: true, replayed: true });
+    expect((db.prepare("SELECT COUNT(*) AS n FROM attempts").get() as { n: number }).n).toBe(1);
+  });
+
+  it("refuses an id from an earlier run", async () => {
+    const { client } = setup();
+    const c = client();
+    await register(c);
+    const id = crypto.randomUUID();
+    await playThrough(c, course);
+    // replay the lesson (run 2) and reuse a run-1 id
+    const first = (await c.get("/api/me/export")).body.attempts[0] as { id: string };
+    await c.post(`/api/lessons/${LESSON}/start`);
+    const r = await L(c).attempt("i.g1-u3-l03.guided-1", correctResponse(course, LESSON, "i.g1-u3-l03.guided-1"), first.id);
+    expect(r.status).toBe(409);
+    void id;
+  });
+});
+
+describe("feedback only states what the submitted note proves (review R6)", () => {
+  const item = (id: string) => course.authoredItems(LESSON).find((i) => i.id === id)!;
+  const pitches = ["E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F5"]; // every selectable position
+  const bottom = (p: string) => pitches.indexOf(p); // 0 = bottom line
+  const onLine = (p: string) => bottom(p) % 2 === 0;
+
+  it.each([
+    ["i.g1-u3-l03.independent-3", "F5"],
+    ["i.g1-u3-l03.independent-4", "G4"],
+  ])("%s: every wrong position gets a message its category justifies", (id, right) => {
+    for (const p of pitches) {
+      const r = gradeResponse(item(id), { kind: "staff-position", pitch: p });
+      expect(r.correct, p).toBe(p === right);
+      if (r.correct) continue;
+      if (r.category === "line-space-swap") expect(onLine(p), `${p} is on a line`).toBe(false);
+      if (r.category === "wrong-octave") expect(p[0], p).toBe(right[0]);
+      if (r.category === "counted-from-top") expect(bottom(p), p).toBe(8 - bottom(right));
+      // a specific note or position is never named for a note that was not submitted
+      if (r.category === "line-space-swap") expect(r.message).not.toMatch(/bottom space|That F is/);
+    }
+  });
+
+  it("does not tell a learner who placed C5 that their note is an F in the bottom space", () => {
+    const r = gradeResponse(item("i.g1-u3-l03.independent-3"), { kind: "staff-position", pitch: "C5" });
+    expect(r.correct).toBe(false);
+    expect(r.message).not.toMatch(/bottom space/);
+    expect(r.message).toMatch(/space/);
   });
 });
