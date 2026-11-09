@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "grades": [
+    {
+      "grade": 1,
+      "adds": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1,
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1,
+        "intervalQuality": "number-only",
+        "intervalLowerNote": "tonic",
+        "compoundIntervals": false,
+        "chromaticIntervals": false,
+        "chordDegrees": [
+          "I"
+        ],
+        "inversions": [
+          "a"
+        ],
+        "degreeNaming": "number",
+        "doubleAccidentals": false,
+        "minorForms": [],
+        "tuplets": [],
+        "ornaments": [],
+        "cadenceTypes": [],
+        "cadenceKeys": [],
+        "instrumentTranspositions": [],
+        "octaveTranspositionClefs": []
+      },
+      "notes": [
+        "Ledger lines are limited to middle C (one ledger line below treble / above bass).",
+        "Intervals: lower note is always the tonic; number only."
+      ],
+      "outcomeRefs": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.16"
+      ]
+    },
+    {
+      "grade": 2,
+      "adds": {
+        "keys": [
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "minorForms": [
+          "harmonic"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8"
+        ],
+        "tuplets": [
+          "triplet"
+        ],
+        "maxLedgerLines": 2
+      },
+      "notes": [
+        "Minor scales: harmonic form only.",
+        "Two ledger lines below and above each stave."
+      ],
+      "outcomeRefs": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.05",
+        "abrsm2020.g2.07"
+      ]
+    },
+    {
+      "grade": 3,
+      "adds": {
+        "keys": [
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "minorForms": [
+          "melodic"
+        ],
+        "timeSignatures": [
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "demisemiquaver"
+        ],
+        "maxLedgerLines": 4,
+        "octaveTranspositionClefs": [
+          "treble",
+          "bass"
+        ],
+        "intervalQuality": "number-and-quality"
+      },
+      "notes": [
+        "'Beyond two ledger lines' has no stated maximum; the app caps generated items at four ledger lines (see OPEN_QUESTIONS Q6).",
+        "Intervals: still above the tonic only; qualities major, minor, perfect."
+      ],
+      "outcomeRefs": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.04",
+        "abrsm2020.g3.05",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08",
+        "abrsm2020.g3.11"
+      ]
+    },
+    {
+      "grade": 4,
+      "adds": {
+        "keys": [
+          "B major",
+          "Db major",
+          "G# minor",
+          "Bb minor"
+        ],
+        "timeSignatures": [
+          "2/8",
+          "4/8",
+          "6/4",
+          "9/4",
+          "12/4",
+          "6/16",
+          "9/16",
+          "12/16"
+        ],
+        "noteValues": [
+          "breve"
+        ],
+        "maxDots": 2,
+        "tuplets": [
+          "duplet"
+        ],
+        "clefs": [
+          "alto"
+        ],
+        "octaveTranspositionClefs": [
+          "alto"
+        ],
+        "doubleAccidentals": true,
+        "intervalLowerNote": "any-diatonic",
+        "chordDegrees": [
+          "IV",
+          "V"
+        ],
+        "degreeNaming": "technical",
+        "ornaments": [
+          "trill",
+          "turn",
+          "upper-mordent",
+          "lower-mordent",
+          "acciaccatura",
+          "appoggiatura"
+        ]
+      },
+      "notes": [
+        "'All regular time signatures': the app's list is the commonly used set; extremely rare signatures (e.g. 2/16) are excluded from generation (see OPEN_QUESTIONS Q7).",
+        "Intervals within an octave between any two notes of one Grade 4 scale."
+      ],
+      "outcomeRefs": [
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.10",
+        "abrsm2020.g4.13",
+        "abrsm2020.g4.14",
+        "abrsm2020.g4.17"
+      ]
+    },
+    {
+      "grade": 5,
+      "adds": {
+        "keys": [
+          "F# major",
+          "Gb major",
+          "D# minor",
+          "Eb minor"
+        ],
+        "timeSignatures": [
+          "5/4",
+          "7/4",
+          "5/8",
+          "7/8"
+        ],
+        "tuplets": [
+          "irregular"
+        ],
+        "clefs": [
+          "tenor"
+        ],
+        "octaveTranspositionClefs": [
+          "tenor"
+        ],
+        "intervalLowerNote": "any",
+        "compoundIntervals": true,
+        "chromaticIntervals": true,
+        "chordDegrees": [
+          "ii"
+        ],
+        "inversions": [
+          "b",
+          "c"
+        ],
+        "cadenceTypes": [
+          "perfect",
+          "plagal",
+          "imperfect"
+        ],
+        "cadenceKeys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "instrumentTranspositions": [
+          "Bb",
+          "A",
+          "F"
+        ]
+      },
+      "notes": [
+        "Cadence and cadence-chord tasks are restricted to C, G, D and F major.",
+        "Chord identification (I, ii, IV, V; a/b/c) uses all Grade 5 keys."
+      ],
+      "outcomeRefs": [
+        "abrsm2020.g5.01",
+        "abrsm2020.g5.03",
+        "abrsm2020.g5.06",
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.08",
+        "abrsm2020.g5.09",
+        "abrsm2020.g5.10"
+      ]
+    }
+  ]
+}

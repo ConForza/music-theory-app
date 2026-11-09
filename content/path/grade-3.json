@@ -1,0 +1,914 @@
+{
+  "schemaVersion": 1,
+  "grade": 3,
+  "title": "Grade 3",
+  "learnerTitle": "Compound Time and Minor Keys",
+  "summary": "Compound time, demisemiquavers, extended ledger lines, octave transposition, keys to four sharps/flats with both minor forms, interval qualities.",
+  "units": [
+    {
+      "id": "G3-U1",
+      "grade": 3,
+      "sequence": 1,
+      "title": "Simple and compound time",
+      "learnerTitle": "Beats in threes",
+      "summary": "Compound time signatures and grouping of notes and rests.",
+      "bookSectionIds": [
+        "fs.g3.s01",
+        "fs.g3.s02",
+        "fs.g3.s03"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G3-U2",
+      "grade": 3,
+      "sequence": 2,
+      "title": "Demisemiquavers and upbeats",
+      "learnerTitle": "Very short notes",
+      "summary": "Demisemiquavers and their rests; optional upbeat starts.",
+      "bookSectionIds": [
+        "fs.g3.s04",
+        "fs.g3.s05"
+      ],
+      "refinements": [
+        "Book §5 (upbeat starts) is an optional enrichment node: useful for reading music, not an explicit current outcome."
+      ]
+    },
+    {
+      "id": "G3-U3",
+      "grade": 3,
+      "sequence": 3,
+      "title": "Ledger lines and octave transposition",
+      "learnerTitle": "Higher, lower, an octave away",
+      "summary": "Notes beyond two ledger lines, octave signs and transposing at the octave between treble and bass.",
+      "bookSectionIds": [
+        "fs.g3.s06",
+        "fs.g3.s07"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G3-U4",
+      "grade": 3,
+      "sequence": 4,
+      "title": "Keys to four sharps or flats; both minor forms",
+      "learnerTitle": "More keys, two minor forms",
+      "summary": "Melodic minor; E and A♭ major; six new minor keys; key signatures, tonic triads and degrees.",
+      "bookSectionIds": [
+        "fs.g3.s08",
+        "fs.g3.s09",
+        "fs.g3.s10",
+        "fs.g2.s09",
+        "fs.g2.s11"
+      ],
+      "refinements": [
+        "Melodic minor (book Grade 2 §§9, 11) is taught here, first in A, E and D minor, as the official syllabus requires it from Grade 3."
+      ]
+    },
+    {
+      "id": "G3-U5",
+      "grade": 3,
+      "sequence": 5,
+      "title": "Interval qualities and expression",
+      "learnerTitle": "Naming intervals exactly",
+      "summary": "Major, minor and perfect intervals above the tonic; Grade 3 terms; reading a melody.",
+      "bookSectionIds": [
+        "fs.g3.s11",
+        "fs.g3.s12"
+      ],
+      "refinements": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "G3-U1-L01",
+      "type": "lesson",
+      "unitId": "G3-U1",
+      "title": "Simple or compound?",
+      "objective": "Tell simple time from compound time by how the beat divides.",
+      "conceptIds": [
+        "c.metre.compound-concept"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s01"
+      ]
+    },
+    {
+      "id": "G3-U1-L02",
+      "type": "lesson",
+      "unitId": "G3-U1",
+      "title": "6/8, 9/8 and 12/8",
+      "objective": "Read compound duple, triple and quadruple time signatures.",
+      "conceptIds": [
+        "c.metre.compound-signatures"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature",
+        "t.g3.bar-complete"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s02"
+      ]
+    },
+    {
+      "id": "G3-U1-L03",
+      "type": "lesson",
+      "unitId": "G3-U1",
+      "title": "Grouping notes in compound time",
+      "objective": "Beam notes in dotted-crotchet beats and use ties to show beats.",
+      "conceptIds": [
+        "c.metre.compound-grouping-notes"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.compound-grouping",
+        "t.g3.bar-complete"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s02"
+      ]
+    },
+    {
+      "id": "G3-U1-L04",
+      "type": "lesson",
+      "unitId": "G3-U1",
+      "title": "Grouping rests in compound time",
+      "objective": "Write rests for silent beats and part-beats in compound time, accepting both forms of a silent beat.",
+      "conceptIds": [
+        "c.metre.compound-grouping-rests"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.compound-grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s03"
+      ]
+    },
+    {
+      "id": "G3-U1-L05",
+      "type": "lesson",
+      "unitId": "G3-U1",
+      "title": "Triplets or compound time?",
+      "objective": "Compare triplets in simple time with the same rhythm in compound time.",
+      "conceptIds": [
+        "c.metre.triplet-compound"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s01",
+        "fs.g3.s02"
+      ]
+    },
+    {
+      "id": "G3-U1-P1",
+      "type": "practice",
+      "unitId": "G3-U1",
+      "title": "Practice: Beats in threes",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.02"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature",
+        "t.g3.bar-complete",
+        "t.g3.compound-grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U1-R1",
+      "type": "review",
+      "unitId": "G3-U1",
+      "title": "Review: Grade 2 foundations",
+      "objective": "Revisit earlier material so it stays fresh.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.02",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.04",
+        "abrsm2020.g2.05",
+        "abrsm2020.g2.06",
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.08",
+        "abrsm2020.g2.09",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11",
+        "abrsm2020.g2.12",
+        "abrsm2020.g2.13"
+      ],
+      "exerciseTemplateIds": [
+        "t.g2.time-signature",
+        "t.g2.bar-complete",
+        "t.g2.triplet",
+        "t.g2.note-grouping",
+        "t.g2.rest-grouping",
+        "t.g2.ledger-read",
+        "t.g2.ledger-write",
+        "t.g2.scale-build-major",
+        "t.g2.scale-build-minor",
+        "t.g2.key-signature",
+        "t.g2.relative-key",
+        "t.g2.tonic-triad",
+        "t.g2.degree",
+        "t.g2.interval-number",
+        "t.g2.terms",
+        "t.g2.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U1-C",
+      "type": "unit_challenge",
+      "unitId": "G3-U1",
+      "title": "Unit challenge: Beats in threes",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g3-u1",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U2-L01",
+      "type": "lesson",
+      "unitId": "G3-U2",
+      "title": "Demisemiquavers and their rests",
+      "objective": "Recognise the demisemiquaver and its rest and relate them to longer values.",
+      "conceptIds": [
+        "c.rhythm.demisemiquavers"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.03"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.demisemiquaver"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s04"
+      ]
+    },
+    {
+      "id": "G3-U2-L02",
+      "type": "lesson",
+      "unitId": "G3-U2",
+      "title": "Beaming very short notes",
+      "objective": "Beam demisemiquavers within beats and arrange their rests.",
+      "conceptIds": [
+        "c.rhythm.demisemiquaver-grouping"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.demisemiquaver",
+        "t.g3.compound-grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s04"
+      ]
+    },
+    {
+      "id": "G3-U2-E1",
+      "type": "enrichment",
+      "unitId": "G3-U2",
+      "title": "Upbeat starts",
+      "objective": "Optional: understand music that begins before the first bar-line.",
+      "conceptIds": [
+        "c.metre.anacrusis"
+      ],
+      "outcomeIds": [],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [],
+      "unlockAfter": [
+        "G3-U2-L01"
+      ],
+      "optional": true,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s05"
+      ]
+    },
+    {
+      "id": "G3-U2-P1",
+      "type": "practice",
+      "unitId": "G3-U2",
+      "title": "Practice: Very short notes",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.02"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.demisemiquaver",
+        "t.g3.compound-grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U2-R1",
+      "type": "review",
+      "unitId": "G3-U2",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.02"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature",
+        "t.g3.bar-complete",
+        "t.g3.compound-grouping",
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U2-C",
+      "type": "unit_challenge",
+      "unitId": "G3-U2",
+      "title": "Unit challenge: Very short notes",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g3-u2",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U3-L01",
+      "type": "lesson",
+      "unitId": "G3-U3",
+      "title": "Beyond two ledger lines",
+      "objective": "Read and write notes with more than two ledger lines.",
+      "conceptIds": [
+        "c.pitch.ledger-extended"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.ledger-read"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s06"
+      ]
+    },
+    {
+      "id": "G3-U3-L02",
+      "type": "lesson",
+      "unitId": "G3-U3",
+      "title": "Octave signs",
+      "objective": "Read 8va and 8vb signs as an alternative to many ledger lines.",
+      "conceptIds": [
+        "c.pitch.octave-signs"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.ledger-read"
+      ],
+      "optional": false,
+      "estimatedMinutes": 4,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s06"
+      ]
+    },
+    {
+      "id": "G3-U3-L03",
+      "type": "lesson",
+      "unitId": "G3-U3",
+      "title": "Transposing at the octave between treble and bass",
+      "objective": "Rewrite a melody an octave higher or lower in the other clef.",
+      "conceptIds": [
+        "c.transposition.octave-treble-bass"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.05"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.octave-transpose"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s07"
+      ]
+    },
+    {
+      "id": "G3-U3-P1",
+      "type": "practice",
+      "unitId": "G3-U3",
+      "title": "Practice: Higher, lower, an octave away",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.04",
+        "abrsm2020.g3.05"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.ledger-read",
+        "t.g3.octave-transpose"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U3-R1",
+      "type": "review",
+      "unitId": "G3-U3",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.02",
+        "abrsm2020.g3.03"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature",
+        "t.g3.bar-complete",
+        "t.g3.compound-grouping",
+        "t.g3.demisemiquaver",
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U3-C",
+      "type": "unit_challenge",
+      "unitId": "G3-U3",
+      "title": "Unit challenge: Higher, lower, an octave away",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g3-u3",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U4-L01",
+      "type": "lesson",
+      "unitId": "G3-U4",
+      "title": "The melodic minor",
+      "objective": "Build A, E and D melodic minor ascending and descending.",
+      "conceptIds": [
+        "c.scales.minor-melodic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.scale-build-minor"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s09",
+        "fs.g2.s11"
+      ]
+    },
+    {
+      "id": "G3-U4-L02",
+      "type": "lesson",
+      "unitId": "G3-U4",
+      "title": "E and A flat major",
+      "objective": "Build E and A♭ major and write their key signatures.",
+      "conceptIds": [
+        "c.scales.major-e-ab"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.scale-build-major",
+        "t.g3.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s08"
+      ]
+    },
+    {
+      "id": "G3-U4-L03",
+      "type": "lesson",
+      "unitId": "G3-U4",
+      "title": "B, F sharp and C sharp minor",
+      "objective": "Build B, F♯ and C♯ minor in both forms.",
+      "conceptIds": [
+        "c.scales.minor-sharp-g3"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.scale-build-minor",
+        "t.g3.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s09"
+      ]
+    },
+    {
+      "id": "G3-U4-L04",
+      "type": "lesson",
+      "unitId": "G3-U4",
+      "title": "G, C and F minor",
+      "objective": "Build G, C and F minor in both forms.",
+      "conceptIds": [
+        "c.scales.minor-flat-g3"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.scale-build-minor",
+        "t.g3.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s10"
+      ]
+    },
+    {
+      "id": "G3-U4-L05",
+      "type": "lesson",
+      "unitId": "G3-U4",
+      "title": "Key signatures, tonic triads and degrees to four",
+      "objective": "Write all key signatures to four sharps/flats, their tonic triads and degree numbers.",
+      "conceptIds": [
+        "c.keys.signatures-g3"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.09",
+        "abrsm2020.g3.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.key-signature",
+        "t.g3.tonic-triad",
+        "t.g3.degree"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s08",
+        "fs.g3.s09",
+        "fs.g3.s10"
+      ]
+    },
+    {
+      "id": "G3-U4-P1",
+      "type": "practice",
+      "unitId": "G3-U4",
+      "title": "Practice: More keys, two minor forms",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.08",
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.09",
+        "abrsm2020.g3.10"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.scale-build-minor",
+        "t.g3.scale-build-major",
+        "t.g3.key-signature",
+        "t.g3.tonic-triad",
+        "t.g3.degree"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U4-R1",
+      "type": "review",
+      "unitId": "G3-U4",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.02",
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.04",
+        "abrsm2020.g3.05"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature",
+        "t.g3.bar-complete",
+        "t.g3.compound-grouping",
+        "t.g3.demisemiquaver",
+        "t.g3.ledger-read",
+        "t.g3.octave-transpose",
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U4-C",
+      "type": "unit_challenge",
+      "unitId": "G3-U4",
+      "title": "Unit challenge: More keys, two minor forms",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g3-u4",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U5-L01",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Perfect intervals",
+      "objective": "Recognise perfect unisons, 4ths, 5ths and octaves above the tonic.",
+      "conceptIds": [
+        "c.intervals.quality-perfect"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.interval-quality"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s11"
+      ]
+    },
+    {
+      "id": "G3-U5-L02",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Major and minor intervals",
+      "objective": "Name 2nds, 3rds, 6ths and 7ths above the tonic as major or minor in major and minor keys.",
+      "conceptIds": [
+        "c.intervals.quality-major-minor"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.interval-quality"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s11"
+      ]
+    },
+    {
+      "id": "G3-U5-L03",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Grade 3 terms",
+      "objective": "Understand the Grade 3 performance terms.",
+      "conceptIds": [
+        "c.terms.g3"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ]
+    },
+    {
+      "id": "G3-U5-L04",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Looking closely at a melody (Grade 3)",
+      "objective": "Answer questions about an original melody in compound time.",
+      "conceptIds": [
+        "c.context.melody-g3"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": []
+    },
+    {
+      "id": "G3-U5-P1",
+      "type": "practice",
+      "unitId": "G3-U5",
+      "title": "Practice: Naming intervals exactly",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.11",
+        "abrsm2020.g3.12",
+        "abrsm2020.g1.21"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.interval-quality",
+        "t.g3.terms",
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U5-R1",
+      "type": "review",
+      "unitId": "G3-U5",
+      "title": "Grade review",
+      "objective": "Cumulative spaced review of the whole grade before the unit challenge and grade assessment.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.02",
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.04",
+        "abrsm2020.g3.05",
+        "abrsm2020.g3.08",
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.09",
+        "abrsm2020.g3.10",
+        "abrsm2020.g3.11",
+        "abrsm2020.g3.12",
+        "abrsm2020.g1.21"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.melody",
+        "t.g2.melody",
+        "t.g3.time-signature",
+        "t.g3.bar-complete",
+        "t.g3.compound-grouping",
+        "t.g3.demisemiquaver",
+        "t.g3.ledger-read",
+        "t.g3.octave-transpose",
+        "t.g3.scale-build-major",
+        "t.g3.scale-build-minor",
+        "t.g3.key-signature",
+        "t.g3.tonic-triad",
+        "t.g3.degree",
+        "t.g3.interval-quality",
+        "t.g3.terms",
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-U5-C",
+      "type": "unit_challenge",
+      "unitId": "G3-U5",
+      "title": "Unit challenge: Naming intervals exactly",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g3-u5",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G3-A",
+      "type": "grade_assessment",
+      "unitId": null,
+      "title": "Grade 3 assessment",
+      "objective": "An independent, hint-free assessment that samples every Grade 3 outcome and earlier essentials.",
+      "assessmentId": "a.g3",
+      "optional": false,
+      "estimatedMinutes": 25,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    }
+  ]
+}

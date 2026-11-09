@@ -1,0 +1,1540 @@
+{
+  "schemaVersion": 1,
+  "grade": 1,
+  "title": "Grade 1",
+  "learnerTitle": "First Notes",
+  "summary": "Rhythm, the stave, treble and bass clefs, the first four major keys, tonic triads, interval numbers and the language of performance.",
+  "units": [
+    {
+      "id": "G1-U1",
+      "grade": 1,
+      "sequence": 1,
+      "title": "Note values, rests, ties and dots",
+      "learnerTitle": "Long and short sounds",
+      "summary": "How long sounds and silences last, and how ties and dots lengthen notes.",
+      "bookSectionIds": [
+        "fs.g1.s01",
+        "fs.g1.s03",
+        "fs.g1.s11",
+        "fs.g1.s12"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G1-U2",
+      "grade": 1,
+      "sequence": 2,
+      "title": "Bars and simple time",
+      "learnerTitle": "Count the beat",
+      "summary": "Bars, bar-lines, 2/4 3/4 4/4, completing bars and grouping notes clearly.",
+      "bookSectionIds": [
+        "fs.g1.s02",
+        "fs.g1.s11",
+        "fs.g1.s18"
+      ],
+      "refinements": [
+        "Rest placement within bars is introduced here at a basic level because the outline lists rests at Grade 1; full rest-grouping rules remain in Grade 2 (see OPEN_QUESTIONS Q3)."
+      ]
+    },
+    {
+      "id": "G1-U3",
+      "grade": 1,
+      "sequence": 3,
+      "title": "Keyboard, stave, clefs and ledger lines",
+      "learnerTitle": "The keyboard and the stave",
+      "summary": "Letter names, the keyboard, the stave, treble and bass clefs, middle C and writing notes.",
+      "bookSectionIds": [
+        "fs.g1.s04",
+        "fs.g1.s05",
+        "fs.g1.s06",
+        "fs.g1.s07"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G1-U4",
+      "grade": 1,
+      "sequence": 4,
+      "title": "Sharps, flats and naturals",
+      "learnerTitle": "Sharps, flats and naturals",
+      "summary": "Accidentals on the keyboard and stave, how long they last and how they are cancelled.",
+      "bookSectionIds": [
+        "fs.g1.s08",
+        "fs.g1.s14"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G1-U5",
+      "grade": 1,
+      "sequence": 5,
+      "title": "Tones, semitones and major keys",
+      "learnerTitle": "Major scales and keys",
+      "summary": "Semitones and tones; C, G, D and F major scales; key signatures; degrees by number.",
+      "bookSectionIds": [
+        "fs.g1.s09",
+        "fs.g1.s10",
+        "fs.g1.s13",
+        "fs.g1.s15"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G1-U6",
+      "grade": 1,
+      "sequence": 6,
+      "title": "Tonic triads and intervals",
+      "learnerTitle": "Triads and intervals",
+      "summary": "Tonic triads in root position and interval numbers above the tonic.",
+      "bookSectionIds": [
+        "fs.g1.s16",
+        "fs.g1.s17"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G1-U7",
+      "grade": 1,
+      "sequence": 7,
+      "title": "Terms, signs and melody reading",
+      "learnerTitle": "Read the music",
+      "summary": "Tempo, dynamics, performance directions and articulation, applied to short original melodies.",
+      "bookSectionIds": [
+        "fs.g1.s19"
+      ],
+      "refinements": [
+        "Music-in-context lesson added: the official outline asks questions about a melody, which the source book does not cover."
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "G1-U1-L01",
+      "type": "lesson",
+      "unitId": "G1-U1",
+      "title": "Beats, crotchets, minims and semibreves",
+      "objective": "Feel a steady beat and compare crotchets, minims and semibreves by how many beats they last.",
+      "conceptIds": [
+        "c.rhythm.beat",
+        "c.rhythm.values-long"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-value"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s01"
+      ]
+    },
+    {
+      "id": "G1-U1-L02",
+      "type": "lesson",
+      "unitId": "G1-U1",
+      "title": "Quavers and semiquavers",
+      "objective": "Recognise quavers and semiquavers and say how many fit into a crotchet.",
+      "conceptIds": [
+        "c.rhythm.values-short"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-value"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s03"
+      ]
+    },
+    {
+      "id": "G1-U1-L03",
+      "type": "lesson",
+      "unitId": "G1-U1",
+      "title": "Flags and beams",
+      "objective": "Recognise the same quavers and semiquavers written with flags or joined by beams.",
+      "conceptIds": [
+        "c.rhythm.beams"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-value"
+      ],
+      "optional": false,
+      "estimatedMinutes": 4,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s03"
+      ]
+    },
+    {
+      "id": "G1-U1-L04",
+      "type": "lesson",
+      "unitId": "G1-U1",
+      "title": "Rests",
+      "objective": "Match each Grade 1 note value with its rest and read the semibreve and minim rests correctly.",
+      "conceptIds": [
+        "c.rhythm.rests"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.rest",
+        "t.g1.note-value"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s11"
+      ]
+    },
+    {
+      "id": "G1-U1-L05",
+      "type": "lesson",
+      "unitId": "G1-U1",
+      "title": "Ties",
+      "objective": "Add the values of tied notes to find how long the sound lasts.",
+      "conceptIds": [
+        "c.rhythm.ties"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.03"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.tie-dot"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s12"
+      ]
+    },
+    {
+      "id": "G1-U1-L06",
+      "type": "lesson",
+      "unitId": "G1-U1",
+      "title": "Dotted notes",
+      "objective": "Work out the length of a dotted note and choose between a tie and a dot.",
+      "conceptIds": [
+        "c.rhythm.dots"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.tie-dot"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s12"
+      ]
+    },
+    {
+      "id": "G1-U1-P1",
+      "type": "practice",
+      "unitId": "G1-U1",
+      "title": "Practice: Long and short sounds",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U1-R1",
+      "type": "review",
+      "unitId": "G1-U1",
+      "title": "Review: long and short sounds",
+      "objective": "Revisit earlier material so it stays fresh.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U1-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U1",
+      "title": "Unit challenge: Long and short sounds",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u1",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U2-L01",
+      "type": "lesson",
+      "unitId": "G1-U2",
+      "title": "Bars and bar-lines",
+      "objective": "Explain how bar-lines group beats and why the first beat of a bar is stronger.",
+      "conceptIds": [
+        "c.metre.bars"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.barlines"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s02"
+      ]
+    },
+    {
+      "id": "G1-U2-L02",
+      "type": "lesson",
+      "unitId": "G1-U2",
+      "title": "Time signatures 2/4, 3/4 and 4/4",
+      "objective": "Read the top and bottom numbers of 2/4, 3/4 and 4/4 (and the C sign).",
+      "conceptIds": [
+        "c.metre.simple-crotchet"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.05"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.time-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s02"
+      ]
+    },
+    {
+      "id": "G1-U2-L03",
+      "type": "lesson",
+      "unitId": "G1-U2",
+      "title": "Complete the bar",
+      "objective": "Complete bars in 2/4, 3/4 and 4/4 using notes, dotted notes and rests.",
+      "conceptIds": [
+        "c.metre.bar-completion"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.bar-complete",
+        "t.g1.barlines"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s02"
+      ]
+    },
+    {
+      "id": "G1-U2-L04",
+      "type": "lesson",
+      "unitId": "G1-U2",
+      "title": "Grouping notes to show the beat",
+      "objective": "Beam quavers and semiquavers so that every beat is easy to see, including the 4/4 half-bar convention.",
+      "conceptIds": [
+        "c.metre.grouping-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.07"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.grouping",
+        "t.g1.bar-complete"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s18"
+      ]
+    },
+    {
+      "id": "G1-U2-L05",
+      "type": "lesson",
+      "unitId": "G1-U2",
+      "title": "Ties or single notes?",
+      "objective": "Replace unnecessary ties with single or dotted notes, and keep ties that show the beat.",
+      "conceptIds": [
+        "c.metre.ties-in-bars"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.07"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s18"
+      ]
+    },
+    {
+      "id": "G1-U2-L06",
+      "type": "lesson",
+      "unitId": "G1-U2",
+      "title": "Rests in a bar",
+      "objective": "Use a semibreve rest for a silent bar and place simple rests on the beat in 2/4, 3/4 and 4/4.",
+      "conceptIds": [
+        "c.metre.rests-in-bars-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.07"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.grouping",
+        "t.g1.bar-complete"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s11",
+        "fs.g1.s18"
+      ]
+    },
+    {
+      "id": "G1-U2-P1",
+      "type": "practice",
+      "unitId": "G1-U2",
+      "title": "Practice: Count the beat",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.02"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.barlines",
+        "t.g1.time-signature",
+        "t.g1.bar-complete",
+        "t.g1.grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U2-R1",
+      "type": "review",
+      "unitId": "G1-U2",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U2-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U2",
+      "title": "Unit challenge: Count the beat",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u2",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U3-L01",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "Letter names on the keyboard",
+      "objective": "Name white keys from A to G using the groups of black keys.",
+      "conceptIds": [
+        "c.pitch.letter-names",
+        "c.pitch.keyboard"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.keyboard"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s04"
+      ]
+    },
+    {
+      "id": "G1-U3-L02",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "The stave: lines and spaces",
+      "objective": "Count the lines and spaces of a stave from the bottom and say whether a note is on a line or in a space.",
+      "conceptIds": [
+        "c.clefs.stave"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-read"
+      ],
+      "optional": false,
+      "estimatedMinutes": 4,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s05"
+      ]
+    },
+    {
+      "id": "G1-U3-L03",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "Treble clef: notes on the lines",
+      "objective": "Read and place the five treble-clef line notes (E, G, B, D, F).",
+      "conceptIds": [
+        "c.clefs.treble-lines"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-read",
+        "t.g1.note-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "example",
+      "bookSectionIds": [
+        "fs.g1.s05",
+        "fs.g1.s06"
+      ],
+      "contentRef": "lessons/G1-U3-L03.json"
+    },
+    {
+      "id": "G1-U3-L04",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "Treble clef: notes in the spaces",
+      "objective": "Read and place the four treble-clef space notes (F, A, C, E).",
+      "conceptIds": [
+        "c.clefs.treble-spaces"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-read",
+        "t.g1.note-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s05"
+      ]
+    },
+    {
+      "id": "G1-U3-L05",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "The bass clef",
+      "objective": "Read and place bass-clef line and space notes, using F on the fourth line as a guide.",
+      "conceptIds": [
+        "c.clefs.bass"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-read",
+        "t.g1.note-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s05"
+      ]
+    },
+    {
+      "id": "G1-U3-L06",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "Middle C and ledger lines",
+      "objective": "Read and write middle C on a ledger line in both clefs and find it on the keyboard.",
+      "conceptIds": [
+        "c.pitch.middle-c"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-read",
+        "t.g1.note-write",
+        "t.g1.keyboard"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s07"
+      ]
+    },
+    {
+      "id": "G1-U3-L07",
+      "type": "lesson",
+      "unitId": "G1-U3",
+      "title": "Writing notes neatly",
+      "objective": "Write note-heads, stems and flags on the stave with stems on the correct side.",
+      "conceptIds": [
+        "c.pitch.note-writing"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s06"
+      ]
+    },
+    {
+      "id": "G1-U3-P1",
+      "type": "practice",
+      "unitId": "G1-U3",
+      "title": "Practice: The keyboard and the stave",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.08"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.keyboard",
+        "t.g1.note-read",
+        "t.g1.note-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U3-R1",
+      "type": "review",
+      "unitId": "G1-U3",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.07"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.time-signature",
+        "t.g1.barlines",
+        "t.g1.bar-complete",
+        "t.g1.grouping",
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U3-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U3",
+      "title": "Unit challenge: The keyboard and the stave",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u3",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U4-L01",
+      "type": "lesson",
+      "unitId": "G1-U4",
+      "title": "Sharps, flats and naturals on the keyboard",
+      "objective": "Name black keys as sharps or flats and explain what a natural sign does.",
+      "conceptIds": [
+        "c.accidentals.signs"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.keyboard"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s08"
+      ]
+    },
+    {
+      "id": "G1-U4-L02",
+      "type": "lesson",
+      "unitId": "G1-U4",
+      "title": "Accidentals on the stave",
+      "objective": "Write an accidental before a note on the same line or space and read notes with accidentals.",
+      "conceptIds": [
+        "c.accidentals.on-stave"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.note-read",
+        "t.g1.note-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s08"
+      ]
+    },
+    {
+      "id": "G1-U4-L03",
+      "type": "lesson",
+      "unitId": "G1-U4",
+      "title": "How long does an accidental last?",
+      "objective": "Decide which notes in a bar an accidental affects, including tied notes over a bar-line.",
+      "conceptIds": [
+        "c.accidentals.bar-rule"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.accidental-state"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s14"
+      ]
+    },
+    {
+      "id": "G1-U4-L04",
+      "type": "lesson",
+      "unitId": "G1-U4",
+      "title": "Cancelling accidentals",
+      "objective": "Use a natural sign to cancel a sharp or flat and spot unnecessary accidentals.",
+      "conceptIds": [
+        "c.accidentals.cancellation"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.accidental-state"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s14"
+      ]
+    },
+    {
+      "id": "G1-U4-P1",
+      "type": "practice",
+      "unitId": "G1-U4",
+      "title": "Practice: Sharps, flats and naturals",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.keyboard",
+        "t.g1.note-read",
+        "t.g1.note-write",
+        "t.g1.accidental-state"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U4-R1",
+      "type": "review",
+      "unitId": "G1-U4",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.08"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.time-signature",
+        "t.g1.barlines",
+        "t.g1.bar-complete",
+        "t.g1.grouping",
+        "t.g1.note-read",
+        "t.g1.note-write",
+        "t.g1.keyboard",
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U4-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U4",
+      "title": "Unit challenge: Sharps, flats and naturals",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u4",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U5-L01",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "Semitones and tones",
+      "objective": "Find semitones and tones on the keyboard.",
+      "conceptIds": [
+        "c.pitch.tones-semitones"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.tone-semitone"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s09"
+      ]
+    },
+    {
+      "id": "G1-U5-L02",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "Building C major",
+      "objective": "Build the C major scale and mark where its semitones fall.",
+      "conceptIds": [
+        "c.scales.major-pattern"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.scale-build"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s09"
+      ]
+    },
+    {
+      "id": "G1-U5-L03",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "G and D major: raising notes",
+      "objective": "Build G and D major by raising notes to keep the major pattern.",
+      "conceptIds": [
+        "c.scales.major-sharp-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.scale-build"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s10"
+      ]
+    },
+    {
+      "id": "G1-U5-L04",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "F major: lowering a note",
+      "objective": "Build F major by lowering the fourth note.",
+      "conceptIds": [
+        "c.scales.major-f"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.scale-build"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s10"
+      ]
+    },
+    {
+      "id": "G1-U5-L05",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "Keys and key signatures",
+      "objective": "Recognise and write the key signatures of C, G, D and F major in both clefs.",
+      "conceptIds": [
+        "c.keys.signature-concept",
+        "c.keys.signatures-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s13"
+      ]
+    },
+    {
+      "id": "G1-U5-L06",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "Writing scales with and without key signatures",
+      "objective": "Write C, G, D and F major ascending and descending in both clefs, with and without key signatures.",
+      "conceptIds": [
+        "c.scales.writing-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.scale-build",
+        "t.g1.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s13"
+      ]
+    },
+    {
+      "id": "G1-U5-L07",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "Scale degrees by number",
+      "objective": "Number the degrees of a scale and name the degree of a note in a Grade 1 key.",
+      "conceptIds": [
+        "c.scales.degree-numbers"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.15"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.degree"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s15"
+      ]
+    },
+    {
+      "id": "G1-U5-P1",
+      "type": "practice",
+      "unitId": "G1-U5",
+      "title": "Practice: Major scales and keys",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13",
+        "abrsm2020.g1.15"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.tone-semitone",
+        "t.g1.scale-build",
+        "t.g1.key-signature",
+        "t.g1.degree"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U5-R1",
+      "type": "review",
+      "unitId": "G1-U5",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.10"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.time-signature",
+        "t.g1.barlines",
+        "t.g1.bar-complete",
+        "t.g1.grouping",
+        "t.g1.note-read",
+        "t.g1.note-write",
+        "t.g1.keyboard",
+        "t.g1.accidental-state",
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U5-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U5",
+      "title": "Unit challenge: Major scales and keys",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u5",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U6-L01",
+      "type": "lesson",
+      "unitId": "G1-U6",
+      "title": "The tonic triad",
+      "objective": "Build and recognise tonic triads in C, G, D and F major in both clefs.",
+      "conceptIds": [
+        "c.chords.tonic-triad"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.14"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.tonic-triad"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s16"
+      ]
+    },
+    {
+      "id": "G1-U6-L02",
+      "type": "lesson",
+      "unitId": "G1-U6",
+      "title": "Interval numbers",
+      "objective": "Count letter names to give the number of an interval.",
+      "conceptIds": [
+        "c.intervals.number"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.16"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.interval-number"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s17"
+      ]
+    },
+    {
+      "id": "G1-U6-L03",
+      "type": "lesson",
+      "unitId": "G1-U6",
+      "title": "Intervals above the tonic",
+      "objective": "Identify and write intervals above the tonic in C, G, D and F major, harmonic and melodic.",
+      "conceptIds": [
+        "c.intervals.above-tonic-number"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.16"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.interval-number"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s17"
+      ]
+    },
+    {
+      "id": "G1-U6-P1",
+      "type": "practice",
+      "unitId": "G1-U6",
+      "title": "Practice: Triads and intervals",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.14",
+        "abrsm2020.g1.16"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.tonic-triad",
+        "t.g1.interval-number"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U6-R1",
+      "type": "review",
+      "unitId": "G1-U6",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.10",
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13",
+        "abrsm2020.g1.15"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.time-signature",
+        "t.g1.barlines",
+        "t.g1.bar-complete",
+        "t.g1.grouping",
+        "t.g1.note-read",
+        "t.g1.note-write",
+        "t.g1.keyboard",
+        "t.g1.accidental-state",
+        "t.g1.tone-semitone",
+        "t.g1.scale-build",
+        "t.g1.key-signature",
+        "t.g1.degree",
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U6-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U6",
+      "title": "Unit challenge: Triads and intervals",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u6",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U7-L01",
+      "type": "lesson",
+      "unitId": "G1-U7",
+      "title": "How fast? Tempo terms",
+      "objective": "Understand common tempo terms and metronome marks.",
+      "conceptIds": [
+        "c.terms.tempo-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.17"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s19"
+      ]
+    },
+    {
+      "id": "G1-U7-L02",
+      "type": "lesson",
+      "unitId": "G1-U7",
+      "title": "How loud? Dynamics",
+      "objective": "Understand dynamic marks and hairpins.",
+      "conceptIds": [
+        "c.terms.dynamics-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.18"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s19"
+      ]
+    },
+    {
+      "id": "G1-U7-L03",
+      "type": "lesson",
+      "unitId": "G1-U7",
+      "title": "Directions and signs",
+      "objective": "Follow repeat marks, pause, 8va and other performance directions.",
+      "conceptIds": [
+        "c.terms.directions-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.19"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s19"
+      ]
+    },
+    {
+      "id": "G1-U7-L04",
+      "type": "lesson",
+      "unitId": "G1-U7",
+      "title": "Articulation",
+      "objective": "Recognise staccato, accent and legato markings.",
+      "conceptIds": [
+        "c.terms.articulation-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.20"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g1.s19"
+      ]
+    },
+    {
+      "id": "G1-U7-L05",
+      "type": "lesson",
+      "unitId": "G1-U7",
+      "title": "Looking closely at a melody",
+      "objective": "Answer questions about an original melody using everything from Grade 1.",
+      "conceptIds": [
+        "c.context.melody-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": []
+    },
+    {
+      "id": "G1-U7-P1",
+      "type": "practice",
+      "unitId": "G1-U7",
+      "title": "Practice: Read the music",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.19",
+        "abrsm2020.g1.20",
+        "abrsm2020.g1.21"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.terms",
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U7-R1",
+      "type": "review",
+      "unitId": "G1-U7",
+      "title": "Grade review",
+      "objective": "Cumulative spaced review of the whole grade before the unit challenge and grade assessment.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.10",
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13",
+        "abrsm2020.g1.15",
+        "abrsm2020.g1.14",
+        "abrsm2020.g1.16",
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.19",
+        "abrsm2020.g1.20",
+        "abrsm2020.g1.21"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.note-value",
+        "t.g1.rest",
+        "t.g1.tie-dot",
+        "t.g1.time-signature",
+        "t.g1.barlines",
+        "t.g1.bar-complete",
+        "t.g1.grouping",
+        "t.g1.note-read",
+        "t.g1.note-write",
+        "t.g1.keyboard",
+        "t.g1.accidental-state",
+        "t.g1.tone-semitone",
+        "t.g1.scale-build",
+        "t.g1.key-signature",
+        "t.g1.degree",
+        "t.g1.tonic-triad",
+        "t.g1.interval-number",
+        "t.g1.terms",
+        "t.g1.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-U7-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U7",
+      "title": "Unit challenge: Read the music",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u7",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G1-A",
+      "type": "grade_assessment",
+      "unitId": null,
+      "title": "Grade 1 assessment",
+      "objective": "An independent, hint-free assessment that samples every Grade 1 outcome and earlier essentials.",
+      "assessmentId": "a.g1",
+      "optional": false,
+      "estimatedMinutes": 25,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    }
+  ]
+}

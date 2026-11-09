@@ -1,0 +1,1078 @@
+{
+  "schemaVersion": 1,
+  "grade": 4,
+  "title": "Grade 4",
+  "learnerTitle": "Clefs, Chords and Colour",
+  "summary": "Breves, double dots, all regular metres, duplets, alto clef, double accidentals, keys to five sharps/flats, chromatic scale, any diatonic interval, primary triads, ornaments and instruments.",
+  "units": [
+    {
+      "id": "G4-U1",
+      "grade": 4,
+      "sequence": 1,
+      "title": "Breves, double dots, regular metres and duplets",
+      "learnerTitle": "Every regular time",
+      "summary": "New values and every simple/compound duple, triple and quadruple time signature.",
+      "bookSectionIds": [
+        "fs.g4.s01",
+        "fs.g4.s02",
+        "fs.g4.s03",
+        "fs.g4.s04"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G4-U2",
+      "grade": 4,
+      "sequence": 2,
+      "title": "Double accidentals, enharmonics and the alto clef",
+      "learnerTitle": "Spelling and the alto clef",
+      "summary": "Double sharps/flats, enharmonic equivalents, alto clef and octave transposition into and out of it.",
+      "bookSectionIds": [
+        "fs.g4.s05",
+        "fs.g4.s14",
+        "fs.g5.s03"
+      ],
+      "refinements": [
+        "Alto-clef key signatures move to G4-U3 so that they follow the new five-accidental keys."
+      ]
+    },
+    {
+      "id": "G4-U3",
+      "grade": 4,
+      "sequence": 3,
+      "title": "Five-accidental keys, degree names and the chromatic scale",
+      "learnerTitle": "More keys and every semitone",
+      "summary": "B, D♭, G♯ minor, B♭ minor; alto-clef key signatures; technical names; chromatic scale.",
+      "bookSectionIds": [
+        "fs.g4.s06",
+        "fs.g4.s07",
+        "fs.g4.s08",
+        "fs.g4.s12",
+        "fs.g4.s14"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G4-U4",
+      "grade": 4,
+      "sequence": 4,
+      "title": "Intervals and primary triads",
+      "learnerTitle": "Intervals and the three main chords",
+      "summary": "Any diatonic interval within an octave; triads and chords on I, IV and V.",
+      "bookSectionIds": [
+        "fs.g4.s09",
+        "fs.g4.s10",
+        "fs.g4.s11"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G4-U5",
+      "grade": 4,
+      "sequence": 5,
+      "title": "Ornaments, instruments and the passage",
+      "learnerTitle": "Ornaments and the orchestra",
+      "summary": "Ornament signs, orchestral instruments and techniques, Grade 4 terms, reading a passage.",
+      "bookSectionIds": [
+        "fs.g4.s13",
+        "fs.g4.s15"
+      ],
+      "refinements": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "G4-U1-L01",
+      "type": "lesson",
+      "unitId": "G4-U1",
+      "title": "The breve and its rest",
+      "objective": "Recognise the breve and the breve rest and use them in 4/2.",
+      "conceptIds": [
+        "c.rhythm.breve"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.breve-double-dot"
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s01"
+      ]
+    },
+    {
+      "id": "G4-U1-L02",
+      "type": "lesson",
+      "unitId": "G4-U1",
+      "title": "Double dots",
+      "objective": "Work out the value of double-dotted notes and rests.",
+      "conceptIds": [
+        "c.rhythm.double-dots"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.03"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.breve-double-dot"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s02"
+      ]
+    },
+    {
+      "id": "G4-U1-L03",
+      "type": "lesson",
+      "unitId": "G4-U1",
+      "title": "All regular time signatures",
+      "objective": "Classify any regular time signature as simple/compound and duple/triple/quadruple.",
+      "conceptIds": [
+        "c.metre.regular-all"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.time-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s03"
+      ]
+    },
+    {
+      "id": "G4-U1-L04",
+      "type": "lesson",
+      "unitId": "G4-U1",
+      "title": "Grouping in the new time signatures",
+      "objective": "Group notes and rests in 6/4, 9/4, 12/4, 6/16 and similar times.",
+      "conceptIds": [
+        "c.metre.regular-grouping"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.regular-grouping"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s03"
+      ]
+    },
+    {
+      "id": "G4-U1-L05",
+      "type": "lesson",
+      "unitId": "G4-U1",
+      "title": "Duplets",
+      "objective": "Read duplets in compound time and compare with simple time.",
+      "conceptIds": [
+        "c.rhythm.duplets"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.duplet"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s04"
+      ]
+    },
+    {
+      "id": "G4-U1-P1",
+      "type": "practice",
+      "unitId": "G4-U1",
+      "title": "Practice: Every regular time",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.02",
+        "abrsm2020.g4.03",
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.04"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.breve-double-dot",
+        "t.g4.time-signature",
+        "t.g4.regular-grouping",
+        "t.g4.duplet"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U1-R1",
+      "type": "review",
+      "unitId": "G4-U1",
+      "title": "Review: Grade 3 foundations",
+      "objective": "Revisit earlier material so it stays fresh.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g3.01",
+        "abrsm2020.g3.02",
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.04",
+        "abrsm2020.g3.05",
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08",
+        "abrsm2020.g3.09",
+        "abrsm2020.g3.10",
+        "abrsm2020.g3.11",
+        "abrsm2020.g3.12"
+      ],
+      "exerciseTemplateIds": [
+        "t.g3.time-signature",
+        "t.g3.bar-complete",
+        "t.g3.compound-grouping",
+        "t.g3.demisemiquaver",
+        "t.g3.ledger-read",
+        "t.g3.octave-transpose",
+        "t.g3.scale-build-major",
+        "t.g3.scale-build-minor",
+        "t.g3.key-signature",
+        "t.g3.tonic-triad",
+        "t.g3.degree",
+        "t.g3.interval-quality",
+        "t.g3.terms",
+        "t.g3.melody"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U1-C",
+      "type": "unit_challenge",
+      "unitId": "G4-U1",
+      "title": "Unit challenge: Every regular time",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g4-u1",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U2-L01",
+      "type": "lesson",
+      "unitId": "G4-U2",
+      "title": "Double sharps and double flats",
+      "objective": "Read, write and cancel double sharps and double flats.",
+      "conceptIds": [
+        "c.accidentals.double"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.double-accidental"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s05"
+      ]
+    },
+    {
+      "id": "G4-U2-L02",
+      "type": "lesson",
+      "unitId": "G4-U2",
+      "title": "Enharmonic equivalents",
+      "objective": "Give other spellings of the same sound and explain when spelling matters.",
+      "conceptIds": [
+        "c.accidentals.enharmonic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.enharmonic"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s05"
+      ]
+    },
+    {
+      "id": "G4-U2-L03",
+      "type": "lesson",
+      "unitId": "G4-U2",
+      "title": "The alto clef",
+      "objective": "Read and write notes in the alto clef, with middle C on the middle line.",
+      "conceptIds": [
+        "c.clefs.alto"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.05"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.alto-read",
+        "t.g4.alto-write"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s14"
+      ]
+    },
+    {
+      "id": "G4-U2-L04",
+      "type": "lesson",
+      "unitId": "G4-U2",
+      "title": "The same pitch in three clefs",
+      "objective": "Recognise notes of the same pitch in treble, alto and bass clefs.",
+      "conceptIds": [
+        "c.clefs.same-pitch-three"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.same-pitch"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s14"
+      ]
+    },
+    {
+      "id": "G4-U2-L05",
+      "type": "lesson",
+      "unitId": "G4-U2",
+      "title": "Octave transposition with the alto clef",
+      "objective": "Transpose a melody at the octave from treble or bass into alto, and back.",
+      "conceptIds": [
+        "c.transposition.octave-alto"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.07"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.octave-transpose-alto"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s14"
+      ]
+    },
+    {
+      "id": "G4-U2-P1",
+      "type": "practice",
+      "unitId": "G4-U2",
+      "title": "Practice: Spelling and the alto clef",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.08",
+        "abrsm2020.g4.09",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.06",
+        "abrsm2020.g4.07"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.double-accidental",
+        "t.g4.enharmonic",
+        "t.g4.alto-read",
+        "t.g4.alto-write",
+        "t.g4.same-pitch",
+        "t.g4.octave-transpose-alto"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U2-R1",
+      "type": "review",
+      "unitId": "G4-U2",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.02",
+        "abrsm2020.g4.03",
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.04"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.time-signature",
+        "t.g4.regular-grouping",
+        "t.g4.breve-double-dot",
+        "t.g4.duplet"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U2-C",
+      "type": "unit_challenge",
+      "unitId": "G4-U2",
+      "title": "Unit challenge: Spelling and the alto clef",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g4-u2",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U3-L01",
+      "type": "lesson",
+      "unitId": "G4-U3",
+      "title": "B major and G sharp minor",
+      "objective": "Build B major and G♯ minor (both forms), including the double sharp.",
+      "conceptIds": [
+        "c.scales.keys-five-sharps"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.scale-build",
+        "t.g4.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s06"
+      ]
+    },
+    {
+      "id": "G4-U3-L02",
+      "type": "lesson",
+      "unitId": "G4-U3",
+      "title": "D flat major and B flat minor",
+      "objective": "Build D♭ major and B♭ minor (both forms).",
+      "conceptIds": [
+        "c.scales.keys-five-flats"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.scale-build",
+        "t.g4.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s07"
+      ]
+    },
+    {
+      "id": "G4-U3-L03",
+      "type": "lesson",
+      "unitId": "G4-U3",
+      "title": "Key signatures in the alto clef",
+      "objective": "Write key signatures of all Grade 4 keys in the alto clef.",
+      "conceptIds": [
+        "c.keys.signatures-alto"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.key-signature",
+        "t.g4.alto-read"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s14"
+      ]
+    },
+    {
+      "id": "G4-U3-L04",
+      "type": "lesson",
+      "unitId": "G4-U3",
+      "title": "Technical names of degrees",
+      "objective": "Name each degree of a diatonic scale: tonic to leading note.",
+      "conceptIds": [
+        "c.scales.technical-names"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.technical-names"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s08"
+      ]
+    },
+    {
+      "id": "G4-U3-L05",
+      "type": "lesson",
+      "unitId": "G4-U3",
+      "title": "The chromatic scale",
+      "objective": "Write a chromatic scale with each letter name used once or twice and sensible accidentals.",
+      "conceptIds": [
+        "c.scales.chromatic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.chromatic-scale"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s12"
+      ]
+    },
+    {
+      "id": "G4-U3-P1",
+      "type": "practice",
+      "unitId": "G4-U3",
+      "title": "Practice: More keys and every semitone",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.10",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.11",
+        "abrsm2020.g4.12"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.scale-build",
+        "t.g4.key-signature",
+        "t.g4.alto-read",
+        "t.g4.technical-names",
+        "t.g4.chromatic-scale"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U3-R1",
+      "type": "review",
+      "unitId": "G4-U3",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.02",
+        "abrsm2020.g4.03",
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.04",
+        "abrsm2020.g4.08",
+        "abrsm2020.g4.09",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.06",
+        "abrsm2020.g4.07"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.time-signature",
+        "t.g4.regular-grouping",
+        "t.g4.breve-double-dot",
+        "t.g4.duplet",
+        "t.g4.double-accidental",
+        "t.g4.enharmonic",
+        "t.g4.alto-read",
+        "t.g4.alto-write",
+        "t.g4.same-pitch",
+        "t.g4.octave-transpose-alto",
+        "t.g4.key-signature"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U3-C",
+      "type": "unit_challenge",
+      "unitId": "G4-U3",
+      "title": "Unit challenge: More keys and every semitone",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g4-u3",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U4-L01",
+      "type": "lesson",
+      "unitId": "G4-U4",
+      "title": "Intervals from any note of the scale",
+      "objective": "Name intervals whose lower note is not the tonic, using the scale that contains both notes.",
+      "conceptIds": [
+        "c.intervals.any-diatonic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.interval-diatonic"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s09"
+      ]
+    },
+    {
+      "id": "G4-U4-L02",
+      "type": "lesson",
+      "unitId": "G4-U4",
+      "title": "Augmented and diminished intervals",
+      "objective": "Recognise augmented and diminished intervals such as the augmented 4th and diminished 5th.",
+      "conceptIds": [
+        "c.intervals.augmented-diminished"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.interval-diatonic"
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s09"
+      ]
+    },
+    {
+      "id": "G4-U4-L03",
+      "type": "lesson",
+      "unitId": "G4-U4",
+      "title": "Triads on I, IV and V",
+      "objective": "Build root-position tonic, subdominant and dominant triads in any Grade 4 key.",
+      "conceptIds": [
+        "c.chords.primary-triads"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.14"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.primary-triad"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s10"
+      ]
+    },
+    {
+      "id": "G4-U4-L04",
+      "type": "lesson",
+      "unitId": "G4-U4",
+      "title": "Chords: spacing and doubling",
+      "objective": "Recognise root-position chords made from a triad with notes doubled or spread.",
+      "conceptIds": [
+        "c.chords.root-position-chords"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.15"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.chord-in-passage"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s11"
+      ]
+    },
+    {
+      "id": "G4-U4-L05",
+      "type": "lesson",
+      "unitId": "G4-U4",
+      "title": "Naming chords in a passage",
+      "objective": "Identify tonic, subdominant and dominant chords in a short original passage.",
+      "conceptIds": [
+        "c.chords.identify-in-passage"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.15"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.chord-in-passage"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s11"
+      ]
+    },
+    {
+      "id": "G4-U4-P1",
+      "type": "practice",
+      "unitId": "G4-U4",
+      "title": "Practice: Intervals and the three main chords",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.13",
+        "abrsm2020.g4.14",
+        "abrsm2020.g4.15"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.interval-diatonic",
+        "t.g4.primary-triad",
+        "t.g4.chord-in-passage"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U4-R1",
+      "type": "review",
+      "unitId": "G4-U4",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.02",
+        "abrsm2020.g4.03",
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.04",
+        "abrsm2020.g4.08",
+        "abrsm2020.g4.09",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.06",
+        "abrsm2020.g4.07",
+        "abrsm2020.g4.10",
+        "abrsm2020.g4.11",
+        "abrsm2020.g4.12"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.time-signature",
+        "t.g4.regular-grouping",
+        "t.g4.breve-double-dot",
+        "t.g4.duplet",
+        "t.g4.double-accidental",
+        "t.g4.enharmonic",
+        "t.g4.alto-read",
+        "t.g4.alto-write",
+        "t.g4.same-pitch",
+        "t.g4.octave-transpose-alto",
+        "t.g4.scale-build",
+        "t.g4.key-signature",
+        "t.g4.technical-names",
+        "t.g4.chromatic-scale"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U4-C",
+      "type": "unit_challenge",
+      "unitId": "G4-U4",
+      "title": "Unit challenge: Intervals and the three main chords",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g4-u4",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U5-L01",
+      "type": "lesson",
+      "unitId": "G4-U5",
+      "title": "Ornament signs",
+      "objective": "Recognise and name the trill, turn, upper and lower mordent, acciaccatura and appoggiatura.",
+      "conceptIds": [
+        "c.ornaments.signs"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.17"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.ornament-name"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s13"
+      ]
+    },
+    {
+      "id": "G4-U5-L02",
+      "type": "lesson",
+      "unitId": "G4-U5",
+      "title": "The orchestra",
+      "objective": "Name the orchestral families and order instruments by range.",
+      "conceptIds": [
+        "c.instruments.orchestra"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.18"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.instruments"
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s15"
+      ]
+    },
+    {
+      "id": "G4-U5-L03",
+      "type": "lesson",
+      "unitId": "G4-U5",
+      "title": "Playing techniques and directions",
+      "objective": "Understand mutes, pizzicato/arco, bowing marks and similar directions.",
+      "conceptIds": [
+        "c.instruments.techniques"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.18",
+        "abrsm2020.g4.16"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.instruments",
+        "t.g4.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s15"
+      ]
+    },
+    {
+      "id": "G4-U5-L04",
+      "type": "lesson",
+      "unitId": "G4-U5",
+      "title": "Grade 4 terms (Italian and French)",
+      "objective": "Understand the Grade 4 terms, including French directions.",
+      "conceptIds": [
+        "c.terms.g4"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.16"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.terms"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g4.s15"
+      ]
+    },
+    {
+      "id": "G4-U5-L05",
+      "type": "lesson",
+      "unitId": "G4-U5",
+      "title": "Looking closely at a passage (Grade 4)",
+      "objective": "Answer questions about an original passage: chords, intervals, ornaments and instruments.",
+      "conceptIds": [
+        "c.context.passage-g4"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.18",
+        "abrsm2020.g1.21"
+      ],
+      "reviewOutcomeIds": [],
+      "exerciseTemplateIds": [
+        "t.g4.passage"
+      ],
+      "optional": false,
+      "estimatedMinutes": 9,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": []
+    },
+    {
+      "id": "G4-U5-P1",
+      "type": "practice",
+      "unitId": "G4-U5",
+      "title": "Practice: Ornaments and the orchestra",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.17",
+        "abrsm2020.g4.18",
+        "abrsm2020.g4.16",
+        "abrsm2020.g1.21"
+      ],
+      "exerciseTemplateIds": [
+        "t.g4.ornament-name",
+        "t.g4.instruments",
+        "t.g4.terms",
+        "t.g4.passage"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U5-R1",
+      "type": "review",
+      "unitId": "G4-U5",
+      "title": "Grade review",
+      "objective": "Cumulative spaced review of the whole grade before the unit challenge and grade assessment.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g4.02",
+        "abrsm2020.g4.03",
+        "abrsm2020.g4.01",
+        "abrsm2020.g4.04",
+        "abrsm2020.g4.08",
+        "abrsm2020.g4.09",
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.06",
+        "abrsm2020.g4.07",
+        "abrsm2020.g4.10",
+        "abrsm2020.g4.11",
+        "abrsm2020.g4.12",
+        "abrsm2020.g4.13",
+        "abrsm2020.g4.14",
+        "abrsm2020.g4.15",
+        "abrsm2020.g4.17",
+        "abrsm2020.g4.18",
+        "abrsm2020.g4.16",
+        "abrsm2020.g1.21"
+      ],
+      "exerciseTemplateIds": [
+        "t.g1.melody",
+        "t.g2.melody",
+        "t.g3.melody",
+        "t.g4.time-signature",
+        "t.g4.regular-grouping",
+        "t.g4.breve-double-dot",
+        "t.g4.duplet",
+        "t.g4.double-accidental",
+        "t.g4.enharmonic",
+        "t.g4.alto-read",
+        "t.g4.alto-write",
+        "t.g4.same-pitch",
+        "t.g4.octave-transpose-alto",
+        "t.g4.scale-build",
+        "t.g4.key-signature",
+        "t.g4.technical-names",
+        "t.g4.chromatic-scale",
+        "t.g4.interval-diatonic",
+        "t.g4.primary-triad",
+        "t.g4.chord-in-passage",
+        "t.g4.ornament-name",
+        "t.g4.instruments",
+        "t.g4.terms",
+        "t.g4.passage"
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-U5-C",
+      "type": "unit_challenge",
+      "unitId": "G4-U5",
+      "title": "Unit challenge: Ornaments and the orchestra",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g4-u5",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G4-A",
+      "type": "grade_assessment",
+      "unitId": null,
+      "title": "Grade 4 assessment",
+      "objective": "An independent, hint-free assessment that samples every Grade 4 outcome and earlier essentials.",
+      "assessmentId": "a.g4",
+      "optional": false,
+      "estimatedMinutes": 25,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    }
+  ]
+}
