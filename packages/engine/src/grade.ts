@@ -2,7 +2,40 @@ import type { CurriculumIndex, ExerciseItem, MusicScope } from "@mtp/curriculum"
 import { EngineError, itemContext, type ItemContext } from "./context.ts";
 import { gradeSimple } from "./graders/index.ts";
 import type { Verdict } from "./graders/types.ts";
-import { LearnerResponse } from "./responses.ts";
+import { inputFor, type ItemInput } from "./inputs.ts";
+import { LearnerResponse, type SimpleResponse } from "./responses.ts";
+
+/**
+ * The response kinds each input offers. The server grades only answers the item's own input could produce, so a
+ * client cannot, for example, send a bare letter to a task that assesses spelling, sound or octave.
+ */
+const RESPONSE_FOR_INPUT: Record<Exclude<ItemInput["kind"], "composite">, SimpleResponse["kind"]> = {
+  choice: "choice",
+  "multi-choice": "multi-choice",
+  "pitch-letter": "pitch-letter",
+  "note-name": "pitch",
+  "staff-position": "staff-position",
+  keyboard: "keyboard",
+  "pitch-sequence": "pitch-sequence",
+  "chord-builder": "chord-notes",
+  "rhythm-builder": "rhythm",
+  "rhythm-grouping": "rhythm",
+  barlines: "barlines",
+  "time-signature": "time-signature",
+  "key-name": "key-name",
+  "key-signature-writer": "key-signature",
+  "interval-name": "interval-name",
+  "chord-name": "chord-name",
+  ornament: "ornament",
+  progression: "progression",
+};
+function requireKind(input: Exclude<ItemInput, { kind: "composite" }>, r: SimpleResponse) {
+  const want = RESPONSE_FOR_INPUT[input.kind];
+  if (r.kind !== want) throw new EngineError("response_mismatch", `This question takes a ${want} answer`);
+  if (input.kind === "note-name" && r.kind === "pitch" && (input.octave !== null) !== /\d$/.test(r.pitch)) {
+    throw new EngineError("response_mismatch", input.octave ? "Give the octave as well" : "Give the note name without an octave");
+  }
+}
 
 export interface GradeResult extends Verdict {
   /** The grader id from engine.json that decided the result. */
@@ -32,12 +65,19 @@ export function gradeItem(ix: CurriculumIndex, item: ExerciseItem, rawResponse: 
   if (!parsed.success) throw new EngineError("malformed_response", parsed.error.issues[0]?.message ?? "Malformed answer");
   const r = parsed.data;
   const c = itemContext(ix, item, scope);
+  const input = inputFor(ix, item, scope);
   const known = knownCategories(c);
   const clean = (v: Verdict): Verdict => ({ ...v, category: v.category && known.has(v.category) ? v.category : null });
 
   let v: Verdict & { graderId: string };
   if (item.answer.kind === "composite") {
     if (r.kind !== "composite") throw new EngineError("response_mismatch", "Answer every part of this question");
+    const partInputs = input.kind === "composite" ? input.parts : [];
+    for (const [id, pr] of Object.entries(r.parts)) {
+      const pi = partInputs.find((p) => p.id === id);
+      if (!pi) throw new EngineError("response_mismatch", `Unknown part ${id}`);
+      requireKind(pi.input, pr);
+    }
     const parts = item.answer.parts.map((p) => {
       const pr = r.parts[p.id];
       if (!pr) return { id: p.id, correct: false, category: null, reason: "This part has no answer yet." };
@@ -53,7 +93,8 @@ export function gradeItem(ix: CurriculumIndex, item: ExerciseItem, rawResponse: 
       parts,
     };
   } else {
-    if (r.kind === "composite") throw new EngineError("response_mismatch", "This question has one answer");
+    if (r.kind === "composite" || input.kind === "composite") throw new EngineError("response_mismatch", "This question has one answer");
+    requireKind(input, r);
     v = gradeSimple(c, item.answer, r, true);
   }
   const out = clean(v);

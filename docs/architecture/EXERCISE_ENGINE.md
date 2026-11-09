@@ -23,7 +23,7 @@ Every rule is a pure function. Written pitch is always `{step, alter, octave}` (
 | triads, function, cadences | `chords.ts` | triads (harmonic minor for chord work), identification from any voicing (bass decides the inversion), chords containing a melody note, cadence classification |
 | durations, metre | `duration.ts`, `rhythm.ts` | rational values, dots, tuplets, simple/compound/irregular metre, beat structure |
 | grouping (simple, compound, irregular) | `rhythm.ts` | bar totals; beaming (half-bar rule in quadruple time, whole bar of half-beat notes in duple/triple, dotted beats in compound time, every standard sub-group pattern in 5 and 7); rest grouping (half-bar rests on beats 1 and 3; crotchet + quaver rest accepted for a dotted-crotchet beat); notes hiding the beat; ties that could be one value; tuplet totals; bar-line positions; convention-compliant auto-beaming |
-| accidental bar state | `accidentals.ts` | reads the printed letter, octave and sign under the key signature and the earlier accidentals in the bar, through ties over the bar-line; also works out which sign must be printed; can re-read the music with one rule broken to diagnose mistakes |
+| accidental bar state | `accidentals.ts` | reads the printed letter, octave and sign under the key signature and the earlier accidentals in the bar, through ties (a continuation takes the pitch of the actual tied note in the event just before it, in its own voice, within or across bars); also works out which sign must be printed; can re-read the music with one rule broken to diagnose mistakes |
 | chromatic scale | `chromatic.ts` | semitone steps, each letter used once or twice, no double accidentals |
 | transposing instruments | `transposing.ts` | B♭ (M2), A (m3) and F (P5): written ↔ concert pitch and keys |
 | ornaments | `ornaments.ts` | the six Grade 5 ornaments; classifies a written-out figure, including near misses such as an inverted turn |
@@ -77,6 +77,8 @@ The curriculum validator checks authored `accepted` lists against the same rules
 
 `message` is the authored feedback for that category (else the family's, else the item's fallback). `reason` explains the learner's own answer without giving the answer away. `solutionFor` gives the worked answer, which the server reveals only after three wrong attempts.
 
+**Response contract.** The server grades only the response kind the item's own input offers (`RESPONSE_FOR_INPUT` in `grade.ts`, including each composite part). A bare letter is accepted only where the input is `pitch-letter` (letter-only Grade 1 reading, which keeps stored Brief 02 answers valid). The octave is required exactly when the task is octave-sensitive. Rhythm answers must have the requested shape before any total counts: one value for "write one note", the stated number of bars, and every tie leading to a following note (`danglingTies`).
+
 **Safety.** Responses are a strict Zod union (`responses.ts`) with bounded sizes, spelt pitches and known enums. There is no correctness field anywhere. A malformed or mismatched answer raises `EngineError`; the API turns that into a 400 and records nothing. A fast-check property feeds arbitrary well-formed responses to every authored item and requires a deterministic grade or an `EngineError`, never a crash. It found and fixed one crash, an octave-less note in an interval build.
 
 ## 3. Input descriptors
@@ -102,7 +104,7 @@ Controls are limited to what the scope allows: the values and dots in scope, acc
 
 Each generated item carries `templateId`, `templateVersion`, `seed`, grade, outcome and concept ids, the template's hints, the family's feedback and accessibility equivalent, and its review status (`generated: true, humanReviewed: false`).
 
-Item ids encode `template.version.seed` (`i.gen.g2-scale-build-minor.v1.s12345`). The server regenerates the item to grade it and refuses a stale version.
+Item ids encode template, version, seed and a **generation fingerprint** (`i.gen.g2-scale-build-minor.v1.s12345.f1a2b3c4d`). The fingerprint hashes `GENERATOR_REVISION` (bump it when generator code changes what a seed produces), the template, the effective scope and the shared vocabularies. The server regenerates the item to grade it, and refuses the id as stale (409) if the version or any of these inputs has changed, rather than grading against a different question. Generation uses two deterministic streams (40 + 400 candidates). An independent 200-seed sweep over all 86 generator templates (17,200 items) produced no failures. An infeasible scope surfaces as `generation_failed` (HTTP 503, "try another"), never as a missing exercise.
 
 The four templates without a generator are `t.g4.same-pitch`, `t.g4.passage`, `t.g5.four-clef-read` (compare tasks) and `t.g5.score`, which has an authored demonstration item instead.
 
@@ -122,7 +124,7 @@ The four templates without a generator are `t.g4.same-pitch`, `t.g4.passage`, `t
 
 **Accessibility.**
 
-* Every figure has the fragment's text alternative.
+* Every figure has the fragment's text alternative. In questions, playable notes are labelled by stave position and printed signs ("Play semibreve on the 4th line"), never by pitch name, so the label cannot give away a reading answer.
 * Notes are focusable buttons when they can be heard (the SVG then uses `role="group"`, not `role="img"`, so axe finds no nested-interactive violation).
 * Highlight and correct/incorrect marks use ✓/✗ symbols as well as colour.
 * Wide music shrinks to fit, down to 70% of its natural size, then scrolls inside its own box, never the page. This is verified at 320px and at 200% text.
@@ -153,9 +155,9 @@ The four templates without a generator are `t.g4.same-pitch`, `t.g4.passage`, `t
 **`lib/audio.ts`:**
 
 * a WebAudio synth in which every note has a scheduled stop;
-* polyphony is capped at 12, releasing the oldest voice first;
+* every scheduled note stays cancellable until it ends; polyphony is capped at 12 notes sounding at once, releasing the oldest of those first;
 * `stopAll` runs on navigation, a new phrase and `visibilitychange`, so notes can't stick;
-* timed playback from the notation (tempo, ties merged, exact durations), highlighting each event as it sounds;
+* timed playback from the notation (tempo, exact durations, ties merged per voice across bar-lines with no new attack), highlighting each event as it sounds;
 * frequency comes from the spelt pitch the stave shows, and transposing parts pass their offset.
 
 Sound is optional everywhere: no task depends on hearing, each figure has a text equivalent, and the Settings sound switch silences everything.

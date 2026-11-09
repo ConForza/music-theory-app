@@ -14,7 +14,9 @@ const MAX_VOICES = 12;
 interface Voice {
   gain: GainNode;
   oscs: OscillatorNode[];
+  start: number;
   end: number;
+  released: boolean;
 }
 let voices: Voice[] = [];
 let timers: number[] = [];
@@ -35,6 +37,7 @@ function context(): AudioContext | undefined {
 }
 
 function release(v: Voice, at: number) {
+  v.released = true;
   try {
     v.gain.gain.cancelScheduledValues(at);
     v.gain.gain.setTargetAtTime(0.0001, at, 0.03);
@@ -52,8 +55,11 @@ export function playSemitones(semis: number, seconds = 0.9, at = 0, velocity = 1
   try {
     const f = 440 * 2 ** ((semis - 57) / 12);
     const t0 = c.currentTime + at;
+    // Every scheduled voice stays in `voices` (cancellable by stopAll) until it has ended. The polyphony cap
+    // applies to voices that would sound at the same moment as this one: the oldest of those is released early.
     voices = voices.filter((v) => v.end > c.currentTime);
-    while (voices.length >= MAX_VOICES) release(voices.shift()!, t0);
+    const simultaneous = voices.filter((v) => !v.released && v.start <= t0 && v.end > t0);
+    for (let i = 0; i <= simultaneous.length - MAX_VOICES; i++) release(simultaneous[i]!, t0);
     const gain = c.createGain();
     const peak = 0.28 * velocity;
     gain.gain.setValueAtTime(0.0001, t0);
@@ -73,7 +79,7 @@ export function playSemitones(semis: number, seconds = 0.9, at = 0, velocity = 1
       o.stop(t0 + seconds + 0.5);
       oscs.push(o);
     }
-    voices.push({ gain, oscs, end: t0 + seconds + 0.5 });
+    voices.push({ gain, oscs, start: t0, end: t0 + seconds + 0.5, released: false });
   } catch {
     /* audio is an enhancement only */
   }

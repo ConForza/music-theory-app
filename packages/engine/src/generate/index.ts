@@ -22,7 +22,7 @@ import {
 } from "@mtp/curriculum";
 import { EngineError, itemContext, templateScope } from "../context.ts";
 import { gradeItem } from "../grade.ts";
-import { rng as makeRng, type Rng } from "../rng.ts";
+import { hashString, rng as makeRng, type Rng } from "../rng.ts";
 import { canonicalResponse, wrongResponse } from "./canonical.ts";
 import { GENERATORS, type Draft } from "./families.ts";
 
@@ -47,22 +47,37 @@ export interface GeneratedItem {
 
 export const generatorTemplateIds = (ix: CurriculumIndex): string[] => [...ix.templates.values()].filter((t) => GENERATORS[t.familyId]?.(t) !== undefined).map((t) => t.id);
 
-export function generatedItemId(templateId: string, version: number, seed: number): string {
-  return `i.gen.${templateId.slice(2).replace(/\./g, "-")}.v${version}.s${seed}`;
+/**
+ * Bump when generator code changes what any (template, version, seed) produces. Together with the template,
+ * the effective scope and the shared vocabularies it forms the generation fingerprint carried in every id, so
+ * an id never silently regenerates a different question after an update (it is refused as stale instead).
+ */
+export const GENERATOR_REVISION = 1;
+
+const canonical = (v: unknown): unknown =>
+  Array.isArray(v) ? v.map(canonical) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort().map((k) => [k, canonical((v as Record<string, unknown>)[k])])) : v;
+
+export function generationFingerprint(t: ExerciseTemplate, scope: MusicScope): string {
+  const inputs = { rev: GENERATOR_REVISION, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES } };
+  return hashString(JSON.stringify(canonical(inputs))).toString(16).padStart(8, "0");
 }
 
-/** Parse a generated item id back into its template, version and seed (for server-side regeneration). */
-export function parseGeneratedItemId(id: string): { templateId: string; version: number; seed: number } | null {
-  const m = /^i\.gen\.(g[1-5])-([a-z0-9-]+)\.v(\d+)\.s(\d+)$/.exec(id);
+export function generatedItemId(templateId: string, version: number, seed: number, fingerprint: string): string {
+  return `i.gen.${templateId.slice(2).replace(/\./g, "-")}.v${version}.s${seed}.f${fingerprint}`;
+}
+
+/** Parse a generated item id back into its template, version, seed and generation fingerprint. */
+export function parseGeneratedItemId(id: string): { templateId: string; version: number; seed: number; fingerprint: string } | null {
+  const m = /^i\.gen\.(g[1-5])-([a-z0-9-]+)\.v(\d+)\.s(\d+)\.f([0-9a-f]{8})$/.exec(id);
   if (!m) return null;
-  return { templateId: `t.${m[1]}.${m[2]}`, version: Number(m[3]), seed: Number(m[4]) };
+  return { templateId: `t.${m[1]}.${m[2]}`, version: Number(m[3]), seed: Number(m[4]), fingerprint: m[5]! };
 }
 
-function finish(ix: CurriculumIndex, t: ExerciseTemplate, seed: number, d: Draft, evidence: "learning" | "independent"): ExerciseItem {
+function finish(ix: CurriculumIndex, t: ExerciseTemplate, seed: number, d: Draft, evidence: "learning" | "independent", fingerprint: string): ExerciseItem {
   const fam = ix.families.get(t.familyId)!;
   const mistakes = Object.fromEntries([...fam.mistakeCategories, ...t.extraMistakeCategories].map((m) => [m.id, m.feedback]));
   return {
-    id: generatedItemId(t.id, t.version, seed),
+    id: generatedItemId(t.id, t.version, seed, fingerprint),
     templateId: t.id,
     templateVersion: t.version,
     seed,
@@ -82,23 +97,29 @@ export interface GenerateOptions {
   evidence?: "learning" | "independent";
   /** Template version requested; generation fails if the content has moved on (stale ids are never regraded). */
   version?: number;
+  /** Fingerprint from a delivered id; generation fails with stale_item if any generation input has changed. */
+  fingerprint?: string;
 }
 
 export function generateItem(ix: CurriculumIndex, templateId: string, seed: number, opts: GenerateOptions = {}): GeneratedItem {
   const t = ix.templates.get(templateId);
   if (!t) throw new EngineError("unknown_template", `Unknown template ${templateId}`);
-  if (opts.version !== undefined && opts.version !== t.version) throw new EngineError("unknown_template", `Template ${templateId} is now version ${t.version}`);
+  if (opts.version !== undefined && opts.version !== t.version) throw new EngineError("stale_item", `Template ${templateId} is now version ${t.version}`);
   if (!Number.isInteger(seed) || seed < 0 || seed > 2 ** 31 - 1) throw new EngineError("unsupported", "Seed must be a non-negative 31-bit integer");
   const gen = GENERATORS[t.familyId]?.(t);
   if (!gen) throw new EngineError("unsupported", `No generator for ${templateId}`);
   const scope = opts.scope ?? templateScope(ix, t);
-  const r: Rng = makeRng(seed, `${t.id}@${t.version}`);
+  const fingerprint = generationFingerprint(t, scope);
+  if (opts.fingerprint !== undefined && opts.fingerprint !== fingerprint) throw new EngineError("stale_item", `${templateId} has changed since this question was made`);
   const fam = ix.families.get(t.familyId)!;
   const problems: string[] = [];
-  for (let attempt = 0; attempt < 40; attempt++) {
+  // Two deterministic streams: the main one, then a longer fallback stream. Same seed → same item, always.
+  const streams: Array<[Rng, number]> = [[makeRng(seed, `${t.id}@${t.version}`), 40], [makeRng(seed, `${t.id}@${t.version}#fallback`), 400]];
+  for (let attempt = 0; attempt < 440; attempt++) {
+    const r = attempt < 40 ? streams[0]![0] : streams[1]![0];
     const d = gen({ rng: r, scope, template: t });
     if (!d) continue;
-    const item = finish(ix, t, seed, d, opts.evidence ?? "independent");
+    const item = finish(ix, t, seed, d, opts.evidence ?? "independent", fingerprint);
     const issues: string[] = [];
     checkItem(item, scope, item.id, (code, _w, message, severity = "error") => {
       if (severity === "error") issues.push(`${code}: ${message}`);
@@ -135,7 +156,7 @@ export function generateItem(ix: CurriculumIndex, templateId: string, seed: numb
       },
     };
   }
-  throw new EngineError("unsupported", `Could not generate a valid ${templateId} item for seed ${seed}: ${problems.slice(0, 3).join(" | ")}`);
+  throw new EngineError("generation_failed", `Could not generate a valid ${templateId} item for seed ${seed}: ${problems.slice(0, 3).join(" | ") || "no candidate fitted the scope"}`);
 }
 
 export { music };

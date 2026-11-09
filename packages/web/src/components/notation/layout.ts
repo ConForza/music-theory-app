@@ -51,6 +51,8 @@ export interface LaidEvent {
   index: number;
   /** Index among all pitched noteheads of the stave in reading order (for per-note marks). */
   noteIndex: number[];
+  /** Label that never names the pitch (clef position and printed signs), for reading assessments. */
+  positionLabel: string;
   x: number;
   width: number;
   pitches: string[];
@@ -74,6 +76,13 @@ export interface StaveLayout {
 }
 
 const y = (pos: number) => -pos / 2;
+const ORDW = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
+/** "3rd line", "space below the stave", "2nd ledger line above the stave" — never a note name. */
+export function positionWords(pos: number): string {
+  if (pos >= 0 && pos <= 8) return pos % 2 === 0 ? `${ORDW[pos / 2]} line` : `${ORDW[(pos - 1) / 2]} space`;
+  if (pos < 0) return pos % 2 === 0 ? `${ORDW[-pos / 2 - 1]} ledger line below the stave` : pos === -1 ? "space just below the stave" : `space below the ${ORDW[(-pos - 1) / 2 - 1]} ledger line`;
+  return pos % 2 === 0 ? `${ORDW[(pos - 8) / 2 - 1]} ledger line above the stave` : pos === 9 ? "space just above the stave" : `space above the ${ORDW[(pos - 9) / 2 - 1]} ledger line`;
+}
 const VALUE_NAME = (e: Inner) => `${e.duration.dots === 2 ? "double-dotted " : e.duration.dots === 1 ? "dotted " : ""}${e.duration.value}`;
 const pretty = (p: string) => p.replace("#", "♯").replace(/b(?=-?\d)/, "♭").replace("x", "𝄪").replace("bb", "𝄫");
 
@@ -248,7 +257,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
       tl.forEach((t, ei) => {
         const key = `${t.onset.n}/${t.onset.d}`;
         const nx = (slotX.get(key) ?? x) + 1.2 + (t.e.kind !== "rest" && t.e.grace ? 1.8 : 0);
-        const ev: LaidEvent = { id: `${bi}.${vi}.${ei}`, bar: bi, voice: vi, index: ei, noteIndex: [], x: nx, width: 1.3, pitches: [], rest: t.e.kind === "rest", label: "", glyphs: [], lines: [], paths: [], texts: [] };
+        const ev: LaidEvent = { id: `${bi}.${vi}.${ei}`, bar: bi, voice: vi, index: ei, noteIndex: [], positionLabel: "", x: nx, width: 1.3, pitches: [], rest: t.e.kind === "rest", label: "", glyphs: [], lines: [], paths: [], texts: [] };
         const e = t.e;
         if (e.kind === "rest") {
           const whole = e.wholeBar || (barCap && music.equals(t.dur, barCap) && voices.length === 1 && tl.length === 1);
@@ -259,6 +268,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
           ev.glyphs.push({ x: rx, y: y(restPos), ch: rg.ch, cls: "n-glyph" });
           for (let d = 0; d < (e.duration.dots ?? 0); d++) ev.glyphs.push({ x: rx + 1.5 + d * 0.5, y: y(5), ch: G.dot, cls: "n-glyph" });
           ev.label = `${whole ? "whole-bar" : VALUE_NAME(e)} rest`;
+          ev.positionLabel = ev.label;
           if (e.articulations?.includes("fermata")) ev.glyphs.push({ x: rx - 0.6, y: y(Math.max(10, restPos + 4)), ch: G.fermataAbove, cls: "n-glyph" });
           if (e.label) ev.texts.push({ x: rx + 0.5, y: y(11) , text: e.label, cls: "n-label", anchor: "middle" });
           reach(y(restPos) - 1.6);
@@ -395,6 +405,9 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
         }
         const names = notes.map((n) => (rhythm ? "" : pretty(n.pitch)));
         ev.label = rhythm ? VALUE_NAME(e) : `${VALUE_NAME(e)} ${names.join(" ")}${e.tieToNext ? ", tied" : ""}`;
+        ev.positionLabel = rhythm
+          ? VALUE_NAME(e)
+          : `${VALUE_NAME(e)} on the ${notes.map((n, ni) => { const sign = signs.get(`${bi}.${vi}.${ei}.${ni}`); return `${positionWords(ps[ni]!)}${sign ? ` with a ${sign.replace("-", " ")} sign` : ""}`; }).join(" and ")}${e.tieToNext ? ", tied" : ""}`;
         events.push(ev);
       });
 
@@ -544,25 +557,30 @@ export function playbackEvents(f: NotationFragment, bpm = 84, transposeSemitones
   const beat = f.timeSignature ? music.metreStructure(f.timeSignature).beatUnit : music.frac(1, 4);
   const secondsPer = (fr: music.Fraction) => (fr.n / fr.d) / (beat.n / beat.d) * (60 / bpm);
   let barStart = 0;
+  // A tie carries per voice across bar-lines: the continuation extends the earlier sound, with no new attack.
+  const tieCarry = new Map<number, number>();
   f.measures.forEach((m, bi) => {
     let longest = 0;
     voicesOf(m).forEach((evs, vi) => {
       const tl = timeline(evs, bar);
-      let tieCarry: { idx: number } | null = null;
       tl.forEach((t, ei) => {
         const end = secondsPer(music.add(t.onset, t.dur));
         longest = Math.max(longest, end);
         if (t.e.kind === "rest") {
-          tieCarry = null;
+          tieCarry.delete(vi);
           return;
         }
         const ps = t.e.kind === "note" ? [t.e.pitch] : t.e.notes.map((n) => n.pitch);
-        if (tieCarry && out[tieCarry.idx]) {
-          out[tieCarry.idx]!.dur += secondsPer(t.dur);
-        } else {
-          out.push({ at: barStart + secondsPer(t.onset), dur: secondsPer(t.dur), pitches: ps, semis: ps.map((p) => music.chromaticNumber(music.parsePitch(p)) + transposeSemitones), id: `${bi}.${vi}.${ei}` });
+        const carried = tieCarry.get(vi);
+        if (carried !== undefined && out[carried]) {
+          out[carried]!.dur += secondsPer(t.dur);
+          if (t.e.tieToNext) tieCarry.set(vi, carried);
+          else tieCarry.delete(vi);
+          return;
         }
-        tieCarry = t.e.tieToNext ? { idx: tieCarry ? tieCarry.idx : out.length - 1 } : null;
+        out.push({ at: barStart + secondsPer(t.onset), dur: secondsPer(t.dur), pitches: ps, semis: ps.map((p) => music.chromaticNumber(music.parsePitch(p)) + transposeSemitones), id: `${bi}.${vi}.${ei}` });
+        if (t.e.tieToNext) tieCarry.set(vi, out.length - 1);
+        else tieCarry.delete(vi);
       });
     });
     barStart += bar ? secondsPer(bar) : longest;

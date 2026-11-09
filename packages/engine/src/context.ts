@@ -10,7 +10,7 @@ export interface ItemContext {
 
 export class EngineError extends Error {
   constructor(
-    public code: "unknown_template" | "unknown_family" | "response_mismatch" | "malformed_response" | "item_inconsistent" | "unsupported",
+    public code: "unknown_template" | "unknown_family" | "response_mismatch" | "malformed_response" | "item_inconsistent" | "unsupported" | "generation_failed" | "stale_item",
     message: string,
   ) {
     super(message);

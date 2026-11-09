@@ -230,6 +230,41 @@ describe("accidental state", () => {
     expect(read(f)).toEqual(["C4", "C4", "C4", "G#4", "G#4", "G4", "C4", "C4"]);
     expect(read(f, "ignore-ties")[4]).toBe("G4");
   });
+  it("a tie continues the actual tied note, not an earlier note on the same line (review P1)", () => {
+    // C#4, then C natural tied over the bar-line: the continuation is C natural.
+    const f = frag(undefined, [[["G4"], ["C4", "sharp"], ["C4", "natural", true]], [["C4"], ["C4"], ["E4"]]]);
+    expect(read(f)).toEqual(["G4", "C#4", "C4", "C4", "C4", "E4"]);
+    const printed = [...m.printedAccidentals({ measures: [
+      { events: [{ kind: "note", pitch: "G4", duration: { value: "crotchet" } }, { kind: "note", pitch: "C#4", duration: { value: "crotchet" } }, { kind: "note", pitch: "C4", duration: { value: "crotchet" }, tieToNext: true }] },
+      { events: [{ kind: "note", pitch: "C4", duration: { value: "crotchet" } }, { kind: "note", pitch: "C4", duration: { value: "crotchet" } }] },
+    ] }).values()];
+    expect(printed).toEqual([null, "sharp", "natural", null, null]);
+  });
+  it("a tie within the bar keeps the tied pitch even after a later accidental would apply", () => {
+    const f = frag(undefined, [[["F4", "sharp", true], ["F4"], ["F4", "natural"], ["F4"]]]);
+    expect(read(f)).toEqual(["F#4", "F#4", "F4", "F4"]);
+  });
+  it("ties belong to their own voice", () => {
+    const f: m.AFragment = { measures: [
+      { voices: [
+        { events: [{ kind: "note", pitch: "C5", writtenAccidental: "sharp", duration: { value: "minim" }, tieToNext: true }] },
+        { events: [{ kind: "note", pitch: "C5", writtenAccidental: "natural", duration: { value: "minim" } }] },
+      ] },
+      { voices: [
+        { events: [{ kind: "note", pitch: "C5", duration: { value: "minim" } }] },
+        { events: [{ kind: "note", pitch: "C5", duration: { value: "minim" } }] },
+      ] },
+    ] };
+    // Voice 1 continues its C#5; voice 2's C5 in the new bar is a fresh note (no accidental in force).
+    expect(read(f)).toEqual(["C#5", "C5", "C#5", "C5"]);
+  });
+  it("tied chords continue each tied head", () => {
+    const f: m.AFragment = { measures: [
+      { events: [{ kind: "chord", notes: [{ pitch: "C4", writtenAccidental: "sharp" }, { pitch: "E4" }], duration: { value: "crotchet" } }, { kind: "chord", notes: [{ pitch: "C4", writtenAccidental: "natural" }, { pitch: "E4" }], duration: { value: "crotchet" }, tieToNext: true }] },
+      { events: [{ kind: "chord", notes: [{ pitch: "C4" }, { pitch: "E4" }], duration: { value: "minim" } }] },
+    ] };
+    expect(read(f)).toEqual(["C#4", "E4", "C4", "E4", "C4", "E4"]);
+  });
   it("prints exactly the accidentals needed", () => {
     const f: m.AFragment = { key: "F major", measures: [{ events: ["B4", "B4", "Bn4", "B4", "B5"].map((p) => ({ kind: "note", pitch: p === "Bn4" ? "B4" : p === "B4" ? "Bb4" : "Bb5", duration: { value: "crotchet" } })) }] };
     const signs = [...m.printedAccidentals(f).values()];

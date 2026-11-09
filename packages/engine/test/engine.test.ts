@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import fc from "fast-check";
-import { buildIndex, loadCurriculum, ExerciseItem, type ExerciseItem as Item } from "@mtp/curriculum";
+import { buildIndex, effectiveScope, loadCurriculum, music as musicRules, ExerciseItem, type ExerciseItem as Item } from "@mtp/curriculum";
 import { describe, expect, it } from "vitest";
 import {
   canonicalResponse,
@@ -77,7 +77,7 @@ describe("generation", () => {
         const a = generateItem(ix, id, seed * 7919 + 13);
         const b = generateItem(ix, id, seed * 7919 + 13);
         expect(b).toEqual(a);
-        expect(parseGeneratedItemId(a.item.id)).toEqual({ templateId: id, version: a.item.templateVersion, seed: seed * 7919 + 13 });
+        expect(parseGeneratedItemId(a.item.id)).toMatchObject({ templateId: id, version: a.item.templateVersion, seed: seed * 7919 + 13 });
         expect(ExerciseItem.safeParse(a.item).success).toBe(true);
         expect(gradeItem(ix, a.item, canonicalResponse(ix, a.item)).correct).toBe(true);
         expect(a.meta.review.humanReviewed).toBe(false);
@@ -107,7 +107,7 @@ describe("golden grading: pitch and spelling", () => {
   it("reads the note from the printed stave, not from a stored answer", () => {
     const it_ = item("t.g1.note-read", { kind: "pitch", accepted: ["G4"], octaveSensitive: false, spellingSensitive: true }, { music: stave("treble", [sb("G4")]) as never });
     expect(grade(it_, { kind: "pitch", pitch: "G" }).correct).toBe(true);
-    expect(grade(it_, { kind: "pitch", pitch: "G5" }).correct).toBe(true); // octave-insensitive
+    expect(() => grade(it_, { kind: "pitch", pitch: "G5" })).toThrow(EngineError); // octave-insensitive: the input asks for no octave
     const bass = grade(it_, { kind: "pitch", pitch: "B" });
     expect(bass.correct).toBe(false);
     expect(bass.category).toBe("clef-confusion"); // G4's position (2nd line) is B in the bass clef
@@ -252,6 +252,93 @@ describe("golden grading: rhythm", () => {
     const it_ = item("t.g3.time-signature", { kind: "time-signature", accepted: ["6/8"] }, { music: music as never });
     expect(grade(it_, { kind: "time-signature", top: 6, bottom: 8 }).correct).toBe(true);
     expect(grade(it_, { kind: "time-signature", top: 3, bottom: 4 }).category).toBe("simple-compound-confusion");
+  });
+});
+
+describe("response contract per item (review R1)", () => {
+  const enh = () => showcase.find((i) => i.id === "i.showcase.accidentals-and-keys.6")!;
+  it("refuses a bare letter where the input asks for a spelt note", () => {
+    expect(() => gradeItem(ix, enh(), { kind: "pitch-letter", letter: "E" })).toThrow(EngineError);
+    expect(gradeItem(ix, enh(), { kind: "pitch", pitch: "E" }).correct).toBe(false);
+    expect(gradeItem(ix, enh(), { kind: "pitch", pitch: "Fb" }).correct).toBe(true);
+  });
+  it("keeps Brief 02 letter answers for letter-only reading", () => {
+    const node = ix.nodeById.get("G1-U3-L03")!;
+    const lesson = curriculum!.lessons.find((l) => l.file === node.contentRef)!.content;
+    const item = lesson.guided[0]!;
+    const scope = effectiveScope(ix, node, node.exercises.find((b) => b.templateId === item.templateId)!);
+    expect(inputFor(ix, item, scope).kind).toBe("pitch-letter");
+    expect(gradeItem(ix, item, canonicalResponse(ix, item, scope), scope).correct).toBe(true);
+    expect(() => gradeItem(ix, item, { kind: "chord-name", roman: "I", inversion: "a" }, scope)).toThrow(EngineError);
+  });
+  it("requires the octave when octave matters, and refuses it when it does not", () => {
+    const sensitive = item("t.g5.four-clef-read", { kind: "pitch", accepted: ["C4"], octaveSensitive: true, spellingSensitive: true }, { music: stave("alto", [sb("C4")]) as never });
+    expect(() => grade(sensitive, { kind: "pitch", pitch: "C" })).toThrow(EngineError);
+    expect(grade(sensitive, { kind: "pitch", pitch: "C4" }).correct).toBe(true);
+  });
+  it("checks composite parts against their own inputs", () => {
+    const score = showcase.find((i) => i.id === "i.showcase.instruments-and-score.9")!;
+    const good = canonicalResponse(ix, score) as { kind: "composite"; parts: Record<string, unknown> };
+    expect(gradeItem(ix, score, good).correct).toBe(true);
+    expect(() => gradeItem(ix, score, { ...good, parts: { ...good.parts, cadence: { kind: "pitch-letter", letter: "C" } } })).toThrow(EngineError);
+  });
+});
+
+describe("rhythm answer structure (review R4/R5)", () => {
+  const sc = (id: string) => showcase.find((i) => i.id === id)!;
+  const n = (value: string, dots = 0, extra = {}) => ({ kind: "note", duration: { value, dots }, ...extra });
+  it("one note means one note: two values with the right total are not accepted", () => {
+    const it_ = sc("i.showcase.note-values.3");
+    expect(gradeItem(ix, it_, canonicalResponse(ix, it_)).correct).toBe(true);
+    const two = gradeItem(ix, it_, { kind: "rhythm", measures: [{ events: [n("minim", 1), n("minim", 1)] as never }] });
+    expect(two.correct).toBe(false);
+    expect(two.reason).toMatch(/single note/);
+  });
+  it("a one-bar task must be answered in one bar", () => {
+    const it_ = sc("i.showcase.building-bars.3");
+    const good = canonicalResponse(ix, it_) as { kind: "rhythm"; measures: unknown[] };
+    expect(gradeItem(ix, it_, good).correct).toBe(true);
+    expect(gradeItem(ix, it_, { ...good, measures: [...good.measures, ...good.measures] } as never).correct).toBe(false);
+  });
+  it("a tie that leads nowhere is refused; a tie into the next bar's note is fine", () => {
+    const it_ = sc("i.showcase.building-bars.1");
+    const good = canonicalResponse(ix, it_) as { kind: "rhythm"; measures: Array<{ events: Array<Record<string, unknown>> }> };
+    const evs = good.measures[0]!.events;
+    const last = evs.length - 1;
+    const orphan = { ...good, measures: [{ events: evs.map((e, i) => (i === last && e.kind === "note" ? { ...e, tieToNext: true } : e)) }] };
+    if (evs[last]!.kind === "note") expect(gradeItem(ix, it_, orphan as never).correct).toBe(false);
+    const { danglingTies } = musicRules;
+    expect(danglingTies([[n("minim", 0, { tieToNext: true }) as never], [n("crotchet") as never]])).toEqual([]);
+    expect(danglingTies([[n("minim", 0, { tieToNext: true }) as never], [{ kind: "rest", duration: { value: "crotchet" } } as never]])).toEqual([0]);
+  });
+  it("the equivalent-value input does not carry the answer's length", () => {
+    const input = inputFor(ix, sc("i.showcase.note-values.3"));
+    expect(JSON.stringify(input)).not.toMatch(/target/);
+  });
+});
+
+describe("generation inputs and robustness (review R9/R10/R11)", () => {
+  it("transposing-instrument questions have exactly one transposing option", () => {
+    expect(musicRules.INSTRUMENTS.find((i) => i.id === "xylophone")!.transposition).toMatch(/P8/);
+    for (const seed of [35, ...Array.from({ length: 60 }, (_, k) => k * 101 + 7)]) {
+      const { item } = generateItem(ix, "t.g5.instruments", seed);
+      if (!/transposing/.test(item.prompt) || item.answer.kind !== "choice") continue;
+      const transposing = item.answer.options.filter((o) => musicRules.INSTRUMENTS.find((i) => i.id === o.id)!.transposition !== null);
+      expect(transposing.map((o) => o.id), `seed ${seed}`).toEqual(item.answer.correctOptionIds);
+    }
+  });
+  it("an id is refused as stale when any generation input changed (scope order, here)", () => {
+    const first = generateItem(ix, "t.g1.note-read", 0);
+    const parsed = parseGeneratedItemId(first.item.id)!;
+    expect(generateItem(ix, "t.g1.note-read", 0, { version: parsed.version, fingerprint: parsed.fingerprint }).item).toEqual(first.item);
+    const g1 = ix.cumulativeScope.get(1)!;
+    const changed = { ...g1, clefs: [...(g1.clefs ?? [])].reverse() };
+    const tpl = ix.templates.get("t.g1.note-read")!;
+    const scope = { ...changed, ...tpl.scope, clefs: (tpl.scope.clefs ?? changed.clefs)!.filter((c) => changed.clefs!.includes(c)).reverse() };
+    expect(() => generateItem(ix, "t.g1.note-read", 0, { scope, fingerprint: parsed.fingerprint })).toThrow(EngineError);
+  });
+  it("seeds that used to exhaust the irregular-grouping generator now produce valid items", () => {
+    for (const seed of [34920769, 752971753]) expect(gradeItem(ix, generateItem(ix, "t.g5.irregular-grouping", seed).item, canonicalResponse(ix, generateItem(ix, "t.g5.irregular-grouping", seed).item)).correct).toBe(true);
   });
 });
 

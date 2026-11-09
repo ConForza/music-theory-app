@@ -45,6 +45,13 @@ function beamBar(evs: REv[], ts: string | null): REv[] {
   }
 }
 
+function ownLength(evs: REv[]): { text: string; state: "under" | "full" | "over" } {
+  if (!evs.length) return { text: "Add the note (or notes) that answer the question.", state: "under" };
+  const total = music.totalLength(evs as unknown as music.REvent[]);
+  const v = music.valueFor(total, 2);
+  return { text: `Your answer lasts ${v ? `as long as a ${v.dots === 2 ? "double-dotted " : v.dots ? "dotted " : ""}${v.value}` : `${music.formatFraction(total)} of a semibreve`}.`, state: "under" };
+}
+
 function remaining(evs: REv[], ts: string | null, target?: [number, number]): { text: string; state: "under" | "full" | "over" } {
   const total = music.totalLength(evs as unknown as music.REvent[]);
   const cap = target ? music.frac(target[0], target[1]) : ts ? music.barCapacity(music.parseTimeSignature(ts)) : null;
@@ -111,7 +118,8 @@ export function RhythmBuilder({ input, value, onChange, disabled }: { input: Ext
     emit(next);
   };
   const clear = () => emit(bars.map((b, i) => (i === 0 ? b.slice(0, given.length) : [])));
-  const meter = remaining(bar, ts, input.mode === "equivalent-value" ? input.target : undefined);
+  // Equivalent-value tasks: the length to match is the answer, so only the learner's own length is read back.
+  const meter = input.mode === "equivalent-value" ? ownLength(bar) : remaining(bar, ts);
   const display = rhythmFragment(bars.map((b) => beamBar(b.map(strip), ts)), ts, input.mode !== "equivalent-value");
 
   return (

@@ -56,11 +56,12 @@ export class PracticeService {
     return { ...this.course.learnerItem(item, "practice"), seed: s, templateVersion: item.templateVersion };
   }
 
-  private generated(templateId: string, seed: number, version?: number) {
+  private generated(templateId: string, seed: number, version?: number, fingerprint?: string) {
     try {
-      return generateItem(this.course.ix, templateId, seed, { evidence: "learning", ...(version !== undefined ? { version } : {}) });
+      return generateItem(this.course.ix, templateId, seed, { evidence: "learning", ...(version !== undefined ? { version } : {}), ...(fingerprint !== undefined ? { fingerprint } : {}) });
     } catch (e) {
-      if (e instanceof EngineError && e.code === "unknown_template") throw new ApiError(409, "stale_item", "This exercise has been updated. Start a new one.");
+      if (e instanceof EngineError && (e.code === "stale_item" || e.code === "unknown_template")) throw new ApiError(409, "stale_item", "This exercise has been updated. Start a new one.");
+      if (e instanceof EngineError && e.code === "generation_failed") throw new ApiError(503, "generation_failed", "We couldn't make that question just now. Try another one.");
       if (e instanceof EngineError) throw new ApiError(404, "not_found", "That exercise could not be created.");
       throw e;
     }
@@ -75,7 +76,7 @@ export class PracticeService {
     }
     const g = parseGeneratedItemId(itemId);
     if (!g || !this.generatable.has(g.templateId)) throw new ApiError(404, "not_found", "Unknown question.");
-    const { item } = this.generated(g.templateId, g.seed, g.version);
+    const { item } = this.generated(g.templateId, g.seed, g.version, g.fingerprint);
     return { item, scope: templateScope(this.course.ix, this.course.ix.templates.get(g.templateId)!), seed: g.seed };
   }
 

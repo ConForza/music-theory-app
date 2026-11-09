@@ -27,6 +27,8 @@ export interface NotationProps {
   describe?: boolean;
   /** Minimum bar width in staff spaces (for empty or nearly empty staves). */
   minWidth?: number;
+  /** "positions": accessible labels describe stave positions and printed signs, never pitch names (assessments). */
+  labels?: "names" | "positions";
 }
 
 function Primitives({ ev, lit, mark }: { ev: Pick<LaidEvent, "glyphs" | "lines" | "paths" | "texts">; lit?: boolean; mark?: boolean | null }) {
@@ -40,7 +42,7 @@ function Primitives({ ev, lit, mark }: { ev: Pick<LaidEvent, "glyphs" | "lines" 
   );
 }
 
-export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, offsetY = 0, px }: { layout: StaveLayout; highlight?: string[]; marks?: NotationProps["marks"]; onActivate?: NotationProps["onActivate"]; overlay?: NotationProps["overlay"]; offsetY?: number; px: number }) {
+export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, offsetY = 0, px, labels = "names" }: { layout: StaveLayout; highlight?: string[]; marks?: NotationProps["marks"]; onActivate?: NotationProps["onActivate"]; overlay?: NotationProps["overlay"]; offsetY?: number; px: number; labels?: "names" | "positions" }) {
   const markOf = (ev: LaidEvent) => {
     if (!marks) return null;
     const ms = ev.noteIndex.map((i) => marks.find((m) => m.index === i)).filter(Boolean);
@@ -71,7 +73,7 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
           }
         };
         return (
-          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${ev.label}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
+          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "positions" ? ev.positionLabel : ev.label}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
             <rect x={ev.x - 1} y={layout.top} width={ev.width + 2} height={layout.bottom - layout.top} fill="transparent" />
             {body}
           </g>
@@ -83,7 +85,7 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
 }
 
 /** Read-only (or tap-to-hear) notation for one stave in any clef, or a rhythm line. */
-export function Notation({ fragment, size = "normal", highlight, marks, onActivate, overlay, caption, describe = true, minWidth }: NotationProps) {
+export function Notation({ fragment, size = "normal", highlight, marks, onActivate, overlay, caption, describe = true, minWidth, labels }: NotationProps) {
   const desc = useId();
   const layout = useMemo(() => layoutFragment(fragment, minWidth ? { minWidth } : {}), [fragment, minWidth]);
   const px = PX[size];
@@ -92,7 +94,7 @@ export function Notation({ fragment, size = "normal", highlight, marks, onActiva
     <figure className={`notation notation-${size}`}>
       <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)" aria-describedby={desc}>
         <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px)} role={onActivate ? "group" : "img"} aria-label={fragment.textAlternative} className="notation-svg fit">
-          <StaveSvg layout={layout} highlight={highlight} marks={marks} onActivate={onActivate} overlay={overlay} px={px} />
+          <StaveSvg layout={layout} highlight={highlight} marks={marks} onActivate={onActivate} overlay={overlay} px={px} labels={labels} />
         </svg>
       </div>
       {caption && <figcaption className="notation-caption">{caption}</figcaption>}

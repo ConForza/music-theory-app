@@ -67,7 +67,7 @@ export function Teach({ lesson, onNext }: { lesson: LearnerLesson; onNext: () =>
 }
 
 /** Notation (or a keyboard picture) with optional sound: tap a note to hear it, or play the whole example in time. */
-export function MusicView({ fragment, marks, size }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large" }) {
+export function MusicView({ fragment, marks, size, labels = "names" }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large"; labels?: "names" | "positions" }) {
   const [lit, setLit] = useState<string[]>([]);
   useEffect(() => () => stopAll(), []);
   if (fragment.presentation === "keyboard") {
@@ -85,7 +85,7 @@ export function MusicView({ fragment, marks, size }: { fragment: NotationFragmen
   const play = () => playTimed(playbackEvents(fragment), (id) => setLit(id ? [id] : []));
   return (
     <div className="music-view">
-      <Notation fragment={fragment} highlight={lit} marks={marks} size={size} onActivate={(ev) => { stopAll(); ev.pitches.forEach((p) => playPitch(p, 0.9)); setLit([ev.id]); window.setTimeout(() => setLit([]), 600); }} />
+      <Notation fragment={fragment} highlight={lit} marks={marks} size={size} labels={labels} onActivate={(ev) => { stopAll(); ev.pitches.forEach((p) => playPitch(p, 0.9)); setLit([ev.id]); window.setTimeout(() => setLit([]), 600); }} />
       <button type="button" className="btn btn-ghost btn-small listen" onClick={play}><Icon name="speaker" size={18} /> Listen</button>
     </div>
   );
@@ -218,7 +218,8 @@ export function Question({
       <section className="lesson-step question" aria-labelledby="q-title">
         <p className="eyebrow">{eyebrow ?? (item.section === "guided" ? "Guided practice" : "Your turn")} · Question {index} of {total}</p>
         <h1 id="q-title" className="q-prompt" tabIndex={-1}>{item.prompt}</h1>
-        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} />}
+        {/* In questions the playable notes are labelled by stave position, never by name (review R6). */}
+        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} labels="positions" />}
         {item.score && <ScoreView score={item.score} />}
         <form onSubmit={(e) => { e.preventDefault(); void check(); }} id="answer-form">
           <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct)} marks={result?.marks} parts={result?.parts} />

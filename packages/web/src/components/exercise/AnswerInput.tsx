@@ -53,7 +53,9 @@ function StaveAnswer({ input, value, onChange, disabled, marks }: { input: Extra
     if (!w.length) return onChange(null);
     if (input.kind === "key-signature-writer") return onChange({ kind: "key-signature", accidentals: w.map((x) => ({ pitch: music.formatPitch({ ...music.naturalAt(clef, x.pos), alter: x.sign === "b" ? -1 : 1 }) })) });
     const given = input.kind === "pitch-sequence" ? input.given : input.kind === "staff-position" ? (input.shown ?? []) : [];
-    if (input.kind === "chord-builder") return onChange({ kind: "chord-notes", pitches: resolveWritten(clef, input.key, w, true).map(music.formatPitch) });
+    // The chord stave shows no key signature (the task says "using accidentals"), so notes are read without one:
+    // what is drawn, typed, heard and submitted always agree (review R3).
+    if (input.kind === "chord-builder") return onChange({ kind: "chord-notes", pitches: resolveWritten(clef, undefined, w, true).map(music.formatPitch) });
     const all = resolveWritten(clef, k, [...toWrittenGiven(clef, k, given), ...w]).map(music.formatPitch);
     if (input.kind === "staff-position") return onChange({ kind: "staff-position", pitch: all[all.length - 1]! });
     onChange({ kind: "pitch-sequence", pitches: all, ...(input.keyOptions && k ? { key: k } : {}) });

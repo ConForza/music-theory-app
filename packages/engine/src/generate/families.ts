@@ -754,7 +754,24 @@ const grouping: Gen = (c) => {
       }
     }
   }
-  if (!music.checkBarAnyPattern(question as unknown as music.REvent[], ts).issues.length) return null;
+  if (!music.checkBarAnyPattern(question as unknown as music.REvent[], ts).issues.length) {
+    // Flags alone can look acceptable under another sub-grouping (irregular metres): beam a whole run across
+    // the group boundary instead, which hides the beat under every standard pattern.
+    const idx = question.map((e, i) => (beamable(e) ? i : -1)).filter((i) => i >= 0);
+    let best: NotationEvent[] | null = null;
+    for (let a = 0; a < idx.length && !best; a++) {
+      let b = a;
+      while (b + 1 < idx.length && idx[b + 1] === idx[b]! + 1) b++;
+      if (b - a >= 2) {
+        const run = idx.slice(a, b + 1);
+        const trial = question.map((e, i) => (run.includes(i) ? { ...e, beam: i === run[0] ? "begin" : i === run[run.length - 1] ? "end" : "continue" } : e)) as NotationEvent[];
+        if (music.checkBarAnyPattern(trial as unknown as music.REvent[], ts).issues.length) best = trial;
+      }
+      a = b;
+    }
+    if (!best) return null;
+    question = best;
+  }
   return {
     prompt: "These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear.",
     music: rhythmLine([{ events: question }], { timeSignature: ts }),
@@ -881,8 +898,10 @@ const choiceFamily: Gen = (c) => {
       const inst = c.rng.pick(music.INSTRUMENTS.filter((i) => i.clefs.length === 1 || i.id === "viola"));
       return { prompt: `Which clef does the ${inst.name} normally use?`, answer: { kind: "choice", options: ["treble", "bass", "alto", "tenor"].map((f) => ({ id: f, label: `${f} clef` })), correctOptionIds: [inst.clefs[0]!] }, hints: ["High instruments read the treble clef and low ones the bass clef; one string instrument has its own clef."] };
     }
-    const trans = music.INSTRUMENTS.filter((i) => i.transposition && i.id !== "double-bass");
-    const plain = c.rng.shuffle(music.INSTRUMENTS.filter((i) => !i.transposition && i.family !== "keyboard")).slice(0, 3);
+    // Exactly one option may transpose: answers are B♭/A/F instruments, distractors sound exactly as written
+    // (octave-transposing instruments such as double bass and xylophone are left out of both sides).
+    const trans = music.INSTRUMENTS.filter((i) => i.transposition && /^(M2|m3|P5)/.test(i.transposition));
+    const plain = c.rng.shuffle(music.INSTRUMENTS.filter((i) => i.transposition === null && i.family !== "keyboard")).slice(0, 3);
     const ans = c.rng.pick(trans);
     return { prompt: "Which of these is a transposing instrument (its music is written at a different pitch from the sound)?", answer: { kind: "choice", options: c.rng.shuffle([ans, ...plain]).map((i) => ({ id: i.id, label: i.name })), correctOptionIds: [ans.id] }, hints: ["Instruments 'in B♭', 'in A' or 'in F' are transposing instruments."] };
   }

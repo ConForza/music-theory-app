@@ -121,7 +121,7 @@ describe("practice lab", () => {
     const g = await c.post("/api/practice/generate", { templateId: "t.g2.scale-build-minor", seed: 12345 });
     expect(g.status).toBe(200);
     expect(JSON.stringify(g.body)).not.toMatch(LEAKS);
-    expect(parseGeneratedItemId(g.body.id)).toEqual({ templateId: "t.g2.scale-build-minor", version: 1, seed: 12345 });
+    expect(parseGeneratedItemId(g.body.id)).toMatchObject({ templateId: "t.g2.scale-build-minor", version: 1, seed: 12345 });
     const again = await c.post("/api/practice/generate", { templateId: "t.g2.scale-build-minor", seed: 12345 });
     expect(again.body).toEqual(g.body); // same seed, same question
     const { item } = generateItem(course.ix, "t.g2.scale-build-minor", 12345, { evidence: "learning" });
@@ -137,7 +137,11 @@ describe("practice lab", () => {
     const c = setup().client();
     await c.post("/api/auth/guest");
     const send = (itemId: string, response: unknown) => c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId, response });
-    expect((await send("i.gen.g1-note-read.v99.s5", { kind: "pitch", pitch: "C" })).status).toBe(409);
+    expect((await send("i.gen.g1-note-read.v99.s5.f00000000", { kind: "pitch", pitch: "C" })).status).toBe(409);
+    // Same template, version and seed, but generated from different inputs: refused as stale, never regraded.
+    const real = (await c.post("/api/practice/generate", { templateId: "t.g1.note-read", seed: 5 })).body.id as string;
+    expect((await send(real.replace(/\.f[0-9a-f]{8}$/, ".fdeadbeef"), { kind: "pitch", pitch: "C" })).status).toBe(409);
+    expect((await send("i.gen.g1-note-read.v1.s5", { kind: "pitch", pitch: "C" })).status).toBe(404);
     expect((await send("i.gen.g9-nope.v1.s5", { kind: "pitch", pitch: "C" })).status).toBe(404);
     expect((await send("i.nope", { kind: "pitch", pitch: "C" })).status).toBe(404);
     const it = course.showcase[0]!.items[0]!;
@@ -146,6 +150,24 @@ describe("practice lab", () => {
     expect((await send(it.id, { kind: "pitch-sequence", pitches: Array(50).fill("C4") })).status).toBe(400);
     expect((await c.post("/api/practice/generate", { templateId: "t.g1.note-read", seed: -4 })).status).toBe(400);
     expect((await c.get("/api/me/export")).body.practiceAttempts).toHaveLength(0);
+  });
+
+  it("only accepts the answer shape the question offers (review R1)", async () => {
+    const c = setup().client();
+    await c.post("/api/auth/guest");
+    const id = "i.showcase.accidentals-and-keys.6"; // "a note that sounds the same as E but has a different letter name"
+    const letter = await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: id, response: { kind: "pitch-letter", letter: "E" } });
+    expect(letter.status).toBe(400);
+    const same = await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: id, response: { kind: "pitch", pitch: "E" } });
+    expect(same.body.correct).toBe(false);
+    const ok = await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: id, response: { kind: "pitch", pitch: "Fb" } });
+    expect(ok.body.correct).toBe(true);
+    // Stored Brief 02 letter answers on the Grade 1 lesson remain valid.
+    await register(c, "zed");
+    await c.post("/api/lessons/G1-U3-L03/start");
+    const legacy = await c.post("/api/lessons/G1-U3-L03/attempts", { attemptId: crypto.randomUUID(), itemId: "i.g1-u3-l03.guided-1", response: { kind: "pitch-letter", letter: "G" } });
+    expect(legacy.status).toBe(200);
+    expect(legacy.body.correct).toBe(true);
   });
 
   it("serves graduated hints and requires a session", async () => {

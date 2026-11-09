@@ -97,7 +97,7 @@ export const INSTRUMENTS: InstrumentInfo[] = [
   { id: "trombone", name: "trombone", family: "brass", clefs: ["bass", "tenor"], transposition: null, sound: "lips buzzing into a mouthpiece; a slide changes the pitch" },
   { id: "tuba", name: "tuba", family: "brass", clefs: ["bass"], transposition: null, sound: "lips buzzing into a mouthpiece" },
   { id: "timpani", name: "timpani", family: "percussion", clefs: ["bass"], transposition: null, sound: "tuned drums struck with sticks" },
-  { id: "xylophone", name: "xylophone", family: "percussion", clefs: ["treble"], transposition: null, sound: "wooden bars struck with beaters" },
+  { id: "xylophone", name: "xylophone", family: "percussion", clefs: ["treble"], transposition: "P8 (sounds an octave higher)", sound: "wooden bars struck with beaters" },
   { id: "piano", name: "piano", family: "keyboard", clefs: ["treble", "bass"], transposition: null, sound: "hammers striking strings" },
 ];
 

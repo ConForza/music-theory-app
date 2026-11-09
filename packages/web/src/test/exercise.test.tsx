@@ -87,3 +87,63 @@ describe("notation layout", () => {
     expect(l.fixed.glyphs.filter((g) => g.ch === "")).toHaveLength(1); // one sharp in the key signature
   });
 });
+
+describe("review fixes (R3, R5, R6, R7, R8)", () => {
+  it("R3: a chord is read with no hidden key signature: unsigned D–F–A is submitted as written", async () => {
+    const user = userEvent.setup();
+    let last: LearnerResponse | null = null;
+    render(<Harness input={{ kind: "chord-builder", clef: "treble", key: "D major", maxLedgerLines: 2, minNotes: 3, maxNotes: 4 }} onValue={(r) => (last = r)} />);
+    await user.click(screen.getByText("Type the notes instead"));
+    await user.type(screen.getByRole("textbox"), "D4 F4 A4");
+    await user.click(screen.getByRole("button", { name: "Write these notes" }));
+    expect(last).toEqual({ kind: "chord-notes", pitches: ["D4", "F4", "A4"] });
+    await user.clear(screen.getByRole("textbox"));
+    await user.type(screen.getByRole("textbox"), "D4 F#4 A4");
+    await user.click(screen.getByRole("button", { name: "Write these notes" }));
+    expect(last).toEqual({ kind: "chord-notes", pitches: ["D4", "F#4", "A4"] });
+  });
+  it("R5: the empty equivalent-value builder does not reveal the length to match", () => {
+    render(<Harness input={{ kind: "rhythm-builder", mode: "equivalent-value", timeSignature: null, bars: 1, given: [], values: ["semibreve", "minim", "crotchet"], maxDots: 1, rests: true, ties: true, tuplets: [] }} onValue={() => undefined} />);
+    expect(document.querySelector(".bar-meter")!.textContent).not.toMatch(/semibreve|minim|crotchet|needed/i);
+  });
+  it("R6: in questions, playable notes are labelled by stave position, never by pitch name", async () => {
+    const { Notation } = await import("../components/notation/Notation");
+    const f = { presentation: "stave", clef: "treble", showKeySignature: false, textAlternative: "x", measures: [{ events: [{ kind: "note", pitch: "D5", duration: { value: "semibreve", dots: 0 } }] }] } as never;
+    render(<Notation fragment={f} labels="positions" onActivate={() => undefined} />);
+    const btn = screen.getByRole("button", { name: /^Play / });
+    expect(btn.getAttribute("aria-label")).toBe("Play semibreve on the 4th line");
+    cleanup();
+    render(<Notation fragment={f} onActivate={() => undefined} />);
+    expect(screen.getByRole("button", { name: /^Play / }).getAttribute("aria-label")).toMatch(/D5/);
+  });
+  it("R8: a note tied over the bar-line sounds once, for the combined length", async () => {
+    const { playbackEvents } = await import("../components/notation/layout");
+    const evs = playbackEvents({ clef: "treble", timeSignature: "2/4", textAlternative: "x", measures: [
+      { events: [{ kind: "note", pitch: "D4", duration: { value: "crotchet", dots: 0 } }, { kind: "note", pitch: "C4", duration: { value: "crotchet", dots: 0 }, tieToNext: true }] },
+      { voices: [
+        { id: "a", events: [{ kind: "note", pitch: "C4", duration: { value: "crotchet", dots: 0 } }, { kind: "note", pitch: "E4", duration: { value: "crotchet", dots: 0 } }] },
+        { id: "b", events: [{ kind: "rest", duration: { value: "minim", dots: 0 } }] },
+      ] },
+    ] } as never, 60);
+    expect(evs.map((e) => e.pitches.join())).toEqual(["D4", "C4", "E4"]);
+    expect(evs[1]!.dur).toBeCloseTo(2);
+  });
+});
+
+describe("R7: every scheduled note stays cancellable", () => {
+  it("stopAll stops all notes of a long phrase, including those past the voice limit", async () => {
+    const stops: Array<{ start: number; stop: number }> = [];
+    class Param { setValueAtTime() {} exponentialRampToValueAtTime() {} setTargetAtTime() {} cancelScheduledValues() {} value = 0; }
+    class Node { connect(n: unknown) { return n; } }
+    class Osc extends Node { type = ""; frequency = new Param(); rec = { start: 0, stop: Infinity }; start(t: number) { this.rec.start = t; stops.push(this.rec); } stop(t: number) { this.rec.stop = t; } }
+    class Ctx { currentTime = 0; state = "running"; destination = {}; resume() {} createGain() { return Object.assign(new Node(), { gain: new Param() }); } createOscillator() { return new Osc(); } }
+    (window as unknown as { AudioContext: unknown }).AudioContext = Ctx;
+    const audio = await import("../lib/audio");
+    audio.setSoundEnabled(true);
+    audio.playTimed(Array.from({ length: 20 }, (_, i) => ({ at: i * 0.1, dur: 2, semis: [48 + i], id: String(i) })));
+    audio.stopAll();
+    expect(stops.length).toBe(60);
+    // Every oscillator, including the 13th–20th notes scheduled in the future, now stops within 0.2s of "now" (0).
+    expect(stops.every((s) => s.stop <= 0.2 + 1e-9)).toBe(true);
+  });
+});

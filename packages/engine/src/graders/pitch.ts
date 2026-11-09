@@ -164,7 +164,8 @@ export const gradeAccidentalState: Grader<AnswerOf<"pitch">> = (c, a, r) => {
   if (!music_) throw new EngineError("item_inconsistent", "Accidental-state item needs music");
   const target = shownNote(c.item);
   if (!target) throw new EngineError("item_inconsistent", "Accidental-state item needs one labelled note");
-  if (sameSpelling(got, target, a.octaveSensitive && got.octave !== undefined)) return right();
+  if (a.octaveSensitive && got.octave === undefined) throw new EngineError("response_mismatch", "Give the octave as well");
+  if (sameSpelling(got, target, a.octaveSensitive)) return right();
   // Re-read the bar with one rule broken: if that reading gives the learner's answer, we know the mistake.
   const all = readFragment(music_);
   const idx = all.findIndex((n) => n.label) >= 0 ? all.findIndex((n) => n.label) : all.findIndex((n) => !n.isChord);

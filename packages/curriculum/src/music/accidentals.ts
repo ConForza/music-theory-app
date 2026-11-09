@@ -64,7 +64,10 @@ interface Slotted {
   ref: NoteRef;
   onset: Fraction;
   written: ANote;
+  /** The previous event in this voice was tied to this one. */
   tiedFrom: boolean;
+  /** This event is tied to the next one in its voice. */
+  tieToNext: boolean;
 }
 
 const voicesOf = (m: AMeasure): AEvent[][] => (m.events ? [m.events] : (m.voices ?? []).map((v) => v.events));
@@ -80,7 +83,8 @@ function noteheads(f: AFragment): Slotted[][] {
         const e = t.e as unknown as AEvent;
         const tiedFrom = tiedVoices.get(voice) ?? false;
         tiedVoices.set(voice, Boolean(e.tieToNext) && e.kind !== "rest");
-        notesOf(e).forEach((written, note) => out.push({ ref: { bar, voice, event, note }, onset: t.onset, written, tiedFrom }));
+        const tieToNext = Boolean(e.tieToNext) && e.kind !== "rest";
+        notesOf(e).forEach((written, note) => out.push({ ref: { bar, voice, event, note }, onset: t.onset, written, tiedFrom, tieToNext }));
       });
     });
     out.sort((a, b) => compare(a.onset, b.onset) || a.ref.voice - b.ref.voice);
@@ -100,6 +104,35 @@ export const RESOLUTION_MISTAKES: Array<{ rule: Exclude<ResolutionRule, "none">;
 ];
 
 /**
+ * Per voice, the noteheads of the event immediately before the current one (the only notes a tie can come
+ * from), whether it was tied, and whether it was in an earlier bar. Noteheads of one event arrive together
+ * (they share bar, voice, event index and onset).
+ */
+class TieTracker<T> {
+  private current = new Map<number, { key: string; bar: number; tie: boolean; heads: T[] }>();
+  private previous = new Map<number, { key: string; bar: number; tie: boolean; heads: T[] }>();
+  /** Call for each notehead before resolving it; returns the tied-from heads when this note continues a tie. */
+  enter(n: Slotted): { heads: T[]; crossesBarline: boolean } | null {
+    const v = n.ref.voice;
+    const key = `${n.ref.bar}.${n.ref.event}`;
+    const cur = this.current.get(v);
+    if (!cur || cur.key !== key) {
+      if (cur) this.previous.set(v, cur);
+      this.current.set(v, { key, bar: n.ref.bar, tie: false, heads: [] });
+    }
+    const prev = this.previous.get(v);
+    if (!n.tiedFrom || !prev || !prev.tie) return null;
+    return { heads: prev.heads, crossesBarline: prev.bar !== n.ref.bar };
+  }
+  /** Record the resolved head of the current event (and whether that event ties onward). */
+  record(n: Slotted, head: T, tieToNext: boolean) {
+    const cur = this.current.get(n.ref.voice)!;
+    cur.heads.push(head);
+    cur.tie = tieToNext;
+  }
+}
+
+/**
  * Sounding pitch of every notehead, computed from the printed letter, octave and printed sign only.
  * Returned in reading order (bar, then time) with references back to the notation.
  */
@@ -107,17 +140,18 @@ export function resolveWrittenPitches(f: AFragment, rule: ResolutionRule = "none
   const key: Key | undefined = f.key && f.showKeySignature !== false ? parseKey(f.key) : undefined;
   const out: Array<{ ref: NoteRef; pitch: Pitch }> = [];
   let carried = new Map<string, number>();
-  const lastTied = new Map<number, Pitch[]>();
+  const ties = new TieTracker<Pitch>();
   noteheads(f).forEach((bar) => {
     const state = rule === "carry-over-barline" ? carried : new Map<string, number>();
-    const tiedNow = new Map<number, Pitch[]>();
     for (const n of bar) {
       const p = parsePitch(n.written.pitch);
       const slot = rule === "any-octave" ? p.step : `${p.step}${p.octave}`;
-      const prevTied = lastTied.get(n.ref.voice)?.find((t) => t.step === p.step && t.octave === p.octave);
+      // A continuation takes the pitch of the tied note itself: same letter and octave in the event just before.
+      const from = ties.enter(n);
+      const tiedHead = from?.heads.find((t) => t.step === p.step && t.octave === p.octave);
       let alter: number;
-      if (n.tiedFrom && prevTied && rule !== "ignore-ties") {
-        alter = prevTied.alter;
+      if (tiedHead && rule !== "ignore-ties") {
+        alter = tiedHead.alter;
       } else if (n.written.writtenAccidental !== undefined) {
         alter = SIGN_ALTER[n.written.writtenAccidental];
         state.set(slot, alter);
@@ -127,11 +161,8 @@ export function resolveWrittenPitches(f: AFragment, rule: ResolutionRule = "none
       }
       const pitch = { step: p.step, alter, octave: p.octave };
       out.push({ ref: n.ref, pitch });
-      tiedNow.set(n.ref.voice, [...(tiedNow.get(n.ref.voice) ?? []), pitch]);
+      ties.record(n, pitch, n.tieToNext);
     }
-    // Ties carry from the last event of each voice in this bar into the next bar.
-    lastTied.clear();
-    for (const [v, ps] of tiedNow) lastTied.set(v, ps);
     if (rule === "carry-over-barline") carried = state;
   });
   return out;
@@ -139,19 +170,20 @@ export function resolveWrittenPitches(f: AFragment, rule: ResolutionRule = "none
 
 /**
  * The sign to print before each notehead so that it reads as its spelt pitch, or null for none.
- * An explicit `writtenAccidental` is always printed (courtesy accidentals are allowed).
+ * An explicit `writtenAccidental` is always printed (courtesy accidentals are allowed). A tied continuation
+ * repeats no sign; across a bar-line it does not establish its accidental for later notes in the new bar.
  */
 export function printedAccidentals(f: AFragment): Map<string, Sign | null> {
   const key: Key | undefined = f.key && f.showKeySignature !== false ? parseKey(f.key) : undefined;
   const out = new Map<string, Sign | null>();
-  const lastTied = new Map<number, Pitch[]>();
+  const ties = new TieTracker<Pitch>();
   noteheads(f).forEach((bar) => {
     const state = new Map<string, number>();
-    const tiedNow = new Map<number, Pitch[]>();
     for (const n of bar) {
       const p = parsePitch(n.written.pitch);
       const slot = `${p.step}${p.octave}`;
-      const continuation = n.tiedFrom && Boolean(lastTied.get(n.ref.voice)?.some((t) => t.step === p.step && t.octave === p.octave && t.alter === p.alter));
+      const from = ties.enter(n);
+      const continuation = Boolean(from?.heads.some((t) => t.step === p.step && t.octave === p.octave && t.alter === p.alter));
       let sign: Sign | null = null;
       if (!continuation) {
         const expected = state.get(slot) ?? (key ? signatureAlter(key, p.step) : 0);
@@ -160,11 +192,8 @@ export function printedAccidentals(f: AFragment): Map<string, Sign | null> {
         if (sign) state.set(slot, p.alter);
       }
       out.set(refKey(n.ref), sign);
-      tiedNow.set(n.ref.voice, [...(tiedNow.get(n.ref.voice) ?? []), p]);
+      ties.record(n, p, n.tieToNext);
     }
-    lastTied.clear();
-    for (const [v, ps] of tiedNow) lastTied.set(v, ps);
   });
   return out;
 }
-

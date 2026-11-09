@@ -524,3 +524,19 @@ export function splitAt<E>(events: E[], positions: number[]): E[][] {
   if (start < events.length) bars.push(events.slice(start));
   return bars;
 }
+
+/**
+ * Ties that end nowhere: a tied note must be followed, in the same voice, by another note (possibly at the start of
+ * the next bar). A tie into a rest, or from the very last note of the passage, is a notation error.
+ * Returns the indices (in the flattened passage) of the offending tied notes.
+ */
+export function danglingTies(bars: REvent[][]): number[] {
+  const flat = bars.flatMap((b) => b.flatMap((e) => (e.kind === "tuplet" ? e.events : [e as RInner])));
+  const out: number[] = [];
+  flat.forEach((e, i) => {
+    if (e.kind === "rest" || !e.tieToNext) return;
+    const next = flat[i + 1];
+    if (!next || next.kind === "rest") out.push(i);
+  });
+  return out;
+}

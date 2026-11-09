@@ -117,9 +117,14 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
   const scopeIssue = a.task === "regroup" ? null : scopeProblem(bars, c.scope);
   if (scopeIssue) return wrong(null, scopeIssue);
   const ts = a.timeSignature ?? c.item.music?.timeSignature;
+  // Structure before totals: a tie must lead to a note, and the answer must have the shape the task asks for.
+  if (music.danglingTies(bars).length) return wrong(a.task === "complete-bar" ? "unnecessary-tie" : null, "A tie must join a note to the next note of the same pitch; this tie leads nowhere.");
 
   if (a.task === "equivalent-value") {
     const target = frac(a.target![0], a.target![1]);
+    const single = a.accepted.every((m) => fromMeasures(m).length === 1 && fromMeasures(m)[0]!.length === 1 && fromMeasures(m)[0]![0]!.kind !== "tuplet");
+    const events = bars.flat();
+    if (single && (events.length !== 1 || events[0]!.kind === "tuplet")) return wrong(null, "The question asks for a single note (or rest): write one value, not several.");
     const total = bars.reduce((s, b) => add(s, totalLength(b)), frac(0));
     const refUsesNotes = a.accepted.some((m) => fromMeasures(m).flat().some((e) => e.kind !== "rest"));
     const usesRests = bars.flat().some((e) => e.kind === "rest");
@@ -133,6 +138,8 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
     return wrong(null, `Your answer lasts ${formatFraction(total)} of a semibreve; it should last ${formatFraction(target)}.`);
   }
   if (!ts) throw new EngineError("item_inconsistent", "Rhythm task needs a time signature");
+  const wantBars = a.task === "regroup" && c.item.music ? c.item.music.measures.length : a.accepted[0]!.length;
+  if (bars.length !== wantBars) return wrong(null, `Write exactly ${wantBars} bar${wantBars === 1 ? "" : "s"}.`);
 
   if (a.task === "complete-bar") {
     const given = (a.given ?? []) as unknown as REvent[];

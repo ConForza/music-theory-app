@@ -94,7 +94,7 @@ describe("onboarding, path and navigation", () => {
     expect(screen.getAllByRole("button", { pressed: false })).toHaveLength(5);
     await user.click(screen.getByRole("button", { name: /Grade 3: Compound Time and Minor Keys/ }));
     await user.click(screen.getByRole("button", { name: "Try it as a guest" }));
-    expect(await screen.findByRole("link", { name: /Grade 3: Compound Time and Minor Keys. Change grade/ })).toBeInTheDocument();
+    expect(await screen.findByRole("link", { name: /Grade 3 Compound Time and Minor Keys. Change grade/ })).toBeInTheDocument();
     expect(await screen.findByText(/Nothing to start in Grade 3/)).toBeInTheDocument();
   });
 
