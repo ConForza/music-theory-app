@@ -189,3 +189,14 @@ describe("durations", () => {
     expect(classifyTimeSignature("7/8")).toEqual({ metre: "irregular", beats: "septuple" });
   });
 });
+
+describe("interval edge cases (Copilot follow-up)", () => {
+  it("names a chromatic unison the same in either note order", () => {
+    expect(describeInterval(intervalBetween(parsePitch("C#4"), parsePitch("C4")))).toBe("augmented 1st");
+    expect(describeInterval(intervalBetween(parsePitch("C4"), parsePitch("Cb4")))).toBe("augmented 1st");
+    expect(intervalBetween(parsePitch("C4"), parsePitch("C#4"))).toEqual(intervalBetween(parsePitch("C#4"), parsePitch("C4")));
+  });
+  it("rejects interval number 0", () => {
+    for (const code of ["M0", "m0", "A0", "P0", "d0"]) expect(() => parseInterval(code)).toThrow();
+  });
+});

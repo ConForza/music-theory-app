@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { loadCurriculum } from "../src/load.ts";
 import { buildIndex } from "../src/model.ts";
@@ -7,7 +7,8 @@ import { AnswerSpec, ExerciseItem } from "../src/schema.ts";
 import { verifyStandaloneItem } from "../src/verify-music.ts";
 
 const ix = buildIndex(loadCurriculum().curriculum!);
-const raw = JSON.parse(readFileSync(join(__dirname, "fixtures/family-items.json"), "utf8")) as unknown[];
+// ESM-safe path (the package is "type": "module", where __dirname is not defined).
+const raw = JSON.parse(readFileSync(fileURLToPath(new URL("./fixtures/family-items.json", import.meta.url)), "utf8")) as unknown[];
 const fixtures = raw.map((r) => ExerciseItem.parse(r));
 const byId = (id: string) => structuredClone(fixtures.find((f) => f.id === `i.fixture.${id}`)!);
 const codes = (item: ExerciseItem) => verifyStandaloneItem(ix, item, item.id).filter((i) => i.severity === "error").map((i) => i.code);
@@ -190,5 +191,13 @@ describe("re-review C2: interval checks honour the allowed minor forms", () => {
 
   it("a stated minor form outside the scope is rejected", () => {
     expect(codes(interval("t.g2.interval-number", { task: "identify", upper: "F#5", minorForm: "melodic-ascending", acceptedIntervals: ["6"] }))).toContain("ANSWER_SCOPE");
+  });
+});
+
+describe("interval codes (Copilot follow-up)", () => {
+  it("the schema rejects interval number 0", async () => {
+    const { IntervalCode } = await import("../src/schema.ts");
+    for (const c of ["0", "M0", "cP0"]) expect(IntervalCode.safeParse(c).success).toBe(false);
+    for (const c of ["1", "P1", "M10", "cM3"]) expect(IntervalCode.safeParse(c).success).toBe(true);
   });
 });
