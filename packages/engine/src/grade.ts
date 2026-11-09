@@ -32,8 +32,9 @@ const RESPONSE_FOR_INPUT: Record<Exclude<ItemInput["kind"], "composite">, Simple
 function requireKind(input: Exclude<ItemInput, { kind: "composite" }>, r: SimpleResponse) {
   const want = RESPONSE_FOR_INPUT[input.kind];
   if (r.kind !== want) throw new EngineError("response_mismatch", `This question takes a ${want} answer`);
-  if (input.kind === "note-name" && r.kind === "pitch" && (input.octave !== null) !== /\d$/.test(r.pitch)) {
-    throw new EngineError("response_mismatch", input.octave ? "Give the octave as well" : "Give the note name without an octave");
+  // An assessed octave must be given; an unassessed one may be given and is ignored by the comparison (review R12).
+  if (input.kind === "note-name" && r.kind === "pitch" && input.octave !== null && !/\d$/.test(r.pitch)) {
+    throw new EngineError("response_mismatch", "Give the octave as well");
   }
 }
 

@@ -162,6 +162,12 @@ describe("practice lab", () => {
     expect(same.body.correct).toBe(false);
     const ok = await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: id, response: { kind: "pitch", pitch: "Fb" } });
     expect(ok.body.correct).toBe(true);
+    // Octave not assessed: no octave, the shown octave, or another octave are all accepted (review R12).
+    for (const pitch of ["D", "D5", "D4"]) {
+      const r = await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: "i.showcase.notes-on-the-stave.1", response: { kind: "pitch", pitch } });
+      expect(r.status, pitch).toBe(200);
+      expect(r.body.correct, pitch).toBe(true);
+    }
     // Stored Brief 02 letter answers on the Grade 1 lesson remain valid.
     await register(c, "zed");
     await c.post("/api/lessons/G1-U3-L03/start");

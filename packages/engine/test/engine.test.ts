@@ -107,7 +107,9 @@ describe("golden grading: pitch and spelling", () => {
   it("reads the note from the printed stave, not from a stored answer", () => {
     const it_ = item("t.g1.note-read", { kind: "pitch", accepted: ["G4"], octaveSensitive: false, spellingSensitive: true }, { music: stave("treble", [sb("G4")]) as never });
     expect(grade(it_, { kind: "pitch", pitch: "G" }).correct).toBe(true);
-    expect(() => grade(it_, { kind: "pitch", pitch: "G5" })).toThrow(EngineError); // octave-insensitive: the input asks for no octave
+    expect(grade(it_, { kind: "pitch", pitch: "G5" }).correct).toBe(true); // octave-insensitive: any octave, or none
+    expect(grade(it_, { kind: "pitch", pitch: "G4" }).correct).toBe(true);
+    expect(grade(it_, { kind: "pitch", pitch: "A4" }).correct).toBe(false);
     const bass = grade(it_, { kind: "pitch", pitch: "B" });
     expect(bass.correct).toBe(false);
     expect(bass.category).toBe("clef-confusion"); // G4's position (2nd line) is B in the bass clef
@@ -271,10 +273,11 @@ describe("response contract per item (review R1)", () => {
     expect(gradeItem(ix, item, canonicalResponse(ix, item, scope), scope).correct).toBe(true);
     expect(() => gradeItem(ix, item, { kind: "chord-name", roman: "I", inversion: "a" }, scope)).toThrow(EngineError);
   });
-  it("requires the octave when octave matters, and refuses it when it does not", () => {
+  it("requires the octave when octave matters; allows an optional one when it does not", () => {
     const sensitive = item("t.g5.four-clef-read", { kind: "pitch", accepted: ["C4"], octaveSensitive: true, spellingSensitive: true }, { music: stave("alto", [sb("C4")]) as never });
     expect(() => grade(sensitive, { kind: "pitch", pitch: "C" })).toThrow(EngineError);
     expect(grade(sensitive, { kind: "pitch", pitch: "C4" }).correct).toBe(true);
+    expect(grade(sensitive, { kind: "pitch", pitch: "C5" }).correct).toBe(false);
   });
   it("checks composite parts against their own inputs", () => {
     const score = showcase.find((i) => i.id === "i.showcase.instruments-and-score.9")!;
