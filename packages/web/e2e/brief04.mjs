@@ -553,7 +553,7 @@ async function largeText() {
     const tabs = await page.evaluate(() =>
       [...document.querySelectorAll(".tab")].map((t) => {
         const r = t.getBoundingClientRect();
-        const label = t.querySelector("span:last-child");
+        const label = t.querySelector(".tab-label");
         return { text: t.textContent, l: r.left, r: r.right, t: r.top, b: r.bottom, clipped: label ? label.scrollWidth > label.clientWidth + 1 : false, words: (t.textContent ?? "").trim() };
       }),
     );
@@ -570,7 +570,7 @@ async function largeText() {
         assert.ok(!overlap, `${path}: tabs "${a.text}" and "${b.text}" overlap at 200% text`);
       }
     // Every word of every label fits its own cell (a long word is never split across cells).
-    const longest = await page.evaluate(() => Math.max(...[...document.querySelectorAll(".tab span:last-child")].map((s) => s.scrollWidth - s.clientWidth)));
+    const longest = await page.evaluate(() => Math.max(...[...document.querySelectorAll(".tab .tab-label")].map((s) => s.scrollWidth - s.clientWidth)));
     assert.ok(longest <= 1, `${path}: a tab label overflows its cell by ${longest}px`);
   }
   await page.goto("/review");

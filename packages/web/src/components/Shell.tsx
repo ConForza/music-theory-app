@@ -38,7 +38,7 @@ export function Shell() {
                   <Icon name={t.icon} size={26} />
                   {t.to === "/review" && due > 0 && <span className="tab-dot" aria-hidden="true" />}
                 </span>
-                <span>{t.label}{t.to === "/review" && due > 0 && <span className="visually-hidden">, {due} ready</span>}</span>
+                <span className="tab-label">{t.label}{t.to === "/review" && due > 0 && <span className="visually-hidden">, {due} ready</span>}</span>
               </NavLink>
             </li>
           ))}
