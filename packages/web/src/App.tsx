@@ -5,6 +5,7 @@ import { Grades } from "./pages/Grades";
 import { Learn } from "./pages/Learn";
 import { Lesson } from "./pages/Lesson";
 import { Onboarding } from "./pages/Onboarding";
+import { Practice, PracticeMore, PracticeSetPlayer } from "./pages/Practice";
 import { Profile } from "./pages/Profile";
 import { Progress } from "./pages/Progress";
 import { Settings } from "./pages/Settings";
@@ -31,9 +32,12 @@ export function App() {
       </Route>
       <Route element={<RequireAuth />}>
         <Route path="/lesson/:nodeId" element={<Lesson />} />
+        <Route path="/practice/more/:templateId" element={<PracticeMore />} />
+        <Route path="/practice/:setId" element={<PracticeSetPlayer />} />
         <Route element={<Shell />}>
           <Route path="/learn" element={<Learn />} />
           <Route path="/grades" element={<Grades />} />
+          <Route path="/practice" element={<Practice />} />
           <Route path="/unit/:unitId" element={<Unit />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/profile" element={<Profile />} />

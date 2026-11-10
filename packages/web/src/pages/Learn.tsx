@@ -35,9 +35,9 @@ export function Learn() {
   return (
     <div className="page learn" data-grade={grade}>
       <header className="learn-head">
-        <Link to="/grades" className="grade-chip" aria-label={`Grade ${grade}: ${world.learnerTitle}. Change grade`}>
+        <Link to="/grades" className="grade-chip">
           <span className="grade-num" aria-hidden="true">{grade}</span>
-          <span><small>Grade {grade}</small><strong>{world.learnerTitle}</strong></span>
+          <span><small>Grade {grade}</small> <strong>{world.learnerTitle}</strong><span className="visually-hidden">. Change grade</span></span>
           <Icon name="down" size={20} />
         </Link>
       </header>

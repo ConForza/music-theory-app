@@ -94,7 +94,7 @@ describe("onboarding, path and navigation", () => {
     expect(screen.getAllByRole("button", { pressed: false })).toHaveLength(5);
     await user.click(screen.getByRole("button", { name: /Grade 3: Compound Time and Minor Keys/ }));
     await user.click(screen.getByRole("button", { name: "Try it as a guest" }));
-    expect(await screen.findByRole("link", { name: /Grade 3: Compound Time and Minor Keys. Change grade/ })).toBeInTheDocument();
+    expect(await screen.findByRole("link", { name: /Grade 3 Compound Time and Minor Keys. Change grade/ })).toBeInTheDocument();
     expect(await screen.findByText(/Nothing to start in Grade 3/)).toBeInTheDocument();
   });
 
@@ -328,8 +328,9 @@ describe("stems point the right way and stay inside the drawing (review R5)", ()
   const stems = (c: HTMLElement) => {
     const vb = c.querySelector("svg")!.getAttribute("viewBox")!.split(" ").map(Number);
     return {
-      height: vb[3]!,
-      list: [...c.querySelectorAll("line.staff-stem")].map((l) => ({ y1: Number(l.getAttribute("y1")), y2: Number(l.getAttribute("y2")) })),
+      min: vb[1]!,
+      max: vb[1]! + vb[3]!,
+      list: [...c.querySelectorAll("line.n-stem")].map((l) => ({ y1: Number(l.getAttribute("y1")), y2: Number(l.getAttribute("y2")) })),
     };
   };
 
@@ -345,18 +346,18 @@ describe("stems point the right way and stay inside the drawing (review R5)", ()
     ["bass", "A3", "crotchet", "down"],
   ] as const)("%s %s %s: stem %s, within the SVG", (clef, pitch, value, dir) => {
     const { container } = render(<StaffView fragment={frag(clef, [[pitch, value]])} />);
-    const { height, list } = stems(container);
+    const { min, max, list } = stems(container);
     expect(list).toHaveLength(1);
     const s = list[0]!;
     expect(s.y2 < s.y1 ? "up" : "down").toBe(dir);
     for (const y of [s.y1, s.y2]) {
-      expect(y).toBeGreaterThanOrEqual(0);
-      expect(y).toBeLessThanOrEqual(height);
+      expect(y).toBeGreaterThanOrEqual(min);
+      expect(y).toBeLessThanOrEqual(max);
     }
   });
 
   it("draws no stem on a semibreve", () => {
     const { container } = render(<StaffView fragment={frag("treble", [["G4", "semibreve"]])} />);
-    expect(container.querySelectorAll("line.staff-stem")).toHaveLength(0);
+    expect(container.querySelectorAll("line.n-stem")).toHaveLength(0);
   });
 });

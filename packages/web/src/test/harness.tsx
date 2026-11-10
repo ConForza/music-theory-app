@@ -125,7 +125,7 @@ export async function completeSampleLesson(course: Course, nodeId = "G1-U3-L03")
   for (const item of course.lesson(nodeId)!.items) {
     const a = course.authoredItems(nodeId).find((i) => i.id === item.id)!.answer;
     const response =
-      a.kind === "pitch" ? { kind: "pitch-letter" as const, letter: a.accepted[0]!.charAt(0) }
+      a.kind === "pitch" ? { kind: "pitch-letter" as const, letter: a.accepted[0]!.charAt(0) as "A" }
       : a.kind === "staff-position" ? { kind: "staff-position" as const, pitch: a.accepted[0]! }
       : { kind: "choice" as const, optionId: (a as { correctOptionIds: string[] }).correctOptionIds[0]! };
     await api.attempt(nodeId, crypto.randomUUID(), item.id, response);

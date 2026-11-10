@@ -1106,3 +1106,28 @@ export const StandaloneItemFile = z
   })
   .strict();
 export type StandaloneItemFile = z.infer<typeof StandaloneItemFile>;
+
+// ---- Demonstration sets (Brief 03) -----------------------------------------
+//
+// Original, fixed exercise items grouped by teaching area, used by the practice lab to show every exercise
+// family working end to end. Items are verified like standalone items (template scope within its grade).
+// `practice` names templates whose seeded generator offers "more like this" variations.
+// Migration note: new optional content folder content/exercises/showcase; no existing file changes shape.
+
+export const ShowcaseFile = z
+  .object({
+    schemaVersion: z.literal(1),
+    id: z.string().regex(/^s\.[a-z0-9]+(-[a-z0-9]+)*$/),
+    title: NonEmpty,
+    summary: NonEmpty,
+    /** Lowest grade of the items in the set (for ordering). */
+    grade: Grade,
+    order: z.number().int().min(1),
+    familyIds: z.array(FamilyId).min(1),
+    provenance: z.object({ authoredBy: NonEmpty, originality: z.literal("original"), notes: NonEmpty }).strict(),
+    review: z.object({ status: ReviewState, reviewedBy: z.string().nullable() }).strict(),
+    items: z.array(ExerciseItem).min(1),
+    practice: z.array(z.object({ templateId: TemplateId, label: NonEmpty }).strict()).default([]),
+  })
+  .strict();
+export type ShowcaseFile = z.infer<typeof ShowcaseFile>;

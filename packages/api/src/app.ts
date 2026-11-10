@@ -6,6 +6,8 @@ import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
+import { PracticeService } from "./practice.ts";
+import { LearnerResponse } from "@mtp/engine";
 
 export const Settings = z
   .object({
@@ -54,11 +56,8 @@ const AttemptBody = z
   .object({
     attemptId: Uuid,
     itemId: z.string().min(1).max(100),
-    response: z.discriminatedUnion("kind", [
-      z.object({ kind: z.literal("choice"), optionId: z.string().min(1).max(100) }).strict(),
-      z.object({ kind: z.literal("pitch-letter"), letter: z.enum(["A", "B", "C", "D", "E", "F", "G"]) }).strict(),
-      z.object({ kind: z.literal("staff-position"), pitch: z.string().regex(/^[A-G][0-9]$/) }).strict(),
-    ]),
+    /** Every learner answer shape the engine accepts (bounded and spelling-aware); never a correctness claim. */
+    response: LearnerResponse,
   })
   .strict();
 
@@ -93,6 +92,7 @@ function parseCookies(header: string | null): Record<string, string> {
 export function createApp(opts: AppOptions) {
   const { db, course } = opts;
   const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true });
+  const practice = new PracticeService(db, course);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
   const loginLimiter = new RateLimiter(10);
@@ -209,6 +209,7 @@ export function createApp(opts: AppOptions) {
       profile: profileOf(id),
       lessonProgress: all("SELECT * FROM lesson_progress WHERE user_id = ?"),
       attempts: all("SELECT * FROM attempts WHERE user_id = ? ORDER BY created_at"),
+      practiceAttempts: all("SELECT * FROM practice_attempts WHERE user_id = ? ORDER BY created_at"),
     };
   });
 
@@ -241,6 +242,22 @@ export function createApp(opts: AppOptions) {
   });
 
   route("POST", "/api/lessons/:nodeId/complete", true, (ctx) => progress.complete(ctx.user!.id, nodeParam(ctx.params[0]!)));
+
+  // ---- practice lab (Brief 03) -------------------------------------------
+  route("GET", "/api/practice", true, () => practice.catalogue());
+  route("GET", "/api/practice/sets/:setId", true, (ctx) => practice.set(ctx.params[0]!));
+  route("POST", "/api/practice/generate", true, async (ctx) => {
+    const b = parse(z.object({ templateId: z.string().regex(/^t\.g[1-5]\.[a-z0-9-]+$/), seed: z.number().int().min(0).max(2 ** 31 - 1).optional() }).strict(), await ctx.body());
+    return practice.generate(b.templateId, b.seed);
+  });
+  route("POST", "/api/practice/hint", true, async (ctx) => {
+    const b = parse(z.object({ itemId: z.string().min(1).max(100), level: z.number().int().min(1).max(10) }).strict(), await ctx.body());
+    return practice.hint(ctx.user!.id, b.itemId, b.level);
+  });
+  route("POST", "/api/practice/attempts", true, async (ctx) => {
+    const b = parse(AttemptBody, await ctx.body());
+    return practice.attempt(ctx.user!.id, b.attemptId, b.itemId, b.response);
+  });
 
   // ---- dispatcher ---------------------------------------------------------
   const sameOrigin = (req: Request, url: URL) => {
@@ -302,6 +319,6 @@ export function createApp(opts: AppOptions) {
     }
   }
 
-  return { fetch, progress };
+  return { fetch, progress, practice };
 }
 export type App = ReturnType<typeof createApp>;

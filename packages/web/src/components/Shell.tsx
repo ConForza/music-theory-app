@@ -6,6 +6,7 @@ import { Icon, Logo, type IconName } from "./Icon";
 
 const TABS: Array<{ to: string; label: string; icon: IconName }> = [
   { to: "/learn", label: "Learn", icon: "path" },
+  { to: "/practice", label: "Practice", icon: "sparkle" },
   { to: "/progress", label: "Progress", icon: "chart" },
   { to: "/profile", label: "Profile", icon: "user" },
   { to: "/settings", label: "Settings", icon: "gear" },

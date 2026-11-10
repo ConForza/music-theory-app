@@ -11,25 +11,25 @@
       "id": "rules.metre.classification",
       "title": "Metre classification",
       "description": "Simple/compound/irregular and duple/triple/quadruple/quintuple/septuple classification of time signatures.",
-      "referenceImplementation": "packages/curriculum/src/music/duration.ts"
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
     },
     {
       "id": "rules.grouping.simple",
       "title": "Grouping in simple time",
       "description": "Beaming and rest-grouping conventions in simple time, including the half-bar rules in quadruple time and accepted alternatives.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
     },
     {
       "id": "rules.grouping.compound",
       "title": "Grouping in compound time",
       "description": "Beaming and rest-grouping conventions for dotted beats, including both accepted forms of a silent dotted-crotchet beat.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
     },
     {
       "id": "rules.grouping.irregular",
       "title": "Grouping in irregular time",
       "description": "Grouping by the stated sub-groups (e.g. 3+2, 2+2+3) in 5/4, 7/4, 5/8, 7/8.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
     },
     {
       "id": "rules.tuplet",
@@ -59,7 +59,7 @@
       "id": "rules.accidental.bar-state",
       "title": "Accidental state",
       "description": "An accidental applies to its line/space for the rest of the bar, through ties over the bar-line, until cancelled.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/accidentals.ts"
     },
     {
       "id": "rules.key-signature",
@@ -89,7 +89,7 @@
       "id": "rules.scale.chromatic",
       "title": "Chromatic scale",
       "description": "All semitones; each line/space used at least once and at most twice; spelling policy.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/chromatic.ts"
     },
     {
       "id": "rules.scale.degrees",
@@ -137,37 +137,37 @@
       "id": "rules.transpose.instrument",
       "title": "Instrument transposition",
       "description": "Written ↔ concert pitch for B♭ (M2), A (m3) and F (P5) instruments with key-signature change and accidental respelling.",
-      "referenceImplementation": "packages/curriculum/src/music/interval.ts"
+      "referenceImplementation": "packages/curriculum/src/music/transposing.ts"
     },
     {
       "id": "rules.ornament.signs",
       "title": "Ornament signs",
       "description": "Recognition of trill, turn, upper/lower mordent, acciaccatura, appoggiatura and matching written-out patterns to signs.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/ornaments.ts"
     },
     {
       "id": "rules.vocabulary.terms",
       "title": "Terms and signs",
       "description": "Controlled vocabulary of performance terms and signs per grade (list pending authoritative source).",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/vocabulary.ts"
     },
     {
       "id": "rules.vocabulary.instruments",
       "title": "Instruments",
       "description": "Controlled vocabulary of instruments, families, clefs, transpositions and sound production.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/vocabulary.ts"
     },
     {
       "id": "rules.vocabulary.voices",
       "title": "Voices",
       "description": "Voice types and ranges.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/curriculum/src/music/vocabulary.ts"
     },
     {
       "id": "rules.score.observation",
       "title": "Score observation",
       "description": "Composite questions about an authored score; each sub-question delegates to a deterministic grader.",
-      "referenceImplementation": null
+      "referenceImplementation": "packages/engine/src/grade.ts"
     }
   ],
   "graders": [

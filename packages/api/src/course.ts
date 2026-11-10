@@ -1,29 +1,34 @@
 import {
   buildIndex,
+  effectiveScope,
   loadCurriculum,
-  music,
   type CurriculumIndex,
   type ExerciseItem,
   type LessonContent,
+  type MusicScope,
   type NodeType,
   type NotationFragment,
+  type NotationScore,
   type OrderedNode,
+  type ShowcaseFile,
 } from "@mtp/curriculum";
+import { inputFor, templateScope, type ItemInput } from "@mtp/engine";
 
-/** How the learner answers an item. Never contains the answer. */
-export type ItemInput =
-  | { kind: "choice"; options: Array<{ id: string; label: string }> }
-  | { kind: "pitch-letter" }
-  | { kind: "staff-position"; clef: "treble" | "bass"; maxLedgerLines: number };
+/** How the learner answers an item (engine input descriptor). Never contains the answer. */
+export type { ItemInput };
 
 export interface LearnerItem {
   id: string;
-  section: "guided" | "independent";
+  section: "guided" | "independent" | "practice";
   evidence: "learning" | "independent";
   prompt: string;
   music?: NotationFragment;
+  score?: NotationScore;
   input: ItemInput;
   hintCount: number;
+  /** Exercise family (for presentation: icons, instructions). */
+  familyId: string;
+  grade: number;
 }
 
 export interface LearnerLesson {
@@ -73,20 +78,12 @@ export interface Course {
   lesson(nodeId: string): LearnerLesson | undefined;
   /** Raw authored items for a playable node (server-side grading only). */
   authoredItems(nodeId: string): ExerciseItem[];
-}
-
-/** Which authored items the Brief 02 lesson player can present and grade. The full engine is Brief 03. */
-export function inputFor(item: ExerciseItem): ItemInput | undefined {
-  const a = item.answer;
-  if (a.kind === "choice") return { kind: "choice", options: a.options };
-  if (a.kind === "pitch") {
-    const letterOnly = !a.octaveSensitive && a.relation === "same" && a.accepted.every((p) => music.parsePitch(p).alter === 0);
-    return letterOnly ? { kind: "pitch-letter" } : undefined;
-  }
-  if (a.kind === "staff-position" && (a.clef === "treble" || a.clef === "bass") && a.octaveSensitive) {
-    return { kind: "staff-position", clef: a.clef, maxLedgerLines: a.target.maxLedgerLines };
-  }
-  return undefined;
+  /** The scope a lesson item is graded in: the node binding's effective scope (what has been taught). */
+  scopeFor(nodeId: string, item: ExerciseItem): MusicScope;
+  /** Practice-lab demonstration sets (content/exercises/showcase). */
+  showcase: ShowcaseFile[];
+  /** Turn any item into what the learner sees (no answers). */
+  learnerItem(item: ExerciseItem, section: LearnerItem["section"], scope?: MusicScope): LearnerItem;
 }
 
 export function loadCourse(root?: string): Course {
@@ -96,6 +93,28 @@ export function loadCourse(root?: string): Course {
     throw new Error(`Curriculum failed to load:\n${errors.map((e) => `  ${e.where}: ${e.message}`).join("\n")}`);
   }
   const ix = buildIndex(curriculum);
+  const scopeFor = (nodeId: string, item: ExerciseItem): MusicScope => {
+    const node = ix.nodeById.get(nodeId);
+    const tpl = ix.templates.get(item.templateId);
+    const binding = node?.exercises.find((b) => b.templateId === item.templateId);
+    if (node && binding) return effectiveScope(ix, node, binding);
+    return tpl ? templateScope(ix, tpl) : {};
+  };
+  const toLearner = (it: ExerciseItem, section: LearnerItem["section"], scope?: MusicScope): LearnerItem => {
+    const tpl = ix.templates.get(it.templateId)!;
+    return {
+      id: it.id,
+      section,
+      evidence: it.evidence,
+      prompt: it.prompt,
+      ...(it.music ? { music: it.music } : {}),
+      ...(it.score ? { score: it.score } : {}),
+      input: inputFor(ix, it, scope),
+      hintCount: it.hints.length,
+      familyId: tpl.familyId,
+      grade: tpl.grade,
+    };
+  };
   const lessonByNode = new Map<string, LessonContent>();
   for (const n of ix.nodes) {
     if (!n.contentRef || n.contentStatus === "planned") continue;
@@ -110,18 +129,16 @@ export function loadCourse(root?: string): Course {
     const raw: ExerciseItem[] = [];
     for (const [section, list] of [["guided", l.guided], ["independent", l.independent]] as const) {
       for (const it of list) {
-        const input = inputFor(it);
-        if (!input) continue;
+        let learner: LearnerItem;
+        try {
+          learner = toLearner(it, section, scopeFor(nodeId, it));
+        } catch (e) {
+          // An item the engine cannot present is left out rather than shown half-working.
+          console.warn(`Skipping ${it.id}: ${(e as Error).message}`);
+          continue;
+        }
         raw.push(it);
-        items.push({
-          id: it.id,
-          section,
-          evidence: it.evidence,
-          prompt: it.prompt,
-          ...(it.music ? { music: it.music } : {}),
-          input,
-          hintCount: it.hints.length,
-        });
+        items.push(learner);
       }
     }
     if (items.length === 0) continue; // nothing the player can run: stays "coming soon"
@@ -186,5 +203,8 @@ export function loadCourse(root?: string): Course {
     isPlayable: (id) => learnerLessons.has(id),
     lesson: (id) => learnerLessons.get(id),
     authoredItems: (id) => authored.get(id) ?? [],
+    scopeFor,
+    showcase: curriculum.showcase.map((x) => x.content),
+    learnerItem: toLearner,
   };
 }

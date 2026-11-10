@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "id": "s.cadences",
+  "title": "Cadences",
+  "summary": "Choose chords for cadences and recognise perfect, plagal and imperfect cadences.",
+  "grade": 5,
+  "order": 10,
+  "familyIds": [
+    "fam.cadence"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path content team (Brief 03)",
+    "originality": "original",
+    "notes": "Items drawn from the seeded generators with a teaching-point filter, then fixed. Music and answers come from the rule engine; prompts and feedback are original."
+  },
+  "review": {
+    "status": "pending",
+    "reviewedBy": null
+  },
+  "items": [
+    {
+      "id": "i.showcase.cadences.1",
+      "templateId": "t.g5.cadence-chords",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Choose a chord for each marked melody note (A and B) in G major so that A–B makes a cadence. Each chord must contain its melody note.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "B"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A two-note melody in G major: A is A, B is G.",
+        "key": "G major"
+      },
+      "answer": {
+        "kind": "chord-progression",
+        "key": "G major",
+        "points": [
+          {
+            "label": "A",
+            "melodyPitches": [
+              "A4"
+            ],
+            "accepted": [
+              "V"
+            ]
+          },
+          {
+            "label": "B",
+            "melodyPitches": [
+              "G5"
+            ],
+            "accepted": [
+              "I"
+            ]
+          }
+        ],
+        "cadences": [
+          {
+            "labels": [
+              "A",
+              "B"
+            ],
+            "acceptedTypes": [
+              "perfect"
+            ]
+          }
+        ]
+      },
+      "hints": [
+        "List the chords containing each melody note.",
+        "A cadence ends on I or V.",
+        "List the chords that contain each melody note, then look for a pair that makes V–I, IV–I or ends on V."
+      ],
+      "feedback": {
+        "correct": "A good choice: both chords contain their melody notes and make a perfect cadence.",
+        "mistakes": {
+          "chord-lacks-melody-note": "The chord must include the melody note above it. Check the notes of the chord you chose.",
+          "non-cadential-pair": "Those two chords don't make one of the cadences. A cadence ends on chord I or chord V.",
+          "cadence-misnamed": "Look at the second chord: ending on V makes an imperfect cadence; V–I is perfect; IV–I is plagal.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    },
+    {
+      "id": "i.showcase.cadences.2",
+      "templateId": "t.g5.cadence-chords",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Choose a chord for each marked melody note (A and B) in C major so that A–B makes a cadence. Each chord must contain its melody note.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "B"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A two-note melody in C major: A is A, B is D.",
+        "key": "C major"
+      },
+      "answer": {
+        "kind": "chord-progression",
+        "key": "C major",
+        "points": [
+          {
+            "label": "A",
+            "melodyPitches": [
+              "A4"
+            ],
+            "accepted": [
+              "IV",
+              "ii"
+            ]
+          },
+          {
+            "label": "B",
+            "melodyPitches": [
+              "D5"
+            ],
+            "accepted": [
+              "V"
+            ]
+          }
+        ],
+        "cadences": [
+          {
+            "labels": [
+              "A",
+              "B"
+            ],
+            "acceptedTypes": [
+              "imperfect"
+            ]
+          }
+        ]
+      },
+      "hints": [
+        "List the chords containing each melody note.",
+        "A cadence ends on I or V.",
+        "List the chords that contain each melody note, then look for a pair that makes V–I, IV–I or ends on V."
+      ],
+      "feedback": {
+        "correct": "Correct. More than one chord pair works here; yours is one of them.",
+        "mistakes": {
+          "chord-lacks-melody-note": "The chord must include the melody note above it. Check the notes of the chord you chose.",
+          "non-cadential-pair": "Those two chords don't make one of the cadences. A cadence ends on chord I or chord V.",
+          "cadence-misnamed": "Look at the second chord: ending on V makes an imperfect cadence; V–I is perfect; IV–I is plagal.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    },
+    {
+      "id": "i.showcase.cadences.3",
+      "templateId": "t.g5.cadence-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "These two chords end a phrase in F major. Which cadence do they make?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "F4"
+                  },
+                  {
+                    "pitch": "A4"
+                  },
+                  {
+                    "pitch": "C5"
+                  }
+                ],
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C4"
+                  },
+                  {
+                    "pitch": "E4"
+                  },
+                  {
+                    "pitch": "G4"
+                  }
+                ],
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two chords in F major: F A C then C E G.",
+        "key": "F major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
+        ],
+        "correctOptionIds": [
+          "imperfect"
+        ]
+      },
+      "hints": [
+        "Look at the last chord.",
+        "Name each chord by its root first. V–I is perfect, IV–I plagal, and any cadence ending on V is imperfect."
+      ],
+      "feedback": {
+        "correct": "Yes, you named the cadence from its chords.",
+        "mistakes": {
+          "chord-lacks-melody-note": "The chord must include the melody note above it. Check the notes of the chord you chose.",
+          "non-cadential-pair": "Those two chords don't make one of the cadences. A cadence ends on chord I or chord V.",
+          "cadence-misnamed": "Look at the second chord: ending on V makes an imperfect cadence; V–I is perfect; IV–I is plagal.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    }
+  ],
+  "practice": [
+    {
+      "templateId": "t.g5.cadence-chords",
+      "label": "More cadences"
+    }
+  ]
+}
