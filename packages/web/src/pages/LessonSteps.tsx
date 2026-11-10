@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { api, ApiFailure, type AnswerResponse, type AttemptResult, type CompletionSummary, type LearnerItem, type LearnerLesson } from "../api/client";
 import { Icon } from "../components/Icon";
+import { RewardPanel } from "../components/Engagement";
 import { Keyboard } from "../components/Keyboard";
 import { pitchesOf } from "../components/Staff";
 import { Notation, ScoreView } from "../components/notation/Notation";
@@ -153,6 +154,7 @@ export function Question({
   source,
   eyebrow,
   continueLabel = "Continue",
+  wrongAction,
 }: {
   nodeId: string;
   item: LearnerItem;
@@ -163,6 +165,8 @@ export function Question({
   source?: QuestionApi;
   eyebrow?: string;
   continueLabel?: string;
+  /** An extra way forward after a wrong answer (review: go to the similar question). Retrying is always still offered. */
+  wrongAction?: (result: AttemptResult & { remedialItemId?: string | null }) => { label: string; onClick: () => void } | null;
 }) {
   const send: QuestionApi = source ?? { attempt: (id, itemId, r) => api.attempt(nodeId, id, itemId, r), hint: (itemId, level) => api.hint(nodeId, itemId, level) };
   const [response, setResponse] = useState<AnswerResponse | null>(null);
@@ -265,7 +269,13 @@ export function Question({
           result.correct ? (
             <button key="continue" ref={feedbackBtn} className="btn btn-primary btn-large" onClick={onCorrect}>{continueLabel}</button>
           ) : (
-            <button key="again" ref={feedbackBtn} className="btn btn-primary btn-large" onClick={again}>Try again</button>
+            <>
+              <button key="again" ref={feedbackBtn} className="btn btn-primary btn-large" onClick={again}>Try again</button>
+              {(() => {
+                const extra = wrongAction?.(result);
+                return extra ? <button key="extra" type="button" className="btn btn-ghost" onClick={extra.onClick}>{extra.label}</button> : null;
+              })()}
+            </>
           )
         ) : (
           <button key="check" type="submit" form="answer-form" className="btn btn-primary btn-large" disabled={!isComplete(item.input, response) || busy}>{busy ? "Checking…" : "Check"}</button>
@@ -313,6 +323,7 @@ export function Done({
         <p className="lede-small">
           {summary.firstTryCorrect === summary.questions ? "Every question right first time." : `${summary.firstTryCorrect} of ${summary.questions} questions right first time. Keep practising and the rest will follow.`}
         </p>
+        {summary.rewards && <RewardPanel rewards={summary.rewards} />}
         <h2 className="h3">What to remember</h2>
         <ul className="checklist">{lesson.recap.map((r) => <li key={r}><Icon name="check" size={20} strokeWidth={3} /><span>{r}</span></li>)}</ul>
         <p className="muted small">Progress saved.</p>

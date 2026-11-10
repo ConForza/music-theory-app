@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import { createApp, loadCourse, openDb, type Course } from "@mtp/api";
+import { createApp, loadCourse, ManualClock, openDb, type Course } from "@mtp/api";
 import { App } from "../App";
 import { AppProvider } from "../state/app";
 
@@ -9,7 +9,9 @@ let course: Course | undefined;
 /** A real API (in-memory SQLite, real curriculum) behind a cookie-aware fetch, so UI tests exercise the whole stack. */
 export function startApi(opts: { waive?: boolean } = {}) {
   course ??= loadCourse();
-  const app = createApp({ db: openDb(":memory:"), course, waiveUnwrittenPrerequisites: opts.waive ?? true });
+  // A controllable server clock (midday UTC on 2 March 2026), so tests can move to "tomorrow" without waiting.
+  const clock = new ManualClock(new Date("2026-03-02T12:00:00Z"));
+  const app = createApp({ db: openDb(":memory:"), course, waiveUnwrittenPrerequisites: opts.waive ?? true, clock });
   let cookie = "";
   let offline = false;
   let lose = 0; // responses to drop after the server has handled the request
@@ -72,6 +74,7 @@ export function startApi(opts: { waive?: boolean } = {}) {
   globalThis.fetch = fake as typeof fetch;
   return {
     app,
+    clock,
     course,
     /** Fail the next `n` matching requests with `status` before the server sees them. */
     failNext: (re: RegExp, n = 1, status = 500) => void failNext.push({ re, left: n, status }),

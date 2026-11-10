@@ -75,7 +75,7 @@ describe("daily goal and streak through the API", () => {
     const c = client();
     await register(c);
     expect((await engagement(c)).goal).toMatchObject({ enabled: true, target: 1, doneToday: 0, met: false });
-    for (let i = 0; i < 3; i++) await c.get("/api/engagement"), await c.get("/api/progress"), await c.get("/api/me");
+    for (let i = 0; i < 3; i++) for (const p of ["/api/engagement", "/api/progress", "/api/me"]) await c.get(p);
     expect((await engagement(c)).goal.doneToday).toBe(0);
     await finishLesson(c);
     expect((await engagement(c)).goal).toMatchObject({ doneToday: 1, met: true });

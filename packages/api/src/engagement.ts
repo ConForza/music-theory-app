@@ -121,6 +121,7 @@ export class Engagement {
     const touched = [...new Set((node?.exercises ?? []).flatMap((b) => b.conceptIds))];
     return {
       xp: xp ? { awarded: xp.awarded, capped: xp.capped, reason: xp.reason } : null,
+      today: lt.date,
       total,
       milestone: this.xp.milestone(total),
       goal: status.goal,

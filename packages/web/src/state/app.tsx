@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { api, ApiFailure, endIdentityScope, type CourseView, type Me, type Overview, type Settings } from "../api/client";
+import { api, ApiFailure, endIdentityScope, type CourseView, type EngagementSnapshot, type Me, type Overview, type Settings } from "../api/client";
 import { setSoundEnabled } from "../lib/audio";
 
 type Load<T> = { status: "loading" } | { status: "error"; error: ApiFailure } | { status: "ready"; data: T };
@@ -10,6 +10,8 @@ interface AppState {
   meError: ApiFailure | null;
   course: Load<CourseView>;
   progress: Load<Overview> | { status: "signed-out" };
+  /** XP, daily goal, streak, review-due and recent badges. Engagement only: nothing here gates the path. */
+  engagement: Load<EngagementSnapshot> | { status: "signed-out" };
   setMe: (m: Me | null) => void;
   refreshProgress: () => Promise<void>;
   reloadAll: () => void;
@@ -62,6 +64,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [meError, setMeError] = useState<ApiFailure | null>(null);
   const [course, setCourse] = useState<Load<CourseView>>({ status: "loading" });
   const [progress, setProgress] = useState<AppState["progress"]>({ status: "signed-out" });
+  const [engagement, setEngagement] = useState<AppState["engagement"]>({ status: "signed-out" });
   const [tick, setTick] = useState(0);
 
   // Who the screen belongs to. `epoch` changes whenever the signed-in learner changes (including to signed out); any
@@ -83,6 +86,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       progressCtl.current = null;
       setPending([]);
       setProgress(userId ? { status: "loading" } : { status: "signed-out" });
+      setEngagement(userId ? { status: "loading" } : { status: "signed-out" });
     }
     setConfirmed(m);
   }, []);
@@ -145,12 +149,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     progressCtl.current = ctl;
     const seq = ++progressSeq.current;
     const stale = () => identity.current.epoch !== epoch || progressSeq.current !== seq;
+    // The dashboard summary rides along with progress; if it fails the path still works, so it never blocks anything.
+    const eng = api.engagement(ctl.signal).then(
+      (data) => !stale() && setEngagement({ status: "ready", data }),
+      (e: unknown) => !stale() && setEngagement({ status: "error", error: failure(e, "Could not load your rewards.") }),
+    );
     try {
       const data = await api.progress(ctl.signal);
       if (!stale()) setProgress({ status: "ready", data });
     } catch (e) {
       if (!stale()) setProgress({ status: "error", error: failure(e, "Could not load your progress.") });
     }
+    await eng;
   }, []);
 
   const userId = me?.user.id;
@@ -187,6 +197,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return result;
   }, []);
 
+  // Keep the learner's day boundaries in step with the device they are using (one quiet save per change; the server validates it).
+  const syncedZone = useRef<string | null>(null);
+  const zoneNow = me?.profile.timezone;
+  useEffect(() => {
+    if (!zoneNow) return;
+    let device: string | undefined;
+    try {
+      device = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch {
+      return;
+    }
+    if (!device || device === zoneNow || syncedZone.current === `${me?.user.id}:${device}`) return;
+    syncedZone.current = `${me?.user.id}:${device}`;
+    void updateProfile({ timezone: device }).then(() => refreshProgress(), () => undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- runs when the saved zone or the learner changes
+  }, [zoneNow, me?.user.id]);
+
   // Only report signed-out once the server has invalidated the session (or says there is none). A failure is thrown
   // to the caller, who keeps the learner signed in and shows a retry: the cookie still works until logout succeeds.
   const signOut = useCallback(async () => {
@@ -199,8 +226,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [setMe]);
 
   const value = useMemo<AppState>(
-    () => ({ me, meError, course, progress, setMe, refreshProgress, reloadAll: () => setTick((t) => t + 1), updateProfile, signOut }),
-    [me, meError, course, progress, setMe, refreshProgress, updateProfile, signOut],
+    () => ({ me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll: () => setTick((t) => t + 1), updateProfile, signOut }),
+    [me, meError, course, progress, engagement, setMe, refreshProgress, updateProfile, signOut],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

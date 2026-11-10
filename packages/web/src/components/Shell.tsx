@@ -6,6 +6,7 @@ import { Icon, Logo, type IconName } from "./Icon";
 
 const TABS: Array<{ to: string; label: string; icon: IconName }> = [
   { to: "/learn", label: "Learn", icon: "path" },
+  { to: "/review", label: "Review", icon: "repeat" },
   { to: "/practice", label: "Practice", icon: "sparkle" },
   { to: "/progress", label: "Progress", icon: "chart" },
   { to: "/profile", label: "Profile", icon: "user" },
@@ -14,7 +15,8 @@ const TABS: Array<{ to: string; label: string; icon: IconName }> = [
 
 /** Main app frame: side rail on large screens, bottom tabs on phones. The lesson player lives outside it. */
 export function Shell() {
-  const { refreshProgress } = useApp();
+  const { refreshProgress, engagement } = useApp();
+  const due = engagement.status === "ready" ? engagement.data.review.dueCount : 0;
   const { pathname } = useLocation();
   // Progress changes inside the lesson player, so re-read it whenever a main page is shown.
   useEffect(() => {
@@ -32,8 +34,11 @@ export function Shell() {
           {TABS.map((t) => (
             <li key={t.to}>
               <NavLink to={t.to} className={({ isActive }) => (isActive ? "tab is-active" : "tab")}>
-                <Icon name={t.icon} size={26} />
-                <span>{t.label}</span>
+                <span className="tab-icon">
+                  <Icon name={t.icon} size={26} />
+                  {t.to === "/review" && due > 0 && <span className="tab-dot" aria-hidden="true" />}
+                </span>
+                <span>{t.label}{t.to === "/review" && due > 0 && <span className="visually-hidden">, {due} ready</span>}</span>
               </NavLink>
             </li>
           ))}

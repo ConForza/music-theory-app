@@ -54,6 +54,10 @@ Attempt ids are UUIDs, and an id is an immutable command: the client freezes `{i
 * `GET /api/me/export` and `DELETE /api/me` give export and deletion; deletion cascades through every table.
 * Client-supplied values never set completion, grades or hint usage: hints are served by the API so "hint-free" is recorded by the server.
 
+## Progression (Brief 04)
+
+Migration `003_progression.sql` adds `xp_ledger`, `daily_activity`, `mastery_evidence`, `concept_mastery`, `review_sessions`, `review_attempts`, `achievements_awarded`, and `timezone` / `daily_goal` on `profiles`. Engagement (XP, activity, badges) and understanding (mastery, review) are separate tables; neither feeds unlocking. Rewards commit in the same transaction as the lesson completion or review completion that earned them, keyed by a unique source event, so retries and second devices cannot inflate them. Time comes only from the server clock (injectable for tests), and a "day" is a calendar date in the learner's saved timezone. The full rules, thresholds and decisions are in [PROGRESSION.md](PROGRESSION.md).
+
 ## Frontend structure
 
 `state/app.tsx` (session, course, progress, settings applied to `<html>`), `components/` (shell, path, node, sheet, notation, keyboard, legend), `pages/` (welcome, onboarding, sign-in, learn, grades, unit, lesson player + steps, profile, progress, settings), `lib/` (path view model, music helpers, WebAudio synth). Settings (theme, motion, sound) are stored on the profile and mirrored in `localStorage` to avoid a flash.
@@ -65,7 +69,7 @@ Notation is drawn by the Brief 03 renderer (`components/notation`, Bravura SMuFL
 | Brief | Where it plugs in |
 |---|---|
 | 03 Exercise engine | **Done.** `grade.ts` delegates to `@mtp/engine` within the node binding's effective scope; `course.ts` uses the engine's `inputFor`; the practice lab adds `/api/practice/*` and `practice_attempts` (migration 002). See [EXERCISE_ENGINE.md](EXERCISE_ENGINE.md). |
-| 04 Progression | `attempts` already carries template/content/curriculum versions, evidence level and hint use. XP, streaks and mastery are derived from this log by new tables/services; `computeNodeStates` stays the single authority for unlocking. Add review scheduling beside `last_stats`. |
+| 04 Progression | **Done.** XP ledger, daily goal and streak, concept mastery evidence + projections, adaptive review sessions and badges are new tables/services (migration 003) derived from the attempt log; `computeNodeStates` is unchanged and remains the single authority for unlocking. See [PROGRESSION.md](PROGRESSION.md). |
 | 05–09 Content | Add `LessonContent` files and set `contentRef`/`contentStatus` on nodes; they appear on the path automatically. Turn `waiveUnwrittenPrerequisites` off when a grade is complete. |
 | 10 Placement | `profiles.experience` records the learner's declared level; placement should write completion through the same server-verified route. |
 
@@ -79,4 +83,4 @@ npm run check      # typecheck, lint, curriculum validation, generated-doc check
 npm run e2e        # real-browser journeys (needs `npm run build` and Playwright's Chromium)
 ```
 
-Environment: `PORT`, `MTP_DB` (SQLite path), `MTP_STATIC_DIR`, `MTP_SECURE_COOKIES`, `MTP_ALLOWED_ORIGINS`, `MTP_WAIVE_UNWRITTEN`, `MTP_TRUST_PROXY_HOPS`.
+Environment: `PORT`, `MTP_DB` (SQLite path), `MTP_STATIC_DIR`, `MTP_SECURE_COOKIES`, `MTP_ALLOWED_ORIGINS`, `MTP_WAIVE_UNWRITTEN`, `MTP_TRUST_PROXY_HOPS`, and `MTP_TEST_CLOCK=1` (browser journeys only; exposes `POST /api/test/clock`, ignored when `NODE_ENV=production`).

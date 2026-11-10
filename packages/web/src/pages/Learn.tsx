@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { ErrorState, Loading } from "../components/Shell";
 import { Icon } from "../components/Icon";
 import { Legend } from "../components/Legend";
+import { RecentBadges, ReviewNudge, StatusStrip, WelcomeBack } from "../components/Engagement";
 import { LearningPath } from "../components/LearningPath";
 import { describeNode } from "../lib/pathView";
 import { useApp, useCourseData } from "../state/app";
@@ -12,7 +13,7 @@ export const prefersReducedMotion = () =>
   (document.documentElement.dataset.motion !== "full" && typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
 export function Learn() {
-  const { me, reloadAll } = useApp();
+  const { me, reloadAll, engagement } = useApp();
   const data = useCourseData();
   const grade = me!.profile.selectedGrade;
 
@@ -42,6 +43,14 @@ export function Learn() {
         </Link>
       </header>
 
+      {engagement.status === "ready" && (
+        <>
+          <StatusStrip e={engagement.data} />
+          <WelcomeBack e={engagement.data} />
+          <ReviewNudge e={engagement.data} />
+        </>
+      )}
+
       {next && v ? (
         <section className="next-card" aria-labelledby="next-h">
           <p className="eyebrow">{v.status === "in_progress" ? "Pick up where you left off" : "Next up"}</p>
@@ -58,6 +67,7 @@ export function Learn() {
         </section>
       )}
 
+      {engagement.status === "ready" && engagement.data.achievements.recent.length > 0 && <RecentBadges e={engagement.data} />}
       <p className="preview-note"><Icon name="info" size={16} /> <span>Early preview: lessons marked “Coming soon” are still being written, so you can open the ready ones in any order.</span></p>
       <Legend />
       <LearningPath data={data} world={world} currentId={currentId} />

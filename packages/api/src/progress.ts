@@ -28,6 +28,8 @@ export interface RunState {
 }
 
 export interface CompletionSummary {
+  /** What finishing earned (XP, goal, badges, concept evidence). Engagement only: never an input to unlocking. */
+  rewards?: ReturnType<Engagement["rewardsFor"]>;
   questions: number;
   firstTryCorrect: number;
   hintsUsed: number;

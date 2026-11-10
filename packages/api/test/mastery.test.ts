@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { foldConcept, rulesFrom, explainMastery, type EvidenceRow } from "../src/mastery.ts";
 import { MasteryService } from "../src/mastery-service.ts";
 import { ManualClock, addDays } from "../src/clock.ts";
-import { LESSON, Client, attemptLesson, canonicalFor, finishLesson, playNode, playThrough, register, setupClock, sharedCourse, wrongFor } from "./helpers.ts";
+import { LESSON, attemptLesson, canonicalFor, finishLesson, playNode, playThrough, register, setupClock, sharedCourse, wrongFor } from "./helpers.ts";
 
 const course = sharedCourse();
 const rules = rulesFrom(course.ix.c.policy);

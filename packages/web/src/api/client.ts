@@ -1,4 +1,4 @@
-import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService } from "@mtp/api";
+import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService } from "@mtp/api";
 import type { LearnerResponse } from "@mtp/engine";
 
 export type { CourseView, LearnerLesson, RunState, CompletionSummary };
@@ -24,6 +24,10 @@ export interface Profile {
   selectedGrade: number;
   onboarded: boolean;
   settings: Settings;
+  /** IANA timezone: where a "day" starts and ends for goals, streaks and review dates. */
+  timezone: string;
+  /** Meaningful sessions a day; 0 means the goal (and streak display) is off. */
+  dailyGoal: number;
 }
 export interface Me {
   user: User;
@@ -47,6 +51,27 @@ export interface AttemptResult {
 }
 /** Every answer shape the engine accepts (see @mtp/engine responses). Never carries correctness. */
 export type AnswerResponse = LearnerResponse;
+export type EngagementSnapshot = ReturnType<Engagement["snapshot"]>;
+export type ReviewOverview = ReturnType<Engagement["reviewOverview"]>;
+export type ConceptCard = ReviewOverview["groups"]["ready"][number];
+export type ConceptDetail = NonNullable<ReturnType<Engagement["conceptDetail"]>>;
+export type LessonRewards = NonNullable<CompletionSummary["rewards"]>;
+export type ReviewStart = ReturnType<ReviewService["start"]>;
+export type ReviewSession = ReturnType<ReviewService["view"]>;
+export type ReviewSessionItem = ReviewSession["items"][number];
+export type ReviewAttemptResult = AttemptResult & { kind: "review" | "remedial"; counted: boolean; remedialItemId: string | null; nextDueDate: string | null };
+export type ReviewSummary = ReturnType<ReviewService["complete"]>;
+export interface AchievementEntry {
+  id: string;
+  grade: number;
+  title: string;
+  description: string;
+  earned: boolean;
+  earnedAt: string | null;
+  have: number;
+  need: number;
+  available: boolean;
+}
 export type PracticeCatalogue = ReturnType<PracticeService["catalogue"]>;
 export type PracticeSet = ReturnType<PracticeService["set"]>;
 export type GeneratedItem = ReturnType<PracticeService["generate"]>;
@@ -221,6 +246,21 @@ export const api = {
   },
   practiceHint: (itemId: string, level: number) =>
     request<{ hint: string; level: number }>("POST", "/api/practice/hint", { itemId, level }, { scope }),
+  // Brief 04: engagement, mastery and review. All account-bound; the answer commands are idempotent and retried like lesson attempts.
+  engagement: (signal?: AbortSignal) => request<EngagementSnapshot>("GET", "/api/engagement", undefined, { signal, scope }),
+  reviewOverview: () => request<ReviewOverview>("GET", "/api/review", undefined, { scope }),
+  achievements: () => request<{ disclaimer: string; achievements: AchievementEntry[] }>("GET", "/api/achievements", undefined, { scope }),
+  concept: (id: string) => request<ConceptDetail>("GET", `/api/mastery/${encodeURIComponent(id)}`, undefined, { scope }),
+  startReview: () => request<ReviewStart>("POST", "/api/review/sessions", {}, { scope }),
+  reviewSession: (id: string) => request<ReviewSession>("GET", `/api/review/sessions/${encodeURIComponent(id)}`, undefined, { scope }),
+  reviewAttempt: (sessionId: string, attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<ReviewAttemptResult>("POST", `/api/review/sessions/${encodeURIComponent(sessionId)}/attempts`, { attemptId, itemId, response }, { scope: sc }));
+  },
+  completeReview: (sessionId: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<ReviewSummary>("POST", `/api/review/sessions/${encodeURIComponent(sessionId)}/complete`, {}, { scope: sc }));
+  },
   complete: (id: string) => {
     const sc = scope;
     return retrying(sc, () => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `${L(id)}/complete`, {}, { scope: sc }));

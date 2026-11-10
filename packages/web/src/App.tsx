@@ -7,6 +7,7 @@ import { Lesson } from "./pages/Lesson";
 import { Onboarding } from "./pages/Onboarding";
 import { Practice, PracticeMore, PracticeSetPlayer } from "./pages/Practice";
 import { Profile } from "./pages/Profile";
+import { ReviewHub, ReviewPlayer } from "./pages/Review";
 import { Progress } from "./pages/Progress";
 import { Settings } from "./pages/Settings";
 import { SignIn } from "./pages/SignIn";
@@ -32,11 +33,13 @@ export function App() {
       </Route>
       <Route element={<RequireAuth />}>
         <Route path="/lesson/:nodeId" element={<Lesson />} />
+        <Route path="/review/session/:sessionId" element={<ReviewPlayer />} />
         <Route path="/practice/more/:templateId" element={<PracticeMore />} />
         <Route path="/practice/:setId" element={<PracticeSetPlayer />} />
         <Route element={<Shell />}>
           <Route path="/learn" element={<Learn />} />
           <Route path="/grades" element={<Grades />} />
+          <Route path="/review" element={<ReviewHub />} />
           <Route path="/practice" element={<Practice />} />
           <Route path="/unit/:unitId" element={<Unit />} />
           <Route path="/progress" element={<Progress />} />
