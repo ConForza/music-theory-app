@@ -1,6 +1,8 @@
 import { createApp, type App } from "../src/app.ts";
 import { loadCourse, type Course } from "../src/course.ts";
 import { openDb } from "../src/db.ts";
+import type { ExerciseItem } from "@mtp/curriculum";
+import { inputFor } from "@mtp/engine";
 
 let course: Course | undefined;
 export const sharedCourse = () => (course ??= loadCourse());
@@ -24,10 +26,31 @@ export class Client {
       this.cookie = pair!.endsWith("=") ? "" : pair!;
     }
     const text = await res.text();
-    return { status: res.status, body: text ? JSON.parse(text) : undefined, headers: res.headers };
+    const parsed = (text ? JSON.parse(text) : undefined) as any;
+    if (res.status === 200 && path.startsWith("/api/auth/") && parsed?.user?.id) seedEarlierLessons(this.app.db, parsed.user.id);
+    return { status: res.status, body: parsed, headers: res.headers };
   }
   get = (p: string) => this.call("GET", p);
   post = (p: string, b: unknown = {}) => this.call("POST", p, b);
+}
+
+/**
+ * The legacy suites exercise G1-U3-L03 directly. Grade 1 is now strict (its earlier lessons are real), so each test learner
+ * starts as someone who already finished L03's prerequisite lessons "before the ledger existed": completed rows, no XP, no evidence.
+ */
+const seeded = new WeakMap<object, Set<string>>();
+export function seedEarlierLessons(db: ReturnType<typeof openDb>, userId: string, nodeId = LESSON) {
+  const done = seeded.get(db) ?? new Set<string>();
+  seeded.set(db, done);
+  if (done.has(userId)) return;
+  done.add(userId);
+  const course = sharedCourse();
+  const node = course.ix.nodeById.get(nodeId)!;
+  const prereqs = [...(course.ix.ancestors.get(node.id) ?? [])].filter((p) => course.lesson(p));
+  for (const p of prereqs) {
+    const pn = course.ix.nodeById.get(p)!;
+    db.prepare("INSERT OR IGNORE INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version,completed_curriculum_version,last_stats) VALUES (?,?,1,0,'questions',?,?,?,?,?,?,?,?)").run(userId, p, pn.contentVersion, course.version, "2026-01-01T00:00:00.000Z", "2026-01-01T00:00:00.000Z", "2026-01-01T00:00:00.000Z", pn.contentVersion, course.version, JSON.stringify({ questions: 0, firstTryCorrect: 0, hintsUsed: 0, completedAt: "2026-01-01T00:00:00.000Z" }));
+  }
 }
 
 export function setup(opts: { waive?: boolean } = {}) {
@@ -56,24 +79,81 @@ export async function register(c: Client, name = "ada", password = "correct hors
   return c.post("/api/auth/register", { email: email(name), password, displayName: name });
 }
 
-/** Correct response for an item of the sample lesson, derived from the authored content (test-side only). */
+/** Correct response for an item, derived from the engine's own solver (test-side only). */
 export function correctResponse(course: Course, nodeId: string, itemId: string) {
   const item = course.authoredItems(nodeId).find((i) => i.id === itemId)!;
+  return responseFor(course, nodeId, item);
+}
+export function responseFor(course: Course, nodeId: string, item: ExerciseItem, scope = course.scopeFor(nodeId, item)) {
   const a = item.answer;
-  if (a.kind === "pitch") return { kind: "pitch-letter", letter: a.accepted[0]!.charAt(0) };
-  if (a.kind === "staff-position") return { kind: "staff-position", pitch: a.accepted[0]! };
-  if (a.kind === "choice") return { kind: "choice", optionId: a.correctOptionIds[0]! };
-  throw new Error("unsupported");
+  const input = inputFor(course.ix, item, scope);
+  if (a.kind === "pitch" && input.kind === "pitch-letter") return { kind: "pitch-letter", letter: a.accepted[0]!.charAt(0) };
+  return canonicalResponse(course.ix, item, scope);
+}
+/** A response the engine grades as wrong, when one exists. */
+export function wrongItemResponse(course: Course, item: ExerciseItem, scope: import("@mtp/curriculum").MusicScope) {
+  return wrongResponse(course.ix, item, scope);
 }
 
-export async function playThrough(c: Client, course: Course, nodeId = LESSON) {
+export async function playLesson(c: Client, course: Course, nodeId: string) {
   await c.post(`/api/lessons/${nodeId}/start`);
   const lesson = course.lesson(nodeId)!;
   for (const it of lesson.items) {
     const r = await c.post(`/api/lessons/${nodeId}/attempts`, { attemptId: crypto.randomUUID(), itemId: it.id, response: correctResponse(course, nodeId, it.id) });
-    if (r.status !== 200) throw new Error(JSON.stringify(r.body));
+    if (r.status !== 200) throw new Error(`${nodeId} ${it.id}: ${JSON.stringify(r.body)}`);
   }
   return c.post(`/api/lessons/${nodeId}/complete`);
+}
+
+/** Play a practice/review/challenge/assessment run, answering every question correctly (or with the first N wrong). */
+export async function playSession(c: Client, app: App, userId: string, nodeId: string, opts: { wrong?: number } = {}) {
+  const started = await c.post(`/api/nodes/${nodeId}/start`);
+  if (started.status !== 200) throw new Error(`${nodeId} start: ${JSON.stringify(started.body)}`);
+  const items = app.nodes.internalItems(userId, nodeId);
+  let wrong = opts.wrong ?? 0;
+  for (const it of items) {
+    const strict = started.body.kind === "challenge" || started.body.kind === "assessment";
+    const bad = wrong > 0 ? wrongItemResponse(sharedCourse(), it.item, it.scope) : null;
+    if (bad) {
+      wrong--;
+      await c.post(`/api/nodes/${nodeId}/attempts`, { attemptId: crypto.randomUUID(), itemId: it.itemId, response: bad });
+      if (strict) continue;
+    }
+    const r = await c.post(`/api/nodes/${nodeId}/attempts`, { attemptId: crypto.randomUUID(), itemId: it.itemId, response: responseFor(sharedCourse(), nodeId, it.item, it.scope) });
+    if (r.status !== 200) throw new Error(`${nodeId} ${it.itemId}: ${JSON.stringify(r.body)}`);
+  }
+  return c.post(`/api/nodes/${nodeId}/complete`);
+}
+
+/** Finish a node and every playable prerequisite before it (the path is strict for Grade 1). */
+export async function ensureDone(c: Client, app: App, userId: string, nodeId: string, seen = new Set<string>()): Promise<void> {
+  if (seen.has(nodeId)) return;
+  seen.add(nodeId);
+  const course = sharedCourse();
+  const node = course.ix.nodeById.get(nodeId)!;
+  for (const p of node.resolvedUnlockAfter) if (course.isPlayable(p)) await ensureDone(c, app, userId, p, seen);
+  const prog = await c.get("/api/progress");
+  if (prog.body.nodes[nodeId]?.state === "completed") return;
+  const res = course.lesson(nodeId) ? await playLesson(c, course, nodeId) : await playSession(c, app, userId, nodeId);
+  if (res.status !== 200) throw new Error(`${nodeId}: ${JSON.stringify(res.body)}`);
+}
+
+/** Play a lesson through (finishing the earlier lessons first). */
+export async function playThrough(c: Client, course: Course, nodeId = LESSON, app?: App, userId?: string) {
+  if (app && userId) {
+    const node = course.ix.nodeById.get(nodeId)!;
+    const seen = new Set<string>([nodeId]);
+    for (const p of node.resolvedUnlockAfter) if (course.isPlayable(p)) await ensureDone(c, app, userId, p, seen);
+  } else {
+    // Without an app handle, only lessons can be finished; their prerequisites are lessons in this unit.
+    const node = course.ix.nodeById.get(nodeId)!;
+    for (const p of [...(course.ix.ancestors.get(node.id) ?? [])].sort((x, y) => course.ix.nodeById.get(x)!.order - course.ix.nodeById.get(y)!.order)) {
+      if (!course.lesson(p)) continue;
+      const prog = await c.get("/api/progress");
+      if (prog.body.nodes[p]?.state !== "completed") await playLesson(c, course, p);
+    }
+  }
+  return playLesson(c, course, nodeId);
 }
 
 // ---- Brief 04 helpers ---------------------------------------------------------------------------------------------

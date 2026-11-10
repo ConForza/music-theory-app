@@ -656,6 +656,11 @@ export const ProgressionPolicy = z
       })
       .strict(),
     readiness: z.object({ passThresholdPercent: z.number().int(), note: NonEmpty }).strict(),
+    /** Brief 05: in-app pass marks for unit challenges and the Grade assessment (provisional; not ABRSM marks). */
+    assessments: z
+      .object({ unitChallengePassPercent: z.number().int().min(1).max(100), gradePassPercent: z.number().int().min(1).max(100), note: NonEmpty })
+      .strict()
+      .optional(),
   })
   .strict();
 export type ProgressionPolicy = z.infer<typeof ProgressionPolicy>;
@@ -816,7 +821,17 @@ export const IntervalCode = z
 const Option = z.object({ id: NonEmpty, label: NonEmpty }).strict();
 
 const ChoiceAnswer = z
-  .object({ kind: z.literal("choice"), options: z.array(Option).min(2), correctOptionIds: z.array(NonEmpty).length(1) })
+  .object({
+    kind: z.literal("choice"),
+    options: z.array(Option).min(2),
+    correctOptionIds: z.array(NonEmpty).length(1),
+    /**
+     * Brief 05: why a specific wrong option is wrong. Keyed by option id; `category` must be a mistake category the item has
+     * feedback for, and `reason` is shown to the learner who chose it (it must not give the answer away). Options without
+     * an entry fall back to the generic message.
+     */
+    diagnoses: z.record(z.string(), z.object({ category: NonEmpty, reason: NonEmpty }).strict()).optional(),
+  })
   .strict();
 const MultiChoiceAnswer = z
   .object({ kind: z.literal("multi-choice"), options: z.array(Option).min(2), correctOptionIds: z.array(NonEmpty).min(1) })

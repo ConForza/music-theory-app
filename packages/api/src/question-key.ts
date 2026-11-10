@@ -1,4 +1,6 @@
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { ExerciseItem } from "@mtp/curriculum";
 import { music } from "@mtp/curriculum";
 
@@ -19,10 +21,19 @@ export function questionKey(item: ExerciseItem): string {
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 
+/**
+ * A concept-level teaching boundary, narrower than the lesson binding's scope. Every field present must hold.
+ *  - `clef`: the question is written in (or asks for) this clef;
+ *  - `staffPositions`: every written pitch sits on a line, or in a space, of that clef;
+ *  - `includesPitch`: at least one of these spelt pitches (octave included) appears in the question or its answer;
+ *  - `ledgerLines`: the most ledger lines any pitch needs in the clef (0 = none).
+ */
 export interface ReviewConstraint {
   conceptId: string;
-  clef: "treble" | "bass" | "alto" | "tenor";
-  staffPositions: "lines" | "spaces";
+  clef?: "treble" | "bass" | "alto" | "tenor";
+  staffPositions?: "lines" | "spaces";
+  includesPitch?: string[];
+  ledgerLines?: number;
 }
 
 const PITCH = /^[A-G](bb|b|#|x)?-?\d$/;
@@ -33,14 +44,47 @@ function collectPitches(v: unknown, out: string[]) {
   else if (v && typeof v === "object") Object.values(v as object).forEach((x) => collectPitches(x, out));
 }
 
-/** True when every pitch the question shows or expects sits where the constraint allows (lines are even positions, spaces odd). */
+/** The clef a question is written in or asks for (stave items only). */
+function clefOf(item: ExerciseItem): string | undefined {
+  return item.music?.clef ?? (item.answer as { clef?: string }).clef;
+}
+
+/** True when the question satisfies every part of the constraint (a constrained concept must be assessable from written pitches). */
 export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
   const pitches: string[] = [];
   collectPitches(item.music ?? null, pitches);
   collectPitches(item.answer, pitches);
-  if (!pitches.length) return false; // a constrained concept must be assessable from written pitches
-  return pitches.every((p) => {
-    const pos = music.staffPosition(c.clef, music.parsePitch(p));
-    return c.staffPositions === "lines" ? pos % 2 === 0 : pos % 2 !== 0;
-  });
+  if (!pitches.length) return false;
+  if (c.clef && clefOf(item) !== c.clef) return false;
+  if (c.includesPitch && !pitches.some((p) => c.includesPitch!.includes(p))) return false;
+  if (c.staffPositions) {
+    const clef = (c.clef ?? clefOf(item)) as ReviewConstraint["clef"];
+    if (!clef) return false;
+    const ok = pitches.every((p) => {
+      const pos = music.staffPosition(clef, music.parsePitch(p));
+      return c.staffPositions === "lines" ? pos % 2 === 0 : pos % 2 !== 0;
+    });
+    if (!ok) return false;
+  }
+  if (c.ledgerLines !== undefined) {
+    const clef = (c.clef ?? clefOf(item)) as ReviewConstraint["clef"];
+    if (!clef) return false;
+    if (!pitches.every((p) => music.ledgerLines(clef, music.parsePitch(p)) <= c.ledgerLines!)) return false;
+  }
+  return true;
+}
+
+/** Read content/policy/review-constraints.json (absent file: no extra constraints). */
+export function loadConstraints(root: string, concepts: Map<string, unknown>): Map<string, ReviewConstraint> {
+  const out = new Map<string, ReviewConstraint>();
+  try {
+    const file = JSON.parse(readFileSync(join(root, "policy/review-constraints.json"), "utf8")) as { constraints: ReviewConstraint[] };
+    for (const c of file.constraints) {
+      if (!concepts.has(c.conceptId)) throw new Error(`review-constraints: unknown concept ${c.conceptId}`);
+      out.set(c.conceptId, c);
+    }
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e;
+  }
+  return out;
 }

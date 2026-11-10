@@ -25,6 +25,7 @@ import { gradeItem } from "../grade.ts";
 import { hashString, rng as makeRng, type Rng } from "../rng.ts";
 import { canonicalResponse, wrongResponse } from "./canonical.ts";
 import { GENERATORS, type Draft } from "./families.ts";
+import { GRADE1_GENERATORS } from "./grade1.ts";
 
 export { canonicalResponse, wrongResponse } from "./canonical.ts";
 
@@ -45,7 +46,8 @@ export interface GeneratedItem {
   };
 }
 
-export const generatorTemplateIds = (ix: CurriculumIndex): string[] => [...ix.templates.values()].filter((t) => GENERATORS[t.familyId]?.(t) !== undefined).map((t) => t.id);
+const generatorFor = (t: ExerciseTemplate) => GRADE1_GENERATORS[t.id] ?? GENERATORS[t.familyId]?.(t);
+export const generatorTemplateIds = (ix: CurriculumIndex): string[] => [...ix.templates.values()].filter((t) => generatorFor(t) !== undefined).map((t) => t.id);
 
 /**
  * Bump when generator code changes what any (template, version, seed) produces. Together with the template,
@@ -106,7 +108,7 @@ export function generateItem(ix: CurriculumIndex, templateId: string, seed: numb
   if (!t) throw new EngineError("unknown_template", `Unknown template ${templateId}`);
   if (opts.version !== undefined && opts.version !== t.version) throw new EngineError("stale_item", `Template ${templateId} is now version ${t.version}`);
   if (!Number.isInteger(seed) || seed < 0 || seed > 2 ** 31 - 1) throw new EngineError("unsupported", "Seed must be a non-negative 31-bit integer");
-  const gen = GENERATORS[t.familyId]?.(t);
+  const gen = generatorFor(t);
   if (!gen) throw new EngineError("unsupported", `No generator for ${templateId}`);
   const scope = opts.scope ?? templateScope(ix, t);
   const fingerprint = generationFingerprint(t, scope);

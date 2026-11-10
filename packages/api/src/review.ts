@@ -21,10 +21,8 @@ import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { isDue, type ConceptMastery } from "./mastery.ts";
 import { learnerTime, type LearnerTime, type MasteryService } from "./mastery-service.ts";
-import { questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
+import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
 import { REVIEW_NODE, type XpService } from "./xp.ts";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 
 export interface SessionItem {
   itemId: string;
@@ -75,15 +73,7 @@ export class ReviewService {
     private opts: { maxConcepts: number; itemsPerConcept: number },
   ) {
     this.generatable = new Set(generatorTemplateIds(course.ix));
-    try {
-      const file = JSON.parse(readFileSync(join(course.ix.c.root, "policy/review-constraints.json"), "utf8")) as { constraints: ReviewConstraint[] };
-      for (const c of file.constraints) {
-        if (!course.ix.concepts.has(c.conceptId)) throw new Error(`review-constraints: unknown concept ${c.conceptId}`);
-        this.constraints.set(c.conceptId, c);
-      }
-    } catch (e) {
-      if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e; // no file: no extra constraints
-    }
+    this.constraints = loadConstraints(course.ix.c.root, course.ix.concepts);
   }
 
   // ---- what can be reviewed --------------------------------------------------------------------------------------

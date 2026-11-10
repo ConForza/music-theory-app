@@ -50,8 +50,12 @@ export interface CourseNode {
   optional: boolean;
   estimatedMinutes: number;
   contentVersion: number;
-  /** True when a lesson with learner-playable content exists for this node. */
+  /** True when learner-playable content exists for this node (a lesson, or a server-built practice/review/challenge/assessment). */
   playable: boolean;
+  /** How the node is played: a fixed authored lesson, or a server-built session of generated questions. */
+  playKind: "lesson" | "session" | null;
+  /** Server-built session behaviour (null for lessons). */
+  sessionKind: SessionKind | null;
   /** Practice-only wording must accompany assessments (OPEN_QUESTIONS Q11). */
   practiceOnly: boolean;
 }
@@ -68,6 +72,9 @@ export interface CourseView {
   }>;
 }
 
+export type SessionKind = "practice" | "review" | "challenge" | "assessment";
+const SESSION_OF: Partial<Record<NodeType, SessionKind>> = { practice: "practice", review: "review", unit_challenge: "challenge", grade_assessment: "assessment" };
+
 export interface Course {
   ix: CurriculumIndex;
   version: string;
@@ -75,6 +82,8 @@ export interface Course {
   /** Ordered nodes (global path order). */
   nodes: OrderedNode[];
   isPlayable(nodeId: string): boolean;
+  /** The kind of server-built session a node runs, if it is one and is playable. */
+  sessionKind(nodeId: string): SessionKind | null;
   lesson(nodeId: string): LearnerLesson | undefined;
   /** Raw authored items for a playable node (server-side grading only). */
   authoredItems(nodeId: string): ExerciseItem[];
@@ -159,6 +168,17 @@ export function loadCourse(root?: string): Course {
     });
   }
 
+  // A practice, review, challenge or assessment node is playable once it is authored (not "planned") and has something to draw
+  // questions from: exercise bindings, or an assessment blueprint. Its questions are generated and graded on the server.
+  const sessionNodes = new Map<string, SessionKind>();
+  for (const n of ix.nodes) {
+    const kind = SESSION_OF[n.type];
+    if (!kind || n.contentStatus === "planned") continue;
+    const ok = kind === "challenge" || kind === "assessment" ? Boolean(n.assessmentId && ix.assessments.get(n.assessmentId)) : n.exercises.length > 0;
+    if (ok) sessionNodes.set(n.id, kind);
+  }
+  const playableNode = (id: string) => learnerLessons.has(id) || sessionNodes.has(id);
+
   const view: CourseView = {
     release: { id: curriculum.release.id, version: curriculum.release.version, status: curriculum.release.status },
     worlds: [...curriculum.worlds]
@@ -189,7 +209,9 @@ export function loadCourse(root?: string): Course {
             optional: n.optional,
             estimatedMinutes: n.estimatedMinutes,
             contentVersion: n.contentVersion,
-            playable: learnerLessons.has(n.id),
+            playable: playableNode(n.id),
+            playKind: learnerLessons.has(n.id) ? "lesson" : sessionNodes.has(n.id) ? "session" : null,
+            sessionKind: sessionNodes.get(n.id) ?? null,
             practiceOnly: n.type === "grade_assessment" || n.type === "unit_challenge",
           })),
       })),
@@ -200,7 +222,8 @@ export function loadCourse(root?: string): Course {
     version: curriculum.release.version,
     view,
     nodes: ix.nodes,
-    isPlayable: (id) => learnerLessons.has(id),
+    isPlayable: playableNode,
+    sessionKind: (id) => sessionNodes.get(id) ?? null,
     lesson: (id) => learnerLessons.get(id),
     authoredItems: (id) => authored.get(id) ?? [],
     scopeFor,

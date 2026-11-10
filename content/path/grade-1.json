@@ -1075,15 +1075,24 @@
             "c.pitch.keyboard"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s04"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L01.json"
     },
     {
       "id": "G1-U3-L02",
@@ -1100,12 +1109,14 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g1.note-read",
+          "templateId": "t.g1.stave-facts",
           "conceptIds": [
             "c.clefs.stave"
           ],
           "scope": {
-            "clefs": [],
+            "clefs": [
+              "treble"
+            ],
             "maxLedgerLines": 0
           }
         }
@@ -1113,10 +1124,11 @@
       "optional": false,
       "estimatedMinutes": 4,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L02.json"
     },
     {
       "id": "G1-U3-L03",
@@ -1157,12 +1169,24 @@
             ],
             "maxLedgerLines": 0
           }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines"
+          ],
+          "scope": {
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 0
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 2,
-      "contentStatus": "example",
+      "contentVersion": 3,
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05",
         "fs.g1.s06"
@@ -1187,7 +1211,6 @@
           "templateId": "t.g1.note-read",
           "conceptIds": [
             "c.clefs.stave",
-            "c.clefs.treble-lines",
             "c.clefs.treble-spaces"
           ],
           "scope": {
@@ -1200,7 +1223,18 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces"
+          ],
+          "scope": {
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
             "c.clefs.treble-spaces"
           ],
           "scope": {
@@ -1214,10 +1248,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L04.json"
     },
     {
       "id": "G1-U3-L05",
@@ -1237,14 +1272,10 @@
         {
           "templateId": "t.g1.note-read",
           "conceptIds": [
-            "c.clefs.stave",
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
             "c.clefs.bass"
           ],
           "scope": {
             "clefs": [
-              "treble",
               "bass"
             ],
             "maxLedgerLines": 0
@@ -1253,9 +1284,31 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
             "c.clefs.bass"
+          ],
+          "scope": {
+            "clefs": [
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.bass"
+          ],
+          "scope": {
+            "clefs": [
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
           ],
           "scope": {
             "clefs": [
@@ -1269,10 +1322,11 @@
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L05.json"
     },
     {
       "id": "G1-U3-L06",
@@ -1291,10 +1345,6 @@
         {
           "templateId": "t.g1.note-read",
           "conceptIds": [
-            "c.clefs.stave",
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
             "c.pitch.middle-c"
           ],
           "scope": {
@@ -1308,9 +1358,19 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
             "c.pitch.middle-c"
           ],
           "scope": {
@@ -1324,7 +1384,6 @@
         {
           "templateId": "t.g1.keyboard",
           "conceptIds": [
-            "c.pitch.keyboard",
             "c.pitch.middle-c"
           ],
           "scope": {}
@@ -1333,10 +1392,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s07"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L06.json"
     },
     {
       "id": "G1-U3-L07",
@@ -1355,10 +1415,19 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
-            "c.pitch.middle-c",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
             "c.pitch.note-writing"
           ],
           "scope": {
@@ -1373,10 +1442,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s06"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L07.json"
     },
     {
       "id": "G1-U3-P1",
@@ -1398,6 +1468,27 @@
           "scope": {}
         },
         {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
           "templateId": "t.g1.note-read",
           "conceptIds": [
             "c.clefs.stave",
@@ -1430,12 +1521,29 @@
             ],
             "maxLedgerLines": 1
           }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
+            "c.pitch.middle-c",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U3-R1",

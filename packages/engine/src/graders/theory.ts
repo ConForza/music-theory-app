@@ -52,6 +52,8 @@ export const gradeChoice: Grader<AnswerOf<"choice">> = (c, a, r) => {
   if (!a.options.some((o) => o.id === r.optionId)) throw new EngineError("malformed_response", "Unknown option");
   if (a.correctOptionIds.includes(r.optionId)) return right();
   const correctId = a.correctOptionIds[0]!;
+  const diagnosed = a.diagnoses?.[r.optionId];
+  if (diagnosed) return wrong(diagnosed.category, diagnosed.reason);
   if (c.family.id === "fam.degree") return diagnoseDegree(a, r.optionId, correctId);
   const chosen = music.TERMS.find((t) => t.id === r.optionId);
   const correct = music.TERMS.find((t) => t.id === correctId);

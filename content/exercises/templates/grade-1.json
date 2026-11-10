@@ -984,6 +984,141 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g1.letter-names",
+      "version": 1,
+      "familyId": "fam.keyboard",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "conceptIds": [
+        "c.pitch.letter-names",
+        "c.pitch.keyboard"
+      ],
+      "promptPattern": "Name the highlighted key. / Which letter comes next? / Move along the white keys.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.stave-facts",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.08"
+      ],
+      "conceptIds": [
+        "c.clefs.stave"
+      ],
+      "promptPattern": "Count the lines and spaces. / Which clef? / Which line does the clef mark?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 0
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.note-place",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 1,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "conceptIds": [
+        "c.clefs.treble-lines",
+        "c.clefs.treble-spaces",
+        "c.clefs.bass",
+        "c.pitch.middle-c",
+        "c.pitch.note-writing"
+      ],
+      "promptPattern": "Write {note} on a line / in a space of the {clef}-clef stave.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Any octave of the letter name on the stave is accepted unless the prompt names middle C or a specific position."
+      },
+      "ambiguityChecks": [
+        "The prompt states line or space, so only positions that match are accepted.",
+        "Middle C is the only ledger-line note."
+      ],
+      "hints": [
+        "Count up from the bottom line, one letter for each line and space."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

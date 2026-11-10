@@ -1,0 +1,829 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U3-L02",
+  "lessonId": "G1-U3-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Count the lines and spaces of a stave from the bottom, and say where a note sits.",
+    "successCriteria": [
+      "I know a stave has five lines and four spaces.",
+      "I always count from the bottom.",
+      "I can say whether a note is on a line or in a space, and which one."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Music is written on a stave. A stave has five lines, with four spaces in between."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "1st"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "2nd"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "3rd"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "4th"
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "5th"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A stave with five notes, one on each line, labelled 1st to 5th from the bottom."
+      },
+      "caption": "Five lines. The bottom line is the 1st line, and we count upwards."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "1st"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "2nd"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "3rd"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "4th"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A stave with four notes, one in each space, labelled 1st to 4th from the bottom."
+      },
+      "caption": "Four spaces, also counted from the bottom. The gap above the bottom line is the 1st space."
+    },
+    {
+      "kind": "text",
+      "text": "A note is either on a line, with the line running through the middle of its head, or in a space, sitting between two lines."
+    },
+    {
+      "kind": "text",
+      "text": "The higher a note sits on the stave, the higher it sounds. The curly sign at the start is a clef; it tells us the name of each note, and that comes in the next lessons."
+    },
+    {
+      "kind": "tip",
+      "text": "If you lose your place, point at the bottom line and count up: 1st line, 1st space, 2nd line, 2nd space, and so on."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Nine notes climbing the stave one step at a time: line, space, line, space and so on, from the bottom line up to the top line."
+    },
+    "steps": [
+      "Tap the bottom note, then the next one up, and keep going. You are touching line, space, line, space ...",
+      "Listen: every step up the stave sounds higher.",
+      "Say each place out loud as you tap: 1st line, 1st space, 2nd line, 2nd space ...",
+      "Which notes are on lines? Which are in spaces? Notice they alternate."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Nine notes climbing a treble stave, alternating line and space from the bottom line to the top line. Each can be tapped to hear that it sounds higher than the one before."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u3-l02.guided-1",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many lines does a stave have?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "line-space-swap",
+            "reason": "You have counted the lines when the question is about spaces (or the other way round). There is always one more line than there are spaces."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "A stave has five lines, and the spaces are the gaps between them."
+      ],
+      "feedback": {
+        "correct": "Five lines. And there is always one fewer space than lines.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l02.guided-2",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Counting from the bottom of the stave, where is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 3rd line."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2nd-space",
+            "label": "2nd space"
+          },
+          {
+            "id": "5th-line",
+            "label": "5th line"
+          },
+          {
+            "id": "3rd-line",
+            "label": "3rd line"
+          },
+          {
+            "id": "3rd-space",
+            "label": "3rd space"
+          }
+        ],
+        "correctOptionIds": [
+          "3rd-line"
+        ],
+        "diagnoses": {
+          "3rd-space": {
+            "category": "line-space-swap",
+            "reason": "This note sits ON a line, with the line running through its middle, not in a space."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."
+      ],
+      "feedback": {
+        "correct": "Yes, this note sits on a line, and you counted from the bottom.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u3-l02.ind-1",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Counting from the bottom of the stave, where is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 2nd space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3rd-space",
+            "label": "3rd space"
+          },
+          {
+            "id": "2nd-space",
+            "label": "2nd space"
+          },
+          {
+            "id": "2nd-line",
+            "label": "2nd line"
+          },
+          {
+            "id": "1st-line",
+            "label": "1st line"
+          }
+        ],
+        "correctOptionIds": [
+          "2nd-space"
+        ],
+        "diagnoses": {
+          "3rd-space": {
+            "category": "counted-from-top",
+            "reason": "That is where the note would be if you counted from the top. Always count from the bottom of the stave."
+          },
+          "2nd-line": {
+            "category": "line-space-swap",
+            "reason": "This note sits in a space, between two lines, not on a line."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."
+      ],
+      "feedback": {
+        "correct": "In a space, counted from the bottom. Well done.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l02.ind-2",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Counting from the bottom of the stave, where is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 3rd line."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2nd-space",
+            "label": "2nd space"
+          },
+          {
+            "id": "5th-line",
+            "label": "5th line"
+          },
+          {
+            "id": "3rd-line",
+            "label": "3rd line"
+          },
+          {
+            "id": "3rd-space",
+            "label": "3rd space"
+          }
+        ],
+        "correctOptionIds": [
+          "3rd-line"
+        ],
+        "diagnoses": {
+          "3rd-space": {
+            "category": "line-space-swap",
+            "reason": "This note sits ON a line, with the line running through its middle, not in a space."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."
+      ],
+      "feedback": {
+        "correct": "On a line, counted from the bottom.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l02.ind-3",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many spaces does a stave have?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ],
+        "diagnoses": {
+          "5": {
+            "category": "line-space-swap",
+            "reason": "You have counted the lines when the question is about spaces (or the other way round). There is always one more line than there are spaces."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "A stave has five lines, and the spaces are the gaps between them."
+      ],
+      "feedback": {
+        "correct": "Four spaces: one fewer than the five lines.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l02.ind-4",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Counting from the bottom of the stave, where is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 1st space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1st-space",
+            "label": "1st space"
+          },
+          {
+            "id": "4th-space",
+            "label": "4th space"
+          },
+          {
+            "id": "1st-line",
+            "label": "1st line"
+          },
+          {
+            "id": "2nd-line",
+            "label": "2nd line"
+          }
+        ],
+        "correctOptionIds": [
+          "1st-space"
+        ],
+        "diagnoses": {
+          "4th-space": {
+            "category": "counted-from-top",
+            "reason": "That is where the note would be if you counted from the top. Always count from the bottom of the stave."
+          },
+          "1st-line": {
+            "category": "line-space-swap",
+            "reason": "This note sits in a space, between two lines, not on a line."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."
+      ],
+      "feedback": {
+        "correct": "Another space note, counted from the bottom.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l02.ind-5",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Counting from the bottom of the stave, where is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 1st line."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2nd-line",
+            "label": "2nd line"
+          },
+          {
+            "id": "5th-line",
+            "label": "5th line"
+          },
+          {
+            "id": "1st-space",
+            "label": "1st space"
+          },
+          {
+            "id": "1st-line",
+            "label": "1st line"
+          }
+        ],
+        "correctOptionIds": [
+          "1st-line"
+        ],
+        "diagnoses": {
+          "5th-line": {
+            "category": "counted-from-top",
+            "reason": "That is where the note would be if you counted from the top. Always count from the bottom of the stave."
+          },
+          "1st-space": {
+            "category": "line-space-swap",
+            "reason": "This note sits ON a line, with the line running through its middle, not in a space."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."
+      ],
+      "feedback": {
+        "correct": "Right again. Lines and spaces both count from the bottom.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l02.ind-6",
+      "templateId": "t.g1.stave-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many lines does a stave have?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "line-space-swap",
+            "reason": "You have counted the lines when the question is about spaces (or the other way round). There is always one more line than there are spaces."
+          }
+        }
+      },
+      "hints": [
+        "Count from the bottom: the bottom line is the 1st line.",
+        "A stave has five lines, and the spaces are the gaps between them."
+      ],
+      "feedback": {
+        "correct": "A stave always has five lines.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "recap": [
+    "A stave has five lines and four spaces.",
+    "Always count lines and spaces from the bottom.",
+    "A note is either on a line or in a space; the higher it sits, the higher it sounds."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.stave-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.stave-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.stave-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.clefs.stave"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s05"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.08"
+    ],
+    "notes": "Original wording and examples. Subject follows Grade 1 outcome 08 (the stave); the stave diagrams are generated by the notation renderer, not copied from any publication."
+  }
+}

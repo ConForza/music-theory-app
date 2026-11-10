@@ -24,28 +24,28 @@ export interface Draft {
   hints?: string[];
   correct?: string;
 }
-type Gen = (ctx: GenCtx) => Draft | null;
+export type Gen = (ctx: GenCtx) => Draft | null;
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
 export const pretty = (s: string) => s.replace(/#/g, "♯").replace(/x/g, "𝄪").replace(/([A-G])bb/g, "$1𝄫").replace(/([A-G])b/g, "$1♭");
-const nameOf = (p: music.PitchClass) => pretty(FC(p));
+export const nameOf = (p: music.PitchClass) => pretty(FC(p));
 const keyName = (k: string) => pretty(k);
 const SIGN_WORD: Record<number, string> = { [-2]: "double flat", [-1]: "flat", 0: "natural", 1: "sharp", 2: "double sharp" };
 const ORD = (n: number) => music.ordinal(n);
-const clefOf = (c: GenCtx): Clef => c.rng.pick(((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]));
-const fits = (clef: Clef, ps: Pitch[], max: number) => ps.every((p) => ledgerLines(clef, p) <= max);
-const maxLedger = (c: GenCtx) => c.scope.maxLedgerLines ?? 0;
-const keysOf = (c: GenCtx) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
+export const clefOf = (c: GenCtx): Clef => c.rng.pick(((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]));
+export const fits = (clef: Clef, ps: Pitch[], max: number) => ps.every((p) => ledgerLines(clef, p) <= max);
+export const maxLedger = (c: GenCtx) => c.scope.maxLedgerLines ?? 0;
+export const keysOf = (c: GenCtx) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
 const DISPLAY = "B4";
 
-function note(pitch: Pitch | string, value: music.NoteValue = "semibreve", extra: Record<string, unknown> = {}): NotationEvent {
+export function note(pitch: Pitch | string, value: music.NoteValue = "semibreve", extra: Record<string, unknown> = {}): NotationEvent {
   return { kind: "note", pitch: typeof pitch === "string" ? pitch : F(pitch), duration: { value, dots: 0 }, ...extra } as NotationEvent;
 }
-const r = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "rest", duration: { value, dots }, ...extra }) as NotationEvent;
-const n = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "note", pitch: DISPLAY, duration: { value, dots }, ...extra }) as NotationEvent;
+export const r = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "rest", duration: { value, dots }, ...extra }) as NotationEvent;
+export const n = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "note", pitch: DISPLAY, duration: { value, dots }, ...extra }) as NotationEvent;
 
 /** Print exactly the accidentals the spelt pitches need (key signature and bar state), so content is self-consistent. */
 export function withSigns(f: NotationFragment): NotationFragment {
@@ -73,11 +73,11 @@ export function withSigns(f: NotationFragment): NotationFragment {
   };
 }
 
-function frag(clef: Clef, measures: Measure[], text: string, extra: Partial<NotationFragment> = {}): NotationFragment {
+export function frag(clef: Clef, measures: Measure[], text: string, extra: Partial<NotationFragment> = {}): NotationFragment {
   return withSigns({ presentation: "stave", clef, showKeySignature: true, measures, textAlternative: text, ...extra } as NotationFragment);
 }
 
-const valueWord = (e: NotationEvent): string => {
+export const valueWord = (e: NotationEvent): string => {
   if (e.kind === "tuplet") return `a ${e.actual === 3 ? "triplet" : e.actual === 2 ? "duplet" : `group of ${e.actual}`} of ${e.events.map(valueWord).join(", ")}`;
   const v = `${"dotted ".repeat(e.duration.dots ?? 0)}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`;
   return `${v}${e.kind !== "rest" && e.tieToNext ? " tied to" : ""}`;
@@ -547,7 +547,7 @@ const cadence: Gen = (c) => {
 // Transposition and ornaments
 // ---------------------------------------------------------------------------
 
-function melodyIn(c: GenCtx, key: music.Key, clef: Clef, len: number): Pitch[] | null {
+export function melodyIn(c: GenCtx, key: music.Key, clef: Clef, len: number): Pitch[] | null {
   const pcs = scale(key, key.mode === "major" ? "major" : "harmonic").slice(0, 7);
   const max = maxLedger(c);
   for (const o of c.rng.shuffle([2, 3, 4, 5])) {
@@ -653,8 +653,8 @@ const ornament: Gen = (c) => {
 // Rhythm families
 // ---------------------------------------------------------------------------
 
-const tsOf = (c: GenCtx, fallback = ["2/4", "3/4", "4/4"]) => c.rng.pick(c.scope.timeSignatures?.length ? c.scope.timeSignatures : fallback);
-const rhythmLine = (measures: Measure[], extra: Partial<NotationFragment> = {}): NotationFragment => ({ presentation: "rhythm-line", clef: "treble", showKeySignature: false, measures, textAlternative: describeRhythm(measures), ...extra }) as NotationFragment;
+export const tsOf = (c: GenCtx, fallback = ["2/4", "3/4", "4/4"]) => c.rng.pick(c.scope.timeSignatures?.length ? c.scope.timeSignatures : fallback);
+export const rhythmLine = (measures: Measure[], extra: Partial<NotationFragment> = {}): NotationFragment => ({ presentation: "rhythm-line", clef: "treble", showKeySignature: false, measures, textAlternative: describeRhythm(measures), ...extra }) as NotationFragment;
 
 const timeSignature: Gen = (c) => {
   const ts = tsOf(c);

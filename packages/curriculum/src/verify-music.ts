@@ -309,6 +309,13 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       if (new Set(ids).size !== ids.length) report("CHOICE_DUPLICATE", where, "Option ids must be unique");
       for (const c of a.correctOptionIds) if (!ids.includes(c)) report("CHOICE_UNKNOWN", where, `Correct option ${c} is not an option`);
       if (a.correctOptionIds.length === ids.length) report("CHOICE_TRIVIAL", where, "Every option is correct");
+      if (a.kind === "choice" && a.diagnoses) {
+        for (const [opt, d] of Object.entries(a.diagnoses)) {
+          if (!ids.includes(opt)) report("CHOICE_DIAGNOSIS", where, `Diagnosis for unknown option ${opt}`);
+          else if (a.correctOptionIds.includes(opt)) report("CHOICE_DIAGNOSIS", where, `The correct option ${opt} cannot carry a mistake diagnosis`);
+          if (!(d.category in item.feedback.mistakes)) report("CHOICE_DIAGNOSIS", where, `Diagnosis category ${d.category} has no feedback on the item`);
+        }
+      }
       return;
     }
     case "pitch": {

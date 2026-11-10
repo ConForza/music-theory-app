@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "start": "node --disable-warning=ExperimentalWarning --import tsx src/main.ts",
-    "dev": "node --disable-warning=ExperimentalWarning --import tsx --watch src/main.ts"
+    "dev": "node --disable-warning=ExperimentalWarning --import tsx --watch src/main.ts",
+    "author:grade1": "tsx scripts/author-grade1.ts"
   },
   "dependencies": {
     "@mtp/curriculum": "0.1.0",
