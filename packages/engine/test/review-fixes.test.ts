@@ -129,3 +129,27 @@ describe("beam-count feedback is about counting noteheads", () => {
     }
   });
 });
+
+describe("clef-identification and rest-location descriptions do not name the answer", () => {
+  it("a clef-identification stave is described by its shape, never as a treble or bass clef", () => {
+    let seen = 0;
+    for (const i of generated("G1-U3-L05", "t.g1.stave-facts", 150)) {
+      if (!i.prompt.startsWith("Which clef is at the start")) continue;
+      seen++;
+      const alt = i.music!.questionAlternative ?? i.music!.textAlternative ?? "";
+      expect(alt, i.id).not.toMatch(/treble|bass|\bG clef|\bF clef/i);
+      expect(alt, i.id).toMatch(/spiral|hook/);
+    }
+    expect(seen).toBeGreaterThan(3);
+  });
+  it("a melody question describes a rest by its shape, so naming it is part of the task", () => {
+    let seen = 0;
+    for (const i of generated("G1-U7-L05", "t.g1.melody-detail", 200)) {
+      if (!/contains a rest/.test(i.prompt)) continue;
+      seen++;
+      const alt = i.music!.questionAlternative ?? i.music!.textAlternative ?? "";
+      expect(alt, i.id).not.toMatch(/\brest\b/);
+    }
+    expect(seen).toBeGreaterThan(0);
+  });
+});

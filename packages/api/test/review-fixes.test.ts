@@ -230,3 +230,12 @@ describe("lessons never repeat a bar-building stimulus", () => {
     expect(dupes).toEqual([]);
   });
 });
+
+describe("the authored rest-location melody is described by shapes", () => {
+  it("never says 'rest' or 'symbol', and gives the shape of the rest sign", () => {
+    const it = course.authoredItems("G1-U7-L05").find((i) => /contains a rest/.test(i.prompt))!;
+    const alt = it.music!.textAlternative;
+    expect(alt).not.toMatch(/\brest\b|symbol/i);
+    expect(alt).toMatch(/zigzag/);
+  });
+});

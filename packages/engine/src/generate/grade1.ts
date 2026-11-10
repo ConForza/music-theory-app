@@ -93,6 +93,15 @@ export const letterNames: Gen = (c) => {
   };
 };
 
+/** What a rest looks like, so a listener can recognise one without being told it is a rest. */
+const REST_SHAPE: Record<string, string> = {
+  semibreve: "a small black block hanging below the 4th line",
+  minim: "a small black block sitting on top of the middle line",
+  crotchet: "a zigzag squiggle sign",
+  quaver: "a slanted stroke with one small flag",
+  semiquaver: "a slanted stroke with two small flags",
+};
+
 /** Where a written note sits, by geometry only (no letter name): used so text equivalents never state a recognition answer. */
 function geom(clef: Clef, p: Pitch): string {
   const pos = staffPosition(clef, p);
@@ -124,7 +133,7 @@ export const staveFacts: Gen = (c) => {
       const p: Pitch = naturalAt(clef, c.rng.pick([0, 2, 4, 6, 8, 1, 3, 5, 7]));
       return {
         prompt: "Which clef is at the start of this stave?",
-        music: frag(clef, [{ events: [note(p)] }], `A ${clef} clef stave with one note. For a listener who cannot see the stave: the note is ${p.step}${p.octave}. Use what you know about the ${clef} clef to work out which line or space it sits on, counting from the bottom.`),
+        music: frag(clef, [{ events: [note(p)] }], clef === "treble" ? "A stave with one note. At the start is a clef sign shaped like a spiral that curls round the second line from the bottom." : "A stave with one note. At the start is a clef sign shaped like a hook with two dots, one above and one below the second line from the top."),
         answer: { kind: "choice", options: [{ id: "treble", label: "Treble clef" }, { id: "bass", label: "Bass clef" }], correctOptionIds: [clef], diagnoses: { [clef === "treble" ? "bass" : "treble"]: { category: "clef-confusion", reason: clef === "treble" ? "The treble clef has a curl that winds round the second line. The bass clef is the one with two dots." : "The bass clef has two dots, one above and one below the line for F. The treble clef is the one with the winding curl." } } },
         hints: ["The treble clef winds round a line like a curl; the bass clef is a hook with two dots."],
       };
@@ -1083,7 +1092,7 @@ export const melodyDetail: Gen = (c) => {
     const sg = music.keySignature(key);
     return sg.count === 0 ? "no sharps or flats" : `${sg.count} ${sg.type === "sharps" ? (sg.count === 1 ? "sharp" : "sharps") : sg.count === 1 ? "flat" : "flats"}`;
   })();
-  const describe = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `a ${e.duration.value} ${geom(clef, P(e.pitch))}${e.writtenAccidental ? ` with a ${e.writtenAccidental} sign` : ""}${e.label ? " (marked x)" : ""}${e.articulations?.length ? ` with ${e.articulations[0]}` : ""}${e.dynamic ? `, marked ${e.dynamic}` : ""}` : `${e.kind === "rest" ? `a ${e.duration.value} rest` : "a group"}`)).join(", ") + ".").join(" ");
+  const describe = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `a ${e.duration.value} ${geom(clef, P(e.pitch))}${e.writtenAccidental ? ` with a ${e.writtenAccidental} sign` : ""}${e.label ? " (marked x)" : ""}${e.articulations?.length ? ` with ${e.articulations[0]}` : ""}${e.dynamic ? `, marked ${e.dynamic}` : ""}` : `${e.kind === "rest" ? REST_SHAPE[e.duration.value as string] ?? "a rest sign" : "a group"}`)).join(", ") + ".").join(" ");
   f.textAlternative = `A three-bar melody, ${clef} clef, key signature of ${sigWord}, time signature ${ts}, marked ${tempoTerm.term} and ${dyn} at the start. ${describe}`;
   const tonic = sc[0]!;
   const note0 = pitches[0]!;
