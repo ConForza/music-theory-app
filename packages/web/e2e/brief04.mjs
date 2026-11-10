@@ -50,7 +50,16 @@ const log = (...a) => console.log(...a);
 
 async function noOverflow(page, where) {
   const over = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-  assert.ok(over <= 1, `${where}: page scrolls sideways by ${over}px`);
+  if (over > 1) {
+    const culprits = await page.evaluate(() => {
+      const w = document.documentElement.clientWidth;
+      return [...document.querySelectorAll("body *")]
+        .filter((e) => e.getBoundingClientRect().right > w + 0.5)
+        .slice(0, 8)
+        .map((e) => `${e.tagName}.${e.className} right=${e.getBoundingClientRect().right.toFixed(1)} text="${(e.textContent ?? "").slice(0, 30)}"`);
+    });
+    assert.fail(`${where}: page scrolls sideways by ${over}px; wider than the viewport: ${culprits.join(" | ")}`);
+  }
 }
 async function axe(page, where) {
   await page.evaluate(axeSource);
