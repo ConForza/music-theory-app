@@ -113,7 +113,7 @@ export const U1: Spec[] = [
       { music: rhythm([[nt("semibreve"), rs("semibreve"), nt("minim"), rs("minim")]], "A semibreve followed by a semibreve rest, then a minim followed by a minim rest."), caption: "The semibreve rest hangs below a line; the minim rest sits on top of it." },
       { text: "The semibreve rest is a small block hanging from the 4th line. The minim rest is the same block sitting on top of the 3rd line. Both last as long as their notes." },
       { music: rhythm([[nt("crotchet"), rs("crotchet"), nt("quaver"), rs("quaver"), nt("semiquaver"), rs("semiquaver")]], "A crotchet, a quaver and a semiquaver, each followed by the rest of the same length."), caption: "Crotchet, quaver and semiquaver rests. Each lasts as long as the note beside it." },
-      { tip: "Two rests, two beats of silence. Count the beats of rests in exactly the same way as notes: just say nothing!" },
+      { tip: "Count rests by their value, exactly as you count notes. Two crotchet rests are two beats of silence; a minim rest on its own is already two beats. Just say nothing!" },
     ],
     demo: {
       widget: "rhythm",

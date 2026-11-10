@@ -109,6 +109,12 @@ export function loadCourse(root?: string): Course {
     if (node && binding) return effectiveScope(ix, node, binding);
     return tpl ? templateScope(ix, tpl) : {};
   };
+  /** In a question the learner gets the description written for questions (it never gives the answer away). */
+  const forLearner = (m: NonNullable<ExerciseItem["music"]>) => {
+    if (!m.questionAlternative) return m;
+    const { questionAlternative, ...rest } = m;
+    return { ...rest, textAlternative: questionAlternative };
+  };
   const toLearner = (it: ExerciseItem, section: LearnerItem["section"], scope?: MusicScope): LearnerItem => {
     const tpl = ix.templates.get(it.templateId)!;
     return {
@@ -116,7 +122,7 @@ export function loadCourse(root?: string): Course {
       section,
       evidence: it.evidence,
       prompt: it.prompt,
-      ...(it.music ? { music: it.music } : {}),
+      ...(it.music ? { music: forLearner(it.music) } : {}),
       ...(it.score ? { score: it.score } : {}),
       input: inputFor(ix, it, scope),
       hintCount: it.hints.length,

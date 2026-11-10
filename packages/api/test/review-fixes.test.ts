@@ -166,3 +166,49 @@ describe("challenge results read in plain words", () => {
     for (const t of titles) expect(t).not.toMatch(/abrsm2020\./);
   }, 300_000);
 });
+
+describe("F5 (upgrade): question identity of Brief 04 questions is unchanged", () => {
+  it("every question the Brief 04 release could generate (seeds 1-6, golden keys recorded from that release) keeps its key", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { fileURLToPath } = await import("node:url");
+    const { buildIndex, effectiveScope, loadCurriculum } = await import("@mtp/curriculum");
+    const { generateItem } = await import("@mtp/engine");
+    const golden = JSON.parse(readFileSync(fileURLToPath(new URL("./fixtures/brief04-question-keys.json", import.meta.url)), "utf8")) as Record<string, string>;
+    const { curriculum } = loadCurriculum(fileURLToPath(new URL("./fixtures/legacy-content", import.meta.url)));
+    const ix = buildIndex(curriculum!);
+    const now: Record<string, string> = {};
+    const seen = new Set<string>();
+    for (const node of ix.nodes) for (const b of node.exercises) {
+      if (seen.has(b.templateId)) continue;
+      seen.add(b.templateId);
+      const scope = effectiveScope(ix, node, b);
+      for (let s = 1; s <= 6; s++) { try { now[`${b.templateId}#${s}`] = questionKey(generateItem(ix, b.templateId, s, { scope }).item); } catch { /* skipped seed */ } }
+    }
+    const drift = Object.keys(golden).filter((k) => now[k] !== golden[k]);
+    expect(Object.keys(golden).length).toBeGreaterThan(300);
+    expect(drift).toEqual([]);
+    // the question a reviewer hinted on the Brief 04 release (A4-B4, tone or semitone)
+    expect(golden["t.g1.tone-semitone#2"]).toBe("8950de608660be6d3ad16ca9");
+  }, 120_000);
+});
+
+describe("F6 (authored melodies): the description gives the stimulus, not the answer", () => {
+  it("every melody question tells the listener the tempo word, signatures and marked-note position, and never the key name or a sign's meaning", () => {
+    const items = course.authoredItems("G1-U7-L05").filter((i) => i.id.includes(".melody-"));
+    expect(items.length).toBe(6);
+    for (const it of items) {
+      const alt = it.music!.textAlternative;
+      expect(alt, it.id).toMatch(/Andante|Allegretto|Moderato/);
+      expect(alt, it.id).toMatch(/key signature of (one|two) (sharps?|flats?)/);
+      expect(alt, it.id).toMatch(/time signature \d\/4/);
+      expect(alt, it.id).not.toMatch(/\b[A-G]( flat| sharp)? major\b/i);
+      expect(alt, it.id).not.toMatch(/accent|staccato|legato|fermata|walking|rest\b/i);
+    }
+  });
+  it("the rests lesson does not claim that any two rests last two beats", () => {
+    const text = JSON.stringify(course.lesson("G1-U1-L04") ?? {});
+    expect(text.length).toBeGreaterThan(100);
+    expect(text).toMatch(/Count rests by their value/);
+    expect(text).not.toMatch(/Two rests, two beats of silence/);
+  });
+});

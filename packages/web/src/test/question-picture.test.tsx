@@ -27,3 +27,11 @@ describe("stave-position questions", () => {
     unmount();
   });
 });
+
+describe("tempo words", () => {
+  it("are printed above the first bar", () => {
+    const f = { presentation: "stave", clef: "treble", showKeySignature: false, tempoText: "Andante", measures: [{ events: [{ kind: "note", pitch: "E4", duration: { value: "semibreve", dots: 0 } }] }], textAlternative: "x" } as unknown as NotationFragment;
+    const { container } = render(<MusicView fragment={f} labels="positions" />);
+    expect(container.querySelector(".n-tempo")?.textContent).toBe("Andante");
+  });
+});

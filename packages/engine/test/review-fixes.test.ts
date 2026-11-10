@@ -73,8 +73,8 @@ describe("F6: text alternatives do not give the answer away", () => {
         for (const i of generated(node.id, b.templateId, 25)) {
           if (i.music?.presentation !== "keyboard") continue;
           seen++;
-          const named = /\b[A-G](#|b| sharp| flat)?\d?\b/.exec((i.music.textAlternative ?? "").replace(/^An? piano keyboard/, ""));
-          if (named && !i.prompt.includes(named[0])) expect.fail(`${i.id} alt text names ${named[0]}: ${i.music.textAlternative}`);
+          const named = /\b[A-G](#|b| sharp| flat)?\d?\b/.exec(((i.music.questionAlternative ?? i.music.textAlternative ?? "")).replace(/^An? piano keyboard/, ""));
+          if (named && !i.prompt.includes(named[0])) expect.fail(`${i.id} alt text names ${named[0]}`);
         }
       }
     }
@@ -99,7 +99,7 @@ describe("beam grouping is available without sight", () => {
     let checked = 0;
     for (const i of generated("G1-U1-L03", "t.g1.beam-choice", 150).concat(generated("G1-U2-L05", "t.g1.bar-judge", 150))) {
       if (!i.prompt.includes("groups its notes")) continue;
-      const alt = i.music!.textAlternative ?? "";
+      const alt = (i.music!.questionAlternative ?? i.music!.textAlternative ?? "");
       const bars = alt.split(/Bar \d+: /).slice(1);
       expect(bars.length).toBe(3);
       expect(new Set(bars).size, alt).toBe(3);
@@ -123,7 +123,7 @@ describe("beam-count feedback is about counting noteheads", () => {
   it("a stave-position question describes the clef and pitch for a listener without naming the line or space", () => {
     for (const i of generated("G1-U3-L02", "t.g1.stave-facts", 80)) {
       if (!i.prompt.startsWith("Counting from the bottom")) continue;
-      const alt = i.music!.textAlternative ?? "";
+      const alt = (i.music!.questionAlternative ?? i.music!.textAlternative ?? "");
       expect(alt).toMatch(/clef stave with one note.*the note is [A-G]\d/);
       expect(alt).not.toMatch(/\b(1st|2nd|3rd|4th|5th) (line|space)\b/);
     }

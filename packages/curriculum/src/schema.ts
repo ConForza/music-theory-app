@@ -787,6 +787,11 @@ export const NotationFragment = z
     measures: z.array(Measure).min(1),
     /** Text description for screen readers and no-graphics mode. */
     textAlternative: NonEmpty,
+    /**
+     * What a learner is told in a question, when the full description would give the answer away. It replaces `textAlternative`
+     * for the learner and is never part of a question's identity (so wording fixes cannot disturb stored mastery history).
+     */
+    questionAlternative: z.string().min(1).optional(),
   })
   .strict();
 export type NotationFragment = z.infer<typeof NotationFragment>;

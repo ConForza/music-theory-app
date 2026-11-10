@@ -9,11 +9,11 @@ import { music } from "@mtp/curriculum";
  * different seeds that show the same music and expect the same answer share a key, so they cannot both be "fresh
  * first-ever" evidence. Ids and seeds are stripped; everything the learner sees or must answer is kept.
  */
-const strip = (v: unknown): unknown =>
+const strip = (v: unknown, alt = false): unknown =>
   Array.isArray(v)
-    ? v.map(strip)
+    ? v.map((x) => strip(x, alt))
     : v && typeof v === "object"
-      ? Object.fromEntries(Object.keys(v as object).filter((k) => k !== "id" && k !== "seed" && k !== "diagnoses").sort().map((k) => [k, strip((v as Record<string, unknown>)[k])]))
+      ? Object.fromEntries(Object.keys(v as object).filter((k) => k !== "id" && k !== "seed" && k !== "diagnoses" && k !== "questionAlternative" && !(alt && k === "textAlternative")).sort().map((k) => [k, strip((v as Record<string, unknown>)[k], alt)]))
       : v;
 
 /**
@@ -41,7 +41,10 @@ export const ORDER_INSENSITIVE_TEMPLATES = new Set(
 
 export function questionKey(item: ExerciseItem): string {
   const answer = ORDER_INSENSITIVE_TEMPLATES.has(item.templateId) ? normaliseAnswer(item.answer) : item.answer;
-  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: answer }));
+  // Brief 04 templates keep hashing their text alternative exactly as that release did, so exposure and evidence stored then still match
+  // after an upgrade (the learner-facing wording for questions lives in `questionAlternative`, which is never hashed). Templates new in
+  // Brief 05 have no history to match, so descriptions never take part in their identity at all.
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: answer }, ORDER_INSENSITIVE_TEMPLATES.has(item.templateId)));
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 
@@ -51,7 +54,7 @@ export function questionKey(item: ExerciseItem): string {
  * so it cannot disturb the identities earlier briefs recorded).
  */
 export function visibleKey(item: ExerciseItem): string {
-  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: normaliseAnswer(item.answer) }));
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: normaliseAnswer(item.answer) }, true));
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 

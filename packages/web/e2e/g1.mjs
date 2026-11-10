@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import { chromium, devices } from "playwright";
 import { answerOnScreen, axe, finishViaApi, get, guest, noOverflow, playLessonInBrowser, playNodeInBrowser, playReviewInBrowser, post, serve, shot } from "./g1lib.mjs";
-import { canonicalResponse } from "@mtp/engine";
+import { canonicalResponse, inputFor } from "@mtp/engine";
 
 const S = await serve();
 const browser = await chromium.launch();
@@ -286,6 +286,27 @@ await test("preferences: dark mode, reduced motion, 200% text at 320px, and soun
   await page.evaluate(() => fetch("/api/me/profile", { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ settings: { sound: false } }) }));
   await playLessonInBrowser(page, S, "G1-U1-L01", { afterDemo: async (p) => { await p.getByRole("button", { name: /Play all/ }).click(); } });
   assert.equal(await page.evaluate(() => window.__ac), 0, "no audio is created when sound is off");
+  await ctx.close();
+});
+
+await test("enlarged text at 320px: the note palette of a bar builder is never clipped", async () => {
+  // the first lesson question (in Unit 2) that uses the bar builder
+  const lesson = S.course.nodes.filter((n) => n.grade === 1 && n.type === "lesson").find((n) => S.course.authoredItems(n.id).some((it) => inputFor(S.course.ix, it, S.course.scopeFor(n.id, it)).kind === "rhythm-builder"));
+  assert.ok(lesson, "a lesson with a bar builder exists");
+  const items = S.course.authoredItems(lesson.id);
+  const k = items.findIndex((it) => inputFor(S.course.ix, it, S.course.scopeFor(lesson.id, it)).kind === "rhythm-builder");
+  const init = () => document.addEventListener("DOMContentLoaded", () => (document.documentElement.style.fontSize = "200%"));
+  const ctx = await ctxFor(profiles["phone-320"]);
+  const { page, userId } = await guest(ctx);
+  await page.addInitScript(init);
+  const prev = S.course.nodes.filter((n) => n.grade === 1)[S.course.nodes.filter((n) => n.grade === 1).findIndex((n) => n.id === lesson.id) - 1];
+  if (prev) await finishViaApi(S, page, userId, prev.id);
+  await playLessonInBrowser(page, S, lesson.id, { stopAfter: k });
+  await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+  await page.locator(".palette-btn").first().waitFor();
+  const clipped = await page.evaluate(() => [...document.querySelectorAll(".palette-btn")].filter((b) => b.scrollWidth > b.clientWidth + 1 || [...b.children].some((c) => c.getBoundingClientRect().right > b.getBoundingClientRect().right + 1 || c.getBoundingClientRect().left < b.getBoundingClientRect().left - 1)).map((b) => b.textContent));
+  assert.deepEqual(clipped, [], "no palette button clips its symbol or name");
+  await noOverflow(page, "bar builder at 200% text");
   await ctx.close();
 });
 
