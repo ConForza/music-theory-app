@@ -69,17 +69,18 @@ export class XpService {
     }
     const base = this.baseFor(typeKey);
     const cap = this.policy.xp.dailyCapPerNode;
-    // The cap is "per day", but a learner can edit their timezone (a client-controlled setting). Count what was already
-    // earned under BOTH readings of today: rows stamped with today's date, and rows whose real instant falls inside today's
-    // window in the learner's current zone. Changing zone at the same instant therefore cannot reopen a spent cap.
+    // The cap is "per day", but a learner can edit their timezone (a client-controlled setting). Count what was already earned
+    // under EITHER reading of "today": rows stamped with today's date, or rows whose real instant falls inside today's window in
+    // the learner's current zone. It must be ONE query over the union: a row matching both is one award, and two rows that each
+    // match only one reading are two (counting each reading separately and taking the larger lets a zone switch reopen the cap).
     const win = dayWindow(lt.date, lt.tz);
-    const byDate = (this.db
-      .prepare("SELECT COUNT(*) AS c FROM xp_ledger WHERE user_id = ? AND node_id = ? AND local_date = ? AND capped = 0 AND xp > 0")
-      .get(userId, a.nodeId, lt.date) as { c: number }).c;
-    const byInstant = (this.db
-      .prepare("SELECT COUNT(*) AS c FROM xp_ledger WHERE user_id = ? AND node_id = ? AND occurred_at >= ? AND occurred_at < ? AND capped = 0 AND xp > 0")
-      .get(userId, a.nodeId, win.start.toISOString(), win.end.toISOString()) as { c: number }).c;
-    const earnedToday = Math.max(byDate, byInstant);
+    const earnedToday = (this.db
+      .prepare(
+        `SELECT COUNT(*) AS c FROM xp_ledger
+         WHERE user_id = ? AND node_id = ? AND capped = 0 AND xp > 0
+           AND (local_date = ? OR (occurred_at >= ? AND occurred_at < ?))`,
+      )
+      .get(userId, a.nodeId, lt.date, win.start.toISOString(), win.end.toISOString()) as { c: number }).c;
     const capped = base > 0 && earnedToday >= cap;
     const xp = capped ? 0 : base;
     this.db

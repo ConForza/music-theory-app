@@ -64,6 +64,37 @@ describe("reward components", () => {
   });
 });
 
+describe("progress counts and stale sessions", () => {
+  it("counts a due proficient topic as nearly there, not learning", async () => {
+    const { api } = await signedIn();
+    await completeSampleLesson(api.course);
+    api.clock.advanceDays(1); // review is now due; nothing was answered, nothing slipped
+    cleanup();
+    renderApp("/progress");
+    const section = (await screen.findByRole("heading", { name: "Understanding" })).closest("section")!;
+    const row = (name: string) => within(section).getByText(name).parentElement!.textContent;
+    await waitFor(() => expect(row("Nearly there")).toMatch(/1$/));
+    expect(row("Learning")).toMatch(/1$/); // "The stave", which only has one kind of evidence so far
+    expect(row("Mastered")).toMatch(/0$/);
+  });
+
+  it("rebuilds an open review whose questions all went stale instead of looping on a failing completion", async () => {
+    const { api } = await signedIn();
+    await completeSampleLesson(api.course);
+    api.clock.advanceDays(1);
+    const { api: client } = await import("../api/client");
+    const started = await client.startReview();
+    const id = started.session!.id;
+    const row = api.db.prepare("SELECT items FROM review_sessions WHERE id = ?").get(id) as { items: string };
+    api.db.prepare("UPDATE review_sessions SET items = ? WHERE id = ?").run(JSON.stringify((JSON.parse(row.items) as Array<{ fingerprint: string }>).map((i) => ({ ...i, fingerprint: "00000000" }))), id);
+    cleanup();
+    renderApp(`/review/session/${id}`);
+    expect(await screen.findByText(/Review · Treble clef line notes/)).toBeInTheDocument(); // a fresh question, no error screen
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(api.calls.filter((c) => c === `POST /api/review/sessions/${id}/complete`)).toHaveLength(0);
+  });
+});
+
 describe("review hub grouping", () => {
   it("does not call a topic nearly mastered when the question pool is what limits it", async () => {
     const { api } = await signedIn();

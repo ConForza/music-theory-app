@@ -2,6 +2,7 @@ import { mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createApp } from "./app.ts";
+import { testClockEnabled } from "./config.ts";
 import { loadCourse } from "./course.ts";
 import { openDb } from "./db.ts";
 import { createHttpServer } from "./server.ts";
@@ -18,8 +19,8 @@ const app = createApp({
   secureCookies: process.env.MTP_SECURE_COOKIES === "1",
   waiveUnwrittenPrerequisites: process.env.MTP_WAIVE_UNWRITTEN !== "0",
   trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0,
-  // Browser journeys only: lets a test move the server's clock. Refused when running in production mode.
-  testClock: process.env.MTP_TEST_CLOCK === "1" && process.env.NODE_ENV !== "production",
+  // Browser journeys only: lets a test move the server's clock. Needs the flag AND NODE_ENV=test (see config.ts).
+  testClock: testClockEnabled(process.env),
   allowedOrigins: (process.env.MTP_ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
 });
 createHttpServer(app, staticDir).listen(port, () => console.log(`Music Theory Path listening on http://localhost:${port} (db: ${dbPath})`));

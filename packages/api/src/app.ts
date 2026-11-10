@@ -8,6 +8,7 @@ import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
 import { Engagement } from "./engagement.ts";
+import { backfillPracticeExposure } from "./backfill.ts";
 import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
 import { LearnerResponse } from "@mtp/engine";
 
@@ -116,6 +117,8 @@ export function createApp(opts: AppOptions) {
   const engagement = new Engagement(db, course, clock, course.ix.c.policy);
   const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true }, engagement, clock);
   const practice = new PracticeService(db, course, clock);
+  // One-off repair of practice history that predates exposure tracking (idempotent; see backfill.ts).
+  backfillPracticeExposure(db, practice, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
   const loginLimiter = new RateLimiter(10);

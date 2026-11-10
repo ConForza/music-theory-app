@@ -11,7 +11,8 @@ export function startApi(opts: { waive?: boolean } = {}) {
   course ??= loadCourse();
   // A controllable server clock (midday UTC on 2 March 2026), so tests can move to "tomorrow" without waiting.
   const clock = new ManualClock(new Date("2026-03-02T12:00:00Z"));
-  const app = createApp({ db: openDb(":memory:"), course, waiveUnwrittenPrerequisites: opts.waive ?? true, clock });
+  const db = openDb(":memory:");
+  const app = createApp({ db, course, waiveUnwrittenPrerequisites: opts.waive ?? true, clock });
   let cookie = "";
   let offline = false;
   let lose = 0; // responses to drop after the server has handled the request
@@ -74,6 +75,7 @@ export function startApi(opts: { waive?: boolean } = {}) {
   globalThis.fetch = fake as typeof fetch;
   return {
     app,
+    db,
     clock,
     course,
     /** Fail the next `n` matching requests with `status` before the server sees them. */

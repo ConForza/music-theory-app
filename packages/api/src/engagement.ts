@@ -11,6 +11,7 @@ import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import { REVEAL_AFTER_WRONG } from "./grade.ts";
 import { questionKey } from "./question-key.ts";
+import { taughtNodes } from "./taught.ts";
 import { explainMastery, isDue, rulesFrom, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { MasteryService, learnerTime, type LearnerTime } from "./mastery-service.ts";
 import { ReviewService } from "./review.ts";
@@ -134,7 +135,7 @@ export class Engagement {
   }
 
   private completed(userId: string): Set<string> {
-    return new Set((this.db.prepare("SELECT node_id FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string }>).map((r) => r.node_id));
+    return taughtNodes(this.db, this.course, userId);
   }
 
   // ---- read models ----------------------------------------------------------------------------------------------------

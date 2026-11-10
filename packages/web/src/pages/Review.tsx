@@ -159,8 +159,20 @@ export function ReviewPlayer() {
     setIdx(null);
     setError(null);
     load().then(
-      (s) => {
+      async (s) => {
         if (!live) return;
+        if (s.status === "open" && s.items.length === 0) {
+          // Every question in this open session went stale (the questions were updated). Rebuild it instead of looping on a
+          // completion that can never succeed; the server keeps the answers already given.
+          try {
+            const next = await api.startReview();
+            if (!live) return;
+            nav(next.session ? `/review/session/${next.session.id}` : "/review", { replace: true });
+          } catch (e) {
+            if (live) setError(asFailure(e, "Could not reopen the review."));
+          }
+          return;
+        }
         const first = s.items.findIndex((i) => !i.answered);
         setIdx(first === -1 ? s.items.length : first);
       },
