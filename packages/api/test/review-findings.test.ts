@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { join } from "node:path";
+import { migrate } from "../src/db.ts";
 import { canonicalResponse, generateItem, templateScope } from "@mtp/engine";
 import { effectiveScope } from "@mtp/curriculum";
 import { questionKey, satisfies } from "../src/question-key.ts";
@@ -328,21 +330,22 @@ describe("P2: the capacity warning also considers question-type variety", () => 
   });
 });
 
-describe("R2 ordering: command order, not timestamps, decides whether a question was already met", () => {
-  const practise = async (c: Client, keys: Set<string>) => {
-    const done = new Set<string>();
-    const tpl = "t.g1.note-read";
-    for (let seed = 0; seed < 6000 && [...keys].some((k) => !done.has(k)); seed++) {
-      const item = generateItem(course.ix, tpl, seed, { evidence: "learning" }).item; // what the practice route serves
-      const key = questionKey(item);
-      if (!keys.has(key) || done.has(key)) continue;
-      done.add(key);
-      expect((await c.post("/api/practice/hint", { itemId: item.id, level: 1 })).status).toBe(200);
-      expect((await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: item.id, response: canonicalResponse(course.ix, item, templateScope(course.ix, course.ix.templates.get(tpl)!)) })).body.correct).toBe(true);
-    }
-    return done;
-  };
+const practise = async (c: Client, keys: Set<string>) => {
+  const done = new Set<string>();
+  const tpl = "t.g1.note-read";
+  for (let seed = 0; seed < 6000 && [...keys].some((k) => !done.has(k)); seed++) {
+    const item = generateItem(course.ix, tpl, seed, { evidence: "learning" }).item; // what the practice route serves
+    const key = questionKey(item);
+    if (!keys.has(key) || done.has(key)) continue;
+    done.add(key);
+    expect((await c.post("/api/practice/hint", { itemId: item.id, level: 1 })).status).toBe(200);
+    expect((await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: item.id, response: canonicalResponse(course.ix, item, templateScope(course.ix, course.ix.templates.get(tpl)!)) })).body.correct).toBe(true);
+  }
+  return done;
+};
 
+
+describe("R2 ordering: command order, not timestamps, decides whether a question was already met", () => {
   it("practice committed first at the very same instant as the review answer: no fresh credit", async () => {
     const { c, clock, db } = await learner();
     const before = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect;
@@ -368,4 +371,48 @@ describe("R2 ordering: command order, not timestamps, decides whether a question
     await practise(c, lineKeys("t.g1.note-read")); // same instant, committed afterwards
     expect((await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect).toBe(credited);
   });
+});
+
+describe("migration 006 repairs legacy novelty (both historical orders)", () => {
+  async function history(order: "practice-first" | "review-first") {
+    const s = setupClock();
+    const c = s.client();
+    await register(c);
+    await finishLesson(c);
+    const uid = (await c.get("/api/me")).body.user.id as string;
+    s.clock.advanceDays(1);
+    if (order === "practice-first") await practise(c, lineKeys("t.g1.note-read")); // March 3 practice...
+    const { session } = (await c.post("/api/review/sessions")).body;
+    s.clock.advanceMs(60_000);
+    await answerSession(c, s.db, session.id); // ...then the review the same day, a minute later
+    if (order === "review-first") {
+      s.clock.advanceDays(1);
+      await practise(c, lineKeys("t.g1.note-read")); // practice on a later day
+    }
+    return { ...s, c, uid, count: async () => (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect as number };
+  }
+
+  for (const order of ["practice-first", "review-first"] as const) {
+    it(`${order}: a database that applied 005's default keeps the right count after 006`, async () => {
+      const h = await history(order);
+      const right = await h.count();
+      // Reproduce what 005 did to existing rows: everything fresh.
+      h.db.exec("UPDATE mastery_evidence SET fresh = 1");
+      h.db.exec("DELETE FROM schema_migrations WHERE version = '006_backfill_novelty.sql'");
+      const wrong = await h.count();
+      if (order === "practice-first") expect(wrong).toBeGreaterThan(right); // the inflation the review found
+      expect(migrate(h.db, join(import.meta.dirname, "../migrations"))).toEqual(["006_backfill_novelty.sql"]);
+      expect(await h.count()).toBe(right);
+      expect(migrate(h.db, join(import.meta.dirname, "../migrations"))).toEqual([]);
+    });
+
+    it(`${order}: a database from before 005 (no fresh column) upgrades to the right count`, async () => {
+      const h = await history(order);
+      const right = await h.count();
+      h.db.exec("ALTER TABLE mastery_evidence DROP COLUMN fresh");
+      h.db.exec("DELETE FROM schema_migrations WHERE version IN ('005_evidence_novelty.sql', '006_backfill_novelty.sql')");
+      expect(migrate(h.db, join(import.meta.dirname, "../migrations"))).toEqual(["005_evidence_novelty.sql", "006_backfill_novelty.sql"]);
+      expect(await h.count()).toBe(right);
+    });
+  }
 });
