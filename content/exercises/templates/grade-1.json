@@ -2083,7 +2083,23 @@
       "hints": [
         "Look at the clef, key signature, time signature and the marks on the notes."
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "confused-similar-term",
+          "description": "Picked a term with a related but different meaning.",
+          "feedback": "Close, but that one means something different. Compare the two meanings side by side, then try again."
+        },
+        {
+          "id": "opposite-meaning",
+          "description": "Picked the opposite meaning (e.g. louder for quieter).",
+          "feedback": "That's the opposite direction. Look again at which way the music should change."
+        },
+        {
+          "id": "wrong-category",
+          "description": "Picked an answer from a different category (e.g. a tempo word for a dynamic).",
+          "feedback": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        }
+      ],
       "difficulty": 3,
       "qa": {
         "status": "draft",

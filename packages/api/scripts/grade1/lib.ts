@@ -37,6 +37,8 @@ export interface Spec {
   recap: string[];
   review: Array<{ t: string; afterDays: number }>;
   notes: string;
+  /** Hand-written questions added after the picked ones (for example questions about an authored melody). */
+  fixedIndependent?: ExerciseItem[];
 }
 
 export interface Author {
@@ -108,7 +110,7 @@ export function buildLesson(a: Author, spec: Spec) {
     explanation: spec.explain.map((b) => ("text" in b ? { kind: "text", text: b.text } : "tip" in b ? { kind: "tip", text: b.tip } : { kind: "notation", music: b.music, caption: b.caption })),
     demonstration: { widget: spec.demo.widget, music: spec.demo.music, steps: spec.demo.steps, audio: { playback: "synth-generated", optional: true }, textAlternative: spec.demo.text },
     guided: spec.guided.map((p, i) => pickItem(a, node, p, "guided", i + 1)),
-    independent: spec.independent.map((p, i) => pickItem(a, node, p, "independent", i + 1)),
+    independent: [...spec.independent.map((p, i) => pickItem(a, node, p, "independent", i + 1)), ...(spec.fixedIndependent ?? [])],
     recap: spec.recap,
     spacedReview: spec.review.map((r) => ({ templateId: r.t, afterDays: r.afterDays })),
     mastery: {
@@ -160,6 +162,7 @@ export const melody = (clef: "treble" | "bass", barList: M[][], ts: string, key:
         if (o.label) e.label = o.label;
         if (o.tie) e.tieToNext = true;
         if (o.beam) e.beam = o.beam;
+        if (o.dots) e.duration = { value, dots: o.dots };
         return note(pitch, value as never, e);
       }),
       ...(bi === barList.length - 1 ? { barline: "final" as const } : {}),
@@ -167,3 +170,8 @@ export const melody = (clef: "treble" | "bass", barList: M[][], ts: string, key:
     text,
     { timeSignature: ts, ...(key ? { key, showKeySignature: true } : { showKeySignature: false }), ...extra },
   );
+
+/** A hand-written fixed item. Its answer is re-derived by the validator and the engine like any other. */
+export function fixedItem(f: { id: string; templateId: string; prompt: string; music: Frag; answer: ExerciseItem["answer"]; hints: string[]; correct: string; mistakes: Record<string, string> }): ExerciseItem {
+  return { id: f.id, templateId: f.templateId, templateVersion: 1, seed: null, evidence: "independent", prompt: f.prompt, music: f.music, answer: f.answer, hints: f.hints, feedback: { correct: f.correct, mistakes: f.mistakes, fallback: "Not quite. Look at the melody again, one thing at a time: clef, key, time signature, then the marks." } };
+}

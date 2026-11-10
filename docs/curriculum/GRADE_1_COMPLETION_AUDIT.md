@@ -164,7 +164,7 @@ Concepts below the capacity rule: **0**.
 | G1-U7-L02 | How loud? Dynamics | 2 | 6 | 1 | 1 |
 | G1-U7-L03 | Directions and signs | 2 | 6 | 1 | 1 |
 | G1-U7-L04 | Articulation | 2 | 6 | 1 | 1 |
-| G1-U7-L05 | Looking closely at a melody | 2 | 6 | 1 | 1 |
+| G1-U7-L05 | Looking closely at a melody | 2 | 12 | 1 | 1 |
 
 ## 6. Assessments
 

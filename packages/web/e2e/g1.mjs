@@ -175,7 +175,7 @@ await test("Grade 1 assessment: an honest below-pass result with what to revisit
   const ctx = await ctxFor(profiles.desktop);
   const { page, userId } = await guest(ctx);
   await finishViaApi(S, page, userId, "G1-U7-R1");
-  await playNodeInBrowser(page, S, userId, "G1-A", { wrong: 11 });
+  await playNodeInBrowser(page, S, userId, "G1-A", { wrong: 12 });
   await page.getByRole("heading", { name: "Not passed yet" }).waitFor();
   await page.getByText(/not an ABRSM examination/i).waitFor();
   await noOverflow(page, "assessment result");

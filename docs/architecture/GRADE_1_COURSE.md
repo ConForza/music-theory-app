@@ -28,6 +28,9 @@ content/assessments/grade-1.json        unit challenge and Grade 1 blueprints (v
 
 ## Testing
 
+* `engine/test/grade1-answers.test.ts`: the new choice templates write their own answers, and the engine's solvability gate grades those same answers, so it cannot catch a wrong generator. This suite re-derives each answer from what is shown (printed durations, the bar-state reader over the printed signs, `scale`, `keySignature`, `staffPosition`, `checkBarAnyPattern`) over 150 seeds per template, plus hand-typed cases. Note that the validator's "answers are re-derived" statement in EXERCISE_ENGINE applies to structured answer kinds; for choice answers this suite is the independent check.
+* `api/test/upgrade.test.ts`: a learner who played the Brief 04 content (with an open review session) is opened with the real content: completion kept and flagged for review, evidence, mastery and XP unchanged, the open session served or rebuilt, L01/L02 available, L04 open for the grandfathered learner (documented), Grade 5 unaffected.
+
 * `grade1-course.test.ts`: all 60 nodes playable; the whole of Grade 1 played start to finish with the preview waiver on and off; a failed assessment is recorded, earns nothing and can be retaken; the first answer in a challenge is final; the taught-scope sweep.
 * `node-run.test.ts`: strict prerequisites, grandfathered open runs, Grades 2-5 unchanged, practice behaviour, hints as non-evidence, concept crediting, idempotent attempts.
 * `e2e/g1.mjs`: real-browser journeys (new account, first lesson with a wrong answer, a unit's practice/review/challenge, resume, delayed revision with the test clock, the Grade 1 assessment below and then above the pass mark, five viewports with axe, keyboard-only, dark mode, reduced motion, 200% text at 320px, sound off).

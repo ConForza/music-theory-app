@@ -1,5 +1,5 @@
 import type { ExerciseItem } from "@mtp/curriculum";
-import { melody, stave, type Spec } from "./lib.ts";
+import { fixedItem, melody, stave, type Spec } from "./lib.ts";
 
 const has = (s: string) => (i: ExerciseItem) => i.prompt.includes(s);
 const starts = (s: string) => (i: ExerciseItem) => i.prompt.startsWith(s);
@@ -19,6 +19,75 @@ const TUNE = melody(
   { tempoText: "Andante" },
 );
 
+
+/** Two more original melodies for fixed questions: F major in the bass clef (3/4) and D major in the treble clef (2/4). */
+const BASS_TUNE = melody(
+  "bass",
+  [
+    [["F2", "crotchet", { dynamic: "p" }], ["G2", "crotchet"], ["A2", "crotchet", { label: "x", art: "accent" }]],
+    [["Bb2", "minim"], ["A2", "crotchet"]],
+    [["F2", "minim", { dots: 1 }]],
+  ],
+  "3/4",
+  "F major",
+  "A three-bar melody in F major, 3/4, bass clef, marked Allegretto and p. Bar 1: F, G, A (marked x, with an accent). Bar 2: B flat minim, A crotchet. Bar 3: F dotted minim.",
+  { tempoText: "Allegretto" },
+);
+const D_TUNE = melody(
+  "treble",
+  [
+    [["D5", "crotchet", { dynamic: "f" }], ["C#5", "crotchet"]],
+    [["B4", "crotchet", { label: "x", art: "staccato" }], ["A4", "crotchet"]],
+    [["F#4", "crotchet"], ["F#4", "crotchet", { rest: true }]],
+  ],
+  "2/4",
+  "D major",
+  "A three-bar melody in D major, 2/4, treble clef, marked Moderato and f. Bar 1: D, C sharp. Bar 2: B (marked x, staccato), A. Bar 3: F sharp, then a crotchet rest.",
+  { tempoText: "Moderato" },
+);
+const mean = (id: string) => ({ id, label: (({ andante: "at a walking pace", allegro: "fast and lively", adagio: "slow", moderato: "at a moderate speed", accent: "emphasise the note", staccato: "short and detached", legato: "smoothly, with the notes joined", fermata: "hold the note longer than its written value" }) as Record<string, string>)[id]! });
+const miss = { "evidence-misread": "Look at the melody again and find the thing the question asks about.", "concept-misapplied": "Check what the sign or number means, then try to apply it to this melody." };
+const MELODY_ITEMS = [
+  fixedItem({
+    id: "i.g1-u7-l05.melody-1", templateId: "t.g1.melody", prompt: "Look at this melody and answer the questions.", music: TUNE,
+    answer: { kind: "composite", parts: [
+      { id: "beats", prompt: "How many crotchet beats are in each bar?", answer: { kind: "choice", options: [2, 3, 4].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: ["4"] } },
+      { id: "marked", prompt: "Name the note marked x.", answer: { kind: "pitch", reference: "B4", relation: "same", accepted: ["B4"], octaveSensitive: false, spellingSensitive: true } },
+      { id: "key", prompt: "The melody is in a major key. Which one?", answer: { kind: "key-signature", task: "name-key", clef: "treble", accepted: ["G major"] } },
+    ] },
+    hints: ["Use the time signature for the beats, the stave for the note, and the key signature for the key."], correct: "All three parts read correctly.", mistakes: miss,
+  }),
+  fixedItem({
+    id: "i.g1-u7-l05.melody-2", templateId: "t.g1.melody-detail", prompt: "Look at the word above the first bar. What does it tell the player?", music: TUNE,
+    answer: { kind: "choice", options: ["andante", "allegro", "adagio", "moderato"].map(mean), correctOptionIds: ["andante"] },
+    hints: ["Tempo words tell you how fast to play."], correct: "Andante: at a walking pace.", mistakes: { "confused-similar-term": "Close, but that word means something different. Andante is a walking pace.", "opposite-meaning": "That is the opposite speed.", "wrong-category": "That belongs to a different kind of marking." },
+  }),
+  fixedItem({
+    id: "i.g1-u7-l05.melody-3", templateId: "t.g1.melody", prompt: "Look at this bass-clef melody and answer the questions.", music: BASS_TUNE,
+    answer: { kind: "composite", parts: [
+      { id: "beats", prompt: "How many crotchet beats are in each bar?", answer: { kind: "choice", options: [2, 3, 4].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: ["3"] } },
+      { id: "marked", prompt: "Name the note marked x.", answer: { kind: "pitch", reference: "A2", relation: "same", accepted: ["A2"], octaveSensitive: false, spellingSensitive: true } },
+      { id: "key", prompt: "The melody is in a major key. Which one?", answer: { kind: "key-signature", task: "name-key", clef: "bass", accepted: ["F major"] } },
+    ] },
+    hints: ["Read the notes in the bass clef: the bottom line is G."], correct: "All three parts read correctly.", mistakes: miss,
+  }),
+  fixedItem({
+    id: "i.g1-u7-l05.melody-4", templateId: "t.g1.melody-detail", prompt: "The note marked x has a sign with it. How should it be played?", music: BASS_TUNE,
+    answer: { kind: "choice", options: ["accent", "staccato", "legato", "fermata"].map(mean), correctOptionIds: ["accent"] },
+    hints: ["A > sign over a note is an accent."], correct: "An accent: emphasise the note.", mistakes: { "confused-similar-term": "Close, but that mark means something different. The > sign is an accent.", "opposite-meaning": "That is the opposite.", "wrong-category": "That belongs to a different kind of marking." },
+  }),
+  fixedItem({
+    id: "i.g1-u7-l05.melody-5", templateId: "t.g1.melody-detail", prompt: "The melody is in F major. What is the interval, by number, from the nearest tonic at or below the note marked x, up to x?", music: BASS_TUNE,
+    answer: { kind: "choice", options: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ id: String(n), label: n === 1 ? "1st (unison)" : n === 8 ? "8th (octave)" : `${n}${n === 2 ? "nd" : n === 3 ? "rd" : "th"}` })), correctOptionIds: ["3"] },
+    hints: ["The tonic is F. Count F G A, counting the tonic as 1."], correct: "A is a 3rd above F.", mistakes: miss,
+  }),
+  fixedItem({
+    id: "i.g1-u7-l05.melody-6", templateId: "t.g1.melody-detail", prompt: "Which bar of the melody contains a rest?", music: D_TUNE,
+    answer: { kind: "choice", options: [1, 2, 3].map((n) => ({ id: String(n), label: `Bar ${n}` })), correctOptionIds: ["3"] },
+    hints: ["A rest is a sign for silence."], correct: "Bar 3 ends with a crotchet rest.", mistakes: miss,
+  }),
+];
+
 export const U7: Spec[] = [
   {
     node: "G1-U7-L01",
@@ -28,7 +97,7 @@ export const U7: Spec[] = [
       { text: "Tempo means speed. At the start of a piece, a word often tells the player how fast the music should go. Many of these words are Italian, because Italian was the language of music for centuries." },
       { music: stave("treble", [["G4", "G"]], "A treble stave with the word Allegro written above it.", { tempoText: "Allegro", timeSignature: "4/4" }), caption: "Allegro: fast and lively." },
       { text: "From slow to fast, the words you need are: adagio and lento (slow), andante (at a walking pace), moderato (at a moderate speed), allegretto (fairly quick) and allegro (fast and lively)." },
-      { tip: "Andante is the walking word: the Italian word for 'walking' is 'andare'. Imagine strolling in time with the music." },
+      { tip: "Andante is the walking word. Its root is the Italian verb 'andare', which means 'to go', so think of music that goes along at an easy, steady walk." },
     ],
     demo: {
       widget: "staff",
@@ -181,6 +250,7 @@ export const U7: Spec[] = [
       { t: "t.g1.melody", correct: "All parts of the melody question right." },
       { t: "t.g1.melody-detail", when: has("How should it be played"), correct: "You read the articulation mark." },
     ],
+    fixedIndependent: MELODY_ITEMS,
     recap: ["Check the clef, key signature, time signature and tempo word first.", "Read the marks on the notes: dynamics, staccato, accents, slurs and pauses.", "Name notes and intervals above the tonic using the key."],
     review: [{ t: "t.g1.melody-detail", afterDays: 1 }, { t: "t.g1.melody", afterDays: 3 }, { t: "t.g1.melody-detail", afterDays: 7 }],
     notes: "Original melody and questions. Follows Grade 1 outcome 21 ('simple questions about a melody written in treble or bass clef'). The melody is composed for this course and is not taken from any published source.",

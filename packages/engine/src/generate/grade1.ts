@@ -1130,7 +1130,7 @@ export const melodyDetail: Gen = (c) => {
     const number = (music.diatonicNumber ? music.diatonicNumber(x) - music.diatonicNumber(tonicBelow) : 0) + 1;
     if (number < 1 || number > 8) return null;
     return {
-      prompt: `The melody is in ${keyWord(keyText)}. What is the interval, by number, from the tonic up to the note marked x?`,
+      prompt: `The melody is in ${keyWord(keyText)}. What is the interval, by number, from the nearest tonic at or below the note marked x, up to x?`,
       music: f,
       answer: { kind: "choice", options: [1, 2, 3, 4, 5, 6, 7, 8].map((n2) => ({ id: String(n2), label: music.ordinal(n2) })), correctOptionIds: [String(number)] },
       hints: ["Count up from the tonic of the key, counting the tonic as 1."],

@@ -104,3 +104,20 @@ describe("practice runs (G1-U3-P1)", () => {
     expect((await a.c.post("/api/nodes/G1-U3-L01/start")).status).toBe(409); // a lesson is not a session
   });
 });
+
+describe("account export and deletion cover the new tables", () => {
+  it("exports node sessions, attempts and assessment results, and deletes them with the account", async () => {
+    const { db, app, c, userId } = await learner();
+    await ensureDone(c, app, userId, "G1-U1-R1");
+    const { body: done } = await playSession(c, app, userId, "G1-U1-C", { wrong: 8 });
+    expect(done.passed).toBe(false);
+    const exp = (await c.get("/api/me/export")).body;
+    expect(exp.nodeSessions.length).toBeGreaterThan(0);
+    expect(exp.nodeAttempts.length).toBeGreaterThan(0);
+    expect(exp.assessmentResults.length).toBe(1);
+    expect((await c.call("DELETE", "/api/me")).status).toBe(200);
+    for (const t of ["node_sessions", "node_attempts", "assessment_results"]) {
+      expect((db.prepare(`SELECT COUNT(*) AS n FROM ${t} WHERE user_id = ?`).get(userId) as { n: number }).n).toBe(0);
+    }
+  }, 300_000);
+});

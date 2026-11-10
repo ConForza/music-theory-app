@@ -131,7 +131,10 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
     if (st?.answered && view.firstAttemptOnly) { await page.getByRole("button", { name: /Continue|Finish/ }).click().catch(() => {}); continue; }
     const q = page.locator("section.question");
     await q.waitFor();
-    const bad = wrong > 0 ? wrongResponse(S.course.ix, it.item, it.scope) : null;
+    // Wrong answers are only injected on choice questions: an unfinished rhythm or stave answer cannot be submitted at all,
+    // and a half-built answer would otherwise be left on screen before the right one is driven.
+    const isChoice = inputFor(S.course.ix, it.item, it.scope).kind === "choice";
+    const bad = wrong > 0 && isChoice ? wrongResponse(S.course.ix, it.item, it.scope) : null;
     const sent = bad ? await answerOnScreen(page, S, it.item, it.scope, bad, true) : false;
     if (bad && sent) {
       wrong--;
