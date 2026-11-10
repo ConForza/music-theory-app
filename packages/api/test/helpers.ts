@@ -35,6 +35,7 @@ export class Client {
       this.cookie = pair!.endsWith("=") ? "" : pair!;
     }
     const text = await res.text();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const parsed = (text ? JSON.parse(text) : undefined) as any;
     return { status: res.status, body: parsed, headers: res.headers };
   }
