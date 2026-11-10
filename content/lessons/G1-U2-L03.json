@@ -819,16 +819,41 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 3/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
-        "timeSignature": "3/4",
+        "timeSignature": "4/4",
         "given": [
           {
-            "kind": "rest",
+            "kind": "note",
+            "pitch": "B4",
             "duration": {
-              "value": "crotchet",
+              "value": "quaver",
+              "dots": 1
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "semiquaver",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "quaver",
+              "dots": 1
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "semiquaver",
               "dots": 0
             }
           }
@@ -838,9 +863,18 @@
             {
               "events": [
                 {
-                  "kind": "rest",
+                  "kind": "note",
+                  "pitch": "B4",
                   "duration": {
-                    "value": "crotchet",
+                    "value": "quaver",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
                     "dots": 0
                   }
                 },
@@ -864,7 +898,7 @@
                   "kind": "note",
                   "pitch": "B4",
                   "duration": {
-                    "value": "semiquaver",
+                    "value": "crotchet",
                     "dots": 0
                   }
                 },
@@ -872,23 +906,7 @@
                   "kind": "note",
                   "pitch": "B4",
                   "duration": {
-                    "value": "semiquaver",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "semiquaver",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "semiquaver",
+                    "value": "crotchet",
                     "dots": 0
                   }
                 }
@@ -901,7 +919,7 @@
       "hints": [
         "How many beats are still missing?",
         "Group within beats so each beat is visible.",
-        "3/4 has three crotchet beats in each bar."
+        "4/4 has four crotchet beats in each bar."
       ],
       "feedback": {
         "correct": "Finished with the right total.",
@@ -1205,25 +1223,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this bar of 3/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
-        "timeSignature": "4/4",
+        "timeSignature": "3/4",
         "given": [
           {
             "kind": "note",
             "pitch": "B4",
             "duration": {
               "value": "quaver",
-              "dots": 1
-            }
-          },
-          {
-            "kind": "note",
-            "pitch": "B4",
-            "duration": {
-              "value": "semiquaver",
               "dots": 0
             }
           },
@@ -1232,14 +1242,14 @@
             "pitch": "B4",
             "duration": {
               "value": "quaver",
-              "dots": 1
+              "dots": 0
             }
           },
           {
             "kind": "note",
             "pitch": "B4",
             "duration": {
-              "value": "semiquaver",
+              "value": "crotchet",
               "dots": 0
             }
           }
@@ -1253,14 +1263,22 @@
                   "pitch": "B4",
                   "duration": {
                     "value": "quaver",
-                    "dots": 1
+                    "dots": 0
                   }
                 },
                 {
                   "kind": "note",
                   "pitch": "B4",
                   "duration": {
-                    "value": "semiquaver",
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
                     "dots": 0
                   }
                 },
@@ -1279,22 +1297,6 @@
                     "value": "semiquaver",
                     "dots": 0
                   }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "crotchet",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "crotchet",
-                    "dots": 0
-                  }
                 }
               ]
             }
@@ -1305,7 +1307,7 @@
       "hints": [
         "How many beats are still missing?",
         "Group within beats so each beat is visible.",
-        "4/4 has four crotchet beats in each bar."
+        "3/4 has three crotchet beats in each bar."
       ],
       "feedback": {
         "correct": "Another complete bar.",

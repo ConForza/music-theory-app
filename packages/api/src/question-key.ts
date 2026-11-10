@@ -54,7 +54,11 @@ export function questionKey(item: ExerciseItem): string {
  * so it cannot disturb the identities earlier briefs recorded).
  */
 export function visibleKey(item: ExerciseItem): string {
-  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: normaliseAnswer(item.answer) }, true));
+  // For "complete the bar" the stimulus is the printed time signature and the given notes; the stored accepted answer is only one
+  // worked solution, so two different sample solutions of the same bar are the same question.
+  const a = normaliseAnswer(item.answer) as Record<string, unknown>;
+  const answer = a && typeof a === "object" && (a as { kind?: string; task?: string }).kind === "rhythm" && (a as { task?: string }).task === "complete-bar" ? Object.fromEntries(Object.entries(a).filter(([k]) => k !== "accepted")) : a;
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: answer }, true));
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 

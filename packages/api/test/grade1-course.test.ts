@@ -116,7 +116,7 @@ describe("generated nodes only ask what has been taught", () => {
 
 describe("lessons teach without repeating themselves", () => {
   it("no lesson asks the same question twice, guided and independent included", async () => {
-    const { questionKey } = await import("../src/question-key.ts");
+    const { visibleKey: questionKey } = await import("../src/question-key.ts");
     const dupes: string[] = [];
     for (const n of G1.filter((x) => x.type === "lesson")) {
       const seen = new Map<string, string>();

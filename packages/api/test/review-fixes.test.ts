@@ -212,3 +212,21 @@ describe("F6 (authored melodies): the description gives the stimulus, not the an
     expect(text).not.toMatch(/Two rests, two beats of silence/);
   });
 });
+
+describe("lessons never repeat a bar-building stimulus", () => {
+  it("no two questions of a lesson show the same bar to complete, whatever sample solution was stored", async () => {
+    const { inputFor } = await import("@mtp/engine");
+    const dupes: string[] = [];
+    for (const n of G1.filter((x) => x.type === "lesson")) {
+      const seen = new Map<string, string>();
+      for (const it of course.authoredItems(n.id)) {
+        const inp = inputFor(course.ix, it, course.scopeFor(n.id, it)) as { kind: string; timeSignature?: string; given?: unknown };
+        if (inp.kind !== "rhythm-builder" || !/^Complete this bar/.test(it.prompt)) continue;
+        const stim = JSON.stringify([inp.timeSignature, inp.given]);
+        if (seen.has(stim)) dupes.push(`${n.id}: ${it.id} repeats ${seen.get(stim)}`);
+        seen.set(stim, it.id);
+      }
+    }
+    expect(dupes).toEqual([]);
+  });
+});
