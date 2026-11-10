@@ -357,6 +357,11 @@ async function acceptance(p) {
   assert.equal(mastered.state, "proficient");
   assert.ok(mastered.delayedReviews >= 1 && mastered.spanDays >= 3 && mastered.independentCorrect < 8);
   assert.match(mastered.missing.join(" "), /more correct first-try answers?/);
+  if (mastered.limited) {
+    // The learner is told, in the list and in the detail, that the question pool (not their effort) is the limit.
+    await page.getByText(/more questions coming/).first().waitFor();
+    assert.match(mastered.missing.join(" "), /still being written/);
+  }
   const trail = mastered.trail;
   assert.ok(trail.some((t) => t.source === "guided-step" && !t.counted), "guided steps are on record but not counted");
   assert.ok(trail.some((t) => t.source === "hinted-step" && !t.counted), "the hinted step is on record but not counted");

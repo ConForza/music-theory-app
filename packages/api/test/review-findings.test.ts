@@ -223,3 +223,28 @@ describe("R7: finished reviews stay readable after content updates", () => {
   });
 });
 
+
+describe("UX: say so when the question pool cannot reach the next level", () => {
+  it("is not flagged while enough unseen questions remain, and is once they cannot reach mastery", async () => {
+    const { c, app, uid } = await learner();
+    const fresh = (await c.get(`/api/mastery/${TREBLE}`)).body;
+    expect(fresh.limited).toBe(false); // 4 credited + 6 unseen line-note questions can still reach 8
+    // The learner burns most of the pool (wrong first answers expose a question for good).
+    let n = 0;
+    for (const tpl of ["t.g1.note-read", "t.g1.note-write"]) {
+      const node = course.ix.nodeById.get(LESSON)!;
+      const scope = effectiveScope(course.ix, node, node.exercises.find((b) => b.templateId === tpl)!);
+      const seen = new Set<string>();
+      for (let s = 0; s < 300 && seen.size < 4; s++) {
+        const item = generateItem(course.ix, tpl, s, { scope, evidence: "independent" }).item;
+        if (!satisfies(item, LINES) || seen.has(questionKey(item))) continue;
+        seen.add(questionKey(item));
+        app.engagement.mastery.record(uid, { id: `review:burn-${n}`, conceptIds: [TREBLE], source: "review-item", correct: false, itemId: `burn-${n++}`, questionKey: questionKey(item), templateId: tpl, templateVersion: 1 });
+      }
+    }
+    const card = (await c.get(`/api/mastery/${TREBLE}`)).body;
+    expect(card.limited).toBe(true);
+    expect(card.headline).toMatch(/don't have enough different questions/);
+    expect(card.missing.join(" ")).toMatch(/still being written/);
+  });
+});

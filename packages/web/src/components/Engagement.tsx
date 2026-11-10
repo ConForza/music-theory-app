@@ -123,6 +123,7 @@ export function ConceptRow({ c, today }: { c: ConceptCard; today: string }) {
       <p className="muted small">
         {c.independentCorrect === 0 ? "No first-try answers yet" : `${plural(c.independentCorrect, "first-try answer")}`}
         {c.nextDueDate && ` · ${c.due ? (c.reviewable ? "review ready" : "review waits for its lesson") : `next review ${friendlyDate(c.nextDueDate, today)}`}`}
+        {c.limited && " · more questions coming"}
         {c.state === "practising" && (c.highestState === "mastered" || c.highestState === "proficient") && ` · was ${c.highestState} before a slip`}
       </p>
       <details>

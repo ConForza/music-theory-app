@@ -49,7 +49,7 @@ describe("reward components", () => {
         <ul>
           <ConceptRow
             today="2026-03-02"
-            c={{ conceptId: "c.x", title: "Treble clef line notes", summary: "", grade: 1, state: "proficient", highestState: "proficient", independentCorrect: 4, distinctTemplates: 2, spanDays: 0, delayedReviews: 0, lapses: 0, nextDueDate: "2026-03-03", due: false, reviewable: true, headline: "Next: mastered.", met: ["Proficient"], missing: ["a correct answer in a scheduled review"], mistakes: [{ id: "clef-confusion", count: 1, label: "Read as another clef.", tip: "Check the clef." }] }}
+            c={{ conceptId: "c.x", title: "Treble clef line notes", summary: "", grade: 1, state: "proficient", highestState: "proficient", independentCorrect: 4, distinctTemplates: 2, spanDays: 0, delayedReviews: 0, lapses: 0, limited: true, nextDueDate: "2026-03-03", due: false, reviewable: true, headline: "Next: mastered.", met: ["Proficient"], missing: ["a correct answer in a scheduled review"], mistakes: [{ id: "clef-confusion", count: 1, label: "Read as another clef.", tip: "Check the clef." }] }}
           />
         </ul>
       </div>,
@@ -58,6 +58,7 @@ describe("reward components", () => {
     expect(screen.getByText("20 XP to your next milestone (50).")).toBeInTheDocument();
     expect(screen.getByText("Practising")).toBeInTheDocument();
     expect(screen.getByText(/next review tomorrow/)).toBeInTheDocument();
+    expect(screen.getByText(/more questions coming/)).toBeInTheDocument();
     expect(screen.getByText("a correct answer in a scheduled review")).toBeInTheDocument();
     await noSeriousViolations(container);
   });

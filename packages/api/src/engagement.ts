@@ -129,7 +129,7 @@ export class Engagement {
       goal: status.goal,
       streak: status.streak,
       newAchievements: this.achievements.awardedFor(userId, key).map((a) => ({ id: a.id, title: a.title, description: a.description })),
-      concepts: touched.map((id) => this.conceptCard(id, mastery.get(id) ?? null, lt.date, this.completed(userId))),
+      concepts: touched.map((id) => this.conceptCard(userId, id, mastery.get(id) ?? null, lt.date, this.completed(userId))),
     };
   }
 
@@ -139,9 +139,21 @@ export class Engagement {
 
   // ---- read models ----------------------------------------------------------------------------------------------------
 
-  conceptCard(conceptId: string, m: ConceptMastery | null, today: string, completed: Set<string>) {
+  conceptCard(userId: string, conceptId: string, m: ConceptMastery | null, today: string, completed: Set<string>) {
     const concept = this.course.ix.concepts.get(conceptId);
     const ex = explainMastery(m, this.mastery.rules);
+    // Can the next level still be reached with the questions that exist? Credited so far + questions not yet met.
+    let limited = false;
+    if (m && m.state !== "mastered" && m.state !== "new") {
+      const pool = this.review.poolKeys(conceptId, completed);
+      if (pool.size > 0) {
+        const unseen = [...pool].filter((k) => !this.mastery.seenKeys(userId, conceptId).has(k)).length;
+        const reached = m.highestState === "proficient" || m.highestState === "mastered";
+        const need = reached ? this.mastery.rules.mastered.minIndependentCorrect : this.mastery.rules.proficient.minIndependentCorrect;
+        limited = m.independentCorrect + unseen < need;
+      }
+    }
+    if (limited) ex.missing.push("More different questions for this topic are still being written. Reviews still keep it fresh, and your progress is kept.");
     const top = Object.entries(m?.mistakes ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 2);
     return {
       conceptId,
@@ -158,7 +170,8 @@ export class Engagement {
       nextDueDate: m?.nextDueDate ?? null,
       due: m ? isDue(m, today) : false,
       reviewable: this.review.candidates(conceptId, completed).length > 0,
-      headline: ex.headline,
+      limited,
+      headline: limited ? "This topic can't go further just yet: we don't have enough different questions for it. More are on the way." : ex.headline,
       met: ex.met,
       missing: ex.missing,
       mistakes: top.map(([id, count]) => ({ id, count, label: this.categories.get(id)?.label ?? id, tip: this.categories.get(id)?.tip ?? "" })),
@@ -190,7 +203,7 @@ export class Engagement {
     const lt = this.time(userId);
     const completed = this.completed(userId);
     const all = this.mastery.all(userId, lt.date);
-    const cards = [...all.values()].map((m) => this.conceptCard(m.conceptId, m, lt.date, completed));
+    const cards = [...all.values()].map((m) => this.conceptCard(userId, m.conceptId, m, lt.date, completed));
     const byTitle = (a: { title: string }, b: { title: string }) => a.title.localeCompare(b.title);
     // "Ready" means due AND reviewable now. A due concept whose lesson is not completed (or has no question type yet) waits quietly.
     const ready = cards.filter((c) => c.due && c.reviewable).sort(byTitle);
@@ -239,6 +252,6 @@ export class Engagement {
     if (!this.course.ix.concepts.has(conceptId)) return null;
     const lt = this.time(userId);
     const completed = this.completed(userId);
-    return { ...this.conceptCard(conceptId, this.mastery.get(userId, conceptId, lt.date), lt.date, completed), trail: this.mastery.trail(userId, conceptId) };
+    return { ...this.conceptCard(userId, conceptId, this.mastery.get(userId, conceptId, lt.date), lt.date, completed), trail: this.mastery.trail(userId, conceptId) };
   }
 }

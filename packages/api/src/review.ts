@@ -143,6 +143,29 @@ export class ReviewService {
     return fallback; // every candidate was already met: still a valid question, it simply earns no new distinct credit
   }
 
+  private poolCache = new Map<string, Set<string>>();
+  /**
+   * Every distinct question (by identity) a concept can be asked inside its teaching boundary today, found by sampling
+   * seeds. Used to tell a learner honestly when the remaining pool cannot reach the next level, instead of promising progress
+   * the content cannot yet provide. Cached per concept and template set for the life of the process.
+   */
+  poolKeys(conceptId: string, completed: Set<string>): Set<string> {
+    const cands = this.candidates(conceptId, completed);
+    const id = `${this.course.version}|${conceptId}|${cands.map((c) => c.templateId).join(",")}`;
+    const hit = this.poolCache.get(id);
+    if (hit) return hit;
+    const constraint = this.constraints.get(conceptId);
+    const keys = new Set<string>();
+    for (const c of cands) {
+      for (let seed = 0; seed < 300; seed++) {
+        const item = this.generate(c, seed);
+        if (item && (!constraint || satisfies(item, constraint))) keys.add(questionKey(item));
+      }
+    }
+    this.poolCache.set(id, keys);
+    return keys;
+  }
+
   private resolve(si: SessionItem): { item: ExerciseItem; scope: MusicScope } | null {
     const node = this.course.ix.nodeById.get(si.nodeId);
     const binding = node?.exercises.find((b) => b.templateId === si.templateId);
