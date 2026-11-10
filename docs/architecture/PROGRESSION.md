@@ -153,3 +153,15 @@ Export (`GET /api/me/export`) and deletion (`DELETE /api/me`) cover every table 
 * Review sessions are per learner and not shared; there are no teacher dashboards, leaderboards, hearts or currencies.
 * Badges for unwritten grades are present but cannot be earned until Briefs 05–10 supply the content.
 * Daily dates use the server's clock and the learner's saved timezone. If a device's timezone differs from the saved one the web app updates it on the next load.
+
+## 8. Brief 05 additions: practice, review, challenge and assessment nodes
+
+Brief 05 makes the four server-built node kinds playable (details in [GRADE_1_COURSE.md](GRADE_1_COURSE.md)). How they meet this system:
+
+* **One completion source.** They complete through `lesson_progress`, so `computeNodeStates`, XP (practice 8, review 8, unit challenge 15, grade assessment 25), the daily goal, the streak and badges behave exactly as for lessons. XP is still keyed `node:<id>:run<n>` and capped at two awards per node per day.
+* **Challenges and the Grade assessment complete only on a pass.** A run below the pass mark (70% challenge, 66% assessment; provisional, `policy.assessments`) is stored in `assessment_results`, earns no XP, completes nothing and awards no badge. The next start brings fresh questions. The grade-complete badge therefore needs a passed assessment run, never XP or lessons alone.
+* **Evidence sources (no new source value, so no schema change).** Practice and challenge/assessment answers are recorded as `independent-step` when they are a first, hint-free answer, `hinted-step` after a hint, and `not-first-attempt` otherwise. Unit review answers are recorded as `review-item`, so they can advance a concept's schedule only when it is genuinely due (`foldConcept` is unchanged). Challenge and assessment answers are final (no second try, no hints, no worked answer).
+* **Which concepts an answer counts for.** `NodeRunService.creditedConcepts` credits a question only to concepts whose lesson binding it fits and whose concept boundary (`content/policy/review-constraints.json`: clef, lines or spaces, ledger lines, rhythm features, keys, term categories, signs) it satisfies. A bass-clef note never credits a treble concept; a staccato question never credits "dynamics". Lesson attempts use the same filter.
+* **Question identity ignores option order.** `questionKey` sorts options first, so a reshuffled copy of a question is not fresh evidence.
+* **Taught scope.** A challenge or assessment draws each template inside the union of the effective scopes of that template's lesson bindings up to the node. The test "every practice, review, challenge and assessment question fits the taught scope of its node" sweeps six learners over all 22 nodes.
+* **Unlocking.** Grade 1 is fully written, so the preview waiver no longer affects any Grade 1 prerequisite (tested with the waiver on and off). A run that was already open when a prerequisite became playable stays openable. Grades 2-5 are unchanged: their first node still depends on the previous grade's last review, and the only playable node outside Grade 1 (G5-U4-L06) is unaffected.

@@ -14,7 +14,7 @@ export const U1: Spec[] = [
       { text: "Notes tell us how many beats a sound lasts. The crotchet is our unit: one crotchet lasts one beat. It has a solid black head and a stem." },
       { music: rhythm([[nt("crotchet", { label: "1" }), nt("minim", { label: "2" }), nt("semibreve", { label: "4" })]], "A crotchet, a minim and a semibreve in a row, labelled with the number of beats each lasts: 1, 2 and 4."), caption: "Crotchet: 1 beat. Minim: 2 beats. Semibreve: 4 beats." },
       { text: "A minim has a hollow head and a stem, and lasts as long as two crotchets. A semibreve is hollow with no stem and lasts as long as four crotchets: the longest note you will meet in Grade 1." },
-      { tip: "Say the counts out loud. A crotchet is 'one'. A minim holds for 'one, two'. A semibreve holds for 'one, two, three, four'." },
+      { tip: "Say the counts out loud. A crotchet is 'one'. A minim holds for 'one, two'. A semibreve holds for 'one, two, three, four'. In some countries these notes are called quarter note, half note and whole note; both sets of names mean the same." },
     ],
     demo: {
       widget: "rhythm",

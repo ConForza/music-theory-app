@@ -101,7 +101,7 @@ export async function answerOnScreen(page, S, item, scope, response, soft = fals
 }
 
 /** Answer a Brief 04 review session (spaced revision) through the UI; questions are regenerated from their stored seeds. */
-export async function playReviewInBrowser(page, S, sessionId, opts = {}) {
+export async function playReviewInBrowser(page, S, sessionId) {
   await page.goto(`/review/session/${sessionId}`);
   const row = S.db.prepare("SELECT items FROM review_sessions WHERE id = ?").get(sessionId);
   const list = JSON.parse(row.items);

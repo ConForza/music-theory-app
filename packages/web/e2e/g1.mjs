@@ -221,7 +221,6 @@ for (const [name, p] of Object.entries(profiles)) {
     await noOverflow(page, `${name} demo`);
     await axe(page, `${name} demo`);
     await page.getByRole("button", { name: "Try some questions" }).click();
-    const it = S.course.authoredItems("G1-U3-L07")[0];
     await page.locator("section.question").waitFor();
     await noOverflow(page, `${name} question`);
     await axe(page, `${name} question`);
@@ -277,7 +276,7 @@ await test("preferences: dark mode, reduced motion, 200% text at 320px, and soun
     await ctx.close();
   }
   const ctx = await ctxFor(profiles.iphone);
-  const { page, userId } = await guest(ctx);
+  const { page } = await guest(ctx);
   await page.addInitScript(() => {
     window.__ac = 0;
     const A = window.AudioContext;
