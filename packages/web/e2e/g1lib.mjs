@@ -5,7 +5,8 @@ import { mkdirSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { canonicalResponse, inputFor, wrongResponse } from "@mtp/engine";
+import { canonicalResponse, generateItem, inputFor, wrongResponse } from "@mtp/engine";
+import { effectiveScope } from "@mtp/curriculum";
 import { createApp, createHttpServer, loadCourse, ManualClock, openDb } from "@mtp/api";
 import { drive } from "./drive.mjs";
 
@@ -82,12 +83,38 @@ export async function finishViaApi(S, page, userId, nodeId, seen = new Set(), op
 }
 
 /** Answer the question on screen through the real controls, then press Check. */
-export async function answerOnScreen(page, S, item, scope, response) {
+export async function answerOnScreen(page, S, item, scope, response, soft = false) {
   const input = inputFor(S.course.ix, item, scope);
   const q = page.locator("section.question");
   await q.waitFor();
-  await drive(page, q, input, response, "tap");
-  await page.getByRole("button", { name: "Check" }).click();
+  if (input.kind === "composite") {
+    for (const [i, part] of input.parts.entries()) await drive(page, q.locator("li.composite-part").nth(i), part.input, response.parts[part.id], "tap");
+  } else await drive(page, q, input, response, "tap");
+  const check = page.getByRole("button", { name: "Check" });
+  await page.waitForFunction(() => { const b = [...document.querySelectorAll("button")].find((x) => x.textContent?.trim() === "Check"); return b && !b.disabled; }, null, { timeout: 4000 }).catch(() => undefined);
+  if (await check.isDisabled()) {
+    if (soft) return false; // e.g. an unfinished bar cannot be submitted at all, so it is not a way to answer wrongly
+    throw new Error(`Check stayed disabled after driving ${input.kind}: ${item.prompt} / ${JSON.stringify(response) + " GIVEN " + JSON.stringify(input.given ?? null)}`);
+  }
+  await check.click();
+  return true;
+}
+
+/** Answer a Brief 04 review session (spaced revision) through the UI; questions are regenerated from their stored seeds. */
+export async function playReviewInBrowser(page, S, sessionId, opts = {}) {
+  await page.goto(`/review/session/${sessionId}`);
+  const row = S.db.prepare("SELECT items FROM review_sessions WHERE id = ?").get(sessionId);
+  const list = JSON.parse(row.items);
+  for (const si of list.filter((x) => x.kind === "review")) {
+    const node = S.course.ix.nodeById.get(si.nodeId);
+    const binding = node.exercises.find((b) => b.templateId === si.templateId);
+    const scope = effectiveScope(S.course.ix, node, binding);
+    const { item } = generateItem(S.course.ix, si.templateId, si.seed, { scope, evidence: "independent" });
+    await answerOnScreen(page, S, item, scope, canonicalResponse(S.course.ix, item, scope));
+    await page.locator(".feedback .feedback-title").getByText("Correct!").waitFor();
+    await page.getByRole("button", { name: /Continue|Finish review/ }).click();
+  }
+  await page.getByRole("heading", { level: 1 }).first().waitFor();
 }
 
 /** Play a session node (practice, review, challenge, assessment) in the browser. Returns the final page text. */
@@ -105,10 +132,10 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
     const q = page.locator("section.question");
     await q.waitFor();
     const bad = wrong > 0 ? wrongResponse(S.course.ix, it.item, it.scope) : null;
-    if (bad) {
+    const sent = bad ? await answerOnScreen(page, S, it.item, it.scope, bad, true) : false;
+    if (bad && sent) {
       wrong--;
-      await answerOnScreen(page, S, it.item, it.scope, bad);
-      await page.locator(".feedback").getByText(/Not quite|Not this time/).waitFor();
+      await page.locator(".feedback .feedback-title").getByText(/Not quite|Not this time/).waitFor();
       if (opts.afterWrong) await opts.afterWrong(page, n);
       if (view.firstAttemptOnly) { await page.getByRole("button", { name: /Continue|Finish/ }).click(); continue; }
       await page.getByRole("button", { name: "Try again" }).click();
@@ -119,4 +146,61 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
     await page.getByRole("button", { name: /Continue|Finish/ }).click();
   }
   await page.locator(".lesson-step h1").first().waitFor();
+}
+
+// ---- page checks shared by the Grade 1 suites ------------------------------------------------------------------------
+export async function noOverflow(page, where) {
+  const over = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  assert.ok(over <= 1, `${where}: page scrolls sideways by ${over}px`);
+}
+export async function axe(page, where) {
+  await page.evaluate(axeSource);
+  const res = await page.evaluate(() => window.axe.run(document, { runOnly: ["wcag2a", "wcag2aa", "wcag21aa"] }));
+  const bad = res.violations.filter((v) => ["serious", "critical"].includes(v.impact));
+  assert.equal(bad.length, 0, `${where}: accessibility violations: ${bad.map((v) => `${v.id} (${v.nodes[0]?.target}) ${v.nodes[0]?.failureSummary ?? ""}`).join(", ")}`);
+}
+export async function shot(page, name) {
+  if (shots) await page.screenshot({ path: join(shots, `${name}.png`), fullPage: true });
+}
+
+/** Play an authored lesson in the browser: intro, teaching, demonstration, then every question through the real controls. */
+export async function playLessonInBrowser(page, S, nodeId, opts = {}) {
+  await page.goto(`/lesson/${nodeId}`);
+  await page.getByRole("button", { name: /Let's go|Continue/ }).click();
+  const view = await get(page, `/api/lessons/${nodeId}`);
+  const run = await get(page, `/api/progress`);
+  void run;
+  const items = S.course.authoredItems(nodeId);
+  const answered = new Set();
+  // a lesson that was left part-way resumes at the first open question; the teaching steps are skipped
+  const onTeach = await page.getByRole("heading", { name: "Here's the idea" }).isVisible().catch(() => false);
+  if (onTeach) {
+    if (opts.afterTeach) await opts.afterTeach(page);
+    await page.getByRole("button", { name: "Next" }).click();
+    await page.getByRole("heading", { name: "See it, hear it" }).waitFor();
+    if (opts.afterDemo) await opts.afterDemo(page);
+    await page.getByRole("button", { name: "Try some questions" }).click();
+  }
+  const stopAt = opts.stopAfter ?? items.length;
+  for (let k = 0; k < Math.min(stopAt, items.length); k++) {
+    const it = items[k];
+    const scope = S.course.scopeFor(nodeId, it);
+    await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+    if (opts.wrongAt === k) {
+      const bad = wrongResponse(S.course.ix, it, scope);
+      if (bad) {
+        await answerOnScreen(page, S, it, scope, bad);
+        await page.locator(".feedback .feedback-title").getByText("Not quite").waitFor();
+        if (opts.afterWrong) await opts.afterWrong(page);
+        await page.getByRole("button", { name: "Try again" }).click();
+      }
+    }
+    await answerOnScreen(page, S, it, scope, canonicalResponse(S.course.ix, it, scope));
+    await page.locator(".feedback").getByText("Correct!").waitFor();
+    if (opts.afterEach) await opts.afterEach(page, k);
+    await page.getByRole("button", { name: "Continue" }).click();
+    answered.add(it.id);
+  }
+  void view;
+  return answered;
 }
