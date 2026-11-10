@@ -64,6 +64,35 @@ describe("reward components", () => {
   });
 });
 
+describe("review hub grouping", () => {
+  it("does not call a topic nearly mastered when the question pool is what limits it", async () => {
+    const { api } = await signedIn();
+    await completeSampleLesson(api.course);
+    const uid = (await (await fetch("/api/me")).json()).user.id as string;
+    // Burn the line-note questions so the topic cannot reach mastered (see the API capacity tests).
+    const { generateItem } = await import("@mtp/engine");
+    const { effectiveScope } = await import("@mtp/curriculum");
+    const { questionKey, satisfies } = await import("@mtp/api");
+    const node = api.course.ix.nodeById.get("G1-U3-L03")!;
+    let n = 0;
+    for (const tpl of ["t.g1.note-read", "t.g1.note-write"]) {
+      const scope = effectiveScope(api.course.ix, node, node.exercises.find((b) => b.templateId === tpl)!);
+      const seen = new Set<string>();
+      for (let s = 0; s < 300; s++) {
+        const item = generateItem(api.course.ix, tpl, s, { scope, evidence: "independent" }).item;
+        if (!satisfies(item, { conceptId: "c.clefs.treble-lines", clef: "treble", staffPositions: "lines" }) || seen.has(questionKey(item))) continue;
+        seen.add(questionKey(item));
+        api.app.engagement.mastery.record(uid, { id: `review:burn-${n}`, conceptIds: ["c.clefs.treble-lines"], source: "not-first-attempt", correct: false, itemId: `burn-${n++}`, questionKey: questionKey(item), templateId: tpl, templateVersion: 1 });
+      }
+    }
+    cleanup();
+    renderApp("/review");
+    expect(await screen.findByRole("heading", { name: "Proficient so far" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Nearly mastered" })).toBeNull();
+    expect(screen.getByText(/More reviews won't unlock mastery yet/)).toBeInTheDocument();
+  });
+});
+
 describe("dashboard and review (real API, controlled clock)", () => {
   it("shows XP, the optional daily goal and no streak pressure for a new learner", async () => {
     await signedIn();

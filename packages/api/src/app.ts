@@ -19,6 +19,17 @@ export const Settings = z
   })
   .strict();
 export type Settings = z.infer<typeof Settings>;
+/**
+ * A settings change names only what it changes. It must NOT be `Settings.partial()`: that keeps each field's default, so a patch of
+ * one preference would silently carry the defaults for the others and overwrite the learner's saved choices.
+ */
+const SettingsPatch = z
+  .object({
+    theme: z.enum(["system", "light", "dark"]).optional(),
+    motion: z.enum(["system", "reduce", "full"]).optional(),
+    sound: z.boolean().optional(),
+  })
+  .strict();
 
 export interface AppOptions {
   db: Db;
@@ -55,7 +66,7 @@ const ProfilePatch = z
     selectedGrade: z.number().int().min(1).max(5).optional(),
     onboarded: z.boolean().optional(),
     displayName: DisplayName.optional(),
-    settings: Settings.partial().optional(),
+    settings: SettingsPatch.optional(),
     /** IANA timezone; the day boundaries for goals, streaks and review dates. */
     timezone: z.string().min(1).max(64).refine(isValidTimezone, "Unknown timezone.").optional(),
     /** Sessions per day; 0 turns the daily goal (and the streak display) off. */

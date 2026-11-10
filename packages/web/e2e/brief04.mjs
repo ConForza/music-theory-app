@@ -549,6 +549,29 @@ async function largeText() {
     await page.locator("main h1, main h2").first().waitFor();
     await page.waitForTimeout(300);
     await check(page, `${path} at 200% text`);
+    // The six navigation destinations stay readable: nothing clipped, nothing overlapping its neighbour, all inside the screen.
+    const tabs = await page.evaluate(() =>
+      [...document.querySelectorAll(".tab")].map((t) => {
+        const r = t.getBoundingClientRect();
+        const label = t.querySelector("span:last-child");
+        return { text: t.textContent, l: r.left, r: r.right, t: r.top, b: r.bottom, clipped: label ? label.scrollWidth > label.clientWidth + 1 : false, words: (t.textContent ?? "").trim() };
+      }),
+    );
+    assert.equal(tabs.length, 6, `${path}: six destinations`);
+    for (const t of tabs) {
+      assert.ok(t.l >= -1 && t.r <= 321, `${path}: tab "${t.text}" inside the screen`);
+      assert.ok(!t.clipped, `${path}: tab "${t.text}" label not clipped`);
+    }
+    for (let i = 0; i < tabs.length; i++)
+      for (let j = i + 1; j < tabs.length; j++) {
+        const a = tabs[i];
+        const b = tabs[j];
+        const overlap = a.l < b.r - 1 && b.l < a.r - 1 && a.t < b.b - 1 && b.t < a.b - 1;
+        assert.ok(!overlap, `${path}: tabs "${a.text}" and "${b.text}" overlap at 200% text`);
+      }
+    // Every word of every label fits its own cell (a long word is never split across cells).
+    const longest = await page.evaluate(() => Math.max(...[...document.querySelectorAll(".tab span:last-child")].map((s) => s.scrollWidth - s.clientWidth)));
+    assert.ok(longest <= 1, `${path}: a tab label overflows its cell by ${longest}px`);
   }
   await page.goto("/review");
   await page.getByRole("button", { name: "Start review" }).click();
@@ -578,6 +601,31 @@ async function settingsGoal() {
   await ctx.close();
 }
 
+async function preferencesCombine() {
+  await clock.set(START);
+  const ctx = await browser.newContext({ ...devices["iPhone 14"], baseURL: base, timezoneId: "Europe/London" });
+  const { page } = await newLearner(ctx, "prefs");
+  await page.goto("/settings");
+  await page.getByRole("heading", { name: "Look and feel" }).waitFor();
+  const settled = () => page.getByText("Saved.").waitFor();
+  await page.getByLabel("Dark", { exact: true }).check();
+  await settled();
+  await page.waitForTimeout(1300);
+  await page.getByLabel("Reduce", { exact: true }).check();
+  await page.waitForTimeout(1300);
+  await page.getByRole("switch", { name: /Play sounds/ }).uncheck();
+  await page.waitForTimeout(1300);
+  const want = { theme: "dark", motion: "reduce", sound: false };
+  assert.deepEqual((await api(page, "GET", "/api/me")).body.profile.settings, want);
+  await page.reload();
+  await page.getByRole("heading", { name: "Look and feel" }).waitFor();
+  assert.equal(await page.getByLabel("Dark", { exact: true }).isChecked(), true, "dark survives the other changes and a reload");
+  assert.equal(await page.getByLabel("Reduce", { exact: true }).isChecked(), true, "reduced motion survives");
+  assert.equal(await page.getByRole("switch", { name: /Play sounds/ }).isChecked(), false, "sound-off survives");
+  assert.deepEqual(await page.evaluate(() => ({ theme: document.documentElement.dataset.theme, motion: document.documentElement.dataset.motion })), { theme: "dark", motion: "reduce" });
+  await ctx.close();
+}
+
 const profiles = [
   { name: "iphone", ...devices["iPhone 14"] },
   { name: "small-phone-320", viewport: { width: 320, height: 640 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
@@ -604,6 +652,7 @@ await run("dark mode + reduced motion", darkAndReduced);
 await run("sound off: no audio is ever started", soundOff);
 await run("200% text at 320px", largeText);
 await run("daily goal settings and timezone", settingsGoal);
+await run("dark mode, reduced motion and sound-off combine and persist", preferencesCombine);
 
 await browser.close();
 server.kill();

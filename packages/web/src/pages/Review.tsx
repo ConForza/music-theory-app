@@ -90,7 +90,20 @@ export function ReviewHub() {
         </section>
       )}
       {groups.learning.length > 0 && <section aria-labelledby="learning-h"><h2 id="learning-h">Still learning</h2>{list(groups.learning)}</section>}
-      {groups.approaching.length > 0 && <section aria-labelledby="near-h"><h2 id="near-h">Nearly mastered</h2><p className="muted small">Proficient: varied first-try answers. Mastery also needs time and a successful review.</p>{list(groups.approaching)}</section>}
+      {groups.approaching.filter((c) => !c.limited).length > 0 && (
+        <section aria-labelledby="near-h">
+          <h2 id="near-h">Nearly mastered</h2>
+          <p className="muted small">Proficient: varied first-try answers. Mastery also needs time and a successful review.</p>
+          {list(groups.approaching.filter((c) => !c.limited))}
+        </section>
+      )}
+      {groups.approaching.filter((c) => c.limited).length > 0 && (
+        <section aria-labelledby="prof-h">
+          <h2 id="prof-h">Proficient so far</h2>
+          <p className="muted small">These topics need more different questions before they can be mastered, and we're still writing them. More reviews won't unlock mastery yet, but they keep what you know fresh.</p>
+          {list(groups.approaching.filter((c) => c.limited))}
+        </section>
+      )}
       {groups.mastered.length > 0 && <section aria-labelledby="mastered-h"><h2 id="mastered-h">Mastered</h2>{list(groups.mastered)}</section>}
 
       {data.upcoming.length > 0 && (
