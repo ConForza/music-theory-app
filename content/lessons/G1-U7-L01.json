@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U7-L01",
+  "lessonId": "G1-U7-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Know the Italian words that tell you how fast to play.",
+    "successCriteria": [
+      "I know a tempo word at the start of a piece tells the player the speed.",
+      "I know allegro is fast, andante is walking pace and adagio is slow.",
+      "I can match a tempo word to its meaning."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Tempo means speed. At the start of a piece, a word often tells the player how fast the music should go. Many of these words are Italian, because Italian was the language of music for centuries."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble stave with the word Allegro written above it.",
+        "tempoText": "Allegro",
+        "timeSignature": "4/4"
+      },
+      "caption": "Allegro: fast and lively."
+    },
+    {
+      "kind": "text",
+      "text": "From slow to fast, the words you need are: adagio and lento (slow), andante (at a walking pace), moderato (at a moderate speed), allegretto (fairly quick) and allegro (fast and lively)."
+    },
+    {
+      "kind": "tip",
+      "text": "Andante is the walking word: the Italian word for 'walking' is 'andare'. Imagine strolling in time with the music."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "Four rising crotchets, C D E F, with the word Andante above the stave.",
+      "timeSignature": "4/4",
+      "tempoText": "Andante"
+    },
+    "steps": [
+      "Press Play all. The notes are played at one steady speed.",
+      "Imagine the same notes marked Adagio: slow and calm.",
+      "And now Allegro: quick and bright. The notes are the same; only the speed changes."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Four rising notes marked Andante. The word tells the player how fast to take them."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u7-l01.guided-1",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “moderato” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          },
+          {
+            "id": "lento",
+            "label": "slow"
+          },
+          {
+            "id": "allegro",
+            "label": "fast and lively"
+          },
+          {
+            "id": "moderato",
+            "label": "at a moderate speed"
+          }
+        ],
+        "correctOptionIds": [
+          "moderato"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“moderato” is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Yes: a tempo word is about speed.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.guided-2",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which term or sign means “at a walking pace”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lento",
+            "label": "lento"
+          },
+          {
+            "id": "moderato",
+            "label": "moderato"
+          },
+          {
+            "id": "allegretto",
+            "label": "allegretto"
+          },
+          {
+            "id": "andante",
+            "label": "andante"
+          }
+        ],
+        "correctOptionIds": [
+          "andante"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "That word has that meaning.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u7-l01.ind-1",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “moderato” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          },
+          {
+            "id": "lento",
+            "label": "slow"
+          },
+          {
+            "id": "allegro",
+            "label": "fast and lively"
+          },
+          {
+            "id": "moderato",
+            "label": "at a moderate speed"
+          }
+        ],
+        "correctOptionIds": [
+          "moderato"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“moderato” is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-2",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “at a walking pace”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lento",
+            "label": "lento"
+          },
+          {
+            "id": "moderato",
+            "label": "moderato"
+          },
+          {
+            "id": "allegretto",
+            "label": "allegretto"
+          },
+          {
+            "id": "andante",
+            "label": "andante"
+          }
+        ],
+        "correctOptionIds": [
+          "andante"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Right word.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-3",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “adagio” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "decrescendo",
+            "label": "gradually getting quieter"
+          },
+          {
+            "id": "allegro",
+            "label": "fast and lively"
+          },
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "adagio",
+            "label": "slow"
+          }
+        ],
+        "correctOptionIds": [
+          "adagio"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“adagio” is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-4",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “fairly quick, but not as fast as allegro”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "allegro",
+            "label": "allegro"
+          },
+          {
+            "id": "lento",
+            "label": "lento"
+          },
+          {
+            "id": "moderato",
+            "label": "moderato"
+          },
+          {
+            "id": "allegretto",
+            "label": "allegretto"
+          }
+        ],
+        "correctOptionIds": [
+          "allegretto"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-5",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “adagio” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "accent",
+            "label": "emphasise the note"
+          },
+          {
+            "id": "allegro",
+            "label": "fast and lively"
+          },
+          {
+            "id": "adagio",
+            "label": "slow"
+          },
+          {
+            "id": "pianissimo",
+            "label": "very quiet"
+          }
+        ],
+        "correctOptionIds": [
+          "adagio"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“adagio” is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-6",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “at a walking pace”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "andante",
+            "label": "andante"
+          },
+          {
+            "id": "allegro",
+            "label": "allegro"
+          },
+          {
+            "id": "adagio",
+            "label": "adagio"
+          },
+          {
+            "id": "allegretto",
+            "label": "allegretto"
+          }
+        ],
+        "correctOptionIds": [
+          "andante"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Tempo means speed.",
+    "Adagio and lento: slow. Andante: walking pace. Moderato: moderate.",
+    "Allegretto: fairly quick. Allegro: fast and lively."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.term-sign",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.tempo-g1"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s19"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.17"
+    ],
+    "notes": "Original wording and meanings. TEACHER TO CONFIRM: the Grade 1 tempo term list (the ABRSM outline PDF names categories but not individual terms; this list is provisional, see content/syllabus and OPEN_QUESTIONS Q2)."
+  }
+}

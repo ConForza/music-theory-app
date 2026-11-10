@@ -206,7 +206,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "B3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -215,12 +215,12 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one semibreve on the 1st ledger line below the stave."
+        "textAlternative": "A treble-clef stave with one semibreve on the space below the 1st ledger line."
       },
       "answer": {
         "kind": "pitch",
         "accepted": [
-          "C4"
+          "B3"
         ],
         "octaveSensitive": false,
         "spellingSensitive": true,
@@ -229,7 +229,7 @@
       "hints": [
         "Find the clef's reference note first (G on line 2 in treble, F on line 4 in bass).",
         "Count lines and spaces from the bottom.",
-        "The note is on the 1st ledger line below the stave. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
+        "The note is on the space below the 1st ledger line. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
       ],
       "feedback": {
         "correct": "Yes: middle C, on its own ledger line.",
@@ -301,7 +301,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "D4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -310,12 +310,12 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with one semibreve on the 1st ledger line above the stave."
+        "textAlternative": "A bass-clef stave with one semibreve on the space above the 1st ledger line."
       },
       "answer": {
         "kind": "pitch",
         "accepted": [
-          "C4"
+          "D4"
         ],
         "octaveSensitive": false,
         "spellingSensitive": true,
@@ -324,7 +324,7 @@
       "hints": [
         "Find the clef's reference note first (G on line 2 in treble, F on line 4 in bass).",
         "Count lines and spaces from the bottom.",
-        "The note is on the 1st ledger line above the stave. The bottom line of the bass clef is G: count up (or down) one letter for each line and space."
+        "The note is on the space above the 1st ledger line. The bottom line of the bass clef is G: count up (or down) one letter for each line and space."
       ],
       "feedback": {
         "correct": "Middle C in the bass clef: one ledger line above the stave.",
@@ -355,7 +355,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "B3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -364,12 +364,12 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one semibreve on the 1st ledger line below the stave."
+        "textAlternative": "A treble-clef stave with one semibreve on the space below the 1st ledger line."
       },
       "answer": {
         "kind": "pitch",
         "accepted": [
-          "C4"
+          "B3"
         ],
         "octaveSensitive": false,
         "spellingSensitive": true,
@@ -378,7 +378,7 @@
       "hints": [
         "Find the clef's reference note first (G on line 2 in treble, F on line 4 in bass).",
         "Count lines and spaces from the bottom.",
-        "The note is on the 1st ledger line below the stave. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
+        "The note is on the space below the 1st ledger line. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
       ],
       "feedback": {
         "correct": "Middle C in the treble clef: one ledger line below the stave.",
@@ -434,33 +434,109 @@
     },
     {
       "id": "i.g1-u3-l06.ind-4",
-      "templateId": "t.g1.keyboard",
+      "templateId": "t.g1.middle-c-find",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Find C on the keyboard. Any C is correct.",
-      "answer": {
-        "kind": "pitch",
-        "reference": "C4",
-        "relation": "same",
-        "accepted": [
-          "C4"
+      "prompt": "Which of these notes is middle C?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
         ],
-        "octaveSensitive": false,
-        "spellingSensitive": true
+        "textAlternative": "Four bass-clef notes in a row: A, C, B, G.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Note 1"
+          },
+          {
+            "id": "2",
+            "label": "Note 2"
+          },
+          {
+            "id": "3",
+            "label": "Note 3"
+          },
+          {
+            "id": "4",
+            "label": "Note 4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "ledger-miscount",
+            "reason": "Middle C is the note on the short ledger line, just above the stave."
+          },
+          "3": {
+            "category": "ledger-miscount",
+            "reason": "Middle C is the note on the short ledger line, just above the stave."
+          },
+          "4": {
+            "category": "ledger-miscount",
+            "reason": "Middle C is the note on the short ledger line, just above the stave."
+          }
+        }
       },
       "hints": [
-        "Use the group of two black keys to find C, D and E.",
-        "Look for the groups of two and three black keys. C is just to the left of a group of two black keys."
+        "Middle C sits on its own short ledger line.",
+        "Middle C sits on its own short ledger line, above the bass stave."
       ],
       "feedback": {
-        "correct": "That is a C on the keyboard; middle C is the one nearest the middle.",
+        "correct": "Found middle C among the others.",
         "mistakes": {
-          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
-          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
-          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
         },
-        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+        "fallback": "Not quite. Start from the clef and count from a note you know."
       }
     },
     {
@@ -469,26 +545,27 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write C in the bass clef. You may use up to 1 ledger line. Any C that fits is correct.",
+      "prompt": "Write B in the treble clef. You may use up to 1 ledger line. Any B that fits is correct.",
       "answer": {
         "kind": "staff-position",
-        "clef": "bass",
+        "clef": "treble",
         "target": {
-          "step": "C",
+          "step": "B",
           "alter": 0,
           "position": "any",
           "maxLedgerLines": 1
         },
         "accepted": [
-          "C3",
-          "C4"
+          "B3",
+          "B4",
+          "B5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Start from the clef's reference line.",
         "Middle C needs one ledger line.",
-        "In the bass clef the bottom line is G. Count up one letter for each line and space until you reach C."
+        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach B."
       ],
       "feedback": {
         "correct": "Middle C written on its ledger line.",

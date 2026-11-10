@@ -1981,6 +1981,118 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g1.term-sign",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.19",
+        "abrsm2020.g1.20"
+      ],
+      "conceptIds": [
+        "c.terms.tempo-g1",
+        "c.terms.dynamics-g1",
+        "c.terms.directions-g1",
+        "c.terms.articulation-g1"
+      ],
+      "promptPattern": "Which term means …? What does this mark mean?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+      },
+      "ambiguityChecks": [
+        "Term list must come from the approved Grade 1 vocabulary (pending — OPEN_QUESTIONS Q2)."
+      ],
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.melody-detail",
+      "version": 1,
+      "familyId": "fam.score-observation",
+      "grade": 1,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g1.21",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.13",
+        "abrsm2020.g1.16",
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.20"
+      ],
+      "conceptIds": [
+        "c.context.melody-g1",
+        "c.terms.tempo-g1",
+        "c.terms.dynamics-g1",
+        "c.terms.articulation-g1"
+      ],
+      "promptPattern": "One question about a short melody.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "maxLedgerLines": 1,
+        "intervalQuality": "number-only",
+        "intervalLowerNote": "tonic"
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Each sub-question has its own acceptance rule."
+      },
+      "ambiguityChecks": [
+        "Melodies are original and use only Grade 1 vocabulary.",
+        "Every sub-question refers to a specific bar or note."
+      ],
+      "hints": [
+        "Look at the clef, key signature, time signature and the marks on the notes."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

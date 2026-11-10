@@ -168,7 +168,7 @@ export const U3: Spec[] = [
       { t: "t.g1.note-read", when: (i) => i.music?.clef === "bass", correct: "Middle C in the bass clef: one ledger line above the stave." },
       { t: "t.g1.note-read", when: (i) => i.music?.clef === "treble", correct: "Middle C in the treble clef: one ledger line below the stave." },
       { t: "t.g1.note-place", when: (i) => i.prompt.includes("treble"), correct: "Middle C below the treble stave, on its ledger line." },
-      { t: "t.g1.keyboard", correct: "That is a C on the keyboard; middle C is the one nearest the middle." },
+      { t: "t.g1.middle-c-find", correct: "Found middle C among the others." },
       { t: "t.g1.note-write", correct: "Middle C written on its ledger line." },
       { t: "t.g1.note-place", when: (i) => i.prompt.includes("bass"), correct: "Middle C above the bass stave, on its ledger line." },
     ],

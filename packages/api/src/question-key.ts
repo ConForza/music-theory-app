@@ -56,6 +56,8 @@ export interface ReviewConstraint {
   staffPositions?: "lines" | "spaces";
   includesPitch?: string[];
   ledgerLines?: number;
+  /** At least one written pitch needs this many ledger lines or more (the concept is about reading beyond the stave). */
+  minLedgerLines?: number;
 }
 
 const PITCH = /^[A-G](bb|b|#|x)?-?\d$/;
@@ -132,7 +134,7 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
     const term = music.TERMS.find((x) => x.id === t);
     if (!term || !c.termCategories.includes(term.category)) return false;
   }
-  const needsPitch = Boolean(c.clef || c.staffPositions || c.includesPitch || c.ledgerLines !== undefined);
+  const needsPitch = Boolean(c.clef || c.staffPositions || c.includesPitch || c.ledgerLines !== undefined || c.minLedgerLines !== undefined);
   if (!needsPitch) return true;
   const pitches: string[] = [];
   collectPitches(item.music ?? null, pitches);
@@ -148,6 +150,11 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
       return c.staffPositions === "lines" ? pos % 2 === 0 : pos % 2 !== 0;
     });
     if (!ok) return false;
+  }
+  if (c.minLedgerLines !== undefined) {
+    const clef = (c.clef ?? clefOf(item)) as ReviewConstraint["clef"];
+    if (!clef) return false;
+    if (!pitches.some((p) => music.ledgerLines(clef, music.parsePitch(p)) >= c.minLedgerLines!)) return false;
   }
   if (c.ledgerLines !== undefined) {
     const clef = (c.clef ?? clefOf(item)) as ReviewConstraint["clef"];

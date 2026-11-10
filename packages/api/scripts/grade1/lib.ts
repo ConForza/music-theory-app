@@ -144,3 +144,26 @@ export const rhythm = (bars: R[][], text?: string, ts?: string): Frag => {
 /** Shorthand: n("crotchet") etc. */
 export const nt = (value: string, o: NonNullable<R[1]> = {}): R => [value, o];
 export const rs = (value: string, o: NonNullable<R[1]> = {}): R => [value, { ...o, rest: true }];
+
+/** A hand-written melody: [pitch, value, options] per note; `rest: true` makes a rest (pitch ignored). */
+export type M = [pitch: string, value: string, o?: { rest?: boolean; dots?: number; dynamic?: string; art?: string; slur?: "start" | "stop"; label?: string; tie?: boolean; beam?: "begin" | "continue" | "end" }];
+export const melody = (clef: "treble" | "bass", barList: M[][], ts: string, key: string | undefined, text: string, extra: Partial<Frag> = {}): Frag =>
+  frag(
+    clef,
+    barList.map((b, bi) => ({
+      events: b.map(([pitch, value, o = {}]) => {
+        if (o.rest) return plainRest(value as never, o.dots ?? 0, {});
+        const e: Record<string, unknown> = {};
+        if (o.dynamic) e.dynamic = o.dynamic;
+        if (o.art) e.articulations = [o.art];
+        if (o.slur) e.slur = o.slur;
+        if (o.label) e.label = o.label;
+        if (o.tie) e.tieToNext = true;
+        if (o.beam) e.beam = o.beam;
+        return note(pitch, value as never, e);
+      }),
+      ...(bi === barList.length - 1 ? { barline: "final" as const } : {}),
+    })),
+    text,
+    { timeSignature: ts, ...(key ? { key, showKeySignature: true } : { showKeySignature: false }), ...extra },
+  );

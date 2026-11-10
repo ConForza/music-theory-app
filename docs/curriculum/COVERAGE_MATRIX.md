@@ -29,11 +29,11 @@ Outcome IDs are atomic decompositions of the numbered items in the official outl
 | `g1.14` | 4 | Write and recognise the tonic triads (root position) of C, G, D and F major. | `G1-U6-L01` | `t.g1.tonic-triad`, `t.g1.triad-notes` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u6`, `a.g1` | G1 §16 | planned |
 | `g1.15` | 4 | Identify scale degrees by number in C, G, D and F major. | `G1-U5-L07` | `t.g1.degree`, `t.g1.degree-note` | `G1-U6-R1`, `G1-U7-R1`, `G2-U1-R1` | `a.g1-u5`, `a.g1` | G1 §15 | planned |
 | `g1.16` | 4 | Identify and write intervals above the tonic, by number only, in C, G, D and F major. | `G1-U6-L02`, `G1-U6-L03` | `t.g1.interval-number`, `t.g1.interval-note` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u6`, `a.g1`, `a.g2` | G1 §17 | planned |
-| `g1.17` | 5 | Understand frequently used terms and signs for tempo. | `G1-U7-L01` | `t.g1.terms`, `t.g1.melody` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
-| `g1.18` | 5 | Understand frequently used terms and signs for dynamics. | `G1-U7-L02` | `t.g1.terms`, `t.g1.melody` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
-| `g1.19` | 5 | Understand frequently used performance directions. | `G1-U7-L03` | `t.g1.terms` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
-| `g1.20` | 5 | Understand frequently used articulation marks. | `G1-U7-L04` | `t.g1.terms`, `t.g1.melody` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
-| `g1.21` | 5 | Answer simple questions about a melody written in treble or bass clef. | `G1-U7-L05`, `G2-U5-L04`, `G3-U5-L04`, `G4-U5-L05`, `G5-U5-L07` | `t.g1.melody`, `t.g2.melody`, `t.g3.melody`, `t.g4.passage`, `t.g5.score` | `G1-U7-R1`, `G2-U1-R1`, `G2-U5-R1`, `G3-U5-R1`, `G4-U5-R1`, `G5-U5-R1` | `a.g1-u7`, `a.g1`, `a.g2-u5`, `a.g2`, `a.g3-u5`, `a.g3`, `a.g4-u5`, `a.g4`, `a.g5-u5` | **gap — original content** | planned |
+| `g1.17` | 5 | Understand frequently used terms and signs for tempo. | `G1-U7-L01` | `t.g1.terms`, `t.g1.melody`, `t.g1.term-sign`, `t.g1.melody-detail` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
+| `g1.18` | 5 | Understand frequently used terms and signs for dynamics. | `G1-U7-L02` | `t.g1.terms`, `t.g1.melody`, `t.g1.term-sign`, `t.g1.melody-detail` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
+| `g1.19` | 5 | Understand frequently used performance directions. | `G1-U7-L03` | `t.g1.terms`, `t.g1.term-sign` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
+| `g1.20` | 5 | Understand frequently used articulation marks. | `G1-U7-L04` | `t.g1.terms`, `t.g1.melody`, `t.g1.term-sign`, `t.g1.melody-detail` | `G1-U7-R1`, `G2-U1-R1` | `a.g1-u7`, `a.g1` | G1 §19 | planned |
+| `g1.21` | 5 | Answer simple questions about a melody written in treble or bass clef. | `G1-U7-L05`, `G2-U5-L04`, `G3-U5-L04`, `G4-U5-L05`, `G5-U5-L07` | `t.g1.melody`, `t.g1.melody-detail`, `t.g2.melody`, `t.g3.melody`, `t.g4.passage`, `t.g5.score` | `G1-U7-R1`, `G2-U1-R1`, `G2-U5-R1`, `G3-U5-R1`, `G4-U5-R1`, `G5-U5-R1` | `a.g1-u7`, `a.g1`, `a.g2-u5`, `a.g2`, `a.g3-u5`, `a.g3`, `a.g4-u5`, `a.g4`, `a.g5-u5` | **gap — original content** | planned |
 
 ## Grade 2
 

@@ -1614,7 +1614,8 @@
         {
           "templateId": "t.g1.keyboard",
           "conceptIds": [
-            "c.pitch.keyboard"
+            "c.pitch.keyboard",
+            "c.pitch.letter-names"
           ],
           "scope": {}
         },
@@ -2018,6 +2019,7 @@
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
+            "c.pitch.letter-names",
             "c.pitch.middle-c"
           ],
           "scope": {}
@@ -2371,6 +2373,7 @@
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
+            "c.pitch.letter-names",
             "c.pitch.middle-c"
           ],
           "scope": {}
@@ -3050,6 +3053,7 @@
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
+            "c.pitch.letter-names",
             "c.pitch.middle-c",
             "c.accidentals.signs"
           ],
@@ -4120,6 +4124,7 @@
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
+            "c.pitch.letter-names",
             "c.pitch.middle-c",
             "c.accidentals.signs"
           ],
@@ -5049,6 +5054,7 @@
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
+            "c.pitch.letter-names",
             "c.pitch.middle-c",
             "c.accidentals.signs"
           ],
@@ -5506,15 +5512,23 @@
             "c.terms.tempo-g1"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
+            "c.terms.tempo-g1"
+          ],
+          "scope": {}
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L01.json"
     },
     {
       "id": "G1-U7-L02",
@@ -5533,7 +5547,13 @@
         {
           "templateId": "t.g1.terms",
           "conceptIds": [
-            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
             "c.terms.dynamics-g1"
           ],
           "scope": {}
@@ -5542,10 +5562,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L02.json"
     },
     {
       "id": "G1-U7-L03",
@@ -5564,8 +5585,13 @@
         {
           "templateId": "t.g1.terms",
           "conceptIds": [
-            "c.terms.tempo-g1",
-            "c.terms.dynamics-g1",
+            "c.terms.directions-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
             "c.terms.directions-g1"
           ],
           "scope": {}
@@ -5574,10 +5600,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L03.json"
     },
     {
       "id": "G1-U7-L04",
@@ -5596,9 +5623,13 @@
         {
           "templateId": "t.g1.terms",
           "conceptIds": [
-            "c.terms.tempo-g1",
-            "c.terms.dynamics-g1",
-            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
             "c.terms.articulation-g1"
           ],
           "scope": {}
@@ -5607,10 +5638,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L04.json"
     },
     {
       "id": "G1-U7-L05",
@@ -5651,13 +5683,43 @@
             "intervalQuality": "number-only",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g1.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g1",
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
-      "bookSectionIds": []
+      "contentStatus": "draft",
+      "bookSectionIds": [],
+      "contentRef": "lessons/G1-U7-L05.json"
     },
     {
       "id": "G1-U7-P1",
@@ -5675,6 +5737,16 @@
       "exercises": [
         {
           "templateId": "t.g1.terms",
+          "conceptIds": [
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
           "conceptIds": [
             "c.terms.tempo-g1",
             "c.terms.dynamics-g1",
@@ -5708,12 +5780,41 @@
             "intervalQuality": "number-only",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g1.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g1",
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U7-R1",
@@ -5748,9 +5849,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -5796,27 +5951,6 @@
           }
         },
         {
-          "templateId": "t.g1.time-signature",
-          "conceptIds": [
-            "c.metre.simple-crotchet"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "2/4",
-              "3/4",
-              "4/4"
-            ],
-            "noteValues": [
-              "semibreve",
-              "minim",
-              "crotchet",
-              "quaver",
-              "semiquaver"
-            ],
-            "maxDots": 1
-          }
-        },
-        {
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
@@ -5838,10 +5972,58 @@
           }
         },
         {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -5862,7 +6044,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -5880,6 +6082,37 @@
               "semiquaver"
             ],
             "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.pitch.keyboard",
+            "c.pitch.letter-names",
+            "c.pitch.middle-c",
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
           }
         },
         {
@@ -5917,13 +6150,67 @@
           }
         },
         {
-          "templateId": "t.g1.keyboard",
+          "templateId": "t.g1.note-place",
           "conceptIds": [
-            "c.pitch.keyboard",
-            "c.accidentals.signs",
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
+            "c.pitch.middle-c",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-find",
+          "conceptIds": [
             "c.pitch.middle-c"
           ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-facts",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-write",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         },
         {
           "templateId": "t.g1.accidental-state",
@@ -5933,11 +6220,27 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major"
+              "C major"
             ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
             "timeSignatures": [
               "2/4",
               "3/4",
@@ -5958,7 +6261,42 @@
           "scope": {}
         },
         {
+          "templateId": "t.g1.step-size",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
           "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
           "conceptIds": [
             "c.scales.major-pattern",
             "c.scales.major-sharp-g1",
@@ -5999,6 +6337,43 @@
           }
         },
         {
+          "templateId": "t.g1.key-facts",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.key-write",
+          "conceptIds": [
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
           "templateId": "t.g1.degree",
           "conceptIds": [
             "c.scales.degree-numbers"
@@ -6018,7 +6393,51 @@
           }
         },
         {
+          "templateId": "t.g1.degree-note",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
           "templateId": "t.g1.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.triad-notes",
           "conceptIds": [
             "c.chords.tonic-triad"
           ],
@@ -6066,7 +6485,40 @@
           }
         },
         {
+          "templateId": "t.g1.interval-note",
+          "conceptIds": [
+            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
+        },
+        {
           "templateId": "t.g1.terms",
+          "conceptIds": [
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
           "conceptIds": [
             "c.terms.tempo-g1",
             "c.terms.dynamics-g1",
@@ -6100,12 +6552,41 @@
             "intervalQuality": "number-only",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g1.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g1",
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U7-C",
@@ -6117,7 +6598,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -6130,7 +6611,7 @@
       "optional": false,
       "estimatedMinutes": 25,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     }
   ]

@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U7-L03",
+  "lessonId": "G1-U7-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand common directions and signs: pauses, ties, slurs, speed changes and repeats.",
+    "successCriteria": [
+      "I know rall., rit. and accel. change the speed gradually.",
+      "I know a pause sign means hold the note longer.",
+      "I know da capo means go back to the beginning and fine means the end."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Besides loudness and speed, composers give other directions. Some change the speed during a piece: rallentando (rall.) or ritardando (rit.) means gradually slower; accelerando (accel.) means gradually faster; a tempo means go back to the original speed."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "articulations": [
+                  "fermata"
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 4/4 with G, A and a minim B with a pause sign above it.",
+        "timeSignature": "4/4"
+      },
+      "caption": "A pause sign (fermata) over a note: hold it longer than its written length."
+    },
+    {
+      "kind": "text",
+      "text": "A tie joins two notes of the same pitch into one longer sound. A slur is a curved line over different notes and means play them smoothly, joined together."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "slur": "start"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "slur": "stop"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 4/4 with a slur over the first two notes, G and A.",
+        "timeSignature": "4/4"
+      },
+      "caption": "A slur over two different notes: play them smoothly."
+    },
+    {
+      "kind": "text",
+      "text": "Da capo (D.C.) means go back to the beginning. Fine means the end. Two small expression words you may meet are dolce (sweetly) and cantabile (in a singing style)."
+    },
+    {
+      "kind": "tip",
+      "text": "A tie joins the SAME note; a slur joins DIFFERENT notes. That is how to tell them apart."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "slur": "start"
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "slur": "stop"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "articulations": [
+                "fermata"
+              ]
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 4/4: G and A under a slur, then a minim B with a pause sign.",
+      "timeSignature": "4/4"
+    },
+    "steps": [
+      "Look at the curved line over G and A: a slur. They are played smoothly.",
+      "Look at the sign over the B: a pause. Hold it longer than its minim length.",
+      "A tie would join two notes of the same pitch; here the notes differ, so it is a slur."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar showing a slur over two notes and a pause sign over the last note."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u7-l03.guided-1",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “dolce” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "accelerando",
+            "label": "gradually getting faster"
+          },
+          {
+            "id": "rallentando",
+            "label": "gradually getting slower"
+          },
+          {
+            "id": "staccato",
+            "label": "short and detached"
+          },
+          {
+            "id": "dolce",
+            "label": "sweetly"
+          }
+        ],
+        "correctOptionIds": [
+          "dolce"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“dolce” is a expression marking."
+      ],
+      "feedback": {
+        "correct": "Right meaning.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l03.guided-2",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A curved line joins two different notes. What does it tell the player?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "slur": "start"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "slur": "stop"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with two crotchets joined by a curved line.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "repeat",
+            "label": "play the passage between the marks again"
+          },
+          {
+            "id": "tie",
+            "label": "join two notes of the same pitch into one longer sound"
+          },
+          {
+            "id": "slur",
+            "label": "play the notes under the curve smoothly"
+          },
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          }
+        ],
+        "correctOptionIds": [
+          "slur"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "Staccato is a dot; an accent is a > sign; a pause is a dot under an arc; a curved line over different notes means play smoothly."
+      ],
+      "feedback": {
+        "correct": "That is what a slur means.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u7-l03.ind-1",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “dolce” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "accelerando",
+            "label": "gradually getting faster"
+          },
+          {
+            "id": "rallentando",
+            "label": "gradually getting slower"
+          },
+          {
+            "id": "staccato",
+            "label": "short and detached"
+          },
+          {
+            "id": "dolce",
+            "label": "sweetly"
+          }
+        ],
+        "correctOptionIds": [
+          "dolce"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“dolce” is a expression marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l03.ind-2",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “play the notes under the curve smoothly”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "slur",
+            "label": "slur"
+          },
+          {
+            "id": "tie",
+            "label": "tie"
+          },
+          {
+            "id": "repeat",
+            "label": "repeat marks"
+          },
+          {
+            "id": "fermata",
+            "label": "pause (fermata)"
+          }
+        ],
+        "correctOptionIds": [
+          "slur"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a sign marking."
+      ],
+      "feedback": {
+        "correct": "Right word.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l03.ind-3",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “rallentando (rall.)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pianissimo",
+            "label": "very quiet"
+          },
+          {
+            "id": "accelerando",
+            "label": "gradually getting faster"
+          },
+          {
+            "id": "andante",
+            "label": "at a walking pace"
+          },
+          {
+            "id": "rallentando",
+            "label": "gradually getting slower"
+          }
+        ],
+        "correctOptionIds": [
+          "rallentando"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“rallentando (rall.)” is a change of speed marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l03.ind-4",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “sweetly”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dolce",
+            "label": "dolce"
+          },
+          {
+            "id": "diminuendo",
+            "label": "diminuendo (dim.)"
+          },
+          {
+            "id": "cantabile",
+            "label": "cantabile"
+          },
+          {
+            "id": "rallentando",
+            "label": "rallentando (rall.)"
+          }
+        ],
+        "correctOptionIds": [
+          "dolce"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a expression marking."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l03.ind-5",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “pause (fermata)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          },
+          {
+            "id": "moderato",
+            "label": "at a moderate speed"
+          }
+        ],
+        "correctOptionIds": [
+          "fermata"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“pause (fermata)” is a sign marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l03.ind-6",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “hold the note longer than its written value”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fermata",
+            "label": "pause (fermata)"
+          },
+          {
+            "id": "slur",
+            "label": "slur"
+          },
+          {
+            "id": "tie",
+            "label": "tie"
+          },
+          {
+            "id": "repeat",
+            "label": "repeat marks"
+          }
+        ],
+        "correctOptionIds": [
+          "fermata"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a sign marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "rall./rit. = gradually slower; accel. = gradually faster; a tempo = back to the speed.",
+    "A pause sign: hold the note longer. D.C.: back to the start. Fine: the end.",
+    "A tie joins the same note; a slur joins different notes smoothly."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.term-sign",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.directions-g1"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s19"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.19"
+    ],
+    "notes": "Original wording. TEACHER TO CONFIRM: the Grade 1 'performance directions' list. Repeat marks are taught in words only because the renderer does not yet draw repeat signs."
+  }
+}

@@ -507,11 +507,9 @@ export const barFix: Gen = (c) => {
   if (!modes.length) return null;
   const mode = c.rng.pick(modes);
   const good = randomBar(c, ts, {});
-  if (!good || codes(good.map(stripBeam), ts).length === 0 === false) {
-    if (!good) return null;
-  }
+  if (!good) return null;
   const plain = good.map(stripBeam);
-  let bad: NotationEvent[] | null = null;
+  let bad: NotationEvent[];
   if (mode === "tie") {
     const idxs = plain.map((e, i) => (e.kind === "note" && !(e.duration.dots ?? 0) && VALUE_ORDER.indexOf(e.duration.value as Value) < 4 ? i : -1)).filter((i) => i >= 0);
     if (!idxs.length) return null;
@@ -713,7 +711,6 @@ export const accidentalCount: Gen = (c) => {
 
 const noteLabel = (p: { step: string; alter: number }) => pretty(`${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`);
 const noteId = (p: { step: string; alter: number }) => `${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`;
-const g1Keys = (c: Parameters<Gen>[0]) => keysIn(c);
 const keysIn = (c: Parameters<Gen>[0]) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
 const keyWord = (k: string) => pretty(k);
 
@@ -950,6 +947,206 @@ export const intervalNote: Gen = (c) => {
   };
 };
 
+
+// ---------------------------------------------------------------------------
+// Unit 7: read the music
+// ---------------------------------------------------------------------------
+
+type TermT = (typeof music.TERMS)[number];
+const G1_TERMS = () => music.termsUpTo(1);
+const meaningCount = (t: TermT) => G1_TERMS().filter((x) => x.meaning === t.meaning).length;
+const DYN_MARK: Record<string, string> = { piano: "p", forte: "f", "mezzo-piano": "mp", "mezzo-forte": "mf", pianissimo: "pp", fortissimo: "ff" };
+
+/** Distractor terms for a target: prefer the same category and a related or opposite meaning, never the same meaning. */
+function termDistractors(c: Parameters<Gen>[0], target: TermT, count = 3): TermT[] {
+  const pool = G1_TERMS().filter((t) => t.meaning !== target.meaning);
+  const near = pool.filter((t) => t.category === target.category || target.opposite?.includes(t.id) || target.similar?.includes(t.id));
+  const picks: TermT[] = [];
+  for (const t of [...c.rng.shuffle(near), ...c.rng.shuffle(pool.filter((x) => !near.includes(x)))]) {
+    if (picks.length === count) break;
+    if (!picks.some((p) => p.meaning === t.meaning)) picks.push(t);
+  }
+  return picks;
+}
+
+/** t.g1.term-sign: terms asked the other way round, and signs met in notation. */
+export const termSign: Gen = (c) => {
+  const mode = c.rng.pick(["reverse", "reverse", "dynamic-mark", "articulation-mark"] as const);
+  if (mode === "reverse") {
+    const target = c.rng.pick(G1_TERMS().filter((t) => meaningCount(t) === 1));
+    const picks = termDistractors(c, target);
+    if (picks.length < 3) return null;
+    return {
+      prompt: `Which term or sign means “${target.meaning}”?`,
+      answer: { kind: "choice", options: c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: t.term })), correctOptionIds: [target.id] },
+      hints: [`It is a ${target.category.replace(/-/g, " ")} marking.`],
+    };
+  }
+  if (mode === "dynamic-mark") {
+    const id = c.rng.pick(Object.keys(DYN_MARK));
+    const target = G1_TERMS().find((t) => t.id === id)!;
+    const picks = termDistractors(c, target);
+    if (picks.length < 3) return null;
+    const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+    const p = naturalAt(clef, c.rng.int(2, 6));
+    return {
+      prompt: "This note has a dynamic mark below it. What does the mark tell the player?",
+      music: frag(clef, [{ events: [note(p, "semibreve", { dynamic: DYN_MARK[id]! })] }], `A ${clef}-clef stave with one semibreve marked ${DYN_MARK[id]} (${target.term}).`),
+      answer: { kind: "choice", options: c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: t.meaning })), correctOptionIds: [target.id] },
+      hints: ["p means quiet and f means loud. An m in front means moderately; doubling the letter makes it very."],
+    };
+  }
+  const which = c.rng.pick(["staccato", "accent", "fermata", "slur"] as const);
+  const target = G1_TERMS().find((t) => t.id === which)!;
+  const picks = termDistractors(c, target).filter((t) => !(which === "slur" && t.id === "legato"));
+  if (picks.length < 3) return null;
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const base = c.rng.int(2, 5);
+  const p1 = naturalAt(clef, base);
+  const p2 = naturalAt(clef, base + 1);
+  const events =
+    which === "slur"
+      ? [note(p1, "crotchet", { slur: "start" }), note(p2, "crotchet", { slur: "stop" })]
+      : [note(p1, "crotchet", { articulations: [which === "fermata" ? "fermata" : which] })];
+  return {
+    prompt: which === "slur" ? "A curved line joins two different notes. What does it tell the player?" : "This note has a mark above or below it. What does the mark tell the player?",
+    music: frag(clef, [{ events: which === "slur" ? [...events, r("minim")] : [...events, r("crotchet"), r("minim")] }], `A ${clef}-clef stave with ${which === "slur" ? "two crotchets joined by a curved line" : `a crotchet with a ${which === "staccato" ? "dot (staccato)" : which === "accent" ? "> sign (accent)" : "pause sign (fermata)"}`}.`, { timeSignature: "4/4" }),
+    answer: { kind: "choice", options: c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: t.meaning })), correctOptionIds: [target.id] },
+    hints: ["Staccato is a dot; an accent is a > sign; a pause is a dot under an arc; a curved line over different notes means play smoothly."],
+  };
+};
+
+/** t.g1.melody-detail: one question about a short melody (key, beats, notes, rests, tempo, dynamics, articulation, intervals). */
+export const melodyDetail: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c));
+  const key = music.parseKey(keyText);
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const ts = c.rng.pick((c.scope.timeSignatures?.length ? c.scope.timeSignatures : ["4/4"]).filter((t) => music.parseTimeSignature(t).bottom === 4));
+  const max = maxLedger(c);
+  const sc = music.scale(key, "major");
+  const o = clef === "treble" ? 4 : 3;
+  const bars: NotationEvent[][] = [];
+  for (let b = 0; b < 3; b++) {
+    const bar = randomBar(c, ts, {});
+    if (!bar) return null;
+    bars.push(bar.map((e) => ({ ...e })));
+  }
+  // give every note a pitch: a gentle walk up and down the scale, ending on the tonic
+  const slots: Array<{ bar: number; idx: number }> = [];
+  bars.forEach((bar, bi) => bar.forEach((e, ei) => e.kind === "note" && slots.push({ bar: bi, idx: ei })));
+  if (slots.length < 4) return null;
+  let d = c.rng.pick([0, 2, 4]);
+  const pitches: Pitch[] = [];
+  slots.forEach((_, k) => {
+    if (k === slots.length - 1) d = 0; // finish on the tonic
+    const deg = ((d % 7) + 7) % 7;
+    pitches.push({ ...sc[deg]!, octave: o + Math.floor((music.stepIndex(key.tonic.step) + d) / 7) });
+    d += c.rng.pick([-2, -1, -1, 1, 1, 2]);
+    d = Math.max(0, Math.min(8, d));
+  });
+  if (!fits(clef, pitches, max) || pitches.some((p) => staffPosition(clef, p) < -2 * max - 1 || staffPosition(clef, p) > 9 + 2 * max)) return null;
+  slots.forEach((s, k) => {
+    const e = bars[s.bar]![s.idx]! as Extract<NotationEvent, { kind: "note" }>;
+    (e as { pitch: string }).pitch = music.formatPitch(pitches[k]!);
+  });
+  // decorations: a dynamic at the start, an articulation on a marked note
+  const dyn = c.rng.pick(["p", "mp", "mf", "f"]);
+  const dynTerm = Object.entries(DYN_MARK).find(([, v]) => v === dyn)![0];
+  const firstNote = bars[0]!.findIndex((e) => e.kind === "note");
+  if (firstNote < 0) return null;
+  (bars[0]![firstNote]! as { dynamic?: string }).dynamic = dyn;
+  const markK = c.rng.int(1, slots.length - 1);
+  const mark = slots[markK]!;
+  const art = c.rng.pick(["staccato", "accent"] as const);
+  const markEv = bars[mark.bar]![mark.idx]! as { label?: string; articulations?: string[] };
+  markEv.label = "x";
+  markEv.articulations = [art];
+  const tempoTerm = c.rng.pick(G1_TERMS().filter((t) => t.category === "tempo" && meaningCount(t) === 1));
+  const measures: Measure[] = bars.map((b, i) => ({ events: b, ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
+  const f = frag(clef, measures, "", { key: keyText, timeSignature: ts, showKeySignature: Boolean(c.scope.keySignatures), tempoText: tempoTerm.term });
+  const hasRest = bars.some((b) => b.some((e) => e.kind === "rest"));
+  const describe = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step}${e.writtenAccidental ? ` ${e.writtenAccidental}` : ""} ${e.duration.value}${e.label ? " (marked x)" : ""}${e.articulations?.length ? ` with ${e.articulations[0]}` : ""}${e.dynamic ? ` ${e.dynamic}` : ""}` : `${e.kind === "rest" ? `${e.duration.value} rest` : "group"}`)).join(", ") + ".").join(" ");
+  f.textAlternative = `A three-bar melody in ${keyText}, ${ts}, ${clef} clef, marked ${tempoTerm.term} and ${dyn} at the start. ${describe}`;
+  const tonic = sc[0]!;
+  const note0 = pitches[0]!;
+  const modes = ["tempo", "dynamic", "articulation", "highest", "beats", "key", "interval", ...(hasRest ? (["rest-bar"] as const) : [])] as const;
+  const mode = c.rng.pick(modes);
+  const meaningOpts = (target: TermT) => {
+    const picks = termDistractors(c, target);
+    return picks.length < 3 ? null : c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: t.meaning }));
+  };
+  if (mode === "tempo") {
+    const opts = meaningOpts(tempoTerm);
+    if (!opts) return null;
+    return { prompt: "Look at the word above the first bar. What does it tell the player?", music: f, answer: { kind: "choice", options: opts, correctOptionIds: [tempoTerm.id] }, hints: ["Tempo words tell you how fast to play."] };
+  }
+  if (mode === "dynamic") {
+    const t = G1_TERMS().find((x) => x.id === dynTerm)!;
+    const opts = meaningOpts(t);
+    if (!opts) return null;
+    return { prompt: `What does ${dyn} at the start of the melody tell the player?`, music: f, answer: { kind: "choice", options: opts, correctOptionIds: [t.id] }, hints: ["p means quiet and f means loud; m means moderately."] };
+  }
+  if (mode === "articulation") {
+    const t = G1_TERMS().find((x) => x.id === art)!;
+    const opts = meaningOpts(t);
+    if (!opts) return null;
+    return { prompt: "The note marked x has a sign with it. How should it be played?", music: f, answer: { kind: "choice", options: opts, correctOptionIds: [t.id] }, hints: ["A dot means staccato; a > sign means an accent."] };
+  }
+  if (mode === "highest") {
+    const hi = pitches.reduce((a, b) => (music.chromaticNumber(b) > music.chromaticNumber(a) ? b : a));
+    if (pitches.filter((p) => music.chromaticNumber(p) === music.chromaticNumber(hi)).length !== 1) return null;
+    const { options, diagnoses } = spelledOptions(c, hi, keyText);
+    return {
+      prompt: "What is the name of the highest note in the melody?",
+      music: f,
+      answer: { kind: "choice", options, correctOptionIds: [noteId(hi)], diagnoses },
+      hints: ["The highest note sits highest on the stave. Remember the key signature."],
+    };
+  }
+  if (mode === "beats") {
+    const beats = music.parseTimeSignature(ts).top;
+    return {
+      prompt: "How many crotchet beats are there in each bar?",
+      music: f,
+      answer: { kind: "choice", options: [2, 3, 4].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: [String(beats)] },
+      hints: ["The top number of the time signature gives the beats in a bar."],
+    };
+  }
+  if (mode === "key") {
+    const all = keysIn(c);
+    if (all.length < 3 || !c.scope.keySignatures) return null;
+    return {
+      prompt: "The melody has a key signature. Which major key is it in?",
+      music: f,
+      answer: { kind: "choice", options: all.map((k) => ({ id: k, label: keyWord(k) })), correctOptionIds: [keyText] },
+      hints: ["Read the key signature at the start of the stave."],
+    };
+  }
+  if (mode === "interval") {
+    const up = music.chromaticNumber(note0) >= music.chromaticNumber({ ...tonic, octave: note0.octave });
+    void up;
+    const x = pitches[markK]!;
+    const tonicBelow: Pitch = { ...tonic, octave: x.octave - (music.stepIndex(x.step) < music.stepIndex(tonic.step) ? 1 : 0) };
+    const number = (music.diatonicNumber ? music.diatonicNumber(x) - music.diatonicNumber(tonicBelow) : 0) + 1;
+    if (number < 1 || number > 8) return null;
+    return {
+      prompt: `The melody is in ${keyWord(keyText)}. What is the interval, by number, from the tonic up to the note marked x?`,
+      music: f,
+      answer: { kind: "choice", options: [1, 2, 3, 4, 5, 6, 7, 8].map((n2) => ({ id: String(n2), label: music.ordinal(n2) })), correctOptionIds: [String(number)] },
+      hints: ["Count up from the tonic of the key, counting the tonic as 1."],
+    };
+  }
+  const restBar = bars.findIndex((b) => b.some((e) => e.kind === "rest"));
+  const rb = bars.filter((b) => b.some((e) => e.kind === "rest")).length;
+  if (rb !== 1) return null;
+  return {
+    prompt: "Which bar of the melody contains a rest?",
+    music: f,
+    answer: { kind: "choice", options: bars.map((_, i) => ({ id: String(i + 1), label: `Bar ${i + 1}` })), correctOptionIds: [String(restBar + 1)] },
+    hints: ["A rest is a sign for silence: look for one in each bar."],
+  };
+};
+
 // ---------------------------------------------------------------------------
 // Unit 3 extra: finding middle C
 // ---------------------------------------------------------------------------
@@ -1006,4 +1203,6 @@ export const GRADE1_GENERATORS: Record<string, Gen> = {
   "t.g1.degree-note": degreeNote,
   "t.g1.triad-notes": triadNotes,
   "t.g1.interval-note": intervalNote,
+  "t.g1.term-sign": termSign,
+  "t.g1.melody-detail": melodyDetail,
 };

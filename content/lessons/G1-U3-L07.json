@@ -390,27 +390,26 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write B in the treble clef. You may use up to 1 ledger line. Any B that fits is correct.",
+      "prompt": "Write A in the treble clef. You may use up to 1 ledger line. Any A that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "B",
+          "step": "A",
           "alter": 0,
           "position": "any",
           "maxLedgerLines": 1
         },
         "accepted": [
-          "B3",
-          "B4",
-          "B5"
+          "A4",
+          "A5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Start from the clef's reference line.",
         "Middle C needs one ledger line.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach B."
+        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach A."
       ],
       "feedback": {
         "correct": "Neat and correct in the treble clef.",
