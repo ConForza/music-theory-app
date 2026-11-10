@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app.ts";
 import { ManualClock } from "../src/clock.ts";
 import { migrate, openDb } from "../src/db.ts";
+
 import { AchievementService } from "../src/achievements.ts";
 import { foldConcept } from "../src/mastery.ts";
 import { Client, LESSON, answerSession, email, finishLesson, playNode, playThrough, register, setupClock, sharedCourse } from "./helpers.ts";
@@ -98,7 +99,7 @@ describe("persistence and migration", () => {
     const dir = mkdtempSync(join(tmpdir(), "mig-"));
     const src = join(import.meta.dirname, "../migrations");
     mkdirSync(join(dir, "m"));
-    for (const f of readdirSync(src).filter((f) => !f.startsWith("003"))) copyFileSync(join(src, f), join(dir, "m", f));
+    for (const f of readdirSync(src).filter((f) => !f.startsWith("003") && !f.startsWith("004"))) copyFileSync(join(src, f), join(dir, "m", f));
     const db = new DatabaseSync(":memory:");
     db.exec("PRAGMA foreign_keys = ON;");
     expect(migrate(db, join(dir, "m"))).toEqual(["001_init.sql", "002_practice.sql"]);
@@ -107,7 +108,7 @@ describe("persistence and migration", () => {
     db.prepare("INSERT INTO profiles (user_id,experience,selected_grade,onboarded,settings,updated_at) VALUES ('u1','new',1,1,'{}',?)").run(t);
     db.prepare("INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES ('u1',?,1,0,'questions',2,'0.2.1',?,?,?,2)").run(LESSON, t, t, t);
     db.prepare("INSERT INTO attempts (user_id,id,node_id,run,item_id,template_id,template_version,content_version,curriculum_version,evidence,response,correct,mistake_category,hints_used,attempt_number,created_at) VALUES ('u1','a1',?,1,'i.g1-u3-l03.independent-1','t.g1.note-read',1,2,'0.2.1','independent','{}',1,NULL,0,1,?)").run(LESSON, t);
-    expect(migrate(db, src)).toEqual(["003_progression.sql"]);
+    expect(migrate(db, src)).toEqual(["003_progression.sql", "004_question_exposure.sql"]);
     expect(migrate(db, src)).toEqual([]); // repeatable
     expect(db.prepare("SELECT timezone, daily_goal FROM profiles WHERE user_id = 'u1'").get()).toEqual({ timezone: "UTC", daily_goal: 1 });
     expect(db.prepare("SELECT COUNT(*) AS n FROM attempts").get()).toEqual({ n: 1 });
@@ -120,6 +121,34 @@ describe("persistence and migration", () => {
     expect(hub.dueCount).toBe(1);
     expect(hub.groups.ready[0]).toMatchObject({ conceptId: "c.clefs.treble-lines", state: "learning", independentCorrect: 0 });
     expect(db.prepare("SELECT COUNT(*) AS n FROM mastery_evidence").get()).toEqual({ n: 0 });
+  });
+
+  it("upgrades a database that already applied 003 (the previous head) without losing anything, and a fresh one gets the same schema", async () => {
+    const src = join(import.meta.dirname, "../migrations");
+    // A learner on the previous head (003 applied, 004 not yet existing): lesson finished, so every 003 table has rows.
+    const old = openDb(":memory:");
+    const prev = createApp({ db: old, course, clock: new ManualClock(new Date("2026-03-02T12:00:00Z")) });
+    const c = new Client(prev);
+    await register(c, "upg");
+    await finishLesson(c);
+    const before = (await c.get("/api/engagement")).body;
+    old.exec("DROP TABLE question_exposure");
+    old.exec("DELETE FROM schema_migrations WHERE version = '004_question_exposure.sql'");
+    expect(() => old.prepare("SELECT 1 FROM question_exposure").get()).toThrow(/no such table/);
+    expect(migrate(old, src)).toEqual(["004_question_exposure.sql"]);
+    expect(migrate(old, src)).toEqual([]);
+    const next = createApp({ db: old, course, clock: new ManualClock(new Date("2026-03-02T12:00:00Z")) });
+    const c2 = new Client(next);
+    c2.cookie = c.cookie;
+    for (const p of ["/api/engagement", "/api/review", "/api/achievements", "/api/progress"]) expect((await c2.get(p)).status, p).toBe(200);
+    expect((await c2.get("/api/engagement")).body.xp.total).toBe(before.xp.total);
+    expect((await c2.get("/api/engagement")).body.achievements.earnedCount).toBe(before.achievements.earnedCount);
+    // The new table works on the upgraded database.
+    const g = (await c2.post("/api/practice/generate", { templateId: "t.g1.note-read", seed: 5 })).body;
+    expect((await c2.post("/api/practice/hint", { itemId: g.id, level: 1 })).status).toBe(200);
+    // A fresh database ends up with the same tables.
+    const tables = (d: ReturnType<typeof openDb>) => (d.prepare("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").all() as Array<{ name: string }>).map((r) => r.name);
+    expect(tables(openDb(":memory:"))).toEqual(tables(old));
   });
 
   it("does not invent evidence for old lesson completions: mastery starts from new, recorded activity only", async () => {
