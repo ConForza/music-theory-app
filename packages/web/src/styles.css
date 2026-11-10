@@ -545,3 +545,5 @@ html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
 :root[data-motion="reduce"] .xp-pop { animation: none; }
 .badge-card > div { min-width: 0; flex: 1; overflow-wrap: anywhere; }
 .concept-row, .reward, .review-nudge > div { min-width: 0; overflow-wrap: anywhere; }
+.segmented label { min-width: 0; max-width: 100%; }
+.segmented span { overflow-wrap: anywhere; }
