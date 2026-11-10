@@ -46,6 +46,16 @@ export function questionKey(item: ExerciseItem): string {
 }
 
 /**
+ * What the learner sees, whatever the template: the same question with its options in a different order is the same question.
+ * Used to avoid repeats inside one lesson, practice, review, challenge or assessment (never stored as evidence or exposure,
+ * so it cannot disturb the identities earlier briefs recorded).
+ */
+export function visibleKey(item: ExerciseItem): string {
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: normaliseAnswer(item.answer) }));
+  return createHash("sha256").update(body).digest("hex").slice(0, 24);
+}
+
+/**
  * A concept-level teaching boundary, narrower than the lesson binding's scope. Every field present must hold.
  *  - `clef`: the question is written in (or asks for) this clef;
  *  - `staffPositions`: every written pitch sits on a line, or in a space, of that clef;

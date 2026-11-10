@@ -14,7 +14,7 @@ import { U4 } from "./grade1/u4.ts";
 import { U5 } from "./grade1/u5.ts";
 import { U6 } from "./grade1/u6.ts";
 import { U7 } from "./grade1/u7.ts";
-import { questionKey } from "../src/question-key.ts";
+import { questionKey, visibleKey } from "../src/question-key.ts";
 import { mergeScope, type ExerciseItem } from "@mtp/curriculum";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../../content");
@@ -48,7 +48,7 @@ if (!only.length || only.includes("G1-U3-L03")) {
     { t: "t.g1.note-place", when: (i: ExerciseItem) => i.prompt.includes("on a line"), correct: "On the right line again." },
   ];
   const have = new Set((l03.independent as ExerciseItem[]).map((i) => i.id));
-  const inL03 = new Set<string>([...l03.guided, ...l03.independent].map((i: ExerciseItem) => questionKey(i)));
+  const inL03 = new Set<string>([...l03.guided, ...l03.independent].map((i: ExerciseItem) => visibleKey(i)));
   extra.forEach((p, k) => {
     const item = pickItem(a, node, p, "independent", 5 + k, inL03);
     if (!have.has(item.id)) l03.independent.push(item);

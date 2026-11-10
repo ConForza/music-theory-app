@@ -82,7 +82,27 @@ export const valueWord = (e: NotationEvent): string => {
   const v = `${"dotted ".repeat(e.duration.dots ?? 0)}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`;
   return `${v}${e.kind !== "rest" && e.tieToNext ? " tied to" : ""}`;
 };
-export const describeRhythm = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(valueWord).join(", ")}.`).join(" ");
+/** Each bar in order; notes joined by a beam are described as one "beamed together" group, so the printed grouping is not lost to a screen reader. */
+export const describeRhythm = (ms: Measure[]) =>
+  ms
+    .map((m, i) => {
+      const parts: string[] = [];
+      let group: string[] | null = null;
+      for (const e of m.events ?? []) {
+        const beam = (e as { beam?: string }).beam;
+        if (beam === "begin") group = [valueWord(e)];
+        else if (group && (beam === "continue" || beam === "end")) {
+          group.push(valueWord(e));
+          if (beam === "end") {
+            parts.push(`${group.length} beamed together (${group.join(", ")})`);
+            group = null;
+          }
+        } else parts.push(valueWord(e));
+      }
+      if (group) parts.push(`${group.length} beamed together (${group.join(", ")})`);
+      return `Bar ${i + 1}: ${parts.join(", ")}.`;
+    })
+    .join(" ");
 
 // Beat fillers: a list of value sequences that fill one beat of the given length (all within scope).
 function beatFills(beat: music.Fraction, sc: MusicScope, compound: boolean): NotationEvent[][] {

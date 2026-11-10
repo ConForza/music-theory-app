@@ -93,3 +93,18 @@ describe("P3: triad questions explain the mistake instead of falling back to gen
     }
   });
 });
+
+describe("beam grouping is available without sight", () => {
+  it("the three candidate bars of a beam-grouping question have different text descriptions", () => {
+    let checked = 0;
+    for (const i of generated("G1-U1-L03", "t.g1.beam-choice", 150).concat(generated("G1-U2-L05", "t.g1.bar-judge", 150))) {
+      if (!i.prompt.includes("groups its notes")) continue;
+      const alt = i.music!.textAlternative ?? "";
+      const bars = alt.split(/Bar \d+: /).slice(1);
+      expect(bars.length).toBe(3);
+      expect(new Set(bars).size, alt).toBe(3);
+      checked++;
+    }
+    expect(checked).toBeGreaterThan(5);
+  });
+});

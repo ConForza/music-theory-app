@@ -8,7 +8,7 @@
  */
 import { buildIndex, effectiveScope, loadCurriculum, type CurriculumIndex, type ExerciseItem, type NotationFragment, type OrderedNode } from "@mtp/curriculum";
 import { frag, generateItem, note, plainNote, plainRest, rhythmLine } from "@mtp/engine";
-import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "../../src/question-key.ts";
+import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "../../src/question-key.ts";
 
 export type Frag = NotationFragment;
 export type Block = { text: string } | { tip: string } | { music: Frag; caption: string };
@@ -84,10 +84,10 @@ export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided
     // A lesson never asks the same question twice: independent questions must differ from every earlier question (guided included),
     // and a guided question avoids earlier ones too, unless the pool is so small that nothing else exists.
     const key = questionKey(item);
-    if (inLesson.has(key)) continue; // never the same question twice in one lesson, guided included
+    if (inLesson.has(visibleKey(item))) continue; // never the same question twice in one lesson, guided included
     if (a.used.has(key) && seed < 20000) continue; // and, where the pool allows, not one met in an earlier lesson either
     a.used.add(key);
-    inLesson.add(key);
+    inLesson.add(visibleKey(item));
     return {
       ...item,
       id: `i.${node.id.toLowerCase()}.${section === "guided" ? "guided" : "ind"}-${n}`,

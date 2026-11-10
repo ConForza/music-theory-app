@@ -28,7 +28,7 @@ import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { STATE_ORDER, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { learnerTime, recordExposure } from "./mastery-service.ts";
-import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
+import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "./question-key.ts";
 import { computeNodeStates, type PathPolicy } from "./path-state.ts";
 
 /** Words shown with every result: this is practice material, never an examination outcome. */
@@ -177,7 +177,7 @@ export class NodeRunService {
       const item = this.gen(templateId, seed, scope);
       if (!item || !accept(item)) continue;
       const key = questionKey(item);
-      if (usedInRun.has(key)) continue;
+      if (usedInRun.has(visibleKey(item))) continue;
       if (avoid.has(key)) {
         fallback ??= { item, seed };
         continue;
@@ -199,7 +199,7 @@ export class NodeRunService {
     const push = (item: ExerciseItem, seed: number, scope: PlannedItem["scope"], concepts: string[], extra: Partial<PlannedItem> = {}) => {
       const g = parseGeneratedItemId(item.id);
       if (!g || !concepts.length) return false;
-      used.add(questionKey(item));
+      used.add(visibleKey(item));
       items.push({ itemId: item.id, templateId: item.templateId, templateVersion: item.templateVersion, seed, fingerprint: g.fingerprint, scope, conceptIds: concepts, ...extra });
       return true;
     };
@@ -368,7 +368,7 @@ export class NodeRunService {
     const planned = JSON.parse(row.items) as PlannedItem[];
     const attempts = this.attemptsFor(userId, nodeId, row.run);
     const blueprint = node.assessmentId ? this.course.ix.assessments.get(node.assessmentId) : undefined;
-    const sectionTitle = new Map((blueprint?.sections ?? []).map((s) => [s.id, s.title]));
+    const sectionTitle = new Map((blueprint?.sections ?? []).map((s) => [s.id, this.sectionLabel(s)]));
     const items: NodeItemView[] = [];
     for (const si of planned) {
       const r = this.resolve(si, node);
@@ -581,11 +581,17 @@ export class NodeRunService {
     };
   }
 
+  /** A section's heading for the learner: the syllabus outcome in plain words, never an internal identifier. */
+  private sectionLabel(s: { title: string; outcomeIds: string[] }): string {
+    const statement = s.outcomeIds.length === 1 ? this.course.ix.outcomes.get(s.outcomeIds[0]!)?.statement : undefined;
+    return /^[a-z]+\d{4}\.|^[a-z0-9]+(?:[.-][a-z0-9]+)+$/i.test(s.title) && statement ? statement.replace(/\.$/, "") : s.title;
+  }
+
   private fillAssessmentDetail(userId: string, node: OrderedNode, row: SessionRow, planned: PlannedItem[], attempts: Map<string, { firstTry: boolean }>, summary: NodeSummary) {
     const bp = this.course.ix.assessments.get(node.assessmentId!)!;
     const sections = bp.sections.map((s) => {
       const mine = planned.filter((p) => p.sectionId === s.id);
-      return { id: s.id, title: s.title, correct: mine.filter((p) => attempts.get(p.itemId)?.firstTry).length, total: mine.length };
+      return { id: s.id, title: this.sectionLabel(s), correct: mine.filter((p) => attempts.get(p.itemId)?.firstTry).length, total: mine.length };
     });
     summary.sections = sections.filter((s) => s.total > 0);
     const outcomeIds = [...new Set(bp.sections.flatMap((s) => s.outcomeIds))];

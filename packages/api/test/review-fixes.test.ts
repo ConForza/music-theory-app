@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app.ts";
 import { openDb } from "../src/db.ts";
-import { questionKey } from "../src/question-key.ts";
-import { Client, ensureDone, realCourse, register, responseFor } from "./helpers.ts";
+import { questionKey, visibleKey } from "../src/question-key.ts";
+import { Client, ensureDone, playSession, realCourse, register, responseFor } from "./helpers.ts";
 
 /** Regression tests for the independent review of Brief 05 (F2, F3, F4, F5, F8). */
 const course = realCourse();
@@ -123,4 +123,46 @@ describe("F8: a saved review URL from before a content update recovers instead o
     const row = db.prepare("SELECT status FROM review_sessions WHERE user_id = ? AND id = 'old-session'").get(userId) as { status: string };
     expect(row.status).toBe("abandoned");
   });
+});
+
+describe("no repeated question inside one run, even with the options in another order", () => {
+  it("every practice, review, challenge and assessment run has distinct learner-visible questions, for many learners", () => {
+    const db = openDb(":memory:");
+    const app = createApp({ db, course });
+    const nodes = G1.filter((n) => ["practice", "review", "unit_challenge", "grade_assessment"].includes(n.type));
+    const dupes: string[] = [];
+    for (let u = 0; u < 12; u++) {
+      const id = `dup-${u}`;
+      seedLearner(db, id);
+      for (const n of nodes) {
+        db.prepare("DELETE FROM lesson_progress WHERE user_id = ? AND node_id = ?").run(id, n.id);
+        app.nodes.start(id, n.id);
+        const seen = new Set<string>();
+        for (const it of app.nodes.internalItems(id, n.id)) {
+          const k = visibleKey(it.item);
+          if (seen.has(k)) dupes.push(`${n.id} (${id}): ${it.itemId}`);
+          seen.add(k);
+        }
+        db.prepare("INSERT OR REPLACE INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES (?,?,1,0,'questions',?,?,?,?,?,?)").run(id, n.id, n.contentVersion, course.version, "2026-01-01", "2026-01-01", "2026-01-01", n.contentVersion);
+      }
+    }
+    expect(dupes).toEqual([]);
+  }, 300_000);
+
+  it("the reported pair (same rest question, options reordered) has one visible identity", () => {
+    const a = { id: "x", templateId: "t.g1.rest", prompt: "Which rest lasts as long as a semiquaver?", answer: { kind: "choice", options: [{ id: "a", label: "minim rest" }, { id: "b", label: "quaver rest" }], correctOptionIds: ["b"] } } as never;
+    const b = { id: "y", templateId: "t.g1.rest", prompt: "Which rest lasts as long as a semiquaver?", answer: { kind: "choice", options: [{ id: "b", label: "quaver rest" }, { id: "a", label: "minim rest" }], correctOptionIds: ["b"] } } as never;
+    expect(visibleKey(a)).toBe(visibleKey(b));
+  });
+});
+
+describe("challenge results read in plain words", () => {
+  it("section headings are the outcome statements, not internal identifiers", async () => {
+    const { app, c, userId } = await learner();
+    await ensureDone(c, app, userId, "G1-U1-R1");
+    const done = await playSession(c, app, userId, "G1-U1-C", { wrong: 8 });
+    const titles = (done.body.summary?.sections ?? done.body.sections ?? []).map((s: { title: string }) => s.title);
+    expect(titles.length).toBeGreaterThan(0);
+    for (const t of titles) expect(t).not.toMatch(/abrsm2020\./);
+  }, 300_000);
 });
