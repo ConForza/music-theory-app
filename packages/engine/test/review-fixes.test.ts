@@ -81,3 +81,15 @@ describe("F6: text alternatives do not give the answer away", () => {
     expect(seen).toBeGreaterThan(0);
   });
 });
+
+describe("P3: triad questions explain the mistake instead of falling back to generic feedback", () => {
+  it("every wrong option of every triad-notes question has a tailored diagnosis; a missing-note one refers to the missing degree", () => {
+    const list = generated("G1-U6-L01", "t.g1.triad-notes", 150);
+    expect(list.length).toBeGreaterThan(50);
+    for (const i of list) {
+      const a = i.answer as { options: Array<{ id: string }>; correctOptionIds: string[]; diagnoses?: Record<string, { reason: string }> };
+      for (const o of a.options) if (!a.correctOptionIds.includes(o.id)) expect(a.diagnoses?.[o.id], `${i.id} ${o.id}`).toBeTruthy();
+      if (i.prompt.includes("missing")) for (const d of Object.values(a.diagnoses ?? {})) expect(JSON.stringify(d)).not.toMatch(/bass note/i);
+    }
+  });
+});

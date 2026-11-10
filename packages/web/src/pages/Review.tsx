@@ -143,6 +143,7 @@ export function ReviewPlayer() {
   const [summary, setSummary] = useState<ReviewSummary | null>(null);
   const [doneError, setDoneError] = useState<ApiFailure | null>(null);
   const [tryAgain, setTryAgain] = useState(0);
+  const [recovered, setRecovered] = useState<{ next: string | null; reason: string | null } | null>(null);
   const firstLoad = useRef(true);
 
   const load = useCallback(async () => {
@@ -158,6 +159,7 @@ export function ReviewPlayer() {
     setSummary(null);
     setIdx(null);
     setError(null);
+    setRecovered(null);
     load().then(
       (s) => {
         if (!live) return;
@@ -165,7 +167,7 @@ export function ReviewPlayer() {
         // fresh one (it closes the stale session) instead of "completing" an empty review.
         if (s.status === "open" && !s.items.some((i) => i.kind === "review")) {
           api.startReview().then(
-            (r) => { if (live) { if (r.session && r.session.id !== sessionId) nav(`/review/session/${r.session.id}`, { replace: true }); else nav("/review", { replace: true }); } },
+            (r) => { if (live) setRecovered({ next: r.session && r.session.id !== sessionId ? r.session.id : null, reason: r.reason ?? null }); },
             (e: unknown) => live && setError(asFailure(e, "Could not open the review.")),
           );
           return;
@@ -203,6 +205,21 @@ export function ReviewPlayer() {
   if (error?.status === 404) return <NotFoundView what="review" />;
   if (error?.status === 401) return <Navigate to="/welcome" replace />;
   if (error) return <ErrorState error={error} onRetry={() => nav(0)} title="We couldn't open that review" />;
+  if (recovered) {
+    return (
+      <div className="state">
+        <Icon name="info" size={36} />
+        <h1>This review was interrupted</h1>
+        <p>The lessons were updated after this review was started, so its questions could not be kept. Anything you had already answered still counted.</p>
+        {recovered.next ? (
+          <Link className="btn btn-primary" to={`/review/session/${recovered.next}`} replace>Start the rebuilt review</Link>
+        ) : (
+          <p>{recovered.reason === "no_questions_yet" ? "Your next topics need their lesson finished before we can ask about them." : "Nothing is due right now. Your next review will appear on the Review page when topics are due."}</p>
+        )}
+        <Link className={recovered.next ? "btn btn-ghost" : "btn btn-primary"} to="/review" replace>Back to Review</Link>
+      </div>
+    );
+  }
   if (!session || idx === null) return <Loading label="Opening your review…" />;
   if (session.status !== "open" && !summary && !finishing) {
     return (

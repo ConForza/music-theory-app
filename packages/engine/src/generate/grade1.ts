@@ -917,6 +917,7 @@ export const triadNotes: Gen = (c) => {
     const roleIdx = c.rng.pick([0, 1, 2]);
     const role = ["root (degree 1)", "3rd (degree 3)", "5th (degree 5)"][roleIdx]!;
     const { options, diagnoses } = spelledOptions(c, tri[roleIdx]!, keyText);
+    for (const o of options) if (o.id !== noteId(tri[roleIdx]!) && !diagnoses[o.id]) diagnoses[o.id] = { category: "note-missing", reason: `That note is not the ${role.split(" ")[0]} of this triad. Count up the scale from the tonic: the root is degree 1, the 3rd is degree 3 and the 5th is degree 5.` };
     return {
       prompt: `In the tonic triad of ${keyWord(keyText)}, which note is the ${role}?`,
       answer: { kind: "choice", options, correctOptionIds: [noteId(tri[roleIdx]!)], diagnoses },
@@ -930,6 +931,8 @@ export const triadNotes: Gen = (c) => {
   const shown = voicing.filter((_, i) => i !== miss) as Pitch[];
   const missingNote = voicing[miss]!;
   const { options, diagnoses } = spelledOptions(c, missingNote, keyText);
+  const lacks = ["root (degree 1)", "3rd (degree 3)", "5th (degree 5)"][miss]!;
+  for (const o of options) if (o.id !== noteId(missingNote) && !diagnoses[o.id]) diagnoses[o.id] = { category: "note-missing", reason: `A triad is degrees 1, 3 and 5 of the scale. The missing note is the ${lacks}: count up the scale from the root to find it.` };
   return {
     prompt: `Part of the tonic triad of ${keyWord(keyText)} is shown. Which note is missing from the chord?`,
     music: frag(clef, [{ events: [{ kind: "chord", notes: shown.map((p) => ({ pitch: music.formatPitch(p) })), duration: { value: "semibreve", dots: 0 } } as NotationEvent] }], `A ${clef}-clef stave with two notes sounded together: ${shown.map(nameOf).join(" and ")}.`, { showKeySignature: false }),
