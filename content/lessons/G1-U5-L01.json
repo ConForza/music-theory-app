@@ -1,0 +1,812 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U5-L01",
+  "lessonId": "G1-U5-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Tell a tone from a semitone on the keyboard and on the stave.",
+    "successCriteria": [
+      "I know a semitone is the distance to the very next key, black or white.",
+      "I know a tone is two semitones.",
+      "I know E to F and B to C are semitones."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A semitone is the distance from one key on the piano to the very next key, whether that key is black or white. It is the smallest step in the music you will use."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C♯"
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A keyboard with C, the black key C sharp, and D highlighted."
+      },
+      "caption": "C to C sharp is a semitone. C sharp to D is another semitone. So C to D is two semitones: a tone."
+    },
+    {
+      "kind": "text",
+      "text": "A tone is two semitones: there is one key between the two notes you are comparing."
+    },
+    {
+      "kind": "text",
+      "text": "Most neighbouring white keys have a black key between them, so their distance is a tone. There are two places where two white keys touch: E to F, and B to C. Those two steps are semitones."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "E"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "B"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A keyboard with E and F highlighted, and B and C highlighted: no black key between either pair."
+      },
+      "caption": "E to F and B to C: no black key between, so each is a semitone."
+    },
+    {
+      "kind": "tip",
+      "text": "Look for the two places where white keys sit side by side with no black key: E–F and B–C."
+    }
+  ],
+  "demonstration": {
+    "widget": "keyboard",
+    "music": {
+      "presentation": "keyboard",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E"
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "F"
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "G"
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "A"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "B"
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "C"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Keys from E up to C: E, F, G, A, B and C."
+    },
+    "steps": [
+      "Tap E then F: a small step up. This is a semitone.",
+      "Tap F then G: a bigger step, with F sharp between. This is a tone.",
+      "Carry on up to B, then tap B and C: another small step, a semitone.",
+      "Listen to how the semitones sound closer together than the tones."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Keys from E to C, showing semitones at E-F and B-C, and tones elsewhere."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u5-l01.guided-1",
+      "templateId": "t.g1.tone-semitone",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Is the distance between these two keys a tone or a semitone?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two highlighted piano keys: C and the next-but-one key above it, D."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "tone"
+        ]
+      },
+      "hints": [
+        "Count the keys between them, black and white.",
+        "A semitone is from one key to the very next key, black or white. A tone is two semitones."
+      ],
+      "feedback": {
+        "correct": "Right: you counted the keys between.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u5-l01.guided-2",
+      "templateId": "t.g1.step-size",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Is the step from the first note up to the second note a tone or a semitone?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with two notes: C♯ and the next letter up, D."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "semitone"
+        ],
+        "diagnoses": {
+          "tone": {
+            "category": "off-by-step",
+            "reason": "They are neighbouring keys on the piano with no key between them, so this is a semitone."
+          }
+        }
+      },
+      "hints": [
+        "A semitone is the very next key; a tone is two semitones.",
+        "A semitone is from one key to the very next key, black or white, with nothing between. A tone has one key between.",
+        "Between E and F, and between B and C, there is no black key."
+      ],
+      "feedback": {
+        "correct": "You judged the step correctly.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u5-l01.ind-1",
+      "templateId": "t.g1.tone-semitone",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the distance between these two keys a tone or a semitone?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two highlighted piano keys: C and the next-but-one key above it, D."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "tone"
+        ]
+      },
+      "hints": [
+        "Count the keys between them, black and white.",
+        "A semitone is from one key to the very next key, black or white. A tone is two semitones."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u5-l01.ind-2",
+      "templateId": "t.g1.step-size",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the step from the first note up to the second note a tone or a semitone?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with two notes: C♯ and the next letter up, D."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "semitone"
+        ],
+        "diagnoses": {
+          "tone": {
+            "category": "off-by-step",
+            "reason": "They are neighbouring keys on the piano with no key between them, so this is a semitone."
+          }
+        }
+      },
+      "hints": [
+        "A semitone is the very next key; a tone is two semitones.",
+        "A semitone is from one key to the very next key, black or white, with nothing between. A tone has one key between.",
+        "Between E and F, and between B and C, there is no black key."
+      ],
+      "feedback": {
+        "correct": "Right: a tone or a semitone, judged from the keyboard.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u5-l01.ind-3",
+      "templateId": "t.g1.tone-semitone",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the distance between these two keys a tone or a semitone?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two highlighted piano keys: A and the next-but-one key above it, B."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "tone"
+        ]
+      },
+      "hints": [
+        "Count the keys between them, black and white.",
+        "A semitone is from one key to the very next key, black or white. A tone is two semitones."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u5-l01.ind-4",
+      "templateId": "t.g1.step-size",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the step from the first note up to the second note a tone or a semitone?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with two notes: E and the next letter up, F."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "semitone"
+        ],
+        "diagnoses": {
+          "tone": {
+            "category": "off-by-step",
+            "reason": "They are neighbouring keys on the piano with no key between them, so this is a semitone."
+          }
+        }
+      },
+      "hints": [
+        "A semitone is the very next key; a tone is two semitones.",
+        "A semitone is from one key to the very next key, black or white, with nothing between. A tone has one key between.",
+        "Between E and F, and between B and C, there is no black key."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u5-l01.ind-5",
+      "templateId": "t.g1.tone-semitone",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the distance between these two keys a tone or a semitone?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two highlighted piano keys: F and the very next key above it, F♯."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "semitone"
+        ]
+      },
+      "hints": [
+        "Count the keys between them, black and white.",
+        "A semitone is from one key to the very next key, black or white. A tone is two semitones."
+      ],
+      "feedback": {
+        "correct": "Counted correctly.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u5-l01.ind-6",
+      "templateId": "t.g1.step-size",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the step from the first note up to the second note a tone or a semitone?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with two notes: C♯ and the next letter up, D."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "semitone"
+        ],
+        "diagnoses": {
+          "tone": {
+            "category": "off-by-step",
+            "reason": "They are neighbouring keys on the piano with no key between them, so this is a semitone."
+          }
+        }
+      },
+      "hints": [
+        "A semitone is the very next key; a tone is two semitones.",
+        "A semitone is from one key to the very next key, black or white, with nothing between. A tone has one key between.",
+        "Between E and F, and between B and C, there is no black key."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "recap": [
+    "A semitone is the distance to the very next key, black or white.",
+    "A tone is two semitones.",
+    "E to F and B to C are semitones."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.tone-semitone",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.step-size",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.tone-semitone",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.pitch.tones-semitones"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s09"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.11"
+    ],
+    "notes": "Original wording. Follows Grade 1 outcome 11. The tone and semitone pairs are standard facts about the keyboard."
+  }
+}

@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U5-L05",
+  "lessonId": "G1-U5-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand keys and read and write the key signatures of C, G, D and F major.",
+    "successCriteria": [
+      "I know a key is the home note and scale a piece is built on.",
+      "I know a key signature puts the sharps or flats at the start of each stave.",
+      "I can name and write the key signatures of C, G, D and F major."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A piece in G major is built from the notes of the G major scale, and G is its home note, the tonic. We say the piece is in the key of G major."
+    },
+    {
+      "kind": "text",
+      "text": "Instead of writing F♯ every time, we put a key signature at the start of every line. It lists the sharps or flats the key needs, and they apply to every octave through the piece."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble stave with the key signature of G major: one sharp, F sharp, on the top line.",
+        "key": "G major"
+      },
+      "caption": "G major: one sharp (F♯)."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass stave with the key signature of D major: F sharp and C sharp.",
+        "key": "D major"
+      },
+      "caption": "D major: two sharps (F♯ and C♯). The bass clef places them on different lines."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble stave with the key signature of F major: one flat, B flat, on the middle line.",
+        "key": "F major"
+      },
+      "caption": "F major: one flat (B♭). C major has no key signature."
+    },
+    {
+      "kind": "tip",
+      "text": "Sharps are added in the order F, C, G, D, A, E, B. Flats go B, E, A, D, G, C, F. Each key takes the first one or two."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "The scale of G major written with its key signature of one sharp, so the F needs no sharp sign in front of it.",
+      "key": "G major"
+    },
+    "steps": [
+      "Look at the one sharp at the start of the stave, on the top line (F).",
+      "Tap the notes from G upwards. Every F is automatically F sharp.",
+      "The scale needs no extra sharps in front of the notes because the key signature does the job."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "The G major scale written with a one-sharp key signature at the start of the stave."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u5-l05.guided-1",
+      "templateId": "t.g1.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name the major key with this key signature.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "treble",
+        "accepted": [
+          "F major"
+        ]
+      },
+      "hints": [
+        "F♯ sits on the top line in treble and the fourth line in bass.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Read the key signature correctly.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g1-u5-l05.guided-2",
+      "templateId": "t.g1.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these are in the key signature of D major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Bb,Eb",
+            "label": "B♭ and E♭"
+          },
+          {
+            "id": "F#,G#",
+            "label": "F♯ and G♯"
+          },
+          {
+            "id": "F#,C#",
+            "label": "F♯ and C♯"
+          }
+        ],
+        "correctOptionIds": [
+          "F#,C#"
+        ],
+        "diagnoses": {
+          "F#,G#": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
+          },
+          "Bb,Eb": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
+          }
+        }
+      },
+      "hints": [
+        "C: none. G: one sharp. D: two sharps. F: one flat.",
+        "Sharps are added in the order F C G D A E B. Flats are added in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u5-l05.ind-1",
+      "templateId": "t.g1.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name the major key with this key signature.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "treble",
+        "accepted": [
+          "F major"
+        ]
+      },
+      "hints": [
+        "F♯ sits on the top line in treble and the fourth line in bass.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Named the key from its signature.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g1-u5-l05.ind-2",
+      "templateId": "t.g1.key-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of G major in the bass clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "bass",
+        "accepted": [
+          "G major"
+        ]
+      },
+      "hints": [
+        "Sharps go in the order F C G D; the flat is B.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F. Each sign goes on its own line or space."
+      ],
+      "feedback": {
+        "correct": "The key signature is written correctly.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g1-u5-l05.ind-3",
+      "templateId": "t.g1.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these are in the key signature of D major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Bb,Eb",
+            "label": "B♭ and E♭"
+          },
+          {
+            "id": "F#,G#",
+            "label": "F♯ and G♯"
+          },
+          {
+            "id": "F#,C#",
+            "label": "F♯ and C♯"
+          }
+        ],
+        "correctOptionIds": [
+          "F#,C#"
+        ],
+        "diagnoses": {
+          "F#,G#": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
+          },
+          "Bb,Eb": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
+          }
+        }
+      },
+      "hints": [
+        "C: none. G: one sharp. D: two sharps. F: one flat.",
+        "Sharps are added in the order F C G D A E B. Flats are added in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g1-u5-l05.ind-4",
+      "templateId": "t.g1.key-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of G major in the treble clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "treble",
+        "accepted": [
+          "G major"
+        ]
+      },
+      "hints": [
+        "Sharps go in the order F C G D; the flat is B.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F. Each sign goes on its own line or space."
+      ],
+      "feedback": {
+        "correct": "Written correctly.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g1-u5-l05.ind-5",
+      "templateId": "t.g1.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name the major key with this key signature.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "bass",
+        "accepted": [
+          "F major"
+        ]
+      },
+      "hints": [
+        "F♯ sits on the top line in treble and the fourth line in bass.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g1-u5-l05.ind-6",
+      "templateId": "t.g1.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which major key has one sharp?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "C major",
+            "label": "C major"
+          },
+          {
+            "id": "G major",
+            "label": "G major"
+          },
+          {
+            "id": "D major",
+            "label": "D major"
+          },
+          {
+            "id": "F major",
+            "label": "F major"
+          }
+        ],
+        "correctOptionIds": [
+          "G major"
+        ],
+        "diagnoses": {
+          "C major": {
+            "category": "wrong-count",
+            "reason": "C major has no sharps or flats, so it is not the one."
+          },
+          "D major": {
+            "category": "wrong-count",
+            "reason": "D major has 2 sharps, so it is not the one."
+          },
+          "F major": {
+            "category": "wrong-count",
+            "reason": "F major has 1 flats, so it is not the one."
+          }
+        }
+      },
+      "hints": [
+        "C: none. G: one sharp. D: two sharps. F: one flat.",
+        "C: none. G: one sharp. D: two sharps. F: one flat."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "recap": [
+    "A key signature at the start of each line gives the sharps or flats of the key.",
+    "C: none. G: F♯. D: F♯ and C♯. F: B♭.",
+    "Key signatures are written on set lines and spaces in each clef."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.key-signature",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.key-write",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.key-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.keys.signature-concept",
+      "c.keys.signatures-g1"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s13"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.13"
+    ],
+    "notes": "Original wording. Follows Grade 1 outcome 13. TEACHER TO CONFIRM: key-signature placement lines in each clef (the written positions are produced by the rule set in rules.keys)."
+  }
+}

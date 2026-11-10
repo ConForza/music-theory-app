@@ -10,12 +10,12 @@
  *
  * Existing templates and generators are untouched, so stored ids for them stay valid.
  */
-import { music, type AnswerSpec, type Measure, type NotationEvent, type NotationFragment } from "@mtp/curriculum";
+import { deriveScale, music, type AnswerSpec, type Measure, type NotationEvent, type NotationFragment } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
 import { fits } from "./families.ts";
 import { frag, maxLedger, nameOf, n, note, pretty, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
 
-const { naturalAt, parsePitch: P } = music;
+const { naturalAt, parsePitch: P, staffPosition } = music;
 type Pitch = music.Pitch;
 type Clef = music.Clef;
 
@@ -706,6 +706,250 @@ export const accidentalCount: Gen = (c) => {
   };
 };
 
+
+// ---------------------------------------------------------------------------
+// Unit 5: tones, semitones, scales and keys
+// ---------------------------------------------------------------------------
+
+const noteLabel = (p: { step: string; alter: number }) => pretty(`${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`);
+const noteId = (p: { step: string; alter: number }) => `${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`;
+const g1Keys = (c: Parameters<Gen>[0]) => keysIn(c);
+const keysIn = (c: Parameters<Gen>[0]) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
+const keyWord = (k: string) => pretty(k);
+
+/** Option set of spelled notes: the answer, its enharmonic twin, and its letter neighbours. */
+function spelledOptions(c: Parameters<Gen>[0], answer: { step: string; alter: number }, key: string): { options: Array<{ id: string; label: string }>; diagnoses: Diagnoses } {
+  const diagnoses: Diagnoses = {};
+  const seen = new Map<string, string>([[noteId(answer), noteLabel(answer)]]);
+  const ai = LETTERS.indexOf(answer.step);
+  const cand: Array<[{ step: string; alter: number }, [string, string] | null]> = [];
+  // the other spelling of the same sound (wrong letter name)
+  const alt = enharmonicOf(answer);
+  if (alt) cand.push([alt, ["letter-skipped-or-repeated", `${noteLabel(alt)} sounds the same, but a scale uses each letter name once, in order. Which letter is missing or comes next?`]]);
+  // the plain white-key note on the right letter, when it has a sign
+  if (answer.alter !== 0) cand.push([{ step: answer.step, alter: 0 }, ["semitone-misplaced", `Check the pattern of tones and semitones: this note needs its ${answer.alter === 1 ? "sharp" : "flat"} to be the right distance from its neighbours.`]]);
+  else {
+    const sa = music.signatureAlter(music.parseKey(key), answer.step as music.Step);
+    if (sa !== 0) cand.push([{ step: answer.step, alter: sa }, ["key-signature-misapplied", `That is the sharp or flat of the key. The note here is the plain one: check the pattern of tones and semitones.`]]);
+  }
+  for (const dI of [1, -1]) cand.push([{ step: LETTERS[(ai + dI + 7) % 7]!, alter: music.signatureAlter(music.parseKey(key), LETTERS[(ai + dI + 7) % 7]! as music.Step) }, null]);
+  for (const [p, d] of cand) {
+    if (seen.size >= 4) break;
+    if (seen.has(noteId(p))) continue;
+    seen.set(noteId(p), noteLabel(p));
+    if (d) diagnoses[noteId(p)] = { category: d[0], reason: d[1] };
+  }
+  return { options: c.rng.shuffle([...seen].map(([id, label]) => ({ id, label }))), diagnoses };
+}
+function enharmonicOf(p: { step: string; alter: number }): { step: string; alter: number } | null {
+  if (p.alter === 1) {
+    const next = LETTERS[(LETTERS.indexOf(p.step) + 1) % 7]!;
+    return p.step === "E" || p.step === "B" ? null : { step: next, alter: -1 };
+  }
+  if (p.alter === -1) {
+    const prev = LETTERS[(LETTERS.indexOf(p.step) + 6) % 7]!;
+    return p.step === "C" || p.step === "F" ? null : { step: prev, alter: 1 };
+  }
+  return null;
+}
+
+/** t.g1.step-size: is the step between two written notes a tone or a semitone? */
+export const stepSize: Gen = (c) => {
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const max = maxLedger(c);
+  const pos = c.rng.int(0, 7);
+  const lower = naturalAt(clef, pos);
+  const upper = naturalAt(clef, pos + 1);
+  const blacks = Boolean(c.scope.accidentals);
+  const a1 = blacks && GOOD_ACC(lower.step, 1) && c.rng.chance(0.35) ? 1 : blacks && GOOD_ACC(lower.step, -1) && c.rng.chance(0.2) ? -1 : 0;
+  const a2 = blacks && GOOD_ACC(upper.step, 1) && c.rng.chance(0.3) ? 1 : blacks && GOOD_ACC(upper.step, -1) && c.rng.chance(0.2) ? -1 : 0;
+  const p1: Pitch = { ...lower, alter: a1 };
+  const p2: Pitch = { ...upper, alter: a2 };
+  if (music.ledgerLines(clef, p1) > max || music.ledgerLines(clef, p2) > max) return null;
+  const gap = music.chromaticNumber(p2) - music.chromaticNumber(p1);
+  if (gap !== 1 && gap !== 2) return null;
+  const answer = gap === 1 ? "semitone" : "tone";
+  return {
+    prompt: "Is the step from the first note up to the second note a tone or a semitone?",
+    music: frag(clef, [{ events: [note(p1), note(p2)] }], `A ${clef}-clef stave with two notes: ${nameOf(p1)} and the next letter up, ${nameOf(p2)}.`),
+    answer: { kind: "choice", options: [{ id: "tone", label: "A tone" }, { id: "semitone", label: "A semitone" }], correctOptionIds: [answer], diagnoses: { [answer === "tone" ? "semitone" : "tone"]: { category: "off-by-step", reason: answer === "tone" ? "There is a key between them on the piano (black or white), so this is a whole tone, two semitones." : "They are neighbouring keys on the piano with no key between them, so this is a semitone." } } },
+    hints: ["A semitone is from one key to the very next key, black or white, with nothing between. A tone has one key between.", "Between E and F, and between B and C, there is no black key."],
+  };
+};
+
+/** t.g1.scale-gap: a major scale with one note missing. Which note fills the gap? */
+export const scaleGap: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c));
+  const key = music.parseKey(keyText);
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const max = maxLedger(c);
+  for (const octave of c.rng.shuffle([2, 3, 4])) {
+    const start: Pitch = { ...key.tonic, octave };
+    const notes = deriveScale(keyText, "major", "ascending", start);
+    if (!fits(clef, notes, max)) continue;
+    const gap = c.rng.int(1, 6);
+    const missing = notes[gap]!;
+    const events: NotationEvent[] = notes.map((p, i) => (i === gap ? r("semibreve") : note(p)));
+    const { options, diagnoses } = spelledOptions(c, missing, keyText);
+    if (options.length < 3) return null;
+    return {
+      prompt: `This is the scale of ${keyWord(keyText)}, going up. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      music: frag(clef, [{ events }], `A ${clef}-clef stave with eight semibreves going up a scale of ${keyText}, with one note replaced by a rest. The other notes are ${notes.filter((_, i) => i !== gap).map(nameOf).join(", ")}.`, { showKeySignature: false }),
+      answer: { kind: "choice", options, correctOptionIds: [noteId(missing)], diagnoses },
+      hints: ["Major scale pattern: tone, tone, semitone, tone, tone, tone, semitone.", "A scale uses each letter name once, in order."],
+    };
+  }
+  return null;
+};
+
+/** t.g1.key-facts: sharps and flats of the Grade 1 keys. */
+export const keyFacts: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c));
+  const key = music.parseKey(keyText);
+  const sig = music.keySignature(key);
+  const mode = c.rng.pick(["count", "type", "which-key", "which-note"] as const);
+  const cnt = sig.count;
+  if (mode === "count") {
+    return {
+      prompt: `How many sharps or flats are in the key signature of ${keyWord(keyText)}?`,
+      answer: { kind: "choice", options: [0, 1, 2, 3].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: [String(cnt)], diagnoses: Object.fromEntries([0, 1, 2, 3].filter((x) => x !== cnt).map((x) => [String(x), { category: "wrong-count", reason: `Count the sharps or flats for ${keyWord(keyText)} again: G has one sharp, D has two, F has one flat, and C has none.` }])) },
+      hints: ["G major has one sharp, D major two sharps, F major one flat, and C major none."],
+    };
+  }
+  if (mode === "type") {
+    if (cnt === 0) return null;
+    const type = sig.type === "sharps" ? "sharps" : "flats";
+    return {
+      prompt: `Is the key signature of ${keyWord(keyText)} made of sharps or flats?`,
+      answer: { kind: "choice", options: [{ id: "sharps", label: "Sharps" }, { id: "flats", label: "Flats" }], correctOptionIds: [type], diagnoses: { [type === "sharps" ? "flats" : "sharps"]: { category: "mixed-sharps-flats", reason: "A key signature uses only sharps or only flats, never both. G and D use sharps; F uses a flat." } } },
+      hints: ["G major and D major use sharps. F major uses a flat."],
+    };
+  }
+  if (mode === "which-key") {
+    const word = cnt === 0 ? "no sharps or flats" : `${cnt === 1 ? "one" : "two"} ${sig.type === "sharps" ? (cnt === 1 ? "sharp" : "sharps") : cnt === 1 ? "flat" : "flats"}`;
+    const all = keysIn(c);
+    if (all.length < 3) return null;
+    return {
+      prompt: `Which major key has ${word}?`,
+      answer: { kind: "choice", options: all.map((k) => ({ id: k, label: keyWord(k) })), correctOptionIds: [keyText], diagnoses: Object.fromEntries(all.filter((k) => k !== keyText).map((k) => [k, { category: "wrong-count", reason: `${keyWord(k)} has ${music.keySignature(music.parseKey(k)).count === 0 ? "no sharps or flats" : `${music.keySignature(music.parseKey(k)).count} ${music.keySignature(music.parseKey(k)).type}`}, so it is not the one.` }])) },
+      hints: ["C: none. G: one sharp. D: two sharps. F: one flat."],
+    };
+  }
+  if (cnt === 0) return null;
+  const answer = sig.accidentals.join(",");
+  const sets: string[][] = [["F#"], ["F#", "C#"], ["Bb"], ["F#", "G#"], ["Bb", "Eb"]].filter((x) => x.length === cnt || x.join(",") === answer);
+  const options = sets.map((x) => ({ id: x.join(","), label: x.map(pretty).join(" and ") }));
+  if (!options.some((o) => o.id === answer) || options.length < 2) return null;
+  return {
+    prompt: `Which of these are in the key signature of ${keyWord(keyText)}?`,
+    answer: { kind: "choice", options: c.rng.shuffle(options), correctOptionIds: [answer], diagnoses: Object.fromEntries(options.filter((o) => o.id !== answer).map((o) => [o.id, { category: "wrong-order", reason: "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D." }])) },
+    hints: ["Sharps are added in the order F C G D A E B. Flats are added in the order B E A D G C F."],
+  };
+};
+
+/** t.g1.key-write: write the key signature of a Grade 1 key. */
+export const keyWrite: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c).filter((k) => k !== "C major"));
+  if (!keyText) return null;
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  return {
+    prompt: `Write the key signature of ${keyWord(keyText)} in the ${clef} clef.`,
+    answer: { kind: "key-signature", task: "write-signature", clef, accepted: [keyText] },
+    hints: ["Sharps are written in the order F C G D A E B; flats in the order B E A D G C F. Each sign goes on its own line or space."],
+  };
+};
+
+/** t.g1.degree-note: which note is degree N of a key? */
+export const degreeNote: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c));
+  const key = music.parseKey(keyText);
+  const d = c.rng.int(1, 7);
+  const sc = music.scale(key, "major");
+  const target = sc[d - 1]!;
+  const { options, diagnoses } = spelledOptions(c, target, keyText);
+  if (options.length < 3) return null;
+  const off: Diagnoses = { ...diagnoses };
+  for (const dd of [d - 1, d + 1]) {
+    const nb = sc[dd - 1];
+    if (nb && options.some((o) => o.id === noteId(nb)) && !off[noteId(nb)]) off[noteId(nb)] = { category: "off-by-one", reason: `${noteLabel(nb)} is degree ${dd}. Count up from the tonic, which is degree 1.` };
+  }
+  return {
+    prompt: `In ${keyWord(keyText)}, which note is degree ${d} of the scale?`,
+    answer: { kind: "choice", options, correctOptionIds: [noteId(target)], diagnoses: off },
+    hints: [`Degree 1 is the tonic, ${noteLabel(key.tonic)}. Count up the scale one note at a time.`],
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Unit 6: triads and intervals
+// ---------------------------------------------------------------------------
+
+/** t.g1.triad-notes: the notes of a tonic triad. */
+export const triadNotes: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c));
+  const key = music.parseKey(keyText);
+  const sc = music.scale(key, "major");
+  const tri = [sc[0]!, sc[2]!, sc[4]!];
+  const mode = c.rng.pick(["notes", "role", "missing"] as const);
+  if (mode === "notes") {
+    const label = (xs: Array<{ step: string; alter: number }>) => xs.map(noteLabel).join(" ");
+    const wrong: Array<[Array<{ step: string; alter: number }>, string, string]> = [
+      [[sc[0]!, sc[1]!, sc[2]!], "wrong-degree", "Those are the first three notes of the scale, side by side. A triad skips: it uses every other note, degrees 1, 3 and 5."],
+      [[sc[0]!, sc[3]!, sc[5]!], "wrong-degree", "A triad is built from the tonic, the note two steps above it (the 3rd) and the note four steps above it (the 5th)."],
+      [[sc[0]!, sc[2]!, sc[3]!], "wrong-degree", "The top note of a triad is the 5th of the scale, not the 4th."],
+    ];
+    const opts = [{ id: "right", label: label(tri) }, ...wrong.map((w, i) => ({ id: `w${i}`, label: label(w[0]) }))];
+    return {
+      prompt: `Which three notes make the tonic triad of ${keyWord(keyText)}?`,
+      answer: { kind: "choice", options: c.rng.shuffle(opts), correctOptionIds: ["right"], diagnoses: Object.fromEntries(wrong.map((w, i) => [`w${i}`, { category: w[1], reason: w[2] }])) },
+      hints: ["The tonic triad uses degrees 1, 3 and 5 of the scale."],
+    };
+  }
+  if (mode === "role") {
+    const roleIdx = c.rng.pick([0, 1, 2]);
+    const role = ["root (degree 1)", "3rd (degree 3)", "5th (degree 5)"][roleIdx]!;
+    const { options, diagnoses } = spelledOptions(c, tri[roleIdx]!, keyText);
+    return {
+      prompt: `In the tonic triad of ${keyWord(keyText)}, which note is the ${role}?`,
+      answer: { kind: "choice", options, correctOptionIds: [noteId(tri[roleIdx]!)], diagnoses },
+      hints: ["Count up the scale: the root is degree 1, the 3rd is degree 3 and the 5th is degree 5."],
+    };
+  }
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const miss = c.rng.pick([1, 2]);
+  const voicing = [3, 4, 2].map((o) => tri.map((p, i) => ({ ...p, octave: o + (i > 0 && music.stepIndex(p.step) < music.stepIndex(tri[0]!.step) ? 1 : 0) }))).find((v) => fits(clef, v as Pitch[], maxLedger(c)) && v.every((p) => staffPosition(clef, p as Pitch) >= -1 && staffPosition(clef, p as Pitch) <= 9));
+  if (!voicing) return null;
+  const shown = voicing.filter((_, i) => i !== miss) as Pitch[];
+  const missingNote = voicing[miss]!;
+  const { options, diagnoses } = spelledOptions(c, missingNote, keyText);
+  return {
+    prompt: `Part of the tonic triad of ${keyWord(keyText)} is shown. Which note is missing from the chord?`,
+    music: frag(clef, [{ events: [{ kind: "chord", notes: shown.map((p) => ({ pitch: music.formatPitch(p) })), duration: { value: "semibreve", dots: 0 } } as NotationEvent] }], `A ${clef}-clef stave with two notes sounded together: ${shown.map(nameOf).join(" and ")}.`, { showKeySignature: false }),
+    answer: { kind: "choice", options, correctOptionIds: [noteId(missingNote)], diagnoses },
+    hints: ["The tonic triad is degrees 1, 3 and 5 of the scale."],
+  };
+};
+
+/** t.g1.interval-note: which note is a given number above the tonic? */
+export const intervalNote: Gen = (c) => {
+  const keyText = c.rng.pick(keysIn(c));
+  const key = music.parseKey(keyText);
+  const sc = music.scale(key, "major");
+  const n = c.rng.int(2, 7);
+  const target = sc[n - 1]!;
+  const { options, diagnoses } = spelledOptions(c, target, keyText);
+  const off: Diagnoses = { ...diagnoses };
+  for (const dd of [n - 1, n + 1]) {
+    const nb = sc[dd - 1];
+    if (nb && dd >= 1 && options.some((o) => o.id === noteId(nb)) && !off[noteId(nb)]) off[noteId(nb)] = { category: "counted-one-end-only", reason: `${noteLabel(nb)} is a ${music.ordinal(dd)} above the tonic. Count the tonic itself as 1 when you count up.` };
+  }
+  return {
+    prompt: `In ${keyWord(keyText)}, which note is a ${music.ordinal(n)} above the tonic?`,
+    answer: { kind: "choice", options, correctOptionIds: [noteId(target)], diagnoses: off },
+    hints: ["Count the tonic as 1 and go up the scale one letter at a time until you reach the number."],
+  };
+};
+
 // ---------------------------------------------------------------------------
 // Unit 3 extra: finding middle C
 // ---------------------------------------------------------------------------
@@ -755,4 +999,11 @@ export const GRADE1_GENERATORS: Record<string, Gen> = {
   "t.g1.accidental-read": accidentalRead,
   "t.g1.accidental-write": accidentalWrite,
   "t.g1.accidental-count": accidentalCount,
+  "t.g1.step-size": stepSize,
+  "t.g1.scale-gap": scaleGap,
+  "t.g1.key-facts": keyFacts,
+  "t.g1.key-write": keyWrite,
+  "t.g1.degree-note": degreeNote,
+  "t.g1.triad-notes": triadNotes,
+  "t.g1.interval-note": intervalNote,
 };
