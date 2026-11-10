@@ -444,7 +444,7 @@ describe("review regressions (R3–R7)", () => {
     const { toPosixPath } = await import("../src/load.ts");
     expect(toPosixPath("lessons\\G1-U3-L03.json")).toBe("lessons/G1-U3-L03.json");
     const codes = mutate((c) => {
-      c.lessons[0]!.file = "lessons\\G1-U3-L03.json";
+      c.lessons.find((l) => l.content.lessonId === "G1-U3-L03")!.file = "lessons\\G1-U3-L03.json";
       node(c, "G1-U3-L03").contentRef = "lessons\\G1-U3-L03.json";
     });
     expect(codes).toEqual([]);

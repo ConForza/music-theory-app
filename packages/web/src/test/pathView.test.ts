@@ -3,7 +3,7 @@ import type { CourseNode, NodeProgress } from "../api/client";
 import { describeNode, lockReason } from "../lib/pathView";
 
 const node = (type: CourseNode["type"], playable = true): CourseNode => ({
-  id: "X", type, unitId: "U", title: "T", objective: "O", optional: false, estimatedMinutes: 5, contentVersion: 1, playable, practiceOnly: false,
+  id: "X", type, unitId: "U", title: "T", objective: "O", optional: false, estimatedMinutes: 5, contentVersion: 1, playable, playKind: playable ? "lesson" : null, sessionKind: null, practiceOnly: false,
 });
 const p = (state: NodeProgress["state"], extra: Partial<NodeProgress> = {}): NodeProgress => ({ state, lockedBy: [], completedAt: null, reviewAvailable: false, replayOpen: false, ...extra });
 

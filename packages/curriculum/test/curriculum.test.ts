@@ -68,7 +68,9 @@ describe("committed curriculum", () => {
 
   it("includes the two required example lessons and one example transposition item", () => {
     const ids = curriculum!.lessons.map((l) => l.content.lessonId).sort();
-    expect(ids).toEqual(["G1-U3-L03", "G5-U4-L06"]);
+    // Brief 05 adds the Grade 1 lessons; the two original examples must still be present.
+    expect(ids).toContain("G1-U3-L03");
+    expect(ids).toContain("G5-U4-L06");
     expect(curriculum!.items.map((i) => i.content.item.templateId)).toContain("t.g5.instrument-transpose");
   });
 

@@ -1,0 +1,3169 @@
+{
+  "schemaVersion": 1,
+  "grade": 2,
+  "title": "Grade 2",
+  "learnerTitle": "New Times and Keys",
+  "summary": "Minim and quaver beats, triplets, rest grouping, two ledger lines, A/B♭/E♭ major and A/E/D harmonic minor.",
+  "units": [
+    {
+      "id": "G2-U1",
+      "grade": 2,
+      "sequence": 1,
+      "title": "New simple time signatures and triplets",
+      "learnerTitle": "New beats and triplets",
+      "summary": "2/2, 3/2, 4/2, 3/8; duple, triple, quadruple; triplets.",
+      "bookSectionIds": [
+        "fs.g2.s01",
+        "fs.g2.s02"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G2-U2",
+      "grade": 2,
+      "sequence": 2,
+      "title": "Grouping notes and rests; two ledger lines",
+      "learnerTitle": "Neat rhythms and high and low notes",
+      "summary": "Note and rest grouping in all Grade 1–2 times; two ledger lines.",
+      "bookSectionIds": [
+        "fs.g2.s03",
+        "fs.g2.s04",
+        "fs.g2.s05"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G2-U3",
+      "grade": 2,
+      "sequence": 3,
+      "title": "A, B flat and E flat major",
+      "learnerTitle": "New major keys",
+      "summary": "Three new major scales, key-signature order and their tonic triads and degrees.",
+      "bookSectionIds": [
+        "fs.g2.s06",
+        "fs.g2.s07",
+        "fs.g2.s08"
+      ],
+      "refinements": []
+    },
+    {
+      "id": "G2-U4",
+      "grade": 2,
+      "sequence": 4,
+      "title": "Relative keys and harmonic minor",
+      "learnerTitle": "Minor keys",
+      "summary": "Minor scales (harmonic form), relative keys, A/E/D minor.",
+      "bookSectionIds": [
+        "fs.g2.s09",
+        "fs.g2.s10",
+        "fs.g2.s12"
+      ],
+      "refinements": [
+        "Book §11 (melodic minor) and the melodic half of §9 are deferred to G3-U4; an optional preview is offered here and is never assessed."
+      ]
+    },
+    {
+      "id": "G2-U5",
+      "grade": 2,
+      "sequence": 5,
+      "title": "Intervals, terms and melody reading",
+      "learnerTitle": "Intervals and expression",
+      "summary": "Interval numbers above the tonic in major and minor keys; new terms and signs in context.",
+      "bookSectionIds": [
+        "fs.g2.s13",
+        "fs.g2.s14"
+      ],
+      "refinements": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "G2-U1-L01",
+      "type": "lesson",
+      "unitId": "G2-U1",
+      "title": "Minim beats: 2/2, 3/2 and 4/2",
+      "objective": "Read time signatures with minim beats and count them.",
+      "conceptIds": [
+        "c.metre.minim-beats"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": []
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s01"
+      ]
+    },
+    {
+      "id": "G2-U1-L02",
+      "type": "lesson",
+      "unitId": "G2-U1",
+      "title": "Quaver beats: 3/8",
+      "objective": "Read 3/8 and compare it with 3/4.",
+      "conceptIds": [
+        "c.metre.quaver-beats"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": []
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s01"
+      ]
+    },
+    {
+      "id": "G2-U1-L03",
+      "type": "lesson",
+      "unitId": "G2-U1",
+      "title": "Duple, triple and quadruple",
+      "objective": "Describe any Grade 1–2 time signature as duple, triple or quadruple, and explain why 2/2 and 4/4 can look alike.",
+      "conceptIds": [
+        "c.metre.beat-classification"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.beat-classification"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s01"
+      ]
+    },
+    {
+      "id": "G2-U1-L04",
+      "type": "lesson",
+      "unitId": "G2-U1",
+      "title": "Triplets",
+      "objective": "Read and write triplets: three notes in the time of two.",
+      "conceptIds": [
+        "c.rhythm.triplets"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.03"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s02"
+      ]
+    },
+    {
+      "id": "G2-U1-L05",
+      "type": "lesson",
+      "unitId": "G2-U1",
+      "title": "Triplets with rests and mixed values",
+      "objective": "Read triplet groups that contain rests or mixed values adding up to three equal notes.",
+      "conceptIds": [
+        "c.rhythm.triplets-mixed"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.04"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets",
+            "c.rhythm.triplets-mixed"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s02"
+      ]
+    },
+    {
+      "id": "G2-U1-P1",
+      "type": "practice",
+      "unitId": "G2-U1",
+      "title": "Practice: New beats and triplets",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.04"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.beat-classification"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets",
+            "c.rhythm.triplets-mixed"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U1-R1",
+      "type": "review",
+      "unitId": "G2-U1",
+      "title": "Review: Grade 1 foundations",
+      "objective": "Revisit earlier material so it stays fresh.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.10",
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13",
+        "abrsm2020.g1.14",
+        "abrsm2020.g1.15",
+        "abrsm2020.g1.16",
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.19",
+        "abrsm2020.g1.20",
+        "abrsm2020.g1.21"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g1.note-value",
+          "conceptIds": [
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.rests"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.rest",
+          "conceptIds": [
+            "c.rhythm.rests"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.tie-dot",
+          "conceptIds": [
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.barlines",
+          "conceptIds": [
+            "c.metre.bars"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-complete",
+          "conceptIds": [
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.grouping",
+          "conceptIds": [
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-read",
+          "conceptIds": [
+            "c.clefs.stave",
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-write",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
+            "c.pitch.middle-c",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.pitch.keyboard",
+            "c.accidentals.signs",
+            "c.pitch.middle-c"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-state",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.tone-semitone",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.key-signature",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.degree",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
+          "templateId": "t.g1.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.interval-number",
+          "conceptIds": [
+            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
+        },
+        {
+          "templateId": "t.g1.terms",
+          "conceptIds": [
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.melody",
+          "conceptIds": [
+            "c.context.melody-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U1-C",
+      "type": "unit_challenge",
+      "unitId": "G2-U1",
+      "title": "Unit challenge: New beats and triplets",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g2-u1",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G2-U2-L01",
+      "type": "lesson",
+      "unitId": "G2-U2",
+      "title": "Grouping notes in the new times",
+      "objective": "Beam notes correctly in 2/2, 3/2, 4/2 and 3/8.",
+      "conceptIds": [
+        "c.metre.grouping-g2"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.note-grouping",
+          "conceptIds": [
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s03"
+      ]
+    },
+    {
+      "id": "G2-U2-L02",
+      "type": "lesson",
+      "unitId": "G2-U2",
+      "title": "A new rest for each silent beat",
+      "objective": "Write rests so that each silent beat starts with a new rest.",
+      "conceptIds": [
+        "c.metre.rest-grouping-beats"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s04"
+      ]
+    },
+    {
+      "id": "G2-U2-L03",
+      "type": "lesson",
+      "unitId": "G2-U2",
+      "title": "Two-beat rests in four-beat bars",
+      "objective": "Use two-beat rests for the first or last half of a four-beat bar, but not the middle.",
+      "conceptIds": [
+        "c.metre.rest-grouping-half-bar"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats",
+            "c.metre.rest-grouping-half-bar"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s04"
+      ]
+    },
+    {
+      "id": "G2-U2-L04",
+      "type": "lesson",
+      "unitId": "G2-U2",
+      "title": "Rests for part of a beat",
+      "objective": "Write rests for half-beats and quarter-beats in the right order.",
+      "conceptIds": [
+        "c.metre.rest-grouping-subdivisions"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats",
+            "c.metre.rest-grouping-half-bar",
+            "c.metre.rest-grouping-subdivisions"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s04"
+      ]
+    },
+    {
+      "id": "G2-U2-L05",
+      "type": "lesson",
+      "unitId": "G2-U2",
+      "title": "Two ledger lines",
+      "objective": "Read and write notes with up to two ledger lines above or below each stave.",
+      "conceptIds": [
+        "c.pitch.ledger-two"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.05"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-two"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-write",
+          "conceptIds": [
+            "c.pitch.ledger-two"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s05"
+      ]
+    },
+    {
+      "id": "G2-U2-L06",
+      "type": "lesson",
+      "unitId": "G2-U2",
+      "title": "The same note in two clefs",
+      "objective": "Recognise the same pitch written with ledger lines in one clef or on the stave in the other.",
+      "conceptIds": [
+        "c.clefs.same-pitch-treble-bass"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.05"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-two",
+            "c.clefs.same-pitch-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s05"
+      ]
+    },
+    {
+      "id": "G2-U2-P1",
+      "type": "practice",
+      "unitId": "G2-U2",
+      "title": "Practice: Neat rhythms and high and low notes",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.02",
+        "abrsm2020.g2.05"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.note-grouping",
+          "conceptIds": [
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats",
+            "c.metre.rest-grouping-half-bar",
+            "c.metre.rest-grouping-subdivisions"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-two",
+            "c.clefs.same-pitch-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-write",
+          "conceptIds": [
+            "c.pitch.ledger-two"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U2-R1",
+      "type": "review",
+      "unitId": "G2-U2",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.04"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.beat-classification"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets",
+            "c.rhythm.triplets-mixed"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U2-C",
+      "type": "unit_challenge",
+      "unitId": "G2-U2",
+      "title": "Unit challenge: Neat rhythms and high and low notes",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g2-u2",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G2-U3-L01",
+      "type": "lesson",
+      "unitId": "G2-U3",
+      "title": "A major",
+      "objective": "Build A major and explain why it needs three sharps.",
+      "conceptIds": [
+        "c.scales.major-a"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-major",
+          "conceptIds": [
+            "c.scales.major-a"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s06"
+      ]
+    },
+    {
+      "id": "G2-U3-L02",
+      "type": "lesson",
+      "unitId": "G2-U3",
+      "title": "B flat and E flat major",
+      "objective": "Build B♭ and E♭ major — scales that start on a black key.",
+      "conceptIds": [
+        "c.scales.major-bb-eb"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-major",
+          "conceptIds": [
+            "c.scales.major-a",
+            "c.scales.major-bb-eb"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s07"
+      ]
+    },
+    {
+      "id": "G2-U3-L03",
+      "type": "lesson",
+      "unitId": "G2-U3",
+      "title": "Key signatures up to three sharps or flats",
+      "objective": "Write major key signatures in the correct order and positions in both clefs.",
+      "conceptIds": [
+        "c.keys.signatures-g2-major"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s08"
+      ]
+    },
+    {
+      "id": "G2-U3-L04",
+      "type": "lesson",
+      "unitId": "G2-U3",
+      "title": "Tonic triads and degrees in the new major keys",
+      "objective": "Build tonic triads and name degrees by number in A, B♭ and E♭ major.",
+      "conceptIds": [
+        "c.chords.tonic-triad-g2-major"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.degree",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "degreeNaming": "number"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s08"
+      ]
+    },
+    {
+      "id": "G2-U3-P1",
+      "type": "practice",
+      "unitId": "G2-U3",
+      "title": "Practice: New major keys",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.08",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-major",
+          "conceptIds": [
+            "c.scales.major-a",
+            "c.scales.major-bb-eb"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.degree",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "degreeNaming": "number"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U3-R1",
+      "type": "review",
+      "unitId": "G2-U3",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.04",
+        "abrsm2020.g2.02",
+        "abrsm2020.g2.05"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.beat-classification"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets",
+            "c.rhythm.triplets-mixed"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.note-grouping",
+          "conceptIds": [
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats",
+            "c.metre.rest-grouping-half-bar",
+            "c.metre.rest-grouping-subdivisions"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-two",
+            "c.clefs.same-pitch-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-write",
+          "conceptIds": [
+            "c.pitch.ledger-two"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U3-C",
+      "type": "unit_challenge",
+      "unitId": "G2-U3",
+      "title": "Unit challenge: New major keys",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g2-u3",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G2-U4-L01",
+      "type": "lesson",
+      "unitId": "G2-U4",
+      "title": "What makes a scale minor?",
+      "objective": "Hear and see the difference between major and minor, focusing on the semitone between degrees 2 and 3.",
+      "conceptIds": [
+        "c.scales.minor-concept"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.07"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-minor",
+          "conceptIds": [
+            "c.scales.minor-concept"
+          ],
+          "scope": {
+            "keys": [],
+            "minorForms": [],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s09"
+      ]
+    },
+    {
+      "id": "G2-U4-L02",
+      "type": "lesson",
+      "unitId": "G2-U4",
+      "title": "Relative major and minor",
+      "objective": "Find the relative minor of C, G and F major and the relative major of A, E and D minor.",
+      "conceptIds": [
+        "c.keys.relative"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.06"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.relative-key",
+          "conceptIds": [
+            "c.keys.relative"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s12"
+      ]
+    },
+    {
+      "id": "G2-U4-L03",
+      "type": "lesson",
+      "unitId": "G2-U4",
+      "title": "Harmonic minor: raising the 7th",
+      "objective": "Build a harmonic minor scale by raising the 7th degree.",
+      "conceptIds": [
+        "c.scales.minor-harmonic"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-minor",
+          "conceptIds": [
+            "c.scales.minor-concept",
+            "c.scales.minor-harmonic"
+          ],
+          "scope": {
+            "keys": [],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s09",
+        "fs.g2.s10"
+      ]
+    },
+    {
+      "id": "G2-U4-L04",
+      "type": "lesson",
+      "unitId": "G2-U4",
+      "title": "A, E and D harmonic minor",
+      "objective": "Write A, E and D harmonic minor in both clefs, with and without key signatures.",
+      "conceptIds": [
+        "c.scales.minor-harmonic-g2"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.09"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-minor",
+          "conceptIds": [
+            "c.scales.minor-concept",
+            "c.scales.minor-harmonic",
+            "c.scales.minor-harmonic-g2"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s10"
+      ]
+    },
+    {
+      "id": "G2-U4-L05",
+      "type": "lesson",
+      "unitId": "G2-U4",
+      "title": "Minor key signatures and tonic triads",
+      "objective": "Write minor key signatures and tonic triads, and name degrees in A, E and D minor.",
+      "conceptIds": [
+        "c.keys.minor-g2"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.09",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.degree",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "degreeNaming": "number"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s12"
+      ]
+    },
+    {
+      "id": "G2-U4-E1",
+      "type": "enrichment",
+      "unitId": "G2-U4",
+      "title": "Coming later: the melodic minor",
+      "objective": "Optional preview of the melodic minor scale, which becomes required in Grade 3.",
+      "conceptIds": [
+        "c.scales.minor-melodic-preview"
+      ],
+      "outcomeIds": [],
+      "reviewOutcomeIds": [],
+      "exercises": [],
+      "unlockAfter": [
+        "G2-U4-L03"
+      ],
+      "optional": true,
+      "estimatedMinutes": 4,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s09",
+        "fs.g2.s11"
+      ]
+    },
+    {
+      "id": "G2-U4-P1",
+      "type": "practice",
+      "unitId": "G2-U4",
+      "title": "Practice: Minor keys",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.06",
+        "abrsm2020.g2.09",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.scale-build-minor",
+          "conceptIds": [
+            "c.scales.minor-concept",
+            "c.scales.minor-harmonic",
+            "c.scales.minor-harmonic-g2"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.relative-key",
+          "conceptIds": [
+            "c.keys.relative"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.degree",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "degreeNaming": "number"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U4-R1",
+      "type": "review",
+      "unitId": "G2-U4",
+      "title": "Review: earlier units",
+      "objective": "Spaced review of earlier units in this grade, mixed with the new unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.04",
+        "abrsm2020.g2.02",
+        "abrsm2020.g2.05",
+        "abrsm2020.g2.08",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.beat-classification"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets",
+            "c.rhythm.triplets-mixed"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.note-grouping",
+          "conceptIds": [
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats",
+            "c.metre.rest-grouping-half-bar",
+            "c.metre.rest-grouping-subdivisions"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-two",
+            "c.clefs.same-pitch-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-write",
+          "conceptIds": [
+            "c.pitch.ledger-two"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.scale-build-major",
+          "conceptIds": [
+            "c.scales.major-a",
+            "c.scales.major-bb-eb"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.degree",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "degreeNaming": "number"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U4-C",
+      "type": "unit_challenge",
+      "unitId": "G2-U4",
+      "title": "Unit challenge: Minor keys",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g2-u4",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G2-U5-L01",
+      "type": "lesson",
+      "unitId": "G2-U5",
+      "title": "Intervals in the new keys",
+      "objective": "Give the number of intervals above the tonic in all Grade 2 major and minor keys.",
+      "conceptIds": [
+        "c.intervals.above-tonic-number-g2"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.interval-number",
+          "conceptIds": [
+            "c.intervals.above-tonic-number-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s13"
+      ]
+    },
+    {
+      "id": "G2-U5-L02",
+      "type": "lesson",
+      "unitId": "G2-U5",
+      "title": "More tempo and character words",
+      "objective": "Understand the Grade 2 tempo and character terms.",
+      "conceptIds": [
+        "c.terms.g2-words"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.terms",
+          "conceptIds": [
+            "c.terms.g2-words"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s14"
+      ]
+    },
+    {
+      "id": "G2-U5-L03",
+      "type": "lesson",
+      "unitId": "G2-U5",
+      "title": "Accents and touch signs",
+      "objective": "Recognise accents, semi-staccato, staccatissimo and tenuto signs.",
+      "conceptIds": [
+        "c.terms.g2-signs"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.terms",
+          "conceptIds": [
+            "c.terms.g2-words",
+            "c.terms.g2-signs"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g2.s14"
+      ]
+    },
+    {
+      "id": "G2-U5-L04",
+      "type": "lesson",
+      "unitId": "G2-U5",
+      "title": "Looking closely at a melody (Grade 2)",
+      "objective": "Answer questions about an original melody using Grades 1–2 knowledge.",
+      "conceptIds": [
+        "c.context.melody-g2"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g2.melody",
+          "conceptIds": [
+            "c.context.melody-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": []
+    },
+    {
+      "id": "G2-U5-P1",
+      "type": "practice",
+      "unitId": "G2-U5",
+      "title": "Practice: Intervals and expression",
+      "objective": "Mixed independent practice of everything in this unit.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.12",
+        "abrsm2020.g2.13",
+        "abrsm2020.g1.21"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g2.interval-number",
+          "conceptIds": [
+            "c.intervals.above-tonic-number-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g2.terms",
+          "conceptIds": [
+            "c.terms.g2-words",
+            "c.terms.g2-signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g2.melody",
+          "conceptIds": [
+            "c.context.melody-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U5-R1",
+      "type": "review",
+      "unitId": "G2-U5",
+      "title": "Grade review",
+      "objective": "Cumulative spaced review of the whole grade before the unit challenge and grade assessment.",
+      "reviewOutcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.04",
+        "abrsm2020.g2.02",
+        "abrsm2020.g2.05",
+        "abrsm2020.g2.08",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11",
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.06",
+        "abrsm2020.g2.09",
+        "abrsm2020.g2.12",
+        "abrsm2020.g2.13",
+        "abrsm2020.g1.21"
+      ],
+      "exercises": [
+        {
+          "templateId": "t.g1.melody",
+          "conceptIds": [
+            "c.context.melody-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g2.time-signature",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.beat-classification"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.bar-complete",
+          "conceptIds": [
+            "c.metre.minim-beats",
+            "c.metre.quaver-beats",
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.triplet",
+          "conceptIds": [
+            "c.rhythm.triplets",
+            "c.rhythm.triplets-mixed"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.note-grouping",
+          "conceptIds": [
+            "c.metre.grouping-g2"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.rest-grouping",
+          "conceptIds": [
+            "c.metre.rest-grouping-beats",
+            "c.metre.rest-grouping-half-bar",
+            "c.metre.rest-grouping-subdivisions"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-two",
+            "c.clefs.same-pitch-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.ledger-write",
+          "conceptIds": [
+            "c.pitch.ledger-two"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.scale-build-major",
+          "conceptIds": [
+            "c.scales.major-a",
+            "c.scales.major-bb-eb"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.scale-build-minor",
+          "conceptIds": [
+            "c.scales.minor-concept",
+            "c.scales.minor-harmonic",
+            "c.scales.minor-harmonic-g2"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g2.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.relative-key",
+          "conceptIds": [
+            "c.keys.relative"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g2.degree",
+          "conceptIds": [
+            "c.chords.tonic-triad-g2-major",
+            "c.keys.minor-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
+          "templateId": "t.g2.interval-number",
+          "conceptIds": [
+            "c.intervals.above-tonic-number-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g2.terms",
+          "conceptIds": [
+            "c.terms.g2-words",
+            "c.terms.g2-signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g2.melody",
+          "conceptIds": [
+            "c.context.melody-g2"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "planned"
+    },
+    {
+      "id": "G2-U5-C",
+      "type": "unit_challenge",
+      "unitId": "G2-U5",
+      "title": "Unit challenge: Intervals and expression",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g2-u5",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    },
+    {
+      "id": "G2-A",
+      "type": "grade_assessment",
+      "unitId": null,
+      "title": "Grade 2 assessment",
+      "objective": "An independent, hint-free assessment that samples every Grade 2 outcome and earlier essentials.",
+      "assessmentId": "a.g2",
+      "optional": false,
+      "estimatedMinutes": 25,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "exercises": []
+    }
+  ]
+}

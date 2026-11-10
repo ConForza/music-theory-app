@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "grade": 1,
+  "concepts": [
+    {
+      "id": "c.rhythm.beat",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "The beat",
+      "summary": "A steady pulse that music is measured against.",
+      "prerequisiteIds": [],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "supporting",
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.values-long",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "Crotchets, minims and semibreves",
+      "summary": "Crotchet = 1 beat, minim = 2, semibreve = 4 (in crotchet beats); British and American names.",
+      "prerequisiteIds": [
+        "c.rhythm.beat"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.values-short",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "Quavers and semiquavers",
+      "summary": "Two quavers or four semiquavers last as long as one crotchet.",
+      "prerequisiteIds": [
+        "c.rhythm.values-long"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.beams",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "Flags and beams",
+      "summary": "Short notes may be flagged singly or beamed together; the value is unchanged.",
+      "prerequisiteIds": [
+        "c.rhythm.values-short"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational",
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.rests",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "Rests",
+      "summary": "Each note value has an equivalent rest; semibreve rest hangs, minim rest sits.",
+      "prerequisiteIds": [
+        "c.rhythm.values-short"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.02"
+      ]
+    },
+    {
+      "id": "c.rhythm.ties",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "Ties",
+      "summary": "A tie joins neighbouring notes of the same pitch into one sound.",
+      "prerequisiteIds": [
+        "c.rhythm.values-long"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.03"
+      ]
+    },
+    {
+      "id": "c.rhythm.dots",
+      "grade": 1,
+      "domain": "rhythm",
+      "title": "Single dots",
+      "summary": "A dot adds half the note's own value; a dot cannot cross a bar-line but a tie can.",
+      "prerequisiteIds": [
+        "c.rhythm.ties",
+        "c.rhythm.values-short"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.04"
+      ]
+    },
+    {
+      "id": "c.metre.bars",
+      "grade": 1,
+      "domain": "metre",
+      "title": "Bars and bar-lines",
+      "summary": "Beats fall into regular groups separated by bar-lines; music ends with a double bar-line.",
+      "prerequisiteIds": [
+        "c.rhythm.values-long"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.06"
+      ]
+    },
+    {
+      "id": "c.metre.simple-crotchet",
+      "grade": 1,
+      "domain": "metre",
+      "title": "2/4, 3/4 and 4/4",
+      "summary": "Top number = beats per bar; bottom 4 = crotchet beats; C = common time.",
+      "prerequisiteIds": [
+        "c.metre.bars"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational",
+        "rules.metre.classification"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.05"
+      ]
+    },
+    {
+      "id": "c.metre.bar-completion",
+      "grade": 1,
+      "domain": "metre",
+      "title": "Completing bars",
+      "summary": "Every bar's values add up to the time signature.",
+      "prerequisiteIds": [
+        "c.metre.simple-crotchet",
+        "c.rhythm.dots",
+        "c.rhythm.rests"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.06"
+      ]
+    },
+    {
+      "id": "c.metre.grouping-g1",
+      "grade": 1,
+      "domain": "metre",
+      "title": "Grouping in 2/4, 3/4, 4/4",
+      "summary": "Beam within beats; in 4/4 keep the halves of the bar visible; some groupings have equally valid alternatives.",
+      "prerequisiteIds": [
+        "c.metre.bar-completion",
+        "c.rhythm.beams"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.07"
+      ]
+    },
+    {
+      "id": "c.metre.ties-in-bars",
+      "grade": 1,
+      "domain": "metre",
+      "title": "Avoiding unnecessary ties",
+      "summary": "Use one note instead of tied notes within a bar where that is clearer; ties may be needed across beats.",
+      "prerequisiteIds": [
+        "c.metre.grouping-g1",
+        "c.rhythm.ties"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.07"
+      ]
+    },
+    {
+      "id": "c.metre.rests-in-bars-g1",
+      "grade": 1,
+      "domain": "metre",
+      "title": "Rests in simple bars",
+      "summary": "Whole-bar rest convention; a rest for each silent beat in simple cases.",
+      "prerequisiteIds": [
+        "c.metre.bar-completion"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.07"
+      ]
+    },
+    {
+      "id": "c.pitch.letter-names",
+      "grade": 1,
+      "domain": "pitch",
+      "title": "The musical alphabet",
+      "summary": "Seven letter names A–G repeat in each octave.",
+      "prerequisiteIds": [],
+      "rulesetIds": [
+        "rules.pitch.spelling"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.pitch.keyboard",
+      "grade": 1,
+      "domain": "pitch",
+      "title": "The keyboard",
+      "summary": "White keys are found from the groups of two and three black keys; pitch rises to the right.",
+      "prerequisiteIds": [
+        "c.pitch.letter-names"
+      ],
+      "rulesetIds": [
+        "rules.keyboard.layout"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.clefs.stave",
+      "grade": 1,
+      "domain": "clefs",
+      "title": "The stave",
+      "summary": "Five lines and four spaces counted from the bottom; 'on a line' means the line passes through the note-head.",
+      "prerequisiteIds": [
+        "c.pitch.letter-names"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.08"
+      ]
+    },
+    {
+      "id": "c.clefs.treble-lines",
+      "grade": 1,
+      "domain": "clefs",
+      "title": "Treble clef line notes",
+      "summary": "The G clef curls around the second line (G); line notes are E G B D F.",
+      "prerequisiteIds": [
+        "c.clefs.stave"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.clefs.treble-spaces",
+      "grade": 1,
+      "domain": "clefs",
+      "title": "Treble clef space notes",
+      "summary": "Space notes are F A C E.",
+      "prerequisiteIds": [
+        "c.clefs.treble-lines"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.clefs.bass",
+      "grade": 1,
+      "domain": "clefs",
+      "title": "Bass clef notes",
+      "summary": "The F clef's dots surround the fourth line (F); line notes G B D F A, space notes A C E G.",
+      "prerequisiteIds": [
+        "c.clefs.stave"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.pitch.middle-c",
+      "grade": 1,
+      "domain": "pitch",
+      "title": "Middle C and one ledger line",
+      "summary": "Middle C sits on one ledger line below the treble stave and above the bass stave — the same pitch.",
+      "prerequisiteIds": [
+        "c.clefs.treble-lines",
+        "c.clefs.bass",
+        "c.pitch.keyboard"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.pitch.note-writing",
+      "grade": 1,
+      "domain": "pitch",
+      "title": "Writing notes",
+      "summary": "Stem direction depends on position; flags always point right; clef on every stave, time signature once.",
+      "prerequisiteIds": [
+        "c.clefs.treble-spaces",
+        "c.clefs.bass",
+        "c.rhythm.values-short"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ]
+    },
+    {
+      "id": "c.accidentals.signs",
+      "grade": 1,
+      "domain": "accidentals",
+      "title": "Sharp, flat and natural",
+      "summary": "A sharp raises and a flat lowers by a semitone; a natural restores the white note.",
+      "prerequisiteIds": [
+        "c.pitch.keyboard"
+      ],
+      "rulesetIds": [
+        "rules.keyboard.layout",
+        "rules.pitch.spelling"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ]
+    },
+    {
+      "id": "c.accidentals.on-stave",
+      "grade": 1,
+      "domain": "accidentals",
+      "title": "Writing accidentals",
+      "summary": "Accidentals are written before the note on its line or space.",
+      "prerequisiteIds": [
+        "c.accidentals.signs",
+        "c.clefs.treble-spaces",
+        "c.clefs.bass"
+      ],
+      "rulesetIds": [
+        "rules.pitch.spelling",
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ]
+    },
+    {
+      "id": "c.accidentals.bar-rule",
+      "grade": 1,
+      "domain": "accidentals",
+      "title": "Accidentals in a bar",
+      "summary": "An accidental lasts to the end of the bar on that line/space; ties carry it over the bar-line.",
+      "prerequisiteIds": [
+        "c.accidentals.on-stave",
+        "c.metre.bars",
+        "c.rhythm.ties"
+      ],
+      "rulesetIds": [
+        "rules.accidental.bar-state"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ]
+    },
+    {
+      "id": "c.accidentals.cancellation",
+      "grade": 1,
+      "domain": "accidentals",
+      "title": "Cancellation",
+      "summary": "A natural cancels an earlier accidental within the bar; repeated accidentals are unnecessary.",
+      "prerequisiteIds": [
+        "c.accidentals.bar-rule"
+      ],
+      "rulesetIds": [
+        "rules.accidental.bar-state"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ]
+    },
+    {
+      "id": "c.pitch.tones-semitones",
+      "grade": 1,
+      "domain": "pitch",
+      "title": "Semitones and tones",
+      "summary": "A semitone is the nearest neighbour key; a tone is two semitones.",
+      "prerequisiteIds": [
+        "c.accidentals.signs"
+      ],
+      "rulesetIds": [
+        "rules.keyboard.layout",
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.11"
+      ]
+    },
+    {
+      "id": "c.scales.major-pattern",
+      "grade": 1,
+      "domain": "scales",
+      "title": "The major scale pattern",
+      "summary": "One note per letter; semitones between degrees 3–4 and 7–8, tones elsewhere.",
+      "prerequisiteIds": [
+        "c.pitch.tones-semitones",
+        "c.clefs.treble-spaces",
+        "c.clefs.bass"
+      ],
+      "rulesetIds": [
+        "rules.scale.major"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ]
+    },
+    {
+      "id": "c.scales.major-sharp-g1",
+      "grade": 1,
+      "domain": "scales",
+      "title": "G and D major",
+      "summary": "G major needs F♯; D major needs F♯ and C♯ — never respelt as flats.",
+      "prerequisiteIds": [
+        "c.scales.major-pattern",
+        "c.accidentals.on-stave"
+      ],
+      "rulesetIds": [
+        "rules.scale.major"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ]
+    },
+    {
+      "id": "c.scales.major-f",
+      "grade": 1,
+      "domain": "scales",
+      "title": "F major",
+      "summary": "F major needs B♭ to keep the semitone between degrees 3 and 4.",
+      "prerequisiteIds": [
+        "c.scales.major-pattern",
+        "c.accidentals.on-stave"
+      ],
+      "rulesetIds": [
+        "rules.scale.major"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ]
+    },
+    {
+      "id": "c.keys.signature-concept",
+      "grade": 1,
+      "domain": "keys",
+      "title": "Keys and key signatures",
+      "summary": "A key signature applies a sharp/flat to every note of that letter, in any octave.",
+      "prerequisiteIds": [
+        "c.scales.major-sharp-g1",
+        "c.scales.major-f",
+        "c.accidentals.bar-rule"
+      ],
+      "rulesetIds": [
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.13"
+      ]
+    },
+    {
+      "id": "c.keys.signatures-g1",
+      "grade": 1,
+      "domain": "keys",
+      "title": "Key signatures of C, G, D, F major",
+      "summary": "None; F♯; F♯ C♯; B♭ — on the exact lines/spaces for each clef.",
+      "prerequisiteIds": [
+        "c.keys.signature-concept"
+      ],
+      "rulesetIds": [
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.13"
+      ]
+    },
+    {
+      "id": "c.scales.writing-g1",
+      "grade": 1,
+      "domain": "scales",
+      "title": "Writing Grade 1 scales",
+      "summary": "Scales in both clefs, ascending/descending, with accidentals or key signature.",
+      "prerequisiteIds": [
+        "c.keys.signatures-g1"
+      ],
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13"
+      ]
+    },
+    {
+      "id": "c.scales.degree-numbers",
+      "grade": 1,
+      "domain": "scales",
+      "title": "Degrees by number",
+      "summary": "Degrees are numbered from the tonic upward, also in descending scales; the top note is 1 again.",
+      "prerequisiteIds": [
+        "c.scales.major-pattern"
+      ],
+      "rulesetIds": [
+        "rules.scale.degrees"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.15"
+      ]
+    },
+    {
+      "id": "c.chords.tonic-triad",
+      "grade": 1,
+      "domain": "chords",
+      "title": "Tonic triad",
+      "summary": "Degrees 1, 3 and 5 sounded together, in root position.",
+      "prerequisiteIds": [
+        "c.scales.degree-numbers",
+        "c.keys.signatures-g1"
+      ],
+      "rulesetIds": [
+        "rules.chord.triad"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.14"
+      ]
+    },
+    {
+      "id": "c.intervals.number",
+      "grade": 1,
+      "domain": "intervals",
+      "title": "Interval number",
+      "summary": "Count letter names inclusively; 8th = octave; harmonic vs melodic intervals.",
+      "prerequisiteIds": [
+        "c.pitch.letter-names",
+        "c.scales.degree-numbers"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.16"
+      ]
+    },
+    {
+      "id": "c.intervals.above-tonic-number",
+      "grade": 1,
+      "domain": "intervals",
+      "title": "Intervals above the tonic (number)",
+      "summary": "Lower note is the tonic of a Grade 1 key; upper note from that scale.",
+      "prerequisiteIds": [
+        "c.intervals.number",
+        "c.keys.signatures-g1"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.16"
+      ]
+    },
+    {
+      "id": "c.terms.tempo-g1",
+      "grade": 1,
+      "domain": "terms",
+      "title": "Grade 1 tempo terms",
+      "summary": "Common Italian tempo words, changes of tempo and metronome marks.",
+      "prerequisiteIds": [],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.17"
+      ]
+    },
+    {
+      "id": "c.terms.dynamics-g1",
+      "grade": 1,
+      "domain": "terms",
+      "title": "Grade 1 dynamics",
+      "summary": "pp to ff, crescendo/diminuendo words and hairpins.",
+      "prerequisiteIds": [],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.18"
+      ]
+    },
+    {
+      "id": "c.terms.directions-g1",
+      "grade": 1,
+      "domain": "terms",
+      "title": "Grade 1 performance directions",
+      "summary": "Repeats, D.C./D.S., fine, pause, octave signs, slurs vs ties.",
+      "prerequisiteIds": [
+        "c.rhythm.ties"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.19"
+      ]
+    },
+    {
+      "id": "c.terms.articulation-g1",
+      "grade": 1,
+      "domain": "terms",
+      "title": "Grade 1 articulation",
+      "summary": "Staccato, accent, legato and slurs.",
+      "prerequisiteIds": [],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.20"
+      ]
+    },
+    {
+      "id": "c.context.melody-g1",
+      "grade": 1,
+      "domain": "context",
+      "title": "Reading a melody (Grade 1)",
+      "summary": "Find time signature, key, bars, intervals, terms and note values in a real melody.",
+      "prerequisiteIds": [
+        "c.terms.tempo-g1",
+        "c.terms.dynamics-g1",
+        "c.terms.directions-g1",
+        "c.terms.articulation-g1",
+        "c.intervals.above-tonic-number",
+        "c.metre.grouping-g1",
+        "c.keys.signatures-g1"
+      ],
+      "rulesetIds": [
+        "rules.score.observation"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ]
+    }
+  ]
+}
