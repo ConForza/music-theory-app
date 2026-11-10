@@ -240,7 +240,7 @@ export function Question({
         {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} labels="positions" />}
         {item.score && <ScoreView score={item.score} />}
         <form onSubmit={(e) => { e.preventDefault(); void check(); }} id="answer-form">
-          <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct && !final) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct) || (final && Boolean(result))} marks={result?.marks} parts={result?.parts} />
+          <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct && !final) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct) || (final && Boolean(result))} marks={result?.marks} parts={result?.parts} exam={final} />
         </form>
         {item.hintCount > 0 && !result && (
           <div className="hints">

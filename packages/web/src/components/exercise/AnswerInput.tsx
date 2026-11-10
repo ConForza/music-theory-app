@@ -28,6 +28,8 @@ export interface AnswerInputProps {
   disabled: boolean;
   marks?: Array<{ index: number; ok: boolean }>;
   parts?: Array<{ id: string; correct: boolean; reason: string | null }>;
+  /** Challenge and assessment: no hint-like help (e.g. how much of a bar is still missing). */
+  exam?: boolean;
 }
 
 /** True when the response is complete enough to check (e.g. a time signature needs both numbers). */
@@ -96,7 +98,7 @@ function toWrittenGiven(clef: music.Clef, key: string | undefined, given: string
   });
 }
 
-function SimpleAnswer({ input, value, onChange, disabled, marks, name }: { input: Simple; value: SimpleResponse | null; onChange: (r: SimpleResponse | null) => void; disabled: boolean; marks?: AnswerInputProps["marks"]; name: string }) {
+function SimpleAnswer({ input, value, onChange, disabled, marks, name, exam }: { exam?: boolean; input: Simple; value: SimpleResponse | null; onChange: (r: SimpleResponse | null) => void; disabled: boolean; marks?: AnswerInputProps["marks"]; name: string }) {
   const p = { value: value as never, onChange: onChange as never, disabled, name };
   switch (input.kind) {
     case "choice":
@@ -122,7 +124,7 @@ function SimpleAnswer({ input, value, onChange, disabled, marks, name }: { input
     case "progression":
       return <ProgressionInput input={input} {...p} />;
     case "rhythm-builder":
-      return <RhythmBuilder input={input} value={value as never} onChange={onChange as never} disabled={disabled} />;
+      return <RhythmBuilder input={input} value={value as never} onChange={onChange as never} disabled={disabled} exam={exam} />;
     case "rhythm-grouping":
       return <GroupingEditor input={input} value={value as never} onChange={onChange as never} disabled={disabled} />;
     case "barlines":
@@ -135,9 +137,9 @@ function SimpleAnswer({ input, value, onChange, disabled, marks, name }: { input
   }
 }
 
-export function AnswerInput({ input, value, onChange, disabled, marks, parts }: AnswerInputProps) {
+export function AnswerInput({ input, value, onChange, disabled, marks, parts, exam }: AnswerInputProps) {
   const name = useId();
-  if (input.kind !== "composite") return <SimpleAnswer input={input} value={value as SimpleResponse | null} onChange={onChange} disabled={disabled} marks={marks} name={name} />;
+  if (input.kind !== "composite") return <SimpleAnswer input={input} value={value as SimpleResponse | null} onChange={onChange} disabled={disabled} marks={marks} name={name} exam={exam} />;
   const current = value?.kind === "composite" ? value.parts : {};
   return (
     <ol className="composite">
@@ -151,7 +153,7 @@ export function AnswerInput({ input, value, onChange, disabled, marks, parts }: 
               if (r) next[part.id] = r;
               else delete next[part.id];
               onChange(Object.keys(next).length ? { kind: "composite", parts: next } : null);
-            }} disabled={disabled} name={`${name}-${part.id}`} />
+            }} disabled={disabled} name={`${name}-${part.id}`} exam={exam} />
             {res && !res.correct && res.reason && <p className="part-reason">{res.reason}</p>}
           </li>
         );
