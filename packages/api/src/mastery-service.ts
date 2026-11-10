@@ -50,6 +50,7 @@ interface DbRow {
   correct: number;
   item_id: string;
   question_key: string;
+  fresh: number;
   template_id: string;
   template_version: number;
   seed: number | null;
@@ -69,6 +70,7 @@ const toRow = (r: DbRow): EvidenceRow => ({
   correct: r.correct === 1,
   itemId: r.item_id,
   questionKey: r.question_key,
+  fresh: r.fresh === 1,
   templateId: r.template_id,
   templateVersion: r.template_version,
   seed: r.seed,
@@ -97,12 +99,14 @@ export class MasteryService {
     const lt = learnerTime(this.db, this.clock, userId);
     const insert = this.db.prepare(
       `INSERT OR IGNORE INTO mastery_evidence
-        (user_id,id,concept_id,source,counts,correct,item_id,question_key,template_id,template_version,seed,node_id,session_id,mistake_category,content_version,curriculum_version,rules_version,timezone,local_date,occurred_at)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        (user_id,id,concept_id,source,counts,correct,item_id,question_key,fresh,template_id,template_version,seed,node_id,session_id,mistake_category,content_version,curriculum_version,rules_version,timezone,local_date,occurred_at)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     );
     const counts = ev.source === "independent-step" || ev.source === "review-item";
+    // Decided here, inside the caller's transaction, before this answer is written: commit order decides novelty.
+    const fresh = this.isFresh(userId, ev.questionKey) ? 1 : 0;
     for (const conceptId of ev.conceptIds) {
-      insert.run(userId, ev.id, conceptId, ev.source, counts ? 1 : 0, ev.correct ? 1 : 0, ev.itemId, ev.questionKey, ev.templateId, ev.templateVersion, ev.seed ?? null, ev.nodeId ?? null, ev.sessionId ?? null, ev.mistakeCategory ?? null, ev.contentVersion ?? null, this.course.version, this.rules.rulesVersion, lt.tz, lt.date, lt.iso);
+      insert.run(userId, ev.id, conceptId, ev.source, counts ? 1 : 0, ev.correct ? 1 : 0, ev.itemId, ev.questionKey, fresh, ev.templateId, ev.templateVersion, ev.seed ?? null, ev.nodeId ?? null, ev.sessionId ?? null, ev.mistakeCategory ?? null, ev.contentVersion ?? null, this.course.version, this.rules.rulesVersion, lt.tz, lt.date, lt.iso);
       this.refresh(userId, conceptId, lt.date);
     }
     return ev.conceptIds;
@@ -122,7 +126,7 @@ export class MasteryService {
 
   /** Recompute one concept from its evidence and store the projection. */
   refresh(userId: string, conceptId: string, today: string): ConceptMastery {
-    const m = foldConcept(conceptId, this.rowsFor(userId, conceptId).map(toRow), this.rules, today, this.exposures(userId));
+    const m = foldConcept(conceptId, this.rowsFor(userId, conceptId).map(toRow), this.rules, today);
     this.db
       .prepare(
         `INSERT INTO concept_mastery (user_id,concept_id,state,highest_state,rules_version,next_due_date,interval_index,lapses,detail,updated_at)
@@ -151,12 +155,10 @@ export class MasteryService {
     return Boolean(this.db.prepare("SELECT 1 FROM mastery_evidence WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey)) || Boolean(this.db.prepare("SELECT 1 FROM question_exposure WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey));
   }
 
-  /** Was this evidence row the first time the learner met the question (ledger and practice exposure both considered)? */
+  /** Did this evidence row earn fresh status when it was recorded (and is it the first row for the question)? */
   creditedFresh(userId: string, questionKey: string, evidenceId: string): boolean {
-    const first = this.db.prepare("SELECT id, occurred_at FROM mastery_evidence WHERE user_id = ? AND question_key = ? ORDER BY rowid LIMIT 1").get(userId, questionKey) as { id: string; occurred_at: string } | undefined;
-    if (!first || first.id !== evidenceId) return false;
-    const exposed = this.exposures(userId).get(questionKey);
-    return exposed === undefined || !(exposed < first.occurred_at);
+    const first = this.db.prepare("SELECT id, fresh FROM mastery_evidence WHERE user_id = ? AND question_key = ? ORDER BY rowid LIMIT 1").get(userId, questionKey) as { id: string; fresh: number } | undefined;
+    return Boolean(first && first.id === evidenceId && first.fresh === 1);
   }
 
   /** The question identities a learner has met (for a concept's evidence, plus anything seen in practice) so review can prefer new ones. */
@@ -174,8 +176,7 @@ export class MasteryService {
       list.push(toRow(r));
       byConcept.set(r.concept_id, list);
     }
-    const ex = this.exposures(userId);
-    const out = new Map([...byConcept].map(([id, rows]) => [id, foldConcept(id, rows, this.rules, today, ex)]));
+    const out = new Map([...byConcept].map(([id, rows]) => [id, foldConcept(id, rows, this.rules, today)]));
     this.addTaughtButUnrecorded(userId, today, out);
     return out;
   }

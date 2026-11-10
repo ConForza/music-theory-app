@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { canonicalResponse, generateItem, templateScope } from "@mtp/engine";
 import { effectiveScope } from "@mtp/curriculum";
 import { questionKey, satisfies } from "../src/question-key.ts";
-import { LESSON, answerSession, attemptLesson, canonicalFor, finishLesson, playThrough, register, rightAnswer, sessionItems, setupClock, sharedCourse, wrongFor } from "./helpers.ts";
+import { Client, LESSON, answerSession, attemptLesson, canonicalFor, finishLesson, playThrough, register, rightAnswer, sessionItems, setupClock, sharedCourse, wrongFor } from "./helpers.ts";
 
 const course = sharedCourse();
 const TREBLE = "c.clefs.treble-lines";
@@ -325,5 +325,47 @@ describe("P2: the capacity warning also considers question-type variety", () => 
     for (const k of lineKeys("t.g1.note-read")) record(app, uid, k, "t.g1.note-read", true, n++);
     const card = (await c.get(`/api/mastery/${TREBLE}`)).body;
     expect(card).toMatchObject({ independentCorrect: 5, distinctTemplates: 1, limited: false });
+  });
+});
+
+describe("R2 ordering: command order, not timestamps, decides whether a question was already met", () => {
+  const practise = async (c: Client, keys: Set<string>) => {
+    const done = new Set<string>();
+    const tpl = "t.g1.note-read";
+    for (let seed = 0; seed < 6000 && [...keys].some((k) => !done.has(k)); seed++) {
+      const item = generateItem(course.ix, tpl, seed, { evidence: "learning" }).item; // what the practice route serves
+      const key = questionKey(item);
+      if (!keys.has(key) || done.has(key)) continue;
+      done.add(key);
+      expect((await c.post("/api/practice/hint", { itemId: item.id, level: 1 })).status).toBe(200);
+      expect((await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: item.id, response: canonicalResponse(course.ix, item, templateScope(course.ix, course.ix.templates.get(tpl)!)) })).body.correct).toBe(true);
+    }
+    return done;
+  };
+
+  it("practice committed first at the very same instant as the review answer: no fresh credit", async () => {
+    const { c, clock, db } = await learner();
+    const before = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect;
+    clock.advanceDays(1); // move BEFORE practising, then hold the instant still for everything that follows
+    const done = await practise(c, lineKeys("t.g1.note-read"));
+    expect(done.size).toBe(lineKeys("t.g1.note-read").size);
+    const { session } = (await c.post("/api/review/sessions")).body;
+    const results = await answerSession(c, db, session.id);
+    const reading = results.filter((x) => x.si.kind === "review" && x.si.templateId === "t.g1.note-read");
+    expect(reading.length).toBeGreaterThan(0);
+    for (const r of reading) expect(r.body.counted).toBe(false);
+    const writingCredited = results.filter((x) => x.si.kind === "review" && x.si.templateId !== "t.g1.note-read" && x.body.counted).length;
+    expect((await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect).toBe(before + writingCredited);
+  });
+
+  it("practice after valid independent evidence at the same instant keeps the original credit", async () => {
+    const { c, clock, db } = await learner();
+    clock.advanceDays(1);
+    const { session } = (await c.post("/api/review/sessions")).body;
+    const results = await answerSession(c, db, session.id); // credited first, at this instant
+    const credited = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect;
+    expect(results.some((r) => r.body.counted)).toBe(true);
+    await practise(c, lineKeys("t.g1.note-read")); // same instant, committed afterwards
+    expect((await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect).toBe(credited);
   });
 });
