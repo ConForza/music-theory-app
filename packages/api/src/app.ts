@@ -7,6 +7,8 @@ import type { Db } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
+import { Engagement } from "./engagement.ts";
+import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
 import { LearnerResponse } from "@mtp/engine";
 
 export const Settings = z
@@ -32,6 +34,10 @@ export interface AppOptions {
    * read, and only the entry that many hops from the right. See docs/development/DEPLOYMENT.md.
    */
   trustedProxyHops?: number;
+  /** The server's clock (tests and browser journeys inject one). Never taken from a request. */
+  clock?: Clock;
+  /** Expose POST /api/test/clock so browser journeys can move time forward. For tests only; never enable in production. */
+  testClock?: boolean;
 }
 
 /** What the HTTP server knows about the connection; never taken from request headers. */
@@ -50,6 +56,10 @@ const ProfilePatch = z
     onboarded: z.boolean().optional(),
     displayName: DisplayName.optional(),
     settings: Settings.partial().optional(),
+    /** IANA timezone; the day boundaries for goals, streaks and review dates. */
+    timezone: z.string().min(1).max(64).refine(isValidTimezone, "Unknown timezone.").optional(),
+    /** Sessions per day; 0 turns the daily goal (and the streak display) off. */
+    dailyGoal: z.number().int().min(0).max(5).optional(),
   })
   .strict();
 const AttemptBody = z
@@ -91,7 +101,9 @@ function parseCookies(header: string | null): Record<string, string> {
 
 export function createApp(opts: AppOptions) {
   const { db, course } = opts;
-  const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true });
+  const clock: Clock = opts.testClock ? (opts.clock ?? new ManualClock()) : (opts.clock ?? systemClock);
+  const engagement = new Engagement(db, course, clock, course.ix.c.policy);
+  const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true }, engagement, clock);
   const practice = new PracticeService(db, course);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
@@ -111,10 +123,10 @@ export function createApp(opts: AppOptions) {
     return r.data;
   };
   const profileOf = (userId: string) => {
-    const p = db.prepare("SELECT experience, selected_grade, onboarded, settings FROM profiles WHERE user_id = ?").get(userId) as {
-      experience: string | null; selected_grade: number; onboarded: number; settings: string;
+    const p = db.prepare("SELECT experience, selected_grade, onboarded, settings, timezone, daily_goal FROM profiles WHERE user_id = ?").get(userId) as {
+      experience: string | null; selected_grade: number; onboarded: number; settings: string; timezone: string; daily_goal: number;
     };
-    return { experience: p.experience, selectedGrade: p.selected_grade, onboarded: p.onboarded === 1, settings: Settings.parse(JSON.parse(p.settings)) };
+    return { experience: p.experience, selectedGrade: p.selected_grade, onboarded: p.onboarded === 1, settings: Settings.parse(JSON.parse(p.settings)), timezone: p.timezone, dailyGoal: p.daily_goal };
   };
   const me = (user: auth.User) => ({ user, profile: profileOf(user.id) });
   const startSession = (ctx: Ctx, userId: string) => {
@@ -188,11 +200,15 @@ export function createApp(opts: AppOptions) {
     const patch = parse(ProfilePatch, await ctx.body());
     const cur = profileOf(ctx.user!.id);
     const settings = Settings.parse({ ...cur.settings, ...(patch.settings ?? {}) });
-    db.prepare("UPDATE profiles SET experience = ?, selected_grade = ?, onboarded = ?, settings = ?, updated_at = ? WHERE user_id = ?").run(
+    const maxGoal = course.ix.c.policy.daily?.maxSessions ?? 5;
+    if ((patch.dailyGoal ?? 0) > maxGoal) throw new ApiError(400, "bad_request", `Choose a goal of ${maxGoal} sessions a day or fewer.`);
+    db.prepare("UPDATE profiles SET experience = ?, selected_grade = ?, onboarded = ?, settings = ?, timezone = ?, daily_goal = ?, updated_at = ? WHERE user_id = ?").run(
       patch.experience ?? cur.experience,
       patch.selectedGrade ?? cur.selectedGrade,
       (patch.onboarded ?? cur.onboarded) ? 1 : 0,
       JSON.stringify(settings),
+      patch.timezone ?? cur.timezone,
+      patch.dailyGoal ?? cur.dailyGoal,
       new Date().toISOString(),
       ctx.user!.id,
     );
@@ -210,6 +226,14 @@ export function createApp(opts: AppOptions) {
       lessonProgress: all("SELECT * FROM lesson_progress WHERE user_id = ?"),
       attempts: all("SELECT * FROM attempts WHERE user_id = ? ORDER BY created_at"),
       practiceAttempts: all("SELECT * FROM practice_attempts WHERE user_id = ? ORDER BY created_at"),
+      // Brief 04. Engagement and understanding are exported separately, as they are stored.
+      xpLedger: all("SELECT * FROM xp_ledger WHERE user_id = ? ORDER BY rowid"),
+      dailyActivity: all("SELECT * FROM daily_activity WHERE user_id = ? ORDER BY occurred_at"),
+      achievements: all("SELECT * FROM achievements_awarded WHERE user_id = ? ORDER BY awarded_at"),
+      masteryEvidence: all("SELECT * FROM mastery_evidence WHERE user_id = ? ORDER BY occurred_at, rowid"),
+      conceptMastery: all("SELECT * FROM concept_mastery WHERE user_id = ? ORDER BY concept_id"),
+      reviewSessions: all("SELECT * FROM review_sessions WHERE user_id = ? ORDER BY started_at"),
+      reviewAttempts: all("SELECT * FROM review_attempts WHERE user_id = ? ORDER BY created_at"),
     };
   });
 
@@ -258,6 +282,38 @@ export function createApp(opts: AppOptions) {
     const b = parse(AttemptBody, await ctx.body());
     return practice.attempt(ctx.user!.id, b.attemptId, b.itemId, b.response);
   });
+
+  // ---- engagement, mastery and review (Brief 04) --------------------------------------------------------------------
+  route("GET", "/api/engagement", true, (ctx) => engagement.snapshot(ctx.user!.id));
+  route("GET", "/api/xp", true, (ctx) => ({ total: engagement.xp.total(ctx.user!.id), recent: engagement.xp.recent(ctx.user!.id, 20) }));
+  route("GET", "/api/achievements", true, (ctx) => {
+    const t = engagement.time(ctx.user!.id);
+    return { disclaimer: engagement.achievements.disclaimer, achievements: engagement.achievements.list(ctx.user!.id, engagement.mastery.all(ctx.user!.id, t.date)) };
+  });
+  route("GET", "/api/review", true, (ctx) => engagement.reviewOverview(ctx.user!.id));
+  route("GET", "/api/mastery/:conceptId", true, (ctx) => {
+    const d = engagement.conceptDetail(ctx.user!.id, ctx.params[0]!);
+    if (!d) throw new ApiError(404, "not_found", "Unknown topic.");
+    return d;
+  });
+  route("POST", "/api/review/sessions", true, (ctx) => engagement.review.start(ctx.user!.id));
+  route("GET", "/api/review/sessions/:id", true, (ctx) => engagement.review.view(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/review/sessions/:id/attempts", true, async (ctx) => {
+    const b = parse(AttemptBody, await ctx.body());
+    return engagement.review.attempt(ctx.user!.id, ctx.params[0]!, b.attemptId, b.itemId, b.response);
+  });
+  route("POST", "/api/review/sessions/:id/complete", true, (ctx) => engagement.review.complete(ctx.user!.id, ctx.params[0]!));
+
+  if (opts.testClock) {
+    route("POST", "/api/test/clock", false, async (ctx) => {
+      const b = parse(z.object({ set: z.string().datetime().optional(), advanceDays: z.number().min(0).max(400).optional(), advanceMinutes: z.number().min(0).max(100000).optional() }).strict(), await ctx.body());
+      const mc = clock as ManualClock;
+      if (b.set) mc.set(b.set);
+      if (b.advanceDays) mc.advanceDays(b.advanceDays);
+      if (b.advanceMinutes) mc.advanceMs(b.advanceMinutes * 60_000);
+      return { now: clock.now().toISOString() };
+    });
+  }
 
   // ---- dispatcher ---------------------------------------------------------
   const sameOrigin = (req: Request, url: URL) => {
@@ -319,6 +375,6 @@ export function createApp(opts: AppOptions) {
     }
   }
 
-  return { fetch, progress, practice };
+  return { fetch, progress, practice, engagement, clock };
 }
 export type App = ReturnType<typeof createApp>;

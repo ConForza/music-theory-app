@@ -12,7 +12,19 @@
     },
     "firstCompletionOnly": false,
     "dailyCapPerNode": 2,
-    "note": "XP measures engagement only. It never unlocks grades, never counts as mastery and never appears in readiness estimates. Each award has a unique source-event key; replays earn XP at most twice per node per day."
+    "note": "XP measures engagement only. It never unlocks grades, never counts as mastery and never appears in readiness estimates. Each award has a unique source-event key; replays earn XP at most twice per node per day. Brief 04: the per-node daily cap counts awards, not requests; first completions and replays follow the same rule.",
+    "milestones": [
+      20,
+      50,
+      100,
+      200,
+      350,
+      550,
+      800,
+      1100,
+      1500,
+      2000
+    ]
   },
   "mastery": {
     "states": [
@@ -47,7 +59,8 @@
         "requiresDelayedReview": true
       }
     },
-    "note": "Thresholds are placeholders for Brief 04 to tune empirically and confirm with a teacher. Accessible alternative interactions carry the same evidence weight."
+    "note": "Thresholds are placeholders for Brief 04 to tune empirically and confirm with a teacher. Accessible alternative interactions carry the same evidence weight.",
+    "rulesVersion": 1
   },
   "review": {
     "intervalsDays": [
@@ -59,7 +72,11 @@
       60
     ],
     "lapseResetsTo": 1,
-    "note": "Per-concept spaced review. A wrong review answer triggers a worked explanation and a short remedial step before rescheduling."
+    "note": "Per-concept spaced review. A wrong review answer triggers a worked explanation and a short remedial step before rescheduling. lapseResetsTo is read as an index into intervalsDays (0 = the first interval, so 1 = the second, 3 days); set it to 0 if the teacher prefers a lapse to restart at one day.",
+    "session": {
+      "maxConcepts": 4,
+      "itemsPerConcept": 2
+    }
   },
   "unlocking": {
     "lesson": "A node unlocks when every node in its unlockAfter list is complete (default: the previous required lesson, practice or review node). Unlocked nodes can always be replayed.",
@@ -70,5 +87,10 @@
   "readiness": {
     "passThresholdPercent": 66,
     "note": "Configurable in-app readiness default. It is not presented as an official ABRSM pass mark."
+  },
+  "daily": {
+    "defaultSessions": 1,
+    "maxSessions": 5,
+    "note": "A meaningful session is a path node completed (every question answered correctly, decided by the server) or a review session finished. Opening the app, refreshing and abandoned or empty activity never count. Learners may keep the default of one session a day, choose up to five, or turn the goal off. A streak day is any calendar day in the learner's timezone with at least one meaningful session, whatever the goal; ending a streak never removes progress or mastery."
   }
 }

@@ -4,9 +4,11 @@ import { ApiError } from "./errors.ts";
 import type { ExerciseItem } from "@mtp/curriculum";
 import type { Course, LearnerLesson } from "./course.ts";
 import { gradeResponse, revealSolution, type GradeResult, type Response } from "./grade.ts";
+import type { Clock } from "./clock.ts";
+import { systemClock } from "./clock.ts";
+import type { Engagement } from "./engagement.ts";
 import { computeNodeStates, nextNodeForGrade, type NodeProgress, type PathPolicy, type ProgressRow } from "./path-state.ts";
 
-const now = () => new Date().toISOString();
 export const PHASES = ["intro", "teach", "demo", "questions"] as const;
 export type Phase = (typeof PHASES)[number];
 
@@ -38,7 +40,21 @@ export class ProgressService {
     private db: Db,
     private course: Course,
     private policy: PathPolicy,
-  ) {}
+    private engagement?: Engagement,
+    private clock: Clock = systemClock,
+  ) {
+    engagement?.attach((userId) => this.nextForSelectedGrade(userId));
+  }
+
+  private now() {
+    return this.clock.now().toISOString();
+  }
+
+  /** The learner's next step in their selected grade (for the dashboard recommendation). */
+  nextForSelectedGrade(userId: string): string | null {
+    const g = (this.db.prepare("SELECT selected_grade FROM profiles WHERE user_id = ?").get(userId) as { selected_grade: number } | undefined)?.selected_grade ?? 1;
+    return nextNodeForGrade(this.course, this.states(userId), g);
+  }
 
   rows(userId: string): ProgressRow[] {
     return this.db
@@ -120,7 +136,7 @@ export class ProgressService {
   /** Begin or resume. Idempotent: calling it twice returns the same run. */
   start(userId: string, nodeId: string): RunState {
     const lesson = this.openableLesson(userId, nodeId);
-    const t = now();
+    const t = this.now();
     tx(this.db, () => {
       const row = this.row(userId, nodeId);
       if (!row) {
@@ -169,7 +185,7 @@ export class ProgressService {
     this.openableLesson(userId, nodeId);
     const row = this.openRun(userId, nodeId);
     // Phase only records where to resume the teaching steps; it never affects completion.
-    this.db.prepare("UPDATE lesson_progress SET phase = ?, updated_at = ? WHERE user_id = ? AND node_id = ?").run(phase, now(), userId, nodeId);
+    this.db.prepare("UPDATE lesson_progress SET phase = ?, updated_at = ? WHERE user_id = ? AND node_id = ?").run(phase, this.now(), userId, nodeId);
     return { phase, run: row.run };
   }
 
@@ -182,7 +198,7 @@ export class ProgressService {
     if (level < 1 || level > item.hints.length) throw new ApiError(400, "bad_request", "No such hint.");
     this.db
       .prepare("INSERT OR IGNORE INTO hint_uses (user_id,node_id,run,item_id,level,created_at) VALUES (?,?,?,?,?,?)")
-      .run(userId, nodeId, row.run, itemId, level, now());
+      .run(userId, nodeId, row.run, itemId, level, this.now());
     return { hint: item.hints[level - 1]!, level };
   }
 
@@ -216,13 +232,16 @@ export class ProgressService {
       const hints = (this.db
         .prepare("SELECT COUNT(*) AS c FROM hint_uses WHERE user_id = ? AND node_id = ? AND run = ? AND item_id = ?")
         .get(userId, nodeId, row.run, itemId) as { c: number }).c;
+      const prior = (this.db.prepare("SELECT COUNT(*) AS c FROM attempts WHERE user_id = ? AND item_id = ?").get(userId, itemId) as { c: number }).c;
       this.db
         .prepare(
           `INSERT INTO attempts (user_id,id,node_id,run,item_id,template_id,template_version,content_version,curriculum_version,evidence,response,correct,mistake_category,hints_used,attempt_number,created_at)
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         )
-        .run(userId, attemptId, nodeId, row.run, itemId, item.templateId, item.templateVersion, row.content_version, row.curriculum_version, item.evidence, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, n, now());
-      this.db.prepare("UPDATE lesson_progress SET updated_at = ? WHERE user_id = ? AND node_id = ?").run(now(), userId, nodeId);
+        .run(userId, attemptId, nodeId, row.run, itemId, item.templateId, item.templateVersion, row.content_version, row.curriculum_version, item.evidence, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, n, this.now());
+      this.db.prepare("UPDATE lesson_progress SET updated_at = ? WHERE user_id = ? AND node_id = ?").run(this.now(), userId, nodeId);
+      // Mastery evidence is classified by the server from facts it holds (authored evidence level, its own hint log, attempt history).
+      this.engagement?.recordLessonAttempt({ userId, nodeId, item, attemptId, priorAttempts: prior, hints, correct: graded.correct, category: graded.category, contentVersion: row.content_version });
       return n;
     });
     return this.result(item, graded.correct, graded.category, number, false, graded, nodeId);
@@ -249,14 +268,14 @@ export class ProgressService {
    * The server decides completion: every playable question must have a correct attempt in the current run.
    * Idempotent: completing a closed run returns the stored summary.
    */
-  complete(userId: string, nodeId: string): CompletionSummary & { alreadyComplete: boolean } {
+  complete(userId: string, nodeId: string) {
     const lesson = this.openableLesson(userId, nodeId);
     const closed = tx(this.db, () => {
       const row = this.row(userId, nodeId);
       if (!row) throw new ApiError(409, "not_started", "Start the lesson first.");
       if (!row.run_open) {
         const stored = this.db.prepare("SELECT last_stats FROM lesson_progress WHERE user_id = ? AND node_id = ?").get(userId, nodeId) as { last_stats: string };
-        return { ...(JSON.parse(stored.last_stats) as Omit<CompletionSummary, "nextNodeId">), alreadyComplete: true };
+        return { ...(JSON.parse(stored.last_stats) as Omit<CompletionSummary, "nextNodeId">), alreadyComplete: true, run: row.run };
       }
       // The open run must belong to the lesson as it is served now; old answers never complete newer material.
       if (row.content_version !== lesson.contentVersion) {
@@ -265,7 +284,7 @@ export class ProgressService {
       const run = this.runState(userId, nodeId);
       const missing = lesson.items.filter((i) => !run.items[i.id]?.correct).map((i) => i.id);
       if (missing.length) throw new ApiError(409, "incomplete", "Some questions still need an answer.", { missing });
-      const t = now();
+      const t = this.now();
       const summary = {
         questions: lesson.items.length,
         firstTryCorrect: lesson.items.filter((i) => run.items[i.id]?.firstTry).length,
@@ -283,9 +302,12 @@ export class ProgressService {
            WHERE user_id = ? AND node_id = ?`,
         )
         .run(t, JSON.stringify(summary), stale ? 1 : 0, t, stale ? 1 : 0, row.content_version, stale ? 1 : 0, row.curriculum_version, userId, nodeId);
-      return { ...summary, alreadyComplete: false };
+      // Engagement rewards commit with the completion itself: one ledger key per run, so a retry cannot add XP.
+      this.engagement?.onNodeComplete(userId, nodeId, row.run, row.content_version);
+      return { ...summary, alreadyComplete: false, run: row.run };
     });
-    return { ...closed, nextNodeId: this.nextAfter(userId, nodeId) };
+    const { run, ...rest } = closed;
+    return { ...rest, nextNodeId: this.nextAfter(userId, nodeId), ...(this.engagement ? { rewards: this.engagement.rewardsFor(userId, nodeId, run) } : {}) };
   }
 
   private nextAfter(userId: string, nodeId: string): string | null {

@@ -122,7 +122,7 @@ describe("migrations", () => {
     const { openDb, migrate } = await import("../src/db.ts");
     const db = openDb(":memory:");
     expect(migrate(db)).toEqual([]);
-    expect((db.prepare("SELECT version FROM schema_migrations").all() as Array<{ version: string }>).map((r) => r.version)).toEqual(["001_init.sql", "002_practice.sql"]);
+    expect((db.prepare("SELECT version FROM schema_migrations").all() as Array<{ version: string }>).map((r) => r.version)).toEqual(["001_init.sql", "002_practice.sql", "003_progression.sql"]);
   });
 });
 
