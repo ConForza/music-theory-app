@@ -29,7 +29,7 @@ const TREBLE = "c.clefs.treble-lines";
 
 const server = spawn("node", ["--disable-warning=ExperimentalWarning", "--import", "tsx", "src/main.ts"], {
   cwd: join(root, "packages/api"),
-  env: { ...process.env, PORT: String(port), MTP_TEST_CLOCK: "1", MTP_DB: join(mkdtempSync(join(tmpdir(), "mtp-")), "e2e.sqlite") },
+  env: { ...process.env, MTP_CONTENT_ROOT: join(root, "packages/api/test/fixtures/legacy-content"), PORT: String(port), MTP_TEST_CLOCK: "1", MTP_DB: join(mkdtempSync(join(tmpdir(), "mtp-")), "e2e.sqlite") },
   stdio: ["ignore", "pipe", "inherit"],
 });
 await new Promise((resolve, reject) => {
