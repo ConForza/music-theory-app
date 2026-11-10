@@ -4,7 +4,11 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 > **Not affiliated with or endorsed by ABRSM.** The app teaches towards the published ABRSM Grades 1–5 theory syllabus. Its practice assessments are not official examinations.
 
-## Status — Brief 03 (music notation, audio and exercise engine)
+## Status — Brief 04 (progression, XP, mastery and adaptive revision)
+
+Brief 04 adds the reward and revision loop without a second curriculum or grader: a **server-authoritative XP ledger** (idempotent, capped against farming), an optional **daily goal and timezone-safe streak**, **concept-level mastery** built only from independent first-try evidence (kept separate from XP and from lesson completion), **adaptive spaced review** with targeted remediation (seeded, reproducible Brief 03 questions inside the taught scope), restrained **badges**, and the **Review** screen plus updated dashboard and progress screens. See [docs/architecture/PROGRESSION.md](docs/architecture/PROGRESSION.md) for the rules, thresholds (provisional, awaiting teacher acceptance) and decisions, and the [Brief 04 completion handoff](docs/handoff/BRIEF_04_COMPLETION.md).
+
+## Brief 03 (music notation, audio and exercise engine)
 
 Brief 03 adds a deterministic **music rule engine** and **graders for all 22 exercise families** (`packages/engine`), **seeded exercise generation**, a **notation renderer** (four clefs, beams, ties, tuplets, voices, multi-stave scores; Bravura font), an **interactive keyboard and audio**, answer controls for every family, and a **practice lab** with 13 original demonstration sets. Grading stays on the server. See [docs/architecture/EXERCISE_ENGINE.md](docs/architecture/EXERCISE_ENGINE.md), the browser evidence in [docs/evidence/brief-03](docs/evidence/brief-03/) and the [Brief 04 handoff](docs/handoff/BRIEF_04_HANDOFF.md).
 

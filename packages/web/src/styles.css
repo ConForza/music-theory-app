@@ -165,17 +165,18 @@ input:focus-visible { outline-offset: 0; border-color: var(--focus); }
 .grade-num { flex: none; width: 52px; height: 52px; border-radius: 16px; background: var(--world); color: var(--on-world); font-weight: 900; font-size: 1.5rem; display: inline-grid; place-items: center; }
 
 /* App shell */
-.shell { min-height: 100dvh; }
-.main { padding: max(0.75rem, env(safe-area-inset-top)) 0 calc(var(--tab-h) + 1.5rem + env(safe-area-inset-bottom)); outline: none; }
+.shell { min-height: 100dvh; display: flex; flex-direction: column; }
+.main { order: 1; flex: 1; min-width: 0; padding: max(0.75rem, env(safe-area-inset-top)) 0 1.5rem; outline: none; }
 .page { max-width: 44rem; margin: 0 auto; padding: 0.5rem 1.1rem 1rem; }
-.tabs { position: fixed; z-index: 20; inset: auto 0 0 0; background: var(--surface); border-top: 2px solid var(--line); padding: 0 0 env(safe-area-inset-bottom); }
-.tabs ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
+.tabs { order: 2; position: sticky; z-index: 20; inset: auto 0 0 0; background: var(--surface); border-top: 2px solid var(--line); padding: 0 0 env(safe-area-inset-bottom); }
+.tabs ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(3.2rem, 1fr)); }
 .tabs-brand { display: none; }
 .tab { overflow-wrap: anywhere; text-align: center; display: grid; justify-items: center; gap: 2px; min-height: var(--tab-h); padding: 8px 4px; color: var(--muted); text-decoration: none; font-weight: 800; font-size: 0.78rem; align-content: center; }
 .tab.is-active { color: var(--brand-strong); }
 .tab.is-active svg { stroke-width: 2.8; }
 @media (min-width: 860px) {
   .shell { display: grid; grid-template-columns: 15rem 1fr; }
+  .main, .tabs { order: 0; }
   .tabs { position: sticky; top: 0; height: 100dvh; inset: 0 auto auto 0; border-top: 0; border-right: 2px solid var(--line); padding: 1.25rem 0.9rem; }
   .tabs-brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 900; font-size: 1.05rem; color: var(--ink); text-decoration: none; margin-bottom: 1.5rem; line-height: 1.15; }
   .tabs ul { display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
@@ -400,9 +401,7 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 /* Large text: rem-based queries match when the learner has enlarged text on a narrow screen (320px is 10rem at 200%). */
 @media (max-width: 15rem) {
   :root { --tab-h: 4.5rem; }
-  .tabs ul { grid-template-columns: repeat(2, 1fr); }
-  .tab { min-height: 3.25rem; grid-auto-flow: column; justify-content: center; gap: 0.4rem; }
-  .main { padding-bottom: calc(3 * 3.25rem + 1.5rem + env(safe-area-inset-bottom)); }
+  .tab { min-height: 3.25rem; }
   .node-label { max-width: 100%; }
 }
 
@@ -492,3 +491,59 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 /* Keep focused or scrolled-to controls clear of the sticky header and answer bar (WCAG 2.4.11). */
 html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
 .option > span, .option > span * { pointer-events: none; }
+
+/* ---- Brief 04: rewards, review, mastery ---------------------------------------------------------------------- */
+.h4 { font-size: 1rem; margin: 0 0 0.15rem; }
+.big-number { font-size: 1.6rem; margin: 0 0 0.4rem; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.25rem 0 0.9rem; }
+.chip { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); text-decoration: none; font-weight: 700; }
+.chip small { display: block; font-weight: 500; color: var(--muted); font-size: 0.78rem; line-height: 1.1; }
+.chip-xp svg { color: #8a5a00; }
+.chip-streak svg { color: #b3470b; }
+.chip-goal.is-met { outline: 2px solid var(--good); outline-offset: -2px; }
+.goal-ring { flex: none; }
+.welcome-back { display: flex; gap: 0.5rem; align-items: flex-start; background: var(--brand-soft); color: var(--ink); border-radius: 14px; padding: 0.7rem 0.9rem; margin: 0 0 0.9rem; }
+.welcome-back svg { flex: none; margin-top: 2px; color: var(--brand-strong); }
+.review-nudge { display: grid; grid-template-columns: auto 1fr auto; gap: 0.8rem; align-items: center; background: var(--surface); border: 2px solid var(--brand); border-radius: var(--radius); padding: 0.8rem 1rem; margin: 0 0 1rem; }
+.review-nudge h2, .review-nudge p { margin: 0; }
+.review-nudge svg { color: var(--brand-strong); }
+@media (max-width: 400px) { .review-nudge { grid-template-columns: auto 1fr; } .review-nudge .btn { grid-column: 1 / -1; } }
+.badge-list { display: grid; gap: 0.6rem; margin: 0.5rem 0; }
+.badge-card { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0.7rem; border-radius: 14px; background: var(--surface-2); }
+.badge-card.is-earned { background: color-mix(in srgb, var(--gold) 22%, var(--surface)); }
+.badge-card h3 { margin: 0; }
+.badge-card p { margin: 0.1rem 0 0; }
+.badge-medal { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--locked); color: var(--locked-ink); }
+.badge-card.is-earned .badge-medal { background: var(--gold); color: #3d2a00; }
+.badge-status { font-weight: 700; color: var(--muted); }
+.badge-card.is-earned .badge-status { color: var(--good); }
+.pill.state-new { background: var(--surface-2); color: var(--muted); }
+.pill.state-learning, .pill.state-practising { background: var(--try-soft); color: var(--try); }
+.pill.state-proficient { background: var(--brand-soft); color: var(--brand-strong); }
+.pill.state-mastered { background: var(--good-soft); color: var(--good); }
+.pill.state-review_due { background: var(--brand-soft); color: var(--brand-strong); outline: 2px solid var(--brand); outline-offset: -2px; }
+.concept-list { display: grid; gap: 0.6rem; margin: 0.5rem 0 1.25rem; }
+.concept-row { background: var(--surface); border-radius: 14px; padding: 0.7rem 0.9rem; box-shadow: var(--shadow); }
+.concept-row p { margin: 0.15rem 0; }
+.concept-row details { margin-top: 0.3rem; }
+.concept-row summary { cursor: pointer; color: var(--brand-strong); font-weight: 700; min-height: 32px; }
+.concept-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.3rem 0.6rem; align-items: center; }
+.milestone { margin: 0.5rem 0; }
+.milestone .progress { height: 12px; }
+.reward { margin: 1.2rem 0; padding: 1rem; border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); text-align: left; }
+.reward-xp p { margin: 0.4rem 0; }
+.xp-pop { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 1.5rem; font-weight: 900; color: #5c3a00; background: var(--gold); padding: 0.2rem 0.9rem 0.2rem 0.6rem; border-radius: 999px; animation: pop 0.55s ease-out both; }
+.xp-pop.is-none { background: var(--surface-2); color: var(--muted); animation: none; }
+.goal-line { display: flex; align-items: center; gap: 0.6rem; margin: 0.5rem 0; font-weight: 700; }
+.evidence summary { cursor: pointer; font-weight: 700; color: var(--brand-strong); min-height: 36px; }
+.how-it-works li { margin: 0.4rem 0; }
+.tab-icon { position: relative; display: inline-grid; }
+.tab-dot { position: absolute; top: -2px; right: -4px; width: 11px; height: 11px; border-radius: 50%; background: var(--danger); border: 2px solid var(--surface); }
+.tab-icon svg { display: block; }
+@media (min-width: 15.01rem) and (max-width: 400px) { .tab { font-size: 0.7rem; padding: 8px 0; } }
+:root[data-motion="reduce"] .xp-pop { animation: none; }
+.badge-card > div { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.concept-row, .reward, .review-nudge > div { min-width: 0; overflow-wrap: anywhere; }
+.segmented label { min-width: 0; max-width: 100%; }
+.segmented span { overflow-wrap: anywhere; }
+.card p, .card li, .card small { overflow-wrap: anywhere; }

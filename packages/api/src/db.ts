@@ -16,7 +16,11 @@ export function openDb(path = ":memory:"): Db {
   return db;
 }
 
-/** Apply numbered `migrations/NNN_name.sql` files exactly once, in order, each in a transaction. */
+/**
+ * Apply numbered `migrations/NNN_name.sql` files exactly once. An applied migration is never re-run, so NEVER edit or append to
+ * one that has shipped: add a new numbered file instead (an upgrade test in engagement-data.test.ts guards this).
+ * Files run in order, each in a transaction.
+ */
 export function migrate(db: Db, dir = MIGRATIONS_DIR): string[] {
   db.exec("CREATE TABLE IF NOT EXISTS schema_migrations (version TEXT PRIMARY KEY, applied_at TEXT NOT NULL)");
   const done = new Set((db.prepare("SELECT version FROM schema_migrations").all() as Array<{ version: string }>).map((r) => r.version));

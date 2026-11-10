@@ -596,14 +596,27 @@ export const ProgressionPolicy = z
         perNodeType: z.record(NodeType, z.number().int().min(0)),
         firstCompletionOnly: z.boolean(),
         dailyCapPerNode: z.number().int().min(0),
+        /** Brief 04: XP totals at which the learner reaches the next milestone (ascending). Engagement only. */
+        milestones: z.array(z.number().int().min(1)).min(1).optional(),
         note: NonEmpty,
       })
       .strict(),
+    /** Brief 04: daily goal and streak rules (optional; the app supplies defaults when absent). */
+    daily: z
+      .object({
+        defaultSessions: z.number().int().min(0).max(5),
+        maxSessions: z.number().int().min(1).max(5),
+        note: NonEmpty,
+      })
+      .strict()
+      .optional(),
     mastery: z
       .object({
         states: z.array(MasteryState).length(6),
         evidenceCounts: z.array(z.enum(["independent-step", "practice-item", "review-item", "assessment-item"])),
         evidenceExcluded: z.array(z.enum(["hinted-step", "guided-step", "worked-example", "retry-after-reveal"])),
+        /** Brief 04: bump when thresholds or evidence rules change; projections record the version they were built with. */
+        rulesVersion: z.number().int().min(1).optional(),
         thresholds: z
           .object({
             proficient: z
@@ -626,6 +639,11 @@ export const ProgressionPolicy = z
       .object({
         intervalsDays: z.array(z.number().int().min(1)).min(3),
         lapseResetsTo: z.number().int().min(0),
+        /** Brief 04: review session shape. */
+        session: z
+          .object({ maxConcepts: z.number().int().min(1).max(10), itemsPerConcept: z.number().int().min(1).max(3) })
+          .strict()
+          .optional(),
         note: NonEmpty,
       })
       .strict(),

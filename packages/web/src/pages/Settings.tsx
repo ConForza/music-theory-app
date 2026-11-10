@@ -105,6 +105,18 @@ export function Settings() {
         </label>
       </section>
 
+      <section className="card" aria-labelledby="goal-h">
+        <h2 id="goal-h">Daily goal</h2>
+        <p className="muted small">A meaningful session is a lesson finished or a review completed. Opening the app doesn't count. The goal and streak are optional, and missing a day never takes anything away.</p>
+        <Segmented
+          legend="Sessions a day"
+          value={String(me!.profile.dailyGoal)}
+          options={[{ v: "0", label: "Off" }, { v: "1", label: "1 (default)" }, { v: "2", label: "2" }, { v: "3", label: "3" }]}
+          onChange={(v) => track("goal", "your daily goal", () => updateProfile({ dailyGoal: Number(v) }, { optimistic: true }))}
+        />
+        <p className="muted small">Your days follow your device's clock ({me!.profile.timezone}), including summer-time changes.</p>
+      </section>
+
       <section className="card" aria-labelledby="who-h">
         <h2 id="who-h">About you</h2>
         <form className="form" onSubmit={(e) => { e.preventDefault(); const attempted = name;

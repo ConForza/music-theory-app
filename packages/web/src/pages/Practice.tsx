@@ -24,7 +24,7 @@ export function Practice() {
       <header className="page-head">
         <p className="eyebrow">Practice lab</p>
         <h1>Try every kind of question</h1>
-        <p className="lede-small">Short sets that use the real music tools: the stave, the keyboard, rhythms, scales, intervals and chords. Practice here does not change your path.</p>
+        <p className="lede-small">Short sets that use the real music tools: the stave, the keyboard, rhythms, scales, intervals and chords. Practice here is optional: it does not change your path, earn XP or count towards mastery, so you can try things freely, with hints. <Link to="/review">Review</Link> is where topics become mastered.</p>
       </header>
       <ul className="practice-grid">
         {data.sets.map((s) => (
