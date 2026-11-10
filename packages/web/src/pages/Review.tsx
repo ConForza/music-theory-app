@@ -183,7 +183,8 @@ export function ReviewPlayer() {
     };
   }, [load, userId, nav, sessionId]);
 
-  const finishing = session !== null && idx !== null && idx >= session.items.length;
+  // Only an open review with questions can be finished; a closed one (finished, or replaced after a content update) just offers the way back.
+  const finishing = session !== null && session.status === "open" && idx !== null && idx >= session.items.length;
   useEffect(() => {
     if (!finishing) return;
     let live = true;
