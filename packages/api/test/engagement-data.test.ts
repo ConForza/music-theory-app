@@ -113,7 +113,11 @@ describe("persistence and migration", () => {
     const app = createApp({ db: db as ReturnType<typeof openDb>, course, clock: new ManualClock(new Date("2026-03-02T12:00:00Z")) });
     expect(app.engagement.xp.total("u1")).toBe(0);
     expect(app.progress.overview("u1").nodes[LESSON]!.state).toBe("completed");
-    expect(app.engagement.reviewOverview("u1").dueCount).toBe(0);
+    // Taught and completed before the ledger existed: reviewable (a fresh question, no invented credit).
+    const hub = app.engagement.reviewOverview("u1");
+    expect(hub.dueCount).toBe(1);
+    expect(hub.groups.ready[0]).toMatchObject({ conceptId: "c.clefs.treble-lines", state: "learning", independentCorrect: 0 });
+    expect(db.prepare("SELECT COUNT(*) AS n FROM mastery_evidence").get()).toEqual({ n: 0 });
   });
 
   it("does not invent evidence for old lesson completions: mastery starts from new, recorded activity only", async () => {
@@ -123,7 +127,11 @@ describe("persistence and migration", () => {
     const uid = (await c.get("/api/me")).body.user.id;
     db.prepare("INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES (?,?,1,0,'questions',2,'0.1.0','2026-01-01','2026-01-01','2026-01-01',2)").run(uid, LESSON);
     expect((await c.get("/api/review")).body.groups.mastered).toEqual([]);
-    expect((await c.post("/api/review/sessions")).body.session).toBeNull();
+    // Reviewable, but nothing was invented: no evidence rows, no credit.
+    const { session } = (await c.post("/api/review/sessions")).body;
+    expect(session.items.length).toBeGreaterThan(0);
+    expect(db.prepare("SELECT COUNT(*) AS n FROM mastery_evidence").get()).toEqual({ n: 0 });
+    expect((await c.get("/api/mastery/c.clefs.treble-lines")).body).toMatchObject({ state: "learning", independentCorrect: 0 });
   });
 
   it("survives losing the reply to a completion or an answer (retry before and after the server committed)", async () => {

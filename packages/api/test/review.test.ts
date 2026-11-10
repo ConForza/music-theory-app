@@ -157,7 +157,7 @@ describe("a review session", () => {
     expect((await c.post(`/api/review/sessions/${session.id}/attempts`, { attemptId: crypto.randomUUID(), itemId: done && sessionItems(db, session.id)[0]!.itemId, response: rightAnswer(sessionItems(db, session.id)[0]!) })).body.error.code).toBe("session_closed");
   });
 
-  it("a perfect session earns mastery evidence and moves the concept towards mastered", async () => {
+  it("perfect sessions earn evidence and delayed-review credit, but only questions the learner has not met count towards the totals", async () => {
     const { c, clock, db } = await learnerWithLesson();
     for (const wait of [1, 3]) {
       clock.advanceDays(wait);
@@ -166,24 +166,30 @@ describe("a review session", () => {
       await c.post(`/api/review/sessions/${session.id}/complete`);
     }
     const m = (await c.get(`/api/mastery/${TREBLE}`)).body;
-    expect(m).toMatchObject({ state: "mastered", independentCorrect: 8, delayedReviews: 2, spanDays: 4 });
-    expect(m.trail.filter((t: { counted: boolean }) => t.counted)).toHaveLength(8);
-    expect((await due(c)).groups.mastered.map((g: { conceptId: string }) => g.conceptId)).toContain(TREBLE);
+    // Today's generators have few distinct line-note questions (see PROGRESSION.md), so this honestly stops short of 8.
+    expect(m).toMatchObject({ delayedReviews: 2, spanDays: 4, distinctTemplates: 2 });
+    expect(m.independentCorrect).toBeGreaterThanOrEqual(5);
+    expect(m.independentCorrect).toBeLessThanOrEqual(8);
+    expect(m.trail.filter((t: { counted: boolean }) => t.counted).length).toBeGreaterThanOrEqual(8);
   });
 
-  it("returns when due again, and a mastered concept becomes review_due without being erased", async () => {
-    const { c, clock, db } = await learnerWithLesson();
-    for (const wait of [1, 3]) {
-      clock.advanceDays(wait);
-      const { session } = (await c.post("/api/review/sessions")).body;
-      await answerSession(c, db, session.id);
-      await c.post(`/api/review/sessions/${session.id}/complete`);
-    }
-    clock.advanceDays(10);
+  it("with enough distinct evidence (fixtures) a topic reaches mastered, then becomes review_due without being erased", async () => {
+    const { c, clock, app } = await learnerWithLesson();
+    const uid = (await c.get("/api/me")).body.user.id;
+    const add = (n: number, tpl: string) =>
+      app.engagement.mastery.record(uid, { id: `review:fixture-${n}`, conceptIds: [TREBLE], source: "review-item", correct: true, itemId: `fixture-item-${n}`, questionKey: `fixture-key-${n}`, templateId: tpl, templateVersion: 1 });
+    clock.advanceDays(1);
+    add(1, "t.g1.note-read");
+    add(2, "t.g1.note-write");
+    clock.advanceDays(3);
+    add(3, "t.g1.note-read");
+    add(4, "t.g1.note-write");
     const m = (await c.get(`/api/mastery/${TREBLE}`)).body;
-    expect(m).toMatchObject({ state: "review_due", highestState: "mastered", due: true });
-    const { session } = (await c.post("/api/review/sessions")).body;
-    expect(session.items.length).toBeGreaterThan(0);
+    expect(m).toMatchObject({ state: "mastered", independentCorrect: 8, delayedReviews: 2, spanDays: 4 });
+    expect((await due(c)).groups.mastered.map((g: { conceptId: string }) => g.conceptId)).toContain(TREBLE);
+    clock.advanceDays(10);
+    expect((await c.get(`/api/mastery/${TREBLE}`)).body).toMatchObject({ state: "review_due", highestState: "mastered", due: true });
+    expect((await c.post("/api/review/sessions")).body.session.items.length).toBeGreaterThan(0);
   });
 
   it("shares one open session across devices, and starts afresh the next day", async () => {

@@ -21,7 +21,10 @@ import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { isDue, type ConceptMastery } from "./mastery.ts";
 import { learnerTime, type LearnerTime, type MasteryService } from "./mastery-service.ts";
+import { questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
 import { REVIEW_NODE, type XpService } from "./xp.ts";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 export interface SessionItem {
   itemId: string;
@@ -60,6 +63,7 @@ const seedFor = (sessionId: string, conceptId: string, templateId: string, salt 
 
 export class ReviewService {
   private generatable: Set<string>;
+  private constraints = new Map<string, ReviewConstraint>();
   constructor(
     private db: Db,
     private course: Course,
@@ -71,6 +75,15 @@ export class ReviewService {
     private opts: { maxConcepts: number; itemsPerConcept: number },
   ) {
     this.generatable = new Set(generatorTemplateIds(course.ix));
+    try {
+      const file = JSON.parse(readFileSync(join(course.ix.c.root, "policy/review-constraints.json"), "utf8")) as { constraints: ReviewConstraint[] };
+      for (const c of file.constraints) {
+        if (!course.ix.concepts.has(c.conceptId)) throw new Error(`review-constraints: unknown concept ${c.conceptId}`);
+        this.constraints.set(c.conceptId, c);
+      }
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e; // no file: no extra constraints
+    }
   }
 
   // ---- what can be reviewed --------------------------------------------------------------------------------------
@@ -107,13 +120,39 @@ export class ReviewService {
     }
   }
 
+  /**
+   * Generate a question for a concept inside its teaching boundary. The effective scope of a lesson binding is coarser than
+   * one concept (treble line notes versus every treble stave note), so a concept-level constraint is enforced here, and a
+   * question the learner has already met (same music and answer under any seed) is skipped while a fresh one exists.
+   * Deterministic: it walks seeds upwards from `base`, so the stored seed regenerates the same question.
+   */
+  private generateFor(c: Candidate, conceptId: string, base: number, avoid: Set<string>): { item: ExerciseItem; seed: number } | null {
+    const constraint = this.constraints.get(conceptId);
+    let fallback: { item: ExerciseItem; seed: number } | null = null;
+    for (let k = 0; k < 300; k++) {
+      const seed = (base + k) % 2 ** 31;
+      const item = this.generate(c, seed);
+      if (!item) continue;
+      if (constraint && !satisfies(item, constraint)) continue;
+      if (avoid.has(questionKey(item))) {
+        fallback ??= { item, seed };
+        continue;
+      }
+      return { item, seed };
+    }
+    return fallback; // every candidate was already met: still a valid question, it simply earns no new distinct credit
+  }
+
   private resolve(si: SessionItem): { item: ExerciseItem; scope: MusicScope } | null {
     const node = this.course.ix.nodeById.get(si.nodeId);
     const binding = node?.exercises.find((b) => b.templateId === si.templateId);
     if (!node || !binding) return null;
     const scope = effectiveScope(this.course.ix, node, binding);
     const item = this.generate({ nodeId: si.nodeId, templateId: si.templateId, scope }, si.seed, { version: si.templateVersion, fingerprint: si.fingerprint });
-    return item ? { item, scope } : null;
+    if (!item) return null;
+    const constraint = this.constraints.get(si.conceptId);
+    if (constraint && !satisfies(item, constraint)) return null; // the boundary moved: stale, never regraded
+    return { item, scope };
   }
 
   private lastUsed(userId: string, conceptId: string): Map<string, string> {
@@ -145,6 +184,12 @@ export class ReviewService {
   private row(userId: string, id: string): SessionRow | undefined {
     return this.db.prepare("SELECT * FROM review_sessions WHERE user_id = ? AND id = ?").get(userId, id) as SessionRow | undefined;
   }
+  /** The learner's open session for `date`, if any: what the hub offers to resume, whether or not its topics are still due. */
+  openSessionId(userId: string, date: string): string | null {
+    const r = this.db.prepare("SELECT id FROM review_sessions WHERE user_id = ? AND status = 'open' AND local_date = ?").get(userId, date) as { id: string } | undefined;
+    return r?.id ?? null;
+  }
+
   private openRow(userId: string): SessionRow | undefined {
     return this.db.prepare("SELECT * FROM review_sessions WHERE user_id = ? AND status = 'open'").get(userId) as SessionRow | undefined;
   }
@@ -177,13 +222,14 @@ export class ReviewService {
         // Vary the question type: templates the learner met least recently come first.
         const ordered = [...cands].sort((a, b) => (used.get(a.templateId) ?? "").localeCompare(used.get(b.templateId) ?? "") || a.templateId.localeCompare(b.templateId));
         let made = 0;
+        const avoid = this.mastery.seenKeys(userId, m.conceptId);
         for (const c of ordered) {
           if (made >= this.opts.itemsPerConcept) break;
-          const seed = seedFor(id, m.conceptId, c.templateId);
-          const item = this.generate(c, seed);
-          const g = item && parseGeneratedItemId(item.id);
-          if (!item || !g) continue; // a template that cannot make a question today is skipped, not an error
-          items.push({ itemId: item.id, kind: "review", conceptId: m.conceptId, nodeId: c.nodeId, templateId: c.templateId, templateVersion: item.templateVersion, seed, fingerprint: g.fingerprint });
+          const gen = this.generateFor(c, m.conceptId, seedFor(id, m.conceptId, c.templateId), avoid);
+          const g = gen && parseGeneratedItemId(gen.item.id);
+          if (!gen || !g) continue; // a template that cannot make a question today is skipped, not an error
+          avoid.add(questionKey(gen.item));
+          items.push({ itemId: gen.item.id, kind: "review", conceptId: m.conceptId, nodeId: c.nodeId, templateId: c.templateId, templateVersion: gen.item.templateVersion, seed: gen.seed, fingerprint: g.fingerprint });
           made++;
         }
       }
@@ -239,7 +285,9 @@ export class ReviewService {
       id: row.id,
       status: row.status,
       startedAt: row.started_at,
-      items: live.map((si) => {
+      // A finished review is read from its stored summary: its questions are not regenerated (a content update may have
+      // made them stale) and nothing is regraded.
+      items: (row.status !== "open" ? [] : live).map((si) => {
         const r = this.resolve(si)!;
         const learner: LearnerItem = { ...this.course.learnerItem(r.item, "practice", r.scope), hintCount: 0, evidence: si.kind === "review" ? "independent" : "learning" };
         const a = attempts.get(si.itemId);
@@ -282,7 +330,7 @@ export class ReviewService {
       if (prior.session_id !== sessionId || prior.item_id !== itemId || prior.response !== JSON.stringify(response)) {
         throw new ApiError(409, "attempt_conflict", "That attempt id was already used for a different answer. Check again to send a new one.");
       }
-      return this.result(userId, si, r, prior.correct === 1, prior.mistake_category, prior.attempt_number, true, graded);
+      return this.result(userId, attemptId, si, r, prior.correct === 1, prior.mistake_category, prior.attempt_number, true, graded);
     }
 
     const lt = learnerTime(this.db, this.clock, userId);
@@ -302,6 +350,7 @@ export class ReviewService {
           source: si.kind === "review" ? "review-item" : "remedial-step",
           correct: graded.correct,
           itemId,
+          questionKey: questionKey(r.item),
           templateId: si.templateId,
           templateVersion: si.templateVersion,
           seed: si.seed,
@@ -313,12 +362,13 @@ export class ReviewService {
           const list = JSON.parse(cur.items) as SessionItem[];
           if (!list.some((x) => x.forItemId === itemId)) {
             const cand: Candidate = { nodeId: si.nodeId, templateId: si.templateId, scope: r.scope };
-            const seed = seedFor(sessionId, si.conceptId, si.templateId, `remedial:${itemId}`);
-            const rem = this.generate(cand, seed);
+            // The question just failed is now on record, so the similar question is a different one, inside the same boundary.
+            const gen = this.generateFor(cand, si.conceptId, seedFor(sessionId, si.conceptId, si.templateId, `remedial:${itemId}`), this.mastery.seenKeys(userId, si.conceptId));
+            const rem = gen?.item;
             const g = rem && parseGeneratedItemId(rem.id);
-            if (rem && g) {
+            if (gen && rem && g) {
               const at = list.findIndex((x) => x.itemId === itemId);
-              list.splice(at + 1, 0, { itemId: rem.id, kind: "remedial", conceptId: si.conceptId, nodeId: si.nodeId, templateId: si.templateId, templateVersion: rem.templateVersion, seed, fingerprint: g.fingerprint, forItemId: itemId });
+              list.splice(at + 1, 0, { itemId: rem.id, kind: "remedial", conceptId: si.conceptId, nodeId: si.nodeId, templateId: si.templateId, templateVersion: rem.templateVersion, seed: gen.seed, fingerprint: g.fingerprint, forItemId: itemId });
               this.db.prepare("UPDATE review_sessions SET items = ? WHERE user_id = ? AND id = ?").run(JSON.stringify(list), userId, sessionId);
             }
           }
@@ -326,10 +376,10 @@ export class ReviewService {
       }
       return n;
     });
-    return this.result(userId, si, r, graded.correct, graded.category, number, false, graded);
+    return this.result(userId, attemptId, si, r, graded.correct, graded.category, number, false, graded);
   }
 
-  private result(userId: string, si: SessionItem, r: { item: ExerciseItem; scope: MusicScope }, correct: boolean, category: string | null, attemptNumber: number, replayed: boolean, graded: ReturnType<typeof gradeResponse>) {
+  private result(userId: string, attemptId: string, si: SessionItem, r: { item: ExerciseItem; scope: MusicScope }, correct: boolean, category: string | null, attemptNumber: number, replayed: boolean, graded: ReturnType<typeof gradeResponse>) {
     const solution = revealSolution(this.course.ix, r.item, r.scope, correct, attemptNumber);
     const row = this.openRow(userId);
     const list = row ? (JSON.parse(row.items) as SessionItem[]) : [];
@@ -348,19 +398,29 @@ export class ReviewService {
       attemptNumber,
       replayed,
       kind: si.kind,
-      /** True only for the first answer to a review question: the one that counts as evidence. */
-      counted: si.kind === "review" && attemptNumber === 1,
+      /** True only for the first answer to a review question the learner had never met: the one that earns distinct evidence. */
+      counted: si.kind === "review" && attemptNumber === 1 && this.mastery.firstEvidenceId(userId, questionKey(r.item)) === `review:${attemptId}`,
       remedialItemId: !correct && si.kind === "review" ? remedial?.itemId ?? null : null,
       nextDueDate: m?.nextDueDate ?? null,
     };
   }
 
+  /**
+   * Finish a session. The status change, the summary, the XP award, the daily-activity row and the badge check are ONE
+   * transaction: either all of them commit or none do, so a failure can never leave a completed review without its rewards.
+   * Repeating the call reads what was committed.
+   */
   complete(userId: string, sessionId: string) {
     const lt = learnerTime(this.db, this.clock, userId);
-    const done = tx(this.db, () => {
+    const key = `review:${sessionId}`;
+    return tx(this.db, () => {
       const row = this.row(userId, sessionId);
       if (!row) throw new ApiError(404, "not_found", "That review session does not exist.");
-      if (row.status === "complete") return { summary: JSON.parse(row.summary!) as Summary, fresh: false };
+      if (row.status === "complete") {
+        const summary = JSON.parse(row.summary!) as Summary;
+        const xp = this.xp.find(userId, key);
+        return { ...summary, alreadyComplete: true, xp: xp ?? { awarded: 0, baseXp: 0, capped: false, duplicate: true, reason: "", total: this.xp.total(userId) }, newAchievements: this.achievements.awardedFor(userId, key).map((a) => ({ id: a.id, title: a.title })) };
+      }
       if (row.status !== "open") throw new ApiError(409, "session_closed", "This review session was closed. Start a new one from Review.");
       const items = (JSON.parse(row.items) as SessionItem[]).filter((i) => !i.stale);
       const attempts = this.attemptsFor(userId, sessionId);
@@ -371,7 +431,6 @@ export class ReviewService {
         const mine = items.filter((i) => i.conceptId === conceptId && i.kind === "review");
         const m = mastery.get(conceptId);
         const firstTry = mine.filter((i) => attempts.get(i.itemId)?.firstTry).length;
-        const slips = (JSON.parse(JSON.stringify(m?.mistakes ?? {})) as Record<string, number>);
         return {
           conceptId,
           title: this.course.ix.concepts.get(conceptId)?.title ?? conceptId,
@@ -380,7 +439,7 @@ export class ReviewService {
           result: firstTry === mine.length ? ("solid" as const) : ("needs-practice" as const),
           state: m?.state ?? "learning",
           nextDueDate: m?.nextDueDate ?? null,
-          mistakeCategories: Object.keys(slips),
+          mistakeCategories: Object.keys(m?.mistakes ?? {}),
         };
       });
       const reviewItems = items.filter((i) => i.kind === "review");
@@ -392,17 +451,11 @@ export class ReviewService {
         today: lt.date,
       };
       this.db.prepare("UPDATE review_sessions SET status = 'complete', completed_at = ?, summary = ? WHERE user_id = ? AND id = ?").run(lt.iso, JSON.stringify(summary), userId, sessionId);
-      return { summary, fresh: true };
-    });
-    // Rewards are decided by the same transaction rules as lesson completion: one key per session, so a retry repeats the reply.
-    const key = `review:${sessionId}`;
-    const rewards = tx(this.db, () => {
       const xp = this.xp.award(userId, { sourceKey: key, kind: "review_session", nodeId: REVIEW_NODE, nodeType: "review", curriculumVersion: this.course.version }, lt);
       this.activity.record(userId, { sourceKey: key, kind: "review_session", nodeId: REVIEW_NODE }, lt);
-      this.achievements.evaluate(userId, this.mastery.all(userId, lt.date), key, lt.iso);
-      return { xp, newAchievements: this.achievements.awardedFor(userId, key).map((a) => ({ id: a.id, title: a.title })) };
+      this.achievements.evaluate(userId, mastery, key, lt.iso);
+      return { ...summary, alreadyComplete: false, xp, newAchievements: this.achievements.awardedFor(userId, key).map((a) => ({ id: a.id, title: a.title })) };
     });
-    return { ...done.summary, alreadyComplete: !done.fresh, xp: rewards.xp, newAchievements: rewards.newAchievements };
   }
 
   history(userId: string, limit = 5) {

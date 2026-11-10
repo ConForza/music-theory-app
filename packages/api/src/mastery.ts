@@ -32,6 +32,8 @@ export interface EvidenceRow {
   counts: boolean;
   correct: boolean;
   itemId: string;
+  /** Stable identity of what was asked, independent of seed (defaults to the item id). */
+  questionKey?: string;
   templateId: string;
   templateVersion: number;
   seed: number | null;
@@ -104,6 +106,8 @@ const baseState = (c: { correct: number; templates: number; span: number; recove
  */
 export function foldConcept(conceptId: string, rows: EvidenceRow[], rules: MasteryRules, today: string): ConceptMastery {
   const correctItems = new Set<string>();
+  // Every question identity the learner has been exposed to in any way (counted or not, right or wrong, any source).
+  const seenKeys = new Set<string>();
   const templates = new Set<string>();
   const counted: string[] = [];
   const mistakes: Record<string, number> = {};
@@ -129,18 +133,24 @@ export function foldConcept(conceptId: string, rows: EvidenceRow[], rules: Maste
 
   for (const r of rows) {
     exposed = true;
+    const key = r.questionKey ?? r.itemId;
+    const fresh = !seenKeys.has(key);
+    seenKeys.add(key);
+    // The review schedule starts at the learner's first activity on the concept, even if nothing has been answered
+    // correctly yet: someone who needed retries is exactly who should be asked again, with a fresh question.
+    if (sch.idx === null) schedule(r.localDate, 0);
     if (!r.counts) continue;
     counted.push(r.id);
     recent.push(r.correct);
     if (!r.correct) {
       mistakes[r.mistakeCategory ?? "unclassified"] = (mistakes[r.mistakeCategory ?? "unclassified"] ?? 0) + 1;
-    } else if (!correctItems.has(r.itemId)) {
-      // Variety: the same item answered again (e.g. a replayed lesson) is not new evidence.
-      correctItems.add(r.itemId);
+    } else if (fresh) {
+      // Variety: only a question the learner has never met before adds distinct evidence. The same question under another
+      // seed, or one they already failed, saw remediation for or replayed, still counts for scheduling but not here.
+      correctItems.add(key);
       templates.add(r.templateId);
       firstCorrect ??= r.localDate;
       if (lastCorrect === null || r.localDate > lastCorrect) lastCorrect = r.localDate;
-      if (sch.idx === null) schedule(r.localDate, 0);
     }
     if (r.source === "review-item" && sch.idx !== null) {
       if (!r.correct) {

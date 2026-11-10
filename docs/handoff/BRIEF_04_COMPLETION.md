@@ -8,6 +8,7 @@
 * **Mastery evidence comes from your lesson's `independent` items**, attributed to the concept ids of the node's `exercises[].conceptIds` for that template. To let a concept reach *proficient* you need **independent items from at least two different templates** bound to that concept (the policy's `minDistinctTemplates: 2`), and at least four items in all. For *mastered* the concept also needs **review**: so bind at least two **generator templates** (86 of 90 have one) to the concept in a lesson that teaches it. A concept with one template can be practised but never proficient (this is the case for `c.cadences.chord-choice` today).
 * Review reads the node's binding scope, so bindings must narrow each template to what the lesson taught (the validator already enforces this).
 * A guided step with `evidence: "learning"` never counts, whatever you write in `mastery.countsAsEvidence`.
+* **Distinct questions matter.** Mastery counts distinct *question identities*, not seeds: give each concept enough distinct questions (a template whose generator can only produce a handful inside the teaching boundary cannot reach mastered). Add a boundary to `content/policy/review-constraints.json` when a concept is narrower than its lesson's binding scope.
 * Turn on the badge conditions by authoring the nodes/concepts named in `content/policy/achievements.json` (the file validates ids at start-up).
 * Unit challenges and the grade assessment will pay XP automatically (15 / 25) once they are playable; the grade-complete badge needs the grade assessment node (Brief 10).
 

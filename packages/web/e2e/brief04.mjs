@@ -347,13 +347,16 @@ async function acceptance(p) {
   await page.waitForURL("**/review/session/**");
   await runReview(page);
   await page.getByRole("link", { name: "Back to Review" }).click();
-  await page.getByRole("heading", { name: "Mastered" }).waitFor();
+  // With today's content there are only a handful of distinct line-note questions, so the honest outcome is "proficient with
+  // reviews passed, not yet mastered": the screen must say exactly what is missing (mastery itself is covered with fixtures).
+  await page.getByRole("heading", { name: "Nearly mastered" }).waitFor();
   await page.getByText("Treble clef line notes").first().waitFor();
-  await check(page, "review hub, mastered");
-  await s("10-review-mastered");
+  await check(page, "review hub, nearly mastered");
+  await s("10-review-nearly-mastered");
   const mastered = (await api(page, "GET", `/api/mastery/${TREBLE}`)).body;
-  assert.equal(mastered.state, "mastered");
-  assert.ok(mastered.independentCorrect >= 8 && mastered.delayedReviews >= 1 && mastered.spanDays >= 3);
+  assert.equal(mastered.state, "proficient");
+  assert.ok(mastered.delayedReviews >= 1 && mastered.spanDays >= 3 && mastered.independentCorrect < 8);
+  assert.match(mastered.missing.join(" "), /more correct first-try answers?/);
   const trail = mastered.trail;
   assert.ok(trail.some((t) => t.source === "guided-step" && !t.counted), "guided steps are on record but not counted");
   assert.ok(trail.some((t) => t.source === "hinted-step" && !t.counted), "the hinted step is on record but not counted");
@@ -381,7 +384,7 @@ async function acceptance(p) {
   const after = (await api(page, "GET", "/api/engagement")).body;
   assert.equal(after.xp.total, before.xp.total);
   assert.equal(after.achievements.earnedCount, 1);
-  assert.equal((await api(page, "GET", `/api/mastery/${TREBLE}`)).body.state, "mastered");
+  assert.equal((await api(page, "GET", `/api/mastery/${TREBLE}`)).body.state, "proficient");
   assert.equal(before.xp.total, 10 + 8 + 8 + 8);
   await strip(page).waitFor();
   assert.match(await strip(page).innerText(), /34\s*XP/);
@@ -395,7 +398,7 @@ async function acceptance(p) {
   await s("12-welcome-back");
   const later = (await api(page, "GET", `/api/mastery/${TREBLE}`)).body;
   assert.equal(later.state, "review_due");
-  assert.equal(later.highestState, "mastered");
+  assert.equal(later.highestState, "proficient");
   assert.equal((await api(page, "GET", "/api/progress")).body.nodes[LESSON].state, "completed");
   assert.deepEqual(errors, [], `console errors: ${errors.join(" | ")}`);
   await ctx.close();

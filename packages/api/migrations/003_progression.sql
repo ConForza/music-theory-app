@@ -52,6 +52,7 @@ CREATE TABLE mastery_evidence (
   counts             INTEGER NOT NULL CHECK (counts IN (0, 1)),
   correct            INTEGER NOT NULL CHECK (correct IN (0, 1)),
   item_id            TEXT NOT NULL,
+  question_key       TEXT NOT NULL,           -- stable identity of what was asked (seed-independent); see question-key.ts
   template_id        TEXT NOT NULL,
   template_version   INTEGER NOT NULL,
   seed               INTEGER,
@@ -67,6 +68,7 @@ CREATE TABLE mastery_evidence (
   PRIMARY KEY (user_id, id, concept_id)
 );
 CREATE INDEX mastery_evidence_by_concept ON mastery_evidence(user_id, concept_id, occurred_at);
+CREATE INDEX mastery_evidence_by_question ON mastery_evidence(user_id, question_key);
 
 -- Projection of the evidence per concept. Always rebuildable from mastery_evidence and stamped with the rules version it
 -- was computed under. next_due_date is a learner-local calendar date.

@@ -3,6 +3,7 @@
  * counts as mastery and never appears in readiness. Totals are always the SUM of the append-only ledger.
  */
 import type { ProgressionPolicy } from "@mtp/curriculum";
+import { dayWindow } from "./clock.ts";
 import type { Db } from "./db.ts";
 import type { LearnerTime } from "./mastery-service.ts";
 
@@ -68,9 +69,17 @@ export class XpService {
     }
     const base = this.baseFor(typeKey);
     const cap = this.policy.xp.dailyCapPerNode;
-    const earnedToday = (this.db
+    // The cap is "per day", but a learner can edit their timezone (a client-controlled setting). Count what was already
+    // earned under BOTH readings of today: rows stamped with today's date, and rows whose real instant falls inside today's
+    // window in the learner's current zone. Changing zone at the same instant therefore cannot reopen a spent cap.
+    const win = dayWindow(lt.date, lt.tz);
+    const byDate = (this.db
       .prepare("SELECT COUNT(*) AS c FROM xp_ledger WHERE user_id = ? AND node_id = ? AND local_date = ? AND capped = 0 AND xp > 0")
       .get(userId, a.nodeId, lt.date) as { c: number }).c;
+    const byInstant = (this.db
+      .prepare("SELECT COUNT(*) AS c FROM xp_ledger WHERE user_id = ? AND node_id = ? AND occurred_at >= ? AND occurred_at < ? AND capped = 0 AND xp > 0")
+      .get(userId, a.nodeId, win.start.toISOString(), win.end.toISOString()) as { c: number }).c;
+    const earnedToday = Math.max(byDate, byInstant);
     const capped = base > 0 && earnedToday >= cap;
     const xp = capped ? 0 : base;
     this.db

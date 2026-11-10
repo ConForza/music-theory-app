@@ -10,6 +10,7 @@ import type { Clock } from "./clock.ts";
 import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import { REVEAL_AFTER_WRONG } from "./grade.ts";
+import { questionKey } from "./question-key.ts";
 import { explainMastery, isDue, rulesFrom, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { MasteryService, learnerTime, type LearnerTime } from "./mastery-service.ts";
 import { ReviewService } from "./review.ts";
@@ -89,6 +90,7 @@ export class Engagement {
       source: this.classify(f),
       correct: f.correct,
       itemId: f.item.id,
+      questionKey: questionKey(f.item),
       templateId: f.item.templateId,
       templateVersion: f.item.templateVersion,
       nodeId: f.nodeId,
@@ -178,7 +180,7 @@ export class Engagement {
       streak: status.streak,
       today: lt.date,
       timezone: lt.tz,
-      review: { dueCount: ready.length, waiting: unavailable.length, nextDueDate: upcoming[0] ?? null },
+      review: { dueCount: ready.length, waiting: unavailable.length, nextDueDate: upcoming[0] ?? null, openSessionId: this.review.openSessionId(userId, lt.date) },
       achievements: { earnedCount: earned.length, total: this.achievements.defs.length, recent: earned.slice(0, 3) },
     };
   }
@@ -199,9 +201,12 @@ export class Engagement {
       .slice(0, 5);
     const reviewable = ready.length;
     const next = this.nextNode(userId);
-    const open = this.db.prepare("SELECT id FROM review_sessions WHERE user_id = ? AND status = 'open' AND local_date = ?").get(userId, lt.date) as { id: string } | undefined;
+    const openId = this.review.openSessionId(userId, lt.date);
+    const open = openId ? { id: openId } : undefined;
     const recommendation =
-      reviewable > 0
+      open
+        ? { kind: "review" as const, nodeId: null, text: "You have a review in progress. Pick up where you left off." }
+        : reviewable > 0
         ? { kind: "review" as const, nodeId: null, text: reviewable === 1 ? "1 topic is ready for a quick review." : `${reviewable} topics are ready for a quick review.` }
         : next
           ? { kind: "lesson" as const, nodeId: next, text: "Nothing to review right now. Continue your learning path." }

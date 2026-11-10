@@ -54,7 +54,27 @@ describe("mastery rules (pure)", () => {
     const m = fold(rows);
     expect(m.independentCorrect).toBe(0);
     expect(m.state).toBe("learning");
-    expect(m.nextDueDate).toBeNull();
+    // Activity of any kind starts the review schedule: someone who has only needed support is who review is for.
+    expect(m.nextDueDate).toBe("2026-03-03");
+  });
+
+  it("the same question under another seed (same key) is not new distinct evidence, even after a failure on it", () => {
+    const k = { questionKey: "same-music-same-answer" };
+    const rows = [
+      ev("2026-03-02", { ...k, item: "i.gen.x.s1", correct: false }), // failed
+      ev("2026-03-03", { ...k, item: "i.gen.x.s2", source: "review-item" }), // identical question, new seed, answered correctly
+      ev("2026-03-04", { ...k, item: "i.gen.x.s3", source: "review-item", tpl: "t.b" }),
+    ];
+    const m = fold(rows, "2026-03-04");
+    expect(m.independentCorrect).toBe(0);
+    expect(m.state).toBe("learning");
+    expect(m.delayedReviews).toBe(1); // it still counts for the schedule
+  });
+
+  it("schedules a review for a learner whose every first try was wrong", () => {
+    const rows = [ev("2026-03-02", { correct: false, mistakeCategory: "x" }), ev("2026-03-02", { source: "not-first-attempt", counts: false })];
+    const m = fold(rows, "2026-03-03");
+    expect(m).toMatchObject({ independentCorrect: 0, nextDueDate: "2026-03-03", state: "learning" });
   });
 
   it("is not mastered without a successful delayed review, even with plenty of varied evidence over several days", () => {

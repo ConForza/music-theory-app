@@ -1,7 +1,7 @@
 import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import type { Clock } from "./clock.ts";
-import { localDate } from "./clock.ts";
+import { addDays, localDate } from "./clock.ts";
 import { foldConcept, type ConceptMastery, type EvidenceRow, type EvidenceSource, type MasteryRules } from "./mastery.ts";
 
 /** The learner's clock: the instant, their timezone and their local calendar date. */
@@ -26,6 +26,8 @@ export interface NewEvidence {
   source: EvidenceSource;
   correct: boolean;
   itemId: string;
+  /** Seed-independent identity of what was asked (see question-key.ts). */
+  questionKey: string;
   templateId: string;
   templateVersion: number;
   seed?: number | null;
@@ -42,6 +44,7 @@ interface DbRow {
   counts: number;
   correct: number;
   item_id: string;
+  question_key: string;
   template_id: string;
   template_version: number;
   seed: number | null;
@@ -60,6 +63,7 @@ const toRow = (r: DbRow): EvidenceRow => ({
   counts: r.counts === 1,
   correct: r.correct === 1,
   itemId: r.item_id,
+  questionKey: r.question_key,
   templateId: r.template_id,
   templateVersion: r.template_version,
   seed: r.seed,
@@ -88,12 +92,12 @@ export class MasteryService {
     const lt = learnerTime(this.db, this.clock, userId);
     const insert = this.db.prepare(
       `INSERT OR IGNORE INTO mastery_evidence
-        (user_id,id,concept_id,source,counts,correct,item_id,template_id,template_version,seed,node_id,session_id,mistake_category,content_version,curriculum_version,rules_version,timezone,local_date,occurred_at)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        (user_id,id,concept_id,source,counts,correct,item_id,question_key,template_id,template_version,seed,node_id,session_id,mistake_category,content_version,curriculum_version,rules_version,timezone,local_date,occurred_at)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     );
     const counts = ev.source === "independent-step" || ev.source === "review-item";
     for (const conceptId of ev.conceptIds) {
-      insert.run(userId, ev.id, conceptId, ev.source, counts ? 1 : 0, ev.correct ? 1 : 0, ev.itemId, ev.templateId, ev.templateVersion, ev.seed ?? null, ev.nodeId ?? null, ev.sessionId ?? null, ev.mistakeCategory ?? null, ev.contentVersion ?? null, this.course.version, this.rules.rulesVersion, lt.tz, lt.date, lt.iso);
+      insert.run(userId, ev.id, conceptId, ev.source, counts ? 1 : 0, ev.correct ? 1 : 0, ev.itemId, ev.questionKey, ev.templateId, ev.templateVersion, ev.seed ?? null, ev.nodeId ?? null, ev.sessionId ?? null, ev.mistakeCategory ?? null, ev.contentVersion ?? null, this.course.version, this.rules.rulesVersion, lt.tz, lt.date, lt.iso);
       this.refresh(userId, conceptId, lt.date);
     }
     return ev.conceptIds;
@@ -127,6 +131,21 @@ export class MasteryService {
     return [...ids].sort().map((id) => this.refresh(userId, id, today));
   }
 
+  /** Has this learner met this exact question (under any seed, source or verdict)? Used to decide novelty before recording. */
+  seen(userId: string, questionKey: string): boolean {
+    return Boolean(this.db.prepare("SELECT 1 FROM mastery_evidence WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey));
+  }
+
+  /** The evidence row that first exposed this learner to a question identity (null if none). */
+  firstEvidenceId(userId: string, questionKey: string): string | null {
+    return (this.db.prepare("SELECT id FROM mastery_evidence WHERE user_id = ? AND question_key = ? ORDER BY rowid LIMIT 1").get(userId, questionKey) as { id: string } | undefined)?.id ?? null;
+  }
+
+  /** The question identities a learner has met for a concept, so review can prefer ones they have not. */
+  seenKeys(userId: string, conceptId: string): Set<string> {
+    return new Set((this.db.prepare("SELECT DISTINCT question_key FROM mastery_evidence WHERE user_id = ? AND concept_id = ?").all(userId, conceptId) as Array<{ question_key: string }>).map((r) => r.question_key));
+  }
+
   /** Authoritative read: folded from the evidence for today's date, so "review due" is never stale. */
   all(userId: string, today: string): Map<string, ConceptMastery> {
     const byConcept = new Map<string, EvidenceRow[]>();
@@ -135,12 +154,33 @@ export class MasteryService {
       list.push(toRow(r));
       byConcept.set(r.concept_id, list);
     }
-    return new Map([...byConcept].map(([id, rows]) => [id, foldConcept(id, rows, this.rules, today)]));
+    const out = new Map([...byConcept].map(([id, rows]) => [id, foldConcept(id, rows, this.rules, today)]));
+    this.addTaughtButUnrecorded(userId, today, out);
+    return out;
+  }
+
+  /**
+   * A concept taught by a lesson the learner completed is reviewable even when nothing was recorded for it (learners who
+   * finished lessons before the ledger existed, or whose answers were all recorded as supported). It starts as "learning"
+   * and is first due one interval after the completion day. No evidence is invented: it counts for nothing.
+   */
+  private addTaughtButUnrecorded(userId: string, today: string, out: Map<string, ConceptMastery>) {
+    const done = this.db.prepare("SELECT node_id, completed_at FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string; completed_at: string }>;
+    const tz = (this.db.prepare("SELECT timezone FROM profiles WHERE user_id = ?").get(userId) as { timezone: string } | undefined)?.timezone ?? "UTC";
+    for (const d of done) {
+      const node = this.course.ix.nodeById.get(d.node_id);
+      if (!node || (node.type !== "lesson" && node.type !== "enrichment") || !this.course.isPlayable(node.id)) continue;
+      for (const conceptId of node.conceptIds) {
+        if (out.has(conceptId)) continue;
+        const base = foldConcept(conceptId, [], this.rules, today);
+        const first = localDate(new Date(d.completed_at), tz);
+        out.set(conceptId, { ...base, state: "learning", highestState: "learning", intervalIndex: 0, nextDueDate: addDays(first, this.rules.intervalsDays[0]!) });
+      }
+    }
   }
 
   get(userId: string, conceptId: string, today: string): ConceptMastery | null {
-    const rows = this.rowsFor(userId, conceptId).map(toRow);
-    return rows.length ? foldConcept(conceptId, rows, this.rules, today) : null;
+    return this.all(userId, today).get(conceptId) ?? null;
   }
 
   /** The audit trail: every row that touched the concept, counted or not, newest first. */

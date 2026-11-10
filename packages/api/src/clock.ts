@@ -56,3 +56,22 @@ export const daysBetween = (a: string, b: string): number => dayNumber(b) - dayN
 export function addDays(date: string, n: number): string {
   return new Date((dayNumber(date) + n) * 86_400_000).toISOString().slice(0, 10);
 }
+
+/**
+ * The instants that make up a learner-local calendar day: [start, end). Found by search on `localDate` (which never goes
+ * backwards in time), so 23- and 25-hour days are handled by construction.
+ */
+export function dayWindow(date: string, tz: string): { start: Date; end: Date } {
+  const first = (target: string): Date => {
+    const mid = new Date(`${target}T00:00:00Z`).getTime();
+    let lo = mid - 16 * 3_600_000; // no zone is more than 14 hours from UTC
+    let hi = mid + 16 * 3_600_000;
+    while (hi - lo > 1) {
+      const m = Math.floor((lo + hi) / 2);
+      if (localDate(new Date(m), tz) >= target) hi = m;
+      else lo = m;
+    }
+    return new Date(hi);
+  };
+  return { start: first(date), end: first(addDays(date, 1)) };
+}

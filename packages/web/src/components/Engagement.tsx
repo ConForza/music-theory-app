@@ -68,13 +68,14 @@ export function WelcomeBack({ e }: { e: EngagementSnapshot }) {
 }
 
 export function ReviewNudge({ e }: { e: EngagementSnapshot }) {
-  if (e.review.dueCount === 0) return null;
+  const inProgress = e.review.openSessionId !== null;
+  if (e.review.dueCount === 0 && !inProgress) return null;
   return (
     <section className="review-nudge" aria-labelledby="nudge-h">
       <Icon name="repeat" size={28} />
       <div>
-        <h2 id="nudge-h" className="h3">{plural(e.review.dueCount, "topic")} ready to review</h2>
-        <p className="muted">A few quick questions keep what you've learned fresh.</p>
+        <h2 id="nudge-h" className="h3">{inProgress ? "A review is in progress" : `${plural(e.review.dueCount, "topic")} ready to review`}</h2>
+        <p className="muted">{inProgress ? "Pick up where you left off. Your answers so far are saved." : "A few quick questions keep what you've learned fresh."}</p>
       </div>
       <Link className="btn btn-primary" to="/review">Review</Link>
     </section>
