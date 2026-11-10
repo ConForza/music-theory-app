@@ -52,11 +52,19 @@ async function noOverflow(page, where) {
   const over = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   if (over > 1) {
     const culprits = await page.evaluate(() => {
-      const w = document.documentElement.clientWidth;
-      return [...document.querySelectorAll("body *")]
-        .filter((e) => e.getBoundingClientRect().right > w + 0.5)
-        .slice(0, 8)
-        .map((e) => `${e.tagName}.${e.className} right=${e.getBoundingClientRect().right.toFixed(1)} text="${(e.textContent ?? "").slice(0, 30)}"`);
+      const de = document.documentElement;
+      const w = de.clientWidth;
+      const out = [`client=${w} scroll=${de.scrollWidth} inner=${innerWidth} body.scroll=${document.body.scrollWidth}`];
+      for (const e of document.querySelectorAll("body *")) {
+        const r = e.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(e);
+        const t = range.getBoundingClientRect();
+        if (r.right > w + 0.5 || e.scrollWidth > e.clientWidth + 0.5 || t.right > w + 0.5) {
+          out.push(`${e.tagName}.${e.className} right=${r.right.toFixed(1)} content=${t.right.toFixed(1)} sw=${e.scrollWidth} cw=${e.clientWidth} "${(e.textContent ?? "").slice(0, 25)}"`);
+        }
+      }
+      return out.slice(0, 14);
     });
     assert.fail(`${where}: page scrolls sideways by ${over}px; wider than the viewport: ${culprits.join(" | ")}`);
   }
