@@ -271,7 +271,8 @@
       ],
       "conceptIds": [
         "c.metre.bar-completion",
-        "c.metre.grouping-g1"
+        "c.metre.grouping-g1",
+        "c.metre.rests-in-bars-g1"
       ],
       "promptPattern": "Complete this bar of {timeSignature} using {allowedValues}.",
       "scope": {
@@ -485,7 +486,8 @@
       "conceptIds": [
         "c.pitch.keyboard",
         "c.accidentals.signs",
-        "c.pitch.middle-c"
+        "c.pitch.middle-c",
+        "c.pitch.letter-names"
       ],
       "promptPattern": "Find {pitchName} on the keyboard. / Name the highlighted key.",
       "scope": {},
@@ -1108,6 +1110,325 @@
       ],
       "hints": [
         "Count up from the bottom line, one letter for each line and space."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.note-total",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02",
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04"
+      ],
+      "conceptIds": [
+        "c.rhythm.beat",
+        "c.rhythm.values-long",
+        "c.rhythm.values-short",
+        "c.rhythm.rests",
+        "c.rhythm.ties",
+        "c.rhythm.dots",
+        "c.rhythm.beams"
+      ],
+      "promptPattern": "How many crotchet beats do these notes and rests last altogether?",
+      "scope": {
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.note-equivalent",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.04"
+      ],
+      "conceptIds": [
+        "c.rhythm.beat",
+        "c.rhythm.values-long",
+        "c.rhythm.values-short",
+        "c.rhythm.ties"
+      ],
+      "promptPattern": "Which single note lasts as long as all of these together?",
+      "scope": {
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Add the beats first."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.beam-choice",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.01"
+      ],
+      "conceptIds": [
+        "c.rhythm.beams",
+        "c.rhythm.values-short"
+      ],
+      "promptPattern": "Flags and beams: what value is each note, and how long does the group last?",
+      "scope": {
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.bar-judge",
+      "version": 1,
+      "familyId": "fam.bar-builder",
+      "grade": 1,
+      "mode": "correct",
+      "outcomeIds": [
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.07"
+      ],
+      "conceptIds": [
+        "c.metre.bars",
+        "c.metre.simple-crotchet",
+        "c.metre.bar-completion",
+        "c.metre.grouping-g1",
+        "c.metre.ties-in-bars",
+        "c.metre.rests-in-bars-g1"
+      ],
+      "promptPattern": "Which of these three bars is right?",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Add up the beats and compare with the time signature."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.middle-c-find",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "conceptIds": [
+        "c.pitch.middle-c"
+      ],
+      "promptPattern": "Which note or key is middle C?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Middle C sits on its own short ledger line."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.bar-fix",
+      "version": 1,
+      "familyId": "fam.bar-builder",
+      "grade": 1,
+      "mode": "correct",
+      "outcomeIds": [
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.07"
+      ],
+      "conceptIds": [
+        "c.metre.ties-in-bars",
+        "c.metre.rests-in-bars-g1"
+      ],
+      "promptPattern": "Rewrite this bar so that it sounds the same but follows the conventions.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Every combination that totals the bar and follows the grouping rules is accepted; equally clear beaming alternatives are both accepted."
+      },
+      "ambiguityChecks": [
+        "The faulty bar and the fixed bar last exactly the same time.",
+        "Every convention-compliant rewrite is accepted."
+      ],
+      "hints": [
+        "Same sound, clearer writing."
       ],
       "extraMistakeCategories": [],
       "difficulty": 2,

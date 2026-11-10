@@ -513,6 +513,7 @@ describe("re-review regressions (C1, C2)", () => {
     return mutate((c) => {
       const raw = firstLesson();
       edit(raw);
+      c.lessons = c.lessons.filter((l) => l.content.lessonId !== "G1-U1-L01"); // the shipped lesson is replaced by the test's own
       c.lessons.push({ file: "lessons/G1-U1-L01.json", content: LessonContent.parse(raw) });
       const n = node(c, "G1-U1-L01");
       n.contentRef = "lessons/G1-U1-L01.json";

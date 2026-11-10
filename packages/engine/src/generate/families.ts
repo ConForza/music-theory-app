@@ -116,7 +116,7 @@ function beatFills(beat: music.Fraction, sc: MusicScope, compound: boolean): Not
 }
 
 /** A random, convention-compliant bar in `ts` drawn from the scope's values. */
-function randomBar(c: GenCtx, ts: string, opts: { noRests?: boolean; needBeams?: boolean } = {}): NotationEvent[] | null {
+export function randomBar(c: GenCtx, ts: string, opts: { noRests?: boolean; needBeams?: boolean } = {}): NotationEvent[] | null {
   const s = c.rng.pick(music.metreStructures(ts));
   const bar: NotationEvent[] = [];
   // Occasionally a longer note across two beats in simple time, starting on a strong beat.

@@ -17,14 +17,19 @@ async function learner(waive = true) {
 }
 
 describe("Grade 1 prerequisites are strict", () => {
-  it("opens L01 first and locks L03 until L01 and L02 are complete, with or without the preview waiver", async () => {
-    for (const waive of [true]) { // with every Grade 1 node written, false behaves identically (asserted in the full-path suite)
+  it("opens the first lesson only, and locks every later one until its prerequisite is complete, with or without the preview waiver", async () => {
+    const states: Record<string, string>[] = [];
+    for (const waive of [true, false]) {
       const { c } = await learner(waive);
       const p = (await c.get("/api/progress")).body.nodes;
-      expect(p["G1-U3-L01"].state).toBe("available");
+      expect(p["G1-U1-L01"].state).toBe("available");
+      expect(p["G1-U1-L02"].state).toBe("locked");
       expect(p["G1-U3-L03"].state).toBe("locked");
       expect((await c.post("/api/lessons/G1-U3-L03/start")).status).toBe(403);
+      states.push(Object.fromEntries(Object.entries(p as Record<string, { state: string }>).filter(([id]) => /^G1-U[123]-/.test(id)).map(([id, v]) => [id, v.state])));
     }
+    // Everything written is held to real prerequisites, so the waiver changes nothing for the written units.
+    expect(states[1]).toEqual(states[0]);
   });
 
   it("keeps an already-open run on L03 openable (nobody loses a lesson in progress)", async () => {

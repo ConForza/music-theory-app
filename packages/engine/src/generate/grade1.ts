@@ -10,9 +10,9 @@
  *
  * Existing templates and generators are untouched, so stored ids for them stay valid.
  */
-import { music, type AnswerSpec, type NotationFragment } from "@mtp/curriculum";
+import { music, type AnswerSpec, type Measure, type NotationEvent, type NotationFragment } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
-import { frag, maxLedger, nameOf, note, r, type Gen } from "./families.ts";
+import { frag, maxLedger, nameOf, n, note, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
 
 const { naturalAt } = music;
 type Pitch = music.Pitch;
@@ -186,8 +186,401 @@ export const notePlace: Gen = (c) => {
   };
 };
 
+
+// ---------------------------------------------------------------------------
+// Unit 1: long and short sounds
+// ---------------------------------------------------------------------------
+
+type Value = music.NoteValue;
+const VALUE_ORDER: Value[] = ["semibreve", "minim", "crotchet", "quaver", "semiquaver"];
+const BEAMABLE = new Set<Value>(["quaver", "semiquaver"]);
+const beats = (f: music.Fraction) => (f.n * 4) / f.d; // crotchet beats
+const beatsText = (b: number) => (Number.isInteger(b) ? String(b) : `${Math.floor(b)}${b % 1 === 0.5 ? "½" : `+${b % 1}`}`.replace(/^0½$/, "½"));
+const valuesOf = (c: { scope: { noteValues?: readonly string[] } }): Value[] => VALUE_ORDER.filter((v) => (c.scope.noteValues?.length ? c.scope.noteValues : VALUE_ORDER).includes(v));
+const dur = (e: NotationEvent) => (e.kind === "tuplet" ? music.frac(0) : music.dotted(e.duration.value, e.duration.dots ?? 0));
+const sumBeats = (evs: NotationEvent[]) => evs.reduce((t, e) => t + beats(dur(e)), 0);
+
+/** Join runs of adjacent short notes that fit inside one crotchet beat with beams (as a printed score would). */
+function beamRuns(evs: NotationEvent[]): NotationEvent[] {
+  const out = evs.map((e) => ({ ...e })) as Array<NotationEvent & { beam?: string }>;
+  let i = 0;
+  while (i < out.length) {
+    const e = out[i]!;
+    if (e.kind === "note" && BEAMABLE.has(e.duration.value) && !(e.duration.dots ?? 0) && !e.tieToNext) {
+      let j = i;
+      let t = 0;
+      while (j < out.length) {
+        const x = out[j]!;
+        if (!(x.kind === "note" && BEAMABLE.has(x.duration.value) && !(x.duration.dots ?? 0) && !x.tieToNext)) break;
+        const next = t + beats(dur(x));
+        if (next > 1) break;
+        t = next;
+        j++;
+      }
+      if (j - i >= 2) {
+        for (let k = i; k < j; k++) out[k]!.beam = k === i ? "begin" : k === j - 1 ? "end" : "continue";
+      }
+      i = Math.max(j, i + 1);
+    } else i++;
+  }
+  return out as NotationEvent[];
+}
+
+/** t.g1.note-total: how many crotchet beats do these notes and rests last altogether? */
+export const noteTotal: Gen = (c) => {
+  const vals = valuesOf(c);
+  const rests = Boolean(c.scope.rests);
+  const dots = (c.scope.maxDots ?? 0) >= 1;
+  const ties = Boolean(c.scope.ties);
+  const count = c.rng.int(2, 4);
+  const evs: NotationEvent[] = [];
+  for (let k = 0; k < count; k++) {
+    const v = c.rng.pick(vals);
+    const dotted = dots && v !== "semiquaver" && c.rng.chance(0.3);
+    const isRest = rests && c.rng.chance(0.3);
+    evs.push(isRest ? r(v, dotted ? 1 : 0) : n(v, dotted ? 1 : 0));
+    if (ties && !isRest && !dotted && c.rng.chance(0.25)) {
+      (evs[evs.length - 1] as { tieToNext?: boolean }).tieToNext = true;
+      evs.push(n(v));
+    }
+  }
+  const total = sumBeats(evs);
+  if (total * 2 !== Math.round(total * 2) || total < 1 || total > 8) return null;
+  const line = beamRuns(evs);
+  // Mistakes a learner really makes, each shown only when it gives a different number from the right answer.
+  const noDots = evs.reduce((t, e) => t + beats(music.dotted((e as { duration: { value: Value } }).duration.value, 0)), 0);
+  const noRests = evs.filter((e) => e.kind !== "rest").reduce((t, e) => t + beats(dur(e)), 0);
+  const firstOfTies = evs.reduce((t, e, k) => t + (k > 0 && (evs[k - 1] as { tieToNext?: boolean }).tieToNext ? 0 : beats(dur(e))), 0);
+  const diag: Array<[number, string, string]> = [
+    [noDots, "dot-misread", "A dot makes a note half as long again, so it adds to the total."],
+    [noRests, "note-rest-confusion", "A rest lasts as long as the note of the same name, so rests count towards the total too."],
+    [firstOfTies, "tie-dot-confusion", "A tie joins two notes into one longer sound, so both of them count."],
+    [total * 2, "halved-or-doubled", "Count again, one note at a time, in crotchet beats."],
+    [total / 2, "halved-or-doubled", "Count again, one note at a time, in crotchet beats."],
+  ];
+  const opts = new Map<number, [string, string] | null>([[total, null]]);
+  for (const [v, cat, why] of diag) if (v > 0 && v !== total && !opts.has(v) && opts.size < 4 && v * 2 === Math.round(v * 2)) opts.set(v, [cat, why]);
+  for (const extra of [total + 1, total - 1, total + 2, total + 0.5, total - 0.5]) if (opts.size < 4 && extra > 0 && !opts.has(extra)) opts.set(extra, null);
+  const ordered = [...opts.keys()].sort((a, b) => a - b);
+  const diagnoses = Object.fromEntries([...opts].filter(([, d]) => d).map(([v, d]) => [String(v * 2), { category: d![0], reason: d![1] }]));
+  const hasRest = evs.some((e) => e.kind === "rest");
+  return {
+    prompt: `How many crotchet beats do these ${hasRest ? "notes and rests" : "notes"} last altogether?`,
+    music: rhythmLine([{ events: line }]),
+    answer: { kind: "choice", options: ordered.map((v) => ({ id: String(v * 2), label: beatsText(v) })), correctOptionIds: [String(total * 2)], ...(Object.keys(diagnoses).length ? { diagnoses } : {}) },
+    hints: ["Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.", "Add the beats one note or rest at a time."],
+  };
+};
+
+/** t.g1.note-equivalent: which single note lasts as long as all of these together? */
+export const noteEquivalent: Gen = (c) => {
+  const vals = valuesOf(c);
+  const dotsMax = c.scope.maxDots ?? 0;
+  const tied = Boolean(c.scope.ties) && c.rng.chance(0.4);
+  const count = tied ? c.rng.pick([2, 2, 3, 4]) : c.rng.int(2, 4);
+  const base = c.rng.pick(vals);
+  const evs: NotationEvent[] = tied
+    ? Array.from({ length: count }, (_, k) => n(base, 0, k < count - 1 ? { tieToNext: true } : {}))
+    : Array.from({ length: count }, () => n(c.rng.pick(vals)));
+  const total = evs.reduce((t, e) => music.add(t, dur(e)), music.frac(0));
+  const answer = music.valueFor(total, dotsMax);
+  if (!answer || !vals.includes(answer.value) || (answer.dots > 0 && dotsMax < 1)) return null;
+  const nameOfValue = (v: Value, dots: number) => `${dots ? "dotted " : ""}${v}`;
+  const correct = nameOfValue(answer.value, answer.dots);
+  const i = VALUE_ORDER.indexOf(answer.value);
+  const cand = new Map<string, [string, string] | null>([[correct, null]]);
+  const dbl = VALUE_ORDER[i - 1];
+  const half = VALUE_ORDER[i + 1];
+  if (dbl && vals.includes(dbl)) cand.set(nameOfValue(dbl, 0), ["halved-or-doubled", "That note is twice as long as the notes added together. Add the beats first, then find the note with that many."]);
+  if (half && vals.includes(half)) cand.set(nameOfValue(half, 0), ["halved-or-doubled", "That note is only half as long as the notes added together. Add the beats first, then find the note with that many."]);
+  for (const v of c.rng.shuffle(vals)) if (cand.size < 4) cand.set(nameOfValue(v, 0), cand.get(nameOfValue(v, 0)) ?? null);
+  if (dotsMax >= 1 && cand.size < 4) cand.set(nameOfValue(answer.value, answer.dots ? 0 : 1), answer.dots ? ["dot-misread", "Without a dot that note is shorter. A dot makes it half as long again."] : ["dot-misread", "A dot would make the note longer than all of these together."]);
+  const labels = c.rng.shuffle([...cand.keys()]);
+  const diagnoses = Object.fromEntries([...cand].filter(([, d]) => d).map(([k, d]) => [k.replace(/ /g, "-"), { category: d![0], reason: d![1] }]));
+  return {
+    prompt: tied ? "These notes are tied together. Which single note lasts as long as all of them?" : "Which single note lasts as long as all of these notes added together?",
+    music: rhythmLine([{ events: beamRuns(evs) }]),
+    answer: { kind: "choice", options: labels.map((l) => ({ id: l.replace(/ /g, "-"), label: l })), correctOptionIds: [correct.replace(/ /g, "-")], ...(Object.keys(diagnoses).length ? { diagnoses } : {}) },
+    hints: ["Work out how many crotchet beats the notes last altogether.", "Then find the single note that lasts that long."],
+  };
+};
+
+/** t.g1.beam-choice: flags and beams on quavers and semiquavers. */
+export const beamChoice: Gen = (c) => {
+  const vals = valuesOf(c).filter((v) => BEAMABLE.has(v));
+  if (!vals.length) return null;
+  const mode = c.rng.pick(["flag", "beam-value", "beam-value", "beam-count", "beam-beats"] as const);
+  const v = c.rng.pick(vals);
+  const flags = v === "quaver" ? 1 : 2;
+  const other: Value = v === "quaver" ? "semiquaver" : "quaver";
+  const valueOptions = (): Array<{ id: string; label: string }> => {
+    const names: Value[] = ["crotchet", "quaver", "semiquaver"].filter((x) => valuesOf(c).includes(x as Value)) as Value[];
+    return names.map((x) => ({ id: x, label: x }));
+  };
+  if (mode === "flag") {
+    return {
+      prompt: `This note has ${flags === 1 ? "one flag" : "two flags"}. What note value is it?`,
+      music: rhythmLine([{ events: [n(v)] }]),
+      answer: { kind: "choice", options: valueOptions(), correctOptionIds: [v], diagnoses: { [other]: { category: "halved-or-doubled", reason: `One flag makes a quaver and two flags make a semiquaver. This note has ${flags === 1 ? "one flag, so it is the longer of the two" : "two flags, so it is the shorter of the two"}.` } } },
+      hints: ["Count the flags: each extra flag halves the length."],
+    };
+  }
+  const size = mode === "beam-beats" ? (v === "quaver" ? c.rng.pick([2, 3, 4]) : c.rng.pick([2, 4])) : c.rng.pick(v === "quaver" ? [2, 3, 4] : [2, 3, 4]);
+  const group = beamRuns(Array.from({ length: size }, () => n(v)));
+  if (!group.every((e) => (e as { beam?: string }).beam)) return null; // must be one beam group (fits within a beat)
+  const lead = [] as NotationEvent[];
+  if (mode === "beam-count" && c.rng.chance(0.5)) lead.push(n("crotchet"));
+  const line = rhythmLine([{ events: [...lead, ...group] }]);
+  if (mode === "beam-value") {
+    return {
+      prompt: `${size} notes are joined by ${v === "quaver" ? "a beam" : "two beams"}. What value is each note?`,
+      music: line,
+      answer: { kind: "choice", options: valueOptions(), correctOptionIds: [v], diagnoses: { [other]: { category: "halved-or-doubled", reason: `One beam means quavers; two beams mean semiquavers. This group has ${v === "quaver" ? "one beam" : "two beams"}.` } } },
+      hints: ["A beam does the job of the flags: one beam for quavers, two for semiquavers."],
+    };
+  }
+  if (mode === "beam-count") {
+    const opts = [2, 3, 4, 5].map((x) => ({ id: String(x), label: String(x) }));
+    return {
+      prompt: "How many notes are joined together by the beam?",
+      music: line,
+      answer: { kind: "choice", options: opts, correctOptionIds: [String(size)] },
+      hints: ["Count the stems that touch the beam, not the whole bar."],
+    };
+  }
+  const total = size * (v === "quaver" ? 0.5 : 0.25);
+  if (total * 2 !== Math.round(total * 2)) return null;
+  const opts = new Map<number, [string, string] | null>([[total, null]]);
+  for (const x of [size, total * 2, total / 2, total + 1]) if (x * 2 === Math.round(x * 2) && x > 0 && !opts.has(x) && opts.size < 4) opts.set(x, x === size ? ["halved-or-doubled", "That counts the notes, not the beats. Quavers are half a beat each and semiquavers a quarter."] : null);
+  const ordered = [...opts.keys()].sort((a, b) => a - b);
+  const diagnoses = Object.fromEntries([...opts].filter(([, d]) => d).map(([x, d]) => [String(x * 2), { category: d![0], reason: d![1] }]));
+  return {
+    prompt: "How many crotchet beats does this beamed group last?",
+    music: line,
+    answer: { kind: "choice", options: ordered.map((x) => ({ id: String(x * 2), label: beatsText(x) })), correctOptionIds: [String(total * 2)], ...(Object.keys(diagnoses).length ? { diagnoses } : {}) },
+    hints: ["A quaver lasts half a crotchet beat; a semiquaver lasts a quarter. Count the notes and add."],
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Unit 2: count the beat
+// ---------------------------------------------------------------------------
+
+const stripBeam = (e: NotationEvent): NotationEvent => {
+  if (e.kind === "tuplet") return e;
+  const { beam: _b, ...rest } = e as NotationEvent & { beam?: string };
+  return rest as NotationEvent;
+};
+const codes = (events: NotationEvent[], ts: string, opts: music.BarCheckOptions = {}) => music.checkBarAnyPattern(events as unknown as music.REvent[], ts, opts).issues.map((i) => i.code);
+
+/** Is this value-list a bar the learner could have been taught (flat events, scope-safe)? */
+function inScope(events: NotationEvent[], c: Parameters<Gen>[0]): boolean {
+  return events.every((e) => e.kind !== "tuplet" && (c.scope.noteValues ?? VALUE_ORDER).includes(e.duration.value) && ((e.duration.dots ?? 0) <= (c.scope.maxDots ?? 0)) && (e.kind !== "rest" || c.scope.rests) && (!(e as { tieToNext?: boolean }).tieToNext || c.scope.ties));
+}
+
+
+
+/** A bar with a silent stretch across two beats: `good` gives each beat its own rest, `bad` merges two of them into one longer rest. */
+function silentStretch(c: Parameters<Gen>[0], ts: string): { good: NotationEvent[]; bad: NotationEvent[] } | null {
+  const { top } = music.parseTimeSignature(ts);
+  if (top < 3 || !c.scope.rests) return null;
+  const starts = top === 4 ? [1] : [0, 1]; // zero-based beat where the merged rest would begin (4/4: beats 2-3 only)
+  const s0 = c.rng.pick(starts);
+  const good: NotationEvent[] = [];
+  const bad: NotationEvent[] = [];
+  for (let b = 0; b < top; b++) {
+    if (b === s0) {
+      good.push(r("crotchet"), r("crotchet"));
+      bad.push(r("minim"));
+      b++;
+      continue;
+    }
+    const filler: NotationEvent[] = c.rng.chance(0.4) ? beamRuns([n("quaver"), n("quaver")]) : [n("crotchet")];
+    good.push(...filler);
+    bad.push(...filler);
+  }
+  const goodIssues = codes(good, ts);
+  const badIssues = codes(bad, ts, { requireBeams: false });
+  if (goodIssues.length || !badIssues.some((x) => x === "rest-across-beat" || x === "rests-not-combined" || x === "half-bar-rest-misplaced")) return null;
+  return { good, bad };
+}
+
+/** t.g1.bar-judge: three bars, one of them right. Which? (total, beaming, rests or ties) */
+export const barJudge: Gen = (c) => {
+  const ts = tsOf(c);
+  const modes = ["total", "total", "grouping", "grouping"] as Array<"total" | "grouping" | "rest" | "tie">;
+  if (c.scope.rests) modes.push("rest");
+  if (c.scope.ties) modes.push("tie");
+  const mode = c.rng.pick(modes);
+  const stretch = mode === "rest" ? silentStretch(c, ts) : null;
+  if (mode === "rest" && !stretch) return null;
+  const good = stretch ? stretch.good : randomBar(c, ts, mode === "grouping" ? { noRests: true, needBeams: true } : {});
+  if (!good) return null;
+  const wrongs: NotationEvent[][] = [];
+  const addWrong = (b: NotationEvent[] | null) => b && inScope(b, c) && !wrongs.some((w) => JSON.stringify(w) === JSON.stringify(b)) && wrongs.push(b);
+  const mutate = (b: NotationEvent[]): NotationEvent[] | null => {
+    const plain = b.map(stripBeam);
+    const idx = c.rng.int(0, plain.length - 1);
+    const e = plain[idx]!;
+    if (mode === "total") {
+      const choice = c.rng.int(0, 2);
+      if (choice === 0) return [...plain, n("crotchet")]; // too long
+      if (choice === 1) return plain.length > 1 ? plain.filter((_, k) => k !== idx) : null; // too short
+      if (e.kind === "tuplet") return null;
+      const smaller = VALUE_ORDER[VALUE_ORDER.indexOf(e.duration.value as Value) + 1];
+      return smaller && e.kind === "note" && !(e.duration.dots ?? 0) ? plain.map((x, k) => (k === idx ? n(smaller) : x)) : null;
+    }
+    if (mode === "grouping") return plain; // unbeamed flags: beats not shown
+    if (mode === "rest") return stretch!.bad; // rests merged across a beat
+    
+    // tie: split a note into two tied notes of a smaller value inside a beat
+    if (e.kind !== "note") return null;
+    const smaller = VALUE_ORDER[VALUE_ORDER.indexOf(e.duration.value as Value) + 1];
+    if (!smaller || (e.duration.dots ?? 0)) return null;
+    return [...plain.slice(0, idx), n(smaller, 0, { tieToNext: true }), n(smaller), ...plain.slice(idx + 1)];
+  };
+  const goodClean = mode === "grouping" ? good : mode === "tie" ? good.map(stripBeam) : good;
+  const goodIssues = codes(goodClean, ts);
+  if (goodIssues.length) return null;
+  if (mode === "rest") {
+    // the second wrong bar is another silent stretch of the same bar length, so the right one is the only bar with a rest per beat
+    for (let k = 0; k < 20 && wrongs.length < 2; k++) {
+      const other = silentStretch(c, ts);
+      if (other) addWrong(other.bad);
+    }
+  }
+  for (let k = 0; k < 60 && wrongs.length < 2 && mode !== "rest"; k++) {
+    const w = mutate(good);
+    if (!w) continue;
+    const issues = codes(w, ts);
+    const totalBad = issues.some((x) => x === "bar-overfull" || x === "bar-underfull");
+    const ok =
+      mode === "total" ? totalBad
+      : mode === "grouping" ? !totalBad && issues.some((x) => x.startsWith("beam") || x === "beat-not-beamed" || x.startsWith("note-"))
+      : !totalBad && issues.includes("unnecessary-tie");
+    if (ok) addWrong(w);
+  }
+  if (mode === "grouping" && wrongs.length < 2) {
+    // a second kind of fault: beam across the middle of a four-beat bar, or beams over beat lines
+    const plain = good.map(stripBeam);
+    const idxs = plain.map((e, i) => (e.kind === "note" && BEAMABLE.has(e.duration.value as Value) ? i : -1)).filter((i) => i >= 0);
+    for (let a = 0; a + 1 < idxs.length && wrongs.length < 2; a++) {
+      const trial = plain.map((e, i) => (i === idxs[a] ? { ...e, beam: "begin" } : i === idxs[a + 1] ? { ...e, beam: "end" } : e)) as NotationEvent[];
+      const issues = codes(trial, ts);
+      if (idxs[a + 1] === idxs[a]! + 1 && issues.some((x) => x.startsWith("beam"))) addWrong(trial);
+    }
+  }
+  if (wrongs.length < 2) return null;
+  const bars = c.rng.shuffle([{ ev: goodClean, right: true }, { ev: wrongs[0]!, right: false }, { ev: wrongs[1]!, right: false }]);
+  const measures: Measure[] = bars.map((b, i) => ({ events: b.ev, ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
+  const answerIdx = bars.findIndex((b) => b.right);
+  const fragment = rhythmLine(measures, mode === "total" ? {} : { timeSignature: ts });
+  const prompt =
+    mode === "total" ? `Each bar is meant to be in ${ts}. Which bar has exactly the right number of beats?`
+    : mode === "grouping" ? `All three bars add up in ${ts}. Which bar groups its notes so the beats are easy to see?`
+    : mode === "rest" ? `All three bars add up in ${ts}. Which bar writes its rests so that each beat can be seen?`
+    : `All three bars add up in ${ts}. Which bar does not use a tie where a single note would do?`;
+  const labelOf = (i: number) => `Bar ${i + 1}`;
+  const why: Record<typeof mode, [string, string]> = {
+    total: ["bar-overfull", "Add up the beats in the bar you chose and compare with the time signature: it does not match."],
+    grouping: ["grouping-obscures-beat", "In the bar you chose the beats are hidden: quavers and semiquavers belong in beamed groups that show each beat."],
+    rest: ["rest-grouping", "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."],
+    tie: ["unnecessary-tie", "In the bar you chose two tied notes could have been written as one longer note."],
+  };
+  const diagnoses = Object.fromEntries(bars.map((b, i) => [String(i + 1), b.right ? null : { category: why[mode][0], reason: why[mode][1] }]).filter(([, v]) => v));
+  return {
+    prompt,
+    music: fragment,
+    answer: { kind: "choice", options: bars.map((_, i) => ({ id: String(i + 1), label: labelOf(i) })), correctOptionIds: [String(answerIdx + 1)], diagnoses },
+    hints: [`${ts} has ${music.describeMetre(music.metreStructure(ts))} in each bar.`],
+  };
+};
+
+
+/** t.g1.bar-fix: rewrite a bar that uses an unnecessary tie, or rests that hide a beat, so it follows the conventions. */
+export const barFix: Gen = (c) => {
+  const ts = tsOf(c);
+  const modes: Array<"tie" | "rest"> = [];
+  if (c.scope.ties) modes.push("tie");
+  if (c.scope.rests) modes.push("rest");
+  if (!modes.length) return null;
+  const mode = c.rng.pick(modes);
+  const good = randomBar(c, ts, {});
+  if (!good || codes(good.map(stripBeam), ts).length === 0 === false) {
+    if (!good) return null;
+  }
+  const plain = good.map(stripBeam);
+  let bad: NotationEvent[] | null = null;
+  if (mode === "tie") {
+    const idxs = plain.map((e, i) => (e.kind === "note" && !(e.duration.dots ?? 0) && VALUE_ORDER.indexOf(e.duration.value as Value) < 4 ? i : -1)).filter((i) => i >= 0);
+    if (!idxs.length) return null;
+    const idx = c.rng.pick(idxs);
+    const e = plain[idx]! as Extract<NotationEvent, { kind: "note" }>;
+    const smaller = VALUE_ORDER[VALUE_ORDER.indexOf(e.duration.value as Value) + 1]! as Value;
+    if (!(c.scope.noteValues ?? VALUE_ORDER).includes(smaller)) return null;
+    bad = [...plain.slice(0, idx), n(smaller, 0, { tieToNext: true }), n(smaller), ...plain.slice(idx + 1)];
+  } else {
+    const st = silentStretch(c, ts);
+    if (!st) return null;
+    bad = st.bad;
+    good.length = 0;
+    good.push(...st.good);
+  }
+  const badCodes = codes(bad, ts, { requireBeams: false });
+  const want = mode === "tie" ? badCodes.includes("unnecessary-tie") : badCodes.some((x) => x === "rest-across-beat" || x === "rests-not-combined" || x === "half-bar-rest-misplaced");
+  if (!want || badCodes.some((x) => x === "bar-overfull" || x === "bar-underfull")) return null;
+  if (codes(good, ts).length) return null;
+  return {
+    prompt: mode === "tie" ? "This bar uses a tie where a single note would do. Rewrite the bar so that it sounds the same but is written clearly." : "The rests in this bar hide a beat. Rewrite the bar so that it sounds the same and every beat can be seen.",
+    music: rhythmLine([{ events: bad, barline: "final" }], { timeSignature: ts }),
+    answer: { kind: "rhythm", task: "regroup", timeSignature: ts, accepted: [[{ events: good }]], acceptAnyRuleCompliant: true },
+    hints: mode === "tie" ? ["Two tied notes inside a bar can become one longer note."] : ["Give each silent beat its own rest, unless one minim rest fills the first or last two beats of 4/4."],
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Unit 3 extra: finding middle C
+// ---------------------------------------------------------------------------
+
+/** t.g1.middle-c-find: which note (or key) is middle C? */
+export const middleCFind: Gen = (c) => {
+  const keyboard = c.rng.chance(0.4);
+  if (keyboard) {
+    const others = c.rng.shuffle(["C2", "C3", "C5", "C6"]).slice(0, 2);
+    const set = ["C4", ...others].sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
+    const pos = ["lowest", "middle", "highest"];
+    const answer = pos[set.indexOf("C4")]!;
+    return {
+      prompt: "Three C keys are highlighted. Which one is middle C?",
+      music: { presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: set.map((p) => note(p)) }], textAlternative: `A piano keyboard with three C keys highlighted, in different octaves.` } as NotationFragment,
+      answer: { kind: "choice", options: pos.map((p) => ({ id: p, label: `The ${p} one` })), correctOptionIds: [answer], diagnoses: Object.fromEntries(pos.filter((p) => p !== answer).map((p) => [p, { category: "white-key-off-by-one", reason: "Middle C is the C nearest the middle of the keyboard, not the highest or lowest of these Cs." }])) },
+      hints: ["Middle C is the C closest to the middle of the keyboard."],
+    };
+  }
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Array<"treble" | "bass">);
+  if (maxLedger(c) < 1) return null;
+  const pool = clef === "treble" ? ["B3", "C4", "D4", "E4", "F4", "G4"] : ["E3", "F3", "G3", "A3", "B3", "C4", "D4"];
+  const count = 4;
+  const rest = c.rng.shuffle(pool.filter((p) => p !== "C4")).slice(0, count - 1);
+  const seq = c.rng.shuffle(["C4", ...rest]);
+  if (seq.some((p) => music.ledgerLines(clef, music.parsePitch(p)) > 1)) return null;
+  const idx = seq.indexOf("C4");
+  return {
+    prompt: `Which of these notes is middle C?`,
+    music: frag(clef, [{ events: seq.map((p) => note(p, "crotchet")) }], `Four ${clef}-clef notes in a row: ${seq.map((p) => p.replace(/\d/, "")).join(", ")}.`, { timeSignature: "4/4" }),
+    answer: { kind: "choice", options: [1, 2, 3, 4].map((x) => ({ id: String(x), label: `Note ${x}` })), correctOptionIds: [String(idx + 1)], diagnoses: Object.fromEntries([1, 2, 3, 4].filter((x) => x !== idx + 1).map((x) => [String(x), { category: "ledger-miscount", reason: `Middle C is the note on the short ledger line, ${clef === "treble" ? "just below" : "just above"} the stave.` }])) },
+    hints: [`Middle C sits on its own short ledger line, ${clef === "treble" ? "below the treble stave" : "above the bass stave"}.`],
+  };
+};
+
 export const GRADE1_GENERATORS: Record<string, Gen> = {
   "t.g1.letter-names": letterNames,
   "t.g1.stave-facts": staveFacts,
   "t.g1.note-place": notePlace,
+  "t.g1.note-total": noteTotal,
+  "t.g1.note-equivalent": noteEquivalent,
+  "t.g1.beam-choice": beamChoice,
+  "t.g1.bar-judge": barJudge,
+  "t.g1.bar-fix": barFix,
+  "t.g1.middle-c-find": middleCFind,
 };

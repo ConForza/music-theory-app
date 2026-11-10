@@ -16,8 +16,22 @@ const strip = (v: unknown): unknown =>
       ? Object.fromEntries(Object.keys(v as object).filter((k) => k !== "id" && k !== "seed").sort().map((k) => [k, strip((v as Record<string, unknown>)[k])]))
       : v;
 
+/**
+ * The order options are shown in is not part of what is asked: the same question with its options shuffled is the same
+ * question, and must not count as fresh evidence. Options (also inside composite parts) are put in a fixed order first.
+ */
+const normaliseAnswer = (a: unknown): unknown => {
+  if (Array.isArray(a)) return a.map(normaliseAnswer);
+  if (a && typeof a === "object") {
+    const o = Object.fromEntries(Object.entries(a as Record<string, unknown>).map(([k, v]) => [k, normaliseAnswer(v)]));
+    if (Array.isArray(o.options)) o.options = [...(o.options as Array<{ id: string }>)].sort((x, y) => String(x.id).localeCompare(String(y.id)));
+    return o;
+  }
+  return a;
+};
+
 export function questionKey(item: ExerciseItem): string {
-  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: item.answer }));
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: normaliseAnswer(item.answer) }));
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 
@@ -30,6 +44,12 @@ export function questionKey(item: ExerciseItem): string {
  */
 export interface ReviewConstraint {
   conceptId: string;
+  /** Rhythm concepts: the written or answered music must contain one of these values / a rest / a dot / a tie / a beam. */
+  rhythm?: { values?: string[]; rest?: boolean; dot?: boolean; tie?: boolean; beam?: boolean };
+  /** Key concepts: the question is about one of these keys. */
+  keys?: string[];
+  /** Vocabulary concepts: the term asked about (or its meaning) is in one of these categories. */
+  termCategories?: string[];
   clef?: "treble" | "bass" | "alto" | "tenor";
   staffPositions?: "lines" | "spaces";
   includesPitch?: string[];
@@ -49,8 +69,56 @@ function clefOf(item: ExerciseItem): string | undefined {
   return item.music?.clef ?? (item.answer as { clef?: string }).clef;
 }
 
-/** True when the question satisfies every part of the constraint (a constrained concept must be assessable from written pitches). */
+function rhythmEvents(item: ExerciseItem): Array<Record<string, unknown>> {
+  const out: Array<Record<string, unknown>> = [];
+  const walk = (v: unknown) => {
+    if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === "object") {
+      const o = v as Record<string, unknown>;
+      if ((o.kind === "note" || o.kind === "rest" || o.kind === "chord") && o.duration) out.push(o);
+      Object.values(o).forEach(walk);
+    }
+  };
+  walk(item.music ?? null);
+  walk((item.answer as { accepted?: unknown }).accepted);
+  walk((item.answer as { given?: unknown }).given);
+  return out;
+}
+
+/** The key a question is about: its printed key, a stated key, a scale's start note, or a named key answer. */
+function keyOf(item: ExerciseItem): string | undefined {
+  const a = item.answer as { key?: string; accepted?: unknown[]; derivation?: { rule?: string; start?: string; sourceKey?: string }; keyName?: string };
+  if (a.keyName) return a.keyName;
+  if (item.music?.key) return item.music.key;
+  if (a.key) return a.key;
+  if (a.derivation?.rule === "scale" && a.derivation.start) return `${a.derivation.start.replace(/\d+$/, "")} major`;
+  if (typeof a.accepted?.[0] === "string" && /major$/.test(a.accepted[0] as string)) return a.accepted[0] as string;
+  const m = /\b([A-G][b#]?) major\b/.exec(item.prompt.replace(/♯/g, "#").replace(/♭/g, "b"));
+  return m ? `${m[1]} major` : undefined;
+}
+
+/** True when the question satisfies every part of the constraint (pitch fields need written pitches to judge). */
 export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
+  if (c.rhythm) {
+    const evs = rhythmEvents(item);
+    const r = c.rhythm;
+    if (r.values && !evs.some((e) => r.values!.includes((e.duration as { value: string }).value))) return false;
+    if (r.rest && !evs.some((e) => e.kind === "rest") && !/ rest"/.test(JSON.stringify((item.answer as { options?: unknown }).options ?? ""))) return false;
+    if (r.dot && !evs.some((e) => ((e.duration as { dots?: number }).dots ?? 0) > 0)) return false;
+    if (r.tie && !evs.some((e) => e.tieToNext === true)) return false;
+    if (r.beam && !evs.some((e) => typeof e.beam === "string" && e.beam !== "none")) return false;
+  }
+  if (c.keys) {
+    const k = keyOf(item);
+    if (!k || !c.keys.includes(k)) return false;
+  }
+  if (c.termCategories) {
+    const t = (item.answer as { kind?: string; correctOptionIds?: string[] }).correctOptionIds?.[0];
+    const term = music.TERMS.find((x) => x.id === t);
+    if (!term || !c.termCategories.includes(term.category)) return false;
+  }
+  const needsPitch = Boolean(c.clef || c.staffPositions || c.includesPitch || c.ledgerLines !== undefined);
+  if (!needsPitch) return true;
   const pitches: string[] = [];
   collectPitches(item.music ?? null, pitches);
   collectPitches(item.answer, pitches);

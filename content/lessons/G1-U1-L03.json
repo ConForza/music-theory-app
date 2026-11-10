@@ -1,0 +1,946 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U1-L03",
+  "lessonId": "G1-U1-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Tell flags from beams and know how many notes a beam joins.",
+    "successCriteria": [
+      "I know a beam does the job of the flags when short notes are grouped.",
+      "I know one beam means quavers and two beams mean semiquavers.",
+      "I can work out how long a beamed group lasts."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A single quaver or semiquaver is written with flags on its stem. When several short notes sit together, their flags are joined into a straight line called a beam."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A single quaver with a flag, followed by two quavers joined by a beam."
+      },
+      "caption": "A flagged quaver on its own, and two quavers joined by one beam."
+    },
+    {
+      "kind": "text",
+      "text": "One flag, or one beam, means quavers. Two flags, or two beams, mean semiquavers. The beam tells you the value in exactly the same way as the flags."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Four semiquavers joined by two beams."
+      },
+      "caption": "Four semiquavers joined by two beams: together they last one beat."
+    },
+    {
+      "kind": "tip",
+      "text": "Beams make music easier to read because they show where the beats are. You will use them to group notes in the next unit."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semiquaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semiquaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semiquaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semiquaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A pair of quavers joined by one beam, then four semiquavers joined by two beams."
+    },
+    "steps": [
+      "Look at the first group: one beam, two notes. These are quavers, a half beat each.",
+      "Look at the second group: two beams, four notes. These are semiquavers, a quarter beat each.",
+      "Press Play all: both groups last one beat, though one has two notes and the other four."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A beamed pair of quavers and a beamed group of four semiquavers, each lasting one beat."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u1-l03.guided-1",
+      "templateId": "t.g1.beam-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "2 notes are joined by a beam. What value is each note?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "quaver"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "halved-or-doubled",
+            "reason": "One beam means quavers; two beams mean semiquavers. This group has one beam."
+          }
+        }
+      },
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver.",
+        "A beam does the job of the flags: one beam for quavers, two for semiquavers."
+      ],
+      "feedback": {
+        "correct": "One beam: quavers.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l03.guided-2",
+      "templateId": "t.g1.beam-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "3 notes are joined by two beams. What value is each note?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "semiquaver"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "halved-or-doubled",
+            "reason": "One beam means quavers; two beams mean semiquavers. This group has two beams."
+          }
+        }
+      },
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver.",
+        "A beam does the job of the flags: one beam for quavers, two for semiquavers."
+      ],
+      "feedback": {
+        "correct": "Two beams: semiquavers.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u1-l03.ind-1",
+      "templateId": "t.g1.beam-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "3 notes are joined by two beams. What value is each note?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "semiquaver"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "halved-or-doubled",
+            "reason": "One beam means quavers; two beams mean semiquavers. This group has two beams."
+          }
+        }
+      },
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver.",
+        "A beam does the job of the flags: one beam for quavers, two for semiquavers."
+      ],
+      "feedback": {
+        "correct": "Two beams: semiquavers.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l03.ind-2",
+      "templateId": "t.g1.beam-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes are joined together by the beam?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ]
+      },
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver.",
+        "Count the stems that touch the beam, not the whole bar."
+      ],
+      "feedback": {
+        "correct": "Counted the notes under the beam.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l03.ind-3",
+      "templateId": "t.g1.beam-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats does this beamed group last?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "½"
+          },
+          {
+            "id": "2",
+            "label": "1"
+          },
+          {
+            "id": "4",
+            "label": "2"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "halved-or-doubled",
+            "reason": "That counts the notes, not the beats. Quavers are half a beat each and semiquavers a quarter."
+          }
+        }
+      },
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver.",
+        "A quaver lasts half a crotchet beat; a semiquaver lasts a quarter. Count the notes and add."
+      ],
+      "feedback": {
+        "correct": "Counted the beat length of the beamed group.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l03.ind-4",
+      "templateId": "t.g1.beam-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "2 notes are joined by a beam. What value is each note?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "quaver"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "halved-or-doubled",
+            "reason": "One beam means quavers; two beams mean semiquavers. This group has one beam."
+          }
+        }
+      },
+      "hints": [
+        "One flag or beam for a quaver, two for a semiquaver.",
+        "A beam does the job of the flags: one beam for quavers, two for semiquavers."
+      ],
+      "feedback": {
+        "correct": "One beam: quavers.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l03.ind-5",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, semiquaver, semiquaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "1"
+          },
+          {
+            "id": "4",
+            "label": "2"
+          },
+          {
+            "id": "6",
+            "label": "3"
+          },
+          {
+            "id": "8",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          },
+          "8": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "You counted a beamed group correctly.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l03.ind-6",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet, quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "1½"
+          },
+          {
+            "id": "5",
+            "label": "2½"
+          },
+          {
+            "id": "7",
+            "label": "3½"
+          },
+          {
+            "id": "10",
+            "label": "5"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "10": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "Another beamed total, counted correctly.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    }
+  ],
+  "recap": [
+    "Beams join the flags of short notes that sit together.",
+    "One flag or beam = quaver; two flags or beams = semiquaver.",
+    "A beamed group is counted note by note, just like separate notes."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.beam-choice",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.note-total",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.beam-choice",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.beams"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s03"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.01"
+    ],
+    "notes": "Original wording. Follows Grade 1 outcome 01 (note values written with flags and beams)."
+  }
+}

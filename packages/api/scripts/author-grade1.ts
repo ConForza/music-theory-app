@@ -7,12 +7,14 @@ import { readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildLesson, pickItem, startAuthoring, type Spec } from "./grade1/lib.ts";
+import { U1 } from "./grade1/u1.ts";
+import { U2 } from "./grade1/u2.ts";
 import { U3 } from "./grade1/u3.ts";
 import { questionKey } from "../src/question-key.ts";
-import type { ExerciseItem } from "@mtp/curriculum";
+import { mergeScope, type ExerciseItem } from "@mtp/curriculum";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../../content");
-const specs: Spec[] = [...U3];
+const specs: Spec[] = [...U1, ...U2, ...U3];
 const only = process.argv.slice(2);
 // Regeneration starts from a clean slate: a previously generated file that no longer validates must not stop the run.
 for (const spec of specs) if (!only.length || only.includes(spec.node)) rmSync(join(root, `lessons/${spec.node}.json`), { force: true });
@@ -63,7 +65,32 @@ for (const { spec, lesson } of built) {
   console.log(`wrote ${spec.node}: ${lesson.guided.length} guided, ${lesson.independent.length} independent`);
 }
 // Practice, review, unit challenge and Grade assessment nodes are built by the server from their bindings/blueprints.
-for (const n of path.nodes as Array<Record<string, unknown>>) {
-  if (n.type !== "lesson" && n.contentStatus === "planned" && (n.id as string) === "G1-U3-P1") n.contentStatus = "draft";
-}
+// A unit's practice node revisits exactly what its lessons taught; a review node revisits everything up to and including its unit.
+// Bindings are derived here from the lessons so the three can never drift apart, and are only switched on (status "draft") once
+// the lessons they draw on are written.
+type Binding = { templateId: string; conceptIds: string[]; scope: Record<string, unknown> };
+const nodes = path.nodes as Array<Record<string, unknown> & { id: string; type: string; unitId: string | null; exercises: Binding[] }>;
+const lessonsOf = (unit: string) => nodes.filter((n) => n.unitId === unit && n.type === "lesson");
+const merge = (list: Binding[]): Binding[] => {
+  const out = new Map<string, Binding>();
+  for (const b of list) {
+    const cur = out.get(b.templateId);
+    out.set(b.templateId, cur ? { templateId: b.templateId, conceptIds: [...new Set([...cur.conceptIds, ...b.conceptIds])], scope: mergeScope(cur.scope as never, b.scope as never) as Record<string, unknown> } : { ...b, conceptIds: [...b.conceptIds], scope: { ...b.scope } });
+  }
+  return [...out.values()];
+};
+const units = ["G1-U1", "G1-U2", "G1-U3", "G1-U4", "G1-U5", "G1-U6", "G1-U7"];
+const written = (unit: string) => lessonsOf(unit).every((l) => l.contentRef);
+units.forEach((u, k) => {
+  const own = merge(lessonsOf(u).flatMap((l) => l.exercises));
+  const upTo = merge(units.slice(0, k + 1).flatMap((x) => lessonsOf(x).flatMap((l) => l.exercises)));
+  const ready = units.slice(0, k + 1).every(written);
+  for (const n of nodes.filter((x) => x.unitId === u)) {
+    if (n.type === "practice" && written(u)) { n.exercises = own; n.contentStatus = "draft"; }
+    if (n.type === "review" && ready) { n.exercises = upTo; n.contentStatus = "draft"; }
+    if (n.type === "unit_challenge" && written(u)) n.contentStatus = "draft";
+  }
+});
+const assessment = nodes.find((n) => n.type === "grade_assessment");
+if (assessment && units.every(written)) assessment.contentStatus = "draft";
 writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");

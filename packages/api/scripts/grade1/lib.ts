@@ -7,7 +7,7 @@
  * from the engine's rules; the picker only chooses which seed to keep. Run: `npm run author:grade1 -w @mtp/api`.
  */
 import { buildIndex, effectiveScope, loadCurriculum, type CurriculumIndex, type ExerciseItem, type NotationFragment, type OrderedNode } from "@mtp/curriculum";
-import { frag, generateItem, note } from "@mtp/engine";
+import { frag, generateItem, note, plainNote, plainRest, rhythmLine } from "@mtp/engine";
 import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "../../src/question-key.ts";
 
 export type Frag = NotationFragment;
@@ -120,3 +120,21 @@ export function buildLesson(a: Author, spec: Spec) {
   };
   return lesson;
 }
+
+/** Rhythm builders: [value, options]. Pitchless (a rhythm line) with an automatic text alternative. */
+export type R = [value: string, opts?: { dots?: number; rest?: boolean; tie?: boolean; beam?: "begin" | "continue" | "end"; label?: string }];
+const toEv = ([value, o = {}]: R) => {
+  const extra: Record<string, unknown> = {};
+  if (o.tie) extra.tieToNext = true;
+  if (o.beam) extra.beam = o.beam;
+  if (o.label) extra.label = o.label;
+  return (o.rest ? plainRest(value as never, o.dots ?? 0, extra) : plainNote(value as never, o.dots ?? 0, extra));
+};
+/** One or more bars of rhythm. Pass a time signature to print it (then every bar must add up). */
+export const rhythm = (bars: R[][], text?: string, ts?: string): Frag => {
+  const f = rhythmLine(bars.map((b, i) => ({ events: b.map(toEv), ...(i === bars.length - 1 && ts ? { barline: "final" as const } : {}) })), ts ? { timeSignature: ts } : {});
+  return text ? { ...f, textAlternative: text } : f;
+};
+/** Shorthand: n("crotchet") etc. */
+export const nt = (value: string, o: NonNullable<R[1]> = {}): R => [value, o];
+export const rs = (value: string, o: NonNullable<R[1]> = {}): R => [value, { ...o, rest: true }];
