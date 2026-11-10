@@ -137,7 +137,7 @@ const { music } = await import("@mtp/curriculum");
 const cats = new Map<string, string[]>();
 for (const term of music.termsUpTo(1)) cats.set(term.category, [...(cats.get(term.category) ?? []), `${term.term} (${term.meaning})`]);
 for (const [c, list] of cats) t.push(`| ${c} | ${esc(list.join("; "))} |`);
-t.push("", "**Compared with the reference book's own Grade 1 list** (read for verification only): the book also lists _poco_ (a little), _dal segno_, _ritenuto_, _8va_ and metronome marks, and draws the crescendo / diminuendo hairpins; this course keeps _dal segno_ and _ritenuto_ at Grade 2, leaves _poco_, _8va_ and metronome marks out, and teaches crescendo / diminuendo as words. This course also includes _dolce_, which is not in the book's Grade 1 list. The 2020 outline does not enumerate terms, so a teacher decision is needed (Q2).", "");
+t.push("", "**Where there was doubt, the content is included.** The reference book (read for verification only) also lists _poco_, _dal segno_, _ritenuto_, _8va_ and metronome marks at Grade 1, and the 2020 outline does not enumerate terms, so these are all INCLUDED in the vocabulary and taught in G1-U7-L03 (the teacher may remove any). The course also includes _dolce_, which is not in the book's Grade 1 list. Crescendo and diminuendo are taught as words because the renderer does not yet draw hairpin signs. See Q2 and Q16.", "");
 t.push("## 6. Assessment questions and scoring", "");
 for (const n of G1.filter((x) => x.assessmentId)) {
   const b = ix.assessments.get(n.assessmentId!)!;
@@ -153,7 +153,7 @@ t.push("## 7. Known ambiguities and limitations", "",
   "- The sounds are synthesised tones, not instruments. No novice learner test has been run.",
   "- Questions are generated per learner; individual generated variants are not teacher-reviewed one by one, only the templates and samples above.", "");
 t.push("## 8. Decisions needed", "",
-  "1. Confirm the Grade 1 term lists (Q2) and whether _dolce_, _poco_, _dal segno_, _ritenuto_, _8va_ and metronome marks belong at Grade 1.",
+  "1. Confirm the Grade 1 term lists (Q2, Q16). Everything in doubt is already included (_dolce_, _poco_, _dal segno_, _ritenuto_, _8va_, metronome marks); say which to remove.",
   "2. Confirm the beaming rule 'keep the middle of a 4/4 bar visible' is Grade 1, not Grade 2.",
   "3. Confirm the rest conventions in section 4, especially the 3/4 minim rest (Q3).",
   "4. Confirm the provisional pass marks (70% challenge, 66% assessment) and the mastery thresholds (Q11).",

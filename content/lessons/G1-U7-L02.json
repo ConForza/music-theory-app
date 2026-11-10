@@ -154,34 +154,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "What does “fortissimo (ff)” mean?",
+      "prompt": "What does “diminuendo (dim.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "cantabile",
-            "label": "in a singing style"
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
           },
           {
-            "id": "pianissimo",
-            "label": "very quiet"
+            "id": "poco",
+            "label": "a little"
           },
           {
-            "id": "forte",
-            "label": "loud"
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
           },
           {
-            "id": "fortissimo",
-            "label": "very loud"
+            "id": "crescendo",
+            "label": "gradually getting louder"
           }
         ],
         "correctOptionIds": [
-          "fortissimo"
+          "diminuendo"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“fortissimo (ff)” is a dynamics marking."
+        "“diminuendo (dim.)” is a dynamics marking."
       ],
       "feedback": {
         "correct": "Right meaning.",
@@ -209,7 +209,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "D5",
+                "pitch": "C5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -225,20 +225,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "fortissimo",
-            "label": "very loud"
-          },
-          {
-            "id": "mezzo-forte",
-            "label": "moderately loud"
-          },
-          {
             "id": "pianissimo",
             "label": "very quiet"
           },
           {
+            "id": "fortissimo",
+            "label": "very loud"
+          },
+          {
             "id": "mezzo-piano",
             "label": "moderately quiet"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
           }
         ],
         "correctOptionIds": [
@@ -267,34 +267,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “fortissimo (ff)” mean?",
+      "prompt": "What does “diminuendo (dim.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "cantabile",
-            "label": "in a singing style"
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
           },
           {
-            "id": "pianissimo",
-            "label": "very quiet"
+            "id": "poco",
+            "label": "a little"
           },
           {
-            "id": "forte",
-            "label": "loud"
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
           },
           {
-            "id": "fortissimo",
-            "label": "very loud"
+            "id": "crescendo",
+            "label": "gradually getting louder"
           }
         ],
         "correctOptionIds": [
-          "fortissimo"
+          "diminuendo"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“fortissimo (ff)” is a dynamics marking."
+        "“diminuendo (dim.)” is a dynamics marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -322,7 +322,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "D5",
+                "pitch": "C5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -338,20 +338,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "fortissimo",
-            "label": "very loud"
-          },
-          {
-            "id": "mezzo-forte",
-            "label": "moderately loud"
-          },
-          {
             "id": "pianissimo",
             "label": "very quiet"
           },
           {
+            "id": "fortissimo",
+            "label": "very loud"
+          },
+          {
             "id": "mezzo-piano",
             "label": "moderately quiet"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
           }
         ],
         "correctOptionIds": [
@@ -378,34 +378,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “pianissimo (pp)” mean?",
+      "prompt": "What does “fortissimo (ff)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "tie",
-            "label": "join two notes of the same pitch into one longer sound"
-          },
-          {
             "id": "pianissimo",
             "label": "very quiet"
+          },
+          {
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
           },
           {
             "id": "fortissimo",
             "label": "very loud"
           },
           {
-            "id": "piano",
-            "label": "quiet"
+            "id": "forte",
+            "label": "loud"
           }
         ],
         "correctOptionIds": [
-          "pianissimo"
+          "fortissimo"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“pianissimo (pp)” is a dynamics marking."
+        "“fortissimo (ff)” is a dynamics marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -426,14 +426,14 @@
       "prompt": "This note has a dynamic mark below it. What does the mark tell the player?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "C3",
+                "pitch": "B4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -443,22 +443,22 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with one semibreve marked pp (pianissimo (pp))."
+        "textAlternative": "A treble-clef stave with one semibreve marked pp (pianissimo (pp))."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "pianissimo",
-            "label": "very quiet"
+            "id": "piano",
+            "label": "quiet"
           },
           {
             "id": "decrescendo",
             "label": "gradually getting quieter"
           },
           {
-            "id": "piano",
-            "label": "quiet"
+            "id": "pianissimo",
+            "label": "very quiet"
           },
           {
             "id": "crescendo",
@@ -489,34 +489,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “mezzo piano (mp)” mean?",
+      "prompt": "What does “mezzo forte (mf)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
-          {
-            "id": "diminuendo",
-            "label": "gradually getting quieter"
-          },
           {
             "id": "mezzo-piano",
             "label": "moderately quiet"
           },
           {
-            "id": "piano",
-            "label": "quiet"
+            "id": "a-tempo",
+            "label": "return to the previous speed"
           },
           {
             "id": "mezzo-forte",
             "label": "moderately loud"
+          },
+          {
+            "id": "forte",
+            "label": "loud"
           }
         ],
         "correctOptionIds": [
-          "mezzo-piano"
+          "mezzo-forte"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“mezzo piano (mp)” is a dynamics marking."
+        "“mezzo forte (mf)” is a dynamics marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -534,29 +534,29 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which term or sign means “moderately quiet”?",
+      "prompt": "Which term or sign means “very quiet”?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "crescendo",
-            "label": "crescendo (cresc.)"
+            "id": "mezzo-piano",
+            "label": "mezzo piano (mp)"
           },
           {
             "id": "decrescendo",
             "label": "decrescendo (decresc.)"
           },
           {
-            "id": "mezzo-forte",
-            "label": "mezzo forte (mf)"
+            "id": "crescendo",
+            "label": "crescendo (cresc.)"
           },
           {
-            "id": "mezzo-piano",
-            "label": "mezzo piano (mp)"
+            "id": "pianissimo",
+            "label": "pianissimo (pp)"
           }
         ],
         "correctOptionIds": [
-          "mezzo-piano"
+          "pianissimo"
         ]
       },
       "hints": [

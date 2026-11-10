@@ -268,20 +268,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "decrescendo",
-            "label": "gradually getting quieter"
-          },
-          {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "moderato",
-            "label": "at a moderate speed"
+            "id": "mezzo-forte",
+            "label": "moderately loud"
           },
           {
-            "id": "rallentando",
-            "label": "gradually getting slower"
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "ottava",
+            "label": "play an octave higher than written"
           }
         ],
         "correctOptionIds": [
@@ -311,14 +311,14 @@
       "prompt": "This note has a mark above or below it. What does the mark tell the player?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "B2",
+                "pitch": "C5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -344,27 +344,27 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with a crotchet with a > sign (accent).",
+        "textAlternative": "A treble-clef stave with a crotchet with a > sign (accent).",
         "timeSignature": "4/4"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "legato",
-            "label": "smoothly, with the notes joined"
+            "id": "staccato",
+            "label": "short and detached"
           },
           {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "staccato",
-            "label": "short and detached"
+            "id": "forte",
+            "label": "loud"
           },
           {
-            "id": "crescendo",
-            "label": "gradually getting louder"
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
           }
         ],
         "correctOptionIds": [
@@ -398,20 +398,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "decrescendo",
-            "label": "gradually getting quieter"
-          },
-          {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "moderato",
-            "label": "at a moderate speed"
+            "id": "mezzo-forte",
+            "label": "moderately loud"
           },
           {
-            "id": "rallentando",
-            "label": "gradually getting slower"
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "ottava",
+            "label": "play an octave higher than written"
           }
         ],
         "correctOptionIds": [
@@ -441,14 +441,14 @@
       "prompt": "This note has a mark above or below it. What does the mark tell the player?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "B2",
+                "pitch": "C5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -474,27 +474,27 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with a crotchet with a > sign (accent).",
+        "textAlternative": "A treble-clef stave with a crotchet with a > sign (accent).",
         "timeSignature": "4/4"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "legato",
-            "label": "smoothly, with the notes joined"
+            "id": "staccato",
+            "label": "short and detached"
           },
           {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "staccato",
-            "label": "short and detached"
+            "id": "forte",
+            "label": "loud"
           },
           {
-            "id": "crescendo",
-            "label": "gradually getting louder"
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
           }
         ],
         "correctOptionIds": [
@@ -521,34 +521,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “legato” mean?",
+      "prompt": "What does “accent (>)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "moderato",
-            "label": "at a moderate speed"
+            "id": "crescendo",
+            "label": "gradually getting louder"
           },
           {
-            "id": "staccato",
-            "label": "short and detached"
+            "id": "accent",
+            "label": "emphasise the note"
           },
           {
-            "id": "legato",
-            "label": "smoothly, with the notes joined"
+            "id": "dolce",
+            "label": "sweetly"
           },
           {
-            "id": "pianissimo",
-            "label": "very quiet"
+            "id": "dal-segno",
+            "label": "repeat from the sign"
           }
         ],
         "correctOptionIds": [
-          "legato"
+          "accent"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“legato” is a articulation marking."
+        "“accent (>)” is a articulation marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -566,29 +566,29 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which term or sign means “smoothly, with the notes joined”?",
+      "prompt": "Which term or sign means “emphasise the note”?",
       "answer": {
         "kind": "choice",
         "options": [
+          {
+            "id": "dolce",
+            "label": "dolce"
+          },
           {
             "id": "legato",
             "label": "legato"
           },
           {
-            "id": "ritardando",
-            "label": "ritardando (rit.)"
+            "id": "staccato",
+            "label": "staccato"
           },
           {
             "id": "accent",
             "label": "accent (>)"
-          },
-          {
-            "id": "staccato",
-            "label": "staccato"
           }
         ],
         "correctOptionIds": [
-          "legato"
+          "accent"
         ]
       },
       "hints": [
@@ -611,34 +611,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “legato” mean?",
+      "prompt": "What does “accent (>)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "legato",
-            "label": "smoothly, with the notes joined"
-          },
-          {
-            "id": "decrescendo",
-            "label": "gradually getting quieter"
+            "id": "accent",
+            "label": "emphasise the note"
           },
           {
             "id": "staccato",
             "label": "short and detached"
           },
           {
-            "id": "piano",
-            "label": "quiet"
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
           }
         ],
         "correctOptionIds": [
-          "legato"
+          "accent"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“legato” is a articulation marking."
+        "“accent (>)” is a articulation marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -656,7 +656,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which term or sign means “emphasise the note”?",
+      "prompt": "Which term or sign means “smoothly, with the notes joined”?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -665,20 +665,20 @@
             "label": "staccato"
           },
           {
-            "id": "legato",
-            "label": "legato"
-          },
-          {
-            "id": "accelerando",
-            "label": "accelerando (accel.)"
+            "id": "ritenuto",
+            "label": "ritenuto (riten.)"
           },
           {
             "id": "accent",
             "label": "accent (>)"
+          },
+          {
+            "id": "legato",
+            "label": "legato"
           }
         ],
         "correctOptionIds": [
-          "accent"
+          "legato"
         ]
       },
       "hints": [

@@ -113,10 +113,10 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.chords.tonic-triad | U6-L01 | tonic-triad 4, triad-notes 27 | 31 |
 | c.intervals.number | U6-L02 | interval-number 155, interval-note 20 | 175 |
 | c.intervals.above-tonic-number | U6-L03 | interval-number 155, interval-note 20 | 175 |
-| c.terms.tempo-g1 | U7-L01 | terms 77, term-sign 15, melody-detail 54 | 146 |
-| c.terms.dynamics-g1 | U7-L02 | terms 97, term-sign 161, melody-detail 54 | 312 |
-| c.terms.directions-g1 | U7-L03 | terms 161, term-sign 85 | 246 |
-| c.terms.articulation-g1 | U7-L04 | terms 43, term-sign 48, melody-detail 59 | 150 |
+| c.terms.tempo-g1 | U7-L01 | terms 64, term-sign 14, melody-detail 54 | 132 |
+| c.terms.dynamics-g1 | U7-L02 | terms 87, term-sign 151, melody-detail 54 | 292 |
+| c.terms.directions-g1 | U7-L03 | terms 199, term-sign 123 | 322 |
+| c.terms.articulation-g1 | U7-L04 | terms 35, term-sign 55, melody-detail 59 | 149 |
 | c.context.melody-g1 | U7-L05 | melody 399, melody-detail 400 | 799 |
 
 Concepts below the capacity rule: **0**.

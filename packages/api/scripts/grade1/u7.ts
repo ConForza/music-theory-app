@@ -163,7 +163,7 @@ export const U7: Spec[] = [
       { music: melody("treble", [[["G4", "crotchet"], ["A4", "crotchet"], ["B4", "minim", { art: "fermata" }]]], "4/4", undefined, "A bar of 4/4 with G, A and a minim B with a pause sign above it."), caption: "A pause sign (fermata) over a note: hold it longer than its written length." },
       { text: "A tie joins two notes of the same pitch into one longer sound. A slur is a curved line over different notes and means play them smoothly, joined together." },
       { music: melody("treble", [[["G4", "crotchet", { slur: "start" }], ["A4", "crotchet", { slur: "stop" }], ["B4", "crotchet"], ["D5", "crotchet"]]], "4/4", undefined, "A bar of 4/4 with a slur over the first two notes, G and A."), caption: "A slur over two different notes: play them smoothly." },
-      { text: "Da capo (D.C.) means go back to the beginning. Fine means the end. Two small expression words you may meet are dolce (sweetly) and cantabile (in a singing style)." },
+      { text: "Da capo (D.C.) means go back to the beginning. Dal segno (D.S.) means go back to the sign. Fine means the end. Ritenuto (riten.) means held back: slower at once. Two small expression words you may meet are dolce (sweetly) and cantabile (in a singing style), and poco means 'a little'. 8va over some notes means play them an octave higher than written. A metronome mark such as M.M. ♩ = 72 gives the exact speed: 72 crotchet beats in a minute." },
       { tip: "A tie joins the SAME note; a slur joins DIFFERENT notes. That is how to tell them apart." },
     ],
     demo: {
@@ -184,9 +184,9 @@ export const U7: Spec[] = [
       { t: "t.g1.terms", correct: "Correct." },
       { t: "t.g1.term-sign", when: starts("Which term"), correct: "Correct." },
     ],
-    recap: ["rall./rit. = gradually slower; accel. = gradually faster; a tempo = back to the speed.", "A pause sign: hold the note longer. D.C.: back to the start. Fine: the end.", "A tie joins the same note; a slur joins different notes smoothly."],
+    recap: ["rall./rit. = gradually slower; riten. = held back; accel. = gradually faster; a tempo = back to the speed.", "A pause sign: hold the note longer. D.C.: back to the start. D.S.: back to the sign. Fine: the end. 8va: an octave higher.", "A tie joins the same note; a slur joins different notes smoothly."],
     review: [{ t: "t.g1.terms", afterDays: 1 }, { t: "t.g1.term-sign", afterDays: 3 }, { t: "t.g1.terms", afterDays: 7 }],
-    notes: "Original wording. TEACHER TO CONFIRM: the Grade 1 'performance directions' list. Repeat marks are taught in words only because the renderer does not yet draw repeat signs.",
+    notes: "Original wording. TEACHER TO CONFIRM: the Grade 1 'performance directions' list. Dal segno, ritenuto, poco, 8va and metronome marks are INCLUDED here because the reference book lists them at Grade 1 and the 2020 outline does not enumerate terms; the teacher may remove any of them. Repeat marks are taught in words only because the renderer does not yet draw repeat signs.",
   },
   {
     node: "G1-U7-L04",

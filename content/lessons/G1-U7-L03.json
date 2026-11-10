@@ -120,7 +120,7 @@
     },
     {
       "kind": "text",
-      "text": "Da capo (D.C.) means go back to the beginning. Fine means the end. Two small expression words you may meet are dolce (sweetly) and cantabile (in a singing style)."
+      "text": "Da capo (D.C.) means go back to the beginning. Dal segno (D.S.) means go back to the sign. Fine means the end. Ritenuto (riten.) means held back: slower at once. Two small expression words you may meet are dolce (sweetly) and cantabile (in a singing style), and poco means 'a little'. 8va over some notes means play them an octave higher than written. A metronome mark such as M.M. ♩ = 72 gives the exact speed: 72 crotchet beats in a minute."
     },
     {
       "kind": "tip",
@@ -190,34 +190,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "What does “dolce” mean?",
+      "prompt": "What does “dal segno (D.S.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "accelerando",
-            "label": "gradually getting faster"
+            "id": "accent",
+            "label": "emphasise the note"
           },
           {
-            "id": "rallentando",
-            "label": "gradually getting slower"
+            "id": "da-capo",
+            "label": "repeat from the beginning"
           },
           {
-            "id": "staccato",
-            "label": "short and detached"
+            "id": "repeat",
+            "label": "play the passage between the marks again"
           },
           {
-            "id": "dolce",
-            "label": "sweetly"
+            "id": "dal-segno",
+            "label": "repeat from the sign"
           }
         ],
         "correctOptionIds": [
-          "dolce"
+          "dal-segno"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“dolce” is a expression marking."
+        "“dal segno (D.S.)” is a structure marking."
       ],
       "feedback": {
         "correct": "Right meaning.",
@@ -245,7 +245,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "E3",
+                "pitch": "C3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -254,7 +254,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F3",
+                "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -278,12 +278,12 @@
         "kind": "choice",
         "options": [
           {
-            "id": "repeat",
-            "label": "play the passage between the marks again"
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
           },
           {
-            "id": "tie",
-            "label": "join two notes of the same pitch into one longer sound"
+            "id": "ottava",
+            "label": "play an octave higher than written"
           },
           {
             "id": "slur",
@@ -320,34 +320,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “dolce” mean?",
+      "prompt": "What does “dal segno (D.S.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "accelerando",
-            "label": "gradually getting faster"
+            "id": "accent",
+            "label": "emphasise the note"
           },
           {
-            "id": "rallentando",
-            "label": "gradually getting slower"
+            "id": "da-capo",
+            "label": "repeat from the beginning"
           },
           {
-            "id": "staccato",
-            "label": "short and detached"
+            "id": "repeat",
+            "label": "play the passage between the marks again"
           },
           {
-            "id": "dolce",
-            "label": "sweetly"
+            "id": "dal-segno",
+            "label": "repeat from the sign"
           }
         ],
         "correctOptionIds": [
-          "dolce"
+          "dal-segno"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“dolce” is a expression marking."
+        "“dal segno (D.S.)” is a structure marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -365,21 +365,21 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which term or sign means “play the notes under the curve smoothly”?",
+      "prompt": "Which term or sign means “play the passage between the marks again”?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "slur",
-            "label": "slur"
-          },
-          {
-            "id": "tie",
-            "label": "tie"
-          },
-          {
             "id": "repeat",
             "label": "repeat marks"
+          },
+          {
+            "id": "ottava",
+            "label": "8va"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
           },
           {
             "id": "fermata",
@@ -387,7 +387,7 @@
           }
         ],
         "correctOptionIds": [
-          "slur"
+          "repeat"
         ]
       },
       "hints": [
@@ -410,34 +410,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “rallentando (rall.)” mean?",
+      "prompt": "What does “accelerando (accel.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "pianissimo",
-            "label": "very quiet"
+            "id": "andante",
+            "label": "at a walking pace"
           },
           {
             "id": "accelerando",
             "label": "gradually getting faster"
           },
           {
-            "id": "andante",
-            "label": "at a walking pace"
-          },
-          {
             "id": "rallentando",
             "label": "gradually getting slower"
+          },
+          {
+            "id": "adagio",
+            "label": "slow"
           }
         ],
         "correctOptionIds": [
-          "rallentando"
+          "accelerando"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“rallentando (rall.)” is a change of speed marking."
+        "“accelerando (accel.)” is a change of speed marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -455,34 +455,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which term or sign means “sweetly”?",
+      "prompt": "Which term or sign means “the end”?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "dolce",
-            "label": "dolce"
+            "id": "staccato",
+            "label": "staccato"
           },
           {
-            "id": "diminuendo",
-            "label": "diminuendo (dim.)"
+            "id": "fine",
+            "label": "fine"
           },
           {
-            "id": "cantabile",
-            "label": "cantabile"
+            "id": "dal-segno",
+            "label": "dal segno (D.S.)"
           },
           {
-            "id": "rallentando",
-            "label": "rallentando (rall.)"
+            "id": "da-capo",
+            "label": "da capo (D.C.)"
           }
         ],
         "correctOptionIds": [
-          "dolce"
+          "fine"
         ]
       },
       "hints": [
         "Think about whether it is about speed, loudness or how the notes are played.",
-        "It is a expression marking."
+        "It is a structure marking."
       ],
       "feedback": {
         "correct": "Right.",
@@ -500,34 +500,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “pause (fermata)” mean?",
+      "prompt": "What does “da capo (D.C.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          },
+          {
+            "id": "ritardando",
+            "label": "gradually getting slower"
+          },
           {
             "id": "da-capo",
             "label": "repeat from the beginning"
           },
           {
-            "id": "forte",
-            "label": "loud"
-          },
-          {
-            "id": "fermata",
-            "label": "hold the note longer than its written value"
-          },
-          {
-            "id": "moderato",
-            "label": "at a moderate speed"
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
           }
         ],
         "correctOptionIds": [
-          "fermata"
+          "da-capo"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“pause (fermata)” is a sign marking."
+        "“da capo (D.C.)” is a structure marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -545,7 +545,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which term or sign means “hold the note longer than its written value”?",
+      "prompt": "Which term or sign means “play the passage between the marks again”?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -554,12 +554,12 @@
             "label": "pause (fermata)"
           },
           {
-            "id": "slur",
-            "label": "slur"
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
           },
           {
-            "id": "tie",
-            "label": "tie"
+            "id": "slur",
+            "label": "slur"
           },
           {
             "id": "repeat",
@@ -567,7 +567,7 @@
           }
         ],
         "correctOptionIds": [
-          "fermata"
+          "repeat"
         ]
       },
       "hints": [
@@ -586,8 +586,8 @@
     }
   ],
   "recap": [
-    "rall./rit. = gradually slower; accel. = gradually faster; a tempo = back to the speed.",
-    "A pause sign: hold the note longer. D.C.: back to the start. Fine: the end.",
+    "rall./rit. = gradually slower; riten. = held back; accel. = gradually faster; a tempo = back to the speed.",
+    "A pause sign: hold the note longer. D.C.: back to the start. D.S.: back to the sign. Fine: the end. 8va: an octave higher.",
     "A tie joins the same note; a slur joins different notes smoothly."
   ],
   "spacedReview": [
@@ -620,6 +620,6 @@
     "outcomeIds": [
       "abrsm2020.g1.19"
     ],
-    "notes": "Original wording. TEACHER TO CONFIRM: the Grade 1 'performance directions' list. Repeat marks are taught in words only because the renderer does not yet draw repeat signs."
+    "notes": "Original wording. TEACHER TO CONFIRM: the Grade 1 'performance directions' list. Dal segno, ritenuto, poco, 8va and metronome marks are INCLUDED here because the reference book lists them at Grade 1 and the 2020 outline does not enumerate terms; the teacher may remove any of them. Repeat marks are taught in words only because the renderer does not yet draw repeat signs."
   }
 }

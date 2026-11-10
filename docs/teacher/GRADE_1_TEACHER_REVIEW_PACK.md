@@ -249,13 +249,13 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | interval-note (U6-L02) | 2 | In G major, which note is a 5th above the tonic? | The answer is “D”. |
 | interval-note (U6-L02) | 3 | In G major, which note is a 6th above the tonic? | The answer is “E”. |
 | interval-note (U6-L02) | 4 | In C major, which note is a 2nd above the tonic? | The answer is “D”. |
-| terms (U7-L01) | 1 | What does “fortissimo (ff)” mean? | The answer is “very loud”. |
-| terms (U7-L01) | 2 | What does “pianissimo (pp)” mean? | The answer is “very quiet”. |
-| terms (U7-L01) | 3 | What does “mezzo piano (mp)” mean? | The answer is “moderately quiet”. |
-| terms (U7-L01) | 4 | What does “piano (p)” mean? | The answer is “quiet”. |
+| terms (U7-L01) | 1 | What does “diminuendo (dim.)” mean? | The answer is “gradually getting quieter”. |
+| terms (U7-L01) | 2 | What does “fortissimo (ff)” mean? | The answer is “very loud”. |
+| terms (U7-L01) | 3 | What does “mezzo forte (mf)” mean? | The answer is “moderately loud”. |
+| terms (U7-L01) | 4 | What does “forte (f)” mean? | The answer is “loud”. |
 | term-sign (U7-L01) | 1 | This note has a dynamic mark below it. What does the mark tell the player? _Shown: A treble-clef stave with one semibreve marked mp (mezzo piano (mp))._ | The answer is “moderately quiet”. |
-| term-sign (U7-L01) | 2 | Which term or sign means “moderately quiet”? | The answer is “mezzo piano (mp)”. |
-| term-sign (U7-L01) | 3 | This note has a dynamic mark below it. What does the mark tell the player? _Shown: A bass-clef stave with one semibreve marked pp (pianissimo (pp))._ | The answer is “very quiet”. |
+| term-sign (U7-L01) | 2 | Which term or sign means “very quiet”? | The answer is “pianissimo (pp)”. |
+| term-sign (U7-L01) | 3 | This note has a dynamic mark below it. What does the mark tell the player? _Shown: A treble-clef stave with one semibreve marked pp (pianissimo (pp))._ | The answer is “very quiet”. |
 | term-sign (U7-L01) | 4 | This note has a dynamic mark below it. What does the mark tell the player? _Shown: A treble-clef stave with one semibreve marked mf (mezzo forte (mf))._ | The answer is “moderately loud”. |
 | melody (U7-L05) | 1 | Look at this melody and answer the questions. _Shown: A two-bar melody in the bass clef with a key signature, time signature 2/4. The notes are A, C, B, A; the note marked x is the 4th note._ | 1. The answer is “2”. 2. The note is A. 3. This is the key signature of G major. |
 | melody (U7-L05) | 2 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are E, G, F, A, B, A, B, C; the note marked x is the 4th note._ | 1. The answer is “4”. 2. The note is A. 3. This is the key signature of C major. |
@@ -282,13 +282,13 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 |---|---|
 | tempo | allegro (fast and lively); andante (at a walking pace); adagio (slow); lento (slow); moderato (at a moderate speed); allegretto (fairly quick, but not as fast as allegro) |
 | dynamics | piano (p) (quiet); forte (f) (loud); mezzo piano (mp) (moderately quiet); mezzo forte (mf) (moderately loud); pianissimo (pp) (very quiet); fortissimo (ff) (very loud); crescendo (cresc.) (gradually getting louder); diminuendo (dim.) (gradually getting quieter); decrescendo (decresc.) (gradually getting quieter) |
-| change-of-speed | rallentando (rall.) (gradually getting slower); ritardando (rit.) (gradually getting slower); accelerando (accel.) (gradually getting faster); a tempo (return to the previous speed) |
+| change-of-speed | rallentando (rall.) (gradually getting slower); ritardando (rit.) (gradually getting slower); accelerando (accel.) (gradually getting faster); a tempo (return to the previous speed); ritenuto (riten.) (held back; slower at once) |
 | articulation | legato (smoothly, with the notes joined); staccato (short and detached); accent (>) (emphasise the note) |
-| expression | cantabile (in a singing style); dolce (sweetly) |
-| structure | da capo (D.C.) (repeat from the beginning); fine (the end) |
-| sign | pause (fermata) (hold the note longer than its written value); slur (play the notes under the curve smoothly); tie (join two notes of the same pitch into one longer sound); repeat marks (play the passage between the marks again) |
+| expression | cantabile (in a singing style); dolce (sweetly); poco (a little) |
+| structure | da capo (D.C.) (repeat from the beginning); fine (the end); dal segno (D.S.) (repeat from the sign) |
+| sign | pause (fermata) (hold the note longer than its written value); slur (play the notes under the curve smoothly); tie (join two notes of the same pitch into one longer sound); repeat marks (play the passage between the marks again); 8va (play an octave higher than written); M.M. ♩ = 72 (72 crotchet beats in a minute) |
 
-**Compared with the reference book's own Grade 1 list** (read for verification only): the book also lists _poco_ (a little), _dal segno_, _ritenuto_, _8va_ and metronome marks, and draws the crescendo / diminuendo hairpins; this course keeps _dal segno_ and _ritenuto_ at Grade 2, leaves _poco_, _8va_ and metronome marks out, and teaches crescendo / diminuendo as words. This course also includes _dolce_, which is not in the book's Grade 1 list. The 2020 outline does not enumerate terms, so a teacher decision is needed (Q2).
+**Where there was doubt, the content is included.** The reference book (read for verification only) also lists _poco_, _dal segno_, _ritenuto_, _8va_ and metronome marks at Grade 1, and the 2020 outline does not enumerate terms, so these are all INCLUDED in the vocabulary and taught in G1-U7-L03 (the teacher may remove any). The course also includes _dolce_, which is not in the book's Grade 1 list. Crescendo and diminuendo are taught as words because the renderer does not yet draw hairpin signs. See Q2 and Q16.
 
 ## 6. Assessment questions and scoring
 
@@ -371,7 +371,7 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 
 ## 8. Decisions needed
 
-1. Confirm the Grade 1 term lists (Q2) and whether _dolce_, _poco_, _dal segno_, _ritenuto_, _8va_ and metronome marks belong at Grade 1.
+1. Confirm the Grade 1 term lists (Q2, Q16). Everything in doubt is already included (_dolce_, _poco_, _dal segno_, _ritenuto_, _8va_, metronome marks); say which to remove.
 2. Confirm the beaming rule 'keep the middle of a 4/4 bar visible' is Grade 1, not Grade 2.
 3. Confirm the rest conventions in section 4, especially the 3/4 minim rest (Q3).
 4. Confirm the provisional pass marks (70% challenge, 66% assessment) and the mastery thresholds (Q11).
