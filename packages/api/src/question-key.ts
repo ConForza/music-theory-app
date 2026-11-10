@@ -46,6 +46,8 @@ export interface ReviewConstraint {
   conceptId: string;
   /** Rhythm concepts: the written or answered music must contain one of these values / a rest / a dot / a tie / a beam. */
   rhythm?: { values?: string[]; rest?: boolean; dot?: boolean; tie?: boolean; beam?: boolean };
+  /** The music shows one of these written accidental signs ("sharp", "flat", "natural"). */
+  showsSign?: string[];
   /** Key concepts: the question is about one of these keys. */
   keys?: string[];
   /** Vocabulary concepts: the term asked about (or its meaning) is in one of these categories. */
@@ -107,6 +109,19 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
     if (r.dot && !evs.some((e) => ((e.duration as { dots?: number }).dots ?? 0) > 0)) return false;
     if (r.tie && !evs.some((e) => e.tieToNext === true)) return false;
     if (r.beam && !evs.some((e) => typeof e.beam === "string" && e.beam !== "none")) return false;
+  }
+  if (c.showsSign) {
+    const signs: string[] = [];
+    const walk = (v: unknown) => {
+      if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === "object") {
+        const o = v as Record<string, unknown>;
+        if (typeof o.writtenAccidental === "string") signs.push(o.writtenAccidental);
+        Object.values(o).forEach(walk);
+      }
+    };
+    walk(item.music ?? null);
+    if (!signs.some((x) => c.showsSign!.includes(x))) return false;
   }
   if (c.keys) {
     const k = keyOf(item);

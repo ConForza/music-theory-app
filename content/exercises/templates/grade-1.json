@@ -1440,6 +1440,183 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g1.accidental-facts",
+      "version": 1,
+      "familyId": "fam.keyboard",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "conceptIds": [
+        "c.accidentals.signs"
+      ],
+      "promptPattern": "What do sharps, flats and naturals do? Name a black key.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "When naming a black key, both sharp and flat names are accepted unless the prompt asks for one (e.g. 'name it as a flat')."
+      },
+      "ambiguityChecks": [
+        "Prompt states which spelling is wanted when a black key is named."
+      ],
+      "hints": [
+        "Sharp = higher, flat = lower, natural = back to plain."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.accidental-read",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "conceptIds": [
+        "c.accidentals.on-stave"
+      ],
+      "promptPattern": "Name this note, including its sharp or flat.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Letter name and the sharp or flat must match; the octave is not asked at Grade 1."
+      },
+      "ambiguityChecks": [
+        "Ledger lines only for middle C.",
+        "Accidentals appear only after G1-U4 concepts are taught."
+      ],
+      "hints": [
+        "Read the line or space, then apply the sign."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.accidental-write",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 1,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "conceptIds": [
+        "c.accidentals.on-stave"
+      ],
+      "promptPattern": "Write {note} with its sign in the {clef} clef.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Any octave of the letter name on the stave is accepted unless the prompt names middle C or a specific position."
+      },
+      "ambiguityChecks": [
+        "If the letter appears more than once on the stave, either position is accepted unless the prompt specifies one."
+      ],
+      "hints": [
+        "Write the note, then put the sign directly in front."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.accidental-count",
+      "version": 1,
+      "familyId": "fam.accidental-state",
+      "grade": 1,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "conceptIds": [
+        "c.accidentals.bar-rule",
+        "c.accidentals.cancellation"
+      ],
+      "promptPattern": "How many notes in this bar carry the accidental?",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct."
+      },
+      "ambiguityChecks": [
+        "Key-signature items only use keys whose signatures have been taught."
+      ],
+      "hints": [
+        "An accidental lasts to the end of the bar."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

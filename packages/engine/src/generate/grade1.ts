@@ -12,9 +12,10 @@
  */
 import { music, type AnswerSpec, type Measure, type NotationEvent, type NotationFragment } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
-import { frag, maxLedger, nameOf, n, note, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
+import { fits } from "./families.ts";
+import { frag, maxLedger, nameOf, n, note, pretty, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
 
-const { naturalAt } = music;
+const { naturalAt, parsePitch: P } = music;
 type Pitch = music.Pitch;
 type Clef = music.Clef;
 
@@ -538,6 +539,173 @@ export const barFix: Gen = (c) => {
   };
 };
 
+
+// ---------------------------------------------------------------------------
+// Unit 4: sharps, flats and naturals
+// ---------------------------------------------------------------------------
+
+const SIGN_NAME = { 1: "sharp", [-1]: "flat", 0: "natural" } as const;
+const SIGN_GLYPH = { 1: "♯", [-1]: "♭", 0: "♮" } as const;
+const BLACK_KEYS: Array<{ sharp: string; flat: string; midi: string }> = [
+  { sharp: "C#", flat: "Db", midi: "C#4" },
+  { sharp: "D#", flat: "Eb", midi: "D#4" },
+  { sharp: "F#", flat: "Gb", midi: "F#4" },
+  { sharp: "G#", flat: "Ab", midi: "G#4" },
+  { sharp: "A#", flat: "Bb", midi: "A#4" },
+];
+
+/** t.g1.accidental-facts: what the signs do, and the two names of a black key. */
+export const accidentalFacts: Gen = (c) => {
+  const mode = c.rng.pick(["effect", "sign-for", "name-sharp", "name-flat"] as const);
+  if (mode === "effect") {
+    const alter = c.rng.pick([1, -1, 0] as const);
+    const right = alter === 1 ? "raise" : alter === -1 ? "lower" : "cancel";
+    const opts = [
+      { id: "raise", label: "Raises the note by a semitone" },
+      { id: "lower", label: "Lowers the note by a semitone" },
+      { id: "cancel", label: "Cancels an earlier sharp or flat" },
+      { id: "tone", label: "Raises the note by a whole tone" },
+    ];
+    const diagnoses: Diagnoses = {};
+    if (alter === 1) diagnoses.lower = { category: "black-key-neighbour", reason: "A flat lowers a note; a sharp raises it. Think of a sharp as 'up' towards the next key on the right." };
+    if (alter === -1) diagnoses.raise = { category: "black-key-neighbour", reason: "A sharp raises a note; a flat lowers it. A flat moves to the next key on the left." };
+    if (alter === 0) diagnoses.raise = { category: "black-key-neighbour", reason: "A natural does not move the note up or down: it takes away an earlier sharp or flat." };
+    return {
+      prompt: `What does a ${SIGN_NAME[alter]} sign (${SIGN_GLYPH[alter]}) do to a note?`,
+      answer: { kind: "choice", options: c.rng.shuffle(opts), correctOptionIds: [right], diagnoses },
+      hints: ["Sharp = higher, flat = lower, natural = back to the plain white-key note."],
+    };
+  }
+  if (mode === "sign-for") {
+    const alter = c.rng.pick([1, -1, 0] as const);
+    const ask = alter === 1 ? "raises a note by a semitone" : alter === -1 ? "lowers a note by a semitone" : "cancels an earlier sharp or flat";
+    const opts = ([1, -1, 0] as const).map((a) => ({ id: SIGN_NAME[a], label: `${SIGN_NAME[a]} (${SIGN_GLYPH[a]})` }));
+    return {
+      prompt: `Which sign ${ask}?`,
+      answer: { kind: "choice", options: opts, correctOptionIds: [SIGN_NAME[alter]], diagnoses: Object.fromEntries(opts.filter((o) => o.id !== SIGN_NAME[alter]).map((o) => [o.id, { category: "black-key-neighbour", reason: `That sign does a different job. A sharp raises, a flat lowers, and a natural cancels.` }])) },
+      hints: ["Sharp = higher, flat = lower, natural = back to the plain white-key note."],
+    };
+  }
+  const key = c.rng.pick(BLACK_KEYS);
+  const sharp = mode === "name-sharp";
+  const answer = sharp ? key.sharp : key.flat;
+  const pool = BLACK_KEYS.map((k) => (sharp ? k.sharp : k.flat));
+  const opts = [answer, ...c.rng.shuffle(pool.filter((x) => x !== answer)).slice(0, 3)];
+  const idx = pool.indexOf(answer);
+  const near = new Set([pool[idx - 1], pool[idx + 1]].filter(Boolean));
+  return {
+    prompt: `Name the highlighted black key using a ${sharp ? "sharp" : "flat"}.`,
+    music: keyboardPicture([key.midi], `A piano keyboard with one black key highlighted, between ${key.sharp[0]} and ${key.flat[0]}.`),
+    answer: { kind: "choice", options: c.rng.shuffle(opts).map((o) => ({ id: o, label: pretty(o) })), correctOptionIds: [answer], diagnoses: Object.fromEntries(opts.filter((o) => near.has(o)).map((o) => [o, { category: "black-key-neighbour", reason: `${pretty(o)} is the black key next door. A ${sharp ? "sharp is the black key just above (to the right of)" : "flat is the black key just below (to the left of)"} the white key of the same letter.` }])) },
+    hints: [sharp ? "A sharp is the black key just to the right of the white key with that letter." : "A flat is the black key just to the left of the white key with that letter."],
+  };
+};
+
+const GOOD_ACC = (step: string, alter: number) => !((step === "E" || step === "B") && alter === 1) && !((step === "C" || step === "F") && alter === -1);
+
+/** t.g1.accidental-read: name a note that has a sharp or flat sign in front of it. */
+export const accidentalRead: Gen = (c) => {
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const max = maxLedger(c);
+  const pos = c.rng.int(-2 * max - (max ? 1 : 0), 8 + 2 * max + (max ? 1 : 0));
+  const alter = c.rng.pick([1, -1]);
+  const base = naturalAt(clef, pos);
+  if (!GOOD_ACC(base.step, alter) || music.ledgerLines(clef, base) > max) return null;
+  const p: Pitch = { ...base, alter };
+  return {
+    prompt: "Name this note, including its sharp or flat.",
+    music: frag(clef, [{ events: [note(p)] }], `A ${clef}-clef stave with one semibreve on the ${describePos(pos)}, with a ${alter === 1 ? "sharp" : "flat"} sign in front of it.`),
+    answer: { kind: "pitch", accepted: [music.formatPitch(p)], octaveSensitive: false, spellingSensitive: true, relation: "same" },
+    hints: ["Read the line or space as usual, then add the sign in front: a sharp raises it, a flat lowers it."],
+  };
+};
+const describePos = (pos: number) => (pos % 2 === 0 ? `${ORD(pos / 2 + 1)} line` : `${ORD((pos - 1) / 2 + 1)} space`);
+
+/** t.g1.accidental-write: write a sharp or flat note on the stave. */
+export const accidentalWrite: Gen = (c) => {
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const max = maxLedger(c);
+  const step = c.rng.pick(music.STEPS);
+  const alter = c.rng.pick([1, -1]);
+  if (!GOOD_ACC(step, alter)) return null;
+  const answer = { kind: "staff-position" as const, clef, target: { step, alter, position: "any" as const, maxLedgerLines: max }, accepted: [] as string[], octaveSensitive: true };
+  const valid = staffTargets(answer, max);
+  if (!valid.length) return null;
+  answer.accepted = valid.map((q) => music.formatPitch(q));
+  return {
+    prompt: `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef. Put the ${alter === 1 ? "sharp" : "flat"} sign in front of the note. Any ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} that fits is correct.`,
+    answer,
+    hints: [`Find ${step} first, then add a ${alter === 1 ? "sharp" : "flat"} sign directly in front of the note.`],
+  };
+};
+
+/** t.g1.accidental-count: how long does an accidental last? Count the notes that carry it. */
+export const accidentalCount: Gen = (c) => {
+  if (!c.scope.accidentals) return null;
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]);
+  const ts = c.rng.pick(c.scope.timeSignatures?.length ? c.scope.timeSignatures : ["4/4"]);
+  const slots = music.parseTimeSignature(ts).top;
+  if (slots < 3) return null;
+  const max = maxLedger(c);
+  const pos = c.rng.int(1, 7);
+  const x = naturalAt(clef, pos);
+  const alter = c.rng.pick([1, -1]);
+  if (!GOOD_ACC(x.step, alter)) return null;
+  const withAlter = (a: number): Pitch => ({ ...x, alter: a });
+  const filler = (): Pitch => {
+    const step = c.rng.pick(music.STEPS.filter((s) => s !== x.step));
+    return { step, alter: 0, octave: x.octave };
+  };
+  const mode = c.rng.pick(["same-bar", "natural", "next-bar"] as const);
+  let bars: Pitch[][];
+  let question: string;
+  let correct: number;
+  let carried: number; // the wrong count a learner gets from the mistake being diagnosed
+  const name = `${pretty(`${x.step}${alter === 1 ? "#" : "b"}`)}`;
+  if (mode === "same-bar") {
+    const repeats = c.rng.int(1, slots - 2);
+    const seq: Pitch[] = [withAlter(alter), ...Array.from({ length: repeats }, () => withAlter(alter))];
+    while (seq.length < slots) seq.push(filler());
+    const body = [seq[0]!, ...c.rng.shuffle(seq.slice(1))];
+    bars = [body];
+    correct = body.filter((p) => p.step === x.step).length;
+    carried = 1;
+    question = `How many notes in this bar sound as ${name}?`;
+  } else if (mode === "natural") {
+    if (slots < 4) return null;
+    const seq: Pitch[] = [withAlter(alter), withAlter(alter), withAlter(0), withAlter(0)];
+    bars = [seq.slice(0, slots)];
+    correct = 2;
+    carried = bars[0]!.length;
+    question = `How many notes in this bar sound as ${name}?`;
+  } else {
+    const m = c.rng.int(1, 2);
+    const first = [withAlter(alter), ...Array.from({ length: slots - 1 }, filler)];
+    const second = [...Array.from({ length: m }, () => withAlter(0)), ...Array.from({ length: slots - m }, filler)];
+    bars = [first, second];
+    correct = 0;
+    carried = m;
+    question = `How many notes in bar 2 sound as ${name}?`;
+  }
+  if (!fits(clef, bars.flat(), max)) return null;
+  const measures: Measure[] = bars.map((b, i) => ({ events: b.map((p) => note(p, "crotchet")), ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
+  const f = frag(clef, measures, "", { timeSignature: ts });
+  const desc = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}` : "rest")).join(", ") + ".").join(" ");
+  f.textAlternative = `${clef} clef, ${ts}. ${desc}`;
+  const opts = new Map<number, [string, string] | null>([[correct, null]]);
+  const add = (v: number, d: [string, string] | null) => v >= 0 && v <= slots && !opts.has(v) && opts.size < 4 && opts.set(v, d);
+  add(carried, mode === "next-bar" ? ["accidental-carried-over-barline", "An accidental only lasts to the end of its own bar. In the next bar the note goes back to what the key signature says."] : mode === "natural" ? ["accidental-forgotten", "A natural sign cancels the sharp or flat. The notes after it are plain again."] : ["accidental-forgotten", "An accidental lasts until the end of the bar, not just for the note it is written beside."]);
+  for (const v of [correct + 1, correct - 1, correct + 2, 0, 1, 2]) add(v, null);
+  const ordered = [...opts.keys()].sort((a, b) => a - b);
+  const diagnoses = Object.fromEntries([...opts].filter(([, d]) => d).map(([v, d]) => [String(v), { category: d![0], reason: d![1] }]));
+  return {
+    prompt: question,
+    music: f,
+    answer: { kind: "choice", options: ordered.map((v) => ({ id: String(v), label: String(v) })), correctOptionIds: [String(correct)], ...(Object.keys(diagnoses).length ? { diagnoses } : {}) },
+    hints: ["An accidental lasts until the end of the bar, on its own line or space. A natural sign cancels it. A new bar starts afresh."],
+  };
+};
+
 // ---------------------------------------------------------------------------
 // Unit 3 extra: finding middle C
 // ---------------------------------------------------------------------------
@@ -583,4 +751,8 @@ export const GRADE1_GENERATORS: Record<string, Gen> = {
   "t.g1.bar-judge": barJudge,
   "t.g1.bar-fix": barFix,
   "t.g1.middle-c-find": middleCFind,
+  "t.g1.accidental-facts": accidentalFacts,
+  "t.g1.accidental-read": accidentalRead,
+  "t.g1.accidental-write": accidentalWrite,
+  "t.g1.accidental-count": accidentalCount,
 };

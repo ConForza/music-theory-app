@@ -55,6 +55,9 @@ export function startAuthoring(): Author {
 type P = string | [string, string];
 const ev = (p: P, value = "semibreve") => (Array.isArray(p) ? note(p[0], value as never, { label: p[1] }) : note(p, value as never));
 export const stave = (clef: "treble" | "bass", pitches: P[], text: string, extra: Partial<Frag> = {}): Frag => frag(clef, [{ events: pitches.map((p) => ev(p)) }], text, { showKeySignature: false, ...extra });
+/** Bars of crotchets (or another value) in a time signature; accidentals are printed by the bar-state rules. */
+export const bars = (clef: "treble" | "bass", list: P[][], ts: string, text: string, value = "crotchet", extra: Partial<Frag> = {}): Frag =>
+  frag(clef, list.map((b, i) => ({ events: b.map((p) => ev(p, value)), ...(i === list.length - 1 ? { barline: "final" as const } : {}) })), text, { showKeySignature: false, timeSignature: ts, ...extra });
 export const keys = (pitches: P[], text: string): Frag => ({ presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: pitches.map((p) => ev(p)) }], textAlternative: text }) as Frag;
 
 export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided" | "independent", n: number): ExerciseItem {

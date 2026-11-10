@@ -1,0 +1,994 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U4-L04",
+  "lessonId": "G1-U4-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Cancel a sharp or flat with a natural, and follow an accidental through a tie.",
+    "successCriteria": [
+      "I know a natural sign cancels an accidental for the rest of the bar.",
+      "I know a tied note keeps its accidental across the bar-line.",
+      "I can read a short passage with several accidentals."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A natural sign (♮) cancels a sharp or flat. Notes after it on that line or space are plain until the end of the bar."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 4/4: F sharp, then F with a natural sign, then G, then F. The last F is plain too.",
+        "timeSignature": "4/4"
+      },
+      "caption": "The natural sign cancels the F sharp. The last F is plain: the natural lasts to the end of the bar."
+    },
+    {
+      "kind": "text",
+      "text": "A tie joins two notes of the same pitch. If the tie crosses a bar-line, the second note keeps the accidental of the first, even though it is in a new bar."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 4/4. Bar 1 ends on an F sharp. Bar 2 starts on an F with no sign. The F in bar 2 is plain.",
+        "timeSignature": "4/4"
+      },
+      "caption": "Without a tie, the F in bar 2 is plain. With a tie from the F sharp, it would still be F sharp."
+    },
+    {
+      "kind": "tip",
+      "text": "Only the first note after a tie across a bar-line inherits the accidental. After that the new bar starts afresh."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "F#4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "writtenAccidental": "sharp"
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "writtenAccidental": "natural"
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 4/4: F sharp, F natural, G, F.",
+      "timeSignature": "4/4"
+    },
+    "steps": [
+      "Tap the F sharp, then the next F. It is lower: the natural has cancelled the sharp.",
+      "Tap the last F. It is plain too, because the natural lasts to the end of the bar.",
+      "A natural sign is how you undo a sharp or flat without starting a new bar."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar with an F sharp, a natural-cancelled F, a G and a plain F."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u4-l04.guided-1",
+      "templateId": "t.g1.accidental-count",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many notes in this bar sound as F♯?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "treble clef, 4/4. Bar 1: F with a sharp sign, F, F with a natural sign, F.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "accidental-forgotten",
+            "reason": "A natural sign cancels the sharp or flat. The notes after it are plain again."
+          }
+        }
+      },
+      "hints": [
+        "An accidental lasts to the end of the bar.",
+        "An accidental lasts until the end of the bar, on its own line or space. A natural sign cancels it. A new bar starts afresh."
+      ],
+      "feedback": {
+        "correct": "The natural cancelled the sharp.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g1-u4-l04.guided-2",
+      "templateId": "t.g1.accidental-state",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "treble clef, key signature: none, 4/4. Bar 1: E 4th space with a sharp sign, E 4th space with a natural sign, D 4th line, E 4th space (marked *).",
+        "key": "C major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "E5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Go through the bar from the beginning.",
+        "A bar-line cancels accidentals unless a tie crosses it.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Followed the accidental correctly.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u4-l04.ind-1",
+      "templateId": "t.g1.accidental-state",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A#2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "bass clef, key signature: none, 3/4. Bar 1: A 1st space with a sharp sign, A 1st space with a natural sign, A 1st space (marked *).",
+        "key": "C major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "A2"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Go through the bar from the beginning.",
+        "A bar-line cancels accidentals unless a tie crosses it.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Right: you tracked the natural.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g1-u4-l04.ind-2",
+      "templateId": "t.g1.accidental-count",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes in this bar sound as A♭?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "treble clef, 4/4. Bar 1: A with a flat sign, A, A with a natural sign, A.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "accidental-forgotten",
+            "reason": "A natural sign cancels the sharp or flat. The notes after it are plain again."
+          }
+        }
+      },
+      "hints": [
+        "An accidental lasts to the end of the bar.",
+        "An accidental lasts until the end of the bar, on its own line or space. A natural sign cancels it. A new bar starts afresh."
+      ],
+      "feedback": {
+        "correct": "Counted correctly after the natural.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g1-u4-l04.ind-3",
+      "templateId": "t.g1.accidental-state",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "treble clef, key signature: none, 4/4. Bar 1: A 2nd space with a flat sign, A 2nd space with a natural sign, B 3rd line, A 2nd space (marked *).",
+        "key": "C major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "A4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Go through the bar from the beginning.",
+        "A bar-line cancels accidentals unless a tie crosses it.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g1-u4-l04.ind-4",
+      "templateId": "t.g1.accidental-count",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes in this bar sound as F♯?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "bass clef, 4/4. Bar 1: F with a sharp sign, F, F with a natural sign, F.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "accidental-forgotten",
+            "reason": "A natural sign cancels the sharp or flat. The notes after it are plain again."
+          }
+        }
+      },
+      "hints": [
+        "An accidental lasts to the end of the bar.",
+        "An accidental lasts until the end of the bar, on its own line or space. A natural sign cancels it. A new bar starts afresh."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g1-u4-l04.ind-5",
+      "templateId": "t.g1.accidental-state",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "bass clef, key signature: none, 4/4. Bar 1: G 4th space with a sharp sign, G 4th space with a natural sign, F 4th line, G 4th space (marked *).",
+        "key": "C major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "G3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Go through the bar from the beginning.",
+        "A bar-line cancels accidentals unless a tie crosses it.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Followed it correctly.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g1-u4-l04.ind-6",
+      "templateId": "t.g1.accidental-count",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes in this bar sound as A♭?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "bass clef, 4/4. Bar 1: A with a flat sign, A, A with a natural sign, A.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "accidental-forgotten",
+            "reason": "A natural sign cancels the sharp or flat. The notes after it are plain again."
+          }
+        }
+      },
+      "hints": [
+        "An accidental lasts to the end of the bar.",
+        "An accidental lasts until the end of the bar, on its own line or space. A natural sign cancels it. A new bar starts afresh."
+      ],
+      "feedback": {
+        "correct": "Counted correctly.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    }
+  ],
+  "recap": [
+    "A natural sign cancels a sharp or flat.",
+    "The natural lasts to the end of the bar too.",
+    "A tied note keeps its accidental across the bar-line."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.accidental-state",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.accidental-count",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.accidental-state",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.accidentals.cancellation"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.10"
+    ],
+    "notes": "Original wording. Follows Grade 1 outcome 10 (cancellation). Tied notes across bar-lines are taught here in prose and assessed through generated bars where the tie occurs."
+  }
+}

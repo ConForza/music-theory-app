@@ -10,11 +10,12 @@ import { buildLesson, pickItem, startAuthoring, type Spec } from "./grade1/lib.t
 import { U1 } from "./grade1/u1.ts";
 import { U2 } from "./grade1/u2.ts";
 import { U3 } from "./grade1/u3.ts";
+import { U4 } from "./grade1/u4.ts";
 import { questionKey } from "../src/question-key.ts";
 import { mergeScope, type ExerciseItem } from "@mtp/curriculum";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../../content");
-const specs: Spec[] = [...U1, ...U2, ...U3];
+const specs: Spec[] = [...U1, ...U2, ...U3, ...U4];
 const only = process.argv.slice(2);
 // Regeneration starts from a clean slate: a previously generated file that no longer validates must not stop the run.
 for (const spec of specs) if (!only.length || only.includes(spec.node)) rmSync(join(root, `lessons/${spec.node}.json`), { force: true });
