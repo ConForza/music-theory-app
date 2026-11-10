@@ -161,6 +161,15 @@ export function ReviewPlayer() {
     load().then(
       (s) => {
         if (!live) return;
+        // A saved review whose questions have all been replaced by a content update cannot be finished: ask the server for a
+        // fresh one (it closes the stale session) instead of "completing" an empty review.
+        if (s.status === "open" && !s.items.some((i) => i.kind === "review")) {
+          api.startReview().then(
+            (r) => { if (live) { if (r.session && r.session.id !== sessionId) nav(`/review/session/${r.session.id}`, { replace: true }); else nav("/review", { replace: true }); } },
+            (e: unknown) => live && setError(asFailure(e, "Could not open the review.")),
+          );
+          return;
+        }
         const first = s.items.findIndex((i) => !i.answered);
         setIdx(first === -1 ? s.items.length : first);
       },
@@ -170,7 +179,7 @@ export function ReviewPlayer() {
       live = false;
       stopAll();
     };
-  }, [load, userId]);
+  }, [load, userId, nav, sessionId]);
 
   const finishing = session !== null && idx !== null && idx >= session.items.length;
   useEffect(() => {

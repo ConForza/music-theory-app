@@ -13,7 +13,7 @@ const strip = (v: unknown): unknown =>
   Array.isArray(v)
     ? v.map(strip)
     : v && typeof v === "object"
-      ? Object.fromEntries(Object.keys(v as object).filter((k) => k !== "id" && k !== "seed").sort().map((k) => [k, strip((v as Record<string, unknown>)[k])]))
+      ? Object.fromEntries(Object.keys(v as object).filter((k) => k !== "id" && k !== "seed" && k !== "diagnoses").sort().map((k) => [k, strip((v as Record<string, unknown>)[k])]))
       : v;
 
 /**
@@ -30,8 +30,18 @@ const normaliseAnswer = (a: unknown): unknown => {
   return a;
 };
 
+/**
+ * Templates introduced in Brief 05. Their questions ignore option order. The older templates keep the order-sensitive identity
+ * they always had, so exposure and evidence rows stored by earlier briefs still match the same questions after an upgrade.
+ * (Misconception `diagnoses` are feedback, not part of what is asked, so they never affect any identity.)
+ */
+export const ORDER_INSENSITIVE_TEMPLATES = new Set(
+  ["letter-names", "stave-facts", "note-place", "note-total", "note-equivalent", "beam-choice", "bar-judge", "bar-fix", "middle-c-find", "middle-c-facts", "accidental-facts", "accidental-read", "accidental-write", "accidental-count", "step-size", "scale-gap", "key-facts", "key-write", "degree-note", "triad-notes", "interval-note", "term-sign", "melody-detail"].map((x) => `t.g1.${x}`),
+);
+
 export function questionKey(item: ExerciseItem): string {
-  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: normaliseAnswer(item.answer) }));
+  const answer = ORDER_INSENSITIVE_TEMPLATES.has(item.templateId) ? normaliseAnswer(item.answer) : item.answer;
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: answer }));
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 
@@ -46,6 +56,8 @@ export interface ReviewConstraint {
   conceptId: string;
   /** Rhythm concepts: the written or answered music must contain one of these values / a rest / a dot / a tie / a beam. */
   rhythm?: { values?: string[]; rest?: boolean; dot?: boolean; tie?: boolean; beam?: boolean };
+  /** Alternative to the pitch fields: a question whose prompt names one of these words is about the concept (for example "middle C"). */
+  promptMentions?: string[];
   /** The music shows one of these written accidental signs ("sharp", "flat", "natural"). */
   showsSign?: string[];
   /** Key concepts: the question is about one of these keys. */
@@ -103,6 +115,7 @@ function keyOf(item: ExerciseItem): string | undefined {
 
 /** True when the question satisfies every part of the constraint (pitch fields need written pitches to judge). */
 export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
+  if (c.promptMentions?.some((w) => item.prompt.includes(w))) return true;
   if (c.rhythm) {
     const evs = rhythmEvents(item);
     const r = c.rhythm;

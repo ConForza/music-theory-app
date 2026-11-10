@@ -52,7 +52,7 @@ export const letterNames: Gen = (c) => {
     for (const o of opts) if (o !== step && (o === LETTERS[(i + 1) % 7] || o === LETTERS[(i + 6) % 7])) diagnoses[o] = { category: "white-key-off-by-one", reason: `${o} is the key next door. Find the group of two or three black keys first, then count along the white keys from C or F.` };
     return {
       prompt: "Which letter name belongs to the highlighted key?",
-      music: keyboardPicture([p], `A piano keyboard with one white key highlighted: ${step}${step === "C" && octave === 4 ? " (middle C)" : ""}.`),
+      music: keyboardPicture([p], "A piano keyboard with one white key highlighted."),
       answer: { kind: "choice", options: letterOpts(opts), correctOptionIds: [step], ...(Object.keys(diagnoses).length ? { diagnoses } : {}) },
       hints: ["C is the white key just to the left of a group of two black keys; F is just to the left of a group of three.", "From C the white keys run C, D, E, F, G, A, B."],
     };
@@ -86,13 +86,22 @@ export const letterNames: Gen = (c) => {
   const wrongWay = LETTERS[(i + (up ? 7 - dist : dist)) % 7]!;
   if (opts.includes(wrongWay) && wrongWay !== answer) diagnoses[wrongWay] = { category: "white-key-off-by-one", reason: `That is ${dist} white key${dist > 1 ? "s" : ""} the other way. Moving right makes the pitch higher; moving left makes it lower.` };
   return {
-    prompt: `Start on the highlighted key. Move ${dist} white key${dist > 1 ? "s" : ""} to the ${up ? "right" : "left"}. Which letter do you reach?`,
+    prompt: `Start on the highlighted key, ${start}. Move ${dist} white key${dist > 1 ? "s" : ""} to the ${up ? "right" : "left"}. Which letter do you reach?`,
     music: keyboardPicture([`${start}${octave}`], `A piano keyboard with ${start} highlighted.`),
     answer: { kind: "choice", options: letterOpts(opts), correctOptionIds: [answer], ...(Object.keys(diagnoses).length ? { diagnoses } : {}) },
     hints: ["Count each white key you pass, not the key you start on.", "Right is higher, left is lower."],
   };
 };
 
+/** Where a written note sits, by geometry only (no letter name): used so text equivalents never state a recognition answer. */
+function geom(clef: Clef, p: Pitch): string {
+  const pos = staffPosition(clef, p);
+  if (pos < -1) return `on a ledger line ${(-pos) / 2 > 1 ? "well " : ""}below the stave`.replace("  ", " ");
+  if (pos === -1) return "in the space just below the stave";
+  if (pos > 9) return "on a ledger line above the stave";
+  if (pos === 9) return "in the space just above the stave";
+  return pos % 2 === 0 ? `on the ${ORD(pos / 2 + 1)} line` : `in the ${ORD((pos - 1) / 2 + 1)} space`;
+}
 const POSITION_LABEL = (pos: number) => (pos % 2 === 0 ? `${ORD(pos / 2 + 1)} line` : `${ORD((pos - 1) / 2 + 1)} space`);
 
 /** t.g1.stave-facts: the stave, counting lines and spaces, and the two clefs. */
@@ -115,7 +124,7 @@ export const staveFacts: Gen = (c) => {
       const p: Pitch = naturalAt(clef, c.rng.pick([0, 2, 4, 6, 8, 1, 3, 5, 7]));
       return {
         prompt: "Which clef is at the start of this stave?",
-        music: frag(clef, [{ events: [note(p)] }], `A ${clef}-clef stave with one note.`),
+        music: frag(clef, [{ events: [note(p)] }], "A stave with a clef sign and one note."),
         answer: { kind: "choice", options: [{ id: "treble", label: "Treble clef" }, { id: "bass", label: "Bass clef" }], correctOptionIds: [clef], diagnoses: { [clef === "treble" ? "bass" : "treble"]: { category: "clef-confusion", reason: clef === "treble" ? "The treble clef has a curl that winds round the second line. The bass clef is the one with two dots." : "The bass clef has two dots, one above and one below the line for F. The treble clef is the one with the winding curl." } } },
         hints: ["The treble clef winds round a line like a curl; the bass clef is a hook with two dots."],
       };
@@ -124,7 +133,7 @@ export const staveFacts: Gen = (c) => {
     const opts = fourLetters(c, target);
     return {
       prompt: clef === "treble" ? "The treble clef curls round one line. Which note is on that line?" : "The two dots of the bass clef sit either side of one line. Which note is on that line?",
-      music: frag(clef, [{ events: [r("semibreve")] }], `A ${clef}-clef stave with the clef and a rest, but no notes.`),
+      music: frag(clef, [{ events: [r("semibreve")] }], "A stave with a clef sign and a rest, but no notes."),
       answer: { kind: "choice", options: letterOpts(opts), correctOptionIds: [target], diagnoses: Object.fromEntries(opts.filter((o) => o !== target && (clef === "treble" ? o === "F" : o === "G")).map((o) => [o, { category: "clef-confusion", reason: clef === "treble" ? "F is the note the bass clef marks. The treble clef marks G." : "G is the note the treble clef marks. The bass clef marks F." }])) },
       hints: [clef === "treble" ? "The treble clef is also called the G clef." : "The bass clef is also called the F clef."],
     };
@@ -145,12 +154,11 @@ export const staveFacts: Gen = (c) => {
   const shuffled = c.rng.shuffle(opts);
   return {
     prompt: "Counting from the bottom of the stave, where is this note?",
-    music: frag(clef, [{ events: [note(p)] }], `A ${clef}-clef stave with one note on the ${describe(pos)}.`),
+    music: frag(clef, [{ events: [note(p)] }], "A stave with a clef sign and one note."),
     answer: { kind: "choice", options: shuffled.map((o) => ({ id: o.replace(/ /g, "-"), label: o })), correctOptionIds: [answer.replace(/ /g, "-")], ...(Object.keys(diagnoses).length ? { diagnoses: Object.fromEntries(Object.entries(diagnoses).map(([k, v]) => [k.replace(/ /g, "-"), v])) } : {}) },
     hints: ["Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."],
   };
 };
-const describe = (pos: number) => POSITION_LABEL(pos);
 
 /** t.g1.note-place: write a named note on a stated line or in a stated space (or on the ledger line for middle C). */
 export const notePlace: Gen = (c) => {
@@ -326,9 +334,12 @@ export const beamChoice: Gen = (c) => {
       hints: ["Count the flags: each extra flag halves the length."],
     };
   }
-  const size = mode === "beam-beats" ? (v === "quaver" ? c.rng.pick([2, 3, 4]) : c.rng.pick([2, 4])) : c.rng.pick(v === "quaver" ? [2, 3, 4] : [2, 3, 4]);
+  // One beamed group fills (at most) one beat, so a group is 2 quavers or 2, 3 or 4 semiquavers; "beats" questions need a whole number of halves.
+  const size = mode === "beam-beats" ? (v === "quaver" ? 2 : c.rng.pick([2, 4])) : v === "quaver" ? 2 : c.rng.pick([2, 3, 4]);
   const group = beamRuns(Array.from({ length: size }, () => n(v)));
-  if (!group.every((e) => (e as { beam?: string }).beam)) return null; // must be one beam group (fits within a beat)
+  // Exactly one connected group: one "begin", one "end", every note in it.
+  const begins = group.filter((e) => (e as { beam?: string }).beam === "begin").length;
+  if (begins !== 1 || !group.every((e) => (e as { beam?: string }).beam)) return null;
   const lead = [] as NotationEvent[];
   if (mode === "beam-count" && c.rng.chance(0.5)) lead.push(n("crotchet"));
   const line = rhythmLine([{ events: [...lead, ...group] }]);
@@ -593,7 +604,7 @@ export const accidentalFacts: Gen = (c) => {
   const near = new Set([pool[idx - 1], pool[idx + 1]].filter(Boolean));
   return {
     prompt: `Name the highlighted black key using a ${sharp ? "sharp" : "flat"}.`,
-    music: keyboardPicture([key.midi], `A piano keyboard with one black key highlighted, between ${key.sharp[0]} and ${key.flat[0]}.`),
+    music: keyboardPicture([key.midi], "A piano keyboard with one black key highlighted."),
     answer: { kind: "choice", options: c.rng.shuffle(opts).map((o) => ({ id: o, label: pretty(o) })), correctOptionIds: [answer], diagnoses: Object.fromEntries(opts.filter((o) => near.has(o)).map((o) => [o, { category: "black-key-neighbour", reason: `${pretty(o)} is the black key next door. A ${sharp ? "sharp is the black key just above (to the right of)" : "flat is the black key just below (to the left of)"} the white key of the same letter.` }])) },
     hints: [sharp ? "A sharp is the black key just to the right of the white key with that letter." : "A flat is the black key just to the left of the white key with that letter."],
   };
@@ -688,7 +699,7 @@ export const accidentalCount: Gen = (c) => {
   if (!fits(clef, bars.flat(), max)) return null;
   const measures: Measure[] = bars.map((b, i) => ({ events: b.map((p) => note(p, "crotchet")), ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
   const f = frag(clef, measures, "", { timeSignature: ts });
-  const desc = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}` : "rest")).join(", ") + ".").join(" ");
+  const desc = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `a note ${geom(clef, P(e.pitch))}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}` : "rest")).join(", ") + ".").join(" ");
   f.textAlternative = `${clef} clef, ${ts}. ${desc}`;
   const opts = new Map<number, [string, string] | null>([[correct, null]]);
   const add = (v: number, d: [string, string] | null) => v >= 0 && v <= slots && !opts.has(v) && opts.size < 4 && opts.set(v, d);
@@ -768,7 +779,7 @@ export const stepSize: Gen = (c) => {
   const answer = gap === 1 ? "semitone" : "tone";
   return {
     prompt: "Is the step from the first note up to the second note a tone or a semitone?",
-    music: frag(clef, [{ events: [note(p1), note(p2)] }], `A ${clef}-clef stave with two notes: ${nameOf(p1)} and the next letter up, ${nameOf(p2)}.`),
+    music: frag(clef, [{ events: [note(p1), note(p2)] }], `A ${clef}-clef stave with two notes: the first ${geom(clef, p1)}${p1.alter ? ` with a ${p1.alter === 1 ? "sharp" : "flat"} sign` : ""}, and the second ${geom(clef, p2)}${p2.alter ? ` with a ${p2.alter === 1 ? "sharp" : "flat"} sign` : ""}.`),
     answer: { kind: "choice", options: [{ id: "tone", label: "A tone" }, { id: "semitone", label: "A semitone" }], correctOptionIds: [answer], diagnoses: { [answer === "tone" ? "semitone" : "tone"]: { category: "off-by-step", reason: answer === "tone" ? "There is a key between them on the piano (black or white), so this is a whole tone, two semitones." : "They are neighbouring keys on the piano with no key between them, so this is a semitone." } } },
     hints: ["A semitone is from one key to the very next key, black or white, with nothing between. A tone has one key between.", "Between E and F, and between B and C, there is no black key."],
   };
@@ -1065,8 +1076,12 @@ export const melodyDetail: Gen = (c) => {
   const measures: Measure[] = bars.map((b, i) => ({ events: b, ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
   const f = frag(clef, measures, "", { key: keyText, timeSignature: ts, showKeySignature: Boolean(c.scope.keySignatures), tempoText: tempoTerm.term });
   const hasRest = bars.some((b) => b.some((e) => e.kind === "rest"));
-  const describe = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step}${e.writtenAccidental ? ` ${e.writtenAccidental}` : ""} ${e.duration.value}${e.label ? " (marked x)" : ""}${e.articulations?.length ? ` with ${e.articulations[0]}` : ""}${e.dynamic ? ` ${e.dynamic}` : ""}` : `${e.kind === "rest" ? `${e.duration.value} rest` : "group"}`)).join(", ") + ".").join(" ");
-  f.textAlternative = `A three-bar melody in ${keyText}, ${ts}, ${clef} clef, marked ${tempoTerm.term} and ${dyn} at the start. ${describe}`;
+  const sigWord = (() => {
+    const sg = music.keySignature(key);
+    return sg.count === 0 ? "no sharps or flats" : `${sg.count} ${sg.type === "sharps" ? (sg.count === 1 ? "sharp" : "sharps") : sg.count === 1 ? "flat" : "flats"}`;
+  })();
+  const describe = f.measures.map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `a ${e.duration.value} ${geom(clef, P(e.pitch))}${e.writtenAccidental ? ` with a ${e.writtenAccidental} sign` : ""}${e.label ? " (marked x)" : ""}${e.articulations?.length ? ` with ${e.articulations[0]}` : ""}${e.dynamic ? `, marked ${e.dynamic}` : ""}` : `${e.kind === "rest" ? `a ${e.duration.value} rest` : "a group"}`)).join(", ") + ".").join(" ");
+  f.textAlternative = `A three-bar melody, ${clef} clef, key signature of ${sigWord}, time signature ${ts}, marked ${tempoTerm.term} and ${dyn} at the start. ${describe}`;
   const tonic = sc[0]!;
   const note0 = pitches[0]!;
   const modes = ["tempo", "dynamic", "articulation", "highest", "beats", "key", "interval", ...(hasRest ? (["rest-bar"] as const) : [])] as const;
@@ -1151,21 +1166,8 @@ export const melodyDetail: Gen = (c) => {
 // Unit 3 extra: finding middle C
 // ---------------------------------------------------------------------------
 
-/** t.g1.middle-c-find: which note (or key) is middle C? */
+/** t.g1.middle-c-find: which of four written notes is middle C? */
 export const middleCFind: Gen = (c) => {
-  const keyboard = c.rng.chance(0.4);
-  if (keyboard) {
-    const others = c.rng.shuffle(["C2", "C3", "C5", "C6"]).slice(0, 2);
-    const set = ["C4", ...others].sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
-    const pos = ["lowest", "middle", "highest"];
-    const answer = pos[set.indexOf("C4")]!;
-    return {
-      prompt: "Three C keys are highlighted. Which one is middle C?",
-      music: { presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: set.map((p) => note(p)) }], textAlternative: `A piano keyboard with three C keys highlighted, in different octaves.` } as NotationFragment,
-      answer: { kind: "choice", options: pos.map((p) => ({ id: p, label: `The ${p} one` })), correctOptionIds: [answer], diagnoses: Object.fromEntries(pos.filter((p) => p !== answer).map((p) => [p, { category: "white-key-off-by-one", reason: "Middle C is the C nearest the middle of the keyboard, not the highest or lowest of these Cs." }])) },
-      hints: ["Middle C is the C closest to the middle of the keyboard."],
-    };
-  }
   const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Array<"treble" | "bass">);
   if (maxLedger(c) < 1) return null;
   const pool = clef === "treble" ? ["B3", "C4", "D4", "E4", "F4", "G4"] : ["E3", "F3", "G3", "A3", "B3", "C4", "D4"];
@@ -1176,7 +1178,7 @@ export const middleCFind: Gen = (c) => {
   const idx = seq.indexOf("C4");
   return {
     prompt: `Which of these notes is middle C?`,
-    music: frag(clef, [{ events: seq.map((p) => note(p, "crotchet")) }], `Four ${clef}-clef notes in a row: ${seq.map((p) => p.replace(/\d/, "")).join(", ")}.`, { timeSignature: "4/4" }),
+    music: frag(clef, [{ events: seq.map((p) => note(p, "crotchet")) }], `Four ${clef}-clef notes in a row: ${seq.map((q, k) => `note ${k + 1} ${geom(clef, music.parsePitch(q))}`).join("; ")}.`, { timeSignature: "4/4" }),
     answer: { kind: "choice", options: [1, 2, 3, 4].map((x) => ({ id: String(x), label: `Note ${x}` })), correctOptionIds: [String(idx + 1)], diagnoses: Object.fromEntries([1, 2, 3, 4].filter((x) => x !== idx + 1).map((x) => [String(x), { category: "ledger-miscount", reason: `Middle C is the note on the short ledger line, ${clef === "treble" ? "just below" : "just above"} the stave.` }])) },
     hints: [`Middle C sits on its own short ledger line, ${clef === "treble" ? "below the treble stave" : "above the bass stave"}.`],
   };
@@ -1220,6 +1222,46 @@ export const noteValueWithReasons: Gen = (c) => {
   return d;
 };
 
+
+/** t.g1.middle-c-facts: where middle C is written, in words (every prompt names middle C, so the facts are credited to that concept). */
+export const middleCFacts: Gen = (c) => {
+  const clefs = (c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[];
+  if (!clefs.includes("treble") || !clefs.includes("bass") || maxLedger(c) < 1) return null;
+  const clef = c.rng.pick(["treble", "bass"] as const);
+  const below = clef === "treble";
+  const mode = c.rng.pick(["where", "count", "which-clef", "relative"] as const);
+  const swapReason = clef === "treble" ? "That is where middle C is written in the bass clef. In the treble clef it hangs below the stave." : "That is where middle C is written in the treble clef. In the bass clef it sits above the stave.";
+  if (mode === "where") {
+    const opts = [{ id: "below", label: "On a short ledger line below the stave" }, { id: "above", label: "On a short ledger line above the stave" }, { id: "bottom", label: "On the bottom line of the stave" }, { id: "inside", label: "In a space in the middle of the stave" }];
+    const right = below ? "below" : "above";
+    return {
+      prompt: `In the ${clef} clef, where is middle C written?`,
+      answer: { kind: "choice", options: c.rng.shuffle(opts), correctOptionIds: [right], diagnoses: <Diagnoses>{ [below ? "above" : "below"]: { category: "clef-confusion", reason: swapReason }, bottom: { category: "line-space-swap", reason: "Middle C is outside the stave, so it needs a short ledger line of its own." }, inside: { category: "line-space-swap", reason: "Middle C is outside the stave, so it needs a short ledger line of its own." } } },
+      hints: [below ? "In the treble clef middle C hangs below the stave." : "In the bass clef middle C sits above the stave."],
+    };
+  }
+  if (mode === "count") {
+    return {
+      prompt: `How many ledger lines does middle C need in the ${clef} clef?`,
+      answer: { kind: "choice", options: [0, 1, 2, 3].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: ["1"], diagnoses: <Diagnoses>{ "0": { category: "ledger-miscount", reason: "Middle C is outside the stave, so it needs its own ledger line." }, "2": { category: "ledger-miscount", reason: "Middle C is just one step outside the stave, so one short ledger line is enough." }, "3": { category: "ledger-miscount", reason: "Middle C is just one step outside the stave, so one short ledger line is enough." } } },
+      hints: ["Middle C sits on its own single ledger line."],
+    };
+  }
+  if (mode === "which-clef") {
+    const opts = [{ id: "treble", label: "Treble clef" }, { id: "bass", label: "Bass clef" }];
+    return {
+      prompt: `In which clef is middle C written on a ledger line ${below ? "below" : "above"} the stave?`,
+      answer: { kind: "choice", options: opts, correctOptionIds: [clef], diagnoses: { [below ? "bass" : "treble"]: { category: "clef-confusion", reason: below ? "In the bass clef middle C sits above the stave. It hangs below the stave in the treble clef." : "In the treble clef middle C hangs below the stave. It sits above the stave in the bass clef." } } },
+      hints: ["Treble: below the stave. Bass: above the stave."],
+    };
+  }
+  return {
+    prompt: `Is middle C higher or lower than the ${below ? "bottom line of the treble stave" : "top line of the bass stave"}?`,
+    answer: { kind: "choice", options: [{ id: "higher", label: "Higher" }, { id: "lower", label: "Lower" }], correctOptionIds: [below ? "lower" : "higher"], diagnoses: { [below ? "higher" : "lower"]: { category: "line-space-swap", reason: below ? "Middle C hangs below the treble stave, so it is lower than the bottom line." : "Middle C sits above the bass stave, so it is higher than the top line." } } },
+    hints: [below ? "Middle C is on a ledger line below the treble stave." : "Middle C is on a ledger line above the bass stave."],
+  };
+};
+
 export const GRADE1_GENERATORS: Record<string, Gen> = {
   "t.g1.note-value": noteValueWithReasons,
   "t.g1.rest": noteValueWithReasons,
@@ -1232,6 +1274,7 @@ export const GRADE1_GENERATORS: Record<string, Gen> = {
   "t.g1.bar-judge": barJudge,
   "t.g1.bar-fix": barFix,
   "t.g1.middle-c-find": middleCFind,
+  "t.g1.middle-c-facts": middleCFacts,
   "t.g1.accidental-facts": accidentalFacts,
   "t.g1.accidental-read": accidentalRead,
   "t.g1.accidental-write": accidentalWrite,

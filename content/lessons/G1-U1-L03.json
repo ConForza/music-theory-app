@@ -618,7 +618,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "4 notes are joined by a beam. What value is each note?",
+      "prompt": "4 notes are joined by two beams. What value is each note?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -630,7 +630,7 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
                 "beam": "begin"
@@ -639,25 +639,25 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
-                "beam": "end"
+                "beam": "continue"
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
-                "beam": "begin"
+                "beam": "continue"
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
                 "beam": "end"
@@ -665,7 +665,7 @@
             ]
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver."
+        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver, semiquaver."
       },
       "answer": {
         "kind": "choice",
@@ -684,12 +684,12 @@
           }
         ],
         "correctOptionIds": [
-          "quaver"
+          "semiquaver"
         ],
         "diagnoses": {
-          "semiquaver": {
+          "quaver": {
             "category": "halved-or-doubled",
-            "reason": "One beam means quavers; two beams mean semiquavers. This group has one beam."
+            "reason": "One beam means quavers; two beams mean semiquavers. This group has two beams."
           }
         }
       },
@@ -698,7 +698,7 @@
         "A beam does the job of the flags: one beam for quavers, two for semiquavers."
       ],
       "feedback": {
-        "correct": "One beam: quavers.",
+        "correct": "Two beams: semiquavers.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",

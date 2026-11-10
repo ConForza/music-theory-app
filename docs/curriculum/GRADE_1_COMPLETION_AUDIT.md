@@ -79,9 +79,9 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 |---|---|---|---|
 | c.rhythm.beat | U1-L01 | note-total 60, note-equivalent 17 | 77 |
 | c.rhythm.values-long | U1-L01 | note-value 3, note-total 60, note-equivalent 17 | 80 |
-| c.rhythm.values-short | U1-L02 | note-total 128, note-equivalent 53, beam-choice 21 | 202 |
-| c.rhythm.beams | U1-L03 | beam-choice 19, note-total 55 | 74 |
-| c.rhythm.rests | U1-L04 | rest 20, note-total 245 | 265 |
+| c.rhythm.values-short | U1-L02 | note-total 128, note-equivalent 53, beam-choice 17 | 198 |
+| c.rhythm.beams | U1-L03 | beam-choice 15, note-total 55 | 70 |
+| c.rhythm.rests | U1-L04 | rest 276, note-total 245 | 521 |
 | c.rhythm.ties | U1-L05 | tie-dot 2, note-total 208, note-equivalent 16 | 226 |
 | c.rhythm.dots | U1-L06 | tie-dot 4, note-total 181 | 185 |
 | c.metre.bars | U2-L01 | barlines 400, bar-judge 376 | 776 |
@@ -96,7 +96,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.clefs.treble-lines | U3-L03 | note-read 5, note-write 1, note-place 5 | 11 |
 | c.clefs.treble-spaces | U3-L04 | note-read 6, note-write 2, note-place 4 | 12 |
 | c.clefs.bass | U3-L05 | note-read 11, note-write 7, note-place 9 | 27 |
-| c.pitch.middle-c | U3-L06 | note-read 8, note-write 17, note-place 2, middle-c-find 286 | 313 |
+| c.pitch.middle-c | U3-L06 | note-read 2, note-place 2, middle-c-find 305, middle-c-facts 8 | 317 |
 | c.pitch.note-writing | U3-L07 | note-write 40, note-place 20 | 60 |
 | c.accidentals.signs | U4-L01 | keyboard 17, accidental-facts 46 | 63 |
 | c.accidentals.on-stave | U4-L02 | accidental-read 43, accidental-write 20 | 63 |
@@ -113,9 +113,9 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.chords.tonic-triad | U6-L01 | tonic-triad 4, triad-notes 27 | 31 |
 | c.intervals.number | U6-L02 | interval-number 155, interval-note 20 | 175 |
 | c.intervals.above-tonic-number | U6-L03 | interval-number 155, interval-note 20 | 175 |
-| c.terms.tempo-g1 | U7-L01 | terms 64, term-sign 14, melody-detail 54 | 132 |
-| c.terms.dynamics-g1 | U7-L02 | terms 87, term-sign 151, melody-detail 54 | 292 |
-| c.terms.directions-g1 | U7-L03 | terms 199, term-sign 123 | 322 |
+| c.terms.tempo-g1 | U7-L01 | terms 65, term-sign 14, melody-detail 54 | 133 |
+| c.terms.dynamics-g1 | U7-L02 | terms 96, term-sign 151, melody-detail 54 | 301 |
+| c.terms.directions-g1 | U7-L03 | terms 204, term-sign 123 | 327 |
 | c.terms.articulation-g1 | U7-L04 | terms 35, term-sign 55, melody-detail 59 | 149 |
 | c.context.melody-g1 | U7-L05 | melody 399, melody-detail 400 | 799 |
 

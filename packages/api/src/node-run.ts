@@ -27,7 +27,7 @@ import type { Engagement } from "./engagement.ts";
 import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { STATE_ORDER, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
-import { learnerTime } from "./mastery-service.ts";
+import { learnerTime, recordExposure } from "./mastery-service.ts";
 import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
 import { computeNodeStates, type PathPolicy } from "./path-state.ts";
 
@@ -231,20 +231,29 @@ export class NodeRunService {
       return items;
     }
 
-    // Challenge and assessment: the node's blueprint, sampled from everything taught up to here.
+    // Challenge and assessment: the node's blueprint, sampled from everything taught up to here. Each question must test the
+    // outcome its section is labelled with: it must credit at least one concept that belongs to that outcome (so a rests section
+    // never serves a question with no rest in it), and a section that cannot be filled makes the whole plan fail loudly rather than
+    // quietly shrinking the blueprint.
     const blueprint = this.course.ix.assessments.get(node.assessmentId!) as AssessmentTemplate;
     for (const s of blueprint.sections) {
+      const wanted = new Set([...this.course.ix.concepts.values()].filter((c) => c.outcomeIds.some((o) => s.outcomeIds.includes(o))).map((c) => c.id));
       const templates = s.templateIds.filter((t) => this.generatable.has(t) && this.taughtUnion(t, node));
-      if (!templates.length) continue;
-      for (let i = 0; i < s.itemCount; i++) {
-        const order = [...templates.slice((seedOf(userId, node.id, run, s.id) + i) % templates.length), ...templates.slice(0, (seedOf(userId, node.id, run, s.id) + i) % templates.length)];
+      let made = 0;
+      for (let i = 0; i < s.itemCount && templates.length; i++) {
+        const shift = (seedOf(userId, node.id, run, s.id) + i) % templates.length;
+        const order = [...templates.slice(shift), ...templates.slice(0, shift)];
         for (const t of order) {
           const scope = this.taughtUnion(t, node)!;
-          const probe = (it: ExerciseItem) => this.creditedConcepts(it, node).length > 0;
+          const probe = (it: ExerciseItem) => this.creditedConcepts(it, node).some((c) => wanted.has(c));
           const got = this.pick(t, scope, seedOf(userId, node.id, run, salt, s.id, i, t), this.seenByLearner(userId, this.conceptsOf(t, node)), used, probe);
-          if (got && push(got.item, got.seed, { mode: "taught" }, this.creditedConcepts(got.item, node), { sectionId: s.id, outcomeId: s.outcomeIds[0] })) break;
+          if (got && push(got.item, got.seed, { mode: "taught" }, this.creditedConcepts(got.item, node), { sectionId: s.id, outcomeId: s.outcomeIds[0] })) {
+            made++;
+            break;
+          }
         }
       }
+      if (made < s.itemCount) throw new ApiError(503, "generation_failed", "We couldn't make a complete set of questions just now. Please try again.");
     }
     return items;
   }
@@ -310,15 +319,25 @@ export class NodeRunService {
         if (!items.length) throw new ApiError(503, "generation_failed", "We couldn't make questions for this activity just now. Please try again.");
         this.db.prepare("INSERT INTO node_sessions (user_id,node_id,run,id,kind,status,started_at,curriculum_version,content_version,items) VALUES (?,?,?,?,?,'open',?,?,?,?)").run(userId, nodeId, run, crypto.randomUUID(), kind, t, this.course.version, node.contentVersion, JSON.stringify(items));
       } else if (existing.status === "open") {
-        // A question whose generator has changed since it was made is replaced; answers already given stay in the log.
-        const list = JSON.parse(existing.items) as PlannedItem[];
-        if (list.some((si) => !this.resolve(si, node))) {
-          const fresh = this.plan(userId, node, run, kind, 1 + (list.length ? seedOf(existing.id) % 1000 : 0));
-          if (fresh.length) this.db.prepare("UPDATE node_sessions SET items = ? WHERE user_id = ? AND node_id = ? AND run = ?").run(JSON.stringify(fresh), userId, nodeId, run);
-        }
+        this.refreshStale(userId, node, kind, run);
       }
     });
     return this.view(userId, nodeId);
+  }
+
+  /**
+   * If any planned question of the open run can no longer be reproduced (its generator or template changed), the run's questions
+   * are replaced as a whole and `true` is returned. Nothing is ever dropped silently: a replaced run has a full set of unanswered
+   * questions, so a content update cannot shrink a blueprint or turn a failed attempt into a pass.
+   */
+  private refreshStale(userId: string, node: OrderedNode, kind: SessionKind, run: number): boolean {
+    const row = this.sessionRow(userId, node.id, run);
+    if (!row || row.status !== "open") return false;
+    const list = JSON.parse(row.items) as PlannedItem[];
+    if (!list.some((si) => !this.resolve(si, node))) return false;
+    const fresh = this.plan(userId, node, run, kind, 1 + (seedOf(row.id, String(list.length)) % 1000));
+    this.db.prepare("UPDATE node_sessions SET items = ? WHERE user_id = ? AND node_id = ? AND run = ?").run(JSON.stringify(fresh), userId, node.id, run);
+    return true;
   }
 
   private attemptsFor(userId: string, nodeId: string, run: number) {
@@ -342,6 +361,8 @@ export class NodeRunService {
   /** The current run as the learner sees it: questions without answers, and what has been answered so far. */
   view(userId: string, nodeId: string) {
     const { node, kind } = this.nodeOf(userId, nodeId);
+    const cur = this.sessionRow(userId, nodeId);
+    if (cur?.status === "open") tx(this.db, () => this.refreshStale(userId, node, kind, cur.run));
     const row = this.sessionRow(userId, nodeId);
     if (!row) throw new ApiError(409, "not_started", "Start the activity first.");
     const planned = JSON.parse(row.items) as PlannedItem[];
@@ -413,13 +434,21 @@ export class NodeRunService {
     const r = si && this.resolve(si, node);
     if (!si || !r) throw new ApiError(404, "not_found", "Unknown question.");
     if (level < 1 || level > r.item.hints.length) throw new ApiError(400, "bad_request", "No such hint.");
-    this.db.prepare("INSERT OR IGNORE INTO hint_uses (user_id,node_id,run,item_id,level,created_at) VALUES (?,?,?,?,?,?)").run(userId, nodeId, row.run, itemId, level, this.clock.now().toISOString());
+    const at = this.clock.now().toISOString();
+    // The hint log and the question's exposure are written together: once a hint has been shown, this question (under any seed,
+    // in any node) can never again be fresh independent evidence, even if it is left unanswered.
+    tx(this.db, () => {
+      this.db.prepare("INSERT OR IGNORE INTO hint_uses (user_id,node_id,run,item_id,level,created_at) VALUES (?,?,?,?,?,?)").run(userId, nodeId, row.run, itemId, level, at);
+      recordExposure(this.db, userId, questionKey(r.item), "practice-hint", at);
+    });
     return { hint: r.item.hints[level - 1]!, level };
   }
 
   /** Grade server-side and record. Replaying the same attemptId returns the stored result and records nothing new. */
   attempt(userId: string, nodeId: string, attemptId: string, itemId: string, response: Response) {
     const { node, kind } = this.nodeOf(userId, nodeId);
+    const open = this.openRun(userId, nodeId);
+    if (tx(this.db, () => this.refreshStale(userId, node, kind, open.run))) throw new ApiError(409, "stale_items", "These questions were updated while you were working. Reload to continue with the new set.");
     const row = this.openRun(userId, nodeId);
     const si = (JSON.parse(row.items) as PlannedItem[]).find((i) => i.itemId === itemId);
     const r = si && this.resolve(si, node);
@@ -495,13 +524,19 @@ export class NodeRunService {
    */
   complete(userId: string, nodeId: string) {
     const { node, kind } = this.nodeOf(userId, nodeId);
+    const current = this.progressRow(userId, nodeId);
+    const live = current ? this.sessionRow(userId, nodeId, current.run) : undefined;
+    // A content update between the last answer and completion replaces the run's questions and asks for a fresh start: the stored
+    // answers are never scored against a shrunken set (that could turn a failed attempt into a pass).
+    if (live?.status === "open" && tx(this.db, () => this.refreshStale(userId, node, kind, live.run))) throw new ApiError(409, "stale_items", "These questions were updated before you finished. Reload to answer the new set.");
     const done = tx(this.db, () => {
       const lp = this.progressRow(userId, nodeId);
       const row = lp ? this.sessionRow(userId, nodeId, lp.run) : undefined;
       if (!lp || !row) throw new ApiError(409, "not_started", "Start the activity first.");
       if (row.status !== "open") return { summary: JSON.parse(row.summary!) as NodeSummary, run: row.run, already: true, completedNode: row.status === "complete" };
       if (lp.content_version !== node.contentVersion) throw new ApiError(409, "stale_lesson", "This activity was updated since you started it. Reload to begin the new version.");
-      const planned = (JSON.parse(row.items) as PlannedItem[]).filter((si) => this.resolve(si, node));
+      const planned = JSON.parse(row.items) as PlannedItem[];
+      if (planned.some((si) => !this.resolve(si, node))) throw new ApiError(409, "stale_items", "These questions were updated before you finished. Reload to answer the new set.");
       const attempts = this.attemptsFor(userId, nodeId, row.run);
       const strict = kind === "challenge" || kind === "assessment";
       const missing = planned.filter((si) => (strict ? !attempts.get(si.itemId)?.attempts : !attempts.get(si.itemId)?.correct)).map((si) => si.itemId);

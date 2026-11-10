@@ -201,7 +201,7 @@ const keyboard: Gen = (c) => {
     if ((a.alter || b.alter) && !c.scope.blackKeys && !c.scope.accidentals) return null;
     return {
       prompt: "Is the distance between these two keys a tone or a semitone?",
-      music: { presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: [note(a), note(b)] }], textAlternative: `Two highlighted piano keys: ${nameOf(a)} and the ${dist === 1 ? "very next" : "next-but-one"} key above it, ${nameOf(b)}.` },
+      music: { presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: [note(a), note(b)] }], textAlternative: "Two highlighted piano keys on a keyboard picture, the second higher than the first. Count the keys from the picture to answer." },
       answer: { kind: "choice", options: [{ id: "tone", label: "A tone" }, { id: "semitone", label: "A semitone" }], correctOptionIds: [dist === 2 ? "tone" : "semitone"] },
       hints: ["A semitone is from one key to the very next key, black or white. A tone is two semitones."],
     };
@@ -293,7 +293,7 @@ const accidentalState: Gen = (c) => {
   const target = f.measures[targetIndex[0]]!.events![targetIndex[1]]!;
   if (target.kind !== "note" || target.writtenAccidental) return null; // the marked note must carry no sign of its own
   const describe = (m: Measure, bi: number) =>
-    `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step} ${describePosition(staffPosition(clef, P(e.pitch)))}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}${e.label ? " (marked *)" : ""}${e.tieToNext ? " tied over" : ""}` : "rest")).join(", ") + ".";
+    `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `a note on the ${describePosition(staffPosition(clef, P(e.pitch)))}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}${e.label ? " (marked *)" : ""}${e.tieToNext ? " tied over" : ""}` : "rest")).join(", ") + ".";
   const sig = music.keySignature(key);
   f.textAlternative = `${clef} clef, key signature: ${sig.count ? `${sig.count} ${sig.count === 1 ? sig.type.slice(0, -1) : sig.type}` : "none"}, ${ts}. ${f.measures.map(describe).join(" ")}`;
   return {
@@ -936,7 +936,7 @@ const scoreObservation: Gen = (c) => {
   const labelAt = c.rng.int(1, tune.length - 1);
   const measures: Measure[] = [0, 1].map((b) => ({ events: tune.slice(b * beats, b * beats + beats).map((p, i) => note(p, "crotchet", b * beats + i === labelAt ? { label: "x" } : {})) }));
   measures[1]!.barline = "final";
-  const f = frag(clef, measures, `A two-bar melody in the ${clef} clef with a key signature, time signature ${ts}. The notes are ${tune.map(nameOf).join(", ")}; the note marked x is the ${ORD(labelAt + 1)} note.`, { key: keyText, timeSignature: ts });
+  const f = frag(clef, measures, `A two-bar melody in the ${clef} clef with a key signature of ${music.keySignature(key).count === 0 ? "no sharps or flats" : `${music.keySignature(key).count} ${music.keySignature(key).type}`}, time signature ${ts}. The notes sit: ${tune.map((p) => describePosition(staffPosition(clef, p))).join(", ")}; the note marked x is the ${ORD(labelAt + 1)} note.`, { key: keyText, timeSignature: ts });
   const marked = tune[labelAt]!;
   return {
     prompt: "Look at this melody and answer the questions.",

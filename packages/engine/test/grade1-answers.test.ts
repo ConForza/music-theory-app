@@ -173,13 +173,9 @@ describe("stave-facts, middle-c-find, letter-names, step-size: derived from the 
   });
   it("middle-c-find: the printed note on the ledger line is the answer", () => {
     for (const i of items("G1-U3-L06", "t.g1.middle-c-find")) {
-      if (i.music?.presentation === "keyboard") {
-        const ps = events(i).map((e) => (e as { pitch: string }).pitch);
-        expect(correct(i)).toBe(["lowest", "middle", "highest"][ps.indexOf("C4")]);
-      } else {
-        const ps = events(i).map((e) => (e as { pitch: string }).pitch);
-        expect(Number(correct(i))).toBe(ps.indexOf("C4") + 1);
-      }
+      const ps = events(i).map((e) => (e as { pitch: string }).pitch);
+      expect(Number(correct(i))).toBe(ps.indexOf("C4") + 1);
+      expect(ps.filter((p) => p === "C4")).toHaveLength(1);
     }
   });
   it("letter-names and step-size: from the keyboard picture and the written pitches", () => {

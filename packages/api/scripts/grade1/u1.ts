@@ -96,7 +96,7 @@ export const U1: Spec[] = [
       { t: "t.g1.beam-choice", when: has("joined by two beams"), correct: "Two beams: semiquavers." },
       { t: "t.g1.beam-choice", when: has("How many notes"), correct: "Counted the notes under the beam." },
       { t: "t.g1.beam-choice", when: has("beamed group"), correct: "Counted the beat length of the beamed group." },
-      { t: "t.g1.beam-choice", when: has("joined by a beam"), correct: "One beam: quavers." },
+      { t: "t.g1.beam-choice", when: has("joined by two beams"), correct: "Two beams: semiquavers." },
       { t: "t.g1.note-total", when: (i) => JSON.stringify(i.music).includes('"beam"'), correct: "You counted a beamed group correctly." },
       { t: "t.g1.note-total", when: (i) => JSON.stringify(i.music).includes('"beam"'), correct: "Another beamed total, counted correctly." },
     ],

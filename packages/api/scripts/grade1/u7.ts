@@ -45,11 +45,16 @@ const D_TUNE = melody(
   "A three-bar melody in D major, 2/4, treble clef, marked Moderato and f. Bar 1: D, C sharp. Bar 2: B (marked x, staccato), A. Bar 3: F sharp, then a crotchet rest.",
   { tempoText: "Moderato" },
 );
+/** Question pictures describe what is there, never what the question asks for (no key, tempo word, note name or sign meaning). */
+const asked = (f: typeof TUNE, text: string) => ({ ...f, textAlternative: text }) as typeof TUNE;
+const Q_TUNE = asked(TUNE, "A four-bar melody on a treble stave with a key signature, a time signature, a word above the first bar and a dynamic mark. One note is labelled x. Use the notation itself to answer.");
+const Q_BASS = asked(BASS_TUNE, "A three-bar melody on a bass stave with a key signature, a time signature, a word above the first bar and a dynamic mark. One note is labelled x and carries a sign. Use the notation itself to answer.");
+const Q_D = asked(D_TUNE, "A three-bar melody on a treble stave with a key signature, a time signature, a word above the first bar and a dynamic mark. One note is labelled x. Use the notation itself to answer.");
 const mean = (id: string) => ({ id, label: (({ andante: "at a walking pace", allegro: "fast and lively", adagio: "slow", moderato: "at a moderate speed", accent: "emphasise the note", staccato: "short and detached", legato: "smoothly, with the notes joined", fermata: "hold the note longer than its written value" }) as Record<string, string>)[id]! });
 const miss = { "evidence-misread": "Look at the melody again and find the thing the question asks about.", "concept-misapplied": "Check what the sign or number means, then try to apply it to this melody." };
 const MELODY_ITEMS = [
   fixedItem({
-    id: "i.g1-u7-l05.melody-1", templateId: "t.g1.melody", prompt: "Look at this melody and answer the questions.", music: TUNE,
+    id: "i.g1-u7-l05.melody-1", templateId: "t.g1.melody", prompt: "Look at this melody and answer the questions.", music: Q_TUNE,
     answer: { kind: "composite", parts: [
       { id: "beats", prompt: "How many crotchet beats are in each bar?", answer: { kind: "choice", options: [2, 3, 4].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: ["4"] } },
       { id: "marked", prompt: "Name the note marked x.", answer: { kind: "pitch", reference: "B4", relation: "same", accepted: ["B4"], octaveSensitive: false, spellingSensitive: true } },
@@ -58,12 +63,12 @@ const MELODY_ITEMS = [
     hints: ["Use the time signature for the beats, the stave for the note, and the key signature for the key."], correct: "All three parts read correctly.", mistakes: miss,
   }),
   fixedItem({
-    id: "i.g1-u7-l05.melody-2", templateId: "t.g1.melody-detail", prompt: "Look at the word above the first bar. What does it tell the player?", music: TUNE,
+    id: "i.g1-u7-l05.melody-2", templateId: "t.g1.melody-detail", prompt: "Look at the word above the first bar. What does it tell the player?", music: Q_TUNE,
     answer: { kind: "choice", options: ["andante", "allegro", "adagio", "moderato"].map(mean), correctOptionIds: ["andante"] },
     hints: ["Tempo words tell you how fast to play."], correct: "Andante: at a walking pace.", mistakes: { "confused-similar-term": "Close, but that word means something different. Andante is a walking pace.", "opposite-meaning": "That is the opposite speed.", "wrong-category": "That belongs to a different kind of marking." },
   }),
   fixedItem({
-    id: "i.g1-u7-l05.melody-3", templateId: "t.g1.melody", prompt: "Look at this bass-clef melody and answer the questions.", music: BASS_TUNE,
+    id: "i.g1-u7-l05.melody-3", templateId: "t.g1.melody", prompt: "Look at this bass-clef melody and answer the questions.", music: Q_BASS,
     answer: { kind: "composite", parts: [
       { id: "beats", prompt: "How many crotchet beats are in each bar?", answer: { kind: "choice", options: [2, 3, 4].map((x) => ({ id: String(x), label: String(x) })), correctOptionIds: ["3"] } },
       { id: "marked", prompt: "Name the note marked x.", answer: { kind: "pitch", reference: "A2", relation: "same", accepted: ["A2"], octaveSensitive: false, spellingSensitive: true } },
@@ -72,17 +77,17 @@ const MELODY_ITEMS = [
     hints: ["Read the notes in the bass clef: the bottom line is G."], correct: "All three parts read correctly.", mistakes: miss,
   }),
   fixedItem({
-    id: "i.g1-u7-l05.melody-4", templateId: "t.g1.melody-detail", prompt: "The note marked x has a sign with it. How should it be played?", music: BASS_TUNE,
+    id: "i.g1-u7-l05.melody-4", templateId: "t.g1.melody-detail", prompt: "The note marked x has a sign with it. How should it be played?", music: Q_BASS,
     answer: { kind: "choice", options: ["accent", "staccato", "legato", "fermata"].map(mean), correctOptionIds: ["accent"] },
     hints: ["A > sign over a note is an accent."], correct: "An accent: emphasise the note.", mistakes: { "confused-similar-term": "Close, but that mark means something different. The > sign is an accent.", "opposite-meaning": "That is the opposite.", "wrong-category": "That belongs to a different kind of marking." },
   }),
   fixedItem({
-    id: "i.g1-u7-l05.melody-5", templateId: "t.g1.melody-detail", prompt: "The melody is in F major. What is the interval, by number, from the nearest tonic at or below the note marked x, up to x?", music: BASS_TUNE,
+    id: "i.g1-u7-l05.melody-5", templateId: "t.g1.melody-detail", prompt: "The melody is in F major. What is the interval, by number, from the nearest tonic at or below the note marked x, up to x?", music: Q_BASS,
     answer: { kind: "choice", options: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ id: String(n), label: n === 1 ? "1st (unison)" : n === 8 ? "8th (octave)" : `${n}${n === 2 ? "nd" : n === 3 ? "rd" : "th"}` })), correctOptionIds: ["3"] },
     hints: ["The tonic is F. Count F G A, counting the tonic as 1."], correct: "A is a 3rd above F.", mistakes: miss,
   }),
   fixedItem({
-    id: "i.g1-u7-l05.melody-6", templateId: "t.g1.melody-detail", prompt: "Which bar of the melody contains a rest?", music: D_TUNE,
+    id: "i.g1-u7-l05.melody-6", templateId: "t.g1.melody-detail", prompt: "Which bar of the melody contains a rest?", music: Q_D,
     answer: { kind: "choice", options: [1, 2, 3].map((n) => ({ id: String(n), label: `Bar ${n}` })), correctOptionIds: ["3"] },
     hints: ["A rest is a sign for silence."], correct: "Bar 3 ends with a crotchet rest.", mistakes: miss,
   }),

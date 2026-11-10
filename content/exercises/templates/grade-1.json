@@ -2109,6 +2109,51 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g1.middle-c-facts",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "conceptIds": [
+        "c.pitch.middle-c"
+      ],
+      "promptPattern": "Where is middle C written? How many ledger lines? Which clef?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Middle C sits on its own short ledger line: below the treble stave, above the bass stave."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

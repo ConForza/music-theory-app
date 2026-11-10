@@ -233,26 +233,27 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write A in the treble clef. You may use up to 1 ledger line. Any A that fits is correct.",
+      "prompt": "Write B in the treble clef. You may use up to 1 ledger line. Any B that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "A",
+          "step": "B",
           "alter": 0,
           "position": "any",
           "maxLedgerLines": 1
         },
         "accepted": [
-          "A4",
-          "A5"
+          "B3",
+          "B4",
+          "B5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Start from the clef's reference line.",
         "Middle C needs one ledger line.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach A."
+        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach B."
       ],
       "feedback": {
         "correct": "Written in the right place in the treble clef.",
@@ -389,26 +390,26 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write C in the treble clef. You may use up to 1 ledger line. Any C that fits is correct.",
+      "prompt": "Write A in the treble clef. You may use up to 1 ledger line. Any A that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "C",
+          "step": "A",
           "alter": 0,
           "position": "any",
           "maxLedgerLines": 1
         },
         "accepted": [
-          "C4",
-          "C5"
+          "A4",
+          "A5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Start from the clef's reference line.",
         "Middle C needs one ledger line.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach C."
+        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach A."
       ],
       "feedback": {
         "correct": "Neat and correct in the treble clef.",

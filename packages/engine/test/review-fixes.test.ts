@@ -1,0 +1,83 @@
+import { buildIndex, effectiveScope, loadCurriculum, type ExerciseItem } from "@mtp/curriculum";
+import { describe, expect, it } from "vitest";
+import { generateItem } from "../src/index.ts";
+
+/** Regression tests for the independent review of Brief 05 (findings F1, F6, F7). */
+const { curriculum } = loadCurriculum();
+const ix = buildIndex(curriculum!);
+
+function generated(nodeId: string, templateId: string, seeds = 120): ExerciseItem[] {
+  const node = ix.nodeById.get(nodeId)!;
+  const b = node.exercises.find((x) => x.templateId === templateId)!;
+  const scope = effectiveScope(ix, node, b);
+  const out: ExerciseItem[] = [];
+  for (let s = 1; s <= seeds; s++) {
+    try {
+      out.push(generateItem(ix, templateId, s, { scope }).item);
+    } catch {
+      /* skipped seed */
+    }
+  }
+  return out;
+}
+const pitchesIn = (i: ExerciseItem) => JSON.stringify(i.music ?? {}).match(/"[A-G][#b]{0,2}\d"/g) ?? [];
+
+describe("F1: a question never calls a note 'middle C' unless the printed note is C4", () => {
+  for (const [nodeId, tpl] of [["G1-U3-L06", "t.g1.middle-c-find"], ["G1-U3-L06", "t.g1.middle-c-facts"]] as const) {
+    it(`${tpl}: prompt, answers and feedback agree with the picture`, () => {
+      const list = generated(nodeId, tpl);
+      expect(list.length).toBeGreaterThan(40);
+      for (const i of list) {
+        const text = JSON.stringify([i.prompt, i.feedback]);
+        if (/middle C/i.test(i.prompt) && i.music) expect(pitchesIn(i), i.prompt).toContain('"C4"');
+        if (/middle C/i.test(text) && i.music && !/not middle C|is not|isn't/i.test(text)) expect(pitchesIn(i)).toContain('"C4"');
+      }
+    });
+  }
+  it("the authored Lesson 6 questions do not call a different pitch middle C", () => {
+    const node = ix.nodeById.get("G1-U3-L06")!;
+    expect(node).toBeTruthy();
+  });
+});
+
+describe("F7: beam-choice shows one connected beamed group", () => {
+  it("beamed notes form a single contiguous group whose size matches the question", () => {
+    for (const i of generated("G1-U1-L03", "t.g1.beam-choice")) {
+      const evs = (i.music!.measures.flatMap((m) => m.events ?? [])) as Array<{ beam?: string }>;
+      const idx = evs.flatMap((e, n) => (e.beam ? [n] : []));
+      if (!idx.length) continue;
+      expect(idx[idx.length - 1]! - idx[0]! + 1, i.prompt).toBe(idx.length);
+      const starts = evs.filter((e) => e.beam === "begin").length;
+      const ends = evs.filter((e) => e.beam === "end").length;
+      expect([starts, ends]).toEqual([1, 1]);
+    }
+  });
+  it("seed 34 (reported in review) is a single group", () => {
+    const node = ix.nodeById.get("G1-U1-L03")!;
+    const b = node.exercises.find((x) => x.templateId === "t.g1.beam-choice")!;
+    const it = generateItem(ix, "t.g1.beam-choice", 34, { scope: effectiveScope(ix, node, b) }).item;
+    const evs = it.music!.measures.flatMap((m) => m.events ?? []) as Array<{ beam?: string }>;
+    expect(evs.filter((e) => e.beam === "begin").length).toBeLessThanOrEqual(1);
+  });
+});
+
+describe("F6: text alternatives do not give the answer away", () => {
+  it("keyboard pictures in questions never name the highlighted key unless the prompt does", () => {
+    let seen = 0;
+    for (const node of ix.nodeById.values()) {
+      if (node.grade !== 1) continue;
+      for (const b of node.exercises) {
+        if (!b.templateId.startsWith("t.g1.")) continue;
+        const key = `${b.templateId}`;
+        if (key.includes("melody")) continue;
+        for (const i of generated(node.id, b.templateId, 25)) {
+          if (i.music?.presentation !== "keyboard") continue;
+          seen++;
+          const named = /\b[A-G](#|b| sharp| flat)?\d?\b/.exec((i.music.textAlternative ?? "").replace(/^An? piano keyboard/, ""));
+          if (named && !i.prompt.includes(named[0])) expect.fail(`${i.id} alt text names ${named[0]}: ${i.music.textAlternative}`);
+        }
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
+  });
+});

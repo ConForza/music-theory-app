@@ -78,8 +78,8 @@ export function MusicView({ fragment, marks, size, labels = "names" }: { fragmen
     const to = pitchAt((Math.floor(Math.max(...ds) / 7) + 1) * 7);
     return (
       <figure className="notation">
-        <Keyboard from={from} to={to} highlight={notes} label="Keyboard picture: the highlighted keys are the ones in the question" />
-        <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>
+        <Keyboard from={from} to={to} highlight={notes} anonymous={labels === "positions"} label="Keyboard picture: the highlighted keys are the ones in the question" />
+        {labels !== "positions" && <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>}
       </figure>
     );
   }
