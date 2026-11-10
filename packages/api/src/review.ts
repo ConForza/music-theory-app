@@ -143,23 +143,23 @@ export class ReviewService {
     return fallback; // every candidate was already met: still a valid question, it simply earns no new distinct credit
   }
 
-  private poolCache = new Map<string, Set<string>>();
+  private poolCache = new Map<string, Map<string, string>>();
   /**
    * Every distinct question (by identity) a concept can be asked inside its teaching boundary today, found by sampling
    * seeds. Used to tell a learner honestly when the remaining pool cannot reach the next level, instead of promising progress
    * the content cannot yet provide. Cached per concept and template set for the life of the process.
    */
-  poolKeys(conceptId: string, completed: Set<string>): Set<string> {
+  poolKeys(conceptId: string, completed: Set<string>): Map<string, string> {
     const cands = this.candidates(conceptId, completed);
     const id = `${this.course.version}|${conceptId}|${cands.map((c) => c.templateId).join(",")}`;
     const hit = this.poolCache.get(id);
     if (hit) return hit;
     const constraint = this.constraints.get(conceptId);
-    const keys = new Set<string>();
+    const keys = new Map<string, string>(); // question identity -> the template that asks it
     for (const c of cands) {
       for (let seed = 0; seed < 300; seed++) {
         const item = this.generate(c, seed);
-        if (item && (!constraint || satisfies(item, constraint))) keys.add(questionKey(item));
+        if (item && (!constraint || satisfies(item, constraint))) keys.set(questionKey(item), c.templateId);
       }
     }
     this.poolCache.set(id, keys);
@@ -422,7 +422,7 @@ export class ReviewService {
       replayed,
       kind: si.kind,
       /** True only for the first answer to a review question the learner had never met: the one that earns distinct evidence. */
-      counted: si.kind === "review" && attemptNumber === 1 && this.mastery.firstEvidenceId(userId, questionKey(r.item)) === `review:${attemptId}`,
+      counted: si.kind === "review" && attemptNumber === 1 && this.mastery.creditedFresh(userId, questionKey(r.item), `review:${attemptId}`),
       remedialItemId: !correct && si.kind === "review" ? remedial?.itemId ?? null : null,
       nextDueDate: m?.nextDueDate ?? null,
     };

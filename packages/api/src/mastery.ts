@@ -104,7 +104,7 @@ const baseState = (c: { correct: number; templates: number; span: number; recove
  * Pure and deterministic: the same rows, rules and `today` always give the same answer. Rows must be ordered by time.
  * `today` (learner-local date) only decides whether a review is due now.
  */
-export function foldConcept(conceptId: string, rows: EvidenceRow[], rules: MasteryRules, today: string): ConceptMastery {
+export function foldConcept(conceptId: string, rows: EvidenceRow[], rules: MasteryRules, today: string, exposures: ReadonlyMap<string, string> = new Map()): ConceptMastery {
   const correctItems = new Set<string>();
   // Every question identity the learner has been exposed to in any way (counted or not, right or wrong, any source).
   const seenKeys = new Set<string>();
@@ -134,7 +134,9 @@ export function foldConcept(conceptId: string, rows: EvidenceRow[], rules: Maste
   for (const r of rows) {
     exposed = true;
     const key = r.questionKey ?? r.itemId;
-    const fresh = !seenKeys.has(key);
+    // Fresh = never met before this answer: not earlier in this ledger, and not shown earlier outside it (practice lab).
+    const exposedAt = exposures.get(key);
+    const fresh = !seenKeys.has(key) && !(exposedAt !== undefined && exposedAt < r.occurredAt);
     seenKeys.add(key);
     // The review schedule starts at the learner's first activity on the concept, even if nothing has been answered
     // correctly yet: someone who needed retries is exactly who should be asked again, with a fresh question.

@@ -19,6 +19,11 @@ export function learnerTime(db: Db, clock: Clock, userId: string): LearnerTime {
   return { at, iso: at.toISOString(), tz, date: localDate(at, tz) };
 }
 
+/** Record that a learner was shown a question outside counted evidence. Idempotent; keeps the earliest time. */
+export function recordExposure(db: Db, userId: string, questionKey: string, source: "practice-attempt" | "practice-hint", iso: string) {
+  db.prepare("INSERT OR IGNORE INTO question_exposure (user_id, question_key, source, occurred_at) VALUES (?,?,?,?)").run(userId, questionKey, source, iso);
+}
+
 export interface NewEvidence {
   /** Source event id, unique per learner and concept: lesson:<attemptId> | review:<attemptId>. */
   id: string;
@@ -103,6 +108,12 @@ export class MasteryService {
     return ev.conceptIds;
   }
 
+  /** Earliest time each question identity was shown to this learner outside counted evidence. */
+  private exposures(userId: string): Map<string, string> {
+    const rows = this.db.prepare("SELECT question_key, MIN(occurred_at) AS at FROM question_exposure WHERE user_id = ? GROUP BY question_key").all(userId) as Array<{ question_key: string; at: string }>;
+    return new Map(rows.map((r) => [r.question_key, r.at]));
+  }
+
   private rowsFor(userId: string, conceptId?: string): DbRow[] {
     return (conceptId
       ? this.db.prepare("SELECT * FROM mastery_evidence WHERE user_id = ? AND concept_id = ? ORDER BY occurred_at, rowid").all(userId, conceptId)
@@ -111,7 +122,7 @@ export class MasteryService {
 
   /** Recompute one concept from its evidence and store the projection. */
   refresh(userId: string, conceptId: string, today: string): ConceptMastery {
-    const m = foldConcept(conceptId, this.rowsFor(userId, conceptId).map(toRow), this.rules, today);
+    const m = foldConcept(conceptId, this.rowsFor(userId, conceptId).map(toRow), this.rules, today, this.exposures(userId));
     this.db
       .prepare(
         `INSERT INTO concept_mastery (user_id,concept_id,state,highest_state,rules_version,next_due_date,interval_index,lapses,detail,updated_at)
@@ -131,19 +142,28 @@ export class MasteryService {
     return [...ids].sort().map((id) => this.refresh(userId, id, today));
   }
 
-  /** Has this learner met this exact question (under any seed, source or verdict)? Used to decide novelty before recording. */
-  seen(userId: string, questionKey: string): boolean {
-    return Boolean(this.db.prepare("SELECT 1 FROM mastery_evidence WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey));
+  /** Would a correct first answer to this question earn distinct credit? Not if the learner has met it before, anywhere. */
+  isFresh(userId: string, questionKey: string): boolean {
+    return !this.seenAnywhere(userId, questionKey);
   }
 
-  /** The evidence row that first exposed this learner to a question identity (null if none). */
-  firstEvidenceId(userId: string, questionKey: string): string | null {
-    return (this.db.prepare("SELECT id FROM mastery_evidence WHERE user_id = ? AND question_key = ? ORDER BY rowid LIMIT 1").get(userId, questionKey) as { id: string } | undefined)?.id ?? null;
+  private seenAnywhere(userId: string, questionKey: string): boolean {
+    return Boolean(this.db.prepare("SELECT 1 FROM mastery_evidence WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey)) || Boolean(this.db.prepare("SELECT 1 FROM question_exposure WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey));
   }
 
-  /** The question identities a learner has met for a concept, so review can prefer ones they have not. */
+  /** Was this evidence row the first time the learner met the question (ledger and practice exposure both considered)? */
+  creditedFresh(userId: string, questionKey: string, evidenceId: string): boolean {
+    const first = this.db.prepare("SELECT id, occurred_at FROM mastery_evidence WHERE user_id = ? AND question_key = ? ORDER BY rowid LIMIT 1").get(userId, questionKey) as { id: string; occurred_at: string } | undefined;
+    if (!first || first.id !== evidenceId) return false;
+    const exposed = this.exposures(userId).get(questionKey);
+    return exposed === undefined || !(exposed < first.occurred_at);
+  }
+
+  /** The question identities a learner has met (for a concept's evidence, plus anything seen in practice) so review can prefer new ones. */
   seenKeys(userId: string, conceptId: string): Set<string> {
-    return new Set((this.db.prepare("SELECT DISTINCT question_key FROM mastery_evidence WHERE user_id = ? AND concept_id = ?").all(userId, conceptId) as Array<{ question_key: string }>).map((r) => r.question_key));
+    const keys = new Set((this.db.prepare("SELECT DISTINCT question_key FROM mastery_evidence WHERE user_id = ? AND concept_id = ?").all(userId, conceptId) as Array<{ question_key: string }>).map((r) => r.question_key));
+    for (const k of this.exposures(userId).keys()) keys.add(k);
+    return keys;
   }
 
   /** Authoritative read: folded from the evidence for today's date, so "review due" is never stale. */
@@ -154,7 +174,8 @@ export class MasteryService {
       list.push(toRow(r));
       byConcept.set(r.concept_id, list);
     }
-    const out = new Map([...byConcept].map(([id, rows]) => [id, foldConcept(id, rows, this.rules, today)]));
+    const ex = this.exposures(userId);
+    const out = new Map([...byConcept].map(([id, rows]) => [id, foldConcept(id, rows, this.rules, today, ex)]));
     this.addTaughtButUnrecorded(userId, today, out);
     return out;
   }

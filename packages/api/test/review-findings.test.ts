@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateItem } from "@mtp/engine";
+import { canonicalResponse, generateItem, templateScope } from "@mtp/engine";
 import { effectiveScope } from "@mtp/curriculum";
 import { questionKey, satisfies } from "../src/question-key.ts";
 import { LESSON, answerSession, attemptLesson, canonicalFor, finishLesson, playThrough, register, rightAnswer, sessionItems, setupClock, sharedCourse, wrongFor } from "./helpers.ts";
@@ -246,5 +246,84 @@ describe("UX: say so when the question pool cannot reach the next level", () => 
     expect(card.limited).toBe(true);
     expect(card.headline).toMatch(/don't have enough different questions/);
     expect(card.missing.join(" ")).toMatch(/still being written/);
+  });
+});
+
+const lineKeys = (tpl: string) => {
+  const node = course.ix.nodeById.get(LESSON)!;
+  const scope = effectiveScope(course.ix, node, node.exercises.find((b) => b.templateId === tpl)!);
+  const keys = new Set<string>();
+  for (let s = 0; s < 300; s++) {
+    const item = generateItem(course.ix, tpl, s, { scope, evidence: "independent" }).item;
+    if (satisfies(item, LINES)) keys.add(questionKey(item));
+  }
+  return keys;
+};
+
+describe("R2 (practice boundary): a question met in practice is no longer fresh", () => {
+  it("hinted practice answers earn no credit, but the same question later in review earns none either", async () => {
+    const { c, clock, db } = await learner();
+    const before = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect;
+    // Practise every line-note question there is, through the real practice routes, each with a hint first.
+    const practised = new Set<string>();
+    for (const tpl of ["t.g1.note-read", "t.g1.note-write"]) {
+      const want = lineKeys(tpl);
+      for (let seed = 0; seed < 6000 && [...want].some((k) => !practised.has(k)); seed++) {
+        const item = generateItem(course.ix, tpl, seed, { evidence: "learning" }).item; // what the practice route serves
+        const key = questionKey(item);
+        if (!want.has(key) || practised.has(key)) continue;
+        practised.add(key);
+        expect((await c.post("/api/practice/hint", { itemId: item.id, level: 1 })).status).toBe(200);
+        const r = await c.post("/api/practice/attempts", { attemptId: crypto.randomUUID(), itemId: item.id, response: canonicalResponse(course.ix, item, templateScope(course.ix, course.ix.templates.get(tpl)!)) });
+        expect(r.body.correct).toBe(true);
+      }
+    }
+    // Every in-boundary reading question was met in practice (the writing question is asked differently there: no overlap).
+    for (const k of lineKeys("t.g1.note-read")) expect(practised.has(k)).toBe(true);
+    // Practice itself is not mastery evidence.
+    expect((await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect).toBe(before);
+    clock.advanceDays(1);
+    const { session } = (await c.post("/api/review/sessions")).body;
+    const results = await answerSession(c, db, session.id);
+    const reading = results.filter((x) => x.si.kind === "review" && x.si.templateId === "t.g1.note-read");
+    expect(reading.length).toBeGreaterThan(0);
+    for (const r of reading) expect(r.body.counted).toBe(false); // met in practice: no fresh credit
+    const credited = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect - before;
+    expect(credited).toBe(results.filter((x) => x.si.kind === "review" && x.si.templateId !== "t.g1.note-read" && x.body.counted).length);
+  });
+});
+
+describe("P2: the capacity warning also considers question-type variety", () => {
+  async function allWrongFirst() {
+    const s = setupClock();
+    const c = s.client();
+    await register(c);
+    await c.post(`/api/lessons/${LESSON}/start`);
+    for (const it of course.lesson(LESSON)!.items) {
+      await attemptLesson(c, LESSON, it.id, wrongFor(course, LESSON, it.id));
+      await attemptLesson(c, LESSON, it.id, canonicalFor(course, LESSON, it.id));
+    }
+    await c.post(`/api/lessons/${LESSON}/complete`);
+    return { ...s, c, uid: (await c.get("/api/me")).body.user.id as string };
+  }
+  const record = (app: ReturnType<typeof setupClock>["app"], uid: string, key: string, tpl: string, correct: boolean, n: number) =>
+    app.engagement.mastery.record(uid, { id: `review:cap-${n}`, conceptIds: [TREBLE], source: "review-item", correct, itemId: `cap-${n}`, questionKey: key, templateId: tpl, templateVersion: 1 });
+
+  it("flags a topic that has enough credited questions but can never get a second question type", async () => {
+    const { c, app, uid } = await allWrongFirst();
+    let n = 0;
+    for (const k of lineKeys("t.g1.note-read")) record(app, uid, k, "t.g1.note-read", true, n++); // five reading questions credited
+    for (const k of lineKeys("t.g1.note-write")) record(app, uid, k, "t.g1.note-write", false, n++); // the only writing question failed
+    const card = (await c.get(`/api/mastery/${TREBLE}`)).body;
+    expect(card).toMatchObject({ independentCorrect: 5, distinctTemplates: 1, state: "practising", limited: true });
+    expect(card.headline).toMatch(/don't have enough different questions/);
+  });
+
+  it("does not flag it while an unseen question of another type remains", async () => {
+    const { c, app, uid } = await allWrongFirst();
+    let n = 0;
+    for (const k of lineKeys("t.g1.note-read")) record(app, uid, k, "t.g1.note-read", true, n++);
+    const card = (await c.get(`/api/mastery/${TREBLE}`)).body;
+    expect(card).toMatchObject({ independentCorrect: 5, distinctTemplates: 1, limited: false });
   });
 });

@@ -104,7 +104,7 @@ export function createApp(opts: AppOptions) {
   const clock: Clock = opts.testClock ? (opts.clock ?? new ManualClock()) : (opts.clock ?? systemClock);
   const engagement = new Engagement(db, course, clock, course.ix.c.policy);
   const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true }, engagement, clock);
-  const practice = new PracticeService(db, course);
+  const practice = new PracticeService(db, course, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
   const loginLimiter = new RateLimiter(10);
@@ -234,6 +234,7 @@ export function createApp(opts: AppOptions) {
       conceptMastery: all("SELECT * FROM concept_mastery WHERE user_id = ? ORDER BY concept_id"),
       reviewSessions: all("SELECT * FROM review_sessions WHERE user_id = ? ORDER BY started_at"),
       reviewAttempts: all("SELECT * FROM review_attempts WHERE user_id = ? ORDER BY created_at"),
+      questionExposure: all("SELECT * FROM question_exposure WHERE user_id = ? ORDER BY occurred_at"),
     };
   });
 

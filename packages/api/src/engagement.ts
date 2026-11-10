@@ -142,15 +142,18 @@ export class Engagement {
   conceptCard(userId: string, conceptId: string, m: ConceptMastery | null, today: string, completed: Set<string>) {
     const concept = this.course.ix.concepts.get(conceptId);
     const ex = explainMastery(m, this.mastery.rules);
-    // Can the next level still be reached with the questions that exist? Credited so far + questions not yet met.
+    // Can the next level still be reached with the questions that exist? Both the number of distinct questions (credited so far
+    // plus those not yet met) and the number of distinct question types must still be able to meet the next threshold.
     let limited = false;
     if (m && m.state !== "mastered" && m.state !== "new") {
       const pool = this.review.poolKeys(conceptId, completed);
       if (pool.size > 0) {
-        const unseen = [...pool].filter((k) => !this.mastery.seenKeys(userId, conceptId).has(k)).length;
+        const seen = this.mastery.seenKeys(userId, conceptId);
+        const unseen = [...pool].filter(([k]) => !seen.has(k));
         const reached = m.highestState === "proficient" || m.highestState === "mastered";
-        const need = reached ? this.mastery.rules.mastered.minIndependentCorrect : this.mastery.rules.proficient.minIndependentCorrect;
-        limited = m.independentCorrect + unseen < need;
+        const need = reached ? this.mastery.rules.mastered : this.mastery.rules.proficient;
+        const attainableTemplates = new Set([...m.templateIds, ...unseen.map(([, t]) => t)]);
+        limited = m.independentCorrect + unseen.length < need.minIndependentCorrect || attainableTemplates.size < need.minDistinctTemplates;
       }
     }
     if (limited) ex.missing.push("More different questions for this topic are still being written. Reviews still keep it fresh, and your progress is kept.");

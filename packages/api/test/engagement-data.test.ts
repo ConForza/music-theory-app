@@ -11,7 +11,7 @@ import { foldConcept } from "../src/mastery.ts";
 import { Client, LESSON, answerSession, email, finishLesson, playNode, playThrough, register, setupClock, sharedCourse } from "./helpers.ts";
 
 const course = sharedCourse();
-const NEW_TABLES = ["xp_ledger", "daily_activity", "mastery_evidence", "concept_mastery", "review_sessions", "review_attempts", "achievements_awarded"];
+const NEW_TABLES = ["xp_ledger", "daily_activity", "mastery_evidence", "concept_mastery", "review_sessions", "review_attempts", "achievements_awarded", "question_exposure"];
 const count = (db: ReturnType<typeof openDb>, table: string, uid: string) => (db.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE user_id = ?`).get(uid) as { n: number }).n;
 
 describe("accounts, isolation, export and deletion", () => {
@@ -82,6 +82,8 @@ describe("accounts, isolation, export and deletion", () => {
     await answerSession(c, db, session.id, (_s, i) => (i === 0 ? "wrong" : "right"));
     await c.post(`/api/review/sessions/${session.id}/complete`);
     const uid = (await c.get("/api/me")).body.user.id;
+    const g = (await c.post("/api/practice/generate", { templateId: "t.g1.note-read", seed: 3 })).body;
+    await c.post("/api/practice/hint", { itemId: g.id, level: 1 }); // practice exposure is exported and deleted too
     const exp = (await c.get("/api/me/export")).body;
     for (const k of ["xpLedger", "dailyActivity", "achievements", "masteryEvidence", "conceptMastery", "reviewSessions", "reviewAttempts"]) expect(exp[k].length, k).toBeGreaterThan(0);
     expect(exp.profile).toMatchObject({ timezone: "UTC", dailyGoal: 1 });
