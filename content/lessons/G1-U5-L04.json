@@ -540,177 +540,6 @@
                 }
               },
               {
-                "kind": "rest",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "A4",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "Bb4",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                },
-                "writtenAccidental": "flat"
-              },
-              {
-                "kind": "note",
-                "pitch": "C5",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "D5",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "E5",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "F5",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              }
-            ]
-          }
-        ],
-        "textAlternative": "A treble-clef stave with eight semibreves going up a scale of F major, with one note replaced by a rest. The other notes are F, A, B♭, C, D, E, F."
-      },
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "G",
-            "label": "G"
-          },
-          {
-            "id": "F",
-            "label": "F"
-          },
-          {
-            "id": "A",
-            "label": "A"
-          }
-        ],
-        "correctOptionIds": [
-          "G"
-        ],
-        "diagnoses": {}
-      },
-      "hints": [
-        "Tone, tone, semitone, tone, tone, tone, semitone.",
-        "Major scale pattern: tone, tone, semitone, tone, tone, tone, semitone.",
-        "A scale uses each letter name once, in order."
-      ],
-      "feedback": {
-        "correct": "Right.",
-        "mistakes": {
-          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
-          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
-          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
-          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
-          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
-          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
-        },
-        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
-    },
-    {
-      "id": "i.g1-u5-l04.ind-3",
-      "templateId": "t.g1.scale-build",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "Write the scale of F major, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
-      "answer": {
-        "kind": "pitch-sequence",
-        "clef": "bass",
-        "key": "F major",
-        "accepted": [
-          [
-            "F2",
-            "G2",
-            "A2",
-            "Bb2",
-            "C3",
-            "D3",
-            "E3",
-            "F3"
-          ]
-        ],
-        "derivation": {
-          "rule": "scale",
-          "key": "F major",
-          "form": "major",
-          "direction": "ascending",
-          "start": "F2"
-        }
-      },
-      "hints": [
-        "One note on every line and space.",
-        "Semitones fall between degrees 3–4 and 7–8.",
-        "Major pattern: tone, tone, semitone, tone, tone, tone, semitone."
-      ],
-      "feedback": {
-        "correct": "A correct scale of F major in the bass clef.",
-        "mistakes": {
-          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
-          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
-          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
-          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
-          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
-          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
-        },
-        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
-    },
-    {
-      "id": "i.g1-u5-l04.ind-4",
-      "templateId": "t.g1.scale-gap",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
-      "music": {
-        "presentation": "stave",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "F4",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
                 "kind": "note",
                 "pitch": "G4",
                 "duration": {
@@ -798,7 +627,7 @@
         "A scale uses each letter name once, in order."
       ],
       "feedback": {
-        "correct": "Correct.",
+        "correct": "Right.",
         "mistakes": {
           "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
           "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
@@ -811,26 +640,26 @@
       }
     },
     {
-      "id": "i.g1-u5-l04.ind-5",
+      "id": "i.g1-u5-l04.ind-3",
       "templateId": "t.g1.scale-build",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the scale of F major, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of F major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
       "answer": {
         "kind": "pitch-sequence",
-        "clef": "treble",
+        "clef": "bass",
         "key": "F major",
         "accepted": [
           [
-            "F5",
-            "E5",
-            "D5",
-            "C5",
-            "Bb4",
-            "A4",
-            "G4",
-            "F4"
+            "F3",
+            "E3",
+            "D3",
+            "C3",
+            "Bb2",
+            "A2",
+            "G2",
+            "F2"
           ]
         ],
         "derivation": {
@@ -838,7 +667,7 @@
           "key": "F major",
           "form": "major",
           "direction": "descending",
-          "start": "F5"
+          "start": "F3"
         }
       },
       "hints": [
@@ -847,7 +676,7 @@
         "Major pattern: tone, tone, semitone, tone, tone, tone, semitone."
       ],
       "feedback": {
-        "correct": "A correct descending scale of F major.",
+        "correct": "A correct scale of F major in the bass clef.",
         "mistakes": {
           "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
           "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
@@ -860,7 +689,7 @@
       }
     },
     {
-      "id": "i.g1-u5-l04.ind-6",
+      "id": "i.g1-u5-l04.ind-4",
       "templateId": "t.g1.scale-gap",
       "templateVersion": 1,
       "seed": null,
@@ -962,6 +791,189 @@
           "A"
         ],
         "diagnoses": {}
+      },
+      "hints": [
+        "Tone, tone, semitone, tone, tone, tone, semitone.",
+        "Major scale pattern: tone, tone, semitone, tone, tone, tone, semitone.",
+        "A scale uses each letter name once, in order."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g1-u5-l04.ind-5",
+      "templateId": "t.g1.scale-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the scale of F major, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "treble",
+        "key": "F major",
+        "accepted": [
+          [
+            "F5",
+            "E5",
+            "D5",
+            "C5",
+            "Bb4",
+            "A4",
+            "G4",
+            "F4"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "F major",
+          "form": "major",
+          "direction": "descending",
+          "start": "F5"
+        }
+      },
+      "hints": [
+        "One note on every line and space.",
+        "Semitones fall between degrees 3–4 and 7–8.",
+        "Major pattern: tone, tone, semitone, tone, tone, tone, semitone."
+      ],
+      "feedback": {
+        "correct": "A correct descending scale of F major.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g1-u5-l04.ind-6",
+      "templateId": "t.g1.scale-gap",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with eight semibreves going up a scale of F major, with one note replaced by a rest. The other notes are F, G, A, C, D, E, F."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "A#",
+            "label": "A♯"
+          },
+          {
+            "id": "Bb",
+            "label": "B♭"
+          }
+        ],
+        "correctOptionIds": [
+          "Bb"
+        ],
+        "diagnoses": {
+          "A#": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "A♯ sounds the same, but a scale uses each letter name once, in order. Which letter is missing or comes next?"
+          },
+          "B": {
+            "category": "semitone-misplaced",
+            "reason": "Check the pattern of tones and semitones: this note needs its flat to be the right distance from its neighbours."
+          }
+        }
       },
       "hints": [
         "Tone, tone, semitone, tone, tone, tone, semitone.",

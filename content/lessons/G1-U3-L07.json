@@ -193,25 +193,24 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write middle C in the bass clef. Middle C sits on a short ledger line, just above the stave.",
+      "prompt": "Write E in a space of the bass-clef stave.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
         "target": {
-          "step": "C",
+          "step": "E",
           "alter": 0,
-          "position": "any",
-          "maxLedgerLines": 1,
-          "octave": 4
+          "position": "space",
+          "maxLedgerLines": 0
         },
         "accepted": [
-          "C4"
+          "E3"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Count up from the bottom line, one letter for each line and space.",
-        "Middle C is the note one ledger line above the bass stave."
+        "In the bass clef the bottom line is G. Count up the lines and spaces, one letter each, until you reach E."
       ],
       "feedback": {
         "correct": "The right place in the bass clef.",
@@ -234,26 +233,26 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write F in the treble clef. You may use up to 1 ledger line. Any F that fits is correct.",
+      "prompt": "Write A in the treble clef. You may use up to 1 ledger line. Any A that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "F",
+          "step": "A",
           "alter": 0,
           "position": "any",
           "maxLedgerLines": 1
         },
         "accepted": [
-          "F4",
-          "F5"
+          "A4",
+          "A5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Start from the clef's reference line.",
         "Middle C needs one ledger line.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach F."
+        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach A."
       ],
       "feedback": {
         "correct": "Written in the right place in the treble clef.",
@@ -352,24 +351,24 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write E in a space of the bass-clef stave.",
+      "prompt": "Write A in a space of the bass-clef stave.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
         "target": {
-          "step": "E",
+          "step": "A",
           "alter": 0,
           "position": "space",
           "maxLedgerLines": 0
         },
         "accepted": [
-          "E3"
+          "A2"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Count up from the bottom line, one letter for each line and space.",
-        "In the bass clef the bottom line is G. Count up the lines and spaces, one letter each, until you reach E."
+        "In the bass clef the bottom line is G. Count up the lines and spaces, one letter each, until you reach A."
       ],
       "feedback": {
         "correct": "In the right bass space.",
@@ -390,26 +389,26 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write A in the treble clef. You may use up to 1 ledger line. Any A that fits is correct.",
+      "prompt": "Write C in the treble clef. You may use up to 1 ledger line. Any C that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "A",
+          "step": "C",
           "alter": 0,
           "position": "any",
           "maxLedgerLines": 1
         },
         "accepted": [
-          "A4",
-          "A5"
+          "C4",
+          "C5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Start from the clef's reference line.",
         "Middle C needs one ledger line.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach A."
+        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach C."
       ],
       "feedback": {
         "correct": "Neat and correct in the treble clef.",
@@ -430,24 +429,24 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write F in a space of the treble-clef stave.",
+      "prompt": "Write C in a space of the treble-clef stave.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "F",
+          "step": "C",
           "alter": 0,
           "position": "space",
           "maxLedgerLines": 0
         },
         "accepted": [
-          "F4"
+          "C5"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Count up from the bottom line, one letter for each line and space.",
-        "In the treble clef the bottom line is E. Count up the lines and spaces, one letter each, until you reach F."
+        "In the treble clef the bottom line is E. Count up the lines and spaces, one letter each, until you reach C."
       ],
       "feedback": {
         "correct": "In the right treble space.",

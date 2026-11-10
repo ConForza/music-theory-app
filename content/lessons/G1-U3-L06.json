@@ -355,7 +355,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B3",
+                "pitch": "A5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -364,12 +364,12 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one semibreve on the space below the 1st ledger line."
+        "textAlternative": "A treble-clef stave with one semibreve on the 1st ledger line above the stave."
       },
       "answer": {
         "kind": "pitch",
         "accepted": [
-          "B3"
+          "A5"
         ],
         "octaveSensitive": false,
         "spellingSensitive": true,
@@ -378,7 +378,7 @@
       "hints": [
         "Find the clef's reference note first (G on line 2 in treble, F on line 4 in bass).",
         "Count lines and spaces from the bottom.",
-        "The note is on the space below the 1st ledger line. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
+        "The note is on the 1st ledger line above the stave. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
       ],
       "feedback": {
         "correct": "Middle C in the treble clef: one ledger line below the stave.",
@@ -582,41 +582,109 @@
     },
     {
       "id": "i.g1-u3-l06.ind-6",
-      "templateId": "t.g1.note-place",
+      "templateId": "t.g1.middle-c-find",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write middle C in the bass clef. Middle C sits on a short ledger line, just above the stave.",
-      "answer": {
-        "kind": "staff-position",
-        "clef": "bass",
-        "target": {
-          "step": "C",
-          "alter": 0,
-          "position": "any",
-          "maxLedgerLines": 1,
-          "octave": 4
-        },
-        "accepted": [
-          "C4"
+      "prompt": "Which of these notes is middle C?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
         ],
-        "octaveSensitive": true
+        "textAlternative": "Four treble-clef notes in a row: C, F, D, B.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Note 1"
+          },
+          {
+            "id": "2",
+            "label": "Note 2"
+          },
+          {
+            "id": "3",
+            "label": "Note 3"
+          },
+          {
+            "id": "4",
+            "label": "Note 4"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "ledger-miscount",
+            "reason": "Middle C is the note on the short ledger line, just below the stave."
+          },
+          "3": {
+            "category": "ledger-miscount",
+            "reason": "Middle C is the note on the short ledger line, just below the stave."
+          },
+          "4": {
+            "category": "ledger-miscount",
+            "reason": "Middle C is the note on the short ledger line, just below the stave."
+          }
+        }
       },
       "hints": [
-        "Count up from the bottom line, one letter for each line and space.",
-        "Middle C is the note one ledger line above the bass stave."
+        "Middle C sits on its own short ledger line.",
+        "Middle C sits on its own short ledger line, below the treble stave."
       ],
       "feedback": {
-        "correct": "Middle C above the bass stave, on its ledger line.",
+        "correct": "Middle C found again, this time among different notes.",
         "mistakes": {
-          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
-          "line-space-swap": "Nearly — move it between a line and a space and check again.",
-          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
-          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
           "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
-          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
         },
-        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+        "fallback": "Not quite. Start from the clef and count from a note you know."
       }
     }
   ],

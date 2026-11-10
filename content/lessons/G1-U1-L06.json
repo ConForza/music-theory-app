@@ -338,181 +338,6 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                },
-                "tieToNext": true
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              }
-            ]
-          }
-        ],
-        "textAlternative": "A semibreve tied to a minim."
-      },
-      "answer": {
-        "kind": "rhythm",
-        "task": "equivalent-value",
-        "target": [
-          3,
-          2
-        ],
-        "accepted": [
-          [
-            {
-              "events": [
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "semibreve",
-                    "dots": 1
-                  }
-                }
-              ]
-            }
-          ]
-        ],
-        "acceptAnyRuleCompliant": true
-      },
-      "hints": [
-        "A dot adds half the note's own value.",
-        "A tie adds the two values together.",
-        "A dot adds half the note's own value."
-      ],
-      "feedback": {
-        "correct": "One dotted note lasts as long as the tied pair.",
-        "mistakes": {
-          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
-          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
-          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
-          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
-        },
-        "fallback": "Not quite. Try counting each value in crotchet beats."
-      }
-    },
-    {
-      "id": "i.g1-u1-l06.ind-2",
-      "templateId": "t.g1.note-total",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "How many crotchet beats do these notes and rests last altogether?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 1
-                }
-              }
-            ]
-          }
-        ],
-        "textAlternative": "Bar 1: quaver rest, crotchet, dotted crotchet."
-      },
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "3",
-            "label": "1½"
-          },
-          {
-            "id": "5",
-            "label": "2½"
-          },
-          {
-            "id": "6",
-            "label": "3"
-          },
-          {
-            "id": "12",
-            "label": "6"
-          }
-        ],
-        "correctOptionIds": [
-          "6"
-        ],
-        "diagnoses": {
-          "3": {
-            "category": "halved-or-doubled",
-            "reason": "Count again, one note at a time, in crotchet beats."
-          },
-          "5": {
-            "category": "dot-misread",
-            "reason": "A dot makes a note half as long again, so it adds to the total."
-          },
-          "12": {
-            "category": "halved-or-doubled",
-            "reason": "Count again, one note at a time, in crotchet beats."
-          }
-        }
-      },
-      "hints": [
-        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
-        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
-        "Add the beats one note or rest at a time."
-      ],
-      "feedback": {
-        "correct": "You counted the dot correctly.",
-        "mistakes": {
-          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
-          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
-          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
-          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
-        },
-        "fallback": "Not quite. Try counting each value in crotchet beats."
-      }
-    },
-    {
-      "id": "i.g1-u1-l06.ind-3",
-      "templateId": "t.g1.tie-dot",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "Write one note that lasts exactly as long as these two tied notes.",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
                   "value": "crotchet",
                   "dots": 0
                 },
@@ -562,7 +387,7 @@
         "A dot adds half the note's own value."
       ],
       "feedback": {
-        "correct": "Right.",
+        "correct": "One dotted note lasts as long as the tied pair.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
@@ -574,7 +399,7 @@
       }
     },
     {
-      "id": "i.g1-u1-l06.ind-4",
+      "id": "i.g1-u1-l06.ind-2",
       "templateId": "t.g1.note-total",
       "templateVersion": 1,
       "seed": null,
@@ -659,7 +484,7 @@
         "Add the beats one note or rest at a time."
       ],
       "feedback": {
-        "correct": "Dotted note counted correctly.",
+        "correct": "You counted the dot correctly.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
@@ -671,7 +496,7 @@
       }
     },
     {
-      "id": "i.g1-u1-l06.ind-5",
+      "id": "i.g1-u1-l06.ind-3",
       "templateId": "t.g1.tie-dot",
       "templateVersion": 1,
       "seed": null,
@@ -737,7 +562,7 @@
         "A dot adds half the note's own value."
       ],
       "feedback": {
-        "correct": "Correct.",
+        "correct": "Right.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
@@ -749,7 +574,7 @@
       }
     },
     {
-      "id": "i.g1-u1-l06.ind-6",
+      "id": "i.g1-u1-l06.ind-4",
       "templateId": "t.g1.note-total",
       "templateVersion": 1,
       "seed": null,
@@ -821,6 +646,178 @@
             "reason": "A dot makes a note half as long again, so it adds to the total."
           },
           "10": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "Dotted note counted correctly.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l06.ind-5",
+      "templateId": "t.g1.tie-dot",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write one note that lasts exactly as long as these two tied notes.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A minim tied to a crotchet."
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "equivalent-value",
+        "target": [
+          3,
+          4
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 1
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "A dot adds half the note's own value.",
+        "A tie adds the two values together.",
+        "A dot adds half the note's own value."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l06.ind-6",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: dotted quaver, semibreve, dotted quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "10",
+            "label": "5"
+          },
+          {
+            "id": "11",
+            "label": "5½"
+          },
+          {
+            "id": "13",
+            "label": "6½"
+          },
+          {
+            "id": "22",
+            "label": "11"
+          }
+        ],
+        "correctOptionIds": [
+          "11"
+        ],
+        "diagnoses": {
+          "10": {
+            "category": "dot-misread",
+            "reason": "A dot makes a note half as long again, so it adds to the total."
+          },
+          "22": {
             "category": "halved-or-doubled",
             "reason": "Count again, one note at a time, in crotchet beats."
           }

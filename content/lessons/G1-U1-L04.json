@@ -268,7 +268,21 @@
         ],
         "correctOptionIds": [
           "semiquaver"
-        ]
+        ],
+        "diagnoses": {
+          "semibreve": {
+            "category": "note-rest-confusion",
+            "reason": "A semibreve rest is as long as a semibreve. A rest has the same name and the same length as its note, so you need the semiquaver rest."
+          },
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "A quaver rest is as long as a quaver. A rest has the same name and the same length as its note, so you need the semiquaver rest."
+          },
+          "minim": {
+            "category": "note-rest-confusion",
+            "reason": "A minim rest is as long as a minim. A rest has the same name and the same length as its note, so you need the semiquaver rest."
+          }
+        }
       },
       "hints": [
         "Semibreve rests hang below a line; minim rests sit on top of one.",
@@ -383,162 +397,6 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which rest lasts as long as a semiquaver?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                }
-              }
-            ]
-          }
-        ],
-        "textAlternative": "One semiquaver."
-      },
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "semiquaver",
-            "label": "semiquaver rest"
-          },
-          {
-            "id": "semibreve",
-            "label": "semibreve rest"
-          },
-          {
-            "id": "quaver",
-            "label": "quaver rest"
-          },
-          {
-            "id": "minim",
-            "label": "minim rest"
-          }
-        ],
-        "correctOptionIds": [
-          "semiquaver"
-        ]
-      },
-      "hints": [
-        "Semibreve rests hang below a line; minim rests sit on top of one.",
-        "Every note value has a rest of the same length and the same name."
-      ],
-      "feedback": {
-        "correct": "The rest that matches the note.",
-        "mistakes": {
-          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
-          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
-          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
-          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
-        },
-        "fallback": "Not quite. Try counting each value in crotchet beats."
-      }
-    },
-    {
-      "id": "i.g1-u1-l04.ind-2",
-      "templateId": "t.g1.note-total",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "How many crotchet beats do these notes and rests last altogether?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              }
-            ]
-          }
-        ],
-        "textAlternative": "Bar 1: crotchet, minim rest."
-      },
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "2",
-            "label": "1"
-          },
-          {
-            "id": "3",
-            "label": "1½"
-          },
-          {
-            "id": "6",
-            "label": "3"
-          },
-          {
-            "id": "12",
-            "label": "6"
-          }
-        ],
-        "correctOptionIds": [
-          "6"
-        ],
-        "diagnoses": {
-          "2": {
-            "category": "note-rest-confusion",
-            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
-          },
-          "3": {
-            "category": "halved-or-doubled",
-            "reason": "Count again, one note at a time, in crotchet beats."
-          },
-          "12": {
-            "category": "halved-or-doubled",
-            "reason": "Count again, one note at a time, in crotchet beats."
-          }
-        }
-      },
-      "hints": [
-        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
-        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
-        "Add the beats one note or rest at a time."
-      ],
-      "feedback": {
-        "correct": "Counted the silence too.",
-        "mistakes": {
-          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
-          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
-          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
-          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
-        },
-        "fallback": "Not quite. Try counting each value in crotchet beats."
-      }
-    },
-    {
-      "id": "i.g1-u1-l04.ind-3",
-      "templateId": "t.g1.rest",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
       "prompt": "Which rest lasts as long as a minim?",
       "music": {
         "presentation": "rhythm-line",
@@ -582,14 +440,28 @@
         ],
         "correctOptionIds": [
           "minim"
-        ]
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "A quaver rest is as long as a quaver. A rest has the same name and the same length as its note, so you need the minim rest."
+          },
+          "semibreve": {
+            "category": "note-rest-confusion",
+            "reason": "A semibreve rest is as long as a semibreve. A rest has the same name and the same length as its note, so you need the minim rest."
+          },
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "A semiquaver rest is as long as a semiquaver. A rest has the same name and the same length as its note, so you need the minim rest."
+          }
+        }
       },
       "hints": [
         "Semibreve rests hang below a line; minim rests sit on top of one.",
         "Every note value has a rest of the same length and the same name."
       ],
       "feedback": {
-        "correct": "Correct match.",
+        "correct": "The rest that matches the note.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
@@ -601,7 +473,7 @@
       }
     },
     {
-      "id": "i.g1-u1-l04.ind-4",
+      "id": "i.g1-u1-l04.ind-2",
       "templateId": "t.g1.note-total",
       "templateVersion": 1,
       "seed": null,
@@ -682,7 +554,7 @@
         "Add the beats one note or rest at a time."
       ],
       "feedback": {
-        "correct": "Notes and rests added correctly.",
+        "correct": "Counted the silence too.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
@@ -694,7 +566,7 @@
       }
     },
     {
-      "id": "i.g1-u1-l04.ind-5",
+      "id": "i.g1-u1-l04.ind-3",
       "templateId": "t.g1.rest",
       "templateVersion": 1,
       "seed": null,
@@ -742,14 +614,28 @@
         ],
         "correctOptionIds": [
           "semibreve"
-        ]
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "A semiquaver rest is as long as a semiquaver. A rest has the same name and the same length as its note, so you need the semibreve rest."
+          },
+          "crotchet": {
+            "category": "note-rest-confusion",
+            "reason": "A crotchet rest is as long as a crotchet. A rest has the same name and the same length as its note, so you need the semibreve rest."
+          },
+          "minim": {
+            "category": "note-rest-confusion",
+            "reason": "A minim rest is as long as a minim. A rest has the same name and the same length as its note, so you need the semibreve rest."
+          }
+        }
       },
       "hints": [
         "Semibreve rests hang below a line; minim rests sit on top of one.",
         "Every note value has a rest of the same length and the same name."
       ],
       "feedback": {
-        "correct": "Right again.",
+        "correct": "Correct match.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
@@ -761,7 +647,7 @@
       }
     },
     {
-      "id": "i.g1-u1-l04.ind-6",
+      "id": "i.g1-u1-l04.ind-4",
       "templateId": "t.g1.note-total",
       "templateVersion": 1,
       "seed": null,
@@ -827,6 +713,179 @@
         ],
         "diagnoses": {
           "6": {
+            "category": "note-rest-confusion",
+            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
+          },
+          "14": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "Notes and rests added correctly.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-5",
+      "templateId": "t.g1.rest",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which rest lasts as long as a crotchet?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semibreve",
+            "label": "semibreve rest"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver rest"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver rest"
+          },
+          {
+            "id": "crotchet",
+            "label": "crotchet rest"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "semibreve": {
+            "category": "note-rest-confusion",
+            "reason": "A semibreve rest is as long as a semibreve. A rest has the same name and the same length as its note, so you need the crotchet rest."
+          },
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "A quaver rest is as long as a quaver. A rest has the same name and the same length as its note, so you need the crotchet rest."
+          },
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "A semiquaver rest is as long as a semiquaver. A rest has the same name and the same length as its note, so you need the crotchet rest."
+          }
+        }
+      },
+      "hints": [
+        "Semibreve rests hang below a line; minim rests sit on top of one.",
+        "Every note value has a rest of the same length and the same name."
+      ],
+      "feedback": {
+        "correct": "Right again.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-6",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes and rests last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet rest, minim rest."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "½"
+          },
+          {
+            "id": "7",
+            "label": "3½"
+          },
+          {
+            "id": "9",
+            "label": "4½"
+          },
+          {
+            "id": "14",
+            "label": "7"
+          }
+        ],
+        "correctOptionIds": [
+          "7"
+        ],
+        "diagnoses": {
+          "1": {
             "category": "note-rest-confusion",
             "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
           },

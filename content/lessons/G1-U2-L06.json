@@ -336,32 +336,16 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
-        "timeSignature": "4/4",
+        "timeSignature": "2/4",
         "given": [
           {
             "kind": "rest",
             "duration": {
               "value": "crotchet",
-              "dots": 0
-            }
-          },
-          {
-            "kind": "note",
-            "pitch": "B4",
-            "duration": {
-              "value": "quaver",
-              "dots": 1
-            }
-          },
-          {
-            "kind": "note",
-            "pitch": "B4",
-            "duration": {
-              "value": "semiquaver",
               "dots": 0
             }
           }
@@ -370,29 +354,6 @@
           [
             {
               "events": [
-                {
-                  "kind": "rest",
-                  "duration": {
-                    "value": "crotchet",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "quaver",
-                    "dots": 1
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "semiquaver",
-                    "dots": 0
-                  }
-                },
                 {
                   "kind": "rest",
                   "duration": {
@@ -417,7 +378,7 @@
       "hints": [
         "How many beats are still missing?",
         "Group within beats so each beat is visible.",
-        "4/4 has four crotchet beats in each bar."
+        "2/4 has two crotchet beats in each bar."
       ],
       "feedback": {
         "correct": "Rests used to finish the bar.",
@@ -435,237 +396,6 @@
   "independent": [
     {
       "id": "i.g1-u2-l06.ind-1",
-      "templateId": "t.g1.bar-judge",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "All three bars add up in 3/4. Which bar writes its rests so that each beat can be seen?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              }
-            ]
-          },
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              }
-            ]
-          },
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              }
-            ],
-            "barline": "final"
-          }
-        ],
-        "textAlternative": "Bar 1: minim rest, crotchet. Bar 2: minim rest, quaver, quaver. Bar 3: crotchet rest, crotchet rest, crotchet.",
-        "timeSignature": "3/4"
-      },
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "1",
-            "label": "Bar 1"
-          },
-          {
-            "id": "2",
-            "label": "Bar 2"
-          },
-          {
-            "id": "3",
-            "label": "Bar 3"
-          }
-        ],
-        "correctOptionIds": [
-          "3"
-        ],
-        "diagnoses": {
-          "1": {
-            "category": "rest-grouping",
-            "reason": "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."
-          },
-          "2": {
-            "category": "rest-grouping",
-            "reason": "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."
-          }
-        }
-      },
-      "hints": [
-        "Add up the beats and compare with the time signature.",
-        "3/4 has three crotchet beats in each bar."
-      ],
-      "feedback": {
-        "correct": "Each beat can be seen.",
-        "mistakes": {
-          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
-          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
-          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
-          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
-          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
-        },
-        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
-    },
-    {
-      "id": "i.g1-u2-l06.ind-2",
-      "templateId": "t.g1.bar-complete",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
-      "answer": {
-        "kind": "rhythm",
-        "task": "complete-bar",
-        "timeSignature": "4/4",
-        "given": [
-          {
-            "kind": "note",
-            "pitch": "B4",
-            "duration": {
-              "value": "quaver",
-              "dots": 0
-            }
-          },
-          {
-            "kind": "note",
-            "pitch": "B4",
-            "duration": {
-              "value": "quaver",
-              "dots": 0
-            }
-          },
-          {
-            "kind": "rest",
-            "duration": {
-              "value": "crotchet",
-              "dots": 0
-            }
-          }
-        ],
-        "accepted": [
-          [
-            {
-              "events": [
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "quaver",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "quaver",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "rest",
-                  "duration": {
-                    "value": "crotchet",
-                    "dots": 0
-                  }
-                },
-                {
-                  "kind": "note",
-                  "pitch": "B4",
-                  "duration": {
-                    "value": "minim",
-                    "dots": 0
-                  }
-                }
-              ]
-            }
-          ]
-        ],
-        "acceptAnyRuleCompliant": true
-      },
-      "hints": [
-        "How many beats are still missing?",
-        "Group within beats so each beat is visible.",
-        "4/4 has four crotchet beats in each bar."
-      ],
-      "feedback": {
-        "correct": "A complete bar with rests.",
-        "mistakes": {
-          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
-          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
-          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
-          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
-          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
-        },
-        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
-    },
-    {
-      "id": "i.g1-u2-l06.ind-3",
       "templateId": "t.g1.bar-judge",
       "templateVersion": 1,
       "seed": null,
@@ -786,6 +516,196 @@
         ],
         "diagnoses": {
           "1": {
+            "category": "rest-grouping",
+            "reason": "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."
+          },
+          "3": {
+            "category": "rest-grouping",
+            "reason": "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."
+          }
+        }
+      },
+      "hints": [
+        "Add up the beats and compare with the time signature.",
+        "3/4 has three crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Each beat can be seen.",
+        "mistakes": {
+          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
+          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
+          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
+          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
+          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
+        },
+        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
+      }
+    },
+    {
+      "id": "i.g1-u2-l06.ind-2",
+      "templateId": "t.g1.bar-complete",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "complete-bar",
+        "timeSignature": "2/4",
+        "given": [
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "crotchet",
+              "dots": 0
+            }
+          }
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "How many beats are still missing?",
+        "Group within beats so each beat is visible.",
+        "2/4 has two crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "A complete bar with rests.",
+        "mistakes": {
+          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
+          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
+          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
+          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
+          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
+        },
+        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
+      }
+    },
+    {
+      "id": "i.g1-u2-l06.ind-3",
+      "templateId": "t.g1.bar-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars add up in 3/4. Which bar writes its rests so that each beat can be seen?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest. Bar 2: crotchet, minim rest. Bar 3: minim rest, crotchet.",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
             "category": "rest-grouping",
             "reason": "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."
           },
@@ -960,14 +880,7 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
+                  "value": "minim",
                   "dots": 0
                 }
               }
@@ -976,8 +889,7 @@
           {
             "events": [
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -986,7 +898,15 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "minim",
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
                   "dots": 0
                 }
               }
@@ -1013,7 +933,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest. Bar 2: crotchet, minim rest. Bar 3: minim rest, crotchet.",
+        "textAlternative": "Bar 1: crotchet, minim rest. Bar 2: crotchet rest, crotchet rest, crotchet. Bar 3: minim rest, crotchet.",
         "timeSignature": "3/4"
       },
       "answer": {
@@ -1033,10 +953,10 @@
           }
         ],
         "correctOptionIds": [
-          "1"
+          "2"
         ],
         "diagnoses": {
-          "2": {
+          "1": {
             "category": "rest-grouping",
             "reason": "In the bar you chose a rest stretches over two beats. Each beat gets its own rest, so the beats stay visible."
           },
@@ -1068,16 +988,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
-        "timeSignature": "2/4",
+        "timeSignature": "4/4",
         "given": [
           {
-            "kind": "rest",
+            "kind": "note",
+            "pitch": "B4",
             "duration": {
-              "value": "crotchet",
+              "value": "minim",
               "dots": 0
             }
           }
@@ -1087,6 +1008,14 @@
             {
               "events": [
                 {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                },
+                {
                   "kind": "rest",
                   "duration": {
                     "value": "crotchet",
@@ -1094,8 +1023,7 @@
                   }
                 },
                 {
-                  "kind": "note",
-                  "pitch": "B4",
+                  "kind": "rest",
                   "duration": {
                     "value": "crotchet",
                     "dots": 0
@@ -1110,7 +1038,7 @@
       "hints": [
         "How many beats are still missing?",
         "Group within beats so each beat is visible.",
-        "2/4 has two crotchet beats in each bar."
+        "4/4 has four crotchet beats in each bar."
       ],
       "feedback": {
         "correct": "Complete and clear.",

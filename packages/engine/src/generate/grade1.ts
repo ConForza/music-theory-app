@@ -13,7 +13,7 @@
 import { deriveScale, music, type AnswerSpec, type Measure, type NotationEvent, type NotationFragment } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
 import { fits } from "./families.ts";
-import { frag, maxLedger, nameOf, n, note, pretty, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
+import { GENERATORS, frag, maxLedger, nameOf, n, note, pretty, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
 
 const { naturalAt, parsePitch: P, staffPosition } = music;
 type Pitch = music.Pitch;
@@ -1182,7 +1182,47 @@ export const middleCFind: Gen = (c) => {
   };
 };
 
+
+// ---------------------------------------------------------------------------
+// Specific feedback for the original note-value and rest questions
+// ---------------------------------------------------------------------------
+
+const BEATS_OF: Record<string, number> = { semibreve: 4, minim: 2, crotchet: 1, quaver: 0.5, semiquaver: 0.25 };
+const asBeats = (value: string, dots: number) => BEATS_OF[value]! * (dots ? 1.5 : 1);
+
+/** t.g1.note-value: the Brief 03 question, with a reason for every wrong option (the generator itself is unchanged). */
+export const noteValueWithReasons: Gen = (c) => {
+  const d = GENERATORS["fam.note-value"]!(c.template)?.(c);
+  if (!d || d.answer.kind !== "choice") return d ?? null;
+  const first = d.music?.measures[0]?.events?.[0];
+  if (!first || first.kind === "tuplet") return d;
+  if (d.prompt.startsWith("How many crotchet beats")) {
+    const value = first.duration.value;
+    const dots = first.duration.dots ?? 0;
+    const right = asBeats(value, dots);
+    const name = `${dots ? "dotted " : ""}${value}`;
+    const diagnoses: Diagnoses = {};
+    for (const o of d.answer.options) {
+      if (d.answer.correctOptionIds.includes(o.id)) continue;
+      const got = Number(o.id);
+      const base = BEATS_OF[value]!;
+      if (dots && got === base) diagnoses[o.id] = { category: "dot-misread", reason: `The dot makes the note half as long again: a ${name} lasts ${right} crotchet beats, not ${got}.` };
+      else diagnoses[o.id] = { category: "halved-or-doubled", reason: `A ${name} lasts ${right} crotchet beats, not ${got}. A semibreve is 4 beats, a minim 2 and a crotchet 1.${got === 1 && value === "minim" ? " One beat is a crotchet; a minim is twice as long." : ""}` };
+    }
+    return { ...d, answer: { ...d.answer, diagnoses } };
+  }
+  const m = /^Which rest lasts as long as a (\w+)\?/.exec(d.prompt);
+  if (m) {
+    const diagnoses: Diagnoses = {};
+    for (const o of d.answer.options) if (!d.answer.correctOptionIds.includes(o.id)) diagnoses[o.id] = { category: "note-rest-confusion", reason: `A ${o.id} rest is as long as a ${o.id}. A rest has the same name and the same length as its note, so you need the ${m[1]} rest.` };
+    return { ...d, answer: { ...d.answer, diagnoses } };
+  }
+  return d;
+};
+
 export const GRADE1_GENERATORS: Record<string, Gen> = {
+  "t.g1.note-value": noteValueWithReasons,
+  "t.g1.rest": noteValueWithReasons,
   "t.g1.letter-names": letterNames,
   "t.g1.stave-facts": staveFacts,
   "t.g1.note-place": notePlace,

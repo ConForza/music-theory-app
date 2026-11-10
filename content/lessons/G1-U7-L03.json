@@ -320,34 +320,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “dal segno (D.S.)” mean?",
+      "prompt": "What does “accelerando (accel.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "accent",
-            "label": "emphasise the note"
+            "id": "andante",
+            "label": "at a walking pace"
           },
           {
-            "id": "da-capo",
-            "label": "repeat from the beginning"
+            "id": "accelerando",
+            "label": "gradually getting faster"
           },
           {
-            "id": "repeat",
-            "label": "play the passage between the marks again"
+            "id": "rallentando",
+            "label": "gradually getting slower"
           },
           {
-            "id": "dal-segno",
-            "label": "repeat from the sign"
+            "id": "adagio",
+            "label": "slow"
           }
         ],
         "correctOptionIds": [
-          "dal-segno"
+          "accelerando"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“dal segno (D.S.)” is a structure marking."
+        "“accelerando (accel.)” is a change of speed marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -410,34 +410,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “accelerando (accel.)” mean?",
+      "prompt": "What does “da capo (D.C.)” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "andante",
-            "label": "at a walking pace"
+            "id": "dal-segno",
+            "label": "repeat from the sign"
           },
           {
-            "id": "accelerando",
-            "label": "gradually getting faster"
-          },
-          {
-            "id": "rallentando",
+            "id": "ritardando",
             "label": "gradually getting slower"
           },
           {
-            "id": "adagio",
-            "label": "slow"
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
           }
         ],
         "correctOptionIds": [
-          "accelerando"
+          "da-capo"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“accelerando (accel.)” is a change of speed marking."
+        "“da capo (D.C.)” is a structure marking."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -500,34 +500,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “da capo (D.C.)” mean?",
+      "prompt": "What does “repeat marks” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "dal-segno",
-            "label": "repeat from the sign"
+            "id": "a-tempo",
+            "label": "return to the previous speed"
           },
           {
-            "id": "ritardando",
-            "label": "gradually getting slower"
+            "id": "ritenuto",
+            "label": "held back; slower at once"
           },
           {
-            "id": "da-capo",
-            "label": "repeat from the beginning"
+            "id": "cantabile",
+            "label": "in a singing style"
           },
           {
-            "id": "metronome-mark",
-            "label": "72 crotchet beats in a minute"
+            "id": "repeat",
+            "label": "play the passage between the marks again"
           }
         ],
         "correctOptionIds": [
-          "da-capo"
+          "repeat"
         ]
       },
       "hints": [
         "Is it about speed, volume or touch?",
-        "“da capo (D.C.)” is a structure marking."
+        "“repeat marks” is a sign marking."
       ],
       "feedback": {
         "correct": "Correct.",

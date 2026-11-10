@@ -504,7 +504,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "D#4",
+                "pitch": "G#4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -513,39 +513,39 @@
             ]
           }
         ],
-        "textAlternative": "A piano keyboard with one black key highlighted, between D and E."
+        "textAlternative": "A piano keyboard with one black key highlighted, between G and A."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "C#",
-            "label": "C♯"
-          },
-          {
             "id": "F#",
             "label": "F♯"
+          },
+          {
+            "id": "A#",
+            "label": "A♯"
           },
           {
             "id": "D#",
             "label": "D♯"
           },
           {
-            "id": "A#",
-            "label": "A♯"
+            "id": "G#",
+            "label": "G♯"
           }
         ],
         "correctOptionIds": [
-          "D#"
+          "G#"
         ],
         "diagnoses": {
-          "C#": {
-            "category": "black-key-neighbour",
-            "reason": "C♯ is the black key next door. A sharp is the black key just above (to the right of) the white key of the same letter."
-          },
           "F#": {
             "category": "black-key-neighbour",
             "reason": "F♯ is the black key next door. A sharp is the black key just above (to the right of) the white key of the same letter."
+          },
+          "A#": {
+            "category": "black-key-neighbour",
+            "reason": "A♯ is the black key next door. A sharp is the black key just above (to the right of) the white key of the same letter."
           }
         }
       },

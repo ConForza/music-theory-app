@@ -333,7 +333,7 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "minim",
+                  "value": "crotchet",
                   "dots": 0
                 },
                 "tieToNext": true
@@ -342,21 +342,21 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "minim",
+                  "value": "crotchet",
                   "dots": 0
                 }
               }
             ]
           }
         ],
-        "textAlternative": "A minim tied to a minim."
+        "textAlternative": "A crotchet tied to a crotchet."
       },
       "answer": {
         "kind": "rhythm",
         "task": "equivalent-value",
         "target": [
           1,
-          1
+          2
         ],
         "accepted": [
           [
@@ -366,7 +366,7 @@
                   "kind": "note",
                   "pitch": "B4",
                   "duration": {
-                    "value": "semibreve",
+                    "value": "minim",
                     "dots": 0
                   }
                 }
@@ -413,8 +413,41 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
                 },
                 "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
               },
               {
                 "kind": "note",
@@ -423,70 +456,37 @@
                   "value": "quaver",
                   "dots": 0
                 }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                },
-                "tieToNext": true
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: quaver tied to, quaver, crotchet, crotchet tied to, crotchet."
+        "textAlternative": "Bar 1: quaver, semiquaver tied to, semiquaver, minim tied to, minim, quaver."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "4",
-            "label": "2"
+            "id": "9",
+            "label": "4½"
           },
           {
-            "id": "5",
-            "label": "2½"
+            "id": "11",
+            "label": "5½"
           },
           {
-            "id": "8",
-            "label": "4"
+            "id": "13",
+            "label": "6½"
           },
           {
-            "id": "16",
-            "label": "8"
+            "id": "22",
+            "label": "11"
           }
         ],
         "correctOptionIds": [
-          "8"
+          "11"
         ],
         "diagnoses": {
-          "4": {
-            "category": "halved-or-doubled",
-            "reason": "Count again, one note at a time, in crotchet beats."
-          },
-          "5": {
-            "category": "tie-dot-confusion",
-            "reason": "A tie joins two notes into one longer sound, so both of them count."
-          },
-          "16": {
+          "22": {
             "category": "halved-or-doubled",
             "reason": "Count again, one note at a time, in crotchet beats."
           }
@@ -598,7 +598,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "How many crotchet beats do these notes last altogether?",
+      "prompt": "How many crotchet beats do these notes and rests last altogether?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -610,14 +610,6 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
                   "value": "semiquaver",
                   "dots": 0
                 },
@@ -632,25 +624,7 @@
                 }
               },
               {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                },
-                "tieToNext": true
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
                   "value": "quaver",
                   "dots": 0
@@ -659,33 +633,37 @@
             ]
           }
         ],
-        "textAlternative": "Bar 1: quaver, semiquaver tied to, semiquaver, minim tied to, minim, quaver."
+        "textAlternative": "Bar 1: semiquaver tied to, semiquaver, quaver rest."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "9",
-            "label": "4½"
+            "id": "1",
+            "label": "½"
           },
           {
-            "id": "11",
-            "label": "5½"
+            "id": "2",
+            "label": "1"
           },
           {
-            "id": "13",
-            "label": "6½"
+            "id": "4",
+            "label": "2"
           },
           {
-            "id": "22",
-            "label": "11"
+            "id": "6",
+            "label": "3"
           }
         ],
         "correctOptionIds": [
-          "11"
+          "2"
         ],
         "diagnoses": {
-          "22": {
+          "1": {
+            "category": "note-rest-confusion",
+            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
+          },
+          "4": {
             "category": "halved-or-doubled",
             "reason": "Count again, one note at a time, in crotchet beats."
           }
@@ -813,7 +791,7 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
                 },
                 "tieToNext": true
@@ -822,51 +800,55 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
                 }
               },
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "quaver",
+                  "value": "minim",
                   "dots": 0
                 }
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: semiquaver tied to, semiquaver, quaver rest."
+        "textAlternative": "Bar 1: quaver tied to, quaver, minim rest."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "1",
-            "label": "½"
-          },
-          {
             "id": "2",
             "label": "1"
           },
           {
-            "id": "4",
-            "label": "2"
+            "id": "5",
+            "label": "2½"
           },
           {
             "id": "6",
             "label": "3"
+          },
+          {
+            "id": "12",
+            "label": "6"
           }
         ],
         "correctOptionIds": [
-          "2"
+          "6"
         ],
         "diagnoses": {
-          "1": {
+          "2": {
             "category": "note-rest-confusion",
             "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
           },
-          "4": {
+          "5": {
+            "category": "tie-dot-confusion",
+            "reason": "A tie joins two notes into one longer sound, so both of them count."
+          },
+          "12": {
             "category": "halved-or-doubled",
             "reason": "Count again, one note at a time, in crotchet beats."
           }

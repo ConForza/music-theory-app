@@ -267,117 +267,6 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “diminuendo (dim.)” mean?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "legato",
-            "label": "smoothly, with the notes joined"
-          },
-          {
-            "id": "poco",
-            "label": "a little"
-          },
-          {
-            "id": "diminuendo",
-            "label": "gradually getting quieter"
-          },
-          {
-            "id": "crescendo",
-            "label": "gradually getting louder"
-          }
-        ],
-        "correctOptionIds": [
-          "diminuendo"
-        ]
-      },
-      "hints": [
-        "Is it about speed, volume or touch?",
-        "“diminuendo (dim.)” is a dynamics marking."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g1-u7-l02.ind-2",
-      "templateId": "t.g1.term-sign",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "This note has a dynamic mark below it. What does the mark tell the player?",
-      "music": {
-        "presentation": "stave",
-        "clef": "treble",
-        "showKeySignature": true,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "C5",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                },
-                "dynamic": "mp"
-              }
-            ]
-          }
-        ],
-        "textAlternative": "A treble-clef stave with one semibreve marked mp (mezzo piano (mp))."
-      },
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "pianissimo",
-            "label": "very quiet"
-          },
-          {
-            "id": "fortissimo",
-            "label": "very loud"
-          },
-          {
-            "id": "mezzo-piano",
-            "label": "moderately quiet"
-          },
-          {
-            "id": "mezzo-forte",
-            "label": "moderately loud"
-          }
-        ],
-        "correctOptionIds": [
-          "mezzo-piano"
-        ]
-      },
-      "hints": [
-        "Think about whether it is about speed, loudness or how the notes are played.",
-        "p means quiet and f means loud. An m in front means moderately; doubling the letter makes it very."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g1-u7-l02.ind-3",
-      "templateId": "t.g1.terms",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
       "prompt": "What does “fortissimo (ff)” mean?",
       "answer": {
         "kind": "choice",
@@ -418,7 +307,7 @@
       }
     },
     {
-      "id": "i.g1-u7-l02.ind-4",
+      "id": "i.g1-u7-l02.ind-2",
       "templateId": "t.g1.term-sign",
       "templateVersion": 1,
       "seed": null,
@@ -474,7 +363,7 @@
         "p means quiet and f means loud. An m in front means moderately; doubling the letter makes it very."
       ],
       "feedback": {
-        "correct": "Right.",
+        "correct": "Correct.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -484,7 +373,7 @@
       }
     },
     {
-      "id": "i.g1-u7-l02.ind-5",
+      "id": "i.g1-u7-l02.ind-3",
       "templateId": "t.g1.terms",
       "templateVersion": 1,
       "seed": null,
@@ -517,6 +406,117 @@
       "hints": [
         "Is it about speed, volume or touch?",
         "“mezzo forte (mf)” is a dynamics marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l02.ind-4",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note has a dynamic mark below it. What does the mark tell the player?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "dynamic": "mf"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one semibreve marked mf (mezzo forte (mf))."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pianissimo",
+            "label": "very quiet"
+          },
+          {
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
+          }
+        ],
+        "correctOptionIds": [
+          "mezzo-forte"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "p means quiet and f means loud. An m in front means moderately; doubling the letter makes it very."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l02.ind-5",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “forte (f)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "crescendo",
+            "label": "gradually getting louder"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
+          },
+          {
+            "id": "piano",
+            "label": "quiet"
+          }
+        ],
+        "correctOptionIds": [
+          "forte"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“forte (f)” is a dynamics marking."
       ],
       "feedback": {
         "correct": "Correct.",

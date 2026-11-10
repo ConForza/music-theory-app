@@ -398,20 +398,20 @@
         "kind": "choice",
         "options": [
           {
+            "id": "crescendo",
+            "label": "gradually getting louder"
+          },
+          {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "mezzo-forte",
-            "label": "moderately loud"
+            "id": "dolce",
+            "label": "sweetly"
           },
           {
-            "id": "forte",
-            "label": "loud"
-          },
-          {
-            "id": "ottava",
-            "label": "play an octave higher than written"
+            "id": "dal-segno",
+            "label": "repeat from the sign"
           }
         ],
         "correctOptionIds": [
@@ -454,7 +454,7 @@
                   "dots": 0
                 },
                 "articulations": [
-                  "accent"
+                  "staccato"
                 ]
               },
               {
@@ -474,7 +474,7 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with a crotchet with a > sign (accent).",
+        "textAlternative": "A treble-clef stave with a crotchet with a dot (staccato).",
         "timeSignature": "4/4"
       },
       "answer": {
@@ -485,20 +485,20 @@
             "label": "short and detached"
           },
           {
-            "id": "accent",
-            "label": "emphasise the note"
-          },
-          {
-            "id": "forte",
-            "label": "loud"
-          },
-          {
             "id": "legato",
             "label": "smoothly, with the notes joined"
+          },
+          {
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
+          },
+          {
+            "id": "accent",
+            "label": "emphasise the note"
           }
         ],
         "correctOptionIds": [
-          "accent"
+          "staccato"
         ]
       },
       "hints": [
@@ -526,16 +526,16 @@
         "kind": "choice",
         "options": [
           {
-            "id": "crescendo",
-            "label": "gradually getting louder"
-          },
-          {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "dolce",
-            "label": "sweetly"
+            "id": "staccato",
+            "label": "short and detached"
+          },
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
           },
           {
             "id": "dal-segno",
@@ -616,20 +616,20 @@
         "kind": "choice",
         "options": [
           {
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
+          },
+          {
+            "id": "moderato",
+            "label": "at a moderate speed"
+          },
+          {
             "id": "accent",
             "label": "emphasise the note"
           },
           {
-            "id": "staccato",
-            "label": "short and detached"
-          },
-          {
-            "id": "mezzo-piano",
-            "label": "moderately quiet"
-          },
-          {
-            "id": "dal-segno",
-            "label": "repeat from the sign"
+            "id": "ottava",
+            "label": "play an octave higher than written"
           }
         ],
         "correctOptionIds": [

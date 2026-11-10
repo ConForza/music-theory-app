@@ -375,7 +375,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "3 notes are joined by two beams. What value is each note?",
+      "prompt": "2 notes are joined by two beams. What value is each note?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -399,21 +399,12 @@
                   "value": "semiquaver",
                   "dots": 0
                 },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
                 "beam": "end"
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver."
+        "textAlternative": "Bar 1: semiquaver, semiquaver."
       },
       "answer": {
         "kind": "choice",
@@ -627,7 +618,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "2 notes are joined by a beam. What value is each note?",
+      "prompt": "4 notes are joined by a beam. What value is each note?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -652,11 +643,29 @@
                   "dots": 0
                 },
                 "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver."
+        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver."
       },
       "answer": {
         "kind": "choice",

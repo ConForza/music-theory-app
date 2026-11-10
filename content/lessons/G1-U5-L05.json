@@ -291,7 +291,7 @@
       "answer": {
         "kind": "key-signature",
         "task": "name-key",
-        "clef": "treble",
+        "clef": "bass",
         "accepted": [
           "F major"
         ]
@@ -349,40 +349,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which of these are in the key signature of D major?",
+      "prompt": "Which major key has one sharp?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "Bb,Eb",
-            "label": "B♭ and E♭"
+            "id": "C major",
+            "label": "C major"
           },
           {
-            "id": "F#,G#",
-            "label": "F♯ and G♯"
+            "id": "G major",
+            "label": "G major"
           },
           {
-            "id": "F#,C#",
-            "label": "F♯ and C♯"
+            "id": "D major",
+            "label": "D major"
+          },
+          {
+            "id": "F major",
+            "label": "F major"
           }
         ],
         "correctOptionIds": [
-          "F#,C#"
+          "G major"
         ],
         "diagnoses": {
-          "F#,G#": {
-            "category": "wrong-order",
-            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
+          "C major": {
+            "category": "wrong-count",
+            "reason": "C major has no sharps or flats, so it is not the one."
           },
-          "Bb,Eb": {
-            "category": "wrong-order",
-            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
+          "D major": {
+            "category": "wrong-count",
+            "reason": "D major has 2 sharps, so it is not the one."
+          },
+          "F major": {
+            "category": "wrong-count",
+            "reason": "F major has 1 flats, so it is not the one."
           }
         }
       },
       "hints": [
         "C: none. G: one sharp. D: two sharps. F: one flat.",
-        "Sharps are added in the order F C G D A E B. Flats are added in the order B E A D G C F."
+        "C: none. G: one sharp. D: two sharps. F: one flat."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -437,9 +445,9 @@
       "answer": {
         "kind": "key-signature",
         "task": "name-key",
-        "clef": "bass",
+        "clef": "treble",
         "accepted": [
-          "F major"
+          "C major"
         ]
       },
       "hints": [
@@ -464,48 +472,32 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which major key has one sharp?",
+      "prompt": "Which of these are in the key signature of G major?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "C major",
-            "label": "C major"
+            "id": "Bb",
+            "label": "B♭"
           },
           {
-            "id": "G major",
-            "label": "G major"
-          },
-          {
-            "id": "D major",
-            "label": "D major"
-          },
-          {
-            "id": "F major",
-            "label": "F major"
+            "id": "F#",
+            "label": "F♯"
           }
         ],
         "correctOptionIds": [
-          "G major"
+          "F#"
         ],
         "diagnoses": {
-          "C major": {
-            "category": "wrong-count",
-            "reason": "C major has no sharps or flats, so it is not the one."
-          },
-          "D major": {
-            "category": "wrong-count",
-            "reason": "D major has 2 sharps, so it is not the one."
-          },
-          "F major": {
-            "category": "wrong-count",
-            "reason": "F major has 1 flats, so it is not the one."
+          "Bb": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D and flats in the order B, E, A, D."
           }
         }
       },
       "hints": [
         "C: none. G: one sharp. D: two sharps. F: one flat.",
-        "C: none. G: one sharp. D: two sharps. F: one flat."
+        "Sharps are added in the order F C G D A E B. Flats are added in the order B E A D G C F."
       ],
       "feedback": {
         "correct": "Right.",

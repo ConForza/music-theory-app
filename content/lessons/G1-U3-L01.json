@@ -700,7 +700,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Start on the highlighted key. Move 2 white keys to the right. Which letter do you reach?",
+      "prompt": "Start on the highlighted key. Move 3 white keys to the right. Which letter do you reach?",
       "music": {
         "presentation": "keyboard",
         "clef": "treble",
@@ -710,7 +710,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A4",
+                "pitch": "F4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -719,31 +719,37 @@
             ]
           }
         ],
-        "textAlternative": "A piano keyboard with A highlighted."
+        "textAlternative": "A piano keyboard with F highlighted."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "D",
-            "label": "D"
-          },
-          {
             "id": "B",
             "label": "B"
           },
           {
-            "id": "E",
-            "label": "E"
-          },
-          {
             "id": "C",
             "label": "C"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "F",
+            "label": "F"
           }
         ],
         "correctOptionIds": [
-          "C"
-        ]
+          "B"
+        ],
+        "diagnoses": {
+          "C": {
+            "category": "white-key-off-by-one",
+            "reason": "That is 3 white keys the other way. Moving right makes the pitch higher; moving left makes it lower."
+          }
+        }
       },
       "hints": [
         "The white keys are named A B C D E F G, then the letters start again.",

@@ -48,8 +48,9 @@ if (!only.length || only.includes("G1-U3-L03")) {
     { t: "t.g1.note-place", when: (i: ExerciseItem) => i.prompt.includes("on a line"), correct: "On the right line again." },
   ];
   const have = new Set((l03.independent as ExerciseItem[]).map((i) => i.id));
+  const inL03 = new Set<string>([...l03.guided, ...l03.independent].map((i: ExerciseItem) => questionKey(i)));
   extra.forEach((p, k) => {
-    const item = pickItem(a, node, p, "independent", 5 + k);
+    const item = pickItem(a, node, p, "independent", 5 + k, inL03);
     if (!have.has(item.id)) l03.independent.push(item);
   });
   l03.contentVersion = 3;

@@ -479,21 +479,21 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the scale of G major, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of G major, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
       "answer": {
         "kind": "pitch-sequence",
-        "clef": "bass",
+        "clef": "treble",
         "key": "G major",
         "accepted": [
           [
-            "G2",
-            "A2",
-            "B2",
-            "C3",
-            "D3",
-            "E3",
-            "F#3",
-            "G3"
+            "G4",
+            "A4",
+            "B4",
+            "C5",
+            "D5",
+            "E5",
+            "F#5",
+            "G5"
           ]
         ],
         "derivation": {
@@ -501,7 +501,7 @@
           "key": "G major",
           "form": "major",
           "direction": "ascending",
-          "start": "G2"
+          "start": "G4"
         }
       },
       "hints": [
@@ -715,14 +715,14 @@
       "prompt": "This is the scale of G major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": false,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "G2",
+                "pitch": "G4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -730,7 +730,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "A2",
+                "pitch": "A4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -738,7 +738,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "B2",
+                "pitch": "B4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -746,7 +746,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "C3",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -761,15 +769,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "E3",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "F#3",
+                "pitch": "F#5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -778,7 +778,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "G3",
+                "pitch": "G5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -787,7 +787,7 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with eight semibreves going up a scale of G major, with one note replaced by a rest. The other notes are G, A, B, C, E, F♯, G."
+        "textAlternative": "A treble-clef stave with eight semibreves going up a scale of G major, with one note replaced by a rest. The other notes are G, A, B, C, D, F♯, G."
       },
       "answer": {
         "kind": "choice",
@@ -797,16 +797,16 @@
             "label": "D"
           },
           {
-            "id": "E",
-            "label": "E"
+            "id": "F#",
+            "label": "F♯"
           },
           {
-            "id": "C",
-            "label": "C"
+            "id": "E",
+            "label": "E"
           }
         ],
         "correctOptionIds": [
-          "D"
+          "E"
         ],
         "diagnoses": {}
       },

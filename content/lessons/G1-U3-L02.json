@@ -466,7 +466,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B4",
+                "pitch": "E4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -475,33 +475,37 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one note on the 3rd line."
+        "textAlternative": "A treble-clef stave with one note on the 1st line."
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "2nd-space",
-            "label": "2nd space"
+            "id": "2nd-line",
+            "label": "2nd line"
           },
           {
             "id": "5th-line",
             "label": "5th line"
           },
           {
-            "id": "3rd-line",
-            "label": "3rd line"
+            "id": "1st-space",
+            "label": "1st space"
           },
           {
-            "id": "3rd-space",
-            "label": "3rd space"
+            "id": "1st-line",
+            "label": "1st line"
           }
         ],
         "correctOptionIds": [
-          "3rd-line"
+          "1st-line"
         ],
         "diagnoses": {
-          "3rd-space": {
+          "5th-line": {
+            "category": "counted-from-top",
+            "reason": "That is where the note would be if you counted from the top. Always count from the bottom of the stave."
+          },
+          "1st-space": {
             "category": "line-space-swap",
             "reason": "This note sits ON a line, with the line running through its middle, not in a space."
           }
@@ -672,7 +676,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "E4",
+                "pitch": "F5",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -681,7 +685,7 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one note on the 1st line."
+        "textAlternative": "A treble-clef stave with one note on the 5th line."
       },
       "answer": {
         "kind": "choice",
@@ -695,25 +699,21 @@
             "label": "5th line"
           },
           {
-            "id": "1st-space",
-            "label": "1st space"
-          },
-          {
             "id": "1st-line",
             "label": "1st line"
+          },
+          {
+            "id": "3rd-line",
+            "label": "3rd line"
           }
         ],
         "correctOptionIds": [
-          "1st-line"
+          "5th-line"
         ],
         "diagnoses": {
-          "5th-line": {
+          "1st-line": {
             "category": "counted-from-top",
             "reason": "That is where the note would be if you counted from the top. Always count from the bottom of the stave."
-          },
-          "1st-space": {
-            "category": "line-space-swap",
-            "reason": "This note sits ON a line, with the line running through its middle, not in a space."
           }
         }
       },
@@ -740,43 +740,67 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "How many lines does a stave have?",
+      "prompt": "Counting from the bottom of the stave, where is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 3rd space."
+      },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "3",
-            "label": "3"
+            "id": "4th-line",
+            "label": "4th line"
           },
           {
-            "id": "4",
-            "label": "4"
+            "id": "2nd-space",
+            "label": "2nd space"
           },
           {
-            "id": "5",
-            "label": "5"
+            "id": "3rd-line",
+            "label": "3rd line"
           },
           {
-            "id": "6",
-            "label": "6"
+            "id": "3rd-space",
+            "label": "3rd space"
           }
         ],
         "correctOptionIds": [
-          "5"
+          "3rd-space"
         ],
         "diagnoses": {
-          "4": {
+          "2nd-space": {
+            "category": "counted-from-top",
+            "reason": "That is where the note would be if you counted from the top. Always count from the bottom of the stave."
+          },
+          "3rd-line": {
             "category": "line-space-swap",
-            "reason": "You have counted the lines when the question is about spaces (or the other way round). There is always one more line than there are spaces."
+            "reason": "This note sits in a space, between two lines, not on a line."
           }
         }
       },
       "hints": [
         "Count from the bottom: the bottom line is the 1st line.",
-        "A stave has five lines, and the spaces are the gaps between them."
+        "Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."
       ],
       "feedback": {
-        "correct": "A stave always has five lines.",
+        "correct": "A stave always has five lines, and you counted from the bottom.",
         "mistakes": {
           "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
           "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",

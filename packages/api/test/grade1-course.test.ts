@@ -113,3 +113,32 @@ describe("generated nodes only ask what has been taught", () => {
     expect(bad).toEqual([]);
   }, 600_000);
 });
+
+describe("lessons teach without repeating themselves", () => {
+  it("no lesson asks the same question twice, guided and independent included", async () => {
+    const { questionKey } = await import("../src/question-key.ts");
+    const dupes: string[] = [];
+    for (const n of G1.filter((x) => x.type === "lesson")) {
+      const seen = new Map<string, string>();
+      for (const it of course.authoredItems(n.id)) {
+        const k = questionKey(it);
+        if (seen.has(k)) dupes.push(`${n.id}: ${it.id} repeats ${seen.get(k)}`);
+        seen.set(k, it.id);
+      }
+    }
+    expect(dupes).toEqual([]);
+  });
+
+  it("a wrong option in the first lessons' choice questions is explained, not just rejected", () => {
+    const missing: string[] = [];
+    for (const id of ["G1-U1-L01", "G1-U1-L04"]) {
+      for (const it of course.authoredItems(id)) {
+        const a = it.answer;
+        if (a.kind !== "choice" || !["t.g1.note-value", "t.g1.rest"].includes(it.templateId)) continue;
+        const wrong = a.options.filter((o) => !a.correctOptionIds.includes(o.id));
+        for (const o of wrong) if (!a.diagnoses?.[o.id]) missing.push(`${id} ${it.id} option ${o.id}`);
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+});

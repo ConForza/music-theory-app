@@ -212,96 +212,6 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “allegretto” mean?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "da-capo",
-            "label": "repeat from the beginning"
-          },
-          {
-            "id": "piano",
-            "label": "quiet"
-          },
-          {
-            "id": "allegro",
-            "label": "fast and lively"
-          },
-          {
-            "id": "allegretto",
-            "label": "fairly quick, but not as fast as allegro"
-          }
-        ],
-        "correctOptionIds": [
-          "allegretto"
-        ]
-      },
-      "hints": [
-        "Is it about speed, volume or touch?",
-        "“allegretto” is a tempo marking."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g1-u7-l01.ind-2",
-      "templateId": "t.g1.term-sign",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "Which term or sign means “at a walking pace”?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "allegretto",
-            "label": "allegretto"
-          },
-          {
-            "id": "moderato",
-            "label": "moderato"
-          },
-          {
-            "id": "andante",
-            "label": "andante"
-          },
-          {
-            "id": "lento",
-            "label": "lento"
-          }
-        ],
-        "correctOptionIds": [
-          "andante"
-        ]
-      },
-      "hints": [
-        "Think about whether it is about speed, loudness or how the notes are played.",
-        "It is a tempo marking."
-      ],
-      "feedback": {
-        "correct": "Right word.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g1-u7-l01.ind-3",
-      "templateId": "t.g1.terms",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
       "prompt": "What does “lento” mean?",
       "answer": {
         "kind": "choice",
@@ -342,7 +252,7 @@
       }
     },
     {
-      "id": "i.g1-u7-l01.ind-4",
+      "id": "i.g1-u7-l01.ind-2",
       "templateId": "t.g1.term-sign",
       "templateVersion": 1,
       "seed": null,
@@ -377,7 +287,7 @@
         "It is a tempo marking."
       ],
       "feedback": {
-        "correct": "Right.",
+        "correct": "Right word.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -387,7 +297,7 @@
       }
     },
     {
-      "id": "i.g1-u7-l01.ind-5",
+      "id": "i.g1-u7-l01.ind-3",
       "templateId": "t.g1.terms",
       "templateVersion": 1,
       "seed": null,
@@ -432,7 +342,7 @@
       }
     },
     {
-      "id": "i.g1-u7-l01.ind-6",
+      "id": "i.g1-u7-l01.ind-4",
       "templateId": "t.g1.term-sign",
       "templateVersion": 1,
       "seed": null,
@@ -460,6 +370,96 @@
         ],
         "correctOptionIds": [
           "moderato"
+        ]
+      },
+      "hints": [
+        "Think about whether it is about speed, loudness or how the notes are played.",
+        "It is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-5",
+      "templateId": "t.g1.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “moderato” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          },
+          {
+            "id": "moderato",
+            "label": "at a moderate speed"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
+          },
+          {
+            "id": "fine",
+            "label": "the end"
+          }
+        ],
+        "correctOptionIds": [
+          "moderato"
+        ]
+      },
+      "hints": [
+        "Is it about speed, volume or touch?",
+        "“moderato” is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g1-u7-l01.ind-6",
+      "templateId": "t.g1.term-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “fast and lively”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "andante",
+            "label": "andante"
+          },
+          {
+            "id": "allegro",
+            "label": "allegro"
+          },
+          {
+            "id": "lento",
+            "label": "lento"
+          },
+          {
+            "id": "moderato",
+            "label": "moderato"
+          }
+        ],
+        "correctOptionIds": [
+          "allegro"
         ]
       },
       "hints": [

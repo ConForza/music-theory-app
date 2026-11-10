@@ -65,7 +65,7 @@ export const chord = (clef: "treble" | "bass", pitches: string[], text: string, 
   frag(clef, [{ events: [{ kind: "chord", notes: pitches.map((pitch) => ({ pitch })), duration: { value: "semibreve", dots: 0 } } as never] }], text, { showKeySignature: false, ...extra });
 export const keys = (pitches: P[], text: string): Frag => ({ presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: pitches.map((p) => ev(p)) }], textAlternative: text }) as Frag;
 
-export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided" | "independent", n: number): ExerciseItem {
+export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided" | "independent", n: number, inLesson: Set<string> = new Set()): ExerciseItem {
   const binding = node.exercises.find((b) => b.templateId === p.t);
   if (!binding) throw new Error(`${node.id}: template ${p.t} is not bound on the node`);
   const scope = effectiveScope(a.ix, node, binding);
@@ -81,9 +81,13 @@ export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided
     if (p.when && !p.when(item)) continue;
     // The question must sit inside the boundary of at least one concept this lesson teaches.
     if (own.length && !own.some((c) => !a.constraints.get(c) || satisfies(item, a.constraints.get(c)!))) continue;
+    // A lesson never asks the same question twice: independent questions must differ from every earlier question (guided included),
+    // and a guided question avoids earlier ones too, unless the pool is so small that nothing else exists.
     const key = questionKey(item);
-    if (section === "independent" && a.used.has(key)) continue;
-    if (section === "independent") a.used.add(key);
+    if (inLesson.has(key)) continue; // never the same question twice in one lesson, guided included
+    if (a.used.has(key) && seed < 20000) continue; // and, where the pool allows, not one met in an earlier lesson either
+    a.used.add(key);
+    inLesson.add(key);
     return {
       ...item,
       id: `i.${node.id.toLowerCase()}.${section === "guided" ? "guided" : "ind"}-${n}`,
@@ -97,6 +101,7 @@ export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided
 }
 
 export function buildLesson(a: Author, spec: Spec) {
+  const inLesson = new Set<string>();
   const node = a.ix.nodeById.get(spec.node)!;
   if (!node) throw new Error(`Unknown node ${spec.node}`);
   if (node.type !== "lesson") throw new Error(`${spec.node} is not a lesson`);
@@ -109,8 +114,8 @@ export function buildLesson(a: Author, spec: Spec) {
     objective: { statement: spec.objective.statement, successCriteria: spec.objective.criteria },
     explanation: spec.explain.map((b) => ("text" in b ? { kind: "text", text: b.text } : "tip" in b ? { kind: "tip", text: b.tip } : { kind: "notation", music: b.music, caption: b.caption })),
     demonstration: { widget: spec.demo.widget, music: spec.demo.music, steps: spec.demo.steps, audio: { playback: "synth-generated", optional: true }, textAlternative: spec.demo.text },
-    guided: spec.guided.map((p, i) => pickItem(a, node, p, "guided", i + 1)),
-    independent: [...spec.independent.map((p, i) => pickItem(a, node, p, "independent", i + 1)), ...(spec.fixedIndependent ?? [])],
+    guided: spec.guided.map((p, i) => pickItem(a, node, p, "guided", i + 1, inLesson)),
+    independent: [...spec.independent.map((p, i) => pickItem(a, node, p, "independent", i + 1, inLesson)), ...(spec.fixedIndependent ?? [])],
     recap: spec.recap,
     spacedReview: spec.review.map((r) => ({ templateId: r.t, afterDays: r.afterDays })),
     mastery: {
