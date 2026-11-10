@@ -68,7 +68,7 @@ export function Teach({ lesson, onNext }: { lesson: LearnerLesson; onNext: () =>
 }
 
 /** Notation (or a keyboard picture) with optional sound: tap a note to hear it, or play the whole example in time. */
-export function MusicView({ fragment, marks, size, labels = "names" }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large"; labels?: "names" | "positions" }) {
+export function MusicView({ fragment, marks, size, labels = "names" }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large"; labels?: "names" | "positions" | "neutral" }) {
   const [lit, setLit] = useState<string[]>([]);
   useEffect(() => () => stopAll(), []);
   if (fragment.presentation === "keyboard") {
@@ -78,8 +78,8 @@ export function MusicView({ fragment, marks, size, labels = "names" }: { fragmen
     const to = pitchAt((Math.floor(Math.max(...ds) / 7) + 1) * 7);
     return (
       <figure className="notation">
-        <Keyboard from={from} to={to} highlight={notes} anonymous={labels === "positions"} label="Keyboard picture: the highlighted keys are the ones in the question" />
-        {labels !== "positions" && <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>}
+        <Keyboard from={from} to={to} highlight={notes} anonymous={labels !== "names"} label="Keyboard picture: the highlighted keys are the ones in the question" />
+        {labels === "names" && <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>}
       </figure>
     );
   }
@@ -237,7 +237,7 @@ export function Question({
         <p className="eyebrow">{eyebrow ?? (item.section === "guided" ? "Guided practice" : "Your turn")} · Question {index} of {total}</p>
         <h1 id="q-title" className="q-prompt" tabIndex={-1}>{item.prompt}</h1>
         {/* In questions the playable notes are labelled by stave position, never by name (review R6). */}
-        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} labels="positions" />}
+        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} labels={/where is this note|which line or space/i.test(item.prompt) ? "neutral" : "positions"} />}
         {item.score && <ScoreView score={item.score} />}
         <form onSubmit={(e) => { e.preventDefault(); void check(); }} id="answer-form">
           <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct && !final) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct) || (final && Boolean(result))} marks={result?.marks} parts={result?.parts} exam={final} />

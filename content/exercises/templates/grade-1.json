@@ -1269,7 +1269,13 @@
       "hints": [
         "One flag or beam for a quaver, two for a semiquaver."
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "beam-count-off",
+          "description": "Miscounted the noteheads joined by a beam.",
+          "feedback": "Count the noteheads that are joined by the beam, one by one."
+        }
+      ],
       "difficulty": 1,
       "qa": {
         "status": "draft",

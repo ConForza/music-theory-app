@@ -108,3 +108,24 @@ describe("beam grouping is available without sight", () => {
     expect(checked).toBeGreaterThan(5);
   });
 });
+
+describe("beam-count feedback is about counting noteheads", () => {
+  it("every wrong count carries a counting explanation, never a beats explanation", () => {
+    let seen = 0;
+    for (const i of generated("G1-U1-L03", "t.g1.beam-choice", 150)) {
+      if (!i.prompt.startsWith("How many notes")) continue;
+      seen++;
+      const a = i.answer as { options: Array<{ id: string }>; correctOptionIds: string[]; diagnoses?: Record<string, { reason: string }> };
+      for (const o of a.options) if (!a.correctOptionIds.includes(o.id)) expect(a.diagnoses?.[o.id]?.reason).toMatch(/noteheads/);
+    }
+    expect(seen).toBeGreaterThan(5);
+  });
+  it("a stave-position question describes the clef and pitch for a listener without naming the line or space", () => {
+    for (const i of generated("G1-U3-L02", "t.g1.stave-facts", 80)) {
+      if (!i.prompt.startsWith("Counting from the bottom")) continue;
+      const alt = i.music!.textAlternative ?? "";
+      expect(alt).toMatch(/clef stave with one note.*the note is [A-G]\d/);
+      expect(alt).not.toMatch(/\b(1st|2nd|3rd|4th|5th) (line|space)\b/);
+    }
+  });
+});

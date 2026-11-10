@@ -18,3 +18,12 @@ describe("question keyboard pictures", () => {
     expect(q.container.textContent).not.toMatch(/highlighted\./);
   });
 });
+
+describe("stave-position questions", () => {
+  it("do not announce the line or space on the note control", () => {
+    const f = { presentation: "staff", clef: "treble", showKeySignature: false, measures: [{ events: [{ kind: "note", pitch: "E4", duration: { value: "semibreve", dots: 0 } }] }], textAlternative: "x" } as unknown as NotationFragment;
+    const { unmount } = render(<MusicView fragment={f} labels="neutral" />);
+    expect(screen.getAllByRole("button").map((b) => b.getAttribute("aria-label")).join(" ")).not.toMatch(/line|space|\bE\b/);
+    unmount();
+  });
+});

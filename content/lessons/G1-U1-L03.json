@@ -274,7 +274,8 @@
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
           "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
           "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them.",
+          "beam-count-off": "Count the noteheads that are joined by the beam, one by one."
         },
         "fallback": "Not quite. Try counting each value in crotchet beats."
       }
@@ -362,7 +363,8 @@
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
           "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
           "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them.",
+          "beam-count-off": "Count the noteheads that are joined by the beam, one by one."
         },
         "fallback": "Not quite. Try counting each value in crotchet beats."
       }
@@ -443,7 +445,8 @@
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
           "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
           "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them.",
+          "beam-count-off": "Count the noteheads that are joined by the beam, one by one."
         },
         "fallback": "Not quite. Try counting each value in crotchet beats."
       }
@@ -515,7 +518,21 @@
         ],
         "correctOptionIds": [
           "2"
-        ]
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "beam-count-off",
+            "reason": "Count only the noteheads joined by the beam. The note before the beam is not part of the group."
+          },
+          "4": {
+            "category": "beam-count-off",
+            "reason": "Count only the noteheads joined by the beam. The note before the beam is not part of the group."
+          },
+          "5": {
+            "category": "beam-count-off",
+            "reason": "Count only the noteheads joined by the beam. The note before the beam is not part of the group."
+          }
+        }
       },
       "hints": [
         "One flag or beam for a quaver, two for a semiquaver.",
@@ -528,7 +545,8 @@
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
           "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
           "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them.",
+          "beam-count-off": "Count the noteheads that are joined by the beam, one by one."
         },
         "fallback": "Not quite. Try counting each value in crotchet beats."
       }
@@ -607,7 +625,8 @@
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
           "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
           "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them.",
+          "beam-count-off": "Count the noteheads that are joined by the beam, one by one."
         },
         "fallback": "Not quite. Try counting each value in crotchet beats."
       }
@@ -704,7 +723,8 @@
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
           "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
           "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
-          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them.",
+          "beam-count-off": "Count the noteheads that are joined by the beam, one by one."
         },
         "fallback": "Not quite. Try counting each value in crotchet beats."
       }

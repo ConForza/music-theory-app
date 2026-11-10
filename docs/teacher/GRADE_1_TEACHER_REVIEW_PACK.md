@@ -157,10 +157,10 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | letter-names (U3-L01) | 2 | Start on the highlighted key, F. Move 3 white keys to the right. Which letter do you reach? _Shown: A piano keyboard with F highlighted._ | The answer is “B”. |
 | letter-names (U3-L01) | 3 | Which letter name belongs to the highlighted key? _Shown: A piano keyboard with one white key highlighted._ | The answer is “F”. |
 | letter-names (U3-L01) | 4 | Start on the highlighted key, D. Move 2 white keys to the left. Which letter do you reach? _Shown: A piano keyboard with D highlighted._ | The answer is “B”. |
-| stave-facts (U3-L02) | 1 | Counting from the bottom of the stave, where is this note? _Shown: A stave with a clef sign and one note._ | The answer is “2nd space”. |
+| stave-facts (U3-L02) | 1 | Counting from the bottom of the stave, where is this note? _Shown: A treble clef stave with one note. For a listener who cannot see the stave: the note is A4. Use what you know about the treble clef to work out which line or space it sits on, counting from the bottom._ | The answer is “2nd space”. |
 | stave-facts (U3-L02) | 2 | How many spaces does a stave have? | The answer is “4”. |
 | stave-facts (U3-L02) | 3 | How many spaces does a stave have? | The answer is “4”. |
-| stave-facts (U3-L02) | 4 | Counting from the bottom of the stave, where is this note? _Shown: A stave with a clef sign and one note._ | The answer is “1st space”. |
+| stave-facts (U3-L02) | 4 | Counting from the bottom of the stave, where is this note? _Shown: A treble clef stave with one note. For a listener who cannot see the stave: the note is F4. Use what you know about the treble clef to work out which line or space it sits on, counting from the bottom._ | The answer is “1st space”. |
 | note-read (U3-L03) | 1 | Name this note. _Shown: A treble-clef stave with one semibreve on the 1st space._ | The note is F. |
 | note-read (U3-L03) | 2 | Name this note. _Shown: A treble-clef stave with one semibreve on the 5th line._ | The note is F. |
 | note-read (U3-L03) | 3 | Name this note. _Shown: A treble-clef stave with one semibreve on the 1st space._ | The note is F. |

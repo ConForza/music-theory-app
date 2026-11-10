@@ -124,7 +124,7 @@ export const staveFacts: Gen = (c) => {
       const p: Pitch = naturalAt(clef, c.rng.pick([0, 2, 4, 6, 8, 1, 3, 5, 7]));
       return {
         prompt: "Which clef is at the start of this stave?",
-        music: frag(clef, [{ events: [note(p)] }], "A stave with a clef sign and one note."),
+        music: frag(clef, [{ events: [note(p)] }], `A ${clef} clef stave with one note. For a listener who cannot see the stave: the note is ${p.step}${p.octave}. Use what you know about the ${clef} clef to work out which line or space it sits on, counting from the bottom.`),
         answer: { kind: "choice", options: [{ id: "treble", label: "Treble clef" }, { id: "bass", label: "Bass clef" }], correctOptionIds: [clef], diagnoses: { [clef === "treble" ? "bass" : "treble"]: { category: "clef-confusion", reason: clef === "treble" ? "The treble clef has a curl that winds round the second line. The bass clef is the one with two dots." : "The bass clef has two dots, one above and one below the line for F. The treble clef is the one with the winding curl." } } },
         hints: ["The treble clef winds round a line like a curl; the bass clef is a hook with two dots."],
       };
@@ -154,7 +154,7 @@ export const staveFacts: Gen = (c) => {
   const shuffled = c.rng.shuffle(opts);
   return {
     prompt: "Counting from the bottom of the stave, where is this note?",
-    music: frag(clef, [{ events: [note(p)] }], "A stave with a clef sign and one note."),
+    music: frag(clef, [{ events: [note(p)] }], `A ${clef} clef stave with one note. For a listener who cannot see the stave: the note is ${p.step}${p.octave}. Use what you know about the ${clef} clef to work out which line or space it sits on, counting from the bottom.`),
     answer: { kind: "choice", options: shuffled.map((o) => ({ id: o.replace(/ /g, "-"), label: o })), correctOptionIds: [answer.replace(/ /g, "-")], ...(Object.keys(diagnoses).length ? { diagnoses: Object.fromEntries(Object.entries(diagnoses).map(([k, v]) => [k.replace(/ /g, "-"), v])) } : {}) },
     hints: ["Lines and spaces are both counted from the bottom: the bottom line is the 1st line, the gap above it is the 1st space."],
   };
@@ -356,7 +356,7 @@ export const beamChoice: Gen = (c) => {
     return {
       prompt: "How many notes are joined together by the beam?",
       music: line,
-      answer: { kind: "choice", options: opts, correctOptionIds: [String(size)] },
+      answer: { kind: "choice", options: opts, correctOptionIds: [String(size)], diagnoses: Object.fromEntries(opts.filter((o) => o.id !== String(size)).map((o) => [o.id, { category: "beam-count-off", reason: lead.length ? "Count only the noteheads joined by the beam. The note before the beam is not part of the group." : "Count the noteheads that are joined by the beam, one by one. Each note in the group has its own stem hanging from the beam." }])) },
       hints: ["Count the stems that touch the beam, not the whole bar."],
     };
   }
