@@ -224,7 +224,7 @@ export function ReviewPlayer() {
   if (!session || idx === null) return <Loading label="Opening your review…" />;
   if (session.status !== "open" && !summary && !finishing) {
     return (
-      <div className="state"><Icon name="info" size={36} /><h1>This review has finished</h1><p>Start a new one from Review whenever topics are due.</p><Link className="btn btn-primary" to="/review">Back to Review</Link></div>
+      <div className="state"><Icon name="info" size={36} /><h1>{session.status === "complete" ? "This review has finished" : "This review is closed"}</h1><p>{session.status === "complete" ? "Start a new one from Review whenever topics are due." : "It was closed before it was completed, so it can no longer be answered. Start a new one from Review whenever topics are due."}</p><Link className="btn btn-primary" to="/review">Back to Review</Link></div>
     );
   }
 

@@ -39,7 +39,7 @@ it("reopening a review that was already closed shows a working way back, not a f
   api.app.db.prepare("INSERT INTO review_sessions (user_id,id,status,started_at,local_date,timezone,curriculum_version,rules_version,items) VALUES (?,?,'abandoned',?,?,?,?,?,?)").run(uid, "closed-review", "2026-03-02T12:00:00Z", "2026-03-02", "UTC", "0", "0", "[]");
   cleanup();
   renderApp("/review/session/closed-review");
-  expect(await screen.findByRole("heading", { name: "This review has finished" })).toBeInTheDocument();
+  expect(await screen.findByRole("heading", { name: "This review is closed" })).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Back to Review" })).toBeInTheDocument();
   expect(screen.queryByText(/couldn't save your review/i)).toBeNull();
 });
