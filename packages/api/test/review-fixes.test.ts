@@ -237,5 +237,6 @@ describe("the authored rest-location melody is described by shapes", () => {
     const alt = it.music!.textAlternative;
     expect(alt).not.toMatch(/\brest\b|symbol/i);
     expect(alt).toMatch(/zigzag/);
+    expect(alt).not.toMatch(/\bcrotchets?\b/); // no bar is marked out as "plain notes" by value words
   });
 });

@@ -102,6 +102,15 @@ const REST_SHAPE: Record<string, string> = {
   semiquaver: "a slanted stroke with two small flags",
 };
 
+/** What a written note looks like, by its printed shape only: for questions that ask the learner to tell notes from rests. */
+export const NOTE_SHAPE: Record<string, string> = {
+  semibreve: "a hollow oval notehead with no stem",
+  minim: "a hollow notehead with a stem",
+  crotchet: "a filled notehead with a stem",
+  quaver: "a filled notehead with a stem and one flag",
+  semiquaver: "a filled notehead with a stem and two flags",
+};
+
 /** Where a written note sits, by geometry only (no letter name): used so text equivalents never state a recognition answer. */
 function geom(clef: Clef, p: Pitch): string {
   const pos = staffPosition(clef, p);
@@ -1168,7 +1177,13 @@ export const melodyDetail: Gen = (c) => {
   if (rb !== 1) return null;
   return {
     prompt: "Which bar of the melody contains a rest?",
-    music: f,
+    // Every sign in every bar is described by its printed shape, so no bar can be ruled out by being "only notes".
+    music: {
+      ...f,
+      textAlternative: `A three-bar melody, ${clef} clef, key signature of ${sigWord}, time signature ${ts}. Signs are described by their printed shape. ${f.measures
+        .map((m, bi) => `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${NOTE_SHAPE[e.duration.value as string] ?? "a notehead"}${e.duration.dots ? " with a dot after it" : ""} ${geom(clef, P(e.pitch))}` : e.kind === "rest" ? (REST_SHAPE[e.duration.value as string] ?? "a sign") + (e.duration.dots ? " with a dot after it" : "") : "a group of signs")).join(", ") + ".")
+        .join(" ")}`,
+    },
     answer: { kind: "choice", options: bars.map((_, i) => ({ id: String(i + 1), label: `Bar ${i + 1}` })), correctOptionIds: [String(restBar + 1)] },
     hints: ["A rest is a sign for silence: look for one in each bar."],
   };

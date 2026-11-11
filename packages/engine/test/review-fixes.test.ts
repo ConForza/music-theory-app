@@ -149,6 +149,10 @@ describe("clef-identification and rest-location descriptions do not name the ans
       seen++;
       const alt = i.music!.questionAlternative ?? i.music!.textAlternative ?? "";
       expect(alt, i.id).not.toMatch(/\brest\b/);
+      // no bar is singled out as "notes only": every event is a described shape, and a bar with a rest looks like any other in form
+      const bars = alt.split(/Bar \d+: /).slice(1);
+      expect(bars.length).toBe(3);
+      for (const b of bars) expect(b, i.id).toMatch(/notehead/);
     }
     expect(seen).toBeGreaterThan(0);
   });
