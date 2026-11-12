@@ -10,7 +10,7 @@ import type { Clock } from "./clock.ts";
 import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import { REVEAL_AFTER_WRONG } from "./grade.ts";
-import { questionKey } from "./question-key.ts";
+import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
 import { explainMastery, isDue, rulesFrom, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { MasteryService, learnerTime, type LearnerTime } from "./mastery-service.ts";
 import { ReviewService } from "./review.ts";
@@ -36,6 +36,7 @@ export class Engagement {
   readonly achievements: AchievementService;
   readonly review: ReviewService;
   private nextNode: (userId: string) => string | null = () => null;
+  private constraints: Map<string, ReviewConstraint>;
   private categories = new Map<string, { label: string; tip: string }>();
 
   constructor(
@@ -44,6 +45,7 @@ export class Engagement {
     readonly clock: Clock,
     readonly policy: ProgressionPolicy,
   ) {
+    this.constraints = loadConstraints(course.ix.c.root, course.ix.concepts);
     this.mastery = new MasteryService(db, course, clock, rulesFrom(policy));
     this.xp = new XpService(db, policy);
     this.activity = new ActivityService(db);
@@ -82,7 +84,11 @@ export class Engagement {
   /** Record a lesson attempt as (non-)evidence for the concepts its template is bound to at this node. Call inside the attempt's transaction. */
   recordLessonAttempt(f: LessonAttemptFacts) {
     const node = this.course.ix.nodeById.get(f.nodeId);
-    const conceptIds = [...new Set((node?.exercises ?? []).filter((b) => b.templateId === f.item.templateId).flatMap((b) => b.conceptIds))];
+    // A question counts only for the concepts whose teaching boundary it sits inside (a bass-clef note never credits a treble concept).
+    const conceptIds = [...new Set((node?.exercises ?? []).filter((b) => b.templateId === f.item.templateId).flatMap((b) => b.conceptIds))].filter((c) => {
+      const k = this.constraints.get(c);
+      return !k || satisfies(f.item, k);
+    });
     if (!conceptIds.length) return;
     this.mastery.record(f.userId, {
       id: `lesson:${f.attemptId}`,

@@ -1,0 +1,10 @@
+import { createApp } from "../src/app.ts";
+import { loadCourse } from "../src/course.ts";
+import { openDb } from "../src/db.ts";
+import { auditCapacity, shortfalls } from "../src/mastery-audit.ts";
+const course = loadCourse();
+const app = createApp({ db: openDb(":memory:"), course });
+const rows = auditCapacity(course, app.nodes);
+for (const r of rows) console.log(r.conceptId.padEnd(34), String(r.distinct).padStart(4), JSON.stringify(Object.fromEntries(Object.entries(r.templates).map(([t, n]) => [t.replace("t.g1.", ""), n]))));
+console.log("\nSHORTFALLS");
+for (const s of shortfalls(rows)) console.log(" ", s.conceptId, "-", s.problem);

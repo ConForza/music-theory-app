@@ -2,7 +2,129 @@
   "schemaVersion": 1,
   "note": "Review questions are generated inside a lesson's effective scope, which is coarser than what one concept teaches (for example, treble line notes versus all treble stave notes). A constraint here narrows generated questions to exactly the material a concept introduced; a question that breaks it is never served, and one that breaks it on regeneration is treated as stale.",
   "constraints": [
-    { "conceptId": "c.clefs.treble-lines", "clef": "treble", "staffPositions": "lines" },
-    { "conceptId": "c.clefs.treble-spaces", "clef": "treble", "staffPositions": "spaces" }
+    {
+      "conceptId": "c.clefs.treble-lines",
+      "clef": "treble",
+      "staffPositions": "lines"
+    },
+    {
+      "conceptId": "c.clefs.treble-spaces",
+      "clef": "treble",
+      "staffPositions": "spaces"
+    },
+    {
+      "conceptId": "c.clefs.bass",
+      "clef": "bass"
+    },
+    {
+      "conceptId": "c.pitch.middle-c",
+      "includesPitch": [
+        "C4"
+      ],
+      "promptMentions": [
+        "middle C"
+      ]
+    },
+    {
+      "conceptId": "c.rhythm.values-long",
+      "rhythm": {
+        "values": [
+          "semibreve",
+          "minim",
+          "crotchet"
+        ]
+      }
+    },
+    {
+      "conceptId": "c.rhythm.values-short",
+      "rhythm": {
+        "values": [
+          "quaver",
+          "semiquaver"
+        ]
+      }
+    },
+    {
+      "conceptId": "c.rhythm.beams",
+      "rhythm": {
+        "beam": true
+      }
+    },
+    {
+      "conceptId": "c.rhythm.rests",
+      "rhythm": {
+        "rest": true
+      }
+    },
+    {
+      "conceptId": "c.rhythm.ties",
+      "rhythm": {
+        "tie": true
+      }
+    },
+    {
+      "conceptId": "c.rhythm.dots",
+      "rhythm": {
+        "dot": true
+      }
+    },
+    {
+      "conceptId": "c.metre.ties-in-bars",
+      "rhythm": {
+        "tie": true
+      }
+    },
+    {
+      "conceptId": "c.metre.rests-in-bars-g1",
+      "rhythm": {
+        "rest": true
+      }
+    },
+    {
+      "conceptId": "c.terms.tempo-g1",
+      "termCategories": [
+        "tempo"
+      ]
+    },
+    {
+      "conceptId": "c.terms.dynamics-g1",
+      "termCategories": [
+        "dynamics"
+      ]
+    },
+    {
+      "conceptId": "c.terms.directions-g1",
+      "termCategories": [
+        "change-of-speed",
+        "structure",
+        "sign",
+        "expression"
+      ]
+    },
+    {
+      "conceptId": "c.terms.articulation-g1",
+      "termCategories": [
+        "articulation"
+      ]
+    },
+    {
+      "conceptId": "c.scales.major-sharp-g1",
+      "keys": [
+        "G major",
+        "D major"
+      ]
+    },
+    {
+      "conceptId": "c.scales.major-f",
+      "keys": [
+        "F major"
+      ]
+    },
+    {
+      "conceptId": "c.accidentals.cancellation",
+      "showsSign": [
+        "natural"
+      ]
+    }
   ]
 }

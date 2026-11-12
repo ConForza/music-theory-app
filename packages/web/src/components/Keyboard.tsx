@@ -49,6 +49,7 @@ export function Keyboard({
   sound = true,
   label = "Piano keyboard",
   showNames = true,
+  anonymous = false,
 }: {
   from: string;
   to: string;
@@ -64,6 +65,8 @@ export function Keyboard({
   sound?: boolean;
   label?: string;
   showNames?: boolean;
+  /** Question pictures: keys are not named, so the picture cannot give the answer away. */
+  anonymous?: boolean;
 }) {
   const keys = keysBetween(from, to);
   const whites = keys.filter((k) => k.white);
@@ -110,14 +113,14 @@ export function Keyboard({
         data-key={k.key}
         tabIndex={k.key === focusKey ? 0 : -1}
         className={`key ${k.white ? "white" : "black"}${lit.has(k.key) ? " is-lit" : ""}${isSel ? " is-selected" : ""}${mark === true ? " is-right" : mark === false ? " is-wrong" : ""}`}
-        aria-label={nameOf(k)}
+        aria-label={anonymous ? `${k.white ? "white" : "black"} key ${keys.filter((x) => x.white === k.white && x.key <= k.key).length} of ${keys.filter((x) => x.white === k.white).length}${lit.has(k.key) ? ", marked in the question" : ""}` : nameOf(k)}
         aria-pressed={onPress ? isSel : undefined}
         aria-disabled={disabled || undefined}
         onClick={() => press(k)}
         onKeyDown={(e) => move(e, k)}
         onFocus={() => setFocusKey(k.key)}
       >
-        {k.white && showNames && <span className="key-name" aria-hidden="true">{k.name}{k.name === "C" ? k.octave : ""}</span>}
+        {k.white && showNames && !anonymous && <span className="key-name" aria-hidden="true">{k.name}{k.name === "C" ? k.octave : ""}</span>}
         {(isSel || mark !== undefined) && <span className="key-mark" aria-hidden="true">{mark === true ? "✓" : mark === false ? "✗" : "●"}</span>}
       </button>
     );

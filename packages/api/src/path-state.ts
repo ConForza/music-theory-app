@@ -50,7 +50,9 @@ export function computeNodeStates(course: Course, rows: ProgressRow[], policy: P
     let state: NodeState;
     if (completedAt) state = "completed";
     else if (!playable) state = "coming_soon";
-    else if (lockedBy.length) state = "locked";
+    // A run that was already open keeps its node openable even if a prerequisite has since been written (the preview waiver
+    // ended for Grade 1): nobody loses a lesson they were in the middle of.
+    else if (lockedBy.length && !row?.run_open) state = "locked";
     else if (row?.run_open) state = "in_progress";
     else state = "available";
     out.set(n.id, {

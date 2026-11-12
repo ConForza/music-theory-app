@@ -52,7 +52,7 @@ function ownLength(evs: REv[]): { text: string; state: "under" | "full" | "over"
   return { text: `Your answer lasts ${v ? `as long as a ${v.dots === 2 ? "double-dotted " : v.dots ? "dotted " : ""}${v.value}` : `${music.formatFraction(total)} of a semibreve`}.`, state: "under" };
 }
 
-function remaining(evs: REv[], ts: string | null, target?: [number, number]): { text: string; state: "under" | "full" | "over" } {
+function remaining(evs: REv[], ts: string | null, target?: [number, number], exam = false): { text: string; state: "under" | "full" | "over" } {
   const total = music.totalLength(evs as unknown as music.REvent[]);
   const cap = target ? music.frac(target[0], target[1]) : ts ? music.barCapacity(music.parseTimeSignature(ts)) : null;
   if (!cap) return { text: "", state: "under" };
@@ -64,11 +64,14 @@ function remaining(evs: REv[], ts: string | null, target?: [number, number]): { 
     return q.d === 1 ? `${q.n} semiquavers' worth` : `${music.formatFraction(f)} of a semibreve`;
   };
   if (c === 0) return { text: target ? "Exactly the right length." : "The bar is full.", state: "full" };
+  // Challenges and assessments: describe the learner's own bar without saying what is missing or by how much.
+  if (exam && c < 0) return { text: "The bar is not full yet.", state: "under" };
+  if (exam && c > 0) return { text: "The bar is too long.", state: "over" };
   if (c < 0) return { text: `Still needed: ${amount(music.sub(cap, total))}.`, state: "under" };
   return { text: `Too long by ${amount(music.sub(total, cap))}.`, state: "over" };
 }
 
-export function RhythmBuilder({ input, value, onChange, disabled }: { input: Extract<ItemInput, { kind: "rhythm-builder" }>; value: Rhythm | null; onChange: (r: Rhythm | null) => void; disabled: boolean }) {
+export function RhythmBuilder({ input, value, onChange, disabled, exam = false }: { input: Extract<ItemInput, { kind: "rhythm-builder" }>; value: Rhythm | null; onChange: (r: Rhythm | null) => void; disabled: boolean; exam?: boolean }) {
   const given = input.given as unknown as REv[];
   const bars: REv[][] = value?.measures.map((m) => m.events) ?? Array.from({ length: input.bars }, (_, i) => (i === 0 ? [...given] : []));
   const [active, setActive] = useState(0);
@@ -119,7 +122,7 @@ export function RhythmBuilder({ input, value, onChange, disabled }: { input: Ext
   };
   const clear = () => emit(bars.map((b, i) => (i === 0 ? b.slice(0, given.length) : [])));
   // Equivalent-value tasks: the length to match is the answer, so only the learner's own length is read back.
-  const meter = input.mode === "equivalent-value" ? ownLength(bar) : remaining(bar, ts);
+  const meter = input.mode === "equivalent-value" ? ownLength(bar) : remaining(bar, ts, undefined, exam);
   const display = rhythmFragment(bars.map((b) => beamBar(b.map(strip), ts)), ts, input.mode !== "equivalent-value");
 
   return (

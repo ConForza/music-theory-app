@@ -99,7 +99,7 @@ describe("persistence and migration", () => {
     const dir = mkdtempSync(join(tmpdir(), "mig-"));
     const src = join(import.meta.dirname, "../migrations");
     mkdirSync(join(dir, "m"));
-    for (const f of readdirSync(src).filter((f) => !/^00[3456]/.test(f))) copyFileSync(join(src, f), join(dir, "m", f));
+    for (const f of readdirSync(src).filter((f) => !/^00[34567]/.test(f))) copyFileSync(join(src, f), join(dir, "m", f));
     const db = new DatabaseSync(":memory:");
     db.exec("PRAGMA foreign_keys = ON;");
     expect(migrate(db, join(dir, "m"))).toEqual(["001_init.sql", "002_practice.sql"]);
@@ -108,7 +108,7 @@ describe("persistence and migration", () => {
     db.prepare("INSERT INTO profiles (user_id,experience,selected_grade,onboarded,settings,updated_at) VALUES ('u1','new',1,1,'{}',?)").run(t);
     db.prepare("INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES ('u1',?,1,0,'questions',2,'0.2.1',?,?,?,2)").run(LESSON, t, t, t);
     db.prepare("INSERT INTO attempts (user_id,id,node_id,run,item_id,template_id,template_version,content_version,curriculum_version,evidence,response,correct,mistake_category,hints_used,attempt_number,created_at) VALUES ('u1','a1',?,1,'i.g1-u3-l03.independent-1','t.g1.note-read',1,2,'0.2.1','independent','{}',1,NULL,0,1,?)").run(LESSON, t);
-    expect(migrate(db, src)).toEqual(["003_progression.sql", "004_question_exposure.sql", "005_evidence_novelty.sql", "006_backfill_novelty.sql"]);
+    expect(migrate(db, src)).toEqual(["003_progression.sql", "004_question_exposure.sql", "005_evidence_novelty.sql", "006_backfill_novelty.sql", "007_node_sessions.sql"]);
     expect(migrate(db, src)).toEqual([]); // repeatable
     expect(db.prepare("SELECT timezone, daily_goal FROM profiles WHERE user_id = 'u1'").get()).toEqual({ timezone: "UTC", daily_goal: 1 });
     expect(db.prepare("SELECT COUNT(*) AS n FROM attempts").get()).toEqual({ n: 1 });

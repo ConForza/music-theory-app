@@ -27,7 +27,7 @@ const sets = curriculum.showcase.map((s) => s.content);
 
 const server = spawn("node", ["--disable-warning=ExperimentalWarning", "--import", "tsx", "src/main.ts"], {
   cwd: join(root, "packages/api"),
-  env: { ...process.env, PORT: String(port), MTP_DB: join(mkdtempSync(join(tmpdir(), "mtp-")), "e2e.sqlite") },
+  env: { ...process.env, MTP_CONTENT_ROOT: join(root, "packages/api/test/fixtures/legacy-content"), PORT: String(port), MTP_DB: join(mkdtempSync(join(tmpdir(), "mtp-")), "e2e.sqlite") },
   stdio: ["ignore", "pipe", "inherit"],
 });
 await new Promise((resolve, reject) => {

@@ -92,5 +92,10 @@
     "defaultSessions": 1,
     "maxSessions": 5,
     "note": "A meaningful session is a path node completed (every question answered correctly, decided by the server) or a review session finished. Opening the app, refreshing and abandoned or empty activity never count. Learners may keep the default of one session a day, choose up to five, or turn the goal off. A streak day is any calendar day in the learner's timezone with at least one meaningful session, whatever the goal; ending a streak never removes progress or mastery."
+  },
+  "assessments": {
+    "unitChallengePassPercent": 70,
+    "gradePassPercent": 66,
+    "note": "Provisional, awaiting teacher acceptance. A unit challenge or Grade assessment run is completed (and pays XP, unlocks the grade badge) only when it reaches the pass mark; a run below it is recorded as an honest result and can be retried with fresh questions. These marks are in-app practice thresholds, not ABRSM pass marks."
   }
 }

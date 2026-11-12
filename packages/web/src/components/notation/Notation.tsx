@@ -28,7 +28,7 @@ export interface NotationProps {
   /** Minimum bar width in staff spaces (for empty or nearly empty staves). */
   minWidth?: number;
   /** "positions": accessible labels describe stave positions and printed signs, never pitch names (assessments). */
-  labels?: "names" | "positions";
+  labels?: "names" | "positions" | "neutral";
 }
 
 function Primitives({ ev, lit, mark }: { ev: Pick<LaidEvent, "glyphs" | "lines" | "paths" | "texts">; lit?: boolean; mark?: boolean | null }) {
@@ -42,7 +42,7 @@ function Primitives({ ev, lit, mark }: { ev: Pick<LaidEvent, "glyphs" | "lines" 
   );
 }
 
-export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, offsetY = 0, px, labels = "names" }: { layout: StaveLayout; highlight?: string[]; marks?: NotationProps["marks"]; onActivate?: NotationProps["onActivate"]; overlay?: NotationProps["overlay"]; offsetY?: number; px: number; labels?: "names" | "positions" }) {
+export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, offsetY = 0, px, labels = "names" }: { layout: StaveLayout; highlight?: string[]; marks?: NotationProps["marks"]; onActivate?: NotationProps["onActivate"]; overlay?: NotationProps["overlay"]; offsetY?: number; px: number; labels?: "names" | "positions" | "neutral" }) {
   const markOf = (ev: LaidEvent) => {
     if (!marks) return null;
     const ms = ev.noteIndex.map((i) => marks.find((m) => m.index === i)).filter(Boolean);
@@ -73,7 +73,7 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
           }
         };
         return (
-          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "positions" ? ev.positionLabel : ev.label}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
+          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "neutral" ? (ev.rest ? ev.label : "note") : labels === "positions" ? ev.positionLabel : ev.label}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
             <rect x={ev.x - 1} y={layout.top} width={ev.width + 2} height={layout.bottom - layout.top} fill="transparent" />
             {body}
           </g>

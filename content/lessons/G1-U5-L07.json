@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U5-L07",
+  "lessonId": "G1-U5-L07",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name the notes of a major scale by their degree numbers.",
+    "successCriteria": [
+      "I know the tonic is degree 1 and the next tonic is degree 8.",
+      "I can say what degree a note is in C, G, D or F major.",
+      "I can name the note that is a given degree."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The notes of a scale can be numbered from the bottom: 1 to 8. The number is the degree of the scale. The tonic, the home note, is degree 1."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "1"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "2"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "3"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "4"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "5"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "6"
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "7",
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "8"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "The scale of G major with each note numbered from 1 to 8."
+      },
+      "caption": "G major: G is degree 1, A is 2, B is 3, C is 4, D is 5, E is 6, F♯ is 7 and G is 8."
+    },
+    {
+      "kind": "text",
+      "text": "The degree depends on the key. F♯ is degree 7 in G major, but it is degree 3 in D major. Always count from the tonic of the key you are in."
+    },
+    {
+      "kind": "tip",
+      "text": "Count the tonic as 1, not 0. Say the letter names as you count: G(1) A(2) B(3) C(4) D(5)."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "1"
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "2"
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "3"
+            },
+            {
+              "kind": "note",
+              "pitch": "Bb4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "4",
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "5"
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "6"
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "7"
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "8"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "The scale of F major with each note numbered 1 to 8."
+    },
+    "steps": [
+      "Tap the notes and say each degree number aloud.",
+      "The tonic F is 1; the B flat is degree 4; the C above is degree 5.",
+      "Try the same scale starting from the tonic in the questions that follow."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "The scale of F major with the degrees 1 to 8 under the notes."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u5-l07.guided-1",
+      "templateId": "t.g1.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In C major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave in C major with its key signature, showing D.",
+        "key": "C major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ]
+      },
+      "hints": [
+        "The tonic is degree 1.",
+        "Count up the scale of C major from the tonic, C, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Counted from the tonic.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g1-u5-l07.guided-2",
+      "templateId": "t.g1.degree-note",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In D major, which note is degree 1 of the scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "C#",
+            "label": "C♯"
+          }
+        ],
+        "correctOptionIds": [
+          "D"
+        ],
+        "diagnoses": {
+          "E": {
+            "category": "off-by-one",
+            "reason": "E is degree 2. Count up from the tonic, which is degree 1."
+          }
+        }
+      },
+      "hints": [
+        "Count up the scale from the tonic.",
+        "Degree 1 is the tonic, D. Count up the scale one note at a time."
+      ],
+      "feedback": {
+        "correct": "That is the note for that degree.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u5-l07.ind-1",
+      "templateId": "t.g1.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In G major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave in G major with its key signature, showing G.",
+        "key": "G major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ]
+      },
+      "hints": [
+        "The tonic is degree 1.",
+        "Count up the scale of G major from the tonic, G, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "The right degree.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g1-u5-l07.ind-2",
+      "templateId": "t.g1.degree-note",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In G major, which note is degree 3 of the scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          }
+        ],
+        "correctOptionIds": [
+          "B"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "off-by-one",
+            "reason": "A is degree 2. Count up from the tonic, which is degree 1."
+          },
+          "C": {
+            "category": "off-by-one",
+            "reason": "C is degree 4. Count up from the tonic, which is degree 1."
+          }
+        }
+      },
+      "hints": [
+        "Count up the scale from the tonic.",
+        "Degree 1 is the tonic, G. Count up the scale one note at a time."
+      ],
+      "feedback": {
+        "correct": "The right note.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g1-u5-l07.ind-3",
+      "templateId": "t.g1.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In D major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave in D major with its key signature, showing D.",
+        "key": "D major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ]
+      },
+      "hints": [
+        "The tonic is degree 1.",
+        "Count up the scale of D major from the tonic, D, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g1-u5-l07.ind-4",
+      "templateId": "t.g1.degree-note",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In G major, which note is degree 2 of the scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          }
+        ],
+        "correctOptionIds": [
+          "A"
+        ],
+        "diagnoses": {
+          "G": {
+            "category": "off-by-one",
+            "reason": "G is degree 1. Count up from the tonic, which is degree 1."
+          },
+          "B": {
+            "category": "off-by-one",
+            "reason": "B is degree 3. Count up from the tonic, which is degree 1."
+          }
+        }
+      },
+      "hints": [
+        "Count up the scale from the tonic.",
+        "Degree 1 is the tonic, G. Count up the scale one note at a time."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g1-u5-l07.ind-5",
+      "templateId": "t.g1.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In G major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave in G major with its key signature, showing A.",
+        "key": "G major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ]
+      },
+      "hints": [
+        "The tonic is degree 1.",
+        "Count up the scale of G major from the tonic, G, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Counted correctly.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g1-u5-l07.ind-6",
+      "templateId": "t.g1.degree-note",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In F major, which note is degree 2 of the scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "G",
+            "label": "G"
+          },
+          {
+            "id": "F",
+            "label": "F"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          }
+        ],
+        "correctOptionIds": [
+          "G"
+        ],
+        "diagnoses": {
+          "F": {
+            "category": "off-by-one",
+            "reason": "F is degree 1. Count up from the tonic, which is degree 1."
+          },
+          "A": {
+            "category": "off-by-one",
+            "reason": "A is degree 3. Count up from the tonic, which is degree 1."
+          }
+        }
+      },
+      "hints": [
+        "Count up the scale from the tonic.",
+        "Degree 1 is the tonic, F. Count up the scale one note at a time."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    }
+  ],
+  "recap": [
+    "The scale degrees are numbered 1 to 8 from the tonic.",
+    "The same note has a different degree in a different key.",
+    "Count the tonic as 1."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.degree",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.degree-note",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.degree",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.scales.degree-numbers"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.15"
+    ],
+    "notes": "Original wording. Follows Grade 1 outcome 15 (degrees by number). Technical names (tonic, dominant ...) are not introduced until Grade 2."
+  }
+}

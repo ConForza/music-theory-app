@@ -521,6 +521,11 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     x += 1.2;
   });
 
+  // A tempo word (e.g. "Andante") is printed above the first bar, where a real score puts it.
+  if (f.tempoText && !rhythm) {
+    fixed.texts.push({ x: barX[0] ?? x, y: -7.2, text: f.tempoText, cls: "n-tempo", anchor: "start" });
+    top = Math.min(top, -8.6);
+  }
   const width = x + 0.4;
   const lines = rhythm ? [4] : [0, 2, 4, 6, 8];
   if (rhythm) {

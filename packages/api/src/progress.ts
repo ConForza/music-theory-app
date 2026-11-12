@@ -126,7 +126,9 @@ export class ProgressService {
     const state = this.states(userId).get(nodeId)!;
     if (state.state === "coming_soon") throw new ApiError(409, "coming_soon", "This lesson is still being written.");
     if (state.state === "locked") throw new ApiError(403, "locked", "Finish the earlier lessons first.", { lockedBy: state.lockedBy });
-    return this.course.lesson(nodeId)!;
+    const lesson = this.course.lesson(nodeId);
+    if (!lesson) throw new ApiError(409, "not_a_lesson", "That is a practice activity, not a lesson.");
+    return lesson;
   }
 
   private row(userId: string, nodeId: string) {
