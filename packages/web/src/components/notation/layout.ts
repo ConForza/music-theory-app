@@ -530,6 +530,11 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     fixed.texts.push({ x: barX[0] ?? x, y: -7.2, text: f.tempoText, cls: "n-tempo", anchor: "start" });
     top = Math.min(top, -8.6);
   }
+  // A rhythm line of several bars numbers them, so "Bar 2" in a question can be found on a small screen.
+  if (rhythm && barX.length > 1) {
+    barX.forEach((bx, i) => fixed.texts.push({ x: bx, y: -7.4, text: String(i + 1), cls: "n-barno", anchor: "start" }));
+    top = Math.min(top, -8.8);
+  }
   const width = x + 0.4;
   const lines = rhythm ? [4] : [0, 2, 4, 6, 8];
   if (rhythm) {

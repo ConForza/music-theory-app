@@ -119,6 +119,8 @@ for (const l of [
   "In minor keys the 6th and 7th above the tonic are never asked as an interval by number alone (the form would be ambiguous); they appear only as intervals between two printed notes or to build.",
   "The 4/4 versus 2/2 style ambiguity is avoided in Grade 3 time-signature questions by checking, for every generated rhythm, which of the signatures in scope fit its beaming (an engine test pins this); the older Grade 3 template is otherwise unchanged.",
   "Three Brief 01 Grade 3 templates gained scope dimensions (rests, note values, ties) so lesson bindings can hold back untaught material; the planned Grade 4 review bindings were updated to state them. No Grade 1-2 template or stored question identity changed.",
+  "Scales are written with accidentals, never with a key signature (Q28). The repository's outcome wording does not say which is required, the official syllabus could not be inspected, and Grades 1-2 ask the same way; the reference book shows both. The assessment requirement was not changed; a teacher decides.",
+  "The demisemiquaver rest is recognised and its length compared with other rests (four make a quaver rest); writing it inside a beat is not asked because the arrangement convention was not verified (Q4, Q26).",
   "The pass marks and mastery thresholds are the provisional values from Briefs 04 and 05 (not changed).",
 ]) a.push(`- ${l}`);
 a.push("");
@@ -197,7 +199,8 @@ t.push("## 8. Decisions needed", "",
   "6. Confirm that melodic minor is assessed in A, E, D, B, F♯, C♯, G, C and F minor, ascending and descending, in treble and bass clefs.",
   "7. Confirm that the perfect/major/minor interval questions above the tonic are right for Grade 3, with the 6th and 7th of minor keys avoided (Q27).",
   "8. Confirm the provisional pass marks (70% challenge, 66% assessment) and mastery thresholds (Q11, Q18).",
-  "9. Sign off, or list changes for, the teaching copy of each lesson.", "");
+  "9. Confirm whether scales must also be written WITH a key signature at Grade 3 (and Grades 1-2); the course currently asks for accidentals only (Q28).",
+  "10. Sign off, or list changes for, the teaching copy of each lesson.", "");
 mkdirSync(join(root, "docs/teacher"), { recursive: true });
 writeFileSync(join(root, "docs/teacher/GRADE_3_TEACHER_REVIEW_PACK.md"), t.join("\n") + "\n");
 console.log("wrote docs/curriculum/GRADE_3_COMPLETION_AUDIT.md and docs/teacher/GRADE_3_TEACHER_REVIEW_PACK.md");

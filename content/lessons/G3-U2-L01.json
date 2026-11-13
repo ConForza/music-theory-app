@@ -133,7 +133,7 @@
     },
     {
       "kind": "text",
-      "text": "The demisemiquaver rest has three flags on its stem, like the note it stands for. It follows the same rules as the rests you already know. Demisemiquaver: 3 flags or beams, half a semiquaver. 2 = a semiquaver, 4 = a quaver, 8 = a crotchet."
+      "text": "The demisemiquaver rest has three flags on its stem, like the note it stands for. It follows the same rules as the rests you already know. A rest lasts as long as the note of the same name, so four demisemiquaver rests fill the time of one quaver rest. Demisemiquaver: 3 flags or beams, half a semiquaver. 2 = a semiquaver, 4 = a quaver, 8 = a crotchet."
     },
     {
       "kind": "notation",
@@ -400,7 +400,7 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "demisemiquaver",
+                  "value": "quaver",
                   "dots": 0
                 }
               }
@@ -408,8 +408,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A single demisemiquaver rest: it has three small flags on its stem.",
-        "questionAlternative": "A single rest with three small flags on its stem."
+        "textAlternative": "A single quaver rest: it has one small flags on its stem.",
+        "questionAlternative": "A single rest with one small flags on its stem."
       },
       "answer": {
         "kind": "choice",
@@ -428,16 +428,16 @@
           }
         ],
         "correctOptionIds": [
-          "demisemiquaver"
+          "quaver"
         ],
         "diagnoses": {
-          "quaver": {
-            "category": "note-rest-confusion",
-            "reason": "Count the flags on the rest: this one has three, which makes it A demisemiquaver rest."
-          },
           "semiquaver": {
             "category": "note-rest-confusion",
-            "reason": "Count the flags on the rest: this one has three, which makes it A demisemiquaver rest."
+            "reason": "Count the flags on the rest: this one has one, which makes it A quaver rest."
+          },
+          "demisemiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "Count the flags on the rest: this one has one, which makes it A quaver rest."
           }
         }
       },
@@ -542,12 +542,12 @@
             "label": "A minim"
           },
           {
-            "id": "quaver",
-            "label": "A quaver"
-          },
-          {
             "id": "semiquaver",
             "label": "A semiquaver"
+          },
+          {
+            "id": "quaver",
+            "label": "A quaver"
           },
           {
             "id": "crotchet",
@@ -662,42 +662,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "How many demisemiquavers fill one whole bar of 2/4?",
+      "prompt": "How many demisemiquavers fill one whole bar of 9/8?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "8",
-            "label": "8"
+            "id": "18",
+            "label": "18"
           },
           {
-            "id": "12",
-            "label": "12"
+            "id": "27",
+            "label": "27"
           },
           {
-            "id": "16",
-            "label": "16"
+            "id": "36",
+            "label": "36"
           },
           {
-            "id": "32",
-            "label": "32"
+            "id": "72",
+            "label": "72"
           }
         ],
         "correctOptionIds": [
-          "16"
+          "36"
         ],
         "diagnoses": {
-          "8": {
+          "18": {
             "category": "halved-or-doubled",
-            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 2/4 holds 16."
+            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 9/8 holds 36."
           },
-          "12": {
+          "27": {
             "category": "halved-or-doubled",
-            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 2/4 holds 16."
+            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 9/8 holds 36."
           },
-          "32": {
+          "72": {
             "category": "halved-or-doubled",
-            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 2/4 holds 16."
+            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 9/8 holds 36."
           }
         }
       },
@@ -723,64 +723,51 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The rest on the stave is a quaver rest, a semiquaver rest or a demisemiquaver rest. Which one is it?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
-              }
-            ],
-            "barline": "final"
-          }
-        ],
-        "textAlternative": "A single quaver rest: it has one small flags on its stem.",
-        "questionAlternative": "A single rest with one small flags on its stem."
-      },
+      "prompt": "How many demisemiquaver rests last as long as one crotchet rest?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "quaver",
-            "label": "A quaver rest"
+            "id": "3",
+            "label": "3"
           },
           {
-            "id": "semiquaver",
-            "label": "A semiquaver rest"
+            "id": "4",
+            "label": "4"
           },
           {
-            "id": "demisemiquaver",
-            "label": "A demisemiquaver rest"
+            "id": "8",
+            "label": "8"
+          },
+          {
+            "id": "16",
+            "label": "16"
           }
         ],
         "correctOptionIds": [
-          "quaver"
+          "8"
         ],
         "diagnoses": {
-          "semiquaver": {
-            "category": "note-rest-confusion",
-            "reason": "Count the flags on the rest: this one has one, which makes it A quaver rest."
+          "3": {
+            "category": "halved-or-doubled",
+            "reason": "A rest lasts as long as the note of the same name, so this is the same sum as for notes: a crotchet is 8 demisemiquavers, a quaver 4 and a semiquaver 2."
           },
-          "demisemiquaver": {
-            "category": "note-rest-confusion",
-            "reason": "Count the flags on the rest: this one has one, which makes it A quaver rest."
+          "4": {
+            "category": "halved-or-doubled",
+            "reason": "A rest lasts as long as the note of the same name, so this is the same sum as for notes: a crotchet is 8 demisemiquavers, a quaver 4 and a semiquaver 2."
+          },
+          "16": {
+            "category": "halved-or-doubled",
+            "reason": "A rest lasts as long as the note of the same name, so this is the same sum as for notes: a crotchet is 8 demisemiquavers, a quaver 4 and a semiquaver 2."
           }
         }
       },
       "hints": [
         "Each shorter note has one more flag or beam and lasts half as long.",
-        "The rest has the same number of flags as the note of the same value: one for a quaver, two for a semiquaver, three for a demisemiquaver."
+        "A rest has the same length as the note of the same name: use the same count as for demisemiquaver notes."
       ],
       "feedback": {
-        "correct": "Correct rest.",
+        "correct": "Correct: a rest lasts as long as the note of the same name.",
         "mistakes": {
           "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
           "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",

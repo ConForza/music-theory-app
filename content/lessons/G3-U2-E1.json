@@ -430,26 +430,34 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Is the upbeat lesson part of the Grade 3 assessment?",
+      "prompt": "A piece in 4/4 starts with an upbeat of two quavers. How many crotchet beats are in its last bar? (Two quavers last one crotchet.)",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "yes",
-            "label": "Yes"
+            "id": "2",
+            "label": "Two"
           },
           {
-            "id": "no",
-            "label": "No, it is optional"
+            "id": "3",
+            "label": "Three"
+          },
+          {
+            "id": "4",
+            "label": "Four"
           }
         ],
         "correctOptionIds": [
-          "no"
+          "3"
         ],
         "diagnoses": {
-          "yes": {
+          "2": {
             "category": "evidence-misread",
-            "reason": "This lesson is optional and is never asked in the Grade 3 assessment."
+            "reason": "One beat of upbeat plus two is only three beats. A bar of 4/4 needs four, so the last bar has three."
+          },
+          "4": {
+            "category": "evidence-misread",
+            "reason": "Four beats would be a whole bar on its own."
           }
         }
       },
@@ -457,9 +465,9 @@
         "The upbeat and the last bar together make one whole bar."
       ],
       "feedback": {
-        "correct": "Right: it is optional enrichment.",
+        "correct": "Right: the upbeat is one beat, so the last bar holds three.",
         "mistakes": {
-          "evidence-misread": "This lesson is optional and is never asked in the Grade 3 assessment."
+          "evidence-misread": "Four beats would be a whole bar on its own."
         },
         "fallback": "Not quite. This lesson is optional, so take your time: the opening upbeat and the last bar together add up to one full bar."
       }

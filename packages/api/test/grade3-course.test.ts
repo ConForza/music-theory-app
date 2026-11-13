@@ -326,6 +326,92 @@ describe("octave transposition is genuinely tested", () => {
   });
 });
 
+describe("Opus review: credit, wording and coverage", () => {
+  const generated = (nodeIds: string[], userTag: string) => {
+    const db = openDb(":memory:");
+    const app = createApp({ db, course });
+    const out: Array<{ nodeId: string; it: ReturnType<typeof app.nodes.internalItems>[number] }> = [];
+    for (let u = 0; u < 4; u++) {
+      const id = `${userTag}${u}`;
+      db.prepare("INSERT INTO users (id,email,password_hash,display_name,is_guest,created_at,last_seen_at) VALUES (?,NULL,NULL,'t',1,?,?)").run(id, "2026-01-01", "2026-01-01");
+      db.prepare("INSERT INTO profiles (user_id,experience,selected_grade,onboarded,settings,updated_at) VALUES (?,'new',3,1,'{}','2026-01-01')").run(id);
+      for (const n of [...EARLIER, ...G3]) insert(db, id, n);
+      for (const nodeId of nodeIds) {
+        const node = course.ix.nodeById.get(nodeId)!;
+        db.prepare("DELETE FROM lesson_progress WHERE user_id = ? AND node_id = ?").run(id, nodeId);
+        app.nodes.start(id, nodeId);
+        for (const it of app.nodes.internalItems(id, nodeId)) out.push({ nodeId, it });
+        db.prepare("DELETE FROM lesson_progress WHERE user_id = ? AND node_id = ?").run(id, nodeId);
+        insert(db, id, node as never);
+      }
+    }
+    return out;
+  };
+  it("every extended-ledger reading question needs at least three ledger lines, in lessons, practice, review, challenge and assessment", async () => {
+    const { music } = await import("@mtp/curriculum");
+    const need = (it: { item: { music?: { clef?: string; measures: Array<{ events?: unknown[] }> } } }) => {
+      const m = it.item.music!;
+      return Math.max(...m.measures.flatMap((x) => (x.events ?? []) as Array<{ pitch?: string }>).filter((e) => e.pitch).map((e) => music.ledgerLines(m.clef as never, music.parsePitch(e.pitch!))));
+    };
+    for (const n of G3.filter((x) => ["lesson"].includes(x.type))) for (const it of course.authoredItems(n.id)) if (it.templateId === "t.g3.ledger-read") expect(need({ item: it as never }), `${n.id} ${it.id}`).toBeGreaterThanOrEqual(3);
+    let seen = 0;
+    for (const { nodeId, it } of generated(["G3-U3-P1", "G3-U3-C", "G3-U4-R1", "G3-A"], "L")) {
+      if (it.item.templateId !== "t.g3.ledger-read") continue;
+      seen++;
+      expect(need(it as never), `${nodeId} ${it.itemId}`).toBeGreaterThanOrEqual(3);
+    }
+    expect(seen).toBeGreaterThan(0);
+  }, 600_000);
+
+  it("Grade 3 terms evidence is the six new terms only, in lessons, practice, review, challenge and assessment", () => {
+    const six = ["andantino", "prestissimo", "tempo-primo", "espressivo", "sostenuto", "con-moto"];
+    for (const n of G3.filter((x) => x.type === "lesson")) for (const it of course.authoredItems(n.id)) if (it.templateId === "t.g3.terms" || it.templateId === "t.g3.term-use") expect(six, `${n.id} ${it.id}`).toContain((it.answer as { correctOptionIds: string[] }).correctOptionIds[0]);
+    let seen = 0;
+    for (const { nodeId, it } of generated(["G3-U5-P1", "G3-U5-C", "G3-U5-R1", "G3-A"], "T")) {
+      if (!["t.g3.terms", "t.g3.term-use"].includes(it.item.templateId)) continue;
+      seen++;
+      expect(six, `${nodeId} ${it.itemId}`).toContain((it.item.answer as { correctOptionIds: string[] }).correctOptionIds[0]);
+    }
+    expect(seen).toBeGreaterThan(0);
+  }, 600_000);
+
+  it("compound-time feedback no longer says the bottom number names the beat, and the minor-interval and key-shortcut teaching is complete", () => {
+    for (const n of G3.filter((x) => x.type === "lesson")) for (const it of course.authoredItems(n.id)) {
+      const text = JSON.stringify(it.feedback.mistakes);
+      expect(text, `${n.id} ${it.id}`).not.toMatch(/That gives the bottom number/);
+    }
+    const flat = (id: string) => JSON.stringify(course.lesson(id)!.explanation);
+    expect(flat("G3-U5-L02")).toMatch(/major 7th/);
+    expect(flat("G3-U5-L02")).toMatch(/melodic minor going up/);
+    expect(flat("G3-U5-L02")).not.toMatch(/minor 7th \(B♭\)\.","caption/);
+    expect(flat("G3-U4-L02")).toMatch(/MAJOR keys/);
+    expect(flat("G3-U4-L02")).toMatch(/relative minor/);
+    expect(flat("G3-U1-L03")).toMatch(/cross a beat line/);
+    expect(flat("G3-U1-L03")).not.toMatch(/begins or ends in the middle of a beat/);
+  });
+
+  it("the demisemiquaver lessons use the rest's length and the dotted-semiquaver figure", async () => {
+    const { generateItem } = await import("@mtp/engine");
+    const node = course.ix.nodeById.get("G3-U2-L02")!;
+    const b = node.exercises.find((x) => x.templateId === "t.g3.demisemi-judge")!;
+    const scope = effectiveScope(course.ix, node, b);
+    let dotted = 0;
+    for (let s = 1; s < 120; s++) {
+      const item = generateItem(course.ix, "t.g3.demisemi-judge", s, { scope }).item;
+      if (JSON.stringify(item.music).includes('"value":"semiquaver","dots":1')) dotted++;
+    }
+    expect(dotted).toBeGreaterThan(5);
+    const n1 = course.ix.nodeById.get("G3-U2-L01")!;
+    const b1 = n1.exercises.find((x) => x.templateId === "t.g3.demisemi-facts")!;
+    let rests = 0;
+    for (let s = 1; s < 120; s++) {
+      const item = generateItem(course.ix, "t.g3.demisemi-facts", s, { scope: effectiveScope(course.ix, n1, b1) }).item;
+      if (item.prompt.includes("demisemiquaver rests last as long as one")) rests++;
+    }
+    expect(rests).toBeGreaterThan(5);
+  });
+});
+
 describe("descriptions name the exact position", () => {
   it("ledger-count describes the line or space and agrees with the note", async () => {
     const node = course.ix.nodeById.get("G3-U3-L01")!;

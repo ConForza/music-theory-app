@@ -107,7 +107,7 @@
     },
     {
       "kind": "text",
-      "text": "A minor key has a lower 3rd, so the interval from the tonic to the 3rd degree is a minor 3rd. In the harmonic minor, and in the lower form of the melodic minor, the 6th is a minor 6th too. The 2nd is always major."
+      "text": "A minor key has a lower 3rd, so the interval from the tonic to the 3rd degree is a minor 3rd. The 6th and 7th above a minor tonic depend on the form of the scale. The 6th is minor in the harmonic minor and in the melodic minor coming down, but major in the melodic minor going up. The 7th is major in the harmonic minor and in the melodic minor going up (B natural above C), and minor only in the melodic minor coming down (B flat above C). The 2nd is always major, and the 4th and 5th are perfect."
     },
     {
       "kind": "notation",
@@ -149,20 +149,19 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb4",
+                "pitch": "B4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
                 },
-                "label": "B♭",
-                "writtenAccidental": "flat"
+                "label": "B♮"
               }
             ]
           }
         ],
-        "textAlternative": "C, then E flat, A flat and B flat above it: a minor 3rd, a minor 6th and a minor 7th above C."
+        "textAlternative": "C, then E flat, A flat and B natural above it: a minor 3rd, a minor 6th and a major 7th above C."
       },
-      "caption": "Above C in C minor: minor 3rd (E♭), minor 6th (A♭) and minor 7th (B♭)."
+      "caption": "Above C in C harmonic minor: minor 3rd (E♭), minor 6th (A♭) and major 7th (B♮). (B♭ would be a minor 7th, in the melodic minor coming down.)"
     },
     {
       "kind": "text",

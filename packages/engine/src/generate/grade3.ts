@@ -378,7 +378,7 @@ export const tripletBar: Gen = (c) => {
     // keep at least one beat that is not divided, so the count differs from "three per beat"
     if (total === beats * 3) return null;
   }
-  const mode = c.rng.pick(["sign", "sign", "count"] as const);
+  const mode = isCompound ? "sign" : c.rng.pick(["sign", "sign", "count"] as const);
   const f = rl(measuresOf([events]), { timeSignature: ts });
   if (mode === "sign") {
     const ans = isCompound ? "no" : "yes";
@@ -407,7 +407,7 @@ const D = "demisemiquaver" as const;
 /** t.g3.demisemi-facts: flags and beams, halves, how many fill a bar, and recognising the rest. */
 export const demisemiFacts: Gen = (c) => {
   if (!valueOk(c, D)) return null;
-  const mode = c.rng.pick(["flags", "beams", "half-of", "bar", "bar", "rest"] as const);
+  const mode = c.rng.pick(["flags", "beams", "half-of", "bar", "bar", "rest", "rest-count", "rest-count"] as const);
   if (mode === "flags") {
     return {
       prompt: "How many flags does a single demisemiquaver have when it is not beamed to other notes?",
@@ -450,6 +450,17 @@ export const demisemiFacts: Gen = (c) => {
       hints: ["A crotchet is worth 8 demisemiquavers. Find how many crotchets (or quavers) fill the bar."],
     };
   }
+  if (mode === "rest-count") {
+    const pairs: Array<[string, number]> = [["quaver", 4], ["semiquaver", 2], ["crotchet", 8]];
+    const ok = pairs.filter(([v]) => valueOk(c, v));
+    const [big, count] = c.rng.pick(ok);
+    const ids = [...new Set([count, count / 2, count * 2, 3])].filter((x) => x >= 2).sort((a, b) => a - b).map(String);
+    return {
+      prompt: `How many demisemiquaver rests last as long as one ${big} rest?`,
+      answer: { kind: "choice", options: optsOf(ids), correctOptionIds: [String(count)], diagnoses: Object.fromEntries(ids.filter((x) => x !== String(count)).map((x) => [x, diag("halved-or-doubled", `A rest lasts as long as the note of the same name, so this is the same sum as for notes: a crotchet is 8 demisemiquavers, a quaver 4 and a semiquaver 2.`)])) },
+      hints: ["A rest has the same length as the note of the same name: use the same count as for demisemiquaver notes."],
+    };
+  }
   // rest: name a demisemiquaver rest from its picture
   const values = ["quaver", "semiquaver", "demisemiquaver"] as const;
   const shown = c.rng.pick(values);
@@ -471,15 +482,17 @@ function demisemiBar(c: Ctx) {
   const s = music.metreStructure(ts);
   const compound = s.metre === "compound";
   const S = "semiquaver" as const;
-  type V = music.NoteValue;
+  // a value, or [value, "."] for a dotted note: the dotted semiquaver followed by a demisemiquaver (3/32 + 1/32 = one quaver) is the common figure
+  type V = music.NoteValue | [music.NoteValue, "."];
+  const SD: V = [S, "."];
   const CELLS: V[][] = compound
-    ? [[D, D, D, D, Q, Q], [Q, D, D, D, D, Q], [D, D, D, D, C], [C, D, D, D, D], [S, S, Q, Q], [Q, S, S, Q], [D, D, S, Q, Q]]
+    ? [[D, D, D, D, Q, Q], [Q, D, D, D, D, Q], [D, D, D, D, C], [C, D, D, D, D], [S, S, Q, Q], [Q, S, S, Q], [D, D, S, Q, Q], [SD, D, Q, Q], [Q, SD, D, Q]]
     : s.groups[0]!.d === 4
-      ? [[D, D, D, D, Q], [Q, D, D, D, D], [S, D, D, Q], [D, D, S, Q], [S, Q, D, D], [D, D, D, D, S, S], [S, S, D, D, D, D]]
-      : [[D, D, D, D], [S, D, D], [D, D, S]];
+      ? [[D, D, D, D, Q], [Q, D, D, D, D], [S, D, D, Q], [D, D, S, Q], [S, Q, D, D], [D, D, D, D, S, S], [S, S, D, D, D, D], [SD, D, Q], [Q, SD, D]]
+      : [[D, D, D, D], [S, D, D], [D, D, S], [SD, D]];
   const cells = Array.from({ length: s.groups.length }, () => c.rng.pick(CELLS));
-  if (!cells.some((cell) => cell.includes(D))) return null;
-  const plain: Ev[] = cells.flat().map((v) => n(v));
+  if (!cells.some((cell) => cell.some((v) => v === D))) return null;
+  const plain: Ev[] = cells.flat().map((v) => (Array.isArray(v) ? n(v[0], 1) : n(v)));
   const right = music.autoBeam(plain as unknown as music.REvent[], s) as unknown as Ev[];
   if (!clean(right, ts)) return null;
   const joined = right.map((e) => ({ ...e })) as Array<Ev & { beam?: "begin" | "continue" | "end" }>;

@@ -56,3 +56,12 @@ The lesson schema allows six explanation blocks, so `author-grade3.ts` fits each
 * **Octave-sign playback.** Fragments carry an optional `octaveShift` (8va = 1, 8vb = -1). Notation stays at the written octave; full playback and tapping a note sound it 12 semitones away (unit test).
 * **Descriptions.** The new ledger questions describe the exact line or space ("on the 3rd ledger line above the stave", "in the space below ...").
 * **Browser driver.** Staff taps wait for the stave to settle and retry once; the reviewer also found the fixed action bar could cover the tap point, so the helper scrolls the stave into view first.
+
+## Review round 2 (educational review of PR #11)
+
+* **Minor intervals.** G3-U5-L02 now says the 6th and 7th above a minor tonic depend on the form: the 7th is major in the harmonic minor and in the melodic minor going up (B♮ above C) and minor only coming down; the 6th is major in the melodic minor going up. The example uses B♮.
+* **Shortcuts.** The "semitone above the last sharp" and "second-last flat" rules are stated for major keys, with a reminder to check the relative minor.
+* **Ties.** The compound-time tie rule refers to crossing a beat line; a note that ends on the next beat line (a crotchet after a quaver) needs no tie.
+* **Beat-unit feedback.** The Grade 3 time-signature templates replace the family wording ("the bottom number gives the beat") with wording that is true in 6/8, 9/8 and 12/8.
+* **Coverage.** Verified in generated runs (tests): every extended-ledger reading question needs three or more ledger lines and every Grade 3 term question is one of the six new terms; the reviewer's counts came from raw generator samples, not from what nodes serve. Demisemiquaver rests now appear as lengths ("how many demisemiquaver rests last as long as a quaver rest") and the dotted-semiquaver plus demisemiquaver figure is in the beaming questions. Scales with a key signature are left as a teacher decision (Q28), because the syllabus text could not be verified.
+* **Smaller.** Multi-bar rhythm lines number their bars; con moto is described as "with movement" between the speed and character groups; the upbeat lesson's non-musical question was replaced; the octave and "bottom number is 8" wording was tightened.

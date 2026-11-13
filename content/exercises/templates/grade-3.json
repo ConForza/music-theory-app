@@ -56,7 +56,18 @@
       "hints": [
         "Do the beats split into 2 or 3?"
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "beat-count-wrong",
+          "description": "Wrong number of beats per bar.",
+          "feedback": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Wrong note named as the beat.",
+          "feedback": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        }
+      ],
       "difficulty": 3,
       "qa": {
         "status": "draft",
@@ -889,7 +900,18 @@
       "hints": [
         "Do the beats split into 2 or 3?"
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "beat-count-wrong",
+          "description": "Wrong number of beats per bar.",
+          "feedback": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Wrong note named as the beat.",
+          "feedback": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        }
+      ],
       "difficulty": 3,
       "qa": {
         "status": "draft",
@@ -1058,19 +1080,19 @@
           "feedback": "Count the equal parts in each beat: two means simple time, three means compound time."
         },
         {
-          "id": "beat-count-wrong",
-          "description": "Miscounts the beats in a bar.",
-          "feedback": "Count the beats first: in compound time divide the top number by three."
-        },
-        {
-          "id": "beat-unit-wrong",
-          "description": "Names the wrong note as the beat.",
-          "feedback": "In compound time the beat is a dotted note that holds three of the notes in the bottom number."
-        },
-        {
           "id": "tuplet-ignored",
           "description": "Ignores that a triplet puts three notes into one beat.",
           "feedback": "A triplet puts three notes into one ordinary beat, so count three notes for that beat."
+        },
+        {
+          "id": "beat-count-wrong",
+          "description": "Wrong number of beats per bar.",
+          "feedback": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Wrong note named as the beat.",
+          "feedback": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
         }
       ],
       "difficulty": 4,
@@ -1133,19 +1155,19 @@
           "feedback": "Count the equal parts in each beat: two means simple time, three means compound time."
         },
         {
-          "id": "beat-count-wrong",
-          "description": "Miscounts the beats in a bar.",
-          "feedback": "Count the beats first: in compound time divide the top number by three."
-        },
-        {
-          "id": "beat-unit-wrong",
-          "description": "Names the wrong note as the beat.",
-          "feedback": "In compound time the beat is a dotted note that holds three of the notes in the bottom number."
-        },
-        {
           "id": "tuplet-ignored",
           "description": "Ignores that a triplet puts three notes into one beat.",
           "feedback": "A triplet puts three notes into one ordinary beat, so count three notes for that beat."
+        },
+        {
+          "id": "beat-count-wrong",
+          "description": "Wrong number of beats per bar.",
+          "feedback": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Wrong note named as the beat.",
+          "feedback": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
         }
       ],
       "difficulty": 4,
@@ -1242,7 +1264,8 @@
           "quaver",
           "semiquaver",
           "demisemiquaver"
-        ]
+        ],
+        "maxDots": 1
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -2159,7 +2182,8 @@
           "quaver",
           "semiquaver",
           "demisemiquaver"
-        ]
+        ],
+        "maxDots": 1
       },
       "acceptance": {
         "spellingSensitive": false,

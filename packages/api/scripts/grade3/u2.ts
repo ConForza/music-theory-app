@@ -1,7 +1,7 @@
 import { V4, bm, dc, has, nt, qqq, rhythm, rs, type Spec2 } from "./lib3.ts";
 
 const D4 = () => bm(["demisemiquaver", "demisemiquaver", "demisemiquaver", "demisemiquaver"]);
-const SC = { timeSignatures: ["2/4", "3/4", "6/8", "9/8", "3/8"], noteValues: V4 };
+const SC = { timeSignatures: ["2/4", "3/4", "6/8", "9/8", "3/8"], noteValues: V4, maxDots: 1 };
 
 export const U2: Spec2[] = [
   {
@@ -17,7 +17,7 @@ export const U2: Spec2[] = [
       { music: rhythm([[nt("crotchet"), nt("quaver"), nt("semiquaver"), nt("demisemiquaver")]], "A crotchet, a quaver, a semiquaver and a demisemiquaver, each half the length of the one before."), caption: "Each note has one more flag than the last: the demisemiquaver has three." },
       { text: "Notes with flags are joined by beams when they are grouped. A beamed group of demisemiquavers has three beams. Two demisemiquavers last as long as one semiquaver, four as long as a quaver, and eight as long as a crotchet." },
       { music: rhythm([[nt("quaver"), ...D4()]], "A quaver, then a group of four beamed demisemiquavers. Both last the same time."), caption: "One quaver lasts as long as four demisemiquavers." },
-      { text: "The demisemiquaver rest has three flags on its stem, like the note it stands for. It follows the same rules as the rests you already know." },
+      { text: "The demisemiquaver rest has three flags on its stem, like the note it stands for. It follows the same rules as the rests you already know. A rest lasts as long as the note of the same name, so four demisemiquaver rests fill the time of one quaver rest." },
       { music: rhythm([[nt("demisemiquaver"), rs("demisemiquaver"), nt("demisemiquaver"), rs("demisemiquaver")]], "A demisemiquaver, a demisemiquaver rest, a demisemiquaver and a demisemiquaver rest."), caption: "The demisemiquaver rest: three flags." },
       { tip: "Demisemiquaver: 3 flags or beams, half a semiquaver. 2 = a semiquaver, 4 = a quaver, 8 = a crotchet." },
     ],
@@ -32,7 +32,7 @@ export const U2: Spec2[] = [
       { t: "t.g3.demisemi-facts", when: has("half as long"), correct: "Correct." },
       { t: "t.g3.demisemiquaver", when: has("as long as a semiquaver"), correct: "Correct." },
       { t: "t.g3.demisemi-facts", when: has("fill one whole bar"), correct: "Correct count." },
-      { t: "t.g3.demisemi-facts", when: has("Which one is it"), correct: "Correct rest." },
+      { t: "t.g3.demisemi-facts", when: has("rests last as long as one"), correct: "Correct: a rest lasts as long as the note of the same name." },
       { t: "t.g3.demisemiquaver", when: has("as long as a dotted quaver"), correct: "Correct: a dotted quaver is six demisemiquavers." },
     ],
     recap: ["A demisemiquaver has three flags (or three beams when grouped).", "It lasts half as long as a semiquaver: 2 = a semiquaver, 4 = a quaver, 8 = a crotchet.", "Its rest has three flags."],
@@ -53,7 +53,7 @@ export const U2: Spec2[] = [
       { text: "In compound time the same rule applies to the dotted-crotchet beat: all the short notes of one beat share a beam, and a new beam starts on the next beat." },
       { music: rhythm([[...bm(["demisemiquaver", "demisemiquaver", "demisemiquaver", "demisemiquaver", "quaver", "quaver"]), dc()]], "One bar of 6/8. Beat 1: four demisemiquavers and two quavers under one beam. Beat 2: a dotted crotchet.", "6/8"), caption: "6/8: the beam covers exactly the first beat." },
       { text: "A beam is a way of showing beats, so a beam that runs across a beat line is wrong, even if the notes add up. In this course a beat never has more than four demisemiquavers in a row, so every beat can be beamed with one beam." },
-      { text: "Demisemiquaver rests are arranged in the same way as semiquaver and quaver rests. You will meet them mixed with notes in later grades." },
+      { text: "Demisemiquaver rests are arranged in the same way as semiquaver and quaver rests. Here you recognise them and compare their lengths; mixing them with notes inside one beat is left for later because its conventions are still to be confirmed." },
       { tip: "One beam for each beat. Never beam across a beat line." },
     ],
     demo: { widget: "rhythm", music: rhythm([[...bm(["demisemiquaver", "demisemiquaver", "semiquaver", "quaver"]), ...bm(["semiquaver", "quaver", "demisemiquaver", "demisemiquaver"])]], "A bar of 2/4: two beamed groups, one for each beat.", "2/4"), steps: ["Find the first beat: the first crotchet's worth of notes.", "Check that one beam joins all the notes of that beat.", "Check that a new beam starts on the second beat."], text: "A bar of 2/4 with one beamed group for each beat." },

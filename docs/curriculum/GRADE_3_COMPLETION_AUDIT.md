@@ -74,9 +74,9 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.metre.compound-signatures | U1-L02 | compound-facts 33, time-signature 196, bar-complete 318 | 547 |
 | c.metre.compound-grouping-notes | U1-L03 | compound-judge 249, compound-grouping 178, bar-complete 318 | 745 |
 | c.metre.compound-grouping-rests | U1-L04 | compound-rest-judge 325, compound-rest-write 70, bar-complete 141 | 536 |
-| c.metre.triplet-compound | U1-L05 | triplet-compare 15, triplet-bar 16 | 31 |
-| c.rhythm.demisemiquavers | U2-L01 | demisemiquaver 210, demisemi-facts 13 | 223 |
-| c.rhythm.demisemiquaver-grouping | U2-L02 | demisemi-judge 344, demisemi-regroup 289 | 633 |
+| c.metre.triplet-compound | U1-L05 | triplet-compare 15, triplet-bar 12 | 27 |
+| c.rhythm.demisemiquavers | U2-L01 | demisemiquaver 210, demisemi-facts 16 | 226 |
+| c.rhythm.demisemiquaver-grouping | U2-L02 | demisemi-judge 368, demisemi-regroup 325 | 693 |
 | c.metre.anacrusis | U2-E1 | none (optional preview: fixed questions only) | 0 |
 | c.pitch.ledger-extended | U3-L01 | ledger-read 42, ledger-place 12, ledger-count 78 | 132 |
 | c.pitch.octave-signs | U3-L02 | octave-sign 14, octave-sound 12 | 26 |
@@ -165,5 +165,7 @@ The wider course tests (`grade3-course.test.ts`) check that every question in ev
 - In minor keys the 6th and 7th above the tonic are never asked as an interval by number alone (the form would be ambiguous); they appear only as intervals between two printed notes or to build.
 - The 4/4 versus 2/2 style ambiguity is avoided in Grade 3 time-signature questions by checking, for every generated rhythm, which of the signatures in scope fit its beaming (an engine test pins this); the older Grade 3 template is otherwise unchanged.
 - Three Brief 01 Grade 3 templates gained scope dimensions (rests, note values, ties) so lesson bindings can hold back untaught material; the planned Grade 4 review bindings were updated to state them. No Grade 1-2 template or stored question identity changed.
+- Scales are written with accidentals, never with a key signature (Q28). The repository's outcome wording does not say which is required, the official syllabus could not be inspected, and Grades 1-2 ask the same way; the reference book shows both. The assessment requirement was not changed; a teacher decides.
+- The demisemiquaver rest is recognised and its length compared with other rests (four make a quaver rest); writing it inside a beat is not asked because the arrangement convention was not verified (Q4, Q26).
 - The pass marks and mastery thresholds are the provisional values from Briefs 04 and 05 (not changed).
 

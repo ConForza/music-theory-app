@@ -253,6 +253,10 @@ describe("demisemiquavers", () => {
         const [t, b] = tsIn(i.prompt);
         expect(Number(correct(i))).toBe((t * 32) / b);
         seen.add("bar");
+      } else if (i.prompt.includes("rests last as long as one")) {
+        const big = /as one (\w+) rest/.exec(i.prompt)![1] as music.NoteValue;
+        expect(Number(correct(i))).toBe(music.mul(music.dotted(big, 0), music.frac(32)).n / music.mul(music.dotted(big, 0), music.frac(32)).d);
+        seen.add("rest-count");
       } else if (i.prompt.includes("Which one is it")) {
         const shown = measuresOf(i)[0]![0]!;
         expect(shown.kind).toBe("rest");
@@ -260,7 +264,7 @@ describe("demisemiquavers", () => {
         seen.add("rest");
       } else throw new Error(`unexpected ${i.prompt}`);
     }
-    expect(seen.size).toBe(5);
+    expect(seen.size).toBe(6);
   });
   it("demisemi-judge and demisemi-regroup: right beaming is clean, wrong beaming breaks a rule, never more than four demisemiquavers in a row", () => {
     /** The longest run of demisemiquavers inside one beat (a run is broken by any other note and by the beat line). */

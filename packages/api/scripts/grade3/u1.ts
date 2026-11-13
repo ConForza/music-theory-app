@@ -44,7 +44,7 @@ export const U1: Spec2[] = [
     ],
     objective: { statement: "Read the compound time signatures 6/8, 9/8 and 12/8.", criteria: ["I know the top number counts quavers.", "I can find the number of dotted-crotchet beats by dividing the top number by 3.", "I can call 6/8, 9/8 and 12/8 compound duple, triple and quadruple."] },
     explain: [
-      { text: "In a compound time signature the bottom number is 8, so the top number counts quavers. Three quavers make one dotted-crotchet beat, so you divide the top number by three to find the number of beats." },
+      { text: "In 6/8, 9/8 and 12/8 the bottom number is 8, so the top number counts quavers. Three quavers make one dotted-crotchet beat, so you divide the top number by three to find the number of beats." },
       { music: rhythm([[dc(), dc()], [dc(), dc()]], "Two bars of 6/8, each with two dotted crotchets.", "6/8"), caption: "6/8: six quavers, two dotted-crotchet beats. Compound duple." },
       { music: rhythm([[dc(), dc(), dc()]], "One bar of 9/8 with three dotted crotchets.", "9/8"), caption: "9/8: nine quavers, three beats. Compound triple." },
       { music: rhythm([[dc(), dc(), dc(), dc()]], "One bar of 12/8 with four dotted crotchets.", "12/8"), caption: "12/8: twelve quavers, four beats. Compound quadruple." },
@@ -83,7 +83,7 @@ export const U1: Spec2[] = [
       { music: rhythm([[...qqq(), ...qqq()], [dc(), ...qqq()]], "Two bars of 6/8: six quavers in two beamed groups of three; then a dotted crotchet and a group of three quavers.", "6/8"), caption: "Beam the quavers of each beat together. Do not join groups from different beats." },
       { text: "A note can be written as a single note only if it sits inside one beat, or fills whole beats from one beat line to another. A crotchet and a quaver in one beat are written separately, a crotchet then a quaver." },
       { music: rhythm([[nt("minim", { dots: 1 })], [dc(), nt("crotchet"), nt("quaver")]], "Two bars of 6/8: a dotted minim; then a dotted crotchet, a crotchet and a quaver.", "6/8"), caption: "Two whole beats are one dotted minim, not two dotted crotchets joined by a tie." },
-      { text: "When a long sound begins or ends in the middle of a beat, split it into two notes and join them with a tie. The tie shows where the beat line falls. Do not use a tie where a single note would do." },
+      { text: "When a sound has to cross a beat line without starting and ending on beats, split it into two notes and join them with a tie. The tie shows where the beat line falls. A note that starts in the middle of a beat but ends on the next beat line, such as a crotchet after a quaver, needs no tie. Do not use a tie where a single note would do." },
       { music: rhythm([[nt("crotchet", { dots: 1, tie: true }), nt("quaver"), nt("crotchet")]], "One bar of 6/8: a dotted crotchet tied to a quaver, then a crotchet. The tie crosses the beat line.", "6/8"), caption: "A dotted crotchet tied to a quaver: the tie crosses into the second beat." },
       { tip: "Show every beat: beam in threes, use a dotted minim for two whole beats, and tie only where a note would hide the beat." },
     ],
