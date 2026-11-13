@@ -168,6 +168,24 @@ describe("the whole of Grade 4 is playable", () => {
     }
   }, 1_200_000);
 
+  it("review: the exact-ratio threshold is Grade 4 only; the Grade 3 assessment keeps its released rule (21 of 32 passes, 20 of 32 fails)", async () => {
+    for (const rightCount of [21, 20]) {
+      const { app, c, userId, db } = await learner();
+      db.prepare("DELETE FROM lesson_progress WHERE user_id = ? AND node_id = 'G3-A'").run(userId);
+      const start = (await c.post("/api/nodes/G3-A/start")).body;
+      expect(start.items).toHaveLength(32);
+      const planned = app.nodes.internalItems(userId, "G3-A");
+      for (const [i, p] of planned.entries()) {
+        const response = i < rightCount ? responseFor(course, "G3-A", p.item, p.scope) : wrongItemResponse(course, p.item, p.scope);
+        expect(response).toBeTruthy();
+        const r = await c.post("/api/nodes/G3-A/attempts", { attemptId: crypto.randomUUID(), itemId: p.itemId, response });
+        expect(r.body.correct, `question ${i + 1}`).toBe(i < rightCount);
+      }
+      const fin = await c.post("/api/nodes/G3-A/complete");
+      expect(fin.body.passed, `${rightCount}/32`).toBe(rightCount === 21);
+    }
+  }, 600_000);
+
   it("resumes an interrupted run with the same questions and the answers already given", async () => {
     const { app, c, userId } = await learner();
     await ensureDone(c, app, userId, "G4-U1-R1");
