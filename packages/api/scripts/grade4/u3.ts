@@ -82,6 +82,7 @@ export const U3: Spec2[] = [
     version: 1,
     bind: [
       { t: "t.g4.key-signature", c: ["c.keys.signatures-alto"], scope: { keys: KEYS_G4, clefs: ["alto"] } },
+      { t: "t.g4.octave-transpose-alto", c: ["c.keys.signatures-alto"], scope: { clefs: ["treble", "bass", "alto"], octaveTranspositionClefs: ["treble", "bass", "alto"], keys: KEYS_G4, maxLedgerLines: 3 } },
       { t: "t.g4.alto-read", c: ["c.clefs.alto"], scope: { clefs: ["alto"], maxLedgerLines: 2, accidentals: true } },
     ],
     objective: { statement: "Write and recognise key signatures in the alto clef, and name notes in the alto clef, with or without a sharp or flat beside them.", criteria: ["I know where the sharps and flats go in the alto clef.", "I can name the key from an alto-clef key signature.", "I can name notes in the alto clef, including a sharp or flat written in front of them."] },
