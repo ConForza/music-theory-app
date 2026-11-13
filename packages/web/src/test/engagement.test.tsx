@@ -89,8 +89,15 @@ describe("progress counts and stale sessions", () => {
     api.db.prepare("UPDATE review_sessions SET items = ? WHERE id = ?").run(JSON.stringify((JSON.parse(row.items) as Array<{ fingerprint: string }>).map((i) => ({ ...i, fingerprint: "00000000" }))), id);
     cleanup();
     renderApp(`/review/session/${id}`);
-    expect(await screen.findByText(/Review · Treble clef line notes/)).toBeInTheDocument(); // a fresh question, no error screen
+    // Brief 05 deliberately explains the interruption instead of silently redirecting. Follow the rebuilt session via
+    // its keyboard-accessible link, then assert that an answerable replacement appears and the old session wasn't completed.
+    expect(await screen.findByRole("heading", { name: "This review was interrupted" })).toBeInTheDocument();
+    const restart = screen.getByRole("link", { name: "Start the rebuilt review" });
+    expect(restart.getAttribute("href")).toMatch(/^\\/review\\/session\\//);
+    expect(restart.getAttribute("href")).not.toContain(id);
     expect(screen.queryByRole("alert")).toBeNull();
+    await userEvent.setup().click(restart);
+    expect(await screen.findByText(/Review · Treble clef line notes/)).toBeInTheDocument();
     expect(api.calls.filter((c) => c === `POST /api/review/sessions/${id}/complete`)).toHaveLength(0);
   });
 });
