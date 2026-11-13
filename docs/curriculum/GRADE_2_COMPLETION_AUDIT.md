@@ -71,8 +71,8 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 
 | Concept | Taught in | Question types (distinct questions each) | Total distinct |
 |---|---|---|---|
-| c.metre.minim-beats | U1-L01 | time-sig-read 359, bar-complete 327, beat-facts 59, bar-judge 262 | 1007 |
-| c.metre.quaver-beats | U1-L02 | time-sig-read 58, bar-complete 37, beat-facts 19, bar-judge 37 | 151 |
+| c.metre.minim-beats | U1-L01 | time-sig-read 359, bar-complete 327, beat-facts 56, bar-judge 262 | 1004 |
+| c.metre.quaver-beats | U1-L02 | time-sig-read 58, bar-complete 37, beat-facts 18, bar-judge 37 | 150 |
 | c.metre.beat-classification | U1-L03 | time-sig-read 391, beat-facts 115 | 506 |
 | c.rhythm.triplets | U1-L04 | triplet 12, triplet-facts 15, triplet-read 62 | 89 |
 | c.rhythm.triplets-mixed | U1-L05 | triplet-mixed 223, triplet-fill 399 | 622 |

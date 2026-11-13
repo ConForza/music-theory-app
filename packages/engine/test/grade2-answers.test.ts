@@ -211,6 +211,37 @@ describe("Brief 06 review fixes", () => {
   });
 });
 
+describe("melody questions are answerable without seeing the page", () => {
+  it("the description gives the bars, every note's length and exact position, the triplet group and the marked note", () => {
+    let triplets = 0;
+    let marked = 0;
+    for (const i of items("G2-U5-L04", "t.g2.melody-detail")) {
+      const text = i.music!.textAlternative;
+      const bars = measuresOf(i);
+      bars.forEach((_, k) => expect(text, `bar ${k + 1}`).toContain(`Bar ${k + 1}:`));
+      const hasTriplet = bars.some((b) => b.some((e) => e.kind === "tuplet"));
+      if (hasTriplet) { expect(text).toMatch(/triplet group of three notes sharing one beat \(/); triplets++; }
+      const notes = bars.flat().flatMap((e) => (e.kind === "tuplet" ? e.events! : [e])).filter((e) => e.kind === "note");
+      expect((text.match(/\b(crotchet|minim|quaver|semibreve|semiquaver)\b/g) ?? []).length, text).toBeGreaterThanOrEqual(notes.length);
+      expect((text.match(/\b(line|space)\b/g) ?? []).length, text).toBeGreaterThanOrEqual(notes.length);
+      if (i.prompt.includes("interval, by number")) { expect(text).toContain("(the note marked x)"); marked++; }
+    }
+    expect(triplets).toBeGreaterThan(0);
+    expect(marked).toBeGreaterThan(0);
+  });
+  it("interval questions only mark a note above the tonic, and the nearest tonic below it is strictly lower", () => {
+    for (const i of items("G2-U5-L04", "t.g2.melody-detail")) if (i.prompt.includes("interval, by number")) {
+      const key = music.parseKey(i.music!.key!);
+      const x = measuresOf(i).flat().flatMap((e) => (e.kind === "tuplet" ? e.events! : [e])).find((e) => e.label === "x")!;
+      const p = music.parsePitch(x.pitch!);
+      expect(p.step === key.tonic.step && p.alter === key.tonic.alter, "the marked note is not the tonic").toBe(false);
+      const below = { ...key.tonic, octave: p.octave - (music.stepIndex(p.step) < music.stepIndex(key.tonic.step) ? 1 : 0) };
+      expect(music.diatonicNumber(below)).toBeLessThan(music.diatonicNumber(p));
+      expect(Number(correct(i))).toBe(music.diatonicNumber(p) - music.diatonicNumber(below) + 1);
+    }
+  });
+});
+
 describe("clef-pair: the same pitch in the other clef", () => {
   it("positions and ledger lines agree with the clef tables", () => {
     for (const i of items("G2-U2-L06", "t.g2.clef-pair")) {

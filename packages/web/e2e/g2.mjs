@@ -323,6 +323,25 @@ await test("notation has accessible descriptions: a triplet bar and a ledger-lin
   await ctx.close();
 });
 
+await test("a melody question is answerable without seeing the page: the triplet's notes and the marked note are named", async () => {
+  const items = S.course.authoredItems("G2-U5-L04");
+  const kt = items.findIndex((it) => it.prompt.includes("contains a triplet"));
+  const kx = items.findIndex((it) => it.prompt.includes("interval, by number"));
+  assert.ok(kt >= 0 && kx >= 0, "the lesson asks a triplet question and a marked-note question");
+  for (const [k, expectText, inNames] of [[kt, /triplet group of three notes sharing one beat/, /in a triplet group/], [kx, /\(the note marked x\)/, /the note marked x/]]) {
+    const { ctx, page, userId } = await grade2Learner(profiles.desktop);
+    await finishViaApi(S, page, userId, "G2-U5-L03");
+    await playLessonInBrowser(page, S, "G2-U5-L04", { stopAfter: k });
+    await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+    const described = await page.locator("svg.notation-svg").first().getAttribute("aria-label");
+    assert.match(described, /Bar 1:/);
+    assert.match(described, expectText, `question ${k + 1} description`);
+    const names = await page.locator("svg.notation-svg [role='button']").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
+    assert.ok(names.some((n) => inNames.test(n)), `question ${k + 1}: note buttons carry the information: ${JSON.stringify(names)}`);
+    await ctx.close();
+  }
+});
+
 await browser.close();
 S.close();
 if (failures) {

@@ -91,6 +91,8 @@ export interface ReviewConstraint {
   timeSignatures?: string[];
   /** Brief 06: the prompt contains at least one of these phrases (the wording tells the kinds of question apart). */
   promptIncludes?: string[];
+  /** Brief 06: the prompt contains none of these phrases (for example wording a later lesson teaches). */
+  promptExcludes?: string[];
   /** Brief 06: the term asked about is one of these term ids. */
   termIds?: string[];
   clef?: "treble" | "bass" | "alto" | "tenor";
@@ -167,6 +169,7 @@ function timeSignaturesOf(item: ExerciseItem): string[] {
 export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
   if (c.promptMentions?.some((w) => item.prompt.includes(w))) return true;
   if (c.promptIncludes && !c.promptIncludes.some((w) => item.prompt.includes(w))) return false;
+  if (c.promptExcludes?.some((w) => item.prompt.includes(w))) return false;
   if (c.timeSignatures) {
     if (!timeSignaturesOf(item).some((t) => c.timeSignatures!.includes(t))) return false;
   }

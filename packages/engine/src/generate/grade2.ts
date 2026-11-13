@@ -1025,8 +1025,18 @@ function buildMelody(c: Ctx, ts: string, keyText: string, clef: Clef, bars: numb
   const sig = music.keySignature(key);
   const sigWord = sig.count === 0 ? "no sharps or flats" : `${sig.count} ${sig.count === 1 ? (sig.type === "sharps" ? "sharp" : "flat") : sig.type}`;
   const marks = [opts.tempo ? `The tempo mark above the first bar says “${opts.tempo}”.` : "", opts.dynamicOnFirst ? `The first note carries the dynamic mark ${opts.dynamicOnFirst}.` : "", opts.tenutoOnFirst ? "The first note has a short horizontal line above it (a tenuto mark)." : ""].filter(Boolean).join(" ");
-  const f = frag(clef, measures, `A ${bars}-bar melody in the ${clef} clef, key signature of ${sigWord}, time signature ${ts}. The notes sit: ${tune.map((p) => geom(clef, p)).join("; ")}. ${marks}`.trim(), { key: keyText, timeSignature: ts, showKeySignature: true, ...(opts.tempo ? { tempoText: opts.tempo } : {}) });
-  return { fragment: f, tune, plan, tripletBar, beats, bv, measures };
+  /** Everything a listener needs: each bar in turn, every note's length and exact stave position, triplet groups closed, a marked note named. */
+  const describe = (ms: Measure[]) => {
+    const one = (e: NotationEvent): string => {
+      if (e.kind === "tuplet") return `a triplet group of three notes sharing one beat (${e.events.map(one).join(", then ")})`;
+      if (e.kind === "rest") return valueWord(e);
+      const pos = e.kind === "note" ? posText(music.staffPosition(clef, music.parsePitch(e.pitch))) : "";
+      return `${valueWord(e)} ${pos}${(e as { label?: string }).label === "x" ? " (the note marked x)" : ""}`;
+    };
+    return `A ${bars}-bar melody in the ${clef} clef, key signature of ${sigWord}, time signature ${ts}. ${ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(one).join("; ")}.`).join(" ")} ${marks}`.trim();
+  };
+  const f = frag(clef, measures, describe(measures), { key: keyText, timeSignature: ts, showKeySignature: true, ...(opts.tempo ? { tempoText: opts.tempo } : {}) });
+  return { fragment: f, tune, plan, tripletBar, beats, bv, measures, describe };
 }
 
 /** t.g2.term-use: meet each new term in words, as a character, or in a short melody. */
@@ -1128,7 +1138,7 @@ export const melodyDetail: Gen = (c) => {
   labelled.forEach((ms) => walk(ms.events as NotationEvent[]));
   return {
     prompt: `The melody is in ${keyWord(keyText)}. What is the interval, by number, from the tonic up to the note marked x? (Use the nearest tonic below the note.)`,
-    music: { ...m.fragment, measures: labelled },
+    music: { ...m.fragment, measures: labelled, textAlternative: m.describe(labelled as Measure[]) },
     answer: { kind: "choice", options: [2, 3, 4, 5, 6, 7].map((v) => ({ id: String(v), label: ORD(v) })), correctOptionIds: [String(number)], diagnoses: Object.fromEntries([number - 1, number + 1].filter((v) => v >= 2 && v <= 7).map((v) => [String(v), diag("evidence-misread", "Count the tonic itself as 1 when you count up to the note.")])) },
     hints: ["Find the tonic of the key, then count up to the marked note, counting the tonic as 1."],
   };

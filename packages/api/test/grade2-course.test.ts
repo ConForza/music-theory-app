@@ -176,6 +176,33 @@ describe("Grade 2 generated nodes only ask what has been taught", () => {
   });
 });
 
+describe("revision only asks what has been taught", () => {
+  it("duple / triple / quadruple wording (taught in G2-U1-L03) never reaches revision of the minim-beat or quaver-beat concepts", async () => {
+    const { generateItem } = await import("@mtp/engine");
+    const { effectiveScope } = await import("@mtp/curriculum");
+    const { loadConstraints, satisfies } = await import("../src/question-key.ts");
+    const constraints = loadConstraints(course.ix.c.root, course.ix.concepts);
+    const db = openDb(":memory:");
+    const app = createApp({ db, course });
+    for (const id of ["G2-U1-L01", "G2-U1-L02"]) {
+      const node = course.ix.nodeById.get(id)!;
+      const b = node.exercises.find((x) => x.templateId === "t.g2.beat-facts")!;
+      const scope = effectiveScope(course.ix, node, b);
+      let seen = 0;
+      for (let seed = 1; seed < 400; seed++) {
+        let item;
+        try { item = generateItem(course.ix, "t.g2.beat-facts", seed, { scope }).item; } catch { continue; }
+        if (!item.prompt.includes("duple, triple or quadruple")) continue;
+        seen++;
+        for (const c of ["c.metre.minim-beats", "c.metre.quaver-beats"]) expect(satisfies(item, constraints.get(c)!), `${id} seed ${seed} ${c}`).toBe(false);
+        // and nothing taught before lesson 3 credits it, so a learner who has only done lessons 1 and 2 is never asked it in review
+        expect(app.nodes.creditedConcepts(item, course.ix.nodeById.get("G2-U1-L02")!)).toEqual([]);
+      }
+      expect(seen, "the generator does produce such questions, so the guard is exercised").toBeGreaterThan(0);
+    }
+  });
+});
+
 describe("no question can leave the learner with nothing to enter", () => {
   it("never asks to write a key signature that has no signs (C major, A minor), in any lesson", () => {
         const bad: string[] = [];
