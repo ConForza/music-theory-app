@@ -124,6 +124,50 @@ describe("the whole of Grade 4 is playable", () => {
     expect(fin.body.passed).toBe(false);
   }, 600_000);
 
+  it("review P1-2: on the full 41-question assessment 27 right fails with no completion XP or badge, and 28 right passes and awards completion exactly once", async () => {
+    for (const rightCount of [27, 28]) {
+      const { app, c, userId, db } = await learner();
+      for (const n of G4) if (n.id !== "G4-A") insert(db, userId, n);
+      const start = (await c.post("/api/nodes/G4-A/start")).body;
+      expect(start.items).toHaveLength(41);
+      const planned = app.nodes.internalItems(userId, "G4-A");
+      const xp0 = (await c.get("/api/xp")).body.total as number;
+      let given = 0;
+      for (const [i, p] of planned.entries()) {
+        const wantRight = i < rightCount;
+        const response = wantRight ? responseFor(course, "G4-A", p.item, p.scope) : wrongItemResponse(course, p.item, p.scope);
+        expect(response, `question ${i + 1} can be answered ${wantRight ? "right" : "wrong"}`).toBeTruthy();
+        const r = await c.post("/api/nodes/G4-A/attempts", { attemptId: crypto.randomUUID(), itemId: p.itemId, response });
+        if (wantRight) expect(r.body.correct, `question ${i + 1}`).toBe(true);
+        else expect(r.body.correct, `question ${i + 1}`).toBe(false);
+        given++;
+      }
+      expect(given).toBe(41);
+      const fin = await c.post("/api/nodes/G4-A/complete");
+      const badge = async () => ((await c.get("/api/achievements")).body.achievements as Array<{ id: string; earned: boolean }>).find((b) => b.id === "g4.grade-complete")?.earned;
+      const xpNow = async () => (await c.get("/api/xp")).body.total as number;
+      if (rightCount === 27) {
+        expect(fin.body.passed).toBe(false);
+        expect(fin.body.completedNode).toBe(false);
+        expect(fin.body.rewards).toBeUndefined();
+        expect((await xpNow()) - xp0).toBe(0);
+        expect(await badge()).toBe(false);
+        expect((await c.get("/api/progress")).body.nodes["G4-A"].state).not.toBe("completed");
+      } else {
+        expect(fin.body.passed).toBe(true);
+        expect(fin.body.rewards.xp.awarded).toBe(25);
+        const after = await xpNow();
+        expect(after - xp0).toBeGreaterThanOrEqual(25);
+        expect(await badge()).toBe(true);
+        // completing again pays nothing more
+        // (a repeated completion replays the stored result; the XP total must not move)
+        await c.post("/api/nodes/G4-A/complete");
+        expect(await xpNow()).toBe(after);
+        expect((await c.get("/api/results")).body.results.filter((r: { nodeId: string; passed: boolean }) => r.nodeId === "G4-A" && r.passed)).toHaveLength(1);
+      }
+    }
+  }, 1_200_000);
+
   it("resumes an interrupted run with the same questions and the answers already given", async () => {
     const { app, c, userId } = await learner();
     await ensureDone(c, app, userId, "G4-U1-R1");

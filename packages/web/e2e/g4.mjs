@@ -10,7 +10,8 @@
 import assert from "node:assert/strict";
 import { chromium, devices } from "playwright";
 import { answerOnScreen, axe, completeEarlier, finishViaApi, get, guest, noOverflow, playLessonInBrowser, playNodeInBrowser, playReviewInBrowser, post, selectGrade, serve, shot } from "./g4lib.mjs";
-import { canonicalResponse, inputFor } from "@mtp/engine";
+import { canonicalResponse, generateItem, inputFor } from "@mtp/engine";
+import { effectiveScope } from "@mtp/curriculum";
 
 const S = await serve({ waive: false });
 const browser = await chromium.launch();
@@ -440,6 +441,101 @@ await test("alto-clef, double-accidental and ornament notation is spoken: positi
     assert.match(described, /marked [ABC]/, "marked notes are named");
     await ctx.close();
   }
+});
+
+
+// Review P2-3: C major and A minor have an EMPTY key signature. The writer needs an explicit "No sharps or flats" answer, which must be
+// submittable by touch and by keyboard, including after a required practice was interrupted and resumed.
+/** Start the required practice until a run holds a write-the-signature question for C major or A minor; answer everything before it by API. */
+async function emptySignatureRun(page, userId) {
+  await finishViaApi(S, page, userId, predecessor("G4-U3-P1").id);
+  await post(page, "/api/nodes/G4-U3-P1/start");
+  // The run's key-signature question is replaced, in the stored run, by the same template's question for C major or A minor
+  // (a random run almost never draws one); it is regenerated from its seed exactly as a real run would be.
+  const row = S.db.prepare("SELECT run, items FROM node_sessions WHERE user_id = ? AND node_id = 'G4-U3-P1' AND status = 'open'").get(userId);
+  const planned = JSON.parse(row.items);
+  const slot = planned.findIndex((x) => x.templateId === "t.g4.key-signature");
+  assert.ok(slot >= 0, "the practice asks a key-signature question");
+  const node = S.course.ix.nodeById.get("G4-U3-P1");
+  const binding = node.exercises.find((x) => x.templateId === "t.g4.key-signature");
+  const scope = effectiveScope(S.course.ix, node, binding);
+  for (let seed = 1; seed < 4000; seed++) {
+    let g;
+    try { g = generateItem(S.course.ix, "t.g4.key-signature", seed, { scope, evidence: "independent" }); } catch { continue; }
+    const a = g.item.answer;
+    if (a.kind !== "key-signature" || a.task !== "write-signature" || !a.accepted.every((k) => ["C major", "A minor"].includes(k))) continue;
+    planned[slot] = { ...planned[slot], itemId: g.item.id, seed, fingerprint: g.fingerprint };
+    S.db.prepare("UPDATE node_sessions SET items = ? WHERE user_id = ? AND node_id = 'G4-U3-P1' AND run = ?").run(JSON.stringify(planned), userId, row.run);
+    const items = S.app.nodes.internalItems(userId, "G4-U3-P1");
+    const k = items.findIndex((it) => it.itemId === g.item.id);
+    assert.ok(k >= 0, "the stored run resolves the replaced question");
+    return { items, k };
+  }
+  throw new Error("no seed asks the C major / A minor write-the-signature question");
+}
+for (const [label, prof, keyboard] of [["mobile (touch)", profiles.iphone, false], ["320px", profiles["phone-320"], false], ["keyboard only", profiles.desktop, true]]) {
+  await test(`empty key signature (${label}): "No sharps or flats" answers C major / A minor, also after the required practice is interrupted and resumed`, async () => {
+    const { ctx, page, userId } = await grade4Learner(prof);
+    const { items, k } = await emptySignatureRun(page, userId);
+    assert.deepEqual(items[k].item.answer.accepted.length > 0, true);
+    for (let j = 0; j < k; j++) await post(page, "/api/nodes/G4-U3-P1/attempts", { attemptId: crypto.randomUUID(), itemId: items[j].itemId, response: canonicalResponse(S.course.ix, items[j].item, items[j].scope) });
+    await page.goto("/lesson/G4-U3-P1");
+    await page.getByRole("button", { name: /Let's go|Continue/ }).click();
+    await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+    await page.reload(); // the interruption
+    await page.getByRole("button", { name: /Let's go|Continue/ }).click();
+    await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+    const toggle = page.getByRole("button", { name: "No sharps or flats" });
+    await toggle.waitFor();
+    const check = page.getByRole("button", { name: "Check" });
+    assert.equal(await check.isDisabled(), true, "nothing is submittable until the empty signature is chosen");
+    if (keyboard) {
+      await toggle.focus();
+      await page.keyboard.press("Space");
+    } else await toggle.tap();
+    assert.equal(await toggle.getAttribute("aria-pressed"), "true");
+    assert.equal(await check.isDisabled(), false);
+    await page.waitForTimeout(600); // the Check button fades from disabled to enabled; audit the settled colours
+    await noOverflow(page, "empty key signature");
+    await axe(page, "empty key signature");
+    if (keyboard) {
+      for (let i = 0; i < 12; i++) {
+        if ((await page.evaluate(() => document.activeElement?.textContent?.trim())) === "Check") break;
+        await page.keyboard.press("Tab");
+      }
+      await page.keyboard.press("Enter");
+    } else await check.tap();
+    await page.locator(".feedback").getByText("Correct!").waitFor();
+    await ctx.close();
+  });
+}
+
+// Review P2-7: playable duplet notes are announced as duplets and triplet notes as triplets (Grade 2 triplet behaviour is unchanged).
+await test("tuplet accessibility: duplet notes are named duplets (Grade 4) and triplet notes are named triplets (Grade 2)", async () => {
+  const items = S.course.authoredItems("G4-U1-L05");
+  const kd = items.findIndex((it) => it.templateId === "t.g4.duplet-read");
+  assert.ok(kd >= 0, "the duplet lesson has a notated duplet bar");
+  const { ctx, page, userId } = await grade4Learner(profiles.desktop);
+  await finishViaApi(S, page, userId, "G4-U1-L04");
+  await playLessonInBrowser(page, S, "G4-U1-L05", { stopAfter: kd });
+  await page.getByText(new RegExp(`Question ${kd + 1} of ${items.length}`)).waitFor();
+  const names = await page.locator("svg.notation-svg [role='button']").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
+  const inGroup = names.filter((n) => /in a (duplet|triplet|tuplet) group/.test(n));
+  assert.ok(inGroup.length >= 2, `duplet notes carry their group: ${JSON.stringify(names)}`);
+  assert.ok(inGroup.every((n) => /in a duplet group/.test(n)), `every grouped note is a duplet note, none a triplet: ${JSON.stringify(inGroup)}`);
+  assert.ok(!names.some((n) => /triplet|tuplet group/.test(n)), "no duplet note is announced as a triplet or a generic tuplet");
+  await ctx.close();
+  const g2items = S.course.authoredItems("G2-U5-L04");
+  const kt = g2items.findIndex((it) => it.prompt.includes("contains a triplet"));
+  assert.ok(kt >= 0);
+  const g2 = await grade4Learner(profiles.desktop);
+  await finishViaApi(S, g2.page, g2.userId, "G2-U5-L03");
+  await playLessonInBrowser(g2.page, S, "G2-U5-L04", { stopAfter: kt });
+  await g2.page.getByText(new RegExp(`Question ${kt + 1} of ${g2items.length}`)).waitFor();
+  const tnames = await g2.page.locator("svg.notation-svg [role='button']").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
+  const tin = tnames.filter((n) => /in a (duplet|triplet|tuplet) group/.test(n));
+  assert.ok(tin.length >= 3 && tin.every((n) => /in a triplet group/.test(n)), `triplet notes are announced as triplets: ${JSON.stringify(tnames)}`);
+  await g2.ctx.close();
 });
 
 await browser.close();
