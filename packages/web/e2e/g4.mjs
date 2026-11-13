@@ -161,13 +161,18 @@ for (const unit of ["G4-U2", "G4-U3", "G4-U4", "G4-U5"]) {
 }
 
 await test("a failed unit challenge is recorded honestly, pays nothing, and a retry with fresh questions passes", async () => {
-  const { ctx, page, userId } = await grade4Learner(profiles.desktop);
-  await finishViaApi(S, page, userId, "G4-U4-R1");
-  const xp0 = (await get(page, "/api/xp")).total;
-  await post(page, "/api/nodes/G4-U4-C/start");
-  const items = S.app.nodes.internalItems(userId, "G4-U4-C");
-  const choices = items.filter((it) => inputFor(S.course.ix, it.item, it.scope).kind === "choice").length;
+  // a run is sampled per learner; use a learner whose run has at least two choice questions (wrong answers are only injected on choices)
+  let ctx, page, userId, items, choices = 0;
+  for (let tries = 0; tries < 12 && choices < 2; tries++) {
+    if (ctx) await ctx.close();
+    ({ ctx, page, userId } = await grade4Learner(profiles.desktop));
+    await finishViaApi(S, page, userId, "G4-U4-R1");
+    await post(page, "/api/nodes/G4-U4-C/start");
+    items = S.app.nodes.internalItems(userId, "G4-U4-C");
+    choices = items.filter((it) => inputFor(S.course.ix, it.item, it.scope).kind === "choice").length;
+  }
   assert.ok(choices >= 2, `enough choice questions (${choices}) to fail on: six questions, pass mark 70%, two wrong fail`);
+  const xp0 = (await get(page, "/api/xp")).total;
   await playNodeInBrowser(page, S, userId, "G4-U4-C", { wrong: choices });
   await page.getByRole("heading", { name: /Not passed yet|Not quite|Challenge not passed/ }).waitFor();
   await noOverflow(page, "failed challenge");
