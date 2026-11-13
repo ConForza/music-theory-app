@@ -4,6 +4,10 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 > **Not affiliated with or endorsed by ABRSM.** The app teaches towards the published ABRSM Grades 1–5 theory syllabus. Its practice assessments are not official examinations.
 
+## Status — Brief 07 (Grade 3 complete course)
+
+All **36 Grade 3 nodes are playable** (19 lessons, 5 unit practice, 5 unit reviews, 5 unit challenges, the Grade 3 assessment and one optional upbeat lesson): compound time (6/8, 9/8, 12/8) and its grouping, demisemiquavers, ledger lines beyond two and octave signs, octave transposition, E and A♭ major, six more minor keys with both minor forms, intervals above the tonic by quality, new terms and reading melodies. See [docs/architecture/GRADE_3_COURSE.md](docs/architecture/GRADE_3_COURSE.md), the generated [completion audit](docs/curriculum/GRADE_3_COMPLETION_AUDIT.md) and [teacher review pack](docs/teacher/GRADE_3_TEACHER_REVIEW_PACK.md), and the [handoff](docs/handoff/BRIEF_07_COMPLETION.md). **Nothing is teacher-reviewed or approved.** Browser journey: `npm run build && npm run e2e:grade3 -w @mtp/web`; mastery audit: `npm run audit:mastery -w @mtp/api -- 3`.
+
 ## Status — Brief 06 (Grade 2 complete course)
 
 All **41 Grade 2 nodes are playable** (24 lessons, 5 unit practice, 5 unit reviews, 5 unit challenges, the Grade 2 assessment and one optional melodic-minor preview) on the same runtime as Grade 1: new time signatures and triplets, neat rests and two ledger lines, A / B♭ / E♭ major, relative keys and A / E / D harmonic minor, intervals above the tonic, new terms and reading a short melody. Melodic minor is deferred to Grade 3 and appears only in the optional preview. See [docs/architecture/GRADE_2_COURSE.md](docs/architecture/GRADE_2_COURSE.md), the generated [completion audit](docs/curriculum/GRADE_2_COMPLETION_AUDIT.md) and [teacher review pack](docs/teacher/GRADE_2_TEACHER_REVIEW_PACK.md), and the [handoff](docs/handoff/BRIEF_06_COMPLETION.md). **Nothing is teacher-reviewed or approved.** Browser journey: `npm run build && npm run e2e:grade2 -w @mtp/web`.

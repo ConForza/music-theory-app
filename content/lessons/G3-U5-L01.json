@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U5-L01",
+  "lessonId": "G3-U5-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name the perfect intervals above the tonic: the 4th, 5th and octave.",
+    "successCriteria": [
+      "I know an interval has a number and a quality.",
+      "I know the 4th, 5th and octave above the tonic are perfect.",
+      "I can name and write perfect intervals in the Grade 3 keys."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In Grade 2 you named an interval by its number only: you counted the letter names, starting with the lower note as 1. Two intervals with the same number can still be different sizes, so Grade 3 adds a quality. The quality is a word such as perfect, major or minor. In Grade 3 the lower note is always the tonic, the key note of one of the keys you know. This lesson is about the perfect intervals. The 4th, the 5th and the octave above the tonic are always perfect, in major keys and in minor keys alike."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two notes in the treble clef: C, then F above it. From C to F is a perfect 4th."
+      },
+      "caption": "C to F: a perfect 4th."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two notes in the treble clef: C, then G above it. From C to G is a perfect 5th."
+      },
+      "caption": "C to G: a perfect 5th."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two notes in the treble clef: middle C, then the C an octave above. From C to C is a perfect octave."
+      },
+      "caption": "C to the C above: a perfect octave."
+    },
+    {
+      "kind": "text",
+      "text": "The same holds in any key. In E flat major the perfect 4th above E flat is A flat, and the perfect 5th is B flat. In F sharp minor, the perfect 4th above F sharp is B, and the perfect 5th is C sharp. The other intervals above the tonic, the 2nd, 3rd, 6th and 7th, are not perfect. They come in major and minor kinds, and the next lesson shows how."
+    },
+    {
+      "kind": "tip",
+      "text": "4th, 5th and octave above the tonic = perfect, in every major and minor key."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Eb4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E♭",
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "Ab4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "A♭",
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "Bb4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "B♭",
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "Eb5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E♭",
+              "writtenAccidental": "flat"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "E flat, then A flat, B flat and E flat an octave higher: the perfect 4th, 5th and octave above E flat."
+    },
+    "steps": [
+      "Count from E flat as 1: F is 2, G is 3, A flat is 4. E flat to A flat is a perfect 4th.",
+      "B flat is 5: a perfect 5th.",
+      "The next E flat is 8: a perfect octave."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "E flat with A flat, B flat and E flat an octave above: perfect 4th, 5th and octave."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u5-l01.guided-1",
+      "templateId": "t.g3.interval-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these intervals above the tonic can be a perfect interval?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "P5",
+            "label": "A 5th"
+          },
+          {
+            "id": "M2",
+            "label": "A 2nd"
+          },
+          {
+            "id": "M6",
+            "label": "A 6th"
+          },
+          {
+            "id": "M3",
+            "label": "A 3rd"
+          }
+        ],
+        "correctOptionIds": [
+          "P5"
+        ],
+        "diagnoses": {
+          "M3": {
+            "category": "quality-from-wrong-key",
+            "reason": "A 3rd above the tonic is not perfect: it is a major or a minor interval. Only the 4th, 5th and octave are perfect."
+          },
+          "M2": {
+            "category": "quality-from-wrong-key",
+            "reason": "A 2nd above the tonic is not perfect: it is a major or a minor interval. Only the 4th, 5th and octave are perfect."
+          },
+          "M6": {
+            "category": "quality-from-wrong-key",
+            "reason": "A 6th above the tonic is not perfect: it is a major or a minor interval. Only the 4th, 5th and octave are perfect."
+          }
+        }
+      },
+      "hints": [
+        "Perfect: 4th, 5th, octave. Major or minor: 2nd, 3rd, 6th, 7th.",
+        "The intervals above the tonic that are called perfect are the 4th, the 5th and the octave."
+      ],
+      "feedback": {
+        "correct": "Yes: the 4th, 5th and octave are perfect.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.guided-2",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this interval (quality and number). The lower note is the tonic of C minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two semibreves in the bass clef: C2, then C3 above it."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "C minor",
+        "lower": "C2",
+        "upper": "C3",
+        "acceptedIntervals": [
+          "P8"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count every letter name from the bottom note to the top note, including both."
+      ],
+      "feedback": {
+        "correct": "Yes: perfect, and the right number.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.guided-3",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write a note above B♭ to make a perfect 4th.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve B♭ in the treble clef."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "Bb major",
+        "lower": "Bb4",
+        "target": "P4",
+        "direction": "up",
+        "acceptedPitches": [
+          "Eb5"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count 4 letter names up from B♭, counting B♭ as 1."
+      ],
+      "feedback": {
+        "correct": "You counted the number and kept the quality.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u5-l01.ind-1",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write a note above A♭ to make a perfect 5th.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve A♭ in the bass clef."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "Ab major",
+        "lower": "Ab2",
+        "target": "P5",
+        "direction": "up",
+        "acceptedPitches": [
+          "Eb3"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count 5 letter names up from A♭, counting A♭ as 1."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.ind-2",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval (quality and number). The lower note is the tonic of B minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two semibreves in the treble clef: B3, then E4 above it."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "B minor",
+        "lower": "B3",
+        "upper": "E4",
+        "acceptedIntervals": [
+          "P4"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count every letter name from the bottom note to the top note, including both."
+      ],
+      "feedback": {
+        "correct": "Correct interval.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.ind-3",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write a note above F♯ to make a perfect 5th.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve F♯ in the treble clef."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "F# minor",
+        "lower": "F#5",
+        "target": "P5",
+        "direction": "up",
+        "acceptedPitches": [
+          "C#6"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count 5 letter names up from F♯, counting F♯ as 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.ind-4",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval (quality and number). The lower note is the tonic of B minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two semibreves in the treble clef: B3, then F♯4 above it."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "B minor",
+        "lower": "B3",
+        "upper": "F#4",
+        "acceptedIntervals": [
+          "P5"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count every letter name from the bottom note to the top note, including both."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.ind-5",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write a note above E to make a perfect 5th.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve E in the bass clef."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "E major",
+        "lower": "E2",
+        "target": "P5",
+        "direction": "up",
+        "acceptedPitches": [
+          "B2"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count 5 letter names up from E, counting E as 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g3-u5-l01.ind-6",
+      "templateId": "t.g3.interval-quality",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval (quality and number). The lower note is the tonic of A minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two semibreves in the bass clef: A3, then D4 above it."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "A minor",
+        "lower": "A3",
+        "upper": "D4",
+        "acceptedIntervals": [
+          "P4"
+        ]
+      },
+      "hints": [
+        "Compare with the major scale on the tonic.",
+        "Count every letter name from the bottom note to the top note, including both."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    }
+  ],
+  "recap": [
+    "An interval has a number and a quality.",
+    "The 4th, 5th and octave above the tonic are perfect.",
+    "This holds in every major and minor key."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.interval-quality",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.interval-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.interval-quality",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.intervals.quality-perfect"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s11"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.11"
+    ],
+    "notes": "Original wording. Follows Grade 3 outcome 11 and book section 11. The lower note is always the tonic (Grade 4 extends intervals to any two notes of a key). Only perfect intervals are asked in this lesson; major and minor intervals come next."
+  }
+}

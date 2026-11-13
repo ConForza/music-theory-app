@@ -42,11 +42,31 @@ describe("Grade 2 mastery capacity (Brief 04 thresholds are not weakened)", () =
 
   it(`gives every required Grade 2 concept at least ${MIN_DISTINCT} distinct questions across at least two question types`, () => {
     // The optional melodic-minor preview has no generated questions by design: it never counts towards Grade 2 mastery or assessment.
-    expect(Object.keys(CAPACITY_ALLOWLIST)).toEqual(["c.scales.minor-melodic-preview"]);
+    expect(Object.keys(CAPACITY_ALLOWLIST)).toEqual(["c.scales.minor-melodic-preview", "c.metre.anacrusis"]);
     expect(shortfalls(rows2, CAPACITY_ALLOWLIST)).toEqual([]);
   });
 
   it("gives the preview concept no generated evidence at all", () => {
     expect(rows2.find((r) => r.conceptId === "c.scales.minor-melodic-preview")!.distinct).toBe(0);
+  });
+});
+
+describe("Grade 3 mastery capacity (Brief 07; thresholds unchanged)", () => {
+  const rows3 = auditCapacity(course, app.nodes, 3);
+
+  it("covers every Grade 3 concept", () => {
+    expect(rows3.length).toBe([...course.ix.concepts.values()].filter((c) => c.grade === 3).length);
+  });
+
+  it(`gives every required Grade 3 concept at least ${MIN_DISTINCT} distinct questions across at least two question types`, () => {
+    // The optional upbeat enrichment has fixed questions only: it never counts towards Grade 3 mastery or assessment.
+    expect(shortfalls(rows3, CAPACITY_ALLOWLIST)).toEqual([]);
+    for (const r of rows3.filter((x) => x.conceptId !== "c.metre.anacrusis")) {
+      expect(Object.values(r.templates).filter((n) => n >= 3).length, r.conceptId).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it("gives the optional upbeat concept no generated evidence at all", () => {
+    expect(rows3.find((r) => r.conceptId === "c.metre.anacrusis")!.distinct).toBe(0);
   });
 });

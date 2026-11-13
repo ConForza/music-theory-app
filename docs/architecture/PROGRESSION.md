@@ -179,3 +179,7 @@ Brief 05 makes the four server-built node kinds playable (details in [GRADE_1_CO
 
 Grade 2 runs on exactly the rules above: its first lesson waits for `G1-U7-R1`; challenges (70%) and the Grade 2 assessment (66%) are unchanged provisional marks; completing the grade is a passed `G2-A` run (the `g2.grade-complete` badge). The optional preview node (`G2-U4-E1`) pays the enrichment award (5 XP), is never required, and has no concept evidence that any blueprint, review or mastery rule reads. The Grade 2 mastery-capacity audit is part of `mastery-audit.test.ts`. See [GRADE_2_COURSE.md](GRADE_2_COURSE.md).
 
+## 11. Grade 3 (Brief 07)
+
+Grade 3 runs on the same rules: its first lesson waits for `G2-U5-R1`; challenges (70%) and the Grade 3 assessment (66%) are the same provisional marks; completing the grade is a passed `G3-A` run (the `g3.grade-complete` badge). The optional upbeat lesson (`G3-U2-E1`) pays 5 XP, gates nothing and is never assessed. No threshold, XP value or review interval changed.
+

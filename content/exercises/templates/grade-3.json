@@ -32,7 +32,16 @@
         ],
         "tuplets": [
           "triplet"
-        ]
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -70,7 +79,8 @@
       ],
       "conceptIds": [
         "c.metre.compound-signatures",
-        "c.metre.compound-grouping-notes"
+        "c.metre.compound-grouping-notes",
+        "c.metre.compound-grouping-rests"
       ],
       "promptPattern": "Complete this bar of {timeSignature}.",
       "scope": {
@@ -78,7 +88,17 @@
           "6/8",
           "9/8",
           "12/8"
-        ]
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -123,7 +143,17 @@
           "6/8",
           "9/8",
           "12/8"
-        ]
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -811,6 +841,1437 @@
       ],
       "extraMistakeCategories": [],
       "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.compound-facts",
+      "version": 1,
+      "familyId": "fam.time-signature",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ],
+      "conceptIds": [
+        "c.metre.compound-concept",
+        "c.metre.compound-signatures"
+      ],
+      "promptPattern": "How does the beat divide? How many beats? What kind of time is this? Which note is the beat?",
+      "scope": {
+        "timeSignatures": [
+          "6/8",
+          "9/8",
+          "12/8",
+          "2/4",
+          "3/4",
+          "4/4",
+          "3/8"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Do the beats split into 2 or 3?"
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.compound-judge",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
+      "conceptIds": [
+        "c.metre.compound-grouping-notes"
+      ],
+      "promptPattern": "Which bar groups its notes correctly?",
+      "scope": {
+        "timeSignatures": [
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One bar is correct; the others each break one grouping rule."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Each beat is a dotted crotchet. Can you see every beat?"
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.compound-rest-judge",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
+      "conceptIds": [
+        "c.metre.compound-grouping-rests"
+      ],
+      "promptPattern": "Which bar writes its rests correctly?",
+      "scope": {
+        "timeSignatures": [
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "rests": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One bar is correct. Both forms of a silent dotted-crotchet beat are treated as correct everywhere; no bar offers one as the wrong answer. (OPEN_QUESTIONS Q4, Q25.)"
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Give each silent beat its own rest."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "rest-grouping",
+          "description": "Writes a silent beat as several small rests.",
+          "feedback": "A silent beat is one dotted-crotchet rest, or a crotchet rest and a quaver rest."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.triplet-compare",
+      "version": 1,
+      "familyId": "fam.tuplet",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ],
+      "conceptIds": [
+        "c.metre.triplet-compound"
+      ],
+      "promptPattern": "A triplet in simple time compared with the beat of compound time.",
+      "scope": {
+        "timeSignatures": [
+          "6/8",
+          "9/8",
+          "12/8",
+          "2/4",
+          "3/4",
+          "4/4",
+          "3/8"
+        ],
+        "tuplets": [
+          "triplet"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count the notes in one beat, then multiply by the number of beats."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "simple-compound-confusion",
+          "description": "Treats compound time as simple time, or the reverse.",
+          "feedback": "Count the equal parts in each beat: two means simple time, three means compound time."
+        },
+        {
+          "id": "beat-count-wrong",
+          "description": "Miscounts the beats in a bar.",
+          "feedback": "Count the beats first: in compound time divide the top number by three."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Names the wrong note as the beat.",
+          "feedback": "In compound time the beat is a dotted note that holds three of the notes in the bottom number."
+        },
+        {
+          "id": "tuplet-ignored",
+          "description": "Ignores that a triplet puts three notes into one beat.",
+          "feedback": "A triplet puts three notes into one ordinary beat, so count three notes for that beat."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.triplet-bar",
+      "version": 1,
+      "familyId": "fam.tuplet",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ],
+      "conceptIds": [
+        "c.metre.triplet-compound"
+      ],
+      "promptPattern": "Does this group of three need a triplet sign? How many quavers are in the bar?",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "6/8",
+          "9/8"
+        ],
+        "noteValues": [
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "tuplets": [
+          "triplet"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Compound time: the beat already divides into three. Simple time: three in a beat is a triplet."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "simple-compound-confusion",
+          "description": "Treats compound time as simple time, or the reverse.",
+          "feedback": "Count the equal parts in each beat: two means simple time, three means compound time."
+        },
+        {
+          "id": "beat-count-wrong",
+          "description": "Miscounts the beats in a bar.",
+          "feedback": "Count the beats first: in compound time divide the top number by three."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Names the wrong note as the beat.",
+          "feedback": "In compound time the beat is a dotted note that holds three of the notes in the bottom number."
+        },
+        {
+          "id": "tuplet-ignored",
+          "description": "Ignores that a triplet puts three notes into one beat.",
+          "feedback": "A triplet puts three notes into one ordinary beat, so count three notes for that beat."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.demisemi-facts",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.03"
+      ],
+      "conceptIds": [
+        "c.rhythm.demisemiquavers"
+      ],
+      "promptPattern": "Flags, beams, halves, how many fill a bar; name the rest.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "9/8",
+          "12/8",
+          "3/8"
+        ],
+        "noteValues": [
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver",
+          "minim"
+        ],
+        "rests": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Each shorter note has one more flag or beam and lasts half as long."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.demisemi-judge",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.02"
+      ],
+      "conceptIds": [
+        "c.rhythm.demisemiquaver-grouping"
+      ],
+      "promptPattern": "Which bar groups its demisemiquavers correctly?",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "6/8",
+          "9/8",
+          "3/8"
+        ],
+        "noteValues": [
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Beam the notes within each beat; start a new beam on each beat."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.ledger-place",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 3,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ],
+      "conceptIds": [
+        "c.pitch.ledger-extended"
+      ],
+      "promptPattern": "In the clef, write the note that sits on a ledger line or in a space beyond the second.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 4
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": true,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one pitch is correct."
+      },
+      "ambiguityChecks": [
+        "The position is stated in the prompt and the octave is fixed, so exactly one pitch is correct and a note inside the stave is never right.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Ledger lines continue the pattern: line, space, line, space."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.ledger-count",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ],
+      "conceptIds": [
+        "c.pitch.ledger-extended"
+      ],
+      "promptPattern": "Count the ledger lines; name a note beyond the stave.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 4
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Only notes that need three or more ledger lines are asked, so the stave alone cannot give the answer."
+      ],
+      "hints": [
+        "Count the short lines from the stave outwards."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.octave-sign",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ],
+      "conceptIds": [
+        "c.pitch.octave-signs"
+      ],
+      "promptPattern": "What do 8va and 8vb mean? Which pitch sounds?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 4
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "8va: an octave higher. 8vb: an octave lower."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.octave-sound",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 3,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ],
+      "conceptIds": [
+        "c.pitch.octave-signs"
+      ],
+      "promptPattern": "Write the note that sounds when a marked note is played.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 4
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": true,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one pitch is correct; the wrong octave is not accepted."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Move the note eight steps (seven lines and spaces) up for 8va or down for 8vb."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 5,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.octave-pick",
+      "version": 1,
+      "familyId": "fam.transposition",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.05"
+      ],
+      "conceptIds": [
+        "c.transposition.octave-treble-bass"
+      ],
+      "promptPattern": "Where does the note go an octave higher or lower in the other clef?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "octaveTranspositionClefs": [
+          "treble",
+          "bass"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "The same-pitch position in the new clef is always offered as a wrong option, so a clef change without the octave move never scores."
+      ],
+      "hints": [
+        "Find the same pitch in the new clef, then move an octave."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.minor-forms",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.08"
+      ],
+      "conceptIds": [
+        "c.scales.minor-melodic",
+        "c.scales.minor-sharp-g3",
+        "c.scales.minor-flat-g3"
+      ],
+      "promptPattern": "Which minor form? Which notes change? Name the raised 6th or 7th.",
+      "scope": {
+        "keys": [
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "minorForms": [
+          "harmonic",
+          "melodic"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Only scales whose notes identify exactly one form and direction are shown."
+      ],
+      "hints": [
+        "Harmonic: only the 7th is raised. Melodic: 6th and 7th raised going up, lowered coming down."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.scale-gap",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08"
+      ],
+      "conceptIds": [
+        "c.scales.major-e-ab",
+        "c.scales.minor-melodic",
+        "c.scales.minor-sharp-g3",
+        "c.scales.minor-flat-g3"
+      ],
+      "promptPattern": "One note of this scale is missing. Which note belongs in the gap?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "minorForms": [
+          "harmonic",
+          "melodic"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "A scale uses each letter name once, in order."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.key-facts",
+      "version": 1,
+      "familyId": "fam.key-signature",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07"
+      ],
+      "conceptIds": [
+        "c.scales.major-e-ab",
+        "c.scales.minor-sharp-g3",
+        "c.scales.minor-flat-g3",
+        "c.keys.signatures-g3"
+      ],
+      "promptPattern": "How many? Sharps or flats? Which key? Which notes? Which is last?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.degree-note",
+      "version": 1,
+      "familyId": "fam.degree",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.10"
+      ],
+      "conceptIds": [
+        "c.keys.signatures-g3"
+      ],
+      "promptPattern": "Which note is degree N of this key?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "minorForms": [
+          "harmonic"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count up the scale from the tonic, which is degree 1."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.triad-notes",
+      "version": 1,
+      "familyId": "fam.triad-chord",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.09"
+      ],
+      "conceptIds": [
+        "c.keys.signatures-g3"
+      ],
+      "promptPattern": "Which notes make the tonic triad? Which note is missing?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "chordDegrees": [
+          "I"
+        ],
+        "inversions": [
+          "a"
+        ],
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The tonic triad uses degrees 1, 3 and 5."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.interval-facts",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.11"
+      ],
+      "conceptIds": [
+        "c.intervals.quality-perfect",
+        "c.intervals.quality-major-minor"
+      ],
+      "promptPattern": "Which intervals are perfect, major or minor above the tonic?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "tonic"
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Perfect: 4th, 5th, octave. Major or minor: 2nd, 3rd, 6th, 7th."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.interval-name",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.11"
+      ],
+      "conceptIds": [
+        "c.intervals.quality-perfect",
+        "c.intervals.quality-major-minor"
+      ],
+      "promptPattern": "Name the interval (quality and number) from the tonic up to the upper note.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "tonic",
+        "minorForms": [
+          "harmonic",
+          "melodic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. The 6th and 7th of a minor key are never asked, because their quality depends on the minor form."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count the number first (tonic = 1), then decide the quality."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.term-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "conceptIds": [
+        "c.terms.g3"
+      ],
+      "promptPattern": "What does this Grade 3 term mean? Which term fits this description?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "maxLedgerLines": 2,
+        "keySignatures": true,
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "No two options could both fit the meaning: speed words never sit beside speed words, nor terms listed as similar.",
+        "Grade 3 terms come from the provisional vocabulary (OPEN_QUESTIONS Q2)."
+      ],
+      "hints": [
+        "Think about speed, feeling or touch."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.melody-detail",
+      "version": 1,
+      "familyId": "fam.score-observation",
+      "grade": 3,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ],
+      "conceptIds": [
+        "c.context.melody-g3"
+      ],
+      "promptPattern": "One question about a short melody in simple or compound time.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "maxLedgerLines": 2,
+        "keySignatures": true,
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option is checked to be clearly wrong and to name a misconception."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Read the clef, key signature and time signature first."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.demisemi-regroup",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 3,
+      "mode": "correct",
+      "outcomeIds": [
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.02"
+      ],
+      "conceptIds": [
+        "c.rhythm.demisemiquaver-grouping"
+      ],
+      "promptPattern": "Beam these short notes so each beat is clear.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "6/8",
+          "9/8",
+          "3/8"
+        ],
+        "noteValues": [
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Any beaming that follows the grouping rules is accepted."
+      },
+      "ambiguityChecks": [
+        "Never more than four demisemiquavers in a row, so the book's alternative of beaming eight in two groups of four never arises (OPEN_QUESTIONS Q26)."
+      ],
+      "hints": [
+        "Beam the notes within each beat; start a new beam on each beat."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.compound-rest-write",
+      "version": 1,
+      "familyId": "fam.bar-builder",
+      "grade": 3,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
+      "conceptIds": [
+        "c.metre.compound-grouping-rests"
+      ],
+      "promptPattern": "Complete this bar of compound time with rests for the silent beats.",
+      "scope": {
+        "timeSignatures": [
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "rests": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Both forms of a silent dotted-crotchet beat are accepted (OPEN_QUESTIONS Q4, provisional). In 12/8 a half-bar rest on beat 1 or 3 is also accepted (Q25)."
+      },
+      "ambiguityChecks": [
+        "At least one valid completion exists; every completion the rhythm rules accept is credited."
+      ],
+      "hints": [
+        "A silent beat is one dotted-crotchet rest, or a crotchet rest and a quaver rest."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.upbeat-facts",
+      "version": 1,
+      "familyId": "fam.score-observation",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
+      "conceptIds": [
+        "c.metre.anacrusis"
+      ],
+      "promptPattern": "Optional enrichment: upbeat starts (fixed questions only).",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Fixed questions with one correct option each. No generator: never sampled by practice, review, a challenge or the assessment."
+      },
+      "ambiguityChecks": [
+        "Optional enrichment with fixed questions only (OPEN_QUESTIONS Q5); never assessed."
+      ],
+      "hints": [
+        "The upbeat and the last bar together make one whole bar."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
       "qa": {
         "status": "draft",
         "reviewRequirements": [

@@ -1,0 +1,900 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U2-L01",
+  "lessonId": "G3-U2-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Recognise the demisemiquaver and its rest, and know how long they last.",
+    "successCriteria": [
+      "I know a demisemiquaver has three flags, or three beams when grouped.",
+      "I know it lasts half as long as a semiquaver.",
+      "I know how many demisemiquavers fit into a quaver, a crotchet and a bar."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "You already know the crotchet, the quaver and the semiquaver. Each one is half as long as the one before. The next note in the line is the demisemiquaver, half as long as a semiquaver."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A crotchet, a quaver, a semiquaver and a demisemiquaver, each half the length of the one before.",
+        "questionAlternative": "Bar 1: crotchet, quaver, semiquaver, demisemiquaver."
+      },
+      "caption": "Each note has one more flag than the last: the demisemiquaver has three."
+    },
+    {
+      "kind": "text",
+      "text": "Notes with flags are joined by beams when they are grouped. A beamed group of demisemiquavers has three beams. Two demisemiquavers last as long as one semiquaver, four as long as a quaver, and eight as long as a crotchet."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A quaver, then a group of four beamed demisemiquavers. Both last the same time.",
+        "questionAlternative": "Bar 1: quaver, 4 beamed together (demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver)."
+      },
+      "caption": "One quaver lasts as long as four demisemiquavers."
+    },
+    {
+      "kind": "text",
+      "text": "The demisemiquaver rest has three flags on its stem, like the note it stands for. It follows the same rules as the rests you already know. Demisemiquaver: 3 flags or beams, half a semiquaver. 2 = a semiquaver, 4 = a quaver, 8 = a crotchet."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A demisemiquaver, a demisemiquaver rest, a demisemiquaver and a demisemiquaver rest.",
+        "questionAlternative": "Bar 1: demisemiquaver, demisemiquaver rest, demisemiquaver, demisemiquaver rest."
+      },
+      "caption": "The demisemiquaver rest: three flags."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "demisemiquaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "demisemiquaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "demisemiquaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "demisemiquaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A quaver and four demisemiquavers.",
+      "questionAlternative": "Bar 1: quaver, 4 beamed together (demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver)."
+    },
+    "steps": [
+      "Tap one quaver.",
+      "Now tap four very quick even notes in the same time: these are the four demisemiquavers.",
+      "One quaver lasts as long as four demisemiquavers."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A quaver, then four beamed demisemiquavers of the same total length."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u2-l01.guided-1",
+      "templateId": "t.g3.demisemi-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many flags does a single demisemiquaver have when it is not beamed to other notes?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "halved-or-doubled",
+            "reason": "One flag is a quaver. Each extra flag halves the length: two flags make a semiquaver and three a demisemiquaver."
+          },
+          "2": {
+            "category": "halved-or-doubled",
+            "reason": "Two flags make a semiquaver. A demisemiquaver is half as long again, so it has a third flag."
+          },
+          "4": {
+            "category": "halved-or-doubled",
+            "reason": "Four flags would be a note even shorter than a demisemiquaver. A demisemiquaver has three."
+          }
+        }
+      },
+      "hints": [
+        "Each shorter note has one more flag or beam and lasts half as long.",
+        "Quaver 1 flag, semiquaver 2 flags, demisemiquaver 3 flags."
+      ],
+      "feedback": {
+        "correct": "Yes: three flags.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.guided-2",
+      "templateId": "t.g3.demisemiquaver",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many demisemiquavers last as long as a quaver?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One quaver.",
+        "questionAlternative": "Bar 1: quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ]
+      },
+      "hints": [
+        "Three beams = demisemiquaver.",
+        "Each dot adds half of the value before it: a double dot adds a half and then a quarter."
+      ],
+      "feedback": {
+        "correct": "Yes: four demisemiquavers make a quaver.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.guided-3",
+      "templateId": "t.g3.demisemi-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The rest on the stave is a quaver rest, a semiquaver rest or a demisemiquaver rest. Which one is it?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A single demisemiquaver rest: it has three small flags on its stem.",
+        "questionAlternative": "A single rest with three small flags on its stem."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "A quaver rest"
+          },
+          {
+            "id": "semiquaver",
+            "label": "A semiquaver rest"
+          },
+          {
+            "id": "demisemiquaver",
+            "label": "A demisemiquaver rest"
+          }
+        ],
+        "correctOptionIds": [
+          "demisemiquaver"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "Count the flags on the rest: this one has three, which makes it A demisemiquaver rest."
+          },
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "Count the flags on the rest: this one has three, which makes it A demisemiquaver rest."
+          }
+        }
+      },
+      "hints": [
+        "Each shorter note has one more flag or beam and lasts half as long.",
+        "The rest has the same number of flags as the note of the same value: one for a quaver, two for a semiquaver, three for a demisemiquaver."
+      ],
+      "feedback": {
+        "correct": "Yes: you counted the flags on the rest.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u2-l01.ind-1",
+      "templateId": "t.g3.demisemiquaver",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many demisemiquavers last as long as a crotchet?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One crotchet.",
+        "questionAlternative": "Bar 1: crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "7",
+            "label": "7"
+          },
+          {
+            "id": "8",
+            "label": "8"
+          },
+          {
+            "id": "16",
+            "label": "16"
+          },
+          {
+            "id": "9",
+            "label": "9"
+          }
+        ],
+        "correctOptionIds": [
+          "8"
+        ]
+      },
+      "hints": [
+        "Three beams = demisemiquaver.",
+        "Each dot adds half of the value before it: a double dot adds a half and then a quarter."
+      ],
+      "feedback": {
+        "correct": "Correct: eight make a crotchet.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.ind-2",
+      "templateId": "t.g3.demisemi-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A demisemiquaver lasts half as long as which note?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "minim",
+            "label": "A minim"
+          },
+          {
+            "id": "quaver",
+            "label": "A quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "A semiquaver"
+          },
+          {
+            "id": "crotchet",
+            "label": "A crotchet"
+          }
+        ],
+        "correctOptionIds": [
+          "semiquaver"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "halved-or-doubled",
+            "reason": "A demisemiquaver is half of a semiquaver. A quaver is a different length."
+          },
+          "crotchet": {
+            "category": "halved-or-doubled",
+            "reason": "A crotchet is much longer. A demisemiquaver is half of just the next note up."
+          },
+          "minim": {
+            "category": "halved-or-doubled",
+            "reason": "A minim is much longer. A demisemiquaver is half of just the next note up."
+          }
+        }
+      },
+      "hints": [
+        "Each shorter note has one more flag or beam and lasts half as long.",
+        "Each shorter note is half the length of the one before: crotchet, quaver, semiquaver, demisemiquaver."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.ind-3",
+      "templateId": "t.g3.demisemiquaver",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many demisemiquavers last as long as a semiquaver?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One semiquaver.",
+        "questionAlternative": "Bar 1: semiquaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "1",
+            "label": "1"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ]
+      },
+      "hints": [
+        "Three beams = demisemiquaver.",
+        "Each dot adds half of the value before it: a double dot adds a half and then a quarter."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.ind-4",
+      "templateId": "t.g3.demisemi-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many demisemiquavers fill one whole bar of 2/4?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "8",
+            "label": "8"
+          },
+          {
+            "id": "12",
+            "label": "12"
+          },
+          {
+            "id": "16",
+            "label": "16"
+          },
+          {
+            "id": "32",
+            "label": "32"
+          }
+        ],
+        "correctOptionIds": [
+          "16"
+        ],
+        "diagnoses": {
+          "8": {
+            "category": "halved-or-doubled",
+            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 2/4 holds 16."
+          },
+          "12": {
+            "category": "halved-or-doubled",
+            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 2/4 holds 16."
+          },
+          "32": {
+            "category": "halved-or-doubled",
+            "reason": "Work it out from one beat: a crotchet is 8 demisemiquavers, a quaver 4. A bar of 2/4 holds 16."
+          }
+        }
+      },
+      "hints": [
+        "Each shorter note has one more flag or beam and lasts half as long.",
+        "A crotchet is worth 8 demisemiquavers. Find how many crotchets (or quavers) fill the bar."
+      ],
+      "feedback": {
+        "correct": "Correct count.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.ind-5",
+      "templateId": "t.g3.demisemi-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The rest on the stave is a quaver rest, a semiquaver rest or a demisemiquaver rest. Which one is it?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A single quaver rest: it has one small flags on its stem.",
+        "questionAlternative": "A single rest with one small flags on its stem."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "A quaver rest"
+          },
+          {
+            "id": "semiquaver",
+            "label": "A semiquaver rest"
+          },
+          {
+            "id": "demisemiquaver",
+            "label": "A demisemiquaver rest"
+          }
+        ],
+        "correctOptionIds": [
+          "quaver"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "Count the flags on the rest: this one has one, which makes it A quaver rest."
+          },
+          "demisemiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "Count the flags on the rest: this one has one, which makes it A quaver rest."
+          }
+        }
+      },
+      "hints": [
+        "Each shorter note has one more flag or beam and lasts half as long.",
+        "The rest has the same number of flags as the note of the same value: one for a quaver, two for a semiquaver, three for a demisemiquaver."
+      ],
+      "feedback": {
+        "correct": "Correct rest.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g3-u2-l01.ind-6",
+      "templateId": "t.g3.demisemiquaver",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many demisemiquavers last as long as a dotted quaver?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One dotted quaver.",
+        "questionAlternative": "Bar 1: dotted quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "12",
+            "label": "12"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ]
+      },
+      "hints": [
+        "Three beams = demisemiquaver.",
+        "Each dot adds half of the value before it: a double dot adds a half and then a quarter."
+      ],
+      "feedback": {
+        "correct": "Correct: a dotted quaver is six demisemiquavers.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    }
+  ],
+  "recap": [
+    "A demisemiquaver has three flags (or three beams when grouped).",
+    "It lasts half as long as a semiquaver: 2 = a semiquaver, 4 = a quaver, 8 = a crotchet.",
+    "Its rest has three flags."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.demisemiquaver",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.demisemi-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.demisemiquaver",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.demisemiquavers"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s04"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.03"
+    ],
+    "notes": "Original wording. Follows Grade 3 outcome 3 and book section 4. The note value is also called a thirty-second note; the course uses the British name throughout."
+  }
+}

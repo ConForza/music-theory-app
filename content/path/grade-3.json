@@ -95,7 +95,7 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g3.time-signature",
+          "templateId": "t.g3.compound-facts",
           "conceptIds": [
             "c.metre.compound-concept"
           ],
@@ -103,14 +103,7 @@
             "timeSignatures": [
               "2/4",
               "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
-            ],
-            "tuplets": [
-              "triplet"
+              "4/4"
             ]
           }
         }
@@ -118,10 +111,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s01"
-      ]
+      ],
+      "contentRef": "lessons/G3-U1-L01.json"
     },
     {
       "id": "G3-U1-L02",
@@ -138,6 +132,23 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
+          "templateId": "t.g3.compound-facts",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ]
+          }
+        },
+        {
           "templateId": "t.g3.time-signature",
           "conceptIds": [
             "c.metre.compound-concept",
@@ -150,38 +161,27 @@
               "12/8",
               "2/4",
               "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
+              "4/4"
             ],
-            "tuplets": [
-              "triplet"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.bar-complete",
-          "conceptIds": [
-            "c.metre.compound-signatures"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8"
-            ]
+            "tuplets": [],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s02"
-      ]
+      ],
+      "contentRef": "lessons/G3-U1-L02.json"
     },
     {
       "id": "G3-U1-L03",
@@ -198,6 +198,26 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
+          "templateId": "t.g3.compound-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-notes"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true
+          }
+        },
+        {
           "templateId": "t.g3.compound-grouping",
           "conceptIds": [
             "c.metre.compound-grouping-notes"
@@ -207,7 +227,15 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": false
           }
         },
         {
@@ -221,17 +249,26 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": false
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s02"
-      ]
+      ],
+      "contentRef": "lessons/G3-U1-L03.json"
     },
     {
       "id": "G3-U1-L04",
@@ -248,9 +285,8 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g3.compound-grouping",
+          "templateId": "t.g3.compound-rest-judge",
           "conceptIds": [
-            "c.metre.compound-grouping-notes",
             "c.metre.compound-grouping-rests"
           ],
           "scope": {
@@ -258,17 +294,87 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-write",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-grouping",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.bar-complete",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s03"
-      ]
+      ],
+      "contentRef": "lessons/G3-U1-L04.json"
     },
     {
       "id": "G3-U1-L05",
@@ -285,10 +391,8 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g3.time-signature",
+          "templateId": "t.g3.triplet-compare",
           "conceptIds": [
-            "c.metre.compound-concept",
-            "c.metre.compound-signatures",
             "c.metre.triplet-compound"
           ],
           "scope": {
@@ -299,25 +403,72 @@
               "2/4",
               "3/4",
               "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
               "3/8"
             ],
             "tuplets": [
               "triplet"
             ]
           }
+        },
+        {
+          "templateId": "t.g3.triplet-bar",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.time-signature",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s01",
         "fs.g3.s02"
-      ]
+      ],
+      "contentRef": "lessons/G3-U1-L05.json"
     },
     {
       "id": "G3-U1-P1",
@@ -331,11 +482,27 @@
       ],
       "exercises": [
         {
+          "templateId": "t.g3.compound-facts",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ]
+          }
+        },
+        {
           "templateId": "t.g3.time-signature",
           "conceptIds": [
             "c.metre.compound-concept",
-            "c.metre.compound-signatures",
-            "c.metre.triplet-compound"
+            "c.metre.compound-signatures"
           ],
           "scope": {
             "timeSignatures": [
@@ -344,21 +511,23 @@
               "12/8",
               "2/4",
               "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
+              "4/4"
             ],
             "tuplets": [
               "triplet"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
           }
         },
         {
-          "templateId": "t.g3.bar-complete",
+          "templateId": "t.g3.compound-judge",
           "conceptIds": [
-            "c.metre.compound-signatures",
             "c.metre.compound-grouping-notes"
           ],
           "scope": {
@@ -366,7 +535,14 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true
           }
         },
         {
@@ -380,6 +556,119 @@
               "6/8",
               "9/8",
               "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.bar-complete",
+          "conceptIds": [
+            "c.metre.compound-signatures",
+            "c.metre.compound-grouping-notes",
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-write",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-compare",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-bar",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "tuplets": [
+              "triplet"
             ]
           }
         }
@@ -387,7 +676,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U1-R1",
@@ -412,7 +701,7 @@
       ],
       "exercises": [
         {
-          "templateId": "t.g2.time-signature",
+          "templateId": "t.g2.time-sig-read",
           "conceptIds": [
             "c.metre.minim-beats",
             "c.metre.quaver-beats",
@@ -524,7 +813,7 @@
           }
         },
         {
-          "templateId": "t.g2.ledger-write",
+          "templateId": "t.g2.ledger-place",
           "conceptIds": [
             "c.pitch.ledger-two"
           ],
@@ -763,7 +1052,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U1-C",
@@ -775,7 +1064,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -799,21 +1088,46 @@
           ],
           "scope": {
             "noteValues": [
-              "demisemiquaver",
-              "semiquaver",
+              "crotchet",
               "quaver",
-              "crotchet"
+              "semiquaver",
+              "demisemiquaver"
             ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-facts",
+          "conceptIds": [
+            "c.rhythm.demisemiquavers"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "rests": true
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s04"
-      ]
+      ],
+      "contentRef": "lessons/G3-U2-L01.json"
     },
     {
       "id": "G3-U2-L02",
@@ -831,31 +1145,44 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g3.demisemiquaver",
+          "templateId": "t.g3.demisemi-judge",
           "conceptIds": [
-            "c.rhythm.demisemiquavers",
             "c.rhythm.demisemiquaver-grouping"
           ],
           "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
             "noteValues": [
-              "demisemiquaver",
-              "semiquaver",
+              "crotchet",
               "quaver",
-              "crotchet"
+              "semiquaver",
+              "demisemiquaver"
             ]
           }
         },
         {
-          "templateId": "t.g3.compound-grouping",
+          "templateId": "t.g3.demisemi-regroup",
           "conceptIds": [
-            "c.metre.compound-grouping-notes",
-            "c.metre.compound-grouping-rests"
+            "c.rhythm.demisemiquaver-grouping"
           ],
           "scope": {
             "timeSignatures": [
+              "2/4",
+              "3/4",
               "6/8",
               "9/8",
-              "12/8"
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
             ]
           }
         }
@@ -863,10 +1190,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s04"
-      ]
+      ],
+      "contentRef": "lessons/G3-U2-L02.json"
     },
     {
       "id": "G3-U2-E1",
@@ -877,19 +1205,37 @@
       "conceptIds": [
         "c.metre.anacrusis"
       ],
-      "outcomeIds": [],
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ],
       "reviewOutcomeIds": [],
-      "exercises": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.upbeat-facts",
+          "conceptIds": [
+            "c.metre.anacrusis"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8"
+            ]
+          }
+        }
+      ],
       "unlockAfter": [
         "G3-U2-L01"
       ],
       "optional": true,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s05"
-      ]
+      ],
+      "contentRef": "lessons/G3-U2-E1.json"
     },
     {
       "id": "G3-U2-P1",
@@ -905,29 +1251,80 @@
         {
           "templateId": "t.g3.demisemiquaver",
           "conceptIds": [
-            "c.rhythm.demisemiquavers",
-            "c.rhythm.demisemiquaver-grouping"
+            "c.rhythm.demisemiquavers"
           ],
           "scope": {
             "noteValues": [
-              "demisemiquaver",
-              "semiquaver",
+              "crotchet",
               "quaver",
-              "crotchet"
+              "semiquaver",
+              "demisemiquaver"
             ]
           }
         },
         {
-          "templateId": "t.g3.compound-grouping",
+          "templateId": "t.g3.demisemi-facts",
           "conceptIds": [
-            "c.metre.compound-grouping-notes",
-            "c.metre.compound-grouping-rests"
+            "c.rhythm.demisemiquavers"
           ],
           "scope": {
             "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
               "6/8",
               "9/8",
-              "12/8"
+              "12/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-judge",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-regroup",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
             ]
           }
         }
@@ -935,7 +1332,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U2-R1",
@@ -949,11 +1346,27 @@
       ],
       "exercises": [
         {
+          "templateId": "t.g3.compound-facts",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ]
+          }
+        },
+        {
           "templateId": "t.g3.time-signature",
           "conceptIds": [
             "c.metre.compound-concept",
-            "c.metre.compound-signatures",
-            "c.metre.triplet-compound"
+            "c.metre.compound-signatures"
           ],
           "scope": {
             "timeSignatures": [
@@ -962,21 +1375,23 @@
               "12/8",
               "2/4",
               "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
+              "4/4"
             ],
             "tuplets": [
               "triplet"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
           }
         },
         {
-          "templateId": "t.g3.bar-complete",
+          "templateId": "t.g3.compound-judge",
           "conceptIds": [
-            "c.metre.compound-signatures",
             "c.metre.compound-grouping-notes"
           ],
           "scope": {
@@ -984,7 +1399,14 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true
           }
         },
         {
@@ -998,6 +1420,119 @@
               "6/8",
               "9/8",
               "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.bar-complete",
+          "conceptIds": [
+            "c.metre.compound-signatures",
+            "c.metre.compound-grouping-notes",
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-write",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-compare",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-bar",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "tuplets": [
+              "triplet"
             ]
           }
         }
@@ -1005,7 +1540,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U2-C",
@@ -1017,7 +1552,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -1046,15 +1581,42 @@
             ],
             "maxLedgerLines": 4
           }
+        },
+        {
+          "templateId": "t.g3.ledger-place",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-count",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s06"
-      ]
+      ],
+      "contentRef": "lessons/G3-U3-L01.json"
     },
     {
       "id": "G3-U3-L02",
@@ -1071,9 +1633,21 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g3.ledger-read",
+          "templateId": "t.g3.octave-sign",
           "conceptIds": [
-            "c.pitch.ledger-extended",
+            "c.pitch.octave-signs"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sound",
+          "conceptIds": [
             "c.pitch.octave-signs"
           ],
           "scope": {
@@ -1088,10 +1662,11 @@
       "optional": false,
       "estimatedMinutes": 4,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s06"
-      ]
+      ],
+      "contentRef": "lessons/G3-U3-L02.json"
     },
     {
       "id": "G3-U3-L03",
@@ -1113,6 +1688,14 @@
             "c.transposition.octave-treble-bass"
           ],
           "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass"
+            ],
             "keys": [
               "C major",
               "G major",
@@ -1125,25 +1708,35 @@
               "E minor",
               "D minor"
             ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-pick",
+          "conceptIds": [
+            "c.transposition.octave-treble-bass"
+          ],
+          "scope": {
             "clefs": [
               "treble",
               "bass"
             ],
-            "maxLedgerLines": 4,
             "octaveTranspositionClefs": [
               "treble",
               "bass"
-            ]
+            ],
+            "maxLedgerLines": 2
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s07"
-      ]
+      ],
+      "contentRef": "lessons/G3-U3-L03.json"
     },
     {
       "id": "G3-U3-P1",
@@ -1159,7 +1752,58 @@
         {
           "templateId": "t.g3.ledger-read",
           "conceptIds": [
-            "c.pitch.ledger-extended",
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-place",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-count",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sign",
+          "conceptIds": [
+            "c.pitch.octave-signs"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sound",
+          "conceptIds": [
             "c.pitch.octave-signs"
           ],
           "scope": {
@@ -1176,6 +1820,14 @@
             "c.transposition.octave-treble-bass"
           ],
           "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass"
+            ],
             "keys": [
               "C major",
               "G major",
@@ -1188,22 +1840,31 @@
               "E minor",
               "D minor"
             ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-pick",
+          "conceptIds": [
+            "c.transposition.octave-treble-bass"
+          ],
+          "scope": {
             "clefs": [
               "treble",
               "bass"
             ],
-            "maxLedgerLines": 4,
             "octaveTranspositionClefs": [
               "treble",
               "bass"
-            ]
+            ],
+            "maxLedgerLines": 2
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U3-R1",
@@ -1218,11 +1879,27 @@
       ],
       "exercises": [
         {
+          "templateId": "t.g3.compound-facts",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ]
+          }
+        },
+        {
           "templateId": "t.g3.time-signature",
           "conceptIds": [
             "c.metre.compound-concept",
-            "c.metre.compound-signatures",
-            "c.metre.triplet-compound"
+            "c.metre.compound-signatures"
           ],
           "scope": {
             "timeSignatures": [
@@ -1231,21 +1908,23 @@
               "12/8",
               "2/4",
               "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
+              "4/4"
             ],
             "tuplets": [
               "triplet"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
           }
         },
         {
-          "templateId": "t.g3.bar-complete",
+          "templateId": "t.g3.compound-judge",
           "conceptIds": [
-            "c.metre.compound-signatures",
             "c.metre.compound-grouping-notes"
           ],
           "scope": {
@@ -1253,7 +1932,14 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true
           }
         },
         {
@@ -1267,21 +1953,199 @@
               "6/8",
               "9/8",
               "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.bar-complete",
+          "conceptIds": [
+            "c.metre.compound-signatures",
+            "c.metre.compound-grouping-notes",
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-write",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-compare",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-bar",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "tuplets": [
+              "triplet"
             ]
           }
         },
         {
           "templateId": "t.g3.demisemiquaver",
           "conceptIds": [
-            "c.rhythm.demisemiquavers",
-            "c.rhythm.demisemiquaver-grouping"
+            "c.rhythm.demisemiquavers"
           ],
           "scope": {
             "noteValues": [
-              "demisemiquaver",
-              "semiquaver",
+              "crotchet",
               "quaver",
-              "crotchet"
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-facts",
+          "conceptIds": [
+            "c.rhythm.demisemiquavers"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-judge",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-regroup",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
             ]
           }
         }
@@ -1289,7 +2153,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U3-C",
@@ -1301,7 +2165,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -1339,16 +2203,61 @@
             ],
             "maxLedgerLines": 2
           }
+        },
+        {
+          "templateId": "t.g3.minor-forms",
+          "conceptIds": [
+            "c.scales.minor-melodic"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.scale-gap",
+          "conceptIds": [
+            "c.scales.minor-melodic"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g2.s09",
         "fs.g2.s11"
-      ]
+      ],
+      "contentRef": "lessons/G3-U4-L01.json"
     },
     {
       "id": "G3-U4-L02",
@@ -1371,13 +2280,6 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
               "E major",
               "Ab major"
             ],
@@ -1395,16 +2297,6 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
               "E major",
               "Ab major"
             ],
@@ -1413,15 +2305,51 @@
               "bass"
             ]
           }
+        },
+        {
+          "templateId": "t.g3.key-facts",
+          "conceptIds": [
+            "c.scales.major-e-ab"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g3.scale-gap",
+          "conceptIds": [
+            "c.scales.major-e-ab"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major"
+            ],
+            "minorForms": [],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s08"
-      ]
+      ],
+      "contentRef": "lessons/G3-U4-L02.json"
     },
     {
       "id": "G3-U4-L03",
@@ -1441,14 +2369,10 @@
         {
           "templateId": "t.g3.scale-build-minor",
           "conceptIds": [
-            "c.scales.minor-melodic",
             "c.scales.minor-sharp-g3"
           ],
           "scope": {
             "keys": [
-              "A minor",
-              "E minor",
-              "D minor",
               "B minor",
               "F# minor",
               "C# minor"
@@ -1467,23 +2391,10 @@
         {
           "templateId": "t.g3.key-signature",
           "conceptIds": [
-            "c.scales.major-e-ab",
             "c.scales.minor-sharp-g3"
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
               "B minor",
               "F# minor",
               "C# minor"
@@ -1493,15 +2404,78 @@
               "bass"
             ]
           }
+        },
+        {
+          "templateId": "t.g3.minor-forms",
+          "conceptIds": [
+            "c.scales.minor-sharp-g3"
+          ],
+          "scope": {
+            "keys": [
+              "B minor",
+              "F# minor",
+              "C# minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.key-facts",
+          "conceptIds": [
+            "c.scales.minor-sharp-g3"
+          ],
+          "scope": {
+            "keys": [
+              "B minor",
+              "F# minor",
+              "C# minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g3.scale-gap",
+          "conceptIds": [
+            "c.scales.minor-sharp-g3"
+          ],
+          "scope": {
+            "keys": [
+              "B minor",
+              "F# minor",
+              "C# minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s09"
-      ]
+      ],
+      "contentRef": "lessons/G3-U4-L03.json"
     },
     {
       "id": "G3-U4-L04",
@@ -1521,18 +2495,10 @@
         {
           "templateId": "t.g3.scale-build-minor",
           "conceptIds": [
-            "c.scales.minor-melodic",
-            "c.scales.minor-sharp-g3",
             "c.scales.minor-flat-g3"
           ],
           "scope": {
             "keys": [
-              "A minor",
-              "E minor",
-              "D minor",
-              "B minor",
-              "F# minor",
-              "C# minor",
               "G minor",
               "C minor",
               "F minor"
@@ -1551,27 +2517,10 @@
         {
           "templateId": "t.g3.key-signature",
           "conceptIds": [
-            "c.scales.major-e-ab",
-            "c.scales.minor-sharp-g3",
             "c.scales.minor-flat-g3"
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
               "G minor",
               "C minor",
               "F minor"
@@ -1581,15 +2530,78 @@
               "bass"
             ]
           }
+        },
+        {
+          "templateId": "t.g3.minor-forms",
+          "conceptIds": [
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.key-facts",
+          "conceptIds": [
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g3.scale-gap",
+          "conceptIds": [
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s10"
-      ]
+      ],
+      "contentRef": "lessons/G3-U4-L04.json"
     },
     {
       "id": "G3-U4-L05",
@@ -1611,23 +2623,10 @@
         {
           "templateId": "t.g3.key-signature",
           "conceptIds": [
-            "c.scales.major-e-ab",
-            "c.scales.minor-sharp-g3",
-            "c.scales.minor-flat-g3",
             "c.keys.signatures-g3"
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
               "E major",
               "Ab major",
               "B minor",
@@ -1650,16 +2649,107 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.degree",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "degreeNaming": "number",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.key-facts",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g3.degree-note",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.triad-notes",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
               "E major",
               "Ab major",
               "B minor",
@@ -1679,52 +2769,23 @@
             ],
             "inversions": [
               "a"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.degree",
-          "conceptIds": [
-            "c.keys.signatures-g3"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
             ],
             "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
-            "degreeNaming": "number"
+              "harmonic"
+            ]
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s08",
         "fs.g3.s09",
         "fs.g3.s10"
-      ]
+      ],
+      "contentRef": "lessons/G3-U4-L05.json"
     },
     {
       "id": "G3-U4-P1",
@@ -1771,19 +2832,75 @@
           }
         },
         {
+          "templateId": "t.g3.minor-forms",
+          "conceptIds": [
+            "c.scales.minor-melodic",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.scale-gap",
+          "conceptIds": [
+            "c.scales.minor-melodic",
+            "c.scales.major-e-ab",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
           "templateId": "t.g3.scale-build-major",
           "conceptIds": [
             "c.scales.major-e-ab"
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
               "E major",
               "Ab major"
             ],
@@ -1804,16 +2921,6 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
               "E major",
               "Ab major",
               "B minor",
@@ -1830,22 +2937,116 @@
           }
         },
         {
+          "templateId": "t.g3.key-facts",
+          "conceptIds": [
+            "c.scales.major-e-ab",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3",
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "keySignatures": true
+          }
+        },
+        {
           "templateId": "t.g3.tonic-triad",
           "conceptIds": [
             "c.keys.signatures-g3"
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.degree",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "degreeNaming": "number",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.degree-note",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.triad-notes",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
               "E major",
               "Ab major",
               "B minor",
@@ -1865,47 +3066,17 @@
             ],
             "inversions": [
               "a"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.degree",
-          "conceptIds": [
-            "c.keys.signatures-g3"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
             ],
             "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
-            "degreeNaming": "number"
+              "harmonic"
+            ]
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U4-R1",
@@ -1922,11 +3093,27 @@
       ],
       "exercises": [
         {
+          "templateId": "t.g3.compound-facts",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ]
+          }
+        },
+        {
           "templateId": "t.g3.time-signature",
           "conceptIds": [
             "c.metre.compound-concept",
-            "c.metre.compound-signatures",
-            "c.metre.triplet-compound"
+            "c.metre.compound-signatures"
           ],
           "scope": {
             "timeSignatures": [
@@ -1935,21 +3122,23 @@
               "12/8",
               "2/4",
               "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
+              "4/4"
             ],
             "tuplets": [
               "triplet"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
           }
         },
         {
-          "templateId": "t.g3.bar-complete",
+          "templateId": "t.g3.compound-judge",
           "conceptIds": [
-            "c.metre.compound-signatures",
             "c.metre.compound-grouping-notes"
           ],
           "scope": {
@@ -1957,7 +3146,14 @@
               "6/8",
               "9/8",
               "12/8"
-            ]
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true
           }
         },
         {
@@ -1971,28 +3167,257 @@
               "6/8",
               "9/8",
               "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.bar-complete",
+          "conceptIds": [
+            "c.metre.compound-signatures",
+            "c.metre.compound-grouping-notes",
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-write",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-compare",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-bar",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "tuplets": [
+              "triplet"
             ]
           }
         },
         {
           "templateId": "t.g3.demisemiquaver",
           "conceptIds": [
-            "c.rhythm.demisemiquavers",
-            "c.rhythm.demisemiquaver-grouping"
+            "c.rhythm.demisemiquavers"
           ],
           "scope": {
             "noteValues": [
-              "demisemiquaver",
-              "semiquaver",
+              "crotchet",
               "quaver",
-              "crotchet"
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-facts",
+          "conceptIds": [
+            "c.rhythm.demisemiquavers"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-judge",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-regroup",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
             ]
           }
         },
         {
           "templateId": "t.g3.ledger-read",
           "conceptIds": [
-            "c.pitch.ledger-extended",
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-place",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-count",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sign",
+          "conceptIds": [
+            "c.pitch.octave-signs"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sound",
+          "conceptIds": [
             "c.pitch.octave-signs"
           ],
           "scope": {
@@ -2009,6 +3434,14 @@
             "c.transposition.octave-treble-bass"
           ],
           "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass"
+            ],
             "keys": [
               "C major",
               "G major",
@@ -2019,32 +3452,33 @@
               "Eb major",
               "A minor",
               "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
+              "D minor"
             ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-pick",
+          "conceptIds": [
+            "c.transposition.octave-treble-bass"
+          ],
+          "scope": {
             "clefs": [
               "treble",
               "bass"
             ],
-            "maxLedgerLines": 4,
             "octaveTranspositionClefs": [
               "treble",
               "bass"
-            ]
+            ],
+            "maxLedgerLines": 2
           }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U4-C",
@@ -2056,7 +3490,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -2099,15 +3533,45 @@
               "C minor",
               "F minor"
             ],
-            "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
             "clefs": [
               "treble",
               "bass"
             ],
             "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.interval-facts",
+          "conceptIds": [
+            "c.intervals.quality-perfect"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "tonic"
           }
@@ -2116,10 +3580,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s11"
-      ]
+      ],
+      "contentRef": "lessons/G3-U5-L01.json"
     },
     {
       "id": "G3-U5-L02",
@@ -2137,6 +3602,45 @@
       "exercises": [
         {
           "templateId": "t.g3.interval-quality",
+          "conceptIds": [
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.interval-name",
           "conceptIds": [
             "c.intervals.quality-perfect",
             "c.intervals.quality-major-minor"
@@ -2162,15 +3666,46 @@
               "C minor",
               "F minor"
             ],
-            "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
             "clefs": [
               "treble",
               "bass"
             ],
             "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.interval-facts",
+          "conceptIds": [
+            "c.intervals.quality-perfect",
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "tonic"
           }
@@ -2179,10 +3714,11 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s11"
-      ]
+      ],
+      "contentRef": "lessons/G3-U5-L02.json"
     },
     {
       "id": "G3-U5-L03",
@@ -2204,15 +3740,56 @@
             "c.terms.g3"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g3.term-use",
+          "conceptIds": [
+            "c.terms.g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g3.s12"
-      ]
+      ],
+      "contentRef": "lessons/G3-U5-L03.json"
     },
     {
       "id": "G3-U5-L04",
@@ -2228,6 +3805,57 @@
       ],
       "reviewOutcomeIds": [],
       "exercises": [
+        {
+          "templateId": "t.g3.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        },
         {
           "templateId": "t.g3.melody",
           "conceptIds": [
@@ -2254,21 +3882,21 @@
               "C minor",
               "F minor"
             ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
             "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8",
               "2/4",
               "3/4",
               "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
               "2/2",
               "3/2",
               "4/2",
               "3/8"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
             ],
             "maxLedgerLines": 4,
             "intervalQuality": "number-and-quality",
@@ -2279,8 +3907,9 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
-      "bookSectionIds": []
+      "contentStatus": "draft",
+      "bookSectionIds": [],
+      "contentRef": "lessons/G3-U5-L04.json"
     },
     {
       "id": "G3-U5-P1",
@@ -2321,9 +3950,76 @@
               "C minor",
               "F minor"
             ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic",
             "minorForms": [
               "harmonic",
               "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.interval-facts",
+          "conceptIds": [
+            "c.intervals.quality-perfect",
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g3.interval-name",
+          "conceptIds": [
+            "c.intervals.quality-perfect",
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
             ],
             "clefs": [
               "treble",
@@ -2331,7 +4027,11 @@
             ],
             "maxLedgerLines": 2,
             "intervalQuality": "number-and-quality",
-            "intervalLowerNote": "tonic"
+            "intervalLowerNote": "tonic",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
           }
         },
         {
@@ -2340,6 +4040,97 @@
             "c.terms.g3"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g3.term-use",
+          "conceptIds": [
+            "c.terms.g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
         },
         {
           "templateId": "t.g3.melody",
@@ -2367,21 +4158,21 @@
               "C minor",
               "F minor"
             ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
             "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8",
               "2/4",
               "3/4",
               "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
               "2/2",
               "3/2",
               "4/2",
               "3/8"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
             ],
             "maxLedgerLines": 4,
             "intervalQuality": "number-and-quality",
@@ -2392,7 +4183,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U5-R1",
@@ -2416,6 +4207,915 @@
         "abrsm2020.g1.21"
       ],
       "exercises": [
+        {
+          "templateId": "t.g3.compound-facts",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.time-signature",
+          "conceptIds": [
+            "c.metre.compound-concept",
+            "c.metre.compound-signatures"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": false
+          }
+        },
+        {
+          "templateId": "t.g3.compound-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-notes"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-grouping",
+          "conceptIds": [
+            "c.metre.compound-grouping-notes",
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.bar-complete",
+          "conceptIds": [
+            "c.metre.compound-signatures",
+            "c.metre.compound-grouping-notes",
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "ties": true,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-judge",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.compound-rest-write",
+          "conceptIds": [
+            "c.metre.compound-grouping-rests"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-compare",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/4",
+              "3/4",
+              "4/4",
+              "3/8"
+            ],
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.triplet-bar",
+          "conceptIds": [
+            "c.metre.triplet-compound"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "tuplets": [
+              "triplet"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemiquaver",
+          "conceptIds": [
+            "c.rhythm.demisemiquavers"
+          ],
+          "scope": {
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-facts",
+          "conceptIds": [
+            "c.rhythm.demisemiquavers"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "rests": true
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-judge",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.demisemi-regroup",
+          "conceptIds": [
+            "c.rhythm.demisemiquaver-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "6/8",
+              "9/8",
+              "3/8"
+            ],
+            "noteValues": [
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-read",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-place",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.ledger-count",
+          "conceptIds": [
+            "c.pitch.ledger-extended"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sign",
+          "conceptIds": [
+            "c.pitch.octave-signs"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-sound",
+          "conceptIds": [
+            "c.pitch.octave-signs"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-transpose",
+          "conceptIds": [
+            "c.transposition.octave-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor"
+            ],
+            "maxLedgerLines": 4
+          }
+        },
+        {
+          "templateId": "t.g3.octave-pick",
+          "conceptIds": [
+            "c.transposition.octave-treble-bass"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "octaveTranspositionClefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.scale-build-minor",
+          "conceptIds": [
+            "c.scales.minor-melodic",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.minor-forms",
+          "conceptIds": [
+            "c.scales.minor-melodic",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.scale-gap",
+          "conceptIds": [
+            "c.scales.minor-melodic",
+            "c.scales.major-e-ab",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.scale-build-major",
+          "conceptIds": [
+            "c.scales.major-e-ab"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.key-signature",
+          "conceptIds": [
+            "c.scales.major-e-ab",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3",
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.key-facts",
+          "conceptIds": [
+            "c.scales.major-e-ab",
+            "c.scales.minor-sharp-g3",
+            "c.scales.minor-flat-g3",
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g3.tonic-triad",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.degree",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "degreeNaming": "number",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.degree-note",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "minorForms": [
+              "harmonic"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
+          "templateId": "t.g3.triad-notes",
+          "conceptIds": [
+            "c.keys.signatures-g3"
+          ],
+          "scope": {
+            "keys": [
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.interval-quality",
+          "conceptIds": [
+            "c.intervals.quality-perfect",
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.interval-facts",
+          "conceptIds": [
+            "c.intervals.quality-perfect",
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic"
+          }
+        },
+        {
+          "templateId": "t.g3.interval-name",
+          "conceptIds": [
+            "c.intervals.quality-perfect",
+            "c.intervals.quality-major-minor"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic",
+            "minorForms": [
+              "harmonic",
+              "melodic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.terms",
+          "conceptIds": [
+            "c.terms.g3"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.term-use",
+          "conceptIds": [
+            "c.terms.g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g3.melody",
+          "conceptIds": [
+            "c.context.melody-g3"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8"
+            ],
+            "maxLedgerLines": 4,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "tonic"
+          }
+        },
         {
           "templateId": "t.g1.melody",
           "conceptIds": [
@@ -2481,386 +5181,12 @@
             ],
             "maxLedgerLines": 2
           }
-        },
-        {
-          "templateId": "t.g3.time-signature",
-          "conceptIds": [
-            "c.metre.compound-concept",
-            "c.metre.compound-signatures",
-            "c.metre.triplet-compound"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8",
-              "2/4",
-              "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
-            ],
-            "tuplets": [
-              "triplet"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.bar-complete",
-          "conceptIds": [
-            "c.metre.compound-signatures",
-            "c.metre.compound-grouping-notes"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.compound-grouping",
-          "conceptIds": [
-            "c.metre.compound-grouping-notes",
-            "c.metre.compound-grouping-rests"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.demisemiquaver",
-          "conceptIds": [
-            "c.rhythm.demisemiquavers",
-            "c.rhythm.demisemiquaver-grouping"
-          ],
-          "scope": {
-            "noteValues": [
-              "demisemiquaver",
-              "semiquaver",
-              "quaver",
-              "crotchet"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.ledger-read",
-          "conceptIds": [
-            "c.pitch.ledger-extended",
-            "c.pitch.octave-signs"
-          ],
-          "scope": {
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 4
-          }
-        },
-        {
-          "templateId": "t.g3.octave-transpose",
-          "conceptIds": [
-            "c.transposition.octave-treble-bass"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 4,
-            "octaveTranspositionClefs": [
-              "treble",
-              "bass"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.scale-build-major",
-          "conceptIds": [
-            "c.scales.major-e-ab"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "E major",
-              "Ab major"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 2
-          }
-        },
-        {
-          "templateId": "t.g3.scale-build-minor",
-          "conceptIds": [
-            "c.scales.minor-melodic",
-            "c.scales.minor-sharp-g3",
-            "c.scales.minor-flat-g3"
-          ],
-          "scope": {
-            "keys": [
-              "A minor",
-              "E minor",
-              "D minor",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 2
-          }
-        },
-        {
-          "templateId": "t.g3.key-signature",
-          "conceptIds": [
-            "c.scales.major-e-ab",
-            "c.scales.minor-sharp-g3",
-            "c.scales.minor-flat-g3",
-            "c.keys.signatures-g3"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.tonic-triad",
-          "conceptIds": [
-            "c.keys.signatures-g3"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 2,
-            "chordDegrees": [
-              "I"
-            ],
-            "inversions": [
-              "a"
-            ]
-          }
-        },
-        {
-          "templateId": "t.g3.degree",
-          "conceptIds": [
-            "c.keys.signatures-g3"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
-            "degreeNaming": "number"
-          }
-        },
-        {
-          "templateId": "t.g3.interval-quality",
-          "conceptIds": [
-            "c.intervals.quality-perfect",
-            "c.intervals.quality-major-minor"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "minorForms": [
-              "harmonic",
-              "melodic"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 2,
-            "intervalQuality": "number-and-quality",
-            "intervalLowerNote": "tonic"
-          }
-        },
-        {
-          "templateId": "t.g3.terms",
-          "conceptIds": [
-            "c.terms.g3"
-          ],
-          "scope": {}
-        },
-        {
-          "templateId": "t.g3.melody",
-          "conceptIds": [
-            "c.context.melody-g3"
-          ],
-          "scope": {
-            "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major",
-              "A major",
-              "Bb major",
-              "Eb major",
-              "A minor",
-              "E minor",
-              "D minor",
-              "E major",
-              "Ab major",
-              "B minor",
-              "F# minor",
-              "C# minor",
-              "G minor",
-              "C minor",
-              "F minor"
-            ],
-            "timeSignatures": [
-              "6/8",
-              "9/8",
-              "12/8",
-              "2/4",
-              "3/4",
-              "4/4",
-              "2/2",
-              "3/2",
-              "4/2",
-              "3/8"
-            ],
-            "clefs": [
-              "treble",
-              "bass"
-            ],
-            "maxLedgerLines": 4,
-            "intervalQuality": "number-and-quality",
-            "intervalLowerNote": "tonic"
-          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G3-U5-C",
@@ -2872,7 +5198,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -2885,7 +5211,7 @@
       "optional": false,
       "estimatedMinutes": 25,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     }
   ]

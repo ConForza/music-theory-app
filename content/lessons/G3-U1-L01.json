@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U1-L01",
+  "lessonId": "G3-U1-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Tell simple time from compound time by how the beat divides.",
+    "successCriteria": [
+      "I know that in simple time every beat divides into two.",
+      "I know that in compound time every beat divides into three.",
+      "I know a compound beat is a dotted note."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Every time signature you have met so far is in simple time. In simple time the beat is a plain note, and it divides into two equal halves: a crotchet beat into two quavers, a minim beat into two crotchets."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A crotchet beat, then a crotchet beat divided into two beamed quavers.",
+        "questionAlternative": "Bar 1: crotchet, 2 beamed together (quaver, quaver)."
+      },
+      "caption": "Simple time: the beat divides into two."
+    },
+    {
+      "kind": "text",
+      "text": "Compound time works differently. Every beat divides into three equal notes, not two. To hold three quavers, the beat has to be a dotted crotchet: a crotchet is two quavers, and the dot adds half as much again, one more quaver."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A dotted crotchet beat, then a dotted crotchet beat divided into three beamed quavers.",
+        "questionAlternative": "Bar 1: dotted crotchet, 3 beamed together (quaver, quaver, quaver)."
+      },
+      "caption": "Compound time: the beat is a dotted note and divides into three."
+    },
+    {
+      "kind": "text",
+      "text": "In Grade 2 you met the triplet, which squeezes three notes into one ordinary beat. Compound time is not the same thing: there, three is the normal way to divide every beat, so no sign is needed."
+    },
+    {
+      "kind": "tip",
+      "text": "Simple time: beats divide into 2. Compound time: beats divide into 3, and the beat is a dotted note."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 1
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A dotted crotchet followed by three beamed quavers.",
+      "questionAlternative": "Bar 1: dotted crotchet, 3 beamed together (quaver, quaver, quaver)."
+    },
+    "steps": [
+      "Tap the dotted crotchet once: that is one beat.",
+      "Now tap three even quavers in the same length of time: that is one beat divided into three.",
+      "Three even notes in each beat is the sound of compound time."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A dotted crotchet beat, then a beat divided into three quavers: both last the same time."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u1-l01.guided-1",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these beats belongs to compound time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "s1",
+            "label": "A crotchet divided into two quavers"
+          },
+          {
+            "id": "s2",
+            "label": "A minim divided into two crotchets"
+          },
+          {
+            "id": "s3",
+            "label": "A quaver divided into two semiquavers"
+          },
+          {
+            "id": "c1",
+            "label": "A dotted crotchet divided into three quavers"
+          }
+        ],
+        "correctOptionIds": [
+          "c1"
+        ],
+        "diagnoses": {
+          "s1": {
+            "category": "simple-compound-confusion",
+            "reason": "That beat divides into two equal parts, which is simple time. In compound time every beat divides into three."
+          },
+          "s2": {
+            "category": "simple-compound-confusion",
+            "reason": "That beat divides into two equal parts, which is simple time. In compound time every beat divides into three."
+          },
+          "s3": {
+            "category": "simple-compound-confusion",
+            "reason": "That beat divides into two equal parts, which is simple time. In compound time every beat divides into three."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "In compound time the beat is a dotted note that divides into three equal notes."
+      ],
+      "feedback": {
+        "correct": "Yes: a dotted note that divides into three is compound.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.guided-2",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A piece has beats that are each a crotchet divided into two quavers. Is it in simple time or compound time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simple",
+            "label": "Simple time"
+          },
+          {
+            "id": "compound",
+            "label": "Compound time"
+          }
+        ],
+        "correctOptionIds": [
+          "simple"
+        ],
+        "diagnoses": {
+          "compound": {
+            "category": "simple-compound-confusion",
+            "reason": "Count the equal parts in each beat: there are two, not three. Beats that divide into two are simple time."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Count the equal notes in one beat: two means simple time, three means compound time."
+      ],
+      "feedback": {
+        "correct": "Yes: you counted the equal parts in each beat.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.guided-3",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In compound time the beat is a dotted crotchet. How many quavers last as long as one dotted crotchet?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "simple-compound-confusion",
+            "reason": "Two quavers last as long as a plain crotchet. The dot adds half as much again: one more quaver."
+          },
+          "4": {
+            "category": "beat-count-wrong",
+            "reason": "Four quavers is a minim. A dotted crotchet is a crotchet (2 quavers) plus half of it (1 quaver)."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "Six quavers is a dotted minim, two whole beats of compound time."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "A crotchet is 2 quavers. The dot adds half its length."
+      ],
+      "feedback": {
+        "correct": "Yes: a crotchet and one more quaver make three.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u1-l01.ind-1",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A piece has beats that are each a quaver divided into two semiquavers. Is it in simple time or compound time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simple",
+            "label": "Simple time"
+          },
+          {
+            "id": "compound",
+            "label": "Compound time"
+          }
+        ],
+        "correctOptionIds": [
+          "simple"
+        ],
+        "diagnoses": {
+          "compound": {
+            "category": "simple-compound-confusion",
+            "reason": "Count the equal parts in each beat: there are two, not three. Beats that divide into two are simple time."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Count the equal notes in one beat: two means simple time, three means compound time."
+      ],
+      "feedback": {
+        "correct": "Correct kind of time.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.ind-2",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Each beat of 4/4 is an ordinary (undotted) note. Into how many equal quavers does it divide?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "simple-compound-confusion",
+            "reason": "Three equal parts is compound time, where the beat is a dotted note. An undotted beat divides into two."
+          },
+          "4": {
+            "category": "beat-count-wrong",
+            "reason": "Four would be two sub-divisions of the beat. The first division of an undotted beat is into two equal parts."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "Six is far too many for one beat. The first division of an undotted beat is into two equal parts."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Simple time: beats divide into two."
+      ],
+      "feedback": {
+        "correct": "Correct: a plain beat divides in two.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.ind-3",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A piece has beats that are each a dotted crotchet divided into three quavers. Is it in simple time or compound time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simple",
+            "label": "Simple time"
+          },
+          {
+            "id": "compound",
+            "label": "Compound time"
+          }
+        ],
+        "correctOptionIds": [
+          "compound"
+        ],
+        "diagnoses": {
+          "simple": {
+            "category": "simple-compound-confusion",
+            "reason": "Count the equal parts in each beat: there are three, not two. Beats that divide into three are compound time."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Count the equal notes in one beat: two means simple time, three means compound time."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.ind-4",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In compound time, into how many equal notes does each beat divide?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "simple-compound-confusion",
+            "reason": "Two equal parts is simple time. In compound time every beat divides into three."
+          },
+          "4": {
+            "category": "beat-count-wrong",
+            "reason": "Four is not the first division of a beat. Compound beats divide into three."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "Six would be two beats' worth. One compound beat divides into three."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Compound time: the beat is a dotted note that divides into three."
+      ],
+      "feedback": {
+        "correct": "Yes: three in every beat.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.ind-5",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A piece has beats that are each a minim divided into two crotchets. Is it in simple time or compound time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simple",
+            "label": "Simple time"
+          },
+          {
+            "id": "compound",
+            "label": "Compound time"
+          }
+        ],
+        "correctOptionIds": [
+          "simple"
+        ],
+        "diagnoses": {
+          "compound": {
+            "category": "simple-compound-confusion",
+            "reason": "Count the equal parts in each beat: there are two, not three. Beats that divide into two are simple time."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Count the equal notes in one beat: two means simple time, three means compound time."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l01.ind-6",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Each beat of 2/4 is an ordinary (undotted) note. Into how many equal quavers does it divide?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "simple-compound-confusion",
+            "reason": "Three equal parts is compound time, where the beat is a dotted note. An undotted beat divides into two."
+          },
+          "4": {
+            "category": "beat-count-wrong",
+            "reason": "Four would be two sub-divisions of the beat. The first division of an undotted beat is into two equal parts."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "Six is far too many for one beat. The first division of an undotted beat is into two equal parts."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Simple time: beats divide into two."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "recap": [
+    "Simple time: each beat divides into two equal notes.",
+    "Compound time: each beat divides into three equal notes.",
+    "A compound beat is a dotted note, such as a dotted crotchet."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.compound-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.compound-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.compound-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.compound-concept"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s01"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.01"
+    ],
+    "notes": "Original wording. Follows the Grade 3 outline: understand compound time. Book section 1 orders the ideas: simple time first, then compound. No compound time signature is named until the next lesson, so questions here use beat descriptions and simple time signatures only."
+  }
+}

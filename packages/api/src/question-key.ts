@@ -40,10 +40,14 @@ export const ORDER_INSENSITIVE_TEMPLATES = new Set(
 );
 
 /** Templates introduced in Brief 06 (Grade 2). New, so they have no stored history; their options are order-insensitive too. */
+/** Templates introduced in Brief 07 (Grade 3): new, so no stored history; option order is not part of the question. */
+export const GRADE3_ORDER_INSENSITIVE = new Set(
+  ["compound-facts", "compound-judge", "compound-rest-judge", "triplet-compare", "triplet-bar", "demisemi-facts", "demisemi-judge", "ledger-count", "octave-sign", "octave-pick", "minor-forms", "scale-gap", "key-facts", "degree-note", "triad-notes", "interval-facts", "interval-name", "term-use", "melody-detail"].map((x) => `t.g3.${x}`),
+);
 export const GRADE2_ORDER_INSENSITIVE = new Set(
   ["beat-facts", "bar-judge", "triplet-facts", "triplet-read", "triplet-mixed", "triplet-fill", "rest-judge", "rest-fix", "time-sig-read", "ledger-place", "clef-pair", "scale-gap", "key-facts", "minor-pattern", "minor-facts", "relative-facts", "degree-note", "triad-notes", "interval-note", "term-use", "melody-detail"].map((x) => `t.g2.${x}`),
 );
-const orderInsensitive = (templateId: string) => ORDER_INSENSITIVE_TEMPLATES.has(templateId) || GRADE2_ORDER_INSENSITIVE.has(templateId);
+const orderInsensitive = (templateId: string) => ORDER_INSENSITIVE_TEMPLATES.has(templateId) || GRADE2_ORDER_INSENSITIVE.has(templateId) || GRADE3_ORDER_INSENSITIVE.has(templateId);
 
 export function questionKey(item: ExerciseItem): string {
   const answer = orderInsensitive(item.templateId) ? normaliseAnswer(item.answer) : item.answer;
@@ -101,6 +105,8 @@ export interface ReviewConstraint {
   ledgerLines?: number;
   /** At least one written pitch needs this many ledger lines or more (the concept is about reading beyond the stave). */
   minLedgerLines?: number;
+  /** Brief 07: the interval the question is about has one of these qualities ("M" major, "m" minor, "P" perfect), read from its accepted answer. */
+  intervalQualities?: string[];
 }
 
 const PITCH = /^[A-G](bb|b|#|x)?-?\d$/;
@@ -144,9 +150,9 @@ function keyOf(item: ExerciseItem): string | undefined {
   // Grade 2 templates (Brief 06): a choice whose right answer is a key names the key it is about. Not applied to older templates,
   // so what earlier briefs credited is unchanged.
   const right = (item.answer as { correctOptionIds?: string[] }).correctOptionIds?.[0];
-  if (item.templateId.startsWith("t.g2.") && right && /^[A-G][b#]? (major|minor)$/.test(right)) return right;
+  if (/^t\.g[23]\./.test(item.templateId) && right && /^[A-G][b#]? (major|minor)$/.test(right)) return right;
   const text = item.prompt.replace(/♯/g, "#").replace(/♭/g, "b");
-  const harmonic = /\b([A-G][b#]?) harmonic minor\b/.exec(text);
+  const harmonic = /\b([A-G][b#]?) (?:harmonic|melodic) minor\b/.exec(text);
   if (harmonic) return `${harmonic[1]} minor`;
   const m = /\b([A-G][b#]?) (major|minor)\b/.exec(text);
   return m ? `${m[1]} ${m[2]}` : undefined;
@@ -172,6 +178,13 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
   if (c.promptExcludes?.some((w) => item.prompt.includes(w))) return false;
   if (c.timeSignatures) {
     if (!timeSignaturesOf(item).some((t) => c.timeSignatures!.includes(t))) return false;
+  }
+  if (c.intervalQualities) {
+    const a = item.answer as { acceptedIntervals?: string[]; target?: string; correctOptionIds?: string[] };
+    const q = a.acceptedIntervals?.[0] ?? a.target ?? a.correctOptionIds?.[0];
+    const word: Record<string, string> = { major: "M", minor: "m", perfect: "P" };
+    const ch = typeof q === "string" ? word[q] ?? (/^[PMmdA]\d/.test(q) ? q[0] : undefined) : undefined;
+    if (!ch || !c.intervalQualities.includes(ch)) return false;
   }
   if (c.termIds) {
     const t = (item.answer as { correctOptionIds?: string[] }).correctOptionIds?.[0];
