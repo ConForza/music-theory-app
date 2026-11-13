@@ -1,0 +1,1146 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U1-L02",
+  "lessonId": "G3-U1-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read the compound time signatures 6/8, 9/8 and 12/8.",
+    "successCriteria": [
+      "I know the top number counts quavers.",
+      "I can find the number of dotted-crotchet beats by dividing the top number by 3.",
+      "I can call 6/8, 9/8 and 12/8 compound duple, triple and quadruple."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In 6/8, 9/8 and 12/8 the bottom number is 8, so the top number counts quavers. Three quavers make one dotted-crotchet beat, so you divide the top number by three to find the number of beats."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 6/8, each with two dotted crotchets.",
+        "questionAlternative": "Bar 1: dotted crotchet, dotted crotchet. Bar 2: dotted crotchet, dotted crotchet.",
+        "timeSignature": "6/8"
+      },
+      "caption": "6/8: six quavers, two dotted-crotchet beats. Compound duple."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 9/8 with three dotted crotchets.",
+        "questionAlternative": "Bar 1: dotted crotchet, dotted crotchet, dotted crotchet.",
+        "timeSignature": "9/8"
+      },
+      "caption": "9/8: nine quavers, three beats. Compound triple."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 12/8 with four dotted crotchets.",
+        "questionAlternative": "Bar 1: dotted crotchet, dotted crotchet, dotted crotchet, dotted crotchet.",
+        "timeSignature": "12/8"
+      },
+      "caption": "12/8: twelve quavers, four beats. Compound quadruple."
+    },
+    {
+      "kind": "text",
+      "text": "Do not confuse 6/8 with 3/4. A bar of each is the same length, six quavers. But 3/4 has three crotchet beats that divide into two, and 6/8 has two dotted-crotchet beats that divide into three. The groups of beamed quavers show which one you are reading."
+    },
+    {
+      "kind": "tip",
+      "text": "Top number ÷ 3 = number of beats. 6/8 = 2 beats, 9/8 = 3 beats, 12/8 = 4 beats. All three have dotted-crotchet beats."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 6/8: two groups of three beamed quavers.",
+      "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver).",
+      "timeSignature": "6/8"
+    },
+    "steps": [
+      "Count the six quavers: 1 2 3 4 5 6.",
+      "Group them in threes: two beats, each a group of three quavers.",
+      "Two beats, three quavers each: this is compound duple time."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 6/8 with two beamed groups of three quavers: two beats."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u1-l02.guided-1",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many beats are there in each bar of 6/8?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "beat-count-wrong",
+            "reason": "Divide the top number by three: 6 quavers make 2 dotted-crotchet beats."
+          },
+          "4": {
+            "category": "beat-count-wrong",
+            "reason": "Divide the top number by three: 6 quavers make 2 dotted-crotchet beats."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "6 is the number of quavers, not the number of beats. In compound time three quavers make one dotted-crotchet beat, so 6/8 has 2 beats."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "The top number counts quavers. Three quavers make one beat."
+      ],
+      "feedback": {
+        "correct": "Yes: divide the top number by three.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.guided-2",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In 12/8, which note is worth one beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "A crotchet"
+          },
+          {
+            "id": "dotted-crotchet",
+            "label": "A dotted crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "A quaver"
+          },
+          {
+            "id": "dotted-minim",
+            "label": "A dotted minim"
+          }
+        ],
+        "correctOptionIds": [
+          "dotted-crotchet"
+        ],
+        "diagnoses": {
+          "crotchet": {
+            "category": "beat-unit-wrong",
+            "reason": "A crotchet is only two quavers. A compound beat holds three quavers, which is a dotted crotchet."
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "The bottom number 8 names the quaver that is counted in the bar, but the beat is three of them, a dotted crotchet."
+          },
+          "dotted-minim": {
+            "category": "beat-unit-wrong",
+            "reason": "A dotted minim is six quavers, two whole beats of compound time."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Three quavers make one beat. Which note lasts as long as three quavers?"
+      ],
+      "feedback": {
+        "correct": "Yes: three quavers make a dotted crotchet.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.guided-3",
+      "templateId": "t.g3.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, dotted crotchet, dotted crotchet, crotchet, quaver. Bar 2: crotchet, quaver, quaver, crotchet, crotchet, quaver, dotted crotchet.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), dotted crotchet, dotted crotchet, crotchet, quaver. Bar 2: crotchet, quaver, quaver, crotchet, crotchet, quaver, dotted crotchet."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "12/8"
+        ]
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+      ],
+      "feedback": {
+        "correct": "Right: you read the beats from the beaming.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u1-l02.ind-1",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What kind of time is 12/8?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "compound duple",
+            "label": "Compound duple"
+          },
+          {
+            "id": "simple quadruple",
+            "label": "Simple quadruple"
+          },
+          {
+            "id": "simple triple",
+            "label": "Simple triple"
+          },
+          {
+            "id": "compound quadruple",
+            "label": "Compound quadruple"
+          }
+        ],
+        "correctOptionIds": [
+          "compound quadruple"
+        ],
+        "diagnoses": {
+          "simple quadruple": {
+            "category": "simple-compound-confusion",
+            "reason": "12/8 has dotted-crotchet beats that divide into three, so it is compound time."
+          },
+          "simple triple": {
+            "category": "simple-compound-confusion",
+            "reason": "12/8 has dotted-crotchet beats that divide into three, so it is compound time."
+          },
+          "compound duple": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats in a bar of 12/8: 4. That makes it compound quadruple."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "12/8 has 4 dotted-crotchet beats in a bar: that is four beats, so compound quadruple."
+      ],
+      "feedback": {
+        "correct": "Correct name.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.ind-2",
+      "templateId": "t.g3.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet, quaver, quaver, quaver, quaver, crotchet. Bar 2: crotchet, quaver, quaver, crotchet, crotchet, quaver.",
+        "questionAlternative": "Bar 1: quaver, crotchet, 3 beamed together (quaver, quaver, quaver), quaver, crotchet. Bar 2: crotchet, quaver, quaver, crotchet, crotchet, quaver."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "9/8"
+        ]
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+      ],
+      "feedback": {
+        "correct": "Correct time signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.ind-3",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these time signatures is in compound triple time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "6/8",
+            "label": "6/8"
+          },
+          {
+            "id": "3/4",
+            "label": "3/4"
+          },
+          {
+            "id": "9/8",
+            "label": "9/8"
+          },
+          {
+            "id": "12/8",
+            "label": "12/8"
+          }
+        ],
+        "correctOptionIds": [
+          "9/8"
+        ],
+        "diagnoses": {
+          "6/8": {
+            "category": "beat-count-wrong",
+            "reason": "6/8 is compound duple time: it has 2 dotted-crotchet beats."
+          },
+          "12/8": {
+            "category": "beat-count-wrong",
+            "reason": "12/8 is compound quadruple time: it has 4 dotted-crotchet beats."
+          },
+          "3/4": {
+            "category": "simple-compound-confusion",
+            "reason": "3/4 is simple triple time. Its beats are undotted notes divided into two."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Compound duple has 2 dotted-crotchet beats, compound triple 3, compound quadruple 4. Divide the top number by 3."
+      ],
+      "feedback": {
+        "correct": "Correct signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.ind-4",
+      "templateId": "t.g3.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver, quaver, quaver, quaver, crotchet, quaver, crotchet. Bar 2: crotchet, quaver, quaver, quaver, quaver, dotted crotchet, dotted crotchet.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver), quaver, crotchet, quaver, crotchet. Bar 2: crotchet, quaver, 3 beamed together (quaver, quaver, quaver), dotted crotchet, dotted crotchet."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "12/8"
+        ]
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+      ],
+      "feedback": {
+        "correct": "Correct time signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.ind-5",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many quavers fill one whole bar of 6/8?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "12",
+            "label": "12"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "beat-count-wrong",
+            "reason": "A bar of 6/8 holds 6 quavers. Work from the beats: each beat is three quavers."
+          },
+          "12": {
+            "category": "beat-count-wrong",
+            "reason": "A bar of 6/8 holds 6 quavers. Work from the beats: each beat is three quavers."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Find the length of one beat in quavers, then multiply by the number of beats."
+      ],
+      "feedback": {
+        "correct": "Correct count.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l02.ind-6",
+      "templateId": "t.g3.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "When the beat of 12/8 is divided in the usual way, into how many equal notes does one beat divide?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "simple-compound-confusion",
+            "reason": "12/8 is compound time: each beat is a dotted note that divides into three, not 2."
+          },
+          "4": {
+            "category": "simple-compound-confusion",
+            "reason": "12/8 is compound time: each beat is a dotted note that divides into three, not 4."
+          },
+          "6": {
+            "category": "simple-compound-confusion",
+            "reason": "12/8 is compound time: each beat is a dotted note that divides into three, not 6."
+          }
+        }
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Compound time: beats divide into three."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "recap": [
+    "6/8, 9/8 and 12/8 are compound times with dotted-crotchet beats.",
+    "Divide the top number by 3 to count the beats: 2, 3 or 4.",
+    "6/8 is compound duple, 9/8 compound triple, 12/8 compound quadruple."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.compound-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.time-signature",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.compound-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.compound-signatures"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s02"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.01"
+    ],
+    "notes": "Original wording. Follows Grade 3 outcome 1. The 6/8 versus 3/4 comparison follows the book's emphasis on telling them apart by the beat. Rhythms that fit more than one time signature once the beaming is read are never generated for the time-signature questions (TEACHER TO CONFIRM that beaming is an acceptable cue)."
+  }
+}

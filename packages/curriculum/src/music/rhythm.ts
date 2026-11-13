@@ -279,6 +279,9 @@ export function checkBar(events: REvent[], m: MetreStructure, opts: BarCheckOpti
   const bounds = beatBoundaries(m);
   const inner = bounds.slice(1, -1);
   const middle = m.metre === "simple" && m.groups.length === 4 ? bounds[2]! : null;
+  // Brief 07: a rest may fill half of a four-beat bar (beats 1-2 or 3-4) in compound quadruple time as well (12/8), as in 4/4.
+  // Notes keep the stricter rule (only simple time has the "middle of the bar" note rule), so no existing note check changes.
+  const restMiddle = m.metre !== "irregular" && m.groups.length === 4 ? bounds[2]! : null;
   const compoundLike = m.metre !== "simple";
 
   // Tuplet written totals.
@@ -352,11 +355,11 @@ export function checkBar(events: REvent[], m: MetreStructure, opts: BarCheckOpti
     if (t.e.wholeBar || (isZero(t.onset) && equals(t.dur, m.capacity))) return;
     const crossing = inner.filter((b) => crosses(t.onset, end, b));
     if (!crossing.length) return;
-    if (middle) {
+    if (restMiddle) {
       const halfBar = mul(m.capacity, frac(1, 2));
-      const startsHalf = isZero(t.onset) || equals(t.onset, middle);
+      const startsHalf = isZero(t.onset) || equals(t.onset, restMiddle);
       if (startsHalf && equals(t.dur, halfBar)) return; // a half-bar rest on beat 1 or 3
-      if (crossing.some((b) => equals(b, middle))) {
+      if (crossing.some((b) => equals(b, restMiddle))) {
         push("half-bar-rest-misplaced", t.index, "A rest may cover half of a 4-beat bar only on beat 1 or beat 3.");
         return;
       }

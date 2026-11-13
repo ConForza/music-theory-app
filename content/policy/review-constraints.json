@@ -265,6 +265,123 @@
     {
       "conceptId": "c.pitch.ledger-two",
       "minLedgerLines": 2
+    },
+    {
+      "conceptId": "c.metre.compound-signatures",
+      "timeSignatures": [
+        "6/8",
+        "9/8",
+        "12/8"
+      ]
+    },
+    {
+      "conceptId": "c.metre.compound-grouping-rests",
+      "rhythm": {
+        "rest": true
+      }
+    },
+    {
+      "conceptId": "c.metre.triplet-compound",
+      "promptIncludes": [
+        "triplet"
+      ]
+    },
+    {
+      "conceptId": "c.rhythm.demisemiquavers",
+      "promptMentions": [
+        "demisemiquaver"
+      ],
+      "rhythm": {
+        "values": [
+          "demisemiquaver"
+        ]
+      }
+    },
+    {
+      "conceptId": "c.rhythm.demisemiquaver-grouping",
+      "rhythm": {
+        "values": [
+          "demisemiquaver"
+        ],
+        "beam": true
+      }
+    },
+    {
+      "conceptId": "c.pitch.ledger-extended",
+      "minLedgerLines": 3
+    },
+    {
+      "conceptId": "c.pitch.octave-signs",
+      "promptIncludes": [
+        "8va",
+        "8vb"
+      ]
+    },
+    {
+      "conceptId": "c.scales.minor-melodic",
+      "promptIncludes": [
+        "melodic"
+      ]
+    },
+    {
+      "conceptId": "c.scales.major-e-ab",
+      "keys": [
+        "E major",
+        "Ab major"
+      ]
+    },
+    {
+      "conceptId": "c.scales.minor-sharp-g3",
+      "keys": [
+        "B minor",
+        "F# minor",
+        "C# minor"
+      ]
+    },
+    {
+      "conceptId": "c.scales.minor-flat-g3",
+      "keys": [
+        "G minor",
+        "C minor",
+        "F minor"
+      ]
+    },
+    {
+      "conceptId": "c.keys.signatures-g3",
+      "keys": [
+        "E major",
+        "Ab major",
+        "B minor",
+        "F# minor",
+        "C# minor",
+        "G minor",
+        "C minor",
+        "F minor"
+      ]
+    },
+    {
+      "conceptId": "c.intervals.quality-perfect",
+      "intervalQualities": [
+        "P"
+      ]
+    },
+    {
+      "conceptId": "c.intervals.quality-major-minor",
+      "intervalQualities": [
+        "M",
+        "m"
+      ]
+    },
+    {
+      "conceptId": "c.terms.g3",
+      "termIds": [
+        "andantino",
+        "prestissimo",
+        "tempo-primo",
+        "espressivo",
+        "sostenuto",
+        "con-moto"
+      ]
     }
   ]
 }

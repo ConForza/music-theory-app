@@ -1,0 +1,1216 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U1-L05",
+  "lessonId": "G3-U1-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Compare triplets in simple time with ordinary beats of compound time.",
+    "successCriteria": [
+      "I know three quavers in a compound beat need no triplet sign.",
+      "I know a triplet in 2/4 sounds like the beats of 6/8.",
+      "I can match a simple time signature with its compound partner."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A triplet puts three notes into a beat that is normally divided into two. Compound time works the other way round: dividing every beat into three is the normal pattern. The two can sound exactly the same."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 2/4: two beats, each a triplet of three quavers.",
+        "questionAlternative": "Bar 1: a triplet of quaver, quaver, quaver, a triplet of quaver, quaver, quaver.",
+        "timeSignature": "2/4"
+      },
+      "caption": "2/4 with a triplet on each beat. The 3 is needed to show three notes in a crotchet beat."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 6/8: two beats, each three beamed quavers.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver).",
+        "timeSignature": "6/8"
+      },
+      "caption": "6/8 with three quavers on each beat. No sign is needed."
+    },
+    {
+      "kind": "text",
+      "text": "Both bars have two beats and six even quavers. They are written differently, and that difference matters: in 2/4 the beat is a crotchet, in 6/8 it is a dotted crotchet."
+    },
+    {
+      "kind": "text",
+      "text": "Each simple time signature with triplets has a compound partner with the same number of beats: 2/4 and 6/8 (two beats), 3/4 and 9/8 (three beats), 4/4 and 12/8 (four beats)."
+    },
+    {
+      "kind": "tip",
+      "text": "Triplet in simple time: needs a 3. Compound time: three in a beat is already the rule."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 6/8 with two groups of three quavers.",
+      "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver).",
+      "timeSignature": "6/8"
+    },
+    "steps": [
+      "Tap a bar of 2/4 with a triplet on each beat: six even notes.",
+      "Tap a bar of 6/8 with three quavers on each of two beats: the same six even notes.",
+      "The sound is the same. Only the way it is written differs."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 6/8 with two groups of three beamed quavers."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u1-l05.guided-1",
+      "templateId": "t.g3.triplet-bar",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This bar is in 9/8. Does the group of three beamed quavers in the first beat need a triplet sign (a 3)?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver, quaver, quaver, dotted crotchet.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver), dotted crotchet.",
+        "timeSignature": "9/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "yes",
+            "label": "Yes, it needs a 3 over the three quavers"
+          },
+          {
+            "id": "no",
+            "label": "No, no sign is needed"
+          }
+        ],
+        "correctOptionIds": [
+          "no"
+        ],
+        "diagnoses": {
+          "yes": {
+            "category": "simple-compound-confusion",
+            "reason": "9/8 is compound time: every beat is a dotted crotchet that already divides into three quavers. No sign is needed for that."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: the beat already divides into three. Simple time: three in a beat is a triplet.",
+        "Compound time: the beat divides into three without any sign."
+      ],
+      "feedback": {
+        "correct": "Yes: you decided from the kind of time.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.guided-2",
+      "templateId": "t.g3.triplet-compare",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Every beat of a bar of 3/4 is a triplet of three quavers. Which compound time signature has the same number of beats, each divided into three quavers?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3/8",
+            "label": "3/8"
+          },
+          {
+            "id": "6/8",
+            "label": "6/8"
+          },
+          {
+            "id": "12/8",
+            "label": "12/8"
+          },
+          {
+            "id": "9/8",
+            "label": "9/8"
+          }
+        ],
+        "correctOptionIds": [
+          "9/8"
+        ],
+        "diagnoses": {
+          "6/8": {
+            "category": "simple-compound-confusion",
+            "reason": "6/8 has 2 beats in a bar, but 3/4 has 3."
+          },
+          "12/8": {
+            "category": "simple-compound-confusion",
+            "reason": "12/8 has 4 beats in a bar, but 3/4 has 3."
+          },
+          "3/8": {
+            "category": "simple-compound-confusion",
+            "reason": "3/8 is simple time, with three quaver beats. We need dotted-crotchet beats, each divided into three quavers."
+          }
+        }
+      },
+      "hints": [
+        "Count the notes in one beat, then multiply by the number of beats.",
+        "3/4 has 3 beats. Which compound signature has 3 dotted-crotchet beats?"
+      ],
+      "feedback": {
+        "correct": "Yes: the same number of beats.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.guided-3",
+      "templateId": "t.g3.triplet-bar",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The bar is in 3/4. How many quavers are written in the whole bar? (Count the three notes of a triplet group as quavers too.)",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (quaver, quaver, quaver), crotchet, a triplet (quaver, quaver, quaver).",
+        "questionAlternative": "Bar 1: a triplet (quaver, quaver, quaver), crotchet, a triplet (quaver, quaver, quaver).",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "7",
+            "label": "7"
+          },
+          {
+            "id": "9",
+            "label": "9"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ],
+        "diagnoses": {
+          "5": {
+            "category": "tuplet-ignored",
+            "reason": "Count the quavers in each beat in turn. A dotted crotchet beat holds no quavers; a beat of three beamed quavers holds three."
+          },
+          "7": {
+            "category": "tuplet-ignored",
+            "reason": "Count the quavers in each beat in turn. A dotted crotchet beat holds no quavers; a beat of three beamed quavers holds three."
+          },
+          "9": {
+            "category": "tuplet-ignored",
+            "reason": "Count the quavers in each beat in turn. A dotted crotchet beat holds no quavers; a beat of three beamed quavers holds three."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: the beat already divides into three. Simple time: three in a beat is a triplet.",
+        "Go beat by beat and count the quavers in each."
+      ],
+      "feedback": {
+        "correct": "Yes: you counted every quaver, triplet notes included.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u1-l05.ind-1",
+      "templateId": "t.g3.triplet-compare",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Bar A is in 4/4 with a triplet of quavers on every beat. Bar B is in 12/8 with every beat divided into three quavers. Which bar has more notes?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "Bar A (4/4, triplets)"
+          },
+          {
+            "id": "B",
+            "label": "Bar B (12/8)"
+          },
+          {
+            "id": "same",
+            "label": "They have the same number of notes"
+          }
+        ],
+        "correctOptionIds": [
+          "same"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "tuplet-ignored",
+            "reason": "Each triplet beat holds three notes and 4/4 has 4 beats: 12 notes. That is the same as 12/8."
+          },
+          "B": {
+            "category": "simple-compound-confusion",
+            "reason": "Bar B has 4 beats of three quavers: 12 notes. Bar A has the same."
+          }
+        }
+      },
+      "hints": [
+        "Count the notes in one beat, then multiply by the number of beats.",
+        "Count the notes in one beat of each bar, then multiply by the 4 beats."
+      ],
+      "feedback": {
+        "correct": "Correct: three per beat in both bars.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.ind-2",
+      "templateId": "t.g3.triplet-bar",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar is in 3/4. Does the group of three beamed quavers in the first beat need a triplet sign (a 3)?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (quaver, quaver, quaver), crotchet, a triplet (quaver, quaver, quaver).",
+        "questionAlternative": "Bar 1: a triplet (quaver, quaver, quaver), crotchet, a triplet (quaver, quaver, quaver).",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "yes",
+            "label": "Yes, it needs a 3 over the three quavers"
+          },
+          {
+            "id": "no",
+            "label": "No, no sign is needed"
+          }
+        ],
+        "correctOptionIds": [
+          "yes"
+        ],
+        "diagnoses": {
+          "no": {
+            "category": "tuplet-ignored",
+            "reason": "3/4 is simple time: a beat is a crotchet that divides into two. Three quavers in one beat is a triplet, so it carries a 3."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: the beat already divides into three. Simple time: three in a beat is a triplet.",
+        "Simple time: the beat divides into two, so three notes in a beat are a triplet."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.ind-3",
+      "templateId": "t.g3.triplet-compare",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A triplet of three quavers takes up one crotchet beat in 4/4. In 12/8, three ordinary quavers make one beat. Which note lasts as long as that one beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dotted-crotchet",
+            "label": "A dotted crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "A quaver"
+          },
+          {
+            "id": "crotchet",
+            "label": "A crotchet"
+          },
+          {
+            "id": "minim",
+            "label": "A minim"
+          }
+        ],
+        "correctOptionIds": [
+          "dotted-crotchet"
+        ],
+        "diagnoses": {
+          "crotchet": {
+            "category": "tuplet-total-wrong",
+            "reason": "The three quavers of a triplet are squeezed into a crotchet. Three ordinary quavers last longer: a crotchet and a half."
+          },
+          "minim": {
+            "category": "beat-unit-wrong",
+            "reason": "A minim is four quavers. One beat of compound time is only three."
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "A quaver is one third of the beat, not the whole beat."
+          }
+        }
+      },
+      "hints": [
+        "Count the notes in one beat, then multiply by the number of beats.",
+        "Three quavers added up: a crotchet plus a quaver, which is a dotted crotchet."
+      ],
+      "feedback": {
+        "correct": "Correct: a dotted crotchet.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.ind-4",
+      "templateId": "t.g3.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver, minim. Bar 2: crotchet, quaver, quaver, quaver, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), minim. Bar 2: crotchet, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "4/4"
+        ]
+      },
+      "hints": [
+        "Do the beats split into 2 or 3?",
+        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+      ],
+      "feedback": {
+        "correct": "Correct time signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.ind-5",
+      "templateId": "t.g3.triplet-compare",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A bar of 12/8 has every beat divided into three quavers. In which simple time signature would the same bar be written with a triplet of quavers on every beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3/4",
+            "label": "3/4"
+          },
+          {
+            "id": "2/4",
+            "label": "2/4"
+          },
+          {
+            "id": "4/4",
+            "label": "4/4"
+          }
+        ],
+        "correctOptionIds": [
+          "4/4"
+        ],
+        "diagnoses": {
+          "2/4": {
+            "category": "beat-count-wrong",
+            "reason": "2/4 has 2 beats in a bar, but 12/8 has 4. The number of beats must match."
+          },
+          "3/4": {
+            "category": "beat-count-wrong",
+            "reason": "3/4 has 3 beats in a bar, but 12/8 has 4. The number of beats must match."
+          }
+        }
+      },
+      "hints": [
+        "Count the notes in one beat, then multiply by the number of beats.",
+        "12/8 has 4 beats. Which simple time signature has 4 beats?"
+      ],
+      "feedback": {
+        "correct": "Correct partner.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g3-u1-l05.ind-6",
+      "templateId": "t.g3.triplet-bar",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar is in 6/8. Does the group of three beamed quavers in the first beat need a triplet sign (a 3)?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, dotted crotchet.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), dotted crotchet.",
+        "timeSignature": "6/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "yes",
+            "label": "Yes, it needs a 3 over the three quavers"
+          },
+          {
+            "id": "no",
+            "label": "No, no sign is needed"
+          }
+        ],
+        "correctOptionIds": [
+          "no"
+        ],
+        "diagnoses": {
+          "yes": {
+            "category": "simple-compound-confusion",
+            "reason": "6/8 is compound time: every beat is a dotted crotchet that already divides into three quavers. No sign is needed for that."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: the beat already divides into three. Simple time: three in a beat is a triplet.",
+        "Compound time: the beat divides into three without any sign."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal parts in each beat: two means simple time, three means compound time.",
+          "tuplet-ignored": "A triplet puts three notes into one ordinary beat, so count three notes for that beat.",
+          "beat-count-wrong": "Count the beats in a bar: in simple time the top number counts them; in 6/8, 9/8 and 12/8 the top number counts quavers, so divide it by three.",
+          "beat-unit-wrong": "Check which note is one beat. In simple time the bottom number names it. In 6/8, 9/8 and 12/8 the beat is a dotted note holding three of the notes the bottom number names, so the bottom number alone does not name it."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "recap": [
+    "A triplet squeezes three notes into one ordinary beat; compound time divides every beat into three.",
+    "Compound time needs no triplet sign.",
+    "2/4 with triplets sounds like 6/8, 3/4 like 9/8 and 4/4 like 12/8."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.triplet-compare",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.triplet-bar",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.triplet-compare",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.triplet-compound"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s01",
+      "fs.g3.s02"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.01"
+    ],
+    "notes": "Original wording. Follows Grade 3 outcome 1 and the book's comparison of triplets with compound beats. Bars with triplets and groups of three in the same time signature are never mixed in one question."
+  }
+}

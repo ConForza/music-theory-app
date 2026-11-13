@@ -1,0 +1,1085 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U3-L03",
+  "lessonId": "G3-U3-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Transpose a melody an octave up or down, into the treble or the bass clef.",
+    "successCriteria": [
+      "I know transposing at the octave moves every note eight steps.",
+      "I know changing the clef is not enough: the note must also move an octave.",
+      "I keep the key signature and write every note in the right place."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "To transpose music is to write it higher or lower, so that it sounds higher or lower. In Grade 3 you transpose at the octave, and you may also change from the treble clef to the bass clef, or the other way round. Take middle C. In the treble clef it is on the first ledger line below the stave. The same pitch in the bass clef is on the first ledger line above the stave, as in the picture below."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Middle C in the bass clef, on the first ledger line above the stave."
+      },
+      "caption": "The same pitch as the treble clef's middle C: this is NOT an octave lower."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "The C an octave below middle C, in the bass clef, in the second space."
+      },
+      "caption": "An octave lower, in the bass clef: the second space."
+    },
+    {
+      "kind": "text",
+      "text": "The last picture is the answer to “write this note an octave lower in the bass clef”. Two things have changed: the clef, and the octave. Writing the same pitch in the new clef would only change the picture, not the sound. To transpose a melody: choose the new clef and the direction. Move every note by one octave, which is eight letter names counting both ends: seven steps of line and space. Keep the key signature, and write any accidentals the notes need. Then check the first and last notes. Moving a note an octave means eight letter names, seven steps of line and space. If the clef changes as well, write the note in its new place: the same pitch in a new clef is not an octave move."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major in the treble clef: G, A, B, D; then B and G.",
+        "timeSignature": "4/4",
+        "key": "G major"
+      },
+      "caption": "A melody in the treble clef, in G major."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "The same melody an octave lower, written in the bass clef, key signature of one sharp.",
+        "timeSignature": "4/4",
+        "key": "G major"
+      },
+      "caption": "An octave lower in the bass clef. Same key signature, every note an octave down."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "bass",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "C"
+            },
+            {
+              "kind": "note",
+              "pitch": "D3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "D"
+            },
+            {
+              "kind": "note",
+              "pitch": "E3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Three notes in the bass clef, C, D and E, an octave below the same notes in the treble clef starting at middle C."
+    },
+    "steps": [
+      "Find the first treble-clef note, middle C, on the first ledger line below the stave.",
+      "Move it down one octave: the C in the second space of the bass clef.",
+      "Move the other notes the same way, keeping the key signature."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "C, D and E in the bass clef, an octave lower than the treble-clef notes starting at middle C."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u3-l03.guided-1",
+      "templateId": "t.g3.octave-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This note is in the treble clef. It is to be written an octave lower in the bass clef. Where is the new note written?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note in the 2nd space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "In the 1st space"
+          },
+          {
+            "id": "9",
+            "label": "In the space just above the stave"
+          },
+          {
+            "id": "15",
+            "label": "In the space above the 3rd ledger line above the stave"
+          },
+          {
+            "id": "8",
+            "label": "On the 5th line"
+          }
+        ],
+        "correctOptionIds": [
+          "8"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "9": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "15": {
+            "category": "wrong-octave",
+            "reason": "That is the same pitch written in the bass clef. The question asks for a note an octave lower, so the position must move as well as the clef."
+          }
+        }
+      },
+      "hints": [
+        "Find the same pitch in the new clef, then move an octave.",
+        "First find the same pitch in the new clef. Then move it up or down by one octave: seven lines and spaces."
+      ],
+      "feedback": {
+        "correct": "Yes: new clef and the octave move.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.guided-2",
+      "templateId": "t.g3.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write this melody an octave lower in the bass clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A four-note melody in the treble clef, C major: F, G, A, F.",
+        "key": "C major"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "C major",
+        "accepted": [
+          [
+            "F3",
+            "G3",
+            "A3",
+            "F3"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "C major"
+        }
+      },
+      "hints": [
+        "Each note moves 8 letter names.",
+        "Check middle C as a landmark.",
+        "Work out the first note in the bass clef, then keep the same shape for the rest."
+      ],
+      "feedback": {
+        "correct": "Right: every note moved an octave, and the key signature stayed.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.guided-3",
+      "templateId": "t.g3.octave-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This note is in the bass clef. It is to be written an octave higher in the treble clef. Where is the new note written?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note in the space just above the stave."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "11",
+            "label": "In the space above the 1st ledger line above the stave"
+          },
+          {
+            "id": "-3",
+            "label": "In the space below the 1st ledger line below the stave"
+          },
+          {
+            "id": "5",
+            "label": "In the 3rd space"
+          },
+          {
+            "id": "4",
+            "label": "On the 3rd line"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ],
+        "diagnoses": {
+          "5": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "11": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "-3": {
+            "category": "wrong-octave",
+            "reason": "That is the same pitch written in the treble clef. The question asks for a note an octave higher, so the position must move as well as the clef."
+          }
+        }
+      },
+      "hints": [
+        "Find the same pitch in the new clef, then move an octave.",
+        "First find the same pitch in the new clef. Then move it up or down by one octave: seven lines and spaces."
+      ],
+      "feedback": {
+        "correct": "Correct position.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u3-l03.ind-1",
+      "templateId": "t.g3.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write this melody an octave higher in the treble clef (the same clef), keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A four-note melody in the treble clef, A major: C♯, B, C♯, D.",
+        "key": "A major"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "treble",
+        "key": "A major",
+        "accepted": [
+          [
+            "C#5",
+            "B4",
+            "C#5",
+            "D5"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "up",
+          "sourceKey": "A major"
+        }
+      },
+      "hints": [
+        "Each note moves 8 letter names.",
+        "Check middle C as a landmark.",
+        "An octave moves every note seven letter names, so a line note becomes a space note and a space note becomes a line note."
+      ],
+      "feedback": {
+        "correct": "Correct transposition.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.ind-2",
+      "templateId": "t.g3.octave-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note is in the bass clef. It is to be written an octave higher in the treble clef. Where is the new note written?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note in the 3rd space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "7",
+            "label": "In the 4th space"
+          },
+          {
+            "id": "-7",
+            "label": "In the space below the 3rd ledger line below the stave"
+          },
+          {
+            "id": "0",
+            "label": "On the 1st line"
+          },
+          {
+            "id": "-1",
+            "label": "In the space just below the stave"
+          }
+        ],
+        "correctOptionIds": [
+          "0"
+        ],
+        "diagnoses": {
+          "7": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "-7": {
+            "category": "wrong-octave",
+            "reason": "That is the same pitch written in the treble clef. The question asks for a note an octave higher, so the position must move as well as the clef."
+          },
+          "-1": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          }
+        }
+      },
+      "hints": [
+        "Find the same pitch in the new clef, then move an octave.",
+        "First find the same pitch in the new clef. Then move it up or down by one octave: seven lines and spaces."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.ind-3",
+      "templateId": "t.g3.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write this melody an octave lower in the treble clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A four-note melody in the bass clef, Eb major: E♭, D, E♭, F.",
+        "key": "Eb major"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "treble",
+        "key": "Eb major",
+        "accepted": [
+          [
+            "Eb3",
+            "D3",
+            "Eb3",
+            "F3"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "Eb major"
+        }
+      },
+      "hints": [
+        "Each note moves 8 letter names.",
+        "Check middle C as a landmark.",
+        "Work out the first note in the treble clef, then keep the same shape for the rest."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.ind-4",
+      "templateId": "t.g3.octave-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note is in the treble clef. It is to be written an octave lower in the bass clef. Where is the new note written?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note in the 1st space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "13",
+            "label": "In the space above the 2nd ledger line above the stave"
+          },
+          {
+            "id": "5",
+            "label": "In the 3rd space"
+          },
+          {
+            "id": "7",
+            "label": "In the 4th space"
+          },
+          {
+            "id": "6",
+            "label": "On the 4th line"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ],
+        "diagnoses": {
+          "5": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "7": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "13": {
+            "category": "wrong-octave",
+            "reason": "That is the same pitch written in the bass clef. The question asks for a note an octave lower, so the position must move as well as the clef."
+          }
+        }
+      },
+      "hints": [
+        "Find the same pitch in the new clef, then move an octave.",
+        "First find the same pitch in the new clef. Then move it up or down by one octave: seven lines and spaces."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.ind-5",
+      "templateId": "t.g3.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write this melody an octave lower in the bass clef (the same clef), keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A four-note melody in the bass clef, D minor: D, E, G, E.",
+        "key": "D minor"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "D minor",
+        "accepted": [
+          [
+            "D3",
+            "E3",
+            "G3",
+            "E3"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "D minor"
+        }
+      },
+      "hints": [
+        "Each note moves 8 letter names.",
+        "Check middle C as a landmark.",
+        "An octave moves every note seven letter names, so a line note becomes a space note and a space note becomes a line note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g3-u3-l03.ind-6",
+      "templateId": "t.g3.octave-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note is in the bass clef. It is to be written an octave higher in the treble clef. Where is the new note written?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note in the space just above the stave."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "5",
+            "label": "In the 3rd space"
+          },
+          {
+            "id": "4",
+            "label": "On the 3rd line"
+          },
+          {
+            "id": "-3",
+            "label": "In the space below the 1st ledger line below the stave"
+          },
+          {
+            "id": "3",
+            "label": "In the 2nd space"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "5": {
+            "category": "wrong-interval",
+            "reason": "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space."
+          },
+          "-3": {
+            "category": "wrong-octave",
+            "reason": "That is the same pitch written in the treble clef. The question asks for a note an octave higher, so the position must move as well as the clef."
+          }
+        }
+      },
+      "hints": [
+        "Find the same pitch in the new clef, then move an octave.",
+        "First find the same pitch in the new clef. Then move it up or down by one octave: seven lines and spaces."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "recap": [
+    "Transposing at the octave moves every note up or down eight letter names.",
+    "Changing the clef alone does not transpose: the pitch must move too.",
+    "Keep the key signature and write accidentals as needed."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.octave-transpose",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.octave-pick",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.octave-transpose",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.transposition.octave-treble-bass"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s07"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.05"
+    ],
+    "notes": "Original wording. Follows Grade 3 outcome 5 and book section 7. A transposition that only changes the clef is never credited (the same-pitch position is always offered as a wrong option in the position questions, and the grader checks the octave)."
+  }
+}

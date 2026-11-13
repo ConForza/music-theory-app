@@ -1,0 +1,2036 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U1-L03",
+  "lessonId": "G3-U1-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Group notes so that every beat of compound time can be seen.",
+    "successCriteria": [
+      "I beam three quavers together in each beat.",
+      "I write a whole beat as one dotted crotchet and two beats as one dotted minim.",
+      "I tie a note that crosses a beat, so the beat stays clear."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Good grouping lets a player see each beat at a glance. In compound time, each beat is a dotted crotchet, so every beat should be easy to spot."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 6/8: six quavers in two beamed groups of three; then a dotted crotchet and a group of three quavers.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver). Bar 2: dotted crotchet, 3 beamed together (quaver, quaver, quaver).",
+        "timeSignature": "6/8"
+      },
+      "caption": "Beam the quavers of each beat together. Do not join groups from different beats."
+    },
+    {
+      "kind": "text",
+      "text": "A note can be written as a single note only if it sits inside one beat, or fills whole beats from one beat line to another. A crotchet and a quaver in one beat are written separately, a crotchet then a quaver."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 6/8: a dotted minim; then a dotted crotchet, a crotchet and a quaver.",
+        "questionAlternative": "Bar 1: dotted minim. Bar 2: dotted crotchet, crotchet, quaver.",
+        "timeSignature": "6/8"
+      },
+      "caption": "Two whole beats are one dotted minim, not two dotted crotchets joined by a tie."
+    },
+    {
+      "kind": "text",
+      "text": "When a sound has to cross a beat line without starting and ending on beats, split it into two notes and join them with a tie. The tie shows where the beat line falls. A note that starts in the middle of a beat but ends on the next beat line, such as a crotchet after a quaver, needs no tie. Do not use a tie where a single note would do. Show every beat: beam in threes, use a dotted minim for two whole beats, and tie only where a note would hide the beat."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 6/8: a dotted crotchet tied to a quaver, then a crotchet. The tie crosses the beat line.",
+        "questionAlternative": "Bar 1: dotted crotchet tied to, quaver, crotchet.",
+        "timeSignature": "6/8"
+      },
+      "caption": "A dotted crotchet tied to a quaver: the tie crosses into the second beat."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 1
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 9/8: a beat of three beamed quavers, a dotted crotchet, then another beat of three beamed quavers.",
+      "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), dotted crotchet, 3 beamed together (quaver, quaver, quaver).",
+      "timeSignature": "9/8"
+    },
+    "steps": [
+      "Count the three beats: three quavers, one dotted crotchet, three quavers.",
+      "Each group of three quavers has its own beam.",
+      "No beam crosses from one beat to the next, so all three beats are visible."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 9/8 with beamed quavers, a dotted crotchet and more beamed quavers: three clear beats."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u1-l03.guided-1",
+      "templateId": "t.g3.compound-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "All three bars are in 12/8. Which bar groups its notes correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, quaver, quaver, quaver, quaver, dotted crotchet, crotchet, quaver. Bar 2: crotchet, quaver, quaver, quaver, quaver, dotted crotchet, crotchet, quaver. Bar 3: crotchet, quaver, quaver, quaver, quaver, crotchet tied to, quaver, crotchet, quaver.",
+        "questionAlternative": "Bar 1: crotchet, quaver, 2 beamed together (quaver, quaver), quaver, dotted crotchet, crotchet, quaver. Bar 2: crotchet, quaver, 3 beamed together (quaver, quaver, quaver), dotted crotchet, crotchet, quaver. Bar 3: crotchet, quaver, 3 beamed together (quaver, quaver, quaver), crotchet tied to, quaver, crotchet, quaver.",
+        "timeSignature": "12/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "compound-beat-hidden",
+            "reason": "The three quavers of a beat belong together. Beam all three, not two and one."
+          },
+          "3": {
+            "category": "tie-instead-of-dot",
+            "reason": "A tie inside one beat is not needed: a dotted crotchet already shows the whole beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat is a dotted crotchet. Can you see every beat?",
+        "12/8 has four dotted-crotchet beats in each bar. Each beat should be easy to see."
+      ],
+      "feedback": {
+        "correct": "Yes: every beat can be seen.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.guided-2",
+      "templateId": "t.g3.compound-grouping",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, crotchet, quaver, quaver, crotchet.",
+        "questionAlternative": "Bar 1: quaver, quaver, quaver, crotchet, quaver, quaver, crotchet.",
+        "timeSignature": "9/8"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "9/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Show each dotted beat.",
+        "In 9/8 there are three dotted-crotchet beats. Beam the quavers (and shorter notes) beat by beat."
+      ],
+      "feedback": {
+        "correct": "You regrouped the notes beat by beat.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.guided-3",
+      "templateId": "t.g3.bar-complete",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Complete this bar of 9/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "complete-bar",
+        "timeSignature": "9/8",
+        "given": [
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "quaver",
+              "dots": 0
+            }
+          }
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Group in dotted-crotchet beats.",
+        "9/8 has three dotted-crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "The bar adds up and the beats are clear.",
+        "mistakes": {
+          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
+          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
+          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
+          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
+          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
+        },
+        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u1-l03.ind-1",
+      "templateId": "t.g3.compound-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 9/8. Which bar groups its notes correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver, quaver, quaver, quaver, crotchet. Bar 2: quaver, quaver, quaver, quaver, quaver, quaver, quaver, crotchet. Bar 3: quaver, quaver, quaver, quaver, quaver, quaver, quaver, crotchet.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver), quaver, crotchet. Bar 2: 6 beamed together (quaver, quaver, quaver, quaver, quaver, quaver), quaver, crotchet. Bar 3: 2 beamed together (quaver, quaver), quaver, 3 beamed together (quaver, quaver, quaver), quaver, crotchet.",
+        "timeSignature": "9/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "compound-beat-hidden",
+            "reason": "One beam across six quavers hides the beats. Beam each group of three separately."
+          },
+          "3": {
+            "category": "compound-beat-hidden",
+            "reason": "The three quavers of a beat belong together. Beam all three, not two and one."
+          }
+        }
+      },
+      "hints": [
+        "Each beat is a dotted crotchet. Can you see every beat?",
+        "9/8 has three dotted-crotchet beats in each bar. Each beat should be easy to see."
+      ],
+      "feedback": {
+        "correct": "Correct bar.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.ind-2",
+      "templateId": "t.g3.bar-complete",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Complete this bar of 9/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "complete-bar",
+        "timeSignature": "9/8",
+        "given": [
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "crotchet",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "quaver",
+              "dots": 0
+            }
+          }
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Group in dotted-crotchet beats.",
+        "9/8 has three dotted-crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "The bar adds up exactly.",
+        "mistakes": {
+          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
+          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
+          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
+          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
+          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
+        },
+        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.ind-3",
+      "templateId": "t.g3.compound-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 6/8 and contain a sound that lasts two beats. Which bar writes it correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: dotted minim. Bar 2: minim, crotchet. Bar 3: dotted crotchet tied to, dotted crotchet.",
+        "questionAlternative": "Bar 1: dotted minim. Bar 2: minim, crotchet. Bar 3: dotted crotchet tied to, dotted crotchet.",
+        "timeSignature": "6/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "compound-beat-hidden",
+            "reason": "A minim and a crotchet do not follow the dotted-crotchet beats: the minim runs into the next beat and hides it."
+          },
+          "3": {
+            "category": "tie-instead-of-dot",
+            "reason": "Two whole beats joined by a tie can be written as one dotted minim. The tie is only needed when a note would hide a beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat is a dotted crotchet. Can you see every beat?",
+        "6/8 has two dotted-crotchet beats in each bar. Each beat should be easy to see."
+      ],
+      "feedback": {
+        "correct": "Correct: two whole beats make a dotted minim.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.ind-4",
+      "templateId": "t.g3.compound-grouping",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, crotchet, quaver, dotted crotchet, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: quaver, quaver, quaver, crotchet, quaver, dotted crotchet, quaver, quaver, quaver.",
+        "timeSignature": "12/8"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "12/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Show each dotted beat.",
+        "In 12/8 there are four dotted-crotchet beats. Beam the quavers (and shorter notes) beat by beat."
+      ],
+      "feedback": {
+        "correct": "Correct grouping.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.ind-5",
+      "templateId": "t.g3.bar-complete",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Complete this bar of 12/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "complete-bar",
+        "timeSignature": "12/8",
+        "given": [
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "quaver",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "crotchet",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "crotchet",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "quaver",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "quaver",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "crotchet",
+              "dots": 0
+            }
+          }
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Group in dotted-crotchet beats.",
+        "12/8 has four dotted-crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "bar-overfull": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra.",
+          "bar-underfull": "There's still room in this bar. Count how many beats are missing.",
+          "grouping-obscures-beat": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible.",
+          "unnecessary-tie": "You can write those tied notes as a single note (or a dotted note). That's easier to read.",
+          "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
+        },
+        "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
+      }
+    },
+    {
+      "id": "i.g3-u1-l03.ind-6",
+      "templateId": "t.g3.compound-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 9/8. Which bar groups its notes correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "tieToNext": true
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, dotted crotchet, quaver, quaver, quaver. Bar 2: quaver, quaver, quaver, dotted crotchet, quaver, quaver, quaver. Bar 3: quaver, quaver, quaver, crotchet tied to, quaver, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), quaver, dotted crotchet, 3 beamed together (quaver, quaver, quaver). Bar 2: 3 beamed together (quaver, quaver, quaver), dotted crotchet, 3 beamed together (quaver, quaver, quaver). Bar 3: 3 beamed together (quaver, quaver, quaver), crotchet tied to, quaver, 3 beamed together (quaver, quaver, quaver).",
+        "timeSignature": "9/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "compound-beat-hidden",
+            "reason": "The three quavers of a beat belong together. Beam all three, not two and one."
+          },
+          "3": {
+            "category": "tie-instead-of-dot",
+            "reason": "A tie inside one beat is not needed: a dotted crotchet already shows the whole beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat is a dotted crotchet. Can you see every beat?",
+        "9/8 has three dotted-crotchet beats in each bar. Each beat should be easy to see."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "recap": [
+    "Beam the three quavers of each beat together; never across a beat.",
+    "A whole beat is a dotted crotchet; two whole beats are a dotted minim.",
+    "Tie a note that crosses a beat line so the beat stays visible."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.compound-judge",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.bar-complete",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.compound-grouping",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.compound-grouping-notes"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s02"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.02"
+    ],
+    "notes": "Original wording. Follows Grade 3 outcome 2 (notes). A two-beat note in the middle of a 12/8 bar is never generated and the lesson does not ask about it (TEACHER TO CONFIRM; the book was only partly legible there). Never more than one rule is broken in a wrong answer."
+  }
+}

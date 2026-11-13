@@ -18,26 +18,26 @@ import { barJudge as barJudgeG1, codes, geom, keyWord, keysIn, noteId, noteLabel
 type Pitch = music.Pitch;
 type Clef = music.Clef;
 type Ctx = Parameters<Gen>[0];
-const ORD = (x: number) => music.ordinal(x);
-const BEAT_NAME: Record<number, string> = { 1: "semibreve", 2: "minim", 4: "crotchet", 8: "quaver", 16: "semiquaver" };
+export const ORD = (x: number) => music.ordinal(x);
+export const BEAT_NAME: Record<number, string> = { 1: "semibreve", 2: "minim", 4: "crotchet", 8: "quaver", 16: "semiquaver" };
 const BEAMABLE = new Set(["quaver", "semiquaver"]);
-const withA = (v: string, dots = 0) => `a ${dots ? "dotted " : ""}${v}`;
-const diag = (category: string, reason: string) => ({ category, reason });
-const optsOf = (ids: string[], label: (id: string) => string = (x) => x) => ids.map((id) => ({ id, label: label(id) }));
-const cap = (s: string) => s[0]!.toUpperCase() + s.slice(1);
+export const withA = (v: string, dots = 0) => `a ${dots ? "dotted " : ""}${v}`;
+export const diag = (category: string, reason: string) => ({ category, reason });
+export const optsOf = (ids: string[], label: (id: string) => string = (x) => x) => ids.map((id) => ({ id, label: label(id) }));
+export const cap = (s: string) => s[0]!.toUpperCase() + s.slice(1);
 const formOf = (k: music.Key): "major" | "harmonic" => (k.mode === "major" ? "major" : "harmonic");
-const clefsOf = (c: Ctx): Clef[] => (c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[];
+export const clefsOf = (c: Ctx): Clef[] => (c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[];
 
 /** The note value that is one beat of a simple time signature (minim in x/2, crotchet in x/4, quaver in x/8). */
-function beatValue(ts: string): music.NoteValue {
+export function beatValue(ts: string): music.NoteValue {
   const v = music.valueFor(music.metreStructure(ts).beatUnit, 0);
   if (!v) throw new Error(`no beat value for ${ts}`);
   return v.value;
 }
-const times = (v: music.NoteValue, k: number, dots = 1) => music.valueFor(music.mul(music.dotted(v, 0), music.frac(k)), dots);
-const halfOf = (v: music.NoteValue): music.NoteValue | null => music.valueFor(music.mul(music.dotted(v, 0), music.frac(1, 2)), 0)?.value ?? null;
-const valueOk = (c: Ctx, v: music.NoteValue | null | undefined): v is music.NoteValue => Boolean(v) && (!c.scope.noteValues?.length || c.scope.noteValues.includes(v!));
-const beamFlag = (v: string, len: number, i: number) => (BEAMABLE.has(v) && len > 1 ? { beam: i === 0 ? "begin" : i === len - 1 ? "end" : "continue" } : {});
+export const times = (v: music.NoteValue, k: number, dots = 1) => music.valueFor(music.mul(music.dotted(v, 0), music.frac(k)), dots);
+export const halfOf = (v: music.NoteValue): music.NoteValue | null => music.valueFor(music.mul(music.dotted(v, 0), music.frac(1, 2)), 0)?.value ?? null;
+export const valueOk = (c: Ctx, v: music.NoteValue | null | undefined): v is music.NoteValue => Boolean(v) && (!c.scope.noteValues?.length || c.scope.noteValues.includes(v!));
+export const beamFlag = (v: string, len: number, i: number) => (BEAMABLE.has(v) && len > 1 ? { beam: i === 0 ? "begin" : i === len - 1 ? "end" : "continue" } : {});
 /** One beat written as a single note, or as two notes of half the value (beamed when they have flags). */
 function beatFill(c: Ctx, ts: string, split: boolean): NotationEvent[] {
   const b = beatValue(ts);
@@ -191,8 +191,8 @@ export const tripletFacts: Gen = (c) => {
  * group ends. (The shared description lists the group's notes together with the notes after it.)
  */
 const word = (e: NotationEvent): string => (e.kind === "tuplet" ? `a triplet (${e.events.map(word).join(", ")})` : valueWord(e));
-const describeBars = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(word).join(", ")}.`).join(" ");
-const describeBeamed = (ms: Measure[]) =>
+export const describeBars = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(word).join(", ")}.`).join(" ");
+export const describeBeamed = (ms: Measure[]) =>
   ms
     .map((m, i) => {
       const parts: string[] = [];
@@ -209,10 +209,10 @@ const describeBeamed = (ms: Measure[]) =>
     })
     .join(" ");
 /** A rhythm line whose descriptions close each triplet group. */
-const rl = (measures: Measure[], extra: Parameters<typeof rhythmLine>[1] = {}) => ({ ...rhythmLine(measures, extra), textAlternative: describeBars(measures), questionAlternative: describeBeamed(measures) });
+export const rl = (measures: Measure[], extra: Parameters<typeof rhythmLine>[1] = {}) => ({ ...rhythmLine(measures, extra), textAlternative: describeBars(measures), questionAlternative: describeBeamed(measures) });
 
 /** A tuplet event (3 in the time of 2) from [units, isRest] parts; one unit is `unit`. Adjacent notes with flags are beamed. */
-function tripletGroup(unit: music.NoteValue, parts: Array<[number, boolean]>): NotationEvent | null {
+export function tripletGroup(unit: music.NoteValue, parts: Array<[number, boolean]>): NotationEvent | null {
   const members = parts.map(([u, isRest]) => {
     const v = times(unit, u, 0);
     return v ? { v: v.value, isRest } : null;
@@ -424,7 +424,7 @@ export const ledgerPlace: Gen = (c) => {
   };
 };
 
-const RESTISH = new Set(["rest-across-beat", "rests-not-combined", "half-bar-rest-misplaced"]);
+export const RESTISH = new Set(["rest-across-beat", "rests-not-combined", "half-bar-rest-misplaced"]);
 
 /**
  * t.g2.rest-judge: three bars, one answer, decided by a rest rule and never by counting. Three kinds, told apart by the prompt wording:
@@ -573,7 +573,7 @@ export const restFix: Gen = (c) => {
 };
 
 /** Where a staff position sits, in words (0 = bottom line; negatives below the stave, 9+ above). */
-function posText(pos: number): string {
+export function posText(pos: number): string {
   if (pos >= 0 && pos <= 8) return pos % 2 === 0 ? `on the ${ORD(pos / 2 + 1)} line` : `in the ${ORD((pos - 1) / 2 + 1)} space`;
   if (pos === -1) return "in the space just below the stave";
   if (pos === 9) return "in the space just above the stave";

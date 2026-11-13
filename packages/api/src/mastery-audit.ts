@@ -72,4 +72,5 @@ export function shortfalls(rows: ConceptCapacity[], allow: Record<string, string
  */
 export const CAPACITY_ALLOWLIST: Record<string, string> = {
   "c.scales.minor-melodic-preview": "optional enrichment with fixed questions only, never assessed or counted (deferred to Grade 3)",
+  "c.metre.anacrusis": "optional enrichment (upbeat starts, OPEN_QUESTIONS Q5) with fixed questions only, never assessed or counted",
 };

@@ -1,0 +1,881 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U3-L02",
+  "lessonId": "G3-U3-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand the octave signs 8va and 8vb, and say which note sounds.",
+    "successCriteria": [
+      "I know 8va above the notes means play an octave higher.",
+      "I know 8vb below the notes means play an octave lower.",
+      "I can write the note that actually sounds, in the right octave."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Very high or very low notes need many ledger lines, which are hard to read. An octave sign saves them: the notes are written closer to the stave, and a sign says to play them in another octave."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C6",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Four notes in the treble clef, marked 8va above the stave: G, A, B, C.",
+        "tempoText": "8va",
+        "octaveShift": 1
+      },
+      "caption": "8va above the notes: play them an octave higher than they are written."
+    },
+    {
+      "kind": "text",
+      "text": "8va stands for ottava, the Italian word for octave. It is written above the stave, and a dotted line shows how far it reaches. The notes keep their letter names. They simply sound one octave higher, so the G written on the stave sounds as the G one octave above it."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "8vb"
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Four notes in the bass clef, marked 8vb below the notes: F, E, D, C.",
+        "octaveShift": -1
+      },
+      "caption": "8vb below the notes: play them an octave lower than they are written."
+    },
+    {
+      "kind": "text",
+      "text": "8vb, sometimes written 8va bassa, goes below the stave and means one octave lower. When the sign ends, the music returns to the written pitch. To find the sounding note, keep the letter name and move one octave in the direction of the sign: eight letter names counting both ends, which is seven steps of line and space, up for 8va and down for 8vb. Notice that the sign changes how the notes are played, not how they are named."
+    },
+    {
+      "kind": "tip",
+      "text": "8va above = an octave higher. 8vb below = an octave lower. Same letter name, one octave away."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Four notes in the treble clef, marked 8va above the stave: C, D, E, F.",
+      "tempoText": "8va",
+      "octaveShift": 1
+    },
+    "steps": [
+      "Read the written notes: C, D, E, F.",
+      "The sign 8va above them means play each one an octave higher.",
+      "They sound as the C, D, E and F one octave above the written notes."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Four treble-clef notes marked 8va: they sound an octave higher."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u3-l02.guided-1",
+      "templateId": "t.g3.octave-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The note is marked 8va. How is it played?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note in the space above the 1st ledger line above the stave. The sign 8va is written above the note.",
+        "octaveShift": 1,
+        "tempoText": "8va"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lower",
+            "label": "An octave lower than written"
+          },
+          {
+            "id": "same",
+            "label": "Exactly as written"
+          },
+          {
+            "id": "higher",
+            "label": "An octave higher than written"
+          },
+          {
+            "id": "two-higher",
+            "label": "Two octaves higher than written"
+          }
+        ],
+        "correctOptionIds": [
+          "higher"
+        ],
+        "diagnoses": {
+          "lower": {
+            "category": "wrong-octave",
+            "reason": "8va points the other way: 8va (octava) is above the stave and means higher."
+          },
+          "same": {
+            "category": "wrong-octave",
+            "reason": "An octave sign changes the pitch: 8va tells the player to move it up an octave."
+          },
+          "two-higher": {
+            "category": "wrong-octave",
+            "reason": "8va moves the note one octave, not two."
+          }
+        }
+      },
+      "hints": [
+        "8va: an octave higher. 8vb: an octave lower.",
+        "8va moves music up an octave; 8vb moves it down an octave."
+      ],
+      "feedback": {
+        "correct": "Yes: you read the direction of the sign.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.guided-2",
+      "templateId": "t.g3.octave-sound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This note is marked 8va. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 3rd line. The sign 8va is written above it.",
+        "octaveShift": 1,
+        "tempoText": "8va"
+      },
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "B",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 4,
+          "octave": 5
+        },
+        "accepted": [
+          "B5"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Move the note eight steps (seven lines and spaces) up for 8va or down for 8vb.",
+        "8va means an octave higher: the same letter name, eight steps up the stave (seven lines and spaces away)."
+      ],
+      "feedback": {
+        "correct": "Right: the same letter an octave away.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.guided-3",
+      "templateId": "t.g3.octave-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The note is written as A on the stave with 8vb. Which sounding pitch does the player produce?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A1",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "8vb"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note on the 3rd ledger line below the stave. The sign 8vb is written below the note.",
+        "octaveShift": -1
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "none",
+            "label": "Written pitch unchanged"
+          },
+          {
+            "id": "up",
+            "label": "A, one octave higher than the written note"
+          },
+          {
+            "id": "down",
+            "label": "A, one octave lower than the written note"
+          }
+        ],
+        "correctOptionIds": [
+          "down"
+        ],
+        "diagnoses": {
+          "up": {
+            "category": "wrong-octave",
+            "reason": "8vb means lower, so the note sounds down."
+          },
+          "none": {
+            "category": "wrong-octave",
+            "reason": "8vb changes the sounding pitch by an octave."
+          }
+        }
+      },
+      "hints": [
+        "8va: an octave higher. 8vb: an octave lower.",
+        "8vb is below the stave: lower."
+      ],
+      "feedback": {
+        "correct": "Yes: the letter stays; the octave moves.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u3-l02.ind-1",
+      "templateId": "t.g3.octave-sound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note is marked 8vb. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "8vb"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note in the 3rd space. The sign 8vb is written below it.",
+        "octaveShift": -1
+      },
+      "answer": {
+        "kind": "staff-position",
+        "clef": "bass",
+        "target": {
+          "step": "E",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 4,
+          "octave": 2
+        },
+        "accepted": [
+          "E2"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Move the note eight steps (seven lines and spaces) up for 8va or down for 8vb.",
+        "8vb means an octave lower: the same letter name, eight steps down the stave (seven lines and spaces away)."
+      ],
+      "feedback": {
+        "correct": "Correct sounding note.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.ind-2",
+      "templateId": "t.g3.octave-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The note is marked 8vb. How is it played?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G1",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "8vb"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note in the space below the 3rd ledger line below the stave. The sign 8vb is written below the note.",
+        "octaveShift": -1
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "same",
+            "label": "Exactly as written"
+          },
+          {
+            "id": "lower",
+            "label": "An octave lower than written"
+          },
+          {
+            "id": "two-higher",
+            "label": "Two octaves higher than written"
+          },
+          {
+            "id": "higher",
+            "label": "An octave higher than written"
+          }
+        ],
+        "correctOptionIds": [
+          "lower"
+        ],
+        "diagnoses": {
+          "higher": {
+            "category": "wrong-octave",
+            "reason": "8vb points the other way: 8vb (octava bassa) is below the stave and means lower."
+          },
+          "same": {
+            "category": "wrong-octave",
+            "reason": "An octave sign changes the pitch: 8vb tells the player to move it down an octave."
+          },
+          "two-higher": {
+            "category": "wrong-octave",
+            "reason": "8vb moves the note one octave, not two."
+          }
+        }
+      },
+      "hints": [
+        "8va: an octave higher. 8vb: an octave lower.",
+        "8va moves music up an octave; 8vb moves it down an octave."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.ind-3",
+      "templateId": "t.g3.octave-sound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note is marked 8va. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note in the 4th space. The sign 8va is written above it.",
+        "octaveShift": 1,
+        "tempoText": "8va"
+      },
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "E",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 4,
+          "octave": 6
+        },
+        "accepted": [
+          "E6"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Move the note eight steps (seven lines and spaces) up for 8va or down for 8vb.",
+        "8va means an octave higher: the same letter name, eight steps up the stave (seven lines and spaces away)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.ind-4",
+      "templateId": "t.g3.octave-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The note is written as C on the stave with 8va. Which sounding pitch does the player produce?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C6",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note on the 2nd ledger line above the stave. The sign 8va is written above the note.",
+        "octaveShift": 1,
+        "tempoText": "8va"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "up",
+            "label": "C, one octave higher than the written note"
+          },
+          {
+            "id": "none",
+            "label": "Written pitch unchanged"
+          },
+          {
+            "id": "down",
+            "label": "C, one octave lower than the written note"
+          }
+        ],
+        "correctOptionIds": [
+          "up"
+        ],
+        "diagnoses": {
+          "down": {
+            "category": "wrong-octave",
+            "reason": "8va means higher, so the note sounds up."
+          },
+          "none": {
+            "category": "wrong-octave",
+            "reason": "8va changes the sounding pitch by an octave."
+          }
+        }
+      },
+      "hints": [
+        "8va: an octave higher. 8vb: an octave lower.",
+        "8va is above the stave: higher."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.ind-5",
+      "templateId": "t.g3.octave-sound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note is marked 8vb. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "8vb"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with one note on the 3rd line. The sign 8vb is written below it.",
+        "octaveShift": -1
+      },
+      "answer": {
+        "kind": "staff-position",
+        "clef": "bass",
+        "target": {
+          "step": "D",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 4,
+          "octave": 2
+        },
+        "accepted": [
+          "D2"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Move the note eight steps (seven lines and spaces) up for 8va or down for 8vb.",
+        "8vb means an octave lower: the same letter name, eight steps down the stave (seven lines and spaces away)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g3-u3-l02.ind-6",
+      "templateId": "t.g3.octave-sign",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The note is marked 8va. How is it played?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D6",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one note in the space above the 2nd ledger line above the stave. The sign 8va is written above the note.",
+        "octaveShift": 1,
+        "tempoText": "8va"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "higher",
+            "label": "An octave higher than written"
+          },
+          {
+            "id": "same",
+            "label": "Exactly as written"
+          },
+          {
+            "id": "two-higher",
+            "label": "Two octaves higher than written"
+          },
+          {
+            "id": "lower",
+            "label": "An octave lower than written"
+          }
+        ],
+        "correctOptionIds": [
+          "higher"
+        ],
+        "diagnoses": {
+          "lower": {
+            "category": "wrong-octave",
+            "reason": "8va points the other way: 8va (octava) is above the stave and means higher."
+          },
+          "same": {
+            "category": "wrong-octave",
+            "reason": "An octave sign changes the pitch: 8va tells the player to move it up an octave."
+          },
+          "two-higher": {
+            "category": "wrong-octave",
+            "reason": "8va moves the note one octave, not two."
+          }
+        }
+      },
+      "hints": [
+        "8va: an octave higher. 8vb: an octave lower.",
+        "8va moves music up an octave; 8vb moves it down an octave."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    }
+  ],
+  "recap": [
+    "8va above the notes: play an octave higher.",
+    "8vb below the notes: play an octave lower.",
+    "The sounding note has the same letter name, one octave away."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.octave-sign",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.octave-sound",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.octave-sign",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.pitch.octave-signs"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s06"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.04"
+    ],
+    "notes": "Original wording. Book section 6 (the second half) and the Grade 1 term 8va. The course prints the sign as text (above the first bar for 8va, under the first note for 8vb) instead of an engraved dashed bracket: a known rendering limitation (see the teacher pack). 8vb and 8va bassa are used only as names for the same sign."
+  }
+}

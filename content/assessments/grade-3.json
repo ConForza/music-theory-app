@@ -7,7 +7,7 @@
       "kind": "unit_challenge",
       "grade": 3,
       "unitId": "G3-U1",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Simple and compound time",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -20,9 +20,12 @@
           ],
           "templateIds": [
             "t.g3.time-signature",
+            "t.g3.compound-facts",
+            "t.g3.triplet-compare",
+            "t.g3.triplet-bar",
             "t.g3.bar-complete"
           ],
-          "itemCount": 2
+          "itemCount": 3
         },
         {
           "id": "o-g3-02",
@@ -32,9 +35,12 @@
           ],
           "templateIds": [
             "t.g3.bar-complete",
-            "t.g3.compound-grouping"
+            "t.g3.compound-grouping",
+            "t.g3.compound-judge",
+            "t.g3.compound-rest-judge",
+            "t.g3.compound-rest-write"
           ],
-          "itemCount": 2
+          "itemCount": 3
         }
       ],
       "sampling": "seeded-balanced",
@@ -45,7 +51,7 @@
       "kind": "unit_challenge",
       "grade": 3,
       "unitId": "G3-U2",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Demisemiquavers and upbeats",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -57,9 +63,12 @@
             "abrsm2020.g3.03"
           ],
           "templateIds": [
-            "t.g3.demisemiquaver"
+            "t.g3.demisemiquaver",
+            "t.g3.demisemi-facts",
+            "t.g3.demisemi-judge",
+            "t.g3.demisemi-regroup"
           ],
-          "itemCount": 2
+          "itemCount": 3
         },
         {
           "id": "o-g3-02",
@@ -68,9 +77,15 @@
             "abrsm2020.g3.02"
           ],
           "templateIds": [
-            "t.g3.compound-grouping"
+            "t.g3.bar-complete",
+            "t.g3.compound-grouping",
+            "t.g3.compound-judge",
+            "t.g3.compound-rest-judge",
+            "t.g3.compound-rest-write",
+            "t.g3.demisemi-judge",
+            "t.g3.demisemi-regroup"
           ],
-          "itemCount": 2
+          "itemCount": 3
         }
       ],
       "sampling": "seeded-balanced",
@@ -81,7 +96,7 @@
       "kind": "unit_challenge",
       "grade": 3,
       "unitId": "G3-U3",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Ledger lines and octave transposition",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -93,9 +108,23 @@
             "abrsm2020.g3.04"
           ],
           "templateIds": [
-            "t.g3.ledger-read"
+            "t.g3.ledger-read",
+            "t.g3.ledger-place",
+            "t.g3.ledger-count"
           ],
-          "itemCount": 2
+          "itemCount": 3
+        },
+        {
+          "id": "o-g3-04b",
+          "title": "abrsm2020.g3.04",
+          "outcomeIds": [
+            "abrsm2020.g3.04"
+          ],
+          "templateIds": [
+            "t.g3.octave-sign",
+            "t.g3.octave-sound"
+          ],
+          "itemCount": 1
         },
         {
           "id": "o-g3-05",
@@ -104,9 +133,10 @@
             "abrsm2020.g3.05"
           ],
           "templateIds": [
-            "t.g3.octave-transpose"
+            "t.g3.octave-transpose",
+            "t.g3.octave-pick"
           ],
-          "itemCount": 2
+          "itemCount": 3
         }
       ],
       "sampling": "seeded-balanced",
@@ -117,7 +147,7 @@
       "kind": "unit_challenge",
       "grade": 3,
       "unitId": "G3-U4",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Keys to four sharps or flats; both minor forms",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -129,6 +159,8 @@
             "abrsm2020.g3.08"
           ],
           "templateIds": [
+            "t.g3.minor-forms",
+            "t.g3.scale-gap",
             "t.g3.scale-build-minor"
           ],
           "itemCount": 2
@@ -141,7 +173,9 @@
           ],
           "templateIds": [
             "t.g3.scale-build-major",
-            "t.g3.key-signature"
+            "t.g3.key-signature",
+            "t.g3.key-facts",
+            "t.g3.scale-gap"
           ],
           "itemCount": 2
         },
@@ -153,7 +187,9 @@
           ],
           "templateIds": [
             "t.g3.scale-build-minor",
-            "t.g3.key-signature"
+            "t.g3.key-signature",
+            "t.g3.key-facts",
+            "t.g3.scale-gap"
           ],
           "itemCount": 2
         },
@@ -164,7 +200,8 @@
             "abrsm2020.g3.09"
           ],
           "templateIds": [
-            "t.g3.tonic-triad"
+            "t.g3.tonic-triad",
+            "t.g3.triad-notes"
           ],
           "itemCount": 2
         },
@@ -175,7 +212,8 @@
             "abrsm2020.g3.10"
           ],
           "templateIds": [
-            "t.g3.degree"
+            "t.g3.degree",
+            "t.g3.degree-note"
           ],
           "itemCount": 2
         }
@@ -188,7 +226,7 @@
       "kind": "unit_challenge",
       "grade": 3,
       "unitId": "G3-U5",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Interval qualities and expression",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -201,7 +239,8 @@
           ],
           "templateIds": [
             "t.g3.interval-quality",
-            "t.g3.melody"
+            "t.g3.interval-name",
+            "t.g3.interval-facts"
           ],
           "itemCount": 2
         },
@@ -213,7 +252,7 @@
           ],
           "templateIds": [
             "t.g3.terms",
-            "t.g3.melody"
+            "t.g3.term-use"
           ],
           "itemCount": 2
         },
@@ -224,7 +263,8 @@
             "abrsm2020.g1.21"
           ],
           "templateIds": [
-            "t.g3.melody"
+            "t.g3.melody",
+            "t.g3.melody-detail"
           ],
           "itemCount": 2
         }
@@ -237,7 +277,7 @@
       "kind": "grade_assessment",
       "grade": 3,
       "unitId": null,
-      "version": 1,
+      "version": 2,
       "title": "Grade 3 practice assessment",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -250,10 +290,12 @@
           ],
           "templateIds": [
             "t.g3.time-signature",
-            "t.g3.bar-complete",
-            "t.g3.melody"
+            "t.g3.compound-facts",
+            "t.g3.triplet-compare",
+            "t.g3.triplet-bar",
+            "t.g3.bar-complete"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-02",
@@ -264,9 +306,13 @@
           "templateIds": [
             "t.g3.bar-complete",
             "t.g3.compound-grouping",
-            "t.g3.melody"
+            "t.g3.compound-judge",
+            "t.g3.compound-rest-judge",
+            "t.g3.compound-rest-write",
+            "t.g3.demisemi-judge",
+            "t.g3.demisemi-regroup"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-03",
@@ -275,9 +321,12 @@
             "abrsm2020.g3.03"
           ],
           "templateIds": [
-            "t.g3.demisemiquaver"
+            "t.g3.demisemiquaver",
+            "t.g3.demisemi-facts",
+            "t.g3.demisemi-judge",
+            "t.g3.demisemi-regroup"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-04",
@@ -287,7 +336,20 @@
           ],
           "templateIds": [
             "t.g3.ledger-read",
-            "t.g3.melody"
+            "t.g3.ledger-place",
+            "t.g3.ledger-count"
+          ],
+          "itemCount": 2
+        },
+        {
+          "id": "o-g3-04b",
+          "title": "abrsm2020.g3.04",
+          "outcomeIds": [
+            "abrsm2020.g3.04"
+          ],
+          "templateIds": [
+            "t.g3.octave-sign",
+            "t.g3.octave-sound"
           ],
           "itemCount": 1
         },
@@ -298,9 +360,10 @@
             "abrsm2020.g3.05"
           ],
           "templateIds": [
-            "t.g3.octave-transpose"
+            "t.g3.octave-transpose",
+            "t.g3.octave-pick"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-06",
@@ -310,9 +373,11 @@
           ],
           "templateIds": [
             "t.g3.scale-build-major",
-            "t.g3.key-signature"
+            "t.g3.key-signature",
+            "t.g3.key-facts",
+            "t.g3.scale-gap"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-07",
@@ -323,9 +388,10 @@
           "templateIds": [
             "t.g3.scale-build-minor",
             "t.g3.key-signature",
-            "t.g3.melody"
+            "t.g3.key-facts",
+            "t.g3.scale-gap"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-08",
@@ -334,9 +400,11 @@
             "abrsm2020.g3.08"
           ],
           "templateIds": [
+            "t.g3.minor-forms",
+            "t.g3.scale-gap",
             "t.g3.scale-build-minor"
           ],
-          "itemCount": 1
+          "itemCount": 3
         },
         {
           "id": "o-g3-09",
@@ -345,9 +413,10 @@
             "abrsm2020.g3.09"
           ],
           "templateIds": [
-            "t.g3.tonic-triad"
+            "t.g3.tonic-triad",
+            "t.g3.triad-notes"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-10",
@@ -356,9 +425,10 @@
             "abrsm2020.g3.10"
           ],
           "templateIds": [
-            "t.g3.degree"
+            "t.g3.degree",
+            "t.g3.degree-note"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-11",
@@ -368,9 +438,10 @@
           ],
           "templateIds": [
             "t.g3.interval-quality",
-            "t.g3.melody"
+            "t.g3.interval-name",
+            "t.g3.interval-facts"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
           "id": "o-g3-12",
@@ -380,31 +451,57 @@
           ],
           "templateIds": [
             "t.g3.terms",
-            "t.g3.melody"
+            "t.g3.term-use"
           ],
-          "itemCount": 1
+          "itemCount": 2
         },
         {
-          "id": "earlier-grades",
-          "title": "Earlier grades (cumulative)",
+          "id": "g2-rhythm",
+          "title": "Grade 2 rhythm and metre",
           "outcomeIds": [
+            "abrsm2020.g2.01",
             "abrsm2020.g2.02",
-            "abrsm2020.g2.03",
+            "abrsm2020.g2.03"
+          ],
+          "templateIds": [
+            "t.g2.time-sig-read",
+            "t.g2.bar-complete",
+            "t.g2.rest-judge",
+            "t.g2.triplet-read",
+            "t.g2.note-grouping"
+          ],
+          "itemCount": 2
+        },
+        {
+          "id": "g2-keys",
+          "title": "Grade 2 keys and scales",
+          "outcomeIds": [
+            "abrsm2020.g2.08",
             "abrsm2020.g2.09",
+            "abrsm2020.g2.10",
+            "abrsm2020.g2.11"
+          ],
+          "templateIds": [
+            "t.g2.scale-build-major",
+            "t.g2.scale-build-minor",
+            "t.g2.key-signature",
+            "t.g2.tonic-triad",
+            "t.g2.degree-note"
+          ],
+          "itemCount": 2
+        },
+        {
+          "id": "g2-terms-melody",
+          "title": "Grade 2 terms and melodies",
+          "outcomeIds": [
+            "abrsm2020.g2.13",
             "abrsm2020.g1.21"
           ],
           "templateIds": [
-            "t.g1.melody",
-            "t.g2.bar-complete",
-            "t.g2.triplet",
-            "t.g2.note-grouping",
-            "t.g2.rest-grouping",
-            "t.g2.scale-build-minor",
-            "t.g2.key-signature",
-            "t.g2.melody",
-            "t.g3.melody"
+            "t.g2.terms",
+            "t.g2.melody-detail"
           ],
-          "itemCount": 4
+          "itemCount": 2
         }
       ],
       "sampling": "seeded-balanced",

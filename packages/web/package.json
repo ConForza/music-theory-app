@@ -9,13 +9,14 @@
     "build": "tsc --noEmit -p tsconfig.json && vite build",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
-    "e2e": "node e2e/run.mjs && node e2e/followup.mjs && node --import tsx e2e/brief03.mjs && node --import tsx e2e/brief04.mjs && node --import tsx e2e/g1.mjs && node --import tsx e2e/g2.mjs",
+    "e2e": "node e2e/run.mjs && node e2e/followup.mjs && node --import tsx e2e/brief03.mjs && node --import tsx e2e/brief04.mjs && node --import tsx e2e/g1.mjs && node --import tsx e2e/g2.mjs && node --import tsx e2e/g3.mjs",
     "e2e:brief02": "node e2e/run.mjs",
     "e2e:followup": "node e2e/followup.mjs",
     "e2e:brief03": "node --import tsx e2e/brief03.mjs",
     "e2e:brief04": "node --import tsx e2e/brief04.mjs",
     "e2e:grade1": "node --import tsx e2e/g1.mjs",
-    "e2e:grade2": "node --import tsx e2e/g2.mjs"
+    "e2e:grade2": "node --import tsx e2e/g2.mjs",
+    "e2e:grade3": "node --import tsx e2e/g3.mjs"
   },
   "devDependencies": {
     "@mtp/api": "0.1.0",
