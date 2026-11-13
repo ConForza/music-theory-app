@@ -1450,7 +1450,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This passage is for the trombone. Look at the passage and answer the questions.",
+      "prompt": "This passage is for the bassoon. Look at the passage and answer the questions.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -1528,7 +1528,7 @@
         "parts": [
           {
             "id": "family",
-            "prompt": "To which family of the orchestra does the trombone belong?",
+            "prompt": "To which family of the orchestra does the bassoon belong?",
             "answer": {
               "kind": "choice",
               "options": [
@@ -1550,20 +1550,20 @@
                 }
               ],
               "correctOptionIds": [
-                "brass"
+                "woodwind"
               ],
               "diagnoses": {
                 "strings": {
                   "category": "wrong-category",
-                  "reason": "The trombone belongs to the brass family."
+                  "reason": "The bassoon belongs to the woodwind family."
                 },
-                "woodwind": {
+                "brass": {
                   "category": "wrong-category",
-                  "reason": "The trombone belongs to the brass family."
+                  "reason": "The bassoon belongs to the woodwind family."
                 },
                 "percussion": {
                   "category": "wrong-category",
-                  "reason": "The trombone belongs to the brass family."
+                  "reason": "The bassoon belongs to the woodwind family."
                 }
               }
             }

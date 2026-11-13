@@ -2,10 +2,10 @@ import { createApp } from "../src/app.ts";
 import { loadCourse } from "../src/course.ts";
 import { openDb } from "../src/db.ts";
 import { auditCapacity, CAPACITY_ALLOWLIST, shortfalls } from "../src/mastery-audit.ts";
-/** Usage: tsx scripts/audit-mastery.ts [grade ...]   (default: every grade that has a playable course, currently 1 and 2). Exits 1 on a shortfall. */
+/** Usage: tsx scripts/audit-mastery.ts [grade ...]   (default: every grade that has a playable course, currently 1 to 4). Exits 1 on a shortfall. */
 const course = loadCourse();
 const app = createApp({ db: openDb(":memory:"), course });
-const grades = process.argv.length > 2 ? process.argv.slice(2).map(Number) : [1, 2];
+const grades = process.argv.length > 2 ? process.argv.slice(2).map(Number) : [1, 2, 3, 4];
 let failed = 0;
 for (const grade of grades) {
   console.log(`\n=== Grade ${grade} ===`);
