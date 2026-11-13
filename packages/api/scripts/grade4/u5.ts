@@ -87,6 +87,7 @@ export const U5: Spec2[] = [
     explain: [
       { text: "Composers give string and brass players instructions about how to make the sound. Pizzicato (pizz.) tells string players to pluck the strings with their fingers instead of using the bow. Arco means 'with the bow' and cancels pizzicato." },
       { text: "String and brass instruments may use a mute, a device that softens the sound. Con sordino (con sord.) means 'with the mute'; senza sordino (senza sord.) means 'without the mute'." },
+      { music: frag("treble", [{ events: [note("G4", "crotchet", { slur: "start" }), note("A4", "crotchet"), note("B4", "crotchet", { slur: "stop" })], barline: "final" }], "A treble stave in 3/4, marked pizz. above the first note: three crotchets G, A and B joined by a slur.", { showKeySignature: false, timeSignature: "3/4", tempoText: "pizz." }), caption: "Marked pizz., then a slur over three notes: pluck them; and when a slur is written for bowed notes they share one bow-stroke." },
       { text: "String players are also told where to play. Sul G means 'on the G string'. Sul ponticello means 'near the bridge', which gives a thin, glassy sound. Bowing signs show the direction of the bow: the sign shaped like a square bracket open at the bottom (⊓) is a down-bow, and the V shape (∨) is an up-bow. A slur over or under two or more notes means they are played in a single bow-stroke, either up or down." },
       { tip: "pizz. = plucked, arco = bowed. con sord. = muted, senza sord. = unmuted. sul G = on the G string; sul ponticello = near the bridge. ⊓ down-bow, ∨ up-bow." },
     ],
@@ -120,6 +121,7 @@ export const U5: Spec2[] = [
       { text: "Grade 4 adds more Italian words for the way music should sound. Some describe character: affettuoso (tenderly), amabile (in a pleasant, amiable way), appassionato (with passion), cantando (in a singing style), facile (easily), con fuoco (with fire), nobilmente (nobly) and sonoro (with a full, resonant tone)." },
       { text: "Some describe changes: affrettando (hurrying), calando (getting softer and usually slower), morendo (dying away) and perdendosi (fading away until lost). L'istesso tempo means 'at the same speed as before': the beat stays the same even when the time signature changes. Tempo giusto means in strict, exact time, and presto possibile means as fast as possible." },
       { text: "Others are small words that join with others: come prima (as before) and come sopra (as above), quasi (as if, almost like), sopra (above), sotto voce (in an undertone, very softly) and niente (nothing, as in 'fading to nothing')." },
+      { music: frag("treble", [{ events: [note("E5", "crotchet"), note("D5", "crotchet"), note("C5", "crotchet")], barline: "final" }], "A treble stave in 3/4 marked affettuoso: three falling crotchets, E, D and C.", { showKeySignature: false, timeSignature: "3/4", tempoText: "Affettuoso" }), caption: "A direction printed above the first bar sets the character: here, affettuoso, tenderly." },
       { tip: "Learn them in three groups: character (affettuoso ... sonoro), change (affrettando, calando, morendo, perdendosi ...), and joining words (come, quasi, sopra, sotto, niente)." },
     ],
     demo: { widget: "staff", music: staveC("treble", ["E5", "D5", "C5"], "A treble stave with three notes going down: E, D, C, for a passage marked morendo."), steps: ["The notes fall away.", "Marked morendo, the music dies away.", "Calando and perdendosi are close cousins: all fade."], text: "A falling phrase, marked morendo." },
@@ -144,7 +146,7 @@ export const U5: Spec2[] = [
     node: "G4-U5-L05",
     version: 1,
     bind: [
-      { t: "t.g4.passage", c: ["c.context.passage-g4"], scope: { keys: KEYS_G4, clefs: CL3, ornaments: ORN, noteValues: ["crotchet"], timeSignatures: ["3/4"], maxLedgerLines: 2, accidentals: true, keySignatures: true, minorForms: FORMS, intervalQuality: "number-and-quality", intervalLowerNote: "any-diatonic" } },
+      { t: "t.g4.passage", c: ["c.context.passage-g4"], scope: { keys: KEYS_G4, clefs: CL3, ornaments: ORN, noteValues: ["crotchet"], timeSignatures: ["3/4"], maxLedgerLines: 2, accidentals: true, keySignatures: true, minorForms: FORMS, intervalQuality: "number-and-quality", intervalLowerNote: "any-diatonic", augmentedDiminished: true } },
       { t: "t.g4.passage-directions", c: ["c.context.passage-g4"], scope: { keys: KEYS_G4, clefs: CL3, ornaments: ORN, noteValues: ["crotchet"], timeSignatures: ["3/4"], maxLedgerLines: 2, accidentals: true, keySignatures: true, minorForms: FORMS } },
     ],
     objective: { statement: "Answer questions about intervals, ornaments, directions and instruments in a short passage.", criteria: ["I read the clef, key signature and directions first.", "I answer each question with the right rule.", "I use what I know of the instrument named in the question."] },

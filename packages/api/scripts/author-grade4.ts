@@ -112,6 +112,8 @@ for (const spec of specs) {
   if (!n) throw new Error(`Unknown node ${spec.node}`);
   n.exercises = spec.bind.map((b) => ({ templateId: b.t, conceptIds: b.c, scope: stated(b.t, b.scope) }));
   n.contentVersion = spec.version;
+  // The passage lesson was planned without a book section; section 15 ("General Questions") is its model, so it is named for the provenance record.
+  if (spec.node === "G4-U5-L05") n.bookSectionIds = ["fs.g4.s15"];
 }
 writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
 

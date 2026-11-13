@@ -1,6 +1,6 @@
 import { CL2, CL3, FORMS, KEYS_G4, chordsC, has, qualityIs, staveC, type Spec2 } from "./lib4.ts";
 
-const ivScope = { keys: KEYS_G4, clefs: CL3, intervalQuality: "number-and-quality", intervalLowerNote: "any-diatonic", compoundIntervals: false, minorForms: FORMS, maxLedgerLines: 2, doubleAccidentals: true, accidentals: true, keySignatures: true };
+const ivScope = (aug: boolean) => ({ augmentedDiminished: aug, keys: KEYS_G4, clefs: CL3, intervalQuality: "number-and-quality", intervalLowerNote: "any-diatonic", compoundIntervals: false, minorForms: FORMS, maxLedgerLines: 2, doubleAccidentals: true, accidentals: true, keySignatures: true });
 const triScope = { keys: KEYS_G4, chordDegrees: ["I", "IV", "V"], inversions: ["a"], doubleAccidentals: true, accidentals: true, keySignatures: true };
 
 export const U4: Spec2[] = [
@@ -8,9 +8,9 @@ export const U4: Spec2[] = [
     node: "G4-U4-L01",
     version: 1,
     bind: [
-      { t: "t.g4.interval-diatonic", c: ["c.intervals.any-diatonic"], scope: ivScope },
-      { t: "t.g4.interval-write", c: ["c.intervals.any-diatonic"], scope: ivScope },
-      { t: "t.g4.interval-facts", c: ["c.intervals.any-diatonic"], scope: ivScope },
+      { t: "t.g4.interval-diatonic", c: ["c.intervals.any-diatonic"], scope: ivScope(false) },
+      { t: "t.g4.interval-write", c: ["c.intervals.any-diatonic"], scope: ivScope(false) },
+      { t: "t.g4.interval-facts", c: ["c.intervals.any-diatonic"], scope: ivScope(false) },
     ],
     objective: { statement: "Name and write the interval between any two notes of a scale.", criteria: ["I count the letter names for the number of an interval.", "I find the quality by comparing the upper note with the major scale of the lower note.", "I know the interval's name does not depend on the key signature."] },
     explain: [
@@ -44,9 +44,9 @@ export const U4: Spec2[] = [
     node: "G4-U4-L02",
     version: 1,
     bind: [
-      { t: "t.g4.interval-diatonic", c: ["c.intervals.augmented-diminished"], scope: ivScope },
-      { t: "t.g4.interval-write", c: ["c.intervals.augmented-diminished"], scope: ivScope },
-      { t: "t.g4.interval-facts", c: ["c.intervals.augmented-diminished"], scope: ivScope },
+      { t: "t.g4.interval-diatonic", c: ["c.intervals.augmented-diminished"], scope: ivScope(true) },
+      { t: "t.g4.interval-write", c: ["c.intervals.augmented-diminished"], scope: ivScope(true) },
+      { t: "t.g4.interval-facts", c: ["c.intervals.augmented-diminished"], scope: ivScope(true) },
     ],
     objective: { statement: "Name and write augmented and diminished intervals that arise within a scale.", criteria: ["I know how a semitone changes the quality of an interval.", "I know where the augmented 4th, diminished 5th and augmented 2nd arise.", "I can name and write them."] },
     explain: [

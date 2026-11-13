@@ -400,6 +400,7 @@ export const passage4: Gen = (c): any => {
       const [x, y] = chromaticOrder(mel[lowIdx]!, mel[highIdx]!);
       const iv = music.intervalBetween(x, y);
       if (iv.number > 8 || iv.number < 2) return null;
+      if (!"MmP".includes(iv.quality) && !c.scope.augmentedDiminished) return null;
       parts.push({ id: "interval", prompt: "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)", answer: { kind: "interval", task: "identify", key: keyText, lower: F(x), upper: F(y), acceptedIntervals: [`${iv.quality}${iv.number}`] } });
     } else if (k === "term") {
       const picks = termOptions(c, term);

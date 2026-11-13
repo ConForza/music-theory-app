@@ -22,6 +22,51 @@
       "text": "String and brass instruments may use a mute, a device that softens the sound. Con sordino (con sord.) means 'with the mute'; senza sordino (senza sord.) means 'without the mute'."
     },
     {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "slur": "start"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "slur": "stop"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble stave in 3/4, marked pizz. above the first note: three crotchets G, A and B joined by a slur.",
+        "timeSignature": "3/4",
+        "tempoText": "pizz."
+      },
+      "caption": "Marked pizz., then a slur over three notes: pluck them; and when a slur is written for bowed notes they share one bow-stroke."
+    },
+    {
       "kind": "text",
       "text": "String players are also told where to play. Sul G means 'on the G string'. Sul ponticello means 'near the bridge', which gives a thin, glassy sound. Bowing signs show the direction of the bow: the sign shaped like a square bracket open at the bottom (⊓) is a down-bow, and the V shape (∨) is an up-bow. A slur over or under two or more notes means they are played in a single bow-stroke, either up or down."
     },

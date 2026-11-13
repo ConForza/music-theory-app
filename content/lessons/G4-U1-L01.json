@@ -201,28 +201,6 @@
       "seed": null,
       "evidence": "learning",
       "prompt": "Which rest shows a silent bar in 4/2?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "breve",
-                  "dots": 0
-                },
-                "wholeBar": true
-              }
-            ]
-          }
-        ],
-        "textAlternative": "A time signature of 4/2 with an empty bar.",
-        "questionAlternative": "Bar 1: breve rest.",
-        "timeSignature": "4/2"
-      },
       "answer": {
         "kind": "choice",
         "options": [
@@ -428,8 +406,7 @@
                   "duration": {
                     "value": "breve",
                     "dots": 0
-                  },
-                  "wholeBar": true
+                  }
                 }
               ]
             }
@@ -460,28 +437,6 @@
       "seed": null,
       "evidence": "independent",
       "prompt": "Which single note fills a whole bar of 4/2 on its own?",
-      "music": {
-        "presentation": "rhythm-line",
-        "clef": "treble",
-        "showKeySignature": false,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "breve",
-                  "dots": 0
-                }
-              }
-            ]
-          }
-        ],
-        "textAlternative": "A time signature of 4/2 with an empty bar.",
-        "questionAlternative": "Bar 1: breve.",
-        "timeSignature": "4/2"
-      },
       "answer": {
         "kind": "choice",
         "options": [

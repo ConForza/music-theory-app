@@ -104,6 +104,8 @@ export const MusicScope = z
     intervalLowerNote: IntervalLowerNote.optional(),
     compoundIntervals: z.boolean().optional(),
     chromaticIntervals: z.boolean().optional(),
+    /** Brief 08: augmented and diminished intervals that arise between two notes of one scale (the quality choices a learner is offered, and the answers a generator may ask). */
+    augmentedDiminished: z.boolean().optional(),
     chordDegrees: z.array(RomanName).optional(),
     inversions: z.array(InversionName).optional(),
     cadenceTypes: z.array(CadenceName).optional(),
@@ -143,7 +145,7 @@ export const GradeScopeFile = z
 
 export const SCOPE_DIMENSIONS = [
   "keys", "minorForms", "timeSignatures", "noteValues", "maxDots", "tuplets", "clefs", "maxLedgerLines",
-  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "chordDegrees", "inversions",
+  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "augmentedDiminished", "chordDegrees", "inversions",
   "cadenceTypes", "cadenceKeys", "instrumentTranspositions", "octaveTranspositionClefs", "ornaments", "degreeNaming",
   "doubleAccidentals", "accidentals", "blackKeys", "keySignatures", "rests", "ties",
 ] as const;

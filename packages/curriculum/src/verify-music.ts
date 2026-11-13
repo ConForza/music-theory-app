@@ -516,6 +516,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
           if (!key) report("ANSWER_SCOPE", where, "A key is required for diatonic interval tasks");
           else if (!inKey(lower) || !inKey(upperPitch)) report("ANSWER_SCOPE", where, `${formatPitch(lower)}–${formatPitch(upperPitch)} is not in the ${forms.join("/")} form(s) of ${a.key} allowed here`);
         }
+        if (sc.intervalQuality === "number-and-quality" && !"MmP".includes(iv.quality) && !sc.augmentedDiminished && !sc.chromaticIntervals) report("ANSWER_SCOPE", where, `${iv.quality}${iv.number} is an augmented or diminished interval, which is not in scope here`);
         if (Math.abs(upperPitch.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, "Double accidentals are not in scope here");
       };
       if (a.task === "identify") {

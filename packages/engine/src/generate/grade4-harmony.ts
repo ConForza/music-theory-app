@@ -62,6 +62,8 @@ function pickPair(c: Ctx): Pair | null {
     const upper = notes[j]!;
     if (!fits(clef, [lower, upper], max)) continue;
     const iv = music.intervalBetween(lower, upper);
+    // augmented and diminished intervals are asked only once they have been taught (scope dimension augmentedDiminished)
+    if (!"MmP".includes(iv.quality) && !c.scope.augmentedDiminished) continue;
     return { key: keyText, form, lower, upper, clef, iv };
   }
   return null;
@@ -109,7 +111,8 @@ const aOrAnWord = (w: string) => (/^[aeiou]/.test(w) ? "an" : "a");
 /** t.g4.interval-facts: how a quality changes when a note moves by a semitone, and where augmented and diminished intervals arise. */
 export const intervalFacts4: Gen = (c): any => {
   if (c.scope.intervalLowerNote === "tonic" || !c.scope.intervalLowerNote) return null;
-  const mode = c.rng.pick(["change", "change", "change", "where-major", "where-minor", "name-twin"] as const);
+  const augOk = Boolean(c.scope.augmentedDiminished);
+  const mode = c.rng.pick(augOk ? (["change", "change", "change", "where-major", "where-minor", "name-twin"] as const) : (["change", "change", "name-twin"] as const));
   if (mode === "change") {
     const num = c.rng.pick([2, 3, 4, 5, 6, 7]);
     const perfect = num === 4 || num === 5;
@@ -128,6 +131,8 @@ export const intervalFacts4: Gen = (c): any => {
     const moveText = { "top-up": "The top note is raised by a semitone (keeping its letter name).", "top-down": "The top note is lowered by a semitone (keeping its letter name).", "bottom-up": "The bottom note is raised by a semitone (keeping its letter name).", "bottom-down": "The bottom note is lowered by a semitone (keeping its letter name)." }[move];
     const quals = perfect ? ["d", "P", "A"] : ["d", "m", "M", "A"];
     if (!quals.includes(result.quality) || result.number !== num) return null;
+    if (!augOk && !"mM".includes(result.quality)) return null;
+    if (!augOk && !"mM".includes(startQuality)) return null;
     return {
       prompt: `Start with a ${startWord}. ${moveText} What is the interval now?`,
       answer: { kind: "choice", options: quals.map((q) => ({ id: `${q}${num}`, label: cap(ivWord(q, num)) })), correctOptionIds: [`${result.quality}${num}`], diagnoses: Object.fromEntries(quals.filter((q) => q !== result.quality).map((q) => [`${q}${num}`, diag("augmented-diminished-swap", q === startQuality ? "The interval has changed: one note moved by a semitone, and that changes the size, so the quality changes too." : q === "A" || q === "d" ? `Check the direction: making the interval a semitone ${move === "top-up" || move === "bottom-down" ? "larger" : "smaller"} moves it ${move === "top-up" || move === "bottom-down" ? "up" : "down"} the list diminished – minor – major – augmented (perfect intervals sit between diminished and augmented).` : "Which way did the interval move? One semitone larger or smaller changes the quality by one step.")])) as Diagnoses },

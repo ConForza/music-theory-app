@@ -545,7 +545,7 @@ describe("Unit 4: intervals and triads", () => {
     for (const i of items("G4-U4-L03", "t.g4.triad-notes", 250)) {
       const m = /chord (i|iv|v) .*? of (.+?)(?:, using|\?)/i.exec(i.prompt)!;
       const key = music.parseKey(plain(m[2]!));
-      const t = music.triad(key, m[1]!).map((x) => music.formatPitchClass(x));
+      const t = music.triad(key, m[1]! as never).map((x) => music.formatPitchClass(x));
       expect(correct(i).split("-")).toEqual(t);
       const sets = options(i).map((o) => o.id.split("-").sort().join());
       expect(new Set(sets).size).toBe(options(i).length);
@@ -665,7 +665,7 @@ describe("Unit 5: ornaments, instruments, terms, passages", () => {
       expect(i.prompt).not.toMatch(/transpos|B♭|in F/i);
       if (i.prompt.startsWith("To which family")) expect(correct(i)).toBe(FAMILY[id(/does the (.+?) belong/.exec(i.prompt)![1]!)]);
       else if (i.prompt.startsWith("Which clef")) expect(correct(i)).toBe(CLEF[id(/the (.+?) normally/.exec(i.prompt)![1]!)]);
-      else expect(FAMILY[correct(i)].replace(/s$/, "")).toBe(/belongs to the (\w+) family/.exec(i.prompt)![1]!.replace(/s$/, ""));
+      else expect(FAMILY[correct(i)]!.replace(/s$/, "")).toBe(/belongs to the (\w+) family/.exec(i.prompt)![1]!.replace(/s$/, ""));
     }
     for (const i of items("G4-U5-L02", "t.g4.instrument-range", 250)) {
       if (i.prompt.includes("highest") || i.prompt.includes("lowest")) {
@@ -749,15 +749,14 @@ describe("adversarial answers are refused by the real engine", () => {
   }, 240_000);
 
   it("a pitch answer that matches only in sound is not a correct spelling (G for F double sharp)", () => {
-    const i = items("G4-U2-L01", "t.g4.double-name", 200).find((x) => /𝄪|x/.test(JSON.stringify(x.answer)) && (x.answer as unknown as { accepted: string[] }).accepted[0]!.includes("x"))!;
-    const a = (i.answer as unknown as { accepted: string[] }).accepted[0]!;
-    const p = P(a);
-    const wrongSpelt = music.spellingsOfKey ? undefined : undefined;
-    void wrongSpelt;
-    const sounding = { step: music.STEPS[(music.STEPS.indexOf(p.step) + 1) % 7]!, alter: 0, octave: p.octave };
-    expect(sound(sounding as music.Pitch) % 12).toBe(sound(p) % 12 === sound(sounding as music.Pitch) % 12 ? sound(p) % 12 : sound(sounding as music.Pitch) % 12);
-    const verdict = gradeItem(ix, i, { kind: "pitch", pitch: music.formatPitchClass(sounding) as never });
+    const i = items("G4-U2-L01", "t.g4.double-name", 200).find((x) => (x.answer as unknown as { accepted: string[] }).accepted[0]!.includes("x"))!;
+    const p = P((i.answer as unknown as { accepted: string[] }).accepted[0]!);
+    // the letter above, spelt as the plain note with the same sound (F double sharp -> G): same key, wrong spelling
+    const plainSame = music.STEPS.map((step) => ({ step, alter: 0 })).find((x) => (sound({ ...x, octave: p.octave } as music.Pitch) % 12) === (sound(p) % 12));
+    expect(plainSame).toBeTruthy();
+    const verdict = gradeItem(ix, i, { kind: "pitch", pitch: music.formatPitchClass(plainSame as music.PitchClass) as never });
     expect(verdict.correct).toBe(false);
+    expect(gradeItem(ix, i, { kind: "pitch", pitch: music.formatPitchClass(p) as never }).correct).toBe(true);
   });
 
   it("a rhythm that fits the bar but uses a rest where the question needs a note is refused (breve-bar)", () => {

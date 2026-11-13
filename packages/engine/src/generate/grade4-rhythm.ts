@@ -84,7 +84,6 @@ export const breveFacts: Gen = (c): any => {
     const lab = (x: string) => `${cap(x.replace("-", " "))}${rest ? " rest" : ""}`;
     return {
       prompt: rest ? "Which rest shows a silent bar in 4/2?" : "Which single note fills a whole bar of 4/2 on its own?",
-      music: rhythmLine([{ events: [rest ? { ...r("breve"), wholeBar: true } as Ev : breveEv()] }], { timeSignature: "4/2", textAlternative: `A time signature of 4/2 with an empty bar.` }),
       answer: { kind: "choice", options: optsOf(ids, lab), correctOptionIds: ["breve"], diagnoses: { semibreve: diag("halved-or-doubled", rest ? "A semibreve rest fills a whole bar in every other time signature, but a bar of 4/2 is two semibreves long, so a semibreve rest would leave half of it unaccounted for." : "A semibreve is only half a bar of 4/2: a bar holds four minims, which is two semibreves."), minim: diag("halved-or-doubled", "A bar of 4/2 holds four minim beats. One minim is only a quarter of the bar."), ...(rest ? { crotchet: diag("halved-or-doubled", "A crotchet is far too short: a bar of 4/2 holds eight crotchets.") } : { "dotted-minim": diag("dot-misread", "A dotted minim lasts three minim beats, one short of the four in a bar of 4/2.") }) } },
       hints: ["A bar of 4/2 holds four minim beats: that is exactly two semibreves, one breve."],
     };
@@ -123,7 +122,7 @@ export const breveBar: Gen = (c): any => {
   const mode = c.rng.pick(["note", "rest", "tied-a", "tied-b", "tied-c"] as const);
   if (mode === "note" || mode === "rest") {
     const rest = mode === "rest";
-    const answerBar: Ev[] = [rest ? ({ ...r("breve"), wholeBar: true } as Ev) : breveEv()];
+    const answerBar: Ev[] = [rest ? r("breve") : breveEv()];
     if (!clean(answerBar, "4/2")) return null;
     return {
       prompt: rest ? "Write a silent bar of 4/2, using one rest." : "Write a bar of 4/2 using one note.",

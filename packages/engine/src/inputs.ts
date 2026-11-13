@@ -206,7 +206,7 @@ function inputForAnswer(c: ItemContext, a: SimpleAnswerSpec): Exclude<ItemInput,
         return {
           kind: "interval-name",
           maxNumber: sc.compoundIntervals ? 15 : 8,
-          qualities: numberOnly ? null : sc.chromaticIntervals ? ["d", "m", "M", "P", "A"] : ["m", "M", "P"],
+          qualities: numberOnly ? null : sc.chromaticIntervals || sc.augmentedDiminished ? ["d", "m", "M", "P", "A"] : ["m", "M", "P"],
           compound: Boolean(sc.compoundIntervals),
         };
       }
