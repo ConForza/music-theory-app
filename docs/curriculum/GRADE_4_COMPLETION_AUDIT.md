@@ -90,10 +90,10 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.accidentals.enharmonic | U2-L02 | enharmonic 35, enharmonic-letter 67, enharmonic-pick 291 | 393 |
 | c.clefs.alto | U2-L03 | alto-facts 19, alto-read 82, alto-write 21 | 122 |
 | c.clefs.same-pitch-three | U2-L04 | same-pitch 60, clef-position 181 | 241 |
-| c.transposition.octave-alto | U2-L05 | octave-transpose-alto 394, octave-pick-alto 129 | 523 |
+| c.transposition.octave-alto | U2-L05 | octave-transpose-alto 459, octave-pick-alto 129 | 588 |
 | c.scales.keys-five-sharps | U3-L01 | scale-build 27, key-signature 8, key-facts 52, scale-spot 237 | 324 |
 | c.scales.keys-five-flats | U3-L02 | scale-build 30, key-signature 8, key-facts 54, scale-spot 219 | 311 |
-| c.keys.signatures-alto | U3-L03 | key-signature 38 | 38 |
+| c.keys.signatures-alto | U3-L03 | key-signature 38, octave-transpose-alto 362 | 400 |
 | c.scales.technical-names | U3-L04 | technical-names 257, degree-name 294 | 551 |
 | c.scales.chromatic | U3-L05 | chromatic-scale 56, chromatic-judge 400 | 456 |
 | c.intervals.any-diatonic | U4-L01 | interval-diatonic 302, interval-write 327, interval-facts 222 | 851 |
@@ -107,7 +107,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.terms.g4 | U5-L04 | terms 357, term-use 332 | 689 |
 | c.context.passage-g4 | U5-L05 | passage 400, passage-directions 400 | 800 |
 
-Concepts below the capacity rule: **1**: c.keys.signatures-alto.
+Concepts below the capacity rule: **0**.
 
 **No false mastery from earlier grades.** A concept boundary (`content/policy/review-constraints.json`) decides which questions credit a Grade 4 concept, whatever template asked them: regular-time-signature concepts credit only the eight signatures that are new at Grade 4; the breve and double-dot concepts credit only questions about those values; alto-clef and alto key-signature concepts credit only questions that name the alto clef; the sharp/flat-key concepts credit only B major, G♯ minor, D♭ major and B♭ minor; the interval concepts split major/minor/perfect from augmented/diminished by the answer; the primary-triad concept ignores a tonic-only chord; the terms concept credits only the 21 Grade 4 terms (not the Grade 1-3 term list); the techniques concept only the eight techniques. Tests in `grade4-course.test.ts` pin each boundary.
 

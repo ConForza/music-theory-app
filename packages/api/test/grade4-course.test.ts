@@ -395,7 +395,7 @@ describe("review P1-1: the same Grade 4 question in another seed is not fresh ev
   });
   it("a second sighting through the real mastery service is not fresh", () => {
     const db = openDb(":memory:");
-    const svc = new MasteryService(db, course, new ManualClock("2026-03-02T10:00:00.000Z"), rulesFrom(course.ix.c.policy));
+    const svc = new MasteryService(db, course, new ManualClock(new Date("2026-03-02T10:00:00.000Z")), rulesFrom(course.ix.c.policy));
     const a = item("G4-U1-L03", "t.g4.metre-facts", 2);
     const b = item("G4-U1-L03", "t.g4.metre-facts", 18);
     db.prepare("INSERT INTO users (id, display_name, is_guest, created_at, last_seen_at) VALUES ('u1','U',1,'2026-03-02T10:00:00.000Z','2026-03-02T10:00:00.000Z')").run();
