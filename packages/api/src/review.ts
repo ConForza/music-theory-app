@@ -22,6 +22,7 @@ import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { isDue, type ConceptMastery } from "./mastery.ts";
 import { learnerTime, type LearnerTime, type MasteryService } from "./mastery-service.ts";
 import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
+import { taughtNodes } from "./taught.ts";
 import { REVIEW_NODE, type XpService } from "./xp.ts";
 
 export interface SessionItem {
@@ -79,7 +80,7 @@ export class ReviewService {
   // ---- what can be reviewed --------------------------------------------------------------------------------------
 
   private completedNodes(userId: string): Set<string> {
-    return new Set((this.db.prepare("SELECT node_id FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string }>).map((r) => r.node_id));
+    return taughtNodes(this.db, this.course, userId);
   }
 
   /**
@@ -141,7 +142,8 @@ export class ReviewService {
    */
   poolKeys(conceptId: string, completed: Set<string>): Map<string, string> {
     const cands = this.candidates(conceptId, completed);
-    const id = `${this.course.version}|${conceptId}|${cands.map((c) => c.templateId).join(",")}`;
+    // Cache depends on each providing node, template and its effective teaching scope.
+    const id = `${this.course.version}|${conceptId}|${cands.map((c) => `${c.nodeId}:${c.templateId}:${JSON.stringify(c.scope)}`).join(";")}`;
     const hit = this.poolCache.get(id);
     if (hit) return hit;
     const constraint = this.constraints.get(conceptId);

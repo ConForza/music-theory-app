@@ -84,6 +84,15 @@ export class PracticeService {
     return { item, scope: templateScope(this.course.ix, this.course.ix.templates.get(g.templateId)!), seed: g.seed };
   }
 
+  /** The stable question identity of a historical practice item id, or null if it can no longer be resolved (e.g. its generator changed). */
+  questionKeyOf(itemId: string): string | null {
+    try {
+      return questionKey(this.resolve(itemId).item);
+    } catch {
+      return null;
+    }
+  }
+
   hint(userId: string, itemId: string, level: number) {
     const { item } = this.resolve(itemId);
     if (level < 1 || level > item.hints.length) throw new ApiError(400, "bad_request", "No such hint.");

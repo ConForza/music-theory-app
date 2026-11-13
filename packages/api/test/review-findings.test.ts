@@ -1,3 +1,10 @@
+import { copyFileSync, mkdirSync, mkdtempSync, readdirSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { DatabaseSync } from "node:sqlite";
+import { createApp } from "../src/app.ts";
+import { ReviewService } from "../src/review.ts";
+import { COOKIE, createSession, createUser } from "../src/auth.ts";
+import { ManualClock } from "../src/clock.ts";
 import { describe, expect, it } from "vitest";
 import { join } from "node:path";
 import { migrate } from "../src/db.ts";
@@ -415,4 +422,147 @@ describe("migration 006 repairs legacy novelty (both historical orders)", () => 
       expect(await h.count()).toBe(right);
     });
   }
+});
+
+describe("XP cap: the union of both day readings, counted once", () => {
+  it("does not pay again when a zone switch sees one award by date and another by instant", async () => {
+    // Two awards, each matching only ONE reading of the final day (the reviewer's exact history), then a third attempt.
+    const { client, clock } = setupClock("2026-03-02T12:00:00Z");
+    const c = client();
+    await register(c);
+    expect((await c.call("PATCH", "/api/me/profile", { timezone: "Pacific/Kiritimati" })).status).toBe(200); // UTC+14
+    expect((await playThrough(c, course)).body.rewards.xp.awarded).toBe(10); // 02 Mar 12:00Z = 03 Mar 02:00 there
+    clock.set("2026-03-03T06:00:00Z");
+    expect((await c.call("PATCH", "/api/me/profile", { timezone: "Pacific/Pago_Pago" })).status).toBe(200); // UTC-11
+    expect((await playThrough(c, course)).body.rewards.xp.awarded).toBe(10); // 02 Mar 19:00 there
+    expect((await playThrough(c, course)).body.rewards.xp).toMatchObject({ awarded: 0, capped: true });
+    // Now the learner is on UTC at the same instant: one earlier row is stamped 3 March (outside the window), the other is
+    // inside the window but stamped 2 March. Two awards in the union, so the cap holds.
+    expect((await c.call("PATCH", "/api/me/profile", { timezone: "UTC" })).status).toBe(200);
+    expect((await playThrough(c, course)).body.rewards.xp).toMatchObject({ awarded: 0, capped: true });
+  });
+});
+
+describe("teaching eligibility is version-aware", () => {
+  /** The same database served by a course whose lesson has moved to a new version that also introduces treble space notes. */
+  function deployV3(db: ReturnType<typeof setupClock>["db"], clock: ReturnType<typeof setupClock>["clock"]) {
+    const node = course.ix.nodeById.get(LESSON)!;
+    const read = node.exercises.find((b) => b.templateId === "t.g1.note-read")!;
+    const v3 = {
+      ...node,
+      contentVersion: node.contentVersion + 1,
+      conceptIds: [...node.conceptIds, "c.clefs.treble-spaces"],
+      exercises: node.exercises.map((b) => (b === read ? { ...b, conceptIds: [...b.conceptIds, "c.clefs.treble-spaces"] } : b)),
+    };
+    const taught = new Map(course.ix.conceptTaughtBy);
+    taught.set("c.clefs.treble-spaces", [v3]);
+    const ix = { ...course.ix, nodeById: new Map(course.ix.nodeById).set(LESSON, v3), conceptTaughtBy: taught };
+    const patched = { ...course, ix, nodes: course.nodes.map((n) => (n.id === LESSON ? { ...n, contentVersion: v3.contentVersion } : n)) } as unknown as typeof course;
+    return createApp({ db, course: patched, clock });
+  }
+
+  it("does not make newly introduced material reviewable from a completion of the older version", async () => {
+    const { c, clock, db } = await learner(); // completed at the version being served
+    clock.advanceDays(1);
+    expect((await c.get("/api/review")).body.dueCount).toBe(1); // control: reviewable before the deployment
+    const next = new Client(deployV3(db, clock));
+    next.cookie = c.cookie;
+    const hub = (await next.get("/api/review")).body;
+    expect(hub.dueCount).toBe(0); // nothing taught at the current version yet
+    expect(hub.groups.ready).toEqual([]);
+    expect((await next.get("/api/progress")).body.nodes[LESSON].reviewAvailable).toBe(true); // the path offers the refresher
+    const started = (await next.post("/api/review/sessions")).body;
+    expect(started.session).toBeNull(); // no question about the new space notes (or anything the old completion cannot vouch for)
+    expect((await next.get("/api/mastery/c.clefs.treble-spaces")).body.reviewable).toBe(false);
+  });
+});
+
+describe("historical practice exposure (Brief 03 databases)", () => {
+  it("a question hinted and answered in Brief 03 practice can no longer earn fresh review credit after upgrade", async () => {
+    // A database exactly as Brief 03 left it: migrations 001 and 002 only, practice attempts and hints, no exposure tracking.
+    const src = join(import.meta.dirname, "../migrations");
+    const dir = mkdtempSync(join(tmpdir(), "b03-"));
+    mkdirSync(join(dir, "m"));
+    for (const f of readdirSync(src).filter((f) => /^00[12]/.test(f))) copyFileSync(join(src, f), join(dir, "m", f));
+    const db = new DatabaseSync(":memory:");
+    db.exec("PRAGMA foreign_keys = ON;");
+    expect(migrate(db, join(dir, "m"))).toEqual(["001_init.sql", "002_practice.sql"]);
+    const user = createUser(db as never, { displayName: "Guest" });
+    const token = createSession(db as never, user.id).token;
+    const tpl = "t.g1.note-read";
+    const want = lineKeys(tpl);
+    const practised = new Map<string, string>();
+    for (let seed = 0; seed < 6000 && practised.size < want.size; seed++) {
+      const item = generateItem(course.ix, tpl, seed, { evidence: "learning" }).item;
+      const key = questionKey(item);
+      if (want.has(key) && !practised.has(key)) practised.set(key, item.id);
+    }
+    expect(practised.size).toBe(want.size);
+    let n = 0;
+    for (const id of practised.values()) {
+      db.prepare("INSERT INTO practice_hint_uses (user_id,item_id,level,created_at) VALUES (?,?,1,'2026-02-01T10:00:00.000Z')").run(user.id, id);
+      db.prepare("INSERT INTO practice_attempts (user_id,id,item_id,template_id,template_version,seed,curriculum_version,response,correct,mistake_category,hints_used,attempt_number,created_at) VALUES (?,?,?,?,1,1,'0.2.1','{}',1,NULL,1,1,'2026-02-01T10:00:01.000Z')").run(user.id, `old-${n++}`, id, tpl);
+    }
+    // Upgrade to the current schema and code.
+    migrate(db, src);
+    expect((db.prepare("SELECT COUNT(*) AS n FROM question_exposure").get() as { n: number }).n).toBe(0); // SQL alone cannot recover them
+    const clock = new ManualClock(new Date("2026-03-02T12:00:00Z"));
+    const app = createApp({ db: db as never, course, clock });
+    expect((db.prepare("SELECT COUNT(DISTINCT question_key) AS n FROM question_exposure").get() as { n: number }).n).toBe(want.size); // recovered
+    expect(db.prepare("SELECT name FROM data_backfills").all()).toEqual([{ name: "practice-exposure-from-brief-03-history" }]);
+    const c = new Client(app);
+    c.cookie = `${COOKIE}=${token}`;
+    await finishLesson(c);
+    const before = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect;
+    expect(before).toBe(4);
+    clock.advanceDays(1);
+    const { session } = (await c.post("/api/review/sessions")).body;
+    const results = await answerSession(c, db as never, session.id);
+    for (const r of results.filter((x) => x.si.kind === "review" && x.si.templateId === tpl)) expect(r.body.counted).toBe(false);
+    // Running the app again repairs nothing twice and changes nothing.
+    createApp({ db: db as never, course, clock });
+    expect((db.prepare("SELECT COUNT(*) AS n FROM data_backfills").get() as { n: number }).n).toBe(1);
+  });
+
+  it("repairs a database that already took the earlier migrations without touching legitimate credit", async () => {
+    const { c, clock, db, uid } = await learner(); // lesson done: four credited independent answers
+    clock.advanceDays(1);
+    const { session } = (await c.post("/api/review/sessions")).body;
+    await answerSession(c, db, session.id); // credited review answers, written before any practice
+    const credited = (await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect;
+    // Practice of the same questions happens later, but its exposure was never recorded (a pre-tracking database).
+    db.prepare("DELETE FROM data_backfills").run();
+    const tplId = "t.g1.note-read";
+    const seen = [...lineKeys(tplId)][0]!;
+    for (let seed = 0; seed < 6000; seed++) {
+      const item = generateItem(course.ix, tplId, seed, { evidence: "learning" }).item;
+      if (questionKey(item) !== seen) continue;
+      db.prepare("INSERT INTO practice_hint_uses (user_id,item_id,level,created_at) VALUES (?,?,1,?)").run(uid, item.id, new Date(clock.now().getTime() + 60_000).toISOString());
+      break;
+    }
+    createApp({ db, course, clock });
+    expect((await c.get(`/api/mastery/${TREBLE}`)).body.independentCorrect).toBe(credited); // later practice never revokes earlier credit
+  });
+});
+
+describe("pool capacity cache identity", () => {
+  it("does not reuse one provider's pool for a different provider's scope of the same template", () => {
+    const { db, clock, app } = setupClock();
+    // Two real lessons bind t.g1.note-read to c.clefs.stave with different effective scopes (treble only; treble and bass).
+    const narrow = course.ix.nodeById.get("G1-U3-L03")!;
+    const wide = course.ix.nodeById.get("G1-U3-L05")!;
+    const patched = {
+      ...course,
+      isPlayable: (id: string) => id === wide.id || course.isPlayable(id),
+      ix: { ...course.ix, conceptTaughtBy: new Map([["c.clefs.stave", [narrow, wide]]]) },
+    } as unknown as typeof course;
+    const make = () => new ReviewService(db, patched, clock, app.engagement.mastery, app.engagement.xp, app.engagement.activity, app.engagement.achievements, { maxConcepts: 4, itemsPerConcept: 2 });
+    const svc = make();
+    const warm = svc.poolKeys("c.clefs.stave", new Set([narrow.id])).size;
+    const other = svc.poolKeys("c.clefs.stave", new Set([wide.id])).size; // same template and concept, a different provider
+    const cold = make().poolKeys("c.clefs.stave", new Set([wide.id])).size;
+    expect(warm).toBeGreaterThan(0);
+    expect(other).toBe(cold); // a warm cache must give the same answer as a cold calculation
+    expect(other).toBeGreaterThan(warm); // and the wider provider really does have more distinct questions
+  });
 });

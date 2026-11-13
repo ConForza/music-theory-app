@@ -7,6 +7,7 @@ import type { Db } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
+import { backfillPracticeExposure } from "./backfill.ts";
 import { NodeRunService } from "./node-run.ts";
 import { Engagement } from "./engagement.ts";
 import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
@@ -119,6 +120,8 @@ export function createApp(opts: AppOptions) {
   const policy = { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true };
   const nodes = new NodeRunService(db, course, policy, clock, engagement);
   const practice = new PracticeService(db, course, clock);
+  // One-time recovery for historical practice without exposure identities; idempotent on startup.
+  backfillPracticeExposure(db, practice, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
   const loginLimiter = new RateLimiter(10);

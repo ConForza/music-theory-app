@@ -33,7 +33,7 @@
 * Review is per learner and has no audio-based question (`listen-identify` is not authored); everything is operable without sound.
 * The Brief 03 golden tables, vocabularies and generator output still await human musical review (see EXERCISE_ENGINE §10); review questions inherit that status.
 * Unlocking is unchanged. In particular the preview waiver of unwritten prerequisites (`waiveUnwrittenPrerequisites`) still applies until Briefs 05–09 land.
-* `POST /api/test/clock` must never be enabled in production (`MTP_TEST_CLOCK` is ignored when `NODE_ENV=production`).
+* `POST /api/test/clock` must never be enabled in production (it needs `MTP_TEST_CLOCK=1` **and** `NODE_ENV=test`).
 
 ## Reviewer guide
 

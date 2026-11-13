@@ -33,6 +33,14 @@ export function Progress() {
   const open = [...data.nodes.values()].filter((n) => progress.nodes[n.id]?.state === "in_progress");
   const refresh = [...data.nodes.values()].filter((n) => describeNode(n, progress.nodes[n.id]).status === "review_available");
 
+  // A topic that is simply due for review keeps the level it earned; only a genuine slip (state practising) counts as learning again.
+  const tally = (() => {
+    const all = review ? [...review.groups.ready, ...review.groups.learning, ...review.groups.approaching, ...review.groups.mastered] : [];
+    const mastered = all.filter((c) => c.state === "mastered" || (c.state === "review_due" && c.highestState === "mastered")).length;
+    const nearly = all.filter((c) => c.state === "proficient" || (c.state === "review_due" && c.highestState === "proficient")).length;
+    return { mastered, nearly, learning: all.length - mastered - nearly };
+  })();
+
   return (
     <div className="page">
       <h1>Your progress</h1>
@@ -60,9 +68,9 @@ export function Progress() {
         <section className="card" aria-labelledby="mastery-h">
           <h2 id="mastery-h">Understanding</h2>
           <dl className="stats stats-row">
-            <div><dt>Mastered</dt><dd>{review.groups.mastered.length}</dd></div>
-            <div><dt>Nearly there</dt><dd>{review.groups.approaching.length}</dd></div>
-            <div><dt>Learning</dt><dd>{review.groups.learning.length + review.groups.ready.length}</dd></div>
+            <div><dt>Mastered</dt><dd>{tally.mastered}</dd></div>
+            <div><dt>Nearly there</dt><dd>{tally.nearly}</dd></div>
+            <div><dt>Learning</dt><dd>{tally.learning}</dd></div>
           </dl>
           <p className="muted small">Topics, not lessons. A topic is mastered after varied first-try answers without hints, spread over days, with a successful review.</p>
           <div className="row">

@@ -2,6 +2,7 @@ import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import type { Clock } from "./clock.ts";
 import { addDays, localDate } from "./clock.ts";
+import { taughtNodes } from "./taught.ts";
 import { foldConcept, type ConceptMastery, type EvidenceRow, type EvidenceSource, type MasteryRules } from "./mastery.ts";
 
 /** The learner's clock: the instant, their timezone and their local calendar date. */
@@ -187,7 +188,9 @@ export class MasteryService {
    * and is first due one interval after the completion day. No evidence is invented: it counts for nothing.
    */
   private addTaughtButUnrecorded(userId: string, today: string, out: Map<string, ConceptMastery>) {
-    const done = this.db.prepare("SELECT node_id, completed_at FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string; completed_at: string }>;
+    // Completed AND current: a completion against an older lesson version does not make newer material reviewable.
+    const taught = taughtNodes(this.db, this.course, userId);
+    const done = (this.db.prepare("SELECT node_id, completed_at FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string; completed_at: string }>).filter((d) => taught.has(d.node_id));
     const tz = (this.db.prepare("SELECT timezone FROM profiles WHERE user_id = ?").get(userId) as { timezone: string } | undefined)?.timezone ?? "UTC";
     for (const d of done) {
       const node = this.course.ix.nodeById.get(d.node_id);
