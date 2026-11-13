@@ -191,11 +191,13 @@
           "lower-mordent",
           "acciaccatura",
           "appoggiatura"
-        ]
+        ],
+        "augmentedDiminished": true
       },
       "notes": [
         "'All regular time signatures': the app's list is the commonly used set; extremely rare signatures (e.g. 2/16) are excluded from generation (see OPEN_QUESTIONS Q7).",
-        "Intervals within an octave between any two notes of one Grade 4 scale."
+        "Intervals within an octave between any two notes of one Grade 4 scale.",
+        "Augmented and diminished intervals arise between two notes of one scale (the augmented 4th, diminished 5th, augmented 2nd in the harmonic minor); the dimension `augmentedDiminished` gates them (Brief 08), separately from the Grade 5 `chromaticIntervals`."
       ],
       "outcomeRefs": [
         "abrsm2020.g4.01",

@@ -104,6 +104,8 @@ export const MusicScope = z
     intervalLowerNote: IntervalLowerNote.optional(),
     compoundIntervals: z.boolean().optional(),
     chromaticIntervals: z.boolean().optional(),
+    /** Brief 08: augmented and diminished intervals that arise between two notes of one scale (the quality choices a learner is offered, and the answers a generator may ask). */
+    augmentedDiminished: z.boolean().optional(),
     chordDegrees: z.array(RomanName).optional(),
     inversions: z.array(InversionName).optional(),
     cadenceTypes: z.array(CadenceName).optional(),
@@ -143,7 +145,7 @@ export const GradeScopeFile = z
 
 export const SCOPE_DIMENSIONS = [
   "keys", "minorForms", "timeSignatures", "noteValues", "maxDots", "tuplets", "clefs", "maxLedgerLines",
-  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "chordDegrees", "inversions",
+  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "augmentedDiminished", "chordDegrees", "inversions",
   "cadenceTypes", "cadenceKeys", "instrumentTranspositions", "octaveTranspositionClefs", "ornaments", "degreeNaming",
   "doubleAccidentals", "accidentals", "blackKeys", "keySignatures", "rests", "ties",
 ] as const;
@@ -855,6 +857,8 @@ const PitchAnswer = z
     reference: PitchName.optional(),
     /** "same-sound": accepted answers must sound like `reference`; "different-spelling": and be spelt differently. */
     relation: z.enum(["same", "same-sound", "different-spelling"]).default("same"),
+    /** Brief 08: the answer must use this letter name (an enharmonic task that names the letter). */
+    letter: z.enum(["A", "B", "C", "D", "E", "F", "G"]).optional(),
   })
   .strict();
 
@@ -971,6 +975,8 @@ const ChordAnswer = z
     acceptedChords: z.array(ChordId).optional(),
     /** build: example correct voicings; the grader accepts any voicing with the right notes and bass. */
     acceptedVoicings: z.array(z.array(PitchName).min(3)).optional(),
+    /** Brief 08, build: the learner must write exactly this many notes (four notes = one note of the triad is doubled). Absent = any number. */
+    voices: z.number().int().min(3).max(5).optional(),
   })
   .strict()
   .refine((a) => (a.task === "identify" ? Boolean(a.acceptedChords?.length) : Boolean(a.target && a.acceptedVoicings?.length)), {

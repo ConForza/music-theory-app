@@ -1,0 +1,852 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U3-L02",
+  "lessonId": "G4-U3-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Write the scales and key signatures of D flat major and B flat minor.",
+    "successCriteria": [
+      "I know D♭ major and B♭ minor have five flats.",
+      "I can write both scales, ascending and descending, with accidentals.",
+      "I know how a natural sign works beside a flat in the key signature."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The two 'flat' keys are D♭ major and its relative minor, B♭ minor. Five flats are B♭, E♭, A♭, D♭ and G♭, in that order. For a flat key the major tonic is the second-to-last flat: the last is G♭, the second-to-last is D♭, so the key is D♭ major."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Db3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Gb3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with eight semibreves: the D♭ major scale, ascending, written with accidentals instead of a key signature."
+      },
+      "caption": "D♭ major, ascending in the bass clef, with accidentals."
+    },
+    {
+      "kind": "text",
+      "text": "B♭ minor has the same signature. In its harmonic form the 7th, A♭, is raised to A natural: a natural sign cancels the flat for the bar. There is no double sign here. In the melodic form the 6th and 7th go up, G natural and A natural, and come down again as G♭ and A♭."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Db5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with eight semibreves: the B♭ melodic minor scale, ascending, with its key signature.",
+        "key": "Bb minor"
+      },
+      "caption": "B♭ melodic minor, ascending, with its key signature: G♮ and A♮ are accidentals."
+    },
+    {
+      "kind": "text",
+      "text": "Notice again the difference between the key signature and an accidental. The five flats in the key signature apply to every B, E, A, D and G in the piece. A natural sign beside a note cancels a flat from the signature for that note and later notes on the same line or space in that bar only."
+    },
+    {
+      "kind": "tip",
+      "text": "Five flats: D♭ major and B♭ minor. The harmonic minor raises the 7th with a natural sign (A♮); there is no double sign in these keys."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Bb4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "Db5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "Eb5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "Gb5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "flat"
+            },
+            {
+              "kind": "note",
+              "pitch": "A5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "Bb5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "flat"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A treble-clef stave with eight semibreves: the B♭ harmonic minor scale, ascending, written with accidentals instead of a key signature."
+    },
+    "steps": [
+      "Start on B♭ and follow the five flats: B♭ C D♭ E♭ F G♭.",
+      "The harmonic minor raises the 7th: A♭ becomes A natural.",
+      "The step from G♭ to A natural is three semitones."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "B♭ harmonic minor, ascending."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u3-l02.guided-1",
+      "templateId": "t.g4.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What is the relative minor of D♭ major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A minor",
+            "label": "A minor"
+          },
+          {
+            "id": "G minor",
+            "label": "G minor"
+          },
+          {
+            "id": "Bb minor",
+            "label": "B♭ minor"
+          },
+          {
+            "id": "Db minor",
+            "label": "D♭ minor"
+          }
+        ],
+        "correctOptionIds": [
+          "Bb minor"
+        ],
+        "diagnoses": {
+          "Db minor": {
+            "category": "relative-confusion",
+            "reason": "D♭ minor is the tonic minor (it shares the starting note), not the relative. The relative key shares the key signature."
+          },
+          "A minor": {
+            "category": "wrong-count",
+            "reason": "A minor has a different key signature from D♭ major. The relative key has the same one."
+          },
+          "G minor": {
+            "category": "wrong-count",
+            "reason": "G minor has a different key signature from D♭ major. The relative key has the same one."
+          }
+        }
+      },
+      "hints": [
+        "Sharps: F C G D A E B; flats: B E A D G C F.",
+        "Relative keys share a key signature. The relative minor starts on the 6th note of the major scale (a minor third below the major tonic)."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "wrong-count": "Count the accidentals of the key signature.",
+          "wrong-order": "Sharps come in the order F C G D A E B; flats in B E A D G C F.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "Relative keys share a key signature; they do not share a starting note.",
+          "mixed-sharps-flats": "A key uses either sharps or flats, never both.",
+          "wrong-minor-form": "The harmonic minor raises only the 7th; the melodic minor raises the 6th and 7th going up.",
+          "letter-skipped-or-repeated": "A scale uses each letter name once, in order.",
+          "off-by-one": "Count again, starting from the tonic as degree 1."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.guided-2",
+      "templateId": "t.g4.scale-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write the scale of D♭ major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "Db major",
+        "accepted": [
+          [
+            "Db4",
+            "C4",
+            "Bb3",
+            "Ab3",
+            "Gb3",
+            "F3",
+            "Eb3",
+            "Db3"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "Db major",
+          "form": "major",
+          "direction": "descending",
+          "start": "Db4"
+        }
+      },
+      "hints": [
+        "One note per letter name.",
+        "Major pattern: tone, tone, semitone, tone, tone, tone, semitone."
+      ],
+      "feedback": {
+        "correct": "Right: every flat is written.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.guided-3",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name a key with this key signature (major or minor).",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "treble",
+        "accepted": [
+          "Db major",
+          "Bb minor"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Right: five flats in order.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u3-l02.ind-1",
+      "templateId": "t.g4.scale-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the B♭ harmonic minor scale, ascending then descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "Bb minor",
+        "accepted": [
+          [
+            "Bb2",
+            "C3",
+            "Db3",
+            "Eb3",
+            "F3",
+            "Gb3",
+            "A3",
+            "Bb3",
+            "A3",
+            "Gb3",
+            "F3",
+            "Eb3",
+            "Db3",
+            "C3",
+            "Bb2"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "Bb minor",
+          "form": "harmonic",
+          "direction": "ascending-descending",
+          "start": "Bb2"
+        }
+      },
+      "hints": [
+        "One note per letter name.",
+        "Harmonic minor: the key-signature notes with the 7th raised a semitone, going up and coming down."
+      ],
+      "feedback": {
+        "correct": "Correct scale.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.ind-2",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name a key with this key signature (major or minor).",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "bass",
+        "accepted": [
+          "Bb minor",
+          "Db major"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Correct signature.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.ind-3",
+      "templateId": "t.g4.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many flats are in the key signature of D♭ major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "wrong-count",
+            "reason": "D♭ major has 5 flats: B♭, E♭, A♭, D♭, G♭."
+          },
+          "6": {
+            "category": "wrong-count",
+            "reason": "D♭ major has 5 flats: B♭, E♭, A♭, D♭, G♭."
+          }
+        }
+      },
+      "hints": [
+        "Sharps: F C G D A E B; flats: B E A D G C F.",
+        "The flats come in a fixed order: B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count the accidentals of the key signature.",
+          "wrong-order": "Sharps come in the order F C G D A E B; flats in B E A D G C F.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "Relative keys share a key signature; they do not share a starting note.",
+          "mixed-sharps-flats": "A key uses either sharps or flats, never both.",
+          "wrong-minor-form": "The harmonic minor raises only the 7th; the melodic minor raises the 6th and 7th going up.",
+          "letter-skipped-or-repeated": "A scale uses each letter name once, in order.",
+          "off-by-one": "Count again, starting from the tonic as degree 1."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.ind-4",
+      "templateId": "t.g4.scale-spot",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is meant to be the B♭ melodic minor scale, going up. Every note sounds right, but one is spelt with the wrong letter name. Which one?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "D#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave. a note in the space below the 1st ledger line below the stave, with a flat sign in front; a note on the 1st ledger line below the stave; a note in the space just below the stave, with a flat sign in front; a note in the space just below the stave, with a sharp sign in front; a note in the 1st space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line, with a flat sign in front."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "5",
+            "label": "The 6th note (G)"
+          },
+          {
+            "id": "3",
+            "label": "The 4th note (D♯)"
+          },
+          {
+            "id": "4",
+            "label": "The 5th note (F)"
+          },
+          {
+            "id": "6",
+            "label": "The 7th note (A)"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "The 5th note is spelt correctly. A scale uses each letter name once, in order: check which letter is missing or used twice."
+          },
+          "5": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "The 6th note is spelt correctly. A scale uses each letter name once, in order: check which letter is missing or used twice."
+          },
+          "6": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "The 7th note is spelt correctly. A scale uses each letter name once, in order: check which letter is missing or used twice."
+          }
+        }
+      },
+      "hints": [
+        "Write the letter names in order.",
+        "Write the letter names in order from the tonic. Which note breaks the pattern of letters?"
+      ],
+      "feedback": {
+        "correct": "Correct: that note has the wrong letter name.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "A scale uses each letter name once, in order.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.ind-5",
+      "templateId": "t.g4.scale-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the scale of D♭ major, ascending then descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "Db major",
+        "accepted": [
+          [
+            "Db2",
+            "Eb2",
+            "F2",
+            "Gb2",
+            "Ab2",
+            "Bb2",
+            "C3",
+            "Db3",
+            "C3",
+            "Bb2",
+            "Ab2",
+            "Gb2",
+            "F2",
+            "Eb2",
+            "Db2"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "Db major",
+          "form": "major",
+          "direction": "ascending-descending",
+          "start": "Db2"
+        }
+      },
+      "hints": [
+        "One note per letter name.",
+        "Major pattern: tone, tone, semitone, tone, tone, tone, semitone."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g4-u3-l02.ind-6",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of B♭ minor in the treble clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "treble",
+        "accepted": [
+          "Bb minor"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "recap": [
+    "D♭ major and B♭ minor have five flats: B♭ E♭ A♭ D♭ G♭.",
+    "B♭ harmonic minor raises A♭ to A natural; the melodic form also raises G♭.",
+    "A natural sign beside a note cancels a flat from the key signature until the barline."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.scale-build",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.key-signature",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.scale-spot",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.scales.keys-five-flats"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s07"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.10"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 10 and First Steps Grade 4 section 7 (pp. 85-86): five flats, D flat major and B flat minor. Scales are asked with accidentals (OPEN_QUESTIONS Q28); the Q27 form is named in every minor-key interval prompt in Unit 4."
+  }
+}

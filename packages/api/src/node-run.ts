@@ -548,7 +548,10 @@ export class NodeRunService {
         const correct = planned.filter((si) => attempts.get(si.itemId)?.firstTry).length;
         const percent = Math.round((100 * correct) / planned.length);
         const passPercent = this.passMark(kind as "challenge" | "assessment");
-        passed = percent >= passPercent;
+        // Grade 4 onwards compares the exact ratio: 27 of 41 is 65.85%, below a 66% pass mark even though it is displayed as 66.
+        // Grades 1-3 keep the rule they were released under (the rounded percentage), so no earlier progression decision changes
+        // (for example 21 of 32 is 65.6%, displayed 66, and still passes the Grade 3 assessment).
+        passed = node.grade >= 4 ? correct * 100 >= passPercent * planned.length : percent >= passPercent;
         Object.assign(summary, { score: correct, percent, passPercent, passed, disclaimer: ASSESSMENT_DISCLAIMER });
         this.fillAssessmentDetail(userId, node, row, planned, attempts, summary);
         const bp = this.course.ix.assessments.get(node.assessmentId!)!;

@@ -49,10 +49,13 @@ function StaveAnswer({ input, value, onChange, disabled, marks }: { input: Extra
   // The key signature drawn on the answer stave is the one unsigned notes are read in.
   const [key, setKey] = useState<string | undefined>(input.kind === "pitch-sequence" ? input.key : input.kind === "staff-position" && !input.shown ? input.key : undefined);
   void value;
+  // A key signature with no sharps or flats (C major, A minor) is a real answer: it needs its own control, because an untouched stave is "no answer yet".
+  const [noAccidentals, setNoAccidentals] = useState(false);
   const clef = input.clef as music.Clef;
   const emit = (w: Written[], k = key) => {
     setWritten(w);
-    if (!w.length) return onChange(null);
+    if (w.length) setNoAccidentals(false);
+    if (!w.length) return onChange(input.kind === "key-signature-writer" && noAccidentals ? { kind: "key-signature", accidentals: [] } : null);
     if (input.kind === "key-signature-writer") return onChange({ kind: "key-signature", accidentals: w.map((x) => ({ pitch: music.formatPitch({ ...music.naturalAt(clef, x.pos), alter: x.sign === "b" ? -1 : 1 }) })) });
     const given = input.kind === "pitch-sequence" ? input.given : input.kind === "staff-position" ? (input.shown ?? []) : [];
     // The chord stave shows no key signature (the task says "using accidentals"), so notes are read without one:
@@ -63,7 +66,27 @@ function StaveAnswer({ input, value, onChange, disabled, marks }: { input: Extra
     onChange({ kind: "pitch-sequence", pitches: all, ...(input.keyOptions && k ? { key: k } : {}) });
   };
   const common = { clef, value: written, onChange: emit, disabled, marks, maxLedgerLines: input.kind === "key-signature-writer" ? 1 : input.maxLedgerLines };
-  if (input.kind === "key-signature-writer") return <StaveEditor {...common} mode="signature" accidentals doubleAccidentals={false} label={`Key signature on a ${input.clef} stave`} />;
+  if (input.kind === "key-signature-writer") {
+    return (
+      <div className="signature-answer">
+        <button
+          type="button"
+          className={`btn btn-small ${noAccidentals ? "btn-primary" : "btn-quiet"}`}
+          aria-pressed={noAccidentals}
+          disabled={disabled}
+          onClick={() => {
+            const next = !noAccidentals;
+            setNoAccidentals(next);
+            setWritten([]);
+            onChange(next ? { kind: "key-signature", accidentals: [] } : null);
+          }}
+        >
+          No sharps or flats
+        </button>
+        <StaveEditor {...common} value={noAccidentals ? [] : written} mode="signature" accidentals doubleAccidentals={false} label={`Key signature on a ${input.clef} stave`} />
+      </div>
+    );
+  }
   if (input.kind === "chord-builder") return <StaveEditor {...common} mode="chord" keyName={undefined} accidentals doubleAccidentals={false} maxNotes={input.maxNotes} label={`Chord on a ${input.clef} stave`} />;
   if (input.kind === "staff-position") {
     return (

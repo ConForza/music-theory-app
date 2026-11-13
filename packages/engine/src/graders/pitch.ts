@@ -35,6 +35,7 @@ function judge(a: AnswerOf<"pitch">, ref: Loose, got: Loose, letterOnly: boolean
   if (a.octaveSensitive && got.octave === undefined) return false;
   if (a.relation === "same") return a.spellingSensitive ? sameSpelling(got, ref, a.octaveSensitive) : sameSound(got, ref, a.octaveSensitive);
   const ss = sameSound(got, ref, a.octaveSensitive);
+  if (a.letter && got.step !== a.letter) return false;
   return a.relation === "same-sound" ? ss : ss && !sameSpelling(got, ref, false);
 }
 
@@ -53,6 +54,7 @@ export const gradePitchSpelling: Grader<AnswerOf<"pitch">> = (c, a, r) => {
   if (judge(a, ref, got, letterOnly)) return right();
   // Enharmonic tasks.
   if (a.relation !== "same") {
+    if (a.letter && got.step !== a.letter && sameSound(got, ref, a.octaveSensitive)) return wrong("same-spelling-given", `${name(got)} does sound the same, but the question asks for a note written with the letter ${a.letter}.`);
     if (sameSpelling(got, ref, false)) return wrong("same-spelling-given", `${name(got)} is spelt the same way as the note shown. Use a different letter name.`);
     return wrong("not-same-pitch", `${name(got)} does not sound the same as ${name(ref)}: they are ${Math.abs(mod12(chromaticNumber({ ...got, octave: 4 }) - chromaticNumber({ ...ref, octave: 4 })))} semitone(s) apart.`);
   }

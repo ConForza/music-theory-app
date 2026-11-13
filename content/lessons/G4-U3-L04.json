@@ -1,0 +1,852 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U3-L04",
+  "lessonId": "G4-U3-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name the degrees of a scale by their technical names.",
+    "successCriteria": [
+      "I know the seven names from tonic to leading note.",
+      "I can name a given note's degree in a key.",
+      "I can find the note that has a given technical name."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Besides numbers, each note of a major or minor scale has a technical name. In order they are: tonic (1st), supertonic (2nd), mediant (3rd), subdominant (4th), dominant (5th), submediant (6th) and leading note (7th). The octave is the (upper) tonic."
+    },
+    {
+      "kind": "text",
+      "text": "The names tell a story. The tonic is the keynote. The dominant, the 5th degree, 'dominates' the tonic with its strong pull towards it. The leading note is a semitone below the tonic and 'leads' to it, so it is always the raised 7th: in a minor key, the harmonic minor raises it to make a leading note."
+    },
+    {
+      "kind": "text",
+      "text": "The supertonic is the note above the tonic. The mediant is halfway between the tonic and the dominant. The subdominant is as far below the tonic as the dominant is above it, and the submediant is as far below the tonic as the mediant is above it."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Gb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Db5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with eight semibreves: the D♭ major scale, ascending, with its key signature.",
+        "key": "Db major"
+      },
+      "caption": "D♭ major: tonic D♭, supertonic E♭, mediant F, subdominant G♭, dominant A♭, submediant B♭, leading note C."
+    },
+    {
+      "kind": "tip",
+      "text": "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note. Count the degree first, then use the name."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A treble-clef stave with eight semibreves: the B major scale, ascending, with its key signature.",
+      "key": "B major"
+    },
+    "steps": [
+      "B is the tonic, the 1st note. C♯ is the supertonic.",
+      "D♯ is the mediant, E the subdominant, F♯ the dominant.",
+      "G♯ is the submediant and A♯ the leading note, a semitone below the top B."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "B major, ascending, with each note's technical name."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u3-l04.guided-1",
+      "templateId": "t.g4.degree-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The supertonic is the note directly above the tonic. Which degree is it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "the 7th",
+            "label": "The 7th"
+          },
+          {
+            "id": "the 4th",
+            "label": "The 4th"
+          },
+          {
+            "id": "the 3rd",
+            "label": "The 3rd"
+          },
+          {
+            "id": "the 2nd",
+            "label": "The 2nd"
+          }
+        ],
+        "correctOptionIds": [
+          "the 2nd"
+        ],
+        "diagnoses": {
+          "the 3rd": {
+            "category": "name-number-mismatch",
+            "reason": "The supertonic is the 2nd degree."
+          },
+          "the 4th": {
+            "category": "name-number-mismatch",
+            "reason": "The supertonic is the 2nd degree."
+          },
+          "the 7th": {
+            "category": "name-number-mismatch",
+            "reason": "The supertonic is the 2nd degree."
+          }
+        }
+      },
+      "hints": [
+        "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note",
+        "The names in order are: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+      ],
+      "feedback": {
+        "correct": "Yes: the names in order.",
+        "mistakes": {
+          "counted-from-wrong-note": "Degree 1 is the tonic of the key.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Learn the names in order: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.guided-2",
+      "templateId": "t.g4.technical-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Give the technical name of this note in B♭ minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave in Bb minor with its key signature, showing F.",
+        "key": "Bb minor"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tonic",
+            "label": "tonic"
+          },
+          {
+            "id": "supertonic",
+            "label": "supertonic"
+          },
+          {
+            "id": "mediant",
+            "label": "mediant"
+          },
+          {
+            "id": "subdominant",
+            "label": "subdominant"
+          },
+          {
+            "id": "dominant",
+            "label": "dominant"
+          },
+          {
+            "id": "submediant",
+            "label": "submediant"
+          },
+          {
+            "id": "leading-note",
+            "label": "leading note"
+          }
+        ],
+        "correctOptionIds": [
+          "dominant"
+        ]
+      },
+      "hints": [
+        "Supertonic is the note above the tonic.",
+        "Count up the scale of B♭ minor from the tonic, B♭, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Right: you counted from the tonic.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.guided-3",
+      "templateId": "t.g4.degree-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In G minor (harmonic minor), which note is the leading note?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "Eb",
+            "label": "E♭"
+          },
+          {
+            "id": "F#",
+            "label": "F♯"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          }
+        ],
+        "correctOptionIds": [
+          "F#"
+        ],
+        "diagnoses": {
+          "G": {
+            "category": "counted-from-wrong-note",
+            "reason": "G is the tonic (the 1st degree) of G minor. The leading note is the 7th."
+          },
+          "D": {
+            "category": "counted-from-wrong-note",
+            "reason": "D is the dominant (the 5th degree) of G minor. The leading note is the 7th."
+          },
+          "Eb": {
+            "category": "counted-from-wrong-note",
+            "reason": "E♭ is the submediant (the 6th degree) of G minor. The leading note is the 7th."
+          }
+        }
+      },
+      "hints": [
+        "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note",
+        "Write out the scale of G minor (harmonic minor) from the tonic, G, and count to degree 7."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "counted-from-wrong-note": "Degree 1 is the tonic of the key.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Learn the names in order: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u3-l04.ind-1",
+      "templateId": "t.g4.technical-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Give the technical name of this note in F major.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave in F major with its key signature, showing C.",
+        "key": "F major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tonic",
+            "label": "tonic"
+          },
+          {
+            "id": "supertonic",
+            "label": "supertonic"
+          },
+          {
+            "id": "mediant",
+            "label": "mediant"
+          },
+          {
+            "id": "subdominant",
+            "label": "subdominant"
+          },
+          {
+            "id": "dominant",
+            "label": "dominant"
+          },
+          {
+            "id": "submediant",
+            "label": "submediant"
+          },
+          {
+            "id": "leading-note",
+            "label": "leading note"
+          }
+        ],
+        "correctOptionIds": [
+          "dominant"
+        ]
+      },
+      "hints": [
+        "Supertonic is the note above the tonic.",
+        "Count up the scale of F major from the tonic, F, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct name.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.ind-2",
+      "templateId": "t.g4.degree-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In C♯ minor (harmonic minor), which note is the supertonic?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "G#",
+            "label": "G♯"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "F#",
+            "label": "F♯"
+          },
+          {
+            "id": "D#",
+            "label": "D♯"
+          }
+        ],
+        "correctOptionIds": [
+          "D#"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "counted-from-wrong-note",
+            "reason": "A is the submediant (the 6th degree) of C♯ minor. The supertonic is the 2nd."
+          },
+          "F#": {
+            "category": "counted-from-wrong-note",
+            "reason": "F♯ is the subdominant (the 4th degree) of C♯ minor. The supertonic is the 2nd."
+          },
+          "G#": {
+            "category": "counted-from-wrong-note",
+            "reason": "G♯ is the dominant (the 5th degree) of C♯ minor. The supertonic is the 2nd."
+          }
+        }
+      },
+      "hints": [
+        "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note",
+        "Write out the scale of C♯ minor (harmonic minor) from the tonic, C♯, and count to degree 2."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "counted-from-wrong-note": "Degree 1 is the tonic of the key.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Learn the names in order: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.ind-3",
+      "templateId": "t.g4.technical-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Give the technical name of this note in D minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave in D minor with its key signature, showing A.",
+        "key": "D minor"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tonic",
+            "label": "tonic"
+          },
+          {
+            "id": "supertonic",
+            "label": "supertonic"
+          },
+          {
+            "id": "mediant",
+            "label": "mediant"
+          },
+          {
+            "id": "subdominant",
+            "label": "subdominant"
+          },
+          {
+            "id": "dominant",
+            "label": "dominant"
+          },
+          {
+            "id": "submediant",
+            "label": "submediant"
+          },
+          {
+            "id": "leading-note",
+            "label": "leading note"
+          }
+        ],
+        "correctOptionIds": [
+          "dominant"
+        ]
+      },
+      "hints": [
+        "Supertonic is the note above the tonic.",
+        "Count up the scale of D minor from the tonic, D, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.ind-4",
+      "templateId": "t.g4.degree-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In A minor (harmonic minor), which note is the supertonic?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          }
+        ],
+        "correctOptionIds": [
+          "B"
+        ],
+        "diagnoses": {
+          "D": {
+            "category": "counted-from-wrong-note",
+            "reason": "D is the subdominant (the 4th degree) of A minor. The supertonic is the 2nd."
+          },
+          "C": {
+            "category": "counted-from-wrong-note",
+            "reason": "C is the mediant (the 3rd degree) of A minor. The supertonic is the 2nd."
+          },
+          "E": {
+            "category": "counted-from-wrong-note",
+            "reason": "E is the dominant (the 5th degree) of A minor. The supertonic is the 2nd."
+          }
+        }
+      },
+      "hints": [
+        "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note",
+        "Write out the scale of A minor (harmonic minor) from the tonic, A, and count to degree 2."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Degree 1 is the tonic of the key.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Learn the names in order: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.ind-5",
+      "templateId": "t.g4.technical-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Give the technical name of this note in D minor.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave in D minor with its key signature, showing B♭.",
+        "key": "D minor"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tonic",
+            "label": "tonic"
+          },
+          {
+            "id": "supertonic",
+            "label": "supertonic"
+          },
+          {
+            "id": "mediant",
+            "label": "mediant"
+          },
+          {
+            "id": "subdominant",
+            "label": "subdominant"
+          },
+          {
+            "id": "dominant",
+            "label": "dominant"
+          },
+          {
+            "id": "submediant",
+            "label": "submediant"
+          },
+          {
+            "id": "leading-note",
+            "label": "leading note"
+          }
+        ],
+        "correctOptionIds": [
+          "submediant"
+        ]
+      },
+      "hints": [
+        "Supertonic is the note above the tonic.",
+        "Count up the scale of D minor from the tonic, D, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g4-u3-l04.ind-6",
+      "templateId": "t.g4.degree-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which technical name belongs to the 4th degree?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "mediant",
+            "label": "Mediant"
+          },
+          {
+            "id": "subdominant",
+            "label": "Subdominant"
+          },
+          {
+            "id": "submediant",
+            "label": "Submediant"
+          },
+          {
+            "id": "dominant",
+            "label": "Dominant"
+          }
+        ],
+        "correctOptionIds": [
+          "subdominant"
+        ],
+        "diagnoses": {
+          "dominant": {
+            "category": "name-number-mismatch",
+            "reason": "The subdominant is the 4th degree, as far below the tonic as the dominant is above it."
+          },
+          "submediant": {
+            "category": "name-number-mismatch",
+            "reason": "The subdominant is the 4th degree, as far below the tonic as the dominant is above it."
+          },
+          "mediant": {
+            "category": "name-number-mismatch",
+            "reason": "The subdominant is the 4th degree, as far below the tonic as the dominant is above it."
+          }
+        }
+      },
+      "hints": [
+        "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note",
+        "The names in order are: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Degree 1 is the tonic of the key.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Learn the names in order: tonic, supertonic, mediant, subdominant, dominant, submediant, leading note."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    }
+  ],
+  "recap": [
+    "tonic, supertonic, mediant, subdominant, dominant, submediant, leading note.",
+    "The leading note is the 7th, a semitone below the tonic.",
+    "The dominant is the 5th and the subdominant the 4th."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.technical-names",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.degree-name",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.technical-names",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.scales.technical-names"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s08"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.11"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 11 and First Steps Grade 4 section 8 (pp. 86-88): the seven technical names and their meaning. The book explains the leading note as always the major 7th, so minor questions use the harmonic minor and say so. 'Subtonic' (the lowered 7th) is not taught or asked."
+  }
+}

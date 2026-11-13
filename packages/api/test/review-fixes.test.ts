@@ -179,6 +179,9 @@ describe("F5 (upgrade): question identity of Brief 04 questions is unchanged", (
     const now: Record<string, string> = {};
     const seen = new Set<string>();
     for (const node of ix.nodes) for (const b of node.exercises) {
+      // Grade 4 templates were provisional in the Brief 04 release (never playable, so no learner can hold a stored identity for one);
+      // Brief 08 gives them real generators. Grades 1-3 and 5 stay pinned exactly.
+      if (b.templateId.startsWith("t.g4.")) continue;
       if (seen.has(b.templateId)) continue;
       seen.add(b.templateId);
       const scope = effectiveScope(ix, node, b);

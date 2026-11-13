@@ -38,10 +38,10 @@ describe("Grade 1 prerequisites are strict", () => {
     expect((await c.get("/api/progress")).body.nodes["G1-U3-L03"].state).toBe("in_progress");
   });
 
-  it("does not change what Grade 4-5 learners can reach, and keeps Grades 2 and 3 locked behind their predecessors", async () => {
+  it("does not change what Grade 5 learners can reach, and keeps Grades 2, 3 and 4 locked behind their predecessors", async () => {
     const { c } = await learner();
     const nodes = (await c.get("/api/progress")).body.nodes as Record<string, { state: string; lockedBy?: string[] }>;
-    const later = Object.entries(nodes).filter(([id]) => !id.startsWith("G1-") && !id.startsWith("G2-") && !id.startsWith("G3-"));
+    const later = Object.entries(nodes).filter(([id]) => !id.startsWith("G1-") && !id.startsWith("G2-") && !id.startsWith("G3-") && !id.startsWith("G4-"));
     expect(later.filter(([, v]) => v.state !== "coming_soon").map(([id, v]) => `${id}:${v.state}`)).toEqual(["G5-U4-L06:available"]);
     // Grade 2 is playable (Brief 06) but a new learner cannot reach any of it: its first lesson waits for the last Grade 1 review.
     const g2 = Object.entries(nodes).filter(([id]) => id.startsWith("G2-"));
@@ -53,6 +53,11 @@ describe("Grade 1 prerequisites are strict", () => {
     expect(g3.length).toBe(36);
     expect(g3.every(([, v]) => v.state === "locked")).toBe(true);
     expect(nodes["G3-U1-L01"]!.lockedBy).toEqual(["G2-U5-R1"]);
+    // Grade 4 is playable (Brief 08) but its first lesson waits for the last Grade 3 review (the established Grade 3 prerequisite policy).
+    const g4 = Object.entries(nodes).filter(([id]) => id.startsWith("G4-"));
+    expect(g4.length).toBe(41);
+    expect(g4.every(([, v]) => v.state === "locked")).toBe(true);
+    expect(nodes["G4-U1-L01"]!.lockedBy).toEqual(["G3-U5-R1"]);
   });
 });
 

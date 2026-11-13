@@ -8,7 +8,10 @@ import { chordPitches, melodyPitches, shownNote } from "./derive.ts";
 import { signaturePitches } from "./graders/theory.ts";
 import { staffTargets } from "./graders/pitch.ts";
 
-const pretty = (s: string) => s.replace(/#/g, "♯").replace(/b(?=\d|$| |,)/g, "♭").replace(/x/g, "𝄪");
+const SIGN: Record<string, string> = { bb: "𝄫", b: "♭", x: "𝄪" };
+/** ASCII note names to printed signs: C#, Bb, Dbb (double flat) and Fx (double sharp); words are left alone. */
+const pretty = (s: string) => s.replace(/#/g, "♯").replace(/\b([A-G])(bb|b|x)(?=-?\d|$|[ ,.)])/g, (_m, l: string, g: string) => `${l}${SIGN[g]}`);
+const article = (w: string) => (/^[aeiou]/i.test(w) ? "an" : "a");
 const P = music.parsePitch;
 const list = (ps: music.Pitch[]) => pretty(ps.map(music.formatPitch).join(", "));
 
@@ -33,7 +36,7 @@ function describe(c: ItemContext, a: SimpleAnswerSpec): string {
       if (d.rule === "chromatic") return `One correct answer is ${list(music.chromaticFrom(P(d.start), d.direction))} (other spellings are fine if each letter is used once or twice).`;
       const iv = music.parseInterval(d.interval);
       const notes = c.item.music ? melodyPitches(c.item.music).map((p) => music.transpose(p, iv, d.direction)) : [];
-      return `Transposed: ${list(notes)}${a.key ? `, in ${a.key}` : ""}.`;
+      return `Transposed: ${list(notes)}${a.key ? `, in ${pretty(a.key)}` : ""}.`;
     }
     case "rhythm":
       if (a.task === "place-barlines") {
@@ -44,14 +47,14 @@ function describe(c: ItemContext, a: SimpleAnswerSpec): string {
     case "time-signature":
       return `The time signature is ${a.accepted[0]}.`;
     case "key-signature":
-      return a.task === "name-key" ? `This is the key signature of ${a.accepted.join(" or ")}.` : `${a.accepted[0]} has ${pretty(signaturePitches(music.parseKey(a.accepted[0]!), a.clef).join(" ").replace(/\d/g, "")) || "no sharps or flats"}.`;
+      return a.task === "name-key" ? `This is the key signature of ${pretty(a.accepted.join(" or "))}.` : `${pretty(a.accepted[0]!)} has ${pretty(signaturePitches(music.parseKey(a.accepted[0]!), a.clef).join(" ").replace(/\d/g, "")) || "no sharps or flats"}.`;
     case "interval": {
-      if (a.task === "identify") return `The interval is a ${music.describeInterval(music.intervalBetween(P(a.lower), P(a.upper!)))}.`;
+      if (a.task === "identify") return `The interval is ${article(music.describeInterval(music.intervalBetween(P(a.lower), P(a.upper!))))} ${music.describeInterval(music.intervalBetween(P(a.lower), P(a.upper!)))}.`;
       const code = a.target!;
       if (/^\d+$/.test(code) && a.key) {
         const key = music.parseKey(a.key);
         const forms = allowedForms(key, c.scope, a.minorForm);
-        return `A ${music.ordinal(Number(code))} ${a.direction === "down" ? "below" : "above"} ${pretty(a.lower)} in ${a.key} is ${pretty(a.acceptedPitches!.join(" or "))}${forms.length > 1 ? " (depending on the form of the minor scale)" : ""}.`;
+        return `A ${music.ordinal(Number(code))} ${a.direction === "down" ? "below" : "above"} ${pretty(a.lower)} in ${pretty(a.key)} is ${pretty(a.acceptedPitches!.join(" or "))}${forms.length > 1 ? " (depending on the form of the minor scale)" : ""}.`;
       }
       return `The note is ${pretty(a.acceptedPitches!.join(" or "))}.`;
     }
@@ -64,7 +67,7 @@ function describe(c: ItemContext, a: SimpleAnswerSpec): string {
       return `Chord ${a.target!.roman}${a.target!.inversion} uses ${pretty(t.map(music.formatPitchClass).join(", "))}, with ${pretty(music.formatPitchClass(music.bassOf(music.parseKey(a.key), a.target!.roman, a.target!.inversion)))} as the lowest note.`;
     }
     case "ornament-sign":
-      return `It is a ${music.ORNAMENT_INFO[a.accepted[0]!].name}.`;
+      return `It is ${article(music.ORNAMENT_INFO[a.accepted[0]!].name)} ${music.ORNAMENT_INFO[a.accepted[0]!].name}.`;
     case "chord-progression":
       return `One correct answer: ${a.points.map((p) => `${p.label} ${p.accepted[0]}`).join(", ")}${a.points.some((p) => p.accepted.length > 1) ? " (other chords that contain the melody notes and form the cadence are also right)" : ""}.`;
   }

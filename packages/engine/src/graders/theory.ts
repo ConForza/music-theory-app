@@ -188,6 +188,9 @@ export const gradeChord: Grader<AnswerOf<"chord">> = (c, a, r) => {
   const got = r.pitches.map(parsePitch);
   const target = a.target!;
   const id = identifyTriad(key, got);
+  if (id && a.voices !== undefined && got.length !== a.voices && music.romanDegree(id.roman) === music.romanDegree(target.roman) && id.inversion === target.inversion) {
+    return wrong("note-missing", a.voices > got.length ? `Those are the right notes, but the question asks for ${a.voices} notes: write one note of the chord twice (the same letter, an octave apart).` : `Those are the right notes, but the question asks for exactly ${a.voices} notes.`);
+  }
   if (id && music.romanDegree(id.roman) === music.romanDegree(target.roman) && id.inversion === target.inversion) return right();
   const want = music.triad(key, target.roman);
   const has = (pc: music.PitchClass) => got.some((p) => music.samePitchClassSpelling(p, pc));

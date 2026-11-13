@@ -339,6 +339,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         } else {
           ok = sameSound && (a.relation === "same-sound" || !samePitchClassSpelling(p, ref));
         }
+        if (a.letter && p.step !== a.letter) report("ANSWER_MISMATCH", where, `Accepted alternative ${acc} does not use the letter ${a.letter} the task requires`);
         if (!ok) report("ANSWER_MISMATCH", where, `Accepted alternative ${acc} is not correct for ${formatPitch(ref)} (${a.relation}, spelling ${a.spellingSensitive ? "sensitive" : "insensitive"}, octave ${a.octaveSensitive ? "sensitive" : "insensitive"})`);
         if (Math.abs(p.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, `${acc} uses a double accidental, which is not in scope here`);
       }
@@ -516,6 +517,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
           if (!key) report("ANSWER_SCOPE", where, "A key is required for diatonic interval tasks");
           else if (!inKey(lower) || !inKey(upperPitch)) report("ANSWER_SCOPE", where, `${formatPitch(lower)}–${formatPitch(upperPitch)} is not in the ${forms.join("/")} form(s) of ${a.key} allowed here`);
         }
+        if (sc.intervalQuality === "number-and-quality" && !"MmP".includes(iv.quality) && !sc.augmentedDiminished && !sc.chromaticIntervals) report("ANSWER_SCOPE", where, `${iv.quality}${iv.number} is an augmented or diminished interval, which is not in scope here`);
         if (Math.abs(upperPitch.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, "Double accidentals are not in scope here");
       };
       if (a.task === "identify") {
@@ -610,6 +612,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       } else {
         scopeChord(a.target!);
         a.acceptedVoicings?.forEach((v, i) => {
+          if (a.voices !== undefined && v.length !== a.voices) report("ANSWER_MISMATCH", where, `Voicing ${i + 1} has ${v.length} notes but the item asks for ${a.voices}`);
           const d = identifyChord(key, v.map(parsePitch));
           if (!d || d.roman !== a.target!.roman || d.inversion !== a.target!.inversion) report("ANSWER_MISMATCH", where, `Voicing ${i + 1} [${v.join(" ")}] is ${d ? d.roman + d.inversion : "not a I/ii/IV/V chord"}, not ${a.target!.roman}${a.target!.inversion}`);
         });

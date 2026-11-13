@@ -1,0 +1,971 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U1-L03",
+  "lessonId": "G4-U1-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Classify every regular time signature as simple or compound and duple, triple or quadruple.",
+    "successCriteria": [
+      "I know the simple and compound time signatures and their beat notes.",
+      "I can count the beats by dividing the top number by 3 in compound time.",
+      "I can tell which regular time signature a rhythm is in."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A regular time signature is one with two, three or four beats in the bar: duple, triple or quadruple time. Each can be simple (the beat divides into two) or compound (the beat divides into three). That gives six families, and all of them are common enough to be asked at Grade 4, though a few are rare in real music. Simple time: the bottom number names the beat note, and the top number counts the beats. So 2/8, 3/8 and 4/8 have two, three and four quaver beats; 2/4, 3/4 and 4/4 have crotchet beats; 2/2, 3/2 and 4/2 have minim beats."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 2/8, each with two quaver beats.",
+        "questionAlternative": "Bar 1: quaver, quaver. Bar 2: quaver, quaver.",
+        "timeSignature": "2/8"
+      },
+      "caption": "2/8: two quaver beats. Simple duple."
+    },
+    {
+      "kind": "text",
+      "text": "Compound time: the beat is a dotted note, so the top number counts the notes that make up the beats, three to a beat. Divide it by three. 6/4, 9/4 and 12/4 have two, three and four dotted-minim beats; 6/8, 9/8 and 12/8 have dotted-crotchet beats; 6/16, 9/16 and 12/16 have dotted-quaver beats."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 6/4, each with two dotted minims.",
+        "questionAlternative": "Bar 1: dotted minim, dotted minim. Bar 2: dotted minim, dotted minim.",
+        "timeSignature": "6/4"
+      },
+      "caption": "6/4: six crotchets, two dotted-minim beats. Compound duple."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 12/16 with four dotted quavers.",
+        "questionAlternative": "Bar 1: dotted quaver, dotted quaver, dotted quaver, dotted quaver.",
+        "timeSignature": "12/16"
+      },
+      "caption": "12/16: twelve semiquavers, four dotted-quaver beats. Compound quadruple."
+    },
+    {
+      "kind": "tip",
+      "text": "Simple: top number = beats. Compound: top number ÷ 3 = beats. The bottom number names the note counted, and in compound time three of them make a beat."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 1
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 1
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 1
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 9/4 with three dotted minims.",
+      "questionAlternative": "Bar 1: dotted minim, dotted minim, dotted minim.",
+      "timeSignature": "9/4"
+    },
+    "steps": [
+      "Nine crotchets in the bar: 9 ÷ 3 = 3 beats.",
+      "Each beat is three crotchets, a dotted minim.",
+      "Three dotted-minim beats: compound triple time."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 9/4 with three dotted minims: compound triple time."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u1-l03.guided-1",
+      "templateId": "t.g4.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What kind of time is 12/16?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "compound duple",
+            "label": "Compound duple"
+          },
+          {
+            "id": "compound triple",
+            "label": "Compound triple"
+          },
+          {
+            "id": "simple quadruple",
+            "label": "Simple quadruple"
+          },
+          {
+            "id": "compound quadruple",
+            "label": "Compound quadruple"
+          }
+        ],
+        "correctOptionIds": [
+          "compound quadruple"
+        ],
+        "diagnoses": {
+          "simple quadruple": {
+            "category": "simple-compound-confusion",
+            "reason": "In 12/16 each beat is a dotted note that divides into three: that is compound time."
+          },
+          "compound triple": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats in a bar of 12/16: there are four."
+          },
+          "compound duple": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats in a bar of 12/16: there are four."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: divide the top number by 3 to count beats.",
+        "Divide the top number by 3 to count the beats: 12 ÷ 3 = 4."
+      ],
+      "feedback": {
+        "correct": "Yes: you counted the beats and the way they divide.",
+        "mistakes": {
+          "beat-count-wrong": "In compound time divide the top number by three to count the beats.",
+          "beat-unit-wrong": "In compound time the beat is a dotted note.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.guided-2",
+      "templateId": "t.g4.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In 6/16, which note lasts exactly one beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dotted-quaver",
+            "label": "A dotted quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "A semiquaver"
+          },
+          {
+            "id": "quaver",
+            "label": "A quaver"
+          },
+          {
+            "id": "dotted-semiquaver",
+            "label": "A dotted semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "dotted-quaver"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "beat-unit-wrong",
+            "reason": "A semiquaver is the note the lower number names, but in compound time a beat is three of them: a dotted note."
+          },
+          "dotted-semiquaver": {
+            "category": "beat-unit-wrong",
+            "reason": "Three semiquavers (the notes the lower figure names) make one beat in 6/16. Which note lasts as long as that?"
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "Three semiquavers (the notes the lower figure names) make one beat in 6/16. Which note lasts as long as that?"
+          }
+        }
+      },
+      "hints": [
+        "Compound time: divide the top number by 3 to count beats.",
+        "A beat is three semiquavers. Which note lasts as long as that?"
+      ],
+      "feedback": {
+        "correct": "Yes: the beat note.",
+        "mistakes": {
+          "beat-count-wrong": "In compound time divide the top number by three to count the beats.",
+          "beat-unit-wrong": "In compound time the beat is a dotted note.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.guided-3",
+      "templateId": "t.g4.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, quaver. Bar 2: dotted quaver, semiquaver, quaver.",
+        "questionAlternative": "Bar 1: 3 beamed together (semiquaver, semiquaver, semiquaver), 2 beamed together (semiquaver, quaver). Bar 2: dotted quaver, 2 beamed together (semiquaver, quaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "6/16"
+        ]
+      },
+      "hints": [
+        "Dotted beat → compound.",
+        "Add up each bar, then look at the beaming: groups of three beamed notes (or beats that are dotted notes) mean compound time."
+      ],
+      "feedback": {
+        "correct": "Right: you read the time signature from the rhythm.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u1-l03.ind-1",
+      "templateId": "t.g4.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What kind of time is 4/8?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simple duple",
+            "label": "Simple duple"
+          },
+          {
+            "id": "simple triple",
+            "label": "Simple triple"
+          },
+          {
+            "id": "simple quadruple",
+            "label": "Simple quadruple"
+          },
+          {
+            "id": "compound quadruple",
+            "label": "Compound quadruple"
+          }
+        ],
+        "correctOptionIds": [
+          "simple quadruple"
+        ],
+        "diagnoses": {
+          "compound quadruple": {
+            "category": "simple-compound-confusion",
+            "reason": "In 4/8 each beat is a plain note that divides into two: that is simple time."
+          },
+          "simple triple": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats in a bar of 4/8: there are four."
+          },
+          "simple duple": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats in a bar of 4/8: there are four."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: divide the top number by 3 to count beats.",
+        "In simple time the top number counts the beats: 4."
+      ],
+      "feedback": {
+        "correct": "Correct name.",
+        "mistakes": {
+          "beat-count-wrong": "In compound time divide the top number by three to count the beats.",
+          "beat-unit-wrong": "In compound time the beat is a dotted note.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.ind-2",
+      "templateId": "t.g4.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: dotted quaver, dotted quaver rest.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, semiquaver), 3 beamed together (semiquaver, semiquaver, semiquaver). Bar 2: dotted quaver, dotted quaver rest."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "6/16"
+        ]
+      },
+      "hints": [
+        "Dotted beat → compound.",
+        "Add up each bar, then look at the beaming: groups of three beamed notes (or beats that are dotted notes) mean compound time."
+      ],
+      "feedback": {
+        "correct": "Correct time signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.ind-3",
+      "templateId": "t.g4.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many beats are there in each bar of 4/8?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "12",
+            "label": "12"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats again: the top number gives 4."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats again: the top number gives 4."
+          },
+          "12": {
+            "category": "beat-count-wrong",
+            "reason": "Count the beats again: the top number gives 4."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: divide the top number by 3 to count beats.",
+        "In simple time the top number is the number of beats."
+      ],
+      "feedback": {
+        "correct": "Correct count.",
+        "mistakes": {
+          "beat-count-wrong": "In compound time divide the top number by three to count the beats.",
+          "beat-unit-wrong": "In compound time the beat is a dotted note.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.ind-4",
+      "templateId": "t.g4.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In 12/16, which note lasts exactly one beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dotted-quaver",
+            "label": "A dotted quaver"
+          },
+          {
+            "id": "quaver",
+            "label": "A quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "A semiquaver"
+          },
+          {
+            "id": "dotted-semiquaver",
+            "label": "A dotted semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "dotted-quaver"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "beat-unit-wrong",
+            "reason": "A semiquaver is the note the lower number names, but in compound time a beat is three of them: a dotted note."
+          },
+          "dotted-semiquaver": {
+            "category": "beat-unit-wrong",
+            "reason": "Three semiquavers (the notes the lower figure names) make one beat in 12/16. Which note lasts as long as that?"
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "Three semiquavers (the notes the lower figure names) make one beat in 12/16. Which note lasts as long as that?"
+          }
+        }
+      },
+      "hints": [
+        "Compound time: divide the top number by 3 to count beats.",
+        "A beat is three semiquavers. Which note lasts as long as that?"
+      ],
+      "feedback": {
+        "correct": "Correct beat note.",
+        "mistakes": {
+          "beat-count-wrong": "In compound time divide the top number by three to count the beats.",
+          "beat-unit-wrong": "In compound time the beat is a dotted note.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.ind-5",
+      "templateId": "t.g4.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, quaver, dotted quaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver, quaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (semiquaver, quaver), dotted quaver. Bar 2: 3 beamed together (semiquaver, semiquaver, semiquaver), 2 beamed together (semiquaver, quaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "6/16"
+        ]
+      },
+      "hints": [
+        "Dotted beat → compound.",
+        "Add up each bar, then look at the beaming: groups of three beamed notes (or beats that are dotted notes) mean compound time."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g4-u1-l03.ind-6",
+      "templateId": "t.g4.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchets fill one whole bar of 6/4?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "12",
+            "label": "12"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "beat-count-wrong",
+            "reason": "2 is the number of beats. The lower figure 4 names the crotchet, and the top number says how many of those fill the bar."
+          },
+          "3": {
+            "category": "beat-unit-wrong",
+            "reason": "The top number tells you: 6/4 has 6 crotchets in a bar."
+          },
+          "12": {
+            "category": "beat-unit-wrong",
+            "reason": "The top number tells you: 6/4 has 6 crotchets in a bar."
+          }
+        }
+      },
+      "hints": [
+        "Compound time: divide the top number by 3 to count beats.",
+        "The lower figure 4 names the crotchet; the top figure counts how many there are in a bar."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "In compound time divide the top number by three to count the beats.",
+          "beat-unit-wrong": "In compound time the beat is a dotted note.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "recap": [
+    "Regular times are duple, triple or quadruple, simple or compound.",
+    "Simple: the top number counts the beats. Compound: divide it by 3.",
+    "Compound beats are dotted notes: dotted minim over 4, dotted crotchet over 8, dotted quaver over 16."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.metre-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.time-signature",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.metre-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.regular-all"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s03"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.01"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 1 and First Steps Grade 4 section 3 (pp. 80-81). OPEN_QUESTIONS Q7: the commonly used regular signatures are asked, including 2/8 and 12/4 (the book calls them rare but examinable); x/16 simple times are excluded. 4/8 is taught and asked in words, but it is never used in 'add the time signature to this rhythm' questions because the same rhythm also fits 2/4 (the book's own point: the difference is only whether the beat is a crotchet or a quaver). A rhythm is only asked when exactly one regular signature fits it (tested)."
+  }
+}

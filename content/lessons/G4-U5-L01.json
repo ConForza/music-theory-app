@@ -1,0 +1,972 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U5-L01",
+  "lessonId": "G4-U5-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Recognise and name the trill, turn, upper and lower mordent, acciaccatura and appoggiatura.",
+    "successCriteria": [
+      "I know the signs that go above a note.",
+      "I know the small notes that go before a note.",
+      "I know ornaments take no time in the bar."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Composers decorate notes with ornaments. They are written in two ways: by small notes just before the main note, or by special signs above the stave. Neither takes any time in the bar: the time values of the full-size notes add up exactly as if the small notes and signs were not there."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "trill"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "turn"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "upper-mordent"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "lower-mordent"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of four minims on E, each with a sign above it: a trill, a turn, an upper mordent and a lower mordent.",
+        "timeSignature": "4/2"
+      },
+      "caption": "Signs above a note: trill (tr), turn, upper mordent, lower mordent."
+    },
+    {
+      "kind": "text",
+      "text": "The trill is written tr, sometimes followed by a wavy line. The turn is a sideways S-shaped curl. The mordent is a short zig-zag: with no line through it, it is the upper mordent; with a short vertical line through it, it is the lower mordent."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "grace": {
+                  "kind": "acciaccatura",
+                  "pitches": [
+                    "F5"
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "grace": {
+                  "kind": "appoggiatura",
+                  "pitches": [
+                    "F5"
+                  ]
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of two minims on E: the first with a small crushed note before it, the second with a small note before it.",
+        "timeSignature": "2/2"
+      },
+      "caption": "Small notes before the main note: acciaccatura (with a stroke), appoggiatura (without)."
+    },
+    {
+      "kind": "text",
+      "text": "A small note with a diagonal stroke through its stem and flag is an acciaccatura (a 'crushed' note). A small note with no stroke is an appoggiatura. At Grade 4 you need to recognise and name all six; how each is played is a Grade 5 topic."
+    },
+    {
+      "kind": "tip",
+      "text": "Signs above: tr = trill, curl = turn, zig-zag = upper mordent, zig-zag with a line = lower mordent. Small notes: stroke = acciaccatura, no stroke = appoggiatura. None counts in the bar."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "ornament": "trill"
+            },
+            {
+              "kind": "note",
+              "pitch": "G5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "ornament": "turn"
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of two minims on G, the first with a trill sign, the second with a turn sign.",
+      "timeSignature": "2/2"
+    },
+    "steps": [
+      "The first note has the letters tr above it: a trill.",
+      "The second has a sideways S above it: a turn.",
+      "Neither sign changes how many beats the note has."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A trill and a turn above two minims."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u5-l01.guided-1",
+      "templateId": "t.g4.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "An ornament is shown by the letters tr above the note (sometimes followed by a wavy line). What is it called?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lower-mordent",
+            "label": "Lower mordent"
+          },
+          {
+            "id": "turn",
+            "label": "Turn"
+          },
+          {
+            "id": "trill",
+            "label": "Trill"
+          },
+          {
+            "id": "upper-mordent",
+            "label": "Upper mordent"
+          }
+        ],
+        "correctOptionIds": [
+          "trill"
+        ],
+        "diagnoses": {
+          "upper-mordent": {
+            "category": "trill-mordent-confusion",
+            "reason": "A trill is written tr. A mordent is a short zig-zag sign with no letters."
+          },
+          "lower-mordent": {
+            "category": "ornament-confused",
+            "reason": "Lower mordent is shown by a short zig-zag above the note with a short vertical line through it."
+          },
+          "turn": {
+            "category": "ornament-confused",
+            "reason": "Turn is shown by a sideways S-shaped curl above the note."
+          }
+        }
+      },
+      "hints": [
+        "Letters, a curl, a zig-zag, or a small note.",
+        "Check each detail of the description: letters or a curl, a zig-zag with or without a line, a small note with or without a stroke."
+      ],
+      "feedback": {
+        "correct": "Yes: you matched the name to the description.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.guided-2",
+      "templateId": "t.g4.ornament-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this ornament sign.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "trill"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A minim E with an ornament sign: the letters tr above the note."
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "name-sign",
+        "sign": "trill",
+        "accepted": [
+          "trill"
+        ]
+      },
+      "hints": [
+        "Look at the direction of the sign.",
+        "Small notes before the main note are grace notes; signs above the note are trills, turns and mordents."
+      ],
+      "feedback": {
+        "correct": "Right: you recognised the sign.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.guided-3",
+      "templateId": "t.g4.ornament-spot",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Three notes in this melody are marked A, B and C. Which note has the lower mordent?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "upper-mordent",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "turn",
+                "label": "B"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "lower-mordent",
+                "label": "C"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 1 flat, 3/4. Bar 1: a note on the 4th line; a note marked A in the 3rd space, with a short zig-zag above it with no line through it; a note marked B on the 4th line, with a sideways S-shaped curl above it. Bar 2: a note in the 4th space; a note in the space just above the stave; a note marked C on the 1st ledger line above the stave, with a short zig-zag above it with a short vertical line through it.",
+        "key": "F major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "Note A"
+          },
+          {
+            "id": "B",
+            "label": "Note B"
+          },
+          {
+            "id": "C",
+            "label": "Note C"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "upper-lower-mordent-swap",
+            "reason": "Note A carries the upper mordent: a short zig-zag above the note, with no line through it. Look for a short zig-zag above the note with a short vertical line through it."
+          },
+          "B": {
+            "category": "ornament-confused",
+            "reason": "Note B carries the turn: a sideways S-shaped curl above the note. Look for a short zig-zag above the note with a short vertical line through it."
+          }
+        }
+      },
+      "hints": [
+        "Check each sign carefully.",
+        "The lower mordent is shown by a short zig-zag above the note with a short vertical line through it."
+      ],
+      "feedback": {
+        "correct": "Yes: you found the sign in the music.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u5-l01.ind-1",
+      "templateId": "t.g4.ornament-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this ornament sign.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "trill"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A minim F with an ornament sign: the letters tr above the note."
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "name-sign",
+        "sign": "trill",
+        "accepted": [
+          "trill"
+        ]
+      },
+      "hints": [
+        "Look at the direction of the sign.",
+        "Small notes before the main note are grace notes; signs above the note are trills, turns and mordents."
+      ],
+      "feedback": {
+        "correct": "Correct name.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.ind-2",
+      "templateId": "t.g4.ornament-spot",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Three notes in this melody are marked A, B and C. Which note has the acciaccatura?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "upper-mordent",
+                "label": "A"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "grace": {
+                  "kind": "acciaccatura",
+                  "pitches": [
+                    "A4"
+                  ]
+                },
+                "label": "B"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "lower-mordent",
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 3/4. Bar 1: a note on the 3rd line; a note on the 4th line; a note marked A on the 3rd line, with a short zig-zag above it with no line through it. Bar 2: a note marked B on the 2nd line, with a small note before it with a diagonal stroke through its stem and flag; a note marked C in the 2nd space, with a short zig-zag above it with a short vertical line through it; a note on the 3rd line.",
+        "key": "G major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "Note A"
+          },
+          {
+            "id": "B",
+            "label": "Note B"
+          },
+          {
+            "id": "C",
+            "label": "Note C"
+          }
+        ],
+        "correctOptionIds": [
+          "B"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "ornament-confused",
+            "reason": "Note A carries the upper mordent: a short zig-zag above the note, with no line through it. Look for a small note before the main note with a diagonal stroke through its stem and flag."
+          },
+          "C": {
+            "category": "ornament-confused",
+            "reason": "Note C carries the lower mordent: a short zig-zag above the note with a short vertical line through it. Look for a small note before the main note with a diagonal stroke through its stem and flag."
+          }
+        }
+      },
+      "hints": [
+        "Check each sign carefully.",
+        "The acciaccatura is shown by a small note before the main note with a diagonal stroke through its stem and flag."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.ind-3",
+      "templateId": "t.g4.ornament-bar",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is one complete bar of crotchets. Ornament signs and small notes take no time in the bar. Which time signature is missing?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "trill"
+              },
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "grace": {
+                  "kind": "acciaccatura",
+                  "pitches": [
+                    "D3"
+                  ]
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 2 sharps. a note on the 3rd line, with the letters tr above it; a note in the 2nd space, with a small note before it with a diagonal stroke through its stem and flag.",
+        "key": "D major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2/4",
+            "label": "2/4"
+          },
+          {
+            "id": "3/4",
+            "label": "3/4"
+          },
+          {
+            "id": "4/4",
+            "label": "4/4"
+          }
+        ],
+        "correctOptionIds": [
+          "2/4"
+        ],
+        "diagnoses": {
+          "3/4": {
+            "category": "grace-note-counted",
+            "reason": "That would need 3 crotchet beats. The bar has only 2 full-size crotchets: small notes and ornament signs do not add time."
+          },
+          "4/4": {
+            "category": "grace-note-counted",
+            "reason": "That would need 4 crotchet beats. The bar has only 2 full-size crotchets: small notes and ornament signs do not add time."
+          }
+        }
+      },
+      "hints": [
+        "Count only the full-size notes.",
+        "Ignore every ornament sign and every small note; count only the full-size crotchets."
+      ],
+      "feedback": {
+        "correct": "Correct: small notes take no time.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation.",
+          "grace-note-counted": "Small notes and ornament signs take no time: count only the full-size notes."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.ind-4",
+      "templateId": "t.g4.ornament-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this ornament sign.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "ornament": "lower-mordent"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A minim G with an ornament sign: a short zig-zag with a vertical line through it above the note."
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "name-sign",
+        "sign": "lower-mordent",
+        "accepted": [
+          "lower-mordent"
+        ]
+      },
+      "hints": [
+        "Look at the direction of the sign.",
+        "Small notes before the main note are grace notes; signs above the note are trills, turns and mordents."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.ind-5",
+      "templateId": "t.g4.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "An ornament is shown by a small note before the main note with no stroke through its stem. What is it called?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lower-mordent",
+            "label": "Lower mordent"
+          },
+          {
+            "id": "acciaccatura",
+            "label": "Acciaccatura"
+          },
+          {
+            "id": "upper-mordent",
+            "label": "Upper mordent"
+          },
+          {
+            "id": "appoggiatura",
+            "label": "Appoggiatura"
+          }
+        ],
+        "correctOptionIds": [
+          "appoggiatura"
+        ],
+        "diagnoses": {
+          "acciaccatura": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "The appoggiatura has no stroke through its stem. The stroked small note is the acciaccatura."
+          },
+          "upper-mordent": {
+            "category": "ornament-confused",
+            "reason": "Upper mordent is shown by a short zig-zag above the note, with no line through it."
+          },
+          "lower-mordent": {
+            "category": "ornament-confused",
+            "reason": "Lower mordent is shown by a short zig-zag above the note with a short vertical line through it."
+          }
+        }
+      },
+      "hints": [
+        "Letters, a curl, a zig-zag, or a small note.",
+        "Check each detail of the description: letters or a curl, a zig-zag with or without a line, a small note with or without a stroke."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g4-u5-l01.ind-6",
+      "templateId": "t.g4.ornament-spot",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Three notes in this melody are marked A, B and C. Which note has the upper mordent?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "lower-mordent",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "grace": {
+                  "kind": "acciaccatura",
+                  "pitches": [
+                    "C5"
+                  ]
+                },
+                "label": "B"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "upper-mordent",
+                "label": "C"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4. Bar 1: a note marked A on the 2nd line, with a short zig-zag above it with a short vertical line through it; a note in the 2nd space; a note marked B on the 3rd line, with a small note before it with a diagonal stroke through its stem and flag. Bar 2: a note in the 3rd space; a note on the 4th line; a note marked C on the 3rd line, with a short zig-zag above it with no line through it.",
+        "key": "F major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "Note A"
+          },
+          {
+            "id": "B",
+            "label": "Note B"
+          },
+          {
+            "id": "C",
+            "label": "Note C"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "upper-lower-mordent-swap",
+            "reason": "Note A carries the lower mordent: a short zig-zag above the note with a short vertical line through it. Look for a short zig-zag above the note, with no line through it."
+          },
+          "B": {
+            "category": "ornament-confused",
+            "reason": "Note B carries the acciaccatura: a small note before the main note with a diagonal stroke through its stem and flag. Look for a short zig-zag above the note, with no line through it."
+          }
+        }
+      },
+      "hints": [
+        "Check each sign carefully.",
+        "The upper mordent is shown by a short zig-zag above the note, with no line through it."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    }
+  ],
+  "recap": [
+    "Ornaments are signs above a note or small notes before it.",
+    "Signs: trill, turn, upper mordent, lower mordent. Small notes: acciaccatura, appoggiatura.",
+    "None of them counts towards the beats of the bar."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.ornament-name",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.ornament-spot",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.ornament-bar",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.ornaments.signs"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s13"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.17"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 17 and First Steps Grade 4 section 13 (pp. 99-100, read in the PDF): the two ways of writing ornaments, the six names, no time in the bar. How the ornaments are played is Grade 5 in the book and is not asked. Notation of the mordent signs: the renderer draws the sign for each ornament name; the descriptions in words are given for accessibility."
+  }
+}

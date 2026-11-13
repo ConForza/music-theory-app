@@ -1,0 +1,696 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U3-L03",
+  "lessonId": "G4-U3-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Write and recognise key signatures in the alto clef, and name notes in the alto clef, with or without a sharp or flat beside them.",
+    "successCriteria": [
+      "I know where the sharps and flats go in the alto clef.",
+      "I can name the key from an alto-clef key signature.",
+      "I can name notes in the alto clef, including a sharp or flat written in front of them."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In the alto clef the sharps and flats of a key signature sit on the lines and spaces of the same letters as always, but those lines and spaces are in different places from the treble clef. The order of the accidentals never changes: sharps F C G D A E B and flats B E A D G C F."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with eight semibreves: the B major scale, ascending, with its key signature.",
+        "key": "B major"
+      },
+      "caption": "B major in the alto clef. The five sharps: F♯ in the fourth space, C♯ on the middle line, G♯ on the top line, D♯ in the third space, A♯ on the second line."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Gb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Db5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with eight semibreves: the D♭ major scale, ascending, with its key signature.",
+        "key": "Db major"
+      },
+      "caption": "D♭ major in the alto clef. The five flats: B♭ in the second space, E♭ on the fourth line, A♭ on the second line, D♭ in the third space, G♭ in the first space."
+    },
+    {
+      "kind": "text",
+      "text": "To name the key from a signature, count the accidentals, then use the same rules as before: for sharps the major key is a semitone above the last sharp; for flats it is the second-to-last flat. Remember the relative minor shares the signature. To read a note in a key with a signature, name it from the clef first, then apply any sharp or flat from the key signature for that letter."
+    },
+    {
+      "kind": "tip",
+      "text": "The order of sharps and flats never changes; only the lines and spaces they sit on. Name the note by its position, then apply the key signature."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C#4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D#4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F#4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G#4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A#4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "An alto-clef stave with eight semibreves: the B major scale, ascending, with its key signature.",
+      "key": "B major"
+    },
+    "steps": [
+      "The key signature has five sharps: F♯ C♯ G♯ D♯ A♯.",
+      "The last sharp is A♯, so the key is a semitone above: B major.",
+      "Every B, every F, C, G, D and A in the scale is sharp."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "B major in the alto clef with its key signature."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u3-l03.guided-1",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name a key with this key signature (major or minor). The key signature is written in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "alto",
+        "accepted": [
+          "G major",
+          "E minor"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Right: the signature in the right places for the alto clef.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.guided-2",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this note in the alto clef, including its sharp, flat or natural.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Db3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the 1st ledger line below the stave, with a flat sign in front of it."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Db3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the 1st ledger line below the stave. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Right: you counted from middle C and applied the key signature.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.guided-3",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name a key with this key signature (major or minor). The key signature is written in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "alto",
+        "accepted": [
+          "Bb minor",
+          "Db major"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u3-l03.ind-1",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of B minor in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "alto",
+        "accepted": [
+          "B minor"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct signature.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.ind-2",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the alto clef, including its sharp, flat or natural.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bbb2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the 2nd ledger line below the stave, with a double flat sign in front of it."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Bbb2"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the 2nd ledger line below the stave. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.ind-3",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name a key with this key signature (major or minor). The key signature is written in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "alto",
+        "accepted": [
+          "B major",
+          "G# minor"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.ind-4",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the alto clef.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the 1st space."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "G3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the 1st space. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.ind-5",
+      "templateId": "t.g4.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of C minor in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "alto",
+        "accepted": [
+          "C minor"
+        ]
+      },
+      "hints": [
+        "Same order, new positions.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g4-u3-l03.ind-6",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the alto clef, including its sharp, flat or natural.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ebb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the 4th line, with a double flat sign in front of it."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Ebb4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the 4th line. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "recap": [
+    "The order of sharps and flats never changes in any clef.",
+    "In the alto clef the five sharps and flats sit on different lines and spaces from the treble clef.",
+    "Name the note by its position first; then apply the key signature."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.key-signature",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.alto-read",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.key-signature",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.keys.signatures-alto"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.05",
+      "abrsm2020.g4.10"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcomes 5 and 10 and First Steps Grade 4 section 14 (p. 101: the key signatures of the keys studied in the alto clef). OPEN_QUESTIONS Q13: reading AND writing key signatures in the alto clef are asked; writing scales in the alto clef is not (the book does not ask it). The positions stated in the captions were checked against the signature table used by the grader."
+  }
+}

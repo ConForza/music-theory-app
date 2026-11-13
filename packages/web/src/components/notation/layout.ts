@@ -55,6 +55,8 @@ export interface LaidEvent {
   positionLabel: string;
   /** Part of a tuplet group (a triplet): its bracket number is only a music-font glyph, so the note's accessible name says so. */
   inTuplet: boolean;
+  /** "duplet" (2 in the time of 3), "triplet" (3 in the time of 2) or "group" (any other ratio), for the accessible name. */
+  tupletKind?: "duplet" | "triplet" | "group";
   /** A printed label such as "x" that marks this note in a question. */
   mark: string;
   x: number;
@@ -261,7 +263,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
       tl.forEach((t, ei) => {
         const key = `${t.onset.n}/${t.onset.d}`;
         const nx = (slotX.get(key) ?? x) + 1.2 + (t.e.kind !== "rest" && t.e.grace ? 1.8 : 0);
-        const ev: LaidEvent = { id: `${bi}.${vi}.${ei}`, bar: bi, voice: vi, index: ei, noteIndex: [], positionLabel: "", inTuplet: t.tuplet !== undefined, mark: (t.e as { label?: string }).label || "", x: nx, width: 1.3, pitches: [], rest: t.e.kind === "rest", label: "", glyphs: [], lines: [], paths: [], texts: [] };
+        const ev: LaidEvent = { id: `${bi}.${vi}.${ei}`, bar: bi, voice: vi, index: ei, noteIndex: [], positionLabel: "", inTuplet: t.tuplet !== undefined, tupletKind: t.tuplet === undefined ? undefined : ((evs[t.tuplet] as { actual?: number; normal?: number } | undefined)?.actual === 2 && (evs[t.tuplet] as { normal?: number } | undefined)?.normal === 3 ? "duplet" : (evs[t.tuplet] as { actual?: number } | undefined)?.actual === 3 && (evs[t.tuplet] as { normal?: number } | undefined)?.normal === 2 ? "triplet" : "group"), mark: (t.e as { label?: string }).label || "", x: nx, width: 1.3, pitches: [], rest: t.e.kind === "rest", label: "", glyphs: [], lines: [], paths: [], texts: [] };
         const e = t.e;
         if (e.kind === "rest") {
           const whole = e.wholeBar || (barCap && music.equals(t.dur, barCap) && voices.length === 1 && tl.length === 1);

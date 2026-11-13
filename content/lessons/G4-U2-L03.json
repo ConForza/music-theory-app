@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U2-L03",
+  "lessonId": "G4-U2-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name and write notes in the alto clef.",
+    "successCriteria": [
+      "I know the alto clef puts middle C on the middle line.",
+      "I can name notes on the lines and spaces of the alto stave.",
+      "I can write a named note in the alto clef."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "As well as the treble clef (the G clef) and the bass clef (the F clef), there is a third clef: the C clef. It points to the line that is middle C. When the C clef is centred on the middle line of the stave it is called the alto clef, and the middle line is middle C."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto stave with five semibreves on the five lines: F, A, middle C, E and G."
+      },
+      "caption": "The five lines of the alto stave: F, A, C (middle C), E, G."
+    },
+    {
+      "kind": "text",
+      "text": "From middle C on the middle line, count one letter for each line and space. Going up: the space above is D, the next line is E, then F, then G on the top line. Going down: B in the space below, A on the second line, G, then F on the bottom line."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto stave with nine semibreves from the bottom line up to the top line: F, G, A, B, middle C, D, E, F, G."
+      },
+      "caption": "Line, space, line, space ...: F to G, bottom line to top line."
+    },
+    {
+      "kind": "text",
+      "text": "The same notes are written very differently in other clefs. The viola reads the alto clef; it is the only instrument in the modern orchestra that normally does. Remember the anchor: alto clef, middle C on the middle line."
+    },
+    {
+      "kind": "tip",
+      "text": "Alto clef: middle C on the middle line. Bottom line F, top line G. Count one letter for each line and space from middle C."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "An alto stave with middle C on the middle line, then E and G above it."
+    },
+    "steps": [
+      "Find the middle line: that is middle C.",
+      "The next line up is E; the top line is G.",
+      "Count one letter for every line and space."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Middle C on the middle line, then E and G."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u2-l03.guided-1",
+      "templateId": "t.g4.alto-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In the alto clef, which line of the stave is middle C?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "bottom",
+            "label": "The bottom line"
+          },
+          {
+            "id": "second",
+            "label": "The second line"
+          },
+          {
+            "id": "middle",
+            "label": "The middle line"
+          },
+          {
+            "id": "top",
+            "label": "The top line"
+          }
+        ],
+        "correctOptionIds": [
+          "middle"
+        ],
+        "diagnoses": {
+          "bottom": {
+            "category": "clef-confusion",
+            "reason": "Middle C sits below the bass stave's top... in the alto clef the clef sign itself points to middle C: its centre rests on the middle line."
+          },
+          "second": {
+            "category": "line-space-swap",
+            "reason": "The alto clef is centred on the middle line, and the centre of the clef is middle C."
+          },
+          "top": {
+            "category": "clef-confusion",
+            "reason": "The top line of the alto stave is G, a fifth above middle C."
+          }
+        }
+      },
+      "hints": [
+        "Middle C is on the middle line of the alto stave.",
+        "The C clef is printed centred on the line that is middle C. For the alto clef that is the middle line."
+      ],
+      "feedback": {
+        "correct": "Yes: the middle line.",
+        "mistakes": {
+          "line-space-swap": "Check whether the note sits on a line or in a space.",
+          "clef-confusion": "Anchor on the clef: the alto clef has middle C on the middle line.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "Count one letter for each line and space.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.guided-2",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this note in the alto clef.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the 5th line."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "G4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the 5th line. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Right: you counted from middle C.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.guided-3",
+      "templateId": "t.g4.alto-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write D in the alto clef. You may use up to 2 ledger lines. Any D that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "alto",
+        "target": {
+          "step": "D",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Count from middle C on the middle line.",
+        "In the alto clef the bottom line is F. Count up one letter for each line and space until you reach D."
+      ],
+      "feedback": {
+        "correct": "Right position.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u2-l03.ind-1",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the alto clef.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the space above the 2nd ledger line."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "E5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the space above the 2nd ledger line. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.ind-2",
+      "templateId": "t.g4.alto-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write E in the alto clef. You may use up to 2 ledger lines. Any E that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "alto",
+        "target": {
+          "step": "E",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "E3",
+          "E4",
+          "E5"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Count from middle C on the middle line.",
+        "In the alto clef the bottom line is F. Count up one letter for each line and space until you reach E."
+      ],
+      "feedback": {
+        "correct": "Correct position.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.ind-3",
+      "templateId": "t.g4.alto-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which note is written on the 3rd line of the alto-clef stave? Give its letter name.",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ],
+        "diagnoses": {
+          "B": {
+            "category": "clef-confusion",
+            "reason": "That is the note at this position in the treble clef. In the alto clef the same position is a different note: count from middle C on the middle line."
+          },
+          "D": {
+            "category": "clef-confusion",
+            "reason": "That is the note at this position in the bass clef. In the alto clef count from middle C on the middle line."
+          },
+          "E": {
+            "category": "off-by-step",
+            "reason": "Close: you are one step out. Count line and space, line and space, from middle C on the middle line."
+          }
+        }
+      },
+      "hints": [
+        "Middle C is on the middle line of the alto stave.",
+        "Middle C is on the middle line. Count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Check whether the note sits on a line or in a space.",
+          "clef-confusion": "Anchor on the clef: the alto clef has middle C on the middle line.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "Count one letter for each line and space.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.ind-4",
+      "templateId": "t.g4.alto-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the alto clef, including its sharp, flat or natural.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Dx5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto-clef stave with one semibreve on the 2nd ledger line above the stave, with a double sharp sign in front of it."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Dx5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle line = middle C.",
+        "The note is on the 2nd ledger line above the stave. The bottom line of the alto clef is F: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.ind-5",
+      "templateId": "t.g4.alto-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write D♭ in the alto clef. You may use up to 2 ledger lines. Any D♭ that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "alto",
+        "target": {
+          "step": "D",
+          "alter": -1,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "Db3",
+          "Db4",
+          "Db5"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Count from middle C on the middle line.",
+        "In the alto clef the bottom line is F. Count up one letter for each line and space until you reach D."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g4-u2-l03.ind-6",
+      "templateId": "t.g4.alto-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which note is written on the top line of the alto-clef stave? Give its letter name.",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "F",
+            "label": "F"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          }
+        ],
+        "correctOptionIds": [
+          "G"
+        ],
+        "diagnoses": {
+          "F": {
+            "category": "clef-confusion",
+            "reason": "That is the note at this position in the treble clef. In the alto clef the same position is a different note: count from middle C on the middle line."
+          },
+          "A": {
+            "category": "clef-confusion",
+            "reason": "That is the note at this position in the bass clef. In the alto clef count from middle C on the middle line."
+          },
+          "E": {
+            "category": "off-by-step",
+            "reason": "Close: you are one step out. Count line and space, line and space, from middle C on the middle line."
+          }
+        }
+      },
+      "hints": [
+        "Middle C is on the middle line of the alto stave.",
+        "Middle C is on the middle line. Count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Check whether the note sits on a line or in a space.",
+          "clef-confusion": "Anchor on the clef: the alto clef has middle C on the middle line.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "Count one letter for each line and space.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "recap": [
+    "The alto clef is a C clef: its centre is middle C on the middle line.",
+    "Bottom line F, top line G; count a letter for each line and space.",
+    "Only the viola normally reads the alto clef."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.alto-read",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.alto-write",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.alto-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.clefs.alto"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.05"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 5 and First Steps Grade 4 section 14 (p. 101): the C clef, the alto clef centred on the middle line, middle C, and the viola. Key signatures in the alto clef are taught in G4-U3-L03 (the planned unit refinement); questions here use no key signature. Instrument fact (viola) is taught here but not credited to the orchestra outcome."
+  }
+}
