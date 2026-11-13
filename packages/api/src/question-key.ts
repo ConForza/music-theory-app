@@ -39,12 +39,18 @@ export const ORDER_INSENSITIVE_TEMPLATES = new Set(
   ["letter-names", "stave-facts", "note-place", "note-total", "note-equivalent", "beam-choice", "bar-judge", "bar-fix", "middle-c-find", "middle-c-facts", "accidental-facts", "accidental-read", "accidental-write", "accidental-count", "step-size", "scale-gap", "key-facts", "key-write", "degree-note", "triad-notes", "interval-note", "term-sign", "melody-detail"].map((x) => `t.g1.${x}`),
 );
 
+/** Templates introduced in Brief 06 (Grade 2). New, so they have no stored history; their options are order-insensitive too. */
+export const GRADE2_ORDER_INSENSITIVE = new Set(
+  ["beat-facts", "bar-judge", "triplet-facts", "triplet-read", "triplet-mixed", "triplet-fill", "rest-judge", "rest-fix", "time-sig-read", "ledger-place", "clef-pair", "scale-gap", "key-facts", "minor-pattern", "minor-facts", "relative-facts", "degree-note", "triad-notes", "interval-note", "term-use", "melody-detail"].map((x) => `t.g2.${x}`),
+);
+const orderInsensitive = (templateId: string) => ORDER_INSENSITIVE_TEMPLATES.has(templateId) || GRADE2_ORDER_INSENSITIVE.has(templateId);
+
 export function questionKey(item: ExerciseItem): string {
-  const answer = ORDER_INSENSITIVE_TEMPLATES.has(item.templateId) ? normaliseAnswer(item.answer) : item.answer;
+  const answer = orderInsensitive(item.templateId) ? normaliseAnswer(item.answer) : item.answer;
   // Brief 04 templates keep hashing their text alternative exactly as that release did, so exposure and evidence stored then still match
   // after an upgrade (the learner-facing wording for questions lives in `questionAlternative`, which is never hashed). Templates new in
   // Brief 05 have no history to match, so descriptions never take part in their identity at all.
-  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: answer }, ORDER_INSENSITIVE_TEMPLATES.has(item.templateId)));
+  const body = JSON.stringify(strip({ t: item.templateId, p: item.prompt, m: item.music ?? null, s: item.score ?? null, a: answer }, orderInsensitive(item.templateId)));
   return createHash("sha256").update(body).digest("hex").slice(0, 24);
 }
 
@@ -81,6 +87,14 @@ export interface ReviewConstraint {
   keys?: string[];
   /** Vocabulary concepts: the term asked about (or its meaning) is in one of these categories. */
   termCategories?: string[];
+  /** Brief 06: the question is about one of these time signatures (printed, answered, or named in the prompt). */
+  timeSignatures?: string[];
+  /** Brief 06: the prompt contains at least one of these phrases (the wording tells the kinds of question apart). */
+  promptIncludes?: string[];
+  /** Brief 06: the prompt contains none of these phrases (for example wording a later lesson teaches). */
+  promptExcludes?: string[];
+  /** Brief 06: the term asked about is one of these term ids. */
+  termIds?: string[];
   clef?: "treble" | "bass" | "alto" | "tenor";
   staffPositions?: "lines" | "spaces";
   includesPitch?: string[];
@@ -120,19 +134,49 @@ function rhythmEvents(item: ExerciseItem): Array<Record<string, unknown>> {
 
 /** The key a question is about: its printed key, a stated key, a scale's start note, or a named key answer. */
 function keyOf(item: ExerciseItem): string | undefined {
-  const a = item.answer as { key?: string; accepted?: unknown[]; derivation?: { rule?: string; start?: string; sourceKey?: string }; keyName?: string };
+  const a = item.answer as { key?: string; accepted?: unknown[]; derivation?: { rule?: string; key?: string; start?: string; sourceKey?: string }; keyName?: string };
   if (a.keyName) return a.keyName;
   if (item.music?.key) return item.music.key;
   if (a.key) return a.key;
+  if (a.derivation?.rule === "scale" && a.derivation.key) return a.derivation.key;
   if (a.derivation?.rule === "scale" && a.derivation.start) return `${a.derivation.start.replace(/\d+$/, "")} major`;
-  if (typeof a.accepted?.[0] === "string" && /major$/.test(a.accepted[0] as string)) return a.accepted[0] as string;
-  const m = /\b([A-G][b#]?) major\b/.exec(item.prompt.replace(/♯/g, "#").replace(/♭/g, "b"));
-  return m ? `${m[1]} major` : undefined;
+  if (typeof a.accepted?.[0] === "string" && /(major|minor)$/.test(a.accepted[0] as string)) return a.accepted[0] as string;
+  // Grade 2 templates (Brief 06): a choice whose right answer is a key names the key it is about. Not applied to older templates,
+  // so what earlier briefs credited is unchanged.
+  const right = (item.answer as { correctOptionIds?: string[] }).correctOptionIds?.[0];
+  if (item.templateId.startsWith("t.g2.") && right && /^[A-G][b#]? (major|minor)$/.test(right)) return right;
+  const text = item.prompt.replace(/♯/g, "#").replace(/♭/g, "b");
+  const harmonic = /\b([A-G][b#]?) harmonic minor\b/.exec(text);
+  if (harmonic) return `${harmonic[1]} minor`;
+  const m = /\b([A-G][b#]?) (major|minor)\b/.exec(text);
+  return m ? `${m[1]} ${m[2]}` : undefined;
+}
+
+/** The time signatures a question is about: printed on its music, the answer (all that are accepted), the correct option, or named in the prompt. */
+function timeSignaturesOf(item: ExerciseItem): string[] {
+  const a = item.answer as { timeSignature?: string; accepted?: unknown[]; correctOptionIds?: string[] };
+  const TS = /^\d{1,2}\/\d{1,2}$/;
+  if (item.music?.timeSignature) return [item.music.timeSignature];
+  if (a.timeSignature) return [a.timeSignature];
+  const accepted = (a.accepted ?? []).filter((x): x is string => typeof x === "string" && TS.test(x));
+  if (accepted.length) return accepted;
+  if (a.correctOptionIds?.[0] && TS.test(a.correctOptionIds[0])) return [a.correctOptionIds[0]];
+  const m = /\b(\d{1,2}\/\d{1,2})\b/.exec(item.prompt)?.[1];
+  return m ? [m] : [];
 }
 
 /** True when the question satisfies every part of the constraint (pitch fields need written pitches to judge). */
 export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
   if (c.promptMentions?.some((w) => item.prompt.includes(w))) return true;
+  if (c.promptIncludes && !c.promptIncludes.some((w) => item.prompt.includes(w))) return false;
+  if (c.promptExcludes?.some((w) => item.prompt.includes(w))) return false;
+  if (c.timeSignatures) {
+    if (!timeSignaturesOf(item).some((t) => c.timeSignatures!.includes(t))) return false;
+  }
+  if (c.termIds) {
+    const t = (item.answer as { correctOptionIds?: string[] }).correctOptionIds?.[0];
+    if (!t || !c.termIds.includes(t)) return false;
+  }
   if (c.rhythm) {
     const evs = rhythmEvents(item);
     const r = c.rhythm;

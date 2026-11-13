@@ -4,6 +4,10 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 > **Not affiliated with or endorsed by ABRSM.** The app teaches towards the published ABRSM Grades 1–5 theory syllabus. Its practice assessments are not official examinations.
 
+## Status — Brief 06 (Grade 2 complete course)
+
+All **41 Grade 2 nodes are playable** (24 lessons, 5 unit practice, 5 unit reviews, 5 unit challenges, the Grade 2 assessment and one optional melodic-minor preview) on the same runtime as Grade 1: new time signatures and triplets, neat rests and two ledger lines, A / B♭ / E♭ major, relative keys and A / E / D harmonic minor, intervals above the tonic, new terms and reading a short melody. Melodic minor is deferred to Grade 3 and appears only in the optional preview. See [docs/architecture/GRADE_2_COURSE.md](docs/architecture/GRADE_2_COURSE.md), the generated [completion audit](docs/curriculum/GRADE_2_COMPLETION_AUDIT.md) and [teacher review pack](docs/teacher/GRADE_2_TEACHER_REVIEW_PACK.md), and the [handoff](docs/handoff/BRIEF_06_COMPLETION.md). **Nothing is teacher-reviewed or approved.** Browser journey: `npm run build && npm run e2e:grade2 -w @mtp/web`.
+
 ## Status — Brief 04 (progression, XP, mastery and adaptive revision)
 
 Brief 04 adds the reward and revision loop without a second curriculum or grader: a **server-authoritative XP ledger** (idempotent, capped against farming), an optional **daily goal and timezone-safe streak**, **concept-level mastery** built only from independent first-try evidence (kept separate from XP and from lesson completion), **adaptive spaced review** with targeted remediation (seeded, reproducible Brief 03 questions inside the taught scope), restrained **badges**, and the **Review** screen plus updated dashboard and progress screens. See [docs/architecture/PROGRESSION.md](docs/architecture/PROGRESSION.md) for the rules, thresholds (provisional, awaiting teacher acceptance) and decisions, and the [Brief 04 completion handoff](docs/handoff/BRIEF_04_COMPLETION.md).

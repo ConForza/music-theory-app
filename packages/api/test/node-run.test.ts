@@ -38,11 +38,16 @@ describe("Grade 1 prerequisites are strict", () => {
     expect((await c.get("/api/progress")).body.nodes["G1-U3-L03"].state).toBe("in_progress");
   });
 
-  it("does not change what Grade 2-5 learners can reach", async () => {
+  it("does not change what Grade 3-5 learners can reach, and keeps Grade 2 locked behind Grade 1", async () => {
     const { c } = await learner();
-    const nodes = (await c.get("/api/progress")).body.nodes as Record<string, { state: string }>;
-    const later = Object.entries(nodes).filter(([id]) => !id.startsWith("G1-"));
+    const nodes = (await c.get("/api/progress")).body.nodes as Record<string, { state: string; lockedBy?: string[] }>;
+    const later = Object.entries(nodes).filter(([id]) => !id.startsWith("G1-") && !id.startsWith("G2-"));
     expect(later.filter(([, v]) => v.state !== "coming_soon").map(([id, v]) => `${id}:${v.state}`)).toEqual(["G5-U4-L06:available"]);
+    // Grade 2 is playable (Brief 06) but a new learner cannot reach any of it: its first lesson waits for the last Grade 1 review.
+    const g2 = Object.entries(nodes).filter(([id]) => id.startsWith("G2-"));
+    expect(g2.length).toBe(41);
+    expect(g2.every(([, v]) => v.state === "locked")).toBe(true);
+    expect(nodes["G2-U1-L01"]!.lockedBy).toEqual(["G1-U7-R1"]);
   });
 });
 

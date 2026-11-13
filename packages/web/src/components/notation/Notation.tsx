@@ -9,7 +9,9 @@ import "./font";
 const PX = { normal: 11, compact: 9, large: 12 } as const;
 /** Wide music shrinks to fit the screen, but never below this share of its natural size (then it scrolls). */
 const MIN_SCALE = 0.7;
-const fit = (w: number) => ({ width: "100%", maxWidth: `${w}px`, minWidth: `${Math.round(w * MIN_SCALE)}px` });
+const fit = (w: number, min = MIN_SCALE) => ({ width: "100%", maxWidth: `${w}px`, minWidth: `${Math.round(w * min)}px` });
+/** A rhythm line has no clef or key to keep legible, so on a narrow phone it may shrink further before it scrolls (three-bar questions). */
+const RHYTHM_MIN_SCALE = 0.5;
 
 export interface NotationProps {
   fragment: NotationFragment;
@@ -73,7 +75,7 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
           }
         };
         return (
-          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "neutral" ? (ev.rest ? ev.label : "note") : labels === "positions" ? ev.positionLabel : ev.label}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
+          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "neutral" ? (ev.rest ? ev.label : "note") : labels === "positions" ? ev.positionLabel : ev.label}${ev.inTuplet ? ", in a triplet group" : ""}${ev.mark === "x" ? ", the note marked x" : ""}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
             <rect x={ev.x - 1} y={layout.top} width={ev.width + 2} height={layout.bottom - layout.top} fill="transparent" />
             {body}
           </g>
@@ -93,7 +95,7 @@ export function Notation({ fragment, size = "normal", highlight, marks, onActiva
   return (
     <figure className={`notation notation-${size}`}>
       <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)" aria-describedby={desc}>
-        <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px)} role={onActivate ? "group" : "img"} aria-label={fragment.textAlternative} className="notation-svg fit">
+        <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px, fragment.presentation === "rhythm-line" ? RHYTHM_MIN_SCALE : MIN_SCALE)} role={onActivate ? "group" : "img"} aria-label={fragment.textAlternative} className="notation-svg fit">
           <StaveSvg layout={layout} highlight={highlight} marks={marks} onActivate={onActivate} overlay={overlay} px={px} labels={labels} />
         </svg>
       </div>

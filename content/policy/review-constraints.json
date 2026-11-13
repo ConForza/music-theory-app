@@ -125,6 +125,146 @@
       "showsSign": [
         "natural"
       ]
+    },
+    {
+      "conceptId": "c.metre.minim-beats",
+      "timeSignatures": [
+        "2/2",
+        "3/2",
+        "4/2"
+      ],
+      "promptExcludes": [
+        "duple, triple or quadruple"
+      ]
+    },
+    {
+      "conceptId": "c.metre.quaver-beats",
+      "timeSignatures": [
+        "3/8"
+      ],
+      "promptExcludes": [
+        "duple, triple or quadruple"
+      ]
+    },
+    {
+      "conceptId": "c.metre.rest-grouping-beats",
+      "promptIncludes": [
+        "silent beats",
+        "Rewrite this bar with the rests"
+      ]
+    },
+    {
+      "conceptId": "c.metre.rest-grouping-half-bar",
+      "promptIncludes": [
+        "half of the bar",
+        "Rewrite this bar with the rests"
+      ]
+    },
+    {
+      "conceptId": "c.metre.rest-grouping-subdivisions",
+      "promptIncludes": [
+        "halfway through one beat",
+        "part of a beat"
+      ]
+    },
+    {
+      "conceptId": "c.clefs.same-pitch-treble-bass",
+      "includesPitch": [
+        "A3",
+        "B3",
+        "C4",
+        "D4",
+        "E4"
+      ]
+    },
+    {
+      "conceptId": "c.scales.major-a",
+      "keys": [
+        "A major"
+      ]
+    },
+    {
+      "conceptId": "c.scales.major-bb-eb",
+      "keys": [
+        "Bb major",
+        "Eb major"
+      ]
+    },
+    {
+      "conceptId": "c.keys.signatures-g2-major",
+      "keys": [
+        "A major",
+        "Bb major",
+        "Eb major"
+      ]
+    },
+    {
+      "conceptId": "c.scales.minor-harmonic",
+      "keys": [
+        "A minor"
+      ],
+      "promptIncludes": [
+        "harmonic minor"
+      ]
+    },
+    {
+      "conceptId": "c.scales.minor-harmonic-g2",
+      "keys": [
+        "E minor",
+        "D minor"
+      ],
+      "promptIncludes": [
+        "harmonic minor"
+      ]
+    },
+    {
+      "conceptId": "c.chords.tonic-triad-g2-major",
+      "keys": [
+        "A major",
+        "Bb major",
+        "Eb major"
+      ]
+    },
+    {
+      "conceptId": "c.keys.minor-g2",
+      "keys": [
+        "A minor",
+        "E minor",
+        "D minor"
+      ]
+    },
+    {
+      "conceptId": "c.intervals.above-tonic-number-g2",
+      "keys": [
+        "A major",
+        "Bb major",
+        "Eb major",
+        "A minor",
+        "E minor",
+        "D minor"
+      ]
+    },
+    {
+      "conceptId": "c.terms.g2-words",
+      "termIds": [
+        "presto",
+        "largo",
+        "vivace",
+        "grazioso",
+        "maestoso"
+      ]
+    },
+    {
+      "conceptId": "c.terms.g2-signs",
+      "termIds": [
+        "sforzando",
+        "fortepiano",
+        "tenuto"
+      ]
+    },
+    {
+      "conceptId": "c.pitch.ledger-two",
+      "minLedgerLines": 2
     }
   ]
 }

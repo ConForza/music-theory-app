@@ -174,3 +174,8 @@ Brief 05 makes the four server-built node kinds playable (details in [GRADE_1_CO
 * **Progress counts**: a topic that is merely due for review keeps the level it earned (only a genuine slip counts as learning again).
 * **Empty stale open review**: the player rebuilds the session instead of looping on a completion that cannot succeed (the server keeps the answers already given).
 * **Not changed**: the reward receipt returned for a retried completion still recomputes live context (today's goal, running total, streak) around the immutable event XP. No XP or activity is ever duplicated; separating receipt from live context is left for a later change.
+
+## 10. Grade 2 (Brief 06)
+
+Grade 2 runs on exactly the rules above: its first lesson waits for `G1-U7-R1`; challenges (70%) and the Grade 2 assessment (66%) are unchanged provisional marks; completing the grade is a passed `G2-A` run (the `g2.grade-complete` badge). The optional preview node (`G2-U4-E1`) pays the enrichment award (5 XP), is never required, and has no concept evidence that any blueprint, review or mastery rule reads. The Grade 2 mastery-capacity audit is part of `mastery-audit.test.ts`. See [GRADE_2_COURSE.md](GRADE_2_COURSE.md).
+

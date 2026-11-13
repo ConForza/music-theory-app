@@ -27,7 +27,7 @@ export const ID_PATTERNS = {
   assessment: /^a\.g[1-5](-u\d)?$/,
   grader: /^g\.[a-z0-9]+(-[a-z0-9]+)*$/,
   ruleset: /^rules\.[a-z0-9]+(-[a-z0-9]+)*(\.[a-z0-9]+(-[a-z0-9]+)*)*$/,
-  lessonContent: /^lc\.G[1-5]-U\d-L\d{2}$/,
+  lessonContent: /^lc\.G[1-5]-U\d-(L\d{2}|E\d)$/,
   item: /^i\.[a-z0-9]+(-[a-z0-9]+)*(\.[a-z0-9]+(-[a-z0-9]+)*)*$/,
 } as const;
 

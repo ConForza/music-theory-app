@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app.ts";
 import { openDb } from "../src/db.ts";
-import { auditCapacity, MIN_DISTINCT, shortfalls } from "../src/mastery-audit.ts";
+import { auditCapacity, CAPACITY_ALLOWLIST, MIN_DISTINCT, shortfalls } from "../src/mastery-audit.ts";
 import { questionKey } from "../src/question-key.ts";
 import { realCourse } from "./helpers.ts";
 
@@ -30,5 +30,23 @@ describe("Grade 1 mastery capacity (Brief 04 thresholds are not weakened)", () =
     expect(questionKey(shuffled)).toBe(questionKey(base));
     const other = { ...base, answer: { ...base.answer, correctOptionIds: ["C"] } };
     expect(questionKey(other)).not.toBe(questionKey(base));
+  });
+});
+
+describe("Grade 2 mastery capacity (Brief 04 thresholds are not weakened)", () => {
+  const rows2 = auditCapacity(course, app.nodes, 2);
+
+  it("covers every Grade 2 concept", () => {
+    expect(rows2.length).toBe([...course.ix.concepts.values()].filter((c) => c.grade === 2).length);
+  });
+
+  it(`gives every required Grade 2 concept at least ${MIN_DISTINCT} distinct questions across at least two question types`, () => {
+    // The optional melodic-minor preview has no generated questions by design: it never counts towards Grade 2 mastery or assessment.
+    expect(Object.keys(CAPACITY_ALLOWLIST)).toEqual(["c.scales.minor-melodic-preview"]);
+    expect(shortfalls(rows2, CAPACITY_ALLOWLIST)).toEqual([]);
+  });
+
+  it("gives the preview concept no generated evidence at all", () => {
+    expect(rows2.find((r) => r.conceptId === "c.scales.minor-melodic-preview")!.distinct).toBe(0);
   });
 });
