@@ -6,8 +6,8 @@
 import { GENERATORS, type Gen } from "./families.ts";
 import { breveBar, breveFacts, doubleDotBar, doubleDotFacts, dupletFacts, dupletRead, groupingJudge4, metreFacts4, timeSigRead4 } from "./grade4-rhythm.ts";
 import { doubleRead, altoFacts, chromaticJudge, clefPosition, degreeName, doubleCancel, doubleFacts, doubleName, doubleWrite, enharmonicLetter, enharmonicPick, keyFacts4, octavePickAlto, samePitch4, scaleSpot } from "./grade4-pitch.ts";
-import { chordBuild4, chordInPassage4, chordRoot, chordSpread, intervalFacts4, intervalName4, intervalWrite4, triadId, triadNotes4 } from "./grade4-harmony.ts";
-import { instruments4, ornamentBar, ornamentFacts, ornamentSpot, passage4, passageDirections, techniqueFacts, termUse4, terms4 } from "./grade4-context.ts";
+import { chordBuild4, chordInPassage4, chordPassagePick, chordRoot, chordSpread, intervalFacts4, intervalName4, intervalWrite4, triadId, triadNotes4 } from "./grade4-harmony.ts";
+import { instrumentRange, instruments4, ornamentBar, ornamentFacts, ornamentSpot, passage4, passageDirections, techniqueFacts, techniqueUse, termUse4, terms4 } from "./grade4-context.ts";
 
 /** The provisional family generator for a template, run as it is. */
 const family = (familyId: string): Gen => (c) => GENERATORS[familyId]?.(c.template)?.(c) ?? null;
@@ -70,7 +70,7 @@ export const GRADE4_GENERATORS: Record<string, Gen> = {
   "t.g4.degree-name": degreeName,
   "t.g4.chromatic-judge": chromaticJudge,
   // Unit 4
-  "t.g4.interval-name": intervalName4,
+  "t.g4.interval-diatonic": intervalName4,
   "t.g4.interval-write": intervalWrite4,
   "t.g4.interval-facts": intervalFacts4,
   "t.g4.triad-notes": triadNotes4,
@@ -79,12 +79,15 @@ export const GRADE4_GENERATORS: Record<string, Gen> = {
   "t.g4.chord-root": chordRoot,
   "t.g4.chord-build": chordBuild4,
   "t.g4.chord-in-passage": chordInPassage4,
+  "t.g4.chord-passage-pick": chordPassagePick,
   // Unit 5
   "t.g4.ornament-spot": ornamentSpot,
   "t.g4.ornament-facts": ornamentFacts,
   "t.g4.ornament-bar": ornamentBar,
   "t.g4.instruments": instruments4,
+  "t.g4.instrument-range": instrumentRange,
   "t.g4.technique-facts": techniqueFacts,
+  "t.g4.technique-use": techniqueUse,
   "t.g4.terms": terms4,
   "t.g4.term-use": termUse4,
   "t.g4.passage": passage4,

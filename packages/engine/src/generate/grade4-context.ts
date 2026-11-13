@@ -180,8 +180,10 @@ const CLEF_NAME: Record<string, string> = { treble: "treble clef", bass: "bass c
 const byFamily = (f: string) => INST.filter((i) => i.family === f).sort((a, b) => a.rank - b.rank);
 
 /** t.g4.instruments: families, clefs, highest and lowest of each family, pitched percussion (Grade 4 lists only). */
-export const instruments4: Gen = (c): any => {
-  const mode = c.rng.pick(["family", "family", "clef", "clef", "highest", "lowest", "belongs", "pitched"] as const);
+export const instruments4: Gen = (c): any => instrumentsMode(c, c.rng.pick(["family", "family", "clef", "clef", "belongs"] as const));
+/** t.g4.instrument-range: the highest and lowest of each family, and the one pitched percussion instrument. */
+export const instrumentRange: Gen = (c): any => instrumentsMode(c, c.rng.pick(["highest", "lowest", "highest", "lowest", "pitched"] as const));
+function instrumentsMode(c: Ctx, mode: "family" | "clef" | "belongs" | "highest" | "lowest" | "pitched") {
   if (mode === "family") {
     const inst = c.rng.pick(INST);
     return {
@@ -229,12 +231,14 @@ export const instruments4: Gen = (c): any => {
     answer: { kind: "choice", options: c.rng.shuffle(list.map((i) => ({ id: i.id, label: cap(i.name) }))), correctOptionIds: [right.id], diagnoses: Object.fromEntries(list.filter((i) => i.id !== right.id).map((i) => [i.id, diag("wrong-category", `The ${right.name} can play ${high ? "higher" : "lower"} notes than the ${i.name}.`)])) as Diagnoses },
     hints: ["From highest to lowest the instruments of a family are usually listed in order of size: the smaller instrument plays higher."],
   };
-};
+}
 
 /** t.g4.technique-facts: pizzicato, arco, mutes, strings, the bow signs. Each question has one right meaning among clearly different ones. */
-export const techniqueFacts: Gen = (c): any => {
+export const techniqueFacts: Gen = (c): any => techniqueMode(c, "meaning");
+/** t.g4.technique-use: the direction that asks for a described way of playing. */
+export const techniqueUse: Gen = (c): any => techniqueMode(c, "term");
+function techniqueMode(c: Ctx, mode: "meaning" | "term") {
   const target = c.rng.pick(TECH);
-  const mode = c.rng.pick(["meaning", "meaning", "term"] as const);
   const pool = TECH.filter((t) => t.id !== target.id);
   const OPP: Record<string, string> = { pizzicato: "arco", arco: "pizzicato", "con-sordino": "senza-sordino", "senza-sordino": "con-sordino", "down-bow": "up-bow", "up-bow": "down-bow" };
   if (mode === "meaning") {
@@ -255,7 +259,7 @@ export const techniqueFacts: Gen = (c): any => {
     answer: { kind: "choice", options: c.rng.shuffle(opts.map((t) => ({ id: t.id, label: t.term }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(opts.filter((t) => t.id !== target.id).map((t) => [t.id, diag(OPP[target.id] === t.id ? "opposite-meaning" : "confused-similar-term", OPP[target.id] === t.id ? `${t.term} is the opposite instruction.` : `${t.term} means to ${t.meaning}.`)])) as Diagnoses },
     hints: ["Read the meanings carefully: some of these come in opposite pairs."],
   };
-};
+}
 
 // ---------------------------------------------------------------------------
 // Terms (Grade 4 list only)

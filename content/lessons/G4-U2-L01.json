@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U2-L01",
+  "lessonId": "G4-U2-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand double sharps and double flats, how long they last and how a natural sign cancels them.",
+    "successCriteria": [
+      "I know the double sharp raises a note by two semitones and the double flat lowers it by two.",
+      "I can name and write notes with double signs.",
+      "I know a double sign lasts to the end of the bar and a natural sign cancels it."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A sharp raises a note by one semitone and a flat lowers it by one. Sometimes a note that is already sharp must go higher still. The double sharp (𝄪) raises a note by two semitones, a whole tone, and the double flat (𝄫) lowers it by two. Each is simply two single signs together."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F♯",
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "Fx4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F𝄪",
+                "writtenAccidental": "double-sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble stave with three semibreves on the same line: F, F sharp and F double sharp."
+      },
+      "caption": "F, F♯ and F𝄪 climb by a semitone each. F𝄪 sounds the same as G."
+    },
+    {
+      "kind": "text",
+      "text": "A double sign is part of the note's name, so spelling matters. F𝄪 sounds like G, but it is called F because of the letter on the stave. Likewise B𝄫 sounds like A, and E𝄫 like D. Later you will see why a composer chooses the double sign: the letter names have to stay in order."
+    },
+    {
+      "kind": "text",
+      "text": "Like any accidental, a double sign lasts until the end of the bar, on the same line or space. A natural sign (♮) cancels it, and the note is plain again. At the barline an accidental ends and the key signature takes over again."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Fx4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 4/4: F double sharp, A, C, then F natural.",
+        "timeSignature": "4/4"
+      },
+      "caption": "The natural sign before the last F cancels the double sharp."
+    },
+    {
+      "kind": "tip",
+      "text": "𝄪 = up two semitones, 𝄫 = down two. A double sign lasts to the barline. A natural sign cancels it. Older music sometimes uses ♮♯ to go from 𝄪 to a single sharp; this course only asks about the natural sign."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff-and-keyboard",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "F"
+            },
+            {
+              "kind": "note",
+              "pitch": "Fx4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "F𝄪",
+              "writtenAccidental": "double-sharp"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A treble stave with F and then F double sharp."
+    },
+    "steps": [
+      "Play F. Play F sharp: one key higher.",
+      "F double sharp is one more key higher: the key you call G.",
+      "Same sound as G, but written as F with two sharps."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "F then F double sharp, which sounds the same as G."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u2-l01.guided-1",
+      "templateId": "t.g4.double-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A double flat lowers a note by how many semitones?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "double-as-single",
+            "reason": "That is what a single flat does. A double sign is two single signs together."
+          },
+          "3": {
+            "category": "double-as-single",
+            "reason": "A double sign is worth exactly two semitones: two single signs, one semitone each."
+          },
+          "4": {
+            "category": "double-as-single",
+            "reason": "Four semitones is a whole major third. A double sign is worth just two semitones."
+          }
+        }
+      },
+      "hints": [
+        "A double sign moves a note two semitones.",
+        "A double flat is two flats together."
+      ],
+      "feedback": {
+        "correct": "Yes: two semitones.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note.",
+          "double-as-single": "A double sharp or double flat moves a note by two semitones, twice as far as a single sign.",
+          "sign-direction": "Sharps raise a note and flats lower it; the double signs do the same twice over.",
+          "double-ignored": "The double sign changes the sound by two semitones: it cannot be ignored.",
+          "not-two-semitones": "Count exactly two semitones from the plain note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.guided-2",
+      "templateId": "t.g4.double-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This note has a double sharp or a double flat in front of it. Name it, including its sign.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ax4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble clef stave with one semibreve in the 2nd space, with a double sharp sign in front of it."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Ax4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Name the letter, then apply the sign.",
+        "Name the letter of the line or space first. The sign in front of it changes the note: a double sharp."
+      ],
+      "feedback": {
+        "correct": "Right: the letter, then the sign.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.guided-3",
+      "templateId": "t.g4.double-cancel",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A note has been written with a double flat. Later in the same bar the same note must be plain again, with no sharp or flat at all. Which sign is written before it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "natural",
+            "label": "♮ (natural)"
+          },
+          {
+            "id": "sharp",
+            "label": "♯ (sharp)"
+          },
+          {
+            "id": "flat",
+            "label": "♭ (flat)"
+          },
+          {
+            "id": "double-sharp",
+            "label": "𝄪 (double sharp)"
+          }
+        ],
+        "correctOptionIds": [
+          "natural"
+        ],
+        "diagnoses": {
+          "sharp": {
+            "category": "cancel-wrong-sign",
+            "reason": "A flat would leave the note altered. To make it plain, cancel the alteration with a natural sign."
+          },
+          "flat": {
+            "category": "cancel-wrong-sign",
+            "reason": "A flat would lower the note. To make it plain, cancel the alteration with a natural sign."
+          },
+          "double-sharp": {
+            "category": "cancel-wrong-sign",
+            "reason": "That is another double sign, which alters the note again. A natural sign cancels the alteration."
+          }
+        }
+      },
+      "hints": [
+        "An accidental lasts to the barline; a natural sign cancels it.",
+        "A natural sign cancels any earlier sharp, flat, double sharp or double flat on that note."
+      ],
+      "feedback": {
+        "correct": "Yes: a natural sign cancels the double sign.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note.",
+          "cancel-wrong-sign": "A natural sign cancels a double sharp or double flat.",
+          "double-forgotten": "An accidental lasts to the end of the bar on its own line or space.",
+          "double-carried-over": "An accidental lasts only to the barline; then the key signature applies again."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u2-l01.ind-1",
+      "templateId": "t.g4.double-name",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This note has a double sharp or a double flat in front of it. Name it, including its sign.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Cb5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble clef stave with one semibreve in the 3rd space, with a flat sign in front of it."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Cb5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Name the letter, then apply the sign.",
+        "Name the letter of the line or space first. The sign in front of it changes the note: a flat."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.ind-2",
+      "templateId": "t.g4.double-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write B𝄪 in the bass clef. You may use up to 2 ledger lines. Any B𝄪 that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "bass",
+        "target": {
+          "step": "B",
+          "alter": 2,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "Bx1",
+          "Bx2",
+          "Bx3"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Place the letter first, then add the sign.",
+        "First put the note on its line or space for the letter B. Then add the sign: 𝄪 for a double sharp."
+      ],
+      "feedback": {
+        "correct": "Correct position.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.ind-3",
+      "templateId": "t.g4.double-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these notes sounds the same as G𝄪?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A#",
+            "label": "A♯"
+          },
+          {
+            "id": "G#",
+            "label": "G♯"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          }
+        ],
+        "correctOptionIds": [
+          "A"
+        ],
+        "diagnoses": {
+          "G#": {
+            "category": "double-as-single",
+            "reason": "G♯ is only one semitone from G. The double sign moves two."
+          },
+          "G": {
+            "category": "double-ignored",
+            "reason": "G is the plain note: the double sign has to be counted."
+          },
+          "A#": {
+            "category": "not-two-semitones",
+            "reason": "Count two semitones up from G: this note is one semitone too far."
+          }
+        }
+      },
+      "hints": [
+        "A double sign moves a note two semitones.",
+        "Find G on the keyboard, then move two keys' distance (two semitones) up."
+      ],
+      "feedback": {
+        "correct": "Correct sound.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note.",
+          "double-as-single": "A double sharp or double flat moves a note by two semitones, twice as far as a single sign.",
+          "sign-direction": "Sharps raise a note and flats lower it; the double signs do the same twice over.",
+          "double-ignored": "The double sign changes the sound by two semitones: it cannot be ignored.",
+          "not-two-semitones": "Count exactly two semitones from the plain note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.ind-4",
+      "templateId": "t.g4.double-accidental",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The first bar contains a double sharp or double flat. What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Gbb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Gbb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass clef, key signature: 3 sharps, 4/4. Bar 1: a note in the 4th space with a double flat sign, a note in the space just above the stave, a note on the 5th line, a note in the 4th space (marked *).",
+        "key": "A major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Gbb3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "𝄪 raises by two semitones.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Correct: the double sign lasts to the barline.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.ind-5",
+      "templateId": "t.g4.double-cancel",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The first note has a double accidental. What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Gbb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Gbb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass clef, key signature: 2 flats, 4/4. Bar 1: a note in the 4th space with a double flat sign, a note on the 4th line, a note on the 5th line, a note in the 4th space (marked *).",
+        "key": "Bb major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Gx",
+            "label": "G𝄪"
+          },
+          {
+            "id": "G#",
+            "label": "G♯"
+          },
+          {
+            "id": "Gbb",
+            "label": "G𝄫"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          }
+        ],
+        "correctOptionIds": [
+          "Gbb"
+        ],
+        "diagnoses": {
+          "Gx": {
+            "category": "double-forgotten",
+            "reason": "An accidental lasts until the end of the bar, on the same line or space. The first note's sign still applies here."
+          },
+          "G#": {
+            "category": "double-forgotten",
+            "reason": "An accidental lasts until the end of the bar, on the same line or space. The first note's sign still applies here."
+          },
+          "G": {
+            "category": "double-forgotten",
+            "reason": "An accidental lasts until the end of the bar, on the same line or space. The first note's sign still applies here."
+          }
+        }
+      },
+      "hints": [
+        "An accidental lasts to the barline; a natural sign cancels it.",
+        "An accidental affects every later note on the same line or space until the barline. After the barline the key signature rules again."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note.",
+          "cancel-wrong-sign": "A natural sign cancels a double sharp or double flat.",
+          "double-forgotten": "An accidental lasts to the end of the bar on its own line or space.",
+          "double-carried-over": "An accidental lasts only to the barline; then the key signature applies again."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.g4-u2-l01.ind-6",
+      "templateId": "t.g4.double-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write G𝄫 in the treble clef. You may use up to 2 ledger lines. Any G𝄫 that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "G",
+          "alter": -2,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "Gbb3",
+          "Gbb4",
+          "Gbb5"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Place the letter first, then add the sign.",
+        "First put the note on its line or space for the letter G. Then add the sign: 𝄫 for a double flat."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    }
+  ],
+  "recap": [
+    "The double sharp raises a note two semitones; the double flat lowers it two.",
+    "A double sign lasts to the end of the bar; a natural sign cancels it.",
+    "Spelling still matters: F𝄪 sounds like G but is written as F."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.double-name",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.double-write",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.double-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.accidentals.double"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s05"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.08"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 8 and First Steps Grade 4 section 5 (p. 83, read in the PDF) for the signs and what they do. The book does not cover cancelling; the cancellation material here is original. OPEN_QUESTIONS Q9: only the unambiguous convention is asked (a natural sign gives a natural note). The older natural-plus-sharp way of reducing a double sharp to a single one is mentioned once in the tip and never asked; a teacher must confirm which convention to teach."
+  }
+}

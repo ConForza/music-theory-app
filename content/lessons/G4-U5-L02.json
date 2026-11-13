@@ -1,0 +1,682 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U5-L02",
+  "lessonId": "G4-U5-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Know the four families of the orchestra, their main instruments, their clefs and which play highest and lowest.",
+    "successCriteria": [
+      "I know the strings, woodwind, brass and percussion.",
+      "I know the usual clef of each instrument.",
+      "I know which instrument of a family plays the highest and the lowest notes."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The orchestra has four groups of instruments: strings, woodwind, brass and percussion. The standard strings are the violin, viola, cello and double bass. The standard woodwind are the flute, oboe, clarinet and bassoon. The standard brass are the trumpet, horn, trombone and tuba."
+    },
+    {
+      "kind": "text",
+      "text": "Within each family the instruments are listed from the one that can play the highest notes to the one that can play the lowest: violin to double bass, flute to bassoon, trumpet to tuba. Smaller instruments play higher."
+    },
+    {
+      "kind": "text",
+      "text": "Each instrument has a clef it normally uses; others may be used if the music goes very high or low. The violin, flute, oboe, clarinet, trumpet and horn normally read the treble clef. The cello, bassoon, trombone, double bass and tuba normally read the bass clef. The viola normally reads the alto clef."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "An alto stave with middle C, G and E: a few notes for the viola."
+      },
+      "caption": "The viola reads the alto clef."
+    },
+    {
+      "kind": "text",
+      "text": "The percussion family includes the timpani (kettle drums), the side drum, the bass drum and the cymbals. Of these, only the timpani produce notes of definite pitch; they are tuned to particular notes, often the tonic and the dominant of the key."
+    },
+    {
+      "kind": "tip",
+      "text": "Four families: strings, woodwind, brass, percussion. Treble clef for the high instruments, bass clef for the low ones, alto clef for the viola. Only the timpani have definite pitch."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "A3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "An alto stave with A, middle C and E."
+    },
+    "steps": [
+      "This music is written in the alto clef.",
+      "The only instrument that normally reads the alto clef is the viola.",
+      "The viola is a string instrument."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Music in the alto clef, for the viola."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u5-l02.guided-1",
+      "templateId": "t.g4.instruments",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "To which family of the orchestra does the side drum belong?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "strings",
+            "label": "Strings"
+          },
+          {
+            "id": "woodwind",
+            "label": "Woodwind"
+          },
+          {
+            "id": "brass",
+            "label": "Brass"
+          },
+          {
+            "id": "percussion",
+            "label": "Percussion"
+          }
+        ],
+        "correctOptionIds": [
+          "percussion"
+        ],
+        "diagnoses": {
+          "strings": {
+            "category": "wrong-category",
+            "reason": "The side drum belongs to the percussion family: timpani, side drum, bass drum, cymbals."
+          },
+          "woodwind": {
+            "category": "wrong-category",
+            "reason": "The side drum belongs to the percussion family: timpani, side drum, bass drum, cymbals."
+          },
+          "brass": {
+            "category": "wrong-category",
+            "reason": "The side drum belongs to the percussion family: timpani, side drum, bass drum, cymbals."
+          }
+        }
+      },
+      "hints": [
+        "Strings, woodwind, brass or percussion?",
+        "The four families are strings, woodwind, brass and percussion."
+      ],
+      "feedback": {
+        "correct": "Yes: that is its family.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.guided-2",
+      "templateId": "t.g4.instruments",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which clef does the tuba normally use?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "treble",
+            "label": "Treble clef"
+          },
+          {
+            "id": "bass",
+            "label": "Bass clef"
+          },
+          {
+            "id": "alto",
+            "label": "Alto clef"
+          }
+        ],
+        "correctOptionIds": [
+          "bass"
+        ],
+        "diagnoses": {
+          "treble": {
+            "category": "wrong-category",
+            "reason": "High instruments normally read the treble clef and low ones the bass clef. The tuba normally reads the bass clef."
+          },
+          "alto": {
+            "category": "wrong-category",
+            "reason": "High instruments normally read the treble clef and low ones the bass clef. The tuba normally reads the bass clef."
+          }
+        }
+      },
+      "hints": [
+        "Strings, woodwind, brass or percussion?",
+        "Treble clef for the higher instruments, bass clef for the lower ones, and one string instrument has its own clef."
+      ],
+      "feedback": {
+        "correct": "Yes: its normal clef.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.guided-3",
+      "templateId": "t.g4.instrument-range",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which instrument of the brass family (horn, trombone, trumpet, tuba) can play the lowest notes?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "trombone",
+            "label": "Trombone"
+          },
+          {
+            "id": "tuba",
+            "label": "Tuba"
+          },
+          {
+            "id": "horn",
+            "label": "Horn"
+          },
+          {
+            "id": "trumpet",
+            "label": "Trumpet"
+          }
+        ],
+        "correctOptionIds": [
+          "tuba"
+        ],
+        "diagnoses": {
+          "trumpet": {
+            "category": "wrong-category",
+            "reason": "The tuba can play lower notes than the trumpet."
+          },
+          "horn": {
+            "category": "wrong-category",
+            "reason": "The tuba can play lower notes than the horn."
+          },
+          "trombone": {
+            "category": "wrong-category",
+            "reason": "The tuba can play lower notes than the trombone."
+          }
+        }
+      },
+      "hints": [
+        "The list of each family runs from highest to lowest.",
+        "From highest to lowest the instruments of a family are usually listed in order of size: the smaller instrument plays higher."
+      ],
+      "feedback": {
+        "correct": "Yes: smaller instruments play higher.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u5-l02.ind-1",
+      "templateId": "t.g4.instruments",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "To which family of the orchestra does the viola belong?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "strings",
+            "label": "Strings"
+          },
+          {
+            "id": "woodwind",
+            "label": "Woodwind"
+          },
+          {
+            "id": "brass",
+            "label": "Brass"
+          },
+          {
+            "id": "percussion",
+            "label": "Percussion"
+          }
+        ],
+        "correctOptionIds": [
+          "strings"
+        ],
+        "diagnoses": {
+          "woodwind": {
+            "category": "wrong-category",
+            "reason": "The viola belongs to the string family: violin, viola, cello, double bass."
+          },
+          "brass": {
+            "category": "wrong-category",
+            "reason": "The viola belongs to the string family: violin, viola, cello, double bass."
+          },
+          "percussion": {
+            "category": "wrong-category",
+            "reason": "The viola belongs to the string family: violin, viola, cello, double bass."
+          }
+        }
+      },
+      "hints": [
+        "Strings, woodwind, brass or percussion?",
+        "The four families are strings, woodwind, brass and percussion."
+      ],
+      "feedback": {
+        "correct": "Correct family.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.ind-2",
+      "templateId": "t.g4.instrument-range",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which instrument of the woodwind family (bassoon, clarinet, flute, oboe) can play the lowest notes?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "flute",
+            "label": "Flute"
+          },
+          {
+            "id": "clarinet",
+            "label": "Clarinet"
+          },
+          {
+            "id": "bassoon",
+            "label": "Bassoon"
+          },
+          {
+            "id": "oboe",
+            "label": "Oboe"
+          }
+        ],
+        "correctOptionIds": [
+          "bassoon"
+        ],
+        "diagnoses": {
+          "flute": {
+            "category": "wrong-category",
+            "reason": "The bassoon can play lower notes than the flute."
+          },
+          "oboe": {
+            "category": "wrong-category",
+            "reason": "The bassoon can play lower notes than the oboe."
+          },
+          "clarinet": {
+            "category": "wrong-category",
+            "reason": "The bassoon can play lower notes than the clarinet."
+          }
+        }
+      },
+      "hints": [
+        "The list of each family runs from highest to lowest.",
+        "From highest to lowest the instruments of a family are usually listed in order of size: the smaller instrument plays higher."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.ind-3",
+      "templateId": "t.g4.instruments",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which clef does the viola normally use?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "treble",
+            "label": "Treble clef"
+          },
+          {
+            "id": "bass",
+            "label": "Bass clef"
+          },
+          {
+            "id": "alto",
+            "label": "Alto clef"
+          }
+        ],
+        "correctOptionIds": [
+          "alto"
+        ],
+        "diagnoses": {
+          "treble": {
+            "category": "wrong-category",
+            "reason": "Only the viola, among the standard orchestral instruments, normally reads the alto clef."
+          },
+          "bass": {
+            "category": "wrong-category",
+            "reason": "Only the viola, among the standard orchestral instruments, normally reads the alto clef."
+          }
+        }
+      },
+      "hints": [
+        "Strings, woodwind, brass or percussion?",
+        "Treble clef for the higher instruments, bass clef for the lower ones, and one string instrument has its own clef."
+      ],
+      "feedback": {
+        "correct": "Correct clef.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.ind-4",
+      "templateId": "t.g4.instrument-range",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which instrument of the string family (cello, double bass, viola, violin) can play the highest notes?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "cello",
+            "label": "Cello"
+          },
+          {
+            "id": "double-bass",
+            "label": "Double bass"
+          },
+          {
+            "id": "viola",
+            "label": "Viola"
+          },
+          {
+            "id": "violin",
+            "label": "Violin"
+          }
+        ],
+        "correctOptionIds": [
+          "violin"
+        ],
+        "diagnoses": {
+          "viola": {
+            "category": "wrong-category",
+            "reason": "The violin can play higher notes than the viola."
+          },
+          "cello": {
+            "category": "wrong-category",
+            "reason": "The violin can play higher notes than the cello."
+          },
+          "double-bass": {
+            "category": "wrong-category",
+            "reason": "The violin can play higher notes than the double bass."
+          }
+        }
+      },
+      "hints": [
+        "The list of each family runs from highest to lowest.",
+        "From highest to lowest the instruments of a family are usually listed in order of size: the smaller instrument plays higher."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.ind-5",
+      "templateId": "t.g4.instruments",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these instruments belongs to the string family?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "trumpet",
+            "label": "Trumpet"
+          },
+          {
+            "id": "bassoon",
+            "label": "Bassoon"
+          },
+          {
+            "id": "cymbals",
+            "label": "Cymbals"
+          },
+          {
+            "id": "cello",
+            "label": "Cello"
+          }
+        ],
+        "correctOptionIds": [
+          "cello"
+        ],
+        "diagnoses": {
+          "cymbals": {
+            "category": "wrong-category",
+            "reason": "The cymbals belongs to the percussion family, not the string family."
+          },
+          "trumpet": {
+            "category": "wrong-category",
+            "reason": "The trumpet belongs to the brass family, not the string family."
+          },
+          "bassoon": {
+            "category": "wrong-category",
+            "reason": "The bassoon belongs to the woodwind family, not the string family."
+          }
+        }
+      },
+      "hints": [
+        "Strings, woodwind, brass or percussion?",
+        "Think about how each instrument makes its sound: bowing strings, blowing across or into a reed, buzzing lips, or striking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l02.ind-6",
+      "templateId": "t.g4.instrument-range",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which instrument of the string family (cello, double bass, viola, violin) can play the lowest notes?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "double-bass",
+            "label": "Double bass"
+          },
+          {
+            "id": "cello",
+            "label": "Cello"
+          },
+          {
+            "id": "viola",
+            "label": "Viola"
+          },
+          {
+            "id": "violin",
+            "label": "Violin"
+          }
+        ],
+        "correctOptionIds": [
+          "double-bass"
+        ],
+        "diagnoses": {
+          "violin": {
+            "category": "wrong-category",
+            "reason": "The double bass can play lower notes than the violin."
+          },
+          "viola": {
+            "category": "wrong-category",
+            "reason": "The double bass can play lower notes than the viola."
+          },
+          "cello": {
+            "category": "wrong-category",
+            "reason": "The double bass can play lower notes than the cello."
+          }
+        }
+      },
+      "hints": [
+        "The list of each family runs from highest to lowest.",
+        "From highest to lowest the instruments of a family are usually listed in order of size: the smaller instrument plays higher."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Strings, woodwind, brass and percussion are the four families.",
+    "Each family runs from its highest instrument to its lowest.",
+    "Viola: alto clef. Only the timpani have definite pitch."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.instruments",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.instrument-range",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.instruments",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.instruments.orchestra"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.18"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 18 and First Steps Grade 4 section 15 (p. 102, read in the PDF): the four groups, the standard instruments of each, highest-to-lowest order, normal clefs and the pitched timpani. The book underlines the clefs an instrument ALWAYS uses; the underlining could not be read reliably from the scan, so the course says 'normally' everywhere (TEACHER TO CONFIRM). Transposing instruments are Grade 5 and are never asked."
+  }
+}

@@ -854,7 +854,7 @@
         "c.intervals.any-diatonic",
         "c.intervals.augmented-diminished"
       ],
-      "promptPattern": "Name this interval (number and quality).",
+      "promptPattern": "Key and scale form named: name the interval between two notes of one scale (quality and number).",
       "scope": {
         "keys": [
           "C major",
@@ -892,17 +892,21 @@
           "harmonic",
           "melodic"
         ],
-        "maxLedgerLines": 2
+        "maxLedgerLines": 2,
+        "doubleAccidentals": true,
+        "accidentals": true,
+        "keySignatures": true
       },
       "acceptance": {
         "spellingSensitive": true,
         "octaveSensitive": false,
         "enharmonicPolicy": "reject",
         "multipleValidAnswers": false,
-        "alternativesNote": "Exactly one answer is correct."
+        "alternativesNote": "Exactly one answer is correct. In minor keys the prompt names the scale form that decides the answer."
       },
       "ambiguityChecks": [
-        "Both notes belong to one Grade 4 scale; within an octave."
+        "Exactly one quality and number is accepted.",
+        "In a minor key the prompt names the scale form that decides the answer."
       ],
       "hints": [
         "Use the major scale on the lower note."
@@ -1408,7 +1412,7 @@
       "conceptIds": [
         "c.rhythm.breve"
       ],
-      "promptPattern": "Write a bar of 4/2 using one note or one rest.",
+      "promptPattern": "Write a bar of 4/2 using one note or one rest, or one note for tied notes that fill the bar.",
       "scope": {
         "noteValues": [
           "breve",
@@ -1418,7 +1422,9 @@
         "timeSignatures": [
           "4/2"
         ],
-        "rests": true
+        "rests": true,
+        "maxDots": 0,
+        "ties": true
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -2695,87 +2701,6 @@
       }
     },
     {
-      "id": "t.g4.interval-name",
-      "version": 1,
-      "familyId": "fam.interval",
-      "grade": 4,
-      "mode": "identify",
-      "outcomeIds": [
-        "abrsm2020.g4.13"
-      ],
-      "conceptIds": [
-        "c.intervals.any-diatonic",
-        "c.intervals.augmented-diminished"
-      ],
-      "promptPattern": "Name the interval between two notes of one scale.",
-      "scope": {
-        "keys": [
-          "C major",
-          "G major",
-          "D major",
-          "F major",
-          "A major",
-          "Bb major",
-          "Eb major",
-          "A minor",
-          "E minor",
-          "D minor",
-          "E major",
-          "Ab major",
-          "B minor",
-          "F# minor",
-          "C# minor",
-          "G minor",
-          "C minor",
-          "F minor",
-          "B major",
-          "Db major",
-          "G# minor",
-          "Bb minor"
-        ],
-        "clefs": [
-          "treble",
-          "bass",
-          "alto"
-        ],
-        "intervalQuality": "number-and-quality",
-        "intervalLowerNote": "any-diatonic",
-        "compoundIntervals": false,
-        "minorForms": [
-          "harmonic",
-          "melodic"
-        ],
-        "maxLedgerLines": 2,
-        "doubleAccidentals": true,
-        "accidentals": true,
-        "keySignatures": true
-      },
-      "acceptance": {
-        "spellingSensitive": true,
-        "octaveSensitive": false,
-        "enharmonicPolicy": "not-applicable",
-        "multipleValidAnswers": false,
-        "alternativesNote": "Exactly one answer is correct. In minor keys the prompt names the scale form."
-      },
-      "ambiguityChecks": [
-        "Exactly one quality and number is accepted.",
-        "In a minor key the prompt names the scale form that decides the answer."
-      ],
-      "hints": [
-        "Count the letters, then the quality."
-      ],
-      "extraMistakeCategories": [],
-      "difficulty": 4,
-      "qa": {
-        "status": "draft",
-        "reviewRequirements": [
-          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
-          "Golden answer fixtures pass in the Brief 03 engine."
-        ],
-        "reviewedBy": null
-      }
-    },
-    {
       "id": "t.g4.interval-write",
       "version": 1,
       "familyId": "fam.interval",
@@ -3816,6 +3741,192 @@
         }
       ],
       "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g4.chord-passage-pick",
+      "version": 1,
+      "familyId": "fam.triad-chord",
+      "grade": 4,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g4.15"
+      ],
+      "conceptIds": [
+        "c.chords.identify-in-passage"
+      ],
+      "promptPattern": "In a passage, which marked chord is the subdominant or the dominant?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "B major",
+          "Db major",
+          "G# minor",
+          "Bb minor"
+        ],
+        "chordDegrees": [
+          "I",
+          "IV",
+          "V"
+        ],
+        "inversions": [
+          "a"
+        ],
+        "doubleAccidentals": true,
+        "accidentals": true,
+        "keySignatures": true,
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one chord has the function asked."
+      },
+      "ambiguityChecks": [
+        "Exactly one chord in the passage has the function asked.",
+        "Spacing and doubling never change the answer."
+      ],
+      "hints": [
+        "Find the root of each chord."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "wrong-degree",
+          "description": "A chord from the wrong degree.",
+          "feedback": "Chord I is on degree 1, IV on 4 and V on 5."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g4.instrument-range",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 4,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g4.18"
+      ],
+      "conceptIds": [
+        "c.instruments.orchestra"
+      ],
+      "promptPattern": "Which instrument of a family plays the highest or lowest notes? Which percussion is pitched?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option differs from it in one named way and carries its own explanation."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The list of each family runs from highest to lowest."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "wrong-category",
+          "description": "An item placed in the wrong group.",
+          "feedback": "Check which group each belongs to."
+        }
+      ],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g4.technique-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 4,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g4.18"
+      ],
+      "conceptIds": [
+        "c.instruments.techniques"
+      ],
+      "promptPattern": "Which direction asks for this way of playing?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; every wrong option differs from it in one named way and carries its own explanation."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option differs from it in one named way.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Some directions come in opposite pairs."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "wrong-category",
+          "description": "An item placed in the wrong group.",
+          "feedback": "Check which group each belongs to."
+        },
+        {
+          "id": "confused-similar-term",
+          "description": "A similar term confused.",
+          "feedback": "Compare the meanings carefully."
+        },
+        {
+          "id": "opposite-meaning",
+          "description": "The opposite meaning chosen.",
+          "feedback": "Some directions come in opposite pairs."
+        }
+      ],
+      "difficulty": 3,
       "qa": {
         "status": "draft",
         "reviewRequirements": [

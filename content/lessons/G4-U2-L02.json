@@ -1,0 +1,548 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U2-L02",
+  "lessonId": "G4-U2-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand enharmonic equivalents: notes that sound the same but are spelt differently.",
+    "successCriteria": [
+      "I know every key of the keyboard has more than one name.",
+      "I can give an enharmonic equivalent with a letter name I am told to use.",
+      "I know the spelling must follow the letter names, not just the sound."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "On a keyboard, every key can be called by more than one name. The black key between C and D is C♯ and also D♭. Notes that sound the same but are spelt differently are called enharmonic equivalents."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C♯"
+              },
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D♭"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A keyboard picture with one black key lit: C sharp and D flat are the same key."
+      },
+      "caption": "C♯ and D♭ are the same key: enharmonic equivalents."
+    },
+    {
+      "kind": "text",
+      "text": "The double signs add more names. The key we call C can also be B♯ or D𝄫. The key D can be C𝄪 or E𝄫. In fact, every key except A♭/G♯ can have three names: one with a sharp or double sharp, the natural-letter name and one with a flat or double flat."
+    },
+    {
+      "kind": "text",
+      "text": "To find an enharmonic equivalent with a given letter name, find the key, then ask which sign that letter needs to reach it. To write the key C♯ using the letter D: the plain D key is one semitone higher than C♯, so D needs a flat to come down to it: D♭."
+    },
+    {
+      "kind": "text",
+      "text": "Which spelling is right depends on the music. A scale uses each letter name once, and a chord is built in thirds from letter to letter, so you cannot swap a spelling just because it sounds the same. Later you will meet F𝄪 in a scale where G would be wrong."
+    },
+    {
+      "kind": "tip",
+      "text": "Enharmonic = same sound, different name. Find the key on the keyboard, then name it with the letter you are asked for."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff-and-keyboard",
+    "music": {
+      "presentation": "keyboard",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "C"
+            },
+            {
+              "kind": "note",
+              "pitch": "B#3",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "B♯"
+            },
+            {
+              "kind": "note",
+              "pitch": "Dbb4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "D𝄫"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A keyboard picture with the key C lit: its names are C, B sharp and D double flat."
+    },
+    "steps": [
+      "Play C: a white key.",
+      "B sharp is the same key: B raised a semitone.",
+      "D double flat is the same key again: D lowered two semitones."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "C, B sharp and D double flat are three names for one key."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u2-l02.guided-1",
+      "templateId": "t.g4.enharmonic-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these notes sounds the same as B♯?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Db",
+            "label": "D♭"
+          },
+          {
+            "id": "Cb",
+            "label": "C♭"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ],
+        "diagnoses": {
+          "Db": {
+            "category": "not-same-pitch",
+            "reason": "D♭ is a different sound: it is a semitone away from B♯."
+          },
+          "Cb": {
+            "category": "not-same-pitch",
+            "reason": "C♭ is a different sound: it is a semitone away from B♯."
+          },
+          "B": {
+            "category": "not-same-pitch",
+            "reason": "B is a different sound: it is a semitone away from B♯."
+          }
+        }
+      },
+      "hints": [
+        "Enharmonic notes are the same key on the keyboard.",
+        "Enharmonic notes are the same key on the keyboard with different names."
+      ],
+      "feedback": {
+        "correct": "Yes: the same key on the keyboard.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "Enharmonic notes are the same key on the keyboard."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.guided-2",
+      "templateId": "t.g4.enharmonic-letter",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write a note that sounds the same as C♭ but uses the letter name B. Give its letter name and sign.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "Cb4",
+        "relation": "different-spelling",
+        "accepted": [
+          "B3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Find the key on the keyboard, then name it with the letter asked for.",
+        "Find C♭ on the keyboard, then ask which sign B needs to reach the same key."
+      ],
+      "feedback": {
+        "correct": "Right: the same sound with the letter you were told to use.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.guided-3",
+      "templateId": "t.g4.enharmonic-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Exactly one of these pairs of notes sounds the same (the notes are enharmonic equivalents). Which pair is it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "C-Dbb",
+            "label": "C and D𝄫"
+          },
+          {
+            "id": "Cb-Dbb",
+            "label": "C♭ and D𝄫"
+          },
+          {
+            "id": "Gbb-Ex",
+            "label": "G𝄫 and E𝄪"
+          },
+          {
+            "id": "Fb-E#",
+            "label": "F♭ and E♯"
+          }
+        ],
+        "correctOptionIds": [
+          "C-Dbb"
+        ],
+        "diagnoses": {
+          "Cb-Dbb": {
+            "category": "not-same-pitch",
+            "reason": "C♭ and D𝄫 are different keys on the keyboard, one semitone apart."
+          },
+          "Gbb-Ex": {
+            "category": "not-same-pitch",
+            "reason": "G𝄫 and E𝄪 are different keys on the keyboard, one semitone apart."
+          },
+          "Fb-E#": {
+            "category": "not-same-pitch",
+            "reason": "F♭ and E♯ are different keys on the keyboard, one semitone apart."
+          }
+        }
+      },
+      "hints": [
+        "Enharmonic notes are the same key on the keyboard.",
+        "Enharmonic notes are the same key on the keyboard. Check each pair on the keyboard in your mind."
+      ],
+      "feedback": {
+        "correct": "Yes: those two are one key.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "Enharmonic notes are the same key on the keyboard."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u2-l02.ind-1",
+      "templateId": "t.g4.enharmonic-letter",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write a note that sounds the same as C♯ but uses the letter name D. Give its letter name and sign.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "C#4",
+        "relation": "different-spelling",
+        "accepted": [
+          "Db4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Find the key on the keyboard, then name it with the letter asked for.",
+        "Find C♯ on the keyboard, then ask which sign D needs to reach the same key."
+      ],
+      "feedback": {
+        "correct": "Correct spelling.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.ind-2",
+      "templateId": "t.g4.enharmonic-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these notes sounds the same as A?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A#",
+            "label": "A♯"
+          },
+          {
+            "id": "G#",
+            "label": "G♯"
+          },
+          {
+            "id": "Bb",
+            "label": "B♭"
+          },
+          {
+            "id": "Bbb",
+            "label": "B𝄫"
+          }
+        ],
+        "correctOptionIds": [
+          "Bbb"
+        ],
+        "diagnoses": {
+          "Bb": {
+            "category": "not-same-pitch",
+            "reason": "B♭ is a different sound: it is a semitone away from A."
+          },
+          "G#": {
+            "category": "not-same-pitch",
+            "reason": "G♯ is a different sound: it is a semitone away from A."
+          },
+          "A#": {
+            "category": "not-same-pitch",
+            "reason": "A♯ is a different sound: it is a semitone away from A."
+          }
+        }
+      },
+      "hints": [
+        "Enharmonic notes are the same key on the keyboard.",
+        "Enharmonic notes are the same key on the keyboard with different names."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "Enharmonic notes are the same key on the keyboard."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.ind-3",
+      "templateId": "t.g4.enharmonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Give a note that sounds the same as E but has a different letter name.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "E4",
+        "relation": "different-spelling",
+        "accepted": [
+          "Dx4",
+          "Fb4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Find it on the keyboard first.",
+        "Find the key on the keyboard, then name it from the white key on either side."
+      ],
+      "feedback": {
+        "correct": "Correct: a different letter name for the same sound.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.ind-4",
+      "templateId": "t.g4.enharmonic-letter",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write a note that sounds the same as D𝄫 but uses the letter name C. Give its letter name and sign.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "Dbb4",
+        "relation": "different-spelling",
+        "accepted": [
+          "C4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Find the key on the keyboard, then name it with the letter asked for.",
+        "Find D𝄫 on the keyboard, then ask which sign C needs to reach the same key."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.ind-5",
+      "templateId": "t.g4.enharmonic-pick",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Exactly one of these pairs of notes sounds the same (the notes are enharmonic equivalents). Which pair is it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Ex-Abb",
+            "label": "E𝄪 and A𝄫"
+          },
+          {
+            "id": "Gb-E#",
+            "label": "G♭ and E♯"
+          },
+          {
+            "id": "Ebb-Fbb",
+            "label": "E𝄫 and F𝄫"
+          },
+          {
+            "id": "C-B#",
+            "label": "C and B♯"
+          }
+        ],
+        "correctOptionIds": [
+          "C-B#"
+        ],
+        "diagnoses": {
+          "Ex-Abb": {
+            "category": "not-same-pitch",
+            "reason": "E𝄪 and A𝄫 are different keys on the keyboard, one semitone apart."
+          },
+          "Gb-E#": {
+            "category": "not-same-pitch",
+            "reason": "G♭ and E♯ are different keys on the keyboard, one semitone apart."
+          },
+          "Ebb-Fbb": {
+            "category": "not-same-pitch",
+            "reason": "E𝄫 and F𝄫 are different keys on the keyboard, one semitone apart."
+          }
+        }
+      },
+      "hints": [
+        "Enharmonic notes are the same key on the keyboard.",
+        "Enharmonic notes are the same key on the keyboard. Check each pair on the keyboard in your mind."
+      ],
+      "feedback": {
+        "correct": "Correct pair.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "Enharmonic notes are the same key on the keyboard."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    },
+    {
+      "id": "i.g4-u2-l02.ind-6",
+      "templateId": "t.g4.enharmonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Give a note that sounds the same as C𝄫 but has a different letter name.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "Cbb4",
+        "relation": "different-spelling",
+        "accepted": [
+          "A#3",
+          "Bb3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Find it on the keyboard first.",
+        "Find the key on the keyboard, then name it from the white key on either side."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    }
+  ],
+  "recap": [
+    "Enharmonic equivalents sound the same but have different letter names.",
+    "Every key can have up to three names.",
+    "Spelling must follow the letter names of the scale or chord, not just the sound."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.enharmonic-letter",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.enharmonic-pick",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.enharmonic",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.accidentals.enharmonic"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s05"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.09"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 9 and First Steps Grade 4 section 5 (p. 84: 'notes which sound the same but have different names are enharmonic equivalents'; the book's three names for each key). The book's list of names is not reproduced; the keyboard picture uses a different example."
+  }
+}

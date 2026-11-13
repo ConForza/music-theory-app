@@ -1,0 +1,710 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U4-L01",
+  "lessonId": "G4-U4-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name and write the interval between any two notes of a scale.",
+    "successCriteria": [
+      "I count the letter names for the number of an interval.",
+      "I find the quality by comparing the upper note with the major scale of the lower note.",
+      "I know the interval's name does not depend on the key signature."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In Grade 3 the lower note of every interval was the tonic. In Grade 4 the lower note can be any note of a scale: you may be asked for the interval between any two notes of one scale you have studied, as long as they are no more than an octave apart. The number is counted exactly as before: count every letter name from the lower note to the upper, counting both ends."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble stave in G major with a minor third: B, then D above it.",
+        "key": "G major"
+      },
+      "caption": "G major: B up to D is a minor 3rd."
+    },
+    {
+      "kind": "text",
+      "text": "To find the quality, imagine the lower note as a tonic and compare the upper note with its major scale. The major scale of B has D♯, but the note here is D♮, a semitone lower. A major 3rd made a semitone smaller is a minor 3rd. In G major, then, B to D is a minor 3rd, even though B is only the 3rd degree. The name of an interval depends only on the two written notes, not on the key signature. A perfect 5th stays a perfect 5th wherever it is written; the same two notes with a different key signature are still the same interval."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble stave in E flat major with a major third: A flat, then C above it.",
+        "key": "Eb major"
+      },
+      "caption": "E♭ major: A♭ up to C is a major 3rd (A♭ major has C)."
+    },
+    {
+      "kind": "text",
+      "text": "In a minor key the 6th and 7th degrees change with the scale form, so a question that uses them will always name the form, for example 'harmonic minor' or 'melodic minor, going up'. The harmonic minor has the raised 7th and the natural 6th."
+    },
+    {
+      "kind": "tip",
+      "text": "Number: count the letters, both ends. Quality: compare the upper note with the major scale of the lower note. The key signature does not change the interval's name."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A treble stave with a major sixth: G, then E above it, in C major.",
+      "key": "C major"
+    },
+    "steps": [
+      "Count the letters: G A B C D E is six.",
+      "Is E in the major scale of G? G major has F♯ but E: yes. So major.",
+      "The interval is a major 6th."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "G up to E in C major: a major 6th."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u4-l01.guided-1",
+      "templateId": "t.g4.interval-diatonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Key: F♯ minor (melodic minor, coming down). Name the interval between these two notes: quality and number.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "a bass clef stave with two semibreves: on the 1st ledger line above the stave with a sharp sign, then in the space above the 1st ledger line above the stave.",
+        "key": "F# minor"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "F# minor",
+        "minorForm": "melodic-descending",
+        "lower": "C#4",
+        "upper": "D4",
+        "acceptedIntervals": [
+          "m2"
+        ]
+      },
+      "hints": [
+        "Use the major scale on the lower note.",
+        "Count every letter name from the lower note to the upper note, both included, for the number. Then compare the upper note with the major scale of the lower note."
+      ],
+      "feedback": {
+        "correct": "Yes: number first, then quality.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.guided-2",
+      "templateId": "t.g4.interval-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Key: E minor (harmonic minor). Write the note that is a major 2nd above the note shown.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "a bass clef stave in E minor with one semibreve on the 5th line.",
+        "key": "E minor"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "E minor",
+        "minorForm": "harmonic",
+        "lower": "A3",
+        "target": "M2",
+        "direction": "up",
+        "acceptedPitches": [
+          "B3"
+        ]
+      },
+      "hints": [
+        "Count the letters first.",
+        "Count 2 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+      ],
+      "feedback": {
+        "correct": "Right: counted up or down to the right note.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.guided-3",
+      "templateId": "t.g4.interval-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In F major the notes B♭ and F make a perfect 5th. The same two written notes appear in a piece in another key. What is the interval between them there?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "P5",
+            "label": "Still a perfect 5th"
+          },
+          {
+            "id": "key",
+            "label": "It depends on the new key signature"
+          },
+          {
+            "id": "major",
+            "label": "It becomes a major interval"
+          }
+        ],
+        "correctOptionIds": [
+          "P5"
+        ],
+        "diagnoses": {
+          "key": {
+            "category": "quality-from-wrong-key",
+            "reason": "The name of an interval depends only on the two written notes (their letters and signs), not on the key signature they are written in."
+          },
+          "major": {
+            "category": "quality-from-wrong-key",
+            "reason": "Changing the key signature does not change the notes themselves, so the interval keeps its name."
+          }
+        }
+      },
+      "hints": [
+        "Larger by a semitone: minor to major, major or perfect to augmented.",
+        "Name the interval from the notes as written: letters for the number, semitones for the quality."
+      ],
+      "feedback": {
+        "correct": "Yes: the key signature does not change the name.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "The name of an interval depends only on the two written notes.",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "A semitone larger moves up the list diminished, minor, major, augmented; a semitone smaller moves down it."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u4-l01.ind-1",
+      "templateId": "t.g4.interval-diatonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Key: B major. Name the interval between these two notes: quality and number.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "an alto clef stave with two semibreves: in the 2nd space, then in the 4th space with a sharp sign.",
+        "key": "B major"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "B major",
+        "lower": "B3",
+        "upper": "F#4",
+        "acceptedIntervals": [
+          "P5"
+        ]
+      },
+      "hints": [
+        "Use the major scale on the lower note.",
+        "Count every letter name from the lower note to the upper note, both included, for the number. Then compare the upper note with the major scale of the lower note."
+      ],
+      "feedback": {
+        "correct": "Correct interval.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.ind-2",
+      "templateId": "t.g4.interval-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Key: D major. Write the note that is a perfect 4th above the note shown.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "an alto clef stave in D major with one semibreve on the 2nd line.",
+        "key": "D major"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "D major",
+        "lower": "A3",
+        "target": "P4",
+        "direction": "up",
+        "acceptedPitches": [
+          "D4"
+        ]
+      },
+      "hints": [
+        "Count the letters first.",
+        "Count 4 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.ind-3",
+      "templateId": "t.g4.interval-diatonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Key: G minor (harmonic minor). Name the interval between these two notes: quality and number.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "a bass clef stave with two semibreves: in the space above the 1st ledger line above the stave, then in the space above the 2nd ledger line above the stave with a sharp sign.",
+        "key": "G minor"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "G minor",
+        "minorForm": "harmonic",
+        "lower": "D4",
+        "upper": "F#4",
+        "acceptedIntervals": [
+          "M3"
+        ]
+      },
+      "hints": [
+        "Use the major scale on the lower note.",
+        "Count every letter name from the lower note to the upper note, both included, for the number. Then compare the upper note with the major scale of the lower note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.ind-4",
+      "templateId": "t.g4.interval-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Key: D major. Write the note that is a perfect octave above the note shown.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "a bass clef stave in D major with one semibreve on the 3rd line.",
+        "key": "D major"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "D major",
+        "lower": "D3",
+        "target": "P8",
+        "direction": "up",
+        "acceptedPitches": [
+          "D4"
+        ]
+      },
+      "hints": [
+        "Count the letters first.",
+        "Count 8 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.ind-5",
+      "templateId": "t.g4.interval-diatonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Key: B minor (melodic minor, coming down). Name the interval between these two notes: quality and number.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "a treble clef stave with two semibreves: on the 1st ledger line below the stave with a sharp sign, then in the space just below the stave.",
+        "key": "B minor"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "key": "B minor",
+        "minorForm": "melodic-descending",
+        "lower": "C#4",
+        "upper": "D4",
+        "acceptedIntervals": [
+          "m2"
+        ]
+      },
+      "hints": [
+        "Use the major scale on the lower note.",
+        "Count every letter name from the lower note to the upper note, both included, for the number. Then compare the upper note with the major scale of the lower note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l01.ind-6",
+      "templateId": "t.g4.interval-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Key: B minor (harmonic minor). Write the note that is a major 3rd above the note shown.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "an alto clef stave in B minor with one semibreve in the 1st space.",
+        "key": "B minor"
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "build",
+        "key": "B minor",
+        "minorForm": "harmonic",
+        "lower": "G3",
+        "target": "M3",
+        "direction": "up",
+        "acceptedPitches": [
+          "B3"
+        ]
+      },
+      "hints": [
+        "Count the letters first.",
+        "Count 3 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    }
+  ],
+  "recap": [
+    "Count both ends for the number of an interval between any two notes.",
+    "Compare the upper note with the major scale of the lower note for the quality.",
+    "In minor keys the question names the scale form; the key signature never changes an interval's name."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.interval-diatonic",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.interval-write",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.interval-diatonic",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.intervals.any-diatonic"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s09"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.13"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 13 and First Steps Grade 4 section 9 (pp. 88-90, read in the PDF): lower note no longer the tonic; any two notes of a scale; the name does not change with the key signature. OPEN_QUESTIONS Q27: the prompt names the minor scale form (harmonic / melodic going up / melodic coming down) whenever the form matters, which also resolves the Grade 3 handoff note about the 6th and 7th of minor keys. Questions use only major, minor and perfect intervals in this lesson (augmented and diminished come next); the picker pins this."
+  }
+}

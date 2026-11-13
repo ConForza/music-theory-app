@@ -1,0 +1,655 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U5-L03",
+  "lessonId": "G4-U5-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand pizzicato, arco, mutes and the other directions for string and brass players.",
+    "successCriteria": [
+      "I know pizzicato means plucked and arco means with the bow.",
+      "I know con sordino means with the mute and senza sordino without.",
+      "I know what sul G, sul ponticello and the bowing signs ask."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Composers give string and brass players instructions about how to make the sound. Pizzicato (pizz.) tells string players to pluck the strings with their fingers instead of using the bow. Arco means 'with the bow' and cancels pizzicato."
+    },
+    {
+      "kind": "text",
+      "text": "String and brass instruments may use a mute, a device that softens the sound. Con sordino (con sord.) means 'with the mute'; senza sordino (senza sord.) means 'without the mute'."
+    },
+    {
+      "kind": "text",
+      "text": "String players are also told where to play. Sul G means 'on the G string'. Sul ponticello means 'near the bridge', which gives a thin, glassy sound. Bowing signs show the direction of the bow: the sign shaped like a square bracket open at the bottom (⊓) is a down-bow, and the V shape (∨) is an up-bow. A slur over or under two or more notes means they are played in a single bow-stroke, either up or down."
+    },
+    {
+      "kind": "tip",
+      "text": "pizz. = plucked, arco = bowed. con sord. = muted, senza sord. = unmuted. sul G = on the G string; sul ponticello = near the bridge. ⊓ down-bow, ∨ up-bow."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A treble stave with three notes for a violin: G, B and D."
+    },
+    "steps": [
+      "If it is marked pizz., the violinist plucks them.",
+      "If it is then marked arco, the bow returns.",
+      "If it is marked con sord., a mute softens the sound."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Three notes for a violin, to be plucked or played with the bow."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u5-l03.guided-1",
+      "templateId": "t.g4.technique-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does the sign ⊓ (down-bow) mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "down-bow",
+            "label": "Play this note with a down-bow"
+          },
+          {
+            "id": "sul-g",
+            "label": "Play on the G string"
+          },
+          {
+            "id": "senza-sordino",
+            "label": "Play without the mute"
+          },
+          {
+            "id": "up-bow",
+            "label": "Play this note with an up-bow"
+          }
+        ],
+        "correctOptionIds": [
+          "down-bow"
+        ],
+        "diagnoses": {
+          "senza-sordino": {
+            "category": "confused-similar-term",
+            "reason": "senza sordino (senza sord.) means to play without the mute."
+          },
+          "up-bow": {
+            "category": "opposite-meaning",
+            "reason": "That is the opposite: the sign ∨ (up-bow) means to play this note with an up-bow."
+          },
+          "sul-g": {
+            "category": "confused-similar-term",
+            "reason": "sul G means to play on the G string."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "This is an instruction to string players."
+      ],
+      "feedback": {
+        "correct": "Yes: that is the meaning.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.guided-2",
+      "templateId": "t.g4.technique-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A player is told to play with the mute on. Which direction is written in the music?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "down-bow",
+            "label": "the sign ⊓ (down-bow)"
+          },
+          {
+            "id": "con-sordino",
+            "label": "con sordino (con sord.)"
+          },
+          {
+            "id": "arco",
+            "label": "arco"
+          },
+          {
+            "id": "senza-sordino",
+            "label": "senza sordino (senza sord.)"
+          }
+        ],
+        "correctOptionIds": [
+          "con-sordino"
+        ],
+        "diagnoses": {
+          "senza-sordino": {
+            "category": "opposite-meaning",
+            "reason": "senza sordino (senza sord.) is the opposite instruction."
+          },
+          "arco": {
+            "category": "confused-similar-term",
+            "reason": "arco means to play with the bow (usually to cancel pizzicato)."
+          },
+          "down-bow": {
+            "category": "confused-similar-term",
+            "reason": "the sign ⊓ (down-bow) means to play this note with a down-bow."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "Read the meanings carefully: some of these come in opposite pairs."
+      ],
+      "feedback": {
+        "correct": "Right: the direction for that way of playing.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.guided-3",
+      "templateId": "t.g4.technique-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does sul G mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "up-bow",
+            "label": "Play this note with an up-bow"
+          },
+          {
+            "id": "con-sordino",
+            "label": "Play with the mute on"
+          },
+          {
+            "id": "sul-ponticello",
+            "label": "Play with the bow near the bridge"
+          },
+          {
+            "id": "sul-g",
+            "label": "Play on the G string"
+          }
+        ],
+        "correctOptionIds": [
+          "sul-g"
+        ],
+        "diagnoses": {
+          "sul-ponticello": {
+            "category": "confused-similar-term",
+            "reason": "sul ponticello means to play with the bow near the bridge."
+          },
+          "con-sordino": {
+            "category": "confused-similar-term",
+            "reason": "con sordino (con sord.) means to play with the mute on."
+          },
+          "up-bow": {
+            "category": "confused-similar-term",
+            "reason": "the sign ∨ (up-bow) means to play this note with an up-bow."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "This is an instruction to string players."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u5-l03.ind-1",
+      "templateId": "t.g4.technique-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does sul G mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sul-g",
+            "label": "Play on the G string"
+          },
+          {
+            "id": "arco",
+            "label": "Play with the bow (usually to cancel pizzicato)"
+          },
+          {
+            "id": "up-bow",
+            "label": "Play this note with an up-bow"
+          },
+          {
+            "id": "pizzicato",
+            "label": "Pluck the strings with the fingers instead of using the bow"
+          }
+        ],
+        "correctOptionIds": [
+          "sul-g"
+        ],
+        "diagnoses": {
+          "arco": {
+            "category": "confused-similar-term",
+            "reason": "arco means to play with the bow (usually to cancel pizzicato)."
+          },
+          "pizzicato": {
+            "category": "confused-similar-term",
+            "reason": "pizzicato (pizz.) means to pluck the strings with the fingers instead of using the bow."
+          },
+          "up-bow": {
+            "category": "confused-similar-term",
+            "reason": "the sign ∨ (up-bow) means to play this note with an up-bow."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "This is an instruction to string players."
+      ],
+      "feedback": {
+        "correct": "Correct meaning.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.ind-2",
+      "templateId": "t.g4.technique-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A player is told to play without the mute. Which direction is written in the music?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "up-bow",
+            "label": "the sign ∨ (up-bow)"
+          },
+          {
+            "id": "con-sordino",
+            "label": "con sordino (con sord.)"
+          },
+          {
+            "id": "senza-sordino",
+            "label": "senza sordino (senza sord.)"
+          },
+          {
+            "id": "arco",
+            "label": "arco"
+          }
+        ],
+        "correctOptionIds": [
+          "senza-sordino"
+        ],
+        "diagnoses": {
+          "arco": {
+            "category": "confused-similar-term",
+            "reason": "arco means to play with the bow (usually to cancel pizzicato)."
+          },
+          "up-bow": {
+            "category": "confused-similar-term",
+            "reason": "the sign ∨ (up-bow) means to play this note with an up-bow."
+          },
+          "con-sordino": {
+            "category": "opposite-meaning",
+            "reason": "con sordino (con sord.) is the opposite instruction."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "Read the meanings carefully: some of these come in opposite pairs."
+      ],
+      "feedback": {
+        "correct": "Correct direction.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.ind-3",
+      "templateId": "t.g4.technique-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does arco mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pizzicato",
+            "label": "Pluck the strings with the fingers instead of using the bow"
+          },
+          {
+            "id": "up-bow",
+            "label": "Play this note with an up-bow"
+          },
+          {
+            "id": "arco",
+            "label": "Play with the bow (usually to cancel pizzicato)"
+          },
+          {
+            "id": "con-sordino",
+            "label": "Play with the mute on"
+          }
+        ],
+        "correctOptionIds": [
+          "arco"
+        ],
+        "diagnoses": {
+          "pizzicato": {
+            "category": "opposite-meaning",
+            "reason": "That is the opposite: pizzicato (pizz.) means to pluck the strings with the fingers instead of using the bow."
+          },
+          "up-bow": {
+            "category": "confused-similar-term",
+            "reason": "the sign ∨ (up-bow) means to play this note with an up-bow."
+          },
+          "con-sordino": {
+            "category": "confused-similar-term",
+            "reason": "con sordino (con sord.) means to play with the mute on."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "This is an instruction to string players."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.ind-4",
+      "templateId": "t.g4.technique-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A player is told to play this note with a down-bow. Which direction is written in the music?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sul-g",
+            "label": "sul G"
+          },
+          {
+            "id": "up-bow",
+            "label": "the sign ∨ (up-bow)"
+          },
+          {
+            "id": "down-bow",
+            "label": "the sign ⊓ (down-bow)"
+          },
+          {
+            "id": "pizzicato",
+            "label": "pizzicato (pizz.)"
+          }
+        ],
+        "correctOptionIds": [
+          "down-bow"
+        ],
+        "diagnoses": {
+          "up-bow": {
+            "category": "opposite-meaning",
+            "reason": "the sign ∨ (up-bow) is the opposite instruction."
+          },
+          "sul-g": {
+            "category": "confused-similar-term",
+            "reason": "sul G means to play on the G string."
+          },
+          "pizzicato": {
+            "category": "confused-similar-term",
+            "reason": "pizzicato (pizz.) means to pluck the strings with the fingers instead of using the bow."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "Read the meanings carefully: some of these come in opposite pairs."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.ind-5",
+      "templateId": "t.g4.technique-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does the sign ⊓ (down-bow) mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "con-sordino",
+            "label": "Play with the mute on"
+          },
+          {
+            "id": "pizzicato",
+            "label": "Pluck the strings with the fingers instead of using the bow"
+          },
+          {
+            "id": "up-bow",
+            "label": "Play this note with an up-bow"
+          },
+          {
+            "id": "down-bow",
+            "label": "Play this note with a down-bow"
+          }
+        ],
+        "correctOptionIds": [
+          "down-bow"
+        ],
+        "diagnoses": {
+          "con-sordino": {
+            "category": "confused-similar-term",
+            "reason": "con sordino (con sord.) means to play with the mute on."
+          },
+          "pizzicato": {
+            "category": "confused-similar-term",
+            "reason": "pizzicato (pizz.) means to pluck the strings with the fingers instead of using the bow."
+          },
+          "up-bow": {
+            "category": "opposite-meaning",
+            "reason": "That is the opposite: the sign ∨ (up-bow) means to play this note with an up-bow."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "This is an instruction to string players."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l03.ind-6",
+      "templateId": "t.g4.technique-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A player is told to play this note with an up-bow. Which direction is written in the music?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sul-ponticello",
+            "label": "sul ponticello"
+          },
+          {
+            "id": "senza-sordino",
+            "label": "senza sordino (senza sord.)"
+          },
+          {
+            "id": "down-bow",
+            "label": "the sign ⊓ (down-bow)"
+          },
+          {
+            "id": "up-bow",
+            "label": "the sign ∨ (up-bow)"
+          }
+        ],
+        "correctOptionIds": [
+          "up-bow"
+        ],
+        "diagnoses": {
+          "down-bow": {
+            "category": "opposite-meaning",
+            "reason": "the sign ⊓ (down-bow) is the opposite instruction."
+          },
+          "senza-sordino": {
+            "category": "confused-similar-term",
+            "reason": "senza sordino (senza sord.) means to play without the mute."
+          },
+          "sul-ponticello": {
+            "category": "confused-similar-term",
+            "reason": "sul ponticello means to play with the bow near the bridge."
+          }
+        }
+      },
+      "hints": [
+        "Some directions come in opposite pairs.",
+        "Read the meanings carefully: some of these come in opposite pairs."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "Some directions come in opposite pairs.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Pizzicato is plucked; arco is with the bow.",
+    "Con sordino is muted; senza sordino is unmuted.",
+    "Sul G is on the G string; sul ponticello is near the bridge; ⊓ is down-bow and ∨ up-bow."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.technique-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.technique-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.technique-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.instruments.techniques"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.18",
+      "abrsm2020.g4.16"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcomes 18 and 16 and First Steps Grade 4 section 15 (p. 102): mutes, pizzicato, arco, bowing signs, slurs as bow-strokes, sul G, sul ponticello. The bowing signs are described in words next to the characters because fonts differ; a teacher should check how the signs appear on learners' screens."
+  }
+}

@@ -130,7 +130,7 @@ export const intervalFacts4: Gen = (c): any => {
     if (!quals.includes(result.quality) || result.number !== num) return null;
     return {
       prompt: `Start with a ${startWord}. ${moveText} What is the interval now?`,
-      answer: { kind: "choice", options: quals.map((q) => ({ id: q, label: cap(ivWord(q, num)) })), correctOptionIds: [result.quality], diagnoses: Object.fromEntries(quals.filter((q) => q !== result.quality).map((q) => [q, diag("augmented-diminished-swap", q === startQuality ? "The interval has changed: one note moved by a semitone, and that changes the size, so the quality changes too." : q === "A" || q === "d" ? `Check the direction: making the interval a semitone ${move === "top-up" || move === "bottom-down" ? "larger" : "smaller"} moves it ${move === "top-up" || move === "bottom-down" ? "up" : "down"} the list diminished – minor – major – augmented (perfect intervals sit between diminished and augmented).` : "Which way did the interval move? One semitone larger or smaller changes the quality by one step.")])) as Diagnoses },
+      answer: { kind: "choice", options: quals.map((q) => ({ id: `${q}${num}`, label: cap(ivWord(q, num)) })), correctOptionIds: [`${result.quality}${num}`], diagnoses: Object.fromEntries(quals.filter((q) => q !== result.quality).map((q) => [`${q}${num}`, diag("augmented-diminished-swap", q === startQuality ? "The interval has changed: one note moved by a semitone, and that changes the size, so the quality changes too." : q === "A" || q === "d" ? `Check the direction: making the interval a semitone ${move === "top-up" || move === "bottom-down" ? "larger" : "smaller"} moves it ${move === "top-up" || move === "bottom-down" ? "up" : "down"} the list diminished – minor – major – augmented (perfect intervals sit between diminished and augmented).` : "Which way did the interval move? One semitone larger or smaller changes the quality by one step.")])) as Diagnoses },
       hints: ["Larger by a semitone: minor → major, major or perfect → augmented. Smaller by a semitone: major → minor, minor or perfect → diminished."],
     };
   }
@@ -148,7 +148,7 @@ export const intervalFacts4: Gen = (c): any => {
     const others = c.rng.shuffle(pairs.filter(([i, j]) => Math.abs(j - i - (rightPair[1] - rightPair[0])) === 1)).slice(0, 3 - decoys.length);
     const all = [rightPair, ...decoys, ...others].slice(0, 4);
     if (all.length < 4) return null;
-    const id = ([i, j]: [number, number]) => `${i + 1}-${j + 1}`;
+    const id = ([i, j]: [number, number]) => `${i === rightPair[0] && j === rightPair[1] ? code : "x"}${i === rightPair[0] && j === rightPair[1] ? "" : "0"}@${i + 1}-${j + 1}`;
     const label = ([i, j]: [number, number]) => `From the ${ORD(i + 1)} degree up to the ${ORD(j + 1)}`;
     const word = major ? "major scale" : "harmonic minor scale";
     return {
@@ -162,7 +162,7 @@ export const intervalFacts4: Gen = (c): any => {
   if (!p) return null;
   return {
     prompt: `In ${kw(p.key)}${FORM_TEXT[p.form]} the notes ${pc(p.lower)} and ${pc(p.upper)} make ${aOrAnWord(QW[p.iv.quality]!)} ${ivWord(p.iv.quality, p.iv.number)}. The same two written notes appear in a piece in another key. What is the interval between them there?`,
-    answer: { kind: "choice", options: [{ id: "same", label: `Still ${aOrAnWord(QW[p.iv.quality]!)} ${ivWord(p.iv.quality, p.iv.number)}` }, { id: "key", label: "It depends on the new key signature" }, { id: "major", label: "It becomes a major interval" }], correctOptionIds: ["same"], diagnoses: { key: diag("quality-from-wrong-key", "The name of an interval depends only on the two written notes (their letters and signs), not on the key signature they are written in."), major: diag("quality-from-wrong-key", "Changing the key signature does not change the notes themselves, so the interval keeps its name.") } },
+    answer: { kind: "choice", options: [{ id: ivCode(p.iv), label: `Still ${aOrAnWord(QW[p.iv.quality]!)} ${ivWord(p.iv.quality, p.iv.number)}` }, { id: "key", label: "It depends on the new key signature" }, { id: "major", label: "It becomes a major interval" }], correctOptionIds: [ivCode(p.iv)], diagnoses: { key: diag("quality-from-wrong-key", "The name of an interval depends only on the two written notes (their letters and signs), not on the key signature they are written in."), major: diag("quality-from-wrong-key", "Changing the key signature does not change the notes themselves, so the interval keeps its name.") } },
     hints: ["Name the interval from the notes as written: letters for the number, semitones for the quality."],
   };
 };
@@ -310,7 +310,7 @@ export const chordRoot: Gen = (c): any => {
   const pcsAll = triadPcs(keyText, roman);
   const score = toScore(keyText, ps, null, null, `A chord of ${ps.length} notes in ${keyText}, written on the treble and bass staves.`);
   return {
-    prompt: `This chord is made from the notes of one triad in ${kw(keyText)}. Answer both questions.`,
+    prompt: `This chord is made from the notes of one triad in ${kw(keyText)}. Answer both questions: is it in root position, and which note is its root?`,
     score,
     answer: {
       kind: "composite",
@@ -396,3 +396,21 @@ export const chordInPassage4: Gen = (c): any => {
 void ledgerLines;
 void diatonicNumber;
 void optsOf;
+
+
+/** t.g4.chord-passage-pick: in a four-chord passage, which marked chord is the subdominant or the dominant? Exactly one chord has the function asked. */
+export const chordPassagePick: Gen = (c): any => {
+  const p = chordPassage(c, 4);
+  if (!p) return null;
+  const key = parseKey(p.keyText);
+  const labels = ["A", "B", "C", "D"];
+  const ask = c.rng.pick(["IV", "V"].filter((r) => romansIn(c).includes(r)));
+  const hits = p.romans.map((r, i) => (r === ask ? i : -1)).filter((i) => i >= 0);
+  if (hits.length !== 1) return null;
+  return {
+    prompt: `This passage is in ${kw(p.keyText)}${key.mode === "minor" ? " (harmonic minor)" : ""}. Every chord is in root position. Which marked chord in the passage is the ${ROMAN_WORD[ask]} chord (${ask})?`,
+    score: p.score,
+    answer: { kind: "choice", options: labels.map((l) => ({ id: l, label: `Chord ${l}` })), correctOptionIds: [labels[hits[0]!]!], diagnoses: Object.fromEntries(labels.map((l, i) => [l, i === hits[0] ? null : diag("wrong-degree", `Chord ${l} is the ${ROMAN_WORD[p.romans[i]!]} chord (${p.romans[i]}): its root is degree ${music.romanDegree(p.romans[i]!)} of the scale. The ${ROMAN_WORD[ask]} chord is built on degree ${music.romanDegree(ask)}.`)]).filter(([, v]) => v)) as Diagnoses },
+    hints: [`Find the root (the lowest note) of each chord and say which degree of ${kw(p.keyText)} it is. The ${ROMAN_WORD[ask]} is degree ${music.romanDegree(ask)}.`],
+  };
+};

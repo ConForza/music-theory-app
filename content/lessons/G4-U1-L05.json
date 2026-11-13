@@ -1,0 +1,1171 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U1-L05",
+  "lessonId": "G4-U1-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read and write duplets in compound time and compare them with triplets in simple time.",
+    "successCriteria": [
+      "I know a duplet puts two equal notes in the time of three.",
+      "I can say how long a duplet lasts.",
+      "I can write the same sound with two dotted notes instead."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In compound time every beat divides into three equal notes. A duplet changes that for one beat: it is a group of two equal notes played in the time normally taken by three. It is shown by a figure 2 above or below the notes."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 6/8: a duplet of two quavers, then a dotted crotchet.",
+        "questionAlternative": "Bar 1: a duplet of quaver, quaver, dotted crotchet.",
+        "timeSignature": "6/8"
+      },
+      "caption": "6/8: the duplet fills the first beat; the dotted crotchet fills the second."
+    },
+    {
+      "kind": "text",
+      "text": "A duplet of two quavers lasts as long as a dotted crotchet: three quavers' worth of time. Another way to write exactly the same sound is to put a dot after each of the two notes: two dotted quavers. Each is one and a half quavers long, and together they last three."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "The same bar of 6/8 written with two dotted quavers instead of a duplet.",
+        "questionAlternative": "Bar 1: dotted quaver, dotted quaver, dotted crotchet.",
+        "timeSignature": "6/8"
+      },
+      "caption": "Two dotted quavers sound the same as a duplet of quavers."
+    },
+    {
+      "kind": "text",
+      "text": "A duplet is the mirror of the triplet you met in Grade 2. A triplet puts three notes where two would fit, in simple time; a duplet puts two notes where three would fit, in compound time. Duplets can also be of other values: in 6/4 a duplet of two crotchets fills a dotted-minim beat."
+    },
+    {
+      "kind": "tip",
+      "text": "Duplet: 2 notes in the time of 3, in compound time. Triplet: 3 notes in the time of 2, in simple time. A duplet fills one beat."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "tuplet",
+              "actual": 2,
+              "normal": 3,
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                }
+              ]
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 1
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A duplet of two quavers and a dotted crotchet.",
+      "questionAlternative": "Bar 1: a duplet of quaver, quaver, dotted crotchet.",
+      "timeSignature": "6/8"
+    },
+    "steps": [
+      "Tap two even notes in the time of one dotted-crotchet beat: the duplet.",
+      "Now tap the dotted crotchet in the same time.",
+      "The duplet divides the beat into two instead of three."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A duplet of two quavers fills one beat of 6/8, like a dotted crotchet."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u1-l05.guided-1",
+      "templateId": "t.g4.duplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In 12/8, a duplet of two quavers fills one beat. Which single note lasts the same time as the whole duplet?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A duplet of two quavers marked 2.",
+        "questionAlternative": "Bar 1: a duplet of quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "Crotchet"
+          },
+          {
+            "id": "dotted-quaver",
+            "label": "Dotted quaver"
+          },
+          {
+            "id": "dotted-crotchet",
+            "label": "Dotted crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "Quaver"
+          }
+        ],
+        "correctOptionIds": [
+          "dotted-crotchet"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "The duplet is two notes, so it lasts longer than one quaver: it fills a whole beat."
+          },
+          "dotted-quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "A dotted quaver is one and a half quavers. The duplet fills three quavers' worth of time: one whole beat."
+          },
+          "crotchet": {
+            "category": "tuplet-total-wrong",
+            "reason": "Two quavers written normally would last quavers×2. The duplet squeezes them into the time of three."
+          }
+        }
+      },
+      "hints": [
+        "A duplet puts two notes where three would fit.",
+        "A duplet of two quavers is played in the time normally taken by three: one whole beat of 12/8."
+      ],
+      "feedback": {
+        "correct": "Yes: the duplet fills one whole beat.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.guided-2",
+      "templateId": "t.g4.duplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In 6/8 one beat is written as a duplet of two quavers. How else can exactly the same sound be written, without the figure 2?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A duplet of two quavers, then a dotted crotchet.",
+        "questionAlternative": "Bar 1: a duplet of quaver, quaver, dotted crotchet.",
+        "timeSignature": "6/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "two-dotted-crotchet",
+            "label": "Two dotted crotchets"
+          },
+          {
+            "id": "two-quaver",
+            "label": "Two ordinary quavers"
+          },
+          {
+            "id": "two-dotted-quaver",
+            "label": "Two dotted quavers"
+          },
+          {
+            "id": "quaver-and-dotted-quaver",
+            "label": "A quaver and a dotted quaver"
+          }
+        ],
+        "correctOptionIds": [
+          "two-dotted-quaver"
+        ],
+        "diagnoses": {
+          "two-quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "Two ordinary quavers fill only two thirds of a beat. Each note of a duplet must be one and a half times as long: add a dot to each."
+          },
+          "two-dotted-crotchet": {
+            "category": "written-value-wrong",
+            "reason": "Those notes are too long: two of them would fill four quavers, more than a beat."
+          },
+          "quaver-and-dotted-quaver": {
+            "category": "written-value-wrong",
+            "reason": "A quaver and a dotted quaver are not equal notes, and a duplet is two equal notes."
+          }
+        }
+      },
+      "hints": [
+        "A duplet puts two notes where three would fit.",
+        "A duplet fills the beat with two equal notes. Each is half a beat: that is one and a half quavers."
+      ],
+      "feedback": {
+        "correct": "Right: two dotted notes.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.guided-3",
+      "templateId": "t.g4.duplet",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write one bar of 12/8 that uses a duplet (two notes in the time of three) somewhere in the bar.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "add-tuplet",
+        "timeSignature": "12/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "tuplet",
+                  "actual": 2,
+                  "normal": 3,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "quaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "quaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ]
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Two in the time of three.",
+        "A duplet of two quavers fills one dotted-crotchet beat."
+      ],
+      "feedback": {
+        "correct": "Right: you placed the duplet on one beat.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u1-l05.ind-1",
+      "templateId": "t.g4.duplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In 9/8, a duplet of two quavers fills one beat. Which single note lasts the same time as the whole duplet?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A duplet of two quavers marked 2.",
+        "questionAlternative": "Bar 1: a duplet of quaver, quaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dotted-quaver",
+            "label": "Dotted quaver"
+          },
+          {
+            "id": "quaver",
+            "label": "Quaver"
+          },
+          {
+            "id": "dotted-crotchet",
+            "label": "Dotted crotchet"
+          },
+          {
+            "id": "crotchet",
+            "label": "Crotchet"
+          }
+        ],
+        "correctOptionIds": [
+          "dotted-crotchet"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "The duplet is two notes, so it lasts longer than one quaver: it fills a whole beat."
+          },
+          "dotted-quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "A dotted quaver is one and a half quavers. The duplet fills three quavers' worth of time: one whole beat."
+          },
+          "crotchet": {
+            "category": "tuplet-total-wrong",
+            "reason": "Two quavers written normally would last quavers×2. The duplet squeezes them into the time of three."
+          }
+        }
+      },
+      "hints": [
+        "A duplet puts two notes where three would fit.",
+        "A duplet of two quavers is played in the time normally taken by three: one whole beat of 9/8."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.ind-2",
+      "templateId": "t.g4.duplet-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar of 12/8 uses duplets of two quavers. How many of its four beats are filled by duplets?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a duplet of quaver, quaver, a duplet of quaver, quaver, a duplet of quaver, quaver, dotted crotchet.",
+        "questionAlternative": "Bar 1: a duplet of quaver, quaver, a duplet of quaver, quaver, a duplet of quaver, quaver, dotted crotchet.",
+        "timeSignature": "12/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each duplet group fills exactly one beat. Count the groups marked 2."
+          },
+          "2": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each duplet group fills exactly one beat. Count the groups marked 2."
+          },
+          "4": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each duplet group fills exactly one beat. Count the groups marked 2."
+          }
+        }
+      },
+      "hints": [
+        "One duplet fills exactly one beat of compound time.",
+        "One duplet fills one beat of 12/8: count the groups marked 2."
+      ],
+      "feedback": {
+        "correct": "Correct reading of the bar.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.ind-3",
+      "templateId": "t.g4.duplet",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write one bar of 12/8 that uses a duplet (two notes in the time of three) somewhere in the bar.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "add-tuplet",
+        "timeSignature": "12/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "tuplet",
+                  "actual": 2,
+                  "normal": 3,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "quaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "quaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ]
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Two in the time of three.",
+        "A duplet of two quavers fills one dotted-crotchet beat."
+      ],
+      "feedback": {
+        "correct": "Correct duplet.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.ind-4",
+      "templateId": "t.g4.duplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In 6/4 one beat is written as a duplet of two crotchets. How else can exactly the same sound be written, without the figure 2?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A duplet of two crotchets, then a dotted minim.",
+        "questionAlternative": "Bar 1: a duplet of crotchet, crotchet, dotted minim.",
+        "timeSignature": "6/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "two-dotted-crotchet",
+            "label": "Two dotted crotchets"
+          },
+          {
+            "id": "crotchet-and-dotted-crotchet",
+            "label": "A crotchet and a dotted crotchet"
+          },
+          {
+            "id": "two-crotchet",
+            "label": "Two ordinary crotchets"
+          },
+          {
+            "id": "two-dotted-minim",
+            "label": "Two dotted minims"
+          }
+        ],
+        "correctOptionIds": [
+          "two-dotted-crotchet"
+        ],
+        "diagnoses": {
+          "two-crotchet": {
+            "category": "tuplet-total-wrong",
+            "reason": "Two ordinary crotchets fill only two thirds of a beat. Each note of a duplet must be one and a half times as long: add a dot to each."
+          },
+          "two-dotted-minim": {
+            "category": "written-value-wrong",
+            "reason": "Those notes are too long: two of them would fill four crotchets, more than a beat."
+          },
+          "crotchet-and-dotted-crotchet": {
+            "category": "written-value-wrong",
+            "reason": "A crotchet and a dotted crotchet are not equal notes, and a duplet is two equal notes."
+          }
+        }
+      },
+      "hints": [
+        "A duplet puts two notes where three would fit.",
+        "A duplet fills the beat with two equal notes. Each is half a beat: that is one and a half crotchets."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number.",
+          "simple-compound-confusion": "Count the equal notes in a beat: two means simple time, three means compound time."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.ind-5",
+      "templateId": "t.g4.duplet-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar of 12/8 uses duplets of two quavers. How many of its four beats are filled by duplets?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 2,
+                "normal": 3,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a duplet of quaver, quaver, dotted crotchet, dotted crotchet, a duplet of quaver, quaver.",
+        "questionAlternative": "Bar 1: a duplet of quaver, quaver, dotted crotchet, dotted crotchet, a duplet of quaver, quaver.",
+        "timeSignature": "12/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each duplet group fills exactly one beat. Count the groups marked 2."
+          },
+          "3": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each duplet group fills exactly one beat. Count the groups marked 2."
+          },
+          "4": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each duplet group fills exactly one beat. Count the groups marked 2."
+          }
+        }
+      },
+      "hints": [
+        "One duplet fills exactly one beat of compound time.",
+        "One duplet fills one beat of 12/8: count the groups marked 2."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g4-u1-l05.ind-6",
+      "templateId": "t.g4.duplet",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write one bar of 6/8 that uses a duplet (two notes in the time of three) somewhere in the bar.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "add-tuplet",
+        "timeSignature": "6/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "tuplet",
+                  "actual": 2,
+                  "normal": 3,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "quaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "quaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Two in the time of three.",
+        "A duplet of two quavers fills one dotted-crotchet beat."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "recap": [
+    "A duplet is two equal notes in the time of three, marked 2.",
+    "It fills one beat of compound time, like a dotted note.",
+    "It sounds the same as two notes with a dot after each."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.duplet-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.duplet",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.duplet-read",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.duplets"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s04"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.04"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 4 and First Steps Grade 4 section 4 (p. 82): a duplet is two equal notes in the time normally taken by three; the figure 2; the two-dotted-notes alternative. The book's comparison table (2/4 with triplets, 6/8 with duplets) is not reproduced; the triplet comparison here is verbal. Rhythms with duplets always fill exactly one beat per group."
+  }
+}

@@ -118,16 +118,26 @@ export const breveFacts: Gen = (c): any => {
   };
 };
 
-/** t.g4.breve-bar: write the breve or the breve rest, alone or after a bar of other notes. Exactly one answer is accepted. */
+/** t.g4.breve-bar: write the breve or its rest for a bar of 4/2, or replace tied notes that fill the bar by one note. Exactly one answer is accepted. */
 export const breveBar: Gen = (c): any => {
-  const rest = c.rng.chance(0.5);
-  const answerBar: Ev[] = [rest ? ({ ...r("breve"), wholeBar: true } as Ev) : breveEv()];
-  if (!clean(answerBar, "4/2")) return null;
-  const prompt = rest ? "Write a silent bar of 4/2, using one rest." : "Write a bar of 4/2 using one note.";
+  const mode = c.rng.pick(["note", "rest", "tied-a", "tied-b", "tied-c"] as const);
+  if (mode === "note" || mode === "rest") {
+    const rest = mode === "rest";
+    const answerBar: Ev[] = [rest ? ({ ...r("breve"), wholeBar: true } as Ev) : breveEv()];
+    if (!clean(answerBar, "4/2")) return null;
+    return {
+      prompt: rest ? "Write a silent bar of 4/2, using one rest." : "Write a bar of 4/2 using one note.",
+      answer: { kind: "rhythm", task: "complete-bar", timeSignature: "4/2", given: [], accepted: [[{ events: answerBar }]], acceptAnyRuleCompliant: false },
+      hints: rest ? ["A breve rest is a block hanging from the fourth line of the stave, filling the space between the third and fourth lines."] : ["A bar of 4/2 is exactly two semibreves long. Which single note is that?"],
+    };
+  }
+  const tied: Ev[] = mode === "tied-a" ? [n("semibreve", 0, { tieToNext: true }), n("semibreve")] : mode === "tied-b" ? [n("minim", 0, { tieToNext: true }), n("minim", 0, { tieToNext: true }), n("minim", 0, { tieToNext: true }), n("minim")] : [n("semibreve", 0, { tieToNext: true }), n("minim", 0, { tieToNext: true }), n("minim")];
+  if (!music.equals(music.totalLength(tied as unknown as music.REvent[]), music.barCapacity(parts("4/2")))) return null;
   return {
-    prompt,
-    answer: { kind: "rhythm", task: "complete-bar", timeSignature: "4/2", given: [], accepted: [[{ events: answerBar }]], acceptAnyRuleCompliant: false },
-    hints: rest ? ["A breve rest is a block hanging from the fourth line of the stave, filling the space between the third and fourth lines."] : ["A bar of 4/2 is exactly two semibreves long. Which single note is that?"],
+    prompt: "These tied notes fill one whole bar of 4/2. Write one single note that lasts exactly as long as all of them together.",
+    music: rhythmLine(measures([tied]), { timeSignature: "4/2" }),
+    answer: { kind: "rhythm", task: "equivalent-value", target: [2, 1], accepted: [[{ events: [breveEv()] }]], acceptAnyRuleCompliant: true },
+    hints: ["Add up the tied notes in semibreves: a bar of 4/2 is exactly two semibreves long."],
   };
 };
 

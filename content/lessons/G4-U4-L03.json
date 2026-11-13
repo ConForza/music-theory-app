@@ -1,0 +1,783 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U4-L03",
+  "lessonId": "G4-U4-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Write and recognise the triads on the tonic, subdominant and dominant.",
+    "successCriteria": [
+      "I know a triad is a root, a 3rd and a 5th.",
+      "I know the tonic, subdominant and dominant are chords I, IV and V.",
+      "I know minor keys use the harmonic minor for their triads."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A triad is three notes: a root, the note a 3rd above it, and the note a 5th above it. You can build a triad on any note of a scale. At Grade 4 you need the triads on three notes: the tonic (the 1st degree, chord I), the subdominant (the 4th, chord IV) and the dominant (the 5th, chord V). Together they are the primary triads of a key."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C4"
+                  },
+                  {
+                    "pitch": "E4"
+                  },
+                  {
+                    "pitch": "G4"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "F4"
+                  },
+                  {
+                    "pitch": "A4"
+                  },
+                  {
+                    "pitch": "C5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "B4"
+                  },
+                  {
+                    "pitch": "D5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Three bars of 4/4, each with one chord: C, E and G; then F, A and C; then G, B and D.",
+        "timeSignature": "4/4"
+      },
+      "caption": "C major: tonic (I), subdominant (IV) and dominant (V)."
+    },
+    {
+      "kind": "text",
+      "text": "In a major key all three primary triads are major triads: each has a major 3rd above its root. In a minor key the notes come from the harmonic minor. The tonic and subdominant triads are minor triads (a minor 3rd above the root), but the dominant is a major triad, because the harmonic minor raises the 7th to make the leading note, which is the 3rd of that chord."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C4"
+                  },
+                  {
+                    "pitch": "Eb4"
+                  },
+                  {
+                    "pitch": "G4"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "F4"
+                  },
+                  {
+                    "pitch": "Ab4"
+                  },
+                  {
+                    "pitch": "C5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "B4",
+                    "writtenAccidental": "natural"
+                  },
+                  {
+                    "pitch": "D5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Three bars of 4/4: C minor chords, the tonic C, E flat, G; the subdominant F, A flat, C; the dominant G, B, D.",
+        "timeSignature": "4/4",
+        "key": "C minor"
+      },
+      "caption": "C minor: tonic (i), subdominant (iv) and dominant (V). The B natural is the raised leading note."
+    },
+    {
+      "kind": "text",
+      "text": "Roman numerals are shorthand for the same chords: I, IV and V. In this course you may write the numerals or the words (tonic, subdominant, dominant); capital letters only are accepted, so you will not lose marks for ignoring the small letters used for minor chords."
+    },
+    {
+      "kind": "tip",
+      "text": "Triad = root, 3rd, 5th. I = tonic, IV = subdominant, V = dominant. In minor keys use the harmonic minor: V needs the raised 7th."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "G4"
+                },
+                {
+                  "pitch": "B4"
+                },
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "One bar of 4/4 with the dominant chord of C major: G, B and D.",
+      "timeSignature": "4/4"
+    },
+    "steps": [
+      "The dominant is the 5th degree: G.",
+      "Add the note a 3rd above (B) and a 5th above (D).",
+      "Together they are chord V of C major."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "The dominant triad of C major: G, B, D."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u4-l03.guided-1",
+      "templateId": "t.g4.triad-notes",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which notes make chord V (the dominant triad) of G♯ minor, using the harmonic minor scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D#-Fx-Ax",
+            "label": "D♯ – F𝄪 – A𝄪"
+          },
+          {
+            "id": "G#-B-D#",
+            "label": "G♯ – B – D♯"
+          },
+          {
+            "id": "D#-Fx-A#",
+            "label": "D♯ – F𝄪 – A♯"
+          },
+          {
+            "id": "D#-Fx-A",
+            "label": "D♯ – F𝄪 – A"
+          }
+        ],
+        "correctOptionIds": [
+          "D#-Fx-A#"
+        ],
+        "diagnoses": {
+          "G#-B-D#": {
+            "category": "wrong-degree",
+            "reason": "Those are the notes of chord I, the tonic. Chord V is built on the 5th degree."
+          },
+          "D#-Fx-A": {
+            "category": "wrong-fifth",
+            "reason": "The top note is the 5th above the root: count its distance in letters and semitones."
+          },
+          "D#-Fx-Ax": {
+            "category": "wrong-fifth",
+            "reason": "The top note is the 5th above the root: count its distance in letters and semitones."
+          }
+        }
+      },
+      "hints": [
+        "Root, 3rd and 5th of the degree.",
+        "Chord V is built on degree 5 of the scale: that note, the one two letters above it and the one four letters above it."
+      ],
+      "feedback": {
+        "correct": "Yes: root, 3rd and 5th.",
+        "mistakes": {
+          "wrong-degree": "Chord I is on degree 1, IV on 4 and V on 5.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In a minor key the 3rd of chord V is the raised leading note.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th.",
+          "wrong-third": "Check the middle note: it must belong to the scale of the key (harmonic minor in minor keys).",
+          "wrong-fifth": "Count the fifth above the root in letters and in semitones."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.guided-2",
+      "templateId": "t.g4.primary-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write chord V of E major in the treble clef (root position).",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "E major",
+        "target": {
+          "roman": "V",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "B4",
+            "D#5",
+            "F#5"
+          ]
+        ]
+      },
+      "hints": [
+        "Count up 1-3-5 from the root.",
+        "Chord V is built on degree 5 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Right: the right notes on the right degree.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.guided-3",
+      "templateId": "t.g4.triad-id",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this chord in F minor (harmonic minor): give its Roman numeral (I, IV or V) or say whether it is the tonic, subdominant or dominant.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C4"
+                  },
+                  {
+                    "pitch": "E4",
+                    "writtenAccidental": "natural"
+                  },
+                  {
+                    "pitch": "G4"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble clef stave in F minor with one chord of three notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line.",
+        "key": "F minor"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "F minor",
+        "acceptedChords": [
+          {
+            "roman": "V",
+            "inversion": "a"
+          }
+        ]
+      },
+      "hints": [
+        "The lowest note is the root.",
+        "The lowest note is the root of the chord. Which degree of the scale is it?"
+      ],
+      "feedback": {
+        "correct": "Yes: you found the root and its degree.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u4-l03.ind-1",
+      "templateId": "t.g4.primary-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write chord IV of A♭ major in the treble clef (root position).",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "Ab major",
+        "target": {
+          "roman": "IV",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "Db4",
+            "F4",
+            "Ab4"
+          ]
+        ]
+      },
+      "hints": [
+        "Count up 1-3-5 from the root.",
+        "Chord IV is built on degree 4 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Correct chord.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.ind-2",
+      "templateId": "t.g4.triad-notes",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which notes make chord V (the dominant triad) of B♭ minor, using the harmonic minor scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "F-A-C",
+            "label": "F – A – C"
+          },
+          {
+            "id": "Bb-Db-F",
+            "label": "B♭ – D♭ – F"
+          },
+          {
+            "id": "F-Ab-C",
+            "label": "F – A♭ – C"
+          },
+          {
+            "id": "F-A#-C",
+            "label": "F – A♯ – C"
+          }
+        ],
+        "correctOptionIds": [
+          "F-A-C"
+        ],
+        "diagnoses": {
+          "F-A#-C": {
+            "category": "wrong-third",
+            "reason": "Check the middle note: in this chord it must match the scale of the key (major or harmonic minor), not a semitone higher."
+          },
+          "Bb-Db-F": {
+            "category": "wrong-degree",
+            "reason": "Those are the notes of chord I, the tonic. Chord V is built on the 5th degree."
+          },
+          "F-Ab-C": {
+            "category": "wrong-third",
+            "reason": "Check the middle note: in this chord it must match the scale of the key (major or harmonic minor), not a semitone lower."
+          }
+        }
+      },
+      "hints": [
+        "Root, 3rd and 5th of the degree.",
+        "Chord V is built on degree 5 of the scale: that note, the one two letters above it and the one four letters above it."
+      ],
+      "feedback": {
+        "correct": "Correct notes.",
+        "mistakes": {
+          "wrong-degree": "Chord I is on degree 1, IV on 4 and V on 5.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In a minor key the 3rd of chord V is the raised leading note.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th.",
+          "wrong-third": "Check the middle note: it must belong to the scale of the key (harmonic minor in minor keys).",
+          "wrong-fifth": "Count the fifth above the root in letters and in semitones."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.ind-3",
+      "templateId": "t.g4.triad-id",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this chord in G major: give its Roman numeral (I, IV or V) or say whether it is the tonic, subdominant or dominant.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "D2"
+                  },
+                  {
+                    "pitch": "F#2"
+                  },
+                  {
+                    "pitch": "A2"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass clef stave in G major with one chord of three notes: in the space below the 1st ledger line below the stave; in the space just below the stave with a sharp sign; in the 1st space.",
+        "key": "G major"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "G major",
+        "acceptedChords": [
+          {
+            "roman": "V",
+            "inversion": "a"
+          }
+        ]
+      },
+      "hints": [
+        "The lowest note is the root.",
+        "The lowest note is the root of the chord. Which degree of the scale is it?"
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.ind-4",
+      "templateId": "t.g4.primary-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write chord IV of D♭ major in the treble clef (root position).",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "Db major",
+        "target": {
+          "roman": "IV",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "Gb3",
+            "Bb3",
+            "Db4"
+          ]
+        ]
+      },
+      "hints": [
+        "Count up 1-3-5 from the root.",
+        "Chord IV is built on degree 4 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.ind-5",
+      "templateId": "t.g4.triad-notes",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which notes make chord V (the dominant triad) of E minor, using the harmonic minor scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "B-Dx-F#",
+            "label": "B – D𝄪 – F♯"
+          },
+          {
+            "id": "B-D-F#",
+            "label": "B – D – F♯"
+          },
+          {
+            "id": "E-G-B",
+            "label": "E – G – B"
+          },
+          {
+            "id": "B-D#-F#",
+            "label": "B – D♯ – F♯"
+          }
+        ],
+        "correctOptionIds": [
+          "B-D#-F#"
+        ],
+        "diagnoses": {
+          "E-G-B": {
+            "category": "wrong-degree",
+            "reason": "Those are the notes of chord I, the tonic. Chord V is built on the 5th degree."
+          },
+          "B-Dx-F#": {
+            "category": "wrong-third",
+            "reason": "Check the middle note: in this chord it must match the scale of the key (major or harmonic minor), not a semitone higher."
+          },
+          "B-D-F#": {
+            "category": "wrong-third",
+            "reason": "Check the middle note: in this chord it must match the scale of the key (major or harmonic minor), not a semitone lower."
+          }
+        }
+      },
+      "hints": [
+        "Root, 3rd and 5th of the degree.",
+        "Chord V is built on degree 5 of the scale: that note, the one two letters above it and the one four letters above it."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Chord I is on degree 1, IV on 4 and V on 5.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In a minor key the 3rd of chord V is the raised leading note.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th.",
+          "wrong-third": "Check the middle note: it must belong to the scale of the key (harmonic minor in minor keys).",
+          "wrong-fifth": "Count the fifth above the root in letters and in semitones."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g4-u4-l03.ind-6",
+      "templateId": "t.g4.triad-id",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this chord in A major: give its Roman numeral (I, IV or V) or say whether it is the tonic, subdominant or dominant.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "D4"
+                  },
+                  {
+                    "pitch": "F#4"
+                  },
+                  {
+                    "pitch": "A4"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble clef stave in A major with one chord of three notes: in the space just below the stave; in the 1st space with a sharp sign; in the 2nd space.",
+        "key": "A major"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "A major",
+        "acceptedChords": [
+          {
+            "roman": "IV",
+            "inversion": "a"
+          }
+        ]
+      },
+      "hints": [
+        "The lowest note is the root.",
+        "The lowest note is the root of the chord. Which degree of the scale is it?"
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    }
+  ],
+  "recap": [
+    "A triad is a root, a 3rd and a 5th.",
+    "The tonic, subdominant and dominant are chords I, IV and V: the primary triads.",
+    "In minor keys use the harmonic minor: the dominant has the raised leading note."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.primary-triad",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.triad-notes",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.triad-id",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.chords.primary-triads"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s10"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.14"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 14 and First Steps Grade 4 section 10 (pp. 92-94, read in the PDF): primary triads, major triads in major keys, minor i and iv with major V in minor keys, the harmonic form. The book's extended-roman note (capital letters accepted) is followed. Chord I alone earns no Grade 4 credit (it is Grade 3 knowledge); the credit boundary requires chord IV or V or a naming question."
+  }
+}
