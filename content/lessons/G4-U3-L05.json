@@ -372,15 +372,15 @@
           },
           {
             "id": "w0",
-            "label": "B: F  F♭  D♯  D  C♯  B♯  C♭  A♯  A  G♯  G  F♯  F"
-          },
-          {
-            "id": "w1",
-            "label": "C: F  E  E♭  D  D  C  B  B♭  A  A♭  G  G♭  F"
+            "label": "B: F  E  E♭  D  D♭  C  B  B♭  B𝄫  A♭  G  G♭  F"
           },
           {
             "id": "w2",
-            "label": "D: F  E  E♭  D  D♭  D𝄫  B  B♭  A  A♭  G  G♭  F"
+            "label": "C: F  E  E♭  D  D  C  B  B♭  A  A♭  G  G♭  F"
+          },
+          {
+            "id": "w1",
+            "label": "D: F  E  E♭  D  D♭  B♯  B  B♭  A  A♭  G  G♭  F"
           }
         ],
         "correctOptionIds": [
@@ -388,16 +388,16 @@
         ],
         "diagnoses": {
           "w0": {
-            "category": "letter-missing",
-            "reason": "Some letter name is missing. Every letter name must appear at least once."
-          },
-          "w1": {
-            "category": "not-all-semitones",
-            "reason": "Two neighbouring notes are not a semitone apart. A chromatic scale moves by semitones only."
+            "category": "letter-used-three-times",
+            "reason": "One letter name is used three times. In a one-octave chromatic scale each letter is used once or twice."
           },
           "w2": {
-            "category": "unnecessary-accidentals",
-            "reason": "A double accidental is not needed in a chromatic scale: use the simpler sharp or flat spelling."
+            "category": "not-all-semitones",
+            "reason": "One note is not a semitone from its neighbours. A chromatic scale moves by semitones only."
+          },
+          "w1": {
+            "category": "letter-missing",
+            "reason": "One letter name is missing. Every letter name must appear at least once."
           }
         }
       },
@@ -470,42 +470,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Four chromatic scales are written ascending, one octave, starting on A♭. Exactly one is written correctly. Which one?",
+      "prompt": "Four chromatic scales are written descending, one octave, starting on D♭. Exactly one is written correctly. Which one?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "w0",
-            "label": "A: A♭  A  A♯  B  B♯  C♯  D  D♯  E  E♯  F♯  G  A♭"
+            "id": "right",
+            "label": "A: D♭  C  B  B♭  A  A♭  G  G♭  F  E  E♭  D  D♭"
           },
           {
             "id": "w2",
-            "label": "B: A♭  A  A♯  C♭  B♯  C♯  D  D♯  F♭  E♯  F♯  G  A♭"
+            "label": "B: D♭  D𝄫  B  B♭  A  A♭  G  G♭  F  E  E♭  D  D♭"
+          },
+          {
+            "id": "w0",
+            "label": "C: D♭  C  B  B♭  A  A♭  G  G♭  F  E  E♭  E𝄫  D♭"
           },
           {
             "id": "w1",
-            "label": "C: A♭  A  B♭  B  B  D♭  D  E♭  E  F  G♭  G  A♭"
-          },
-          {
-            "id": "right",
-            "label": "D: A♭  A  B♭  B  C  D♭  D  E♭  E  F  G♭  G  A♭"
+            "label": "D: D♭  C  B  B♭  A  A♭  G♯  G♭  F  E  E♭  D  D♭"
           }
         ],
         "correctOptionIds": [
           "right"
         ],
         "diagnoses": {
-          "w0": {
-            "category": "letter-used-three-times",
-            "reason": "Some letter name is used more than twice. In a one-octave chromatic scale each letter is used once or twice."
-          },
           "w2": {
             "category": "letter-missing",
-            "reason": "Some letter name is missing. Every letter name must appear at least once."
+            "reason": "One letter name is missing. Every letter name must appear at least once."
+          },
+          "w0": {
+            "category": "letter-used-three-times",
+            "reason": "One letter name is used three times. In a one-octave chromatic scale each letter is used once or twice."
           },
           "w1": {
             "category": "not-all-semitones",
-            "reason": "Two neighbouring notes are not a semitone apart. A chromatic scale moves by semitones only."
+            "reason": "One note is not a semitone from its neighbours. A chromatic scale moves by semitones only."
           }
         }
       },
@@ -580,42 +580,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Four chromatic scales are written descending, one octave, starting on E♭. Exactly one is written correctly. Which one?",
+      "prompt": "Four chromatic scales are written descending, one octave, starting on A♯. Exactly one is written correctly. Which one?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "right",
-            "label": "A: E♭  D  C♯  C  B  A♯  A  G♯  G  F♯  F  E  E♭"
-          },
-          {
-            "id": "w0",
-            "label": "B: E♭  D  C♯  C  C  A♯  A  G♯  G  F♯  F  E  E♭"
-          },
-          {
             "id": "w2",
-            "label": "C: E♭  D  D♭  C  B  C𝄫  A  A♭  G  G♭  F  E  E♭"
+            "label": "A: A♯  A♯  G♯  G  F♯  F  E  D♯  D  C♯  C  B  A♯"
           },
           {
             "id": "w1",
-            "label": "D: E♭  D  C♯  B♯  B  A♯  A  G♯  G  F♯  E♯  E  E♭"
+            "label": "B: A♯  G𝄪  G♯  G  F♯  F  E  D♯  D  C♯  C  B  A♯"
+          },
+          {
+            "id": "w0",
+            "label": "C: A♯  A  G♯  G  F♯  F  F♭  D♯  D  C♯  C  B  A♯"
+          },
+          {
+            "id": "right",
+            "label": "D: A♯  A  G♯  G  F♯  F  E  D♯  D  C♯  C  B  A♯"
           }
         ],
         "correctOptionIds": [
           "right"
         ],
         "diagnoses": {
-          "w0": {
-            "category": "not-all-semitones",
-            "reason": "Two neighbouring notes are not a semitone apart. A chromatic scale moves by semitones only."
-          },
           "w2": {
-            "category": "unnecessary-accidentals",
-            "reason": "A double accidental is not needed in a chromatic scale: use the simpler sharp or flat spelling."
+            "category": "not-all-semitones",
+            "reason": "One note is not a semitone from its neighbours. A chromatic scale moves by semitones only."
           },
           "w1": {
             "category": "letter-used-three-times",
-            "reason": "Some letter name is used more than twice. In a one-octave chromatic scale each letter is used once or twice."
+            "reason": "One letter name is used three times. In a one-octave chromatic scale each letter is used once or twice."
+          },
+          "w0": {
+            "category": "letter-missing",
+            "reason": "One letter name is missing. Every letter name must appear at least once."
           }
         }
       },
@@ -688,42 +688,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Four chromatic scales are written ascending, one octave, starting on C. Exactly one is written correctly. Which one?",
+      "prompt": "Four chromatic scales are written ascending, one octave, starting on D♯. Exactly one is written correctly. Which one?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "w0",
-            "label": "A: C  C♯  D  D♯  D♯  F  F♯  G  G♯  A  A♯  B  C"
-          },
-          {
             "id": "w1",
-            "label": "B: C  C♯  D  D♯  F♭  E♯  F♯  G  G♯  A  A♯  C♭  C"
+            "label": "A: D♯  E  F  F♯  G  G♯  A  A  B  C  C♯  D  D♯"
           },
           {
             "id": "right",
-            "label": "C: C  C♯  D  D♯  E  F  F♯  G  G♯  A  A♯  B  C"
+            "label": "B: D♯  E  F  F♯  G  G♯  A  A♯  B  C  C♯  D  D♯"
+          },
+          {
+            "id": "w0",
+            "label": "C: D♯  E  F  F♯  G  A♭  A  A♯  B  C  C♯  D  D♯"
           },
           {
             "id": "w2",
-            "label": "D: C  C♯  D  D♯  E  G𝄫  F♯  G  G♯  A  A♯  B  C"
+            "label": "D: D♯  F♭  F  F♯  G  G♯  A  A♯  B  C  C♯  D  D♯"
           }
         ],
         "correctOptionIds": [
           "right"
         ],
         "diagnoses": {
-          "w0": {
-            "category": "not-all-semitones",
-            "reason": "Two neighbouring notes are not a semitone apart. A chromatic scale moves by semitones only."
-          },
           "w1": {
-            "category": "letter-missing",
-            "reason": "Some letter name is missing. Every letter name must appear at least once."
+            "category": "not-all-semitones",
+            "reason": "One note is not a semitone from its neighbours. A chromatic scale moves by semitones only."
+          },
+          "w0": {
+            "category": "letter-used-three-times",
+            "reason": "One letter name is used three times. In a one-octave chromatic scale each letter is used once or twice."
           },
           "w2": {
-            "category": "unnecessary-accidentals",
-            "reason": "A double accidental is not needed in a chromatic scale: use the simpler sharp or flat spelling."
+            "category": "letter-missing",
+            "reason": "One letter name is missing. Every letter name must appear at least once."
           }
         }
       },
@@ -802,19 +802,19 @@
         "options": [
           {
             "id": "w2",
-            "label": "A: F  E  D♯  D  D  C  B  A♯  A  G♯  G  F♯  F"
-          },
-          {
-            "id": "w1",
-            "label": "B: F  E  E♭  D  D♭  D𝄫  B  B♭  A  A♭  G  G♭  F"
-          },
-          {
-            "id": "w0",
-            "label": "C: F  F♭  D♯  D  C♯  B♯  C♭  A♯  A  G♯  G  F♯  F"
+            "label": "A: F  E  E♭  D  D♭  C  B  B♭  A  A♭  G♭  G♭  F"
           },
           {
             "id": "right",
-            "label": "D: F  E  D♯  D  C♯  C  B  A♯  A  G♯  G  F♯  F"
+            "label": "B: F  E  E♭  D  D♭  C  B  B♭  A  A♭  G  G♭  F"
+          },
+          {
+            "id": "w0",
+            "label": "C: F  E  E♭  D  D♭  B♯  B  B♭  A  A♭  G  G♭  F"
+          },
+          {
+            "id": "w1",
+            "label": "D: F  E  D♯  D  D♭  C  B  B♭  A  A♭  G  G♭  F"
           }
         ],
         "correctOptionIds": [
@@ -823,15 +823,15 @@
         "diagnoses": {
           "w2": {
             "category": "not-all-semitones",
-            "reason": "Two neighbouring notes are not a semitone apart. A chromatic scale moves by semitones only."
-          },
-          "w1": {
-            "category": "unnecessary-accidentals",
-            "reason": "A double accidental is not needed in a chromatic scale: use the simpler sharp or flat spelling."
+            "reason": "One note is not a semitone from its neighbours. A chromatic scale moves by semitones only."
           },
           "w0": {
             "category": "letter-missing",
-            "reason": "Some letter name is missing. Every letter name must appear at least once."
+            "reason": "One letter name is missing. Every letter name must appear at least once."
+          },
+          "w1": {
+            "category": "letter-used-three-times",
+            "reason": "One letter name is used three times. In a one-octave chromatic scale each letter is used once or twice."
           }
         }
       },

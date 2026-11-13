@@ -4,6 +4,7 @@
  * exists for a Grade 4 template. Grade 1-3 generators are never touched.
  */
 import { GENERATORS, type Gen } from "./families.ts";
+import { describeScore, describeStave } from "./grade4-text.ts";
 import { breveBar, breveFacts, doubleDotBar, doubleDotFacts, dupletFacts, dupletRead, groupingJudge4, metreFacts4, timeSigRead4 } from "./grade4-rhythm.ts";
 import { doubleRead, altoFacts, chromaticJudge, clefPosition, degreeName, doubleCancel, doubleFacts, doubleName, doubleWrite, enharmonicLetter, enharmonicPick, keyFacts4, octavePickAlto, samePitch4, scaleSpot } from "./grade4-pitch.ts";
 import { chordBuild4, chordInPassage4, chordPassagePick, chordRoot, chordSpread, intervalFacts4, intervalName4, intervalWrite4, triadId, triadNotes4 } from "./grade4-harmony.ts";
@@ -37,7 +38,17 @@ const octaveAlto: Gen = (c) => {
   return (altoWords(d) ? d : { ...d, prompt: `${d.prompt} (The original melody is in the alto clef.)` }) as never;
 };
 
-export const GRADE4_GENERATORS: Record<string, Gen> = {
+/** Every stave a Grade 4 generator draws is described from the notation it really contains (grade4-text.ts), not from what the generator meant to draw. */
+const described = (g: Gen): Gen => (c) => {
+  const d = g(c) as (Record<string, unknown> & { music?: { presentation?: string; textAlternative: string }; score?: never }) | null;
+  if (!d) return d as never;
+  const out: Record<string, unknown> = { ...d };
+  if (d.music && d.music.presentation === "stave") out.music = { ...d.music, textAlternative: describeStave(d.music as never) };
+  if (d.score) out.score = describeScore(d.score as never, (d.score as { textAlternative: string }).textAlternative.split(/(Treble|Bass) stave/)[0]!.trim() || "A passage on two staves.");
+  return out as never;
+};
+
+const REGISTRY: Record<string, Gen> = {
   // The provisional templates that keep a family generator, adapted where the Grade 4 boundary needs it
   "t.g4.alto-read": altoRead,
   "t.g4.key-signature": keySignature4,
@@ -93,3 +104,7 @@ export const GRADE4_GENERATORS: Record<string, Gen> = {
   "t.g4.passage": passage4,
   "t.g4.passage-directions": passageDirections,
 };
+
+export const GRADE4_GENERATORS: Record<string, Gen> = Object.fromEntries(
+  Object.entries(REGISTRY).map(([id, g]) => [id, ["t.g4.alto-read", "t.g4.key-signature", "t.g4.octave-transpose-alto"].includes(id) ? g : described(g)]),
+);

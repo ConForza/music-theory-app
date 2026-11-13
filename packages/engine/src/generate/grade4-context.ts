@@ -379,38 +379,28 @@ function instrumentPart(c: Ctx, clef: Clef): { inst: music.InstrumentG4; part: P
 export const passage4: Gen = (c): any => {
   const clef = c.rng.pick(clefsIn(c).filter((x) => x === "treble" || x === "bass" || x === "alto"));
   const keyText = c.rng.pick(keysIn(c));
-  const key = parseKey(keyText);
   const mel = melodyFor(c, keyText, clef, 6);
   const ip = instrumentPart(c, clef);
   if (!mel || !ip) return null;
   const signs = ornamentsIn(c);
   const term = c.rng.pick(T.filter((t) => groupSize(t.group) === 1 && t.category !== "structure"));
   const markedOrn = signs.length ? c.rng.pick(signs) : null;
+  const kinds = c.rng.shuffle(["interval", "term", ...(markedOrn ? ["ornament"] : [])] as string[]).slice(0, 2);
+  const withInterval = kinds.includes("interval");
   const ornAt = c.rng.int(1, 4);
-  const events = mel.map((p, i) => (markedOrn && i === ornAt ? mark(p, markedOrn, "crotchet", { label: "A" }) : note(p, "crotchet", i === 1 ? { label: "x" } : i === 4 ? { label: "y" } : {})));
-  if (markedOrn && ornAt === 1) events[1] = mark(mel[1]!, markedOrn, "crotchet", { label: "A" });
-  const measures: Measure[] = [{ events: events.slice(0, 3) }, { events: events.slice(3), barline: "final" }];
   const lowIdx = 1;
   const highIdx = ornAt === 4 ? 5 : 4;
-  const lower = mel[Math.min(lowIdx, highIdx)]!;
-  const upper = mel[Math.max(lowIdx, highIdx)]!;
-  const [lo, hi] = chromaticOrder(lower, upper);
-  const iv = music.intervalBetween(lo, hi);
-  if (iv.number > 8 || iv.number < 2) return null;
+  const events = mel.map((p, i) => (kinds.includes("ornament") && markedOrn && i === ornAt ? mark(p, markedOrn, "crotchet", { label: "A" }) : note(p, "crotchet", withInterval && i === lowIdx ? { label: "x" } : withInterval && i === highIdx ? { label: "y" } : {})));
+  // the interval is asked between the notes marked x and y (the ornamented note keeps its own label, so the interval avoids it)
+  if (withInterval && kinds.includes("ornament") && (ornAt === lowIdx || ornAt === highIdx)) return null;
+  const measures: Measure[] = [{ events: events.slice(0, 3) }, { events: events.slice(3), barline: "final" }];
   const parts: Part[] = [ip.part];
-  const kinds = c.rng.shuffle(["interval", "term", ...(markedOrn ? ["ornament"] : [])] as string[]).slice(0, 2);
-  const lowLabel = lowIdx === ornAt ? "A" : "x";
-  const hiLabel = highIdx === ornAt ? "A" : "y";
-  const marksNeeded: Record<number, string> = { [lowIdx]: lowLabel, [highIdx]: hiLabel };
-  void marksNeeded;
-  const noteAt = (i: number) => mel[i]!;
   for (const k of kinds) {
     if (k === "interval") {
-      const a = noteAt(Math.min(lowIdx, highIdx));
-      const b = noteAt(Math.max(lowIdx, highIdx));
-      const [x, y] = chromaticOrder(a, b);
-      const lab = (i: number) => (i === ornAt ? "A" : i === 1 ? "x" : "y");
-      parts.push({ id: "interval", prompt: `What is the interval from the lower to the higher of the notes marked ${lab(1)} and ${lab(highIdx)}? (Quality and number.)`, answer: { kind: "interval", task: "identify", key: keyText, lower: F(x), upper: F(y), acceptedIntervals: [`${music.intervalBetween(x, y).quality}${music.intervalBetween(x, y).number}`] } });
+      const [x, y] = chromaticOrder(mel[lowIdx]!, mel[highIdx]!);
+      const iv = music.intervalBetween(x, y);
+      if (iv.number > 8 || iv.number < 2) return null;
+      parts.push({ id: "interval", prompt: "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)", answer: { kind: "interval", task: "identify", key: keyText, lower: F(x), upper: F(y), acceptedIntervals: [`${iv.quality}${iv.number}`] } });
     } else if (k === "term") {
       const picks = termOptions(c, term);
       if (picks.length < 3) return null;
@@ -420,8 +410,7 @@ export const passage4: Gen = (c): any => {
     }
   }
   if (parts.length < 3) return null;
-  const f = frag(clef, measures, `${cap(an(clef))} clef melody in ${keyText}, 3/4, for ${ip.inst.name}. ${events.map((e, i) => (e.kind === "note" ? `Note ${i + 1} ${posText(staffPosition(clef, music.parsePitch(e.pitch)))}${e.label ? ` (marked ${e.label})` : ""}${e.ornament ? ` with ${ornDesc(e.ornament)}` : ""}${e.grace ? ` with ${ornDesc(e.grace.kind)}` : ""}` : "")).join("; ")}.`, { key: keyText, timeSignature: "3/4", tempoText: `${cap(term.term)}` });
-  void key;
+  const f = frag(clef, measures, "", { key: keyText, timeSignature: "3/4", tempoText: `${cap(term.term)}` });
   return {
     prompt: `${ip.line} Look at the passage and answer the questions.`,
     music: f,

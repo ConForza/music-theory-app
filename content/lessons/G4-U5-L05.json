@@ -165,9 +165,7 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                },
-                "ornament": "lower-mordent",
-                "label": "A"
+                }
               }
             ]
           },
@@ -179,7 +177,9 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                }
+                },
+                "ornament": "lower-mordent",
+                "label": "A"
               },
               {
                 "kind": "note",
@@ -202,7 +202,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "An alto clef melody in Ab major, 3/4, for viola. Note 1 in the 2nd space; Note 2 on the 2nd line (marked x); Note 3 in the 2nd space (marked A) with a short zig-zag above the note with a short vertical line through it; Note 4 on the 2nd line; Note 5 on the 3rd line (marked y); Note 6 in the 3rd space.",
+        "textAlternative": "An alto-clef stave, key signature of 4 flats, 3/4, marked Affettuoso. Bar 1: a note in the 2nd space; a note marked x on the 2nd line; a note in the 2nd space. Bar 2: a note marked A on the 2nd line, with a short zig-zag above it with a short vertical line through it; a note marked y on the 3rd line; a note in the 3rd space.",
         "key": "Ab major",
         "timeSignature": "3/4",
         "tempoText": "Affettuoso"
@@ -265,45 +265,17 @@
             }
           },
           {
-            "id": "term",
-            "prompt": "The passage is marked “affettuoso”. What does it ask?",
+            "id": "interval",
+            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
             "answer": {
-              "kind": "choice",
-              "options": [
-                {
-                  "id": "morendo",
-                  "label": "Dying away"
-                },
-                {
-                  "id": "amabile",
-                  "label": "In a pleasant, amiable way"
-                },
-                {
-                  "id": "affettuoso",
-                  "label": "Tenderly, with affection"
-                },
-                {
-                  "id": "facile",
-                  "label": "Easily, without effort"
-                }
-              ],
-              "correctOptionIds": [
-                "affettuoso"
-              ],
-              "diagnoses": {
-                "facile": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “facile”."
-                },
-                "amabile": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “amabile”."
-                },
-                "morendo": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “morendo”."
-                }
-              }
+              "kind": "interval",
+              "task": "identify",
+              "key": "Ab major",
+              "lower": "Ab3",
+              "upper": "C4",
+              "acceptedIntervals": [
+                "M3"
+              ]
             }
           }
         ]
@@ -397,7 +369,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "An alto clef melody in A minor, 3/4, for viola, marked con fuoco and arco. Note 1 on the 3rd line; Note 2 in the 2nd space (marked A) with a short zig-zag above the note, with no line through it; Note 3 in the 1st space; Note 4 on the 2nd line; Note 5 in the 2nd space; Note 6 in the 3rd space.",
+        "textAlternative": "An alto-clef stave, no sharps or flats in the key signature, 3/4, marked Con fuoco · arco. Bar 1: a note on the 3rd line; a note marked A in the 2nd space, with a short zig-zag above it with no line through it; a note in the 1st space, with a sharp sign in front. Bar 2: a note on the 2nd line; a note in the 2nd space; a note in the 3rd space.",
         "key": "A minor",
         "timeSignature": "3/4",
         "tempoText": "Con fuoco · arco"
@@ -525,17 +497,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This passage is for the bassoon. Look at the passage and answer the questions.",
+      "prompt": "This passage is for the clarinet. Look at the passage and answer the questions.",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "Bb2",
+                "pitch": "G4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -543,16 +515,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "C3",
+                "pitch": "E4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                },
-                "label": "x"
+                }
               },
               {
                 "kind": "note",
-                "pitch": "Db3",
+                "pitch": "G4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -564,27 +535,30 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C3",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
                 },
-                "ornament": "turn",
+                "grace": {
+                  "kind": "appoggiatura",
+                  "pitches": [
+                    "F4"
+                  ]
+                },
                 "label": "A"
               },
               {
                 "kind": "note",
-                "pitch": "A2",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                },
-                "label": "y",
-                "writtenAccidental": "natural"
-              },
-              {
-                "kind": "note",
-                "pitch": "Bb2",
+                "pitch": "F4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -594,8 +568,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A bass clef melody in Bb minor, 3/4, for bassoon. Note 1 on the 2nd line; Note 2 in the 2nd space (marked x); Note 3 on the 3rd line; Note 4 in the 2nd space (marked A) with a sideways S-shaped curl above the note; Note 5 in the 1st space (marked y); Note 6 on the 2nd line.",
-        "key": "Bb minor",
+        "textAlternative": "A treble-clef stave, no sharps or flats in the key signature, 3/4, marked Tempo giusto. Bar 1: a note on the 2nd line; a note on the 1st line; a note on the 2nd line. Bar 2: a note in the 1st space; a note marked A on the 1st line, with a small note before it with no stroke through its stem; a note in the 1st space.",
+        "key": "C major",
         "timeSignature": "3/4",
         "tempoText": "Tempo giusto"
       },
@@ -604,7 +578,7 @@
         "parts": [
           {
             "id": "family",
-            "prompt": "To which family of the orchestra does the bassoon belong?",
+            "prompt": "To which family of the orchestra does the clarinet belong?",
             "answer": {
               "kind": "choice",
               "options": [
@@ -631,31 +605,17 @@
               "diagnoses": {
                 "strings": {
                   "category": "wrong-category",
-                  "reason": "The bassoon belongs to the woodwind family."
+                  "reason": "The clarinet belongs to the woodwind family."
                 },
                 "brass": {
                   "category": "wrong-category",
-                  "reason": "The bassoon belongs to the woodwind family."
+                  "reason": "The clarinet belongs to the woodwind family."
                 },
                 "percussion": {
                   "category": "wrong-category",
-                  "reason": "The bassoon belongs to the woodwind family."
+                  "reason": "The clarinet belongs to the woodwind family."
                 }
               }
-            }
-          },
-          {
-            "id": "interval",
-            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
-            "answer": {
-              "kind": "interval",
-              "task": "identify",
-              "key": "Bb minor",
-              "lower": "A2",
-              "upper": "C3",
-              "acceptedIntervals": [
-                "m3"
-              ]
             }
           },
           {
@@ -665,20 +625,20 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "amabile",
-                  "label": "In a pleasant, amiable way"
-                },
-                {
                   "id": "tempo-giusto",
                   "label": "In strict, exact time"
                 },
                 {
-                  "id": "quasi",
-                  "label": "As if, almost like"
-                },
-                {
                   "id": "presto-possibile",
                   "label": "As fast as possible"
+                },
+                {
+                  "id": "morendo",
+                  "label": "Dying away"
+                },
+                {
+                  "id": "quasi",
+                  "label": "As if, almost like"
                 }
               ],
               "correctOptionIds": [
@@ -689,15 +649,27 @@
                   "category": "confused-similar-term",
                   "reason": "That is the meaning of “presto possibile”."
                 },
-                "amabile": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “amabile”."
-                },
                 "quasi": {
                   "category": "confused-similar-term",
                   "reason": "That is the meaning of “quasi”."
+                },
+                "morendo": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “morendo”."
                 }
               }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "appoggiatura",
+              "accepted": [
+                "appoggiatura"
+              ]
             }
           }
         ]
@@ -748,14 +720,7 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                },
-                "grace": {
-                  "kind": "acciaccatura",
-                  "pitches": [
-                    "B5"
-                  ]
-                },
-                "label": "A"
+                }
               },
               {
                 "kind": "note",
@@ -785,7 +750,13 @@
                   "value": "crotchet",
                   "dots": 0
                 },
-                "label": "y"
+                "grace": {
+                  "kind": "acciaccatura",
+                  "pitches": [
+                    "A5"
+                  ]
+                },
+                "label": "A"
               },
               {
                 "kind": "note",
@@ -799,7 +770,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble clef melody in F# minor, 3/4, for oboe. Note 1 on the 5th line; Note 2 on the 1st ledger line above the stave (marked A) with a small note before the main note with a diagonal stroke through its stem and flag; Note 3 in the space just above the stave; Note 4 in the 4th space; Note 5 in the space just above the stave (marked y); Note 6 on the 5th line.",
+        "textAlternative": "A treble-clef stave, key signature of 3 sharps, 3/4, marked Affettuoso. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note in the 4th space, with a sharp sign in front; a note marked A in the space just above the stave, with a small note before it with a diagonal stroke through its stem and flag; a note on the 5th line.",
         "key": "F# minor",
         "timeSignature": "3/4",
         "tempoText": "Affettuoso"
@@ -831,18 +802,6 @@
                   "reason": "The oboe normally reads the treble clef, and this passage is written in it."
                 }
               }
-            }
-          },
-          {
-            "id": "ornament",
-            "prompt": "What is the ornament on the note marked A?",
-            "answer": {
-              "kind": "ornament-sign",
-              "task": "name-sign",
-              "sign": "acciaccatura",
-              "accepted": [
-                "acciaccatura"
-              ]
             }
           },
           {
@@ -885,6 +844,18 @@
                   "reason": "That is the meaning of “calando”."
                 }
               }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "acciaccatura",
+              "accepted": [
+                "acciaccatura"
+              ]
             }
           }
         ]
@@ -977,7 +948,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "An alto clef melody in Eb major, 3/4, for viola, marked cantando and senza sordino (senza sord.). Note 1 on the 2nd line; Note 2 on the 1st line; Note 3 in the space just below the stave; Note 4 on the 1st ledger line below the stave (marked A) with a short zig-zag above the note, with no line through it; Note 5 in the space just below the stave; Note 6 on the 1st line.",
+        "textAlternative": "An alto-clef stave, key signature of 3 flats, 3/4, marked Cantando · senza sordino. Bar 1: a note on the 2nd line; a note on the 1st line; a note in the space just below the stave. Bar 2: a note marked A on the 1st ledger line below the stave, with a short zig-zag above it with no line through it; a note in the space just below the stave; a note on the 1st line.",
         "key": "Eb major",
         "timeSignature": "3/4",
         "tempoText": "Cantando · senza sordino"
@@ -1148,14 +1119,7 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                },
-                "grace": {
-                  "kind": "appoggiatura",
-                  "pitches": [
-                    "C5"
-                  ]
-                },
-                "label": "A"
+                }
               },
               {
                 "kind": "note",
@@ -1163,8 +1127,7 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                },
-                "label": "y"
+                }
               },
               {
                 "kind": "note",
@@ -1172,13 +1135,14 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                }
+                },
+                "label": "y"
               }
             ],
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble clef melody in G minor, 3/4, for horn. Note 1 on the 3rd line; Note 2 on the 2nd line (marked x); Note 3 in the 2nd space; Note 4 on the 3rd line (marked A) with a small note before the main note with no stroke through its stem; Note 5 in the 3rd space (marked y); Note 6 on the 4th line.",
+        "textAlternative": "A treble-clef stave, key signature of 2 flats, 3/4, marked Sotto voce. Bar 1: a note on the 3rd line; a note marked x on the 2nd line; a note in the 2nd space. Bar 2: a note on the 3rd line; a note in the 3rd space; a note marked y on the 4th line.",
         "key": "G minor",
         "timeSignature": "3/4",
         "tempoText": "Sotto voce"
@@ -1220,9 +1184,9 @@
               "task": "identify",
               "key": "G minor",
               "lower": "G4",
-              "upper": "C5",
+              "upper": "D5",
               "acceptedIntervals": [
-                "P4"
+                "P5"
               ]
             }
           },
@@ -1358,7 +1322,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "An alto clef melody in D minor, 3/4, for viola, marked cantando and pizzicato (pizz.). Note 1 in the 3rd space; Note 2 on the 4th line; Note 3 on the 5th line; Note 4 in the 4th space (marked A) with a sideways S-shaped curl above the note; Note 5 on the 4th line; Note 6 in the 4th space.",
+        "textAlternative": "An alto-clef stave, key signature of 1 flat, 3/4, marked Cantando · pizzicato. Bar 1: a note in the 3rd space; a note on the 4th line; a note on the 5th line. Bar 2: a note marked A in the 4th space, with a sideways S-shaped curl above it; a note on the 4th line; a note in the 4th space.",
         "key": "D minor",
         "timeSignature": "3/4",
         "tempoText": "Cantando · pizzicato"
@@ -1554,7 +1518,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A bass clef melody in Bb major, 3/4, for trombone. Note 1 on the 1st ledger line above the stave; Note 2 on the 5th line (marked x); Note 3 in the 4th space; Note 4 in the 3rd space (marked A) with a sideways S-shaped curl above the note; Note 5 on the 3rd line (marked y); Note 6 on the 2nd line.",
+        "textAlternative": "A bass-clef stave, key signature of 2 flats, 3/4, marked Presto possibile. Bar 1: a note on the 1st ledger line above the stave; a note marked x on the 5th line; a note in the 4th space. Bar 2: a note marked A in the 3rd space, with a sideways S-shaped curl above it; a note marked y on the 3rd line; a note on the 2nd line.",
         "key": "Bb major",
         "timeSignature": "3/4",
         "tempoText": "Presto possibile"
@@ -1619,45 +1583,15 @@
             }
           },
           {
-            "id": "term",
-            "prompt": "The passage is marked “presto possibile”. What does it ask?",
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
             "answer": {
-              "kind": "choice",
-              "options": [
-                {
-                  "id": "presto-possibile",
-                  "label": "As fast as possible"
-                },
-                {
-                  "id": "tempo-giusto",
-                  "label": "In strict, exact time"
-                },
-                {
-                  "id": "affrettando",
-                  "label": "Hurrying, pressing on"
-                },
-                {
-                  "id": "appassionato",
-                  "label": "With passion"
-                }
-              ],
-              "correctOptionIds": [
-                "presto-possibile"
-              ],
-              "diagnoses": {
-                "tempo-giusto": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “tempo giusto”."
-                },
-                "affrettando": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “affrettando”."
-                },
-                "appassionato": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “appassionato”."
-                }
-              }
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "turn",
+              "accepted": [
+                "turn"
+              ]
             }
           }
         ]
@@ -1750,7 +1684,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "An alto clef melody in B minor, 3/4, for viola, marked tempo giusto and sul ponticello. Note 1 in the 3rd space; Note 2 on the 4th line; Note 3 in the 3rd space (marked A) with the letters tr above the note (sometimes followed by a wavy line); Note 4 on the 4th line; Note 5 in the 4th space; Note 6 in the 3rd space.",
+        "textAlternative": "An alto-clef stave, key signature of 2 sharps, 3/4, marked Tempo giusto · sul ponticello. Bar 1: a note in the 3rd space; a note on the 4th line; a note marked A in the 3rd space, with the letters tr above it. Bar 2: a note on the 4th line; a note in the 4th space; a note in the 3rd space.",
         "key": "B minor",
         "timeSignature": "3/4",
         "tempoText": "Tempo giusto · sul ponticello"

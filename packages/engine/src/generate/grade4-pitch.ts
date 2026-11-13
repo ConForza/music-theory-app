@@ -546,7 +546,7 @@ export const degreeName: Gen = (c): any => {
   };
 };
 
-/** t.g4.chromatic-judge: which written chromatic scale is correct? Exactly one option passes the rules; every wrong one breaks one named rule. */
+/** t.g4.chromatic-judge: which written chromatic scale is correct? Exactly one option passes the rules; each wrong one is the correct scale with ONE note changed and breaks one named rule. */
 export const chromaticJudge: Gen = (c): any => {
   const direction = c.rng.pick(["ascending", "descending"] as const);
   const step = c.rng.pick(music.STEPS);
@@ -555,53 +555,56 @@ export const chromaticJudge: Gen = (c): any => {
   const start: Pitch = { step, alter, octave: 4 };
   const sign = direction === "ascending" ? 1 : -1;
   const sound0 = chromaticNumber(start);
-  // a correct spelling: every letter once or twice, semitones only, no double accidentals
-  const build = (choose: (sounds: number, prev: Pitch | null, i: number) => music.PitchClass[]): Pitch[] | null => {
+  const withOctave = (pc: music.PitchClass, sound: number): Pitch => {
+    let octave = Math.floor(sound / 12);
+    let p: Pitch = { ...pc, octave };
+    while (chromaticNumber(p) < sound) p = { ...p, octave: ++octave };
+    while (chromaticNumber(p) > sound) p = { ...p, octave: --octave };
+    return p;
+  };
+  // a correct scale: every black key spelt with a sharp throughout, or with a flat throughout (the two usual spellings)
+  const build = (accidental: 1 | -1): Pitch[] | null => {
     const out: Pitch[] = [start];
     for (let i = 1; i <= 12; i++) {
       const sound = sound0 + sign * i;
       if (i === 12) { out.push({ ...start, octave: start.octave + sign }); break; }
-      const cands = choose(sound, out[out.length - 1]!, i);
-      if (!cands.length) return null;
-      const pc = cands[0]!;
-      let octave = Math.floor(sound / 12);
-      let p: Pitch = { ...pc, octave };
-      while (chromaticNumber(p) < sound) p = { ...p, octave: ++octave };
-      while (chromaticNumber(p) > sound) p = { ...p, octave: --octave };
-      out.push(p);
+      const l = spellingsOfSound(sound, 1);
+      const pc = l.find((x) => x.alter === 0) ?? l.find((x) => x.alter === accidental);
+      if (!pc) return null;
+      out.push(withOctave(pc, sound));
     }
     return out;
   };
-  const okSpell = (ps: Pitch[]) => music.checkChromatic(ps, start, direction).length === 0;
-  const prefer = (flatsFirst: boolean) => (sound: number) => spellingsOfSound(sound, 1).sort((x, y) => (flatsFirst ? x.alter - y.alter : y.alter - x.alter) || Math.abs(x.alter) - Math.abs(y.alter)).sort((x, y) => Math.abs(x.alter) - Math.abs(y.alter));
-  const sharps = build((s) => { const l = spellingsOfSound(s, 1); const white = l.find((x) => x.alter === 0); return white ? [white] : l.filter((x) => x.alter === 1); });
-  const flats = build((s) => { const l = spellingsOfSound(s, 1); const white = l.find((x) => x.alter === 0); return white ? [white] : l.filter((x) => x.alter === -1); });
-  void prefer;
-  const valid = [sharps, flats].filter((x): x is Pitch[] => Boolean(x) && okSpell(x!));
+  const problems = (ps: Pitch[]) => music.checkChromatic(ps, start, direction);
+  const valid = ([1, -1] as const).map(build).filter((x): x is Pitch[] => Boolean(x) && problems(x!).length === 0);
   if (!valid.length) return null;
   const right = c.rng.pick(valid);
-  type Bad = { ps: Pitch[]; cat: string; why: string };
-  const bads: Bad[] = [];
-  const addBad = (ps: Pitch[] | null, cat: string, why: string) => { if (ps && !okSpell(ps) && !bads.some((b) => b.cat === cat) && JSON.stringify(ps.map(F)) !== JSON.stringify(right.map(F))) bads.push({ ps, cat, why }); };
-  // a letter used three times: respell a black note with a letter already used twice, or repeat a natural note with both sharp and flat forms
-  addBad(build((s) => { const l = spellingsOfSound(s, 1); const sharp = l.find((x) => x.alter === 1); const white = l.find((x) => x.alter === 0); return sharp ?? (white ? [white] : []).concat(l)[0] ? [sharp ?? white ?? l[0]!] : []; }), "letter-used-three-times", "");
-  // a letter missing: a note respelt so one letter never appears (use sharps or flats where a white-key spelling was needed)
-  addBad(build((s) => { const l = spellingsOfSound(s, 1); const nonWhite = l.filter((x) => x.alter !== 0); return nonWhite.length ? [nonWhite[0]!] : l; }), "letter-missing", "");
-  // a repeated sound: a tone step written as the same sound twice is not a semitone
-  const dup = right.map((p, i) => (i === 4 ? { ...right[3]!, octave: right[3]!.octave } : p));
-  addBad(dup, "not-all-semitones", "");
-  // double accidentals where none are needed
-  addBad(build((s, _p, i) => { const l = spellingsOfSound(s, 2); const dbl = l.find((x) => Math.abs(x.alter) === 2); return i === 5 && dbl ? [dbl] : (spellingsOfSound(s, 1).find((x) => x.alter === 0) ? [spellingsOfSound(s, 1).find((x) => x.alter === 0)!] : spellingsOfSound(s, 1).filter((x) => x.alter === (direction === "ascending" ? 1 : -1))); }), "unnecessary-accidentals", "");
+  // every one-note edit: respell a note (same sound, other letter) or move it a semitone (wrong sound); group the results by the rule they break
+  const byRule = new Map<string, Pitch[][]>();
+  for (let i = 1; i <= 11; i++) {
+    const sound = chromaticNumber(right[i]!);
+    const edits: Pitch[] = [
+      ...spellingsOfSound(sound, 2).filter((x) => x.step !== right[i]!.step).map((x) => withOctave(x, sound)),
+      ...[1, -1].map((d) => ({ ...right[i]!, alter: right[i]!.alter + d })),
+    ].filter((x) => Math.abs(x.alter) <= 2);
+    for (const e of edits) {
+      const ps = right.map((x, k) => (k === i ? e : x));
+      const first = problems(ps)[0];
+      if (!first || JSON.stringify(ps.map(F)) === JSON.stringify(right.map(F))) continue;
+      byRule.set(first.code, [...(byRule.get(first.code) ?? []), ps]);
+    }
+  }
   const reasons: Record<string, string> = {
-    "letter-used-three-times": "Some letter name is used more than twice. In a one-octave chromatic scale each letter is used once or twice.",
-    "letter-missing": "Some letter name is missing. Every letter name must appear at least once.",
-    "not-all-semitones": "Two neighbouring notes are not a semitone apart. A chromatic scale moves by semitones only.",
-    "unnecessary-accidentals": "A double accidental is not needed in a chromatic scale: use the simpler sharp or flat spelling.",
+    "letter-used-three-times": "One letter name is used three times. In a one-octave chromatic scale each letter is used once or twice.",
+    "letter-missing": "One letter name is missing. Every letter name must appear at least once.",
+    "not-a-semitone": "One note is not a semitone from its neighbours. A chromatic scale moves by semitones only.",
+    "double-accidental": "A double accidental is not needed in a chromatic scale: use the simpler sharp or flat spelling.",
   };
-  const picks = c.rng.shuffle(bads).slice(0, 3);
-  if (picks.length < 3) return null;
+  const rules = c.rng.shuffle([...byRule.keys()].filter((k) => reasons[k]));
+  if (rules.length < 3) return null;
+  const picks = rules.slice(0, 3).map((k) => ({ code: k, ps: c.rng.pick(byRule.get(k)!) }));
   const fmt = (ps: Pitch[]) => ps.map((p) => pcLabel(p)).join("  ");
-  const all = [{ id: "right", ps: right, d: null as null | { category: string; reason: string } }, ...picks.map((b, i) => ({ id: `w${i}`, ps: b.ps, d: diag(b.cat, reasons[b.cat]!) }))];
+  const all = [{ id: "right", ps: right, d: null as null | { category: string; reason: string } }, ...picks.map((b, i) => ({ id: `w${i}`, ps: b.ps, d: diag(b.code === "not-a-semitone" ? "not-all-semitones" : b.code, reasons[b.code]!) }))];
   const order = c.rng.shuffle(all);
   if (new Set(order.map((o) => fmt(o.ps))).size < 4) return null;
   return {
@@ -609,9 +612,7 @@ export const chromaticJudge: Gen = (c): any => {
     answer: { kind: "choice", options: order.map((o, i) => ({ id: o.id, label: `${String.fromCharCode(65 + i)}: ${fmt(o.ps)}` })), correctOptionIds: ["right"], diagnoses: Object.fromEntries(order.filter((o) => o.d).map((o) => [o.id, o.d!])) as Diagnoses },
     hints: ["Check three things: every note a semitone from the last; every letter name used once or twice; no double accidentals."],
   };
-  void r;
 };
-
 
 /** t.g4.double-accidental: read a note in a bar where a double sharp or double flat has been written; the accidental lasts to the barline. */
 export const doubleRead: Gen = (c): any => {
