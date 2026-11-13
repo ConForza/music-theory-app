@@ -62,7 +62,8 @@
           }
         ],
         "textAlternative": "Four notes in the treble clef, marked 8va above the stave: G, A, B, C.",
-        "tempoText": "8va"
+        "tempoText": "8va",
+        "octaveShift": 1
       },
       "caption": "8va above the notes: play them an octave higher than they are written."
     },
@@ -115,7 +116,8 @@
             ]
           }
         ],
-        "textAlternative": "Four notes in the bass clef, marked 8vb below the notes: F, E, D, C."
+        "textAlternative": "Four notes in the bass clef, marked 8vb below the notes: F, E, D, C.",
+        "octaveShift": -1
       },
       "caption": "8vb below the notes: play them an octave lower than they are written."
     },
@@ -173,7 +175,8 @@
         }
       ],
       "textAlternative": "Four notes in the treble clef, marked 8va above the stave: C, D, E, F.",
-      "tempoText": "8va"
+      "tempoText": "8va",
+      "octaveShift": 1
     },
     "steps": [
       "Read the written notes: C, D, E, F.",
@@ -212,7 +215,8 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one note on a ledger line above the stave. The sign 8va is written above the note.",
+        "textAlternative": "A treble-clef stave with one note in the space above the 1st ledger line above the stave. The sign 8va is written above the note.",
+        "octaveShift": 1,
         "tempoText": "8va"
       },
       "answer": {
@@ -296,6 +300,7 @@
           }
         ],
         "textAlternative": "A treble-clef stave with one note on the 3rd line. The sign 8va is written above it.",
+        "octaveShift": 1,
         "tempoText": "8va"
       },
       "answer": {
@@ -356,7 +361,8 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with one note on a ledger line well below the stave. The sign 8vb is written below the note."
+        "textAlternative": "A bass-clef stave with one note on the 3rd ledger line below the stave. The sign 8vb is written below the note.",
+        "octaveShift": -1
       },
       "answer": {
         "kind": "choice",
@@ -433,7 +439,8 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with one note in the 3rd space. The sign 8vb is written below it."
+        "textAlternative": "A bass-clef stave with one note in the 3rd space. The sign 8vb is written below it.",
+        "octaveShift": -1
       },
       "answer": {
         "kind": "staff-position",
@@ -493,7 +500,8 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with one note on a ledger line well below the stave. The sign 8vb is written below the note."
+        "textAlternative": "A bass-clef stave with one note in the space below the 3rd ledger line below the stave. The sign 8vb is written below the note.",
+        "octaveShift": -1
       },
       "answer": {
         "kind": "choice",
@@ -576,6 +584,7 @@
           }
         ],
         "textAlternative": "A treble-clef stave with one note in the 4th space. The sign 8va is written above it.",
+        "octaveShift": 1,
         "tempoText": "8va"
       },
       "answer": {
@@ -635,7 +644,8 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one note on a ledger line above the stave. The sign 8va is written above the note.",
+        "textAlternative": "A treble-clef stave with one note on the 2nd ledger line above the stave. The sign 8va is written above the note.",
+        "octaveShift": 1,
         "tempoText": "8va"
       },
       "answer": {
@@ -711,7 +721,8 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave with one note on the 3rd line. The sign 8vb is written below it."
+        "textAlternative": "A bass-clef stave with one note on the 3rd line. The sign 8vb is written below it.",
+        "octaveShift": -1
       },
       "answer": {
         "kind": "staff-position",
@@ -770,7 +781,8 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave with one note on a ledger line above the stave. The sign 8va is written above the note.",
+        "textAlternative": "A treble-clef stave with one note in the space above the 2nd ledger line above the stave. The sign 8va is written above the note.",
+        "octaveShift": 1,
         "tempoText": "8va"
       },
       "answer": {

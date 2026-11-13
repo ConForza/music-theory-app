@@ -16,7 +16,7 @@
  */
 import { deriveScale, music, type Measure, type NotationEvent } from "@mtp/curriculum";
 import { frag, maxLedger, n, nameOf, note, pretty, r, rhythmLine, valueWord, type Gen } from "./families.ts";
-import { codes, geom, keyWord, keysIn, noteId, noteLabel, spelledOptions, type Diagnoses } from "./grade1.ts";
+import { codes, keyWord, keysIn, noteId, noteLabel, spelledOptions, type Diagnoses } from "./grade1.ts";
 import { ORD, cap, clefsOf, degreeNote, diag, keyFacts, optsOf, posText, rl, triadNotes } from "./grade2.ts";
 
 type Pitch = music.Pitch;
@@ -533,12 +533,17 @@ export const compoundRestWrite: Gen = (c) => {
   const silent = beats === 2 ? 1 : c.rng.int(1, 2);
   const cells = Array.from({ length: beats - silent }, () => c.rng.pick<CellName>(["dc", "qqq", "cq", "qc"]));
   const given = planBar(cells).map(stripBeam);
-  const rests = Array.from({ length: silent }, () => r(C, 1));
-  const full = [...given, ...rests];
-  if (codes(full, ts, { requireBeams: false }).length) return null;
+  // Every accepted ending is listed: each silent beat is a dotted-crotchet rest or a crotchet rest plus a quaver rest; in 12/8 the last two beats may be one dotted-minim rest.
+  // Nothing but rests is accepted in the silent beats (a sounded note there is wrong), so the answer is not "any bar that adds up".
+  const forms: Ev[][] = [[r(C, 1)], [r(C), r(Q)]];
+  let endings: Ev[][] = [[]];
+  for (let i = 0; i < silent; i++) endings = endings.flatMap((e) => forms.map((f) => [...e, ...f.map((x) => ({ ...x }))]));
+  if (ts === "12/8" && silent === 2) endings.push([r("minim", 1)]);
+  const fulls = endings.map((e) => [...given, ...e]);
+  if (fulls.some((f) => codes(f, ts, { requireBeams: false }).length)) return null;
   return {
     prompt: `Complete this bar of ${ts}. The last ${silent === 1 ? "beat is" : "two beats are"} silent: add the ${silent === 1 ? "rest" : "rests"} so the bar adds up and the beats stay clear.`,
-    answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given, accepted: [[{ events: full }]], acceptAnyRuleCompliant: true },
+    answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given, accepted: fulls.map((f) => [{ events: f }]), acceptAnyRuleCompliant: false },
     hints: ["A silent beat is one dotted-crotchet rest, or a crotchet rest and a quaver rest. Give every silent beat its own rest."],
   };
 };
@@ -573,7 +578,7 @@ export const ledgerCount: Gen = (c) => {
   const need = music.ledgerLines(clef, p);
   if (need < 3 || need > max) return null;
   const mode = c.rng.pick(["count", "name", "name"] as const);
-  const shown = frag(clef, [{ events: [note(p)] }], `A ${clef}-clef stave with one note ${geom(clef, p)}.`, { showKeySignature: false });
+  const shown = frag(clef, [{ events: [note(p)] }], `A ${clef}-clef stave with one note ${posText(music.staffPosition(clef, p))}.`, { showKeySignature: false });
   if (mode === "count") {
     const ids = ["2", "3", "4", "5"].filter((x) => Number(x) <= max + 1);
     return {
@@ -607,7 +612,7 @@ export const octaveSign: Gen = (c) => {
   const sounds = useHigh ? 12 : -12;
   void sounds;
   const mode = c.rng.pick(["meaning", "sounding"] as const);
-  const fig = frag(clef, [{ events: [note(p, "semibreve", useHigh ? {} : { label: "8vb" })] }], `A ${clef}-clef stave with one note ${geom(clef, p)}.${useHigh ? " The sign 8va is written above the note." : " The sign 8vb is written below the note."}`, { showKeySignature: false, ...(useHigh ? { tempoText: "8va" } : {}) });
+  const fig = frag(clef, [{ events: [note(p, "semibreve", useHigh ? {} : { label: "8vb" })] }], `A ${clef}-clef stave with one note ${posText(music.staffPosition(clef, p))}.${useHigh ? " The sign 8va is written above the note." : " The sign 8vb is written below the note."}`, { showKeySignature: false, octaveShift: useHigh ? 1 : -1, ...(useHigh ? { tempoText: "8va" } : {}) });
   if (mode === "meaning") {
     const ids = ["higher", "lower", "same", "two-higher"];
     const right = useHigh ? "higher" : "lower";
@@ -643,7 +648,7 @@ export const octaveSound: Gen = (c) => {
   const need = music.ledgerLines(clef, sounding);
   if (need > max || need < 1) return null;
   const sign = up ? "8va" : "8vb";
-  const fig = frag(clef, [{ events: [note(written, "semibreve", up ? {} : { label: "8vb" })] }], `A ${clef}-clef stave with one note ${geom(clef, written)}.${up ? " The sign 8va is written above it." : " The sign 8vb is written below it."}`, { showKeySignature: false, ...(up ? { tempoText: "8va" } : {}) });
+  const fig = frag(clef, [{ events: [note(written, "semibreve", up ? {} : { label: "8vb" })] }], `A ${clef}-clef stave with one note ${posText(music.staffPosition(clef, written))}.${up ? " The sign 8va is written above it." : " The sign 8vb is written below it."}`, { showKeySignature: false, octaveShift: up ? 1 : -1, ...(up ? { tempoText: "8va" } : {}) });
   return {
     prompt: `This note is marked ${sign}. In the same clef, write the note that will actually sound, without the sign. You may use up to ${max} ledger lines.`,
     music: fig,
@@ -671,7 +676,7 @@ export const octavePick: Gen = (c) => {
   if (!ids.has(other) && music.ledgerLines(to, music.naturalAt(to, other)) <= 3) ids.set(other, { cat: "wrong-direction", why: `That moves the note the wrong way. ${dir === "up" ? "Higher" : "Lower"} means ${dir === "up" ? "up" : "down"} the stave.` });
   for (const d of c.rng.shuffle([-1, 1, 7, -7])) if (ids.size < 4 && !ids.has(tpos + d) && music.ledgerLines(to, music.naturalAt(to, tpos + d)) <= 2) ids.set(tpos + d, { cat: "wrong-interval", why: "That is the right idea but not the right line or space. Count the octave as eight letters, seven steps of line and space." });
   if (ids.size < 3) return null;
-  const shown = frag(from, [{ events: [note(p)] }], `A ${from}-clef stave with one note ${geom(from, p)}.`, { showKeySignature: false });
+  const shown = frag(from, [{ events: [note(p)] }], `A ${from}-clef stave with one note ${posText(music.staffPosition(from, p))}.`, { showKeySignature: false });
   const list = [...ids.keys()];
   return {
     prompt: `This note is in the ${from} clef. It is to be written an octave ${dir === "up" ? "higher" : "lower"} in the ${to} clef. Where is the new note written?`,
@@ -911,7 +916,7 @@ export const intervalName: Gen = (c) => {
   const bars = [{ events: [note(tonic), note(upper)] }];
   return {
     prompt: `The lower note is the tonic of ${keyWord(keyText)}. Name the interval from the lower note up to the upper note (quality and number).`,
-    music: frag(clef, bars, `A ${clef}-clef stave with two notes: the lower note ${noteLabel(tonic)} ${geom(clef, tonic)}, then the upper note ${geom(clef, upper)}.`, { showKeySignature: false }),
+    music: frag(clef, bars, `A ${clef}-clef stave with two notes: the lower note ${noteLabel(tonic)} ${posText(music.staffPosition(clef, tonic))}, then the upper note ${posText(music.staffPosition(clef, upper))}.`, { showKeySignature: false }),
     answer: { kind: "choice", options: c.rng.shuffle([{ id: rightId, label: ivWord(pick.num, pick.quality) }, ...picks.map(([id, x]) => ({ id, label: x.label }))]), correctOptionIds: [rightId], diagnoses: Object.fromEntries(picks.map(([id, x]) => [id, diag(id.slice(1) === String(pick.num) ? "quality-from-wrong-key" : "counted-one-end-only", x.why)])) as Diagnoses },
     hints: ["Count the number first (tonic = 1). Then decide the quality: the 4th, 5th and octave are perfect; the others are major in a major key and the 3rd is minor in a minor key."],
   };

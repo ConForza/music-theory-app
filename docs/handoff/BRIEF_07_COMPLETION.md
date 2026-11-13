@@ -8,7 +8,7 @@
 
 1. Bindings of all 19 lessons were rewritten from the lesson specs (the planned ones reused templates before their teaching point). The 14 Brief 01 templates are kept; three gained scope dimensions; 23 templates were added.
 2. G3-U1-R1 keeps its planned Grade 2 foundations, with two Grade 2 templates replaced as in Grade 2's review (`time-sig-read`, `ledger-place`).
-3. Unit 1 and 2 challenges have 6 questions (3 per section, was 4); the Grade 3 assessment has 31 (was 16). Pass marks unchanged.
+3. Unit 1 and 2 challenges have 6 questions (3 per section, was 4); the Grade 3 assessment has 32 (was 16). Pass marks unchanged.
 4. The optional upbeat node lists g3.02 as related outcome (schema needs one); it covers nothing.
 5. The rule checker accepts a 12/8 half-bar rest (Q25).
 6. Ledger limit four; `maxLedgerLines: 4` introduction row added (Q6).

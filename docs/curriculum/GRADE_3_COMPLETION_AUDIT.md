@@ -41,7 +41,7 @@ Taught = a lesson whose outcomes include it. Practised = a unit practice node bo
 
 Outcomes missing a lesson, practice, review or assessment: **0**. (The optional upbeat node relates to g3.02 for the lesson schema only; it covers nothing and is not counted.)
 
-The Grade 3 assessment also samples Grade 2 essentials (rhythm and metre, keys and scales, terms and melody reading; blueprint sections g2-rhythm, g2-keys, g2-terms-melody) so the mixed run covers new and prerequisite concepts. It has 31 questions per run (24 for the twelve outcomes, 3 for melodic minor, 6 earlier-grade); the earlier blueprint had 16.
+The Grade 3 assessment also samples Grade 2 essentials (rhythm and metre, keys and scales, terms and melody reading; blueprint sections g2-rhythm, g2-keys, g2-terms-melody) so the mixed run covers new and prerequisite concepts. It has 32 questions per run (24 for the twelve outcomes, 1 more on octave signs, 1 more on melodic minor, 6 earlier-grade); the earlier blueprint had 16. A test pins the exact count and unique section ids.
 
 ## 3. Reference-book sections (First Steps, Grade 3 sections 1-12, plus Grade 2 sections 9 and 11 for the melodic minor) → lessons
 
@@ -126,10 +126,10 @@ Required concepts below the capacity rule: **0**.
 |---|---|---|---|
 | G3-U1-C | a.g3-u1 v2 | 2 | 6 |
 | G3-U2-C | a.g3-u2 v2 | 2 | 6 |
-| G3-U3-C | a.g3-u3 v2 | 2 | 6 |
+| G3-U3-C | a.g3-u3 v2 | 3 | 7 |
 | G3-U4-C | a.g3-u4 v2 | 5 | 10 |
 | G3-U5-C | a.g3-u5 v2 | 3 | 6 |
-| G3-A | a.g3 v2 | 33 | 67 |
+| G3-A | a.g3 v2 | 16 | 32 |
 
 Pass marks (provisional, unchanged, in `content/policy/progression.json`): unit challenge 70%, Grade assessment 66%. They are in-app practice marks, not ABRSM marks. A run below the mark is stored as an honest result and completes nothing; completing the grade requires a passed assessment run.
 

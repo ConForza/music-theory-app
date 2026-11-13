@@ -116,10 +116,10 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | compound-rest-judge (U1-L04) | 2 | All three bars are in 9/8 and have a silent beat. Which bar writes the silent beat correctly? _Shown: Bar 1: quaver, crotchet, quaver, crotchet, quaver rest, crotchet rest. Bar 2: quaver, crotchet, quaver, crotchet, dotted crotchet rest. Bar 3: quaver, crotchet, quaver, crotchet, quaver rest, quaver rest, quaver rest._ | The answer is “Bar 2”. |
 | compound-rest-judge (U1-L04) | 3 | All three bars are in 9/8 and have two silent beats in a row. Which bar writes its rests correctly? _Shown: Bar 1: dotted minim rest, quaver, quaver, quaver. Bar 2: crotchet rest, quaver rest, quaver rest, quaver rest, quaver rest, quaver, quaver, quaver. Bar 3: dotted crotchet rest, dotted crotchet rest, quaver, quaver, quaver._ | The answer is “Bar 3”. |
 | compound-rest-judge (U1-L04) | 4 | All three bars are in 6/8 and have a silent beat. Which bar writes the silent beat correctly? _Shown: Bar 1: crotchet, quaver, crotchet rest, quaver rest. Bar 2: crotchet, quaver, quaver rest, crotchet rest. Bar 3: crotchet, quaver, quaver rest, quaver rest, quaver rest._ | The answer is “Bar 1”. |
-| compound-rest-write (U1-L04) | 1 | Complete this bar of 9/8. The last two beats are silent: add the rests so the bar adds up and the beats stay clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| compound-rest-write (U1-L04) | 2 | Complete this bar of 12/8. The last two beats are silent: add the rests so the bar adds up and the beats stay clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| compound-rest-write (U1-L04) | 3 | Complete this bar of 12/8. The last beat is silent: add the rest so the bar adds up and the beats stay clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| compound-rest-write (U1-L04) | 4 | Complete this bar of 6/8. The last beat is silent: add the rest so the bar adds up and the beats stay clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
+| compound-rest-write (U1-L04) | 1 | Complete this bar of 9/8. The last two beats are silent: add the rests so the bar adds up and the beats stay clear. | Compare your answer with the example. |
+| compound-rest-write (U1-L04) | 2 | Complete this bar of 12/8. The last two beats are silent: add the rests so the bar adds up and the beats stay clear. | Compare your answer with the example. |
+| compound-rest-write (U1-L04) | 3 | Complete this bar of 12/8. The last beat is silent: add the rest so the bar adds up and the beats stay clear. | Compare your answer with the example. |
+| compound-rest-write (U1-L04) | 4 | Complete this bar of 6/8. The last beat is silent: add the rest so the bar adds up and the beats stay clear. | Compare your answer with the example. |
 | triplet-compare (U1-L05) | 1 | Every beat of a bar of 3/4 is a triplet of three quavers. Which compound time signature has the same number of beats, each divided into three quavers? | The answer is “9/8”. |
 | triplet-compare (U1-L05) | 2 | In 3/4, every beat is a triplet of three quavers. How many quavers are played in one bar? | The answer is “9”. |
 | triplet-compare (U1-L05) | 3 | A bar of 12/8 has every beat divided into three quavers. In which simple time signature would the same bar be written with a triplet of quavers on every beat? | The answer is “4/4”. |
@@ -152,14 +152,14 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | ledger-place (U3-L01) | 2 | In the treble clef, write the note E that sits on the 3rd ledger line above the stave. | E can go at E6. |
 | ledger-place (U3-L01) | 3 | In the bass clef, write the note B that sits on the 4th ledger line above the stave. | B can go at B4. |
 | ledger-place (U3-L01) | 4 | In the treble clef, write the note D that sits on the 4th ledger line below the stave. | D can go at D3. |
-| ledger-count (U3-L01) | 1 | How many ledger lines does this note need? Count every ledger line from the stave out to the note. _Shown: A bass-clef stave with one note on a ledger line above the stave._ | The answer is “4”. |
-| ledger-count (U3-L01) | 2 | Name this note. (It is written in the treble clef.) _Shown: A treble-clef stave with one note on a ledger line well below the stave._ | The answer is “E”. |
-| ledger-count (U3-L01) | 3 | How many ledger lines does this note need? Count every ledger line from the stave out to the note. _Shown: A treble-clef stave with one note on a ledger line above the stave._ | The answer is “4”. |
-| ledger-count (U3-L01) | 4 | Name this note. (It is written in the treble clef.) _Shown: A treble-clef stave with one note on a ledger line above the stave._ | The answer is “E”. |
-| octave-sign (U3-L02) | 1 | The note is marked 8va. How is it played? _Shown: A treble-clef stave with one note on a ledger line above the stave. The sign 8va is written above the note._ | The answer is “An octave higher than written”. |
-| octave-sign (U3-L02) | 2 | The note is written as A on the stave with 8vb. Which sounding pitch does the player produce? _Shown: A bass-clef stave with one note on a ledger line well below the stave. The sign 8vb is written below the note._ | The answer is “A, one octave lower than the written note”. |
-| octave-sign (U3-L02) | 3 | The note is written as C on the stave with 8va. Which sounding pitch does the player produce? _Shown: A treble-clef stave with one note on a ledger line above the stave. The sign 8va is written above the note._ | The answer is “C, one octave higher than the written note”. |
-| octave-sign (U3-L02) | 4 | The note is marked 8vb. How is it played? _Shown: A bass-clef stave with one note on a ledger line well below the stave. The sign 8vb is written below the note._ | The answer is “An octave lower than written”. |
+| ledger-count (U3-L01) | 1 | How many ledger lines does this note need? Count every ledger line from the stave out to the note. _Shown: A bass-clef stave with one note on the 4th ledger line above the stave._ | The answer is “4”. |
+| ledger-count (U3-L01) | 2 | Name this note. (It is written in the treble clef.) _Shown: A treble-clef stave with one note in the space below the 3rd ledger line below the stave._ | The answer is “E”. |
+| ledger-count (U3-L01) | 3 | How many ledger lines does this note need? Count every ledger line from the stave out to the note. _Shown: A treble-clef stave with one note on the 4th ledger line above the stave._ | The answer is “4”. |
+| ledger-count (U3-L01) | 4 | Name this note. (It is written in the treble clef.) _Shown: A treble-clef stave with one note on the 3rd ledger line above the stave._ | The answer is “E”. |
+| octave-sign (U3-L02) | 1 | The note is marked 8va. How is it played? _Shown: A treble-clef stave with one note in the space above the 1st ledger line above the stave. The sign 8va is written above the note._ | The answer is “An octave higher than written”. |
+| octave-sign (U3-L02) | 2 | The note is written as A on the stave with 8vb. Which sounding pitch does the player produce? _Shown: A bass-clef stave with one note on the 3rd ledger line below the stave. The sign 8vb is written below the note._ | The answer is “A, one octave lower than the written note”. |
+| octave-sign (U3-L02) | 3 | The note is written as C on the stave with 8va. Which sounding pitch does the player produce? _Shown: A treble-clef stave with one note on the 2nd ledger line above the stave. The sign 8va is written above the note._ | The answer is “C, one octave higher than the written note”. |
+| octave-sign (U3-L02) | 4 | The note is marked 8vb. How is it played? _Shown: A bass-clef stave with one note in the space below the 3rd ledger line below the stave. The sign 8vb is written below the note._ | The answer is “An octave lower than written”. |
 | octave-sound (U3-L02) | 1 | This note is marked 8va. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines. _Shown: A treble-clef stave with one note on the 3rd line. The sign 8va is written above it._ | B can go at B5. |
 | octave-sound (U3-L02) | 2 | This note is marked 8vb. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines. _Shown: A bass-clef stave with one note in the 3rd space. The sign 8vb is written below it._ | E can go at E2. |
 | octave-sound (U3-L02) | 3 | This note is marked 8va. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines. _Shown: A treble-clef stave with one note in the 4th space. The sign 8va is written above it._ | E can go at E6. |
@@ -221,9 +221,9 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | interval-facts (U5-L01) | 3 | Which of these intervals above the tonic can be a perfect interval? | The answer is “A 5th”. |
 | interval-facts (U5-L01) | 4 | Which of these intervals above the tonic can be a perfect interval? | The answer is “A octave”. |
 | interval-name (U5-L02) | 1 | The lower note is the tonic of B minor. Name the interval from the lower note up to the upper note (quality and number). _Shown: A treble-clef stave with two notes: the lower note B on the 3rd line, then the upper note in the 4th space._ | The answer is “perfect 4th”. |
-| interval-name (U5-L02) | 2 | The lower note is the tonic of A minor. Name the interval from the lower note up to the upper note (quality and number). _Shown: A treble-clef stave with two notes: the lower note A on a ledger line well below the stave, then the upper note in the space just below the stave._ | The answer is “perfect 4th”. |
-| interval-name (U5-L02) | 3 | The lower note is the tonic of D major. Name the interval from the lower note up to the upper note (quality and number). _Shown: A bass-clef stave with two notes: the lower note D on the 3rd line, then the upper note on a ledger line above the stave._ | The answer is “major 7th”. |
-| interval-name (U5-L02) | 4 | The lower note is the tonic of B♭ major. Name the interval from the lower note up to the upper note (quality and number). _Shown: A bass-clef stave with two notes: the lower note B♭ in the space just above the stave, then the upper note on a ledger line above the stave._ | The answer is “major 3rd”. |
+| interval-name (U5-L02) | 2 | The lower note is the tonic of A minor. Name the interval from the lower note up to the upper note (quality and number). _Shown: A treble-clef stave with two notes: the lower note A on the 2nd ledger line below the stave, then the upper note in the space just below the stave._ | The answer is “perfect 4th”. |
+| interval-name (U5-L02) | 3 | The lower note is the tonic of D major. Name the interval from the lower note up to the upper note (quality and number). _Shown: A bass-clef stave with two notes: the lower note D on the 3rd line, then the upper note on the 1st ledger line above the stave._ | The answer is “major 7th”. |
+| interval-name (U5-L02) | 4 | The lower note is the tonic of B♭ major. Name the interval from the lower note up to the upper note (quality and number). _Shown: A bass-clef stave with two notes: the lower note B♭ in the space just above the stave, then the upper note in the space above the 1st ledger line above the stave._ | The answer is “major 3rd”. |
 | terms (U5-L03) | 1 | What does “presto” mean? | The answer is “very fast”. |
 | terms (U5-L03) | 2 | What does “adagio” mean? | The answer is “slow”. |
 | terms (U5-L03) | 3 | What does “staccato” mean? | The answer is “short and detached”. |
@@ -281,7 +281,8 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 
 ### G3-U3-C: Unit challenge: Ledger lines and octave transposition (blueprint a.g3-u3 v2)
 
-- abrsm2020.g3.04: 3 question(s) from ledger-read, ledger-place, ledger-count, octave-sign, octave-sound (outcome g3.04)
+- abrsm2020.g3.04: 3 question(s) from ledger-read, ledger-place, ledger-count (outcome g3.04)
+- abrsm2020.g3.04: 1 question(s) from octave-sign, octave-sound (outcome g3.04)
 - abrsm2020.g3.05: 3 question(s) from octave-transpose, octave-pick (outcome g3.05)
 
 ### G3-U4-C: Unit challenge: Keys to four sharps or flats; both minor forms (blueprint a.g3-u4 v2)
@@ -303,7 +304,8 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g3.01: 2 question(s) from time-signature, compound-facts, triplet-compare, triplet-bar, bar-complete (outcome g3.01)
 - abrsm2020.g3.02: 2 question(s) from bar-complete, compound-grouping, compound-judge, compound-rest-judge, compound-rest-write, demisemi-judge, demisemi-regroup (outcome g3.02)
 - abrsm2020.g3.03: 2 question(s) from demisemiquaver, demisemi-facts, demisemi-judge, demisemi-regroup (outcome g3.03)
-- abrsm2020.g3.04: 2 question(s) from ledger-read, ledger-place, ledger-count, octave-sign, octave-sound (outcome g3.04)
+- abrsm2020.g3.04: 2 question(s) from ledger-read, ledger-place, ledger-count (outcome g3.04)
+- abrsm2020.g3.04: 1 question(s) from octave-sign, octave-sound (outcome g3.04)
 - abrsm2020.g3.05: 2 question(s) from octave-transpose, octave-pick (outcome g3.05)
 - abrsm2020.g3.06: 2 question(s) from scale-build-major, key-signature, key-facts, scale-gap (outcome g3.06)
 - abrsm2020.g3.07: 2 question(s) from scale-build-minor, key-signature, key-facts, scale-gap (outcome g3.07)
@@ -312,24 +314,6 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g3.10: 2 question(s) from degree, degree-note (outcome g3.10)
 - abrsm2020.g3.11: 2 question(s) from interval-quality, interval-name, interval-facts (outcome g3.11)
 - abrsm2020.g3.12: 2 question(s) from terms, term-use (outcome g3.12)
-- Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
-- Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
-- Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
-- Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
-- Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
-- Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
-- Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
-- Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
-- Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
-- Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
-- Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
-- Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
 - Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
 - Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
 - Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)

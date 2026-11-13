@@ -14,7 +14,8 @@ export const option = (scope, text) => scope.locator("label.option", { hasText: 
 export async function tapStave(page, scope, pos) {
   const svg = scope.locator(".stave-editor-stave svg").first();
   const [vbY, vbH] = await svg.evaluate((el) => { const v = el.getAttribute("viewBox").split(" ").map(Number); return [v[1], v[3]]; });
-  await svg.scrollIntoViewIfNeeded();
+  // centre the stave, so the fixed action bar at the bottom of the screen never covers the tap point
+  await svg.evaluate((el) => el.scrollIntoView({ block: "center" }));
   // wait for the stave to stop moving (a slower machine can still be settling after the previous question), then tap
   let box = await svg.boundingBox();
   for (let i = 0; i < 10; i++) {

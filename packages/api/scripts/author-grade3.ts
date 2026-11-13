@@ -168,7 +168,8 @@ const SECTION_TEMPLATES: Record<string, string[]> = {
   "o-g3-01": ["t.g3.time-signature", "t.g3.compound-facts", "t.g3.triplet-compare", "t.g3.triplet-bar", "t.g3.bar-complete"],
   "o-g3-02": ["t.g3.bar-complete", "t.g3.compound-grouping", "t.g3.compound-judge", "t.g3.compound-rest-judge", "t.g3.compound-rest-write", "t.g3.demisemi-judge", "t.g3.demisemi-regroup"],
   "o-g3-03": ["t.g3.demisemiquaver", "t.g3.demisemi-facts", "t.g3.demisemi-judge", "t.g3.demisemi-regroup"],
-  "o-g3-04": ["t.g3.ledger-read", "t.g3.ledger-place", "t.g3.ledger-count", "t.g3.octave-sign", "t.g3.octave-sound"],
+  "o-g3-04": ["t.g3.ledger-read", "t.g3.ledger-place", "t.g3.ledger-count"],
+  "o-g3-04b": ["t.g3.octave-sign", "t.g3.octave-sound"],
   "o-g3-05": ["t.g3.octave-transpose", "t.g3.octave-pick"],
   "o-g3-06": ["t.g3.scale-build-major", "t.g3.key-signature", "t.g3.key-facts", "t.g3.scale-gap"],
   "o-g3-07": ["t.g3.scale-build-minor", "t.g3.key-signature", "t.g3.key-facts", "t.g3.scale-gap"],
@@ -191,13 +192,21 @@ const EARLIER = [
 for (const bp of as.assessments) {
   bp.version = 2;
   const unitIndex = bp.kind === "unit_challenge" ? units.indexOf(String(bp.unitId)) : 99;
+  // The extended-ledger section asks only about notes beyond the stave; octave signs have their own single question.
+  if ((bp.id === "a.g3" || bp.id === "a.g3-u3") && !bp.sections.some((s: { id: string }) => s.id === "o-g3-04b")) {
+    const at = bp.sections.findIndex((s: { id: string }) => s.id === "o-g3-04");
+    bp.sections.splice(at + 1, 0, { id: "o-g3-04b", title: "abrsm2020.g3.04", outcomeIds: ["abrsm2020.g3.04"], templateIds: [], itemCount: 1 });
+  }
   for (const s of bp.sections) {
     if (SECTION_TEMPLATES[s.id]) s.templateIds = SECTION_TEMPLATES[s.id].filter((t) => (firstUnit.get(t) ?? 0) <= unitIndex);
     if (bp.id === "a.g3" && s.id.startsWith("o-g3-")) s.itemCount = s.id === "o-g3-08" ? 3 : 2;
   }
-  if (bp.id === "a.g3") bp.sections = [...bp.sections.filter((s: { id: string }) => s.id !== "earlier-grades"), ...EARLIER];
+  // Idempotent: every section this script owns is replaced, never appended to ("earlier-grades" is the planned section it supersedes).
+  if (bp.id === "a.g3") bp.sections = [...bp.sections.filter((s: { id: string }) => s.id !== "earlier-grades" && !EARLIER.some((e) => e.id === s.id)), ...EARLIER];
+  if (new Set(bp.sections.map((s: { id: string }) => s.id)).size !== bp.sections.length) throw new Error(`${bp.id} has duplicate section ids`);
   // A unit challenge needs enough questions to be a fair check: at least six.
   if (bp.kind === "unit_challenge" && bp.sections.reduce((n: number, s: { itemCount: number }) => n + s.itemCount, 0) < 6) for (const s of bp.sections) s.itemCount = 3;
+  for (const s of bp.sections) if (s.id === "o-g3-04b") s.itemCount = 1;
   for (const s of bp.sections) if (!s.templateIds.length) throw new Error(`${bp.id}/${s.id} has no templates`);
 }
 writeFileSync(asFile, JSON.stringify(as, null, 2) + "\n");

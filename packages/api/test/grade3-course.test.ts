@@ -189,7 +189,10 @@ describe("Grade 3 generated nodes only ask what has been taught", () => {
     const per = new Map<string, number>();
     for (const s of bp.sections) for (const o of s.outcomeIds) per.set(o, (per.get(o) ?? 0) + s.itemCount);
     for (let k = 1; k <= 12; k++) expect(per.get(`abrsm2020.g3.${String(k).padStart(2, "0")}`) ?? 0, `g3.${k}`).toBeGreaterThanOrEqual(2);
-    expect(bp.sections.reduce((n, s) => n + s.itemCount, 0)).toBeGreaterThanOrEqual(30);
+    expect(new Set(bp.sections.map((s) => s.id)).size, "section ids are unique").toBe(bp.sections.length);
+    expect(bp.sections.reduce((n, s) => n + s.itemCount, 0)).toBe(32);
+    expect(bp.sections.filter((s) => s.id.startsWith("g2-")).reduce((n, s) => n + s.itemCount, 0)).toBe(6);
+    for (const b of course.ix.assessments.values()) if (b.grade === 3) expect(new Set(b.sections.map((s) => s.id)).size, b.id).toBe(b.sections.length);
     expect(bp.hintsAllowed).toBe(false);
   });
 
@@ -204,7 +207,10 @@ describe("Grade 3 generated nodes only ask what has been taught", () => {
       for (const n of [...EARLIER, ...G3]) if (n.id !== "G3-A") insert(db, id, n);
       app.nodes.start(id, "G3-A");
       const items = app.nodes.internalItems(id, "G3-A");
-      expect(items.length).toBeGreaterThanOrEqual(30);
+      expect(items.length).toBe(32);
+      // genuine extended-ledger evidence in every run, and the Grade 3 questions carry the pass mark
+      expect(items.filter((i) => i.conceptIds.includes("c.pitch.ledger-extended")).length, `learner ${u} extended-ledger questions`).toBeGreaterThanOrEqual(2);
+      expect(items.filter((i) => !/^t\.g[12]\./.test(i.item.templateId)).length).toBe(26);
       expect(new Set(items.map((i) => visibleKey(i.item))).size).toBe(items.length);
       let melodic = 0;
       let compound = 0;
@@ -213,13 +219,12 @@ describe("Grade 3 generated nodes only ask what has been taught", () => {
         const text = JSON.stringify({ p: it.item.prompt, m: it.item.music });
         if (/melodic/.test(it.item.prompt)) melodic++;
         if (/\b(6|9|12)\/8\b/.test(text)) compound++;
-        const o = (it as unknown as { outcomeId?: string }).outcomeId;
-        if (o) outcomes.add(o);
+        for (const c of it.conceptIds) for (const o of course.ix.concepts.get(c)?.outcomeIds ?? []) outcomes.add(o);
       }
       expect(melodic, `learner ${u}`).toBeGreaterThanOrEqual(1);
       expect(compound, `learner ${u}`).toBeGreaterThanOrEqual(2);
     }
-    void outcomes;
+    for (let k = 1; k <= 12; k++) expect(outcomes.has(`abrsm2020.g3.${String(k).padStart(2, "0")}`), `g3.${k} credited in a generated assessment`).toBe(true);
   }, 600_000);
 });
 
@@ -312,9 +317,29 @@ describe("octave transposition is genuinely tested", () => {
       expect(gradeItem(course.ix, item, { ...good, measures: [{ events: swapped }] } as never, scope).correct, `${item.prompt} crotchet+quaver`).toBe(true);
       const quavers = ev.flatMap((e) => (e.kind === "rest" && e.duration.value === "crotchet" ? [1, 2, 3].map(() => ({ kind: "rest", duration: { value: "quaver", dots: 0 } })) : [e]));
       expect(gradeItem(course.ix, item, { ...good, measures: [{ events: quavers }] } as never, scope).correct, `${item.prompt} three quaver rests`).toBe(false);
+      // sounded notes of the same lengths in the silent beats are wrong (the task is about rests)
+      const noted = ev.map((e) => (e.kind === "rest" ? { ...e, kind: "note" } : e));
+      expect(gradeItem(course.ix, item, { ...good, measures: [{ events: noted }] } as never, scope).correct, `${item.prompt} notes instead of rests`).toBe(false);
       forms++;
     }
     expect(forms).toBeGreaterThan(20);
+  });
+});
+
+describe("descriptions name the exact position", () => {
+  it("ledger-count describes the line or space and agrees with the note", async () => {
+    const node = course.ix.nodeById.get("G3-U3-L01")!;
+    const b = node.exercises.find((x) => x.templateId === "t.g3.ledger-count")!;
+    const scope = effectiveScope(course.ix, node, b);
+    for (let s = 1; s < 40; s++) {
+      const item = generateItem(course.ix, "t.g3.ledger-count", s, { scope }).item;
+      const m = item.music!;
+      const pitch = (m.measures[0]!.events![0] as { pitch: string }).pitch;
+      const pos = (await import("@mtp/curriculum")).music.staffPosition(m.clef as never, (await import("@mtp/curriculum")).music.parsePitch(pitch));
+      const lines = pos > 8 ? Math.floor((pos - 8) / 2) : Math.floor(-pos / 2);
+      expect(m.textAlternative, item.prompt).toMatch(new RegExp(`${lines}(st|nd|rd|th) ledger line`));
+      expect(m.textAlternative).toMatch(pos % 2 === 0 ? /on the \d(st|nd|rd|th) ledger line/ : /in the space/);
+    }
   });
 });
 

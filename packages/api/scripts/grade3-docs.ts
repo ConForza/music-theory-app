@@ -54,7 +54,7 @@ for (const o of outs) {
   a.push(`| ${o.id.replace("abrsm2020.", "")} | ${esc(o.statement)} | ${taught.join(", ")} | ${practised.join(", ")} | ${reviewed.join(", ")} | ${assessed.join(", ")} | ${revisable}/${concepts.length} |`);
 }
 a.push("", `Outcomes missing a lesson, practice, review or assessment: **${gaps}**. (The optional upbeat node relates to g3.02 for the lesson schema only; it covers nothing and is not counted.)`, "");
-a.push("The Grade 3 assessment also samples Grade 2 essentials (rhythm and metre, keys and scales, terms and melody reading; blueprint sections g2-rhythm, g2-keys, g2-terms-melody) so the mixed run covers new and prerequisite concepts. It has 31 questions per run (24 for the twelve outcomes, 3 for melodic minor, 6 earlier-grade); the earlier blueprint had 16.", "");
+a.push("The Grade 3 assessment also samples Grade 2 essentials (rhythm and metre, keys and scales, terms and melody reading; blueprint sections g2-rhythm, g2-keys, g2-terms-melody) so the mixed run covers new and prerequisite concepts. It has 32 questions per run (24 for the twelve outcomes, 1 more on octave signs, 1 more on melodic minor, 6 earlier-grade); the earlier blueprint had 16. A test pins the exact count and unique section ids.", "");
 
 a.push("## 3. Reference-book sections (First Steps, Grade 3 sections 1-12, plus Grade 2 sections 9 and 11 for the melodic minor) → lessons", "");
 a.push("| Section | Heading | Printed page | Lessons using it | Source note |", "|---|---|---|---|---|");

@@ -784,6 +784,8 @@ export const NotationFragment = z
     showKeySignature: z.boolean().default(true),
     timeSignature: TimeSignatureName.optional(),
     tempoText: z.string().optional(),
+    /** Brief 07: an octave sign (8va = 1, 8vb = -1) covers this fragment. Display stays at the written octave; playback sounds it one octave away. */
+    octaveShift: z.union([z.literal(1), z.literal(-1)]).optional(),
     measures: z.array(Measure).min(1),
     /** Text description for screen readers and no-graphics mode. */
     textAlternative: NonEmpty,

@@ -86,7 +86,7 @@ export function MusicView({ fragment, marks, size, labels = "names" }: { fragmen
   const play = () => playTimed(playbackEvents(fragment), (id) => setLit(id ? [id] : []));
   return (
     <div className="music-view">
-      <Notation fragment={fragment} highlight={lit} marks={marks} size={size} labels={labels} onActivate={(ev) => { stopAll(); ev.pitches.forEach((p) => playPitch(p, 0.9)); setLit([ev.id]); window.setTimeout(() => setLit([]), 600); }} />
+      <Notation fragment={fragment} highlight={lit} marks={marks} size={size} labels={labels} onActivate={(ev) => { stopAll(); ev.pitches.forEach((p) => playPitch(p, 0.9, 0, 12 * (fragment.octaveShift ?? 0))); setLit([ev.id]); window.setTimeout(() => setLit([]), 600); }} />
       <button type="button" className="btn btn-ghost btn-small listen" onClick={play}><Icon name="speaker" size={18} /> Listen</button>
     </div>
   );
@@ -106,8 +106,8 @@ export function Demo({ lesson, onNext }: { lesson: LearnerLesson; onNext: () => 
     stopAll();
   }, []);
 
-  const play = (p: string) => {
-    playPitch(p);
+  const play = (p: string, transpose = 0) => {
+    playPitch(p, 0.9, 0, transpose);
     setLit([p]);
     timers.current.push(window.setTimeout(() => setLit([]), 700));
   };
@@ -123,7 +123,7 @@ export function Demo({ lesson, onNext }: { lesson: LearnerLesson; onNext: () => 
     <>
       <Step title="See it, hear it" eyebrow="Try it">
         <p className="lede-small">Tap the notes or the keys. Sound is optional: everything is described in words too.</p>
-        {d.widget !== "keyboard" && <Notation fragment={d.music} highlight={lit} onActivate={(ev) => ev.pitches.forEach(play)} />}
+        {d.widget !== "keyboard" && <Notation fragment={d.music} highlight={lit} onActivate={(ev) => ev.pitches.forEach((p) => play(p, 12 * (d.music.octaveShift ?? 0)))} />}
         {showKeys && <Keyboard from={from} to={to} highlight={lit.length ? lit : notes.slice(0, 1)} onPlay={play} />}
         <button type="button" className="btn btn-ghost" onClick={playAll}><Icon name="speaker" size={20} /> Play all the notes</button>
         <ol className="demo-steps">{d.steps.map((s) => <li key={s}>{s}</li>)}</ol>

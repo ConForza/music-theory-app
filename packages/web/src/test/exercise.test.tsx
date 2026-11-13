@@ -116,6 +116,14 @@ describe("review fixes (R3, R5, R6, R7, R8)", () => {
     render(<Notation fragment={f} onActivate={() => undefined} />);
     expect(screen.getByRole("button", { name: /^Play / }).getAttribute("aria-label")).toMatch(/D5/);
   });
+  it("an octave sign sounds the notes one octave away without moving them on the stave (8va +12, 8vb -12 semitones)", async () => {
+    const { playbackEvents } = await import("../components/notation/layout");
+    const frag = (shift?: 1 | -1) => ({ clef: "treble", textAlternative: "x", ...(shift ? { octaveShift: shift } : {}), measures: [{ events: [{ kind: "note", pitch: "C5", duration: { value: "semibreve", dots: 0 } }] }] }) as never;
+    const base = playbackEvents(frag())[0]!.semis[0]!;
+    expect(playbackEvents(frag(1))[0]!.semis[0]).toBe(base + 12);
+    expect(playbackEvents(frag(-1))[0]!.semis[0]).toBe(base - 12);
+    expect(playbackEvents(frag(1))[0]!.pitches).toEqual(["C5"]);
+  });
   it("R8: a note tied over the bar-line sounds once, for the combined length", async () => {
     const { playbackEvents } = await import("../components/notation/layout");
     const evs = playbackEvents({ clef: "treble", timeSignature: "2/4", textAlternative: "x", measures: [

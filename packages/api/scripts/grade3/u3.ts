@@ -53,14 +53,14 @@ export const U3: Spec2[] = [
     objective: { statement: "Understand the octave signs 8va and 8vb, and say which note sounds.", criteria: ["I know 8va above the notes means play an octave higher.", "I know 8vb below the notes means play an octave lower.", "I can write the note that actually sounds, in the right octave."] },
     explain: [
       { text: "Very high or very low notes need many ledger lines, which are hard to read. An octave sign saves them: the notes are written closer to the stave, and a sign says to play them in another octave." },
-      { music: stave("treble", ["G5", "A5", "B5", "C6"], "Four notes in the treble clef, marked 8va above the stave: G, A, B, C.", { tempoText: "8va" }), caption: "8va above the notes: play them an octave higher than they are written." },
+      { music: stave("treble", ["G5", "A5", "B5", "C6"], "Four notes in the treble clef, marked 8va above the stave: G, A, B, C.", { tempoText: "8va", octaveShift: 1 }), caption: "8va above the notes: play them an octave higher than they are written." },
       { text: "8va stands for ottava, the Italian word for octave. It is written above the stave, and a dotted line shows how far it reaches. The notes keep their letter names. They simply sound one octave higher, so the G written on the stave sounds as the G one octave above it." },
-      { music: stave("bass", [["F2", "8vb"], "E2", "D2", "C2"], "Four notes in the bass clef, marked 8vb below the notes: F, E, D, C."), caption: "8vb below the notes: play them an octave lower than they are written." },
+      { music: stave("bass", [["F2", "8vb"], "E2", "D2", "C2"], "Four notes in the bass clef, marked 8vb below the notes: F, E, D, C.", { octaveShift: -1 }), caption: "8vb below the notes: play them an octave lower than they are written." },
       { text: "8vb, sometimes written 8va bassa, goes below the stave and means one octave lower. When the sign ends, the music returns to the written pitch." },
       { text: "To find the sounding note, keep the letter name and move one octave in the direction of the sign: seven steps of line and space, up for 8va and down for 8vb. Notice that the sign changes how the notes are played, not how they are named." },
       { tip: "8va above = an octave higher. 8vb below = an octave lower. Same letter name, one octave away." },
     ],
-    demo: { widget: "staff", music: stave("treble", ["C5", "D5", "E5", "F5"], "Four notes in the treble clef, marked 8va above the stave: C, D, E, F.", { tempoText: "8va" }), steps: ["Read the written notes: C, D, E, F.", "The sign 8va above them means play each one an octave higher.", "They sound as the C, D, E and F one octave above the written notes."], text: "Four treble-clef notes marked 8va: they sound an octave higher." },
+    demo: { widget: "staff", music: stave("treble", ["C5", "D5", "E5", "F5"], "Four notes in the treble clef, marked 8va above the stave: C, D, E, F.", { tempoText: "8va", octaveShift: 1 }), steps: ["Read the written notes: C, D, E, F.", "The sign 8va above them means play each one an octave higher.", "They sound as the C, D, E and F one octave above the written notes."], text: "Four treble-clef notes marked 8va: they sound an octave higher." },
     guided: [
       { t: "t.g3.octave-sign", when: has("How is it played"), correct: "Yes: you read the direction of the sign." },
       { t: "t.g3.octave-sound", correct: "Right: the same letter an octave away." },

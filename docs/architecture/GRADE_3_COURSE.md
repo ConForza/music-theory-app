@@ -42,8 +42,17 @@ The lesson schema allows six explanation blocks, so `author-grade3.ts` fits each
 * **Melodic minor.** Taught in A, E and D minor first (G3-U4-L01), then B, F♯, C♯, G, C, F. The Grade 2 preview concept is not used. Melodic-concept credit requires the prompt to name the melodic minor, so harmonic questions never count for it.
 * **Intervals.** Above the tonic only, quality and number. The 6th and 7th of a minor key are never asked by key.
 * **Terms (Q2).** The vocabulary has six Grade 3 terms; it was not extended because it is part of every generation fingerprint.
-* **Assessment.** 31 questions a run: 2 per outcome, 3 for g3.08 (so melodic minor is always present), and 6 from Grade 2. Pass marks unchanged.
+* **Assessment.** 32 questions a run: 2 per outcome, 1 more on octave signs (so the extended-ledger section is only about notes beyond the stave), 3 for g3.08 (so melodic minor is always present), and 6 from Grade 2. Pass marks unchanged.
 
 ## Testing
 
 `engine/test/grade3-answers.test.ts` (independent derivation of every new answer), `api/test/grade3-course.test.ts` (36 nodes, progression, failed/passed challenge and assessment, retake, interruption, scope and later-unit-wording checks, boundaries, octave and rest grading through the real grader), Grade 3 block in `mastery-audit.test.ts`, and `web/e2e/g3.mjs` (real-browser journeys on five viewports, keyboard, dark mode, reduced motion, 200% text at 320px, notation descriptions).
+
+## Review round 1 (independent review of PR #11)
+
+* **Assessment size.** `author-grade3.ts` appended the Grade 2 sections on every run, so the committed blueprint had 67 questions (42 from Grade 2). It now replaces its own sections, rebuilds the blueprint from the planned one, and a test pins unique section ids and exactly 32 questions (6 from Grade 2).
+* **Extended ledger lines.** The octave-sign templates have their own single-question section (`o-g3-04b`); the `o-g3-04` section draws only ledger-line templates, and a test requires extended-ledger credit in every generated run.
+* **Rest writing.** `compound-rest-write` lists every accepted ending (dotted-crotchet rest, crotchet plus quaver rest, and in 12/8 the half-bar rest) and no longer accepts "any bar that adds up", so a sounded note in a silent beat is wrong (tested through the real grader).
+* **Octave-sign playback.** Fragments carry an optional `octaveShift` (8va = 1, 8vb = -1). Notation stays at the written octave; full playback and tapping a note sound it 12 semitones away (unit test).
+* **Descriptions.** The new ledger questions describe the exact line or space ("on the 3rd ledger line above the stave", "in the space below ...").
+* **Browser driver.** Staff taps wait for the stave to settle and retry once; the reviewer also found the fixed action bar could cover the tap point, so the helper scrolls the stave into view first.
