@@ -524,6 +524,20 @@ describe("Unit 4: intervals and triads", () => {
     expect(music.intervalBetween(P("F4"), P("G#4"))).toMatchObject({ quality: "A", number: 2 });
   });
 
+  it("review (educational P1-2): once augmented and diminished intervals are taught, both are asked at a meaningful rate", () => {
+    for (const tpl of ["t.g4.interval-diatonic", "t.g4.interval-write"]) {
+      const counts: Record<string, number> = { d: 0, A: 0, other: 0 };
+      const list = items("G4-U4-L02", tpl, 200);
+      for (const i of list) {
+        const a = i.answer as unknown as { acceptedIntervals?: string[]; target?: string };
+        const q = (a.acceptedIntervals?.[0] ?? a.target)![0]!;
+        counts[q === "d" || q === "A" ? q : "other"]!++;
+      }
+      expect(counts.d, `${tpl} diminished`).toBeGreaterThanOrEqual(list.length * 0.1);
+      expect(counts.A, `${tpl} augmented`).toBeGreaterThanOrEqual(list.length * 0.1);
+    }
+  });
+
   it("interval-write: the accepted note is the interval above or below, in the key named", () => {
     for (const i of items("G4-U4-L02", "t.g4.interval-write", 200)) {
       const a = i.answer as unknown as { lower: string; target: string; direction: "up" | "down"; acceptedPitches: string[]; key: string };

@@ -358,6 +358,14 @@ describe("Grade 4 concept boundaries (no false mastery from earlier-grade materi
     for (const t of ["t.g4.technique-facts", "t.g4.technique-use"]) for (const i of sample(t, "G4-U5-P1", 120)) { expect(ok("c.instruments.techniques", i)).toBe(true); expect(ok("c.terms.g4", i)).toBe(false); }
   });
 
+  it("review (educational P1-1/P1-2): the interval lessons show A flat as a flat, and the augmented/diminished lesson contains a diminished interval question", () => {
+    const l1 = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../../../content/lessons/G4-U4-L01.json"), "utf8");
+    expect(l1).not.toMatch(/"pitch": "A4"[^}]*"writtenAccidental": "natural"/);
+    const items = course.authoredItems("G4-U4-L02");
+    const qualities = items.map((i) => ((i.answer as { acceptedIntervals?: string[]; target?: string }).acceptedIntervals?.[0] ?? (i.answer as { target?: string }).target ?? "")[0]);
+    expect(qualities.filter((q) => q === "d").length).toBeGreaterThanOrEqual(2);
+  });
+
   it("review P2-6: tonic-bottomed intervals, tonic-chord questions, empty alto signatures and unprinted double signs earn no Grade 4 credit", () => {
     const tonicOf = (k: string) => /^([A-G][b#]?)/.exec(k)![1]!;
     for (const t of ["t.g4.interval-diatonic", "t.g4.interval-write"]) {

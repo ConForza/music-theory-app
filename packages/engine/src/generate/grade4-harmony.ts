@@ -55,16 +55,23 @@ function pickPair(c: Ctx): Pair | null {
   const form = c.rng.pick(forms);
   const clef = c.rng.pick(clefsIn(c));
   const max = Math.min(maxLedger(c), 2);
-  for (const oct of c.rng.shuffle([2, 3, 4])) {
-    const notes = ascendingNotes(keyText, form, oct);
-    const i = c.rng.int(0, 6);
-    const j = c.rng.int(i + 1, 7);
+  // once augmented and diminished intervals are taught, about half the questions are about them (they are rare among the pairs of
+  // one scale, so without this a lesson on them would almost never ask for one); diminished and augmented are asked in turn
+  const wantNew = Boolean(c.scope.augmentedDiminished) && c.rng.chance(0.55);
+  const wantQuality = wantNew ? c.rng.pick(["d", "A"] as const) : null;
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const oct = c.rng.pick([2, 3, 4]);
+    // two octaves of the scale, so a pair may start on the 7th degree (the diminished 5th and 7th need it); never more than an octave apart
+    const notes = [...ascendingNotes(keyText, form, oct), ...ascendingNotes(keyText, form, oct + 1).slice(1)];
+    const i = c.rng.int(0, 13);
+    const j = c.rng.int(i + 1, Math.min(i + 7, 14));
     const lower = notes[i]!;
     const upper = notes[j]!;
     if (!fits(clef, [lower, upper], max)) continue;
     const iv = music.intervalBetween(lower, upper);
     // augmented and diminished intervals are asked only once they have been taught (scope dimension augmentedDiminished)
     if (!"MmP".includes(iv.quality) && !c.scope.augmentedDiminished) continue;
+    if (wantQuality && iv.quality !== wantQuality && attempt < 50) continue;
     return { key: keyText, form, lower, upper, clef, iv };
   }
   return null;

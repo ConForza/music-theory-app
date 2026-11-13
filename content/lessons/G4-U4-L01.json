@@ -65,12 +65,11 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A4",
+                "pitch": "Ab4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
-                },
-                "writtenAccidental": "natural"
+                }
               },
               {
                 "kind": "note",
@@ -146,17 +145,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Key: F♯ minor (melodic minor, coming down). Name the interval between these two notes: quality and number.",
+      "prompt": "Key: B major. Name the interval between these two notes: quality and number.",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "alto",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "C#4",
+                "pitch": "C#3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -164,7 +163,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D4",
+                "pitch": "D#3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -173,18 +172,17 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 3 sharps. a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave.",
-        "key": "F# minor"
+        "textAlternative": "An alto-clef stave, key signature of 5 sharps. a note in the space below the 1st ledger line below the stave; a note on the 1st ledger line below the stave.",
+        "key": "B major"
       },
       "answer": {
         "kind": "interval",
         "task": "identify",
-        "key": "F# minor",
-        "minorForm": "melodic-descending",
-        "lower": "C#4",
-        "upper": "D4",
+        "key": "B major",
+        "lower": "C#3",
+        "upper": "D#3",
         "acceptedIntervals": [
-          "m2"
+          "M2"
         ]
       },
       "hints": [
@@ -209,7 +207,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Key: E minor (harmonic minor). Write the note that is a major 2nd above the note shown.",
+      "prompt": "Key: E minor (harmonic minor). Write the note that is a perfect 5th below the note shown.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -219,7 +217,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "G3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -228,7 +226,7 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 1 sharp. a note on the 5th line.",
+        "textAlternative": "A bass-clef stave, key signature of 1 sharp. a note in the 4th space.",
         "key": "E minor"
       },
       "answer": {
@@ -236,16 +234,16 @@
         "task": "build",
         "key": "E minor",
         "minorForm": "harmonic",
-        "lower": "A3",
-        "target": "M2",
-        "direction": "up",
+        "lower": "G3",
+        "target": "P5",
+        "direction": "down",
         "acceptedPitches": [
-          "B3"
+          "C3"
         ]
       },
       "hints": [
         "Count the letters first.",
-        "Count 2 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+        "Count 5 letter names down from the note, counting it as 1. Then check the quality against its major scale."
       ],
       "feedback": {
         "correct": "Right: counted up or down to the right note.",
@@ -330,7 +328,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "D4",
+                "pitch": "A2",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -338,7 +336,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F#4",
+                "pitch": "F#3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -348,7 +346,7 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 2 flats. a note in the space above the 1st ledger line above the stave; a note in the space above the 2nd ledger line above the stave, with a sharp sign in front.",
+        "textAlternative": "A bass-clef stave, key signature of 2 flats. a note in the 1st space; a note on the 4th line, with a sharp sign in front.",
         "key": "G minor"
       },
       "answer": {
@@ -356,10 +354,10 @@
         "task": "identify",
         "key": "G minor",
         "minorForm": "harmonic",
-        "lower": "D4",
-        "upper": "F#4",
+        "lower": "A2",
+        "upper": "F#3",
         "acceptedIntervals": [
-          "M3"
+          "M6"
         ]
       },
       "hints": [
@@ -384,7 +382,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Key: D major. Write the note that is a perfect 4th above the note shown.",
+      "prompt": "Key: D major. Write the note that is a major 6th above the note shown.",
       "music": {
         "presentation": "stave",
         "clef": "alto",
@@ -394,7 +392,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "E4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -403,23 +401,23 @@
             ]
           }
         ],
-        "textAlternative": "An alto-clef stave, key signature of 2 sharps. a note on the 2nd line.",
+        "textAlternative": "An alto-clef stave, key signature of 2 sharps. a note on the 4th line.",
         "key": "D major"
       },
       "answer": {
         "kind": "interval",
         "task": "build",
         "key": "D major",
-        "lower": "A3",
-        "target": "P4",
+        "lower": "E4",
+        "target": "M6",
         "direction": "up",
         "acceptedPitches": [
-          "D4"
+          "C#5"
         ]
       },
       "hints": [
         "Count the letters first.",
-        "Count 4 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+        "Count 6 letter names up from the note, counting it as 1. Then check the quality against its major scale."
       ],
       "feedback": {
         "correct": "Correct note.",
@@ -439,7 +437,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Key: B minor (melodic minor, coming down). Name the interval between these two notes: quality and number.",
+      "prompt": "Key: G minor (harmonic minor). Name the interval between these two notes: quality and number.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -449,7 +447,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C#4",
+                "pitch": "Bb3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -457,7 +455,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D4",
+                "pitch": "Eb4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -466,18 +464,18 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 2 sharps. a note on the 1st ledger line below the stave; a note in the space just below the stave.",
-        "key": "B minor"
+        "textAlternative": "A treble-clef stave, key signature of 2 flats. a note in the space below the 1st ledger line below the stave; a note on the 1st line.",
+        "key": "G minor"
       },
       "answer": {
         "kind": "interval",
         "task": "identify",
-        "key": "B minor",
-        "minorForm": "melodic-descending",
-        "lower": "C#4",
-        "upper": "D4",
+        "key": "G minor",
+        "minorForm": "harmonic",
+        "lower": "Bb3",
+        "upper": "Eb4",
         "acceptedIntervals": [
-          "m2"
+          "P4"
         ]
       },
       "hints": [
@@ -502,17 +500,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Key: B minor (harmonic minor). Write the note that is a major 3rd above the note shown.",
+      "prompt": "Key: D major. Write the note that is a major 2nd below the note shown.",
       "music": {
         "presentation": "stave",
-        "clef": "alto",
+        "clef": "bass",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "G3",
+                "pitch": "A3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -521,24 +519,23 @@
             ]
           }
         ],
-        "textAlternative": "An alto-clef stave, key signature of 2 sharps. a note in the 1st space.",
-        "key": "B minor"
+        "textAlternative": "A bass-clef stave, key signature of 2 sharps. a note on the 5th line.",
+        "key": "D major"
       },
       "answer": {
         "kind": "interval",
         "task": "build",
-        "key": "B minor",
-        "minorForm": "harmonic",
-        "lower": "G3",
-        "target": "M3",
-        "direction": "up",
+        "key": "D major",
+        "lower": "A3",
+        "target": "M2",
+        "direction": "down",
         "acceptedPitches": [
-          "B3"
+          "G3"
         ]
       },
       "hints": [
         "Count the letters first.",
-        "Count 3 letter names up from the note, counting it as 1. Then check the quality against its major scale."
+        "Count 2 letter names down from the note, counting it as 1. Then check the quality against its major scale."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -558,17 +555,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Key: G minor (harmonic minor). Name the interval between these two notes: quality and number.",
+      "prompt": "Key: G major. Name the interval between these two notes: quality and number.",
       "music": {
         "presentation": "stave",
-        "clef": "treble",
+        "clef": "bass",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "C5",
+                "pitch": "B3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -576,7 +573,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Eb5",
+                "pitch": "D4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -585,16 +582,15 @@
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 2 flats. a note in the 3rd space; a note in the 4th space.",
-        "key": "G minor"
+        "textAlternative": "A bass-clef stave, key signature of 1 sharp. a note in the space just above the stave; a note in the space above the 1st ledger line above the stave.",
+        "key": "G major"
       },
       "answer": {
         "kind": "interval",
         "task": "identify",
-        "key": "G minor",
-        "minorForm": "harmonic",
-        "lower": "C5",
-        "upper": "Eb5",
+        "key": "G major",
+        "lower": "B3",
+        "upper": "D4",
         "acceptedIntervals": [
           "m3"
         ]
@@ -621,17 +617,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Key: D minor (melodic minor, coming down). Write the note that is a minor 3rd below the note shown.",
+      "prompt": "Key: B minor (harmonic minor). Write the note that is a perfect 4th above the note shown.",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "alto",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "D4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -640,24 +636,24 @@
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 1 flat. a note on the 1st ledger line above the stave.",
-        "key": "D minor"
+        "textAlternative": "An alto-clef stave, key signature of 2 sharps. a note in the 3rd space.",
+        "key": "B minor"
       },
       "answer": {
         "kind": "interval",
         "task": "build",
-        "key": "D minor",
-        "minorForm": "melodic-descending",
-        "lower": "C4",
-        "target": "m3",
-        "direction": "down",
+        "key": "B minor",
+        "minorForm": "harmonic",
+        "lower": "D4",
+        "target": "P4",
+        "direction": "up",
         "acceptedPitches": [
-          "A3"
+          "G4"
         ]
       },
       "hints": [
         "Count the letters first.",
-        "Count 3 letter names down from the note, counting it as 1. Then check the quality against its major scale."
+        "Count 4 letter names up from the note, counting it as 1. Then check the quality against its major scale."
       ],
       "feedback": {
         "correct": "Correct.",

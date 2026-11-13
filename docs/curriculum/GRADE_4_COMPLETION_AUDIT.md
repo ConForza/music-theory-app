@@ -96,8 +96,8 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.keys.signatures-alto | U3-L03 | key-signature 38, octave-transpose-alto 362 | 400 |
 | c.scales.technical-names | U3-L04 | technical-names 257, degree-name 294 | 551 |
 | c.scales.chromatic | U3-L05 | chromatic-scale 56, chromatic-judge 400 | 456 |
-| c.intervals.any-diatonic | U4-L01 | interval-diatonic 302, interval-write 327, interval-facts 222 | 851 |
-| c.intervals.augmented-diminished | U4-L02 | interval-diatonic 31, interval-write 29, interval-facts 90 | 150 |
+| c.intervals.any-diatonic | U4-L01 | interval-diatonic 506, interval-write 544, interval-facts 267 | 1317 |
+| c.intervals.augmented-diminished | U4-L02 | interval-diatonic 130, interval-write 119, interval-facts 110 | 359 |
 | c.chords.primary-triads | U4-L03 | primary-triad 61, triad-notes 178, triad-id 118 | 357 |
 | c.chords.root-position-chords | U4-L04 | chord-build 123, chord-spread 341, chord-root 370 | 834 |
 | c.chords.identify-in-passage | U4-L05 | chord-in-passage 400, chord-passage-pick 400 | 800 |
