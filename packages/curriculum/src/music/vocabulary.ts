@@ -190,7 +190,7 @@ export interface InstrumentG4 {
   id: string;
   name: string;
   family: "strings" | "woodwind" | "brass" | "percussion";
-  /** The clef the instrument normally reads (none for unpitched percussion). */
+  /** The clef the instrument normally reads, as the reference book lists it (none is given for any percussion instrument, so none is asked). */
   clef: "treble" | "bass" | "alto" | null;
   /** Rank within the family, 1 = the instrument that can play the highest notes (reference book's list order). */
   rank: number;
@@ -210,7 +210,7 @@ export const INSTRUMENTS_G4: InstrumentG4[] = [
   { id: "horn", name: "horn", family: "brass", clef: "treble", rank: 2, pitched: true },
   { id: "trombone", name: "trombone", family: "brass", clef: "bass", rank: 3, pitched: true },
   { id: "tuba", name: "tuba", family: "brass", clef: "bass", rank: 4, pitched: true },
-  { id: "timpani", name: "timpani", family: "percussion", clef: "bass", rank: 1, pitched: true },
+  { id: "timpani", name: "timpani", family: "percussion", clef: null, rank: 1, pitched: true },
   { id: "side-drum", name: "side drum", family: "percussion", clef: null, rank: 2, pitched: false },
   { id: "bass-drum", name: "bass drum", family: "percussion", clef: null, rank: 3, pitched: false },
   { id: "cymbals", name: "cymbals", family: "percussion", clef: null, rank: 4, pitched: false },
