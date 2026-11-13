@@ -82,9 +82,9 @@ export const U3: Spec2[] = [
     version: 1,
     bind: [
       { t: "t.g4.key-signature", c: ["c.keys.signatures-alto"], scope: { keys: KEYS_G4, clefs: ["alto"] } },
-      { t: "t.g4.alto-read", c: ["c.keys.signatures-alto"], scope: { clefs: ["alto"], keys: KEYS_G4, maxLedgerLines: 2, accidentals: true } },
+      { t: "t.g4.alto-read", c: ["c.clefs.alto"], scope: { clefs: ["alto"], maxLedgerLines: 2, accidentals: true } },
     ],
-    objective: { statement: "Write and recognise key signatures in the alto clef, and name notes in the alto clef in any Grade 4 key.", criteria: ["I know where the sharps and flats go in the alto clef.", "I can name the key from an alto-clef key signature.", "I can name notes in the alto clef in a key with a signature."] },
+    objective: { statement: "Write and recognise key signatures in the alto clef, and name notes in the alto clef, with or without a sharp or flat beside them.", criteria: ["I know where the sharps and flats go in the alto clef.", "I can name the key from an alto-clef key signature.", "I can name notes in the alto clef, including a sharp or flat written in front of them."] },
     explain: [
       { text: "In the alto clef the sharps and flats of a key signature sit on the lines and spaces of the same letters as always, but those lines and spaces are in different places from the treble clef. The order of the accidentals never changes: sharps F C G D A E B and flats B E A D G C F." },
       { music: scaleFrag({ key: "B major", form: "major", dir: "ascending", clef: "alto", oct: 3, signature: true }), caption: "B major in the alto clef. The five sharps: F♯ in the fourth space, C♯ on the middle line, G♯ on the top line, D♯ in the third space, A♯ on the second line." },

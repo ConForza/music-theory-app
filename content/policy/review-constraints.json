@@ -430,11 +430,7 @@
     },
     {
       "conceptId": "c.accidentals.double",
-      "promptIncludes": [
-        "double",
-        "𝄪",
-        "𝄫"
-      ]
+      "doubleSign": true
     },
     {
       "conceptId": "c.accidentals.enharmonic",
@@ -480,7 +476,8 @@
       "conceptId": "c.keys.signatures-alto",
       "promptIncludes": [
         "alto"
-      ]
+      ],
+      "nonEmptySignature": true
     },
     {
       "conceptId": "c.intervals.any-diatonic",
@@ -488,7 +485,8 @@
         "M",
         "m",
         "P"
-      ]
+      ],
+      "intervalLowerNotTonic": true
     },
     {
       "conceptId": "c.intervals.augmented-diminished",
@@ -499,13 +497,9 @@
     },
     {
       "conceptId": "c.chords.primary-triads",
-      "promptIncludes": [
-        "chord IV",
-        "chord V",
-        "subdominant",
-        "dominant",
-        "Roman numeral",
-        "IV"
+      "romans": [
+        "IV",
+        "V"
       ]
     },
     {

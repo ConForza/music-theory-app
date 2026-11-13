@@ -86,6 +86,7 @@ export async function drive(page, scope, input, r, how) {
     case "chord-builder":
       return typeNotes(scope, r.pitches);
     case "key-signature-writer":
+      if (!r.accidentals.length) return scope.getByRole("button", { name: "No sharps or flats" }).click();
       return typeNotes(scope, r.accidentals.map((a) => a.pitch));
     case "time-signature":
       await option(within(scope, "Top number"), String(r.top)).click();

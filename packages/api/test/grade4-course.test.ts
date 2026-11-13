@@ -8,7 +8,10 @@ import { checkItem, effectiveScope, music, taughtScope } from "@mtp/curriculum";
 import { canonicalResponse, generateItem, gradeItem } from "@mtp/engine";
 import { createApp } from "../src/app.ts";
 import { openDb } from "../src/db.ts";
-import { loadConstraints, satisfies, visibleKey } from "../src/question-key.ts";
+import { loadConstraints, questionKey, satisfies, visibleKey } from "../src/question-key.ts";
+import { MasteryService, recordExposure } from "../src/mastery-service.ts";
+import { ManualClock } from "../src/clock.ts";
+import { rulesFrom } from "../src/mastery.ts";
 import { Client, ensureDone, playSession, realCourse, register, responseFor, wrongItemResponse } from "./helpers.ts";
 
 const course = realCourse();
@@ -276,7 +279,7 @@ describe("Grade 4 concept boundaries (no false mastery from earlier-grade materi
   it("the alto-clef concepts credit only questions that name the alto clef; octave transposition between treble and bass earns no alto credit", () => {
     for (const t of ["t.g4.octave-transpose-alto", "t.g4.octave-pick-alto"]) for (const i of sample(t, "G4-U2-P1", 120)) expect(ok("c.transposition.octave-alto", i) ? /alto/.test(i.prompt) : true, i.prompt).toBe(true);
     for (const i of sample("t.g4.octave-transpose-alto", "G4-U2-P1", 200)) expect([i.music?.clef, (i.answer as { clef?: string }).clef].includes("alto"), `no treble-bass-only item is ever generated: ${i.prompt}`).toBe(true);
-    for (const i of sample("t.g4.key-signature", "G4-U3-P1", 120)) if ((i.answer as { clef: string }).clef === "alto") expect(ok("c.keys.signatures-alto", i)).toBe(true); else expect(ok("c.keys.signatures-alto", i)).toBe(false);
+    for (const i of sample("t.g4.key-signature", "G4-U3-P1", 120)) { const a = i.answer as { clef: string; accidentals?: unknown[]; accepted?: string[] }; const empty = a.accidentals ? a.accidentals.length === 0 : (a.accepted ?? []).some((k) => ["C major", "A minor"].includes(k)); expect(ok("c.keys.signatures-alto", i), i.prompt).toBe(a.clef === "alto" && !empty); }
   });
 
   it("scale and key concepts split the sharp keys from the flat keys and credit no key learned before Grade 4", () => {
@@ -309,6 +312,31 @@ describe("Grade 4 concept boundaries (no false mastery from earlier-grade materi
       for (const o of (i.answer as { options: Array<{ id: string }> }).options) expect(g123.has(o.id), o.id).toBe(false);
     }
     for (const t of ["t.g4.technique-facts", "t.g4.technique-use"]) for (const i of sample(t, "G4-U5-P1", 120)) { expect(ok("c.instruments.techniques", i)).toBe(true); expect(ok("c.terms.g4", i)).toBe(false); }
+  });
+
+  it("review P2-6: tonic-bottomed intervals, tonic-chord questions, empty alto signatures and unprinted double signs earn no Grade 4 credit", () => {
+    const tonicOf = (k: string) => /^([A-G][b#]?)/.exec(k)![1]!;
+    for (const t of ["t.g4.interval-diatonic", "t.g4.interval-write"]) {
+      for (const i of sample(t, "G4-U4-L01", 200)) {
+        const a = i.answer as { key: string; lower: string; direction?: string; acceptedPitches?: string[] };
+        const lower = a.direction === "down" ? a.acceptedPitches![0]! : a.lower;
+        const fromTonic = lower.replace(/-?\d+$/, "") === tonicOf(a.key);
+        expect(ok("c.intervals.any-diatonic", i), `${i.prompt} ${lower}`).toBe(!fromTonic);
+      }
+    }
+    for (const i of [...sample("t.g4.triad-notes", "G4-U4-L03", 200), ...sample("t.g4.triad-id", "G4-U4-L03", 200)]) {
+      const named = /chord (I|IV|V)\b/.exec(i.prompt)?.[1] ?? (i.answer as { acceptedChords?: Array<{ roman: string }> }).acceptedChords?.[0]?.roman;
+      expect(ok("c.chords.primary-triads", i), i.prompt).toBe(named === "IV" || named === "V");
+    }
+    for (const i of sample("t.g4.key-signature", "G4-U3-L03", 200)) {
+      const a = i.answer as { accidentals?: unknown[] };
+      if (a.accidentals) expect(ok("c.keys.signatures-alto", i)).toBe(a.accidentals.length > 0);
+    }
+    for (const i of [...sample("t.g4.double-name", "G4-U2-L01", 100), ...sample("t.g4.double-facts", "G4-U2-L01", 100)]) expect(ok("c.accidentals.double", i), i.prompt).toBe(true);
+    // a stave that prints only single signs, answered with a single accidental, is not a double-accidental question
+    const single = sample("t.g4.double-name", "G4-U2-L01", 20)[0]!;
+    const plain = { ...single, music: undefined, answer: { kind: "pitch", accepted: ["C#4"], relation: "same", octaveSensitive: true, spellingSensitive: true }, prompt: "Name this note." } as never;
+    expect(ok("c.accidentals.double", plain)).toBe(false);
   });
 
   it("the primary-triad concept credits chords IV and V and naming questions, and a tonic-only chord writing question earns no Grade 4 credit", () => {
@@ -344,6 +372,36 @@ describe("octave transposition into the alto clef is genuinely tested", () => {
       checked++;
     }
     expect(checked).toBeGreaterThan(5);
+  });
+});
+
+describe("review P1-1: the same Grade 4 question in another seed is not fresh evidence", () => {
+  const item = (node: string, tpl: string, seed: number) => {
+    const n = course.ix.nodeById.get(node)!;
+    const b = n.exercises.find((x) => x.templateId === tpl)!;
+    return generateItem(course.ix, tpl, seed, { scope: effectiveScope(course.ix, n, b) }).item;
+  };
+  it("metre-facts seeds 2 and 18 and chord-build seeds 18 and 36 share one question key and one visible key", () => {
+    const a = item("G4-U1-L03", "t.g4.metre-facts", 2);
+    const b = item("G4-U1-L03", "t.g4.metre-facts", 18);
+    expect(a.id).not.toBe(b.id);
+    expect(questionKey(a)).toBe(questionKey(b));
+    expect(visibleKey(a)).toBe(visibleKey(b));
+    const c = item("G4-U4-L04", "t.g4.chord-build", 18);
+    const d = item("G4-U4-L04", "t.g4.chord-build", 36);
+    expect(c.id).not.toBe(d.id);
+    expect(questionKey(c)).toBe(questionKey(d));
+    expect(visibleKey(c)).toBe(visibleKey(d));
+  });
+  it("a second sighting through the real mastery service is not fresh", () => {
+    const db = openDb(":memory:");
+    const svc = new MasteryService(db, course, new ManualClock("2026-03-02T10:00:00.000Z"), rulesFrom(course.ix.c.policy));
+    const a = item("G4-U1-L03", "t.g4.metre-facts", 2);
+    const b = item("G4-U1-L03", "t.g4.metre-facts", 18);
+    db.prepare("INSERT INTO users (id, display_name, is_guest, created_at, last_seen_at) VALUES ('u1','U',1,'2026-03-02T10:00:00.000Z','2026-03-02T10:00:00.000Z')").run();
+    expect(svc.isFresh("u1", questionKey(a))).toBe(true);
+    recordExposure(db, "u1", questionKey(a), "practice-attempt", "2026-03-02T10:00:00.000Z");
+    expect(svc.isFresh("u1", questionKey(b))).toBe(false);
   });
 });
 

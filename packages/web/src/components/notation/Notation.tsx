@@ -75,7 +75,7 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
           }
         };
         return (
-          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "neutral" ? (ev.rest ? ev.label : "note") : labels === "positions" ? ev.positionLabel : ev.label}${ev.inTuplet ? ", in a triplet group" : ""}${ev.mark === "x" ? ", the note marked x" : ""}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
+          <g key={ev.id} role="button" tabIndex={0} aria-label={`Play ${labels === "neutral" ? (ev.rest ? ev.label : "note") : labels === "positions" ? ev.positionLabel : ev.label}${ev.inTuplet ? `, in a ${ev.tupletKind === "duplet" ? "duplet" : ev.tupletKind === "triplet" ? "triplet" : "tuplet"} group` : ""}${ev.mark === "x" ? ", the note marked x" : ""}`} className="n-event is-playable" onClick={() => onActivate(ev)} onKeyDown={key}>
             <rect x={ev.x - 1} y={layout.top} width={ev.width + 2} height={layout.bottom - layout.top} fill="transparent" />
             {body}
           </g>

@@ -250,7 +250,7 @@ describe("Unit 2: double accidentals, enharmonics, clefs", () => {
   it("double-name and double-write: the printed sign or the asked sign is a double sign, and the pitch is read back from the stave", () => {
     for (const i of items("G4-U2-L01", "t.g4.double-name", 150)) {
       const { pitch } = readBack(i.music!)[0]!;
-      expect(Math.abs(pitch.alter)).toBeLessThanOrEqual(2);
+      expect(Math.abs(pitch.alter)).toBe(2); // review P2-5: every double-name question really prints a double sign
       expect((i.answer as unknown as { accepted: string[] }).accepted).toEqual([music.formatPitch(pitch)]);
       expect(i.prompt).toMatch(/double/);
     }
@@ -288,6 +288,20 @@ describe("Unit 2: double accidentals, enharmonics, clefs", () => {
       expect(acc[0]!.step).toBe(m[2]);
       expect(sound(acc[0]!)).toBe(sound(ref));
       expect(acc[0]!.step).not.toBe(ref.step);
+      // review P2-4: a third spelling that sounds the same but uses neither the printed nor the requested letter (Ax4 for Cb, asked for B) is wrong
+      let thirds = 0;
+      for (const step of music.STEPS) {
+        if (step === m[2] || step === ref.step) continue;
+        for (const alter of [-2, -1, 1, 2]) {
+          const cand = { step, alter, octave: acc[0]!.octave } as music.Pitch;
+          if (sound(cand) % 12 !== sound(ref) % 12) continue;
+          thirds++;
+          const v = gradeItem(ix, i, { kind: "pitch", pitch: music.formatPitch(cand) } as never, scopeOf("G4-U2-L02", "t.g4.enharmonic-letter"));
+          expect(v.correct, `${i.prompt} accepted ${music.formatPitch(cand)}`).toBe(false);
+        }
+      }
+      void thirds;
+      expect(gradeItem(ix, i, { kind: "pitch", pitch: music.formatPitch(acc[0]!) } as never, scopeOf("G4-U2-L02", "t.g4.enharmonic-letter")).correct).toBe(true);
     }
     for (const i of items("G4-U2-L02", "t.g4.enharmonic-pick", 250)) {
       if (i.prompt.startsWith("Which of these notes sounds the same")) {

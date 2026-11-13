@@ -548,7 +548,8 @@ export class NodeRunService {
         const correct = planned.filter((si) => attempts.get(si.itemId)?.firstTry).length;
         const percent = Math.round((100 * correct) / planned.length);
         const passPercent = this.passMark(kind as "challenge" | "assessment");
-        passed = percent >= passPercent;
+        // compare the exact ratio: 27 of 41 is 65.85%, which is below a 66% pass mark even though it is displayed as 66
+        passed = correct * 100 >= passPercent * planned.length;
         Object.assign(summary, { score: correct, percent, passPercent, passed, disclaimer: ASSESSMENT_DISCLAIMER });
         this.fillAssessmentDetail(userId, node, row, planned, attempts, summary);
         const bp = this.course.ix.assessments.get(node.assessmentId!)!;

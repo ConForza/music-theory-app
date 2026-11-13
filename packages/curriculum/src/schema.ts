@@ -857,6 +857,8 @@ const PitchAnswer = z
     reference: PitchName.optional(),
     /** "same-sound": accepted answers must sound like `reference`; "different-spelling": and be spelt differently. */
     relation: z.enum(["same", "same-sound", "different-spelling"]).default("same"),
+    /** Brief 08: the answer must use this letter name (an enharmonic task that names the letter). */
+    letter: z.enum(["A", "B", "C", "D", "E", "F", "G"]).optional(),
   })
   .strict();
 

@@ -130,8 +130,8 @@ See `GRADE_4_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | double-facts (U2-L01) | 3 | Which of these notes sounds the same as G𝄪? | The answer is “A”. |
 | double-facts (U2-L01) | 4 | Which of these notes sounds the same as G𝄪? | The answer is “A”. |
 | double-name (U2-L01) | 1 | This note has a double sharp or a double flat in front of it. Name it, including its sign. _Shown: A treble-clef stave. a note in the 2nd space, with a double sharp sign in front._ | The note is A𝄪. |
-| double-name (U2-L01) | 2 | This note has a double sharp or a double flat in front of it. Name it, including its sign. _Shown: A treble-clef stave. a note in the 3rd space, with a flat sign in front._ | The note is C♭. |
-| double-name (U2-L01) | 3 | This note has a double sharp or a double flat in front of it. Name it, including its sign. _Shown: A treble-clef stave. a note on the 4th line, with a double flat sign in front._ | The note is Db♭. |
+| double-name (U2-L01) | 2 | This note has a double sharp or a double flat in front of it. Name it, including its sign. _Shown: A treble-clef stave. a note in the 3rd space, with a double flat sign in front._ | The note is Cb♭. |
+| double-name (U2-L01) | 3 | This note has a double sharp or a double flat in front of it. Name it, including its sign. _Shown: A treble-clef stave. a note on the 4th line, with a double sharp sign in front._ | The note is D𝄪. |
 | double-name (U2-L01) | 4 | This note has a double sharp or a double flat in front of it. Name it, including its sign. _Shown: A bass-clef stave. a note on the 1st line, with a double sharp sign in front._ | The note is G𝄪. |
 | double-write (U2-L01) | 1 | Write B𝄪 in the bass clef. You may use up to 2 ledger lines. Any B𝄪 that fits is correct. | B𝄪 can go at B𝄪1 or B𝄪2 or B𝄪3. |
 | double-write (U2-L01) | 2 | Write G𝄫 in the treble clef. You may use up to 2 ledger lines. Any G𝄫 that fits is correct. | Gb♭ can go at Gb♭3 or Gb♭4 or Gb♭5. |

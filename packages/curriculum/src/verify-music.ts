@@ -339,6 +339,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         } else {
           ok = sameSound && (a.relation === "same-sound" || !samePitchClassSpelling(p, ref));
         }
+        if (a.letter && p.step !== a.letter) report("ANSWER_MISMATCH", where, `Accepted alternative ${acc} does not use the letter ${a.letter} the task requires`);
         if (!ok) report("ANSWER_MISMATCH", where, `Accepted alternative ${acc} is not correct for ${formatPitch(ref)} (${a.relation}, spelling ${a.spellingSensitive ? "sensitive" : "insensitive"}, octave ${a.octaveSensitive ? "sensitive" : "insensitive"})`);
         if (Math.abs(p.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, `${acc} uses a double accidental, which is not in scope here`);
       }

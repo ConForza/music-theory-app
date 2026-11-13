@@ -107,7 +107,7 @@ export const doubleName: Gen = (c): any => {
   const max = Math.min(maxLedger(c), 2);
   const pos = c.rng.int(-1, 9);
   const base = naturalAt(clef, pos);
-  const p: Pitch = { ...base, alter: c.rng.pick([2, -2, 2, -2, 1, -1]) };
+  const p: Pitch = { ...base, alter: c.rng.pick([2, -2]) };
   if (!fits(clef, [p], max) || staffPosition(clef, p) < -1 - 2 * max || staffPosition(clef, p) > 9 + 2 * max) return null;
   const sign = SIGN_WORD[p.alter]!;
   const text = `${cap(articleClef(clef))} clef stave with one semibreve ${posText(staffPosition(clef, p))}, with a ${sign} sign in front of it.`.replace(/^(\w)/, (x) => x);
@@ -216,7 +216,7 @@ export const enharmonicLetter: Gen = (c): any => {
   if (chromaticNumber(out) !== chromaticNumber(ref)) return null;
   return {
     prompt: `Write a note that sounds the same as ${pcLabel(ref)} but uses the letter name ${target.step}. Give its letter name and sign.`,
-    answer: { kind: "pitch", reference: F(ref), relation: "different-spelling", accepted: [F(out)], octaveSensitive: false, spellingSensitive: true },
+    answer: { kind: "pitch", reference: F(ref), relation: "different-spelling", letter: target.step, accepted: [F(out)], octaveSensitive: false, spellingSensitive: true },
     hints: [`Find ${pcLabel(ref)} on the keyboard, then ask which sign ${target.step} needs to reach the same key.`],
   };
 };

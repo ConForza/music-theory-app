@@ -81,33 +81,33 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 
 | Concept | Taught in | Question types (distinct questions each) | Total distinct |
 |---|---|---|---|
-| c.rhythm.breve | U1-L01 | breve-facts 10, breve-bar 5, breve-double-dot 167 | 182 |
-| c.rhythm.double-dots | U1-L02 | double-dot-facts 30, double-dot-bar 7, breve-double-dot 163 | 200 |
-| c.metre.regular-all | U1-L03 | metre-facts 224, time-signature 395 | 619 |
+| c.rhythm.breve | U1-L01 | breve-facts 10, breve-bar 5, breve-double-dot 8 | 23 |
+| c.rhythm.double-dots | U1-L02 | double-dot-facts 30, double-dot-bar 7, breve-double-dot 12 | 49 |
+| c.metre.regular-all | U1-L03 | metre-facts 65, time-signature 395 | 460 |
 | c.metre.regular-grouping | U1-L04 | grouping-judge 254, regular-grouping 272 | 526 |
-| c.rhythm.duplets | U1-L05 | duplet-facts 114, duplet-read 20, duplet 9 | 143 |
-| c.accidentals.double | U2-L01 | double-facts 170, double-name 87, double-write 28, double-cancel 231, double-accidental 397 | 913 |
-| c.accidentals.enharmonic | U2-L02 | enharmonic 35, enharmonic-letter 67, enharmonic-pick 397 | 499 |
-| c.clefs.alto | U2-L03 | alto-facts 198, alto-read 82, alto-write 21 | 301 |
-| c.clefs.same-pitch-three | U2-L04 | same-pitch 60, clef-position 380 | 440 |
-| c.transposition.octave-alto | U2-L05 | octave-transpose-alto 394, octave-pick-alto 376 | 770 |
-| c.scales.keys-five-sharps | U3-L01 | scale-build 27, key-signature 8, key-facts 191, scale-spot 390 | 616 |
-| c.scales.keys-five-flats | U3-L02 | scale-build 30, key-signature 8, key-facts 215, scale-spot 424 | 677 |
-| c.keys.signatures-alto | U3-L03 | key-signature 42, alto-read 82 | 124 |
-| c.scales.technical-names | U3-L04 | technical-names 257, degree-name 375 | 632 |
-| c.scales.chromatic | U3-L05 | chromatic-scale 56, chromatic-judge 399 | 455 |
-| c.intervals.any-diatonic | U4-L01 | interval-diatonic 375, interval-write 385, interval-facts 222 | 982 |
-| c.intervals.augmented-diminished | U4-L02 | interval-diatonic 31, interval-write 29, interval-facts 111 | 171 |
-| c.chords.primary-triads | U4-L03 | primary-triad 61, triad-notes 276, triad-id 188 | 525 |
-| c.chords.root-position-chords | U4-L04 | chord-build 156, chord-spread 341, chord-root 394 | 891 |
+| c.rhythm.duplets | U1-L05 | duplet-facts 13, duplet-read 20, duplet 9 | 42 |
+| c.accidentals.double | U2-L01 | double-facts 52, double-name 44, double-write 28, double-cancel 229, double-accidental 397 | 750 |
+| c.accidentals.enharmonic | U2-L02 | enharmonic 35, enharmonic-letter 67, enharmonic-pick 291 | 393 |
+| c.clefs.alto | U2-L03 | alto-facts 19, alto-read 82, alto-write 21 | 122 |
+| c.clefs.same-pitch-three | U2-L04 | same-pitch 60, clef-position 181 | 241 |
+| c.transposition.octave-alto | U2-L05 | octave-transpose-alto 394, octave-pick-alto 129 | 523 |
+| c.scales.keys-five-sharps | U3-L01 | scale-build 27, key-signature 8, key-facts 52, scale-spot 237 | 324 |
+| c.scales.keys-five-flats | U3-L02 | scale-build 30, key-signature 8, key-facts 54, scale-spot 219 | 311 |
+| c.keys.signatures-alto | U3-L03 | key-signature 38 | 38 |
+| c.scales.technical-names | U3-L04 | technical-names 257, degree-name 294 | 551 |
+| c.scales.chromatic | U3-L05 | chromatic-scale 56, chromatic-judge 400 | 456 |
+| c.intervals.any-diatonic | U4-L01 | interval-diatonic 302, interval-write 327, interval-facts 222 | 851 |
+| c.intervals.augmented-diminished | U4-L02 | interval-diatonic 31, interval-write 29, interval-facts 90 | 150 |
+| c.chords.primary-triads | U4-L03 | primary-triad 61, triad-notes 178, triad-id 118 | 357 |
+| c.chords.root-position-chords | U4-L04 | chord-build 123, chord-spread 341, chord-root 370 | 834 |
 | c.chords.identify-in-passage | U4-L05 | chord-in-passage 400, chord-passage-pick 400 | 800 |
-| c.ornaments.signs | U5-L01 | ornament-name 36, ornament-spot 400, ornament-facts 275, ornament-bar 395 | 1106 |
-| c.instruments.orchestra | U5-L02 | instruments 127, instrument-range 154 | 281 |
-| c.instruments.techniques | U5-L03 | technique-facts 375, technique-use 379 | 754 |
-| c.terms.g4 | U5-L04 | terms 395, term-use 394 | 789 |
+| c.ornaments.signs | U5-L01 | ornament-name 36, ornament-spot 400, ornament-facts 71, ornament-bar 395 | 902 |
+| c.instruments.orchestra | U5-L02 | instruments 127, instrument-range 7 | 134 |
+| c.instruments.techniques | U5-L03 | technique-facts 141, technique-use 140 | 281 |
+| c.terms.g4 | U5-L04 | terms 357, term-use 332 | 689 |
 | c.context.passage-g4 | U5-L05 | passage 400, passage-directions 400 | 800 |
 
-Concepts below the capacity rule: **0**.
+Concepts below the capacity rule: **1**: c.keys.signatures-alto.
 
 **No false mastery from earlier grades.** A concept boundary (`content/policy/review-constraints.json`) decides which questions credit a Grade 4 concept, whatever template asked them: regular-time-signature concepts credit only the eight signatures that are new at Grade 4; the breve and double-dot concepts credit only questions about those values; alto-clef and alto key-signature concepts credit only questions that name the alto clef; the sharp/flat-key concepts credit only B major, G♯ minor, D♭ major and B♭ minor; the interval concepts split major/minor/perfect from augmented/diminished by the answer; the primary-triad concept ignores a tonic-only chord; the terms concept credits only the 21 Grade 4 terms (not the Grade 1-3 term list); the techniques concept only the eight techniques. Tests in `grade4-course.test.ts` pin each boundary.
 
