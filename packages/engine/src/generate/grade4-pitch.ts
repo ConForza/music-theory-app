@@ -103,7 +103,7 @@ export const doubleFacts: Gen = (c): any => {
 export const doubleName: Gen = (c): any => {
   if (!c.scope.doubleAccidentals) return null;
   const clef = c.rng.pick(clefsIn(c));
-  const max = maxLedger(c);
+  const max = Math.min(maxLedger(c), 2);
   const pos = c.rng.int(-1, 9);
   const base = naturalAt(clef, pos);
   const p: Pitch = { ...base, alter: c.rng.pick([2, -2, 2, -2, 1, -1]) };
@@ -122,7 +122,7 @@ export const doubleName: Gen = (c): any => {
 export const doubleWrite: Gen = (c): any => {
   if (!c.scope.doubleAccidentals) return null;
   const clef = c.rng.pick(clefsIn(c));
-  const max = maxLedger(c);
+  const max = Math.min(maxLedger(c), 2);
   const step = c.rng.pick(music.STEPS);
   const alter = c.rng.pick([2, -2]);
   const answer = { kind: "staff-position" as const, clef, target: { step, alter, position: "any" as const, maxLedgerLines: max }, accepted: [] as string[], octaveSensitive: true };
@@ -149,7 +149,7 @@ export const doubleCancel: Gen = (c): any => {
     };
   }
   const clef = c.rng.pick(clefsIn(c));
-  const max = maxLedger(c);
+  const max = Math.min(maxLedger(c), 2);
   const keyText = c.rng.pick(keysIn(c));
   const key = parseKey(keyText);
   const ts = "4/4";
@@ -617,7 +617,7 @@ export const chromaticJudge: Gen = (c): any => {
 export const doubleRead: Gen = (c): any => {
   if (!c.scope.doubleAccidentals) return null;
   const clef = c.rng.pick(clefsIn(c));
-  const max = maxLedger(c);
+  const max = Math.min(maxLedger(c), 2);
   const keyText = c.rng.pick(keysIn(c));
   const key = parseKey(keyText);
   const scenario = c.rng.pick(["lasts", "lasts", "next-bar", "other-octave"] as const);

@@ -2,7 +2,7 @@ import { frag, note } from "@mtp/engine";
 import { CL3, FORMS, KEYS_G4, ORN, has, staveC, type Spec2 } from "./lib4.ts";
 
 const ornaments = (clef: "treble" | "bass" | "alto", items: Array<[string, Record<string, unknown>]>, text: string) =>
-  frag(clef, [{ events: items.map(([p, extra]) => note(p, "minim", extra)).slice(0, 4), barline: "final" }], text, { showKeySignature: false, timeSignature: "2/2" });
+  frag(clef, [{ events: items.map(([p, extra]) => note(p, "minim", extra)).slice(0, 4), barline: "final" }], text, { showKeySignature: false, timeSignature: items.length >= 4 ? "4/2" : "2/2" });
 const KEYS_EASY = ["C major", "G major", "D major", "F major"];
 
 export const U5: Spec2[] = [

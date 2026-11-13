@@ -32,7 +32,8 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 1
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -40,7 +41,17 @@
                 "duration": {
                   "value": "semiquaver",
                   "dots": 0
-                }
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
               },
               {
                 "kind": "note",
@@ -54,8 +65,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A bar of 6/8: a dotted quaver, a semiquaver and a dotted crotchet.",
-        "questionAlternative": "Bar 1: dotted quaver, semiquaver, dotted crotchet.",
+        "textAlternative": "A bar of 6/8: a beamed beat of dotted quaver, semiquaver and quaver, then a dotted crotchet.",
+        "questionAlternative": "Bar 1: 3 beamed together (dotted quaver, semiquaver, quaver), dotted crotchet.",
         "timeSignature": "6/8"
       },
       "caption": "6/8: the pattern the other times are built on."
@@ -89,6 +100,14 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
                   "value": "minim",
                   "dots": 1
                 }
@@ -97,8 +116,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "The same pattern in 6/4, with every value doubled.",
-        "questionAlternative": "Bar 1: dotted crotchet, quaver, dotted minim.",
+        "textAlternative": "The same pattern in 6/4, with every value doubled: dotted crotchet, quaver, crotchet, then a dotted minim.",
+        "questionAlternative": "Bar 1: dotted crotchet, quaver, crotchet, dotted minim.",
         "timeSignature": "6/4"
       },
       "caption": "6/4: the values are doubled (crotchet for quaver)."
@@ -118,7 +137,8 @@
                 "duration": {
                   "value": "semiquaver",
                   "dots": 1
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -126,7 +146,17 @@
                 "duration": {
                   "value": "demisemiquaver",
                   "dots": 0
-                }
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
               },
               {
                 "kind": "note",
@@ -140,8 +170,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "The same pattern in 6/16, with every value halved.",
-        "questionAlternative": "Bar 1: dotted semiquaver, demisemiquaver, dotted quaver.",
+        "textAlternative": "The same pattern in 6/16, with every value halved: a beamed beat of dotted semiquaver, demisemiquaver and semiquaver, then a dotted quaver.",
+        "questionAlternative": "Bar 1: 3 beamed together (dotted semiquaver, demisemiquaver, semiquaver), dotted quaver.",
         "timeSignature": "6/16"
       },
       "caption": "6/16: the values are halved (semiquaver for quaver)."

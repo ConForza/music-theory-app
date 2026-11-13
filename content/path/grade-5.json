@@ -470,7 +470,8 @@
               "alto",
               "bass"
             ],
-            "maxLedgerLines": 2
+            "maxLedgerLines": 2,
+            "accidentals": true
           }
         },
         {
@@ -632,7 +633,15 @@
               "harmonic",
               "melodic"
             ],
-            "degreeNaming": "technical"
+            "degreeNaming": "technical",
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "doubleAccidentals": true,
+            "keySignatures": true
           }
         },
         {
@@ -716,7 +725,10 @@
             "maxLedgerLines": 2,
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "any-diatonic",
-            "compoundIntervals": false
+            "compoundIntervals": false,
+            "doubleAccidentals": true,
+            "accidentals": true,
+            "keySignatures": true
           }
         },
         {
@@ -807,7 +819,10 @@
             ],
             "inversions": [
               "a"
-            ]
+            ],
+            "doubleAccidentals": true,
+            "keySignatures": true,
+            "accidentals": true
           }
         },
         {
@@ -879,14 +894,6 @@
             ],
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "any-diatonic",
-            "chordDegrees": [
-              "I",
-              "IV",
-              "V"
-            ],
-            "inversions": [
-              "a"
-            ],
             "ornaments": [
               "trill",
               "turn",
@@ -894,6 +901,19 @@
               "lower-mordent",
               "acciaccatura",
               "appoggiatura"
+            ],
+            "noteValues": [
+              "crotchet"
+            ],
+            "timeSignatures": [
+              "3/4"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic",
+              "melodic"
             ]
           }
         }
@@ -4048,14 +4068,6 @@
             ],
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "any-diatonic",
-            "chordDegrees": [
-              "I",
-              "IV",
-              "V"
-            ],
-            "inversions": [
-              "a"
-            ],
             "ornaments": [
               "trill",
               "turn",
@@ -4063,6 +4075,19 @@
               "lower-mordent",
               "acciaccatura",
               "appoggiatura"
+            ],
+            "noteValues": [
+              "crotchet"
+            ],
+            "timeSignatures": [
+              "3/4"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic",
+              "melodic"
             ]
           }
         },

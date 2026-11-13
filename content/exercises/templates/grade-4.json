@@ -255,15 +255,7 @@
           "G# minor",
           "Bb minor"
         ],
-        "doubleAccidentals": true,
-        "timeSignatures": [
-          "4/4"
-        ],
-        "noteValues": [
-          "crotchet"
-        ],
-        "accidentals": true,
-        "keySignatures": true
+        "doubleAccidentals": true
       },
       "acceptance": {
         "spellingSensitive": true,
@@ -443,30 +435,31 @@
     {
       "id": "t.g4.same-pitch",
       "version": 1,
-      "familyId": "fam.note-read",
+      "familyId": "fam.note-write",
       "grade": 4,
-      "mode": "compare",
+      "mode": "build",
       "outcomeIds": [
         "abrsm2020.g4.06"
       ],
       "conceptIds": [
         "c.clefs.same-pitch-three"
       ],
-      "promptPattern": "Which of these notes is the same pitch as {pitch}?",
+      "promptPattern": "Write the note that sounds exactly the same, in another clef.",
       "scope": {
         "clefs": [
           "treble",
-          "alto",
-          "bass"
+          "bass",
+          "alto"
         ],
-        "maxLedgerLines": 2
+        "maxLedgerLines": 2,
+        "accidentals": true
       },
       "acceptance": {
         "spellingSensitive": true,
         "octaveSensitive": true,
         "enharmonicPolicy": "not-applicable",
         "multipleValidAnswers": false,
-        "alternativesNote": "Exactly one answer is correct."
+        "alternativesNote": "Exactly one pitch is correct: same letter, sign and octave."
       },
       "ambiguityChecks": [
         "Distractors differ by octave or clef reading."
@@ -746,7 +739,15 @@
         "minorForms": [
           "harmonic",
           "melodic"
-        ]
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "accidentals": true,
+        "doubleAccidentals": true,
+        "keySignatures": true
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -1002,7 +1003,7 @@
     {
       "id": "t.g4.chord-in-passage",
       "version": 1,
-      "familyId": "fam.triad-chord",
+      "familyId": "fam.score-observation",
       "grade": 4,
       "mode": "apply-in-context",
       "outcomeIds": [
@@ -1228,6 +1229,7 @@
       "mode": "apply-in-context",
       "outcomeIds": [
         "abrsm2020.g4.18",
+        "abrsm2020.g1.21",
         "abrsm2020.g4.13",
         "abrsm2020.g4.16",
         "abrsm2020.g4.17"
@@ -3133,9 +3135,9 @@
     {
       "id": "t.g4.chord-root",
       "version": 1,
-      "familyId": "fam.triad-chord",
+      "familyId": "fam.score-observation",
       "grade": 4,
-      "mode": "identify",
+      "mode": "apply-in-context",
       "outcomeIds": [
         "abrsm2020.g4.15"
       ],
@@ -3544,7 +3546,8 @@
       "grade": 4,
       "mode": "identify",
       "outcomeIds": [
-        "abrsm2020.g4.18"
+        "abrsm2020.g4.18",
+        "abrsm2020.g4.16"
       ],
       "conceptIds": [
         "c.instruments.techniques"
@@ -3650,6 +3653,7 @@
       "mode": "apply-in-context",
       "outcomeIds": [
         "abrsm2020.g4.18",
+        "abrsm2020.g1.21",
         "abrsm2020.g4.16",
         "abrsm2020.g4.17"
       ],
@@ -3888,7 +3892,8 @@
       "grade": 4,
       "mode": "identify",
       "outcomeIds": [
-        "abrsm2020.g4.18"
+        "abrsm2020.g4.18",
+        "abrsm2020.g4.16"
       ],
       "conceptIds": [
         "c.instruments.techniques"

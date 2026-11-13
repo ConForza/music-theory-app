@@ -39,6 +39,8 @@ const stated = (templateId: string, scope: Record<string, unknown>) => {
   const tpl = templates.get(templateId);
   if (!tpl) throw new Error(`Unknown template ${templateId}`);
   const out = clean(scope);
+  // A binding may only narrow dimensions its template lists (BINDING_WIDENS_TEMPLATE); any other dimension keeps the taught level.
+  for (const k of Object.keys(out)) if (!(k in tpl.scope)) delete out[k];
   for (const [k, v] of Object.entries(tpl.scope)) if (!(k in out)) out[k] = v;
   return out;
 };
@@ -87,6 +89,21 @@ for (const spec of specs) fit(spec);
         if (JSON.stringify(next) !== JSON.stringify(b.scope)) { b.scope = next; changed++; }
       }
   if (changed) console.log(`stated Grade 3 dimensions on ${changed} planned review bindings`);
+}
+
+// 0b. Grade 5's planned reviews bind Grade 4 templates. A binding must state every dimension its template lists, and Grade 4 templates
+//     gained dimensions, so those planned bindings are normalised the same way (nothing else about Grade 5 changes).
+{
+  const g5File = join(root, "path/grade-5.json");
+  const g5 = JSON.parse(readFileSync(g5File, "utf8"));
+  let changed = 0;
+  for (const n of g5.nodes as Array<{ exercises?: Binding[] }>)
+    for (const b of n.exercises ?? [])
+      if (b.templateId.startsWith("t.g4.")) {
+        const next = stated(b.templateId, b.scope);
+        if (JSON.stringify(next) !== JSON.stringify(b.scope)) { b.scope = next; changed++; }
+      }
+  if (changed) { writeFileSync(g5File, JSON.stringify(g5, null, 2) + "\n"); console.log(`stated dimensions on ${changed} planned Grade 5 review bindings of Grade 4 templates`); }
 }
 
 // 1. Lesson bindings come from the specs, so the path, the lessons and the generated nodes can never drift apart.
