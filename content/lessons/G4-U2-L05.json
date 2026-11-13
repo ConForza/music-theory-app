@@ -587,7 +587,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write this melody an octave lower in the treble clef, keeping the key signature. (The original melody is in the alto clef.)",
+      "prompt": "Write this melody an octave higher in the treble clef, keeping the key signature. (The original melody is in the alto clef.)",
       "music": {
         "presentation": "stave",
         "clef": "alto",
@@ -597,7 +597,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C5",
+                "pitch": "D4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -605,7 +605,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D5",
+                "pitch": "E4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -613,7 +613,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F#5",
+                "pitch": "F4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -621,7 +621,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D5",
+                "pitch": "A4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -630,26 +630,26 @@
             ]
           }
         ],
-        "textAlternative": "A four-note melody in the alto clef, G major: C, D, F♯, D.",
-        "key": "G major"
+        "textAlternative": "A four-note melody in the alto clef, A minor: D, E, F, A.",
+        "key": "A minor"
       },
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
-        "key": "G major",
+        "key": "A minor",
         "accepted": [
           [
-            "C4",
-            "D4",
-            "F#4",
-            "D4"
+            "D5",
+            "E5",
+            "F5",
+            "A5"
           ]
         ],
         "derivation": {
           "rule": "transpose",
           "interval": "P8",
-          "direction": "down",
-          "sourceKey": "G major"
+          "direction": "up",
+          "sourceKey": "A minor"
         }
       },
       "hints": [
@@ -759,17 +759,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write this melody an octave higher in the alto clef, keeping the key signature.",
+      "prompt": "Write this melody an octave higher in the treble clef, keeping the key signature. (The original melody is in the alto clef.)",
       "music": {
         "presentation": "stave",
-        "clef": "treble",
+        "clef": "alto",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "F4",
+                "pitch": "Bb3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -777,7 +777,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "E4",
+                "pitch": "G3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -785,7 +785,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D4",
+                "pitch": "Ab3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -793,7 +793,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "Bb3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -802,31 +802,31 @@
             ]
           }
         ],
-        "textAlternative": "A four-note melody in the treble clef, C major: F, E, D, C.",
-        "key": "C major"
+        "textAlternative": "A four-note melody in the alto clef, F minor: B♭, G, A♭, B♭.",
+        "key": "F minor"
       },
       "answer": {
         "kind": "pitch-sequence",
-        "clef": "alto",
-        "key": "C major",
+        "clef": "treble",
+        "key": "F minor",
         "accepted": [
           [
-            "F5",
-            "E5",
-            "D5",
-            "C5"
+            "Bb4",
+            "G4",
+            "Ab4",
+            "Bb4"
           ]
         ],
         "derivation": {
           "rule": "transpose",
           "interval": "P8",
           "direction": "up",
-          "sourceKey": "C major"
+          "sourceKey": "F minor"
         }
       },
       "hints": [
         "Avoid writing at the same pitch.",
-        "Work out the first note in the alto clef, then keep the same shape for the rest."
+        "Work out the first note in the treble clef, then keep the same shape for the rest."
       ],
       "feedback": {
         "correct": "Correct.",

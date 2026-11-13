@@ -90,7 +90,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.accidentals.enharmonic | U2-L02 | enharmonic 35, enharmonic-letter 67, enharmonic-pick 291 | 393 |
 | c.clefs.alto | U2-L03 | alto-facts 19, alto-read 82, alto-write 21 | 122 |
 | c.clefs.same-pitch-three | U2-L04 | same-pitch 60, clef-position 181 | 241 |
-| c.transposition.octave-alto | U2-L05 | octave-transpose-alto 459, octave-pick-alto 129 | 588 |
+| c.transposition.octave-alto | U2-L05 | octave-transpose-alto 598, octave-pick-alto 129 | 727 |
 | c.scales.keys-five-sharps | U3-L01 | scale-build 27, key-signature 8, key-facts 52, scale-spot 237 | 324 |
 | c.scales.keys-five-flats | U3-L02 | scale-build 30, key-signature 8, key-facts 54, scale-spot 219 | 311 |
 | c.keys.signatures-alto | U3-L03 | key-signature 38, octave-transpose-alto 362 | 400 |
@@ -104,7 +104,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.ornaments.signs | U5-L01 | ornament-name 36, ornament-spot 400, ornament-facts 71, ornament-bar 395 | 902 |
 | c.instruments.orchestra | U5-L02 | instruments 127, instrument-range 7 | 134 |
 | c.instruments.techniques | U5-L03 | technique-facts 141, technique-use 140 | 281 |
-| c.terms.g4 | U5-L04 | terms 357, term-use 332 | 689 |
+| c.terms.g4 | U5-L04 | terms 357, term-use 381 | 738 |
 | c.context.passage-g4 | U5-L05 | passage 400, passage-directions 400 | 800 |
 
 Concepts below the capacity rule: **0**.
@@ -140,7 +140,7 @@ Concepts below the capacity rule: **0**.
 | G4-U5-L01 | Ornament signs | 3 | 6 | 1 | 1 |
 | G4-U5-L02 | The orchestra | 3 | 6 | 1 | 1 |
 | G4-U5-L03 | Playing techniques and directions | 3 | 6 | 1 | 1 |
-| G4-U5-L04 | Grade 4 terms (Italian and French) | 3 | 6 | 1 | 1 |
+| G4-U5-L04 | Grade 4 Italian terms | 3 | 6 | 1 | 1 |
 | G4-U5-L05 | Looking closely at a passage (Grade 4) | 3 | 6 | 1 | 1 |
 
 Every lesson has: a learning objective with three success criteria; an explanation with original worked notation examples; a demonstration; three guided and six independent questions with mistake-specific feedback; a three-point recap; and spaced-review entries. Lessons never repeat a question (a test pins it).

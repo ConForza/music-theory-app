@@ -238,6 +238,8 @@ function instrumentsMode(c: Ctx, mode: "family" | "clef" | "belongs" | "highest"
 export const techniqueFacts: Gen = (c): any => techniqueMode(c, "meaning");
 /** t.g4.technique-use: the direction that asks for a described way of playing. */
 export const techniqueUse: Gen = (c): any => techniqueMode(c, "term");
+/** The bow signs are shown by their look, not their name (the name would answer the question). */
+const techLabel = (t: { id: string; term: string }) => (t.id === "down-bow" ? "the sign ⊓ (a square bracket, open side down)" : t.id === "up-bow" ? "the sign ∨ (a V shape)" : t.term);
 function techniqueMode(c: Ctx, mode: "meaning" | "term") {
   const target = c.rng.pick(TECH);
   const pool = TECH.filter((t) => t.id !== target.id);
@@ -247,7 +249,7 @@ function techniqueMode(c: Ctx, mode: "meaning" | "term") {
     const opp = pool.find((t) => t.id === OPP[target.id]);
     const opts = [target, ...(opp && !picks.includes(opp) ? [opp, ...picks.slice(0, 2)] : picks)];
     return {
-      prompt: `What does ${target.term} mean?`,
+      prompt: `What does ${techLabel(target)} mean?`,
       answer: { kind: "choice", options: c.rng.shuffle(opts.map((t) => ({ id: t.id, label: cap(t.meaning) }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(opts.filter((t) => t.id !== target.id).map((t) => [t.id, diag(OPP[target.id] === t.id ? "opposite-meaning" : "confused-similar-term", OPP[target.id] === t.id ? `That is the opposite: ${t.term} means to ${t.meaning}.` : `${t.term} means to ${t.meaning}.`)])) as Diagnoses },
       hints: [target.applies === "strings" ? "This is an instruction to string players." : "This is an instruction to string and brass players."],
     };
@@ -257,7 +259,7 @@ function techniqueMode(c: Ctx, mode: "meaning" | "term") {
   const opts = [target, ...(opp && !picks.includes(opp) ? [opp, ...picks.slice(0, 2)] : picks)];
   return {
     prompt: `A player is told to ${target.meaning}. Which direction is written in the music?`,
-    answer: { kind: "choice", options: c.rng.shuffle(opts.map((t) => ({ id: t.id, label: t.term }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(opts.filter((t) => t.id !== target.id).map((t) => [t.id, diag(OPP[target.id] === t.id ? "opposite-meaning" : "confused-similar-term", OPP[target.id] === t.id ? `${t.term} is the opposite instruction.` : `${t.term} means to ${t.meaning}.`)])) as Diagnoses },
+    answer: { kind: "choice", options: c.rng.shuffle(opts.map((t) => ({ id: t.id, label: techLabel(t) }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(opts.filter((t) => t.id !== target.id).map((t) => [t.id, diag(OPP[target.id] === t.id ? "opposite-meaning" : "confused-similar-term", OPP[target.id] === t.id ? `${t.term} is the opposite instruction.` : `${t.term} means to ${t.meaning}.`)])) as Diagnoses },
     hints: ["Read the meanings carefully: some of these come in opposite pairs."],
   };
 }
@@ -267,29 +269,6 @@ function techniqueMode(c: Ctx, mode: "meaning" | "term") {
 // ---------------------------------------------------------------------------
 
 const groupSize = (g: string) => T.filter((t) => t.group === g).length;
-const USE: Record<string, string> = {
-  affettuoso: "The tune is meant to be played with real tenderness and affection",
-  affrettando: "The music should hurry and press forward",
-  amabile: "The melody should sound pleasant and amiable",
-  appassionato: "A performer is told to play with passion",
-  calando: "The music should get softer and usually slower as the piece closes",
-  cantando: "The player should make the melody sing",
-  "come-prima": "After a contrasting passage, the music should go back to be played as before",
-  "come-sopra": "A repeated line should be played as above",
-  facile: "The passage should sound easy and effortless",
-  "con-fuoco": "The finale should be played with fire",
-  "tempo-giusto": "The march must be kept in strict, exact time",
-  "l-istesso-tempo": "The time signature changes but the beat stays at the same speed",
-  morendo: "The last chord should die away",
-  niente: "The sound should fade to nothing",
-  nobilmente: "The theme should be played nobly",
-  perdendosi: "The sound should fade away until it is lost",
-  "presto-possibile": "The coda is to be played as fast as possible",
-  quasi: "The passage should sound as if it were something else (almost like)",
-  sonoro: "The player should use a full, resonant tone",
-  sopra: "The left hand should play above the right",
-  "sotto-voce": "The singers should use an undertone, very softly",
-};
 
 /** Alternatives for a term question: different groups only, so no alternative can also be a fair answer. */
 function termOptions(c: Ctx, target: music.TermG4): music.TermG4[] {
@@ -314,7 +293,7 @@ export const terms4: Gen = (c): any => {
     return {
       prompt: `What does “${target.term}” mean?`,
       answer: { kind: "choice", options: c.rng.shuffle([target, ...picks].map((t) => ({ id: t.id, label: cap(t.meaning) }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(picks.map((t) => [t.id, diag(t.category === target.category ? "confused-similar-term" : "wrong-category", `${cap(t.meaning)} is the meaning of “${t.term}”.`)])) as Diagnoses },
-      hints: [`“${target.term}” is an Italian or French direction of the kind: ${target.category.replace(/-/g, " ")}.`],
+      hints: [`“${target.term}” is an Italian direction of the kind: ${target.category.replace(/-/g, " ")}.`],
     };
   }
   return {
@@ -324,15 +303,25 @@ export const terms4: Gen = (c): any => {
   };
 };
 
-/** t.g4.term-use: a short situation; the learner says what the direction asks (terms that share a meaning are never both options). */
+/** t.g4.term-use: the direction is met in a score and the learner says what it asks of the player. The situation never states the meaning
+ *  (that would give the answer away); the terms that share a meaning are never both options. */
+const WHERE = [
+  "You are playing a violin part and, at the start of the first phrase, the composer has written",
+  "In the middle of a piece for piano, a bar is marked",
+  "At the end of a song you are accompanying you see",
+  "A conductor points to a passage in your part, which carries the direction",
+  "Your teacher asks you to play a new piece. The first line of music is marked",
+  "The score for this passage says",
+];
 export const termUse4: Gen = (c): any => {
-  const target = c.rng.pick(T.filter((t) => USE[t.id]));
+  const target = c.rng.pick(T);
   const picks = termOptions(c, target);
   if (picks.length < 3) return null;
+  const where = c.rng.pick(WHERE);
   return {
-    prompt: `${USE[target.id]}? No: here is the direction on the page — “${target.term}”. What should the player do?`.replace("? No: here is", ". Here is"),
+    prompt: `${where} “${target.term}”. What should the player do?`,
     answer: { kind: "choice", options: c.rng.shuffle([target, ...picks].map((t) => ({ id: t.id, label: cap(t.meaning) }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(picks.map((t) => [t.id, diag(t.category === target.category ? "confused-similar-term" : "wrong-category", `${cap(t.meaning)} is what “${t.term}” asks. Check the word again.`)])) as Diagnoses },
-    hints: [`“${target.term}” means ${target.meaning}.`],
+    hints: [`“${target.term}” is an Italian direction of the kind: ${target.category.replace(/-/g, " ")}.`],
   };
 };
 
@@ -371,7 +360,12 @@ function instrumentPart(c: Ctx, clef: Clef): { inst: music.InstrumentG4; part: P
   if (kind === "family") {
     return { inst, line: `This passage is for the ${inst.name}.`, part: { id: "family", prompt: `To which family of the orchestra does the ${inst.name} belong?`, answer: choice(FAMILIES.map((f) => [f, cap(f)] as [string, string]), inst.family, Object.fromEntries(FAMILIES.filter((f) => f !== inst.family).map((f) => [f, `The ${inst.name} belongs to ${FAMILY_WORD[inst.family]}.`]))) } };
   }
-  return { inst, line: `This passage is for the ${inst.name}.`, part: { id: "clef", prompt: `The ${inst.name} normally reads one clef. Is this passage written in that clef?`, answer: choice([["yes", `Yes: the ${CLEF_NAME[clef]} is normal for the ${inst.name}`], ["no", `No: the ${inst.name} normally reads a different clef`]], "yes", { no: `The ${inst.name} normally reads the ${CLEF_NAME[inst.clef!]}, and this passage is written in it.` }) } };
+  // about half the time the passage is for an instrument that normally reads a DIFFERENT clef (the right answer is then "No")
+  const others = PASSAGE_INST.filter((i) => i.clef !== clef);
+  const mismatch = others.length > 0 && c.rng.chance(0.5);
+  const who = mismatch ? c.rng.pick(others) : inst;
+  const right = mismatch ? "no" : "yes";
+  return { inst: who, line: `This passage is for the ${who.name}.`, part: { id: "clef", prompt: `The ${who.name} normally reads one clef. Is this passage written in that clef?`, answer: choice([["yes", `Yes: the ${CLEF_NAME[clef]} is normal for the ${who.name}`], ["no", `No: the ${who.name} normally reads a different clef`]], right, mismatch ? { yes: `The ${who.name} normally reads the ${CLEF_NAME[who.clef!]}, but this passage is written in the ${CLEF_NAME[clef]}.` } : { no: `The ${who.name} normally reads the ${CLEF_NAME[who.clef!]}, and this passage is written in it.` }) } };
 }
 
 /** t.g4.passage: a short melody for a named instrument with an interval, an ornament or a direction, and a question about the instrument. */

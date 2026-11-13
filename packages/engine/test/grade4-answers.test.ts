@@ -1,6 +1,6 @@
 import { buildIndex, effectiveScope, loadCurriculum, music, type ExerciseItem } from "@mtp/curriculum";
 import { describe, expect, it } from "vitest";
-import { canonicalResponse, generateItem, generationFingerprint, gradeItem, wrongResponse } from "../src/index.ts";
+import { canonicalResponse, generateItem, generationFingerprint, gradeItem, solutionFor, wrongResponse } from "../src/index.ts";
 
 /**
  * Independent check of the Brief 08 (Grade 4) generators. The generators write their own answers and the engine's solvability gate grades
@@ -821,6 +821,41 @@ describe("version-safe vocabulary", () => {
         let a: ExerciseItem;
         try { a = generateItem(ix, t.id, s).item; } catch { continue; }
         expect(JSON.stringify(generateItem(ix, t.id, s).item)).toBe(JSON.stringify(a));
+      }
+    }
+  });
+});
+
+describe("educational review: wording that gave answers away or showed mangled text", () => {
+  it("term-use never states the meaning it asks for, and technique questions never name the bow sign they ask about", () => {
+    const meanings = new Map(music.TERMS_G4.map((t) => [t.id, t.meaning.toLowerCase()]));
+    for (const i of items("G4-U5-L04", "t.g4.term-use", 150)) {
+      const right = (i.answer as unknown as { correctOptionIds: string[] }).correctOptionIds[0]!;
+      expect(i.prompt.toLowerCase(), i.prompt).not.toContain(meanings.get(right)!);
+    }
+    for (const i of [...items("G4-U5-L03", "t.g4.technique-facts", 150), ...items("G4-U5-L03", "t.g4.technique-use", 150)]) {
+      const q = i.prompt.replace(/play this note with an? (up|down)-bow/g, "");
+      if (/sign/.test(q)) expect(q, q).not.toMatch(/down-bow|up-bow/);
+      for (const o of (i.answer as unknown as { options: Array<{ label: string }> }).options) if (/the sign/.test(o.label)) expect(o.label).not.toMatch(/down-bow|up-bow/);
+    }
+  });
+
+  it("passage clef questions have both outcomes (an instrument that normally reads another clef gets No)", () => {
+    const seen = new Set<string>();
+    for (const i of items("G4-U5-L05", "t.g4.passage", 200)) {
+      const parts = (i.answer as unknown as { parts: Array<{ id: string; answer: { correctOptionIds: string[] } }> }).parts;
+      const p = parts.find((x) => x.id === "clef");
+      if (p) seen.add(p.answer.correctOptionIds[0]!);
+    }
+    expect([...seen].sort()).toEqual(["no", "yes"]);
+  });
+
+  it("revealed solutions print double flats, flat keys and sharps with the real signs and use the right article", () => {
+    const flat = (t: string) => t;
+    for (const [node, tpl] of [["G4-U2-L01", "t.g4.double-write"], ["G4-U3-L03", "t.g4.key-signature"], ["G4-U2-L03", "t.g4.alto-write"], ["G4-U4-L02", "t.g4.interval-diatonic"], ["G4-U5-L01", "t.g4.ornament-spot"]] as const) {
+      for (const i of items(node, tpl, 60)) {
+        const text = flat(solutionFor(ix, i, scopeOf(node, tpl)));
+        expect(text, text).not.toMatch(/[A-G]b♭|[A-G]#(?!\w)|\b[A-G]#? (major|minor)\b.*#|\ba (augmented|upper|acciaccatura|appoggiatura|inverted)/);
       }
     }
   });

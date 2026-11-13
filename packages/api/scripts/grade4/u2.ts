@@ -1,4 +1,4 @@
-import { CL2, CL3, barsC, has, keys, staveC, type Spec2 } from "./lib4.ts";
+import { CL2, CL3, KEYS_OLD, barsC, has, keys, staveC, type Spec2 } from "./lib4.ts";
 
 const KEYS_EARLY = ["C major", "G major", "D major", "F major", "A major", "Bb major", "Eb major"];
 
@@ -148,7 +148,7 @@ export const U2: Spec2[] = [
     node: "G4-U2-L05",
     version: 1,
     bind: [
-      { t: "t.g4.octave-transpose-alto", c: ["c.transposition.octave-alto"], scope: { clefs: CL3, octaveTranspositionClefs: CL3, keys: ["C major", "G major", "D major", "F major"], maxLedgerLines: 3 } },
+      { t: "t.g4.octave-transpose-alto", c: ["c.transposition.octave-alto"], scope: { clefs: CL3, octaveTranspositionClefs: CL3, keys: KEYS_OLD, maxLedgerLines: 2 } },
       { t: "t.g4.octave-pick-alto", c: ["c.transposition.octave-alto"], scope: { clefs: CL3, octaveTranspositionClefs: CL3, maxLedgerLines: 2 } },
     ],
     objective: { statement: "Write a melody an octave higher or lower, into or out of the alto clef.", criteria: ["I know an octave is eight letter names, seven steps of line and space.", "I can move a melody up or down an octave and change its clef.", "I can tell this from writing the same pitch in another clef."] },

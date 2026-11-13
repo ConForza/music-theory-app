@@ -5,7 +5,7 @@
   "contentVersion": 1,
   "locale": "en-GB",
   "objective": {
-    "statement": "Understand the Grade 4 Italian and French terms.",
+    "statement": "Understand the Grade 4 Italian terms.",
     "successCriteria": [
       "I know the terms of expression: affettuoso, amabile, appassionato, cantando, facile, con fuoco, nobilmente, sonoro.",
       "I know the terms for changes of speed and fading: affrettando, calando, morendo, perdendosi, l'istesso tempo.",
@@ -169,8 +169,8 @@
         }
       },
       "hints": [
-        "Is it Italian or French?",
-        "“affrettando” is an Italian or French direction of the kind: change of speed."
+        "Which kind of direction is it?",
+        "“affrettando” is an Italian direction of the kind: change of speed."
       ],
       "feedback": {
         "correct": "Yes: that is the meaning.",
@@ -188,18 +188,10 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The singers should use an undertone, very softly. Here is the direction on the page — “sotto voce”. What should the player do?",
+      "prompt": "In the middle of a piece for piano, a bar is marked “sotto voce”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
-          {
-            "id": "l-istesso-tempo",
-            "label": "At the same speed as before"
-          },
-          {
-            "id": "sotto-voce",
-            "label": "In an undertone, very softly"
-          },
           {
             "id": "sonoro",
             "label": "With a full, resonant tone"
@@ -207,6 +199,14 @@
           {
             "id": "morendo",
             "label": "Dying away"
+          },
+          {
+            "id": "sotto-voce",
+            "label": "In an undertone, very softly"
+          },
+          {
+            "id": "l-istesso-tempo",
+            "label": "At the same speed as before"
           }
         ],
         "correctOptionIds": [
@@ -228,8 +228,8 @@
         }
       },
       "hints": [
-        "Think about the meaning of the Italian or French word.",
-        "“sotto voce” means in an undertone, very softly."
+        "Think about the meaning of the Italian word.",
+        "“sotto voce” is an Italian direction of the kind: dynamics."
       ],
       "feedback": {
         "correct": "Right: the term that fits.",
@@ -287,7 +287,7 @@
         }
       },
       "hints": [
-        "Is it Italian or French?",
+        "Which kind of direction is it?",
         "Think of the Italian word that means “in strict, exact time”."
       ],
       "feedback": {
@@ -348,8 +348,8 @@
         }
       },
       "hints": [
-        "Is it Italian or French?",
-        "“sonoro” is an Italian or French direction of the kind: expression."
+        "Which kind of direction is it?",
+        "“sonoro” is an Italian direction of the kind: expression."
       ],
       "feedback": {
         "correct": "Correct meaning.",
@@ -367,7 +367,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The left hand should play above the right. Here is the direction on the page — “sopra”. What should the player do?",
+      "prompt": "In the middle of a piece for piano, a bar is marked “sopra”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -407,8 +407,8 @@
         }
       },
       "hints": [
-        "Think about the meaning of the Italian or French word.",
-        "“sopra” means above."
+        "Think about the meaning of the Italian word.",
+        "“sopra” is an Italian direction of the kind: structure."
       ],
       "feedback": {
         "correct": "Correct term.",
@@ -466,7 +466,7 @@
         }
       },
       "hints": [
-        "Is it Italian or French?",
+        "Which kind of direction is it?",
         "Think of the Italian word that means “as if, almost like”."
       ],
       "feedback": {
@@ -485,7 +485,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The passage should sound easy and effortless. Here is the direction on the page — “facile”. What should the player do?",
+      "prompt": "Your teacher asks you to play a new piece. The first line of music is marked “facile”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -498,12 +498,12 @@
             "label": "Nobly"
           },
           {
-            "id": "facile",
-            "label": "Easily, without effort"
-          },
-          {
             "id": "tempo-giusto",
             "label": "In strict, exact time"
+          },
+          {
+            "id": "facile",
+            "label": "Easily, without effort"
           }
         ],
         "correctOptionIds": [
@@ -525,8 +525,8 @@
         }
       },
       "hints": [
-        "Think about the meaning of the Italian or French word.",
-        "“facile” means easily, without effort."
+        "Think about the meaning of the Italian word.",
+        "“facile” is an Italian direction of the kind: expression."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -584,7 +584,7 @@
         }
       },
       "hints": [
-        "Is it Italian or French?",
+        "Which kind of direction is it?",
         "Think of the Italian word that means “nobly”."
       ],
       "feedback": {
@@ -603,7 +603,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A performer is told to play with passion. Here is the direction on the page — “appassionato”. What should the player do?",
+      "prompt": "Your teacher asks you to play a new piece. The first line of music is marked “appassionato”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -616,12 +616,12 @@
             "label": "Easily, without effort"
           },
           {
-            "id": "appassionato",
-            "label": "With passion"
-          },
-          {
             "id": "con-fuoco",
             "label": "With fire"
+          },
+          {
+            "id": "appassionato",
+            "label": "With passion"
           }
         ],
         "correctOptionIds": [
@@ -643,8 +643,8 @@
         }
       },
       "hints": [
-        "Think about the meaning of the Italian or French word.",
-        "“appassionato” means with passion."
+        "Think about the meaning of the Italian word.",
+        "“appassionato” is an Italian direction of the kind: expression."
       ],
       "feedback": {
         "correct": "Correct.",

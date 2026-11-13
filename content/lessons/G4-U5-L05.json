@@ -698,7 +698,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This passage is for the oboe. Look at the passage and answer the questions.",
+      "prompt": "This passage is for the trombone. Look at the passage and answer the questions.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -720,7 +720,8 @@
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
-                }
+                },
+                "label": "x"
               },
               {
                 "kind": "note",
@@ -750,13 +751,7 @@
                   "value": "crotchet",
                   "dots": 0
                 },
-                "grace": {
-                  "kind": "acciaccatura",
-                  "pitches": [
-                    "A5"
-                  ]
-                },
-                "label": "A"
+                "label": "y"
               },
               {
                 "kind": "note",
@@ -770,91 +765,93 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 3 sharps, 3/4, marked Affettuoso. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note in the 4th space, with a sharp sign in front; a note marked A in the space just above the stave, with a small note before it with a diagonal stroke through its stem and flag; a note on the 5th line.",
+        "textAlternative": "A treble-clef stave, key signature of 3 sharps, 3/4, marked Appassionato. Bar 1: a note on the 5th line; a note marked x on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note in the 4th space, with a sharp sign in front; a note marked y in the space just above the stave; a note on the 5th line.",
         "key": "F# minor",
         "timeSignature": "3/4",
-        "tempoText": "Affettuoso"
+        "tempoText": "Appassionato"
       },
       "answer": {
         "kind": "composite",
         "parts": [
           {
             "id": "clef",
-            "prompt": "The oboe normally reads one clef. Is this passage written in that clef?",
+            "prompt": "The trombone normally reads one clef. Is this passage written in that clef?",
             "answer": {
               "kind": "choice",
               "options": [
                 {
                   "id": "yes",
-                  "label": "Yes: the treble clef is normal for the oboe"
+                  "label": "Yes: the treble clef is normal for the trombone"
                 },
                 {
                   "id": "no",
-                  "label": "No: the oboe normally reads a different clef"
+                  "label": "No: the trombone normally reads a different clef"
                 }
               ],
               "correctOptionIds": [
-                "yes"
+                "no"
               ],
               "diagnoses": {
-                "no": {
+                "yes": {
                   "category": "wrong-category",
-                  "reason": "The oboe normally reads the treble clef, and this passage is written in it."
+                  "reason": "The trombone normally reads the bass clef, but this passage is written in the treble clef."
                 }
               }
             }
           },
           {
             "id": "term",
-            "prompt": "The passage is marked “affettuoso”. What does it ask?",
+            "prompt": "The passage is marked “appassionato”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
-                {
-                  "id": "affettuoso",
-                  "label": "Tenderly, with affection"
-                },
                 {
                   "id": "con-fuoco",
                   "label": "With fire"
                 },
                 {
-                  "id": "niente",
-                  "label": "Nothing (as in “to nothing”)"
+                  "id": "morendo",
+                  "label": "Dying away"
                 },
                 {
-                  "id": "calando",
-                  "label": "Getting softer and (usually) slower"
+                  "id": "appassionato",
+                  "label": "With passion"
+                },
+                {
+                  "id": "quasi",
+                  "label": "As if, almost like"
                 }
               ],
               "correctOptionIds": [
-                "affettuoso"
+                "appassionato"
               ],
               "diagnoses": {
-                "niente": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “niente”."
-                },
                 "con-fuoco": {
                   "category": "confused-similar-term",
                   "reason": "That is the meaning of “con fuoco”."
                 },
-                "calando": {
+                "quasi": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “calando”."
+                  "reason": "That is the meaning of “quasi”."
+                },
+                "morendo": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “morendo”."
                 }
               }
             }
           },
           {
-            "id": "ornament",
-            "prompt": "What is the ornament on the note marked A?",
+            "id": "interval",
+            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
             "answer": {
-              "kind": "ornament-sign",
-              "task": "name-sign",
-              "sign": "acciaccatura",
-              "accepted": [
-                "acciaccatura"
+              "kind": "interval",
+              "task": "identify",
+              "key": "F# minor",
+              "lower": "G#5",
+              "upper": "A5",
+              "acceptedIntervals": [
+                "m2"
               ]
             }
           }
@@ -1076,17 +1073,17 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This passage is for the horn. Look at the passage and answer the questions.",
+      "prompt": "This passage is for the viola. Look at the passage and answer the questions.",
       "music": {
         "presentation": "stave",
-        "clef": "treble",
+        "clef": "alto",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "Bb4",
+                "pitch": "G3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1094,7 +1091,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "G4",
+                "pitch": "Eb3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1103,7 +1100,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "A4",
+                "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1115,7 +1112,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Bb4",
+                "pitch": "F3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1123,7 +1120,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C5",
+                "pitch": "Eb3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1131,7 +1128,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D5",
+                "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1142,27 +1139,27 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 2 flats, 3/4, marked Sotto voce. Bar 1: a note on the 3rd line; a note marked x on the 2nd line; a note in the 2nd space. Bar 2: a note on the 3rd line; a note in the 3rd space; a note marked y on the 4th line.",
-        "key": "G minor",
+        "textAlternative": "An alto-clef stave, key signature of 3 flats, 3/4, marked Facile. Bar 1: a note in the 1st space; a note marked x in the space just below the stave; a note on the 1st ledger line below the stave. Bar 2: a note on the 1st line; a note in the space just below the stave; a note marked y on the 1st ledger line below the stave.",
+        "key": "C minor",
         "timeSignature": "3/4",
-        "tempoText": "Sotto voce"
+        "tempoText": "Facile"
       },
       "answer": {
         "kind": "composite",
         "parts": [
           {
             "id": "clef",
-            "prompt": "The horn normally reads one clef. Is this passage written in that clef?",
+            "prompt": "The viola normally reads one clef. Is this passage written in that clef?",
             "answer": {
               "kind": "choice",
               "options": [
                 {
                   "id": "yes",
-                  "label": "Yes: the treble clef is normal for the horn"
+                  "label": "Yes: the alto clef is normal for the viola"
                 },
                 {
                   "id": "no",
-                  "label": "No: the horn normally reads a different clef"
+                  "label": "No: the viola normally reads a different clef"
                 }
               ],
               "correctOptionIds": [
@@ -1171,7 +1168,7 @@
               "diagnoses": {
                 "no": {
                   "category": "wrong-category",
-                  "reason": "The horn normally reads the treble clef, and this passage is written in it."
+                  "reason": "The viola normally reads the alto clef, and this passage is written in it."
                 }
               }
             }
@@ -1182,52 +1179,52 @@
             "answer": {
               "kind": "interval",
               "task": "identify",
-              "key": "G minor",
-              "lower": "G4",
-              "upper": "D5",
+              "key": "C minor",
+              "lower": "D3",
+              "upper": "Eb3",
               "acceptedIntervals": [
-                "P5"
+                "m2"
               ]
             }
           },
           {
             "id": "term",
-            "prompt": "The passage is marked “sotto voce”. What does it ask?",
+            "prompt": "The passage is marked “facile”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
-                {
-                  "id": "amabile",
-                  "label": "In a pleasant, amiable way"
-                },
-                {
-                  "id": "affrettando",
-                  "label": "Hurrying, pressing on"
-                },
                 {
                   "id": "sotto-voce",
                   "label": "In an undertone, very softly"
                 },
                 {
-                  "id": "cantando",
-                  "label": "In a singing style"
+                  "id": "facile",
+                  "label": "Easily, without effort"
+                },
+                {
+                  "id": "appassionato",
+                  "label": "With passion"
+                },
+                {
+                  "id": "sonoro",
+                  "label": "With a full, resonant tone"
                 }
               ],
               "correctOptionIds": [
-                "sotto-voce"
+                "facile"
               ],
               "diagnoses": {
-                "cantando": {
+                "sonoro": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “cantando”."
+                  "reason": "That is the meaning of “sonoro”."
                 },
-                "affrettando": {
+                "appassionato": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “affrettando”."
+                  "reason": "That is the meaning of “appassionato”."
                 },
-                "amabile": {
+                "sotto-voce": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “amabile”."
+                  "reason": "That is the meaning of “sotto voce”."
                 }
               }
             }
