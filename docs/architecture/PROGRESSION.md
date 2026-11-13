@@ -183,3 +183,7 @@ Grade 2 runs on exactly the rules above: its first lesson waits for `G1-U7-R1`; 
 
 Grade 3 runs on the same rules: its first lesson waits for `G2-U5-R1`; challenges (70%) and the Grade 3 assessment (66%) are the same provisional marks; completing the grade is a passed `G3-A` run (the `g3.grade-complete` badge). The optional upbeat lesson (`G3-U2-E1`) pays 5 XP, gates nothing and is never assessed. No threshold, XP value or review interval changed.
 
+## 12. Grade 4 (Brief 08)
+
+Grade 4 runs on the same rules: its first lesson waits for `G3-U5-R1` (the last required Grade 3 node; the optional upbeat lesson is never a prerequisite); challenges (70%) and the Grade 4 assessment (66%) are the same provisional marks; completing the grade is a passed `G4-A` run (the `g4.grade-complete` badge). All 41 Grade 4 nodes are required. The assessment has 41 questions of which 5 are earlier-grade, so the pass mark cannot be reached on earlier-grade answers (at least 23 Grade 4 answers are needed; a test asserts it). No threshold, XP value, retry rule or review interval changed. Concept credit follows concept boundaries (`review-constraints.json`), so a Grade 1-3 fact asked inside a Grade 4 node never counts as Grade 4 mastery evidence.
+

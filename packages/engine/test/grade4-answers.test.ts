@@ -606,8 +606,8 @@ describe("Unit 4: intervals and triads", () => {
         s.music.measures.forEach((m, bi) => { const n = (m.events ?? []).reduce((t, e) => t + (e.kind === "chord" ? e.notes.length : e.kind === "note" ? 1 : 0), 0); perBar[bi]!.push(...reads[si]!.slice(at, at + n).map((r) => r.pitch)); at += n; });
       });
       const romans = perBar.map((b) => music.identifyTriad(key, b)!.roman);
-      expect(romans.filter((r) => r === ask)).toHaveLength(1);
-      expect(correct(i)).toBe("ABCD"[romans.indexOf(ask)]);
+      expect(romans.filter((r) => (r as string) === ask)).toHaveLength(1);
+      expect(correct(i)).toBe("ABCD"[romans.map(String).indexOf(ask)]);
     }
   });
 
