@@ -7,6 +7,7 @@ export * from "./generate/index.ts";
 export { GRADERS, defaultGraderId } from "./graders/index.ts";
 export type { Verdict } from "./graders/types.ts";
 export { rng, hashString } from "./rng.ts";
+export { frag, note, withSigns, rhythmLine, n as plainNote, r as plainRest } from "./generate/families.ts";
 export { signaturePitches, SIGNATURE_PLACEMENT } from "./graders/theory.ts";
 export { spellingsOfKey, describePosition } from "./graders/pitch.ts";
 export { soundingProfile } from "./graders/rhythm.ts";

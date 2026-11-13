@@ -109,7 +109,7 @@ describe("XP ledger", () => {
     const c2 = new Client(next);
     c2.cookie = c.cookie;
     // The lesson changed under the learner: the new version is a fresh run that earns again, and the old row is untouched.
-    const r = await playThrough(c2, { ...course, lesson: (id: string) => ({ ...course.lesson(id)!, contentVersion: course.lesson(id)!.contentVersion + 1 }), authoredItems: course.authoredItems, scopeFor: course.scopeFor } as typeof course);
+    const r = await playThrough(c2, { ...course, lesson: (id: string) => (course.lesson(id) ? { ...course.lesson(id)!, contentVersion: course.lesson(id)!.contentVersion + 1 } : undefined), authoredItems: course.authoredItems, scopeFor: course.scopeFor } as typeof course);
     expect(r.body.rewards.xp.awarded).toBe(10);
     const rows = db.prepare("SELECT curriculum_version, content_version, xp FROM xp_ledger ORDER BY rowid").all() as Array<{ curriculum_version: string; content_version: number; xp: number }>;
     expect(rows.map((x) => x.curriculum_version)).toEqual([course.version, "9.9.9"]);

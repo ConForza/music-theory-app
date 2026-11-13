@@ -1,0 +1,809 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U3-L01",
+  "lessonId": "G1-U3-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name the white keys A to G using the groups of black keys.",
+    "successCriteria": [
+      "I can say the seven letter names in order, and I know they start again after G.",
+      "I can find C and F by looking at the black keys.",
+      "I can name any white key on the keyboard."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Music uses just seven letter names: A, B, C, D, E, F and G. After G they start again at A, one step higher."
+    },
+    {
+      "kind": "text",
+      "text": "On a piano the black keys come in groups of two and groups of three. Those groups are your map for finding the white keys."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with the white key C highlighted, just to the left of a group of two black keys."
+      },
+      "caption": "C is the white key just to the left of a group of two black keys."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with the white key F highlighted, just to the left of a group of three black keys."
+      },
+      "caption": "F is the white key just to the left of a group of three black keys."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "E"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "B"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with seven white keys highlighted and named C, D, E, F, G, A and B."
+      },
+      "caption": "From C the white keys run C D E F G A B, and then C comes round again."
+    },
+    {
+      "kind": "tip",
+      "text": "Put your finger on C and say the letters as you move right. Moving right sounds higher; moving left sounds lower."
+    }
+  ],
+  "demonstration": {
+    "widget": "keyboard",
+    "music": {
+      "presentation": "keyboard",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "C"
+            },
+            {
+              "kind": "note",
+              "pitch": "D4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "D"
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E"
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "F"
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "G"
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "A"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "B"
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "C"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Eight white keys from C up to the next C."
+    },
+    "steps": [
+      "Find the group of two black keys. The white key just to its left is C. Tap it to hear it.",
+      "Tap each white key to the right in turn: D, E, F, G, A, B. Listen to the sound climbing.",
+      "Now find the group of three black keys. The white key just to its left is F.",
+      "After B the pattern repeats: the next white key is C again, one octave higher."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A keyboard of eight white keys from C to the next C. Each key can be tapped to hear its note, and its letter name is spoken in the step list."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u3-l01.guided-1",
+      "templateId": "t.g1.letter-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Look for the group of two black keys. The highlighted white key is just to the left of it. Which letter is it?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with one white key highlighted."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "D",
+            "label": "D"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ],
+        "diagnoses": {
+          "D": {
+            "category": "white-key-off-by-one",
+            "reason": "D is the key next door. Find the group of two or three black keys first, then count along the white keys from C or F."
+          }
+        }
+      },
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys.",
+        "C is the white key just to the left of a group of two black keys; F is just to the left of a group of three.",
+        "From C the white keys run C, D, E, F, G, A, B."
+      ],
+      "feedback": {
+        "correct": "Yes, C: just to the left of the group of two black keys.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.guided-2",
+      "templateId": "t.g1.keyboard",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Find F on the keyboard. Any F is correct.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "F4",
+        "relation": "same",
+        "accepted": [
+          "F4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Use the group of two black keys to find C, D and E.",
+        "Look for the groups of two and three black keys. F is just to the left of a group of three black keys."
+      ],
+      "feedback": {
+        "correct": "That's F: the white key just to the left of the group of three black keys.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.guided-3",
+      "templateId": "t.g1.letter-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Start on the highlighted key, A. Move 2 white keys to the right. Which letter do you reach?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with A highlighted."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ]
+      },
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys.",
+        "Count each white key you pass, not the key you start on.",
+        "Right is higher, left is lower."
+      ],
+      "feedback": {
+        "correct": "Counting white keys one at a time got you there.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u3-l01.ind-1",
+      "templateId": "t.g1.keyboard",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Find D on the keyboard. Any D is correct.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "D4",
+        "relation": "same",
+        "accepted": [
+          "D4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Use the group of two black keys to find C, D and E.",
+        "Look for the groups of two and three black keys. Find C (left of the two black keys) and count up the white keys."
+      ],
+      "feedback": {
+        "correct": "D sits between the two black keys of the pair.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.ind-2",
+      "templateId": "t.g1.letter-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which letter name belongs to the highlighted key?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with one white key highlighted."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          }
+        ],
+        "correctOptionIds": [
+          "A"
+        ],
+        "diagnoses": {
+          "B": {
+            "category": "white-key-off-by-one",
+            "reason": "B is the key next door. Find the group of two or three black keys first, then count along the white keys from C or F."
+          },
+          "G": {
+            "category": "white-key-off-by-one",
+            "reason": "G is the key next door. Find the group of two or three black keys first, then count along the white keys from C or F."
+          }
+        }
+      },
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys.",
+        "C is the white key just to the left of a group of two black keys; F is just to the left of a group of three.",
+        "From C the white keys run C, D, E, F, G, A, B."
+      ],
+      "feedback": {
+        "correct": "A: the white key after G. The alphabet has come round again.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.ind-3",
+      "templateId": "t.g1.keyboard",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Find B on the keyboard. Any B is correct.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "B4",
+        "relation": "same",
+        "accepted": [
+          "B4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Use the group of two black keys to find C, D and E.",
+        "Look for the groups of two and three black keys. Find C (left of the two black keys) and count up the white keys."
+      ],
+      "feedback": {
+        "correct": "B is the last white key before the pattern starts again at C.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.ind-4",
+      "templateId": "t.g1.letter-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In the musical alphabet, which letter comes straight before E?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "F",
+            "label": "F"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          }
+        ],
+        "correctOptionIds": [
+          "D"
+        ],
+        "diagnoses": {
+          "C": {
+            "category": "white-key-off-by-one",
+            "reason": "C is two letters away. Take just one step back from E."
+          }
+        }
+      },
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys.",
+        "The musical alphabet only uses A B C D E F G, then starts again at A.",
+        "Say the letters in order, out loud if you like, and stop on the one you want."
+      ],
+      "feedback": {
+        "correct": "Right. Remember the alphabet loops from G back to A.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.ind-5",
+      "templateId": "t.g1.letter-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which letter name belongs to the highlighted key?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with one white key highlighted."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "F",
+            "label": "F"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          }
+        ],
+        "correctOptionIds": [
+          "E"
+        ],
+        "diagnoses": {
+          "D": {
+            "category": "white-key-off-by-one",
+            "reason": "D is the key next door. Find the group of two or three black keys first, then count along the white keys from C or F."
+          },
+          "F": {
+            "category": "white-key-off-by-one",
+            "reason": "F is the key next door. Find the group of two or three black keys first, then count along the white keys from C or F."
+          }
+        }
+      },
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys.",
+        "C is the white key just to the left of a group of two black keys; F is just to the left of a group of three.",
+        "From C the white keys run C, D, E, F, G, A, B."
+      ],
+      "feedback": {
+        "correct": "E: the white key just to the right of D.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.g1-u3-l01.ind-6",
+      "templateId": "t.g1.letter-names",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Start on the highlighted key, F. Move 3 white keys to the right. Which letter do you reach?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A piano keyboard with F highlighted."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "F",
+            "label": "F"
+          }
+        ],
+        "correctOptionIds": [
+          "B"
+        ],
+        "diagnoses": {
+          "C": {
+            "category": "white-key-off-by-one",
+            "reason": "That is 3 white keys the other way. Moving right makes the pitch higher; moving left makes it lower."
+          }
+        }
+      },
+      "hints": [
+        "The white keys are named A B C D E F G, then the letters start again.",
+        "C is just to the left of a group of two black keys.",
+        "Count each white key you pass, not the key you start on.",
+        "Right is higher, left is lower."
+      ],
+      "feedback": {
+        "correct": "Good counting: you moved along the white keys one at a time.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    }
+  ],
+  "recap": [
+    "There are only seven letter names: A B C D E F G, and then they repeat.",
+    "C sits just left of the group of two black keys; F just left of the group of three.",
+    "Moving right on the keyboard sounds higher, moving left sounds lower."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.letter-names",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.keyboard",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.letter-names",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.pitch.letter-names",
+      "c.pitch.keyboard"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s04"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.09"
+    ],
+    "notes": "Original wording and examples. Subject follows Grade 1 outcome 09 (letter names and the keyboard); the black-key-group method is a standard teaching approach, not taken from the reference book's text."
+  }
+}

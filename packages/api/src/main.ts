@@ -15,11 +15,12 @@ const staticDir = process.env.MTP_STATIC_DIR ?? resolve(here, "../../web/dist");
 
 const app = createApp({
   db: openDb(dbPath),
-  course: loadCourse(),
+  // Browser suites for earlier briefs pin the content of their era (MTP_CONTENT_ROOT); production always serves the shipped content.
+  course: loadCourse(process.env.NODE_ENV !== "production" ? process.env.MTP_CONTENT_ROOT || undefined : undefined),
   secureCookies: process.env.MTP_SECURE_COOKIES === "1",
   waiveUnwrittenPrerequisites: process.env.MTP_WAIVE_UNWRITTEN !== "0",
   trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0,
-  // Browser journeys only: lets a test move the server's clock. Needs the flag AND NODE_ENV=test (see config.ts).
+  // Browser journeys only: needs explicit MTP_TEST_CLOCK=1 and NODE_ENV=test.
   testClock: testClockEnabled(process.env),
   allowedOrigins: (process.env.MTP_ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
 });

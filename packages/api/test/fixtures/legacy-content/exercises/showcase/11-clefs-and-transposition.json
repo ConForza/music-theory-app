@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 1,
+  "id": "s.clefs-and-transposition",
+  "title": "Clefs and transposition",
+  "summary": "Move melodies by an octave between clefs, and transpose for instruments in B♭, A and F.",
+  "grade": 3,
+  "order": 11,
+  "familyIds": [
+    "fam.transposition"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path content team (Brief 03)",
+    "originality": "original",
+    "notes": "Items drawn from the seeded generators with a teaching-point filter, then fixed. Music and answers come from the rule engine; prompts and feedback are original."
+  },
+  "review": {
+    "status": "pending",
+    "reviewedBy": null
+  },
+  "items": [
+    {
+      "id": "i.showcase.clefs-and-transposition.1",
+      "templateId": "t.g3.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write this melody an octave lower in the bass clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A four-note melody in the treble clef, G major: C, D, E, C.",
+        "key": "G major"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "G major",
+        "accepted": [
+          [
+            "C4",
+            "D4",
+            "E4",
+            "C4"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "G major"
+        }
+      },
+      "hints": [
+        "Each note moves 8 letter names.",
+        "Check middle C as a landmark.",
+        "Work out the first note in the bass clef, then keep the same shape for the rest."
+      ],
+      "feedback": {
+        "correct": "Correct: an octave lower, rewritten for the bass clef.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.showcase.clefs-and-transposition.2",
+      "templateId": "t.g4.octave-transpose-alto",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write this melody an octave lower in the alto clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A four-note melody in the treble clef, C major: F, G, F, G.",
+        "key": "C major"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "alto",
+        "key": "C major",
+        "accepted": [
+          [
+            "F4",
+            "G4",
+            "F4",
+            "G4"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "C major"
+        }
+      },
+      "hints": [
+        "Avoid writing at the same pitch.",
+        "Work out the first note in the alto clef, then keep the same shape for the rest."
+      ],
+      "feedback": {
+        "correct": "Yes. The alto clef puts middle C on the middle line.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.showcase.clefs-and-transposition.3",
+      "templateId": "t.g5.instrument-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is at concert pitch. Write it as it would appear in a part for horn in F, which sounds a perfect 5th lower than written: transpose it up a perfect 5th, with the new key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A five-note melody in Eb major: G, A♭, B♭, A♭, G.",
+        "key": "Eb major"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "treble",
+        "key": "Bb major",
+        "accepted": [
+          [
+            "D6",
+            "Eb6",
+            "F6",
+            "Eb6",
+            "D6"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P5",
+          "direction": "up",
+          "sourceKey": "Eb major"
+        }
+      },
+      "hints": [
+        "Find the new key first.",
+        "Transpose accidentals by degree, not by copying.",
+        "First transpose the key: E♭ major up a perfect 5th is B♭ major. Then move every note by the same interval."
+      ],
+      "feedback": {
+        "correct": "Right notes and the right new key signature.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "practice": [
+    {
+      "templateId": "t.g5.instrument-transpose",
+      "label": "More transposition"
+    }
+  ]
+}

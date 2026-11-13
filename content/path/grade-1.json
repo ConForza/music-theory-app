@@ -136,15 +136,46 @@
             ],
             "maxDots": 0
           }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s01"
-      ]
+      ],
+      "contentRef": "lessons/G1-U1-L01.json"
     },
     {
       "id": "G1-U1-L02",
@@ -161,9 +192,24 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g1.note-value",
+          "templateId": "t.g1.note-total",
           "conceptIds": [
-            "c.rhythm.values-long",
+            "c.rhythm.values-short"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
             "c.rhythm.values-short"
           ],
           "scope": {
@@ -181,10 +227,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s03"
-      ]
+      ],
+      "contentRef": "lessons/G1-U1-L02.json"
     },
     {
       "id": "G1-U1-L03",
@@ -201,10 +248,26 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g1.note-value",
+          "templateId": "t.g1.beam-choice",
           "conceptIds": [
-            "c.rhythm.values-long",
+            "c.rhythm.beams",
             "c.rhythm.values-short"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beams"
           ],
           "scope": {
             "noteValues": [
@@ -221,10 +284,11 @@
       "optional": false,
       "estimatedMinutes": 4,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s03"
-      ]
+      ],
+      "contentRef": "lessons/G1-U1-L03.json"
     },
     {
       "id": "G1-U1-L04",
@@ -256,10 +320,8 @@
           }
         },
         {
-          "templateId": "t.g1.note-value",
+          "templateId": "t.g1.note-total",
           "conceptIds": [
-            "c.rhythm.values-long",
-            "c.rhythm.values-short",
             "c.rhythm.rests"
           ],
           "scope": {
@@ -277,10 +339,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s11"
-      ]
+      ],
+      "contentRef": "lessons/G1-U1-L04.json"
     },
     {
       "id": "G1-U1-L05",
@@ -311,15 +374,48 @@
             ],
             "maxDots": 0
           }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s12"
-      ]
+      ],
+      "contentRef": "lessons/G1-U1-L05.json"
     },
     {
       "id": "G1-U1-L06",
@@ -338,7 +434,22 @@
         {
           "templateId": "t.g1.tie-dot",
           "conceptIds": [
-            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
             "c.rhythm.dots"
           ],
           "scope": {
@@ -356,10 +467,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s12"
-      ]
+      ],
+      "contentRef": "lessons/G1-U1-L06.json"
     },
     {
       "id": "G1-U1-P1",
@@ -377,9 +489,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -428,7 +594,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U1-R1",
@@ -446,9 +612,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -497,7 +717,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U1-C",
@@ -509,7 +729,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -532,7 +752,32 @@
             "c.metre.bars"
           ],
           "scope": {
-            "timeSignatures": [],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
             "noteValues": [
               "semibreve",
               "minim",
@@ -547,10 +792,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s02"
-      ]
+      ],
+      "contentRef": "lessons/G1-U2-L01.json"
     },
     {
       "id": "G1-U2-L02",
@@ -586,15 +832,37 @@
             ],
             "maxDots": 1
           }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s02"
-      ]
+      ],
+      "contentRef": "lessons/G1-U2-L02.json"
     },
     {
       "id": "G1-U2-L03",
@@ -633,9 +901,9 @@
           }
         },
         {
-          "templateId": "t.g1.barlines",
+          "templateId": "t.g1.bar-judge",
           "conceptIds": [
-            "c.metre.bars"
+            "c.metre.bar-completion"
           ],
           "scope": {
             "timeSignatures": [
@@ -657,10 +925,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s02"
-      ]
+      ],
+      "contentRef": "lessons/G1-U2-L03.json"
     },
     {
       "id": "G1-U2-L04",
@@ -700,7 +969,27 @@
         {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
-            "c.metre.bar-completion",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
             "c.metre.grouping-g1"
           ],
           "scope": {
@@ -723,10 +1012,11 @@
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s18"
-      ]
+      ],
+      "contentRef": "lessons/G1-U2-L04.json"
     },
     {
       "id": "G1-U2-L05",
@@ -743,9 +1033,29 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g1.grouping",
+          "templateId": "t.g1.bar-fix",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
             "c.metre.ties-in-bars"
           ],
           "scope": {
@@ -768,10 +1078,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s18"
-      ]
+      ],
+      "contentRef": "lessons/G1-U2-L05.json"
     },
     {
       "id": "G1-U2-L06",
@@ -789,10 +1100,8 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g1.grouping",
+          "templateId": "t.g1.bar-fix",
           "conceptIds": [
-            "c.metre.grouping-g1",
-            "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
           "scope": {
@@ -814,8 +1123,28 @@
         {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
-            "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -837,11 +1166,12 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s11",
         "fs.g1.s18"
-      ]
+      ],
+      "contentRef": "lessons/G1-U2-L06.json"
     },
     {
       "id": "G1-U2-P1",
@@ -860,6 +1190,32 @@
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -902,7 +1258,8 @@
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -923,7 +1280,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -947,7 +1324,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U2-R1",
@@ -965,9 +1342,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -1013,9 +1444,120 @@
           }
         },
         {
+          "templateId": "t.g1.barlines",
+          "conceptIds": [
+            "c.metre.bars"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-complete",
+          "conceptIds": [
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -1039,7 +1581,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U2-C",
@@ -1051,7 +1593,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -1072,6 +1614,15 @@
         {
           "templateId": "t.g1.keyboard",
           "conceptIds": [
+            "c.pitch.keyboard",
+            "c.pitch.letter-names"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
             "c.pitch.keyboard"
           ],
           "scope": {}
@@ -1080,10 +1631,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s04"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L01.json"
     },
     {
       "id": "G1-U3-L02",
@@ -1100,12 +1652,14 @@
       "reviewOutcomeIds": [],
       "exercises": [
         {
-          "templateId": "t.g1.note-read",
+          "templateId": "t.g1.stave-facts",
           "conceptIds": [
             "c.clefs.stave"
           ],
           "scope": {
-            "clefs": [],
+            "clefs": [
+              "treble"
+            ],
             "maxLedgerLines": 0
           }
         }
@@ -1113,10 +1667,11 @@
       "optional": false,
       "estimatedMinutes": 4,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L02.json"
     },
     {
       "id": "G1-U3-L03",
@@ -1157,12 +1712,24 @@
             ],
             "maxLedgerLines": 0
           }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines"
+          ],
+          "scope": {
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 0
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 2,
-      "contentStatus": "example",
+      "contentVersion": 3,
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05",
         "fs.g1.s06"
@@ -1187,7 +1754,6 @@
           "templateId": "t.g1.note-read",
           "conceptIds": [
             "c.clefs.stave",
-            "c.clefs.treble-lines",
             "c.clefs.treble-spaces"
           ],
           "scope": {
@@ -1200,7 +1766,18 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces"
+          ],
+          "scope": {
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
             "c.clefs.treble-spaces"
           ],
           "scope": {
@@ -1214,10 +1791,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L04.json"
     },
     {
       "id": "G1-U3-L05",
@@ -1237,14 +1815,10 @@
         {
           "templateId": "t.g1.note-read",
           "conceptIds": [
-            "c.clefs.stave",
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
             "c.clefs.bass"
           ],
           "scope": {
             "clefs": [
-              "treble",
               "bass"
             ],
             "maxLedgerLines": 0
@@ -1253,9 +1827,31 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
             "c.clefs.bass"
+          ],
+          "scope": {
+            "clefs": [
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.bass"
+          ],
+          "scope": {
+            "clefs": [
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
           ],
           "scope": {
             "clefs": [
@@ -1269,10 +1865,11 @@
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s05"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L05.json"
     },
     {
       "id": "G1-U3-L06",
@@ -1291,10 +1888,6 @@
         {
           "templateId": "t.g1.note-read",
           "conceptIds": [
-            "c.clefs.stave",
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
             "c.pitch.middle-c"
           ],
           "scope": {
@@ -1306,11 +1899,8 @@
           }
         },
         {
-          "templateId": "t.g1.note-write",
+          "templateId": "t.g1.note-place",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
             "c.pitch.middle-c"
           ],
           "scope": {
@@ -1322,21 +1912,40 @@
           }
         },
         {
-          "templateId": "t.g1.keyboard",
+          "templateId": "t.g1.middle-c-find",
           "conceptIds": [
-            "c.pitch.keyboard",
             "c.pitch.middle-c"
           ],
-          "scope": {}
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s07"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L06.json"
     },
     {
       "id": "G1-U3-L07",
@@ -1355,10 +1964,19 @@
         {
           "templateId": "t.g1.note-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
-            "c.pitch.middle-c",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
             "c.pitch.note-writing"
           ],
           "scope": {
@@ -1373,10 +1991,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s06"
-      ]
+      ],
+      "contentRef": "lessons/G1-U3-L07.json"
     },
     {
       "id": "G1-U3-P1",
@@ -1393,9 +2012,30 @@
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
-            "c.pitch.middle-c"
+            "c.pitch.letter-names"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
         },
         {
           "templateId": "t.g1.note-read",
@@ -1420,8 +2060,50 @@
             "c.clefs.treble-lines",
             "c.clefs.treble-spaces",
             "c.clefs.bass",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
             "c.pitch.middle-c",
             "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-find",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
           ],
           "scope": {
             "clefs": [
@@ -1435,7 +2117,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U3-R1",
@@ -1456,9 +2138,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -1504,27 +2240,6 @@
           }
         },
         {
-          "templateId": "t.g1.time-signature",
-          "conceptIds": [
-            "c.metre.simple-crotchet"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "2/4",
-              "3/4",
-              "4/4"
-            ],
-            "noteValues": [
-              "semibreve",
-              "minim",
-              "crotchet",
-              "quaver",
-              "semiquaver"
-            ],
-            "maxDots": 1
-          }
-        },
-        {
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
@@ -1546,10 +2261,58 @@
           }
         },
         {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -1570,7 +2333,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -1589,72 +2372,36 @@
             ],
             "maxDots": 1
           }
-        }
-      ],
-      "optional": false,
-      "estimatedMinutes": 6,
-      "contentVersion": 1,
-      "contentStatus": "planned"
-    },
-    {
-      "id": "G1-U3-C",
-      "type": "unit_challenge",
-      "unitId": "G1-U3",
-      "title": "Unit challenge: The keyboard and the stave",
-      "objective": "Show independently, without hints, what you can do from this unit.",
-      "assessmentId": "a.g1-u3",
-      "optional": false,
-      "estimatedMinutes": 8,
-      "contentVersion": 1,
-      "contentStatus": "planned",
-      "exercises": []
-    },
-    {
-      "id": "G1-U4-L01",
-      "type": "lesson",
-      "unitId": "G1-U4",
-      "title": "Sharps, flats and naturals on the keyboard",
-      "objective": "Name black keys as sharps or flats and explain what a natural sign does.",
-      "conceptIds": [
-        "c.accidentals.signs"
-      ],
-      "outcomeIds": [
-        "abrsm2020.g1.10"
-      ],
-      "reviewOutcomeIds": [],
-      "exercises": [
+        },
         {
           "templateId": "t.g1.keyboard",
           "conceptIds": [
             "c.pitch.keyboard",
-            "c.accidentals.signs",
-            "c.pitch.middle-c"
+            "c.pitch.letter-names"
           ],
           "scope": {}
-        }
-      ],
-      "optional": false,
-      "estimatedMinutes": 5,
-      "contentVersion": 1,
-      "contentStatus": "planned",
-      "bookSectionIds": [
-        "fs.g1.s08"
-      ]
-    },
-    {
-      "id": "G1-U4-L02",
-      "type": "lesson",
-      "unitId": "G1-U4",
-      "title": "Accidentals on the stave",
-      "objective": "Write an accidental before a note on the same line or space and read notes with accidentals.",
-      "conceptIds": [
-        "c.accidentals.on-stave"
-      ],
-      "outcomeIds": [
-        "abrsm2020.g1.10"
-      ],
-      "reviewOutcomeIds": [],
-      "exercises": [
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
+          }
+        },
         {
           "templateId": "t.g1.note-read",
           "conceptIds": [
@@ -1678,8 +2425,147 @@
             "c.clefs.treble-lines",
             "c.clefs.treble-spaces",
             "c.clefs.bass",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
             "c.pitch.middle-c",
             "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-find",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft"
+    },
+    {
+      "id": "G1-U3-C",
+      "type": "unit_challenge",
+      "unitId": "G1-U3",
+      "title": "Unit challenge: The keyboard and the stave",
+      "objective": "Show independently, without hints, what you can do from this unit.",
+      "assessmentId": "a.g1-u3",
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "exercises": []
+    },
+    {
+      "id": "G1-U4-L01",
+      "type": "lesson",
+      "unitId": "G1-U4",
+      "title": "Sharps, flats and naturals on the keyboard",
+      "objective": "Name black keys as sharps or flats and explain what a natural sign does.",
+      "conceptIds": [
+        "c.accidentals.signs"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-facts",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 5,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g1.s08"
+      ],
+      "contentRef": "lessons/G1-U4-L01.json"
+    },
+    {
+      "id": "G1-U4-L02",
+      "type": "lesson",
+      "unitId": "G1-U4",
+      "title": "Accidentals on the stave",
+      "objective": "Write an accidental before a note on the same line or space and read notes with accidentals.",
+      "conceptIds": [
+        "c.accidentals.on-stave"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-write",
+          "conceptIds": [
+            "c.accidentals.on-stave"
           ],
           "scope": {
             "clefs": [
@@ -1693,10 +2579,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s08"
-      ]
+      ],
+      "contentRef": "lessons/G1-U4-L02.json"
     },
     {
       "id": "G1-U4-L03",
@@ -1718,7 +2605,27 @@
             "c.accidentals.bar-rule"
           ],
           "scope": {
-            "keys": [],
+            "keys": [
+              "C major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule"
+          ],
+          "scope": {
             "timeSignatures": [
               "2/4",
               "3/4",
@@ -1735,10 +2642,11 @@
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s14"
-      ]
+      ],
+      "contentRef": "lessons/G1-U4-L03.json"
     },
     {
       "id": "G1-U4-L04",
@@ -1757,11 +2665,30 @@
         {
           "templateId": "t.g1.accidental-state",
           "conceptIds": [
-            "c.accidentals.bar-rule",
             "c.accidentals.cancellation"
           ],
           "scope": {
-            "keys": [],
+            "keys": [
+              "C major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
             "timeSignatures": [
               "2/4",
               "3/4",
@@ -1778,10 +2705,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s14"
-      ]
+      ],
+      "contentRef": "lessons/G1-U4-L04.json"
     },
     {
       "id": "G1-U4-P1",
@@ -1796,20 +2724,21 @@
         {
           "templateId": "t.g1.keyboard",
           "conceptIds": [
-            "c.pitch.keyboard",
-            "c.accidentals.signs",
-            "c.pitch.middle-c"
+            "c.accidentals.signs"
           ],
           "scope": {}
         },
         {
-          "templateId": "t.g1.note-read",
+          "templateId": "t.g1.accidental-facts",
           "conceptIds": [
-            "c.clefs.stave",
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
-            "c.pitch.middle-c"
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
           ],
           "scope": {
             "clefs": [
@@ -1820,13 +2749,9 @@
           }
         },
         {
-          "templateId": "t.g1.note-write",
+          "templateId": "t.g1.accidental-write",
           "conceptIds": [
-            "c.clefs.treble-lines",
-            "c.clefs.treble-spaces",
-            "c.clefs.bass",
-            "c.pitch.middle-c",
-            "c.pitch.note-writing"
+            "c.accidentals.on-stave"
           ],
           "scope": {
             "clefs": [
@@ -1843,7 +2768,28 @@
             "c.accidentals.cancellation"
           ],
           "scope": {
-            "keys": [],
+            "keys": [
+              "C major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
             "timeSignatures": [
               "2/4",
               "3/4",
@@ -1860,7 +2806,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U4-R1",
@@ -1883,9 +2829,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -1931,27 +2931,6 @@
           }
         },
         {
-          "templateId": "t.g1.time-signature",
-          "conceptIds": [
-            "c.metre.simple-crotchet"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "2/4",
-              "3/4",
-              "4/4"
-            ],
-            "noteValues": [
-              "semibreve",
-              "minim",
-              "crotchet",
-              "quaver",
-              "semiquaver"
-            ],
-            "maxDots": 1
-          }
-        },
-        {
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
@@ -1973,10 +2952,58 @@
           }
         },
         {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -1997,7 +3024,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -2015,6 +3062,36 @@
               "semiquaver"
             ],
             "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.pitch.keyboard",
+            "c.pitch.letter-names",
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
           }
         },
         {
@@ -2040,6 +3117,22 @@
             "c.clefs.treble-lines",
             "c.clefs.treble-spaces",
             "c.clefs.bass",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
             "c.pitch.middle-c",
             "c.pitch.note-writing"
           ],
@@ -2052,19 +3145,110 @@
           }
         },
         {
-          "templateId": "t.g1.keyboard",
+          "templateId": "t.g1.middle-c-find",
           "conceptIds": [
-            "c.pitch.keyboard",
-            "c.accidentals.signs",
             "c.pitch.middle-c"
           ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-facts",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-write",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-state",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
+            "keys": [
+              "C major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U4-C",
@@ -2076,7 +3260,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -2099,15 +3283,29 @@
             "c.pitch.tones-semitones"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.step-size",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s09"
-      ]
+      ],
+      "contentRef": "lessons/G1-U5-L01.json"
     },
     {
       "id": "G1-U5-L02",
@@ -2139,15 +3337,32 @@
             ],
             "maxLedgerLines": 1
           }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
+          "conceptIds": [
+            "c.scales.major-pattern"
+          ],
+          "scope": {
+            "keys": [
+              "C major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s09"
-      ]
+      ],
+      "contentRef": "lessons/G1-U5-L02.json"
     },
     {
       "id": "G1-U5-L03",
@@ -2167,7 +3382,24 @@
         {
           "templateId": "t.g1.scale-build",
           "conceptIds": [
-            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
+          "conceptIds": [
             "c.scales.major-sharp-g1"
           ],
           "scope": {
@@ -2187,10 +3419,11 @@
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s10"
-      ]
+      ],
+      "contentRef": "lessons/G1-U5-L03.json"
     },
     {
       "id": "G1-U5-L04",
@@ -2210,8 +3443,25 @@
         {
           "templateId": "t.g1.scale-build",
           "conceptIds": [
-            "c.scales.major-pattern",
-            "c.scales.major-sharp-g1",
+            "c.scales.major-f"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
+          "conceptIds": [
             "c.scales.major-f"
           ],
           "scope": {
@@ -2232,10 +3482,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s10"
-      ]
+      ],
+      "contentRef": "lessons/G1-U5-L04.json"
     },
     {
       "id": "G1-U5-L05",
@@ -2270,38 +3521,12 @@
               "bass"
             ]
           }
-        }
-      ],
-      "optional": false,
-      "estimatedMinutes": 7,
-      "contentVersion": 1,
-      "contentStatus": "planned",
-      "bookSectionIds": [
-        "fs.g1.s13"
-      ]
-    },
-    {
-      "id": "G1-U5-L06",
-      "type": "lesson",
-      "unitId": "G1-U5",
-      "title": "Writing scales with and without key signatures",
-      "objective": "Write C, G, D and F major ascending and descending in both clefs, with and without key signatures.",
-      "conceptIds": [
-        "c.scales.writing-g1"
-      ],
-      "outcomeIds": [
-        "abrsm2020.g1.12",
-        "abrsm2020.g1.13"
-      ],
-      "reviewOutcomeIds": [],
-      "exercises": [
+        },
         {
-          "templateId": "t.g1.scale-build",
+          "templateId": "t.g1.key-facts",
           "conceptIds": [
-            "c.scales.major-pattern",
-            "c.scales.major-sharp-g1",
-            "c.scales.major-f",
-            "c.scales.writing-g1"
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
           ],
           "scope": {
             "keys": [
@@ -2313,14 +3538,12 @@
             "clefs": [
               "treble",
               "bass"
-            ],
-            "maxLedgerLines": 1
+            ]
           }
         },
         {
-          "templateId": "t.g1.key-signature",
+          "templateId": "t.g1.key-write",
           "conceptIds": [
-            "c.keys.signature-concept",
             "c.keys.signatures-g1"
           ],
           "scope": {
@@ -2340,10 +3563,92 @@
       "optional": false,
       "estimatedMinutes": 7,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s13"
-      ]
+      ],
+      "contentRef": "lessons/G1-U5-L05.json"
+    },
+    {
+      "id": "G1-U5-L06",
+      "type": "lesson",
+      "unitId": "G1-U5",
+      "title": "Writing scales with and without key signatures",
+      "objective": "Write C, G, D and F major ascending and descending in both clefs, with and without key signatures.",
+      "conceptIds": [
+        "c.scales.writing-g1"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g1.12",
+        "abrsm2020.g1.13"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
+          "conceptIds": [
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.key-signature",
+          "conceptIds": [
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 7,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g1.s13"
+      ],
+      "contentRef": "lessons/G1-U5-L06.json"
     },
     {
       "id": "G1-U5-L07",
@@ -2377,15 +3682,35 @@
             ],
             "degreeNaming": "number"
           }
+        },
+        {
+          "templateId": "t.g1.degree-note",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s15"
-      ]
+      ],
+      "contentRef": "lessons/G1-U5-L07.json"
     },
     {
       "id": "G1-U5-P1",
@@ -2408,7 +3733,42 @@
           "scope": {}
         },
         {
+          "templateId": "t.g1.step-size",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
           "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
           "conceptIds": [
             "c.scales.major-pattern",
             "c.scales.major-sharp-g1",
@@ -2449,7 +3809,63 @@
           }
         },
         {
+          "templateId": "t.g1.key-facts",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.key-write",
+          "conceptIds": [
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
           "templateId": "t.g1.degree",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
+          "templateId": "t.g1.degree-note",
           "conceptIds": [
             "c.scales.degree-numbers"
           ],
@@ -2471,7 +3887,7 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U5-R1",
@@ -2495,9 +3911,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -2543,27 +4013,6 @@
           }
         },
         {
-          "templateId": "t.g1.time-signature",
-          "conceptIds": [
-            "c.metre.simple-crotchet"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "2/4",
-              "3/4",
-              "4/4"
-            ],
-            "noteValues": [
-              "semibreve",
-              "minim",
-              "crotchet",
-              "quaver",
-              "semiquaver"
-            ],
-            "maxDots": 1
-          }
-        },
-        {
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
@@ -2585,10 +4034,58 @@
           }
         },
         {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -2609,7 +4106,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -2627,6 +4144,36 @@
               "semiquaver"
             ],
             "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.pitch.keyboard",
+            "c.pitch.letter-names",
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
           }
         },
         {
@@ -2652,6 +4199,22 @@
             "c.clefs.treble-lines",
             "c.clefs.treble-spaces",
             "c.clefs.bass",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
             "c.pitch.middle-c",
             "c.pitch.note-writing"
           ],
@@ -2664,13 +4227,63 @@
           }
         },
         {
-          "templateId": "t.g1.keyboard",
+          "templateId": "t.g1.middle-c-find",
           "conceptIds": [
-            "c.pitch.keyboard",
-            "c.accidentals.signs",
             "c.pitch.middle-c"
           ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-facts",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-write",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         },
         {
           "templateId": "t.g1.accidental-state",
@@ -2680,10 +4293,7 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major"
+              "C major"
             ],
             "timeSignatures": [
               "2/4",
@@ -2696,12 +4306,189 @@
             ],
             "maxLedgerLines": 1
           }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.tone-semitone",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.step-size",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.key-signature",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.key-facts",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.key-write",
+          "conceptIds": [
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.degree",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
+          "templateId": "t.g1.degree-note",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U5-C",
@@ -2713,7 +4500,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -2754,15 +4541,41 @@
               "a"
             ]
           }
+        },
+        {
+          "templateId": "t.g1.triad-notes",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s16"
-      ]
+      ],
+      "contentRef": "lessons/G1-U6-L01.json"
     },
     {
       "id": "G1-U6-L02",
@@ -2799,15 +4612,38 @@
             "intervalLowerNote": "tonic",
             "compoundIntervals": false
           }
+        },
+        {
+          "templateId": "t.g1.interval-note",
+          "conceptIds": [
+            "c.intervals.number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s17"
-      ]
+      ],
+      "contentRef": "lessons/G1-U6-L02.json"
     },
     {
       "id": "G1-U6-L03",
@@ -2826,7 +4662,28 @@
         {
           "templateId": "t.g1.interval-number",
           "conceptIds": [
-            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
+        },
+        {
+          "templateId": "t.g1.interval-note",
+          "conceptIds": [
             "c.intervals.above-tonic-number"
           ],
           "scope": {
@@ -2850,10 +4707,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s17"
-      ]
+      ],
+      "contentRef": "lessons/G1-U6-L03.json"
     },
     {
       "id": "G1-U6-P1",
@@ -2868,6 +4726,31 @@
       "exercises": [
         {
           "templateId": "t.g1.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.triad-notes",
           "conceptIds": [
             "c.chords.tonic-triad"
           ],
@@ -2913,12 +4796,35 @@
             "intervalLowerNote": "tonic",
             "compoundIntervals": false
           }
+        },
+        {
+          "templateId": "t.g1.interval-note",
+          "conceptIds": [
+            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U6-R1",
@@ -2946,9 +4852,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -2994,27 +4954,6 @@
           }
         },
         {
-          "templateId": "t.g1.time-signature",
-          "conceptIds": [
-            "c.metre.simple-crotchet"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "2/4",
-              "3/4",
-              "4/4"
-            ],
-            "noteValues": [
-              "semibreve",
-              "minim",
-              "crotchet",
-              "quaver",
-              "semiquaver"
-            ],
-            "maxDots": 1
-          }
-        },
-        {
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
@@ -3036,10 +4975,58 @@
           }
         },
         {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -3060,7 +5047,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -3078,6 +5085,36 @@
               "semiquaver"
             ],
             "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.pitch.keyboard",
+            "c.pitch.letter-names",
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
           }
         },
         {
@@ -3103,6 +5140,22 @@
             "c.clefs.treble-lines",
             "c.clefs.treble-spaces",
             "c.clefs.bass",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
             "c.pitch.middle-c",
             "c.pitch.note-writing"
           ],
@@ -3115,13 +5168,63 @@
           }
         },
         {
-          "templateId": "t.g1.keyboard",
+          "templateId": "t.g1.middle-c-find",
           "conceptIds": [
-            "c.pitch.keyboard",
-            "c.accidentals.signs",
             "c.pitch.middle-c"
           ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-facts",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-write",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         },
         {
           "templateId": "t.g1.accidental-state",
@@ -3131,11 +5234,27 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major"
+              "C major"
             ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
             "timeSignatures": [
               "2/4",
               "3/4",
@@ -3156,7 +5275,42 @@
           "scope": {}
         },
         {
+          "templateId": "t.g1.step-size",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
           "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
           "conceptIds": [
             "c.scales.major-pattern",
             "c.scales.major-sharp-g1",
@@ -3197,6 +5351,43 @@
           }
         },
         {
+          "templateId": "t.g1.key-facts",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.key-write",
+          "conceptIds": [
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
           "templateId": "t.g1.degree",
           "conceptIds": [
             "c.scales.degree-numbers"
@@ -3214,12 +5405,127 @@
             ],
             "degreeNaming": "number"
           }
+        },
+        {
+          "templateId": "t.g1.degree-note",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
+          "templateId": "t.g1.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.triad-notes",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.interval-number",
+          "conceptIds": [
+            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
+        },
+        {
+          "templateId": "t.g1.interval-note",
+          "conceptIds": [
+            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U6-C",
@@ -3231,7 +5537,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -3254,15 +5560,23 @@
             "c.terms.tempo-g1"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
+            "c.terms.tempo-g1"
+          ],
+          "scope": {}
         }
       ],
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L01.json"
     },
     {
       "id": "G1-U7-L02",
@@ -3281,7 +5595,13 @@
         {
           "templateId": "t.g1.terms",
           "conceptIds": [
-            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
             "c.terms.dynamics-g1"
           ],
           "scope": {}
@@ -3290,10 +5610,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L02.json"
     },
     {
       "id": "G1-U7-L03",
@@ -3312,8 +5633,13 @@
         {
           "templateId": "t.g1.terms",
           "conceptIds": [
-            "c.terms.tempo-g1",
-            "c.terms.dynamics-g1",
+            "c.terms.directions-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
             "c.terms.directions-g1"
           ],
           "scope": {}
@@ -3322,10 +5648,11 @@
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L03.json"
     },
     {
       "id": "G1-U7-L04",
@@ -3344,9 +5671,13 @@
         {
           "templateId": "t.g1.terms",
           "conceptIds": [
-            "c.terms.tempo-g1",
-            "c.terms.dynamics-g1",
-            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
+          "conceptIds": [
             "c.terms.articulation-g1"
           ],
           "scope": {}
@@ -3355,10 +5686,11 @@
       "optional": false,
       "estimatedMinutes": 5,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "bookSectionIds": [
         "fs.g1.s19"
-      ]
+      ],
+      "contentRef": "lessons/G1-U7-L04.json"
     },
     {
       "id": "G1-U7-L05",
@@ -3399,13 +5731,43 @@
             "intervalQuality": "number-only",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g1.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g1",
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
-      "bookSectionIds": []
+      "contentStatus": "draft",
+      "bookSectionIds": [],
+      "contentRef": "lessons/G1-U7-L05.json"
     },
     {
       "id": "G1-U7-P1",
@@ -3423,6 +5785,16 @@
       "exercises": [
         {
           "templateId": "t.g1.terms",
+          "conceptIds": [
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
           "conceptIds": [
             "c.terms.tempo-g1",
             "c.terms.dynamics-g1",
@@ -3456,12 +5828,41 @@
             "intervalQuality": "number-only",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g1.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g1",
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U7-R1",
@@ -3496,9 +5897,63 @@
         {
           "templateId": "t.g1.note-value",
           "conceptIds": [
+            "c.rhythm.values-long"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.note-total",
+          "conceptIds": [
+            "c.rhythm.beat",
             "c.rhythm.values-long",
             "c.rhythm.values-short",
-            "c.rhythm.rests"
+            "c.rhythm.beams",
+            "c.rhythm.rests",
+            "c.rhythm.ties",
+            "c.rhythm.dots"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-equivalent",
+          "conceptIds": [
+            "c.rhythm.beat",
+            "c.rhythm.values-long",
+            "c.rhythm.values-short",
+            "c.rhythm.ties"
+          ],
+          "scope": {
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 0
+          }
+        },
+        {
+          "templateId": "t.g1.beam-choice",
+          "conceptIds": [
+            "c.rhythm.beams",
+            "c.rhythm.values-short"
           ],
           "scope": {
             "noteValues": [
@@ -3544,27 +5999,6 @@
           }
         },
         {
-          "templateId": "t.g1.time-signature",
-          "conceptIds": [
-            "c.metre.simple-crotchet"
-          ],
-          "scope": {
-            "timeSignatures": [
-              "2/4",
-              "3/4",
-              "4/4"
-            ],
-            "noteValues": [
-              "semibreve",
-              "minim",
-              "crotchet",
-              "quaver",
-              "semiquaver"
-            ],
-            "maxDots": 1
-          }
-        },
-        {
           "templateId": "t.g1.barlines",
           "conceptIds": [
             "c.metre.bars"
@@ -3586,10 +6020,58 @@
           }
         },
         {
+          "templateId": "t.g1.bar-judge",
+          "conceptIds": [
+            "c.metre.bars",
+            "c.metre.simple-crotchet",
+            "c.metre.bar-completion",
+            "c.metre.grouping-g1",
+            "c.metre.ties-in-bars",
+            "c.metre.rests-in-bars-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.time-signature",
+          "conceptIds": [
+            "c.metre.simple-crotchet"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
           "templateId": "t.g1.bar-complete",
           "conceptIds": [
             "c.metre.bar-completion",
-            "c.metre.grouping-g1"
+            "c.metre.grouping-g1",
+            "c.metre.rests-in-bars-g1"
           ],
           "scope": {
             "timeSignatures": [
@@ -3610,7 +6092,27 @@
         {
           "templateId": "t.g1.grouping",
           "conceptIds": [
-            "c.metre.grouping-g1",
+            "c.metre.grouping-g1"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "noteValues": [
+              "semibreve",
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.bar-fix",
+          "conceptIds": [
             "c.metre.ties-in-bars",
             "c.metre.rests-in-bars-g1"
           ],
@@ -3628,6 +6130,36 @@
               "semiquaver"
             ],
             "maxDots": 1
+          }
+        },
+        {
+          "templateId": "t.g1.keyboard",
+          "conceptIds": [
+            "c.pitch.keyboard",
+            "c.pitch.letter-names",
+            "c.accidentals.signs"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.letter-names",
+          "conceptIds": [
+            "c.pitch.letter-names",
+            "c.pitch.keyboard"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.stave-facts",
+          "conceptIds": [
+            "c.clefs.stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 0
           }
         },
         {
@@ -3653,6 +6185,22 @@
             "c.clefs.treble-lines",
             "c.clefs.treble-spaces",
             "c.clefs.bass",
+            "c.pitch.note-writing"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.note-place",
+          "conceptIds": [
+            "c.clefs.treble-lines",
+            "c.clefs.treble-spaces",
+            "c.clefs.bass",
             "c.pitch.middle-c",
             "c.pitch.note-writing"
           ],
@@ -3665,13 +6213,63 @@
           }
         },
         {
-          "templateId": "t.g1.keyboard",
+          "templateId": "t.g1.middle-c-find",
           "conceptIds": [
-            "c.pitch.keyboard",
-            "c.accidentals.signs",
             "c.pitch.middle-c"
           ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.middle-c-facts",
+          "conceptIds": [
+            "c.pitch.middle-c"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-facts",
+          "conceptIds": [
+            "c.accidentals.signs"
+          ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g1.accidental-read",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-write",
+          "conceptIds": [
+            "c.accidentals.on-stave"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
         },
         {
           "templateId": "t.g1.accidental-state",
@@ -3681,11 +6279,27 @@
           ],
           "scope": {
             "keys": [
-              "C major",
-              "G major",
-              "D major",
-              "F major"
+              "C major"
             ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.accidental-count",
+          "conceptIds": [
+            "c.accidentals.bar-rule",
+            "c.accidentals.cancellation"
+          ],
+          "scope": {
             "timeSignatures": [
               "2/4",
               "3/4",
@@ -3706,7 +6320,42 @@
           "scope": {}
         },
         {
+          "templateId": "t.g1.step-size",
+          "conceptIds": [
+            "c.pitch.tones-semitones"
+          ],
+          "scope": {
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
           "templateId": "t.g1.scale-build",
+          "conceptIds": [
+            "c.scales.major-pattern",
+            "c.scales.major-sharp-g1",
+            "c.scales.major-f",
+            "c.scales.writing-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1
+          }
+        },
+        {
+          "templateId": "t.g1.scale-gap",
           "conceptIds": [
             "c.scales.major-pattern",
             "c.scales.major-sharp-g1",
@@ -3747,6 +6396,43 @@
           }
         },
         {
+          "templateId": "t.g1.key-facts",
+          "conceptIds": [
+            "c.keys.signature-concept",
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.key-write",
+          "conceptIds": [
+            "c.keys.signatures-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        {
           "templateId": "t.g1.degree",
           "conceptIds": [
             "c.scales.degree-numbers"
@@ -3766,7 +6452,51 @@
           }
         },
         {
+          "templateId": "t.g1.degree-note",
+          "conceptIds": [
+            "c.scales.degree-numbers"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "degreeNaming": "number"
+          }
+        },
+        {
           "templateId": "t.g1.tonic-triad",
+          "conceptIds": [
+            "c.chords.tonic-triad"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "chordDegrees": [
+              "I"
+            ],
+            "inversions": [
+              "a"
+            ]
+          }
+        },
+        {
+          "templateId": "t.g1.triad-notes",
           "conceptIds": [
             "c.chords.tonic-triad"
           ],
@@ -3814,7 +6544,40 @@
           }
         },
         {
+          "templateId": "t.g1.interval-note",
+          "conceptIds": [
+            "c.intervals.number",
+            "c.intervals.above-tonic-number"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic",
+            "compoundIntervals": false
+          }
+        },
+        {
           "templateId": "t.g1.terms",
+          "conceptIds": [
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.directions-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g1.term-sign",
           "conceptIds": [
             "c.terms.tempo-g1",
             "c.terms.dynamics-g1",
@@ -3848,12 +6611,41 @@
             "intervalQuality": "number-only",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g1.melody-detail",
+          "conceptIds": [
+            "c.context.melody-g1",
+            "c.terms.tempo-g1",
+            "c.terms.dynamics-g1",
+            "c.terms.articulation-g1"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 1,
+            "intervalQuality": "number-only",
+            "intervalLowerNote": "tonic"
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
       "contentVersion": 1,
-      "contentStatus": "planned"
+      "contentStatus": "draft"
     },
     {
       "id": "G1-U7-C",
@@ -3865,7 +6657,7 @@
       "optional": false,
       "estimatedMinutes": 8,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     },
     {
@@ -3878,7 +6670,7 @@
       "optional": false,
       "estimatedMinutes": 25,
       "contentVersion": 1,
-      "contentStatus": "planned",
+      "contentStatus": "draft",
       "exercises": []
     }
   ]

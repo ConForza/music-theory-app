@@ -440,11 +440,11 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .bar-meter.is-over { border-color: var(--danger); color: var(--danger); }
 .bar-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.5rem; }
-.palette-btn { overflow: hidden; appearance: none; font: inherit; display: grid; justify-items: center; gap: 0.1rem; min-height: 76px; padding: 0.4rem 0.3rem; border-radius: 14px; border: 2px solid var(--line-strong); background: var(--surface); color: var(--ink); box-shadow: 0 3px 0 var(--line-strong); cursor: pointer; }
+.palette-btn { overflow: visible; min-width: 0; appearance: none; font: inherit; display: grid; justify-items: center; gap: 0.1rem; min-height: 76px; padding: 0.4rem 0.3rem; border-radius: 14px; border: 2px solid var(--line-strong); background: var(--surface); color: var(--ink); box-shadow: 0 3px 0 var(--line-strong); cursor: pointer; }
 .palette-btn:active { transform: translateY(2px); }
 .palette-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .palette-btn .smufl-inline { font-size: 2.6rem; height: 2.6rem; }
-.palette-name { font-size: 0.78rem; font-weight: 800; color: var(--muted); }
+.palette-name { overflow-wrap: anywhere; text-align: center; font-size: 0.78rem; font-weight: 800; color: var(--muted); }
 .palette-tools { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .join-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem; padding: 0.4rem; background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); }
 .join-cell { display: inline-flex; align-items: center; gap: 0.15rem; }
@@ -483,7 +483,8 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .notation-large .notation-scroll { padding: 0.6rem; }
 @media (max-width: 380px) {
   .options.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .palette { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* Cells grow with the text size, so enlarged note names and symbols are never cut off (they wrap into fewer columns instead). */
+  .palette { grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.4rem), 1fr)); }
 }
 .signs .smufl-inline { padding-top: 0; height: auto; transform: translateY(0.12em); }
 .notation-svg.fit { height: auto; }

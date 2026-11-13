@@ -49,7 +49,7 @@ export const TERMS: Term[] = [
   { id: "ritardando", term: "ritardando (rit.)", meaning: "gradually getting slower", category: "change-of-speed", firstGrade: 1, opposite: ["accelerando"], similar: ["rallentando", "ritenuto"] },
   { id: "accelerando", term: "accelerando (accel.)", meaning: "gradually getting faster", category: "change-of-speed", firstGrade: 1, opposite: ["rallentando", "ritardando"] },
   { id: "a-tempo", term: "a tempo", meaning: "return to the previous speed", category: "change-of-speed", firstGrade: 1, similar: ["tempo-primo"] },
-  { id: "ritenuto", term: "ritenuto (rit., riten.)", meaning: "held back; slower at once", category: "change-of-speed", firstGrade: 2, similar: ["rallentando"] },
+  { id: "ritenuto", term: "ritenuto (riten.)", meaning: "held back; slower at once", category: "change-of-speed", firstGrade: 1, similar: ["rallentando"] },
   { id: "tempo-primo", term: "tempo primo", meaning: "return to the speed at the start", category: "change-of-speed", firstGrade: 3, similar: ["a-tempo"] },
   { id: "legato", term: "legato", meaning: "smoothly, with the notes joined", category: "articulation", firstGrade: 1, opposite: ["staccato"] },
   { id: "staccato", term: "staccato", meaning: "short and detached", category: "articulation", firstGrade: 1, opposite: ["legato"], similar: ["staccatissimo"] },
@@ -65,12 +65,14 @@ export const TERMS: Term[] = [
   { id: "con-moto", term: "con moto", meaning: "with movement", category: "expression", firstGrade: 3 },
   { id: "da-capo", term: "da capo (D.C.)", meaning: "repeat from the beginning", category: "structure", firstGrade: 1, similar: ["dal-segno"] },
   { id: "fine", term: "fine", meaning: "the end", category: "structure", firstGrade: 1 },
-  { id: "dal-segno", term: "dal segno (D.S.)", meaning: "repeat from the sign", category: "structure", firstGrade: 2, similar: ["da-capo"] },
+  { id: "dal-segno", term: "dal segno (D.S.)", meaning: "repeat from the sign", category: "structure", firstGrade: 1, similar: ["da-capo"] },
   { id: "fermata", term: "pause (fermata)", meaning: "hold the note longer than its written value", category: "sign", firstGrade: 1 },
   { id: "slur", term: "slur", meaning: "play the notes under the curve smoothly", category: "sign", firstGrade: 1, similar: ["tie"] },
   { id: "tie", term: "tie", meaning: "join two notes of the same pitch into one longer sound", category: "sign", firstGrade: 1, similar: ["slur"] },
   { id: "repeat", term: "repeat marks", meaning: "play the passage between the marks again", category: "sign", firstGrade: 1 },
-  { id: "ottava", term: "8va", meaning: "play an octave higher than written", category: "sign", firstGrade: 4 },
+  { id: "ottava", term: "8va", meaning: "play an octave higher than written", category: "sign", firstGrade: 1 },
+  { id: "poco", term: "poco", meaning: "a little", category: "expression", firstGrade: 1 },
+  { id: "metronome-mark", term: "M.M. ♩ = 72", meaning: "72 crotchet beats in a minute", category: "sign", firstGrade: 1 },
 ];
 
 export interface InstrumentInfo {

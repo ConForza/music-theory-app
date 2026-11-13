@@ -1,4 +1,4 @@
-import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService } from "@mtp/api";
+import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService, NodeRunService } from "@mtp/api";
 import type { LearnerResponse } from "@mtp/engine";
 
 export type { CourseView, LearnerLesson, RunState, CompletionSummary };
@@ -58,6 +58,10 @@ export type ConceptDetail = NonNullable<ReturnType<Engagement["conceptDetail"]>>
 export type LessonRewards = NonNullable<CompletionSummary["rewards"]>;
 export type ReviewStart = ReturnType<ReviewService["start"]>;
 export type ReviewSession = ReturnType<ReviewService["view"]>;
+/** Brief 05: a server-built practice, review, challenge or assessment run. */
+export type NodeSession = ReturnType<NodeRunService["view"]>;
+export type NodeResult = ReturnType<NodeRunService["complete"]> & { rewards?: LessonRewards };
+export type AssessmentResults = ReturnType<NodeRunService["results"]>;
 export type ReviewSessionItem = ReviewSession["items"][number];
 export type ReviewAttemptResult = AttemptResult & { kind: "review" | "remedial"; counted: boolean; remedialItemId: string | null; nextDueDate: string | null };
 export type ReviewSummary = ReturnType<ReviewService["complete"]>;
@@ -261,6 +265,21 @@ export const api = {
     const sc = scope;
     return retrying(sc, () => request<ReviewSummary>("POST", `/api/review/sessions/${encodeURIComponent(sessionId)}/complete`, {}, { scope: sc }));
   },
+  // Brief 05: practice, review, unit challenges and the Grade assessment. Same account binding and idempotent retries as lessons.
+  nodeStart: (id: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<NodeSession>("POST", `/api/nodes/${encodeURIComponent(id)}/start`, {}, { scope: sc }));
+  },
+  nodeHint: (id: string, itemId: string, level: number) => request<{ hint: string; level: number }>("POST", `/api/nodes/${encodeURIComponent(id)}/hint`, { itemId, level }, { scope }),
+  nodeAttempt: (id: string, attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<AttemptResult>("POST", `/api/nodes/${encodeURIComponent(id)}/attempts`, { attemptId, itemId, response }, { scope: sc }));
+  },
+  nodeComplete: (id: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<NodeResult>("POST", `/api/nodes/${encodeURIComponent(id)}/complete`, {}, { scope: sc }));
+  },
+  results: () => request<{ results: AssessmentResults }>("GET", "/api/results", undefined, { scope }),
   complete: (id: string) => {
     const sc = scope;
     return retrying(sc, () => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `${L(id)}/complete`, {}, { scope: sc }));

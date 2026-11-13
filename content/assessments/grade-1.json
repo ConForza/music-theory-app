@@ -7,7 +7,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U1",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Note values, rests, ties and dots",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -19,7 +19,10 @@
             "abrsm2020.g1.01"
           ],
           "templateIds": [
-            "t.g1.note-value"
+            "t.g1.note-value",
+            "t.g1.note-total",
+            "t.g1.note-equivalent",
+            "t.g1.beam-choice"
           ],
           "itemCount": 2
         },
@@ -31,7 +34,8 @@
           ],
           "templateIds": [
             "t.g1.note-value",
-            "t.g1.rest"
+            "t.g1.rest",
+            "t.g1.note-total"
           ],
           "itemCount": 2
         },
@@ -42,7 +46,8 @@
             "abrsm2020.g1.03"
           ],
           "templateIds": [
-            "t.g1.tie-dot"
+            "t.g1.tie-dot",
+            "t.g1.note-total"
           ],
           "itemCount": 2
         },
@@ -53,7 +58,9 @@
             "abrsm2020.g1.04"
           ],
           "templateIds": [
-            "t.g1.tie-dot"
+            "t.g1.tie-dot",
+            "t.g1.note-total",
+            "t.g1.note-equivalent"
           ],
           "itemCount": 2
         }
@@ -66,7 +73,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U2",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Bars and simple time",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -79,7 +86,9 @@
           ],
           "templateIds": [
             "t.g1.barlines",
-            "t.g1.bar-complete"
+            "t.g1.bar-complete",
+            "t.g1.bar-judge",
+            "t.g1.bar-fix"
           ],
           "itemCount": 2
         },
@@ -91,7 +100,9 @@
           ],
           "templateIds": [
             "t.g1.time-signature",
-            "t.g1.bar-complete"
+            "t.g1.bar-complete",
+            "t.g1.bar-judge",
+            "t.g1.bar-fix"
           ],
           "itemCount": 2
         },
@@ -103,7 +114,9 @@
           ],
           "templateIds": [
             "t.g1.bar-complete",
-            "t.g1.grouping"
+            "t.g1.grouping",
+            "t.g1.bar-judge",
+            "t.g1.bar-fix"
           ],
           "itemCount": 2
         },
@@ -114,7 +127,10 @@
             "abrsm2020.g1.02"
           ],
           "templateIds": [
-            "t.g1.grouping"
+            "t.g1.grouping",
+            "t.g1.note-value",
+            "t.g1.rest",
+            "t.g1.note-total"
           ],
           "itemCount": 2
         }
@@ -127,7 +143,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U3",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Keyboard, stave, clefs and ledger lines",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -141,9 +157,12 @@
           "templateIds": [
             "t.g1.keyboard",
             "t.g1.note-read",
-            "t.g1.note-write"
+            "t.g1.note-write",
+            "t.g1.letter-names",
+            "t.g1.note-place",
+            "t.g1.middle-c-find"
           ],
-          "itemCount": 2
+          "itemCount": 3
         },
         {
           "id": "o-g1-08",
@@ -152,9 +171,10 @@
             "abrsm2020.g1.08"
           ],
           "templateIds": [
-            "t.g1.note-read"
+            "t.g1.note-read",
+            "t.g1.stave-facts"
           ],
-          "itemCount": 2
+          "itemCount": 3
         }
       ],
       "sampling": "seeded-balanced",
@@ -165,7 +185,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U4",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Sharps, flats and naturals",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -178,9 +198,13 @@
           ],
           "templateIds": [
             "t.g1.keyboard",
-            "t.g1.accidental-state"
+            "t.g1.accidental-state",
+            "t.g1.accidental-facts",
+            "t.g1.accidental-read",
+            "t.g1.accidental-write",
+            "t.g1.accidental-count"
           ],
-          "itemCount": 2
+          "itemCount": 6
         }
       ],
       "sampling": "seeded-balanced",
@@ -191,7 +215,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U5",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Tones, semitones and major keys",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -204,7 +228,9 @@
           ],
           "templateIds": [
             "t.g1.tone-semitone",
-            "t.g1.scale-build"
+            "t.g1.scale-build",
+            "t.g1.step-size",
+            "t.g1.scale-gap"
           ],
           "itemCount": 2
         },
@@ -215,7 +241,8 @@
             "abrsm2020.g1.12"
           ],
           "templateIds": [
-            "t.g1.scale-build"
+            "t.g1.scale-build",
+            "t.g1.scale-gap"
           ],
           "itemCount": 2
         },
@@ -226,7 +253,9 @@
             "abrsm2020.g1.13"
           ],
           "templateIds": [
-            "t.g1.key-signature"
+            "t.g1.key-signature",
+            "t.g1.key-facts",
+            "t.g1.key-write"
           ],
           "itemCount": 2
         },
@@ -237,7 +266,8 @@
             "abrsm2020.g1.15"
           ],
           "templateIds": [
-            "t.g1.degree"
+            "t.g1.degree",
+            "t.g1.degree-note"
           ],
           "itemCount": 2
         }
@@ -250,7 +280,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U6",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Tonic triads and intervals",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -262,9 +292,10 @@
             "abrsm2020.g1.14"
           ],
           "templateIds": [
-            "t.g1.tonic-triad"
+            "t.g1.tonic-triad",
+            "t.g1.triad-notes"
           ],
-          "itemCount": 2
+          "itemCount": 3
         },
         {
           "id": "o-g1-16",
@@ -273,9 +304,10 @@
             "abrsm2020.g1.16"
           ],
           "templateIds": [
-            "t.g1.interval-number"
+            "t.g1.interval-number",
+            "t.g1.interval-note"
           ],
-          "itemCount": 2
+          "itemCount": 3
         }
       ],
       "sampling": "seeded-balanced",
@@ -286,7 +318,7 @@
       "kind": "unit_challenge",
       "grade": 1,
       "unitId": "G1-U7",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Terms, signs and melody reading",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -299,7 +331,9 @@
           ],
           "templateIds": [
             "t.g1.terms",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.term-sign",
+            "t.g1.melody-detail"
           ],
           "itemCount": 2
         },
@@ -311,7 +345,9 @@
           ],
           "templateIds": [
             "t.g1.terms",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.term-sign",
+            "t.g1.melody-detail"
           ],
           "itemCount": 2
         },
@@ -322,7 +358,8 @@
             "abrsm2020.g1.19"
           ],
           "templateIds": [
-            "t.g1.terms"
+            "t.g1.terms",
+            "t.g1.term-sign"
           ],
           "itemCount": 2
         },
@@ -334,7 +371,9 @@
           ],
           "templateIds": [
             "t.g1.terms",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.term-sign",
+            "t.g1.melody-detail"
           ],
           "itemCount": 2
         },
@@ -345,7 +384,8 @@
             "abrsm2020.g1.21"
           ],
           "templateIds": [
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.melody-detail"
           ],
           "itemCount": 2
         }
@@ -358,7 +398,7 @@
       "kind": "grade_assessment",
       "grade": 1,
       "unitId": null,
-      "version": 1,
+      "version": 2,
       "title": "Grade 1 practice assessment",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -370,7 +410,10 @@
             "abrsm2020.g1.01"
           ],
           "templateIds": [
-            "t.g1.note-value"
+            "t.g1.note-value",
+            "t.g1.note-total",
+            "t.g1.note-equivalent",
+            "t.g1.beam-choice"
           ],
           "itemCount": 1
         },
@@ -383,7 +426,8 @@
           "templateIds": [
             "t.g1.note-value",
             "t.g1.rest",
-            "t.g1.grouping"
+            "t.g1.grouping",
+            "t.g1.note-total"
           ],
           "itemCount": 1
         },
@@ -394,7 +438,8 @@
             "abrsm2020.g1.03"
           ],
           "templateIds": [
-            "t.g1.tie-dot"
+            "t.g1.tie-dot",
+            "t.g1.note-total"
           ],
           "itemCount": 1
         },
@@ -405,7 +450,9 @@
             "abrsm2020.g1.04"
           ],
           "templateIds": [
-            "t.g1.tie-dot"
+            "t.g1.tie-dot",
+            "t.g1.note-total",
+            "t.g1.note-equivalent"
           ],
           "itemCount": 1
         },
@@ -418,7 +465,10 @@
           "templateIds": [
             "t.g1.time-signature",
             "t.g1.bar-complete",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.bar-judge",
+            "t.g1.bar-fix",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -430,7 +480,9 @@
           ],
           "templateIds": [
             "t.g1.barlines",
-            "t.g1.bar-complete"
+            "t.g1.bar-complete",
+            "t.g1.bar-judge",
+            "t.g1.bar-fix"
           ],
           "itemCount": 1
         },
@@ -442,7 +494,9 @@
           ],
           "templateIds": [
             "t.g1.bar-complete",
-            "t.g1.grouping"
+            "t.g1.grouping",
+            "t.g1.bar-judge",
+            "t.g1.bar-fix"
           ],
           "itemCount": 1
         },
@@ -453,7 +507,8 @@
             "abrsm2020.g1.08"
           ],
           "templateIds": [
-            "t.g1.note-read"
+            "t.g1.note-read",
+            "t.g1.stave-facts"
           ],
           "itemCount": 1
         },
@@ -467,7 +522,11 @@
             "t.g1.note-read",
             "t.g1.note-write",
             "t.g1.keyboard",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.letter-names",
+            "t.g1.note-place",
+            "t.g1.middle-c-find",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -479,7 +538,11 @@
           ],
           "templateIds": [
             "t.g1.keyboard",
-            "t.g1.accidental-state"
+            "t.g1.accidental-state",
+            "t.g1.accidental-facts",
+            "t.g1.accidental-read",
+            "t.g1.accidental-write",
+            "t.g1.accidental-count"
           ],
           "itemCount": 1
         },
@@ -491,7 +554,9 @@
           ],
           "templateIds": [
             "t.g1.tone-semitone",
-            "t.g1.scale-build"
+            "t.g1.scale-build",
+            "t.g1.step-size",
+            "t.g1.scale-gap"
           ],
           "itemCount": 1
         },
@@ -502,7 +567,8 @@
             "abrsm2020.g1.12"
           ],
           "templateIds": [
-            "t.g1.scale-build"
+            "t.g1.scale-build",
+            "t.g1.scale-gap"
           ],
           "itemCount": 1
         },
@@ -514,7 +580,10 @@
           ],
           "templateIds": [
             "t.g1.key-signature",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.key-facts",
+            "t.g1.key-write",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -525,7 +594,8 @@
             "abrsm2020.g1.14"
           ],
           "templateIds": [
-            "t.g1.tonic-triad"
+            "t.g1.tonic-triad",
+            "t.g1.triad-notes"
           ],
           "itemCount": 1
         },
@@ -536,7 +606,8 @@
             "abrsm2020.g1.15"
           ],
           "templateIds": [
-            "t.g1.degree"
+            "t.g1.degree",
+            "t.g1.degree-note"
           ],
           "itemCount": 1
         },
@@ -548,7 +619,9 @@
           ],
           "templateIds": [
             "t.g1.interval-number",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.interval-note",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -560,7 +633,9 @@
           ],
           "templateIds": [
             "t.g1.terms",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.term-sign",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -572,7 +647,9 @@
           ],
           "templateIds": [
             "t.g1.terms",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.term-sign",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -583,7 +660,8 @@
             "abrsm2020.g1.19"
           ],
           "templateIds": [
-            "t.g1.terms"
+            "t.g1.terms",
+            "t.g1.term-sign"
           ],
           "itemCount": 1
         },
@@ -595,7 +673,9 @@
           ],
           "templateIds": [
             "t.g1.terms",
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.term-sign",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         },
@@ -606,7 +686,8 @@
             "abrsm2020.g1.21"
           ],
           "templateIds": [
-            "t.g1.melody"
+            "t.g1.melody",
+            "t.g1.melody-detail"
           ],
           "itemCount": 1
         }

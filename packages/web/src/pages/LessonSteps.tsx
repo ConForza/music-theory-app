@@ -68,7 +68,7 @@ export function Teach({ lesson, onNext }: { lesson: LearnerLesson; onNext: () =>
 }
 
 /** Notation (or a keyboard picture) with optional sound: tap a note to hear it, or play the whole example in time. */
-export function MusicView({ fragment, marks, size, labels = "names" }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large"; labels?: "names" | "positions" }) {
+export function MusicView({ fragment, marks, size, labels = "names" }: { fragment: NotationFragment; marks?: Array<{ index: number; ok: boolean }>; size?: "normal" | "compact" | "large"; labels?: "names" | "positions" | "neutral" }) {
   const [lit, setLit] = useState<string[]>([]);
   useEffect(() => () => stopAll(), []);
   if (fragment.presentation === "keyboard") {
@@ -78,8 +78,8 @@ export function MusicView({ fragment, marks, size, labels = "names" }: { fragmen
     const to = pitchAt((Math.floor(Math.max(...ds) / 7) + 1) * 7);
     return (
       <figure className="notation">
-        <Keyboard from={from} to={to} highlight={notes} label="Keyboard picture: the highlighted keys are the ones in the question" />
-        <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>
+        <Keyboard from={from} to={to} highlight={notes} anonymous={labels !== "names"} label="Keyboard picture: the highlighted keys are the ones in the question" />
+        {labels === "names" && <figcaption className="visually-hidden">{fragment.textAlternative}</figcaption>}
       </figure>
     );
   }
@@ -155,6 +155,7 @@ export function Question({
   eyebrow,
   continueLabel = "Continue",
   wrongAction,
+  final = false,
 }: {
   nodeId: string;
   item: LearnerItem;
@@ -167,6 +168,8 @@ export function Question({
   continueLabel?: string;
   /** An extra way forward after a wrong answer (review: go to the similar question). Retrying is always still offered. */
   wrongAction?: (result: AttemptResult & { remedialItemId?: string | null }) => { label: string; onClick: () => void } | null;
+  /** Challenge and assessment: the first answer is final, so a wrong answer moves on (no retry, no hints). */
+  final?: boolean;
 }) {
   const send: QuestionApi = source ?? { attempt: (id, itemId, r) => api.attempt(nodeId, id, itemId, r), hint: (itemId, level) => api.hint(nodeId, itemId, level) };
   const [response, setResponse] = useState<AnswerResponse | null>(null);
@@ -234,10 +237,10 @@ export function Question({
         <p className="eyebrow">{eyebrow ?? (item.section === "guided" ? "Guided practice" : "Your turn")} · Question {index} of {total}</p>
         <h1 id="q-title" className="q-prompt" tabIndex={-1}>{item.prompt}</h1>
         {/* In questions the playable notes are labelled by stave position, never by name (review R6). */}
-        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} labels="positions" />}
+        {item.music && !(item.input.kind === "staff-position" && !item.input.shown && item.music.measures.length === 0) && <MusicView fragment={item.music} labels={/where is this note|which line or space/i.test(item.prompt) ? "neutral" : "positions"} />}
         {item.score && <ScoreView score={item.score} />}
         <form onSubmit={(e) => { e.preventDefault(); void check(); }} id="answer-form">
-          <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct)} marks={result?.marks} parts={result?.parts} />
+          <AnswerInput input={item.input} value={response} onChange={(r) => { setResponse(r); if (result && !result.correct && !final) { setResult(null); pending.current = null; } }} disabled={busy || Boolean(result?.correct) || (final && Boolean(result))} marks={result?.marks} parts={result?.parts} exam={final} />
         </form>
         {item.hintCount > 0 && !result && (
           <div className="hints">
@@ -258,7 +261,7 @@ export function Question({
         <div className="feedback" role="status" aria-live="polite">
           {result && (
             <>
-              <p className="feedback-title"><Icon name={result.correct ? "check" : "info"} size={24} strokeWidth={3} /> {result.correct ? "Correct!" : "Not quite"}</p>
+              <p className="feedback-title"><Icon name={result.correct ? "check" : "info"} size={24} strokeWidth={3} /> {result.correct ? "Correct!" : final ? "Not this time" : "Not quite"}</p>
               <p>{result.message}</p>
               {!result.correct && result.reason && result.reason !== result.message && <p className="feedback-reason">{result.reason}</p>}
               {!result.correct && result.solution && <p className="feedback-solution"><strong>The answer: </strong>{result.solution}</p>}
@@ -266,7 +269,7 @@ export function Question({
           )}
         </div>
         {result ? (
-          result.correct ? (
+          result.correct || final ? (
             <button key="continue" ref={feedbackBtn} className="btn btn-primary btn-large" onClick={onCorrect}>{continueLabel}</button>
           ) : (
             <>

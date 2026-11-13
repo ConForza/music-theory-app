@@ -1,3 +1,4 @@
+import { resolve } from "node:path";
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { createApp, loadCourse, ManualClock, openDb, type Course } from "@mtp/api";
@@ -8,7 +9,9 @@ let course: Course | undefined;
 
 /** A real API (in-memory SQLite, real curriculum) behind a cookie-aware fetch, so UI tests exercise the whole stack. */
 export function startApi(opts: { waive?: boolean } = {}) {
-  course ??= loadCourse();
+  // The Brief 02-04 UI suites run against the content of that era (frozen in the API package's test fixtures), where only
+  // G1-U3-L03 and G5-U4-L06 are playable. Brief 05's Grade 1 journeys run in the browser suites against the real content.
+  course ??= loadCourse(resolve(process.cwd(), "../api/test/fixtures/legacy-content"));
   // A controllable server clock (midday UTC on 2 March 2026), so tests can move to "tomorrow" without waiting.
   const clock = new ManualClock(new Date("2026-03-02T12:00:00Z"));
   const db = openDb(":memory:");

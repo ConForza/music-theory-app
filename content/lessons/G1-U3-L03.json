@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "lc.G1-U3-L03",
   "lessonId": "G1-U3-L03",
-  "contentVersion": 2,
+  "contentVersion": 3,
   "locale": "en-GB",
   "objective": {
     "statement": "Read and write the five notes that sit on the lines of the treble clef.",
@@ -387,12 +387,143 @@
         },
         "fallback": "G is the second line up, marked by the treble clef's curl."
       }
+    },
+    {
+      "id": "i.g1-u3-l03.ind-5",
+      "templateId": "t.g1.note-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with one semibreve on the 5th line."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "F5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Find the clef's reference note first (G on line 2 in treble, F on line 4 in bass).",
+        "Count lines and spaces from the bottom.",
+        "The note is on the 5th line. The bottom line of the treble clef is E: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Another treble line note read correctly.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g1-u3-l03.ind-6",
+      "templateId": "t.g1.note-place",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write B on a line of the treble-clef stave.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "B",
+          "alter": 0,
+          "position": "line",
+          "maxLedgerLines": 0
+        },
+        "accepted": [
+          "B4"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Count up from the bottom line, one letter for each line and space.",
+        "In the treble clef the bottom line is E. Count up the lines and spaces, one letter each, until you reach B."
+      ],
+      "feedback": {
+        "correct": "On the right treble line.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g1-u3-l03.ind-7",
+      "templateId": "t.g1.note-place",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write D on a line of the treble-clef stave.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "D",
+          "alter": 0,
+          "position": "line",
+          "maxLedgerLines": 0
+        },
+        "accepted": [
+          "D5"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Count up from the bottom line, one letter for each line and space.",
+        "In the treble clef the bottom line is E. Count up the lines and spaces, one letter each, until you reach D."
+      ],
+      "feedback": {
+        "correct": "On the right line again.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
     }
   ],
   "recap": [
     "The treble clef curls around G on the second line.",
     "The line notes from the bottom are E, G, B, D, F.",
-    "Lines and spaces are always counted from the bottom."
+    "Lines and spaces are always counted from the bottom.",
+    "A line note has the line running through the middle of its head."
   ],
   "spacedReview": [
     {
@@ -416,7 +547,7 @@
     "completion": "The lesson is complete when every step has been answered (with retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
   },
   "provenance": {
-    "authoredBy": "Music Theory Path curriculum team (Brief 01 example)",
+    "authoredBy": "Music Theory Path curriculum team (Brief 01 example, extended in Brief 05; pending qualified teacher review)",
     "originality": "original",
     "bookSectionIds": [
       "fs.g1.s05",

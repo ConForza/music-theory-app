@@ -7,8 +7,9 @@ import type { Db } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
-import { Engagement } from "./engagement.ts";
 import { backfillPracticeExposure } from "./backfill.ts";
+import { NodeRunService } from "./node-run.ts";
+import { Engagement } from "./engagement.ts";
 import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
 import { LearnerResponse } from "@mtp/engine";
 
@@ -116,8 +117,10 @@ export function createApp(opts: AppOptions) {
   const clock: Clock = opts.testClock ? (opts.clock ?? new ManualClock()) : (opts.clock ?? systemClock);
   const engagement = new Engagement(db, course, clock, course.ix.c.policy);
   const progress = new ProgressService(db, course, { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true }, engagement, clock);
+  const policy = { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true };
+  const nodes = new NodeRunService(db, course, policy, clock, engagement);
   const practice = new PracticeService(db, course, clock);
-  // One-off repair of practice history that predates exposure tracking (idempotent; see backfill.ts).
+  // One-time recovery for historical practice without exposure identities; idempotent on startup.
   backfillPracticeExposure(db, practice, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
@@ -240,6 +243,10 @@ export function createApp(opts: AppOptions) {
       lessonProgress: all("SELECT * FROM lesson_progress WHERE user_id = ?"),
       attempts: all("SELECT * FROM attempts WHERE user_id = ? ORDER BY created_at"),
       practiceAttempts: all("SELECT * FROM practice_attempts WHERE user_id = ? ORDER BY created_at"),
+      // Brief 05: server-built practice, review, challenge and assessment runs and their results.
+      nodeSessions: all("SELECT * FROM node_sessions WHERE user_id = ? ORDER BY started_at"),
+      nodeAttempts: all("SELECT * FROM node_attempts WHERE user_id = ? ORDER BY created_at"),
+      assessmentResults: all("SELECT * FROM assessment_results WHERE user_id = ? ORDER BY completed_at"),
       // Brief 04. Engagement and understanding are exported separately, as they are stored.
       xpLedger: all("SELECT * FROM xp_ledger WHERE user_id = ? ORDER BY rowid"),
       dailyActivity: all("SELECT * FROM daily_activity WHERE user_id = ? ORDER BY occurred_at"),
@@ -281,6 +288,20 @@ export function createApp(opts: AppOptions) {
   });
 
   route("POST", "/api/lessons/:nodeId/complete", true, (ctx) => progress.complete(ctx.user!.id, nodeParam(ctx.params[0]!)));
+
+  // ---- practice, review, challenge and assessment runs (Brief 05) ----------------------------------------------------
+  route("POST", "/api/nodes/:nodeId/start", true, (ctx) => nodes.start(ctx.user!.id, nodeParam(ctx.params[0]!)));
+  route("GET", "/api/nodes/:nodeId/session", true, (ctx) => nodes.view(ctx.user!.id, nodeParam(ctx.params[0]!)));
+  route("POST", "/api/nodes/:nodeId/hint", true, async (ctx) => {
+    const b = parse(z.object({ itemId: z.string().min(1).max(100), level: z.number().int().min(1).max(10) }).strict(), await ctx.body());
+    return nodes.hint(ctx.user!.id, nodeParam(ctx.params[0]!), b.itemId, b.level);
+  });
+  route("POST", "/api/nodes/:nodeId/attempts", true, async (ctx) => {
+    const b = parse(AttemptBody, await ctx.body());
+    return nodes.attempt(ctx.user!.id, nodeParam(ctx.params[0]!), b.attemptId, b.itemId, b.response);
+  });
+  route("POST", "/api/nodes/:nodeId/complete", true, (ctx) => nodes.complete(ctx.user!.id, nodeParam(ctx.params[0]!)));
+  route("GET", "/api/results", true, (ctx) => ({ results: nodes.results(ctx.user!.id) }));
 
   // ---- practice lab (Brief 03) -------------------------------------------
   route("GET", "/api/practice", true, () => practice.catalogue());
@@ -390,6 +411,6 @@ export function createApp(opts: AppOptions) {
     }
   }
 
-  return { fetch, progress, practice, engagement, clock };
+  return { fetch, progress, practice, engagement, nodes, clock, db };
 }
 export type App = ReturnType<typeof createApp>;

@@ -24,28 +24,28 @@ export interface Draft {
   hints?: string[];
   correct?: string;
 }
-type Gen = (ctx: GenCtx) => Draft | null;
+export type Gen = (ctx: GenCtx) => Draft | null;
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
 export const pretty = (s: string) => s.replace(/#/g, "♯").replace(/x/g, "𝄪").replace(/([A-G])bb/g, "$1𝄫").replace(/([A-G])b/g, "$1♭");
-const nameOf = (p: music.PitchClass) => pretty(FC(p));
+export const nameOf = (p: music.PitchClass) => pretty(FC(p));
 const keyName = (k: string) => pretty(k);
 const SIGN_WORD: Record<number, string> = { [-2]: "double flat", [-1]: "flat", 0: "natural", 1: "sharp", 2: "double sharp" };
 const ORD = (n: number) => music.ordinal(n);
-const clefOf = (c: GenCtx): Clef => c.rng.pick(((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]));
-const fits = (clef: Clef, ps: Pitch[], max: number) => ps.every((p) => ledgerLines(clef, p) <= max);
-const maxLedger = (c: GenCtx) => c.scope.maxLedgerLines ?? 0;
-const keysOf = (c: GenCtx) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
+export const clefOf = (c: GenCtx): Clef => c.rng.pick(((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Clef[]));
+export const fits = (clef: Clef, ps: Pitch[], max: number) => ps.every((p) => ledgerLines(clef, p) <= max);
+export const maxLedger = (c: GenCtx) => c.scope.maxLedgerLines ?? 0;
+export const keysOf = (c: GenCtx) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
 const DISPLAY = "B4";
 
-function note(pitch: Pitch | string, value: music.NoteValue = "semibreve", extra: Record<string, unknown> = {}): NotationEvent {
+export function note(pitch: Pitch | string, value: music.NoteValue = "semibreve", extra: Record<string, unknown> = {}): NotationEvent {
   return { kind: "note", pitch: typeof pitch === "string" ? pitch : F(pitch), duration: { value, dots: 0 }, ...extra } as NotationEvent;
 }
-const r = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "rest", duration: { value, dots }, ...extra }) as NotationEvent;
-const n = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "note", pitch: DISPLAY, duration: { value, dots }, ...extra }) as NotationEvent;
+export const r = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "rest", duration: { value, dots }, ...extra }) as NotationEvent;
+export const n = (value: music.NoteValue, dots = 0, extra: Record<string, unknown> = {}): NotationEvent => ({ kind: "note", pitch: DISPLAY, duration: { value, dots }, ...extra }) as NotationEvent;
 
 /** Print exactly the accidentals the spelt pitches need (key signature and bar state), so content is self-consistent. */
 export function withSigns(f: NotationFragment): NotationFragment {
@@ -73,16 +73,37 @@ export function withSigns(f: NotationFragment): NotationFragment {
   };
 }
 
-function frag(clef: Clef, measures: Measure[], text: string, extra: Partial<NotationFragment> = {}): NotationFragment {
+export function frag(clef: Clef, measures: Measure[], text: string, extra: Partial<NotationFragment> = {}): NotationFragment {
   return withSigns({ presentation: "stave", clef, showKeySignature: true, measures, textAlternative: text, ...extra } as NotationFragment);
 }
 
-const valueWord = (e: NotationEvent): string => {
+export const valueWord = (e: NotationEvent): string => {
   if (e.kind === "tuplet") return `a ${e.actual === 3 ? "triplet" : e.actual === 2 ? "duplet" : `group of ${e.actual}`} of ${e.events.map(valueWord).join(", ")}`;
   const v = `${"dotted ".repeat(e.duration.dots ?? 0)}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`;
   return `${v}${e.kind !== "rest" && e.tieToNext ? " tied to" : ""}`;
 };
 export const describeRhythm = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(valueWord).join(", ")}.`).join(" ");
+/** For questions: notes joined by a beam are described as one "beamed together" group, so the printed grouping is not lost to a screen reader. */
+export const describeRhythmWithBeams = (ms: Measure[]) =>
+  ms
+    .map((m, i) => {
+      const parts: string[] = [];
+      let group: string[] | null = null;
+      for (const e of m.events ?? []) {
+        const beam = (e as { beam?: string }).beam;
+        if (beam === "begin") group = [valueWord(e)];
+        else if (group && (beam === "continue" || beam === "end")) {
+          group.push(valueWord(e));
+          if (beam === "end") {
+            parts.push(`${group.length} beamed together (${group.join(", ")})`);
+            group = null;
+          }
+        } else parts.push(valueWord(e));
+      }
+      if (group) parts.push(`${group.length} beamed together (${group.join(", ")})`);
+      return `Bar ${i + 1}: ${parts.join(", ")}.`;
+    })
+    .join(" ");
 
 // Beat fillers: a list of value sequences that fill one beat of the given length (all within scope).
 function beatFills(beat: music.Fraction, sc: MusicScope, compound: boolean): NotationEvent[][] {
@@ -116,7 +137,7 @@ function beatFills(beat: music.Fraction, sc: MusicScope, compound: boolean): Not
 }
 
 /** A random, convention-compliant bar in `ts` drawn from the scope's values. */
-function randomBar(c: GenCtx, ts: string, opts: { noRests?: boolean; needBeams?: boolean } = {}): NotationEvent[] | null {
+export function randomBar(c: GenCtx, ts: string, opts: { noRests?: boolean; needBeams?: boolean } = {}): NotationEvent[] | null {
   const s = c.rng.pick(music.metreStructures(ts));
   const bar: NotationEvent[] = [];
   // Occasionally a longer note across two beats in simple time, starting on a strong beat.
@@ -201,7 +222,7 @@ const keyboard: Gen = (c) => {
     if ((a.alter || b.alter) && !c.scope.blackKeys && !c.scope.accidentals) return null;
     return {
       prompt: "Is the distance between these two keys a tone or a semitone?",
-      music: { presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: [note(a), note(b)] }], textAlternative: `Two highlighted piano keys: ${nameOf(a)} and the ${dist === 1 ? "very next" : "next-but-one"} key above it, ${nameOf(b)}.` },
+      music: { presentation: "keyboard", clef: "treble", showKeySignature: false, measures: [{ events: [note(a), note(b)] }], textAlternative: `Two highlighted piano keys: ${nameOf(a)} and the ${dist === 1 ? "very next" : "next-but-one"} key above it, ${nameOf(b)}.`, questionAlternative: "Two highlighted piano keys on a keyboard picture, the second higher than the first. Count the keys from the picture to answer." },
       answer: { kind: "choice", options: [{ id: "tone", label: "A tone" }, { id: "semitone", label: "A semitone" }], correctOptionIds: [dist === 2 ? "tone" : "semitone"] },
       hints: ["A semitone is from one key to the very next key, black or white. A tone is two semitones."],
     };
@@ -292,10 +313,14 @@ const accidentalState: Gen = (c) => {
   const f = frag(clef, measures, "", { key: keyText, timeSignature: ts });
   const target = f.measures[targetIndex[0]]!.events![targetIndex[1]]!;
   if (target.kind !== "note" || target.writtenAccidental) return null; // the marked note must carry no sign of its own
-  const describe = (m: Measure, bi: number) =>
+  const describeOld = (m: Measure, bi: number) =>
     `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `${P(e.pitch).step} ${describePosition(staffPosition(clef, P(e.pitch)))}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}${e.label ? " (marked *)" : ""}${e.tieToNext ? " tied over" : ""}` : "rest")).join(", ") + ".";
+  const describe = (m: Measure, bi: number) =>
+    `Bar ${bi + 1}: ` + (m.events ?? []).map((e) => (e.kind === "note" ? `a note on the ${describePosition(staffPosition(clef, P(e.pitch)))}${e.writtenAccidental ? ` with a ${e.writtenAccidental.replace("-", " ")} sign` : ""}${e.label ? " (marked *)" : ""}${e.tieToNext ? " tied over" : ""}` : "rest")).join(", ") + ".";
   const sig = music.keySignature(key);
-  f.textAlternative = `${clef} clef, key signature: ${sig.count ? `${sig.count} ${sig.count === 1 ? sig.type.slice(0, -1) : sig.type}` : "none"}, ${ts}. ${f.measures.map(describe).join(" ")}`;
+  const head = `${clef} clef, key signature: ${sig.count ? `${sig.count} ${sig.count === 1 ? sig.type.slice(0, -1) : sig.type}` : "none"}, ${ts}. `;
+  f.textAlternative = head + f.measures.map(describeOld).join(" ");
+  f.questionAlternative = head + f.measures.map(describe).join(" ");
   return {
     prompt: "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
     music: f,
@@ -547,7 +572,7 @@ const cadence: Gen = (c) => {
 // Transposition and ornaments
 // ---------------------------------------------------------------------------
 
-function melodyIn(c: GenCtx, key: music.Key, clef: Clef, len: number): Pitch[] | null {
+export function melodyIn(c: GenCtx, key: music.Key, clef: Clef, len: number): Pitch[] | null {
   const pcs = scale(key, key.mode === "major" ? "major" : "harmonic").slice(0, 7);
   const max = maxLedger(c);
   for (const o of c.rng.shuffle([2, 3, 4, 5])) {
@@ -653,8 +678,8 @@ const ornament: Gen = (c) => {
 // Rhythm families
 // ---------------------------------------------------------------------------
 
-const tsOf = (c: GenCtx, fallback = ["2/4", "3/4", "4/4"]) => c.rng.pick(c.scope.timeSignatures?.length ? c.scope.timeSignatures : fallback);
-const rhythmLine = (measures: Measure[], extra: Partial<NotationFragment> = {}): NotationFragment => ({ presentation: "rhythm-line", clef: "treble", showKeySignature: false, measures, textAlternative: describeRhythm(measures), ...extra }) as NotationFragment;
+export const tsOf = (c: GenCtx, fallback = ["2/4", "3/4", "4/4"]) => c.rng.pick(c.scope.timeSignatures?.length ? c.scope.timeSignatures : fallback);
+export const rhythmLine = (measures: Measure[], extra: Partial<NotationFragment> = {}): NotationFragment => ({ presentation: "rhythm-line", clef: "treble", showKeySignature: false, measures, textAlternative: describeRhythm(measures), questionAlternative: describeRhythmWithBeams(measures), ...extra }) as NotationFragment;
 
 const timeSignature: Gen = (c) => {
   const ts = tsOf(c);
@@ -937,6 +962,8 @@ const scoreObservation: Gen = (c) => {
   const measures: Measure[] = [0, 1].map((b) => ({ events: tune.slice(b * beats, b * beats + beats).map((p, i) => note(p, "crotchet", b * beats + i === labelAt ? { label: "x" } : {})) }));
   measures[1]!.barline = "final";
   const f = frag(clef, measures, `A two-bar melody in the ${clef} clef with a key signature, time signature ${ts}. The notes are ${tune.map(nameOf).join(", ")}; the note marked x is the ${ORD(labelAt + 1)} note.`, { key: keyText, timeSignature: ts });
+  const q = frag(clef, measures, `A two-bar melody in the ${clef} clef with a key signature of ${music.keySignature(key).count === 0 ? "no sharps or flats" : `${music.keySignature(key).count} ${music.keySignature(key).type}`}, time signature ${ts}. The notes sit: ${tune.map((p) => describePosition(staffPosition(clef, p))).join(", ")}; the note marked x is the ${ORD(labelAt + 1)} note.`, { key: keyText, timeSignature: ts });
+  f.questionAlternative = q.textAlternative;
   const marked = tune[labelAt]!;
   return {
     prompt: "Look at this melody and answer the questions.",
