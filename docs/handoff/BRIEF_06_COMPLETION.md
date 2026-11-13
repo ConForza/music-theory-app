@@ -1,13 +1,13 @@
 # Brief 06 completion handoff: Grade 2
 
-**Delivered:** all 41 Grade 2 nodes are playable (24 lessons, 5 practice, 5 reviews, 5 unit challenges, the Grade 2 assessment, and one optional melodic-minor preview); 20 new templates with generators and per-option misconception feedback; concept boundaries for the mastery audit, now run for Grade 2 as well; independent answer checks; a full Grade 2 API journey test; real-browser Grade 2 journeys; the completion audit and teacher review pack (generated). Architecture: [GRADE_2_COURSE.md](../architecture/GRADE_2_COURSE.md).
+**Delivered:** all 41 Grade 2 nodes are playable (24 lessons, 5 practice, 5 reviews, 5 unit challenges, the Grade 2 assessment, and one optional melodic-minor preview); 22 new templates with generators and per-option misconception feedback; concept boundaries for the mastery audit, now run for Grade 2 as well; independent answer checks; a full Grade 2 API journey test; real-browser Grade 2 journeys; the completion audit and teacher review pack (generated). Architecture: [GRADE_2_COURSE.md](../architecture/GRADE_2_COURSE.md).
 
 **Not done, by design:** no teacher has reviewed anything; nothing is approved, "production-ready" or ABRSM-endorsed. No novice-learner session has been run. Placement, practice exams and readiness estimates remain Brief 10.
 
 ## Deliberate deviations from the existing Grade 2 specification
 
 1. **Introduction of A, E and D minor** moved to the first minor concept (`c.scales.minor-concept`), so the first minor lesson can use them. The natural-minor pattern is a stepping stone only.
-2. **Brief 01's lesson bindings were rewritten** (several were unusable placeholders). The 16 original templates are kept; 20 were added.
+2. **Brief 01's lesson bindings were rewritten** (several were unusable placeholders). The 16 original templates are kept; 22 were added.
 3. **Practice and review bindings are derived** from the lessons. Review 1 keeps its Grade 1 foundations; review 5 includes unit 5.
 4. **Unit 2 challenge** has 3 questions per section (6 in all, was 4) so it is a fair check; the Grade 2 assessment asks 2 questions per outcome (30 in all, was 17). Pass marks are unchanged.
 5. **The optional preview node** lists g2.07 as a related outcome (the lesson schema needs one); it covers nothing. The lesson-content id pattern now accepts `E<n>`.

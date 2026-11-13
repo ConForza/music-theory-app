@@ -179,7 +179,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "All three bars are in 4/4. The second half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?",
+      "prompt": "All three bars are in 4/4. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -188,42 +188,6 @@
           {
             "events": [
               {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
                 "kind": "rest",
                 "duration": {
                   "value": "minim",
@@ -231,7 +195,26 @@
                 }
               },
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -260,25 +243,15 @@
                 "beam": "end"
               },
               {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
                 "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -335,8 +308,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver, quaver, quaver, minim rest, crotchet rest. Bar 2: quaver, quaver, quaver, quaver, crotchet rest. Bar 3: quaver, quaver, quaver, quaver, minim rest.",
-        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), minim rest, crotchet rest. Bar 2: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), crotchet rest. Bar 3: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), minim rest."
+        "textAlternative": "Bar 1: minim rest, quaver, quaver, crotchet. Bar 2: quaver, quaver, minim rest, crotchet. Bar 3: quaver, quaver, quaver, quaver, minim rest.",
+        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver), crotchet. Bar 2: 2 beamed together (quaver, quaver), minim rest, crotchet. Bar 3: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), minim rest."
       },
       "answer": {
         "kind": "choice",
@@ -355,16 +328,16 @@
           }
         ],
         "correctOptionIds": [
-          "3"
+          "2"
         ],
         "diagnoses": {
           "1": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           },
-          "2": {
+          "3": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           }
         }
       },
@@ -373,7 +346,7 @@
         "4/4 has four crotchet beats in each bar."
       ],
       "feedback": {
-        "correct": "Yes: a two-beat rest fills half the bar.",
+        "correct": "Yes: that bar's two-beat rest crosses the middle of the bar.",
         "mistakes": {
           "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
           "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
@@ -495,7 +468,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "All three bars are in 4/4. The second half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?",
+      "prompt": "All three bars are in 4/4. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -504,6 +477,13 @@
           {
             "events": [
               {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
@@ -511,6 +491,28 @@
                   "dots": 0
                 }
               },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
               {
                 "kind": "note",
                 "pitch": "B4",
@@ -525,6 +527,24 @@
                   "value": "minim",
                   "dots": 0
                 }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
               }
             ]
           },
@@ -550,40 +570,6 @@
                 "kind": "rest",
                 "duration": {
                   "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              }
-            ]
-          },
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
                   "dots": 0
                 }
               }
@@ -591,8 +577,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet, crotchet, minim rest. Bar 2: crotchet, crotchet, minim rest, crotchet rest. Bar 3: crotchet, crotchet, crotchet rest.",
-        "questionAlternative": "Bar 1: crotchet, crotchet, minim rest. Bar 2: crotchet, crotchet, minim rest, crotchet rest. Bar 3: crotchet, crotchet, crotchet rest."
+        "textAlternative": "Bar 1: minim rest, crotchet, quaver, quaver. Bar 2: crotchet, minim rest, quaver, quaver. Bar 3: crotchet, crotchet, minim rest.",
+        "questionAlternative": "Bar 1: minim rest, crotchet, 2 beamed together (quaver, quaver). Bar 2: crotchet, minim rest, 2 beamed together (quaver, quaver). Bar 3: crotchet, crotchet, minim rest."
       },
       "answer": {
         "kind": "choice",
@@ -611,16 +597,16 @@
           }
         ],
         "correctOptionIds": [
-          "1"
+          "2"
         ],
         "diagnoses": {
-          "2": {
+          "1": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           },
           "3": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           }
         }
       },
@@ -753,7 +739,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 4/4. The first half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?",
+      "prompt": "All three bars are in 4/4. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -764,7 +750,7 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "crotchet",
+                  "value": "minim",
                   "dots": 0
                 }
               },
@@ -789,32 +775,25 @@
           {
             "events": [
               {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
                 "kind": "rest",
                 "duration": {
                   "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
                   "dots": 0
                 }
               }
@@ -823,17 +802,17 @@
           {
             "events": [
               {
-                "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
                   "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
                   "dots": 0
                 }
               },
@@ -849,8 +828,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet rest, crotchet, crotchet. Bar 2: minim rest, crotchet rest, crotchet, crotchet. Bar 3: minim rest, crotchet, crotchet.",
-        "questionAlternative": "Bar 1: crotchet rest, crotchet, crotchet. Bar 2: minim rest, crotchet rest, crotchet, crotchet. Bar 3: minim rest, crotchet, crotchet."
+        "textAlternative": "Bar 1: minim rest, crotchet, crotchet. Bar 2: crotchet, crotchet, minim rest. Bar 3: crotchet, minim rest, crotchet.",
+        "questionAlternative": "Bar 1: minim rest, crotchet, crotchet. Bar 2: crotchet, crotchet, minim rest. Bar 3: crotchet, minim rest, crotchet."
       },
       "answer": {
         "kind": "choice",
@@ -874,11 +853,11 @@
         "diagnoses": {
           "1": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           },
           "2": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           }
         }
       },
@@ -887,7 +866,7 @@
         "4/4 has four crotchet beats in each bar."
       ],
       "feedback": {
-        "correct": "That bar uses the two-beat rest correctly.",
+        "correct": "You spotted the rest that crosses the middle of the bar.",
         "mistakes": {
           "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
           "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
@@ -904,7 +883,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 4/4. The first half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?",
+      "prompt": "All three bars are in 4/4. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -960,67 +939,53 @@
           {
             "events": [
               {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
                 "kind": "rest",
                 "duration": {
                   "value": "minim",
                   "dots": 0
                 }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
               }
             ]
           },
           {
             "events": [
               {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
@@ -1037,6 +1002,13 @@
                   "dots": 0
                 },
                 "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
               },
               {
                 "kind": "note",
@@ -1060,8 +1032,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: minim rest, quaver, quaver, quaver, quaver. Bar 2: minim rest, crotchet rest, quaver, quaver, quaver, quaver. Bar 3: crotchet rest, quaver, quaver, quaver, quaver.",
-        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver). Bar 2: minim rest, crotchet rest, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver). Bar 3: crotchet rest, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver)."
+        "textAlternative": "Bar 1: minim rest, quaver, quaver, quaver, quaver. Bar 2: quaver, quaver, quaver, quaver, minim rest. Bar 3: quaver, quaver, minim rest, quaver, quaver.",
+        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver). Bar 2: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), minim rest. Bar 3: 2 beamed together (quaver, quaver), minim rest, 2 beamed together (quaver, quaver)."
       },
       "answer": {
         "kind": "choice",
@@ -1080,16 +1052,16 @@
           }
         ],
         "correctOptionIds": [
-          "1"
+          "3"
         ],
         "diagnoses": {
+          "1": {
+            "category": "half-bar-rest-misplaced",
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
+          },
           "2": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
-          },
-          "3": {
-            "category": "half-bar-rest-misplaced",
-            "reason": "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           }
         }
       },
@@ -1219,7 +1191,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 4/4. The first half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?",
+      "prompt": "All three bars are in 4/4. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -1227,21 +1199,6 @@
         "measures": [
           {
             "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
               {
                 "kind": "note",
                 "pitch": "B4",
@@ -1259,30 +1216,48 @@
                   "dots": 0
                 },
                 "beam": "end"
-              }
-            ]
-          },
-          {
-            "events": [
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
                   "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
                   "dots": 0
                 }
               },
@@ -1345,8 +1320,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet rest, crotchet, quaver, quaver. Bar 2: minim rest, crotchet rest, crotchet, quaver, quaver. Bar 3: minim rest, crotchet, quaver, quaver.",
-        "questionAlternative": "Bar 1: crotchet rest, crotchet, 2 beamed together (quaver, quaver). Bar 2: minim rest, crotchet rest, crotchet, 2 beamed together (quaver, quaver). Bar 3: minim rest, crotchet, 2 beamed together (quaver, quaver)."
+        "textAlternative": "Bar 1: quaver, quaver, crotchet, minim rest. Bar 2: quaver, quaver, minim rest, quaver, quaver. Bar 3: minim rest, crotchet, quaver, quaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), crotchet, minim rest. Bar 2: 2 beamed together (quaver, quaver), minim rest, 2 beamed together (quaver, quaver). Bar 3: minim rest, crotchet, 2 beamed together (quaver, quaver)."
       },
       "answer": {
         "kind": "choice",
@@ -1365,16 +1340,16 @@
           }
         ],
         "correctOptionIds": [
-          "3"
+          "2"
         ],
         "diagnoses": {
           "1": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           },
-          "2": {
+          "3": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           }
         }
       },
@@ -1400,7 +1375,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 4/4. The second half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?",
+      "prompt": "All three bars are in 4/4. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -1427,6 +1402,42 @@
                 "beam": "end"
               },
               {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
@@ -1435,11 +1446,22 @@
                 }
               },
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
-                  "value": "minim",
+                  "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
               }
             ]
           },
@@ -1474,51 +1496,7 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              }
-            ]
-          },
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
                   "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
                   "dots": 0
                 }
               }
@@ -1526,8 +1504,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver, crotchet, minim rest. Bar 2: quaver, quaver, crotchet, crotchet rest. Bar 3: quaver, quaver, crotchet, minim rest, crotchet rest.",
-        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), crotchet, minim rest. Bar 2: 2 beamed together (quaver, quaver), crotchet, crotchet rest. Bar 3: 2 beamed together (quaver, quaver), crotchet, minim rest, crotchet rest."
+        "textAlternative": "Bar 1: quaver, quaver, minim rest, quaver, quaver. Bar 2: minim rest, crotchet, quaver, quaver. Bar 3: quaver, quaver, crotchet, minim rest.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), minim rest, 2 beamed together (quaver, quaver). Bar 2: minim rest, crotchet, 2 beamed together (quaver, quaver). Bar 3: 2 beamed together (quaver, quaver), crotchet, minim rest."
       },
       "answer": {
         "kind": "choice",
@@ -1551,11 +1529,11 @@
         "diagnoses": {
           "2": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           },
           "3": {
             "category": "half-bar-rest-misplaced",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3."
           }
         }
       },

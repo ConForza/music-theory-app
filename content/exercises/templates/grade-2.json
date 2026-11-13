@@ -2036,6 +2036,102 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g2.time-sig-read",
+      "version": 1,
+      "familyId": "fam.time-signature",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ],
+      "conceptIds": [
+        "c.metre.minim-beats",
+        "c.metre.quaver-beats",
+        "c.metre.beat-classification"
+      ],
+      "promptPattern": "Add a time signature that fits this rhythm (more than one may fit).",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Every time signature that fits the notes is accepted."
+      },
+      "ambiguityChecks": [
+        "When a rhythm fits two time signatures of the same bar length by its notes alone (four crotchets: 4/4 or 2/2) both are accepted.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Add up each bar, then look at how the notes are grouped into beats."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.ledger-place",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 2,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g2.05"
+      ],
+      "conceptIds": [
+        "c.pitch.ledger-two"
+      ],
+      "promptPattern": "In the clef, write the note that sits on a ledger line or in a space beyond one.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": true,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one pitch is correct."
+      },
+      "ambiguityChecks": [
+        "The position is stated in the prompt and the octave is fixed, so exactly one pitch is correct and a note inside the stave is never right.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Ledger lines continue the line/space pattern."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

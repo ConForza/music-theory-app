@@ -41,7 +41,7 @@ export const ORDER_INSENSITIVE_TEMPLATES = new Set(
 
 /** Templates introduced in Brief 06 (Grade 2). New, so they have no stored history; their options are order-insensitive too. */
 export const GRADE2_ORDER_INSENSITIVE = new Set(
-  ["beat-facts", "bar-judge", "triplet-facts", "triplet-read", "triplet-mixed", "triplet-fill", "rest-judge", "rest-fix", "clef-pair", "scale-gap", "key-facts", "minor-pattern", "minor-facts", "relative-facts", "degree-note", "triad-notes", "interval-note", "term-use", "melody-detail"].map((x) => `t.g2.${x}`),
+  ["beat-facts", "bar-judge", "triplet-facts", "triplet-read", "triplet-mixed", "triplet-fill", "rest-judge", "rest-fix", "time-sig-read", "ledger-place", "clef-pair", "scale-gap", "key-facts", "minor-pattern", "minor-facts", "relative-facts", "degree-note", "triad-notes", "interval-note", "term-use", "melody-detail"].map((x) => `t.g2.${x}`),
 );
 const orderInsensitive = (templateId: string) => ORDER_INSENSITIVE_TEMPLATES.has(templateId) || GRADE2_ORDER_INSENSITIVE.has(templateId);
 
@@ -150,15 +150,17 @@ function keyOf(item: ExerciseItem): string | undefined {
   return m ? `${m[1]} ${m[2]}` : undefined;
 }
 
-/** The time signature a question is about: printed on its music, the answer, the correct option, or named in the prompt. */
-function timeSignatureOf(item: ExerciseItem): string | undefined {
+/** The time signatures a question is about: printed on its music, the answer (all that are accepted), the correct option, or named in the prompt. */
+function timeSignaturesOf(item: ExerciseItem): string[] {
   const a = item.answer as { timeSignature?: string; accepted?: unknown[]; correctOptionIds?: string[] };
   const TS = /^\d{1,2}\/\d{1,2}$/;
-  if (item.music?.timeSignature) return item.music.timeSignature;
-  if (a.timeSignature) return a.timeSignature;
-  if (typeof a.accepted?.[0] === "string" && TS.test(a.accepted[0])) return a.accepted[0];
-  if (a.correctOptionIds?.[0] && TS.test(a.correctOptionIds[0])) return a.correctOptionIds[0];
-  return /\b(\d{1,2}\/\d{1,2})\b/.exec(item.prompt)?.[1];
+  if (item.music?.timeSignature) return [item.music.timeSignature];
+  if (a.timeSignature) return [a.timeSignature];
+  const accepted = (a.accepted ?? []).filter((x): x is string => typeof x === "string" && TS.test(x));
+  if (accepted.length) return accepted;
+  if (a.correctOptionIds?.[0] && TS.test(a.correctOptionIds[0])) return [a.correctOptionIds[0]];
+  const m = /\b(\d{1,2}\/\d{1,2})\b/.exec(item.prompt)?.[1];
+  return m ? [m] : [];
 }
 
 /** True when the question satisfies every part of the constraint (pitch fields need written pitches to judge). */
@@ -166,8 +168,7 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
   if (c.promptMentions?.some((w) => item.prompt.includes(w))) return true;
   if (c.promptIncludes && !c.promptIncludes.some((w) => item.prompt.includes(w))) return false;
   if (c.timeSignatures) {
-    const t = timeSignatureOf(item);
-    if (!t || !c.timeSignatures.includes(t)) return false;
+    if (!timeSignaturesOf(item).some((t) => c.timeSignatures!.includes(t))) return false;
   }
   if (c.termIds) {
     const t = (item.answer as { correctOptionIds?: string[] }).correctOptionIds?.[0];

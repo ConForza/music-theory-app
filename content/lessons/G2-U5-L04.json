@@ -833,7 +833,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B2",
+                "pitch": "D3",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -857,7 +857,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F#3",
+                "pitch": "E3",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -869,7 +869,31 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "D3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -877,33 +901,9 @@
               },
               {
                 "kind": "note",
-                "pitch": "B3",
+                "pitch": "E3",
                 "duration": {
                   "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "A3",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B3",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "A3",
-                "duration": {
-                  "value": "minim",
                   "dots": 0
                 }
               }
@@ -911,7 +911,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 4/2. The notes sit: on the 2nd line; in the 2nd space; on the 3rd line; on the 4th line; on the 5th line; in the space just above the stave; on the 5th line; in the space just above the stave; on the 5th line. The tempo mark above the first bar says “presto”.",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 4/2. The notes sit: on the 3rd line; in the 2nd space; on the 3rd line; in the 3rd space; on the 3rd line; in the 3rd space; on the 4th line; in the 4th space; in the 3rd space. The tempo mark above the first bar says “presto”.",
         "key": "A major",
         "timeSignature": "4/2",
         "tempoText": "presto"
@@ -920,37 +920,37 @@
         "kind": "choice",
         "options": [
           {
+            "id": "largo",
+            "label": "slow and broad"
+          },
+          {
+            "id": "andante",
+            "label": "at a walking pace"
+          },
+          {
             "id": "presto",
             "label": "very fast"
           },
           {
-            "id": "lento",
+            "id": "adagio",
             "label": "slow"
-          },
-          {
-            "id": "allegro",
-            "label": "fast and lively"
-          },
-          {
-            "id": "moderato",
-            "label": "at a moderate speed"
           }
         ],
         "correctOptionIds": [
           "presto"
         ],
         "diagnoses": {
-          "moderato": {
+          "adagio": {
             "category": "evidence-misread",
-            "reason": "“moderato” means “at a moderate speed”, which is a different marking."
+            "reason": "“adagio” means “slow”, which is a different marking."
           },
-          "lento": {
+          "andante": {
             "category": "evidence-misread",
-            "reason": "“lento” means “slow”, which is a different marking."
+            "reason": "“andante” means “at a walking pace”, which is a different marking."
           },
-          "allegro": {
+          "largo": {
             "category": "evidence-misread",
-            "reason": "“allegro” means “fast and lively”, which is a different marking."
+            "reason": "“largo” means “slow and broad”, which is a different marking."
           }
         }
       },
@@ -1214,10 +1214,6 @@
         "kind": "choice",
         "options": [
           {
-            "id": "1",
-            "label": "1st"
-          },
-          {
             "id": "2",
             "label": "2nd"
           },
@@ -1240,10 +1236,6 @@
           {
             "id": "7",
             "label": "7th"
-          },
-          {
-            "id": "8",
-            "label": "octave"
           }
         ],
         "correctOptionIds": [

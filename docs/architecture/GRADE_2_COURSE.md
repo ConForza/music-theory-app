@@ -10,7 +10,7 @@ packages/api/scripts/grade2/e1.ts       the optional melodic-minor preview (fixe
 packages/api/scripts/author-grade2.ts   writes the lesson bindings into content/path/grade-2.json, builds content/lessons/G2-*.json,
                                         DERIVES the practice and review bindings, and updates the blueprints (version 2)
 packages/engine/src/generate/grade2.ts  Grade 2 generators (one per new template)
-content/exercises/templates/grade-2.json  16 Brief 01 templates + 20 new ones (all `draft`)
+content/exercises/templates/grade-2.json  16 Brief 01 templates + 22 new ones (all `draft`)
 content/policy/review-constraints.json  concept boundaries for Grade 2 concepts
 content/assessments/grade-2.json        five unit challenges and the Grade 2 blueprint (version 2)
 packages/api/scripts/grade2-docs.ts     generates the audit and the teacher pack (`npm run docs:grade2 -w @mtp/api`)
@@ -31,6 +31,15 @@ packages/api/scripts/grade2-docs.ts     generates the audit and the teacher pack
 | `schema.ts` | lesson-content id may end in `E<n>` (the enrichment node) | widening only |
 | `scope-concepts.json` | A, E and D minor are introduced by `c.scales.minor-concept` (was: the harmonic concepts) | Grade 2 only; see below |
 | web `NodeRun.tsx` | the assessment screens name their own grade ("Grade 2 assessment") | Grade 1 wording unchanged |
+
+## Review round 1 (independent music-theory review of PR #10)
+
+* **4/4 vs 2/2.** The shipped `t.g2.time-signature` generator treats 4/4 as the only answer for rhythms that equally fit 2/2. It is left as it was (a Brief 04 guard pins its keys) and replaced in every lesson, practice and blueprint by `t.g2.time-sig-read`, which accepts every time signature that fits the notes (as G2-U1-L03 teaches). `g.time-signature` is now marked as supporting multiple valid answers (it always did).
+* **Triplet descriptions** close the group ("a triplet (minim rest, crotchet), then minim"), for the new triplet templates.
+* **Bar judge** (`t.g2.bar-judge`) no longer lets the beaming give the answer in the beat-count questions.
+* **Ledger lines.** `t.g2.ledger-place` names the position and fixes the octave, so a note inside the stave is never right (`t.g2.ledger-write` is no longer used).
+* **Rests.** Wrong bars now differ by a rest rule, not by counting; the half-bar question asks which bar *breaks* the rule.
+* Smaller fixes: no tonic or "1st" in the melody interval question, no E major, no trivial root/degree-1 questions, no other fast word beside the target in character questions, bass-below and beyond-the-second-ledger-line examples in G2-U2-L05, clearer wording in several places, rhythm lines may shrink further on narrow phones.
 
 ## Decisions worth knowing
 

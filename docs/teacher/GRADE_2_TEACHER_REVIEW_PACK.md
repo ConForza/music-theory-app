@@ -19,7 +19,7 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 - The number 3 is written above or below the group, often with a bracket. It means: play these three notes in the time that two of them would normally take.
 - So the notes in a triplet are shorter than ordinary ones. Three triplet quavers last as long as two ordinary quavers, or one crotchet.
 - [notation] The triplet takes the place of one whole beat. The bar still has three beats.
-- Triplet = three in the time of two. The group fills the time of its first note value's pair.
+- Triplet = three in the time of two. Three triplet quavers fill the time of two ordinary quavers: one crotchet beat.
 
 **Recap.** A triplet is three equal notes in the time of two. | The number 3 marks the group. | A triplet of quavers fills one crotchet beat.
 
@@ -91,10 +91,10 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 
 | Template | Seed | Question | Correct answer (engine) |
 |---|---|---|---|
-| time-signature (U1-L01) | 1 | Add the time signature to this rhythm. _Shown: Bar 1: semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver, crotchet, crotchet, crotchet rest._ | The time signature is 4/4. |
-| time-signature (U1-L01) | 2 | Add the time signature to this rhythm. _Shown: Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, dotted quaver, semiquaver. Bar 2: dotted quaver, semiquaver, crotchet rest._ | The time signature is 2/4. |
-| time-signature (U1-L01) | 3 | Add the time signature to this rhythm. _Shown: Bar 1: quaver, semiquaver, semiquaver, crotchet, semiquaver, semiquaver, semiquaver, semiquaver, dotted quaver, semiquaver. Bar 2: crotchet, quaver, quaver, crotchet rest, semiquaver, semiquaver, semiquaver, semiquaver._ | The time signature is 4/4. |
-| time-signature (U1-L01) | 4 | Add the time signature to this rhythm. _Shown: Bar 1: minim, semiquaver, semiquaver, quaver, quaver, quaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver, crotchet rest, quaver, semiquaver, semiquaver, crotchet._ | The time signature is 4/4. |
+| time-sig-read (U1-L01) | 1 | Add the time signature to this rhythm. _Shown: Bar 1: dotted quaver, semiquaver, crotchet. Bar 2: quaver, quaver, dotted quaver, semiquaver._ | The time signature is 2/4. |
+| time-sig-read (U1-L01) | 2 | Add the time signature to this rhythm. _Shown: Bar 1: minim, crotchet. Bar 2: quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver._ | The time signature is 3/4. |
+| time-sig-read (U1-L01) | 3 | Add a time signature that fits this rhythm. More than one may fit; give any one of them. _Shown: Bar 1: minim, quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: quaver, semiquaver, semiquaver, quaver, quaver, quaver, quaver, semiquaver, semiquaver, quaver._ | The time signature is 4/4. |
+| time-sig-read (U1-L01) | 4 | Add a time signature that fits this rhythm. More than one may fit; give any one of them. _Shown: Bar 1: crotchet, quaver, quaver, dotted quaver, semiquaver, semiquaver, semiquaver, quaver. Bar 2: minim, crotchet, dotted quaver, semiquaver._ | The time signature is 4/4. |
 | bar-complete (U1-L01) | 1 | Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | bar-complete (U1-L01) | 2 | Complete this bar of 3/2. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | bar-complete (U1-L01) | 3 | Complete this bar of 3/2. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
@@ -115,18 +115,18 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | triplet-facts (U1-L04) | 2 | Which number is written above (or below) the notes of a triplet? | The answer is “3”. |
 | triplet-facts (U1-L04) | 3 | Three quavers are played as a triplet. Together they last as long as which single note? | The answer is “a crotchet”. |
 | triplet-facts (U1-L04) | 4 | In 3/8, every beat is filled by a triplet of semiquavers. How many semiquavers are played in one bar? | The answer is “9”. |
-| triplet-read (U1-L04) | 1 | The three notes joined by the bracket marked 3 are a triplet. Which single note lasts as long as the whole group? _Shown: Bar 1: a triplet of quaver, quaver, quaver, crotchet, crotchet, crotchet._ | The answer is “a crotchet”. |
-| triplet-read (U1-L04) | 2 | How many notes are played in this bar altogether? Count every note, including each note of the triplet. _Shown: Bar 1: minim, minim, a triplet of crotchet, crotchet, crotchet, minim._ | The answer is “6”. |
-| triplet-read (U1-L04) | 3 | The three notes joined by the bracket marked 3 are a triplet. Which single note lasts as long as the whole group? _Shown: Bar 1: a triplet of quaver, quaver, quaver, crotchet._ | The answer is “a crotchet”. |
-| triplet-read (U1-L04) | 4 | On which beat of the bar does the triplet start? _Shown: Bar 1: a triplet of crotchet, crotchet, crotchet, minim, minim._ | The answer is “Beat 1”. |
-| triplet-mixed (U1-L05) | 1 | The whole triplet group (notes and rests together) is played in the time of how long? _Shown: Bar 1: a triplet of quaver, crotchet, crotchet, crotchet, crotchet._ | The answer is “one crotchet beat”. |
-| triplet-mixed (U1-L05) | 2 | A triplet is divided into three equal parts. Which part of this triplet is silent? _Shown: Bar 1: crotchet, crotchet, a triplet of quaver, quaver rest, quaver._ | The answer is “The second of the three parts”. |
-| triplet-mixed (U1-L05) | 3 | The whole triplet group (notes and rests together) is played in the time of how long? _Shown: Bar 1: a triplet of quaver, crotchet rest, crotchet._ | The answer is “one crotchet beat”. |
-| triplet-mixed (U1-L05) | 4 | A triplet is divided into three equal parts. Which part of this triplet is silent? _Shown: Bar 1: crotchet, a triplet of quaver, quaver, quaver rest._ | The answer is “The third of the three parts”. |
-| triplet-fill (U1-L05) | 1 | Each group is marked 3, so it must add up to three quavers of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet of quaver, quaver, quaver. Bar 2: a triplet of quaver, quaver, quaver, quaver rest. Bar 3: a triplet of quaver, quaver rest._ | The answer is “Group 1”. |
-| triplet-fill (U1-L05) | 2 | Each group is marked 3, so it must add up to three crotchets of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet of crotchet, crotchet. Bar 2: a triplet of crotchet rest, crotchet, crotchet. Bar 3: a triplet of minim, minim._ | The answer is “Group 2”. |
-| triplet-fill (U1-L05) | 3 | Each group is marked 3, so it must add up to three quavers of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet of crotchet, quaver. Bar 2: a triplet of crotchet, quaver rest, quaver. Bar 3: a triplet of quaver rest, quaver._ | The answer is “Group 1”. |
-| triplet-fill (U1-L05) | 4 | Each group is marked 3, so it must add up to three crotchets of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet of minim. Bar 2: a triplet of crotchet rest, crotchet, crotchet rest. Bar 3: a triplet of minim, crotchet, crotchet._ | The answer is “Group 2”. |
+| triplet-read (U1-L04) | 1 | The three notes joined by the bracket marked 3 are a triplet. Which single note lasts as long as the whole group? _Shown: Bar 1: a triplet (quaver, quaver, quaver), crotchet, crotchet, crotchet._ | The answer is “a crotchet”. |
+| triplet-read (U1-L04) | 2 | How many notes are played in this bar altogether? Count every note, including each note of the triplet. _Shown: Bar 1: minim, minim, a triplet (crotchet, crotchet, crotchet), minim._ | The answer is “6”. |
+| triplet-read (U1-L04) | 3 | The three notes joined by the bracket marked 3 are a triplet. Which single note lasts as long as the whole group? _Shown: Bar 1: a triplet (quaver, quaver, quaver), crotchet._ | The answer is “a crotchet”. |
+| triplet-read (U1-L04) | 4 | On which beat of the bar does the triplet start? _Shown: Bar 1: a triplet (crotchet, crotchet, crotchet), minim, minim._ | The answer is “Beat 1”. |
+| triplet-mixed (U1-L05) | 1 | The whole triplet group (notes and rests together) is played in the time of how long? _Shown: Bar 1: a triplet (quaver, crotchet), crotchet, crotchet, crotchet._ | The answer is “one crotchet beat”. |
+| triplet-mixed (U1-L05) | 2 | A triplet is divided into three equal parts. Which part of this triplet is silent? _Shown: Bar 1: crotchet, crotchet, a triplet (quaver, quaver rest, quaver)._ | The answer is “The second of the three parts”. |
+| triplet-mixed (U1-L05) | 3 | The whole triplet group (notes and rests together) is played in the time of how long? _Shown: Bar 1: a triplet (quaver, crotchet rest), crotchet._ | The answer is “one crotchet beat”. |
+| triplet-mixed (U1-L05) | 4 | A triplet is divided into three equal parts. Which part of this triplet is silent? _Shown: Bar 1: crotchet, a triplet (quaver, quaver, quaver rest)._ | The answer is “The third of the three parts”. |
+| triplet-fill (U1-L05) | 1 | Each group is marked 3, so it must add up to three quavers of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet (quaver, quaver, quaver). Bar 2: a triplet (quaver, quaver, quaver, quaver rest). Bar 3: a triplet (quaver, quaver rest)._ | The answer is “Group 1”. |
+| triplet-fill (U1-L05) | 2 | Each group is marked 3, so it must add up to three crotchets of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet (crotchet, crotchet). Bar 2: a triplet (crotchet rest, crotchet, crotchet). Bar 3: a triplet (minim, minim)._ | The answer is “Group 2”. |
+| triplet-fill (U1-L05) | 3 | Each group is marked 3, so it must add up to three quavers of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet (crotchet, quaver). Bar 2: a triplet (crotchet, quaver rest, quaver). Bar 3: a triplet (quaver rest, quaver)._ | The answer is “Group 1”. |
+| triplet-fill (U1-L05) | 4 | Each group is marked 3, so it must add up to three crotchets of written length (notes and rests together). Which group is complete? _Shown: Bar 1: a triplet (minim). Bar 2: a triplet (crotchet rest, crotchet, crotchet rest). Bar 3: a triplet (minim, crotchet, crotchet)._ | The answer is “Group 2”. |
 | note-grouping (U2-L01) | 1 | These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear. _Shown: Bar 1: quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | note-grouping (U2-L01) | 2 | These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear. _Shown: Bar 1: quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | note-grouping (U2-L01) | 3 | These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear. _Shown: Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
@@ -135,10 +135,10 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | rest-grouping (U2-L02) | 2 | Rewrite this bar with the rests grouped correctly. It must sound exactly the same. _Shown: Bar 1: minim, semibreve rest._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | rest-grouping (U2-L02) | 3 | Rewrite this bar with the rests grouped correctly. It must sound exactly the same. _Shown: Bar 1: crotchet, minim rest._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | rest-grouping (U2-L02) | 4 | Rewrite this bar with the rests grouped correctly. It must sound exactly the same. _Shown: Bar 1: minim, semibreve rest._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| rest-judge (U2-L02) | 1 | All three bars are in 3/4. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly? _Shown: Bar 1: quaver, quaver, quaver, crotchet rest, quaver. Bar 2: quaver, quaver, quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, quaver, quaver, quaver rest, quaver._ | The answer is “Bar 2”. |
-| rest-judge (U2-L02) | 2 | All three bars are in 3/8, and beats 2 and 3 are silent. Which bar writes the silent beats correctly? _Shown: Bar 1: quaver, quaver rest. Bar 2: quaver, crotchet rest. Bar 3: quaver, quaver rest, quaver rest._ | The answer is “Bar 3”. |
-| rest-judge (U2-L02) | 3 | All three bars are in 3/8. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly? _Shown: Bar 1: semiquaver, semiquaver, semiquaver, quaver rest, semiquaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver. Bar 3: semiquaver, semiquaver, semiquaver, semiquaver rest, semiquaver._ | The answer is “Bar 2”. |
-| rest-judge (U2-L02) | 4 | All three bars are in 4/4, and beats 2 and 3 are silent. Which bar writes the silent beats correctly? _Shown: Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet._ | The answer is “Bar 1”. |
+| rest-judge (U2-L02) | 1 | All three bars are in 3/4. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly? _Shown: Bar 1: quaver, quaver, quaver, crotchet rest, quaver. Bar 2: quaver, quaver, quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, crotchet rest, quaver, quaver, quaver._ | The answer is “Bar 2”. |
+| rest-judge (U2-L02) | 2 | All three bars are in 3/8 and each has silent beats. Which bar writes its rests correctly? _Shown: Bar 1: quaver, crotchet rest. Bar 2: crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest._ | The answer is “Bar 3”. |
+| rest-judge (U2-L02) | 3 | All three bars are in 3/8. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly? _Shown: Bar 1: semiquaver, semiquaver, semiquaver, quaver rest, semiquaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver. Bar 3: semiquaver, quaver rest, semiquaver, quaver._ | The answer is “Bar 2”. |
+| rest-judge (U2-L02) | 4 | All three bars are in 4/4 and each has silent beats. Which bar writes its rests correctly? _Shown: Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, minim rest, crotchet rest._ | The answer is “Bar 1”. |
 | rest-fix (U2-L03) | 1 | Rewrite this bar so that the rest does not run on from part of a beat into the next beat. It must sound exactly the same. _Shown: Bar 1: crotchet, minim rest, crotchet, minim, minim._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | rest-fix (U2-L03) | 2 | Rewrite this bar so that the rest does not run on from part of a beat into the next beat. It must sound exactly the same. _Shown: Bar 1: minim, minim, crotchet, minim rest, crotchet._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | rest-fix (U2-L03) | 3 | Rewrite this bar so that no rest crosses the middle of the bar: a two-beat rest may only fill the first or the second half of the bar. It must sound exactly the same. _Shown: Bar 1: minim, semibreve rest, minim._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
@@ -147,10 +147,10 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | ledger-read (U2-L05) | 2 | Name this note. _Shown: A treble-clef stave with one semibreve on the space above the 2nd ledger line._ | The note is D. |
 | ledger-read (U2-L05) | 3 | Name this note, including its sharp, flat or natural. _Shown: A treble-clef stave with one semibreve on the 1st line, with a flat sign in front of it._ | The note is E♭. |
 | ledger-read (U2-L05) | 4 | Name this note. _Shown: A bass-clef stave with one semibreve on the space just below the stave._ | The note is F. |
-| ledger-write (U2-L05) | 1 | Write G in the treble clef. You may use up to 2 ledger lines. Any G that fits is correct. | G can go at G3 or G4 or G5. |
-| ledger-write (U2-L05) | 2 | Write F in the bass clef. You may use up to 2 ledger lines. Any F that fits is correct. | F can go at F2 or F3 or F4. |
-| ledger-write (U2-L05) | 3 | Write A♭ in the treble clef. You may use up to 2 ledger lines. Any A♭ that fits is correct. | A♭ can go at A♭3 or A♭4 or A♭5. |
-| ledger-write (U2-L05) | 4 | Write C in the treble clef. You may use up to 2 ledger lines. Any C that fits is correct. | C can go at C4 or C5 or C6. |
+| ledger-place (U2-L05) | 1 | In the bass clef, write the note C that sits on the 1st ledger line above the stave. | C can go at C4. |
+| ledger-place (U2-L05) | 2 | In the bass clef, write the note F that sits in the space above the 2nd ledger line above the stave. | F can go at F4. |
+| ledger-place (U2-L05) | 3 | In the treble clef, write the note A that sits on the 1st ledger line above the stave. | A can go at A5. |
+| ledger-place (U2-L05) | 4 | In the bass clef, write the note B that sits in the space below the 2nd ledger line below the stave. | B can go at B1. |
 | clef-pair (U2-L06) | 1 | This note is shown in the treble clef. Where would the same pitch be written in the bass clef? _Shown: A treble-clef stave with one note on the 1st line._ | The answer is “On the 2nd ledger line above the stave”. |
 | clef-pair (U2-L06) | 2 | This note is shown in the bass clef. If the same pitch were written in the treble clef, how many ledger lines would it need? _Shown: A bass-clef stave with one note on a ledger line above the stave._ | The answer is “0”. |
 | clef-pair (U2-L06) | 3 | This note is shown in the bass clef. If the same pitch were written in the treble clef, how many ledger lines would it need? _Shown: A bass-clef stave with one note on a ledger line above the stave._ | The answer is “0”. |
@@ -182,19 +182,19 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | triad-notes (U3-L04) | 1 | Which three notes make the tonic triad of C major? | The answer is “C E G”. |
 | triad-notes (U3-L04) | 2 | Part of the tonic triad of G major is shown. Which note is missing from the chord? _Shown: A treble-clef stave with two notes sounded together: G and D._ | The answer is “B”. |
 | triad-notes (U3-L04) | 3 | Which three notes make the tonic triad of A major? | The answer is “A C♯ E”. |
-| triad-notes (U3-L04) | 4 | In the tonic triad of A major, which note is the root (degree 1)? | The answer is “A”. |
+| triad-notes (U3-L04) | 4 | Part of the tonic triad of A major is shown. Which note is missing from the chord? _Shown: A treble-clef stave with two notes sounded together: A and C♯._ | The answer is “E”. |
 | degree-note (U3-L04) | 1 | In A major, which note is degree 5 of the scale? | The answer is “E”. |
 | degree-note (U3-L04) | 2 | In F major, which note is degree 3 of the scale? | The answer is “A”. |
-| degree-note (U3-L04) | 3 | In F major, which note is degree 2 of the scale? | The answer is “G”. |
-| degree-note (U3-L04) | 4 | In B♭ major, which note is degree 2 of the scale? | The answer is “C”. |
+| degree-note (U3-L04) | 3 | In F major, which note is degree 3 of the scale? | The answer is “A”. |
+| degree-note (U3-L04) | 4 | In B♭ major, which note is degree 3 of the scale? | The answer is “D”. |
 | minor-pattern (U4-L01) | 1 | These are the 6th and 7th notes of D minor (before the 7th is raised). Is the step from the first note up to the second a tone or a semitone? _Shown: A treble-clef stave with two notes: B♭ then C above it._ | The answer is “A tone”. |
 | minor-pattern (U4-L01) | 2 | Counting up from the tonic, between which pairs of neighbouring notes are the two semitones in the pattern of a minor scale (before the 7th is raised)? | The answer is “2–3 and 5–6”. |
 | minor-pattern (U4-L01) | 3 | These are the 4th and 5th notes of E minor (before the 7th is raised). Is the step from the first note up to the second a tone or a semitone? _Shown: A bass-clef stave with two notes: A then B above it._ | The answer is “A tone”. |
 | minor-pattern (U4-L01) | 4 | These are the 6th and 7th notes of A minor (before the 7th is raised). Is the step from the first note up to the second a tone or a semitone? _Shown: A bass-clef stave with two notes: F then G above it._ | The answer is “A tone”. |
 | minor-facts (U4-L01) | 1 | The tonic triad of D major includes F♯. Which note replaces it in the tonic triad of D minor? | The answer is “F”. |
-| minor-facts (U4-L01) | 2 | The tonic triad of E major includes G♯. Which note replaces it in the tonic triad of E minor? | The answer is “G”. |
-| minor-facts (U4-L01) | 3 | The tonic triad of E major includes G♯. Which note replaces it in the tonic triad of E minor? | The answer is “G”. |
-| minor-facts (U4-L01) | 4 | The tonic triad of E major includes G♯. Which note replaces it in the tonic triad of E minor? | The answer is “G”. |
+| minor-facts (U4-L01) | 2 | The tonic triad of A major includes C♯. Which note replaces it in the tonic triad of A minor? | The answer is “C”. |
+| minor-facts (U4-L01) | 3 | The tonic triad of D major includes F♯. Which note replaces it in the tonic triad of D minor? | The answer is “F”. |
+| minor-facts (U4-L01) | 4 | The tonic triad of D major includes F♯. Which note replaces it in the tonic triad of D minor? | The answer is “F”. |
 | relative-key (U4-L02) | 1 | What is the relative major of D minor? | This is the key signature of F major. |
 | relative-key (U4-L02) | 2 | What is the relative minor of G major? | This is the key signature of E minor. |
 | relative-key (U4-L02) | 3 | What is the relative minor of C major? | This is the key signature of A minor. |
@@ -228,9 +228,9 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | melody (U5-L04) | 3 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are E, F, D, B, D, C, B, G; the note marked x is the 4th note._ | 1. The answer is “4”. 2. The note is B. 3. This is the key signature of C major. |
 | melody (U5-L04) | 4 | Look at this melody and answer the questions. _Shown: A two-bar melody in the bass clef with a key signature, time signature 2/4. The notes are E, G, E, C♯; the note marked x is the 4th note._ | 1. The answer is “2”. 2. The note is C♯. 3. This is the key signature of D major. |
 | melody-detail (U5-L04) | 1 | Which bar of the melody contains a triplet? _Shown: A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. The notes sit: in the space just below the stave; on the 1st line; in the space just below the stave; in the 1st space; on the 1st line; in the 1st space; on the 2nd line._ | The answer is “Bar 1”. |
-| melody-detail (U5-L04) | 2 | The melody is marked “presto”. Which description of the way to play it is right? _Shown: A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 4/2. The notes sit: on the 2nd line; in the 2nd space; on the 3rd line; on the 4th line; on the 5th line; in the space just above the stave; on the 5th line; in the space just above the stave; on the 5th line. The tempo mark above the first bar says “presto”._ | The answer is “very fast”. |
+| melody-detail (U5-L04) | 2 | The melody is marked “presto”. Which description of the way to play it is right? _Shown: A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 4/2. The notes sit: on the 3rd line; in the 2nd space; on the 3rd line; in the 3rd space; on the 3rd line; in the 3rd space; on the 4th line; in the 4th space; in the 3rd space. The tempo mark above the first bar says “presto”._ | The answer is “very fast”. |
 | melody-detail (U5-L04) | 3 | Which bar of the melody contains a triplet? _Shown: A 2-bar melody in the bass clef, key signature of 2 flats, time signature 2/4. The notes sit: on the 2nd line; in the 2nd space; on the 3rd line; on the 4th line; in the 4th space; in the space just above the stave; in the 4th space._ | The answer is “Bar 2”. |
-| melody-detail (U5-L04) | 4 | The melody is marked “vivace”. Which description of the way to play it is right? _Shown: A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. The notes sit: on a ledger line above the stave; in the space just above the stave; on a ledger line above the stave; on the 5th line; in the space just above the stave; on a ledger line above the stave; on a ledger line above the stave. The tempo mark above the first bar says “vivace”._ | The answer is “lively and quick”. |
+| melody-detail (U5-L04) | 4 | The melody is marked “vivace”. Which description of the way to play it is right? _Shown: A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. The notes sit: in the 4th space; on the 5th line; on the 4th line; on the 3rd line; in the 2nd space; on the 3rd line; in the 2nd space. The tempo mark above the first bar says “vivace”._ | The answer is “lively and quick”. |
 
 ## 4. Conventions the rule set enforces (please confirm each is Grade 2)
 
@@ -262,14 +262,14 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 
 ### G2-U1-C: Unit challenge: New simple time signatures and triplets (blueprint a.g2-u1 v2)
 
-- abrsm2020.g2.01: 2 question(s) from time-signature, bar-complete, beat-facts, bar-judge (outcome g2.01)
+- abrsm2020.g2.01: 2 question(s) from time-sig-read, bar-complete, beat-facts, bar-judge (outcome g2.01)
 - abrsm2020.g2.03: 2 question(s) from triplet, triplet-facts, triplet-read (outcome g2.03)
 - abrsm2020.g2.04: 2 question(s) from triplet-mixed, triplet-fill (outcome g2.04)
 
 ### G2-U2-C: Unit challenge: Grouping notes and rests; two ledger lines (blueprint a.g2-u2 v2)
 
 - abrsm2020.g2.02: 3 question(s) from bar-complete, note-grouping, rest-grouping, rest-judge, rest-fix, bar-judge (outcome g2.02)
-- abrsm2020.g2.05: 3 question(s) from ledger-read, ledger-write, clef-pair (outcome g2.05)
+- abrsm2020.g2.05: 3 question(s) from ledger-read, ledger-place, clef-pair (outcome g2.05)
 
 ### G2-U3-C: Unit challenge: A, B flat and E flat major (blueprint a.g2-u3 v2)
 
@@ -293,11 +293,11 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 
 ### G2-A: Grade 2 practice assessment (blueprint a.g2 v2)
 
-- abrsm2020.g2.01: 2 question(s) from time-signature, bar-complete, beat-facts, bar-judge, melody-detail (outcome g2.01)
+- abrsm2020.g2.01: 2 question(s) from time-sig-read, bar-complete, beat-facts, bar-judge, melody-detail (outcome g2.01)
 - abrsm2020.g2.02: 2 question(s) from bar-complete, note-grouping, rest-grouping, rest-judge, rest-fix, bar-judge (outcome g2.02)
 - abrsm2020.g2.03: 2 question(s) from triplet, triplet-facts, triplet-read, melody-detail (outcome g2.03)
 - abrsm2020.g2.04: 2 question(s) from triplet-mixed, triplet-fill (outcome g2.04)
-- abrsm2020.g2.05: 2 question(s) from ledger-read, ledger-write, clef-pair, melody-detail (outcome g2.05)
+- abrsm2020.g2.05: 2 question(s) from ledger-read, ledger-place, clef-pair, melody-detail (outcome g2.05)
 - abrsm2020.g2.06: 2 question(s) from relative-key, relative-facts (outcome g2.06)
 - abrsm2020.g2.07: 2 question(s) from scale-build-minor, minor-facts, minor-pattern, scale-gap (outcome g2.07)
 - abrsm2020.g2.08: 2 question(s) from scale-build-major, key-signature, scale-gap, key-facts (outcome g2.08)

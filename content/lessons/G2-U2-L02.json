@@ -9,7 +9,7 @@
     "successCriteria": [
       "I know each silent beat normally gets its own rest.",
       "I know a rest should not join two beats in a bar of triple time.",
-      "I know a whole bar of silence uses the semibreve rest."
+      "I know a whole bar of silence has its own whole-bar rest."
     ]
   },
   "explanation": [
@@ -101,11 +101,11 @@
     },
     {
       "kind": "text",
-      "text": "A minim rest across two crotchet beats in 3/4 would hide where beat 3 starts, so it is not written."
+      "text": "In triple time the rule is a convention: write a separate rest for each silent beat, rather than one longer rest that joins two beats. It keeps every beat easy to see."
     },
     {
       "kind": "text",
-      "text": "If a whole bar is silent, use a semibreve rest. It hangs from the fourth line of the stave and means a bar's silence, whatever the time signature."
+      "text": "If a whole bar is silent, a whole-bar rest is used. In most times it is the semibreve rest, which hangs from the fourth line of the stave (4/2 is the exception: it uses a breve rest). Whole-bar rests are not part of the questions here."
     },
     {
       "kind": "tip",
@@ -169,7 +169,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "All three bars are in 3/8, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 3/8 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -188,7 +188,7 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "quaver",
+                  "value": "crotchet",
                   "dots": 0
                 }
               }
@@ -197,17 +197,17 @@
           {
             "events": [
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
-                  "value": "quaver",
+                  "value": "crotchet",
                   "dots": 0
                 }
               },
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
-                  "value": "crotchet",
+                  "value": "quaver",
                   "dots": 0
                 }
               }
@@ -241,8 +241,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver rest. Bar 2: quaver, crotchet rest. Bar 3: quaver, quaver rest, quaver rest.",
-        "questionAlternative": "Bar 1: quaver, quaver rest. Bar 2: quaver, crotchet rest. Bar 3: quaver, quaver rest, quaver rest."
+        "textAlternative": "Bar 1: quaver, crotchet rest. Bar 2: crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest.",
+        "questionAlternative": "Bar 1: quaver, crotchet rest. Bar 2: crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest."
       },
       "answer": {
         "kind": "choice",
@@ -266,11 +266,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -385,7 +385,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "All three bars are in 4/4, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 4/4 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -465,13 +465,12 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "crotchet",
+                  "value": "minim",
                   "dots": 0
                 }
               },
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -481,8 +480,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet."
+        "textAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, minim rest, crotchet rest.",
+        "questionAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, minim rest, crotchet rest."
       },
       "answer": {
         "kind": "choice",
@@ -506,11 +505,11 @@
         "diagnoses": {
           "2": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "3": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -627,7 +626,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/2, and beats 1 and 2 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 3/2 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -636,17 +635,17 @@
           {
             "events": [
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
                   "value": "minim",
                   "dots": 0
                 }
               },
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
-                  "value": "minim",
+                  "value": "semibreve",
                   "dots": 0
                 }
               }
@@ -699,8 +698,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: minim rest, minim. Bar 2: semibreve rest, minim. Bar 3: minim rest, minim rest, minim.",
-        "questionAlternative": "Bar 1: minim rest, minim. Bar 2: semibreve rest, minim. Bar 3: minim rest, minim rest, minim."
+        "textAlternative": "Bar 1: minim, semibreve rest. Bar 2: semibreve rest, minim. Bar 3: minim rest, minim rest, minim.",
+        "questionAlternative": "Bar 1: minim, semibreve rest. Bar 2: semibreve rest, minim. Bar 3: minim rest, minim rest, minim."
       },
       "answer": {
         "kind": "choice",
@@ -724,11 +723,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -754,7 +753,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 4/4, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 4/4 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -834,13 +833,12 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "crotchet",
+                  "value": "minim",
                   "dots": 0
                 }
               },
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -850,8 +848,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet, minim rest, crotchet. Bar 2: crotchet, crotchet rest, crotchet rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet. Bar 2: crotchet, crotchet rest, crotchet rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet."
+        "textAlternative": "Bar 1: crotchet, minim rest, crotchet. Bar 2: crotchet, crotchet rest, crotchet rest, crotchet. Bar 3: crotchet, minim rest, crotchet rest.",
+        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet. Bar 2: crotchet, crotchet rest, crotchet rest, crotchet. Bar 3: crotchet, minim rest, crotchet rest."
       },
       "answer": {
         "kind": "choice",
@@ -875,11 +873,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "3": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -905,7 +903,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/2, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 3/2 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -923,25 +921,6 @@
               },
               {
                 "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "minim",
-                  "dots": 0
-                }
-              }
-            ]
-          },
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "B4",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -973,12 +952,39 @@
                   "dots": 0
                 }
               }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
             ],
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: minim, minim rest, minim rest. Bar 2: minim, minim rest. Bar 3: minim, semibreve rest.",
-        "questionAlternative": "Bar 1: minim, minim rest, minim rest. Bar 2: minim, minim rest. Bar 3: minim, semibreve rest."
+        "textAlternative": "Bar 1: minim, minim rest, minim rest. Bar 2: minim, semibreve rest. Bar 3: semibreve rest, crotchet, crotchet.",
+        "questionAlternative": "Bar 1: minim, minim rest, minim rest. Bar 2: minim, semibreve rest. Bar 3: semibreve rest, crotchet, crotchet."
       },
       "answer": {
         "kind": "choice",
@@ -1002,11 +1008,11 @@
         "diagnoses": {
           "2": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "3": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -1032,7 +1038,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/4, and beats 1 and 2 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 3/4 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -1070,13 +1076,6 @@
           {
             "events": [
               {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
@@ -1093,6 +1092,13 @@
                   "dots": 0
                 },
                 "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
               }
             ]
           },
@@ -1134,8 +1140,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: minim rest, quaver, quaver. Bar 2: crotchet rest, quaver, quaver. Bar 3: crotchet rest, crotchet rest, quaver, quaver.",
-        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver). Bar 2: crotchet rest, 2 beamed together (quaver, quaver). Bar 3: crotchet rest, crotchet rest, 2 beamed together (quaver, quaver)."
+        "textAlternative": "Bar 1: minim rest, quaver, quaver. Bar 2: quaver, quaver, minim rest. Bar 3: crotchet rest, crotchet rest, quaver, quaver.",
+        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver). Bar 2: 2 beamed together (quaver, quaver), minim rest. Bar 3: crotchet rest, crotchet rest, 2 beamed together (quaver, quaver)."
       },
       "answer": {
         "kind": "choice",
@@ -1159,11 +1165,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -1189,7 +1195,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/8, and beats 1 and 2 are silent. Which bar writes the silent beats correctly?",
+      "prompt": "All three bars are in 3/8 and each has silent beats. Which bar writes its rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -1227,29 +1233,19 @@
           {
             "events": [
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
                   "value": "quaver",
                   "dots": 0
                 }
               },
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "crotchet",
                   "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "end"
+                }
               }
             ]
           },
@@ -1291,8 +1287,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet rest, semiquaver, semiquaver. Bar 2: quaver rest, semiquaver, semiquaver. Bar 3: quaver rest, quaver rest, semiquaver, semiquaver.",
-        "questionAlternative": "Bar 1: crotchet rest, 2 beamed together (semiquaver, semiquaver). Bar 2: quaver rest, 2 beamed together (semiquaver, semiquaver). Bar 3: quaver rest, quaver rest, 2 beamed together (semiquaver, semiquaver)."
+        "textAlternative": "Bar 1: crotchet rest, semiquaver, semiquaver. Bar 2: quaver, crotchet rest. Bar 3: quaver rest, quaver rest, semiquaver, semiquaver.",
+        "questionAlternative": "Bar 1: crotchet rest, 2 beamed together (semiquaver, semiquaver). Bar 2: quaver, crotchet rest. Bar 3: quaver rest, quaver rest, 2 beamed together (semiquaver, semiquaver)."
       },
       "answer": {
         "kind": "choice",
@@ -1316,11 +1312,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see."
           }
         }
       },
@@ -1344,7 +1340,7 @@
   "recap": [
     "Each silent beat gets its own rest.",
     "Do not join two beats of triple time into one rest.",
-    "A whole bar of silence is a semibreve rest."
+    "A whole bar of silence uses a whole-bar rest."
   ],
   "spacedReview": [
     {

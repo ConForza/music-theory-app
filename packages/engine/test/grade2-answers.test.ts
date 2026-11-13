@@ -130,17 +130,25 @@ describe("rests and beaming: every option is judged with the bar rules, from the
       const ts = tsIn(i.prompt).join("/");
       const bars = measuresOf(i);
       const issues = bars.map((b) => music.checkBarAnyPattern(b as never, ts).issues.map((x) => x.code));
-      const ok = issues.map((x, k) => (x.length === 0 ? k + 1 : 0)).filter(Boolean);
-      expect(ok, i.prompt).toEqual([Number(correct(i))]);
-      const good = bars[Number(correct(i)) - 1]!;
-      const rests = good.filter((e) => e.kind === "rest");
+      const clean = issues.map((x, k) => (x.length === 0 ? k + 1 : 0)).filter(Boolean);
+      const rest = issues.map((x, k) => (x.some((c) => c === "rest-across-beat" || c === "half-bar-rest-misplaced") ? k + 1 : 0)).filter(Boolean);
       const beat = music.metreStructure(ts).beatUnit;
-      if (i.prompt.includes("silent beats") || i.prompt.includes("part of a beat")) for (const r of rests) expect(frac(r).n / frac(r).d <= beat.n / beat.d + 1e-9, "no rest longer than a beat").toBe(true);
-      if (i.prompt.includes("half of the bar")) expect(rests.some((r) => same(frac(r), music.mul(beat, music.frac(2)))), "a two-beat rest").toBe(true);
+      if (i.prompt.includes("breaks that rule")) {
+        // the answer is the only bar whose two-beat rest does not fill a half of the bar; the other two are correct
+        expect(rest, i.prompt).toEqual([Number(correct(i))]);
+        expect(clean).toHaveLength(2);
+        for (const b of bars) expect(b.filter((e) => e.kind === "rest").every((e) => same(frac(e), music.mul(beat, music.frac(2)))), "all bars use a two-beat rest").toBe(true);
+      } else {
+        expect(clean, i.prompt).toEqual([Number(correct(i))]);
+        // wrong bars differ by a rest rule (or are a beat short), not by the sound being a different length from the others in a "which breaks" way
+        for (const k of [1, 2, 3]) if (k !== Number(correct(i))) expect(issues[k - 1]!.length, `bar ${k}`).toBeGreaterThan(0);
+        const good = bars[Number(correct(i)) - 1]!;
+        for (const r of good.filter((e) => e.kind === "rest")) expect(frac(r).n / frac(r).d <= beat.n / beat.d + 1e-9, "no rest longer than a beat in the right bar").toBe(true);
+      }
       for (const b of bars) expect(b.every((e) => e.kind !== "rest" || (e.duration!.dots ?? 0) === 0), "no dotted rests").toBe(true);
     }
   };
-  it("beats, half of the bar and part of a beat", () => {
+  it("beats, half of the bar and halfway through one beat", () => {
     check("G2-U2-L02");
     check("G2-U2-L03");
     check("G2-U2-L04");
@@ -155,6 +163,50 @@ describe("rests and beaming: every option is judged with the bar rules, from the
       expect(bad.some((c) => c === "rest-across-beat" || c === "half-bar-rest-misplaced"), bad.join()).toBe(true);
       expect(same(total(shown), total(fixed))).toBe(true);
       expect(shown.filter((e) => e.kind === "note").length).toBe(fixed.filter((e) => e.kind === "note").length);
+    }
+  });
+});
+
+describe("Brief 06 review fixes", () => {
+  it("time-sig-read: every time signature that fits the notes is accepted, so 4/4 and 2/2 are never marked apart", () => {
+    let both = 0;
+    for (const nodeId of ["G2-U1-L01", "G2-U1-L03"]) for (const i of items(nodeId, "t.g2.time-sig-read")) {
+      const accepted = (i.answer as { accepted: string[] }).accepted;
+      const bars = measuresOf(i);
+      for (const t of ["2/2", "3/2", "4/2", "3/8", "2/4", "3/4", "4/4"]) {
+        const fits = bars.every((b) => music.checkBarAnyPattern(b as never, t, { requireBeams: false }).issues.length === 0);
+        expect(accepted.includes(t), `${i.prompt} ${t}`).toBe(fits);
+      }
+      if (accepted.length > 1) both++;
+      expect(JSON.stringify(i.hints)).not.toMatch(/compound/i);
+    }
+    expect(both).toBeGreaterThan(0);
+  });
+  it("ledger-place: the position is named, one pitch is right, and it needs a ledger line", () => {
+    for (const i of items("G2-U2-L05", "t.g2.ledger-place")) {
+      const a = i.answer as { clef: music.Clef; accepted: string[] };
+      expect(a.accepted).toHaveLength(1);
+      expect(music.ledgerLines(a.clef, music.parsePitch(a.accepted[0]!))).toBeGreaterThanOrEqual(1);
+      expect(i.prompt).toMatch(/ledger line|space/);
+    }
+  });
+  it("bar-judge: in the beat-count questions the three bars are beamed alike, so the beams cannot give the answer", () => {
+    for (const i of items("G2-U1-L01", "t.g2.bar-judge")) {
+      if (!i.prompt.includes("exactly the right number of beats")) continue;
+      const beamed = measuresOf(i).map((b) => b.some((e) => e.beam));
+      expect(new Set(beamed).size).toBe(1);
+    }
+  });
+  it("triplet descriptions close the group, so a screen-reader user can tell where it ends", () => {
+    for (const i of items("G2-U1-L05", "t.g2.triplet-mixed")) {
+      expect(i.music!.textAlternative).toMatch(/a triplet \(.+\)/);
+      expect(i.music!.questionAlternative).toMatch(/a triplet \(.+\)/);
+    }
+  });
+  it("melody interval questions never mark the tonic, and offer 2nd to 7th", () => {
+    for (const i of items("G2-U5-L04", "t.g2.melody-detail")) if (i.prompt.includes("interval, by number")) {
+      expect(options(i).map((o) => o.id)).toEqual(["2", "3", "4", "5", "6", "7"]);
+      expect(Number(correct(i))).toBeGreaterThanOrEqual(2);
     }
   });
 });

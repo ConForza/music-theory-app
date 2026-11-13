@@ -71,29 +71,29 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 
 | Concept | Taught in | Question types (distinct questions each) | Total distinct |
 |---|---|---|---|
-| c.metre.minim-beats | U1-L01 | time-signature 245, bar-complete 327, beat-facts 59, bar-judge 262 | 893 |
-| c.metre.quaver-beats | U1-L02 | time-signature 53, bar-complete 37, beat-facts 19, bar-judge 37 | 146 |
-| c.metre.beat-classification | U1-L03 | time-signature 391, beat-facts 115 | 506 |
+| c.metre.minim-beats | U1-L01 | time-sig-read 359, bar-complete 327, beat-facts 59, bar-judge 262 | 1007 |
+| c.metre.quaver-beats | U1-L02 | time-sig-read 58, bar-complete 37, beat-facts 19, bar-judge 37 | 151 |
+| c.metre.beat-classification | U1-L03 | time-sig-read 391, beat-facts 115 | 506 |
 | c.rhythm.triplets | U1-L04 | triplet 12, triplet-facts 15, triplet-read 62 | 89 |
 | c.rhythm.triplets-mixed | U1-L05 | triplet-mixed 223, triplet-fill 399 | 622 |
 | c.metre.grouping-g2 | U2-L01 | note-grouping 297, bar-complete 314, bar-judge 375 | 986 |
-| c.metre.rest-grouping-beats | U2-L02 | rest-grouping 3, rest-judge 93 | 96 |
-| c.metre.rest-grouping-half-bar | U2-L03 | rest-grouping 2, rest-judge 37, rest-fix 8 | 47 |
-| c.metre.rest-grouping-subdivisions | U2-L04 | rest-fix 27, rest-judge 110 | 137 |
-| c.pitch.ledger-two | U2-L05 | ledger-read 24, ledger-write 23 | 47 |
+| c.metre.rest-grouping-beats | U2-L02 | rest-grouping 3, rest-judge 118 | 121 |
+| c.metre.rest-grouping-half-bar | U2-L03 | rest-grouping 2, rest-judge 47, rest-fix 8 | 57 |
+| c.metre.rest-grouping-subdivisions | U2-L04 | rest-fix 27, rest-judge 125 | 152 |
+| c.pitch.ledger-two | U2-L05 | ledger-read 24, ledger-place 8 | 32 |
 | c.clefs.same-pitch-treble-bass | U2-L06 | ledger-read 10, clef-pair 51 | 61 |
 | c.scales.major-a | U3-L01 | scale-build-major 6, scale-gap 18 | 24 |
 | c.scales.major-bb-eb | U3-L02 | scale-build-major 12, scale-gap 36 | 48 |
 | c.keys.signatures-g2-major | U3-L03 | key-signature 14, key-facts 15 | 29 |
-| c.chords.tonic-triad-g2-major | U3-L04 | tonic-triad 5, degree 65, triad-notes 16, degree-note 13 | 99 |
-| c.scales.minor-concept | U4-L01 | minor-pattern 61, minor-facts 12 | 73 |
+| c.chords.tonic-triad-g2-major | U3-L04 | tonic-triad 5, degree 65, triad-notes 15, degree-note 12 | 97 |
+| c.scales.minor-concept | U4-L01 | minor-pattern 61, minor-facts 11 | 72 |
 | c.keys.relative | U4-L02 | relative-key 12, relative-facts 10 | 22 |
 | c.scales.minor-harmonic | U4-L03 | scale-build-minor 6, scale-gap 18, minor-facts 3 | 27 |
 | c.scales.minor-harmonic-g2 | U4-L04 | scale-build-minor 14, scale-gap 36, minor-facts 6 | 56 |
-| c.keys.minor-g2 | U4-L05 | key-signature 8, key-facts 10, tonic-triad 4, degree 53, triad-notes 24, degree-note 16 | 115 |
+| c.keys.minor-g2 | U4-L05 | key-signature 8, key-facts 10, tonic-triad 4, degree 53, triad-notes 21, degree-note 13 | 109 |
 | c.scales.minor-melodic-preview | U4-E1 | none (optional preview: fixed questions only) | 0 |
 | c.intervals.above-tonic-number-g2 | U5-L01 | interval-number 162, interval-note 25 | 187 |
-| c.terms.g2-words | U5-L02 | terms 52, term-use 174 | 226 |
+| c.terms.g2-words | U5-L02 | terms 52, term-use 145 | 197 |
 | c.terms.g2-signs | U5-L03 | terms 31, term-use 105 | 136 |
 | c.context.melody-g2 | U5-L04 | melody 400, melody-detail 400 | 800 |
 

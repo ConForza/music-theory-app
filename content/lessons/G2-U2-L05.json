@@ -52,13 +52,22 @@
                   "dots": 0
                 },
                 "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G"
               }
             ]
           }
         ],
-        "textAlternative": "A treble stave with C on the first ledger line below, B in the space under it, and A on the second ledger line below."
+        "textAlternative": "A treble stave with C on the first ledger line below, B in the space under it, A on the second ledger line below, and G in the space under that."
       },
-      "caption": "Going down from the stave in the treble clef: C is on the first ledger line, B is in the space below it, A is on the second ledger line."
+      "caption": "Going down from the treble stave: C is on the first ledger line, B is in the space below it, A is on the second ledger line, and G is in the space beyond it."
     },
     {
       "kind": "notation",
@@ -95,17 +104,22 @@
                   "dots": 0
                 },
                 "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "D6",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
               }
             ]
           }
         ],
-        "textAlternative": "A treble stave with A on the first ledger line above, B in the space above it, and C on the second ledger line above."
+        "textAlternative": "A treble stave with A on the first ledger line above, B in the space above it, C on the second ledger line above, and D in the space above that."
       },
-      "caption": "Going up above the treble stave: A is on the first ledger line, B is in the space above it, and C is on the second ledger line."
-    },
-    {
-      "kind": "text",
-      "text": "The bass clef works the same way, but the letters are different. You count the lines and spaces from the clef's own notes: the bottom line is G, and the top line is A."
+      "caption": "Going up above the treble stave: A is on the first ledger line, B is in the space above it, C is on the second ledger line, and D is in the space beyond it."
     },
     {
       "kind": "notation",
@@ -142,13 +156,74 @@
                   "dots": 0
                 },
                 "label": "E"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
               }
             ]
           }
         ],
-        "textAlternative": "A bass stave with C on the first ledger line above, D in the space above it, and E on the second ledger line above."
+        "textAlternative": "A bass stave with C on the first ledger line above, D in the space above it, E on the second ledger line above, and F in the space above that."
       },
-      "caption": "Above the bass stave: C is on the first ledger line, D is in the space above it, E is on the second ledger line."
+      "caption": "The bass clef counts from its own notes (the bottom line is G, the top line is A). Above the bass stave: C is on the first ledger line, D is in the space above it, E is on the second ledger line, F is in the space beyond it."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "E"
+              },
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
+              },
+              {
+                "kind": "note",
+                "pitch": "C2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass stave with F in the space below, E on the first ledger line below, D in the space under it, and C on the second ledger line below."
+      },
+      "caption": "Below the bass stave: F is in the space just below, E is on the first ledger line, D is in the space under it, and C is on the second ledger line."
     },
     {
       "kind": "tip",
@@ -281,30 +356,29 @@
     },
     {
       "id": "i.g2-u2-l05.guided-2",
-      "templateId": "t.g2.ledger-write",
+      "templateId": "t.g2.ledger-place",
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write G in the treble clef. You may use up to 2 ledger lines. Any G that fits is correct.",
+      "prompt": "In the bass clef, write the note F that sits in the space above the 2nd ledger line above the stave.",
       "answer": {
         "kind": "staff-position",
-        "clef": "treble",
+        "clef": "bass",
         "target": {
-          "step": "G",
+          "step": "F",
           "alter": 0,
           "position": "any",
-          "maxLedgerLines": 2
+          "maxLedgerLines": 2,
+          "octave": 4
         },
         "accepted": [
-          "G3",
-          "G4",
-          "G5"
+          "F4"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Ledger lines continue the line/space pattern.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach G."
+        "In the bass clef the bottom line is G. Count up or down one letter for each line and space, including the spaces between ledger lines."
       ],
       "feedback": {
         "correct": "Written on the right ledger line.",
@@ -429,30 +503,29 @@
     },
     {
       "id": "i.g2-u2-l05.ind-2",
-      "templateId": "t.g2.ledger-write",
+      "templateId": "t.g2.ledger-place",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write F in the bass clef. You may use up to 2 ledger lines. Any F that fits is correct.",
+      "prompt": "In the bass clef, write the note B that sits in the space below the 2nd ledger line below the stave.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
         "target": {
-          "step": "F",
+          "step": "B",
           "alter": 0,
           "position": "any",
-          "maxLedgerLines": 2
+          "maxLedgerLines": 2,
+          "octave": 1
         },
         "accepted": [
-          "F2",
-          "F3",
-          "F4"
+          "B1"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Ledger lines continue the line/space pattern.",
-        "In the bass clef the bottom line is G. Count up one letter for each line and space until you reach F."
+        "In the bass clef the bottom line is G. Count up or down one letter for each line and space, including the spaces between ledger lines."
       ],
       "feedback": {
         "correct": "Written correctly.",
@@ -522,30 +595,29 @@
     },
     {
       "id": "i.g2-u2-l05.ind-4",
-      "templateId": "t.g2.ledger-write",
+      "templateId": "t.g2.ledger-place",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write A♭ in the treble clef. You may use up to 2 ledger lines. Any A♭ that fits is correct.",
+      "prompt": "In the bass clef, write the note C that sits on the 2nd ledger line below the stave.",
       "answer": {
         "kind": "staff-position",
-        "clef": "treble",
+        "clef": "bass",
         "target": {
-          "step": "A",
-          "alter": -1,
+          "step": "C",
+          "alter": 0,
           "position": "any",
-          "maxLedgerLines": 2
+          "maxLedgerLines": 2,
+          "octave": 2
         },
         "accepted": [
-          "Ab3",
-          "Ab4",
-          "Ab5"
+          "C2"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Ledger lines continue the line/space pattern.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach A."
+        "In the bass clef the bottom line is G. Count up or down one letter for each line and space, including the spaces between ledger lines."
       ],
       "feedback": {
         "correct": "Written on the right ledger line.",
@@ -615,30 +687,29 @@
     },
     {
       "id": "i.g2-u2-l05.ind-6",
-      "templateId": "t.g2.ledger-write",
+      "templateId": "t.g2.ledger-place",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write C in the treble clef. You may use up to 2 ledger lines. Any C that fits is correct.",
+      "prompt": "In the treble clef, write the note A that sits on the 2nd ledger line below the stave.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
         "target": {
-          "step": "C",
+          "step": "A",
           "alter": 0,
           "position": "any",
-          "maxLedgerLines": 2
+          "maxLedgerLines": 2,
+          "octave": 3
         },
         "accepted": [
-          "C4",
-          "C5",
-          "C6"
+          "A3"
         ],
         "octaveSensitive": true
       },
       "hints": [
         "Ledger lines continue the line/space pattern.",
-        "In the treble clef the bottom line is E. Count up one letter for each line and space until you reach C."
+        "In the treble clef the bottom line is E. Count up or down one letter for each line and space, including the spaces between ledger lines."
       ],
       "feedback": {
         "correct": "Well written.",
@@ -665,7 +736,7 @@
       "afterDays": 1
     },
     {
-      "templateId": "t.g2.ledger-write",
+      "templateId": "t.g2.ledger-place",
       "afterDays": 3
     },
     {

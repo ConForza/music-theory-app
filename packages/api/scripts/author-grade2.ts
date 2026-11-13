@@ -110,11 +110,11 @@ writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
 // 4. Blueprints (version 2): the sections keep their outcomes; the template lists gain the Brief 06 templates so every outcome
 //    can be asked in more than one way. A section only ever draws from what has been taught.
 const SECTION_TEMPLATES: Record<string, string[]> = {
-  "o-g2-01": ["t.g2.time-signature", "t.g2.bar-complete", "t.g2.beat-facts", "t.g2.bar-judge", "t.g2.melody-detail"],
+  "o-g2-01": ["t.g2.time-sig-read", "t.g2.bar-complete", "t.g2.beat-facts", "t.g2.bar-judge", "t.g2.melody-detail"],
   "o-g2-02": ["t.g2.bar-complete", "t.g2.note-grouping", "t.g2.rest-grouping", "t.g2.rest-judge", "t.g2.rest-fix", "t.g2.bar-judge"],
   "o-g2-03": ["t.g2.triplet", "t.g2.triplet-facts", "t.g2.triplet-read", "t.g2.melody-detail"],
   "o-g2-04": ["t.g2.triplet-mixed", "t.g2.triplet-fill"],
-  "o-g2-05": ["t.g2.ledger-read", "t.g2.ledger-write", "t.g2.clef-pair", "t.g2.melody-detail"],
+  "o-g2-05": ["t.g2.ledger-read", "t.g2.ledger-place", "t.g2.clef-pair", "t.g2.melody-detail"],
   "o-g2-06": ["t.g2.relative-key", "t.g2.relative-facts"],
   "o-g2-07": ["t.g2.scale-build-minor", "t.g2.minor-facts", "t.g2.minor-pattern", "t.g2.scale-gap"],
   "o-g2-08": ["t.g2.scale-build-major", "t.g2.key-signature", "t.g2.scale-gap", "t.g2.key-facts"],

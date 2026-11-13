@@ -91,7 +91,8 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -99,7 +100,8 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "continue"
               },
               {
                 "kind": "note",
@@ -107,7 +109,8 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "end"
               }
             ]
           },
@@ -134,7 +137,7 @@
           }
         ],
         "textAlternative": "Two bars of 3/8: triple time.",
-        "questionAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: crotchet, quaver.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver). Bar 2: crotchet, quaver.",
         "timeSignature": "3/8"
       },
       "caption": "3/8: triple time with quaver beats."
@@ -321,7 +324,7 @@
     },
     {
       "id": "i.g2-u1-l03.guided-3",
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
@@ -337,8 +340,8 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
+                  "value": "quaver",
+                  "dots": 1
                 },
                 "beam": "begin"
               },
@@ -349,97 +352,15 @@
                   "value": "semiquaver",
                   "dots": 0
                 },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
                 "beam": "end"
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "crotchet",
                   "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
+                }
               }
             ]
           },
@@ -449,8 +370,26 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
                 },
                 "beam": "begin"
               },
@@ -461,64 +400,23 @@
                   "value": "semiquaver",
                   "dots": 0
                 },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
                 "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver, crotchet, crotchet, crotchet rest.",
-        "questionAlternative": "Bar 1: 3 beamed together (semiquaver, semiquaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver). Bar 2: 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver), crotchet, crotchet, crotchet rest."
+        "textAlternative": "Bar 1: dotted quaver, semiquaver, crotchet. Bar 2: quaver, quaver, dotted quaver, semiquaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (dotted quaver, semiquaver), crotchet. Bar 2: 2 beamed together (quaver, quaver), 2 beamed together (dotted quaver, semiquaver)."
       },
       "answer": {
         "kind": "time-signature",
         "accepted": [
-          "4/4"
+          "2/4"
         ]
       },
       "hints": [
-        "Find the beat value first.",
-        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -636,7 +534,7 @@
     },
     {
       "id": "i.g2-u1-l03.ind-3",
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
@@ -652,55 +550,17 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "minim",
                   "dots": 0
-                },
-                "beam": "begin"
+                }
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "crotchet",
                   "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 1
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "end"
+                }
               }
             ]
           },
@@ -711,9 +571,18 @@
                 "pitch": "B4",
                 "duration": {
                   "value": "quaver",
-                  "dots": 1
+                  "dots": 0
                 },
                 "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
               },
               {
                 "kind": "note",
@@ -725,27 +594,74 @@
                 "beam": "end"
               },
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
-                  "value": "crotchet",
+                  "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, dotted quaver, semiquaver. Bar 2: dotted quaver, semiquaver, crotchet rest.",
-        "questionAlternative": "Bar 1: 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver), 2 beamed together (dotted quaver, semiquaver). Bar 2: 2 beamed together (dotted quaver, semiquaver), crotchet rest."
+        "textAlternative": "Bar 1: minim, crotchet. Bar 2: quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver.",
+        "questionAlternative": "Bar 1: minim, crotchet. Bar 2: 3 beamed together (quaver, semiquaver, semiquaver), 2 beamed together (quaver, quaver), 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver)."
       },
       "answer": {
         "kind": "time-signature",
         "accepted": [
-          "2/4"
+          "3/4"
         ]
       },
       "hints": [
-        "Find the beat value first.",
-        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
       ],
       "feedback": {
         "correct": "Right: you read the beats from the notes.",
@@ -877,11 +793,11 @@
     },
     {
       "id": "i.g2-u1-l03.ind-6",
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Add the time signature to this rhythm.",
+      "prompt": "Add a time signature that fits this rhythm. More than one may fit; give any one of them.",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -893,6 +809,60 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
                   "value": "quaver",
                   "dots": 0
                 },
@@ -911,34 +881,19 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 1
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
                 "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
               },
               {
                 "kind": "note",
@@ -948,14 +903,6 @@
                   "dots": 0
                 },
                 "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
               }
             ]
           },
@@ -965,17 +912,10 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semibreve",
+                  "value": "quaver",
                   "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 1
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -983,23 +923,60 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
                 }
               }
             ]
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver, crotchet, dotted crotchet, quaver, quaver, quaver, crotchet. Bar 2: semibreve, dotted crotchet, quaver.",
-        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), crotchet, dotted crotchet, quaver, 2 beamed together (quaver, quaver), crotchet. Bar 2: semibreve, dotted crotchet, quaver."
+        "textAlternative": "Bar 1: semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, quaver. Bar 2: quaver, quaver, semiquaver, semiquaver, quaver, minim.",
+        "questionAlternative": "Bar 1: 3 beamed together (semiquaver, semiquaver, quaver), 3 beamed together (quaver, semiquaver, semiquaver), 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver). Bar 2: 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), minim."
       },
       "answer": {
         "kind": "time-signature",
         "accepted": [
-          "3/2"
+          "4/4",
+          "2/2"
         ]
       },
       "hints": [
-        "Find the beat value first.",
-        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -1023,7 +1000,7 @@
       "afterDays": 1
     },
     {
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "afterDays": 3
     },
     {

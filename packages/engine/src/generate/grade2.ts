@@ -12,8 +12,8 @@
  * rests, triplets). The engine's own gates (checkItem, solvability) run on every draft in addition.
  */
 import { deriveScale, music, type Measure, type NotationEvent } from "@mtp/curriculum";
-import { frag, maxLedger, melodyIn, n, nameOf, note, pretty, r, rhythmLine, type Gen } from "./families.ts";
-import { barJudge, codes, geom, keyWord, keysIn, noteId, noteLabel, spelledOptions, type Diagnoses } from "./grade1.ts";
+import { GENERATORS, frag, maxLedger, melodyIn, n, nameOf, note, pretty, r, rhythmLine, valueWord, type Gen } from "./families.ts";
+import { barJudge as barJudgeG1, codes, geom, keyWord, keysIn, noteId, noteLabel, spelledOptions, type Diagnoses } from "./grade1.ts";
 
 type Pitch = music.Pitch;
 type Clef = music.Clef;
@@ -185,6 +185,32 @@ export const tripletFacts: Gen = (c) => {
   };
 };
 
+
+/**
+ * Screen-reader descriptions that CLOSE a triplet group ("a triplet (minim rest, crotchet), then minim"), so a listener can tell where the
+ * group ends. (The shared description lists the group's notes together with the notes after it.)
+ */
+const word = (e: NotationEvent): string => (e.kind === "tuplet" ? `a triplet (${e.events.map(word).join(", ")})` : valueWord(e));
+const describeBars = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(word).join(", ")}.`).join(" ");
+const describeBeamed = (ms: Measure[]) =>
+  ms
+    .map((m, i) => {
+      const parts: string[] = [];
+      let group: string[] | null = null;
+      for (const e of m.events ?? []) {
+        const beam = e.kind === "tuplet" ? undefined : (e as { beam?: string }).beam;
+        if (beam === "begin") group = [word(e)];
+        else if (group && (beam === "continue" || beam === "end")) {
+          group.push(word(e));
+          if (beam === "end") { parts.push(`${group.length} beamed together (${group.join(", ")})`); group = null; }
+        } else parts.push(word(e));
+      }
+      return `Bar ${i + 1}: ${parts.join(", ")}.`;
+    })
+    .join(" ");
+/** A rhythm line whose descriptions close each triplet group. */
+const rl = (measures: Measure[], extra: Parameters<typeof rhythmLine>[1] = {}) => ({ ...rhythmLine(measures, extra), textAlternative: describeBars(measures), questionAlternative: describeBeamed(measures) });
+
 /** A tuplet event (3 in the time of 2) from [units, isRest] parts; one unit is `unit`. Adjacent notes with flags are beamed. */
 function tripletGroup(unit: music.NoteValue, parts: Array<[number, boolean]>): NotationEvent | null {
   const members = parts.map(([u, isRest]) => {
@@ -227,7 +253,7 @@ export const tripletRead: Gen = (c) => {
   const bar = barWithTriplet(c, ts, [[1, false], [1, false], [1, false]]);
   if (!bar) return null;
   const beats = music.parseTimeSignature(ts).top;
-  const fragment = rhythmLine([{ events: bar.events, barline: "final" }], { timeSignature: ts });
+  const fragment = rl([{ events: bar.events, barline: "final" }], { timeSignature: ts });
   const mode = c.rng.pick(["single", "single", "played", "which-beat"] as const);
   if (mode === "single") {
     const dotted = times(bar.unit, 3, 1)!;
@@ -282,7 +308,7 @@ export const tripletMixed: Gen = (c) => {
   const pat = c.rng.pick(patterns);
   const bar = barWithTriplet(c, ts, pat.parts);
   if (!bar) return null;
-  const fragment = rhythmLine([{ events: bar.events, barline: "final" }], { timeSignature: ts });
+  const fragment = rl([{ events: bar.events, barline: "final" }], { timeSignature: ts });
   if (mode === "notes") {
     const sounded = pat.parts.filter(([, x]) => !x).length;
     const ids = ["1", "2", "3"];
@@ -339,7 +365,7 @@ export const tripletFill: Gen = (c) => {
   const measures: Measure[] = groups.map((g, i) => ({ events: [g!], ...(i === groups.length - 1 ? { barline: "final" as const } : {}) }));
   return {
     prompt: `Each group is marked 3, so it must add up to three ${unit}s of written length (notes and rests together). Which group is complete?`,
-    music: rhythmLine(measures),
+    music: rl(measures),
     answer: { kind: "choice", options: sets.map((_, i) => ({ id: String(i + 1), label: `Group ${i + 1}` })), correctOptionIds: [String(answerIdx + 1)], diagnoses: Object.fromEntries(sets.map((s, i) => [String(i + 1), i === answerIdx ? null : diag("tuplet-total-wrong", s.total < 3 ? `Group ${i + 1} adds up to only ${s.total} ${unit}s' worth, so it is missing something.` : `Group ${i + 1} adds up to ${s.total} ${unit}s' worth, which is too much for a triplet.`)]).filter(([, v]) => v)) },
     hints: [`Add up the written lengths in each group. A ${unit} counts as 1; a note or rest twice as long counts as 2.`],
   };
@@ -349,11 +375,61 @@ export const tripletFill: Gen = (c) => {
 // Unit 2: neat rhythms, rests, ledger lines
 // ---------------------------------------------------------------------------
 
+
+/**
+ * t.g2.time-sig-read: "add the time signature". Replaces the Brief 01 template `t.g2.time-signature` for lessons and blueprints. Its generator
+ * decides a rhythm that fits two time signatures of the same bar length (four crotchets are 4/4 or 2/2) by the NOTES alone, ignoring a
+ * beaming preference, and then accepts BOTH, as the lesson teaches. The shipped generator treated 4/4 as the only answer.
+ */
+export const timeSigRead: Gen = (c) => {
+  const d = GENERATORS["fam.time-signature"]?.(c.template)?.(c);
+  if (!d || !d.music) return null;
+  const ts = (d.answer as { accepted: string[] }).accepted[0]!;
+  const bars = d.music.measures.map((m) => (m.events ?? []) as unknown as music.REvent[]);
+  const cap = music.barCapacity(music.parseTimeSignature(ts));
+  const rivals = (c.scope.timeSignatures ?? []).filter((t) => t !== ts && music.equals(music.barCapacity(music.parseTimeSignature(t)), cap) && bars.every((b) => music.checkBarAnyPattern(b, t, { requireBeams: false }).issues.length === 0));
+  return {
+    ...d,
+    prompt: rivals.length ? "Add a time signature that fits this rhythm. More than one may fit; give any one of them." : "Add the time signature to this rhythm.",
+    answer: { kind: "time-signature", accepted: [ts, ...rivals] },
+    hints: ["Add up each bar, then look at how the notes are grouped into beats."],
+  };
+};
+
+const stripBeams = (ms: Measure[]): Measure[] => ms.map((m) => ({ ...m, events: (m.events ?? []).map((e) => { if (e.kind === "tuplet") return e; const { beam: _b, ...rest } = e as NotationEvent & { beam?: string }; return rest as NotationEvent; }) }));
+/**
+ * t.g2.bar-judge: Grade 1's bar judge, with one change. In its "right number of beats" mode the wrong bars lose their beams, so the one beamed
+ * bar was the answer (389 of 461 such questions). Here all three bars are shown unbeamed, so only the beat count can decide.
+ */
+export const barJudge: Gen = (c) => {
+  const d = barJudgeG1(c);
+  if (!d || !d.music || !d.prompt.includes("exactly the right number of beats")) return d;
+  const measures = stripBeams(d.music.measures);
+  return { ...d, music: rhythmLine(measures) };
+};
+
+/** t.g2.ledger-place: write a named note on a ledger line (or in a space beyond one). The position is stated, so a note inside the stave is never right. */
+export const ledgerPlace: Gen = (c) => {
+  const clefs = clefsOf(c);
+  if (maxLedger(c) < 2) return null;
+  const clef = c.rng.pick(clefs);
+  const pos = c.rng.pick([-5, -4, -3, -2, 10, 11, 12, 13]);
+  const p = music.naturalAt(clef, pos);
+  if (music.ledgerLines(clef, p) < 1 || music.ledgerLines(clef, p) > 2) return null;
+  const answer = { kind: "staff-position" as const, clef, target: { step: p.step, alter: 0, position: "any" as const, maxLedgerLines: 2, octave: p.octave }, accepted: [music.formatPitch(p)], octaveSensitive: true };
+  return {
+    prompt: `In the ${clef} clef, write the note ${p.step} that sits ${posText(pos)}.`,
+    answer,
+    hints: [`In the ${clef} clef the bottom line is ${nameOf(music.naturalAt(clef, 0))}. Count up or down one letter for each line and space, including the spaces between ledger lines.`],
+  };
+};
+
 const RESTISH = new Set(["rest-across-beat", "rests-not-combined", "half-bar-rest-misplaced"]);
 
 /**
- * t.g2.rest-judge: three bars; which one writes its silences correctly? Three kinds, told apart by the prompt wording:
- * "silent beats" (one rest per beat), "half of the bar" (a two-beat rest only fills a half) and "part of a beat".
+ * t.g2.rest-judge: three bars, one answer, decided by a rest rule and never by counting. Three kinds, told apart by the prompt wording:
+ * "silent beats" (each silent beat gets its own rest: which bar writes its rests correctly?), "half of the bar" (a two-beat rest may only
+ * fill a half of a four-beat bar: which bar breaks that rule?) and "halfway through one beat" (a rest must not run across a beat line).
  */
 export const restJudge: Gen = (c) => {
   if (!c.scope.rests) return null;
@@ -371,63 +447,78 @@ export const restJudge: Gen = (c) => {
   if (!modes.length || !valueOk(c, bv)) return null;
   const mode = c.rng.pick(modes);
   const seed = Array.from({ length: beats }, () => beatFill(c, ts, c.rng.chance(0.35)));
-  const flat = (parts: NotationEvent[][]) => parts.flat();
-  const check = (good: NotationEvent[], wrongA: NotationEvent[], wrongB: NotationEvent[], needA: (cs: string[]) => boolean, needB: (cs: string[]) => boolean) => {
-    if (codes(good, ts).length) return null;
-    const a = codes(wrongA, ts, { requireBeams: false });
-    const b = codes(wrongB, ts, { requireBeams: false });
-    return needA(a) && needB(b) ? { good, wrongA, wrongB } : null;
+  /** A bar from beat slots: `over[b]` replaces the filler of beat b (and swallows `span` beats). */
+  const bar = (over: Record<number, { span: number; ev: NotationEvent[] }> = {}) => {
+    const out: NotationEvent[] = [];
+    for (let b = 0; b < beats; b++) {
+      const o = over[b];
+      if (o) { out.push(...o.ev); b += o.span - 1; } else out.push(...seed[b]!);
+    }
+    return out;
   };
-  const under = (cs: string[]) => cs.includes("bar-underfull") && !cs.includes("bar-overfull");
-  const over = (cs: string[]) => cs.includes("bar-overfull") && !cs.includes("bar-underfull");
-  const restish = (cs: string[]) => cs.some((x) => RESTISH.has(x)) && !cs.some((x) => x === "bar-underfull" || x === "bar-overfull");
+  const issues = (ev: NotationEvent[]) => codes(ev, ts, { requireBeams: false });
+  const restish = (ev: NotationEvent[]) => { const cs = issues(ev); return cs.some((x) => RESTISH.has(x)) && !cs.some((x) => x === "bar-underfull" || x === "bar-overfull"); };
+  const clean = (ev: NotationEvent[]) => codes(ev, ts).length === 0;
+  type Bar = { ev: NotationEvent[]; right: boolean; why: string };
   let prompt: string;
-  let built: { good: NotationEvent[]; wrongA: NotationEvent[]; wrongB: NotationEvent[] } | null;
-  let reasons: [string, string];
+  let category = "rest-across-beat";
+  let bars: Bar[];
   if (mode === "beats") {
-    const at = beats === 4 ? 1 : c.rng.int(0, beats - 2);
-    const make = (silent: NotationEvent[]) => {
-      const out: NotationEvent[][] = [];
-      for (let b = 0; b < beats; b++) {
-        if (b === at) { out.push(silent); b++; } else out.push(seed[b]!);
-      }
-      return flat(out);
-    };
-    built = check(make([r(bv), r(bv)]), make([r(two!)]), make([r(bv)]), restish, under);
-    prompt = `All three bars are in ${ts}, and beats ${at + 1} and ${at + 2} are silent. Which bar writes the silent beats correctly?`;
-    reasons = ["rest-across-beat", "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."];
+    const merge = (at: number): Record<number, { span: number; ev: NotationEvent[] }> => ({ [at]: { span: 2, ev: [r(two!)] } });
+    const why = "A single rest joins two beats here. Give each silent beat its own rest so that the beats stay easy to see.";
+    if (beats === 3) {
+      const at = c.rng.int(0, 1);
+      bars = [{ ev: bar({ [at]: { span: 2, ev: [r(bv), r(bv)] } }), right: true, why: "" }, { ev: bar(merge(0)), right: false, why }, { ev: bar(merge(1)), right: false, why }];
+    } else {
+      bars = [
+        { ev: bar({ 1: { span: 2, ev: [r(bv), r(bv)] } }), right: true, why: "" },
+        { ev: bar(merge(1)), right: false, why },
+        { ev: [...seed[0]!, r(two!), r(bv)], right: false, why },
+      ];
+    }
+    prompt = `All three bars are in ${ts} and each has silent beats. Which bar writes its rests correctly?`;
   } else if (mode === "half") {
-    const first = c.rng.chance(0.5);
-    const make = (silent: NotationEvent[]) => flat(first ? [silent, seed[2]!, seed[3]!] : [seed[0]!, seed[1]!, silent]);
-    built = check(make([r(two!)]), make([r(bv)]), make([r(two!), r(bv)]), under, over);
-    prompt = `All three bars are in ${ts}. The ${first ? "first" : "second"} half of the bar is silent. Which bar fills that half of the bar with a single two-beat rest?`;
-    reasons = ["half-bar-rest-misplaced", "Check how many beats that rest covers: a two-beat rest fills exactly half of a four-beat bar."];
+    category = "half-bar-rest-misplaced";
+    const ok = "That bar follows the rule: its two-beat rest fills exactly half of the bar, from beat 1 or from beat 3.";
+    bars = [
+      { ev: bar({ 1: { span: 2, ev: [r(two!)] } }), right: true, why: "" },
+      { ev: bar({ 0: { span: 2, ev: [r(two!)] } }), right: false, why: ok },
+      { ev: bar({ 2: { span: 2, ev: [r(two!)] } }), right: false, why: ok },
+    ];
+    prompt = `All three bars are in ${ts}. A two-beat rest may only fill the first or the second half of the bar. Which bar breaks that rule?`;
   } else {
-    const at = c.rng.int(0, beats - 2);
     const h = half!;
-    const make = (mid: NotationEvent[]) => {
-      const out: NotationEvent[][] = [];
-      for (let b = 0; b < beats; b++) {
-        if (b === at) { out.push(mid); b++; } else out.push(seed[b]!);
-      }
-      return flat(out);
-    };
-    built = check(make([n(h), r(h), r(h), n(h)]), make([n(h), r(bv), n(h)]), make([n(h), r(h), n(h)]), restish, under);
-    prompt = `All three bars are in ${ts}. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly?`;
-    reasons = ["rest-across-beat", "A rest must not stretch across a beat line. Rest for the second half of one beat, then start a new rest for the first half of the next."];
+    const mid = (at: number, ev: NotationEvent[]) => ({ [at]: { span: 2, ev } });
+    const straddle = [n(h), r(bv), n(h)];
+    const why = "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat.";
+    const at = c.rng.int(0, beats - 2);
+    const other = beats > 2 ? (at + 1) % (beats - 1) : -1;
+    bars = [{ ev: bar(mid(at, [n(h), r(h), r(h), n(h)])), right: true, why: "" }, { ev: bar(mid(at, straddle)), right: false, why }];
+    bars.push(other >= 0 ? { ev: bar(mid(other, straddle)), right: false, why } : { ev: bar(mid(at, [n(h), r(h), n(h)])), right: false, why: "Add up the beats in this bar: it does not match the time signature, so a rest is missing." });
+    prompt = `All three bars are in ${ts}. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?`;
   }
-  if (!built) return null;
-  const bars = c.rng.shuffle([{ ev: built.good, right: true }, { ev: built.wrongA, right: false, why: reasons[1] }, { ev: built.wrongB, right: false, why: "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many." }]);
-  const measures: Measure[] = bars.map((b, i) => ({ events: b.ev, ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
-  const answerIdx = bars.findIndex((b) => b.right);
+  // Every bar is checked against the bar rules: the answer must be the only bar that differs from the rest.
+  const right = bars.filter((b) => b.right);
+  if (right.length !== 1) return null;
+  if (mode === "half") {
+    // the bar that breaks the rule must break it, and the other two must follow it
+    if (!restish(right[0]!.ev) || bars.filter((b) => !b.right).some((b) => !clean(b.ev))) return null;
+  } else {
+    if (!clean(right[0]!.ev)) return null;
+    for (const b of bars.filter((x) => !x.right)) if (clean(b.ev) || !(restish(b.ev) || issues(b.ev).includes("bar-underfull"))) return null;
+  }
+  const keys = new Set(bars.map((b) => JSON.stringify(b.ev)));
+  if (keys.size !== 3) return null;
+  const order = c.rng.shuffle(bars);
+  const measures: Measure[] = order.map((b, i) => ({ events: b.ev, ...(i === order.length - 1 ? { barline: "final" as const } : {}) }));
+  const answerIdx = order.findIndex((b) => b.right);
   return {
     prompt,
     music: rhythmLine(measures),
-    answer: { kind: "choice", options: bars.map((_, i) => ({ id: String(i + 1), label: `Bar ${i + 1}` })), correctOptionIds: [String(answerIdx + 1)], diagnoses: Object.fromEntries(bars.map((b, i) => [String(i + 1), b.right ? null : diag(reasons[0], b.why!)]).filter(([, v]) => v)) },
+    answer: { kind: "choice", options: order.map((_, i) => ({ id: String(i + 1), label: `Bar ${i + 1}` })), correctOptionIds: [String(answerIdx + 1)], diagnoses: Object.fromEntries(order.map((b, i) => [String(i + 1), b.right ? null : diag(category, b.why)]).filter(([, v]) => v)) },
     hints: [`${ts} has ${music.describeMetre(music.metreStructure(ts))} in each bar.`],
   };
 };
-
 
 /**
  * t.g2.rest-fix: rewrite a bar whose rest breaks a rule. Two kinds, told apart by the prompt: a rest that runs on from part of one
@@ -600,7 +691,7 @@ export const keyFacts: Gen = (c) => {
   if (mode === "which-notes") {
     if (cnt === 0) return null;
     const mine = sig.accidentals;
-    const label = (xs: string[]) => xs.map(pretty).join(" and ");
+    const label = (xs: string[]) => (xs.length < 2 ? pretty(xs[0]!) : `${xs.slice(0, -1).map(pretty).join(", ")} and ${pretty(xs[xs.length - 1]!)}`);
     const options = new Map<string, string>([[mine.join(","), label(mine)]]);
     for (const k of all) {
       const s = music.keySignature(music.parseKey(k)).accidentals;
@@ -676,6 +767,8 @@ export const minorFacts: Gen = (c) => {
   const mode = c.rng.pick(["third", "raised-degree", "raised-note", "big-step"] as const);
   if (mode === "third") {
     const majorText = keyText.replace("minor", "major");
+    // only major keys that Grade 2 teaches may be named (E major is Grade 3)
+    if (!["C major", "G major", "D major", "F major", "A major", "Bb major", "Eb major"].includes(majorText)) return null;
     const majorThird = music.scale(music.parseKey(majorText), "major")[2]!;
     const minorThird = harm[2]!;
     const { options, diagnoses } = spelledOptions(c, minorThird, keyText);
@@ -716,7 +809,7 @@ export const minorFacts: Gen = (c) => {
   const ids = ["2-3", "5-6", "6-7", "7-8"];
   return {
     prompt: `In the ${noteLabel(key.tonic)} harmonic minor scale, which step is the biggest: three semitones, larger than a tone?`,
-    answer: { kind: "choice", options: optsOf(ids, (x) => `Between the ${x.replace("-", " and ")}`), correctOptionIds: ["6-7"], diagnoses: { "7-8": diag("semitone-misplaced", "Raising the 7th makes the step up to the tonic a semitone. The gap is below it."), "5-6": diag("semitone-misplaced", "The step from the 5th to the 6th is a semitone."), "2-3": diag("semitone-misplaced", "The step from the 2nd to the 3rd is a semitone.") } },
+    answer: { kind: "choice", options: optsOf(ids, (x) => { const [lo, hi] = x.split("-").map(Number); return `Between the ${ORD(lo!)} and ${ORD(hi!)} notes`; }), correctOptionIds: ["6-7"], diagnoses: { "7-8": diag("semitone-misplaced", "Raising the 7th makes the step up to the tonic a semitone. The gap is below it."), "5-6": diag("semitone-misplaced", "The step from the 5th to the 6th is a semitone."), "2-3": diag("semitone-misplaced", "The step from the 2nd to the 3rd is a semitone.") } },
     hints: ["The raised 7th leaves a gap of one and a half tones just below it."],
   };
 };
@@ -732,7 +825,7 @@ export const relativeFacts: Gen = (c) => {
     const ids = ["4", "5", "6", "7"];
     return {
       prompt: "The relative minor of a major key starts on which note of the major scale?",
-      answer: { kind: "choice", options: optsOf(ids, (x) => `The ${ORD(Number(x))} note`), correctOptionIds: ["6"], diagnoses: { "5": diag("relative-confusion", "The 5th note (the dominant) is a different relative. The relative minor begins on the 6th note."), "4": diag("relative-confusion", "The relative minor begins on the 6th note of the major scale."), "7": diag("relative-confusion", "The 7th note is the leading note. The relative minor begins one step lower, on the 6th.") } },
+      answer: { kind: "choice", options: optsOf(ids, (x) => `The ${ORD(Number(x))} note`), correctOptionIds: ["6"], diagnoses: { "5": diag("relative-confusion", "The 5th note is the dominant. The relative minor begins on the 6th note of the major scale."), "4": diag("relative-confusion", "The relative minor begins on the 6th note of the major scale."), "7": diag("relative-confusion", "The 7th note is the leading note. The relative minor begins one step lower, on the 6th.") } },
       hints: ["Count up the major scale: the relative minor starts on the 6th note."],
     };
   }
@@ -769,7 +862,7 @@ export const degreeNote: Gen = (c) => {
   const form = formOf(key);
   if (form === "harmonic" && !(c.scope.minorForms ?? []).includes("harmonic")) return null;
   const sc = music.scale(key, form);
-  const d = c.rng.int(1, 7);
+  const d = c.rng.int(2, 7); // degree 1 is the key note itself, which the prompt names
   const target = sc[d - 1]!;
   const { options, diagnoses } = spelledOptions(c, target, keyText);
   if (options.length < 3) return null;
@@ -812,7 +905,7 @@ export const triadNotes: Gen = (c) => {
     };
   }
   if (mode === "role") {
-    const idx = c.rng.pick([0, 1, 2]);
+    const idx = c.rng.pick([1, 2]); // the root is named in the question, so only the 3rd and the 5th are asked
     const role = ["root (degree 1)", "3rd (degree 3)", "5th (degree 5)"][idx]!;
     const { options, diagnoses } = spelledOptions(c, tri[idx]!, keyText);
     const dg: Diagnoses = { ...diagnoses };
@@ -882,8 +975,12 @@ const CONTEXT: Record<string, string> = {
   tenuto: "notes that are held for their full length",
 };
 /** Terms whose meanings could be confused with the target are never offered beside it. */
+const FAST = new Set(["presto", "vivace", "allegro", "allegretto"]);
+const SLOW = new Set(["largo", "adagio", "lento"]);
 function termDistractors(c: Ctx, target: TermT): TermT[] {
-  const pool = G2_POOL().filter((t) => t.meaning !== target.meaning && !target.similar?.includes(t.id) && !t.similar?.includes(target.id));
+  // never another word of the same speed family beside the target: "a lively, quick dance" could be vivace, presto or allegro
+  const family = FAST.has(target.id) ? FAST : SLOW.has(target.id) ? SLOW : null;
+  const pool = G2_POOL().filter((t) => t.meaning !== target.meaning && !target.similar?.includes(t.id) && !t.similar?.includes(target.id) && !(family && family.has(t.id)));
   const near = pool.filter((t) => t.category === target.category);
   const picks: TermT[] = [];
   for (const t of [...c.rng.shuffle(near), ...c.rng.shuffle(pool.filter((x) => !near.includes(x)))]) {
@@ -1019,11 +1116,12 @@ export const melodyDetail: Gen = (c) => {
     return { prompt: "What is the largest number of ledger lines used by any note in this melody?", music: m.fragment, answer: { kind: "choice", options: optsOf(ids), correctOptionIds: [String(need)], diagnoses: Object.fromEntries(ids.filter((x) => x !== String(need)).map((x) => [x, diag("evidence-misread", "Look above and below the stave for notes that sit on short extra lines and count the most lines any one note needs.")])) }, hints: ["Check the highest and the lowest note."] };
   }
   // interval from the nearest tonic below (or at) the first note... keep simple: the interval above the tonic of the marked note
-  const idx = c.rng.int(1, m.tune.length - 1);
-  const x = m.tune[idx]!;
+  const candidates = m.tune.map((p, k) => ({ p, k })).filter(({ p, k }) => k >= 1 && (music.diatonicNumber(p) - music.diatonicNumber({ ...key.tonic, octave: p.octave - (music.stepIndex(p.step) < music.stepIndex(key.tonic.step) ? 1 : 0) }) + 1) >= 2 && (music.diatonicNumber(p) - music.diatonicNumber({ ...key.tonic, octave: p.octave - (music.stepIndex(p.step) < music.stepIndex(key.tonic.step) ? 1 : 0) }) + 1) <= 7);
+  if (!candidates.length) return null;
+  const { p: x, k: idx } = c.rng.pick(candidates);
   const tonicBelow: Pitch = { ...key.tonic, octave: x.octave - (music.stepIndex(x.step) < music.stepIndex(key.tonic.step) ? 1 : 0) };
   const number = music.diatonicNumber(x) - music.diatonicNumber(tonicBelow) + 1;
-  if (number < 1 || number > 8) return null;
+  if (number < 2 || number > 7) return null;
   const labelled = m.fragment.measures.map((ms) => ({ ...ms, events: (ms.events ?? []).map((e) => e) }));
   let count = 0;
   const walk = (evs: NotationEvent[]) => evs.forEach((e) => { if (e.kind === "tuplet") walk(e.events as NotationEvent[]); else if (e.kind === "note") { if (count === idx) (e as { label?: string }).label = "x"; count++; } });
@@ -1031,13 +1129,15 @@ export const melodyDetail: Gen = (c) => {
   return {
     prompt: `The melody is in ${keyWord(keyText)}. What is the interval, by number, from the tonic up to the note marked x? (Use the nearest tonic below the note.)`,
     music: { ...m.fragment, measures: labelled },
-    answer: { kind: "choice", options: [1, 2, 3, 4, 5, 6, 7, 8].map((v) => ({ id: String(v), label: ORD(v) })), correctOptionIds: [String(number)], diagnoses: Object.fromEntries([number - 1, number + 1].filter((v) => v >= 1 && v <= 8).map((v) => [String(v), diag("evidence-misread", "Count the tonic itself as 1 when you count up to the note.")])) },
+    answer: { kind: "choice", options: [2, 3, 4, 5, 6, 7].map((v) => ({ id: String(v), label: ORD(v) })), correctOptionIds: [String(number)], diagnoses: Object.fromEntries([number - 1, number + 1].filter((v) => v >= 2 && v <= 7).map((v) => [String(v), diag("evidence-misread", "Count the tonic itself as 1 when you count up to the note.")])) },
     hints: ["Find the tonic of the key, then count up to the marked note, counting the tonic as 1."],
   };
 };
 
 export const GRADE2_GENERATORS: Record<string, Gen> = {
   "t.g2.beat-facts": beatFacts,
+  "t.g2.time-sig-read": timeSigRead,
+  "t.g2.ledger-place": ledgerPlace,
   "t.g2.bar-judge": barJudge,
   "t.g2.triplet-facts": tripletFacts,
   "t.g2.triplet-read": tripletRead,

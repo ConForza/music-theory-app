@@ -111,7 +111,7 @@
     },
     {
       "kind": "text",
-      "text": "Compare it with A major, whose 3rd note is C♯. In A minor the 3rd note is C, a semitone lower. That lower 3rd is what makes the scale (and its tonic triad) minor."
+      "text": "Compare it with A major, whose 3rd note is C♯. In A minor the 3rd note is C, a semitone lower. That lower 3rd, three semitones above the key note instead of four, is what makes the scale (and its tonic triad) minor."
     },
     {
       "kind": "text",
@@ -119,7 +119,7 @@
     },
     {
       "kind": "tip",
-      "text": "Minor = lower 3rd. Major 3rd: four semitones above the tonic. Minor 3rd: three semitones."
+      "text": "Minor = lower 3rd: three semitones above the key note, where a major scale has four."
     }
   ],
   "demonstration": {
@@ -508,32 +508,32 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The tonic triad of E major includes G♯. Which note replaces it in the tonic triad of E minor?",
+      "prompt": "The tonic triad of A major includes C♯. Which note replaces it in the tonic triad of A minor?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "F#",
-            "label": "F♯"
+            "id": "B",
+            "label": "B"
           },
           {
-            "id": "A",
-            "label": "A"
+            "id": "D",
+            "label": "D"
           },
           {
-            "id": "G",
-            "label": "G"
+            "id": "C",
+            "label": "C"
           }
         ],
         "correctOptionIds": [
-          "G"
+          "C"
         ],
         "diagnoses": {
-          "F#": {
+          "B": {
             "category": "wrong-minor-form",
             "reason": "The minor tonic triad has its middle note a semitone lower than in the major. Count three semitones up from the tonic to find it."
           },
-          "A": {
+          "D": {
             "category": "wrong-minor-form",
             "reason": "The minor tonic triad has its middle note a semitone lower than in the major. Count three semitones up from the tonic to find it."
           }
@@ -696,60 +696,6 @@
     },
     {
       "id": "i.g2-u4-l01.ind-5",
-      "templateId": "t.g2.minor-facts",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "The tonic triad of A major includes C♯. Which note replaces it in the tonic triad of A minor?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "B",
-            "label": "B"
-          },
-          {
-            "id": "D",
-            "label": "D"
-          },
-          {
-            "id": "C",
-            "label": "C"
-          }
-        ],
-        "correctOptionIds": [
-          "C"
-        ],
-        "diagnoses": {
-          "B": {
-            "category": "wrong-minor-form",
-            "reason": "The minor tonic triad has its middle note a semitone lower than in the major. Count three semitones up from the tonic to find it."
-          },
-          "D": {
-            "category": "wrong-minor-form",
-            "reason": "The minor tonic triad has its middle note a semitone lower than in the major. Count three semitones up from the tonic to find it."
-          }
-        }
-      },
-      "hints": [
-        "The harmonic minor raises the 7th note.",
-        "The minor triad has a lower middle note: three semitones above the tonic instead of four."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
-          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
-          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
-          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
-          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
-          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
-        },
-        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
-    },
-    {
-      "id": "i.g2-u4-l01.ind-6",
       "templateId": "t.g2.minor-pattern",
       "templateVersion": 1,
       "seed": null,
@@ -782,6 +728,81 @@
           }
         ],
         "textAlternative": "A treble-clef stave with two notes: F then G above it."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "tone"
+        ],
+        "diagnoses": {
+          "semitone": {
+            "category": "semitone-misplaced",
+            "reason": "There is a key between them on the piano, so this is a whole tone."
+          }
+        }
+      },
+      "hints": [
+        "Minor pattern: tone, semitone, tone, tone, semitone, tone, tone.",
+        "A semitone is from one key to the very next key; a tone has one key between.",
+        "Minor pattern: tone, semitone, tone, tone, semitone, tone, tone."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l01.ind-6",
+      "templateId": "t.g2.minor-pattern",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "These are the 7th and octave notes of E minor (before the 7th is raised). Is the step from the first note up to the second a tone or a semitone?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with two notes: D then E above it."
       },
       "answer": {
         "kind": "choice",

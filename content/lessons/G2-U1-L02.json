@@ -292,7 +292,7 @@
     },
     {
       "id": "i.g2-u1-l02.guided-3",
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
@@ -316,17 +316,37 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
-                }
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
               }
             ]
           },
@@ -341,8 +361,7 @@
                 }
               },
               {
-                "kind": "note",
-                "pitch": "B4",
+                "kind": "rest",
                 "duration": {
                   "value": "quaver",
                   "dots": 0
@@ -369,8 +388,8 @@
             ]
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: quaver, quaver, semiquaver, semiquaver.",
-        "questionAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: quaver, quaver, 2 beamed together (semiquaver, semiquaver)."
+        "textAlternative": "Bar 1: quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: quaver, quaver rest, semiquaver, semiquaver.",
+        "questionAlternative": "Bar 1: quaver, 2 beamed together (semiquaver, semiquaver), 2 beamed together (semiquaver, semiquaver). Bar 2: quaver, quaver rest, 2 beamed together (semiquaver, semiquaver)."
       },
       "answer": {
         "kind": "time-signature",
@@ -379,8 +398,8 @@
         ]
       },
       "hints": [
-        "Find the beat value first.",
-        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
       ],
       "feedback": {
         "correct": "Right: you found 3/8 from its beats.",
@@ -455,7 +474,7 @@
     },
     {
       "id": "i.g2-u1-l02.ind-2",
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
@@ -471,77 +490,57 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
-                },
-                "beam": "begin"
+                }
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
-                },
-                "beam": "end"
+                }
               },
               {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "end"
+                }
               }
             ]
           },
           {
             "events": [
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
                 "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
                 "duration": {
                   "value": "quaver",
                   "dots": 0
@@ -550,8 +549,8 @@
             ]
           }
         ],
-        "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: quaver rest, quaver rest, quaver.",
-        "questionAlternative": "Bar 1: 2 beamed together (semiquaver, semiquaver), 2 beamed together (semiquaver, semiquaver), 2 beamed together (semiquaver, semiquaver). Bar 2: quaver rest, quaver rest, quaver."
+        "textAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: semiquaver, semiquaver, quaver rest, quaver rest.",
+        "questionAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: 2 beamed together (semiquaver, semiquaver), quaver rest, quaver rest."
       },
       "answer": {
         "kind": "time-signature",
@@ -560,8 +559,8 @@
         ]
       },
       "hints": [
-        "Find the beat value first.",
-        "Add up each bar. Then look at the beaming: groups of three quavers mean compound time."
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
       ],
       "feedback": {
         "correct": "Correct time signature.",
@@ -935,7 +934,7 @@
       "afterDays": 3
     },
     {
-      "templateId": "t.g2.time-signature",
+      "templateId": "t.g2.time-sig-read",
       "afterDays": 7
     }
   ],

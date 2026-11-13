@@ -669,20 +669,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "vivace",
-            "label": "vivace"
+            "id": "adagio",
+            "label": "adagio"
           },
           {
             "id": "largo",
             "label": "largo"
           },
           {
-            "id": "presto",
-            "label": "presto"
+            "id": "moderato",
+            "label": "moderato"
           },
           {
-            "id": "allegretto",
-            "label": "allegretto"
+            "id": "vivace",
+            "label": "vivace"
           }
         ],
         "correctOptionIds": [
@@ -693,13 +693,13 @@
             "category": "confused-similar-term",
             "reason": "That is “largo”, which means “slow and broad”. Look for the term that matches the meaning given."
           },
-          "presto": {
+          "moderato": {
             "category": "confused-similar-term",
-            "reason": "That is “presto”, which means “very fast”. Look for the term that matches the meaning given."
+            "reason": "That is “moderato”, which means “at a moderate speed”. Look for the term that matches the meaning given."
           },
-          "allegretto": {
+          "adagio": {
             "category": "confused-similar-term",
-            "reason": "That is “allegretto”, which means “fairly quick, but not as fast as allegro”. Look for the term that matches the meaning given."
+            "reason": "That is “adagio”, which means “slow”. Look for the term that matches the meaning given."
           }
         }
       },

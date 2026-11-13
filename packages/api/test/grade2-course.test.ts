@@ -169,7 +169,7 @@ describe("Grade 2 generated nodes only ask what has been taught", () => {
   }, 600_000);
 
   it("a unit challenge only draws on its own unit and earlier ones, and the assessment covers every Grade 2 outcome", () => {
-    const early: Record<string, string[]> = { "a.g2-u1": ["time-signature", "bar-complete", "beat-facts", "bar-judge", "triplet", "triplet-facts", "triplet-read", "triplet-mixed", "triplet-fill"] };
+    const early: Record<string, string[]> = { "a.g2-u1": ["time-sig-read", "bar-complete", "beat-facts", "bar-judge", "triplet", "triplet-facts", "triplet-read", "triplet-mixed", "triplet-fill"] };
     for (const t of new Set([...course.ix.assessments.get("a.g2-u1")!.sections.flatMap((s) => s.templateIds)])) expect(early["a.g2-u1"]!.includes(t.replace("t.g2.", "")), t).toBe(true);
     const outcomes = new Set(course.ix.assessments.get("a.g2")!.sections.flatMap((s) => s.outcomeIds));
     for (let k = 1; k <= 13; k++) expect(outcomes.has(`abrsm2020.g2.${String(k).padStart(2, "0")}`), `g2.${k}`).toBe(true);

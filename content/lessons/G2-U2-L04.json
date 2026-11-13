@@ -186,7 +186,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "All three bars are in 3/4. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly?",
+      "prompt": "All three bars are in 3/4. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -297,6 +297,29 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
                 },
                 "beam": "begin"
               },
@@ -308,36 +331,13 @@
                   "dots": 0
                 },
                 "beam": "end"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                }
               }
             ],
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: quaver, quaver, quaver, crotchet rest, quaver. Bar 2: quaver, quaver, quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, quaver, quaver, quaver rest, quaver.",
-        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), quaver, crotchet rest, quaver. Bar 2: 2 beamed together (quaver, quaver), quaver, quaver rest, quaver rest, quaver. Bar 3: 2 beamed together (quaver, quaver), quaver, quaver rest, quaver."
+        "textAlternative": "Bar 1: quaver, quaver, quaver, crotchet rest, quaver. Bar 2: quaver, quaver, quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, crotchet rest, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), quaver, crotchet rest, quaver. Bar 2: 2 beamed together (quaver, quaver), quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, crotchet rest, quaver, 2 beamed together (quaver, quaver)."
       },
       "answer": {
         "kind": "choice",
@@ -361,11 +361,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "A rest must not stretch across a beat line. Rest for the second half of one beat, then start a new rest for the first half of the next."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           },
           "3": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           }
         }
       },
@@ -495,7 +495,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "All three bars are in 4/2. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly?",
+      "prompt": "All three bars are in 4/2. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -570,6 +570,13 @@
                 }
               },
               {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
@@ -589,22 +596,7 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "rest",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
+                  "value": "minim",
                   "dots": 0
                 }
               }
@@ -663,8 +655,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet. Bar 3: crotchet, crotchet, minim, crotchet, minim rest, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet. Bar 3: crotchet, crotchet, minim, crotchet, minim rest, crotchet."
+        "textAlternative": "Bar 1: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet, minim, minim. Bar 3: crotchet, crotchet, minim, crotchet, minim rest, crotchet.",
+        "questionAlternative": "Bar 1: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet, minim, minim. Bar 3: crotchet, crotchet, minim, crotchet, minim rest, crotchet."
       },
       "answer": {
         "kind": "choice",
@@ -688,11 +680,11 @@
         "diagnoses": {
           "2": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           },
           "3": {
             "category": "rest-across-beat",
-            "reason": "A rest must not stretch across a beat line. Rest for the second half of one beat, then start a new rest for the first half of the next."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           }
         }
       },
@@ -840,7 +832,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/4. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly?",
+      "prompt": "All three bars are in 3/4. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -897,6 +889,14 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
                   "value": "quaver",
                   "dots": 0
                 }
@@ -904,7 +904,7 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "quaver",
+                  "value": "crotchet",
                   "dots": 0
                 }
               },
@@ -915,24 +915,6 @@
                   "value": "quaver",
                   "dots": 0
                 }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "begin"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "quaver",
-                  "dots": 0
-                },
-                "beam": "end"
               }
             ]
           },
@@ -990,8 +972,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: quaver, crotchet rest, quaver, quaver, quaver. Bar 2: quaver, quaver rest, quaver, quaver, quaver. Bar 3: quaver, quaver rest, quaver rest, quaver, quaver, quaver.",
-        "questionAlternative": "Bar 1: quaver, crotchet rest, quaver, 2 beamed together (quaver, quaver). Bar 2: quaver, quaver rest, quaver, 2 beamed together (quaver, quaver). Bar 3: quaver, quaver rest, quaver rest, quaver, 2 beamed together (quaver, quaver)."
+        "textAlternative": "Bar 1: quaver, crotchet rest, quaver, quaver, quaver. Bar 2: crotchet, quaver, crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: quaver, crotchet rest, quaver, 2 beamed together (quaver, quaver). Bar 2: crotchet, quaver, crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest, quaver, 2 beamed together (quaver, quaver)."
       },
       "answer": {
         "kind": "choice",
@@ -1015,11 +997,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "A rest must not stretch across a beat line. Rest for the second half of one beat, then start a new rest for the first half of the next."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           }
         }
       },
@@ -1149,7 +1131,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/2. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly?",
+      "prompt": "All three bars are in 3/2. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -1196,6 +1178,14 @@
                 "kind": "note",
                 "pitch": "B4",
                 "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
                   "value": "crotchet",
                   "dots": 0
                 }
@@ -1203,23 +1193,15 @@
               {
                 "kind": "rest",
                 "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
-                "duration": {
                   "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
                   "dots": 0
                 }
               }
@@ -1269,8 +1251,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: crotchet, minim rest, crotchet, minim. Bar 2: crotchet, crotchet rest, crotchet, minim. Bar 3: crotchet, crotchet rest, crotchet rest, crotchet, minim.",
-        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet, minim. Bar 2: crotchet, crotchet rest, crotchet, minim. Bar 3: crotchet, crotchet rest, crotchet rest, crotchet, minim."
+        "textAlternative": "Bar 1: crotchet, minim rest, crotchet, minim. Bar 2: minim, crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet rest, crotchet, minim.",
+        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet, minim. Bar 2: minim, crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet rest, crotchet, minim."
       },
       "answer": {
         "kind": "choice",
@@ -1294,11 +1276,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "A rest must not stretch across a beat line. Rest for the second half of one beat, then start a new rest for the first half of the next."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           }
         }
       },
@@ -1444,7 +1426,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "All three bars are in 3/8. Bar by bar, one beat in the middle is silent for part of a beat on each side of a beat line. Which bar writes the silent part of a beat correctly?",
+      "prompt": "All three bars are in 3/8. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -1455,6 +1437,13 @@
               {
                 "kind": "note",
                 "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
                 "duration": {
                   "value": "quaver",
                   "dots": 0
@@ -1469,11 +1458,13 @@
                 }
               },
               {
-                "kind": "rest",
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
                   "value": "semiquaver",
                   "dots": 0
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -1481,7 +1472,8 @@
                 "duration": {
                   "value": "semiquaver",
                   "dots": 0
-                }
+                },
+                "beam": "end"
               }
             ]
           },
@@ -1564,8 +1556,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "Bar 1: quaver, semiquaver, semiquaver rest, semiquaver. Bar 2: quaver, semiquaver, quaver rest, semiquaver. Bar 3: quaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver.",
-        "questionAlternative": "Bar 1: quaver, semiquaver, semiquaver rest, semiquaver. Bar 2: quaver, semiquaver, quaver rest, semiquaver. Bar 3: quaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver."
+        "textAlternative": "Bar 1: semiquaver, quaver rest, semiquaver, semiquaver, semiquaver. Bar 2: quaver, semiquaver, quaver rest, semiquaver. Bar 3: quaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver.",
+        "questionAlternative": "Bar 1: semiquaver, quaver rest, semiquaver, 2 beamed together (semiquaver, semiquaver). Bar 2: quaver, semiquaver, quaver rest, semiquaver. Bar 3: quaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver."
       },
       "answer": {
         "kind": "choice",
@@ -1589,11 +1581,11 @@
         "diagnoses": {
           "1": {
             "category": "rest-across-beat",
-            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           },
           "2": {
             "category": "rest-across-beat",
-            "reason": "A rest must not stretch across a beat line. Rest for the second half of one beat, then start a new rest for the first half of the next."
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
           }
         }
       },
