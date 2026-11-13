@@ -16,6 +16,14 @@ const COPY = {
   assessment: { eyebrow: "Grade 1 assessment", intro: "A practice check across the whole of Grade 1. There are no hints, and your first answer to each question counts. You can take it again with fresh questions.", done: "Assessment finished" },
 } as const;
 
+/** The grade a node belongs to ("G2-A" is Grade 2); the grade assessment's wording names its own grade. */
+const gradeOf = (nodeId: string) => Number(/^G(\d)/.exec(nodeId)?.[1] ?? 1);
+const copyFor = (kind: keyof typeof COPY, nodeId: string): { eyebrow: string; intro: string; done: string } => {
+  if (kind !== "assessment") return COPY[kind];
+  const g = gradeOf(nodeId);
+  return { ...COPY.assessment, eyebrow: `Grade ${g} assessment`, intro: COPY.assessment.intro.replace("Grade 1", `Grade ${g}`) };
+};
+
 type Load = { status: "loading" } | { status: "error"; error: ApiFailure } | { status: "ready"; session: NodeSession };
 const asFailure = (e: unknown, msg: string) => (e instanceof ApiFailure ? e : new ApiFailure(0, "network", msg));
 
@@ -101,7 +109,7 @@ export function NodeRun({ nodeId }: { nodeId: string }) {
   }
 
   const s = load.session;
-  const copy = COPY[s.kind];
+  const copy = copyFor(s.kind, nodeId);
   const strict = s.firstAttemptOnly;
   const item = started && idx < total ? s.items[idx] : undefined;
   const barMax = Math.max(1, total);
@@ -164,11 +172,11 @@ function NodeDone({ kind, result, error, onRetry, onAgain, nodeId }: { kind: Nod
   if (!result) return <div className="state" role="status"><span className="spinner" aria-hidden="true" /><p>Saving your result…</p></div>;
   const strict = kind === "challenge" || kind === "assessment";
   const passed = result.completedNode;
-  const title = !strict ? COPY[kind].done : passed ? (kind === "assessment" ? "Grade 1 assessment passed" : "Challenge passed") : "Not passed yet";
+  const title = !strict ? COPY[kind].done : passed ? (kind === "assessment" ? `Grade ${gradeOf(nodeId)} assessment passed` : "Challenge passed") : "Not passed yet";
   return (
     <>
       <section className="lesson-step" aria-labelledby="nd-title">
-        <p className="eyebrow">{COPY[kind].eyebrow}</p>
+        <p className="eyebrow">{copyFor(kind, nodeId).eyebrow}</p>
         <h1 id="nd-title" tabIndex={-1} ref={h}>{title}</h1>
         {strict ? (
           <>

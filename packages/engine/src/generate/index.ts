@@ -26,6 +26,7 @@ import { hashString, rng as makeRng, type Rng } from "../rng.ts";
 import { canonicalResponse, wrongResponse } from "./canonical.ts";
 import { GENERATORS, type Draft } from "./families.ts";
 import { GRADE1_GENERATORS } from "./grade1.ts";
+import { GRADE2_GENERATORS } from "./grade2.ts";
 
 export { canonicalResponse, wrongResponse } from "./canonical.ts";
 
@@ -46,7 +47,7 @@ export interface GeneratedItem {
   };
 }
 
-const generatorFor = (t: ExerciseTemplate) => GRADE1_GENERATORS[t.id] ?? GENERATORS[t.familyId]?.(t);
+const generatorFor = (t: ExerciseTemplate) => GRADE1_GENERATORS[t.id] ?? GRADE2_GENERATORS[t.id] ?? GENERATORS[t.familyId]?.(t);
 export const generatorTemplateIds = (ix: CurriculumIndex): string[] => [...ix.templates.values()].filter((t) => generatorFor(t) !== undefined).map((t) => t.id);
 
 /**

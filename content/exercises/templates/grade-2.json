@@ -331,7 +331,7 @@
         "alternativesNote": "Octave-specific: the prompt shows or names the exact pitch."
       },
       "ambiguityChecks": [
-        "Target pitch reachable with ≤ 2 ledger lines in the given clef."
+        "Target pitch reachable with \u2264 2 ledger lines in the given clef."
       ],
       "hints": [
         "Ledger lines continue the line/space pattern."
@@ -842,7 +842,7 @@
         "alternativesNote": "Each sub-question has its own acceptance rule."
       },
       "ambiguityChecks": [
-        "Original melodies only; Grade 1–2 vocabulary."
+        "Original melodies only; Grade 1\u20132 vocabulary."
       ],
       "hints": [
         "Find the bar first."
@@ -854,6 +854,1185 @@
         "reviewRequirements": [
           "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
           "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.beat-facts",
+      "version": 1,
+      "familyId": "fam.time-signature",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ],
+      "conceptIds": [
+        "c.metre.minim-beats",
+        "c.metre.quaver-beats",
+        "c.metre.beat-classification"
+      ],
+      "promptPattern": "How many beats? Which note is the beat? Duple, triple or quadruple? Which note fills a bar?",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; options never fit two readings of the time signature.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.bar-judge",
+      "version": 1,
+      "familyId": "fam.bar-builder",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.02"
+      ],
+      "conceptIds": [
+        "c.metre.minim-beats",
+        "c.metre.quaver-beats",
+        "c.metre.grouping-g2",
+        "c.metre.rest-grouping-beats",
+        "c.metre.rest-grouping-half-bar",
+        "c.metre.rest-grouping-subdivisions"
+      ],
+      "promptPattern": "Which of three bars has the right number of beats, grouping or rests?",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one of the three bars follows the rule; the others are each checked to break it.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count the beats in each bar and compare with the time signature."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.triplet-facts",
+      "version": 1,
+      "familyId": "fam.tuplet",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.03"
+      ],
+      "conceptIds": [
+        "c.rhythm.triplets"
+      ],
+      "promptPattern": "What is a triplet worth? How many notes? Which number?",
+      "scope": {
+        "tuplets": [
+          "triplet"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Equivalent values are derived from the note-value arithmetic.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Three notes in the time of two."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.triplet-read",
+      "version": 1,
+      "familyId": "fam.tuplet",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.03"
+      ],
+      "conceptIds": [
+        "c.rhythm.triplets"
+      ],
+      "promptPattern": "Read a bar that contains a triplet.",
+      "scope": {
+        "tuplets": [
+          "triplet"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Bars shown add up exactly in the printed time signature.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "A triplet group takes the place of one beat."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.triplet-mixed",
+      "version": 1,
+      "familyId": "fam.tuplet",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.04"
+      ],
+      "conceptIds": [
+        "c.rhythm.triplets-mixed"
+      ],
+      "promptPattern": "Read a triplet group that contains rests or unequal notes.",
+      "scope": {
+        "tuplets": [
+          "triplet"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "rests": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Groups containing rests total exactly three tuplet units.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Rests and notes inside the group total three units."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.triplet-fill",
+      "version": 1,
+      "familyId": "fam.tuplet",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.04"
+      ],
+      "conceptIds": [
+        "c.rhythm.triplets-mixed"
+      ],
+      "promptPattern": "Which triplet group is complete?",
+      "scope": {
+        "tuplets": [
+          "triplet"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "rests": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one group totals three units; the others total two or four.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Add up the units in each group: it must come to three."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.rest-judge",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ],
+      "conceptIds": [
+        "c.metre.rest-grouping-beats",
+        "c.metre.rest-grouping-half-bar",
+        "c.metre.rest-grouping-subdivisions"
+      ],
+      "promptPattern": "Which bar writes its silences correctly?",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one bar follows the rest-grouping rules; the others are checked to break them.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.clef-pair",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.05"
+      ],
+      "conceptIds": [
+        "c.clefs.same-pitch-treble-bass"
+      ],
+      "promptPattern": "Where is the same pitch written in the other clef?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Only pitches that need at most two ledger lines in both clefs are used.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Middle C is the first ledger line below the treble stave and the first ledger line above the bass stave."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.scale-gap",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.08",
+        "abrsm2020.g2.09"
+      ],
+      "conceptIds": [
+        "c.scales.major-a",
+        "c.scales.major-bb-eb",
+        "c.scales.minor-harmonic",
+        "c.scales.minor-harmonic-g2"
+      ],
+      "promptPattern": "One note of this scale is missing. Which note belongs in the gap?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; the natural 7th is offered as a distractor in minor keys.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Major: tone, tone, semitone, tone, tone, tone, semitone. Harmonic minor: raise the 7th."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.key-facts",
+      "version": 1,
+      "familyId": "fam.key-signature",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.08",
+        "abrsm2020.g2.09"
+      ],
+      "conceptIds": [
+        "c.keys.signatures-g2-major",
+        "c.keys.minor-g2"
+      ],
+      "promptPattern": "How many? Sharps or flats? Which key? Which notes? Which is last?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Key signatures are derived from the key rules.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.minor-pattern",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.07"
+      ],
+      "conceptIds": [
+        "c.scales.minor-concept"
+      ],
+      "promptPattern": "Tone or semitone? Where are the semitones in a minor scale?",
+      "scope": {
+        "keys": [
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "The natural-minor pattern is a stepping stone to the harmonic form; it is never asked as a separate scale.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Minor pattern: tone, semitone, tone, tone, semitone, tone, tone."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.minor-facts",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.09"
+      ],
+      "conceptIds": [
+        "c.scales.minor-concept",
+        "c.scales.minor-harmonic",
+        "c.scales.minor-harmonic-g2"
+      ],
+      "promptPattern": "What changes in the minor? Which note does the harmonic minor raise?",
+      "scope": {
+        "keys": [
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Melodic minor is never mentioned as required (deferred to Grade 3).",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The harmonic minor raises the 7th note."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.relative-facts",
+      "version": 1,
+      "familyId": "fam.key-signature",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.06"
+      ],
+      "conceptIds": [
+        "c.keys.relative"
+      ],
+      "promptPattern": "Which key is the relative major or minor?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Only key pairs from the Grade 2 key set are used.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The relative minor starts on the 6th note of the major scale."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.degree-note",
+      "version": 1,
+      "familyId": "fam.degree",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.11"
+      ],
+      "conceptIds": [
+        "c.chords.tonic-triad-g2-major",
+        "c.keys.minor-g2"
+      ],
+      "promptPattern": "Which note is degree N of this key?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "minorForms": [
+          "harmonic"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Minor keys use the harmonic form (raised 7th).",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Degree 1 is the tonic: count up from it."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.triad-notes",
+      "version": 1,
+      "familyId": "fam.triad-chord",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.10"
+      ],
+      "conceptIds": [
+        "c.chords.tonic-triad-g2-major",
+        "c.keys.minor-g2"
+      ],
+      "promptPattern": "Which notes make the tonic triad? Which note is missing?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "chordDegrees": [
+          "I"
+        ],
+        "inversions": [
+          "a"
+        ],
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Root position only.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "The tonic triad is degrees 1, 3 and 5."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.interval-note",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.12"
+      ],
+      "conceptIds": [
+        "c.intervals.above-tonic-number-g2"
+      ],
+      "promptPattern": "Which note is a given number above the tonic?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "intervalQuality": "number-only",
+        "intervalLowerNote": "tonic",
+        "minorForms": [
+          "harmonic"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Intervals above the tonic, by number only; the 7th of a minor key is never asked.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Count the tonic as 1."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.term-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ],
+      "conceptIds": [
+        "c.terms.g2-words",
+        "c.terms.g2-signs"
+      ],
+      "promptPattern": "What does this Grade 2 term or sign mean? Which term fits this description?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "tuplets": [
+          "triplet"
+        ],
+        "maxLedgerLines": 2,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Near-synonyms are never offered beside the target (term list pending teacher approval, OPEN_QUESTIONS Q2).",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Think about speed, loudness, character or touch."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.melody-detail",
+      "version": 1,
+      "familyId": "fam.score-observation",
+      "grade": 2,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g1.21",
+        "abrsm2020.g2.01",
+        "abrsm2020.g2.03",
+        "abrsm2020.g2.05",
+        "abrsm2020.g2.12",
+        "abrsm2020.g2.13"
+      ],
+      "conceptIds": [
+        "c.context.melody-g2"
+      ],
+      "promptPattern": "One question about a short melody.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "tuplets": [
+          "triplet"
+        ],
+        "maxLedgerLines": 2,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Original melodies only; Grade 1-2 vocabulary.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Read the clef, key, time signature and marks in turn."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.rest-fix",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 2,
+      "mode": "correct",
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ],
+      "conceptIds": [
+        "c.metre.rest-grouping-half-bar",
+        "c.metre.rest-grouping-subdivisions"
+      ],
+      "promptPattern": "Rewrite this bar so no rest crosses the middle of the bar or runs from part of one beat into the next.",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Any bar that sounds the same and follows the rest-grouping rules is accepted."
+      },
+      "ambiguityChecks": [
+        "The wrong bar breaks exactly one rule (a rest across a beat line, or a two-beat rest across the middle of the bar) and has the right total.",
+        "Everything asked has been taught at the node that uses the template."
+      ],
+      "hints": [
+        "Finish the rest for the first beat, then start a new rest for the next beat."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.melodic-preview",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.07"
+      ],
+      "conceptIds": [
+        "c.scales.minor-melodic-preview"
+      ],
+      "promptPattern": "Optional preview: which minor scale form is needed now, and which comes in Grade 3?",
+      "scope": {
+        "keys": [
+          "A minor"
+        ],
+        "clefs": [
+          "treble"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; each wrong option is checked to be clearly wrong and, where it matches a common misconception, carries a diagnosis."
+      },
+      "ambiguityChecks": [
+        "Fixed questions only (no generator). Never used in a unit challenge, review, practice or assessment: the melodic minor is deferred to Grade 3."
+      ],
+      "hints": [
+        "Think about which form of the minor scale Grade 2 asks for."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Independent answer checks pass (packages/engine/test/grade2-answers.test.ts)."
         ],
         "reviewedBy": null
       }

@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U3-L04",
+  "lessonId": "G2-U3-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name the notes of the tonic triad and the degrees of the scale in A, B♭ and E♭ major.",
+    "successCriteria": [
+      "I know a tonic triad is built on degrees 1, 3 and 5.",
+      "I can name the tonic triad of A, B♭ and E♭ major.",
+      "I can say which degree of the scale a note is."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The notes of a scale are numbered from the key note: the tonic is degree 1, then 2, 3 and so on up to 7."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "1"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "2"
+              },
+              {
+                "kind": "note",
+                "pitch": "C#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "3",
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "4"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "5"
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "6",
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "7",
+                "writtenAccidental": "sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "The scale of A major with its degrees: 1 is A, 2 is B, 3 is C sharp, 4 is D, 5 is E, 6 is F sharp, 7 is G sharp."
+      },
+      "caption": "The degrees of A major. A is degree 1, the tonic."
+    },
+    {
+      "kind": "text",
+      "text": "A tonic triad is a chord of three notes built on the tonic: degrees 1, 3 and 5. In root position the tonic is the lowest note."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "A4"
+                  },
+                  {
+                    "pitch": "C#5",
+                    "writtenAccidental": "sharp"
+                  },
+                  {
+                    "pitch": "E5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "The tonic triad of A major: A, C sharp and E sounded together."
+      },
+      "caption": "The tonic triad of A major: A, C♯, E (degrees 1, 3 and 5)."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "Bb4",
+                    "writtenAccidental": "flat"
+                  },
+                  {
+                    "pitch": "D5"
+                  },
+                  {
+                    "pitch": "F5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "The tonic triad of B flat major: B flat, D and F sounded together."
+      },
+      "caption": "B♭ major: B♭, D, F. For E♭ major the triad is E♭, G, B♭."
+    },
+    {
+      "kind": "tip",
+      "text": "Triad = every other note of the scale: 1, 3, 5. Leave out 2 and 4."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff-and-keyboard",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "Eb4",
+                  "writtenAccidental": "flat"
+                },
+                {
+                  "pitch": "G4"
+                },
+                {
+                  "pitch": "Bb4",
+                  "writtenAccidental": "flat"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "The tonic triad of E flat major: E flat, G and B flat sounded together."
+    },
+    "steps": [
+      "Start on the tonic, E♭: that is degree 1.",
+      "Count up two notes: F, then G. G is degree 3.",
+      "Count on two more: A♭, then B♭. B♭ is degree 5. The triad is E♭, G, B♭."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "The tonic triad of E flat major in the treble clef: E flat, G and B flat."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u3-l04.guided-1",
+      "templateId": "t.g2.degree-note",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In A major, which note is degree 5 of the scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "F#",
+            "label": "F♯"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          }
+        ],
+        "correctOptionIds": [
+          "E"
+        ],
+        "diagnoses": {
+          "D": {
+            "category": "off-by-one",
+            "reason": "D is degree 4. Count up from the tonic, which is degree 1."
+          },
+          "F#": {
+            "category": "off-by-one",
+            "reason": "F♯ is degree 6. Count up from the tonic, which is degree 1."
+          }
+        }
+      },
+      "hints": [
+        "Degree 1 is the tonic: count up from it.",
+        "Degree 1 is the tonic, A. Count up the scale one note at a time."
+      ],
+      "feedback": {
+        "correct": "Correct degree.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.guided-2",
+      "templateId": "t.g2.triad-notes",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which three notes make the tonic triad of A major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w1",
+            "label": "A D F♯"
+          },
+          {
+            "id": "w0",
+            "label": "A B C♯"
+          },
+          {
+            "id": "w2",
+            "label": "A C♯ D"
+          },
+          {
+            "id": "right",
+            "label": "A C♯ E"
+          }
+        ],
+        "correctOptionIds": [
+          "right"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "wrong-degree",
+            "reason": "Those are the first three notes of the scale, side by side. A triad uses every other note: degrees 1, 3 and 5."
+          },
+          "w1": {
+            "category": "wrong-degree",
+            "reason": "A triad is built from the tonic, the note two steps above it (the 3rd) and the note four steps above it (the 5th)."
+          },
+          "w2": {
+            "category": "wrong-degree",
+            "reason": "The top note of a triad is the 5th of the scale, not the 4th."
+          }
+        }
+      },
+      "hints": [
+        "The tonic triad is degrees 1, 3 and 5.",
+        "The tonic triad uses degrees 1, 3 and 5 of the major scale."
+      ],
+      "feedback": {
+        "correct": "You built the triad from degrees 1, 3 and 5.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.guided-3",
+      "templateId": "t.g2.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In B♭ major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave in Bb major with its key signature, showing G.",
+        "key": "Bb major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ]
+      },
+      "hints": [
+        "Count from the tonic.",
+        "Count up the scale of B♭ major from the tonic, B♭, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u3-l04.ind-1",
+      "templateId": "t.g2.tonic-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the tonic triad of E♭ major in the treble clef, in root position, using accidentals.",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "Eb major",
+        "target": {
+          "roman": "I",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "Eb4",
+            "G4",
+            "Bb4"
+          ]
+        ]
+      },
+      "hints": [
+        "Degrees 1, 3, 5.",
+        "Chord I is built on degree 1 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Correct triad.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.ind-2",
+      "templateId": "t.g2.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In A major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave in A major with its key signature, showing F♯.",
+        "key": "A major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ]
+      },
+      "hints": [
+        "Count from the tonic.",
+        "Count up the scale of A major from the tonic, A, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct degree.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.ind-3",
+      "templateId": "t.g2.triad-notes",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In the tonic triad of A major, which note is the root (degree 1)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "B",
+            "label": "B"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "G#",
+            "label": "G♯"
+          }
+        ],
+        "correctOptionIds": [
+          "A"
+        ],
+        "diagnoses": {
+          "B": {
+            "category": "note-missing",
+            "reason": "That note is not the root of this triad. Count up the scale from the tonic: the root is degree 1, the 3rd is degree 3 and the 5th is degree 5."
+          },
+          "G#": {
+            "category": "note-missing",
+            "reason": "That note is not the root of this triad. Count up the scale from the tonic: the root is degree 1, the 3rd is degree 3 and the 5th is degree 5."
+          }
+        }
+      },
+      "hints": [
+        "The tonic triad is degrees 1, 3 and 5.",
+        "Count up the scale: the root is degree 1, the 3rd is degree 3 and the 5th is degree 5."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.ind-4",
+      "templateId": "t.g2.degree-note",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In B♭ major, which note is degree 2 of the scale?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "Bb",
+            "label": "B♭"
+          },
+          {
+            "id": "C",
+            "label": "C"
+          }
+        ],
+        "correctOptionIds": [
+          "C"
+        ],
+        "diagnoses": {
+          "Bb": {
+            "category": "off-by-one",
+            "reason": "B♭ is degree 1. Count up from the tonic, which is degree 1."
+          },
+          "D": {
+            "category": "off-by-one",
+            "reason": "D is degree 3. Count up from the tonic, which is degree 1."
+          }
+        }
+      },
+      "hints": [
+        "Degree 1 is the tonic: count up from it.",
+        "Degree 1 is the tonic, B♭. Count up the scale one note at a time."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.ind-5",
+      "templateId": "t.g2.tonic-triad",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the tonic triad of B♭ major in the treble clef, in root position, using accidentals.",
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "Bb major",
+        "target": {
+          "roman": "I",
+          "inversion": "a"
+        },
+        "acceptedVoicings": [
+          [
+            "Bb4",
+            "D5",
+            "F5"
+          ]
+        ]
+      },
+      "hints": [
+        "Degrees 1, 3, 5.",
+        "Chord I is built on degree 1 of the scale: that note, the 3rd above it and the 5th above it."
+      ],
+      "feedback": {
+        "correct": "Triad written correctly.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion.",
+          "inversion-misread": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c).",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g2-u3-l04.ind-6",
+      "templateId": "t.g2.degree",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In B♭ major, which degree of the scale is this note?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave in Bb major with its key signature, showing D.",
+        "key": "Bb major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1st"
+          },
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ]
+      },
+      "hints": [
+        "Count from the tonic.",
+        "Count up the scale of B♭ major from the tonic, B♭, which is degree 1."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-from-wrong-note": "Count from the tonic (the key note) as degree 1.",
+          "off-by-one": "The tonic itself is degree 1 — count it too.",
+          "name-number-mismatch": "Check the technical name that belongs to that degree number."
+        },
+        "fallback": "Not quite. Write out the scale from the tonic and count."
+      }
+    }
+  ],
+  "recap": [
+    "Scale degrees are numbered from the tonic.",
+    "The tonic triad is degrees 1, 3 and 5.",
+    "A major: A C♯ E. B♭ major: B♭ D F. E♭ major: E♭ G B♭."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.tonic-triad",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.degree",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.triad-notes",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.chords.tonic-triad-g2-major"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s08"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.10",
+      "abrsm2020.g2.11"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcomes 10 and 11. Root position only; degrees are given by number, not technical name (a Grade 3 outcome)."
+  }
+}

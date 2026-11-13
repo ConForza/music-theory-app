@@ -22,7 +22,7 @@ type Clef = music.Clef;
 const LETTERS = music.STEPS as readonly string[];
 const letterOpts = (ids: readonly string[]) => ids.map((l) => ({ id: l, label: l }));
 
-type Diagnoses = NonNullable<Extract<AnswerSpec, { kind: "choice" }>["diagnoses"]>;
+export type Diagnoses = NonNullable<Extract<AnswerSpec, { kind: "choice" }>["diagnoses"]>;
 const ORD = (n: number) => music.ordinal(n);
 
 /** A keyboard picture with the given keys highlighted. */
@@ -112,7 +112,7 @@ export const NOTE_SHAPE: Record<string, string> = {
 };
 
 /** Where a written note sits, by geometry only (no letter name): used so text equivalents never state a recognition answer. */
-function geom(clef: Clef, p: Pitch): string {
+export function geom(clef: Clef, p: Pitch): string {
   const pos = staffPosition(clef, p);
   if (pos < -1) return `on a ledger line ${(-pos) / 2 > 1 ? "well " : ""}below the stave`.replace("  ", " ");
   if (pos === -1) return "in the space just below the stave";
@@ -396,12 +396,12 @@ export const beamChoice: Gen = (c) => {
 // Unit 2: count the beat
 // ---------------------------------------------------------------------------
 
-const stripBeam = (e: NotationEvent): NotationEvent => {
+export const stripBeam = (e: NotationEvent): NotationEvent => {
   if (e.kind === "tuplet") return e;
   const { beam: _b, ...rest } = e as NotationEvent & { beam?: string };
   return rest as NotationEvent;
 };
-const codes = (events: NotationEvent[], ts: string, opts: music.BarCheckOptions = {}) => music.checkBarAnyPattern(events as unknown as music.REvent[], ts, opts).issues.map((i) => i.code);
+export const codes = (events: NotationEvent[], ts: string, opts: music.BarCheckOptions = {}) => music.checkBarAnyPattern(events as unknown as music.REvent[], ts, opts).issues.map((i) => i.code);
 
 /** Is this value-list a bar the learner could have been taught (flat events, scope-safe)? */
 function inScope(events: NotationEvent[], c: Parameters<Gen>[0]): boolean {
@@ -738,13 +738,13 @@ export const accidentalCount: Gen = (c) => {
 // Unit 5: tones, semitones, scales and keys
 // ---------------------------------------------------------------------------
 
-const noteLabel = (p: { step: string; alter: number }) => pretty(`${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`);
-const noteId = (p: { step: string; alter: number }) => `${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`;
-const keysIn = (c: Parameters<Gen>[0]) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
-const keyWord = (k: string) => pretty(k);
+export const noteLabel = (p: { step: string; alter: number }) => pretty(`${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`);
+export const noteId = (p: { step: string; alter: number }) => `${p.step}${p.alter === 1 ? "#" : p.alter === -1 ? "b" : ""}`;
+export const keysIn = (c: Parameters<Gen>[0]) => (c.scope.keys?.length ? c.scope.keys : ["C major"]);
+export const keyWord = (k: string) => pretty(k);
 
 /** Option set of spelled notes: the answer, its enharmonic twin, and its letter neighbours. */
-function spelledOptions(c: Parameters<Gen>[0], answer: { step: string; alter: number }, key: string): { options: Array<{ id: string; label: string }>; diagnoses: Diagnoses } {
+export function spelledOptions(c: Parameters<Gen>[0], answer: { step: string; alter: number }, key: string): { options: Array<{ id: string; label: string }>; diagnoses: Diagnoses } {
   const diagnoses: Diagnoses = {};
   const seen = new Map<string, string>([[noteId(answer), noteLabel(answer)]]);
   const ai = LETTERS.indexOf(answer.step);

@@ -143,7 +143,11 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
       if (view.firstAttemptOnly) { await page.getByRole("button", { name: /Continue|Finish/ }).click(); continue; }
       await page.getByRole("button", { name: "Try again" }).click();
     }
-    await answerOnScreen(page, S, it.item, it.scope, canonicalResponse(S.course.ix, it.item, it.scope));
+    try {
+      await answerOnScreen(page, S, it.item, it.scope, canonicalResponse(S.course.ix, it.item, it.scope));
+    } catch (e) {
+      throw new Error(`${nodeId} question ${n} (${it.item.templateId}, ${inputFor(S.course.ix, it.item, it.scope).kind}) "${it.item.prompt}": ${e.message}`, { cause: e });
+    }
     await page.locator(".feedback").getByText("Correct!").waitFor();
     if (opts.afterEach) await opts.afterEach(page, n);
     await page.getByRole("button", { name: /Continue|Finish/ }).click();

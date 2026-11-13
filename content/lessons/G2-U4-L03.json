@@ -1,0 +1,971 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U4-L03",
+  "lessonId": "G2-U4-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Build a harmonic minor scale by raising the 7th note.",
+    "successCriteria": [
+      "I know the harmonic minor raises the 7th note by a semitone.",
+      "I know the raised note is written as an accidental, not in the key signature.",
+      "I can write the scale of A harmonic minor."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The minor scale you have met ends with a whole tone before the key note. Composers often wanted a semitone there, so the 7th note is raised by one semitone. This gives the harmonic minor scale."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "B"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "C"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "E"
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G♯",
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "A"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "The A harmonic minor scale going up: A, B, C, D, E, F, G sharp, A."
+      },
+      "caption": "A harmonic minor: A B C D E F G♯ A. The 7th note, G, is raised to G♯."
+    },
+    {
+      "kind": "text",
+      "text": "The raised note is written with an accidental in front of the note, as it is not part of the key signature. It is the same coming down: A G♯ F E D C B A."
+    },
+    {
+      "kind": "text",
+      "text": "Raising G to G♯ makes a big step between F and G♯: three semitones, or a tone and a half. It is the most characteristic sound of the harmonic minor."
+    },
+    {
+      "kind": "tip",
+      "text": "Harmonic minor: raise the 7th note, going up and coming down."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff-and-keyboard",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "A"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "B"
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "C"
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "D"
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E"
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "F"
+            },
+            {
+              "kind": "note",
+              "pitch": "G#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "G♯",
+              "writtenAccidental": "sharp"
+            },
+            {
+              "kind": "note",
+              "pitch": "A5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "A"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "The scale of A harmonic minor with G sharp as the 7th note."
+    },
+    "steps": [
+      "Play A, B, C, D, E, F: the notes are all white keys.",
+      "Instead of G, play the black key just above it: G♯. That is the raised 7th.",
+      "Now play A to finish. Notice the larger step from F up to G♯ and the semitone from G♯ to A."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A harmonic minor in the treble clef: A, B, C, D, E, F, G sharp, A."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u4-l03.guided-1",
+      "templateId": "t.g2.minor-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In the A harmonic minor scale, which step is the biggest: three semitones, larger than a tone?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2-3",
+            "label": "Between the 2 and 3"
+          },
+          {
+            "id": "5-6",
+            "label": "Between the 5 and 6"
+          },
+          {
+            "id": "6-7",
+            "label": "Between the 6 and 7"
+          },
+          {
+            "id": "7-8",
+            "label": "Between the 7 and 8"
+          }
+        ],
+        "correctOptionIds": [
+          "6-7"
+        ],
+        "diagnoses": {
+          "7-8": {
+            "category": "semitone-misplaced",
+            "reason": "Raising the 7th makes the step up to the tonic a semitone. The gap is below it."
+          },
+          "5-6": {
+            "category": "semitone-misplaced",
+            "reason": "The step from the 5th to the 6th is a semitone."
+          },
+          "2-3": {
+            "category": "semitone-misplaced",
+            "reason": "The step from the 2nd to the 3rd is a semitone."
+          }
+        }
+      },
+      "hints": [
+        "The harmonic minor raises the 7th note.",
+        "The raised 7th leaves a gap of one and a half tones just below it."
+      ],
+      "feedback": {
+        "correct": "Yes: only the 7th note changes.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.guided-2",
+      "templateId": "t.g2.scale-gap",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This is the A harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with eight semibreves going up a scale of A minor (harmonic minor), with one note replaced by a rest. The other notes are A, B, C, D, E, F, A."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "G",
+            "label": "G"
+          },
+          {
+            "id": "Ab",
+            "label": "A♭"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          },
+          {
+            "id": "G#",
+            "label": "G♯"
+          }
+        ],
+        "correctOptionIds": [
+          "G#"
+        ],
+        "diagnoses": {
+          "Ab": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "A♭ sounds the same, but a scale uses each letter name once, in order. Which letter is missing or comes next?"
+          },
+          "G": {
+            "category": "wrong-minor-form",
+            "reason": "That is the 7th note of the key signature. In the harmonic minor the 7th is raised by a semitone, so it is G♯."
+          }
+        }
+      },
+      "hints": [
+        "Major: tone, tone, semitone, tone, tone, tone, semitone. Harmonic minor: raise the 7th.",
+        "Harmonic minor: the notes of the key signature, with the 7th raised by a semitone.",
+        "A scale uses each letter name once, in order."
+      ],
+      "feedback": {
+        "correct": "Right note.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.guided-3",
+      "templateId": "t.g2.scale-build-minor",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write the A harmonic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "treble",
+        "key": "A minor",
+        "accepted": [
+          [
+            "A5",
+            "G#5",
+            "F5",
+            "E5",
+            "D5",
+            "C5",
+            "B4",
+            "A4"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "A minor",
+          "form": "harmonic",
+          "direction": "descending",
+          "start": "A5"
+        }
+      },
+      "hints": [
+        "Raise the 7th degree.",
+        "Harmonic minor: the key-signature notes with the 7th raised a semitone, going up and coming down."
+      ],
+      "feedback": {
+        "correct": "You wrote A harmonic minor.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u4-l03.ind-1",
+      "templateId": "t.g2.scale-build-minor",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the A harmonic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "treble",
+        "key": "A minor",
+        "accepted": [
+          [
+            "A3",
+            "B3",
+            "C4",
+            "D4",
+            "E4",
+            "F4",
+            "G#4",
+            "A4"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "A minor",
+          "form": "harmonic",
+          "direction": "ascending",
+          "start": "A3"
+        }
+      },
+      "hints": [
+        "Raise the 7th degree.",
+        "Harmonic minor: the key-signature notes with the 7th raised a semitone, going up and coming down."
+      ],
+      "feedback": {
+        "correct": "Correct scale.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.ind-2",
+      "templateId": "t.g2.minor-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In the A harmonic minor scale, which note of the key signature's scale is raised by a semitone?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "The 3rd note"
+          },
+          {
+            "id": "5",
+            "label": "The 5th note"
+          },
+          {
+            "id": "6",
+            "label": "The 6th note"
+          },
+          {
+            "id": "7",
+            "label": "The 7th note"
+          }
+        ],
+        "correctOptionIds": [
+          "7"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "wrong-minor-form",
+            "reason": "The 3rd stays as it is: it is the note that makes the scale minor."
+          },
+          "5": {
+            "category": "wrong-minor-form",
+            "reason": "The 5th is never changed in a minor scale. Only the 7th is raised in the harmonic form."
+          },
+          "6": {
+            "category": "wrong-minor-form",
+            "reason": "The 6th is raised in the melodic minor, which you meet in Grade 3. In the harmonic minor only the 7th note is raised."
+          }
+        }
+      },
+      "hints": [
+        "The harmonic minor raises the 7th note.",
+        "The harmonic minor raises the 7th note, which becomes the leading note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.ind-3",
+      "templateId": "t.g2.scale-gap",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is the A harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with eight semibreves going up a scale of A minor (harmonic minor), with one note replaced by a rest. The other notes are A, B, C, D, F, G♯, A."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D",
+            "label": "D"
+          },
+          {
+            "id": "F",
+            "label": "F"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          }
+        ],
+        "correctOptionIds": [
+          "E"
+        ],
+        "diagnoses": {}
+      },
+      "hints": [
+        "Major: tone, tone, semitone, tone, tone, tone, semitone. Harmonic minor: raise the 7th.",
+        "Harmonic minor: the notes of the key signature, with the 7th raised by a semitone.",
+        "A scale uses each letter name once, in order."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.ind-4",
+      "templateId": "t.g2.scale-build-minor",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the A harmonic minor scale, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "bass",
+        "key": "A minor",
+        "accepted": [
+          [
+            "A3",
+            "G#3",
+            "F3",
+            "E3",
+            "D3",
+            "C3",
+            "B2",
+            "A2"
+          ]
+        ],
+        "derivation": {
+          "rule": "scale",
+          "key": "A minor",
+          "form": "harmonic",
+          "direction": "descending",
+          "start": "A3"
+        }
+      },
+      "hints": [
+        "Raise the 7th degree.",
+        "Harmonic minor: the key-signature notes with the 7th raised a semitone, going up and coming down."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.ind-5",
+      "templateId": "t.g2.minor-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In the A harmonic minor scale, which note is the raised 7th (the leading note)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Ab",
+            "label": "A♭"
+          },
+          {
+            "id": "G",
+            "label": "G"
+          },
+          {
+            "id": "G#",
+            "label": "G♯"
+          },
+          {
+            "id": "A",
+            "label": "A"
+          }
+        ],
+        "correctOptionIds": [
+          "G#"
+        ],
+        "diagnoses": {
+          "Ab": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "A♭ sounds the same, but a scale uses each letter name once, in order. Which letter is missing or comes next?"
+          },
+          "G": {
+            "category": "wrong-minor-form",
+            "reason": "G is the 7th note of the key signature. The harmonic minor raises it by a semitone."
+          },
+          "A": {
+            "category": "letter-skipped-or-repeated",
+            "reason": "The 7th note of the scale keeps its letter name but is raised. Which letter is the 7th note, and what does raising it do to the sign?"
+          }
+        }
+      },
+      "hints": [
+        "The harmonic minor raises the 7th note.",
+        "Find the 7th note of the scale, then raise it by one semitone."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    },
+    {
+      "id": "i.g2-u4-l03.ind-6",
+      "templateId": "t.g2.scale-gap",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is the A harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave with eight semibreves going up a scale of A minor (harmonic minor), with one note replaced by a rest. The other notes are A, B, C, E, F, G♯, A."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "C",
+            "label": "C"
+          },
+          {
+            "id": "E",
+            "label": "E"
+          },
+          {
+            "id": "D",
+            "label": "D"
+          }
+        ],
+        "correctOptionIds": [
+          "D"
+        ],
+        "diagnoses": {}
+      },
+      "hints": [
+        "Major: tone, tone, semitone, tone, tone, tone, semitone. Harmonic minor: raise the 7th.",
+        "Harmonic minor: the notes of the key signature, with the 7th raised by a semitone.",
+        "A scale uses each letter name once, in order."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "semitone-misplaced": "Check the pattern of tones and semitones — the semitones aren't where they belong.",
+          "letter-skipped-or-repeated": "Each letter name appears once. You've used one letter twice and skipped another — respell that note.",
+          "wrong-minor-form": "Check which form of the minor scale is asked for, and which notes that form changes.",
+          "melodic-descent-not-restored": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th.",
+          "key-signature-misapplied": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written.",
+          "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
+        },
+        "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
+      }
+    }
+  ],
+  "recap": [
+    "The harmonic minor raises the 7th note by a semitone.",
+    "The raised note is an accidental, not in the key signature.",
+    "It is the same going up and coming down."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.scale-build-minor",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.minor-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.scale-gap",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.scales.minor-harmonic"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s09",
+      "fs.g2.s10"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.07",
+      "abrsm2020.g2.09"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 7. Melodic minor is deferred to Grade 3 core and is never required here; the optional preview (G2-U4-E1) is the only mention. The augmented 2nd is described as a tone and a half, never asked by name."
+  }
+}

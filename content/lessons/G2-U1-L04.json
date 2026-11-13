@@ -1,0 +1,1046 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U1-L04",
+  "lessonId": "G2-U1-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand and write triplets: three equal notes in the time of two.",
+    "successCriteria": [
+      "I know a triplet fits three notes into the time of two.",
+      "I know the number 3 marks a triplet.",
+      "I can write a triplet that fills one beat."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Normally a crotchet beat holds two quavers. Sometimes a composer wants three equal notes in the same beat. That group is called a triplet."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 2/4: a triplet of three quavers marked 3, then a crotchet.",
+        "questionAlternative": "Bar 1: a triplet of quaver, quaver, quaver, crotchet.",
+        "timeSignature": "2/4"
+      },
+      "caption": "Three quavers marked 3: a triplet. Together they last exactly one crotchet beat."
+    },
+    {
+      "kind": "text",
+      "text": "The number 3 is written above or below the group, often with a bracket. It means: play these three notes in the time that two of them would normally take."
+    },
+    {
+      "kind": "text",
+      "text": "So the notes in a triplet are shorter than ordinary ones. Three triplet quavers last as long as two ordinary quavers, or one crotchet."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 3/4: a crotchet, a triplet of quavers, and another crotchet.",
+        "questionAlternative": "Bar 1: crotchet, a triplet of quaver, quaver, quaver, crotchet.",
+        "timeSignature": "3/4"
+      },
+      "caption": "The triplet takes the place of one whole beat. The bar still has three beats."
+    },
+    {
+      "kind": "tip",
+      "text": "Triplet = three in the time of two. The group fills the time of its first note value's pair."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "tuplet",
+              "actual": 3,
+              "normal": 2,
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                }
+              ]
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 3/4: a crotchet, a triplet of quavers, and another crotchet.",
+      "questionAlternative": "Bar 1: crotchet, a triplet of quaver, quaver, quaver, crotchet.",
+      "timeSignature": "3/4"
+    },
+    "steps": [
+      "Count 1 for the first crotchet.",
+      "Say tri-ple-t for the three quavers: they all fit into beat 2.",
+      "Count 3 for the last crotchet. The triplet did not change the number of beats."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 3/4: a crotchet, a triplet of three quavers marked 3, and a crotchet."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u1-l04.guided-1",
+      "templateId": "t.g2.triplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many notes are in a triplet group?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "tuplet-number-wrong",
+            "reason": "Two is how many notes the group takes the time of. The group itself has three notes."
+          },
+          "4": {
+            "category": "tuplet-number-wrong",
+            "reason": "A triplet has three notes, not four."
+          },
+          "6": {
+            "category": "tuplet-number-wrong",
+            "reason": "Six notes is two triplets. One triplet group has three notes."
+          }
+        }
+      },
+      "hints": [
+        "Three notes in the time of two.",
+        "The word triplet comes from three."
+      ],
+      "feedback": {
+        "correct": "Yes: three notes.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.guided-2",
+      "templateId": "t.g2.triplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Three quavers are played as a triplet. Together they last as long as which single note?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          },
+          {
+            "id": "minim",
+            "label": "a minim"
+          },
+          {
+            "id": "crotchet.",
+            "label": "a dotted crotchet"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "That is the length of just one of the notes. A triplet fits three quavers into the time of two, so the whole group lasts as long as a crotchet."
+          },
+          "crotchet.": {
+            "category": "tuplet-total-wrong",
+            "reason": "Three ordinary quavers would last that long. A triplet squeezes the three into the time of two quavers, so it is shorter."
+          },
+          "minim": {
+            "category": "tuplet-total-wrong",
+            "reason": "That is the length of four quavers. A triplet group is the time of two quavers."
+          }
+        }
+      },
+      "hints": [
+        "Three notes in the time of two.",
+        "A triplet puts three notes into the time that two of the same notes would normally take."
+      ],
+      "feedback": {
+        "correct": "Yes: a triplet lasts as long as two ordinary notes of the same value.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.guided-3",
+      "templateId": "t.g2.triplet-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The three notes joined by the bracket marked 3 are a triplet. Which single note lasts as long as the whole group?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet of quaver, quaver, quaver, crotchet, crotchet, crotchet.",
+        "questionAlternative": "Bar 1: a triplet of quaver, quaver, quaver, crotchet, crotchet, crotchet.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "crotchet.",
+            "label": "a dotted crotchet"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "tuplet-total-wrong",
+            "reason": "That is the length of one note of the group. All three together fill one beat, which is a crotchet."
+          },
+          "crotchet.": {
+            "category": "tuplet-total-wrong",
+            "reason": "Three ordinary quavers would last that long. The triplet squeezes them into one beat."
+          }
+        }
+      },
+      "hints": [
+        "A triplet group takes the place of one beat.",
+        "The triplet group takes the place of one ordinary beat."
+      ],
+      "feedback": {
+        "correct": "The group fills one beat.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u1-l04.ind-1",
+      "templateId": "t.g2.triplet",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write one bar of 3/8 that uses a triplet (three notes in the time of two) somewhere in the bar.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "add-tuplet",
+        "timeSignature": "3/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "tuplet",
+                  "actual": 3,
+                  "normal": 2,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ]
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Three in the time of two.",
+        "A triplet of three quavers fills one crotchet beat."
+      ],
+      "feedback": {
+        "correct": "A triplet fills the beat correctly.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.ind-2",
+      "templateId": "t.g2.triplet-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes are played in this bar altogether? Count every note, including each note of the triplet.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: minim, minim, a triplet of crotchet, crotchet, crotchet, minim.",
+        "questionAlternative": "Bar 1: minim, minim, a triplet of crotchet, crotchet, crotchet, minim.",
+        "timeSignature": "4/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "5",
+            "label": "5"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "7",
+            "label": "7"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "tuplet-number-wrong",
+            "reason": "That counts the triplet group as one note. It has three notes."
+          },
+          "5": {
+            "category": "tuplet-number-wrong",
+            "reason": "Count the single notes, then add the three notes of the triplet."
+          },
+          "7": {
+            "category": "tuplet-number-wrong",
+            "reason": "Count the single notes, then add the three notes of the triplet."
+          }
+        }
+      },
+      "hints": [
+        "A triplet group takes the place of one beat.",
+        "Count the notes outside the triplet, then add three for the triplet group."
+      ],
+      "feedback": {
+        "correct": "Counted each note of the triplet.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.ind-3",
+      "templateId": "t.g2.triplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which lasts longer: three ordinary semiquavers, or a triplet of three semiquavers?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ordinary",
+            "label": "Three ordinary semiquavers"
+          },
+          {
+            "id": "triplet",
+            "label": "The triplet of three semiquavers"
+          },
+          {
+            "id": "same",
+            "label": "They last the same time"
+          }
+        ],
+        "correctOptionIds": [
+          "ordinary"
+        ],
+        "diagnoses": {
+          "triplet": {
+            "category": "tuplet-total-wrong",
+            "reason": "The triplet squeezes its three notes into the time of two semiquavers, so it is the shorter one."
+          },
+          "same": {
+            "category": "tuplet-total-wrong",
+            "reason": "The triplet is played faster: three notes in the time of two. So it is not the same as three ordinary semiquavers."
+          }
+        }
+      },
+      "hints": [
+        "Three notes in the time of two.",
+        "A triplet fits three notes into the time of two."
+      ],
+      "feedback": {
+        "correct": "The triplet is the shorter one.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.ind-4",
+      "templateId": "t.g2.triplet",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write one bar of 3/8 that uses a triplet (three notes in the time of two) somewhere in the bar.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "add-tuplet",
+        "timeSignature": "3/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "tuplet",
+                  "actual": 3,
+                  "normal": 2,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Three in the time of two.",
+        "A triplet of three quavers fills one crotchet beat."
+      ],
+      "feedback": {
+        "correct": "Written with a triplet in the right place.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.ind-5",
+      "templateId": "t.g2.triplet-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In 3/8, every beat is filled by a triplet of semiquavers. How many semiquavers are played in one bar?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "8",
+            "label": "8"
+          },
+          {
+            "id": "9",
+            "label": "9"
+          },
+          {
+            "id": "12",
+            "label": "12"
+          }
+        ],
+        "correctOptionIds": [
+          "9"
+        ],
+        "diagnoses": {
+          "6": {
+            "category": "tuplet-total-wrong",
+            "reason": "That counts two semiquavers a beat, which is how many ordinary semiquavers fit in a quaver. A triplet has three in each beat."
+          },
+          "8": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each beat holds one triplet of three semiquavers, and there are 3 beats in a bar of 3/8."
+          },
+          "12": {
+            "category": "tuplet-total-wrong",
+            "reason": "Each beat holds one triplet of three semiquavers, and there are 3 beats in a bar of 3/8."
+          }
+        }
+      },
+      "hints": [
+        "Three notes in the time of two.",
+        "3/8 has 3 quaver beats. A triplet of semiquavers fills one quaver beat."
+      ],
+      "feedback": {
+        "correct": "Three notes in each beat.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l04.ind-6",
+      "templateId": "t.g2.triplet-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "On which beat of the bar does the triplet start?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet of crotchet, crotchet, crotchet, minim, minim.",
+        "questionAlternative": "Bar 1: a triplet of crotchet, crotchet, crotchet, minim, minim.",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Beat 1"
+          },
+          {
+            "id": "2",
+            "label": "Beat 2"
+          },
+          {
+            "id": "3",
+            "label": "Beat 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "tuplet-number-wrong",
+            "reason": "Each beat is one minim, and the triplet group fills one whole beat. Count the single notes before it to find its beat."
+          },
+          "3": {
+            "category": "tuplet-number-wrong",
+            "reason": "Each beat is one minim, and the triplet group fills one whole beat. Count the single notes before it to find its beat."
+          }
+        }
+      },
+      "hints": [
+        "A triplet group takes the place of one beat.",
+        "The triplet fills exactly one beat, so count the notes before it."
+      ],
+      "feedback": {
+        "correct": "You found the beat the triplet fills.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "recap": [
+    "A triplet is three equal notes in the time of two.",
+    "The number 3 marks the group.",
+    "A triplet of quavers fills one crotchet beat."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.triplet",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.triplet-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.triplet-read",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.triplets"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s02"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.03"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 3. Triplets are shown in simple time only; the music in the lesson is original."
+  }
+}

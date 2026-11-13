@@ -1,0 +1,1002 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U5-L03",
+  "lessonId": "G2-U5-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn three new signs and words for touch and accent: sforzando (sf), fortepiano (fp) and tenuto.",
+    "successCriteria": [
+      "I know sf means a sudden strong accent.",
+      "I know fp means loud, then immediately quiet.",
+      "I know tenuto means to hold a note for its full length."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Some signs tell you how to play a single note, not the whole tune. Here are three new ones."
+    },
+    {
+      "kind": "text",
+      "text": "Sforzando, written sf, means a sudden strong accent on one note."
+    },
+    {
+      "kind": "text",
+      "text": "Fortepiano, written fp, means start the note loud, then drop to quiet at once."
+    },
+    {
+      "kind": "text",
+      "text": "Tenuto is a short horizontal line above or below the notehead. It means hold the note for its full length."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "dynamic": "sf"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "articulations": [
+                  "tenuto"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "dynamic": "fp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A four-bar tune in B flat major, 3/4. Bar 1: B flat marked sf, D, F. Bar 2: E flat minim marked tenuto, D. Bar 3: C marked fp, A, B flat. Bar 4: dotted minim B flat.",
+        "timeSignature": "3/4",
+        "key": "Bb major"
+      },
+      "caption": "An original tune in B♭ major showing all three: sf on the first note, tenuto on the E♭ in bar 2, and fp on the C in bar 3."
+    },
+    {
+      "kind": "tip",
+      "text": "sf = sudden accent. fp = loud then quiet. Tenuto line = hold it, full length."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Bb4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "dynamic": "sf"
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Eb5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "articulations": [
+                "tenuto"
+              ]
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "dynamic": "fp"
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "Bb4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Bb4",
+              "duration": {
+                "value": "minim",
+                "dots": 1
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A four-bar tune in B flat major, 3/4. Bar 1: B flat marked sf, D, F. Bar 2: E flat minim marked tenuto, D. Bar 3: C marked fp, A, B flat. Bar 4: dotted minim B flat.",
+      "timeSignature": "3/4",
+      "key": "Bb major"
+    },
+    "steps": [
+      "Look at the very first note: it is marked sf, a sudden strong accent.",
+      "In bar 2, the E♭ has a tenuto line: hold it for its full length.",
+      "In bar 3, the C is marked fp: loud at the start, then quiet at once."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A short tune in B flat major with sf on the first note, a tenuto mark in bar 2 and fp in bar 3."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u5-l03.guided-1",
+      "templateId": "t.g2.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does the mark on the first note tell the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "articulations": [
+                  "tenuto"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 1 flat, time signature 2/4. The notes sit: in the 2nd space; on the 2nd line; on the 3rd line; in the 3rd space; on the 4th line. The first note has a short horizontal line above it (a tenuto mark).",
+        "key": "F major",
+        "timeSignature": "2/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
+          },
+          {
+            "id": "staccato",
+            "label": "short and detached"
+          },
+          {
+            "id": "tenuto",
+            "label": "held: give the note its full length"
+          },
+          {
+            "id": "accent",
+            "label": "emphasise the note"
+          }
+        ],
+        "correctOptionIds": [
+          "tenuto"
+        ],
+        "diagnoses": {
+          "staccato": {
+            "category": "confused-similar-term",
+            "reason": "“staccato” is a different word: it means “short and detached”."
+          },
+          "legato": {
+            "category": "confused-similar-term",
+            "reason": "“legato” is a different word: it means “smoothly, with the notes joined”."
+          },
+          "accent": {
+            "category": "confused-similar-term",
+            "reason": "“accent (>)” is a different word: it means “emphasise the note”."
+          }
+        }
+      },
+      "hints": [
+        "Think about speed, loudness, character or touch.",
+        "Look at what is written on or under the first note: it is a sign for how to play it."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.guided-2",
+      "templateId": "t.g2.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does the mark on the first note tell the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "dynamic": "fp"
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 2/2. The notes sit: on the 5th line; in the space just above the stave; in the 4th space; on the 5th line; in the space just above the stave; in the 4th space. The first note carries the dynamic mark fp.",
+        "key": "A major",
+        "timeSignature": "2/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
+          },
+          {
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
+          },
+          {
+            "id": "fortepiano",
+            "label": "loud, then immediately quiet"
+          }
+        ],
+        "correctOptionIds": [
+          "fortepiano"
+        ],
+        "diagnoses": {
+          "mezzo-forte": {
+            "category": "confused-similar-term",
+            "reason": "“mezzo forte (mf)” is a different word: it means “moderately loud”."
+          },
+          "forte": {
+            "category": "confused-similar-term",
+            "reason": "“forte (f)” is a different word: it means “loud”."
+          },
+          "diminuendo": {
+            "category": "confused-similar-term",
+            "reason": "“diminuendo (dim.)” is a different word: it means “gradually getting quieter”."
+          }
+        }
+      },
+      "hints": [
+        "Think about speed, loudness, character or touch.",
+        "Look at what is written on or under the first note: it is a sign for how to play it."
+      ],
+      "feedback": {
+        "correct": "That is what the mark means.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.guided-3",
+      "templateId": "t.g2.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “fortepiano (fp)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "presto",
+            "label": "very fast"
+          },
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          },
+          {
+            "id": "fortepiano",
+            "label": "loud, then immediately quiet"
+          },
+          {
+            "id": "repeat",
+            "label": "play the passage between the marks again"
+          }
+        ],
+        "correctOptionIds": [
+          "fortepiano"
+        ]
+      },
+      "hints": [
+        "Think of a piece you know that uses it.",
+        "“fortepiano (fp)” is a dynamics marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u5-l03.ind-1",
+      "templateId": "t.g2.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which term or sign means “held: give the note its full length”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "legato",
+            "label": "legato"
+          },
+          {
+            "id": "accent",
+            "label": "accent (>)"
+          },
+          {
+            "id": "staccato",
+            "label": "staccato"
+          },
+          {
+            "id": "tenuto",
+            "label": "tenuto"
+          }
+        ],
+        "correctOptionIds": [
+          "tenuto"
+        ],
+        "diagnoses": {
+          "staccato": {
+            "category": "confused-similar-term",
+            "reason": "That is “staccato”, which means “short and detached”. Look for the term that matches the meaning given."
+          },
+          "legato": {
+            "category": "confused-similar-term",
+            "reason": "That is “legato”, which means “smoothly, with the notes joined”. Look for the term that matches the meaning given."
+          },
+          "accent": {
+            "category": "confused-similar-term",
+            "reason": "That is “accent (>)”, which means “emphasise the note”. Look for the term that matches the meaning given."
+          }
+        }
+      },
+      "hints": [
+        "Think about speed, loudness, character or touch.",
+        "It is a articulation marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.ind-2",
+      "templateId": "t.g2.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does the mark on the first note tell the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "articulations": [
+                  "tenuto"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 3/2. The notes sit: on the 1st line; in the 1st space; on the 2nd line; in the 2nd space; on the 3rd line; on the 4th line; on the 3rd line. The first note has a short horizontal line above it (a tenuto mark).",
+        "key": "Bb major",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
+          },
+          {
+            "id": "accent",
+            "label": "emphasise the note"
+          },
+          {
+            "id": "tenuto",
+            "label": "held: give the note its full length"
+          },
+          {
+            "id": "staccato",
+            "label": "short and detached"
+          }
+        ],
+        "correctOptionIds": [
+          "tenuto"
+        ],
+        "diagnoses": {
+          "legato": {
+            "category": "confused-similar-term",
+            "reason": "“legato” is a different word: it means “smoothly, with the notes joined”."
+          },
+          "accent": {
+            "category": "confused-similar-term",
+            "reason": "“accent (>)” is a different word: it means “emphasise the note”."
+          },
+          "staccato": {
+            "category": "confused-similar-term",
+            "reason": "“staccato” is a different word: it means “short and detached”."
+          }
+        }
+      },
+      "hints": [
+        "Think about speed, loudness, character or touch.",
+        "Look at what is written on or under the first note: it is a sign for how to play it."
+      ],
+      "feedback": {
+        "correct": "You read the mark on the note.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.ind-3",
+      "templateId": "t.g2.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “sforzando (sf)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "allegretto",
+            "label": "fairly quick, but not as fast as allegro"
+          },
+          {
+            "id": "sforzando",
+            "label": "with a sudden strong accent"
+          },
+          {
+            "id": "lento",
+            "label": "slow"
+          },
+          {
+            "id": "rallentando",
+            "label": "gradually getting slower"
+          }
+        ],
+        "correctOptionIds": [
+          "sforzando"
+        ]
+      },
+      "hints": [
+        "Think of a piece you know that uses it.",
+        "“sforzando (sf)” is a dynamics marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.ind-4",
+      "templateId": "t.g2.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a note that starts loud and drops to quiet at once. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fortepiano",
+            "label": "fortepiano (fp)"
+          },
+          {
+            "id": "diminuendo",
+            "label": "diminuendo (dim.)"
+          },
+          {
+            "id": "crescendo",
+            "label": "crescendo (cresc.)"
+          },
+          {
+            "id": "piano",
+            "label": "piano (p)"
+          }
+        ],
+        "correctOptionIds": [
+          "fortepiano"
+        ],
+        "diagnoses": {
+          "piano": {
+            "category": "confused-similar-term",
+            "reason": "That is “piano (p)”, which means “quiet”. Look for the term that matches the meaning given."
+          },
+          "diminuendo": {
+            "category": "confused-similar-term",
+            "reason": "That is “diminuendo (dim.)”, which means “gradually getting quieter”. Look for the term that matches the meaning given."
+          },
+          "crescendo": {
+            "category": "confused-similar-term",
+            "reason": "That is “crescendo (cresc.)”, which means “gradually getting louder”. Look for the term that matches the meaning given."
+          }
+        }
+      },
+      "hints": [
+        "Think about speed, loudness, character or touch.",
+        "Think about speed, loudness, character or touch: “fortepiano (fp)” is a dynamics marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.ind-5",
+      "templateId": "t.g2.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “fortepiano (fp)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fortepiano",
+            "label": "loud, then immediately quiet"
+          },
+          {
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          },
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          }
+        ],
+        "correctOptionIds": [
+          "fortepiano"
+        ]
+      },
+      "hints": [
+        "Think of a piece you know that uses it.",
+        "“fortepiano (fp)” is a dynamics marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l03.ind-6",
+      "templateId": "t.g2.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “sforzando (sf)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
+          },
+          {
+            "id": "pianissimo",
+            "label": "very quiet"
+          },
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          },
+          {
+            "id": "sforzando",
+            "label": "with a sudden strong accent"
+          }
+        ],
+        "correctOptionIds": [
+          "sforzando"
+        ],
+        "diagnoses": {
+          "pianissimo": {
+            "category": "confused-similar-term",
+            "reason": "“pianissimo (pp)” is a different word: it means “very quiet”."
+          },
+          "diminuendo": {
+            "category": "confused-similar-term",
+            "reason": "“diminuendo (dim.)” is a different word: it means “gradually getting quieter”."
+          },
+          "mezzo-piano": {
+            "category": "confused-similar-term",
+            "reason": "“mezzo piano (mp)” is a different word: it means “moderately quiet”."
+          }
+        }
+      },
+      "hints": [
+        "Think about speed, loudness, character or touch.",
+        "“sforzando (sf)” is a dynamics marking."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "sf: a sudden strong accent.",
+    "fp: loud, then immediately quiet.",
+    "Tenuto: hold the note for its full length."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.term-use",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.terms",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.term-use",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g2-signs"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.13"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 13. The Grade 2 sign list is provisional (OPEN_QUESTIONS Q2). TEACHER TO CONFIRM."
+  }
+}

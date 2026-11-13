@@ -65,3 +65,11 @@ export function shortfalls(rows: ConceptCapacity[], allow: Record<string, string
     return problems.length ? [{ conceptId: r.conceptId, problem: problems.join("; ") }] : [];
   });
 }
+
+/**
+ * Concepts that genuinely cannot meet the capacity rule, each with the reason. Never silently skipped; a test pins the list.
+ * Brief 06: the optional melodic-minor preview has fixed questions only and is never assessed or counted towards mastery.
+ */
+export const CAPACITY_ALLOWLIST: Record<string, string> = {
+  "c.scales.minor-melodic-preview": "optional enrichment with fixed questions only, never assessed or counted (deferred to Grade 3)",
+};

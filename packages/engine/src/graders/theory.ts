@@ -256,7 +256,12 @@ export const gradeScale: Grader<AnswerOf<"pitch-sequence">> = (_c, a, r) => {
   const same = (alt: Pitch[]) => alt.length === got.length && alt.every((p, i) => samePitch(p, got[i]!));
   if (key.mode === "minor") {
     const other = d.form === "harmonic" ? deriveScale(d.key, "melodic", d.direction, parsePitch(d.start)) : deriveScale(d.key, "harmonic", d.direction, parsePitch(d.start));
-    if (same(other)) return wrong("wrong-minor-form", `That is the ${d.form === "harmonic" ? "melodic" : "harmonic"} minor; this question asks for the ${d.form} form.`, { marks });
+    if (same(other)) {
+      // Where the question's scope does not include the other form (Grade 2 teaches only the harmonic minor), its name is not used:
+      // the learner is told what to change, not about a scale they have not met.
+      if (!(_c.scope.minorForms ?? []).includes(d.form === "harmonic" ? "melodic" : "harmonic")) return wrong("wrong-minor-form", "Too many notes have been raised. In the harmonic minor only the 7th note is raised: the 6th stays as it is in the key signature.", { marks });
+      return wrong("wrong-minor-form", `That is the ${d.form === "harmonic" ? "melodic" : "harmonic"} minor; this question asks for the ${d.form} form.`, { marks });
+    }
     if (d.form === "melodic" && d.direction !== "ascending") {
       const up = deriveScale(d.key, "melodic", "ascending", parsePitch(d.start));
       const raisedDown = d.direction === "descending" ? [...up].reverse() : [...up, ...[...up].reverse().slice(1)];

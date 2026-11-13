@@ -1,0 +1,1381 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U2-L02",
+  "lessonId": "G2-U2-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Write a new rest for each silent beat.",
+    "successCriteria": [
+      "I know each silent beat normally gets its own rest.",
+      "I know a rest should not join two beats in a bar of triple time.",
+      "I know a whole bar of silence uses the semibreve rest."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Rests are grouped by beat, just like notes. When more than one beat is silent, write a separate rest for each beat."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 3/4: a crotchet, then two crotchet rests.",
+        "questionAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest.",
+        "timeSignature": "3/4"
+      },
+      "caption": "Two silent beats in 3/4: two crotchet rests, one for each beat."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 3/2: a minim, then two minim rests.",
+        "questionAlternative": "Bar 1: minim, minim rest, minim rest.",
+        "timeSignature": "3/2"
+      },
+      "caption": "The same idea in 3/2, where each beat is a minim: two minim rests."
+    },
+    {
+      "kind": "text",
+      "text": "A minim rest across two crotchet beats in 3/4 would hide where beat 3 starts, so it is not written."
+    },
+    {
+      "kind": "text",
+      "text": "If a whole bar is silent, use a semibreve rest. It hangs from the fourth line of the stave and means a bar's silence, whatever the time signature."
+    },
+    {
+      "kind": "tip",
+      "text": "One beat, one rest. The exception for whole bars is the semibreve rest."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "One bar of 3/8: a quaver, then two quaver rests.",
+      "questionAlternative": "Bar 1: quaver, quaver rest, quaver rest.",
+      "timeSignature": "3/8"
+    },
+    "steps": [
+      "Beat 1 is a quaver note.",
+      "Beat 2 and beat 3 are silent, so each gets its own quaver rest.",
+      "Every beat can be seen clearly."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 3/8 with a quaver and two quaver rests."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u2-l02.guided-1",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "All three bars are in 3/8, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver rest. Bar 2: quaver, crotchet rest. Bar 3: quaver, quaver rest, quaver rest.",
+        "questionAlternative": "Bar 1: quaver, quaver rest. Bar 2: quaver, crotchet rest. Bar 3: quaver, quaver rest, quaver rest."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/8 has three quaver beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Yes: each silent beat has its own rest.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.guided-2",
+      "templateId": "t.g2.rest-grouping",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Rewrite this bar with the rests grouped correctly. It must sound exactly the same.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet rest.",
+        "questionAlternative": "Bar 1: quaver, crotchet rest.",
+        "timeSignature": "3/8"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "3/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Each silent beat gets its own rest.",
+        "Half-bar rests: first or last half only.",
+        "Each beat needs its own rest unless a rest fills half of a four-beat bar starting on beat 1 or 3."
+      ],
+      "feedback": {
+        "correct": "You gave each beat its own rest.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.guided-3",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "All three bars are in 4/4, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet.",
+        "questionAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          },
+          "3": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "4/4 has four crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u2-l02.ind-1",
+      "templateId": "t.g2.rest-grouping",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Rewrite this bar with the rests grouped correctly. It must sound exactly the same.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: minim, semibreve rest.",
+        "questionAlternative": "Bar 1: minim, semibreve rest.",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "3/2",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Each silent beat gets its own rest.",
+        "Half-bar rests: first or last half only.",
+        "Each beat needs its own rest unless a rest fills half of a four-beat bar starting on beat 1 or 3."
+      ],
+      "feedback": {
+        "correct": "Neat rests.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.ind-2",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/2, and beats 1 and 2 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: minim rest, minim. Bar 2: semibreve rest, minim. Bar 3: minim rest, minim rest, minim.",
+        "questionAlternative": "Bar 1: minim rest, minim. Bar 2: semibreve rest, minim. Bar 3: minim rest, minim rest, minim."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/2 has three minim beats in each bar."
+      ],
+      "feedback": {
+        "correct": "That bar groups its rests correctly.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.ind-3",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 4/4, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, minim rest, crotchet. Bar 2: crotchet, crotchet rest, crotchet rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet.",
+        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet. Bar 2: crotchet, crotchet rest, crotchet rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          },
+          "3": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "4/4 has four crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "A rest for each beat.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.ind-4",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/2, and beats 2 and 3 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: minim, minim rest, minim rest. Bar 2: minim, minim rest. Bar 3: minim, semibreve rest.",
+        "questionAlternative": "Bar 1: minim, minim rest, minim rest. Bar 2: minim, minim rest. Bar 3: minim, semibreve rest."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          },
+          "3": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/2 has three minim beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.ind-5",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/4, and beats 1 and 2 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: minim rest, quaver, quaver. Bar 2: crotchet rest, quaver, quaver. Bar 3: crotchet rest, crotchet rest, quaver, quaver.",
+        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver). Bar 2: crotchet rest, 2 beamed together (quaver, quaver). Bar 3: crotchet rest, crotchet rest, 2 beamed together (quaver, quaver)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/4 has three crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Well judged.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l02.ind-6",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/8, and beats 1 and 2 are silent. Which bar writes the silent beats correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet rest, semiquaver, semiquaver. Bar 2: quaver rest, semiquaver, semiquaver. Bar 3: quaver rest, quaver rest, semiquaver, semiquaver.",
+        "questionAlternative": "Bar 1: crotchet rest, 2 beamed together (semiquaver, semiquaver). Bar 2: quaver rest, 2 beamed together (semiquaver, semiquaver). Bar 3: quaver rest, quaver rest, 2 beamed together (semiquaver, semiquaver)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "A rest should not join two beats together here. Give each silent beat its own rest so the beats stay easy to see."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "Add up the beats in this bar: it does not match the time signature, so a rest is missing or there is one too many."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/8 has three quaver beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "recap": [
+    "Each silent beat gets its own rest.",
+    "Do not join two beats of triple time into one rest.",
+    "A whole bar of silence is a semibreve rest."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.rest-grouping",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.rest-judge",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.rest-judge",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.rest-grouping-beats"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s04"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.02"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 2 (grouping of notes and rests). Resolves OPEN_QUESTIONS Q3 as documented there: full rest rules are taught from Grade 2. Dotted rests are not used."
+  }
+}

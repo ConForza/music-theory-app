@@ -110,7 +110,7 @@ export class NodeRunService {
   // ---- scope and crediting -------------------------------------------------------------------------------------
 
   private teachingNodesBefore(node: OrderedNode): OrderedNode[] {
-    return this.course.nodes.filter((n) => n.order <= node.order && n.grade === node.grade && (n.type === "lesson" || n.type === "enrichment"));
+    return this.course.nodes.filter((n) => n.order <= node.order && n.grade <= node.grade && (n.type === "lesson" || n.type === "enrichment"));
   }
 
   /** Everything a template may use at `node`: the union of its lesson bindings' effective scopes up to that point. */
