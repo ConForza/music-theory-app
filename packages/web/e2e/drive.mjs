@@ -14,7 +14,16 @@ export const option = (scope, text) => scope.locator("label.option", { hasText: 
 export async function tapStave(page, scope, pos) {
   const svg = scope.locator(".stave-editor-stave svg").first();
   const [vbY, vbH] = await svg.evaluate((el) => { const v = el.getAttribute("viewBox").split(" ").map(Number); return [v[1], v[3]]; });
-  const box = await svg.boundingBox();
+  await svg.scrollIntoViewIfNeeded();
+  // wait for the stave to stop moving (a slower machine can still be settling after the previous question), then tap
+  let box = await svg.boundingBox();
+  for (let i = 0; i < 10; i++) {
+    await page.waitForTimeout(80);
+    const again = await svg.boundingBox();
+    const still = again && box && Math.abs(again.y - box.y) < 0.5 && Math.abs(again.height - box.height) < 0.5;
+    box = again;
+    if (still) break;
+  }
   await page.mouse.click(box.x + box.width * 0.62, box.y + ((-pos / 2 - vbY) / vbH) * box.height);
 }
 

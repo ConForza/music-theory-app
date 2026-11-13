@@ -92,6 +92,11 @@ export async function answerOnScreen(page, S, item, scope, response, soft = fals
   } else await drive(page, q, input, response, "tap");
   const check = page.getByRole("button", { name: "Check" });
   await page.waitForFunction(() => { const b = [...document.querySelectorAll("button")].find((x) => x.textContent?.trim() === "Check"); return b && !b.disabled; }, null, { timeout: 4000 }).catch(() => undefined);
+  if ((await check.isDisabled()) && input.kind === "staff-position") {
+    // a single-note stave answer is safe to place again: a tap that landed while the page was still settling is simply redone
+    await drive(page, q, input, response, "tap");
+    await page.waitForFunction(() => { const b = [...document.querySelectorAll("button")].find((x) => x.textContent?.trim() === "Check"); return b && !b.disabled; }, null, { timeout: 4000 }).catch(() => undefined);
+  }
   if (await check.isDisabled()) {
     if (soft) return false; // e.g. an unfinished bar cannot be submitted at all, so it is not a way to answer wrongly
     throw new Error(`Check stayed disabled after driving ${input.kind}: ${item.prompt} / ${JSON.stringify(response) + " GIVEN " + JSON.stringify(input.given ?? null)}`);
