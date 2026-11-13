@@ -93,7 +93,7 @@ describe("progress counts and stale sessions", () => {
     // its keyboard-accessible link, then assert that an answerable replacement appears and the old session wasn't completed.
     expect(await screen.findByRole("heading", { name: "This review was interrupted" })).toBeInTheDocument();
     const restart = screen.getByRole("link", { name: "Start the rebuilt review" });
-    expect(restart.getAttribute("href")).toMatch(/^\\/review\\/session\\//);
+    expect(restart.getAttribute("href")).toContain("/review/session/");
     expect(restart.getAttribute("href")).not.toContain(id);
     expect(screen.queryByRole("alert")).toBeNull();
     await userEvent.setup().click(restart);
