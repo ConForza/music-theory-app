@@ -971,6 +971,8 @@ const ChordAnswer = z
     acceptedChords: z.array(ChordId).optional(),
     /** build: example correct voicings; the grader accepts any voicing with the right notes and bass. */
     acceptedVoicings: z.array(z.array(PitchName).min(3)).optional(),
+    /** Brief 08, build: the learner must write exactly this many notes (four notes = one note of the triad is doubled). Absent = any number. */
+    voices: z.number().int().min(3).max(5).optional(),
   })
   .strict()
   .refine((a) => (a.task === "identify" ? Boolean(a.acceptedChords?.length) : Boolean(a.target && a.acceptedVoicings?.length)), {

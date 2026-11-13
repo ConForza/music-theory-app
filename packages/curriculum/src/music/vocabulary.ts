@@ -121,3 +121,100 @@ export const VOICES: VoiceInfo[] = [
 ];
 
 export const termsUpTo = (grade: number) => TERMS.filter((t) => t.firstGrade <= grade);
+
+// ---------------------------------------------------------------------------
+// Grade 4 vocabulary (Brief 08). VERSIONED AND KEPT SEPARATE on purpose: `TERMS`, `INSTRUMENTS` and `VOICES` above are part of
+// every Grade 1-3 generation fingerprint, so editing them would silently change the identity of every stored question. The
+// Grade 4 lists below are added to the fingerprint of Grade 4 templates only (engine/generate/index.ts).
+//
+// STATUS: provisional (OPEN_QUESTIONS Q2). The term list is the one the reference book states is used for Grade 4; the official
+// outline publishes no list, so a qualified teacher must confirm it. Meanings are newly written.
+// ---------------------------------------------------------------------------
+
+export const VOCAB_G4_VERSION = 1;
+
+export interface TermG4 {
+  id: string;
+  term: string;
+  meaning: string;
+  category: TermCategory;
+  /** Terms in the same group mean (nearly) the same: they are never offered as alternatives to each other. */
+  group: string;
+}
+
+export const TERMS_G4: TermG4[] = [
+  { id: "affettuoso", term: "affettuoso", meaning: "tenderly, with affection", category: "expression", group: "tender" },
+  { id: "affrettando", term: "affrettando", meaning: "hurrying, pressing on", category: "change-of-speed", group: "hurry" },
+  { id: "amabile", term: "amabile", meaning: "in a pleasant, amiable way", category: "expression", group: "pleasant" },
+  { id: "appassionato", term: "appassionato", meaning: "with passion", category: "expression", group: "passion" },
+  { id: "calando", term: "calando", meaning: "getting softer and (usually) slower", category: "change-of-speed", group: "fading" },
+  { id: "cantando", term: "cantando", meaning: "in a singing style", category: "expression", group: "singing" },
+  { id: "come-prima", term: "come prima", meaning: "as before", category: "structure", group: "as-before" },
+  { id: "come-sopra", term: "come sopra", meaning: "as above", category: "structure", group: "as-above" },
+  { id: "facile", term: "facile", meaning: "easily, without effort", category: "expression", group: "easy" },
+  { id: "con-fuoco", term: "con fuoco", meaning: "with fire", category: "expression", group: "fire" },
+  { id: "tempo-giusto", term: "tempo giusto", meaning: "in strict, exact time", category: "tempo", group: "exact" },
+  { id: "l-istesso-tempo", term: "l'istesso tempo", meaning: "at the same speed as before", category: "change-of-speed", group: "same-speed" },
+  { id: "morendo", term: "morendo", meaning: "dying away", category: "change-of-speed", group: "fading" },
+  { id: "niente", term: "niente", meaning: "nothing (as in “to nothing”)", category: "expression", group: "nothing" },
+  { id: "nobilmente", term: "nobilmente", meaning: "nobly", category: "expression", group: "noble" },
+  { id: "perdendosi", term: "perdendosi", meaning: "fading away until lost", category: "change-of-speed", group: "fading" },
+  { id: "presto-possibile", term: "presto possibile", meaning: "as fast as possible", category: "tempo", group: "fastest" },
+  { id: "quasi", term: "quasi", meaning: "as if, almost like", category: "expression", group: "as-if" },
+  { id: "sonoro", term: "sonoro", meaning: "with a full, resonant tone", category: "expression", group: "resonant" },
+  { id: "sopra", term: "sopra", meaning: "above", category: "structure", group: "above" },
+  { id: "sotto-voce", term: "sotto voce", meaning: "in an undertone, very softly", category: "dynamics", group: "undertone" },
+];
+
+export interface TechniqueG4 {
+  id: string;
+  term: string;
+  meaning: string;
+  /** What kind of instruments it applies to. */
+  applies: "strings" | "strings-and-brass";
+}
+
+/** Instrumental techniques and directions of the reference book's Grade 4 section 15 (own wording). */
+export const TECHNIQUES_G4: TechniqueG4[] = [
+  { id: "pizzicato", term: "pizzicato (pizz.)", meaning: "pluck the strings with the fingers instead of using the bow", applies: "strings" },
+  { id: "arco", term: "arco", meaning: "play with the bow (usually to cancel pizzicato)", applies: "strings" },
+  { id: "con-sordino", term: "con sordino (con sord.)", meaning: "play with the mute on", applies: "strings-and-brass" },
+  { id: "senza-sordino", term: "senza sordino (senza sord.)", meaning: "play without the mute", applies: "strings-and-brass" },
+  { id: "sul-g", term: "sul G", meaning: "play on the G string", applies: "strings" },
+  { id: "sul-ponticello", term: "sul ponticello", meaning: "play with the bow near the bridge", applies: "strings" },
+  { id: "down-bow", term: "the sign ⊓ (down-bow)", meaning: "play this note with a down-bow", applies: "strings" },
+  { id: "up-bow", term: "the sign ∨ (up-bow)", meaning: "play this note with an up-bow", applies: "strings" },
+];
+
+export interface InstrumentG4 {
+  id: string;
+  name: string;
+  family: "strings" | "woodwind" | "brass" | "percussion";
+  /** The clef the instrument normally reads (none for unpitched percussion). */
+  clef: "treble" | "bass" | "alto" | null;
+  /** Rank within the family, 1 = the instrument that can play the highest notes (reference book's list order). */
+  rank: number;
+  pitched: boolean;
+}
+
+export const INSTRUMENTS_G4: InstrumentG4[] = [
+  { id: "violin", name: "violin", family: "strings", clef: "treble", rank: 1, pitched: true },
+  { id: "viola", name: "viola", family: "strings", clef: "alto", rank: 2, pitched: true },
+  { id: "cello", name: "cello", family: "strings", clef: "bass", rank: 3, pitched: true },
+  { id: "double-bass", name: "double bass", family: "strings", clef: "bass", rank: 4, pitched: true },
+  { id: "flute", name: "flute", family: "woodwind", clef: "treble", rank: 1, pitched: true },
+  { id: "oboe", name: "oboe", family: "woodwind", clef: "treble", rank: 2, pitched: true },
+  { id: "clarinet", name: "clarinet", family: "woodwind", clef: "treble", rank: 3, pitched: true },
+  { id: "bassoon", name: "bassoon", family: "woodwind", clef: "bass", rank: 4, pitched: true },
+  { id: "trumpet", name: "trumpet", family: "brass", clef: "treble", rank: 1, pitched: true },
+  { id: "horn", name: "horn", family: "brass", clef: "treble", rank: 2, pitched: true },
+  { id: "trombone", name: "trombone", family: "brass", clef: "bass", rank: 3, pitched: true },
+  { id: "tuba", name: "tuba", family: "brass", clef: "bass", rank: 4, pitched: true },
+  { id: "timpani", name: "timpani", family: "percussion", clef: "bass", rank: 1, pitched: true },
+  { id: "side-drum", name: "side drum", family: "percussion", clef: null, rank: 2, pitched: false },
+  { id: "bass-drum", name: "bass drum", family: "percussion", clef: null, rank: 3, pitched: false },
+  { id: "cymbals", name: "cymbals", family: "percussion", clef: null, rank: 4, pitched: false },
+];
+
+/** The Grade 4 vocabulary as one value, for the generation fingerprint of Grade 4 templates. */
+export const VOCAB_G4 = { version: VOCAB_G4_VERSION, terms: TERMS_G4, techniques: TECHNIQUES_G4, instruments: INSTRUMENTS_G4 };

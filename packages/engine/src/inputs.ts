@@ -214,7 +214,7 @@ function inputForAnswer(c: ItemContext, a: SimpleAnswerSpec): Exclude<ItemInput,
     }
     case "chord":
       if (a.task === "identify") return { kind: "chord-name", romans: sc.chordDegrees?.length ? sc.chordDegrees : ["I"], inversions: sc.inversions?.length ? sc.inversions : ["a"] };
-      return { kind: "chord-builder", clef: clefOf(), key: a.key, maxLedgerLines: sc.maxLedgerLines ?? 2, minNotes: 3, maxNotes: 4 };
+      return { kind: "chord-builder", clef: clefOf(), key: a.key, maxLedgerLines: sc.maxLedgerLines ?? 2, minNotes: a.voices ?? 3, maxNotes: a.voices ?? 4 };
     case "ornament-sign":
       return { kind: "ornament", options: (sc.ornaments?.length ? sc.ornaments : music.ORNAMENTS) as music.Ornament[] };
     case "chord-progression":

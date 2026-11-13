@@ -610,6 +610,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       } else {
         scopeChord(a.target!);
         a.acceptedVoicings?.forEach((v, i) => {
+          if (a.voices !== undefined && v.length !== a.voices) report("ANSWER_MISMATCH", where, `Voicing ${i + 1} has ${v.length} notes but the item asks for ${a.voices}`);
           const d = identifyChord(key, v.map(parsePitch));
           if (!d || d.roman !== a.target!.roman || d.inversion !== a.target!.inversion) report("ANSWER_MISMATCH", where, `Voicing ${i + 1} [${v.join(" ")}] is ${d ? d.roman + d.inversion : "not a I/ii/IV/V chord"}, not ${a.target!.roman}${a.target!.inversion}`);
         });
