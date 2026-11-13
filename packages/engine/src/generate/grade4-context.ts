@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- generators return loosely typed drafts that the engine validates (checkItem) before use */
 /**
  * Grade 4 ornament, instrument, term and passage generators (Brief 08, Unit 5).
  *
@@ -195,7 +196,7 @@ function instrumentsMode(c: Ctx, mode: "family" | "clef" | "belongs" | "highest"
   if (mode === "clef") {
     const inst = c.rng.pick(INST.filter((i) => i.clef));
     const ids = ["treble", "bass", "alto"];
-    return {
+      return {
       prompt: `Which clef does the ${inst.name} normally use?`,
       answer: { kind: "choice", options: ids.map((x) => ({ id: x, label: cap(CLEF_NAME[x]!) })), correctOptionIds: [inst.clef!], diagnoses: Object.fromEntries(ids.filter((x) => x !== inst.clef).map((x) => [x, diag("wrong-category", inst.clef === "alto" ? "Only the viola, among the standard orchestral instruments, normally reads the alto clef." : `High instruments normally read the treble clef and low ones the bass clef. The ${inst.name} normally reads the ${CLEF_NAME[inst.clef!]}.`)])) as Diagnoses },
       hints: ["Treble clef for the higher instruments, bass clef for the lower ones, and one string instrument has its own clef."],
@@ -370,9 +371,7 @@ function instrumentPart(c: Ctx, clef: Clef): { inst: music.InstrumentG4; part: P
   if (kind === "family") {
     return { inst, line: `This passage is for the ${inst.name}.`, part: { id: "family", prompt: `To which family of the orchestra does the ${inst.name} belong?`, answer: choice(FAMILIES.map((f) => [f, cap(f)] as [string, string]), inst.family, Object.fromEntries(FAMILIES.filter((f) => f !== inst.family).map((f) => [f, `The ${inst.name} belongs to ${FAMILY_WORD[inst.family]}.`]))) } };
   }
-  const ids = ["treble", "bass", "alto"];
   return { inst, line: `This passage is for the ${inst.name}.`, part: { id: "clef", prompt: `The ${inst.name} normally reads one clef. Is this passage written in that clef?`, answer: choice([["yes", `Yes: the ${CLEF_NAME[clef]} is normal for the ${inst.name}`], ["no", `No: the ${inst.name} normally reads a different clef`]], "yes", { no: `The ${inst.name} normally reads the ${CLEF_NAME[inst.clef!]}, and this passage is written in it.` }) } };
-  void ids;
 }
 
 /** t.g4.passage: a short melody for a named instrument with an interval, an ornament or a direction, and a question about the instrument. */

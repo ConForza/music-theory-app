@@ -410,12 +410,12 @@ describe("Grade 4 authoring is idempotent", () => {
     const script = join(dirname(fileURLToPath(import.meta.url)), "../scripts/author-grade4.ts");
     expect(existsSync(script)).toBe(true);
     const before = digest();
-    const as0 = JSON.parse(readFileSync(join(root, "assessments/grade-4.json"), "utf8")).assessments as Array<{ id: string; sections: Array<{ id: string; itemCount: number }> }>;
+    
     for (let run = 0; run < 2; run++) {
       execFileSync(process.execPath, ["--import", "tsx", script], { cwd: join(dirname(script), ".."), stdio: "pipe", timeout: 600_000 });
       expect(digest(), `after run ${run + 1}`).toBe(before);
     }
-    const as1 = JSON.parse(readFileSync(join(root, "assessments/grade-4.json"), "utf8")).assessments as typeof as0;
+    const as1 = JSON.parse(readFileSync(join(root, "assessments/grade-4.json"), "utf8")).assessments as Array<{ id: string; sections: Array<{ id: string; itemCount: number }> }>;
     for (const bp of as1) {
       expect(new Set(bp.sections.map((s) => s.id)).size, `${bp.id} section ids unique`).toBe(bp.sections.length);
       expect(bp.sections.reduce((n, s) => n + s.itemCount, 0)).toBe(({ "a.g4-u1": 8, "a.g4-u2": 10, "a.g4-u3": 8, "a.g4-u4": 6, "a.g4-u5": 8, "a.g4": 41 } as Record<string, number>)[bp.id]);

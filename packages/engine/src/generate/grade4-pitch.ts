@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- generators return loosely typed drafts that the engine validates (checkItem) before use */
 /**
  * Grade 4 pitch generators (Brief 08, Units 2 and 3): double accidentals, enharmonic equivalents, the alto clef, the same pitch in
  * three clefs, octave transposition, the five-accidental keys, technical names and chromatic scales.
@@ -12,7 +13,7 @@
  */
 import { deriveScale, music, type NotationEvent } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
-import { fits, frag, maxLedger, nameOf, note, pretty, r, type Gen } from "./families.ts";
+import { fits, frag, maxLedger, nameOf, note, pretty, type Gen } from "./families.ts";
 import type { Diagnoses } from "./grade1.ts";
 import { ORD, cap, diag, posText, optsOf } from "./grade2.ts";
 
@@ -181,7 +182,7 @@ export const doubleCancel: Gen = (c): any => {
   return {
     prompt: mode === "lasts" ? "The first note has a double accidental. What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it." : "The first note of bar 1 has a double accidental. What is the note marked * at the start of bar 2? Give its letter name and any sharp, flat or natural that applies.",
     music: f,
-    answer: { kind: "choice", options: c.rng.shuffle([...optsSet].map(([id, x]) => ({ id, label: pcLabel(x) }))), correctOptionIds: [rightId], diagnoses: Object.fromEntries([...optsSet].filter(([id]) => id !== rightId).map(([id, x]) => [id, diag(mode === "lasts" ? "double-forgotten" : "double-carried-over", mode === "lasts" ? "An accidental lasts until the end of the bar, on the same line or space. The first note's sign still applies here." : "An accidental lasts only to the barline. In a new bar the key signature applies again.")])) as Diagnoses },
+    answer: { kind: "choice", options: c.rng.shuffle([...optsSet].map(([id, x]) => ({ id, label: pcLabel(x) }))), correctOptionIds: [rightId], diagnoses: Object.fromEntries([...optsSet].filter(([id]) => id !== rightId).map(([id]) => [id, diag(mode === "lasts" ? "double-forgotten" : "double-carried-over", mode === "lasts" ? "An accidental lasts until the end of the bar, on the same line or space. The first note's sign still applies here." : "An accidental lasts only to the barline. In a new bar the key signature applies again.")])) as Diagnoses },
     hints: ["An accidental affects every later note on the same line or space until the barline. After the barline the key signature rules again."],
   };
 };
@@ -281,7 +282,6 @@ export const enharmonicPick: Gen = (c): any => {
 export const altoFacts: Gen = (c): any => {
   if (!clefsIn(c).includes("alto")) return null;
   const mode = c.rng.pick(["middle-c", "line-note", "line-note", "line-note", "which-clef", "space-note"] as const);
-  const L: Array<[number, string]> = [[0, "bottom"], [2, "second"], [4, "middle"], [6, "fourth"], [8, "top"]];
   if (mode === "middle-c") {
     return {
       prompt: "In the alto clef, which line of the stave is middle C?",
@@ -315,7 +315,6 @@ export const altoFacts: Gen = (c): any => {
     answer: { kind: "choice", options: c.rng.shuffle([...ids].map(([id, x]) => ({ id, label: x.label }))), correctOptionIds: [p.step], diagnoses: Object.fromEntries([...ids].filter(([id]) => id !== p.step).map(([id, x]) => [id, diag(x.cat!, x.why!)])) as Diagnoses },
     hints: [`Middle C is on the middle line. Count up (or down) one letter for each line and space.`],
   };
-  void L;
 };
 const describeLines = (pos: number) => {
   const ord = ["1st", "2nd", "3rd", "4th", "5th"];

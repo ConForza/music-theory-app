@@ -50,15 +50,6 @@ const predecessor = (id) => {
   return G4.filter((n) => n.order < node.order && ["lesson", "practice", "review"].includes(n.type) && !n.optional).at(-1);
 };
 const labelsOf = (page) => page.locator("svg.notation-svg").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
-/** Open a lesson at a given question number and return the notation descriptions on screen. */
-async function openAt(page, userId, lesson, index) {
-  await finishViaApi(S, page, userId, predecessor(lesson).id);
-  await playLessonInBrowser(page, S, lesson, { stopAfter: index });
-  const items = S.course.authoredItems(lesson);
-  await page.getByText(new RegExp(`Question ${index + 1} of ${items.length}`)).waitFor();
-  return items;
-}
-
 await test("learner arriving from Grade 3: Grade 4 opens at its first lesson, later lessons are locked, the first lesson teaches and rewards", async () => {
   const { ctx, page } = await grade4Learner(profiles.iphone, { reducedMotion: "no-preference" });
   const errors = [];

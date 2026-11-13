@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- generators return loosely typed drafts that the engine validates (checkItem) before use */
 /**
  * Grade 4 interval and chord generators (Brief 08, Unit 4).
  *
