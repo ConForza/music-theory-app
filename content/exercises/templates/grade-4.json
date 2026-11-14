@@ -3945,6 +3945,84 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g4.book-terms",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 4,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g4.16"
+      ],
+      "conceptIds": [
+        "c.terms.g4-more"
+      ],
+      "promptPattern": "What does {term} mean? Which word means this? What does this direction mean?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. Wrong options never share a group or a meaning with it, and never come from a class of words that could also fit."
+      },
+      "ambiguityChecks": [
+        "Speed words never sit beside speed words, mood words only beside moods of another pole, and touch signs only beside other kinds of word.",
+        "A wrong option only ever shows a word that this lesson or an earlier one has taught (VOCAB_BOOK, OPEN_QUESTIONS Q2 and Q38)."
+      ],
+      "hints": [
+        "Use what the lesson told you about the word."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g4.book-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 4,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g4.16"
+      ],
+      "conceptIds": [
+        "c.terms.g4-more"
+      ],
+      "promptPattern": "Which marking fits this description? What does this marking ask the player to do? Which sign is on these notes?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. Wrong options never share a group or a meaning with it, and never come from a class of words that could also fit."
+      },
+      "ambiguityChecks": [
+        "Speed words never sit beside speed words, mood words only beside moods of another pole, and touch signs only beside other kinds of word.",
+        "A wrong option only ever shows a word that this lesson or an earlier one has taught (VOCAB_BOOK, OPEN_QUESTIONS Q2 and Q38)."
+      ],
+      "hints": [
+        "Think about what the marking asks the player to do."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

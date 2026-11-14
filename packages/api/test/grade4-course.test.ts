@@ -35,15 +35,15 @@ async function learner() {
 }
 
 describe("the whole of Grade 4 is playable", () => {
-  it("has a real learner experience for all 41 nodes", () => {
-    expect(G4).toHaveLength(41);
+  it("has a real learner experience for all 42 nodes", () => {
+    expect(G4).toHaveLength(42);
     expect(G4.filter((n) => !course.isPlayable(n.id)).map((n) => n.id)).toEqual([]);
     expect(G4.filter((n) => n.contentStatus === "planned")).toEqual([]);
     const count = (t: string) => G4.filter((n) => n.type === t).length;
-    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("grade_assessment")]).toEqual([25, 5, 5, 5, 1]);
+    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("grade_assessment")]).toEqual([26, 5, 5, 5, 1]);
     expect(G4.filter((n) => n.type === "lesson").every((n) => course.lesson(n.id))).toBe(true);
     expect(G4.filter((n) => SESSION.includes(n.type)).every((n) => course.sessionKind(n.id))).toBe(true);
-    // nothing is optional: all 41 are required
+    // nothing is optional: all 42 are required
     expect(G4.filter((n) => n.optional)).toEqual([]);
   });
 
@@ -68,8 +68,8 @@ describe("the whole of Grade 4 is playable", () => {
     for (const n of G4.filter((x) => x.type === "unit_challenge")) await ensureDone(c, app, userId, n.id);
     const prog = (await c.get("/api/progress")).body;
     const g4 = prog.grades.find((g: { grade: number }) => g.grade === 4);
-    expect(g4.requiredNodes).toBe(41);
-    expect(g4.completedNodes).toBe(41);
+    expect(g4.requiredNodes).toBe(42);
+    expect(g4.completedNodes).toBe(42);
     const results = (await c.get("/api/results")).body.results as Array<{ nodeId: string; passed: boolean }>;
     expect(results.filter((r) => r.nodeId === "G4-A" && r.passed)).toHaveLength(1);
     expect(results.filter((r) => /^G4-U\d-C$/.test(r.nodeId) && r.passed)).toHaveLength(5);
@@ -539,8 +539,12 @@ describe("Grade 4 authoring is idempotent", () => {
     expect(existsSync(script)).toBe(true);
     const before = digest();
     
+    // The terminology completion overlay (author-terms.ts) is applied AFTER the per-grade scripts: the Grade 4 script rewrites the blueprints and
+    // bindings it owns, so the pipeline is `author:grade4` then `author:terms`, and the result must be byte-identical to what is committed.
+    const terms = join(dirname(script), "author-terms.ts");
     for (let run = 0; run < 2; run++) {
       execFileSync(process.execPath, ["--import", "tsx", script], { cwd: join(dirname(script), ".."), stdio: "pipe", timeout: 600_000 });
+      execFileSync(process.execPath, ["--import", "tsx", terms], { cwd: join(dirname(script), ".."), stdio: "pipe", timeout: 600_000 });
       expect(digest(), `after run ${run + 1}`).toBe(before);
     }
     const as1 = JSON.parse(readFileSync(join(root, "assessments/grade-4.json"), "utf8")).assessments as Array<{ id: string; sections: Array<{ id: string; itemCount: number }> }>;

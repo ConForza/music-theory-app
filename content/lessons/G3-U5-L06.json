@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U5-L06",
+  "lessonId": "G3-U5-L06",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn six strong words: forza, deciso, risoluto, pesante, marcato and energico.",
+    "successCriteria": [
+      "I know forza means force and pesante means heavy.",
+      "I know deciso and risoluto both mean decided and bold.",
+      "I know marcato means emphatic and accented, and energico means energetic."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Six words ask for strength. Forza is force. Deciso and risoluto are about being firm and bold. Pesante is heavy. Energico is full of energy. Marcato is about touch: every note is marked out clearly."
+    },
+    {
+      "kind": "text",
+      "text": "“forza” means force, strength. “deciso” means with determination. “risoluto” means bold, strong and resolute. “pesante” means heavy."
+    },
+    {
+      "kind": "text",
+      "text": "Marcato: emphatic and accented. “energico” means energetic."
+    },
+    {
+      "kind": "text",
+      "text": "Deciso means with determination and risoluto means bold, strong and resolute: they are close in meaning. Marcato (marc.) means emphatic and accented."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked pesante.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "pesante"
+      },
+      "caption": "Pesante above the first bar: heavy, with weight in every note."
+    },
+    {
+      "kind": "tip",
+      "text": "Force: forza. Firm and bold: deciso, risoluto. Heavy: pesante. Full of energy: energico. Every note stressed: marcato."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked risoluto.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "risoluto"
+    },
+    "steps": [
+      "Look at the word above the first bar: risoluto.",
+      "It means bold, strong and resolute: play with firm confidence.",
+      "It does not change the speed: only the way the notes are shaped."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked risoluto."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u5-l06.guided-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “forza” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          },
+          {
+            "id": "rubato",
+            "label": "with some freedom of time: the player may push and pull the beat"
+          },
+          {
+            "id": "forza",
+            "label": "force, strength"
+          }
+        ],
+        "correctOptionIds": [
+          "forza"
+        ],
+        "diagnoses": {
+          "rubato": {
+            "category": "confused-similar-term",
+            "reason": "That is what “rubato” means, not “forza”."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “forza”."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "That is what “M.M. ♩ = 72” means, not “forza”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: forza means force, strength.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.guided-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A composer wants a firm, determined entry that leaves no doubt. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "giocoso",
+            "label": "giocoso"
+          },
+          {
+            "id": "fine",
+            "label": "fine"
+          },
+          {
+            "id": "rubato",
+            "label": "rubato"
+          },
+          {
+            "id": "deciso",
+            "label": "deciso"
+          }
+        ],
+        "correctOptionIds": [
+          "deciso"
+        ],
+        "diagnoses": {
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "“giocoso” means playful and merry; the word asked about means with determination."
+          },
+          "rubato": {
+            "category": "confused-similar-term",
+            "reason": "“rubato” means with some freedom of time: the player may push and pull the beat; the word asked about means with determination."
+          },
+          "fine": {
+            "category": "wrong-category",
+            "reason": "“fine” means the end; the word asked about means with determination."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: deciso means with determination.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.guided-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “bold, strong and resolute”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "risoluto",
+            "label": "risoluto"
+          },
+          {
+            "id": "tie",
+            "label": "tie"
+          },
+          {
+            "id": "dal-segno",
+            "label": "dal segno (D.S.)"
+          },
+          {
+            "id": "giocoso",
+            "label": "giocoso"
+          }
+        ],
+        "correctOptionIds": [
+          "risoluto"
+        ],
+        "diagnoses": {
+          "tie": {
+            "category": "wrong-category",
+            "reason": "“tie” means join two notes of the same pitch into one longer sound; the word asked about means bold, strong and resolute."
+          },
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "“giocoso” means playful and merry; the word asked about means bold, strong and resolute."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means bold, strong and resolute."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: risoluto means bold, strong and resolute.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u5-l06.ind-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “force, strength”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dolce",
+            "label": "dolce"
+          },
+          {
+            "id": "da-capo",
+            "label": "da capo (D.C.)"
+          },
+          {
+            "id": "forza",
+            "label": "forza"
+          },
+          {
+            "id": "tie",
+            "label": "tie"
+          }
+        ],
+        "correctOptionIds": [
+          "forza"
+        ],
+        "diagnoses": {
+          "tie": {
+            "category": "wrong-category",
+            "reason": "“tie” means join two notes of the same pitch into one longer sound; the word asked about means force, strength."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "“da capo (D.C.)” means repeat from the beginning; the word asked about means force, strength."
+          },
+          "dolce": {
+            "category": "confused-similar-term",
+            "reason": "“dolce” means sweetly; the word asked about means force, strength."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: forza means force, strength.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.ind-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a firm, determined entry that leaves no doubt. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simile",
+            "label": "simile (sim.)"
+          },
+          {
+            "id": "deciso",
+            "label": "deciso"
+          },
+          {
+            "id": "grazioso",
+            "label": "grazioso"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
+          }
+        ],
+        "correctOptionIds": [
+          "deciso"
+        ],
+        "diagnoses": {
+          "simile": {
+            "category": "wrong-category",
+            "reason": "“simile (sim.)” means in the same way: carry on as before; the word asked about means with determination."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means with determination."
+          },
+          "grazioso": {
+            "category": "confused-similar-term",
+            "reason": "“grazioso” means gracefully; the word asked about means with determination."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: deciso means with determination.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.ind-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “bold, strong and resolute”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
+          },
+          {
+            "id": "con-moto",
+            "label": "con moto"
+          },
+          {
+            "id": "simile",
+            "label": "simile (sim.)"
+          },
+          {
+            "id": "risoluto",
+            "label": "risoluto"
+          }
+        ],
+        "correctOptionIds": [
+          "risoluto"
+        ],
+        "diagnoses": {
+          "con-moto": {
+            "category": "confused-similar-term",
+            "reason": "“con moto” means with movement; the word asked about means bold, strong and resolute."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means bold, strong and resolute."
+          },
+          "simile": {
+            "category": "wrong-category",
+            "reason": "“simile (sim.)” means in the same way: carry on as before; the word asked about means bold, strong and resolute."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: risoluto means bold, strong and resolute.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.ind-4",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “pesante”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 1 flat, time signature 3/4. Bar 1: crotchet on the 1st ledger line above the stave; crotchet in the space just above the stave; crotchet in the 4th space. Bar 2: crotchet on the 5th line; crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave. The tempo mark above the first bar says “pesante”.",
+        "key": "F major",
+        "timeSignature": "3/4",
+        "tempoText": "pesante"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pesante",
+            "label": "heavy"
+          },
+          {
+            "id": "simile",
+            "label": "in the same way: carry on as before"
+          },
+          {
+            "id": "repeat",
+            "label": "play the passage between the marks again"
+          },
+          {
+            "id": "grazioso",
+            "label": "gracefully"
+          }
+        ],
+        "correctOptionIds": [
+          "pesante"
+        ],
+        "diagnoses": {
+          "simile": {
+            "category": "wrong-category",
+            "reason": "That is what “simile (sim.)” means, not “pesante”."
+          },
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "That is what “repeat marks” means, not “pesante”."
+          },
+          "grazioso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “grazioso” means, not “pesante”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: pesante means heavy.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.ind-5",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “marcato (marc.)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "marcato",
+            "label": "emphatic and accented"
+          },
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
+          },
+          {
+            "id": "adagietto",
+            "label": "rather slow, but a little faster than adagio"
+          }
+        ],
+        "correctOptionIds": [
+          "marcato"
+        ],
+        "diagnoses": {
+          "adagietto": {
+            "category": "wrong-category",
+            "reason": "That is what “adagietto” means, not “marcato (marc.)”."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "That is what “M.M. ♩ = 72” means, not “marcato (marc.)”."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “marcato (marc.)”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: marcato: emphatic and accented.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l06.ind-6",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “energico”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 1 sharp, time signature 3/4. Bar 1: crotchet on the 1st line; crotchet on the 2nd line; crotchet on the 1st line. Bar 2: crotchet in the 1st space; crotchet in the 2nd space; crotchet in the 3rd space. The tempo mark above the first bar says “energico”.",
+        "key": "G major",
+        "timeSignature": "3/4",
+        "tempoText": "energico"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ottava",
+            "label": "play an octave higher than written"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          },
+          {
+            "id": "energico",
+            "label": "energetic"
+          },
+          {
+            "id": "cantabile",
+            "label": "in a singing style"
+          }
+        ],
+        "correctOptionIds": [
+          "energico"
+        ],
+        "diagnoses": {
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “energico”."
+          },
+          "ottava": {
+            "category": "wrong-category",
+            "reason": "That is what “8va” means, not “energico”."
+          },
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "That is what “cantabile” means, not “energico”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: energico means energetic.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Forza is force and pesante is heavy.",
+    "Deciso and risoluto both mean firm and bold; energico is energetic.",
+    "Marcato means emphatic and accented."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g3-strong"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s12"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.12"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 3 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38)."
+  }
+}

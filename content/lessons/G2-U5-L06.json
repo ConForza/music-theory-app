@@ -1,0 +1,950 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U5-L06",
+  "lessonId": "G2-U5-L06",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn words that say how much: more, less, very and too much, and the word for movement.",
+    "successCriteria": [
+      "I know più means more and meno means less.",
+      "I know molto and assai both mean very, and troppo means too much.",
+      "I can read directions such as meno mosso and ma non troppo."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "These words change how much of something a direction asks for. Più and meno are opposites. Molto and assai both strengthen a word. Troppo warns against too much. Mosso means movement, and it is the word that più and meno most often meet."
+    },
+    {
+      "kind": "text",
+      "text": "“più” means more. “meno” means less. “molto” means very, or much. “troppo” means too much."
+    },
+    {
+      "kind": "text",
+      "text": "“assai” means very. “mosso, moto” means movement."
+    },
+    {
+      "kind": "text",
+      "text": "Più mosso means with more movement, so a little faster; meno mosso means with less movement, so slower. Non troppo means not too much, and ma non troppo means but not too much. Molto vivace means very lively, and allegro assai means very quick."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked molto vivace.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "molto vivace"
+      },
+      "caption": "Molto vivace: very lively. Molto strengthens vivace."
+    },
+    {
+      "kind": "tip",
+      "text": "più = more, meno = less. molto = assai = very. troppo = too much, so non troppo = not too much."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked meno mosso.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "meno mosso"
+    },
+    "steps": [
+      "Look at the words above the first bar: meno mosso.",
+      "Meno means less and mosso means movement, so the music should move less: a little slower.",
+      "The words ask for a change of feeling, not a new tune."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked meno mosso."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u5-l06.guided-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “more”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "crescendo",
+            "label": "crescendo (cresc.)"
+          },
+          {
+            "id": "piu",
+            "label": "più"
+          },
+          {
+            "id": "con-col",
+            "label": "con, col"
+          },
+          {
+            "id": "meno",
+            "label": "meno"
+          }
+        ],
+        "correctOptionIds": [
+          "piu"
+        ],
+        "diagnoses": {
+          "con-col": {
+            "category": "confused-similar-term",
+            "reason": "“con, col” means with; the word asked about means more."
+          },
+          "meno": {
+            "category": "confused-similar-term",
+            "reason": "“meno” means less; the word asked about means more."
+          },
+          "crescendo": {
+            "category": "wrong-category",
+            "reason": "“crescendo (cresc.)” means gradually getting louder; the word asked about means more."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: più means more.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.guided-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is marked “meno mosso”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 1 sharp, time signature 3/4. Bar 1: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 2nd ledger line above the stave. Bar 2: crotchet in the space above the 1st ledger line above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 5th line. The tempo mark above the first bar says “meno mosso”.",
+        "key": "G major",
+        "timeSignature": "3/4",
+        "tempoText": "meno mosso"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "troppo",
+            "label": "but not too much"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
+          },
+          {
+            "id": "meno",
+            "label": "with less movement: slower"
+          },
+          {
+            "id": "e-ed",
+            "label": "and"
+          }
+        ],
+        "correctOptionIds": [
+          "meno"
+        ],
+        "diagnoses": {
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “meno”."
+          },
+          "troppo": {
+            "category": "confused-similar-term",
+            "reason": "That is what “troppo” means, not “meno”."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "That is what “M.M. ♩ = 72” means, not “meno”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: meno means less.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.guided-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “very, or much”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "molto",
+            "label": "molto"
+          },
+          {
+            "id": "senza",
+            "label": "senza"
+          },
+          {
+            "id": "e-ed",
+            "label": "e, ed"
+          },
+          {
+            "id": "a",
+            "label": "a"
+          }
+        ],
+        "correctOptionIds": [
+          "molto"
+        ],
+        "diagnoses": {
+          "senza": {
+            "category": "confused-similar-term",
+            "reason": "“senza” means without; the word asked about means very, or much."
+          },
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "“e, ed” means and; the word asked about means very, or much."
+          },
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "“a” means at, to, by or in the style of; the word asked about means very, or much."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: molto means very, or much.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u5-l06.ind-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “more”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piu",
+            "label": "più"
+          },
+          {
+            "id": "non",
+            "label": "non"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
+          },
+          {
+            "id": "assai",
+            "label": "assai"
+          }
+        ],
+        "correctOptionIds": [
+          "piu"
+        ],
+        "diagnoses": {
+          "assai": {
+            "category": "confused-similar-term",
+            "reason": "“assai” means very; the word asked about means more."
+          },
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "“non” means not; the word asked about means more."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means more."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: più means more.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.ind-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “meno mosso”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. Bar 1: crotchet in the space just below the stave; crotchet in the space below the 1st ledger line below the stave. Bar 2: crotchet on the 1st ledger line below the stave; crotchet in the space just below the stave. The tempo mark above the first bar says “meno mosso”.",
+        "key": "Bb major",
+        "timeSignature": "2/4",
+        "tempoText": "meno mosso"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "al-alla",
+            "label": "in the style of a march"
+          },
+          {
+            "id": "meno",
+            "label": "with less movement: slower"
+          },
+          {
+            "id": "non",
+            "label": "not"
+          },
+          {
+            "id": "mezzo-piano",
+            "label": "moderately quiet"
+          }
+        ],
+        "correctOptionIds": [
+          "meno"
+        ],
+        "diagnoses": {
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "That is what “non” means, not “meno”."
+          },
+          "al-alla": {
+            "category": "confused-similar-term",
+            "reason": "That is what “al, alla” means, not “meno”."
+          },
+          "mezzo-piano": {
+            "category": "wrong-category",
+            "reason": "That is what “mezzo piano (mp)” means, not “meno”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: meno means less.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.ind-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “very, or much”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piu",
+            "label": "più"
+          },
+          {
+            "id": "dal-segno",
+            "label": "dal segno (D.S.)"
+          },
+          {
+            "id": "ma",
+            "label": "ma"
+          },
+          {
+            "id": "molto",
+            "label": "molto"
+          }
+        ],
+        "correctOptionIds": [
+          "molto"
+        ],
+        "diagnoses": {
+          "piu": {
+            "category": "confused-similar-term",
+            "reason": "“più” means more; the word asked about means very, or much."
+          },
+          "ma": {
+            "category": "confused-similar-term",
+            "reason": "“ma” means but; the word asked about means very, or much."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means very, or much."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: molto means very, or much.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.ind-4",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “ma non troppo”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 flats, time signature 3/4. Bar 1: crotchet on the 3rd line; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet in the 3rd space; crotchet on the 3rd line; crotchet on the 2nd line. The tempo mark above the first bar says “ma non troppo”.",
+        "key": "Bb major",
+        "timeSignature": "3/4",
+        "tempoText": "ma non troppo"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "troppo",
+            "label": "but not too much"
+          },
+          {
+            "id": "piu",
+            "label": "with more movement: faster"
+          },
+          {
+            "id": "e-ed",
+            "label": "and"
+          },
+          {
+            "id": "assai",
+            "label": "very quick"
+          }
+        ],
+        "correctOptionIds": [
+          "troppo"
+        ],
+        "diagnoses": {
+          "piu": {
+            "category": "confused-similar-term",
+            "reason": "That is what “più” means, not “troppo”."
+          },
+          "assai": {
+            "category": "confused-similar-term",
+            "reason": "That is what “assai” means, not “troppo”."
+          },
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “troppo”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: troppo means too much.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.ind-5",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “very”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ma",
+            "label": "ma"
+          },
+          {
+            "id": "a",
+            "label": "a"
+          },
+          {
+            "id": "poco",
+            "label": "poco"
+          },
+          {
+            "id": "assai",
+            "label": "assai"
+          }
+        ],
+        "correctOptionIds": [
+          "assai"
+        ],
+        "diagnoses": {
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "“a” means at, to, by or in the style of; the word asked about means very."
+          },
+          "ma": {
+            "category": "confused-similar-term",
+            "reason": "“ma” means but; the word asked about means very."
+          },
+          "poco": {
+            "category": "confused-similar-term",
+            "reason": "“poco” means a little; the word asked about means very."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: assai means very.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l06.ind-6",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “mosso, moto” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ma",
+            "label": "but"
+          },
+          {
+            "id": "assai",
+            "label": "very"
+          },
+          {
+            "id": "mosso",
+            "label": "movement"
+          },
+          {
+            "id": "non",
+            "label": "not"
+          }
+        ],
+        "correctOptionIds": [
+          "mosso"
+        ],
+        "diagnoses": {
+          "assai": {
+            "category": "confused-similar-term",
+            "reason": "That is what “assai” means, not “mosso, moto”."
+          },
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "That is what “non” means, not “mosso, moto”."
+          },
+          "ma": {
+            "category": "confused-similar-term",
+            "reason": "That is what “ma” means, not “mosso, moto”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: mosso, moto means movement.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Più means more and meno means less.",
+    "Molto and assai mean very; troppo means too much.",
+    "Mosso means movement: più mosso is faster, meno mosso is slower."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g2-more"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.13"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 2 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38). “Più mosso” is a standard direction not printed in the list; it is the opposite of the printed “meno mosso”, and it is flagged for the teacher."
+  }
+}

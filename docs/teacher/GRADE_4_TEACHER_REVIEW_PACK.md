@@ -301,6 +301,14 @@ See `GRADE_4_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | term-use (U5-L04) | 2 | In the middle of a piece for piano, a bar is marked “sopra”. What should the player do? | The answer is “Above”. |
 | term-use (U5-L04) | 3 | Your teacher asks you to play a new piece. The first line of music is marked “facile”. What should the player do? | The answer is “Easily, without effort”. |
 | term-use (U5-L04) | 4 | Your teacher asks you to play a new piece. The first line of music is marked “appassionato”. What should the player do? | The answer is “With passion”. |
+| book-terms (U5-L06) | 1 | What does “veloce” mean? | The answer is “swift”. |
+| book-terms (U5-L06) | 2 | Which word means “voice”? | The answer is “voce”. |
+| book-terms (U5-L06) | 3 | Which word means “swift”? | The answer is “veloce”. |
+| book-terms (U5-L06) | 4 | Which word means “voice”? | The answer is “voce”. |
+| book-use (U5-L06) | 1 | A composer wants a swift, rushing run of notes. Which marking fits best? | The answer is “veloce”. |
+| book-use (U5-L06) | 2 | This melody is marked “sotto voce”. What does the marking ask the player to do? _Shown: A 2-bar melody in the bass clef, key signature of 5 flats, time signature 2/4. Bar 1: crotchet on the 2nd ledger line above the stave; crotchet in the space above the 2nd ledger line above the stave. Bar 2: crotchet on the 3rd ledger line above the stave; crot_ | The answer is “in an undertone: very softly, as if in a low voice”. |
+| book-use (U5-L06) | 3 | This melody is marked “veloce”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet in the 4th space; crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave. Bar 2: crotchet in the space just above the stave; c_ | The answer is “swift”. |
+| book-use (U5-L06) | 4 | This melody is marked “veloce”. What does the marking ask the player to do? _Shown: A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. Bar 1: crotchet on the 3rd line; crotchet in the 3rd space; crotchet in the 2nd space. Bar 2: crotchet on the 3rd line; crotchet in the 2nd space; crotchet on the 3rd lin_ | The answer is “swift”. |
 | passage (U5-L05) | 1 | This passage is for the viola. Look at the passage and answer the questions. _Shown: An alto-clef stave, key signature of 4 flats, 3/4, marked Affettuoso. Bar 1: a note in the 2nd space; a note marked x on the 2nd line; a note in the 2nd space. Bar 2: a note marked A on the 2nd line, with a short zig-zag above it with a short vertical line thr_ | 1. The answer is “Strings”. 2. It is a lower mordent. 3. The interval is a major 3rd. |
 | passage (U5-L05) | 2 | This passage is for the clarinet. Look at the passage and answer the questions. _Shown: A treble-clef stave, no sharps or flats in the key signature, 3/4, marked Tempo giusto. Bar 1: a note on the 2nd line; a note on the 1st line; a note on the 2nd line. Bar 2: a note in the 1st space; a note marked A on the 1st line, with a small note before it _ | 1. The answer is “Woodwind”. 2. The answer is “In strict, exact time”. 3. It is an appoggiatura. |
 | passage (U5-L05) | 3 | This passage is for the trombone. Look at the passage and answer the questions. _Shown: A treble-clef stave, key signature of 3 sharps, 3/4, marked Appassionato. Bar 1: a note on the 5th line; a note marked x on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note in the 4th space, with a sharp sign in fron_ | 1. The answer is “No: the trombone normally reads a different clef”. 2. The answer is “With passion”. 3. The interval is a minor 2nd. |
@@ -394,14 +402,14 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g4.14: 2 question(s) from primary-triad, triad-notes, triad-id (outcome g4.14)
 - abrsm2020.g4.15: 2 question(s) from chord-in-passage, chord-passage-pick, chord-spread, chord-root (outcome g4.15)
 
-### G4-U5-C: Unit challenge: Ornaments, instruments and the passage (blueprint a.g4-u5 v1)
+### G4-U5-C: Unit challenge: Ornaments, instruments and the passage (blueprint a.g4-u5 v2)
 
 - abrsm2020.g4.17: 2 question(s) from ornament-name, ornament-spot, ornament-facts, ornament-bar (outcome g4.17)
 - abrsm2020.g4.18: 2 question(s) from instruments, instrument-range, technique-facts, technique-use, passage, passage-directions (outcome g4.18)
-- abrsm2020.g4.16: 2 question(s) from terms, term-use, technique-facts, technique-use (outcome g4.16)
+- abrsm2020.g4.16: 2 question(s) from terms, term-use, technique-facts, technique-use, book-terms, book-use (outcome g4.16)
 - abrsm2020.g1.21: 2 question(s) from passage, passage-directions (outcome g1.21)
 
-### G4-A: Grade 4 practice assessment (blueprint a.g4 v1)
+### G4-A: Grade 4 practice assessment (blueprint a.g4 v2)
 
 - abrsm2020.g4.01: 2 question(s) from time-signature, metre-facts, regular-grouping, grouping-judge (outcome g4.01)
 - abrsm2020.g4.02: 2 question(s) from breve-facts, breve-bar, breve-double-dot (outcome g4.02)
@@ -418,7 +426,7 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g4.13: 2 question(s) from interval-diatonic, interval-write, interval-facts (outcome g4.13)
 - abrsm2020.g4.14: 2 question(s) from primary-triad, triad-notes, triad-id (outcome g4.14)
 - abrsm2020.g4.15: 2 question(s) from chord-in-passage, chord-passage-pick, chord-spread, chord-root (outcome g4.15)
-- abrsm2020.g4.16: 2 question(s) from terms, term-use, technique-facts, technique-use (outcome g4.16)
+- abrsm2020.g4.16: 2 question(s) from terms, term-use, technique-facts, technique-use, book-terms, book-use (outcome g4.16)
 - abrsm2020.g4.17: 2 question(s) from ornament-name, ornament-spot, ornament-facts, ornament-bar (outcome g4.17)
 - abrsm2020.g4.18: 2 question(s) from instruments, instrument-range, technique-facts, technique-use, passage, passage-directions (outcome g4.18)
 - Earlier grades: Grade 3 and melodies: 5 question(s) from melody, melody, bar-complete, compound-grouping, octave-transpose, scale-build-minor, interval-quality, melody (outcome g3.02, g3.05, g3.08, g3.11, g1.21)

@@ -1,0 +1,946 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U5-L06",
+  "lessonId": "G4-U5-L06",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn two more Grade 4 words: veloce and voce.",
+    "successCriteria": [
+      "I know veloce means swift.",
+      "I know voce means voice.",
+      "I can explain sotto voce as in an undertone."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Two more Italian words complete the Grade 4 list: one is about speed, and the other is the word for the voice, which you already know from sotto voce."
+    },
+    {
+      "kind": "text",
+      "text": "“veloce” means swift. “voce” means voice."
+    },
+    {
+      "kind": "text",
+      "text": "Sotto voce means in an undertone: very softly, as if in a low voice. Veloce asks for quick, light playing."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked sotto voce.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "sotto voce"
+      },
+      "caption": "Sotto voce above the first bar: in an undertone, as if in a low voice."
+    },
+    {
+      "kind": "tip",
+      "text": "Veloce = swift. Voce = voice, as in sotto voce."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked veloce.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "veloce"
+    },
+    "steps": [
+      "Look at the word above the first bar: veloce.",
+      "It means swift: quick, light and rushing.",
+      "It describes the speed. The notes stay the same."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked veloce."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u5-l06.guided-1",
+      "templateId": "t.g4.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “veloce” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "veloce",
+            "label": "swift"
+          },
+          {
+            "id": "crescendo",
+            "label": "gradually getting louder"
+          },
+          {
+            "id": "accent",
+            "label": "emphasise the note"
+          },
+          {
+            "id": "come-sopra",
+            "label": "as above"
+          }
+        ],
+        "correctOptionIds": [
+          "veloce"
+        ],
+        "diagnoses": {
+          "crescendo": {
+            "category": "wrong-category",
+            "reason": "That is what “crescendo (cresc.)” means, not “veloce”."
+          },
+          "come-sopra": {
+            "category": "wrong-category",
+            "reason": "That is what “come sopra” means, not “veloce”."
+          },
+          "accent": {
+            "category": "wrong-category",
+            "reason": "That is what “accent (>)” means, not “veloce”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: veloce means swift.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.guided-2",
+      "templateId": "t.g4.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is marked “sotto voce”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Gb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 5 flats, time signature 2/4. Bar 1: crotchet on the 2nd ledger line above the stave; crotchet in the space above the 2nd ledger line above the stave. Bar 2: crotchet on the 3rd ledger line above the stave; crotchet in the space above the 3rd ledger line above the stave. The tempo mark above the first bar says “sotto voce”.",
+        "key": "Db major",
+        "timeSignature": "2/4",
+        "tempoText": "sotto voce"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "voce",
+            "label": "in an undertone: very softly, as if in a low voice"
+          },
+          {
+            "id": "al-alla",
+            "label": "in the style of a march"
+          },
+          {
+            "id": "molto",
+            "label": "very lively"
+          },
+          {
+            "id": "tanto",
+            "label": "not so much"
+          }
+        ],
+        "correctOptionIds": [
+          "voce"
+        ],
+        "diagnoses": {
+          "al-alla": {
+            "category": "confused-similar-term",
+            "reason": "That is what “al, alla” means, not “voce”."
+          },
+          "molto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “molto” means, not “voce”."
+          },
+          "tanto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “tanto” means, not “voce”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: voce means voice.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.guided-3",
+      "templateId": "t.g4.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “voice”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "meno",
+            "label": "meno"
+          },
+          {
+            "id": "ma",
+            "label": "ma"
+          },
+          {
+            "id": "voce",
+            "label": "voce"
+          },
+          {
+            "id": "comodo",
+            "label": "comodo"
+          }
+        ],
+        "correctOptionIds": [
+          "voce"
+        ],
+        "diagnoses": {
+          "ma": {
+            "category": "confused-similar-term",
+            "reason": "“ma” means but; the word asked about means voice."
+          },
+          "meno": {
+            "category": "confused-similar-term",
+            "reason": "“meno” means less; the word asked about means voice."
+          },
+          "comodo": {
+            "category": "wrong-category",
+            "reason": "“comodo” means comfortable: at an easy, convenient speed; the word asked about means voice."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: voce means voice.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u5-l06.ind-1",
+      "templateId": "t.g4.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “swift”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "veloce",
+            "label": "veloce"
+          },
+          {
+            "id": "mezzo-forte",
+            "label": "mezzo forte (mf)"
+          },
+          {
+            "id": "simile",
+            "label": "simile (sim.)"
+          },
+          {
+            "id": "fermata",
+            "label": "pause (fermata)"
+          }
+        ],
+        "correctOptionIds": [
+          "veloce"
+        ],
+        "diagnoses": {
+          "mezzo-forte": {
+            "category": "wrong-category",
+            "reason": "“mezzo forte (mf)” means moderately loud; the word asked about means swift."
+          },
+          "simile": {
+            "category": "wrong-category",
+            "reason": "“simile (sim.)” means in the same way: carry on as before; the word asked about means swift."
+          },
+          "fermata": {
+            "category": "wrong-category",
+            "reason": "“pause (fermata)” means hold the note longer than its written value; the word asked about means swift."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: veloce means swift.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.ind-2",
+      "templateId": "t.g4.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “sotto voce”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the alto clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet on the 2nd ledger line below the stave; crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. Bar 2: crotchet in the space just below the stave; crotchet on the 1st line; crotchet on the 2nd line. The tempo mark above the first bar says “sotto voce”.",
+        "key": "Eb major",
+        "timeSignature": "3/4",
+        "tempoText": "sotto voce"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "mezzo-forte",
+            "label": "moderately loud"
+          },
+          {
+            "id": "molto",
+            "label": "very lively"
+          },
+          {
+            "id": "e-ed",
+            "label": "and"
+          },
+          {
+            "id": "voce",
+            "label": "in an undertone: very softly, as if in a low voice"
+          }
+        ],
+        "correctOptionIds": [
+          "voce"
+        ],
+        "diagnoses": {
+          "molto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “molto” means, not “voce”."
+          },
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “voce”."
+          },
+          "mezzo-forte": {
+            "category": "wrong-category",
+            "reason": "That is what “mezzo forte (mf)” means, not “voce”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: voce means voice.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.ind-3",
+      "templateId": "t.g4.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a swift, rushing run of notes. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sforzando",
+            "label": "sforzando (sf)"
+          },
+          {
+            "id": "accent",
+            "label": "accent (>)"
+          },
+          {
+            "id": "dal-segno",
+            "label": "dal segno (D.S.)"
+          },
+          {
+            "id": "veloce",
+            "label": "veloce"
+          }
+        ],
+        "correctOptionIds": [
+          "veloce"
+        ],
+        "diagnoses": {
+          "sforzando": {
+            "category": "wrong-category",
+            "reason": "“sforzando (sf)” means with a sudden strong accent; the word asked about means swift."
+          },
+          "accent": {
+            "category": "wrong-category",
+            "reason": "“accent (>)” means emphasise the note; the word asked about means swift."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means swift."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: veloce means swift.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.ind-4",
+      "templateId": "t.g4.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “voice”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sempre",
+            "label": "sempre"
+          },
+          {
+            "id": "marcato",
+            "label": "marcato (marc.)"
+          },
+          {
+            "id": "non",
+            "label": "non"
+          },
+          {
+            "id": "voce",
+            "label": "voce"
+          }
+        ],
+        "correctOptionIds": [
+          "voce"
+        ],
+        "diagnoses": {
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "“non” means not; the word asked about means voice."
+          },
+          "sempre": {
+            "category": "confused-similar-term",
+            "reason": "“sempre” means always; the word asked about means voice."
+          },
+          "marcato": {
+            "category": "wrong-category",
+            "reason": "“marcato (marc.)” means emphatic and accented; the word asked about means voice."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: voce means voice.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.ind-5",
+      "templateId": "t.g4.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “veloce” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pointed-accent",
+            "label": "an accent: the note is stressed, as with >, and perhaps even more strongly"
+          },
+          {
+            "id": "prima",
+            "label": "first"
+          },
+          {
+            "id": "veloce",
+            "label": "swift"
+          },
+          {
+            "id": "diminuendo",
+            "label": "gradually getting quieter"
+          }
+        ],
+        "correctOptionIds": [
+          "veloce"
+        ],
+        "diagnoses": {
+          "prima": {
+            "category": "wrong-category",
+            "reason": "That is what “prima, primo” means, not “veloce”."
+          },
+          "diminuendo": {
+            "category": "wrong-category",
+            "reason": "That is what “diminuendo (dim.)” means, not “veloce”."
+          },
+          "pointed-accent": {
+            "category": "wrong-category",
+            "reason": "That is what “the sign ∧ (over a note) or ∨ (under it)” means, not “veloce”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: veloce means swift.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l06.ind-6",
+      "templateId": "t.g4.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “sotto voce”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the alto clef, key signature of 3 sharps, time signature 3/4. Bar 1: crotchet on the 2nd ledger line above the stave; crotchet in the space above the 2nd ledger line above the stave; crotchet on the 3rd ledger line above the stave. Bar 2: crotchet on the 2nd ledger line above the stave; crotchet in the space above the 2nd ledger line above the stave; crotchet on the 3rd ledger line above the stave. The tempo mark above the first bar says “sotto voce”.",
+        "key": "A major",
+        "timeSignature": "3/4",
+        "tempoText": "sotto voce"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pesante",
+            "label": "heavy"
+          },
+          {
+            "id": "piu",
+            "label": "with more movement: faster"
+          },
+          {
+            "id": "voce",
+            "label": "in an undertone: very softly, as if in a low voice"
+          },
+          {
+            "id": "non",
+            "label": "not"
+          }
+        ],
+        "correctOptionIds": [
+          "voce"
+        ],
+        "diagnoses": {
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "That is what “non” means, not “voce”."
+          },
+          "piu": {
+            "category": "confused-similar-term",
+            "reason": "That is what “più” means, not “voce”."
+          },
+          "pesante": {
+            "category": "confused-similar-term",
+            "reason": "That is what “pesante” means, not “voce”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: voce means voice.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Veloce means swift.",
+    "Voce means voice.",
+    "Sotto voce means in an undertone."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g4-more"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.16"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 4 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38)."
+  }
+}

@@ -52,7 +52,7 @@ await test("learner arriving from Grade 1: Grade 2 opens at its first lesson, la
   assert.equal(await page.locator('[data-node="G2-U1-L01"]').getAttribute("data-status"), "available");
   assert.equal(await page.locator('[data-node="G2-U1-L02"]').getAttribute("data-status"), "locked");
   assert.equal(await page.locator('[data-node="G2-U3-L01"]').getAttribute("data-status"), "locked");
-  assert.equal(await page.locator("[data-node]").count(), 41, "all 41 Grade 2 nodes are on the path");
+  assert.equal(await page.locator("[data-node]").count(), 45, "all 45 Grade 2 nodes are on the path");
   await noOverflow(page, "grade 2 path");
   await axe(page, "grade 2 path");
   await shot(page, "g2-01-path");
@@ -208,14 +208,14 @@ await test("complete progression to the Grade 2 assessment: below the pass mark 
   await shot(page, "g2-12-assessment-passed");
   const prog = await get(page, "/api/progress");
   assert.equal(prog.nodes["G2-A"].state, "completed");
-  assert.equal(prog.grades.find((g) => g.grade === 2).completedNodes, 40);
+  assert.equal(prog.grades.find((g) => g.grade === 2).completedNodes, 44);
   assert.equal((await get(page, "/api/achievements")).achievements.find((b) => b.id === "g2.grade-complete").earned, true);
   // the preview is optional: still not completed, playable now, and it changes nothing about the grade
   assert.notEqual(prog.nodes["G2-U4-E1"].state, "completed");
   await playLessonInBrowser(page, S, "G2-U4-E1");
   await page.getByRole("heading", { name: "Lesson complete!" }).waitFor();
   await shot(page, "g2-13-optional-preview-complete");
-  assert.equal((await get(page, "/api/progress")).grades.find((g) => g.grade === 2).requiredNodes, 40);
+  assert.equal((await get(page, "/api/progress")).grades.find((g) => g.grade === 2).requiredNodes, 44);
   await page.goto("/progress");
   await page.getByRole("heading", { level: 1 }).waitFor();
   await noOverflow(page, "progress");
@@ -330,7 +330,7 @@ await test("a melody question is answerable without seeing the page: the triplet
   assert.ok(kt >= 0 && kx >= 0, "the lesson asks a triplet question and a marked-note question");
   for (const [k, expectText, inNames] of [[kt, /triplet group of three notes sharing one beat/, /in a triplet group/], [kx, /\(the note marked x\)/, /the note marked x/]]) {
     const { ctx, page, userId } = await grade2Learner(profiles.desktop);
-    await finishViaApi(S, page, userId, "G2-U5-L03");
+    await finishViaApi(S, page, userId, "G2-U5-L08"); // the melody lesson now follows the four terminology lessons
     await playLessonInBrowser(page, S, "G2-U5-L04", { stopAfter: k });
     await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
     const described = await page.locator("svg.notation-svg").first().getAttribute("aria-label");

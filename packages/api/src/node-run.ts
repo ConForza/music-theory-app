@@ -17,7 +17,7 @@
  * A challenge or assessment below the pass mark is stored as an honest result (`assessment_results`), earns nothing,
  * completes nothing, and can be retried with fresh questions.
  */
-import { checkItem, effectiveScope, mergeScope, type AssessmentTemplate, type ExerciseBinding, type ExerciseItem, type MusicScope, type OrderedNode } from "@mtp/curriculum";
+import { checkItem, effectiveScope, mergeScope, music, type AssessmentTemplate, type ExerciseBinding, type ExerciseItem, type MusicScope, type OrderedNode } from "@mtp/curriculum";
 import { EngineError, generateItem, generatorTemplateIds, hashString, parseGeneratedItemId } from "@mtp/engine";
 import type { Clock } from "./clock.ts";
 import type { Course, LearnerItem, SessionKind } from "./course.ts";
@@ -126,6 +126,21 @@ export class NodeRunService {
     return scope;
   }
 
+  /**
+   * Terminology completion (VOCAB_BOOK): the path-based taught scope says a template is available from its first lesson onwards, and a
+   * learner who finished the grade before these lessons existed has not completed them. A `*.book-*` template is offered to a learner only
+   * once EVERY lesson that teaches it has been completed (the lessons are one chain, so this is the same as "the last of them"), so a
+   * practice, review, challenge or assessment run never shows a word the learner has not been taught. Every other template is unaffected:
+   * for them reaching the node already implies having completed its lessons.
+   */
+  private taughtToLearner(userId: string, templateId: string, node: OrderedNode): boolean {
+    if (!music.isBookTemplate(templateId)) return true;
+    const lessons = this.teachingNodesBefore(node).filter((n) => n.type === "lesson" && n.exercises.some((b) => b.templateId === templateId));
+    if (!lessons.length) return false;
+    const done = new Set((this.db.prepare("SELECT node_id FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string }>).map((r) => r.node_id));
+    return lessons.every((n) => done.has(n.id));
+  }
+
   private scopeOf(si: PlannedItem, node: OrderedNode): MusicScope | null {
     if (si.scope.mode === "taught") return this.taughtUnion(si.templateId, node);
     const bn = this.course.ix.nodeById.get(si.scope.nodeId);
@@ -205,7 +220,7 @@ export class NodeRunService {
     };
 
     if (kind === "practice" || kind === "review") {
-      const bindings = node.exercises.filter((b) => this.generatable.has(b.templateId));
+      const bindings = node.exercises.filter((b) => this.generatable.has(b.templateId) && this.taughtToLearner(userId, b.templateId, node));
       let order = bindings;
       let total = Math.min(10, Math.max(6, bindings.length * 2));
       if (kind === "review") {
@@ -238,7 +253,7 @@ export class NodeRunService {
     const blueprint = this.course.ix.assessments.get(node.assessmentId!) as AssessmentTemplate;
     for (const s of blueprint.sections) {
       const wanted = new Set([...this.course.ix.concepts.values()].filter((c) => c.outcomeIds.some((o) => s.outcomeIds.includes(o))).map((c) => c.id));
-      const templates = s.templateIds.filter((t) => this.generatable.has(t) && this.taughtUnion(t, node));
+      const templates = s.templateIds.filter((t) => this.generatable.has(t) && this.taughtUnion(t, node) && this.taughtToLearner(userId, t, node));
       let made = 0;
       for (let i = 0; i < s.itemCount && templates.length; i++) {
         const shift = (seedOf(userId, node.id, run, s.id) + i) % templates.length;

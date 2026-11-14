@@ -1,0 +1,966 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U5-L07",
+  "lessonId": "G2-U5-L07",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn six more words of speed and character: allargando, grave, larghetto, giocoso, simile and vivo.",
+    "successCriteria": [
+      "I can put grave, largo and larghetto in order from slowest to fastest.",
+      "I know allargando means broadening, and vivo means lively and quick.",
+      "I know giocoso means playful and simile means carry on in the same way."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Here are six more words. Grave, larghetto and allargando are about slow, broad music. Vivo is quick, like vivace. Giocoso describes a playful mood, and simile tells the player to carry on in the same way."
+    },
+    {
+      "kind": "text",
+      "text": "“allargando” means broadening: getting a little slower, and usually a little louder. “grave” means very slow and solemn. “larghetto” means rather slow, but not as slow as largo. “giocoso” means playful and merry."
+    },
+    {
+      "kind": "text",
+      "text": "“simile” means in the same way: carry on as before. “vivo” means lively and quick."
+    },
+    {
+      "kind": "text",
+      "text": "From slowest to fastest the slow words go grave, largo, larghetto. Allargando is different: it is a change, getting a little slower and broader, usually with a little more sound."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked grave.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "grave"
+      },
+      "caption": "Grave above the first bar: very slow and solemn, slower than largo."
+    },
+    {
+      "kind": "tip",
+      "text": "Slow: grave (very slow, solemn), largo (slow, stately), larghetto (rather slow). Changing: allargando (broadening). Quick: vivo. Mood: giocoso (playful). Carry on: simile."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked larghetto.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "larghetto"
+    },
+    "steps": [
+      "Look at the word above the first bar: larghetto.",
+      "It ends in -etto, which means a little: a little largo, so rather slow, but not as slow as largo.",
+      "Play it gently and broadly, but keep it moving."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked larghetto."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u5-l07.guided-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “allargando” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "allargando",
+            "label": "broadening: getting a little slower, and usually a little louder"
+          },
+          {
+            "id": "pianissimo",
+            "label": "very quiet"
+          },
+          {
+            "id": "fine",
+            "label": "the end"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
+          }
+        ],
+        "correctOptionIds": [
+          "allargando"
+        ],
+        "diagnoses": {
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "That is what “M.M. ♩ = 72” means, not “allargando”."
+          },
+          "pianissimo": {
+            "category": "wrong-category",
+            "reason": "That is what “pianissimo (pp)” means, not “allargando”."
+          },
+          "fine": {
+            "category": "wrong-category",
+            "reason": "That is what “fine” means, not “allargando”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: allargando means broadening: getting a little slower, and usually a little louder.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.guided-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is marked “grave”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet on the 2nd line; crotchet on the 3rd line; crotchet on the 4th line. Bar 2: crotchet on the 5th line; crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave. The tempo mark above the first bar says “grave”.",
+        "key": "Eb major",
+        "timeSignature": "3/4",
+        "tempoText": "grave"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "grave",
+            "label": "very slow and solemn"
+          },
+          {
+            "id": "accent",
+            "label": "emphasise the note"
+          },
+          {
+            "id": "forte",
+            "label": "loud"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          }
+        ],
+        "correctOptionIds": [
+          "grave"
+        ],
+        "diagnoses": {
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “grave”."
+          },
+          "forte": {
+            "category": "wrong-category",
+            "reason": "That is what “forte (f)” means, not “grave”."
+          },
+          "accent": {
+            "category": "wrong-category",
+            "reason": "That is what “accent (>)” means, not “grave”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: grave means very slow and solemn.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.guided-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “larghetto” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pianissimo",
+            "label": "very quiet"
+          },
+          {
+            "id": "tenuto",
+            "label": "held: give the note its full length"
+          },
+          {
+            "id": "slur",
+            "label": "play the notes under the curve smoothly"
+          },
+          {
+            "id": "larghetto",
+            "label": "rather slow, but not as slow as largo"
+          }
+        ],
+        "correctOptionIds": [
+          "larghetto"
+        ],
+        "diagnoses": {
+          "slur": {
+            "category": "wrong-category",
+            "reason": "That is what “slur” means, not “larghetto”."
+          },
+          "tenuto": {
+            "category": "wrong-category",
+            "reason": "That is what “tenuto” means, not “larghetto”."
+          },
+          "pianissimo": {
+            "category": "wrong-category",
+            "reason": "That is what “pianissimo (pp)” means, not “larghetto”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: larghetto means rather slow, but not as slow as largo.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u5-l07.ind-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “allargando” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          },
+          {
+            "id": "allargando",
+            "label": "broadening: getting a little slower, and usually a little louder"
+          },
+          {
+            "id": "legato",
+            "label": "smoothly, with the notes joined"
+          },
+          {
+            "id": "fortissimo",
+            "label": "very loud"
+          }
+        ],
+        "correctOptionIds": [
+          "allargando"
+        ],
+        "diagnoses": {
+          "legato": {
+            "category": "wrong-category",
+            "reason": "That is what “legato” means, not “allargando”."
+          },
+          "fortissimo": {
+            "category": "wrong-category",
+            "reason": "That is what “fortissimo (ff)” means, not “allargando”."
+          },
+          "fermata": {
+            "category": "wrong-category",
+            "reason": "That is what “pause (fermata)” means, not “allargando”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: allargando means broadening: getting a little slower, and usually a little louder.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.ind-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “grave”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet on the 1st line; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet in the 1st space; crotchet on the 2nd line; crotchet on the 3rd line. The tempo mark above the first bar says “grave”.",
+        "key": "Eb major",
+        "timeSignature": "3/4",
+        "tempoText": "grave"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fortepiano",
+            "label": "loud, then immediately quiet"
+          },
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "ottava",
+            "label": "play an octave higher than written"
+          },
+          {
+            "id": "grave",
+            "label": "very slow and solemn"
+          }
+        ],
+        "correctOptionIds": [
+          "grave"
+        ],
+        "diagnoses": {
+          "ottava": {
+            "category": "wrong-category",
+            "reason": "That is what “8va” means, not “grave”."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “grave”."
+          },
+          "fortepiano": {
+            "category": "wrong-category",
+            "reason": "That is what “fortepiano (fp)” means, not “grave”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: grave means very slow and solemn.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.ind-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “rather slow, but not as slow as largo”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "larghetto",
+            "label": "larghetto"
+          },
+          {
+            "id": "slur",
+            "label": "slur"
+          },
+          {
+            "id": "da-capo",
+            "label": "da capo (D.C.)"
+          },
+          {
+            "id": "tenuto",
+            "label": "tenuto"
+          }
+        ],
+        "correctOptionIds": [
+          "larghetto"
+        ],
+        "diagnoses": {
+          "slur": {
+            "category": "wrong-category",
+            "reason": "“slur” means play the notes under the curve smoothly; the word asked about means rather slow, but not as slow as largo."
+          },
+          "tenuto": {
+            "category": "wrong-category",
+            "reason": "“tenuto” means held: give the note its full length; the word asked about means rather slow, but not as slow as largo."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "“da capo (D.C.)” means repeat from the beginning; the word asked about means rather slow, but not as slow as largo."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: larghetto means rather slow, but not as slow as largo.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.ind-4",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a playful, merry game of tag. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "maestoso",
+            "label": "maestoso"
+          },
+          {
+            "id": "fine",
+            "label": "fine"
+          },
+          {
+            "id": "giocoso",
+            "label": "giocoso"
+          },
+          {
+            "id": "slur",
+            "label": "slur"
+          }
+        ],
+        "correctOptionIds": [
+          "giocoso"
+        ],
+        "diagnoses": {
+          "slur": {
+            "category": "wrong-category",
+            "reason": "“slur” means play the notes under the curve smoothly; the word asked about means playful and merry."
+          },
+          "maestoso": {
+            "category": "confused-similar-term",
+            "reason": "“maestoso” means majestically; the word asked about means playful and merry."
+          },
+          "fine": {
+            "category": "wrong-category",
+            "reason": "“fine” means the end; the word asked about means playful and merry."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: giocoso means playful and merry.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.ind-5",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “in the same way: carry on as before”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "grave",
+            "label": "grave"
+          },
+          {
+            "id": "simile",
+            "label": "simile (sim.)"
+          },
+          {
+            "id": "staccato",
+            "label": "staccato"
+          },
+          {
+            "id": "fortissimo",
+            "label": "fortissimo (ff)"
+          }
+        ],
+        "correctOptionIds": [
+          "simile"
+        ],
+        "diagnoses": {
+          "fortissimo": {
+            "category": "wrong-category",
+            "reason": "“fortissimo (ff)” means very loud; the word asked about means in the same way: carry on as before."
+          },
+          "staccato": {
+            "category": "wrong-category",
+            "reason": "“staccato” means short and detached; the word asked about means in the same way: carry on as before."
+          },
+          "grave": {
+            "category": "wrong-category",
+            "reason": "“grave” means very slow and solemn; the word asked about means in the same way: carry on as before."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It tells the player where in the music, or in what order, to play."
+      ],
+      "feedback": {
+        "correct": "Correct: simile means in the same way: carry on as before.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l07.ind-6",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “vivo”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 sharps, time signature 3/4. Bar 1: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave. Bar 2: crotchet on the 1st ledger line below the stave; crotchet in the space just below the stave; crotchet on the 1st ledger line below the stave. The tempo mark above the first bar says “vivo”.",
+        "key": "D major",
+        "timeSignature": "3/4",
+        "tempoText": "vivo"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "vivo",
+            "label": "lively and quick"
+          },
+          {
+            "id": "staccato",
+            "label": "short and detached"
+          },
+          {
+            "id": "fortissimo",
+            "label": "very loud"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          }
+        ],
+        "correctOptionIds": [
+          "vivo"
+        ],
+        "diagnoses": {
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “vivo”."
+          },
+          "fortissimo": {
+            "category": "wrong-category",
+            "reason": "That is what “fortissimo (ff)” means, not “vivo”."
+          },
+          "staccato": {
+            "category": "wrong-category",
+            "reason": "That is what “staccato” means, not “vivo”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It is about speed or time: faster, slower or in between."
+      ],
+      "feedback": {
+        "correct": "Correct: vivo means lively and quick.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Grave is slower than largo, and largo is slower than larghetto.",
+    "Allargando means broadening: getting a little slower, and usually louder.",
+    "Vivo is lively and quick, giocoso is playful and simile means in the same way."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g2-character"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.13"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 2 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38)."
+  }
+}

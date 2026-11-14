@@ -57,7 +57,7 @@ await test("learner arriving from Grade 2: Grade 3 opens at its first lesson, la
   assert.equal(await page.locator('[data-node="G3-U1-L01"]').getAttribute("data-status"), "available");
   assert.equal(await page.locator('[data-node="G3-U1-L02"]').getAttribute("data-status"), "locked");
   assert.equal(await page.locator('[data-node="G3-U4-L01"]').getAttribute("data-status"), "locked");
-  assert.equal(await page.locator("[data-node]").count(), 36, "all 36 Grade 3 nodes are on the path");
+  assert.equal(await page.locator("[data-node]").count(), 42, "all 42 Grade 3 nodes are on the path");
   await noOverflow(page, "grade 3 path");
   await axe(page, "grade 3 path");
   await shot(page, "g3-01-path");
@@ -213,7 +213,7 @@ await test("complete progression to the Grade 3 assessment: below the pass mark 
   await shot(page, "g3-12-assessment-passed");
   const prog = await get(page, "/api/progress");
   assert.equal(prog.nodes["G3-A"].state, "completed");
-  assert.equal(prog.grades.find((g) => g.grade === 3).completedNodes, 35);
+  assert.equal(prog.grades.find((g) => g.grade === 3).completedNodes, 41);
   assert.equal((await get(page, "/api/achievements")).achievements.find((b) => b.id === "g3.grade-complete").earned, true);
   const results = (await get(page, "/api/results")).results.filter((r) => r.nodeId === "G3-A");
   assert.deepEqual(results.map((r) => r.passed).sort(), [false, true], "both results are recorded; the retake did not overwrite the first");
@@ -222,7 +222,7 @@ await test("complete progression to the Grade 3 assessment: below the pass mark 
   await playLessonInBrowser(page, S, "G3-U2-E1");
   await page.getByRole("heading", { name: "Lesson complete!" }).waitFor();
   await shot(page, "g3-13-optional-upbeat-complete");
-  assert.equal((await get(page, "/api/progress")).grades.find((g) => g.grade === 3).requiredNodes, 35);
+  assert.equal((await get(page, "/api/progress")).grades.find((g) => g.grade === 3).requiredNodes, 41);
   await page.goto("/progress");
   await page.getByRole("heading", { level: 1 }).waitFor();
   await noOverflow(page, "progress");
@@ -372,7 +372,7 @@ await test("ledger-line notes and the sign 8va are described; a marked note is n
   assert.ok(kx >= 0, "the melody lesson asks a marked-note question");
   {
     const { ctx, page, userId } = await grade3Learner(profiles.desktop);
-    await finishViaApi(S, page, userId, "G3-U5-L03");
+    await finishViaApi(S, page, userId, "G3-U5-L10");
     await playLessonInBrowser(page, S, "G3-U5-L04", { stopAfter: kx });
     await page.getByText(new RegExp(`Question ${kx + 1} of ${mel.length}`)).waitFor();
     const described = await page.locator("svg.notation-svg").first().getAttribute("aria-label");

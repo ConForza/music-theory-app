@@ -1168,11 +1168,68 @@
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-speed",
+            "c.terms.g3-strong",
+            "c.terms.g3-gentle",
+            "c.terms.g3-feelings",
+            "c.terms.g3-style",
+            "c.terms.g3-order"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-speed",
+            "c.terms.g3-strong",
+            "c.terms.g3-gentle",
+            "c.terms.g3-feelings",
+            "c.terms.g3-style",
+            "c.terms.g3-order"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 1,
+      "contentVersion": 2,
       "contentStatus": "draft"
     },
     {
@@ -5944,6 +6001,44 @@
       "contentRef": "lessons/G4-U5-L04.json"
     },
     {
+      "id": "G4-U5-L06",
+      "type": "lesson",
+      "unitId": "G4-U5",
+      "title": "Two more Grade 4 words",
+      "objective": "Learn two more Grade 4 words: veloce and voce.",
+      "conceptIds": [
+        "c.terms.g4-more"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g4.16"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g4.book-terms",
+          "conceptIds": [
+            "c.terms.g4-more"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g4.book-use",
+          "conceptIds": [
+            "c.terms.g4-more"
+          ],
+          "scope": {}
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g4.s15"
+      ],
+      "contentRef": "lessons/G4-U5-L06.json"
+    },
+    {
       "id": "G4-U5-L05",
       "type": "lesson",
       "unitId": "G4-U5",
@@ -6247,6 +6342,20 @@
           "scope": {}
         },
         {
+          "templateId": "t.g4.book-terms",
+          "conceptIds": [
+            "c.terms.g4-more"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g4.book-use",
+          "conceptIds": [
+            "c.terms.g4-more"
+          ],
+          "scope": {}
+        },
+        {
           "templateId": "t.g4.passage",
           "conceptIds": [
             "c.context.passage-g4"
@@ -6368,7 +6477,7 @@
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 1,
+      "contentVersion": 2,
       "contentStatus": "draft"
     },
     {
@@ -7854,6 +7963,20 @@
           "scope": {}
         },
         {
+          "templateId": "t.g4.book-terms",
+          "conceptIds": [
+            "c.terms.g4-more"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g4.book-use",
+          "conceptIds": [
+            "c.terms.g4-more"
+          ],
+          "scope": {}
+        },
+        {
           "templateId": "t.g4.passage",
           "conceptIds": [
             "c.context.passage-g4"
@@ -8088,7 +8211,7 @@
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 1,
+      "contentVersion": 2,
       "contentStatus": "draft"
     },
     {

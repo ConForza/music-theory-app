@@ -1,0 +1,826 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U5-L09",
+  "lessonId": "G3-U5-L09",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn four words of style: marziale, scherzando, brio and ritmico.",
+    "successCriteria": [
+      "I know marziale means in a military style.",
+      "I know scherzando means playful and joking.",
+      "I know brio means vigour, as in con brio, and ritmico means with a bold, clear beat."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "These four words describe the style of a piece. Marziale is military, like a march. Scherzando is playful, like a joke. Brio is vigour and spirit. Ritmico means the rhythm should be clear and bold."
+    },
+    {
+      "kind": "text",
+      "text": "“marziale” means in a military style. “scherzando” means playful and joking. “brio” means vigour and spirit. “ritmico” means rhythmically: with a bold, clear beat."
+    },
+    {
+      "kind": "text",
+      "text": "Con brio means with vigour: lively and spirited. Scherzando may also be written scherzoso."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked con brio.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "con brio"
+      },
+      "caption": "Con brio above the first bar: with vigour, lively and spirited."
+    },
+    {
+      "kind": "tip",
+      "text": "March: marziale. Joking: scherzando. Spirit: brio. Clear beat: ritmico."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked marziale.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "marziale"
+    },
+    "steps": [
+      "Look at the word above the first bar: marziale.",
+      "It means in a military style: steady, upright and firm, like a march.",
+      "It describes the style. The notes stay the same."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked marziale."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u5-l09.guided-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “marziale” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "giocoso",
+            "label": "playful and merry"
+          },
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          },
+          {
+            "id": "animato",
+            "label": "animated and lively"
+          },
+          {
+            "id": "marziale",
+            "label": "in a military style"
+          }
+        ],
+        "correctOptionIds": [
+          "marziale"
+        ],
+        "diagnoses": {
+          "animato": {
+            "category": "confused-similar-term",
+            "reason": "That is what “animato” means, not “marziale”."
+          },
+          "fermata": {
+            "category": "wrong-category",
+            "reason": "That is what “pause (fermata)” means, not “marziale”."
+          },
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “giocoso” means, not “marziale”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: marziale means in a military style.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.guided-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A composer wants a playful, joking piece, like a clown's tune. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pesante",
+            "label": "pesante"
+          },
+          {
+            "id": "scherzando",
+            "label": "scherzando"
+          },
+          {
+            "id": "delicato",
+            "label": "delicato"
+          },
+          {
+            "id": "rubato",
+            "label": "rubato"
+          }
+        ],
+        "correctOptionIds": [
+          "scherzando"
+        ],
+        "diagnoses": {
+          "pesante": {
+            "category": "confused-similar-term",
+            "reason": "“pesante” means heavy; the word asked about means playful and joking."
+          },
+          "delicato": {
+            "category": "confused-similar-term",
+            "reason": "“delicato” means delicate; the word asked about means playful and joking."
+          },
+          "rubato": {
+            "category": "confused-similar-term",
+            "reason": "“rubato” means with some freedom of time: the player may push and pull the beat; the word asked about means playful and joking."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: scherzando means playful and joking.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.guided-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “vigour and spirit”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "repeat",
+            "label": "repeat marks"
+          },
+          {
+            "id": "deciso",
+            "label": "deciso"
+          },
+          {
+            "id": "brio",
+            "label": "brio"
+          },
+          {
+            "id": "mesto",
+            "label": "mesto"
+          }
+        ],
+        "correctOptionIds": [
+          "brio"
+        ],
+        "diagnoses": {
+          "mesto": {
+            "category": "confused-similar-term",
+            "reason": "“mesto” means sad; the word asked about means vigour and spirit."
+          },
+          "deciso": {
+            "category": "confused-similar-term",
+            "reason": "“deciso” means with determination; the word asked about means vigour and spirit."
+          },
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "“repeat marks” means play the passage between the marks again; the word asked about means vigour and spirit."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: brio means vigour and spirit.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u5-l09.ind-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “in a military style”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "da-capo",
+            "label": "da capo (D.C.)"
+          },
+          {
+            "id": "marziale",
+            "label": "marziale"
+          },
+          {
+            "id": "slur",
+            "label": "slur"
+          },
+          {
+            "id": "dolce",
+            "label": "dolce"
+          }
+        ],
+        "correctOptionIds": [
+          "marziale"
+        ],
+        "diagnoses": {
+          "dolce": {
+            "category": "confused-similar-term",
+            "reason": "“dolce” means sweetly; the word asked about means in a military style."
+          },
+          "slur": {
+            "category": "wrong-category",
+            "reason": "“slur” means play the notes under the curve smoothly; the word asked about means in a military style."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "“da capo (D.C.)” means repeat from the beginning; the word asked about means in a military style."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: marziale means in a military style.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.ind-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a playful, joking piece, like a clown's tune. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "scherzando",
+            "label": "scherzando"
+          },
+          {
+            "id": "marziale",
+            "label": "marziale"
+          },
+          {
+            "id": "forza",
+            "label": "forza"
+          },
+          {
+            "id": "amore",
+            "label": "amore"
+          }
+        ],
+        "correctOptionIds": [
+          "scherzando"
+        ],
+        "diagnoses": {
+          "forza": {
+            "category": "confused-similar-term",
+            "reason": "“forza” means force, strength; the word asked about means playful and joking."
+          },
+          "amore": {
+            "category": "confused-similar-term",
+            "reason": "“amore” means love; the word asked about means playful and joking."
+          },
+          "marziale": {
+            "category": "confused-similar-term",
+            "reason": "“marziale” means in a military style; the word asked about means playful and joking."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: scherzando means playful and joking.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.ind-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “brio” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "triste",
+            "label": "sad and sorrowful"
+          },
+          {
+            "id": "ritmico",
+            "label": "rhythmically: with a bold, clear beat"
+          },
+          {
+            "id": "brio",
+            "label": "vigour and spirit"
+          },
+          {
+            "id": "deciso",
+            "label": "with determination"
+          }
+        ],
+        "correctOptionIds": [
+          "brio"
+        ],
+        "diagnoses": {
+          "ritmico": {
+            "category": "confused-similar-term",
+            "reason": "That is what “ritmico” means, not “brio”."
+          },
+          "triste": {
+            "category": "confused-similar-term",
+            "reason": "That is what “triste” means, not “brio”."
+          },
+          "deciso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “deciso” means, not “brio”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: brio means vigour and spirit.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.ind-4",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “ritmico”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D6",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 sharps, time signature 3/4. Bar 1: crotchet on the 5th line; crotchet on the 1st ledger line above the stave; crotchet in the space above the 1st ledger line above the stave. Bar 2: crotchet in the space above the 2nd ledger line above the stave; crotchet in the space above the 1st ledger line above the stave; crotchet in the space just above the stave. The tempo mark above the first bar says “ritmico”.",
+        "key": "D major",
+        "timeSignature": "3/4",
+        "tempoText": "ritmico"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ritmico",
+            "label": "rhythmically: with a bold, clear beat"
+          },
+          {
+            "id": "mesto",
+            "label": "sad"
+          },
+          {
+            "id": "tranquillo",
+            "label": "calm"
+          },
+          {
+            "id": "cantabile",
+            "label": "in a singing style"
+          }
+        ],
+        "correctOptionIds": [
+          "ritmico"
+        ],
+        "diagnoses": {
+          "mesto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “mesto” means, not “ritmico”."
+          },
+          "tranquillo": {
+            "category": "confused-similar-term",
+            "reason": "That is what “tranquillo” means, not “ritmico”."
+          },
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "That is what “cantabile” means, not “ritmico”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: ritmico means rhythmically: with a bold, clear beat.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.ind-5",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a military march for a parade. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "marziale",
+            "label": "marziale"
+          },
+          {
+            "id": "dolce",
+            "label": "dolce"
+          },
+          {
+            "id": "repeat",
+            "label": "repeat marks"
+          },
+          {
+            "id": "cantabile",
+            "label": "cantabile"
+          }
+        ],
+        "correctOptionIds": [
+          "marziale"
+        ],
+        "diagnoses": {
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "“cantabile” means in a singing style; the word asked about means in a military style."
+          },
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "“repeat marks” means play the passage between the marks again; the word asked about means in a military style."
+          },
+          "dolce": {
+            "category": "confused-similar-term",
+            "reason": "“dolce” means sweetly; the word asked about means in a military style."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: marziale means in a military style.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l09.ind-6",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “playful and joking”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dal-segno",
+            "label": "dal segno (D.S.)"
+          },
+          {
+            "id": "cantabile",
+            "label": "cantabile"
+          },
+          {
+            "id": "scherzando",
+            "label": "scherzando"
+          },
+          {
+            "id": "maestoso",
+            "label": "maestoso"
+          }
+        ],
+        "correctOptionIds": [
+          "scherzando"
+        ],
+        "diagnoses": {
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means playful and joking."
+          },
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "“cantabile” means in a singing style; the word asked about means playful and joking."
+          },
+          "maestoso": {
+            "category": "confused-similar-term",
+            "reason": "“maestoso” means majestically; the word asked about means playful and joking."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: scherzando means playful and joking.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Marziale is military; scherzando is playful and joking.",
+    "Brio is vigour: con brio means with vigour.",
+    "Ritmico asks for a bold, clear beat."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g3-style"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s12"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.12"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 3 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38)."
+  }
+}
