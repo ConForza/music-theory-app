@@ -117,14 +117,16 @@ export const chordIdentify5: Gen = (c): any => {
 export const chordBuild5: Gen = (c): any => {
   const keyText = c.rng.pick(keysIn(c));
   const key = parseKey(keyText);
-  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble", "bass"]).filter((x) => x === "treble" || x === "bass")) as "treble" | "bass";
+  // A build question has no music of its own, so the learner's stave uses the scope's FIRST clef: the prompt must name that clef (chord identification uses both clefs).
+  const clef = ((c.scope.clefs?.length ? c.scope.clefs : ["treble"])[0] === "bass" ? "bass" : "treble") as "treble" | "bass";
   const roman = c.rng.pick(romans(c));
   const inv = c.rng.pick(invs(c));
   const voices = c.rng.pick([3, 3, 4]);
   const ps = singleStaveChord(c, key, roman, inv, clef);
   if (!ps) return null;
   // the example voicing has the number of notes the question asks for
-  const ex = (() => { for (let i = 0; i < 30; i++) { const x = singleStaveChord(c, key, roman, inv, clef); if (x && x.length === voices) return x; } return null; })();
+  // the example voicing stays close to the stave (at most one ledger line, within a ninth): every note of it can be placed with the real controls, also on a phone
+  const ex = (() => { for (let i = 0; i < 80; i++) { const x = singleStaveChord(c, key, roman, inv, clef); if (x && x.length === voices && fitsIn(clef, x, 1) && Math.max(...x.map(diatonicNumber)) - Math.min(...x.map(diatonicNumber)) <= 8) return x; } return null; })();
   if (!ex) return null;
   const sorted = [...ex].sort((a, b) => diatonicNumber(a) - diatonicNumber(b));
   const bassWord = inv === "a" ? "the root" : inv === "b" ? "the 3rd" : "the 5th";

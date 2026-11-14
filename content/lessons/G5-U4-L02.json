@@ -283,21 +283,21 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write chord iib of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord iib of C♯ minor in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "F major",
+        "key": "C# minor",
         "target": {
           "roman": "ii",
           "inversion": "b"
         },
         "acceptedVoicings": [
           [
-            "Bb3",
-            "G4",
-            "D5",
-            "G5"
+            "F#4",
+            "A4",
+            "D#5",
+            "F#5"
           ]
         ],
         "voices": 4
@@ -455,28 +455,28 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord iia of F major in the bass clef, in root position (the root of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord iib of F minor in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "F major",
+        "key": "F minor",
         "target": {
           "roman": "ii",
-          "inversion": "a"
+          "inversion": "b"
         },
         "acceptedVoicings": [
           [
-            "G2",
-            "G3",
             "Bb3",
-            "D4"
+            "Db4",
+            "G4",
+            "Bb4"
           ]
         ],
         "voices": 4
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord ii is built on degree 2. Write its three notes, but put the root lowest."
+        "Chord ii is built on degree 2. Write its three notes, but put the 3rd lowest."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -625,28 +625,27 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord iic of D♯ minor in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
+      "prompt": "Write chord iia of A minor in the treble clef, in root position (the root of the chord is the lowest note), using exactly 3 notes. In a minor key this triad is diminished. Any spacing is correct.",
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "D# minor",
+        "key": "A minor",
         "target": {
           "roman": "ii",
-          "inversion": "c"
+          "inversion": "a"
         },
         "acceptedVoicings": [
           [
             "B3",
-            "E#4",
-            "G#4",
-            "E#5"
+            "D4",
+            "F4"
           ]
         ],
-        "voices": 4
+        "voices": 3
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord ii is built on degree 2. Write its three notes, but put the 5th lowest."
+        "Chord ii is built on degree 2. Write its three notes, but put the root lowest."
       ],
       "feedback": {
         "correct": "Correct.",
