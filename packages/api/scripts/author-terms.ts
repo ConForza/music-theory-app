@@ -16,7 +16,7 @@
  *                                            (item counts are unchanged, so pass marks and exact ratios are unchanged)
  *   lessons/G{2,3,4}-U5-L*.json              the eleven lessons; their questions are picked from the generators and frozen
  */
-import { readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { music } from "@mtp/curriculum";
@@ -27,7 +27,13 @@ import { COPY } from "./terms-book/lessons.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../../content");
 const rd = (f: string) => JSON.parse(readFileSync(join(root, f), "utf8"));
-const wr = (f: string, v: unknown) => writeFileSync(join(root, f), JSON.stringify(v, null, 2) + "\n");
+/** Writes only when the content differs, and never deletes first: a re-run must not open a window in which another process (a parallel test) sees a missing or half-written file. */
+const put = (f: string, text: string) => {
+  const path = join(root, f);
+  if (existsSync(path) && readFileSync(path, "utf8") === text) return;
+  writeFileSync(path, text);
+};
+const wr = (f: string, v: unknown) => put(f, JSON.stringify(v, null, 2) + "\n");
 
 type Json = Record<string, unknown>;
 type Binding = { templateId: string; conceptIds: string[]; scope: Json };
@@ -39,7 +45,7 @@ const ANCHOR: Record<number, string> = { 2: "G2-U5-L03", 3: "G3-U5-L03", 4: "G4-
 const PRIOR_CONCEPT: Record<number, string> = { 2: "c.terms.g2-signs", 3: "c.terms.g3", 4: "c.terms.g4" };
 const grades = [2, 3, 4] as const;
 /**
- * Versions on the tree before this work (PR #13 head). A node or blueprint that gains the new templates is set to exactly base + 1, not
+ * Versions on the tree before this work (main at 81d8169 (PR #13 merged)). A node or blueprint that gains the new templates is set to exactly base + 1, not
  * incremented, so re-running this script (or running it after an `author:gradeN` script, which rewrites those nodes) never drifts.
  */
 const BASE_NODE_VERSION: Record<string, number> = { "G2-U5-P1": 1, "G2-U5-R1": 1, "G3-U1-R1": 1, "G3-U5-P1": 1, "G3-U5-R1": 1, "G4-U1-R1": 1, "G4-U5-P1": 1, "G4-U5-R1": 1, "G5-U1-R1": 1 };
@@ -263,7 +269,6 @@ const specs: Spec2[] = music.BOOK_LESSONS.map((l) => {
   } as Spec2;
 });
 
-for (const l of music.BOOK_LESSONS) rmSync(join(root, `lessons/${l.node}.json`), { force: true });
 const author = startAuthoring();
 const built = specs.map((spec) => ({ spec, lesson: buildLesson(author, spec) }));
 for (const g of grades) {
@@ -271,7 +276,7 @@ for (const g of grades) {
   const doc = rd(file);
   for (const { spec, lesson } of built.filter((x) => x.spec.node.startsWith(`G${g}-`))) {
     const n = (doc.nodes as PathNode[]).find((x) => x.id === spec.node)!;
-    writeFileSync(join(root, `lessons/${spec.node}.json`), JSON.stringify(lesson, null, 2) + "\n");
+    put(`lessons/${spec.node}.json`, JSON.stringify(lesson, null, 2) + "\n");
     n.contentRef = `lessons/${spec.node}.json`;
     n.contentStatus = "draft";
     console.log(`wrote ${spec.node}: ${lesson.guided.length} guided, ${lesson.independent.length} independent`);

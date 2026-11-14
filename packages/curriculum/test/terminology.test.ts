@@ -28,7 +28,7 @@ describe("vocabulary integrity", () => {
   it("is versioned (VOCAB_BOOK version 1) and no older list was edited: their content hashes are those of the tree before this work", () => {
     expect(VOCAB_BOOK_VERSION).toBe(1);
     // These lists are hashed into the generation fingerprint of every earlier template, so editing one would silently change stored question
-    // identities. The hashes were taken on the tree before the terminology completion work (PR #13 head).
+    // identities. The hashes were taken on the tree before the terminology completion work (main at 81d8169 (PR #13 merged)).
     const h = (v: unknown) => createHash("sha256").update(JSON.stringify(v)).digest("hex").slice(0, 16);
     expect({ TERMS: h(TERMS), TERMS_G4: h(TERMS_G4), TECHNIQUES_G4: h(TECHNIQUES_G4), TERMS_G5: h(TERMS_G5), INSTRUMENTS: h(INSTRUMENTS), VOICES: h(VOICES), INSTRUMENTS_G4: h(INSTRUMENTS_G4), INSTRUMENTS_G5: h(INSTRUMENTS_G5), VOICES_G5: h(VOICES_G5) }).toEqual({
       TERMS: "54bebcecf5dfef25", TERMS_G4: "17aa001d7b766541", TECHNIQUES_G4: "de0fe253f77f5495", TERMS_G5: "40563ccfbc14d793", INSTRUMENTS: "74b0e7d08199e5e5", VOICES: "a9670e7953e6cba6",

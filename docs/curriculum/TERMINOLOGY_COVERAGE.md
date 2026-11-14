@@ -8,7 +8,7 @@ The comparison is generated from the committed lessons, templates, path and blue
 
 ## 1. Verification of the reviewer's counts
 
-The Grade 5 educational review reported Grade 1 32/32, Grade 2 16/31, Grade 3 1/34 and Grade 4 21/22. Re-counted against the book and the tree before this work (PR #13 head):
+The Grade 5 educational review reported Grade 1 32/32, Grade 2 16/31, Grade 3 1/34 and Grade 4 21/22. Re-counted against the book and the tree before this work (main at 81d8169 (PR #13 merged)):
 
 | List | Reviewer reported | Covered here (a vocabulary entry exists, or a lesson names the term) | Vocabulary entry exists | Reading |
 |---|---|---|---|---|

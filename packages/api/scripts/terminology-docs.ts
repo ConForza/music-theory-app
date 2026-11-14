@@ -47,7 +47,7 @@ const rv = (k: string, reported: string, note: string) => {
   const b = G(k);
   return `| ${groups.find((g) => g.key === k)!.label} | ${reported} | ${covered(b)}/${b.length} | ${inVocab(b)}/${b.length} | ${note.replace("{vocab}", String(inVocab(b)))} |`;
 };
-L.push("The Grade 5 educational review reported Grade 1 32/32, Grade 2 16/31, Grade 3 1/34 and Grade 4 21/22. Re-counted against the book and the tree before this work (PR #13 head):", "");
+L.push("The Grade 5 educational review reported Grade 1 32/32, Grade 2 16/31, Grade 3 1/34 and Grade 4 21/22. Re-counted against the book and the tree before this work (main at 81d8169 (PR #13 merged)):", "");
 L.push("| List | Reviewer reported | Covered here (a vocabulary entry exists, or a lesson names the term) | Vocabulary entry exists | Reading |", "|---|---|---|---|---|");
 L.push(rv("g1w", "32/32", "Complete. The reviewer's total of 32 is not reproducible under any single counting convention (the printed list has 28 words and ten signs); the conclusion (complete) agrees."));
 L.push(rv("g2w", "16/31", "Reproduced: 16 covered. The reviewer's 31 counts *mosso* and *moto* separately; the printed line is one entry. Only {vocab} are real vocabulary entries; four more are named only in a lesson of another grade."));

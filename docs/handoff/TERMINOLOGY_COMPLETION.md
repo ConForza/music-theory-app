@@ -1,6 +1,6 @@
 # Terminology completion handoff (Grades 2-4)
 
-**Stacked on PR #13** (Grade 5). PR #13 was still open, not merged, when this work started, so this branch is built on its head (`cb906f3`) and its PR targets that branch. When #13 merges, retarget this PR to `main`; nothing here depends on anything that is not in #13.
+Built on PR #13 (Grade 5), now merged: this branch has merged `main` (81d8169) and its PR targets `main`. The "before" fixtures were retaken from that merged tree.
 
 **Delivered:** every term and sign that the reference book lists for Grades 1-4 (167 entries) is now taught, practised and assessable. Before: 49 missing, 1 present but untaught, 6 taught but not practised. After: none. The numbers are generated: [`docs/curriculum/TERMINOLOGY_COVERAGE.md`](../curriculum/TERMINOLOGY_COVERAGE.md) (before/after table, reviewer-count verification, teacher-approval list, every new term).
 
@@ -14,7 +14,7 @@
 
 ## How learners, progress and identities are protected
 
-* **Question identities.** No existing template, concept, lesson file or fingerprint changed. `VOCAB_BOOK` joins the generation fingerprint of the `*.book-*` templates only. All 1,501 fingerprints that existed before are pinned in `packages/api/test/fixtures/fingerprints-before-terms.json` (produced on the PR #13 head) and must be identical; every earlier lesson file, template, concept, concept boundary, path node (except the nine below) and blueprint section is pinned by hash in `content-before-terms.json`.
+* **Question identities.** No existing template, concept, lesson file or fingerprint changed. `VOCAB_BOOK` joins the generation fingerprint of the `*.book-*` templates only. All 1,501 fingerprints that existed before are pinned in `packages/api/test/fixtures/fingerprints-before-terms.json` (produced on the main at 81d8169 (PR #13 merged)) and must be identical; every earlier lesson file, template, concept, concept boundary, path node (except the nine below) and blueprint section is pinned by hash in `content-before-terms.json`.
 * **Progress.** A learner who finished a grade before these lessons existed keeps every completion. The new lessons are `available` for them (their prerequisite was completed); the later ones wait in the chain. The nine practice and review nodes that gained bindings, and the blueprints that gained templates, take version base + 1 (a refresher is offered, nothing is locked).
 * **Learn before assessed.** The path-based taught scope would let a practice, review, challenge or assessment draw a template from its first lesson onward, and a learner who skipped the new lessons has not completed them. `NodeRunService.taughtToLearner` therefore offers a `*.book-*` template only once every lesson that teaches it is completed. Inside a question, wrong options come only from older terms or from this lesson and the ones before it, so a question never shows an untaught word. Tests: `terms-book.test.ts`, `terminology-course.test.ts`.
 * **No mastery shortfalls.** The Grade 2, 3 and 4 mastery-capacity audits report 0 shortfalls with the eleven new concepts in them (each has at least 100 distinct questions across two templates).

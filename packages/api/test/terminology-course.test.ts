@@ -12,7 +12,7 @@ import { Client, playLesson, realCourse, register, responseFor } from "./helpers
 
 /**
  * Terminology completion (Grades 2-4): the eleven new lessons, what they changed on the path, and what they must NOT have changed.
- * The "before" facts come from fixtures produced on the tree before this work (PR #13 head): every earlier lesson file, template, concept,
+ * The "before" facts come from fixtures produced on the tree before this work (main at 81d8169 (PR #13 merged)): every earlier lesson file, template, concept,
  * path node, blueprint section and generation fingerprint.
  */
 const course = realCourse();

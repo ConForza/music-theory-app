@@ -2,7 +2,7 @@
  * Prints (or writes with --out) a JSON map "nodeId|templateId" -> generation fingerprint for every lesson, practice and review binding,
  * plus "template|templateId" for each template on its own grade scope. It is how the "no existing question identity changed" test is
  * pinned: the fixture packages/api/test/fixtures/fingerprints-before-terms.json was produced by this script on the tree before the
- * terminology completion work (PR #13 head), and the test requires every entry in it to be byte-for-byte identical today.
+ * terminology completion work (main at 81d8169 (PR #13 merged)), and the test requires every entry in it to be byte-for-byte identical today.
  */
 import { writeFileSync } from "node:fs";
 import { buildIndex, effectiveScope, loadCurriculum } from "@mtp/curriculum";
