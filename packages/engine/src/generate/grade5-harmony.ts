@@ -39,12 +39,6 @@ export function triadQuality(key: music.Key, roman: string): "major" | "minor" |
   throw new Error(`Unexpected triad ${i3.quality}${i3.number} ${i5.quality}${i5.number}`);
 }
 
-const above = (prev: Pitch, pc: music.PitchClass): Pitch => {
-  let o = prev.octave;
-  let p: Pitch = { ...pc, octave: o };
-  while (diatonicNumber(p) <= diatonicNumber(prev)) p = { ...pc, octave: ++o };
-  return p;
-};
 
 /** All ways to write a triad with its bass note fixed by the inversion: three upper notes (one chord tone doubled) or two. */
 export function voicings(key: music.Key, roman: string, inv: Inv, bassOctave: number, opts: { lo: Pitch; hi: Pitch }): { bass: Pitch; upper: Pitch[] }[] {
@@ -68,7 +62,6 @@ export function voicings(key: music.Key, roman: string, inv: Inv, bassOctave: nu
 }
 const cover = (t: music.PitchClass[], ps: Pitch[]) => t.every((pc) => ps.some((p) => samePitchClassSpelling(p, pc))) && ps.every((p) => t.some((pc) => samePitchClassSpelling(p, pc)));
 const span = (ps: Pitch[]) => ps.every((p, i) => i === 0 || (diatonicNumber(p) > diatonicNumber(ps[i - 1]!) && diatonicNumber(p) - diatonicNumber(ps[i - 1]!) <= 7));
-const ENDS = { treble: { lo: { step: "C", alter: 0, octave: 4 } as Pitch, hi: { step: "A", alter: 0, octave: 5 } as Pitch }, bass: { lo: { step: "E", alter: 0, octave: 2 } as Pitch, hi: { step: "G", alter: 0, octave: 3 } as Pitch } } as const;
 
 /** One chord on a single stave, in any spacing and with or without a doubled note. */
 function singleStaveChord(c: Ctx, key: music.Key, roman: string, inv: Inv, clef: "treble" | "bass"): Pitch[] | null {

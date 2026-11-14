@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- tests read loosely typed answer specs */
 import { buildIndex, effectiveScope, loadCurriculum, music, type ExerciseItem } from "@mtp/curriculum";
 import { describe, expect, it } from "vitest";
 import { canonicalResponse, generateItem, generationFingerprint, gradeItem, templateScope, wrongResponse } from "../src/index.ts";

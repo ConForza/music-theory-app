@@ -89,7 +89,8 @@ export const ornamentFacts5: Gen = (c): any => {
     { q: "A turn written directly over a note…", right: "begins at once, on the note above", wrongs: [["begins only after the note has been sounded", "That is true of a turn placed to the right of the note, not directly over it."], ["begins on the note below", "That is the inverted turn."], ["is played before the beat as a crushed note", "That describes the acciaccatura."]] },
     { q: "Why is there rarely one 'correct' way to play an ornament?", right: "the speed, style and period of the music affect the exact notes and rhythm", wrongs: [["because every ornament sign has several unrelated meanings", "Each sign has a clear basic pattern; it is the rhythm and number of notes that vary."], ["because ornaments are never played in written music", "Ornaments are played; how exactly depends on the music."], ["because only singers may play them", "Ornaments are played by every kind of performer."]] },
   ];
-  const useful = items.filter((it) => !signs.length || true);
+  void signs;
+  const useful = items;
   const it = c.rng.pick(useful);
   const opts: Array<[string, string]> = [["r", cap(it.right)], ...it.wrongs.map(([t], i) => [`w${i}`, cap(t)] as [string, string])];
   const cats: Record<string, string> = {};
@@ -376,7 +377,6 @@ const MELODY_INST: Record<string, Array<{ id: string; name: string }>> = {
   tenor: [{ id: "cello", name: "cello" }, { id: "bassoon", name: "bassoon" }, { id: "trombone-tenor", name: "tenor trombone" }],
   alto: [{ id: "viola", name: "viola" }],
 };
-const CLEF_NAME: Record<string, string> = { treble: "treble", tenor: "tenor", alto: "alto", bass: "bass" };
 
 /** t.g5.score: a short original passage (melody over chords) and several connected questions about it. */
 export const score5: Gen = (c): any => {

@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { checkItem, effectiveScope, music, taughtScope } from "@mtp/curriculum";
-import { canonicalResponse, generateItem, gradeItem } from "@mtp/engine";
+import { generateItem } from "@mtp/engine";
 import { createApp } from "../src/app.ts";
 import { openDb } from "../src/db.ts";
 import { loadConstraints, questionKey, satisfies, visibleKey } from "../src/question-key.ts";

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any -- generators return loosely typed drafts that the engine validates (checkItem) before use */
 /**
  * Shared helpers for the Grade 5 generators (Brief 09). Additive: nothing here is used by Grades 1-4.
  *

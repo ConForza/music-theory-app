@@ -1,5 +1,5 @@
 import { CL2, CL4, FORMS, KEYS_G5, KEYS_OLD, NEWK, has, iq, rline, st, type Spec2 } from "./lib5.ts";
-import { chords, bars } from "./lib5.ts";
+import { bars } from "./lib5.ts";
 
 const six = (keys: string[]) => ({ keys, minorForms: FORMS, clefs: CL2, maxLedgerLines: 2, accidentals: true, keySignatures: true, doubleAccidentals: true });
 const ivs = (extra: Record<string, unknown> = {}) => ({ clefs: CL4, intervalQuality: "number-and-quality", intervalLowerNote: "any", chromaticIntervals: true, doubleAccidentals: true, accidentals: true, maxLedgerLines: 2, keySignatures: true, ...extra });

@@ -18,7 +18,7 @@ import { deriveScale, music, type AnswerSpec, type Measure } from "@mtp/curricul
 import { frag, type Gen } from "./families.ts";
 import { KEYS_G5, NEW_KEYS, F, P, WORDS, an, cap, choiceAnswer, clefsIn, family5, fitsIn, keyWords, keysIn, melodyIn5, nameOfPc, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
-const { parseKey, formatKey, transpose, parseInterval, intervalBetween, staffPosition, naturalAt, ledgerLines, describeInterval } = music;
+const { parseKey, formatKey, transpose, parseInterval, intervalBetween, staffPosition, naturalAt, describeInterval } = music;
 const CLEF_WORD: Record<Clef, string> = { treble: "treble clef", bass: "bass clef", alto: "alto clef", tenor: "tenor clef" };
 
 /** The rhythm of a short melody: one or two bars of crotchets with a longer last note. */
@@ -492,13 +492,12 @@ export const concertFacts5: Gen = (c): any => {
   const inst = c.rng.pick(insts);
   const label = c.rng.pick(INST_LABEL[inst]);
   const mode = c.rng.pick(["sounds", "written", "direction", "interval"] as const);
-  const iv = music.INSTRUMENT_INTERVAL[inst];
   if (mode === "interval") {
     const opts: Array<[string, string]> = [["Bb", "a tone (major 2nd)"], ["A", "a minor 3rd"], ["F", "a perfect 5th"], ["C", "an octave"]];
     const names: Record<InstKey, string> = { Bb: "B♭", A: "A", F: "F" };
     return {
       prompt: `An instrument “in ${names[inst]}” sounds how far BELOW the note that is written for it?`,
-      answer: choiceAnswer(opts, inst, Object.fromEntries(opts.filter(([id]) => id !== inst).map(([id, l]) => [id, ["wrong-interval", `That is the distance for an instrument in ${id === "C" ? "C an octave lower" : id === "Bb" ? "B♭" : id}, not for one in ${names[inst]}.`]]))),
+      answer: choiceAnswer(opts, inst, Object.fromEntries(opts.filter(([id]) => id !== inst).map(([id]) => [id, ["wrong-interval", `That is the distance for an instrument in ${id === "C" ? "C an octave lower" : id === "Bb" ? "B♭" : id}, not for one in ${names[inst]}.`]]))),
       hints: ["B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."],
     };
   }

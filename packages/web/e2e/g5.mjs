@@ -10,8 +10,7 @@
 import assert from "node:assert/strict";
 import { chromium, devices } from "playwright";
 import { answerOnScreen, axe, completeEarlier, finishViaApi, get, guest, noOverflow, playLessonInBrowser, playNodeInBrowser, playReviewInBrowser, post, selectGrade, serve, shot } from "./g5lib.mjs";
-import { canonicalResponse, generateItem, inputFor, wrongResponse } from "@mtp/engine";
-import { effectiveScope } from "@mtp/curriculum";
+import { canonicalResponse, inputFor, wrongResponse } from "@mtp/engine";
 
 const S = await serve({ waive: false });
 const browser = await chromium.launch();
