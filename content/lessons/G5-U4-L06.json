@@ -206,7 +206,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The melody notes marked A and B come at a cadence point in C major. Choose a chord for each (I, ii, IV or V) so that A and B make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct.",
+      "prompt": "The melody notes marked A and B come at a cadence point in F major. Choose a chord for each (I, ii, IV or V) so that A and B make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -216,31 +216,31 @@
             "events": [
               {
                 "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
                 "pitch": "E5",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "D5",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "E5",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "D5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -252,7 +252,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "F5",
+                "pitch": "D5",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -261,7 +261,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "B4",
+                "pitch": "G5",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -272,18 +272,18 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 4th space; a note on the 4th line; a note in the 4th space; a note on the 4th line. Bar 2: a note marked A on the 5th line; a note marked B on the 3rd line.",
-        "key": "C major",
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 4/4. Bar 1: a note on the 1st ledger line above the stave; a note in the space just above the stave; a note on the 5th line; a note in the 4th space. Bar 2: a note marked A on the 4th line; a note marked B in the space just above the stave.",
+        "key": "F major",
         "timeSignature": "4/4"
       },
       "answer": {
         "kind": "chord-progression",
-        "key": "C major",
+        "key": "F major",
         "points": [
           {
             "label": "A",
             "melodyPitches": [
-              "F5"
+              "D5"
             ],
             "accepted": [
               "IV",
@@ -293,7 +293,7 @@
           {
             "label": "B",
             "melodyPitches": [
-              "B4"
+              "G5"
             ],
             "accepted": [
               "V"
@@ -531,7 +531,23 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "F#4",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -540,22 +556,6 @@
               {
                 "kind": "note",
                 "pitch": "A4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "C4",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "E4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -587,7 +587,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 1st space; a note in the 2nd space; a note on the 1st ledger line below the stave; a note on the 1st line. Bar 2: a note marked A in the 3rd space; a note marked B in the 2nd space.",
+        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. Bar 1: a note on the 4th line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space. Bar 2: a note marked A in the 3rd space; a note marked B in the 2nd space.",
         "key": "G major",
         "timeSignature": "4/4"
       },
@@ -970,7 +970,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "E5",
+                "pitch": "G4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -978,7 +978,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "A5",
+                "pitch": "F4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -986,7 +986,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "G5",
+                "pitch": "A4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -994,7 +994,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F5",
+                "pitch": "C5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -1026,7 +1026,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 flat, 4/4. Bar 1: a note in the 4th space; a note on the 1st ledger line above the stave; a note in the space just above the stave; a note on the 5th line. Bar 2: a note marked A on the 3rd line; a note marked B on the 5th line.",
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 4/4. Bar 1: a note on the 2nd line; a note in the 1st space; a note in the 2nd space; a note in the 3rd space. Bar 2: a note marked A on the 3rd line; a note marked B on the 5th line.",
         "key": "F major",
         "timeSignature": "4/4"
       },

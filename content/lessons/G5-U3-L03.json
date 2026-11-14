@@ -57,7 +57,7 @@
     },
     {
       "kind": "text",
-      "text": "Two intervals can sound the same and have different names. C up to A♯ is an augmented 6th, and C up to B♭ is a minor 7th, yet the two upper notes are the same key on the piano. The letter names decide the number, so never name an interval by its sound alone. Intervals that cannot be named with major, minor, perfect, augmented or diminished (such as a doubly augmented 4th) are not asked."
+      "text": "Two intervals can sound the same and have different names. C up to A♯ is an augmented 6th, and C up to B♭ is a minor 7th, yet the two upper notes are the same key on the piano. The letter names decide the number, so never name an interval by its sound alone. Intervals that cannot be named with major, minor, perfect, augmented or diminished (such as a doubly augmented 4th) are not asked. The octave can be altered too: from a note up to the same letter name in the next octave is a perfect 8th; C up to C♯ is an augmented 8th (an octave plus a semitone), and C up to C♭ in the next octave is a diminished 8th (an octave less a semitone)."
     },
     {
       "kind": "tip",
@@ -178,14 +178,14 @@
       "prompt": "Name this interval, measured from the lower note to the higher one: give its quality and its number.",
       "music": {
         "presentation": "stave",
-        "clef": "treble",
+        "clef": "alto",
         "showKeySignature": false,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "Bb4",
+                "pitch": "Fb3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
@@ -194,25 +194,24 @@
               },
               {
                 "kind": "note",
-                "pitch": "Gbb5",
+                "pitch": "A3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
-                },
-                "writtenAccidental": "double-flat"
+                }
               }
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave. a note on the 3rd line, with a flat sign in front; a note in the space just above the stave, with a double flat sign in front."
+        "textAlternative": "An alto-clef stave. a note on the 1st line, with a flat sign in front; a note on the 2nd line."
       },
       "answer": {
         "kind": "interval",
         "task": "identify",
-        "lower": "Bb4",
-        "upper": "Gbb5",
+        "lower": "Fb3",
+        "upper": "A3",
         "acceptedIntervals": [
-          "d6"
+          "A3"
         ]
       },
       "hints": [
@@ -237,7 +236,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write the note that is an augmented 7th below C𝄪. Write it on the stave, with any sharp, flat or natural it needs.",
+      "prompt": "Write the note that is an augmented 3rd below A♯. Write it on the stave, with any sharp, flat or natural it needs.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -247,31 +246,31 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Cx5",
+                "pitch": "A#4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
                 },
-                "writtenAccidental": "double-sharp"
+                "writtenAccidental": "sharp"
               }
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave. a note in the 3rd space, with a double sharp sign in front."
+        "textAlternative": "A treble-clef stave. a note in the 2nd space, with a sharp sign in front."
       },
       "answer": {
         "kind": "interval",
         "task": "build",
-        "lower": "Cx5",
-        "target": "A7",
+        "lower": "A#4",
+        "target": "A3",
         "direction": "down",
         "acceptedPitches": [
-          "D4"
+          "F4"
         ]
       },
       "hints": [
         "Letter name first, then the sharp or flat that gives the quality.",
-        "Count 7 letter names down from Cx for the letter, then add the sharp or flat that gives the quality."
+        "Count 3 letter names down from A# for the letter, then add the sharp or flat that gives the quality."
       ],
       "feedback": {
         "correct": "Right: the letter first, then the accidental.",
@@ -296,40 +295,40 @@
       "prompt": "Name this interval, measured from the lower note to the higher one: give its quality and its number.",
       "music": {
         "presentation": "stave",
-        "clef": "alto",
+        "clef": "treble",
         "showKeySignature": false,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "Cb4",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                },
-                "writtenAccidental": "flat"
-              },
-              {
-                "kind": "note",
-                "pitch": "B4",
+                "pitch": "D4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
                 }
+              },
+              {
+                "kind": "note",
+                "pitch": "B#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
               }
             ]
           }
         ],
-        "textAlternative": "An alto-clef stave. a note on the 3rd line, with a flat sign in front; a note on the 1st ledger line above the stave."
+        "textAlternative": "A treble-clef stave. a note in the space just below the stave; a note on the 3rd line, with a sharp sign in front."
       },
       "answer": {
         "kind": "interval",
         "task": "identify",
-        "lower": "Cb4",
-        "upper": "B4",
+        "lower": "D4",
+        "upper": "B#4",
         "acceptedIntervals": [
-          "A7"
+          "A6"
         ]
       },
       "hints": [
@@ -354,7 +353,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the note that is an augmented 6th above F. Write it on the stave, with any sharp, flat or natural it needs.",
+      "prompt": "Write the note that is a diminished 3rd above F. Write it on the stave, with any sharp, flat or natural it needs.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -379,15 +378,15 @@
         "kind": "interval",
         "task": "build",
         "lower": "F4",
-        "target": "A6",
+        "target": "d3",
         "direction": "up",
         "acceptedPitches": [
-          "D#5"
+          "Abb4"
         ]
       },
       "hints": [
         "Letter name first, then the sharp or flat that gives the quality.",
-        "Count 6 letter names up from F for the letter, then add the sharp or flat that gives the quality."
+        "Count 3 letter names up from F for the letter, then add the sharp or flat that gives the quality."
       ],
       "feedback": {
         "correct": "Correct note.",
@@ -417,33 +416,34 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B4",
-                "duration": {
-                  "value": "semibreve",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "Db5",
+                "pitch": "D#4",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
                 },
-                "writtenAccidental": "flat"
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ex4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-sharp"
               }
             ]
           }
         ],
-        "textAlternative": "A treble-clef stave. a note on the 3rd line; a note on the 4th line, with a flat sign in front."
+        "textAlternative": "A treble-clef stave. a note in the space just below the stave, with a sharp sign in front; a note on the 1st line, with a double sharp sign in front."
       },
       "answer": {
         "kind": "interval",
         "task": "identify",
-        "lower": "B4",
-        "upper": "Db5",
+        "lower": "D#4",
+        "upper": "Ex4",
         "acceptedIntervals": [
-          "d3"
+          "A2"
         ]
       },
       "hints": [
@@ -513,7 +513,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the note that is an augmented 7th below G♯. Write it on the stave, with any sharp, flat or natural it needs.",
+      "prompt": "Write the note that is an augmented octave below A. Write it on the stave, with any sharp, flat or natural it needs.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -523,23 +523,22 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "G#3",
+                "pitch": "A3",
                 "duration": {
                   "value": "semibreve",
                   "dots": 0
-                },
-                "writtenAccidental": "sharp"
+                }
               }
             ]
           }
         ],
-        "textAlternative": "A bass-clef stave. a note in the 4th space, with a sharp sign in front."
+        "textAlternative": "A bass-clef stave. a note on the 5th line."
       },
       "answer": {
         "kind": "interval",
         "task": "build",
-        "lower": "G#3",
-        "target": "A7",
+        "lower": "A3",
+        "target": "A8",
         "direction": "down",
         "acceptedPitches": [
           "Ab2"
@@ -547,7 +546,7 @@
       },
       "hints": [
         "Letter name first, then the sharp or flat that gives the quality.",
-        "Count 7 letter names down from G# for the letter, then add the sharp or flat that gives the quality."
+        "Count 8 letter names down from A for the letter, then add the sharp or flat that gives the quality."
       ],
       "feedback": {
         "correct": "Correct.",

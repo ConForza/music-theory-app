@@ -5,7 +5,7 @@
   "contentVersion": 1,
   "locale": "en-GB",
   "objective": {
-    "statement": "Read 5/4, 7/4, 5/8 and 7/8 as combinations of groups of two and three beats.",
+    "statement": "Read 5/4, 7/4, 5/8 and 7/8 as combinations of groups of two (or four) and three beats.",
     "successCriteria": [
       "I can tell an irregular time signature from a regular one.",
       "I know the upper figure counts the beats and the lower figure names the beat.",
@@ -15,7 +15,7 @@
   "explanation": [
     {
       "kind": "text",
-      "text": "So far every bar you have met had beats that were all alike: two, three or four of them, simple or compound. A time signature with five or seven beats in a bar is called irregular, because its beats cannot be shared out evenly. Instead the bar breaks into smaller groups of two and three beats. At Grade 5 the irregular signatures are 5/4, 7/4, 5/8 and 7/8."
+      "text": "So far every bar you have met had beats that were all alike: two, three or four of them, simple or compound. A time signature with five or seven beats in a bar is called irregular, because its beats cannot be shared out evenly. Instead the bar breaks into smaller groups of two and three beats (a group of four is also possible: seven beats may be 4 + 3). At Grade 5 the irregular signatures are 5/4, 7/4, 5/8 and 7/8."
     },
     {
       "kind": "text",
@@ -102,7 +102,7 @@
     },
     {
       "kind": "text",
-      "text": "Some questions list regular and irregular signatures together: work out the bar length first, and look for dotted beats or three-note beams (compound time) before you decide. A time signature does not say how the beats are grouped. Five beats may fall as 3 + 2 or 2 + 3; seven beats as 2 + 2 + 3, 3 + 2 + 2 or 2 + 3 + 2. The composer shows the grouping with note lengths and beams, and a piece usually keeps the same grouping from bar to bar."
+      "text": "Some questions list regular and irregular signatures together: work out the bar length first, and look for dotted beats or three-note beams (compound time) before you decide. A time signature does not say how the beats are grouped. Five beats may fall as 3 + 2 or 2 + 3; seven beats as 2 + 2 + 3, 3 + 2 + 2, 2 + 3 + 2 or, with a group of four, 4 + 3 or 3 + 4. The composer shows the grouping with note lengths and beams, and a piece usually keeps the same grouping from bar to bar."
     },
     {
       "kind": "tip",
@@ -305,7 +305,8 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -313,7 +314,8 @@
                 "duration": {
                   "value": "quaver",
                   "dots": 0
-                }
+                },
+                "beam": "end"
               },
               {
                 "kind": "note",
@@ -390,7 +392,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, crotchet, quaver, quaver, quaver, quaver, crotchet. Bar 2: crotchet rest, crotchet, quaver, quaver, crotchet rest, quaver, quaver.",
-        "questionAlternative": "Bar 1: crotchet, crotchet, 2 beamed together (quaver, quaver), quaver, quaver, crotchet. Bar 2: crotchet rest, crotchet, 2 beamed together (quaver, quaver), crotchet rest, 2 beamed together (quaver, quaver)."
+        "questionAlternative": "Bar 1: crotchet, crotchet, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), crotchet. Bar 2: crotchet rest, crotchet, 2 beamed together (quaver, quaver), crotchet rest, 2 beamed together (quaver, quaver)."
       },
       "answer": {
         "kind": "time-signature",
@@ -418,7 +420,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Which of these groupings can a bar of 5/4 use? (A bar is divided into groups of two and three beats.)",
+      "prompt": "Which of these groupings can a bar of 5/4 use? (Groups are usually of two or three beats, and occasionally of four.)",
       "answer": {
         "kind": "choice",
         "options": [
@@ -445,24 +447,24 @@
         "diagnoses": {
           "3+3": {
             "category": "beat-count-wrong",
-            "reason": "3+3 is not a normal way to divide 5 beats: irregular bars use only groups of two and three."
+            "reason": "3+3 is not a normal way to divide 5 beats: irregular bars are made of groups of two or three beats, and occasionally four."
           },
           "4+1": {
             "category": "beat-count-wrong",
-            "reason": "4+1 is not a normal way to divide 5 beats: irregular bars use only groups of two and three."
+            "reason": "4+1 is not a normal way to divide 5 beats: irregular bars are made of groups of two or three beats, and occasionally four."
           },
           "2+2+1": {
             "category": "beat-count-wrong",
-            "reason": "2+2+1 is not a normal way to divide 5 beats: irregular bars use only groups of two and three."
+            "reason": "2+2+1 is not a normal way to divide 5 beats: irregular bars are made of groups of two or three beats, and occasionally four."
           }
         }
       },
       "hints": [
         "The upper figure counts the units; the lower figure names the unit; groups are twos and threes.",
-        "Groups are made of two or three beats, never one."
+        "Groups are made of two or three beats (occasionally four), never one."
       ],
       "feedback": {
-        "correct": "Yes: only groups of two and three.",
+        "correct": "Yes: groups of two or three, and occasionally four.",
         "mistakes": {
           "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
           "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
@@ -725,7 +727,7 @@
       },
       "hints": [
         "The upper figure counts the units; the lower figure names the unit; groups are twos and threes.",
-        "Irregular signatures have five or seven beats in a bar, and the beats fall into unequal groups of two and three."
+        "Irregular signatures have five or seven beats in a bar, and the beats fall into unequal groups of two (or four) and three."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -948,7 +950,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "One piece in 7/8 is felt as 2+3+2 and another as 3+2+2. What is true?",
+      "prompt": "One piece in 7/8 is felt as 2+2+3 and another as 3+4. What is true?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -958,11 +960,11 @@
           },
           {
             "id": "first",
-            "label": "Only 2+3+2 is correct for 7/8"
+            "label": "Only 2+2+3 is correct for 7/8"
           },
           {
             "id": "second",
-            "label": "Only 3+2+2 is correct for 7/8"
+            "label": "Only 3+4 is correct for 7/8"
           },
           {
             "id": "neither",
@@ -975,11 +977,11 @@
         "diagnoses": {
           "first": {
             "category": "wrong-category",
-            "reason": "3+2+2 is also a normal grouping of 7/8."
+            "reason": "3+4 is also a normal grouping of 7/8."
           },
           "second": {
             "category": "wrong-category",
-            "reason": "2+3+2 is also a normal grouping of 7/8."
+            "reason": "2+2+3 is also a normal grouping of 7/8."
           },
           "neither": {
             "category": "wrong-category",
@@ -1260,7 +1262,7 @@
     }
   ],
   "recap": [
-    "Irregular time has five or seven beats, made of groups of two and three.",
+    "Irregular time has five or seven beats, made of groups of two (or four) and three.",
     "The upper figure counts the beats; the lower figure names the beat.",
     "The signature does not give the grouping: the notes and beams do."
   ],
@@ -1294,6 +1296,6 @@
     "outcomeIds": [
       "abrsm2020.g5.01"
     ],
-    "notes": "Original wording. Follows Grade 5 outcome 1 and First Steps Grade 5 section 1 (p. 105, read in the PDF): five or seven beats; bars are combinations of twos and threes; only 5/4, 7/4, 5/8 and 7/8 at Grade 5. Q30/Q35: grouping in x/4 is shown by note lengths because crotchets cannot be beamed."
+    "notes": "Original wording. Follows Grade 5 outcome 1 and First Steps Grade 5 section 1 (p. 105, read in the PDF): five or seven beats; bars are combinations of two- (or four-) and three-beat groups (the book's own 7/8 example is 4+3); only 5/4, 7/4, 5/8 and 7/8 at Grade 5. Q30/Q35: grouping in x/4 is shown by note lengths because crotchets cannot be beamed."
   }
 }

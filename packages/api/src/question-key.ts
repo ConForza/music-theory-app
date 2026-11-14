@@ -34,7 +34,7 @@ const strip = (v: unknown, alt = false): unknown =>
  */
 /** A chord-writing task accepts ANY voicing with the right notes, so its stored worked example is not part of what is asked. */
 const withoutWorkedExample = (templateId: string, a: unknown): unknown => {
-  if (templateId === "t.g4.chord-build" && a && typeof a === "object") {
+  if ((templateId === "t.g4.chord-build" || templateId === "t.g5.chord-build") && a && typeof a === "object") {
     const { acceptedVoicings: _w, ...rest } = a as Record<string, unknown>;
     return rest;
   }
@@ -141,19 +141,35 @@ export const GRADE2_ORDER_INSENSITIVE = new Set(
     "melody-detail",
   ].map((x) => `t.g2.${x}`),
 );
-/** Brief 08 (Grade 4): every Grade 4 template is new, so none has stored history; option order is never part of a question. */
+/**
+ * Brief 08 (Grade 4) and Brief 09 (Grade 5): every Grade 4 and Grade 5 template is new, so none has stored history; option order and
+ * descriptions are never part of a question.
+ */
 const orderInsensitive = (templateId: string) =>
   templateId.startsWith("t.g4.") ||
+  templateId.startsWith("t.g5.") ||
   ORDER_INSENSITIVE_TEMPLATES.has(templateId) ||
   GRADE2_ORDER_INSENSITIVE.has(templateId) ||
   GRADE3_ORDER_INSENSITIVE.has(templateId);
 
+/** A Grade 5 "complete the bar" task accepts any bar that follows the rules, so its stored sample completion is not part of what is asked. */
+const withoutSampleCompletion = (templateId: string, a: unknown): unknown => {
+  const r = a as { kind?: string; task?: string; acceptAnyRuleCompliant?: boolean } | null;
+  if (templateId.startsWith("t.g5.") && r && typeof r === "object" && r.kind === "rhythm" && r.task === "complete-bar" && r.acceptAnyRuleCompliant) {
+    return Object.fromEntries(Object.entries(r).filter(([k]) => k !== "accepted"));
+  }
+  return a;
+};
+
 export function questionKey(item: ExerciseItem): string {
-  const answer = withoutWorkedExample(
+  const answer = withoutSampleCompletion(
     item.templateId,
-    orderInsensitive(item.templateId)
-      ? normaliseAnswer(item.answer)
-      : item.answer,
+    withoutWorkedExample(
+      item.templateId,
+      orderInsensitive(item.templateId)
+        ? normaliseAnswer(item.answer)
+        : item.answer,
+    ),
   );
   // Brief 04 templates keep hashing their text alternative exactly as that release did, so exposure and evidence stored then still match
   // after an upgrade (the learner-facing wording for questions lives in `questionAlternative`, which is never hashed). Templates new in

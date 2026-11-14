@@ -47,7 +47,9 @@ export const ornamentReplace5: Gen = (c): any => {
   const figures: Record<string, Array<[Pitch, music.NoteValue]>> = {
     "upper-mordent": [[main, "semiquaver"], [up, "semiquaver"], [main, "quaver"]],
     "lower-mordent": [[main, "semiquaver"], [down, "semiquaver"], [main, "quaver"]],
-    turn: [[up, "semiquaver"], [main, "semiquaver"], [down, "semiquaver"], [main, "semiquaver"]],
+    turn: c.rng.chance(0.4)
+      ? [[main, "quaver"], [up, "demisemiquaver"], [main, "demisemiquaver"], [down, "demisemiquaver"], [main, "demisemiquaver"]] // a turn written to the right of the note: main, upper, main, lower, main
+      : [[up, "semiquaver"], [main, "semiquaver"], [down, "semiquaver"], [main, "semiquaver"]],
     trill: [[up, "semiquaver"], [main, "semiquaver"], [up, "semiquaver"], [main, "semiquaver"], [up, "semiquaver"], [main, "semiquaver"], [down, "semiquaver"], [main, "semiquaver"]],
   };
   const fig = figures[sign]!;
@@ -348,12 +350,13 @@ export const termUse5: Gen = (c): any => {
     };
   }
   if (mode === "pedal") {
-    const picks = ["una-corda", "tre-corde", "mano-sinistra", "mano-destra"].map((id) => T.find((t) => t.id === id)!);
-    const t = c.rng.pick(picks);
+    const all = ["una-corda", "tre-corde", "ped-sign", "spread-chord", "mano-sinistra", "mano-destra"].map((id) => T.find((t) => t.id === id)!);
+    const t = c.rng.pick(all);
+    const picks = [t, ...shuffled(c, all.filter((x) => x.id !== t.id)).slice(0, 3)];
     return {
       prompt: `A pianist reads the direction “${t.term}”. What should be done?`,
       answer: choiceAnswer(shuffled(c, picks.map((x) => [x.id, cap(x.meaning)] as [string, string])), t.id, Object.fromEntries(picks.filter((x) => x.id !== t.id).map((x) => [x.id, ["confused-similar-term", `That is the meaning of “${x.term}”.`]]))),
-      hints: ["Una corda and tre corde concern the left pedal; mano sinistra and mano destra name the hands."],
+      hints: ["Una corda and tre corde concern the left pedal and Ped. the right pedal; mano sinistra and mano destra name the hands; a wavy line before a chord spreads it."],
     };
   }
   // instruction: from meaning to term, one term per synonym group so one answer is right
@@ -418,7 +421,7 @@ export const score5: Gen = (c): any => {
     mel.push(best!);
     for (let i = 0; i < 3; i++) {
       d += c.rng.pick([-1, 1, 1, -1, 0].filter((x) => x !== 0 || i === 2) as number[]);
-      const pc = pcs[((d % 7) + 7) % 7]!;
+      const pc = pcs.find((x) => music.stepIndex(x.step) === ((d % 7) + 7) % 7)!; // d counts letters from C, so the scale is looked up by letter, not by degree
       mel.push({ ...pc, octave: Math.floor(d / 7) } as Pitch);
     }
   }

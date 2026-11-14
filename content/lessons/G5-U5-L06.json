@@ -15,11 +15,11 @@
   "explanation": [
     {
       "kind": "text",
-      "text": "Grade 5 adds more Italian terms: for example attacca (go straight on to the next section), dolente (sad, mournful), doppio movimento (twice as fast), estinto (as soft as possible), incalzando (getting quicker), lusingando (coaxing), ossia (or, alternatively), piangevole (plaintive), rinforzando (reinforcing), smorzando (dying away), teneramente (tenderly), tosto (swift) and volante (flying, fast)."
+      "text": "Grade 5 adds more Italian terms: for example attacca (go straight on to the next section), dolente (sad, mournful), dolore (grief; doloroso: sorrowful), segue (go straight on), misura (measure: alla misura is in strict time, senza misura in free time), piacevole (pleasant), pochettino (rather little), doppio movimento (twice as fast), estinto (as soft as possible), incalzando (getting quicker), lusingando (coaxing), ossia (or, alternatively), piangevole (plaintive), rinforzando (reinforcing), smorzando (dying away), teneramente (tenderly), tosto (swift, rapid: often used in the same sense as troppo, 'too much') and volante (flying, fast)."
     },
     {
       "kind": "text",
-      "text": "German directions are built from short words: langsam (slow), schnell (fast), lebhaft (lively), ruhig (peaceful), bewegt (with movement), zart (tender), breit (broad), traurig (sad), süss (sweet), fröhlich (cheerful), mässig (at a moderate speed). Little words change them: sehr (very), etwas (somewhat), wenig (little), nicht (not), zu (too), immer (always), wieder (again), und (and), mit (with), ohne (without), aber (but). Sehr langsam is 'very slow'; mit Ausdruck is 'with expression'. French directions work in the same way: lent (slow), vif (lively), vite (quick), léger (light), douce (sweet, gentle), modéré (at a moderate speed), animé (animated), with little words such as très (very), assez (enough), peu (little), plus (more), moins (less), sans (without), avec (with), mais (but), et (and); cédez, ralentir and retenu all ask for a slower speed, and avec sourdines means 'with mutes'. Très lent is 'very slow'."
+      "text": "German directions are built from short words: langsam (slow), schnell (fast), lebhaft (lively), ruhig (peaceful), bewegt (with movement), zart (tender), breit (broad), traurig (sad), süss (sweet), fröhlich (cheerful), mässig (at a moderate speed). Little words change them: sehr (very), etwas (somewhat), wenig (little), nicht (not), zu (too), immer (always), wieder (again), und (and), mit (with), ohne (without), aber (but); ein or eine (a, one) and einfach (simple) complete the list. Sehr langsam is 'very slow'; mit Ausdruck is 'with expression'. French directions work in the same way (à means 'to, at', un or une 'one', en dehors 'prominent' and presser 'to hurry'): lent (slow), vif (lively), vite (quick), léger (light), douce (sweet, gentle), modéré (at a moderate speed), animé (animated), with little words such as très (very), assez (enough), peu (little), plus (more), moins (less), sans (without), avec (with), mais (but), et (and); cédez, ralentir and retenu all ask for a slower speed, and avec sourdines means 'with mutes'. Très lent is 'very slow'."
     },
     {
       "kind": "notation",
@@ -74,7 +74,7 @@
     },
     {
       "kind": "text",
-      "text": "Pianists also meet directions for the pedals and hands: una corda (press the left pedal, literally 'one string'), tre corde (release the left pedal, 'three strings'), mano sinistra (m.s., left hand) and mano destra (m.d., right hand)."
+      "text": "Pianists also meet directions for the pedals and hands: una corda (press the left pedal, literally 'one string'), tre corde (release the left pedal, 'three strings'), the sign Ped. … ✱ (press the right pedal at Ped. and release it at the star), mano sinistra (m.s., left hand) and mano destra (m.d., right hand). A wavy line before a chord means: spread the notes quickly, starting from the bottom note."
     },
     {
       "kind": "text",
@@ -157,12 +157,8 @@
         "kind": "choice",
         "options": [
           {
-            "id": "lacrimoso",
-            "label": "Tearful, sad"
-          },
-          {
-            "id": "smorzando",
-            "label": "Dying away in tone and speed"
+            "id": "dolore",
+            "label": "Grief"
           },
           {
             "id": "volante",
@@ -171,6 +167,10 @@
           {
             "id": "lunga",
             "label": "Long (as in lunga pausa, a long pause)"
+          },
+          {
+            "id": "lacrimoso",
+            "label": "Tearful, sad"
           }
         ],
         "correctOptionIds": [
@@ -185,9 +185,9 @@
             "category": "confused-similar-term",
             "reason": "That is the meaning of “lacrimoso”."
           },
-          "smorzando": {
+          "dolore": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “smorzando (smorz.)”."
+            "reason": "That is the meaning of “dolore”."
           }
         }
       },
@@ -211,13 +211,13 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "A composer wants the player to enough, sufficiently. Which direction would be printed?",
+      "prompt": "A composer wants the player to prominent (a direction to make a melody stand out). Which direction would be printed?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "fr-douce",
-            "label": "douce"
+            "id": "fr-cedez",
+            "label": "cédez"
           },
           {
             "id": "fr-moderefr",
@@ -228,17 +228,17 @@
             "label": "lent"
           },
           {
-            "id": "fr-assez",
-            "label": "assez"
+            "id": "fr-en-dehors",
+            "label": "en dehors"
           }
         ],
         "correctOptionIds": [
-          "fr-assez"
+          "fr-en-dehors"
         ],
         "diagnoses": {
-          "fr-douce": {
+          "fr-cedez": {
             "category": "confused-similar-term",
-            "reason": "“douce” means “sweet, gentle”."
+            "reason": "“cédez” means “yield: relax the speed”."
           },
           "fr-moderefr": {
             "category": "confused-similar-term",
@@ -270,29 +270,29 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "A French term: what does “douce” mean?",
+      "prompt": "A French term: what does “en dehors” mean?",
       "answer": {
         "kind": "choice",
         "options": [
-          {
-            "id": "fr-douce",
-            "label": "Sweet, gentle"
-          },
           {
             "id": "fr-anime",
             "label": "Animated, lively"
           },
           {
-            "id": "fr-non",
-            "label": "Not"
-          },
-          {
             "id": "fr-lent",
             "label": "Slow"
+          },
+          {
+            "id": "fr-en-dehors",
+            "label": "Prominent (a direction to make a melody stand out)"
+          },
+          {
+            "id": "fr-non",
+            "label": "Not"
           }
         ],
         "correctOptionIds": [
-          "fr-douce"
+          "fr-en-dehors"
         ],
         "diagnoses": {
           "fr-anime": {
@@ -331,21 +331,21 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "An Italian term: what does “piangevole” mean?",
+      "prompt": "An Italian term: what does “lacrimoso” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "piangevole",
-            "label": "Plaintive, in the style of a lament"
+            "id": "tosto",
+            "label": "Swift, rapid (often used in the same sense as troppo)"
           },
           {
-            "id": "incalzando",
-            "label": "Getting quicker, pressing forward"
+            "id": "loco",
+            "label": "At the normal pitch (cancels an 8va sign)"
           },
           {
-            "id": "smorzando",
-            "label": "Dying away in tone and speed"
+            "id": "lacrimoso",
+            "label": "Tearful, sad"
           },
           {
             "id": "teneramente",
@@ -353,20 +353,20 @@
           }
         ],
         "correctOptionIds": [
-          "piangevole"
+          "lacrimoso"
         ],
         "diagnoses": {
-          "incalzando": {
+          "loco": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “incalzando”."
+            "reason": "That is the meaning of “loco”."
           },
           "teneramente": {
             "category": "confused-similar-term",
             "reason": "That is the meaning of “teneramente”."
           },
-          "smorzando": {
+          "tosto": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “smorzando (smorz.)”."
+            "reason": "That is the meaning of “tosto”."
           }
         }
       },
@@ -390,38 +390,38 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which direction asks the player to do this: left hand?",
+      "prompt": "Which direction asks the player to do this: spread the notes of the chord quickly, starting from the bottom note?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "mano-sinistra",
-            "label": "mano sinistra (m.s.)"
-          },
-          {
             "id": "una-corda",
             "label": "una corda"
+          },
+          {
+            "id": "mano-destra",
+            "label": "mano destra (m.d.)"
           },
           {
             "id": "tre-corde",
             "label": "tre corde"
           },
           {
-            "id": "mano-destra",
-            "label": "mano destra (m.d.)"
+            "id": "spread-chord",
+            "label": "the wavy line before a chord"
           }
         ],
         "correctOptionIds": [
-          "mano-sinistra"
+          "spread-chord"
         ],
         "diagnoses": {
-          "una-corda": {
-            "category": "confused-similar-term",
-            "reason": "“una corda” means “press the left (soft) pedal (literally “one string”)”."
-          },
           "mano-destra": {
             "category": "confused-similar-term",
             "reason": "“mano destra (m.d.)” means “right hand”."
+          },
+          "una-corda": {
+            "category": "confused-similar-term",
+            "reason": "“una corda” means “press the left (soft) pedal (literally “one string”)”."
           },
           "tre-corde": {
             "category": "confused-similar-term",
@@ -462,12 +462,12 @@
             "label": "Somewhat, rather"
           },
           {
-            "id": "ohne",
-            "label": "Without"
-          },
-          {
             "id": "breit",
             "label": "Broad, expansive"
+          },
+          {
+            "id": "ohne",
+            "label": "Without"
           }
         ],
         "correctOptionIds": [
@@ -508,7 +508,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A composer wants the player to at the normal pitch (cancels an 8va sign). Which direction would be printed?",
+      "prompt": "A composer wants the player to coaxing, in a sweet and persuasive style. Which direction would be printed?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -517,33 +517,33 @@
             "label": "lusingando"
           },
           {
-            "id": "loco",
-            "label": "loco"
+            "id": "smorzando",
+            "label": "smorzando (smorz.)"
+          },
+          {
+            "id": "doloroso",
+            "label": "doloroso"
           },
           {
             "id": "rinforzando",
             "label": "rinforzando (rf, rfz)"
-          },
-          {
-            "id": "lacrimoso",
-            "label": "lacrimoso"
           }
         ],
         "correctOptionIds": [
-          "loco"
+          "lusingando"
         ],
         "diagnoses": {
+          "doloroso": {
+            "category": "confused-similar-term",
+            "reason": "“doloroso” means “sorrowful”."
+          },
           "rinforzando": {
             "category": "confused-similar-term",
             "reason": "“rinforzando (rf, rfz)” means “reinforcing: a sudden stress on a note or chord”."
           },
-          "lusingando": {
+          "smorzando": {
             "category": "confused-similar-term",
-            "reason": "“lusingando” means “coaxing, in a sweet and persuasive style”."
-          },
-          "lacrimoso": {
-            "category": "confused-similar-term",
-            "reason": "“lacrimoso” means “tearful, sad”."
+            "reason": "“smorzando (smorz.)” means “dying away in tone and speed”."
           }
         }
       },
@@ -567,29 +567,29 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A French term: what does “douce” mean?",
+      "prompt": "A French term: what does “en dehors” mean?",
       "answer": {
         "kind": "choice",
         "options": [
-          {
-            "id": "fr-et",
-            "label": "And"
-          },
-          {
-            "id": "fr-douce",
-            "label": "Sweet, gentle"
-          },
           {
             "id": "fr-moderefr",
             "label": "At a moderate speed"
           },
           {
+            "id": "fr-en-dehors",
+            "label": "Prominent (a direction to make a melody stand out)"
+          },
+          {
             "id": "fr-assez",
             "label": "Enough, sufficiently"
+          },
+          {
+            "id": "fr-et",
+            "label": "And"
           }
         ],
         "correctOptionIds": [
-          "fr-douce"
+          "fr-en-dehors"
         ],
         "diagnoses": {
           "fr-assez": {
@@ -626,31 +626,35 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A pianist reads the direction “mano sinistra (m.s.)”. What should be done?",
+      "prompt": "A pianist reads the direction “the wavy line before a chord”. What should be done?",
       "answer": {
         "kind": "choice",
         "options": [
-          {
-            "id": "tre-corde",
-            "label": "Release the left pedal (literally “three strings”)"
-          },
           {
             "id": "una-corda",
             "label": "Press the left (soft) pedal (literally “one string”)"
           },
           {
-            "id": "mano-destra",
-            "label": "Right hand"
+            "id": "spread-chord",
+            "label": "Spread the notes of the chord quickly, starting from the bottom note"
           },
           {
-            "id": "mano-sinistra",
-            "label": "Left hand"
+            "id": "tre-corde",
+            "label": "Release the left pedal (literally “three strings”)"
+          },
+          {
+            "id": "mano-destra",
+            "label": "Right hand"
           }
         ],
         "correctOptionIds": [
-          "mano-sinistra"
+          "spread-chord"
         ],
         "diagnoses": {
+          "mano-destra": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “mano destra (m.d.)”."
+          },
           "una-corda": {
             "category": "confused-similar-term",
             "reason": "That is the meaning of “una corda”."
@@ -658,16 +662,12 @@
           "tre-corde": {
             "category": "confused-similar-term",
             "reason": "That is the meaning of “tre corde”."
-          },
-          "mano-destra": {
-            "category": "confused-similar-term",
-            "reason": "That is the meaning of “mano destra (m.d.)”."
           }
         }
       },
       "hints": [
         "Translate word by word.",
-        "Una corda and tre corde concern the left pedal; mano sinistra and mano destra name the hands."
+        "Una corda and tre corde concern the left pedal and Ped. the right pedal; mano sinistra and mano destra name the hands; a wavy line before a chord spreads it."
       ],
       "feedback": {
         "correct": "Correct.",

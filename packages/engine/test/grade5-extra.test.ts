@@ -245,3 +245,94 @@ describe("rhythm input", () => {
     expect(n).toBeGreaterThan(40);
   });
 });
+
+describe("fixes after the independent reviews of PR #13", () => {
+  const IVN: Record<number, [number, number]> = { 8: [7, 12] };
+  it("augmented and diminished octaves are asked, read and written, with the right letters and semitones", () => {
+    const seen = { d8: 0, A8: 0 };
+    for (const t of ["t.g5.interval-any", "t.g5.interval-write"]) {
+      for (const it of items("G5-U3-L03", t, 600)) {
+        const a = A(it);
+        const code = (a.acceptedIntervals?.[0] ?? a.target) as string;
+        if (!/^[dA]8$/.test(code)) continue;
+        const [lo, hi] = a.task === "identify" ? [pn(a.lower), pn(a.upper)] : [pn(a.lower), pn(a.acceptedPitches[0])];
+        const down = a.direction === "down";
+        const [low, high] = down ? [hi, lo] : [lo, hi];
+        expect(steps(high) - steps(low), `${it.id}: eight letters`).toBe(IVN[8]![0]);
+        expect(semis(high) - semis(low), `${it.id}: ${code}`).toBe(IVN[8]![1] + (code === "A8" ? 1 : -1));
+        seen[code as "d8" | "A8"]++;
+      }
+    }
+    expect(seen.d8).toBeGreaterThan(10);
+    expect(seen.A8).toBeGreaterThan(10);
+  });
+
+  it("compound-interval questions never use an octave quality", () => {
+    for (const it of items("G5-U3-L04", "t.g5.interval-compound", 200)) expect(A(it).acceptedIntervals[0], it.id).not.toMatch(/8$|15$/);
+  });
+
+  it("cadence melodies move by step or small skip in every key (letters were once looked up from C, not from the tonic)", () => {
+    let n = 0;
+    for (const node of ["G5-U4-L04", "G5-U4-L05", "G5-U4-L06"]) {
+      for (const it of items(node, node === "G5-U4-L06" ? "t.g5.cadence-chords" : "t.g5.cadence-identify", 200).slice(0, 200)) {
+        const evs = (it.music?.measures ?? []).flatMap((m) => (m.events as any[]).filter((e) => e.kind === "note"));
+        for (let i = 1; i < evs.length; i++) expect(Math.abs(steps(pn(evs[i].pitch)) - steps(pn(evs[i - 1].pitch))), `${it.id} ${evs[i - 1].pitch}→${evs[i].pitch}`).toBeLessThanOrEqual(7);
+        n++;
+      }
+    }
+    expect(n).toBeGreaterThan(50);
+  });
+
+  it("quavers in x/4 are beamed in pairs, every pair", () => {
+    let pairs = 0;
+    for (const it of items("G5-U1-L01", "t.g5.time-signature", 300)) {
+      const ts = A(it).accepted[0] as string;
+      if (!ts.endsWith("/4")) continue;
+      for (const m of it.music!.measures) {
+        const evs = m.events as any[];
+        evs.forEach((e, i) => { if (e.kind === "note" && e.duration.value === "quaver") expect(e.beam, `${it.id} note ${i}`).toBeTruthy(); });
+        pairs += evs.filter((e) => e.beam === "begin").length;
+      }
+    }
+    expect(pairs).toBeGreaterThan(20);
+  });
+
+  it("an approach chord is never accepted where the chord at B is the only way to make the cadence", () => {
+    let n = 0;
+    for (const it of items("G5-U4-E2", "t.g5.approach-chord", 300)) {
+      const [pa, pb] = A(it).points as any[];
+      expect(pa.accepted.length, it.id).toBeGreaterThan(0);
+      expect(pb.accepted.length, it.id).toBe(1);
+      expect(pa.accepted.includes(pb.accepted[0]), it.id).toBe(false);
+      n++;
+    }
+    expect(n).toBeGreaterThan(40);
+  });
+
+  it("a seven-beat bar grouped 4+3 is a recognised grouping", () => {
+    let four = 0;
+    for (const it of items("G5-U1-L01", "t.g5.metre-facts", 300)) {
+      if (!/Which of these groupings/.test(it.prompt)) continue;
+      const right = A(it).options.find((o: any) => o.id === A(it).correctOptionIds[0]).label as string;
+      const wrongs = (A(it).options as any[]).filter((o) => o.id !== A(it).correctOptionIds[0]).map((o) => o.label as string);
+      expect(wrongs.includes("4+3"), it.id).toBe(false);
+      expect(wrongs.includes("3+4"), it.id).toBe(false);
+      if (right === "4+3" || right === "3+4") four++;
+    }
+    expect(four).toBeGreaterThan(0);
+  });
+
+  it("transposition melodies sometimes carry a chromatic note, and the answer carries its accidental by the interval", () => {
+    let chromatic = 0;
+    for (const it of items("G5-U3-L06", "t.g5.instrument-transpose", 400)) {
+      const keyText = A(it).derivation.sourceKey as string;
+      if (!keyText.endsWith("major")) continue;
+      const tonic = LETTERS.indexOf(keyText[0]!);
+      const tonicSemis = SEMI[tonic]! + (keyText[1] === "b" ? -1 : keyText[1] === "#" ? 1 : 0);
+      const MAJOR = [0, 2, 4, 5, 7, 9, 11];
+      const offScale = (it.music!.measures.flatMap((m) => m.events as any[]) as any[]).filter((e) => !MAJOR.includes((((semis({ ...pn(e.pitch), oct: 0 }) - tonicSemis) % 12) + 12) % 12));
+      if (offScale.length) chromatic++;
+    }
+    expect(chromatic).toBeGreaterThan(10);
+  });
+});

@@ -350,10 +350,10 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Flute stave, no sharps or flats in the key signature, 4/4, marked Dolore. Bar 1: a note in the 3rd space; a note on the 4th line; a note in the 3rd space; a note on the 3rd line. Bar 2: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 3: a note in the 3rd space; a note on the 4th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space just above the stave.",
+              "textAlternative": "Flute stave, no sharps or flats in the key signature, 4/4, marked Doppio movimento. Bar 1: a note in the 3rd space; a note on the 4th line; a note in the 3rd space; a note on the 3rd line. Bar 2: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 3: a note in the 3rd space; a note on the 4th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space just above the stave.",
               "key": "C major",
               "timeSignature": "4/4",
-              "tempoText": "Dolore"
+              "tempoText": "Doppio movimento"
             }
           },
           {
@@ -460,7 +460,7 @@
             }
           }
         ],
-        "textAlternative": "A short piece for flute and piano, four bars of 4/4. Flute stave, no sharps or flats in the key signature, 4/4, marked Dolore. Bar 1: a note in the 3rd space; a note on the 4th line; a note in the 3rd space; a note on the 3rd line. Bar 2: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 3: a note in the 3rd space; a note on the 4th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space just above the stave. Piano (left hand) stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 2: a chord of 3 notes: on the 4th line; on the 5th line; on the 1st ledger line above the stave. Bar 3: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 4: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave."
+        "textAlternative": "A short piece for flute and piano, four bars of 4/4. Flute stave, no sharps or flats in the key signature, 4/4, marked Doppio movimento. Bar 1: a note in the 3rd space; a note on the 4th line; a note in the 3rd space; a note on the 3rd line. Bar 2: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 3: a note in the 3rd space; a note on the 4th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space just above the stave. Piano (left hand) stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 2: a chord of 3 notes: on the 4th line; on the 5th line; on the 1st ledger line above the stave. Bar 3: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 4: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave."
       },
       "answer": {
         "kind": "composite",
@@ -585,42 +585,42 @@
           },
           {
             "id": "term",
-            "prompt": "The piece is marked “dolore”. What does it ask?",
+            "prompt": "The piece is marked “doppio movimento”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
-                {
-                  "id": "piangevole",
-                  "label": "Plaintive, in the style of a lament"
-                },
-                {
-                  "id": "dolore",
-                  "label": "Grief"
-                },
                 {
                   "id": "piacevole",
                   "label": "Pleasant"
                 },
                 {
-                  "id": "lusingando",
-                  "label": "Coaxing, in a sweet and persuasive style"
+                  "id": "lunga",
+                  "label": "Long (as in lunga pausa, a long pause)"
+                },
+                {
+                  "id": "lacrimoso",
+                  "label": "Tearful, sad"
+                },
+                {
+                  "id": "doppio-movimento",
+                  "label": "Twice as fast"
                 }
               ],
               "correctOptionIds": [
-                "dolore"
+                "doppio-movimento"
               ],
               "diagnoses": {
                 "piacevole": {
                   "category": "confused-similar-term",
                   "reason": "That is the meaning of “piacevole”."
                 },
-                "lusingando": {
+                "lacrimoso": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “lusingando”."
+                  "reason": "That is the meaning of “lacrimoso”."
                 },
-                "piangevole": {
+                "lunga": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “piangevole”."
+                  "reason": "That is the meaning of “lunga”."
                 }
               }
             }
@@ -870,7 +870,7 @@
                   "events": [
                     {
                       "kind": "note",
-                      "pitch": "C4",
+                      "pitch": "G4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -878,44 +878,17 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "B3",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "pitch": "C4",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "pitch": "B3",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
-                    }
-                  ]
-                },
-                {
-                  "events": [
-                    {
-                      "kind": "note",
-                      "pitch": "A3",
+                      "pitch": "A4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
                       },
-                      "label": "x"
+                      "ornament": "trill",
+                      "label": "B"
                     },
                     {
                       "kind": "note",
-                      "pitch": "G3",
+                      "pitch": "G4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -923,16 +896,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "F3",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      },
-                      "label": "y"
-                    },
-                    {
-                      "kind": "note",
-                      "pitch": "E3",
+                      "pitch": "A4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -944,7 +908,7 @@
                   "events": [
                     {
                       "kind": "note",
-                      "pitch": "D3",
+                      "pitch": "A4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -952,7 +916,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C3",
+                      "pitch": "B4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -960,7 +924,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "D3",
+                      "pitch": "C5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -968,7 +932,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "E3",
+                      "pitch": "C5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -980,7 +944,7 @@
                   "events": [
                     {
                       "kind": "note",
-                      "pitch": "E3",
+                      "pitch": "B4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -988,7 +952,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "D3",
+                      "pitch": "A4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -996,7 +960,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C3",
+                      "pitch": "G4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -1004,7 +968,43 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "D3",
+                      "pitch": "A4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "A4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "A4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "A4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -1014,9 +1014,10 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Viola stave, no sharps or flats in the key signature, 4/4. Bar 1: a note on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note in the 2nd space. Bar 2: a note marked x on the 2nd line; a note in the 1st space; a note marked y on the 1st line; a note in the space just below the stave. Bar 3: a note on the 1st ledger line below the stave; a note in the space below the 1st ledger line below the stave; a note on the 1st ledger line below the stave; a note in the space just below the stave. Bar 4: a note in the space just below the stave; a note on the 1st ledger line below the stave; a note in the space below the 1st ledger line below the stave; a note on the 1st ledger line below the stave.",
-              "key": "C major",
-              "timeSignature": "4/4"
+              "textAlternative": "Viola stave, key signature of 1 sharp, 4/4, marked Fröhlich. Bar 1: a note on the 5th line; a note marked B in the space just above the stave, with the letters tr above it; a note on the 5th line; a note in the space just above the stave. Bar 2: a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 3: a note on the 1st ledger line above the stave; a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave. Bar 4: a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space just above the stave; a note in the space just above the stave.",
+              "key": "G major",
+              "timeSignature": "4/4",
+              "tempoText": "Fröhlich"
             }
           },
           {
@@ -1033,13 +1034,13 @@
                       "kind": "chord",
                       "notes": [
                         {
-                          "pitch": "E2"
+                          "pitch": "G2"
                         },
                         {
-                          "pitch": "C3"
+                          "pitch": "D3"
                         },
                         {
-                          "pitch": "G3"
+                          "pitch": "B3"
                         }
                       ],
                       "duration": {
@@ -1055,10 +1056,10 @@
                       "kind": "chord",
                       "notes": [
                         {
-                          "pitch": "F2"
+                          "pitch": "F#2"
                         },
                         {
-                          "pitch": "C3"
+                          "pitch": "D3"
                         },
                         {
                           "pitch": "A3"
@@ -1099,13 +1100,13 @@
                       "kind": "chord",
                       "notes": [
                         {
-                          "pitch": "C3"
+                          "pitch": "D3"
                         },
                         {
-                          "pitch": "E3"
+                          "pitch": "F#3"
                         },
                         {
-                          "pitch": "G3"
+                          "pitch": "A3"
                         }
                       ],
                       "duration": {
@@ -1117,13 +1118,13 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Piano (left hand) stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; in the 2nd space; in the 4th space. Bar 2: a chord of 3 notes: in the space just below the stave; in the 2nd space; on the 5th line. Bar 3: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 4: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space.",
-              "key": "C major",
+              "textAlternative": "Piano (left hand) stave, key signature of 1 sharp, 4/4. Bar 1: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 2: a chord of 3 notes: in the space just below the stave; on the 3rd line; on the 5th line. Bar 3: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 4: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line.",
+              "key": "G major",
               "timeSignature": "4/4"
             }
           }
         ],
-        "textAlternative": "A short piece for viola and piano, four bars of 4/4. Viola stave, no sharps or flats in the key signature, 4/4. Bar 1: a note on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note in the 2nd space. Bar 2: a note marked x on the 2nd line; a note in the 1st space; a note marked y on the 1st line; a note in the space just below the stave. Bar 3: a note on the 1st ledger line below the stave; a note in the space below the 1st ledger line below the stave; a note on the 1st ledger line below the stave; a note in the space just below the stave. Bar 4: a note in the space just below the stave; a note on the 1st ledger line below the stave; a note in the space below the 1st ledger line below the stave; a note on the 1st ledger line below the stave. Piano (left hand) stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; in the 2nd space; in the 4th space. Bar 2: a chord of 3 notes: in the space just below the stave; in the 2nd space; on the 5th line. Bar 3: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 4: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space."
+        "textAlternative": "A short piece for viola and piano, four bars of 4/4. Viola stave, key signature of 1 sharp, 4/4, marked Fröhlich. Bar 1: a note on the 5th line; a note marked B in the space just above the stave, with the letters tr above it; a note on the 5th line; a note in the space just above the stave. Bar 2: a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 3: a note on the 1st ledger line above the stave; a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave. Bar 4: a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space just above the stave; a note in the space just above the stave. Piano (left hand) stave, key signature of 1 sharp, 4/4. Bar 1: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 2: a chord of 3 notes: in the space just below the stave; on the 3rd line; on the 5th line. Bar 3: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 4: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line."
       },
       "answer": {
         "kind": "composite",
@@ -1172,7 +1173,7 @@
           },
           {
             "id": "cadence",
-            "prompt": "What cadence do the last two chords (bars 3 and 4, the piano part) make? (They are V–I.)",
+            "prompt": "What cadence do the last two chords (bars 3 and 4, the piano part) make? (They are I–V.)",
             "answer": {
               "kind": "choice",
               "options": [
@@ -1190,14 +1191,14 @@
                 }
               ],
               "correctOptionIds": [
-                "perfect"
+                "imperfect"
               ],
               "diagnoses": {
-                "plagal": {
+                "perfect": {
                   "category": "cadence-misnamed",
                   "reason": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect."
                 },
-                "imperfect": {
+                "plagal": {
                   "category": "cadence-misnamed",
                   "reason": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect."
                 }
@@ -1205,58 +1206,56 @@
             }
           },
           {
-            "id": "key",
-            "prompt": "What is the key of the piece?",
+            "id": "term",
+            "prompt": "The piece is marked “fröhlich”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
                 {
-                  "id": "F major",
-                  "label": "F major"
+                  "id": "immer",
+                  "label": "Always"
                 },
                 {
-                  "id": "G major",
-                  "label": "G major"
+                  "id": "lebhaft",
+                  "label": "Lively"
                 },
                 {
-                  "id": "A minor",
-                  "label": "A minor"
+                  "id": "frohlich",
+                  "label": "Cheerful, joyful"
                 },
                 {
-                  "id": "C major",
-                  "label": "C major"
+                  "id": "etwas",
+                  "label": "Somewhat, rather"
                 }
               ],
               "correctOptionIds": [
-                "C major"
+                "frohlich"
               ],
               "diagnoses": {
-                "A minor": {
-                  "category": "wrong-category",
-                  "reason": "The relative minor shares the key signature, but the piece begins and ends on the major tonic chord."
+                "etwas": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “etwas”."
                 },
-                "G major": {
-                  "category": "wrong-category",
-                  "reason": "G major has a different key signature."
+                "lebhaft": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “lebhaft”."
                 },
-                "F major": {
-                  "category": "wrong-category",
-                  "reason": "F major has a different key signature."
+                "immer": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “immer”."
                 }
               }
             }
           },
           {
-            "id": "interval",
-            "prompt": "Name the interval from the lower to the higher of the notes marked x and y (quality and number).",
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked B?",
             "answer": {
-              "kind": "interval",
-              "task": "identify",
-              "key": "C major",
-              "lower": "F3",
-              "upper": "A3",
-              "acceptedIntervals": [
-                "M3"
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "trill",
+              "accepted": [
+                "trill"
               ]
             }
           }
@@ -1411,20 +1410,20 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "traurig",
-                  "label": "Sad"
-                },
-                {
-                  "id": "ein",
-                  "label": "A, one"
-                },
-                {
                   "id": "ruhig",
                   "label": "Peaceful, calm"
                 },
                 {
+                  "id": "traurig",
+                  "label": "Sad"
+                },
+                {
                   "id": "voll",
                   "label": "Full"
+                },
+                {
+                  "id": "ein",
+                  "label": "A, one"
                 }
               ],
               "correctOptionIds": [
@@ -1465,16 +1464,16 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "F major",
-                  "label": "F major"
-                },
-                {
                   "id": "C major",
                   "label": "C major"
                 },
                 {
                   "id": "D minor",
                   "label": "D minor"
+                },
+                {
+                  "id": "F major",
+                  "label": "F major"
                 }
               ],
               "correctOptionIds": [
@@ -1678,10 +1677,10 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Flute stave, no sharps or flats in the key signature, 4/4, marked Dolore. Bar 1: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note marked B on the 3rd line, with a short zig-zag above it with no line through it. Bar 2: a note on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space. Bar 3: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 4: a note on the 3rd line; a note in the 2nd space; a note on the 2nd line; a note in the 1st space.",
+              "textAlternative": "Flute stave, no sharps or flats in the key signature, 4/4, marked Doppio movimento. Bar 1: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note marked B on the 3rd line, with a short zig-zag above it with no line through it. Bar 2: a note on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space. Bar 3: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 4: a note on the 3rd line; a note in the 2nd space; a note on the 2nd line; a note in the 1st space.",
               "key": "C major",
               "timeSignature": "4/4",
-              "tempoText": "Dolore"
+              "tempoText": "Doppio movimento"
             }
           },
           {
@@ -1788,7 +1787,7 @@
             }
           }
         ],
-        "textAlternative": "A short piece for flute and piano, four bars of 4/4. Flute stave, no sharps or flats in the key signature, 4/4, marked Dolore. Bar 1: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note marked B on the 3rd line, with a short zig-zag above it with no line through it. Bar 2: a note on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space. Bar 3: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 4: a note on the 3rd line; a note in the 2nd space; a note on the 2nd line; a note in the 1st space. Piano (left hand) stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 2: a chord of 3 notes: on the 2nd line; on the 3rd line; in the 4th space. Bar 3: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line. Bar 4: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave."
+        "textAlternative": "A short piece for flute and piano, four bars of 4/4. Flute stave, no sharps or flats in the key signature, 4/4, marked Doppio movimento. Bar 1: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note marked B on the 3rd line, with a short zig-zag above it with no line through it. Bar 2: a note on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space. Bar 3: a note in the 2nd space; a note on the 2nd line; a note in the 2nd space; a note on the 3rd line. Bar 4: a note on the 3rd line; a note in the 2nd space; a note on the 2nd line; a note in the 1st space. Piano (left hand) stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 2: a chord of 3 notes: on the 2nd line; on the 3rd line; in the 4th space. Bar 3: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line. Bar 4: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave."
       },
       "answer": {
         "kind": "composite",
@@ -1883,42 +1882,42 @@
           },
           {
             "id": "term",
-            "prompt": "The piece is marked “dolore”. What does it ask?",
+            "prompt": "The piece is marked “doppio movimento”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
-                {
-                  "id": "dolore",
-                  "label": "Grief"
-                },
                 {
                   "id": "smorzando",
                   "label": "Dying away in tone and speed"
                 },
                 {
-                  "id": "rinforzando",
-                  "label": "Reinforcing: a sudden stress on a note or chord"
+                  "id": "lunga",
+                  "label": "Long (as in lunga pausa, a long pause)"
                 },
                 {
-                  "id": "lacrimoso",
-                  "label": "Tearful, sad"
+                  "id": "doppio-movimento",
+                  "label": "Twice as fast"
+                },
+                {
+                  "id": "doloroso",
+                  "label": "Sorrowful"
                 }
               ],
               "correctOptionIds": [
-                "dolore"
+                "doppio-movimento"
               ],
               "diagnoses": {
-                "lacrimoso": {
+                "doloroso": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “lacrimoso”."
+                  "reason": "That is the meaning of “doloroso”."
                 },
                 "smorzando": {
                   "category": "confused-similar-term",
                   "reason": "That is the meaning of “smorzando (smorz.)”."
                 },
-                "rinforzando": {
+                "lunga": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “rinforzando (rf, rfz)”."
+                  "reason": "That is the meaning of “lunga”."
                 }
               }
             }
@@ -2100,37 +2099,37 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "misura",
-                  "label": "Measure (alla misura: in strict time; senza misura: in free time)"
+                  "id": "volante",
+                  "label": "Flying, fast"
                 },
                 {
-                  "id": "piacevole",
-                  "label": "Pleasant"
+                  "id": "loco",
+                  "label": "At the normal pitch (cancels an 8va sign)"
+                },
+                {
+                  "id": "segue",
+                  "label": "Go straight on"
                 },
                 {
                   "id": "rinforzando",
                   "label": "Reinforcing: a sudden stress on a note or chord"
-                },
-                {
-                  "id": "volante",
-                  "label": "Flying, fast"
                 }
               ],
               "correctOptionIds": [
                 "rinforzando"
               ],
               "diagnoses": {
-                "piacevole": {
-                  "category": "confused-similar-term",
-                  "reason": "That is the meaning of “piacevole”."
-                },
                 "volante": {
                   "category": "confused-similar-term",
                   "reason": "That is the meaning of “volante”."
                 },
-                "misura": {
+                "segue": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “misura”."
+                  "reason": "That is the meaning of “segue”."
+                },
+                "loco": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “loco”."
                 }
               }
             }
@@ -2185,15 +2184,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "D4",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "pitch": "E4",
+                      "pitch": "C#4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2202,6 +2193,14 @@
                     {
                       "kind": "note",
                       "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "C#4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2221,6 +2220,14 @@
                     },
                     {
                       "kind": "note",
+                      "pitch": "A3",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
                       "pitch": "B3",
                       "duration": {
                         "value": "crotchet",
@@ -2229,15 +2236,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C#3",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "pitch": "D4",
+                      "pitch": "C#4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2257,14 +2256,6 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "E4",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
-                    },
-                    {
-                      "kind": "note",
                       "pitch": "D4",
                       "duration": {
                         "value": "crotchet",
@@ -2273,7 +2264,15 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "E4",
+                      "pitch": "C#4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2286,6 +2285,14 @@
                     {
                       "kind": "note",
                       "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "E4",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2306,23 +2313,15 @@
                         "value": "crotchet",
                         "dots": 0
                       }
-                    },
-                    {
-                      "kind": "note",
-                      "pitch": "A4",
-                      "duration": {
-                        "value": "crotchet",
-                        "dots": 0
-                      }
                     }
                   ],
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Bassoon stave, key signature of 2 sharps, 4/4, marked Piacevole. Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a note in the 3rd space; a note in the space just below the stave; a note in the 4th space. Bar 3: a note on the 4th line; a note on the 5th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave.",
+              "textAlternative": "Bassoon stave, key signature of 2 sharps, 4/4, marked Rinforzando (rf, rfz). Bar 1: a note in the 4th space; a note on the 4th line; a note in the 4th space; a note on the 4th line. Bar 2: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note on the 4th line. Bar 3: a note on the 4th line; a note in the 4th space; a note on the 4th line; a note in the 4th space. Bar 4: a note in the 4th space; a note on the 5th line; a note in the space just above the stave; a note on the 1st ledger line above the stave.",
               "key": "D major",
               "timeSignature": "4/4",
-              "tempoText": "Piacevole"
+              "tempoText": "Rinforzando (rf, rfz)"
             }
           },
           {
@@ -2429,7 +2428,7 @@
             }
           }
         ],
-        "textAlternative": "A short piece for bassoon and piano, four bars of 4/4. Bassoon stave, key signature of 2 sharps, 4/4, marked Piacevole. Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a note in the 3rd space; a note in the space just below the stave; a note in the 4th space. Bar 3: a note on the 4th line; a note on the 5th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Piano (left hand) stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line. Bar 2: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 3: a chord of 3 notes: in the 1st space; in the 2nd space; in the 3rd space. Bar 4: a chord of 3 notes: in the space below the 1st ledger line below the stave; on the 4th line; on the 5th line."
+        "textAlternative": "A short piece for bassoon and piano, four bars of 4/4. Bassoon stave, key signature of 2 sharps, 4/4, marked Rinforzando (rf, rfz). Bar 1: a note in the 4th space; a note on the 4th line; a note in the 4th space; a note on the 4th line. Bar 2: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note on the 4th line. Bar 3: a note on the 4th line; a note in the 4th space; a note on the 4th line; a note in the 4th space. Bar 4: a note in the 4th space; a note on the 5th line; a note in the space just above the stave; a note on the 1st ledger line above the stave. Piano (left hand) stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line. Bar 2: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 3: a chord of 3 notes: in the 1st space; in the 2nd space; in the 3rd space. Bar 4: a chord of 3 notes: in the space below the 1st ledger line below the stave; on the 4th line; on the 5th line."
       },
       "answer": {
         "kind": "composite",
@@ -2512,38 +2511,38 @@
           },
           {
             "id": "term",
-            "prompt": "The piece is marked “piacevole”. What does it ask?",
+            "prompt": "The piece is marked “rinforzando (rf, rfz)”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
-                {
-                  "id": "piacevole",
-                  "label": "Pleasant"
-                },
                 {
                   "id": "lusingando",
                   "label": "Coaxing, in a sweet and persuasive style"
                 },
                 {
-                  "id": "smorzando",
-                  "label": "Dying away in tone and speed"
+                  "id": "misura",
+                  "label": "Measure (alla misura: in strict time; senza misura: in free time)"
                 },
                 {
-                  "id": "dolore",
-                  "label": "Grief"
+                  "id": "doloroso",
+                  "label": "Sorrowful"
+                },
+                {
+                  "id": "rinforzando",
+                  "label": "Reinforcing: a sudden stress on a note or chord"
                 }
               ],
               "correctOptionIds": [
-                "piacevole"
+                "rinforzando"
               ],
               "diagnoses": {
-                "smorzando": {
+                "doloroso": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “smorzando (smorz.)”."
+                  "reason": "That is the meaning of “doloroso”."
                 },
-                "dolore": {
+                "misura": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “dolore”."
+                  "reason": "That is the meaning of “misura”."
                 },
                 "lusingando": {
                   "category": "confused-similar-term",
@@ -2771,20 +2770,20 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "fr-peu",
-                  "label": "Little"
-                },
-                {
-                  "id": "fr-plus",
-                  "label": "More"
+                  "id": "fr-presser",
+                  "label": "Hurry (en pressant: hurrying on)"
                 },
                 {
                   "id": "fr-sans",
                   "label": "Without"
                 },
                 {
-                  "id": "fr-presser",
-                  "label": "Hurry (en pressant: hurrying on)"
+                  "id": "fr-peu",
+                  "label": "Little"
+                },
+                {
+                  "id": "fr-plus",
+                  "label": "More"
                 }
               ],
               "correctOptionIds": [
@@ -2856,7 +2855,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "A5",
+                      "pitch": "E5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2864,7 +2863,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "Bb5",
+                      "pitch": "F5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2872,7 +2871,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "Bb5",
+                      "pitch": "F5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2892,7 +2891,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "Bb5",
+                      "pitch": "F5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2900,7 +2899,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C5",
+                      "pitch": "G5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2908,7 +2907,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C5",
+                      "pitch": "G5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2930,7 +2929,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "Bb5",
+                      "pitch": "F5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2938,7 +2937,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C5",
+                      "pitch": "G5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2946,7 +2945,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C5",
+                      "pitch": "G5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2966,7 +2965,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C5",
+                      "pitch": "G5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2974,7 +2973,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "Bb5",
+                      "pitch": "F5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2982,7 +2981,7 @@
                     },
                     {
                       "kind": "note",
-                      "pitch": "C5",
+                      "pitch": "G5",
                       "duration": {
                         "value": "crotchet",
                         "dots": 0
@@ -2992,10 +2991,10 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Oboe stave, key signature of 1 flat, 4/4, marked Bewegt. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 2: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note marked B in the 3rd space, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note in the 3rd space. Bar 4: a note on the 5th line; a note in the 3rd space; a note in the space above the 1st ledger line above the stave; a note in the 3rd space.",
+              "textAlternative": "Oboe stave, key signature of 1 flat, 4/4, marked Breit. Bar 1: a note on the 5th line; a note in the 4th space; a note on the 5th line; a note on the 5th line. Bar 2: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note marked B in the space just above the stave, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space just above the stave. Bar 4: a note on the 5th line; a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave.",
               "key": "F major",
               "timeSignature": "4/4",
-              "tempoText": "Bewegt"
+              "tempoText": "Breit"
             }
           },
           {
@@ -3102,7 +3101,7 @@
             }
           }
         ],
-        "textAlternative": "A short piece for oboe and piano, four bars of 4/4. Oboe stave, key signature of 1 flat, 4/4, marked Bewegt. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 2: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note marked B in the 3rd space, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note in the 3rd space. Bar 4: a note on the 5th line; a note in the 3rd space; a note in the space above the 1st ledger line above the stave; a note in the 3rd space. Piano (left hand) stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 2nd space; on the 5th line. Bar 2: a chord of 3 notes: on the 2nd line; on the 3rd line; in the 4th space. Bar 3: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 4: a chord of 3 notes: in the space just below the stave; on the 5th line; on the 1st ledger line above the stave."
+        "textAlternative": "A short piece for oboe and piano, four bars of 4/4. Oboe stave, key signature of 1 flat, 4/4, marked Breit. Bar 1: a note on the 5th line; a note in the 4th space; a note on the 5th line; a note on the 5th line. Bar 2: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note marked B in the space just above the stave, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space just above the stave. Bar 4: a note on the 5th line; a note in the space just above the stave; a note on the 5th line; a note in the space just above the stave. Piano (left hand) stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 2nd space; on the 5th line. Bar 2: a chord of 3 notes: on the 2nd line; on the 3rd line; in the 4th space. Bar 3: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 4: a chord of 3 notes: in the space just below the stave; on the 5th line; on the 1st ledger line above the stave."
       },
       "answer": {
         "kind": "composite",
@@ -3197,18 +3196,10 @@
           },
           {
             "id": "term",
-            "prompt": "The piece is marked “bewegt”. What does it ask?",
+            "prompt": "The piece is marked “breit”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
-                {
-                  "id": "bewegt",
-                  "label": "With movement, agitated"
-                },
-                {
-                  "id": "ein",
-                  "label": "A, one"
-                },
                 {
                   "id": "und",
                   "label": "And"
@@ -3216,10 +3207,18 @@
                 {
                   "id": "zu",
                   "label": "To, too"
+                },
+                {
+                  "id": "breit",
+                  "label": "Broad, expansive"
+                },
+                {
+                  "id": "ein",
+                  "label": "A, one"
                 }
               ],
               "correctOptionIds": [
-                "bewegt"
+                "breit"
               ],
               "diagnoses": {
                 "ein": {

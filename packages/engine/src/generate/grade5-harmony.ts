@@ -419,7 +419,7 @@ function cadenceMelody(c: Ctx, key: music.Key, r1: string, r2: string, lead: num
   for (let i = 0; i < lead; i++) {
     const move = c.rng.pick([-2, -1, 1, 1, 2]);
     const d = diatonicNumber(cur) + move;
-    const pc = pcs[((d % 7) + 7) % 7]!;
+    const pc = pcs.find((x) => music.stepIndex(x.step) === ((d % 7) + 7) % 7)!; // d counts letters from C, so the scale is looked up by letter, not by degree
     cur = { ...pc, octave: Math.floor(d / 7) } as Pitch;
     back.push(cur);
   }
@@ -529,14 +529,19 @@ export const approachChord5: Gen = (c): any => {
   if (new Set(pairs.map((p) => p[2])).size !== 1 || pairs[0]?.[2] !== type || !accs[0]!.length) return null;
   const okB = [...new Set(pairs.map((p) => p[0]))];
   const okC = [...new Set(pairs.map((p) => p[1]))];
+  // A cadence is two DIFFERENT chords, and the approach chord comes before them: it must differ from the chord at B. That relation cannot be
+  // checked across points, so the question is only asked where B has one possible chord, and that chord is not accepted at A.
+  if (okB.length !== 1) return null;
+  const okA = accs[0]!.filter((x) => !okB.includes(x));
+  if (!okA.length) return null;
   const events: Ev[] = mel.map((p, i) => note(p, i < 3 ? "crotchet" : i === 3 ? "crotchet" : "minim", i === 3 ? { label: "A" } : i === 4 ? { label: "B" } : i === 5 ? { label: "C" } : {}));
   // 3 lead-in crotchets + A (crotchet) = bar 1; B and C (minims) = bar 2
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
     prompt: `In ${keyWords(keyText)}, B and C make a ${type} cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)`,
     music: f,
-    answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(pts[0]!)], accepted: accs[0] as never }, { label: "B", melodyPitches: [F(pts[1]!)], accepted: okB as never }, { label: "C", melodyPitches: [F(pts[2]!)], accepted: okC as never }], cadences: [{ labels: ["B", "C"], acceptedTypes: [type] }] },
-    hints: ["First choose the cadence chords for B and C. Then pick any of I, ii, IV or V that contains the melody note at A."],
+    answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(pts[0]!)], accepted: okA as never }, { label: "B", melodyPitches: [F(pts[1]!)], accepted: okB as never }, { label: "C", melodyPitches: [F(pts[2]!)], accepted: okC as never }], cadences: [{ labels: ["B", "C"], acceptedTypes: [type] }] },
+    hints: ["First choose the cadence chords for B and C. Then pick a chord for A that contains its melody note and is different from the chord at B: a cadence needs two different chords."],
   };
 };
 

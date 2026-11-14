@@ -16,7 +16,7 @@
  */
 import { deriveScale, music, type AnswerSpec, type Measure } from "@mtp/curriculum";
 import { frag, type Gen } from "./families.ts";
-import { KEYS_G5, NEW_KEYS, F, P, WORDS, an, cap, choiceAnswer, clefsIn, family5, fitsIn, keyWords, keysIn, melodyIn5, nameOfPc, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
+import { KEYS_G5, NEW_KEYS, F, P, WORDS, an, cap, choiceAnswer, clefsIn, family5, fitsIn, keyWords, keysIn, melodyIn5, withChromaticNote, nameOfPc, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
 const { parseKey, formatKey, transpose, parseInterval, intervalBetween, staffPosition, naturalAt, describeInterval } = music;
 const CLEF_WORD: Record<Clef, string> = { treble: "treble clef", bass: "bass clef", alto: "alto clef", tenor: "tenor clef" };
@@ -313,7 +313,7 @@ export const scaleSpot5: Gen = (c): any => {
 
 const QUAL: Record<string, string> = { d: "diminished", m: "minor", M: "major", P: "perfect", A: "augmented" };
 const qualWord = (code: string) => `${QUAL[code[0]!]} ${music.ordinal(Number(code.slice(1)))}`;
-const SIMPLE_POOL = ["m2", "M2", "m3", "M3", "P4", "P5", "m6", "M6", "m7", "M7", "A1", "A2", "A3", "A4", "A5", "A6", "d3", "d4", "d5", "d6", "d7", "d8", "A7"].filter((x) => x !== "d8");
+const SIMPLE_POOL = ["m2", "M2", "m3", "M3", "P4", "P5", "m6", "M6", "m7", "M7", "A1", "A2", "A3", "A4", "A5", "A6", "d3", "d4", "d5", "d6", "d7", "d8", "A7", "A8"];
 
 export const isDiatonicPair = music.isDiatonicPair;
 export const isChromaticPair = (lower: Pitch, upper: Pitch) => music.isChromaticPairOfPitches(lower, upper);
@@ -367,7 +367,7 @@ const compoundOf = (q: string, simple: number) => ({ code: `${q}${simple + 7}`, 
 /** t.g5.interval-compound: name an interval larger than an octave, either as "major 10th" or as "compound major 3rd". */
 export const intervalCompound5: Gen = (c): any => {
   const clef = c.rng.pick(clefsIn(c, ["treble", "bass"]).filter((x) => x === "treble" || x === "bass"));
-  const pool = SIMPLE_POOL.filter((x) => !x.endsWith("1") && x !== "A7");
+  const pool = SIMPLE_POOL.filter((x) => !x.endsWith("1") && !x.endsWith("8") && x !== "A7");
   const pair = randomPair(c, pool, clef, null);
   if (!pair) return null;
   const { lower, code } = pair;
@@ -581,8 +581,9 @@ export const instrumentTranspose5: Gen = (c): any => {
   try { newKey = toWritten ? music.writtenKeyFor(key, inst) : music.concertKeyFor(key, inst); } catch { return null; }
   const newText = formatKey(newKey);
   if (!(c.scope.keys ?? KEYS_G5).includes(newText)) return null;
-  const mel = melodyIn5(c, key, "treble", c.rng.pick([6, 7, 8]), 1);
-  if (!mel) return null;
+  const plainMel = melodyIn5(c, key, "treble", c.rng.pick([6, 7, 8]), 1);
+  if (!plainMel) return null;
+  const mel = withChromaticNote(c, plainMel, key);
   const iv = music.INSTRUMENT_INTERVAL[inst];
   const dir = toWritten ? "up" : "down";
   const out = mel.map((p) => transpose(p, iv, dir));

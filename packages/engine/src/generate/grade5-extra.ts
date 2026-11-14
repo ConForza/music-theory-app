@@ -16,7 +16,7 @@ import { n, r, rhythmLine, frag, type Gen } from "./families.ts";
 import { ALL_REGULAR, timeSigRead4 } from "./grade4-rhythm.ts";
 import { timeSigIrregular } from "./grade5-rhythm.ts";
 import { INST_LABEL, instIn, ivText, melodyFrag } from "./grade5-pitch.ts";
-import { KEYS_G5, F, WORDS, choiceAnswer, fitsIn, keyWords, melodyIn5, note, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
+import { KEYS_G5, F, WORDS, choiceAnswer, fitsIn, keyWords, melodyIn5, withChromaticNote, note, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
 const { frac, mul, valueFor, parseTimeSignature, classifyTimeSignature, barCapacity, equals, parseKey, formatKey, naturalAt, staffPosition, transpose } = music;
 const MAX_IRREGULAR = ["5/4", "7/4", "5/8", "7/8"];
@@ -340,7 +340,7 @@ export const clefMinor5: Gen = (c): any => {
     prompt: "The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it?",
     score: { staves: order.map(stave), textAlternative: "The same eight notes on three staves with three different clefs." },
     answer: choiceAnswer(ids.map((id, i) => [id, `Stave ${letters[i]}`] as [string, string]), ids[at]!, Object.fromEntries(ids.filter((_, i) => i !== at).map((id) => [id, ["clef-confusion", "In this clef the notes get different letter names, and the pattern of tones and semitones is not that of a minor scale."] as [string, string]]))),
-    hints: ["Name the notes in each clef. A scale uses each letter name once in order (A B C D E F G A, say). Then check the semitones: a minor scale has a semitone after its second note and after its fifth."],
+    hints: ["Name the notes in each clef. A scale uses each letter name once in order (A B C D E F G A, say). Then check the semitones. Every minor scale has a semitone between its 2nd and 3rd notes. The harmonic form also has semitones from the 5th to the 6th and from the 7th to the 8th notes, with a step of three semitones from the 6th to the 7th; the ascending melodic form has only the 2nd to 3rd and 7th to 8th."],
   };
 };
 
@@ -361,8 +361,9 @@ export const transposeJudge5: Gen = (c): any => {
   try { newKey = toWritten ? music.writtenKeyFor(key, inst) : music.concertKeyFor(key, inst); } catch { return null; }
   const newText = formatKey(newKey);
   if (!(c.scope.keys ?? KEYS_G5).includes(newText)) return null;
-  const mel = melodyIn5(c, key, "treble", 6, 1);
-  if (!mel) return null;
+  const plainMel = melodyIn5(c, key, "treble", 6, 1);
+  if (!plainMel) return null;
+  const mel = withChromaticNote(c, plainMel, key);
   const iv = music.INSTRUMENT_INTERVAL[inst];
   const dir = toWritten ? "up" : "down";
   const right = mel.map((p) => transpose(p, iv, dir));

@@ -555,7 +555,7 @@ describe("Unit 5: ornaments, voices, instruments, terms and the score", () => {
       const main = pn(a.mainNote);
       const figure = (a.writtenOut as string[]).map((p) => steps(pn(p)) - steps(main));
       const pattern = figure.join();
-      const truth = pattern === "0,1,0" ? "upper-mordent" : pattern === "0,-1,0" ? "lower-mordent" : pattern === "1,0,-1,0" ? "turn" : figure.slice(0, 6).every((x, i) => x === (i % 2 === 0 ? 1 : 0)) && figure.slice(-2).join() === "-1,0" ? "trill" : null;
+      const truth = pattern === "0,1,0" ? "upper-mordent" : pattern === "0,-1,0" ? "lower-mordent" : (pattern === "1,0,-1,0" || pattern === "0,1,0,-1,0") ? "turn" : figure.slice(0, 6).every((x, i) => x === (i % 2 === 0 ? 1 : 0)) && figure.slice(-2).join() === "-1,0" ? "trill" : null;
       expect(truth, it.id).toBe(a.accepted[0]);
       n++;
     }

@@ -231,7 +231,7 @@ export const VOCAB_G4 = { version: VOCAB_G4_VERSION, terms: TERMS_G4, techniques
 // Grade 5 terminology credit.
 // ---------------------------------------------------------------------------
 
-export const VOCAB_G5_VERSION = 2; // 2: French terms added after comparing the course with eight Grade 5 papers (docs/curriculum/GRADE_5_PAPER_COMPARISON.md)
+export const VOCAB_G5_VERSION = 3; // 2: French terms added after comparing the course with eight Grade 5 papers (docs/curriculum/GRADE_5_PAPER_COMPARISON.md); 3: doloroso, the right-pedal and spread-chord signs and the troppo note, from the book's own Grade 5 list (review of PR #13)
 
 export type TermLanguage = "italian" | "german" | "french" | "direction";
 export interface TermG5 {
@@ -248,6 +248,7 @@ export const TERMS_G5: TermG5[] = [
   { id: "segue", term: "segue", meaning: "go straight on", language: "italian", group: "go-on" },
   { id: "dolente", term: "dolente", meaning: "sad, mournful", language: "italian", group: "sad" },
   { id: "dolore", term: "dolore", meaning: "grief", language: "italian", group: "grief" },
+  { id: "doloroso", term: "doloroso", meaning: "sorrowful", language: "italian", group: "grief" },
   { id: "lacrimoso", term: "lacrimoso", meaning: "tearful, sad", language: "italian", group: "sad" },
   { id: "piangevole", term: "piangevole", meaning: "plaintive, in the style of a lament", language: "italian", group: "sad" },
   { id: "doppio-movimento", term: "doppio movimento", meaning: "twice as fast", language: "italian", group: "twice-fast" },
@@ -263,7 +264,7 @@ export const TERMS_G5: TermG5[] = [
   { id: "rinforzando", term: "rinforzando (rf, rfz)", meaning: "reinforcing: a sudden stress on a note or chord", language: "italian", group: "reinforcing" },
   { id: "smorzando", term: "smorzando (smorz.)", meaning: "dying away in tone and speed", language: "italian", group: "dying" },
   { id: "teneramente", term: "teneramente", meaning: "tenderly (tenerezza: tenderness)", language: "italian", group: "tender" },
-  { id: "tosto", term: "tosto", meaning: "swift, rapid", language: "italian", group: "swift" },
+  { id: "tosto", term: "tosto", meaning: "swift, rapid (often used in the same sense as troppo)", language: "italian", group: "swift" },
   { id: "volante", term: "volante", meaning: "flying, fast", language: "italian", group: "swift" },
   { id: "aber", term: "aber", meaning: "but", language: "german", group: "but" },
   { id: "ausdruck", term: "Ausdruck", meaning: "expression", language: "german", group: "expression" },
@@ -319,6 +320,8 @@ export const TERMS_G5: TermG5[] = [
   { id: "una-corda", term: "una corda", meaning: "press the left (soft) pedal (literally “one string”)", language: "direction", group: "left-pedal" },
   { id: "tre-corde", term: "tre corde", meaning: "release the left pedal (literally “three strings”)", language: "direction", group: "release-left" },
   { id: "mano-sinistra", term: "mano sinistra (m.s.)", meaning: "left hand", language: "direction", group: "left-hand" },
+  { id: "ped-sign", term: "Ped. … ✱ (the right-pedal sign)", meaning: "press the right pedal at Ped. and release it at the star", language: "direction", group: "right-pedal" },
+  { id: "spread-chord", term: "the wavy line before a chord", meaning: "spread the notes of the chord quickly, starting from the bottom note", language: "direction", group: "spread" },
   { id: "mano-destra", term: "mano destra (m.d.)", meaning: "right hand", language: "direction", group: "right-hand" },
 ];
 

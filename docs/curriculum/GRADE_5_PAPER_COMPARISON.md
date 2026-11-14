@@ -23,7 +23,7 @@ Consequence for the course: the course teaches and assesses more by writing than
 | Chords are not required to be root position in the cadence questions' answers | Nothing requires it either way, but the 2014 papers say position need not be stated. The course's root-position cadence restriction is stricter than the papers, not looser. |
 | Key signatures to six accidentals, with D♯, E♭ and B♭ minor and G♭ and F♯ major | 3.1/3.2 use G♭, F♯ and B major and D♯, E♭ and B♭ minor. |
 | Compound intervals named either "major 10th" or "compound major 3rd" | Both forms appear in one answer list. |
-| Diminished and augmented octaves | "diminished 8th/8ve" and "augmented 8th/8ve" appear in 4.1 and 4.3. |
+| Diminished and augmented octaves | "diminished 8th/8ve" and "augmented 8th/8ve" appear in 4.1 and 4.3. **Correction:** the first version of this table said the course covered them. It did not (the generator filtered d8 out and never had A8); they were added after review of PR #13. |
 | Transposing instruments: B♭ trumpet and clarinet, A clarinet, F horn, cor anglais | Each appears, in both directions (concert to written and written to sounding). |
 | Written-out ornaments: trill, turn, mordents, appoggiatura, acciaccatura | 6.2 asks for these. |
 | Chromatic scale (taught in Grade 4) | 3.6 tests it at Grade 5, starting on F, A♭, E♭, D♯, D♭ and C♯. |
@@ -68,7 +68,7 @@ Ranked by how likely they are to matter. "Recommend" is my suggestion, not a cha
 | # | Result |
 |---|---|
 | P1 | French terms added to `VOCAB_G5` (version 2): the book's list from p. 104 plus *sourdines*; taught in G5-U5-L06; asked by `t.g5.terms`. |
-| P2 | Not done: a teacher decides how far the list goes beyond the book (doloroso, a niente, tristamente, scherzando, con spirito). Added to the teacher pack as item 13 and to `OPEN_QUESTIONS.md` as Q37. |
+| P2 | Partly corrected after review: *doloroso*, the right-pedal sign and the spread-chord sign are in the book's own Grade 5 list and were added. *Tristamente* and *scherzando* are in the book's Grade 3 list and *niente* in its Grade 4 list (my first Q37 was wrong about this). Only *con spirito* is beyond the book. Teacher pack item 13, Q37. |
 | P3 | `t.g5.metre-mixed`. About 40% of its bars hold tuplets: triplets in simple time, duplets in compound time, and triplets, quintuplets and septuplets in irregular time. Tuplet bars come from a Grade 5 builder; the Grade 4 reader is untouched. |
 | P4 | `t.g5.rest-judge` for dotted-beat metres (9/x, 12/x) and 7/4, 7/8 (two silent groups, three bars), and for the two-group metres 5/x and 6/x (the last unit of the first group and the first unit of the second are silent: one rest for each is right, one rest across the boundary is wrong; two bars). |
 | P5 | `t.g5.duration-facts`: beats in a bar and dotted-note or tied-note sums. Tuplet totals in minim beats are not covered. |
@@ -76,3 +76,11 @@ Ranked by how likely they are to matter. "Recommend" is my suggestion, not a cha
 | P7 | Already in the lesson in a different form, but the old wording said "either spelling is accepted", which is only true as a meaning: the app's input is a list that shows ii. The G5-U4-L02 text now says the exam prints capitals, lower case is also recognised, and the app's ii means the same as II. |
 
 The new templates are bound to lessons G5-U1-L01 to L03, G5-U2-L02 and G5-U3-L06, so practice and review use them, and all five are in the unit challenges and the assessment (question counts unchanged). The `duration-facts` template's regular-metre questions earn no concept credit, because the only Grade 5 concept it can attach to is the irregular-metre one: they are practice only.
+
+## 7. Corrections after the independent reviews of PR #13
+
+Two reviews of head `daab5cd` found problems that this comparison missed. Each was checked against the code or the reference book before it was fixed.
+
+* **Missed by the comparison:** every paper's five-box chord question splits 2 + 3, so one cadence always needs an *approach chord*; intervals are sometimes set under a key signature (none were, here); and transposing carries accidentals (a G♯ becomes a B♮), which the melodies never exercised (chromatic notes now appear in major-key transposition melodies).
+* **"Checking a transposition: the skill is the same"** was wrong for the same reason.
+* **Still open for the owner:** whether the approach chord becomes compulsory (the book's section 11 says it may be asked; the papers always set it). It stays an optional enrichment until the owner decides.

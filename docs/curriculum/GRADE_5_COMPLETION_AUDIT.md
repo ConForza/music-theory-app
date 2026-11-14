@@ -78,32 +78,32 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 
 | Concept | Taught in | Question types (distinct questions each) | Total distinct |
 |---|---|---|---|
-| c.metre.irregular | U1-L01 | time-signature 400, metre-facts 142, metre-mixed 284 | 826 |
-| c.metre.irregular-grouping | U1-L02 | grouping-judge 383, irregular-grouping 214, rest-judge 61, bar-complete 333 | 991 |
-| c.rhythm.irregular-divisions | U1-L03 | irregular-division 390, division-facts 20, division-write 16 | 426 |
-| c.clefs.tenor | U2-L01 | tenor-read 55, tenor-write 21, tenor-facts 133 | 209 |
+| c.metre.irregular | U1-L01 | time-signature 400, metre-facts 90, metre-mixed 285 | 775 |
+| c.metre.irregular-grouping | U1-L02 | grouping-judge 382, irregular-grouping 214, rest-judge 61, bar-complete 161 | 818 |
+| c.rhythm.irregular-divisions | U1-L03 | irregular-division 248, division-facts 20, division-write 16 | 284 |
+| c.clefs.tenor | U2-L01 | tenor-read 55, tenor-write 21, tenor-facts 19 | 95 |
 | c.clefs.four-clefs | U2-L02 | four-clef-read 202, same-pitch 399, key-signature 83, clef-minor 357 | 1041 |
 | c.transposition.octave-any | U2-L03 | octave-transpose 400, clef-position 399 | 799 |
-| c.scales.keys-six-sharps | U3-L01 | scale-build 33, key-facts 185, scale-spot 16, key-signature 16 | 250 |
-| c.scales.keys-six-flats | U3-L02 | scale-build 27, key-facts 168, scale-spot 18, key-signature 16 | 229 |
-| c.intervals.chromatic | U3-L03 | interval-any 204, interval-write 210, interval-facts 377 | 791 |
-| c.intervals.compound | U3-L04 | interval-compound 316, compound-facts 128 | 444 |
-| c.transposition.concert-pitch | U3-L05 | concert-facts 262, transpose-key 364 | 626 |
-| c.transposition.instrument | U3-L06 | instrument-transpose 400, transpose-key 364, concert-facts 262, transpose-judge 400 | 1426 |
-| c.chords.inversions | U4-L01 | inversion-facts 283, chord-identify 308, chord-build 258 | 849 |
-| c.chords.supertonic | U4-L02 | supertonic-facts 200, chord-identify 85, chord-build 97 | 382 |
-| c.chords.identify-inversions | U4-L03 | chord-in-passage 283, chord-identify 252, chord-build 227 | 762 |
-| c.cadences.types | U4-L04 | cadence-facts 63, cadence-identify 119 | 182 |
+| c.scales.keys-six-sharps | U3-L01 | scale-build 33, key-facts 14, scale-spot 16, key-signature 16 | 79 |
+| c.scales.keys-six-flats | U3-L02 | scale-build 27, key-facts 14, scale-spot 18, key-signature 16 | 75 |
+| c.intervals.chromatic | U3-L03 | interval-any 232, interval-write 225, interval-facts 323 | 780 |
+| c.intervals.compound | U3-L04 | interval-compound 316, compound-facts 71 | 387 |
+| c.transposition.concert-pitch | U3-L05 | concert-facts 82, transpose-key 180 | 262 |
+| c.transposition.instrument | U3-L06 | instrument-transpose 400, transpose-key 180, concert-facts 82, transpose-judge 400 | 1062 |
+| c.chords.inversions | U4-L01 | inversion-facts 145, chord-identify 308, chord-build 249 | 702 |
+| c.chords.supertonic | U4-L02 | supertonic-facts 77, chord-identify 85, chord-build 93 | 255 |
+| c.chords.identify-inversions | U4-L03 | chord-in-passage 283, chord-identify 252, chord-build 220 | 755 |
+| c.cadences.types | U4-L04 | cadence-facts 12, cadence-identify 119 | 131 |
 | c.cadences.recognise | U4-L05 | cadence-find 83, cadence-identify 119 | 202 |
-| c.cadences.chord-choice | U4-L06 | cadence-chords 397, chord-choice 400 | 797 |
+| c.cadences.chord-choice | U4-L06 | cadence-chords 397, chord-choice 391 | 788 |
 | c.chords.cadential-six-four | U4-E1 |  | 0 |
 | c.cadences.approach-chord | U4-E2 |  | 0 |
-| c.ornaments.patterns | U5-L01 | ornament-facts 190, ornament-read 400 | 590 |
-| c.ornaments.replace-with-sign | U5-L02 | ornament-replace 281, ornament-figure 387 | 668 |
-| c.voices.types | U5-L03 | voices 273, voice-groups 190 | 463 |
-| c.instruments.sound-production | U5-L04 | instrument-sound 349, instrument-which 395 | 744 |
-| c.instruments.extended | U5-L05 | instruments 158, instruments-more 251 | 409 |
-| c.terms.g5 | U5-L06 | terms 394, term-use 357 | 751 |
+| c.ornaments.patterns | U5-L01 | ornament-facts 10, ornament-read 387 | 397 |
+| c.ornaments.replace-with-sign | U5-L02 | ornament-replace 296, ornament-figure 221 | 517 |
+| c.voices.types | U5-L03 | voices 224, voice-groups 11 | 235 |
+| c.instruments.sound-production | U5-L04 | instrument-sound 13, instrument-which 340 | 353 |
+| c.instruments.extended | U5-L05 | instruments 8, instruments-more 103 | 111 |
+| c.terms.g5 | U5-L06 | terms 390, term-use 264 | 654 |
 | c.context.score-g5 | U5-L07 | score 400, score-melody 400 | 800 |
 | c.voices.satb-scores | U5-E1 |  | 0 |
 

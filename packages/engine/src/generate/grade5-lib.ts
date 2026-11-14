@@ -84,3 +84,17 @@ export const an = (s: string) => `${/^[aeiou]/i.test(s) ? "an" : "a"} ${s}`;
 
 /** The provisional family generator for a template, run as it is. */
 export const family5 = (familyId: string): Gen => (c) => GENERATORS[familyId]?.(c.template)?.(c) ?? null;
+
+/**
+ * Now and then a melody in a major key carries one chromatic note: the 4th degree raised, or the 7th degree lowered. Transposition then
+ * has to carry the accidental over by the interval (G♯ in D major becomes B♮ in F major), which a melody of scale notes never asks. Minor
+ * keys already carry the raised 7th, so they are left alone.
+ */
+export function withChromaticNote(c: Ctx, mel: Pitch[], key: music.Key): Pitch[] {
+  if (key.mode !== "major" || !c.rng.chance(0.5)) return mel;
+  const at = mel.map((p, i) => ({ p, i, deg: (music.stepIndex(p.step) - music.stepIndex(key.tonic.step) + 7) % 7 })).filter((x) => x.i > 0 && (x.deg === 3 || x.deg === 6));
+  if (!at.length) return mel;
+  const pick = c.rng.pick(at);
+  const alter = pick.p.alter + (pick.deg === 3 ? 1 : -1);
+  return mel.map((p, i) => (i === pick.i ? { ...p, alter } : p));
+}

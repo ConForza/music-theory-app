@@ -29,6 +29,8 @@ export const unitName = (ts: string): NV => NAME[parseTimeSignature(ts).bottom]!
 const valueOfUnits = (ts: string, k: number) => valueFor(mul(unitOf(ts), frac(k)), 1);
 const halfValue = (ts: string) => valueFor(mul(unitOf(ts), frac(1, 2)), 0);
 const patternText = (p: number[]) => p.join("+");
+/** The groupings the Grade 5 generators ask for: groups of two or three (a group of four is accepted from a learner, and appears as a fact, but is not drawn). */
+const taught = (top: number) => music.irregularPatterns(top).filter((p) => Math.max(...p) <= 3);
 const structOf = (ts: string, p: number[]) => music.metreStructures(ts).find((s) => s.pattern?.join("+") === p.join("+"))!;
 const allowed = (c: Ctx, v: NV, dots = 0) => (!c.scope.noteValues?.length || c.scope.noteValues.includes(v)) && dots <= (c.scope.maxDots ?? 1);
 export const barClean = (events: Ev[], ts: string, p: number[], requireBeams = false) => music.checkBar(events as unknown as music.REvent[], structOf(ts, p), { requireBeams }).length === 0;
@@ -129,7 +131,7 @@ function buildBar(c: Ctx, ts: string, pattern: number[], opts: { minNotes?: numb
 export const timeSigIrregular: Gen = (c): any => {
   const ts = c.rng.pick(irregularIn(c));
   if (!ts) return null;
-  const pattern = c.rng.pick(music.irregularPatterns(parseTimeSignature(ts).top));
+  const pattern = c.rng.pick(taught(parseTimeSignature(ts).top));
   const is4 = parseTimeSignature(ts).bottom === 4;
   const bars: Ev[][] = [];
   for (let i = 0; i < 2; i++) {
@@ -161,7 +163,7 @@ function startText(evs: Ev[]): string {
 function withUnitBeams(events: Ev[]): Ev[] {
   const out = events.map((e) => ({ ...e })) as any[];
   for (let i = 0; i + 1 < out.length; i++) {
-    if (out[i].kind === "note" && out[i + 1].kind === "note" && out[i].duration.value === "quaver" && out[i + 1].duration.value === "quaver" && !out[i].beam && !out[i - 1]?.beam) {
+    if (out[i].kind === "note" && out[i + 1].kind === "note" && out[i].duration.value === "quaver" && out[i + 1].duration.value === "quaver" && !out[i].beam) {
       out[i].beam = "begin";
       out[i + 1].beam = "end";
       i++;
@@ -203,21 +205,21 @@ export const metreFacts5: Gen = (c): any => {
     return {
       prompt: "Which of these is an irregular time signature?",
       answer: choiceAnswer(opts.map((x) => [x, x]), ts, Object.fromEntries(regular.map((x) => [x, ["simple-compound-confusion", `${x} is ${music.classifyTimeSignature(x).metre} time: its beats are all alike (${music.classifyTimeSignature(x).beats}). Irregular time has five or seven beats, made of twos and threes.`]]))),
-      hints: ["Irregular signatures have five or seven beats in a bar, and the beats fall into unequal groups of two and three."],
+      hints: ["Irregular signatures have five or seven beats in a bar, and the beats fall into unequal groups of two (or four) and three."],
     };
   }
   if (mode === "groupings") {
     const valid = music.irregularPatterns(top).map(patternText);
-    const wrongs = (top === 5 ? ["4+1", "2+2+1", "3+3"] : ["3+3+1", "4+3", "2+2+2+1"]).filter((x) => !valid.includes(x));
+    const wrongs = (top === 5 ? ["4+1", "2+2+1", "3+3"] : ["3+3+1", "5+2", "2+2+2+1"]).filter((x) => !valid.includes(x));
     const right = c.rng.pick(valid);
     const others = valid.filter((x) => x !== right);
     // only one correct option is offered, so the other genuine groupings are never offered as wrong answers
     const opts = c.rng.shuffle([right, ...wrongs.slice(0, 3)]);
     void others;
     return {
-      prompt: `Which of these groupings can a bar of ${ts} use? (A bar is divided into groups of two and three beats.)`,
-      answer: choiceAnswer(opts.map((x) => [x, x]), right, Object.fromEntries(opts.filter((x) => x !== right).map((x) => [x, ["beat-count-wrong", `${x} is not a normal way to divide ${top} beats: irregular bars use only groups of two and three.`]]))),
-      hints: ["Groups are made of two or three beats, never one."],
+      prompt: `Which of these groupings can a bar of ${ts} use? (Groups are usually of two or three beats, and occasionally of four.)`,
+      answer: choiceAnswer(opts.map((x) => [x, x]), right, Object.fromEntries(opts.filter((x) => x !== right).map((x) => [x, ["beat-count-wrong", `${x} is not a normal way to divide ${top} beats: irregular bars are made of groups of two or three beats, and occasionally four.`]]))),
+      hints: ["Groups are made of two or three beats (occasionally four), never one."],
     };
   }
   // same-ts: the same signature can be grouped differently
@@ -247,7 +249,7 @@ export const groupingJudge5: Gen = (c): any => {
   if (!sigs.length) return null;
   const ts = c.rng.pick(sigs);
   const top = parseTimeSignature(ts).top;
-  const patterns = music.irregularPatterns(top);
+  const patterns = taught(top);
   const P = c.rng.pick(patterns);
   const mode = c.rng.pick(["read", "judge"] as const);
   if (mode === "read") {
@@ -292,7 +294,7 @@ export const irregularGrouping5: Gen = (c): any => {
   if (!sigs.length) return null;
   const ts = c.rng.pick(sigs);
   const top = parseTimeSignature(ts).top;
-  const patterns = music.irregularPatterns(top);
+  const patterns = taught(top);
   const P = c.rng.pick(patterns);
   const Q = c.rng.pick(patterns.filter((p) => patternText(p) !== patternText(P)));
   // the same notes (each unit whole or split in halves) are written once for Q (shown) and once for P (the answer)
@@ -321,7 +323,7 @@ export const barComplete5: Gen = (c): any => {
   if (!sigs.length) return null;
   const ts = c.rng.pick(sigs);
   const { top, bottom } = parseTimeSignature(ts);
-  const P = c.rng.pick(music.irregularPatterns(top));
+  const P = c.rng.pick(taught(top));
   const is4 = bottom === 4;
   const givenGroups = c.rng.int(1, P.length - 1);
   const built = buildBar(c, ts, P, { minNotes: 0, allowSplit: true, allowRests: false, beam: !is4 });
@@ -417,7 +419,7 @@ export const irregularDivision5: Gen = (c): any => {
   const d = c.rng.pick(divsIn(c));
   if (!d) return null;
   const ts = c.rng.pick(d.ts.filter((t) => (c.scope.timeSignatures ?? []).includes(t)));
-  const P = c.rng.pick(music.irregularPatterns(parseTimeSignature(ts).top));
+  const P = c.rng.pick(taught(parseTimeSignature(ts).top));
   const b = barWithTuplet(c, ts, P, d);
   if (!b) return null;
   const ids = ["minim", "crotchet", "quaver", "semiquaver", "dotted-crotchet"].filter((x) => allowedOpt(x));
@@ -472,7 +474,7 @@ export const divisionWrite5: Gen = (c): any => {
   const d = c.rng.pick(divsIn(c));
   if (!d) return null;
   const ts = c.rng.pick(d.ts.filter((t) => (c.scope.timeSignatures ?? []).includes(t)));
-  const P = c.rng.pick(music.irregularPatterns(parseTimeSignature(ts).top));
+  const P = c.rng.pick(taught(parseTimeSignature(ts).top));
   const b = barWithTuplet(c, ts, P, d);
   if (!b) return null;
   // the group must be the last thing in the bar so that what is given is a plain start of the bar

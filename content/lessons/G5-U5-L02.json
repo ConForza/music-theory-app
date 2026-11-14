@@ -717,9 +717,9 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C5",
+                "pitch": "Bb4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
                 },
                 "beam": "begin",
@@ -727,9 +727,18 @@
               },
               {
                 "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "demisemiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
                 "pitch": "Bb4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "demisemiquaver",
                   "dots": 0
                 },
                 "beam": "continue"
@@ -738,7 +747,7 @@
                 "kind": "note",
                 "pitch": "A4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "demisemiquaver",
                   "dots": 0
                 },
                 "beam": "continue"
@@ -747,7 +756,7 @@
                 "kind": "note",
                 "pitch": "Bb4",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "demisemiquaver",
                   "dots": 0
                 },
                 "beam": "end"
@@ -772,7 +781,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4. a note marked A in the 3rd space; a note on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4. a note marked A on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
         "key": "F major",
         "timeSignature": "3/4"
       },
@@ -781,6 +790,7 @@
         "task": "replace-written-out",
         "mainNote": "Bb4",
         "writtenOut": [
+          "Bb4",
           "C5",
           "Bb4",
           "A4",
