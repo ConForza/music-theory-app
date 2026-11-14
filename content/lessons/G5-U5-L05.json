@@ -74,90 +74,35 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Which of these is the higher-sounding version of the flute?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "piccolo",
-            "label": "piccolo"
-          },
-          {
-            "id": "bass-clarinet",
-            "label": "bass clarinet"
-          },
-          {
-            "id": "double-bassoon",
-            "label": "double bassoon"
-          },
-          {
-            "id": "cor-anglais",
-            "label": "cor anglais"
-          }
-        ],
-        "correctOptionIds": [
-          "piccolo"
-        ],
-        "diagnoses": {
-          "cor-anglais": {
-            "category": "wrong-category",
-            "reason": "The cor anglais is a version of a different instrument."
-          },
-          "double-bassoon": {
-            "category": "wrong-category",
-            "reason": "The double bassoon is a version of a different instrument."
-          },
-          "bass-clarinet": {
-            "category": "wrong-category",
-            "reason": "The bass clarinet is a version of a different instrument."
-          }
-        }
-      },
-      "hints": [
-        "Piccolo: flute. Cor anglais: oboe.",
-        "Each of these instruments is a bigger or smaller relative of one of the Grade 4 woodwinds."
-      ],
-      "feedback": {
-        "correct": "Yes.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g5-u5-l05.guided-2",
-      "templateId": "t.g5.instruments",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "learning",
       "prompt": "The piccolo is a smaller, higher version of which instrument?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "oboe",
-            "label": "oboe"
-          },
-          {
-            "id": "bassoon",
-            "label": "bassoon"
+            "id": "flute",
+            "label": "flute"
           },
           {
             "id": "clarinet",
             "label": "clarinet"
           },
           {
-            "id": "flute",
-            "label": "flute"
+            "id": "bassoon",
+            "label": "bassoon"
+          },
+          {
+            "id": "oboe",
+            "label": "oboe"
           }
         ],
         "correctOptionIds": [
           "flute"
         ],
         "diagnoses": {
+          "oboe": {
+            "category": "wrong-category",
+            "reason": "The piccolo is a version of the flute, not of the oboe."
+          },
           "bassoon": {
             "category": "wrong-category",
             "reason": "The piccolo is a version of the flute, not of the bassoon."
@@ -165,10 +110,6 @@
           "clarinet": {
             "category": "wrong-category",
             "reason": "The piccolo is a version of the flute, not of the clarinet."
-          },
-          "oboe": {
-            "category": "wrong-category",
-            "reason": "The piccolo is a version of the flute, not of the oboe."
           }
         }
       },
@@ -187,15 +128,143 @@
       }
     },
     {
+      "id": "i.g5-u5-l05.guided-2",
+      "templateId": "t.g5.instruments-more",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these percussion instruments plays notes of definite pitch?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "glockenspiel",
+            "label": "glockenspiel"
+          },
+          {
+            "id": "tam-tam",
+            "label": "tam-tam (gong)"
+          },
+          {
+            "id": "tambourine",
+            "label": "tambourine"
+          },
+          {
+            "id": "triangle",
+            "label": "triangle"
+          }
+        ],
+        "correctOptionIds": [
+          "glockenspiel"
+        ],
+        "diagnoses": {
+          "triangle": {
+            "category": "wrong-category",
+            "reason": "The triangle has no definite pitch."
+          },
+          "tam-tam": {
+            "category": "wrong-category",
+            "reason": "The tam-tam (gong) has no definite pitch."
+          },
+          "tambourine": {
+            "category": "wrong-category",
+            "reason": "The tambourine has no definite pitch."
+          }
+        }
+      },
+      "hints": [
+        "Two tenor trombones and one bass trombone.",
+        "Triangle, tambourine, castanets and tam-tam have no definite pitch; xylophone, marimba, glockenspiel, vibraphone, celesta and tubular bells do."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
       "id": "i.g5-u5-l05.guided-3",
       "templateId": "t.g5.instruments",
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
+      "prompt": "The double bassoon is a deeper, lower version of which instrument?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "bassoon",
+            "label": "bassoon"
+          },
+          {
+            "id": "oboe",
+            "label": "oboe"
+          },
+          {
+            "id": "flute",
+            "label": "flute"
+          },
+          {
+            "id": "clarinet",
+            "label": "clarinet"
+          }
+        ],
+        "correctOptionIds": [
+          "bassoon"
+        ],
+        "diagnoses": {
+          "flute": {
+            "category": "wrong-category",
+            "reason": "The double bassoon is a version of the bassoon, not of the flute."
+          },
+          "oboe": {
+            "category": "wrong-category",
+            "reason": "The double bassoon is a version of the bassoon, not of the oboe."
+          },
+          "clarinet": {
+            "category": "wrong-category",
+            "reason": "The double bassoon is a version of the bassoon, not of the clarinet."
+          }
+        }
+      },
+      "hints": [
+        "Piccolo: flute. Cor anglais: oboe.",
+        "Piccolo: flute. Cor anglais: oboe. Bass clarinet: clarinet. Double bassoon: bassoon."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-l05.ind-1",
+      "templateId": "t.g5.instruments-more",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
       "prompt": "A full orchestra normally has how many trombones of each kind?",
       "answer": {
         "kind": "choice",
         "options": [
+          {
+            "id": "2b",
+            "label": "Two bass trombones only"
+          },
+          {
+            "id": "1t2b",
+            "label": "One tenor trombone and two bass trombones"
+          },
           {
             "id": "2t1b",
             "label": "Two tenor trombones and one bass trombone"
@@ -203,14 +272,6 @@
           {
             "id": "3t",
             "label": "Three tenor trombones"
-          },
-          {
-            "id": "1t2b",
-            "label": "One tenor trombone and two bass trombones"
-          },
-          {
-            "id": "2b",
-            "label": "Two bass trombones only"
           }
         ],
         "correctOptionIds": [
@@ -232,11 +293,11 @@
         }
       },
       "hints": [
-        "Piccolo: flute. Cor anglais: oboe.",
+        "Two tenor trombones and one bass trombone.",
         "Two tenor, one bass."
       ],
       "feedback": {
-        "correct": "Yes.",
+        "correct": "Correct.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -244,11 +305,9 @@
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
       }
-    }
-  ],
-  "independent": [
+    },
     {
-      "id": "i.g5-u5-l05.ind-1",
+      "id": "i.g5-u5-l05.ind-2",
       "templateId": "t.g5.instruments",
       "templateVersion": 1,
       "seed": null,
@@ -307,112 +366,53 @@
       }
     },
     {
-      "id": "i.g5-u5-l05.ind-2",
-      "templateId": "t.g5.instruments",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "Which of these is the deeper-sounding version of the bassoon?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "bass-clarinet",
-            "label": "bass clarinet"
-          },
-          {
-            "id": "double-bassoon",
-            "label": "double bassoon"
-          },
-          {
-            "id": "piccolo",
-            "label": "piccolo"
-          },
-          {
-            "id": "cor-anglais",
-            "label": "cor anglais"
-          }
-        ],
-        "correctOptionIds": [
-          "double-bassoon"
-        ],
-        "diagnoses": {
-          "cor-anglais": {
-            "category": "wrong-category",
-            "reason": "The cor anglais is a version of a different instrument."
-          },
-          "bass-clarinet": {
-            "category": "wrong-category",
-            "reason": "The bass clarinet is a version of a different instrument."
-          },
-          "piccolo": {
-            "category": "wrong-category",
-            "reason": "The piccolo is a version of a different instrument."
-          }
-        }
-      },
-      "hints": [
-        "Piccolo: flute. Cor anglais: oboe.",
-        "Each of these instruments is a bigger or smaller relative of one of the Grade 4 woodwinds."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
       "id": "i.g5-u5-l05.ind-3",
-      "templateId": "t.g5.instruments",
+      "templateId": "t.g5.instruments-more",
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which of these percussion instruments plays notes of indefinite pitch?",
+      "prompt": "Which of these instruments reads the tenor clef for its higher notes?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "castanets",
-            "label": "castanets"
+            "id": "flute",
+            "label": "flute"
           },
           {
-            "id": "vibraphone",
-            "label": "vibraphone"
+            "id": "bassoon",
+            "label": "bassoon"
           },
           {
-            "id": "celesta",
-            "label": "celesta"
+            "id": "bass-trombone",
+            "label": "bass trombone"
           },
           {
-            "id": "xylophone",
-            "label": "xylophone"
+            "id": "viola",
+            "label": "viola"
           }
         ],
         "correctOptionIds": [
-          "castanets"
+          "bassoon"
         ],
         "diagnoses": {
-          "xylophone": {
+          "bass-trombone": {
             "category": "wrong-category",
-            "reason": "The xylophone has definite pitches."
+            "reason": "The bass trombone normally reads the bass clef."
           },
-          "vibraphone": {
+          "viola": {
             "category": "wrong-category",
-            "reason": "The vibraphone has definite pitches."
+            "reason": "The viola normally reads the alto clef."
           },
-          "celesta": {
+          "flute": {
             "category": "wrong-category",
-            "reason": "The celesta has definite pitches."
+            "reason": "The flute normally reads the treble clef."
           }
         }
       },
       "hints": [
-        "Piccolo: flute. Cor anglais: oboe.",
-        "Triangle, tambourine, castanets and tam-tam have no definite pitch; xylophone, marimba, glockenspiel, vibraphone, celesta and tubular bells do."
+        "Two tenor trombones and one bass trombone.",
+        "Cello, bassoon and tenor trombone use the tenor clef."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -430,48 +430,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which of these is NOT a regular member of the standard orchestra?",
+      "prompt": "The bass clarinet is a deeper, lower version of which instrument?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "cello",
-            "label": "cello"
+            "id": "oboe",
+            "label": "oboe"
           },
           {
             "id": "flute",
             "label": "flute"
           },
           {
-            "id": "recorder",
-            "label": "recorder"
+            "id": "clarinet",
+            "label": "clarinet"
           },
           {
-            "id": "viola",
-            "label": "viola"
+            "id": "bassoon",
+            "label": "bassoon"
           }
         ],
         "correctOptionIds": [
-          "recorder"
+          "clarinet"
         ],
         "diagnoses": {
           "flute": {
             "category": "wrong-category",
-            "reason": "The flute is a regular member of the orchestra."
+            "reason": "The bass clarinet is a version of the clarinet, not of the flute."
           },
-          "viola": {
+          "bassoon": {
             "category": "wrong-category",
-            "reason": "The viola is a regular member of the orchestra."
+            "reason": "The bass clarinet is a version of the clarinet, not of the bassoon."
           },
-          "cello": {
+          "oboe": {
             "category": "wrong-category",
-            "reason": "The cello is a regular member of the orchestra."
+            "reason": "The bass clarinet is a version of the clarinet, not of the oboe."
           }
         }
       },
       "hints": [
         "Piccolo: flute. Cor anglais: oboe.",
-        "Guitar, saxophone, recorder, harpsichord, clavichord and organ are not regular members."
+        "Piccolo: flute. Cor anglais: oboe. Bass clarinet: clarinet. Double bassoon: bassoon."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -485,6 +485,65 @@
     },
     {
       "id": "i.g5-u5-l05.ind-5",
+      "templateId": "t.g5.instruments-more",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these percussion instruments plays notes of definite pitch?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "castanets",
+            "label": "castanets"
+          },
+          {
+            "id": "tambourine",
+            "label": "tambourine"
+          },
+          {
+            "id": "glockenspiel",
+            "label": "glockenspiel"
+          },
+          {
+            "id": "tam-tam",
+            "label": "tam-tam (gong)"
+          }
+        ],
+        "correctOptionIds": [
+          "glockenspiel"
+        ],
+        "diagnoses": {
+          "tam-tam": {
+            "category": "wrong-category",
+            "reason": "The tam-tam (gong) has no definite pitch."
+          },
+          "tambourine": {
+            "category": "wrong-category",
+            "reason": "The tambourine has no definite pitch."
+          },
+          "castanets": {
+            "category": "wrong-category",
+            "reason": "The castanets has no definite pitch."
+          }
+        }
+      },
+      "hints": [
+        "Two tenor trombones and one bass trombone.",
+        "Triangle, tambourine, castanets and tam-tam have no definite pitch; xylophone, marimba, glockenspiel, vibraphone, celesta and tubular bells do."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l05.ind-6",
       "templateId": "t.g5.instruments",
       "templateVersion": 1,
       "seed": null,
@@ -494,20 +553,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "bass-clarinet",
-            "label": "bass clarinet"
+            "id": "cor-anglais",
+            "label": "cor anglais"
           },
           {
             "id": "double-bassoon",
             "label": "double bassoon"
           },
           {
-            "id": "cor-anglais",
-            "label": "cor anglais"
-          },
-          {
             "id": "piccolo",
             "label": "piccolo"
+          },
+          {
+            "id": "bass-clarinet",
+            "label": "bass clarinet"
           }
         ],
         "correctOptionIds": [
@@ -541,65 +600,6 @@
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
       }
-    },
-    {
-      "id": "i.g5-u5-l05.ind-6",
-      "templateId": "t.g5.instruments",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "Which of these instruments reads the tenor clef for its higher notes?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "viola",
-            "label": "viola"
-          },
-          {
-            "id": "double-bassoon",
-            "label": "double bassoon"
-          },
-          {
-            "id": "bass-trombone",
-            "label": "bass trombone"
-          },
-          {
-            "id": "bassoon",
-            "label": "bassoon"
-          }
-        ],
-        "correctOptionIds": [
-          "bassoon"
-        ],
-        "diagnoses": {
-          "bass-trombone": {
-            "category": "wrong-category",
-            "reason": "The bass trombone normally reads the bass clef."
-          },
-          "viola": {
-            "category": "wrong-category",
-            "reason": "The viola normally reads the alto clef."
-          },
-          "double-bassoon": {
-            "category": "wrong-category",
-            "reason": "The double bassoon normally reads the bass clef."
-          }
-        }
-      },
-      "hints": [
-        "Piccolo: flute. Cor anglais: oboe.",
-        "Cello, bassoon and tenor trombone use the tenor clef."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
     }
   ],
   "recap": [
@@ -613,7 +613,7 @@
       "afterDays": 1
     },
     {
-      "templateId": "t.g5.instruments",
+      "templateId": "t.g5.instruments-more",
       "afterDays": 3
     },
     {

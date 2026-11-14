@@ -6,8 +6,8 @@
 import type { Gen } from "./families.ts";
 import { describeScore, describeStave } from "./grade4-text.ts";
 import { clefPosition5, compoundFacts5, concertFacts5, fourClefRead, intervalAny5, intervalCompound5, intervalFacts5, intervalWrite5, instrumentTranspose5, keyFacts5, keySignature5, octaveTranspose5, samePitch5, scaleBuild5, scaleSpot5, tenorFacts, tenorRead, tenorWrite, transposeKey5 } from "./grade5-pitch.ts";
-import { instrumentSound5, instruments5, ornamentFacts5, ornamentReplace5, score5, termUse5, terms5, voices5 } from "./grade5-context.ts";
-import { approachChord5, cadenceChords5, cadenceFacts5, cadenceFind5, cadenceIdentify5, chordBuild5, chordIdentify5, chordInPassage5, inversionFacts5, satbFacts5, satbVoices5, sixFourFiveThree5, supertonicFacts5 } from "./grade5-harmony.ts";
+import { instrumentSound5, instrumentWhich5, instruments5, instrumentsMore5, ornamentFacts5, ornamentFigure5, ornamentRead5, ornamentReplace5, score5, scoreMelody5, termUse5, terms5, voiceGroups5, voices5 } from "./grade5-context.ts";
+import { approachChord5, chordChoice5, cadenceChords5, cadenceFacts5, cadenceFind5, cadenceIdentify5, chordBuild5, chordIdentify5, chordInPassage5, inversionFacts5, satbFacts5, satbVoices5, sixFourFiveThree5, supertonicFacts5 } from "./grade5-harmony.ts";
 import { barComplete5, divisionFacts5, divisionWrite5, groupingJudge5, irregularDivision5, irregularGrouping5, metreFacts5, timeSigIrregular } from "./grade5-rhythm.ts";
 
 
@@ -64,6 +64,7 @@ const REGISTRY: Record<string, Gen> = {
   "t.g5.cadence-find": cadenceFind5,
   "t.g5.cadence-facts": cadenceFacts5,
   "t.g5.cadence-chords": cadenceChords5,
+  "t.g5.chord-choice": chordChoice5,
   "t.g5.cadential-six-four": sixFourFiveThree5,
   "t.g5.approach-chord": approachChord5,
   "t.g5.satb-voices": satbVoices5,
@@ -77,6 +78,12 @@ const REGISTRY: Record<string, Gen> = {
   "t.g5.terms": terms5,
   "t.g5.term-use": termUse5,
   "t.g5.score": score5,
+  "t.g5.score-melody": scoreMelody5,
+  "t.g5.voice-groups": voiceGroups5,
+  "t.g5.instruments-more": instrumentsMore5,
+  "t.g5.instrument-which": instrumentWhich5,
+  "t.g5.ornament-read": ornamentRead5,
+  "t.g5.ornament-figure": ornamentFigure5,
 };
 
 export const GRADE5_GENERATORS: Record<string, Gen> = Object.fromEntries(Object.entries(REGISTRY).map(([id, g]) => [id, described(g)]));

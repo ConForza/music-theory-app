@@ -179,6 +179,7 @@ export const U4: Spec2[] = [
     version: 1,
     bind: [
       { t: "t.g5.cadence-chords", c: ["c.cadences.chord-choice"], scope: { ...cad, inversions: ["a"] } },
+      { t: "t.g5.chord-choice", c: ["c.cadences.chord-choice"], scope: { ...cad, inversions: ["a"] } },
     ],
     objective: { statement: "Choose suitable chords for the melody notes at a cadence point.", criteria: ["I list the chords that contain each melody note.", "I find a pair that makes the cadence asked for.", "I know several pairs may be correct."] },
     explain: [
@@ -191,18 +192,18 @@ export const U4: Spec2[] = [
     demo: { widget: "staff", music: chords("treble", [["G4", "B4", "D5"], ["C5", "E5", "G5"]], "Two chords in C major: V then I.", cmaj), steps: ["Melody notes: D then C.", "D is in V (G B D); C is in I (C E G).", "V followed by I: a perfect cadence."], text: "V–I in C major." },
     guided: [
       { t: "t.g5.cadence-chords", correct: "Yes: each chord holds its melody note." },
-      { t: "t.g5.cadence-chords", correct: "Right." },
+      { t: "t.g5.chord-choice", correct: "Right." },
     ],
     independent: [
       { t: "t.g5.cadence-chords", correct: "Correct chords." },
+      { t: "t.g5.chord-choice", correct: "Correct." },
       { t: "t.g5.cadence-chords", correct: "Correct." },
+      { t: "t.g5.chord-choice", correct: "Correct." },
       { t: "t.g5.cadence-chords", correct: "Correct." },
-      { t: "t.g5.cadence-chords", correct: "Correct." },
-      { t: "t.g5.cadence-chords", correct: "Correct." },
-      { t: "t.g5.cadence-chords", correct: "Correct." },
+      { t: "t.g5.chord-choice", correct: "Correct." },
     ],
     recap: ["Choose a chord that contains each marked melody note.", "The two chords must make the cadence named in the question.", "More than one pair may be correct; spacing is not marked."],
-    review: [{ t: "t.g5.cadence-chords", afterDays: 1 }, { t: "t.g5.cadence-chords", afterDays: 3 }, { t: "t.g5.cadence-chords", afterDays: 7 }],
+    review: [{ t: "t.g5.cadence-chords", afterDays: 1 }, { t: "t.g5.chord-choice", afterDays: 3 }, { t: "t.g5.cadence-chords", afterDays: 7 }],
     notes: "Original wording and melodies. First Steps Grade 5 section 11 (pp. 122-126, read in the PDF): chords suggested at indicated cadence points in C, G, D or F; Roman numerals, letter names or written notes; no penalty for poor spacing. Every pair of chords that contains the melody notes and makes the named cadence is accepted (no single 'right' sequence).",
   },
   {

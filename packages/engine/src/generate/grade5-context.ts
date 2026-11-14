@@ -101,40 +101,82 @@ export const ornamentFacts5: Gen = (c): any => {
   };
 };
 
+const ORN_DESC: Record<string, string> = {
+  trill: "Alternate quickly between the written note and the note above it",
+  turn: "Play the note above, the written note, the note below, then the written note again",
+  "upper-mordent": "Play the written note, the note above it, then the written note again",
+  "lower-mordent": "Play the written note, the note below it, then the written note again",
+  acciaccatura: "Crush the small note in as quickly as possible just before the main note",
+  appoggiatura: "Lean on the small note, which takes part of the time of the main note",
+};
+/** t.g5.ornament-read: from the printed sign to what it asks the player to do (a description, never a note-by-note realisation to write). */
+export const ornamentRead5: Gen = (c): any => {
+  const signs = ornamentsIn(c);
+  const sign = c.rng.pick(signs);
+  const keyText = c.rng.pick(keysIn(c).filter((k) => Math.abs(music.keyFifths(parseKey(k))) <= 3));
+  const key = parseKey(keyText);
+  const pcs = music.scale(key, key.mode === "major" ? "major" : "harmonic").slice(0, 7);
+  const d = c.rng.int(1, 5);
+  const main: Pitch = { ...pcs[d % 7]!, octave: 5 };
+  const up = { ...pcs[(d + 1) % 7]!, octave: 5 };
+  if (!fitsIn("treble", [main, up], 1)) return null;
+  const ev = sign === "acciaccatura" || sign === "appoggiatura" ? note(main, "crotchet", { label: "A", grace: { kind: sign, pitches: [F(up)] } }) : note(main, "crotchet", { label: "A", ornament: sign });
+  const others = shuffled(c, signs.filter((x) => x !== sign)).slice(0, 3);
+  if (others.length < 3) return null;
+  const f = frag("treble", [{ events: [ev, note({ ...pcs[(d + 2) % 7]!, octave: 5 }, "crotchet"), note(main, "minim")], barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
+  return {
+    prompt: "What does the ornament on the note marked A ask the player to do?",
+    music: f,
+    answer: choiceAnswer(shuffled(c, [sign, ...others].map((x) => [x, ORN_DESC[x]!] as [string, string])), sign, Object.fromEntries(others.map((x) => [x, [x.includes("mordent") && sign.includes("mordent") ? "upper-lower-mordent-swap" : "trill-mordent-confusion", `That describes ${x === "acciaccatura" || x === "appoggiatura" ? `an ${x}` : `a ${x.replace("-", " ")}`}. Look again at the sign: ${ORN_LOOK_TEXT[sign]}.`]]))),
+    hints: ["Small notes before the main note are grace notes; signs above the note are trills, turns and mordents."],
+  };
+};
+const ORN_LOOK_TEXT: Record<string, string> = { trill: "the letters tr", turn: "a sideways S-shaped curl", "upper-mordent": "a short zig-zag with no line through it", "lower-mordent": "a short zig-zag with a vertical line through it", acciaccatura: "a small note with a stroke through its stem", appoggiatura: "a small note without a stroke" };
+
+/** t.g5.ornament-figure: a written-out figure is described by its notes; which sign replaces it? */
+export const ornamentFigure5: Gen = (c): any => {
+  const signs = ornamentsIn(c).filter((s) => ["trill", "turn", "upper-mordent", "lower-mordent"].includes(s));
+  if (!signs.length) return null;
+  const keyText = c.rng.pick(keysIn(c).filter((k) => Math.abs(music.keyFifths(parseKey(k))) <= 3));
+  const key = parseKey(keyText);
+  const pcs = music.scale(key, key.mode === "major" ? "major" : "harmonic").slice(0, 7);
+  const d = c.rng.int(1, 5);
+  const at = (k: number): Pitch => { const pc = pcs[((k % 7) + 7) % 7]!; return { ...pc, octave: 4 + Math.floor((music.stepIndex(key.tonic.step) + k) / 7) }; };
+  const main = at(d);
+  const up = at(d + 1);
+  const down = at(d - 1);
+  const sign = c.rng.pick(signs);
+  const figs: Record<string, Pitch[]> = { "upper-mordent": [main, up, main], "lower-mordent": [main, down, main], turn: [up, main, down, main], trill: [up, main, up, main, up, main, down, main] };
+  const fig = figs[sign]!;
+  if (!fitsIn("treble", fig, 1) || music.classifyOrnamentFigure(main, fig) !== sign) return null;
+  const nm = (p: Pitch) => pretty(F(p).replace(/\d$/, ""));
+  const f = frag("treble", [{ events: fig.map((p, i) => note(p, "semiquaver", { beam: i === 0 ? "begin" : i === fig.length - 1 ? "end" : "continue" })) }], "A figure.", { key: keyText, showKeySignature: true });
+  const others = signs.filter((x) => x !== sign);
+  return {
+    prompt: `A composer has written out an ornament on the note ${nm(main)} as these notes: ${fig.map(nm).join(", ")}. Which sign could replace the written-out notes?`,
+    music: f,
+    answer: choiceAnswer(shuffled(c, signs.map((x) => [x, cap(x.replace("-", " "))] as [string, string])), sign, Object.fromEntries(others.map((x) => [x, [x.includes("mordent") && sign.includes("mordent") ? "upper-lower-mordent-swap" : sign === "turn" || x === "turn" ? "turn-inverted" : "trill-mordent-confusion", `The figure is ${fig.length} notes around ${nm(main)}: ${sign.includes("mordent") ? "the extra note is " + (sign === "upper-mordent" ? "above" : "below") : sign === "turn" ? "above, then below" : "an alternation with the note above"}, which is not ${x.replace("-", " ")}.`]]))),
+    hints: ["Find the main note, then see where the extra notes go: above, below, or both, and how often."],
+  };
+};
+
 // ---------------------------------------------------------------------------
 // Voices
 // ---------------------------------------------------------------------------
 
-/** t.g5.voices: the voice types, their order, and the two unmistakable ranges. */
+/** t.g5.voices: the highest and lowest choral voices, and the two unmistakable ranges. */
 export const voices5: Gen = (c): any => {
-  const mode = c.rng.pick(["highest", "lowest", "between", "satb", "range", "range"] as const);
+  const mode = c.rng.pick(["highest", "lowest", "range", "range", "range"] as const);
   const opt = (ids: string[]) => ids.map((id) => [id, cap(V.find((v) => v.id === id)!.name)] as [string, string]);
   if (mode === "highest" || mode === "lowest") {
     const right = mode === "highest" ? "soprano" : "bass";
     const ids = ["soprano", "alto", "tenor", "bass"];
     return { prompt: `Which of the four voices of a mixed choir is the ${mode === "highest" ? "highest" : "lowest"}?`, answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `The ${x} is not the ${mode === "highest" ? "highest" : "lowest"} voice: the order, high to low, is soprano, alto, tenor, bass.`]]))), hints: ["High to low: soprano, alto, tenor, bass."] };
   }
-  if (mode === "between") {
-    const pair = c.rng.pick([["soprano", "alto", "mezzo-soprano"], ["tenor", "bass", "baritone"]] as const);
-    const ids = ["mezzo-soprano", "baritone", "alto", "tenor"].filter((x) => x !== pair[0] && x !== pair[1]).concat(pair[2]);
-    const opts = [...new Set([pair[2], ...ids])].slice(0, 4);
-    if (!opts.includes(pair[2])) opts.push(pair[2]);
-    return { prompt: `Singers, especially solo singers, are also classed in intermediate ranges. Which voice lies between the ${pair[0]} and the ${pair[1]}?`, answer: choiceAnswer(shuffled(c, opt(opts)), pair[2], Object.fromEntries(opts.filter((x) => x !== pair[2]).map((x) => [x, ["wrong-category", `The ${pair[2]} is the voice between the ${pair[0]} and the ${pair[1]}.`]]))), hints: ["Mezzo-soprano sits between soprano and alto; baritone between tenor and bass."] };
-  }
-  if (mode === "satb") {
-    const wrong = c.rng.pick(["mezzo-soprano", "baritone"]);
-    const ids = ["soprano", "alto", "tenor", "bass"];
-    const opts = [...ids.slice(0, 3), wrong];
-    const other = ids[3]!;
-    void other;
-    return { prompt: "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?", answer: choiceAnswer(shuffled(c, opt(opts)), wrong, Object.fromEntries(ids.slice(0, 3).map((x) => [x, ["wrong-category", `The ${x} is one of the four choral voices: soprano, alto, tenor and bass.`]]))), hints: ["S, A, T and B are the four choral voices."] };
-  }
   // range: a part wholly in the soprano-only or the bass-only zone
   const sop = c.rng.chance(0.5);
   const clef: Clef = sop ? "treble" : "bass";
-  const pool: Pitch[] = sop
-    ? ["E5", "F5", "G5", "A5"].map((p) => music.parsePitch(p))
-    : ["E2", "F2", "G2", "A2", "B2"].map((p) => music.parsePitch(p));
+  const pool: Pitch[] = sop ? ["E5", "F5", "G5", "A5"].map((p) => music.parsePitch(p)) : ["E2", "F2", "G2", "A2", "B2"].map((p) => music.parsePitch(p));
   const ps = Array.from({ length: 5 }, () => c.rng.pick(pool));
   if (new Set(ps.map(F)).size < 3) return null;
   const f = frag(clef, [{ events: ps.map((p) => note(p, "crotchet")).slice(0, 4) }, { events: [note(ps[4]!, "minim"), { kind: "rest", duration: { value: "minim", dots: 0 } } as Ev], barline: "final" }], "A vocal part.", { showKeySignature: false, timeSignature: "4/4" });
@@ -146,6 +188,26 @@ export const voices5: Gen = (c): any => {
     answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `This part is too ${sop ? "high" : "low"} for a ${x}: it lies ${sop ? "above" : "below"} the range of the ${x}.`]]))),
     hints: ["The soprano is the highest choral voice and the bass the lowest."],
   };
+};
+
+/** t.g5.voice-groups: the four choral voices as a group, and the voices that lie between them. */
+export const voiceGroups5: Gen = (c): any => {
+  const mode = c.rng.pick(["between", "satb", "order", "not-choral"] as const);
+  const opt = (ids: string[]) => ids.map((id) => [id, cap(V.find((v) => v.id === id)!.name)] as [string, string]);
+  if (mode === "between") {
+    const pair = c.rng.pick([["soprano", "alto", "mezzo-soprano"], ["tenor", "bass", "baritone"]] as const);
+    const ids = ["mezzo-soprano", "baritone", "alto", "tenor", "soprano", "bass"].filter((x) => x !== pair[0] && x !== pair[1] && x !== pair[2]);
+    const opts = [pair[2], ...shuffled(c, ids).slice(0, 3)];
+    return { prompt: `Singers, especially solo singers, are also classed in intermediate ranges. Which voice lies between the ${pair[0]} and the ${pair[1]}?`, answer: choiceAnswer(shuffled(c, opt(opts)), pair[2], Object.fromEntries(opts.filter((x) => x !== pair[2]).map((x) => [x, ["wrong-category", `The ${pair[2]} is the voice between the ${pair[0]} and the ${pair[1]}.`]]))), hints: ["Mezzo-soprano sits between soprano and alto; baritone between tenor and bass."] };
+  }
+  if (mode === "satb" || mode === "not-choral") {
+    const wrong = c.rng.pick(["mezzo-soprano", "baritone"]);
+    const ids = ["soprano", "alto", "tenor", "bass"];
+    const opts = [...shuffled(c, ids).slice(0, 3), wrong];
+    return { prompt: "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?", answer: choiceAnswer(shuffled(c, opt(opts)), wrong, Object.fromEntries(opts.filter((x) => x !== wrong).map((x) => [x, ["wrong-category", `The ${x} is one of the four choral voices: soprano, alto, tenor and bass.`]]))), hints: ["S, A, T and B are the four choral voices."] };
+  }
+  const lists: Array<[string, string]> = [["a", "Soprano, mezzo-soprano, alto, tenor, baritone, bass"], ["b", "Soprano, alto, mezzo-soprano, tenor, baritone, bass"], ["c", "Soprano, mezzo-soprano, alto, baritone, tenor, bass"], ["d", "Bass, baritone, tenor, alto, mezzo-soprano, soprano"]];
+  return { prompt: "Which list gives all six voices in order, from the highest to the lowest?", answer: choiceAnswer(shuffled(c, lists), "a", { b: ["wrong-category", "The mezzo-soprano lies between the soprano and the alto, not below the alto."], c: ["wrong-category", "The baritone lies between the tenor and the bass, so it comes after the tenor."], d: ["wrong-category", "That list runs from the lowest voice to the highest."] }), hints: ["High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass."] };
 };
 
 // ---------------------------------------------------------------------------
@@ -165,9 +227,11 @@ export const instrumentSound5: Gen = (c): any => {
   };
 };
 
-/** t.g5.instruments: the extra Grade 5 instruments: versions of others, percussion pitch, the harp, trombones, clefs and non-orchestral instruments. */
-export const instruments5: Gen = (c): any => {
-  const mode = c.rng.pick(["version", "version", "register", "trombones", "harp", "perc", "non-orch", "tenor-clef", "organ"] as const);
+/** t.g5.instruments: the relatives of the Grade 4 woodwinds (piccolo, cor anglais, bass clarinet, double bassoon). */
+export const instruments5: Gen = (c): any => instrumentsMode(c, c.rng.pick(["version", "version", "register"] as const));
+/** t.g5.instruments-more: trombones, the harp, percussion, the tenor clef, non-orchestral instruments and the organ. */
+export const instrumentsMore5: Gen = (c): any => instrumentsMode(c, c.rng.pick(["trombones", "harp", "perc", "non-orch", "tenor-clef", "organ"] as const));
+function instrumentsMode(c: Ctx, mode: "version" | "register" | "trombones" | "harp" | "perc" | "non-orch" | "tenor-clef" | "organ"): any {
   const opts = (xs: Array<[string, string]>) => shuffled(c, xs);
   if (mode === "version") {
     const v = c.rng.pick(INST.filter((i) => i.version));
@@ -213,7 +277,23 @@ export const instruments5: Gen = (c): any => {
     return { prompt: "Which of these instruments reads the tenor clef for its higher notes?", answer: choiceAnswer(opts(ids.map((x) => [x, nm(x)] as [string, string])), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `The ${nm(x)} normally reads the ${x === "viola" ? "alto" : x === "flute" ? "treble" : "bass"} clef.`]]))), hints: ["Cello, bassoon and tenor trombone use the tenor clef."] };
   }
   const o: Array<[string, string]> = [["3", "Three"], ["2", "Two"], ["1", "One"], ["4", "Four"]];
-  return { prompt: "Organ music is normally written on how many staves? (One of them is for the pedal-board.)", answer: choiceAnswer(opts(o), "3", { "2": ["wrong-category", "Two staves are for the hands; the pedals have a third stave of their own."], "1": ["wrong-category", "The hands and the feet each need their own stave."], "4": ["wrong-category", "Three: right hand, left hand and the pedal-board."] }), hints: ["Hands on two staves, feet on a third."] };
+  return { prompt: "Organ music is normally written on how many staves? (One of them is for the pedal-board.)", answer: choiceAnswer(opts(o), "3", { "2": ["wrong-category", "Two staves are for the hands; the pedals have a third stave of their own."], "1": ["wrong-category", "The hands and the feet each need their own stave."], "4": ["wrong-category", "Three: right hand, left hand and the pedal-board."] }), hints: ["Hands on two staves, feet on a third."] }
+};
+
+/** t.g5.instrument-which: from a way of making sound to the instrument. */
+export const instrumentWhich5: Gen = (c): any => {
+  const kinds = ["single reed", "double reed", "air across an edge", "lips buzzing into a mouthpiece"] as const;
+  const kind = c.rng.pick(kinds);
+  const pool = INST.filter((i) => i.sound === kind && i.family !== "non-orchestral");
+  const right = c.rng.pick(pool);
+  const wrongs = shuffled(c, INST.filter((i) => i.sound !== kind && i.family !== "percussion" && i.family !== "non-orchestral")).filter((i, k, a) => a.findIndex((x) => x.sound === i.sound) === k || true).slice(0, 3);
+  if (wrongs.length < 3) return null;
+  const label = SOUND_LABEL[kind]!;
+  return {
+    prompt: `Which of these instruments makes its sound with ${label}?`,
+    answer: choiceAnswer(shuffled(c, [right, ...wrongs].map((i) => [i.id, i.name] as [string, string])), right.id, Object.fromEntries(wrongs.map((i) => [i.id, ["wrong-category", `The ${i.name} uses ${SOUND_LABEL[i.sound] ?? i.sound}.`]]))),
+    hints: ["Think of what the player's mouth touches: one reed, two reeds, an edge, or a metal mouthpiece."],
+  };
 };
 
 // ---------------------------------------------------------------------------
@@ -411,4 +491,65 @@ export const score5: Gen = (c): any => {
     answer: { kind: "composite", parts },
     hints: ["Take the questions one at a time. Use the clef and key signature, the printed direction, the marks on the notes and the chords in the piano part."],
   };
+};
+
+// ---------------------------------------------------------------------------
+// t.g5.score-melody: a one-stave melody for a named (possibly transposing) instrument
+// ---------------------------------------------------------------------------
+
+const SOLO: Array<{ id: string; name: string; clef: "treble" | "tenor" | "alto"; transposes?: music.InstrumentKey }> = [
+  { id: "flute", name: "flute", clef: "treble" }, { id: "oboe", name: "oboe", clef: "treble" }, { id: "recorder", name: "recorder", clef: "treble" },
+  { id: "clarinet", name: "clarinet in B♭", clef: "treble", transposes: "Bb" }, { id: "clarinet", name: "clarinet in A", clef: "treble", transposes: "A" },
+  { id: "trumpet", name: "trumpet in B♭", clef: "treble", transposes: "Bb" }, { id: "horn", name: "horn in F", clef: "treble", transposes: "F" },
+  { id: "cor-anglais", name: "cor anglais (in F)", clef: "treble", transposes: "F" },
+  { id: "cello", name: "cello", clef: "tenor" }, { id: "bassoon", name: "bassoon", clef: "tenor" }, { id: "trombone-tenor", name: "tenor trombone", clef: "tenor" }, { id: "viola", name: "viola", clef: "alto" },
+];
+export const scoreMelody5: Gen = (c): any => {
+  const inst = c.rng.pick(SOLO);
+  const clef = inst.clef;
+  const keyText = c.rng.pick(keysIn(c).filter((k) => Math.abs(music.keyFifths(parseKey(k))) <= 4));
+  const key = parseKey(keyText);
+  const mel = melodyIn5(c, key, clef, 6, 1);
+  if (!mel) return null;
+  const wanted = c.rng.shuffle(["key", "term", "ornament", "interval"]).slice(0, 3);
+  const withOrn = wanted.includes("ornament");
+  const withInt = wanted.includes("interval");
+  const ornAt = c.rng.pick([1, 4]);
+  const sign = c.rng.pick(ornamentsIn(c).filter((s) => ["trill", "turn", "upper-mordent", "lower-mordent"].includes(s)));
+  const term = c.rng.pick(T.filter((t) => t.language !== "direction" && termGroupSize(t.group) === 1 && !["pochettino", "misura", "lunga", "loco", "ossia"].includes(t.id)));
+  const labels: Record<number, string> = {};
+  const events: Ev[] = mel.map((p, i) => note(p, "crotchet", { ...(withOrn && i === ornAt ? { ornament: sign, label: "B" } : {}), ...(withInt && i === 0 ? { label: "x" } : {}), ...(withInt && i === 3 ? { label: "y" } : {}) }));
+  void labels;
+  const f = frag(clef, [{ events: events.slice(0, 3) }, { events: events.slice(3), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "3/4", ...(wanted.includes("term") ? { tempoText: cap(term.term) } : {}) });
+  const parts: Array<{ id: string; prompt: string; answer: any }> = [];
+  const info = INST.find((i) => i.id === inst.id);
+  const instQs: Array<() => any> = [() => ({ id: "clef", prompt: `In which clef is this ${inst.name} part written?`, answer: choiceAnswer(["treble", "alto", "tenor", "bass"].map((x) => [x, `The ${x} clef`] as [string, string]), clef, Object.fromEntries(["treble", "alto", "tenor", "bass"].filter((x) => x !== clef).map((x) => [x, ["clef-confusion", "Find middle C in the printed clef before you decide."]])) as any) })];
+  if (inst.transposes) { const tr = inst.transposes; instQs.push(() => ({ id: "sounds", prompt: `The ${inst.name} is a transposing instrument. How far from the written notes does it sound?`, answer: choiceAnswer([["Bb", "A tone lower than written"], ["A", "A minor 3rd lower than written"], ["F", "A perfect 5th lower than written"], ["none", "Exactly as written"]], tr, Object.fromEntries([["Bb", "A tone lower than written"], ["A", "A minor 3rd lower than written"], ["F", "A perfect 5th lower than written"], ["none", "Exactly as written"]].filter(([id]) => id !== tr).map(([id]) => [id, ["wrong-interval", "B♭ instruments sound a tone lower, A instruments a minor 3rd lower and F instruments a perfect 5th lower than written."]])) as any) })); }
+  if (info && ["single reed", "double reed", "air across an edge"].includes(info.sound)) { const sd = info.sound; const nme = info.name; instQs.push(() => ({ id: "sound", prompt: `How is the sound of the ${nme} made?`, answer: choiceAnswer(["single reed", "double reed", "air across an edge", "lips buzzing into a mouthpiece"].map((x) => [x, cap(SOUND_LABEL[x]!)] as [string, string]), sd, Object.fromEntries(["single reed", "double reed", "air across an edge", "lips buzzing into a mouthpiece"].filter((x) => x !== sd).map((x) => [x, ["wrong-category", `The ${nme} uses ${SOUND_LABEL[sd]}.`]])) as any) })); }
+  parts.push(c.rng.pick(instQs)());
+  for (const w of wanted) {
+    if (w === "key") {
+      const cons = inst.transposes ? (() => { try { return music.concertKeyFor(key, inst.transposes!); } catch { return null; } })() : key;
+      if (!cons) return null;
+      const target = music.formatKey(cons);
+      const dom = music.formatKey({ tonic: music.transpose({ ...key.tonic, octave: 4 }, music.parseInterval("P5"), "up") as never, mode: key.mode } as never);
+      const other = inst.transposes ? music.formatKey(music.writtenKeyFor(key, inst.transposes)) : music.formatKey(music.relativeKey(key));
+      const ids = [...new Set([target, keyText, other, dom])];
+      if (ids.length < 3) return null;
+      parts.push({ id: "key", prompt: inst.transposes ? `This is the written part for the ${inst.name}. In which key does the music sound (concert pitch)?` : "What is the key of the melody?", answer: choiceAnswer(shuffled(c, ids.map((x) => [x, keyWords(x)] as [string, string])), target, Object.fromEntries(ids.filter((x) => x !== target).map((x) => [x, [x === keyText && inst.transposes ? "key-signature-missing" : "wrong-category", x === keyText && inst.transposes ? "That is the key written in the part. The instrument sounds lower than written, so the music sounds in a different key." : `${keyWords(x)} has a different key signature or lies the wrong way from the written key.`]])) as any) });
+    } else if (w === "ornament") parts.push({ id: "ornament", prompt: "What is the ornament on the note marked B?", answer: { kind: "ornament-sign", task: "name-sign", sign, accepted: [sign] } });
+    else if (w === "term") {
+      const wr = options5(c, term);
+      if (wr.length < 3) return null;
+      parts.push({ id: "term", prompt: `The melody is marked “${term.term}”. What does it ask?`, answer: choiceAnswer(shuffled(c, [term, ...wr].map((t) => [t.id, cap(t.meaning)] as [string, string])), term.id, Object.fromEntries(wr.map((t) => [t.id, ["confused-similar-term", `That is the meaning of “${t.term}”.`]])) as any) });
+    } else if (w === "interval") {
+      const [x, y] = [mel[0]!, mel[3]!];
+      const [lo, hi] = diatonicNumber(x) <= diatonicNumber(y) ? [x, y] : [y, x];
+      const iv = intervalBetween(lo, hi);
+      if (iv.number < 2 || iv.number > 8 || !"dmMPA".includes(iv.quality)) return null;
+      parts.push({ id: "interval", prompt: "Name the interval from the lower to the higher of the notes marked x and y (quality and number).", answer: { kind: "interval", task: "identify", key: keyText, lower: F(lo), upper: F(hi), acceptedIntervals: [`${iv.quality}${iv.number}`] } });
+    }
+  }
+  if (parts.length < 4) return null;
+  return { prompt: `Look at this melody for the ${inst.name} and answer the questions.`, music: f, answer: { kind: "composite", parts }, hints: ["Take the questions one at a time. Use the clef, the key signature, the printed direction and the marks on the notes."] };
 };

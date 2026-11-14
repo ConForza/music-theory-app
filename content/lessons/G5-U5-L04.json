@@ -159,6 +159,65 @@
     },
     {
       "id": "i.g5-u5-l04.guided-2",
+      "templateId": "t.g5.instrument-which",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these instruments makes its sound with air blown across an edge (no reed)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "double-bassoon",
+            "label": "double bassoon"
+          },
+          {
+            "id": "bass-clarinet",
+            "label": "bass clarinet"
+          },
+          {
+            "id": "trombone-tenor",
+            "label": "tenor trombone"
+          },
+          {
+            "id": "piccolo",
+            "label": "piccolo"
+          }
+        ],
+        "correctOptionIds": [
+          "piccolo"
+        ],
+        "diagnoses": {
+          "trombone-tenor": {
+            "category": "wrong-category",
+            "reason": "The tenor trombone uses lips buzzing into a mouthpiece."
+          },
+          "double-bassoon": {
+            "category": "wrong-category",
+            "reason": "The double bassoon uses a double reed."
+          },
+          "bass-clarinet": {
+            "category": "wrong-category",
+            "reason": "The bass clarinet uses a single reed."
+          }
+        }
+      },
+      "hints": [
+        "Think of what touches the player's mouth.",
+        "Think of what the player's mouth touches: one reed, two reeds, an edge, or a metal mouthpiece."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l04.guided-3",
       "templateId": "t.g5.instrument-sound",
       "templateVersion": 1,
       "seed": null,
@@ -223,13 +282,74 @@
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
       }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-l04.ind-1",
+      "templateId": "t.g5.instrument-which",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these instruments makes its sound with lips buzzing into a mouthpiece?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "trombone-tenor",
+            "label": "tenor trombone"
+          },
+          {
+            "id": "viola",
+            "label": "viola"
+          },
+          {
+            "id": "cor-anglais",
+            "label": "cor anglais"
+          },
+          {
+            "id": "clarinet",
+            "label": "clarinet"
+          }
+        ],
+        "correctOptionIds": [
+          "trombone-tenor"
+        ],
+        "diagnoses": {
+          "clarinet": {
+            "category": "wrong-category",
+            "reason": "The clarinet uses a single reed."
+          },
+          "cor-anglais": {
+            "category": "wrong-category",
+            "reason": "The cor anglais uses a double reed."
+          },
+          "viola": {
+            "category": "wrong-category",
+            "reason": "The viola uses bowed or plucked strings."
+          }
+        }
+      },
+      "hints": [
+        "Think of what touches the player's mouth.",
+        "Think of what the player's mouth touches: one reed, two reeds, an edge, or a metal mouthpiece."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
     },
     {
-      "id": "i.g5-u5-l04.guided-3",
+      "id": "i.g5-u5-l04.ind-2",
       "templateId": "t.g5.instrument-sound",
       "templateVersion": 1,
       "seed": null,
-      "evidence": "learning",
+      "evidence": "independent",
       "prompt": "How is the sound of the flute made?",
       "answer": {
         "kind": "choice",
@@ -282,7 +402,7 @@
         "Think of what touches the player's lips: a reed (one or two), an edge, or a metal mouthpiece."
       ],
       "feedback": {
-        "correct": "Yes.",
+        "correct": "Correct.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -290,11 +410,68 @@
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
       }
-    }
-  ],
-  "independent": [
+    },
     {
-      "id": "i.g5-u5-l04.ind-1",
+      "id": "i.g5-u5-l04.ind-3",
+      "templateId": "t.g5.instrument-which",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these instruments makes its sound with lips buzzing into a mouthpiece?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "harp",
+            "label": "harp"
+          },
+          {
+            "id": "clarinet",
+            "label": "clarinet"
+          },
+          {
+            "id": "bass-trombone",
+            "label": "bass trombone"
+          },
+          {
+            "id": "bass-clarinet",
+            "label": "bass clarinet"
+          }
+        ],
+        "correctOptionIds": [
+          "bass-trombone"
+        ],
+        "diagnoses": {
+          "bass-clarinet": {
+            "category": "wrong-category",
+            "reason": "The bass clarinet uses a single reed."
+          },
+          "harp": {
+            "category": "wrong-category",
+            "reason": "The harp uses plucked strings."
+          },
+          "clarinet": {
+            "category": "wrong-category",
+            "reason": "The clarinet uses a single reed."
+          }
+        }
+      },
+      "hints": [
+        "Think of what touches the player's mouth.",
+        "Think of what the player's mouth touches: one reed, two reeds, an edge, or a metal mouthpiece."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l04.ind-4",
       "templateId": "t.g5.instrument-sound",
       "templateVersion": 1,
       "seed": null,
@@ -361,7 +538,66 @@
       }
     },
     {
-      "id": "i.g5-u5-l04.ind-2",
+      "id": "i.g5-u5-l04.ind-5",
+      "templateId": "t.g5.instrument-which",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these instruments makes its sound with a single reed?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "oboe",
+            "label": "oboe"
+          },
+          {
+            "id": "clarinet",
+            "label": "clarinet"
+          },
+          {
+            "id": "double-bassoon",
+            "label": "double bassoon"
+          },
+          {
+            "id": "cor-anglais",
+            "label": "cor anglais"
+          }
+        ],
+        "correctOptionIds": [
+          "clarinet"
+        ],
+        "diagnoses": {
+          "double-bassoon": {
+            "category": "wrong-category",
+            "reason": "The double bassoon uses a double reed."
+          },
+          "cor-anglais": {
+            "category": "wrong-category",
+            "reason": "The cor anglais uses a double reed."
+          },
+          "oboe": {
+            "category": "wrong-category",
+            "reason": "The oboe uses a double reed."
+          }
+        }
+      },
+      "hints": [
+        "Think of what touches the player's mouth.",
+        "Think of what the player's mouth touches: one reed, two reeds, an edge, or a metal mouthpiece."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l04.ind-6",
       "templateId": "t.g5.instrument-sound",
       "templateVersion": 1,
       "seed": null,
@@ -426,274 +662,6 @@
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
       }
-    },
-    {
-      "id": "i.g5-u5-l04.ind-3",
-      "templateId": "t.g5.instrument-sound",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "How is the sound of the bassoon made?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "plucked strings",
-            "label": "Plucked strings"
-          },
-          {
-            "id": "single reed",
-            "label": "A single reed"
-          },
-          {
-            "id": "double reed",
-            "label": "A double reed"
-          },
-          {
-            "id": "lips buzzing into a mouthpiece",
-            "label": "Lips buzzing into a mouthpiece"
-          },
-          {
-            "id": "air across an edge",
-            "label": "Air blown across an edge (no reed)"
-          }
-        ],
-        "correctOptionIds": [
-          "double reed"
-        ],
-        "diagnoses": {
-          "single reed": {
-            "category": "wrong-category",
-            "reason": "The bassoon does not use a single reed: it uses a double reed."
-          },
-          "air across an edge": {
-            "category": "wrong-category",
-            "reason": "The bassoon does not use air blown across an edge (no reed): it uses a double reed."
-          },
-          "lips buzzing into a mouthpiece": {
-            "category": "wrong-category",
-            "reason": "The bassoon does not use lips buzzing into a mouthpiece: it uses a double reed."
-          },
-          "plucked strings": {
-            "category": "wrong-category",
-            "reason": "The bassoon does not use plucked strings: it uses a double reed."
-          }
-        }
-      },
-      "hints": [
-        "Think of what touches the player's lips.",
-        "Think of what touches the player's lips: a reed (one or two), an edge, or a metal mouthpiece."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g5-u5-l04.ind-4",
-      "templateId": "t.g5.instrument-sound",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "How is the sound of the oboe made?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "lips buzzing into a mouthpiece",
-            "label": "Lips buzzing into a mouthpiece"
-          },
-          {
-            "id": "plucked strings",
-            "label": "Plucked strings"
-          },
-          {
-            "id": "double reed",
-            "label": "A double reed"
-          },
-          {
-            "id": "air across an edge",
-            "label": "Air blown across an edge (no reed)"
-          },
-          {
-            "id": "single reed",
-            "label": "A single reed"
-          }
-        ],
-        "correctOptionIds": [
-          "double reed"
-        ],
-        "diagnoses": {
-          "single reed": {
-            "category": "wrong-category",
-            "reason": "The oboe does not use a single reed: it uses a double reed."
-          },
-          "air across an edge": {
-            "category": "wrong-category",
-            "reason": "The oboe does not use air blown across an edge (no reed): it uses a double reed."
-          },
-          "lips buzzing into a mouthpiece": {
-            "category": "wrong-category",
-            "reason": "The oboe does not use lips buzzing into a mouthpiece: it uses a double reed."
-          },
-          "plucked strings": {
-            "category": "wrong-category",
-            "reason": "The oboe does not use plucked strings: it uses a double reed."
-          }
-        }
-      },
-      "hints": [
-        "Think of what touches the player's lips.",
-        "Think of what touches the player's lips: a reed (one or two), an edge, or a metal mouthpiece."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g5-u5-l04.ind-5",
-      "templateId": "t.g5.instrument-sound",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "How is the sound of the harp made?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "single reed",
-            "label": "A single reed"
-          },
-          {
-            "id": "air across an edge",
-            "label": "Air blown across an edge (no reed)"
-          },
-          {
-            "id": "lips buzzing into a mouthpiece",
-            "label": "Lips buzzing into a mouthpiece"
-          },
-          {
-            "id": "double reed",
-            "label": "A double reed"
-          },
-          {
-            "id": "plucked strings",
-            "label": "Plucked strings"
-          }
-        ],
-        "correctOptionIds": [
-          "plucked strings"
-        ],
-        "diagnoses": {
-          "single reed": {
-            "category": "wrong-category",
-            "reason": "The harp does not use a single reed: it uses plucked strings."
-          },
-          "double reed": {
-            "category": "wrong-category",
-            "reason": "The harp does not use a double reed: it uses plucked strings."
-          },
-          "air across an edge": {
-            "category": "wrong-category",
-            "reason": "The harp does not use air blown across an edge (no reed): it uses plucked strings."
-          },
-          "lips buzzing into a mouthpiece": {
-            "category": "wrong-category",
-            "reason": "The harp does not use lips buzzing into a mouthpiece: it uses plucked strings."
-          }
-        }
-      },
-      "hints": [
-        "Think of what touches the player's lips.",
-        "Think of what touches the player's lips: a reed (one or two), an edge, or a metal mouthpiece."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
-    },
-    {
-      "id": "i.g5-u5-l04.ind-6",
-      "templateId": "t.g5.instrument-sound",
-      "templateVersion": 1,
-      "seed": null,
-      "evidence": "independent",
-      "prompt": "How is the sound of the clarinet made?",
-      "answer": {
-        "kind": "choice",
-        "options": [
-          {
-            "id": "plucked strings",
-            "label": "Plucked strings"
-          },
-          {
-            "id": "double reed",
-            "label": "A double reed"
-          },
-          {
-            "id": "single reed",
-            "label": "A single reed"
-          },
-          {
-            "id": "lips buzzing into a mouthpiece",
-            "label": "Lips buzzing into a mouthpiece"
-          },
-          {
-            "id": "air across an edge",
-            "label": "Air blown across an edge (no reed)"
-          }
-        ],
-        "correctOptionIds": [
-          "single reed"
-        ],
-        "diagnoses": {
-          "double reed": {
-            "category": "wrong-category",
-            "reason": "The clarinet does not use a double reed: it uses a single reed."
-          },
-          "air across an edge": {
-            "category": "wrong-category",
-            "reason": "The clarinet does not use air blown across an edge (no reed): it uses a single reed."
-          },
-          "lips buzzing into a mouthpiece": {
-            "category": "wrong-category",
-            "reason": "The clarinet does not use lips buzzing into a mouthpiece: it uses a single reed."
-          },
-          "plucked strings": {
-            "category": "wrong-category",
-            "reason": "The clarinet does not use plucked strings: it uses a single reed."
-          }
-        }
-      },
-      "hints": [
-        "Think of what touches the player's lips.",
-        "Think of what touches the player's lips: a reed (one or two), an edge, or a metal mouthpiece."
-      ],
-      "feedback": {
-        "correct": "Correct.",
-        "mistakes": {
-          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
-          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
-          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
-        },
-        "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
     }
   ],
   "recap": [
@@ -707,7 +675,7 @@
       "afterDays": 1
     },
     {
-      "templateId": "t.g5.instrument-sound",
+      "templateId": "t.g5.instrument-which",
       "afterDays": 3
     },
     {

@@ -461,7 +461,7 @@ Refinements to the provisional unit map: The Ic–V (six-four, five-three) progr
 | `G5-U4-L04` | Lesson | Perfect, plagal and imperfect cadences | Recognise the three cadences by their chords in C, G, D and F major. | `c.cadences.types` (`c.chords.identify-in-passage`, `c.chords.supertonic`) | g5.11 | `G5-U4-L03` | 7 |
 | `G5-U4-L05` | Lesson | Hearing and finding cadences | Identify cadences at the ends of phrases in short original passages. | `c.cadences.recognise` (`c.cadences.types`) | g5.11 | `G5-U4-L04` | 7 |
 | `G5-U4-L06` | Lesson | Choosing chords at cadence points | Choose chords that fit marked melody notes and make the intended cadence. | `c.cadences.chord-choice` (`c.cadences.recognise`, `c.chords.identify-inversions`) | g5.10, g5.11 | `G5-U4-L05` | 10 |
-| `G5-U4-E1` | Enrichment (optional) | The six-four, five-three progression | Optional: recognise Ic–V over the dominant bass. | `c.chords.cadential-six-four` (`c.chords.identify-inversions`) | — | `G5-U4-L03` | 6 |
+| `G5-U4-E1` | Enrichment (optional) | The six-four, five-three progression | Optional: recognise Ic–V over the dominant bass. | `c.chords.cadential-six-four` (`c.chords.identify-inversions`) | — | `G5-U4-L06` | 6 |
 | `G5-U4-E2` | Enrichment (optional) | Approach chords | Optional: choose a chord before a two-chord cadence. | `c.cadences.approach-chord` (`c.cadences.chord-choice`) | — | `G5-U4-L06` | 6 |
 | `G5-U4-P1` | Practice | Practice: Harmony | Mixed independent practice of everything in this unit. | — | g5.09, g5.11, g5.10 | `G5-U4-L06` | 6 |
 | `G5-U4-R1` | Review | Review: earlier units | Spaced review of earlier units in this grade, mixed with the new unit. | — | g5.01, g5.02, g5.03, g5.04, g5.05, g5.07, g5.08, g5.06 | `G5-U4-P1` | 6 |

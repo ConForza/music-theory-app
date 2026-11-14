@@ -3571,6 +3571,488 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g5.chord-choice",
+      "version": 1,
+      "familyId": "fam.cadence",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.10",
+        "abrsm2020.g5.11"
+      ],
+      "conceptIds": [
+        "c.cadences.chord-choice"
+      ],
+      "promptPattern": "Pick the pair of chords that fits two melody notes at a cadence point and makes a named cadence.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "cadenceKeys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "cadenceTypes": [
+          "perfect",
+          "plagal",
+          "imperfect"
+        ],
+        "chordDegrees": [
+          "I",
+          "ii",
+          "IV",
+          "V"
+        ],
+        "inversions": [
+          "a",
+          "b",
+          "c"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2,
+        "accidentals": true,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one offered pair fits both melody notes and the named cadence."
+      },
+      "ambiguityChecks": [
+        "Exactly one option fits both notes and the named cadence; the others each fail in one named way."
+      ],
+      "hints": [
+        "Check each chord holds its melody note, then check the cadence."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "cadence-misnamed",
+          "description": "A cadence named wrongly.",
+          "feedback": "Name the last two chords first."
+        },
+        {
+          "id": "non-cadential-pair",
+          "description": "A pair of chords that is not a cadence.",
+          "feedback": "Cadences are V–I, IV–I, or end on V."
+        },
+        {
+          "id": "chord-lacks-melody-note",
+          "description": "A chord that does not contain the melody note.",
+          "feedback": "Each chord must contain its melody note."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.ornament-read",
+      "version": 1,
+      "familyId": "fam.ornament",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ],
+      "conceptIds": [
+        "c.ornaments.patterns"
+      ],
+      "promptPattern": "From the sign on a note to what it asks the player to do.",
+      "scope": {
+        "ornaments": [
+          "trill",
+          "turn",
+          "upper-mordent",
+          "lower-mordent",
+          "acciaccatura",
+          "appoggiatura"
+        ],
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "B major",
+          "Db major",
+          "F# major",
+          "Gb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble"
+        ],
+        "maxLedgerLines": 1,
+        "accidentals": true,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One description fits the sign."
+      },
+      "ambiguityChecks": [
+        "Descriptions only: no question asks the learner to write out an ornament from its sign."
+      ],
+      "hints": [
+        "Recall the look of each sign."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.ornament-figure",
+      "version": 1,
+      "familyId": "fam.ornament",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ],
+      "conceptIds": [
+        "c.ornaments.replace-with-sign"
+      ],
+      "promptPattern": "A written-out figure is described by its notes: which sign replaces it?",
+      "scope": {
+        "ornaments": [
+          "trill",
+          "turn",
+          "upper-mordent",
+          "lower-mordent"
+        ],
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "B major",
+          "Db major",
+          "F# major",
+          "Gb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble"
+        ],
+        "maxLedgerLines": 1,
+        "accidentals": true,
+        "keySignatures": true,
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one sign replaces the figure."
+      },
+      "ambiguityChecks": [
+        "Only figures that identify one sign are used."
+      ],
+      "hints": [
+        "Find the main note, then where the extra notes go."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.voice-groups",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.14"
+      ],
+      "conceptIds": [
+        "c.voices.types"
+      ],
+      "promptPattern": "The four choral voices as a group, the voices between them, and the order of all six.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "One option is correct."
+      ],
+      "hints": [
+        "High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.instrument-which",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ],
+      "conceptIds": [
+        "c.instruments.sound-production"
+      ],
+      "promptPattern": "Which instrument makes its sound in a stated way.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "Wrong options never share the stated way of making sound."
+      ],
+      "hints": [
+        "Think of what touches the player's mouth."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.instruments-more",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ],
+      "conceptIds": [
+        "c.instruments.extended"
+      ],
+      "promptPattern": "Trombones, the harp, percussion pitch, the tenor clef, non-orchestral instruments and the organ.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "One option is correct."
+      ],
+      "hints": [
+        "Two tenor trombones and one bass trombone."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.score-melody",
+      "version": 1,
+      "familyId": "fam.score-observation",
+      "grade": 5,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g5.16",
+        "abrsm2020.g1.21",
+        "abrsm2020.g5.06",
+        "abrsm2020.g5.08",
+        "abrsm2020.g5.12",
+        "abrsm2020.g5.13",
+        "abrsm2020.g5.15"
+      ],
+      "conceptIds": [
+        "c.context.score-g5"
+      ],
+      "promptPattern": "Look at a melody for a named (sometimes transposing) instrument and answer connected questions.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "G minor",
+          "C minor",
+          "F minor"
+        ],
+        "clefs": [
+          "treble",
+          "tenor",
+          "alto"
+        ],
+        "ornaments": [
+          "trill",
+          "turn",
+          "upper-mordent",
+          "lower-mordent"
+        ],
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "any",
+        "chromaticIntervals": true,
+        "instrumentTranspositions": [
+          "Bb",
+          "A",
+          "F"
+        ],
+        "maxLedgerLines": 2,
+        "accidentals": true,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Each question has its own acceptance rule."
+      },
+      "ambiguityChecks": [
+        "Original melodies; every question is about something in the melody."
+      ],
+      "hints": [
+        "Take the questions one at a time."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "clef-confusion",
+          "description": "The clef misread.",
+          "feedback": "Find middle C in the printed clef."
+        },
+        {
+          "id": "wrong-interval",
+          "description": "The transposing interval wrong.",
+          "feedback": "B♭ a tone, A a minor 3rd, F a perfect 5th."
+        },
+        {
+          "id": "key-signature-missing",
+          "description": "The written key given for the sounding key.",
+          "feedback": "A transposing part is written in a different key."
+        },
+        {
+          "id": "confused-similar-term",
+          "description": "A similar term confused.",
+          "feedback": "Compare the meanings."
+        },
+        {
+          "id": "wrong-category",
+          "description": "An item in the wrong group.",
+          "feedback": "Check which group it belongs to."
+        }
+      ],
+      "difficulty": 5,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

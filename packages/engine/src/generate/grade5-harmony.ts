@@ -461,6 +461,38 @@ export const cadenceChords5: Gen = (c): any => {
   };
 };
 
+/** t.g5.chord-choice: pick the pair of chords for two melody notes at a cadence point (exactly one offered pair fits both the notes and the named cadence). */
+export const chordChoice5: Gen = (c): any => {
+  const keyText = c.rng.pick(CAD_KEYS(c));
+  const key = parseKey(keyText);
+  const type = c.rng.pick(CAD_TYPES(c));
+  const rs = romans(c);
+  const [r1, r2] = c.rng.pick(CAD_PAIRS[type].filter(([a, b]) => rs.includes(a) && rs.includes(b)));
+  if (!r1) return null;
+  const oct = (pc: music.PitchClass): Pitch => ({ ...pc, octave: music.stepIndex(pc.step) >= 5 ? 4 : 5 });
+  const A = oct(c.rng.pick(triad(key, r1)));
+  const B = oct(c.rng.pick(triad(key, r2)));
+  const fits = ([x, y]: [string, string]) => music.triadContains(key, x, A) && music.triadContains(key, y, B) && classifyCadence(x, y) === type;
+  const all: Array<[string, string]> = rs.flatMap((x) => rs.filter((y) => y !== x).map((y) => [x, y] as [string, string]));
+  const valid = all.filter(fits);
+  const right = valid.find(([x, y]) => x === r1 && y === r2)!;
+  const bad = shuffled(c, all.filter((p) => !fits(p)));
+  // distractors that fail in different ways: one chord lacking its note, one making another cadence (or none)
+  const lacks = bad.filter(([x, y]) => !(music.triadContains(key, x, A) && music.triadContains(key, y, B)));
+  const wrongType = bad.filter(([x, y]) => music.triadContains(key, x, A) && music.triadContains(key, y, B));
+  const picks = [...lacks.slice(0, 2), ...wrongType.slice(0, 1), ...lacks.slice(2)].slice(0, 3);
+  if (picks.length < 3) return null;
+  const lab = (p: [string, string]) => `${p[0]}–${p[1]}`;
+  const typeWord = type === "imperfect" ? "an imperfect" : `a ${type}`;
+  const f = frag("treble", [{ events: [note(A, "minim", { label: "A" }), note(B, "minim", { label: "B" })], barline: "final" }], "A two-note melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
+  return {
+    prompt: `The melody notes marked A and B come at a cadence point in ${keyWords(keyText)}. Which pair of chords, with each chord containing its melody note, makes ${typeWord} cadence?`,
+    music: f,
+    answer: choiceAnswer(shuffled(c, [right, ...picks].map((p) => [lab(p), lab(p)] as [string, string])), lab(right), Object.fromEntries(picks.map((p) => [lab(p), [music.triadContains(key, p[0], A) && music.triadContains(key, p[1], B) ? "cadence-misnamed" : "chord-lacks-melody-note", music.triadContains(key, p[0], A) && music.triadContains(key, p[1], B) ? `${lab(p)} contains both melody notes but makes ${classifyCadence(p[0], p[1]) ? `a ${classifyCadence(p[0], p[1])} cadence` : "no cadence"}, not ${typeWord} one.` : `Chord ${music.triadContains(key, p[0], A) ? p[1] : p[0]} does not contain its melody note (${music.triadContains(key, p[0], A) ? nameOfPc(B) : nameOfPc(A)}).`]]))),
+    hints: ["Check each chord contains its melody note, then check the pair makes the cadence named."],
+  };
+};
+
 // ---------------------------------------------------------------------------
 // Optional enrichment (never compulsory, never mastery evidence, never in an assessment)
 // ---------------------------------------------------------------------------

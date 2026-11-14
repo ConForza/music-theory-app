@@ -4419,6 +4419,47 @@
             "accidentals": true,
             "keySignatures": true
           }
+        },
+        {
+          "templateId": "t.g5.chord-choice",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true
+          }
         }
       ],
       "optional": false,
@@ -4992,6 +5033,47 @@
         },
         {
           "templateId": "t.g5.cadence-chords",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g5.chord-choice",
           "conceptIds": [
             "c.cadences.chord-choice"
           ],
@@ -5878,6 +5960,56 @@
               "appoggiatura"
             ]
           }
+        },
+        {
+          "templateId": "t.g5.ornament-read",
+          "conceptIds": [
+            "c.ornaments.patterns"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "F# major",
+              "Gb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 1,
+            "accidentals": true,
+            "keySignatures": true
+          }
         }
       ],
       "optional": false,
@@ -5961,6 +6093,61 @@
               "3/4"
             ]
           }
+        },
+        {
+          "templateId": "t.g5.ornament-figure",
+          "conceptIds": [
+            "c.ornaments.replace-with-sign"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 1,
+            "accidentals": true,
+            "keySignatures": true,
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
         }
       ],
       "optional": false,
@@ -5998,6 +6185,13 @@
             ],
             "maxLedgerLines": 2
           }
+        },
+        {
+          "templateId": "t.g5.voice-groups",
+          "conceptIds": [
+            "c.voices.types"
+          ],
+          "scope": {}
         }
       ],
       "optional": false,
@@ -6030,6 +6224,13 @@
             "c.instruments.sound-production"
           ],
           "scope": {}
+        },
+        {
+          "templateId": "t.g5.instrument-which",
+          "conceptIds": [
+            "c.instruments.sound-production"
+          ],
+          "scope": {}
         }
       ],
       "optional": false,
@@ -6057,6 +6258,13 @@
       "exercises": [
         {
           "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.extended"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.instruments-more",
           "conceptIds": [
             "c.instruments.extended"
           ],
@@ -6182,6 +6390,42 @@
             "accidentals": true,
             "keySignatures": true
           }
+        },
+        {
+          "templateId": "t.g5.score-melody",
+          "conceptIds": [
+            "c.context.score-g5"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "tenor",
+              "alto"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "chromaticIntervals": true,
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
+          }
         }
       ],
       "optional": false,
@@ -6284,6 +6528,56 @@
           }
         },
         {
+          "templateId": "t.g5.ornament-read",
+          "conceptIds": [
+            "c.ornaments.patterns"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "F# major",
+              "Gb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 1,
+            "accidentals": true,
+            "keySignatures": true
+          }
+        },
+        {
           "templateId": "t.g5.ornament-replace",
           "conceptIds": [
             "c.ornaments.replace-with-sign"
@@ -6343,6 +6637,61 @@
           }
         },
         {
+          "templateId": "t.g5.ornament-figure",
+          "conceptIds": [
+            "c.ornaments.replace-with-sign"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 1,
+            "accidentals": true,
+            "keySignatures": true,
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
           "templateId": "t.g5.voices",
           "conceptIds": [
             "c.voices.types"
@@ -6356,6 +6705,13 @@
           }
         },
         {
+          "templateId": "t.g5.voice-groups",
+          "conceptIds": [
+            "c.voices.types"
+          ],
+          "scope": {}
+        },
+        {
           "templateId": "t.g5.instrument-sound",
           "conceptIds": [
             "c.instruments.sound-production"
@@ -6363,7 +6719,21 @@
           "scope": {}
         },
         {
+          "templateId": "t.g5.instrument-which",
+          "conceptIds": [
+            "c.instruments.sound-production"
+          ],
+          "scope": {}
+        },
+        {
           "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.extended"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.instruments-more",
           "conceptIds": [
             "c.instruments.extended"
           ],
@@ -6439,6 +6809,42 @@
             "maxLedgerLines": 2,
             "accidentals": true,
             "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g5.score-melody",
+          "conceptIds": [
+            "c.context.score-g5"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "tenor",
+              "alto"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "chromaticIntervals": true,
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
           }
         }
       ],
@@ -7699,6 +8105,47 @@
           }
         },
         {
+          "templateId": "t.g5.chord-choice",
+          "conceptIds": [
+            "c.cadences.chord-choice"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "cadenceKeys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "cadenceTypes": [
+              "perfect",
+              "plagal",
+              "imperfect"
+            ],
+            "chordDegrees": [
+              "I",
+              "ii",
+              "IV",
+              "V"
+            ],
+            "inversions": [
+              "a"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true
+          }
+        },
+        {
           "templateId": "t.g5.ornament-facts",
           "conceptIds": [
             "c.ornaments.patterns"
@@ -7712,6 +8159,56 @@
               "acciaccatura",
               "appoggiatura"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.ornament-read",
+          "conceptIds": [
+            "c.ornaments.patterns"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent",
+              "acciaccatura",
+              "appoggiatura"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "F# major",
+              "Gb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 1,
+            "accidentals": true,
+            "keySignatures": true
           }
         },
         {
@@ -7774,6 +8271,61 @@
           }
         },
         {
+          "templateId": "t.g5.ornament-figure",
+          "conceptIds": [
+            "c.ornaments.replace-with-sign"
+          ],
+          "scope": {
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent"
+            ],
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "maxLedgerLines": 1,
+            "accidentals": true,
+            "keySignatures": true,
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ]
+          }
+        },
+        {
           "templateId": "t.g5.voices",
           "conceptIds": [
             "c.voices.types"
@@ -7787,6 +8339,13 @@
           }
         },
         {
+          "templateId": "t.g5.voice-groups",
+          "conceptIds": [
+            "c.voices.types"
+          ],
+          "scope": {}
+        },
+        {
           "templateId": "t.g5.instrument-sound",
           "conceptIds": [
             "c.instruments.sound-production"
@@ -7794,7 +8353,21 @@
           "scope": {}
         },
         {
+          "templateId": "t.g5.instrument-which",
+          "conceptIds": [
+            "c.instruments.sound-production"
+          ],
+          "scope": {}
+        },
+        {
           "templateId": "t.g5.instruments",
+          "conceptIds": [
+            "c.instruments.extended"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g5.instruments-more",
           "conceptIds": [
             "c.instruments.extended"
           ],
@@ -7870,6 +8443,42 @@
             "maxLedgerLines": 2,
             "accidentals": true,
             "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g5.score-melody",
+          "conceptIds": [
+            "c.context.score-g5"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major"
+            ],
+            "clefs": [
+              "treble",
+              "tenor",
+              "alto"
+            ],
+            "ornaments": [
+              "trill",
+              "turn",
+              "upper-mordent",
+              "lower-mordent"
+            ],
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "chromaticIntervals": true,
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ]
           }
         },
         {
