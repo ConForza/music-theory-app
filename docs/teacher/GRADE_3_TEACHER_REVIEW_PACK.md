@@ -234,7 +234,7 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | term-use (U5-L03) | 4 | What does “andantino” mean? | The answer is “a little faster than andante”. |
 | book-terms (U5-L05) | 1 | What does “ben” mean? | The answer is “well”. |
 | book-terms (U5-L05) | 2 | What does “mesto” mean? | The answer is “sad”. |
-| book-terms (U5-L05) | 3 | Which word means “rhythmically: with a bold, clear beat”? | The answer is “ritmico”. |
+| book-terms (U5-L05) | 3 | Which word means “rhythmically”? | The answer is “ritmico”. |
 | book-terms (U5-L05) | 4 | Which word means “sad”? | The answer is “mesto”. |
 | book-use (U5-L05) | 1 | This melody is marked “seconda volta”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 3 flats, time signature 4/4. Bar 1: crotchet on the 1st line; crotchet on the 1st ledger line below the stave; crotchet in the space below the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave. Bar 2: crotchet in the space below the 1st ledger line below the stave; crotchet in the space below the 2nd ledger line below the stave; crotchet on the 2nd ledger line below the stave; crotchet on the 1st ledger line below the stave. The tempo mark above the first bar says “seconda volta”._ | The answer is “the second time”. |
 | book-use (U5-L05) | 2 | A composer wants a passage that the player is allowed to take freely, at their own choice. Which marking fits best? | The answer is “ad libitum (ad lib.)”. |

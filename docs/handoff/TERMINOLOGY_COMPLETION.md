@@ -25,7 +25,7 @@ Built on PR #13 (Grade 5), now merged: this branch has merged `main` (81d8169) a
 
 ## Decisions for a teacher (OPEN_QUESTIONS Q38)
 
-Grade placement is **not** treated as an ABRSM requirement; each new term is taught where the book prints it only because the course's units follow the book's sections. Not moved, awaiting a decision: *andantino*, *espressivo*, *sostenuto*, *con moto* (book Grade 2, taught at Grade 3); *dolce* (book Grade 2, taught at Grade 1); the 24 French words (book Grade 4, taught at Grade 5); *léger* taught where the book prints *légèrement*; the course terms the book does not list; *più mosso* (standard, not printed). Editing `VOCAB_G5` or the older lists would version Grade 4 and 5 identities, so each is a teacher decision first.
+Grade placement is **not** treated as an ABRSM requirement; each new term is taught where the book prints it only because the course's units follow the book's sections. Not moved, awaiting a decision: *andantino*, *espressivo*, *sostenuto* (book Grade 2, taught at Grade 3; *con moto* is only a gloss under *mosso, moto*); *dolce* (book Grade 2, taught at Grade 1); the 24 French words (book Grade 4, taught at Grade 5); *léger* taught where the book prints *légèrement*; the course terms the book does not list; *più mosso* (standard, not printed). Editing `VOCAB_G5` or the older lists would version Grade 4 and 5 identities, so each is a teacher decision first.
 
 ## Known limitations
 

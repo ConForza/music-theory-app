@@ -45,13 +45,13 @@ const inVocab = (list: BaseRow[]) => list.filter((r) => r.vocab === "present").l
 const G = (k: string) => baseline.filter(groups.find((g) => g.key === k)!.match);
 const rv = (k: string, reported: string, note: string) => {
   const b = G(k);
-  return `| ${groups.find((g) => g.key === k)!.label} | ${reported} | ${covered(b)}/${b.length} | ${inVocab(b)}/${b.length} | ${note.replace("{vocab}", String(inVocab(b)))} |`;
+  return `| ${groups.find((g) => g.key === k)!.label} | ${reported} | ${covered(b)}/${b.length} | ${inVocab(b)}/${b.length} | ${note.replace("{vocab}", String(inVocab(b))).replace("{covered}", String(covered(b)))} |`;
 };
 L.push("The Grade 5 educational review reported Grade 1 32/32, Grade 2 16/31, Grade 3 1/34 and Grade 4 21/22. Re-counted against the book and the tree before this work (main at 81d8169 (PR #13 merged)):", "");
 L.push("| List | Reviewer reported | Covered here (a vocabulary entry exists, or a lesson names the term) | Vocabulary entry exists | Reading |", "|---|---|---|---|---|");
 L.push(rv("g1w", "32/32", "Complete. The reviewer's total of 32 is not reproducible under any single counting convention (the printed list has 28 words and ten signs); the conclusion (complete) agrees."));
-L.push(rv("g2w", "16/31", "Reproduced: 16 covered. The reviewer's 31 counts *mosso* and *moto* separately; the printed line is one entry. Only {vocab} are real vocabulary entries; four more are named only in a lesson of another grade."));
-L.push(rv("g3w", "1/34", "Reproduced within one entry: the two covered entries are *alla breve* (named in a Grade 2 time-signature lesson) and *prima/primo* (met inside *tempo primo*). No Grade 3 book word was a vocabulary entry."));
+L.push(rv("g2w", "16/31", "Close, not exact: {covered} covered. The reviewer's 31 counts *mosso* and *moto* separately (the printed line is one entry), and a looser reading that counts every lesson mentioning a word gives 16. Only {vocab} are real vocabulary entries; the rest of the covered ones are named only in a lesson of another grade. Either way about half of Grade 2 was absent."));
+L.push(rv("g3w", "1/34", "Within one entry: the two covered entries are *alla breve* (named in a Grade 2 time-signature lesson) and *prima/primo* (met inside *tempo primo*). No Grade 3 book word was a vocabulary entry."));
 L.push(rv("g4w", "21/22", "Reproduced exactly: *veloce* was missing and *voce* was met only inside *sotto voce*."));
 L.push("");
 L.push("*Counting convention.* One entry per printed headword line; alternative spellings and abbreviations on one line are forms of one entry; each printed sign is one entry; Italian words, French words, techniques and ornaments are counted separately (content/source-book/terminology-inventory.json).", "");
@@ -110,6 +110,8 @@ for (const r of rows) {
   if (!r.taughtAt) continue;
   const tg = Number(/^G(\d)/.exec(r.taughtAt)![1]);
   if (tg === r.entry.bookGrade) continue;
+  // the book prints some signs twice (the accent in Grades 1 and 2): taught where it first prints is not a disagreement
+  if (rows.some((o) => o !== r && o.entry.termIds.join() === r.entry.termIds.join() && o.entry.bookGrade === tg)) continue;
   const where = tg > r.entry.bookGrade ? `Grade ${tg} (${r.taughtAt}), later than the book` : `Grade ${tg} (${r.taughtAt}), earlier than the book`;
   L.push(`| *${esc(word(r))}* (${r.entry.kind}${r.entry.language === "french" ? ", French" : ""}) | ${r.entry.bookGrade} | ${where} | Keep, or move to the book's grade? |`);
 }
@@ -117,7 +119,7 @@ L.push("");
 const referenced = new Set(rows.flatMap((r) => r.entry.termIds));
 const extras = [...music.TERMS, ...music.TERMS_G4].filter((t) => !referenced.has(t.id));
 L.push(`**Course terms that the book does not list in Grades 1-4 (${extras.length}):** ${extras.map((t) => `*${esc(t.term)}*`).join(", ")}. They are kept (removing one would change stored question identities); a teacher decides whether they stay.`, "");
-L.push("**Not changed, on purpose:** the French list is printed with the Grade 4 words in the book and taught at Grade 5 (where the Grade 5 papers test it); the book prints *légèrement* where the course teaches *léger*; *staccatissimo* was a Grade 4 vocabulary entry that no lesson taught, and is now taught with the other touch signs at Grade 2; *più mosso* is a standard direction that the book does not print, used as the opposite of the printed *meno mosso*. Editing `VOCAB_G5` or the older lists would version the Grade 4 and 5 question identities, so each is a teacher decision first.", "");
+L.push("**Not changed, on purpose:** the French list is printed with the Grade 4 words in the book and taught at Grade 5 (where the Grade 5 papers test it); the book prints *légèrement* where the course teaches *léger*; the French *non* is asked in Grade 5 practice but the Grade 5 terms lesson never lists it (it is the same word and meaning as the Italian *non* now taught at Grade 2), which a teacher may want named there; the slur used as a bowing mark (played in one bow-stroke) is treated as covered by *slur*, not as a ninth technique; *staccatissimo* was a Grade 4 vocabulary entry that no lesson taught, and is now taught with the other touch signs at Grade 2; *più mosso* is a standard direction that the book does not print, used as the opposite of the printed *meno mosso*. Editing `VOCAB_G5` or the older lists would version the Grade 4 and 5 question identities, so each is a teacher decision first.", "");
 
 // ---- 6. the new terms
 L.push("## 6. The new terms and signs, for teacher review", "");

@@ -99,6 +99,9 @@ const ALSO_FITS: Record<string, string[]> = {
   allargando: ["rallentando", "ritardando", "ritenuto", "calando", "morendo"],
   "alla-breve": ["a-tempo"],
   rubato: ["a-tempo"],
+  tanto: ["troppo", "molto", "assai", "non"],
+  troppo: ["tanto", "molto", "assai"],
+  molto: ["tanto", "troppo"],
 };
 const tokens = (s: string) => new Set(s.toLowerCase().replace(/[“”()∧∨>.,:]/g, " ").split(/\s+/).filter(Boolean));
 /** A wrong option may not contain a word of the target or of its phrases (old "sotto voce" beside "voce", "a tempo" beside "a"). */
@@ -216,7 +219,7 @@ const SIGN_DRAW: Record<string, { marks: Record<number, { art?: string; slur?: "
   tenuto: { marks: { 1: { art: "tenuto" } }, text: "The second note has a short horizontal line above or below its head." },
   staccatissimo: { marks: { 1: { art: "staccatissimo" } }, text: "The second note has a small pointed wedge above or below its head." },
   "pointed-accent": { marks: { 1: { art: "strong-accent" } }, text: "The second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it." },
-  "semi-staccato": { marks: { 0: { art: "staccato", slur: "start" }, 1: { art: "staccato" }, 2: { art: "staccato", slur: "stop" } }, text: "The first three notes sit under one curved slur line and each has a dot." },
+  "semi-staccato": { marks: { 0: { art: "staccato", slur: "start" }, 1: { art: "staccato" }, 2: { art: "staccato", slur: "stop" } }, text: "The first three notes are joined by one curved slur line and each has a dot." },
 };
 
 /** Use the term: pick it for a description, read a marked melody, or name a sign drawn on notes. */
@@ -261,7 +264,7 @@ export const bookUse: Gen = (c) => {
   };
 };
 
-const SIGN_NAMES: Record<string, string> = { staccato: "staccato dot", accent: "accent (>)", tenuto: "tenuto line", staccatissimo: "wedge (staccatissimo)", "pointed-accent": "pointed accent (∧ or ∨)", "semi-staccato": "dots under a slur (semi-staccato)" };
+const SIGN_NAMES: Record<string, string> = { staccato: "staccato dot", accent: "accent (>)", tenuto: "tenuto line", staccatissimo: "wedge (staccatissimo)", "pointed-accent": "pointed accent (∧ or ∨)", "semi-staccato": "dots inside a slur (semi-staccato)" };
 const signName = (t: T) => SIGN_NAMES[t.id] ?? t.term;
 function oldSign(id: string): T {
   const o = REGISTRY.old.get(id) ?? REGISTRY.book.get(id);

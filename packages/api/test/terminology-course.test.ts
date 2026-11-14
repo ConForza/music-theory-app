@@ -293,3 +293,20 @@ describe("the generated terminology document is current", () => {
     execFileSync(process.execPath, ["--import", "tsx", join(here, "../scripts/terminology-docs.ts"), "--check"], { cwd: join(here, ".."), stdio: "pipe", timeout: 300_000 });
   }, 300_000);
 });
+
+describe("every printed entry is taught, practised and assessable, on strict evidence", () => {
+  it("each of the 167 entries has a lesson that teaches it (a question that asks it, a whole-name mention, or hand-checked words), is practised, and is assessable", async () => {
+    const { rows } = await import("../scripts/terminology-inventory.ts");
+    expect(rows).toHaveLength(167);
+    for (const r of rows) {
+      expect(r.taughtAt, `${r.entry.id} has no lesson that teaches it`).toBeTruthy();
+      expect(r.status, r.entry.id).toBe("assessed");
+    }
+  }, 300_000);
+  it("the hand-checked evidence sentences are really in the lessons they cite", () => {
+    const inv = readJson("source-book/terminology-inventory.json").entries as Array<{ id: string; evidence?: { lesson: string; text: string } }>;
+    const withEvidence = inv.filter((e) => e.evidence);
+    expect(withEvidence.length).toBeGreaterThan(0);
+    for (const e of withEvidence) expect(lessonText(e.evidence!.lesson), e.id).toContain(tidy(e.evidence!.text).trim());
+  });
+});

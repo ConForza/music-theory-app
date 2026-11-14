@@ -775,14 +775,14 @@
       "prompt": "This melody is marked “non tanto”. What does the marking ask the player to do?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "Eb3",
+                "pitch": "C4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -790,7 +790,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D3",
+                "pitch": "A3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -798,15 +798,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb2",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "D3",
+                "pitch": "C4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -818,7 +810,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C3",
+                "pitch": "Bb3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -826,7 +818,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "D3",
+                "pitch": "C4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -834,15 +826,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb2",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "G2",
+                "pitch": "A3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -852,46 +836,46 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 flats, time signature 4/4. Bar 1: crotchet in the 3rd space; crotchet on the 3rd line; crotchet on the 2nd line; crotchet on the 3rd line. Bar 2: crotchet in the 2nd space; crotchet on the 3rd line; crotchet on the 2nd line; crotchet on the 1st line. The tempo mark above the first bar says “non tanto”.",
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 3/4. Bar 1: crotchet on the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave; crotchet on the 1st ledger line below the stave. Bar 2: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave. The tempo mark above the first bar says “non tanto”.",
         "key": "Bb major",
-        "timeSignature": "4/4",
+        "timeSignature": "3/4",
         "tempoText": "non tanto"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "e-ed",
-            "label": "and"
+            "id": "piu",
+            "label": "with more movement: faster"
           },
           {
-            "id": "troppo",
-            "label": "but not too much"
-          },
-          {
-            "id": "simile",
-            "label": "in the same way: carry on as before"
+            "id": "senza",
+            "label": "without"
           },
           {
             "id": "tanto",
             "label": "not so much"
+          },
+          {
+            "id": "forte",
+            "label": "loud"
           }
         ],
         "correctOptionIds": [
           "tanto"
         ],
         "diagnoses": {
-          "e-ed": {
+          "senza": {
             "category": "confused-similar-term",
-            "reason": "That is what “e, ed” means, not “tanto”."
+            "reason": "That is what “senza” means, not “tanto”."
           },
-          "troppo": {
+          "piu": {
             "category": "confused-similar-term",
-            "reason": "That is what “troppo” means, not “tanto”."
+            "reason": "That is what “più” means, not “tanto”."
           },
-          "simile": {
+          "forte": {
             "category": "wrong-category",
-            "reason": "That is what “simile (sim.)” means, not “tanto”."
+            "reason": "That is what “forte (f)” means, not “tanto”."
           }
         }
       },

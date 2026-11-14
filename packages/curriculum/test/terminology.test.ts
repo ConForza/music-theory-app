@@ -128,7 +128,7 @@ describe("the reference inventory", () => {
       return { n: rows.length, missing: by("missing"), vocabOnly: by("vocab-only"), taughtOnly: by("taught-only") };
     };
     expect(tally(1, "word", "italian")).toEqual({ n: 28, missing: 0, vocabOnly: 0, taughtOnly: 0 });
-    expect(tally(2, "word", "italian")).toEqual({ n: 30, missing: 14, vocabOnly: 0, taughtOnly: 4 });
+    expect(tally(2, "word", "italian")).toEqual({ n: 30, missing: 15, vocabOnly: 0, taughtOnly: 3 });
     expect(tally(3, "word", "italian")).toEqual({ n: 34, missing: 32, vocabOnly: 0, taughtOnly: 2 });
     expect(tally(4, "word", "italian")).toEqual({ n: 22, missing: 1, vocabOnly: 0, taughtOnly: 0 });
   });

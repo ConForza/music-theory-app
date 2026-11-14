@@ -19,7 +19,7 @@
     },
     {
       "kind": "text",
-      "text": "“a” means at, to, by or in the style of. “al, alla” means to the, or in the manner of. “con, col” means with. “e, ed” means and."
+      "text": "“a” means at, to, by, for, in, or in the style of. “al, alla” means to the, or in the manner of. “con, col” means with. “e, ed” means and."
     },
     {
       "kind": "text",
@@ -194,7 +194,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Which word means “at, to, by or in the style of”?",
+      "prompt": "Which word means “at, to, by, for, in, or in the style of”?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -221,15 +221,15 @@
         "diagnoses": {
           "e-ed": {
             "category": "confused-similar-term",
-            "reason": "“e, ed” means and; the word asked about means at, to, by or in the style of."
+            "reason": "“e, ed” means and; the word asked about means at, to, by, for, in, or in the style of."
           },
           "con-col": {
             "category": "confused-similar-term",
-            "reason": "“con, col” means with; the word asked about means at, to, by or in the style of."
+            "reason": "“con, col” means with; the word asked about means at, to, by, for, in, or in the style of."
           },
           "grazioso": {
             "category": "confused-similar-term",
-            "reason": "“grazioso” means gracefully; the word asked about means at, to, by or in the style of."
+            "reason": "“grazioso” means gracefully; the word asked about means at, to, by, for, in, or in the style of."
           }
         }
       },
@@ -238,7 +238,7 @@
         "It is a small word that joins with others to make a direction."
       ],
       "feedback": {
-        "correct": "Correct: a means at, to, by or in the style of.",
+        "correct": "Correct: a means at, to, by, for, in, or in the style of.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -407,7 +407,7 @@
         "diagnoses": {
           "a": {
             "category": "confused-similar-term",
-            "reason": "“a” means at, to, by or in the style of; the word asked about means with."
+            "reason": "“a” means at, to, by, for, in, or in the style of; the word asked about means with."
           },
           "non": {
             "category": "confused-similar-term",
@@ -455,7 +455,7 @@
           },
           {
             "id": "a",
-            "label": "at, to, by or in the style of"
+            "label": "at, to, by, for, in, or in the style of"
           },
           {
             "id": "non",
@@ -485,7 +485,7 @@
         "It is a small word that joins with others to make a direction."
       ],
       "feedback": {
-        "correct": "Correct: a means at, to, by or in the style of.",
+        "correct": "Correct: a means at, to, by, for, in, or in the style of.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -701,7 +701,7 @@
           },
           "a": {
             "category": "confused-similar-term",
-            "reason": "“a” means at, to, by or in the style of; the word asked about means and."
+            "reason": "“a” means at, to, by, for, in, or in the style of; the word asked about means and."
           },
           "decrescendo": {
             "category": "wrong-category",
@@ -739,7 +739,7 @@
           },
           {
             "id": "a",
-            "label": "at, to, by or in the style of"
+            "label": "at, to, by, for, in, or in the style of"
           },
           {
             "id": "ma",
@@ -819,7 +819,7 @@
           },
           "a": {
             "category": "confused-similar-term",
-            "reason": "“a” means at, to, by or in the style of; the word asked about means not."
+            "reason": "“a” means at, to, by, for, in, or in the style of; the word asked about means not."
           },
           "adagio": {
             "category": "wrong-category",
@@ -861,7 +861,7 @@
           },
           {
             "id": "a",
-            "label": "at, to, by or in the style of"
+            "label": "at, to, by, for, in, or in the style of"
           },
           {
             "id": "e-ed",

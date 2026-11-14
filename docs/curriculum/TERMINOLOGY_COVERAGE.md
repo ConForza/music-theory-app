@@ -13,8 +13,8 @@ The Grade 5 educational review reported Grade 1 32/32, Grade 2 16/31, Grade 3 1/
 | List | Reviewer reported | Covered here (a vocabulary entry exists, or a lesson names the term) | Vocabulary entry exists | Reading |
 |---|---|---|---|---|
 | Grade 1 Italian words | 32/32 | 28/28 | 26/28 | Complete. The reviewer's total of 32 is not reproducible under any single counting convention (the printed list has 28 words and ten signs); the conclusion (complete) agrees. |
-| Grade 2 Italian words | 16/31 | 16/30 | 11/30 | Reproduced: 16 covered. The reviewer's 31 counts *mosso* and *moto* separately; the printed line is one entry. Only 11 are real vocabulary entries; four more are named only in a lesson of another grade. |
-| Grade 3 Italian words | 1/34 | 2/34 | 0/34 | Reproduced within one entry: the two covered entries are *alla breve* (named in a Grade 2 time-signature lesson) and *prima/primo* (met inside *tempo primo*). No Grade 3 book word was a vocabulary entry. |
+| Grade 2 Italian words | 16/31 | 15/30 | 11/30 | Close, not exact: 15 covered. The reviewer's 31 counts *mosso* and *moto* separately (the printed line is one entry), and a looser reading that counts every lesson mentioning a word gives 16. Only 11 are real vocabulary entries; the rest of the covered ones are named only in a lesson of another grade. Either way about half of Grade 2 was absent. |
+| Grade 3 Italian words | 1/34 | 2/34 | 0/34 | Within one entry: the two covered entries are *alla breve* (named in a Grade 2 time-signature lesson) and *prima/primo* (met inside *tempo primo*). No Grade 3 book word was a vocabulary entry. |
 | Grade 4 Italian words | 21/22 | 21/22 | 20/22 | Reproduced exactly: *veloce* was missing and *voce* was met only inside *sotto voce*. |
 
 *Counting convention.* One entry per printed headword line; alternative spellings and abbreviations on one line are forms of one entry; each printed sign is one entry; Italian words, French words, techniques and ornaments are counted separately (content/source-book/terminology-inventory.json).
@@ -29,7 +29,7 @@ Missing = in no vocabulary and in no lesson. Vocabulary only = a vocabulary entr
 | | | **after** | **0** | **0** | **0** | **0** | **28** |
 | Grade 1 signs | 10 | before | 0 | 0 | 0 | 0 | 10 |
 | | | **after** | **0** | **0** | **0** | **0** | **10** |
-| Grade 2 Italian words | 30 | before | 14 | 0 | 4 | 0 | 12 |
+| Grade 2 Italian words | 30 | before | 15 | 0 | 3 | 0 | 12 |
 | | | **after** | **0** | **0** | **0** | **0** | **30** |
 | Grade 2 signs | 5 | before | 2 | 1 | 0 | 0 | 2 |
 | | | **after** | **0** | **0** | **0** | **0** | **5** |
@@ -43,18 +43,18 @@ Missing = in no vocabulary and in no lesson. Vocabulary only = a vocabulary entr
 | | | **after** | **0** | **0** | **0** | **0** | **8** |
 | Grade 4 ornament signs | 6 | before | 0 | 0 | 0 | 0 | 6 |
 | | | **after** | **0** | **0** | **0** | **0** | **6** |
-| **All entries** | 167 | before | 49 | 1 | 6 | 0 | 111 |
+| **All entries** | 167 | before | 50 | 1 | 5 | 0 | 111 |
 | | | **after** | **0** | **0** | **0** | **0** | **167** |
 
 Entries both taught and askable in practice or review: 111 of 167 before, 167 of 167 after.
 
 ## 3. Entries that were missing, present but not taught, or taught but not practised
 
-**Missing entirely (49):** Grade 2: *a*, *allargando*, *assai*, *con, col*, *e, ed*, *giocoso*, *grave*, *larghetto*, *ma*, *meno*, *molto*, *non*, *più*, *simile (sim.)*, *pointed accent ∧ (over) or ∨ (under)*, *dots inside a slur (semi-staccato)*. Grade 3: *adagietto*, *ad libitum (ad lib.)*, *agitato*, *amore*, *anima*, *animato*, *ben*, *brio*, *comodo*, *deciso*, *delicato*, *energico*, *forza*, *largamente*, *leggiero*, *marcato (marc.)*, *marziale*, *mesto*, *pesante*, *risoluto*, *ritmico*, *rubato (tempo rubato)*, *scherzando (scherzoso)*, *semplice*, *seconda, secondo*, *sempre*, *stringendo*, *subito*, *tanto*, *tranquillo*, *triste (tristamente)*, *volta*. Grade 4: *veloce*.
+**Missing entirely (50):** Grade 2: *a*, *al, alla*, *allargando*, *assai*, *con, col*, *e, ed*, *giocoso*, *grave*, *larghetto*, *ma*, *meno*, *molto*, *non*, *più*, *simile (sim.)*, *pointed accent ∧ (over) or ∨ (under)*, *dots inside a slur (semi-staccato)*. Grade 3: *adagietto*, *ad libitum (ad lib.)*, *agitato*, *amore*, *anima*, *animato*, *ben*, *brio*, *comodo*, *deciso*, *delicato*, *energico*, *forza*, *largamente*, *leggiero*, *marcato (marc.)*, *marziale*, *mesto*, *pesante*, *risoluto*, *ritmico*, *rubato (tempo rubato)*, *scherzando (scherzoso)*, *semplice*, *seconda, secondo*, *sempre*, *stringendo*, *subito*, *tanto*, *tranquillo*, *triste (tristamente)*, *volta*. Grade 4: *veloce*.
 
 **Present but not taught (1):** *wedge (staccatissimo)* (The term existed (vocabulary firstGrade 4) but no lesson taught the wedge at Grade 2, although the G2-U5-L03 objective named it.).
 
-**Taught but not practised (6):** *al, alla*, *mosso, moto*, *senza*, *troppo*, *alla breve*, *prima, primo*. These had no vocabulary entry: a lesson of another grade named them (for example *alla breve* as the cut-time sign), but no question could ask them.
+**Taught but not practised (5):** *mosso, moto*, *senza*, *troppo*, *alla breve*, *prima, primo*. These had no vocabulary entry: a lesson of another grade named them (for example *alla breve* as the cut-time sign), but no question could ask them.
 
 **Present, taught and assessed before, but at a different grade from the book** are listed in section 5.
 
@@ -65,11 +65,11 @@ Entries both taught and askable in practice or review: 111 of 167 before, 167 of
 | `G2-U5-L05` Little words that change a direction | 2 | a; al, alla; con, col; e, ed; ma; non; senza | `c.terms.g2-link` |
 | `G2-U5-L06` More, less, very and too much | 2 | più; meno; molto; troppo; assai; mosso, moto | `c.terms.g2-more` |
 | `G2-U5-L07` More tempo and character words | 2 | allargando; grave; larghetto; giocoso; simile (sim.); vivo | `c.terms.g2-character` |
-| `G2-U5-L08` Wedge, pointed accent and dots under a slur | 2 | staccatissimo (the wedge sign); the sign ∧ (over a note) or ∨ (under it); dots under a slur | `c.terms.g2-touch` |
+| `G2-U5-L08` Wedge, pointed accent and dots inside a slur | 2 | staccatissimo (the wedge sign); the sign ∧ (over a note) or ∨ (under it); dots inside a slur | `c.terms.g2-touch` |
 | `G3-U5-L05` Speed and time | 3 | adagietto; largamente; stringendo; alla breve; comodo; rubato | `c.terms.g3-speed` |
 | `G3-U5-L06` Strong words | 3 | forza; deciso; risoluto; pesante; marcato (marc.); energico | `c.terms.g3-strong` |
 | `G3-U5-L07` Gentle words, and how much | 3 | delicato; leggiero; tranquillo; semplice; ben; tanto | `c.terms.g3-gentle` |
-| `G3-U5-L08` Feelings | 3 | agitato; mesto; triste; amore; anima; animato | `c.terms.g3-feelings` |
+| `G3-U5-L08` Feelings | 3 | agitato; mesto; triste; con amore; anima; animato | `c.terms.g3-feelings` |
 | `G3-U5-L09` Style and character | 3 | marziale; scherzando; brio; ritmico | `c.terms.g3-style` |
 | `G3-U5-L10` Always, suddenly and in order | 3 | sempre; subito; prima, primo; seconda, secondo; volta; ad libitum (ad lib.) | `c.terms.g3-order` |
 | `G4-U5-L06` Two more Grade 4 words | 4 | veloce; voce | `c.terms.g4-more` |
@@ -88,36 +88,41 @@ The book's grade is where the 1999 list prints a term. This course teaches each 
 
 | Term | Book grade | Course teaches it at | Decision needed |
 |---|---|---|---|
+| *8va under notes (an octave lower)* (sign) | 1 | Grade 3 (G3-U3-L02), later than the book | Keep, or move to the book's grade? |
 | *andantino* (word) | 2 | Grade 3 (G3-U5-L03), later than the book | Keep, or move to the book's grade? |
 | *dolce* (word) | 2 | Grade 1 (G1-U7-L03), earlier than the book | Keep, or move to the book's grade? |
 | *espressivo (espress., espr.)* (word) | 2 | Grade 3 (G3-U5-L03), later than the book | Keep, or move to the book's grade? |
 | *sostenuto* (word) | 2 | Grade 3 (G3-U5-L03), later than the book | Keep, or move to the book's grade? |
-| *accent sign > over or under a note* (sign) | 2 | Grade 1 (G1-U7-L04), earlier than the book | Keep, or move to the book's grade? |
-| *pointed accent ∧ (over) or ∨ (under)* (sign) | 2 | Grade 1 (G1-U1-L04), earlier than the book | Keep, or move to the book's grade? |
-| *dots inside a slur (semi-staccato)* (sign) | 2 | Grade 1 (G1-U3-L05), earlier than the book | Keep, or move to the book's grade? |
 | *alla breve* (word) | 3 | Grade 2 (G2-U1-L01), earlier than the book | Keep, or move to the book's grade? |
-| *come* (word) | 4 | Grade 1 (G1-U3-L01), earlier than the book | Keep, or move to the book's grade? |
+| *à* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *animé* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *assez* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *avec* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *cédez* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *douce* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *en dehors* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
+| *et* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *légèrement* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *lent* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *mais* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *moins* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *modéré* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
+| *non* (word, French) | 4 | Grade 2 (G2-U5-L05), earlier than the book | Keep, or move to the book's grade? |
+| *peu* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
+| *plus* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *presser* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *ralentir* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *retenu* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *sans* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *très* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
+| *un, une* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
+| *vif* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
 | *vite* (word, French) | 4 | Grade 5 (G5-U5-L06), later than the book | Keep, or move to the book's grade? |
+| *turn* (ornament) | 4 | Grade 5 (G5-U5-L01), later than the book | Keep, or move to the book's grade? |
 
 **Course terms that the book does not list in Grades 1-4 (4):** *prestissimo*, *tempo primo*, *con moto*, *tie*. They are kept (removing one would change stored question identities); a teacher decides whether they stay.
 
-**Not changed, on purpose:** the French list is printed with the Grade 4 words in the book and taught at Grade 5 (where the Grade 5 papers test it); the book prints *légèrement* where the course teaches *léger*; *staccatissimo* was a Grade 4 vocabulary entry that no lesson taught, and is now taught with the other touch signs at Grade 2; *più mosso* is a standard direction that the book does not print, used as the opposite of the printed *meno mosso*. Editing `VOCAB_G5` or the older lists would version the Grade 4 and 5 question identities, so each is a teacher decision first.
+**Not changed, on purpose:** the French list is printed with the Grade 4 words in the book and taught at Grade 5 (where the Grade 5 papers test it); the book prints *légèrement* where the course teaches *léger*; the French *non* is asked in Grade 5 practice but the Grade 5 terms lesson never lists it (it is the same word and meaning as the Italian *non* now taught at Grade 2), which a teacher may want named there; the slur used as a bowing mark (played in one bow-stroke) is treated as covered by *slur*, not as a ninth technique; *staccatissimo* was a Grade 4 vocabulary entry that no lesson taught, and is now taught with the other touch signs at Grade 2; *più mosso* is a standard direction that the book does not print, used as the opposite of the printed *meno mosso*. Editing `VOCAB_G5` or the older lists would version the Grade 4 and 5 question identities, so each is a teacher decision first.
 
 ## 6. The new terms and signs, for teacher review
 
@@ -125,7 +130,7 @@ Every meaning, character description and phrase gloss is newly written and provi
 
 | Term | Lesson | Meaning | Phrases | Described as (for the “a composer wants …” question) |
 |---|---|---|---|---|
-| *a* | `G2-U5-L05` | at, to, by or in the style of | a tempo: go back to the speed from before | — |
+| *a* | `G2-U5-L05` | at, to, by, for, in, or in the style of | a tempo: go back to the speed from before | — |
 | *al, alla* | `G2-U5-L05` | to the, or in the manner of | alla marcia: in the style of a march | — |
 | *con, col* | `G2-U5-L05` | with | — | — |
 | *e, ed* | `G2-U5-L05` | and | — | — |
@@ -145,7 +150,7 @@ Every meaning, character description and phrase gloss is newly written and provi
 | *simile (sim.)* | `G2-U5-L07` | in the same way: carry on as before | — | the pattern to carry on being played in the same way as it began |
 | *vivo* | `G2-U5-L07` | lively and quick | — | a quick, bright dance |
 | *the sign ∧ (over a note) or ∨ (under it)* | `G2-U5-L08` | an accent: the note is stressed, as with >, and perhaps even more strongly | — | a note that must be hit hard and clearly |
-| *dots under a slur* | `G2-U5-L08` | the notes are slightly separated, but less than with ordinary staccato | — | a flowing line whose notes are only slightly separated |
+| *dots inside a slur* | `G2-U5-L08` | the notes are slightly separated, but less than with ordinary staccato dots | — | a flowing line whose notes are only slightly separated |
 | *adagietto* | `G3-U5-L05` | rather slow, but a little faster than adagio | — | a tender song that is slow, but not as slow as an adagio |
 | *largamente* | `G3-U5-L05` | broadly | — | a broad, sweeping tune with a wide, spacious feel |
 | *stringendo* | `G3-U5-L05` | gradually getting faster, pressing on | — | a chase that speeds up more and more towards the end |
@@ -167,13 +172,13 @@ Every meaning, character description and phrase gloss is newly written and provi
 | *agitato* | `G3-U5-L08` | agitated and restless | — | a restless, agitated storm of notes |
 | *mesto* | `G3-U5-L08` | sad | — | a sad, mournful lament |
 | *triste* | `G3-U5-L08` | sad and sorrowful | — | a sorrowful song of loss |
-| *amore* | `G3-U5-L08` | love | amoroso: loving | a tender song about love |
+| *con amore* | `G3-U5-L08` | with love, lovingly | amoroso: loving | a tender song played lovingly, with real affection |
 | *anima* | `G3-U5-L08` | soul or spirit | con anima: with feeling, or spirited | — |
 | *animato* | `G3-U5-L08` | animated and lively | animando: becoming more lively | an animated, lively country dance |
 | *marziale* | `G3-U5-L09` | in a military style | — | a military march for a parade |
 | *scherzando* | `G3-U5-L09` | playful and joking | — | a playful, joking piece, like a clown's tune |
 | *brio* | `G3-U5-L09` | vigour and spirit | con brio: with vigour: lively and spirited | a bright, spirited piece played with vigour |
-| *ritmico* | `G3-U5-L09` | rhythmically: with a bold, clear beat | — | a piece in which the beat is bold, clear and rhythmic |
+| *ritmico* | `G3-U5-L09` | rhythmically | — | a piece driven by its rhythm, with the beat clear and well marked |
 | *sempre* | `G3-U5-L10` | always | sempre staccato: always short and detached | — |
 | *subito* | `G3-U5-L10` | suddenly | subito piano: suddenly quiet | — |
 | *prima, primo* | `G3-U5-L10` | first | prima volta: the first time | — |
@@ -181,7 +186,7 @@ Every meaning, character description and phrase gloss is newly written and provi
 | *volta* | `G3-U5-L10` | time, as in “once” or “twice” | prima volta: the first time; seconda volta: the second time | — |
 | *ad libitum (ad lib.)* | `G3-U5-L10` | at the player's choice: the passage may be played freely | — | a passage that the player is allowed to take freely, at their own choice |
 | *veloce* | `G4-U5-L06` | swift | — | a swift, rushing run of notes |
-| *voce* | `G4-U5-L06` | voice | sotto voce: in an undertone: very softly, as if in a low voice | — |
+| *voce* | `G4-U5-L06` | voice | sotto voce: in an undertone: very softly, under the breath | — |
 
 ## 7. Reproduce
 

@@ -5,17 +5,17 @@
   "contentVersion": 1,
   "locale": "en-GB",
   "objective": {
-    "statement": "Recognise three more signs that show how to touch a note: the wedge, the pointed accent and dots under a slur.",
+    "statement": "Recognise three more signs that show how to touch a note: the wedge, the pointed accent and dots inside a slur.",
     "successCriteria": [
       "I know a wedge means staccatissimo: as short as possible.",
       "I know ∧ over a note, or ∨ under it, is a pointed accent: stronger than >.",
-      "I know dots under a slur mean the notes are only slightly separated."
+      "I know dots inside a slur mean the notes are only slightly separated."
     ]
   },
   "explanation": [
     {
       "kind": "text",
-      "text": "Some signs tell the player how to touch one note. You already know the dot (staccato, short), the sideways V (accent) and the short line (tenuto, held). Here are three more."
+      "text": "Some signs tell the player how to touch one note. You already know the dot (staccato, short), the sideways V (accent) and the short line (tenuto: held, with a slight pressure). Here are three more."
     },
     {
       "kind": "text",
@@ -23,7 +23,7 @@
     },
     {
       "kind": "text",
-      "text": "Dots under a slur mean semi-staccato: the notes are slightly separated, but not as much as with ordinary staccato dots."
+      "text": "Dots inside a slur mean semi-staccato: the notes are slightly separated, but not as much as with ordinary staccato dots."
     },
     {
       "kind": "notation",
@@ -101,7 +101,7 @@
     },
     {
       "kind": "tip",
-      "text": "Dot = short. Wedge = shortest. Dots under a slur = slightly separated. > is an accent and ∧ or ∨ is a stronger one. The short line is tenuto: held."
+      "text": "Dot = short. Wedge = shortest. Dots inside a slur = slightly separated. > is an accent and ∧ or ∨ is a stronger one. The short line is tenuto: held, with a slight pressure."
     }
   ],
   "demonstration": {
@@ -362,13 +362,13 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "What does “dots under a slur” mean?",
+      "prompt": "What does “dots inside a slur” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
             "id": "semi-staccato",
-            "label": "the notes are slightly separated, but less than with ordinary staccato"
+            "label": "the notes are slightly separated, but less than with ordinary staccato dots"
           },
           {
             "id": "grave",
@@ -389,15 +389,15 @@
         "diagnoses": {
           "grave": {
             "category": "wrong-category",
-            "reason": "That is what “grave” means, not “dots under a slur”."
+            "reason": "That is what “grave” means, not “dots inside a slur”."
           },
           "fermata": {
             "category": "wrong-category",
-            "reason": "That is what “pause (fermata)” means, not “dots under a slur”."
+            "reason": "That is what “pause (fermata)” means, not “dots inside a slur”."
           },
           "da-capo": {
             "category": "wrong-category",
-            "reason": "That is what “da capo (D.C.)” means, not “dots under a slur”."
+            "reason": "That is what “da capo (D.C.)” means, not “dots inside a slur”."
           }
         }
       },
@@ -406,7 +406,7 @@
         "It is about how a note is touched: how short, how stressed or how held."
       ],
       "feedback": {
-        "correct": "Correct: dots under a slur: the notes are slightly separated, but less than with ordinary staccato.",
+        "correct": "Correct: dots inside a slur: the notes are slightly separated, but less than with ordinary staccato dots.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -541,7 +541,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “dots under a slur” mean?",
+      "prompt": "What does “dots inside a slur” mean?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -559,7 +559,7 @@
           },
           {
             "id": "semi-staccato",
-            "label": "the notes are slightly separated, but less than with ordinary staccato"
+            "label": "the notes are slightly separated, but less than with ordinary staccato dots"
           }
         ],
         "correctOptionIds": [
@@ -568,15 +568,15 @@
         "diagnoses": {
           "tie": {
             "category": "wrong-category",
-            "reason": "That is what “tie” means, not “dots under a slur”."
+            "reason": "That is what “tie” means, not “dots inside a slur”."
           },
           "allegretto": {
             "category": "wrong-category",
-            "reason": "That is what “allegretto” means, not “dots under a slur”."
+            "reason": "That is what “allegretto” means, not “dots inside a slur”."
           },
           "da-capo": {
             "category": "wrong-category",
-            "reason": "That is what “da capo (D.C.)” means, not “dots under a slur”."
+            "reason": "That is what “da capo (D.C.)” means, not “dots inside a slur”."
           }
         }
       },
@@ -585,7 +585,7 @@
         "It is about how a note is touched: how short, how stressed or how held."
       ],
       "feedback": {
-        "correct": "Correct: dots under a slur: the notes are slightly separated, but less than with ordinary staccato.",
+        "correct": "Correct: dots inside a slur: the notes are slightly separated, but less than with ordinary staccato dots.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -719,7 +719,7 @@
           },
           {
             "id": "semi-staccato",
-            "label": "dots under a slur (semi-staccato)"
+            "label": "dots inside a slur (semi-staccato)"
           }
         ],
         "correctOptionIds": [
@@ -736,7 +736,7 @@
           },
           "semi-staccato": {
             "category": "confused-similar-term",
-            "reason": "That sign is “dots under a slur (semi-staccato)”: the notes are slightly separated, but less than with ordinary staccato."
+            "reason": "That sign is “dots inside a slur (semi-staccato)”: the notes are slightly separated, but less than with ordinary staccato dots."
           }
         }
       },
@@ -760,13 +760,13 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "What does “dots under a slur” mean?",
+      "prompt": "What does “dots inside a slur” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
             "id": "semi-staccato",
-            "label": "the notes are slightly separated, but less than with ordinary staccato"
+            "label": "the notes are slightly separated, but less than with ordinary staccato dots"
           },
           {
             "id": "repeat",
@@ -787,15 +787,15 @@
         "diagnoses": {
           "repeat": {
             "category": "wrong-category",
-            "reason": "That is what “repeat marks” means, not “dots under a slur”."
+            "reason": "That is what “repeat marks” means, not “dots inside a slur”."
           },
           "dal-segno": {
             "category": "wrong-category",
-            "reason": "That is what “dal segno (D.S.)” means, not “dots under a slur”."
+            "reason": "That is what “dal segno (D.S.)” means, not “dots inside a slur”."
           },
           "adagio": {
             "category": "wrong-category",
-            "reason": "That is what “adagio” means, not “dots under a slur”."
+            "reason": "That is what “adagio” means, not “dots inside a slur”."
           }
         }
       },
@@ -804,7 +804,7 @@
         "It is about how a note is touched: how short, how stressed or how held."
       ],
       "feedback": {
-        "correct": "Correct: dots under a slur: the notes are slightly separated, but less than with ordinary staccato.",
+        "correct": "Correct: dots inside a slur: the notes are slightly separated, but less than with ordinary staccato dots.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",

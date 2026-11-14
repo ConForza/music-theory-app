@@ -136,7 +136,7 @@ Required concepts below the capacity rule: **0**.
 | G2-U5-L05 | Little words that change a direction | 3 | 7 | 1 | 1 |
 | G2-U5-L06 | More, less, very and too much | 3 | 6 | 1 | 1 |
 | G2-U5-L07 | More tempo and character words | 3 | 6 | 1 | 1 |
-| G2-U5-L08 | Wedge, pointed accent and dots under a slur | 3 | 6 | 1 | 1 |
+| G2-U5-L08 | Wedge, pointed accent and dots inside a slur | 3 | 6 | 1 | 1 |
 | G2-U5-L04 | Looking closely at a melody (Grade 2) | 3 | 6 | 1 | 1 |
 
 ## 6. Assessments

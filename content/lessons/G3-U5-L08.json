@@ -9,17 +9,17 @@
     "successCriteria": [
       "I know agitato is agitated and animato is animated and lively.",
       "I know mesto and triste are both sad.",
-      "I know amore means love and anima means soul or spirit, as in con anima."
+      "I know “con amore” means with love and anima means soul or spirit, as in con anima."
     ]
   },
   "explanation": [
     {
       "kind": "text",
-      "text": "Composers use words of feeling to show the mood of the music. Agitato is restless. Mesto and triste are both sad. Amore is love. Anima is soul or spirit. Animato is animated and lively."
+      "text": "Composers use words of feeling to show the mood of the music. Agitato is restless. Mesto and triste are both sad. “Con amore” is with love (amore is love). Anima is soul or spirit. Animato is animated and lively."
     },
     {
       "kind": "text",
-      "text": "“agitato” means agitated and restless. “mesto” means sad. “triste” means sad and sorrowful. “amore” means love."
+      "text": "“agitato” means agitated and restless. “mesto” means sad. “triste” means sad and sorrowful. “con amore” means with love, lovingly."
     },
     {
       "kind": "text",
@@ -103,7 +103,7 @@
     },
     {
       "kind": "tip",
-      "text": "Restless: agitato. Sad: mesto, triste. Love: amore. Soul or spirit: anima. Lively: animato."
+      "text": "Restless: agitato. Sad: mesto, triste. Love: con amore. Soul or spirit: anima. Lively: animato."
     }
   ],
   "demonstration": {
@@ -212,7 +212,7 @@
           },
           {
             "id": "amore",
-            "label": "love"
+            "label": "with love, lovingly"
           }
         ],
         "correctOptionIds": [
@@ -225,7 +225,7 @@
           },
           "amore": {
             "category": "confused-similar-term",
-            "reason": "That is what “amore” means, not “agitato”."
+            "reason": "That is what “con amore” means, not “agitato”."
           },
           "energico": {
             "category": "confused-similar-term",
@@ -443,7 +443,7 @@
           },
           {
             "id": "amore",
-            "label": "love"
+            "label": "with love, lovingly"
           }
         ],
         "correctOptionIds": [
@@ -456,7 +456,7 @@
           },
           "amore": {
             "category": "confused-similar-term",
-            "reason": "That is what “amore” means, not “agitato”."
+            "reason": "That is what “con amore” means, not “agitato”."
           },
           "semplice": {
             "category": "confused-similar-term",
@@ -602,42 +602,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A composer wants a tender song about love. Which marking fits best?",
+      "prompt": "A composer wants a tender song played lovingly, with real affection. Which marking fits best?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "giocoso",
-            "label": "giocoso"
+            "id": "energico",
+            "label": "energico"
           },
           {
-            "id": "dal-segno",
-            "label": "dal segno (D.S.)"
-          },
-          {
-            "id": "metronome-mark",
-            "label": "M.M. ♩ = 72"
+            "id": "risoluto",
+            "label": "risoluto"
           },
           {
             "id": "amore",
-            "label": "amore"
+            "label": "con amore"
+          },
+          {
+            "id": "repeat",
+            "label": "repeat marks"
           }
         ],
         "correctOptionIds": [
           "amore"
         ],
         "diagnoses": {
-          "dal-segno": {
+          "repeat": {
             "category": "wrong-category",
-            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means love."
+            "reason": "“repeat marks” means play the passage between the marks again; the word asked about means with love, lovingly."
           },
-          "metronome-mark": {
-            "category": "wrong-category",
-            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means love."
-          },
-          "giocoso": {
+          "energico": {
             "category": "confused-similar-term",
-            "reason": "“giocoso” means playful and merry; the word asked about means love."
+            "reason": "“energico” means energetic; the word asked about means with love, lovingly."
+          },
+          "risoluto": {
+            "category": "confused-similar-term",
+            "reason": "“risoluto” means bold, strong and resolute; the word asked about means with love, lovingly."
           }
         }
       },
@@ -646,7 +646,7 @@
         "It describes a feeling or a style of playing, not a speed."
       ],
       "feedback": {
-        "correct": "Correct: amore means love.",
+        "correct": "Correct: con amore means with love, lovingly.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -829,7 +829,7 @@
   "recap": [
     "Agitato is restless; animato is lively.",
     "Mesto and triste are both sad.",
-    "Amore is love; anima is soul or spirit."
+    "Con amore is with love; anima is soul or spirit."
   ],
   "spacedReview": [
     {

@@ -27,7 +27,7 @@ const outFile = args.includes("--out") ? args[args.indexOf("--out") + 1] : undef
 const SEEDS = 260;
 
 export type Status = "missing" | "vocab-only" | "taught-only" | "practised" | "assessed";
-export interface Entry { id: string; headword: string; forms?: string[]; kind: string; language: string; bookGrade: number; section: string; termIds: string[]; partial?: boolean; note?: string }
+export interface Entry { evidence?: { lesson: string; text: string }; id: string; headword: string; forms?: string[]; kind: string; language: string; bookGrade: number; section: string; termIds: string[]; partial?: boolean; note?: string }
 export interface Row { entry: Entry; vocab: "present" | "partial" | "absent"; taughtAt: string | null; taughtIn: "text" | "question" | null; practisedIn: string[]; assessedIn: string[]; status: Status }
 
 const inventory = JSON.parse(readFileSync(join(root, "content/source-book/terminology-inventory.json"), "utf8")) as { entries: Entry[] };
@@ -71,6 +71,8 @@ for (const n of course.nodes) {
   }
   lessons.push({ node: n, text, targets });
 }
+// one or two letters ("a", "e", "à") are also note and key names ("E:"), so only an explicit "à means" counts for them
+const shortRe = (w: string) => new RegExp(`(^|[^\\p{L}0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}${w.length < 3 ? "( means)" : "( \\(| means|:)"}`, "u");
 const wordRe = (w: string) => new RegExp(`(^|[^\\p{L}0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}($|[^\\p{L}0-9])`, "u");
 
 // ---- sampling: which terms can a template ask (as the correct answer) inside a scope
@@ -136,15 +138,26 @@ export function classify(e: Entry): Row {
   const vocabState: Row["vocab"] = have.every(Boolean) ? (e.partial ? "partial" : "present") : "absent";
   const present = e.termIds.filter((id) => vocab.has(id));
   const patterns = new Set<string>();
-  const long = (s: string) => base(s).length >= 4 || /\s/.test(base(s));
+  // Only whole names count as text evidence: a name of five or more letters, or of two or more words. A four-letter headword is an ordinary
+  // English word too ("come"), and the single words of a sign's description ("sign", "over", "note", "slur") say nothing about the sign, so both
+  // are taught only if a lesson question targets them (found by the review of PR #15: three false "taught at Grade 1" rows).
+  const long = (s: string) => base(s).length >= 5 || /\s/.test(base(s));
   for (const s of [e.headword, ...(e.forms ?? [])]) if (long(s)) patterns.add(base(s));
   for (const id of present) for (const s of vocab.get(id)!.names) if (long(s)) patterns.add(base(s));
-  if (e.kind === "sign") for (const id of present) for (const s of vocab.get(id)!.names) for (const w of base(s).split(" ")) if (w.length >= 4) patterns.add(w);
+  // A short name ("à", "avec", "plus") is taught only where the lesson DEFINES it: "avec (with)", "à means", "plus:". Plain occurrence proves nothing.
+  const shortNames = new Set<string>();
+  for (const s of [e.headword, ...(e.forms ?? []), ...present.flatMap((id) => vocab.get(id)!.names)]) for (const w of base(s).split(/[,\s]+/)) if (w && w.length < 5 && !/\s/.test(base(s))) shortNames.add(w);
   let taughtAt: string | null = null;
   let taughtIn: Row["taughtIn"] = null;
-  for (const l of lessons) {
+  // Hand-checked evidence for the few names too short or too common for text matching: the lesson and the exact words it uses (a test re-reads them).
+  if (e.evidence) {
+    const l = lessons.find((x) => x.node.id === e.evidence!.lesson);
+    if (l && l.text.includes(norm(e.evidence.text))) { taughtAt = l.node.id; taughtIn = "text"; }
+  }
+  // an Italian word of the same spelling taught earlier is not the French word ("non"), so French counts only from Grade 4 lessons
+  for (const l of taughtAt ? [] : lessons.filter((x) => e.language !== "french" || x.node.grade >= 4)) {
     const byQuestion = present.some((id) => l.targets.has(id)) && e.termIds.every((id) => !vocab.has(id) || true);
-    const byText = [...patterns].some((p) => wordRe(p).test(l.text));
+    const byText = [...patterns].some((p) => wordRe(p).test(l.text)) || [...shortNames].some((w) => shortRe(w).test(l.text));
     if (byQuestion || byText) {
       taughtAt = l.node.id;
       taughtIn = byQuestion ? "question" : "text";

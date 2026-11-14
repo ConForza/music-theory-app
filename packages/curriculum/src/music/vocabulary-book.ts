@@ -52,7 +52,7 @@ const t = (id: string, term: string, meaning: string, category: TermCategory, cl
 
 export const TERMS_BOOK: TermBook[] = [
   // ---- Grade 2, lesson 5: little words that change a direction ----------------------------------------------------------------------
-  t("a", "a", "at, to, by or in the style of", "expression", "word", "in-style", 2, L(2, 5), { phrases: [{ phrase: "a tempo", meaning: "go back to the speed from before" }] }),
+  t("a", "a", "at, to, by, for, in, or in the style of", "expression", "word", "in-style", 2, L(2, 5), { phrases: [{ phrase: "a tempo", meaning: "go back to the speed from before" }] }),
   t("al-alla", "al, alla", "to the, or in the manner of", "expression", "word", "in-style", 2, L(2, 5), { forms: ["al", "alla"], phrases: [{ phrase: "alla marcia", meaning: "in the style of a march" }] }),
   t("con-col", "con, col", "with", "expression", "word", "with", 2, L(2, 5), { forms: ["con", "col"] }),
   t("e-ed", "e, ed", "and", "expression", "word", "and", 2, L(2, 5), { forms: ["e", "ed"] }),
@@ -75,7 +75,7 @@ export const TERMS_BOOK: TermBook[] = [
   t("vivo", "vivo", "lively and quick", "tempo", "speed", "lively-quick", 2, L(2, 7), { character: "a quick, bright dance" }),
   // ---- Grade 2, lesson 8: touch signs (staccatissimo is an existing term, taught here for the first time) ---------------------------
   t("pointed-accent", "the sign ∧ (over a note) or ∨ (under it)", "an accent: the note is stressed, as with >, and perhaps even more strongly", "articulation", "touch", "accents", 2, L(2, 8), { mark: "strong-accent", character: "a note that must be hit hard and clearly" }),
-  t("semi-staccato", "dots under a slur", "the notes are slightly separated, but less than with ordinary staccato", "articulation", "touch", "separated", 2, L(2, 8), { mark: "semi-staccato", character: "a flowing line whose notes are only slightly separated" }),
+  t("semi-staccato", "dots inside a slur", "the notes are slightly separated, but less than with ordinary staccato dots", "articulation", "touch", "separated", 2, L(2, 8), { mark: "semi-staccato", character: "a flowing line whose notes are only slightly separated" }),
 
   // ---- Grade 3, lesson 5: speed and time ---------------------------------------------------------------------------------------------
   t("adagietto", "adagietto", "rather slow, but a little faster than adagio", "tempo", "speed", "rather-slow", 3, L(3, 5), { character: "a tender song that is slow, but not as slow as an adagio" }),
@@ -102,14 +102,14 @@ export const TERMS_BOOK: TermBook[] = [
   t("agitato", "agitato", "agitated and restless", "expression", "mood", "agitated", 3, L(3, 8), { pole: "lively", character: "a restless, agitated storm of notes" }),
   t("mesto", "mesto", "sad", "expression", "mood", "sad", 3, L(3, 8), { pole: "sad", character: "a sad, mournful lament" }),
   t("triste", "triste", "sad and sorrowful", "expression", "mood", "sad", 3, L(3, 8), { pole: "sad", forms: ["tristamente"], character: "a sorrowful song of loss" }),
-  t("amore", "amore", "love", "expression", "mood", "love", 3, L(3, 8), { pole: "gentle", phrases: [{ phrase: "amoroso", meaning: "loving" }], character: "a tender song about love" }),
+  t("amore", "con amore", "with love, lovingly", "expression", "mood", "love", 3, L(3, 8), { pole: "gentle", phrases: [{ phrase: "amoroso", meaning: "loving" }], character: "a tender song played lovingly, with real affection" }),
   t("anima", "anima", "soul or spirit", "expression", "mood", "spirit", 3, L(3, 8), { pole: "neutral", phrases: [{ phrase: "con anima", meaning: "with feeling, or spirited" }] }),
   t("animato", "animato", "animated and lively", "expression", "mood", "animated", 3, L(3, 8), { pole: "lively", phrases: [{ phrase: "animando", meaning: "becoming more lively" }], character: "an animated, lively country dance" }),
   // ---- Grade 3, lesson 9: style and character ----------------------------------------------------------------------------------------
   t("marziale", "marziale", "in a military style", "expression", "mood", "military", 3, L(3, 9), { pole: "strong", character: "a military march for a parade" }),
   t("scherzando", "scherzando", "playful and joking", "expression", "mood", "joking", 3, L(3, 9), { pole: "lively", forms: ["scherzoso"], character: "a playful, joking piece, like a clown's tune" }),
   t("brio", "brio", "vigour and spirit", "expression", "mood", "vigour", 3, L(3, 9), { pole: "lively", phrases: [{ phrase: "con brio", meaning: "with vigour: lively and spirited" }], character: "a bright, spirited piece played with vigour" }),
-  t("ritmico", "ritmico", "rhythmically: with a bold, clear beat", "expression", "mood", "rhythmic", 3, L(3, 9), { pole: "strong", character: "a piece in which the beat is bold, clear and rhythmic" }),
+  t("ritmico", "ritmico", "rhythmically", "expression", "mood", "rhythmic", 3, L(3, 9), { pole: "strong", character: "a piece driven by its rhythm, with the beat clear and well marked" }),
   // ---- Grade 3, lesson 10: always, suddenly and in order -----------------------------------------------------------------------------
   t("sempre", "sempre", "always", "expression", "word", "always", 3, L(3, 10), { phrases: [{ phrase: "sempre staccato", meaning: "always short and detached" }] }),
   t("subito", "subito", "suddenly", "expression", "word", "suddenly", 3, L(3, 10), { phrases: [{ phrase: "subito piano", meaning: "suddenly quiet" }] }),
@@ -120,7 +120,7 @@ export const TERMS_BOOK: TermBook[] = [
 
   // ---- Grade 4, lesson 6: the two Italian words not yet in the Grade 4 list --------------------------------------------------------
   t("veloce", "veloce", "swift", "tempo", "speed", "swift", 4, L(4, 6), { character: "a swift, rushing run of notes" }),
-  t("voce", "voce", "voice", "expression", "word", "voice", 4, L(4, 6), { phrases: [{ phrase: "sotto voce", meaning: "in an undertone: very softly, as if in a low voice" }] }),
+  t("voce", "voce", "voice", "expression", "word", "voice", 4, L(4, 6), { phrases: [{ phrase: "sotto voce", meaning: "in an undertone: very softly, under the breath" }] }),
 ];
 
 /**
@@ -141,7 +141,7 @@ export const BOOK_LESSONS: BookLesson[] = [
   { node: "G2-U5-L05", grade: 2, title: "Little words that change a direction", termIds: ["a", "al-alla", "con-col", "e-ed", "ma", "non", "senza"], conceptId: "c.terms.g2-link" },
   { node: "G2-U5-L06", grade: 2, title: "More, less, very and too much", termIds: ["piu", "meno", "molto", "troppo", "assai", "mosso"], conceptId: "c.terms.g2-more" },
   { node: "G2-U5-L07", grade: 2, title: "More tempo and character words", termIds: ["allargando", "grave", "larghetto", "giocoso", "simile", "vivo"], conceptId: "c.terms.g2-character" },
-  { node: "G2-U5-L08", grade: 2, title: "Wedge, pointed accent and dots under a slur", termIds: ["staccatissimo", "pointed-accent", "semi-staccato"], conceptId: "c.terms.g2-touch" },
+  { node: "G2-U5-L08", grade: 2, title: "Wedge, pointed accent and dots inside a slur", termIds: ["staccatissimo", "pointed-accent", "semi-staccato"], conceptId: "c.terms.g2-touch" },
   { node: "G3-U5-L05", grade: 3, title: "Speed and time", termIds: ["adagietto", "largamente", "stringendo", "alla-breve", "comodo", "rubato"], conceptId: "c.terms.g3-speed" },
   { node: "G3-U5-L06", grade: 3, title: "Strong words", termIds: ["forza", "deciso", "risoluto", "pesante", "marcato", "energico"], conceptId: "c.terms.g3-strong" },
   { node: "G3-U5-L07", grade: 3, title: "Gentle words, and how much", termIds: ["delicato", "leggiero", "tranquillo", "semplice", "ben", "tanto"], conceptId: "c.terms.g3-gentle" },

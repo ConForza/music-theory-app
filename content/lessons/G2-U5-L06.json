@@ -389,33 +389,33 @@
             "label": "molto"
           },
           {
-            "id": "senza",
-            "label": "senza"
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
           },
           {
-            "id": "e-ed",
-            "label": "e, ed"
+            "id": "con-col",
+            "label": "con, col"
           },
           {
-            "id": "a",
-            "label": "a"
+            "id": "non",
+            "label": "non"
           }
         ],
         "correctOptionIds": [
           "molto"
         ],
         "diagnoses": {
-          "senza": {
+          "con-col": {
             "category": "confused-similar-term",
-            "reason": "“senza” means without; the word asked about means very, or much."
+            "reason": "“con, col” means with; the word asked about means very, or much."
           },
-          "e-ed": {
+          "non": {
             "category": "confused-similar-term",
-            "reason": "“e, ed” means and; the word asked about means very, or much."
+            "reason": "“non” means not; the word asked about means very, or much."
           },
-          "a": {
-            "category": "confused-similar-term",
-            "reason": "“a” means at, to, by or in the style of; the word asked about means very, or much."
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means very, or much."
           }
         }
       },
@@ -616,37 +616,37 @@
         "kind": "choice",
         "options": [
           {
-            "id": "piu",
-            "label": "più"
+            "id": "fortepiano",
+            "label": "fortepiano (fp)"
           },
           {
-            "id": "dal-segno",
-            "label": "dal segno (D.S.)"
-          },
-          {
-            "id": "ma",
-            "label": "ma"
+            "id": "al-alla",
+            "label": "al, alla"
           },
           {
             "id": "molto",
             "label": "molto"
+          },
+          {
+            "id": "meno",
+            "label": "meno"
           }
         ],
         "correctOptionIds": [
           "molto"
         ],
         "diagnoses": {
-          "piu": {
+          "meno": {
             "category": "confused-similar-term",
-            "reason": "“più” means more; the word asked about means very, or much."
+            "reason": "“meno” means less; the word asked about means very, or much."
           },
-          "ma": {
+          "al-alla": {
             "category": "confused-similar-term",
-            "reason": "“ma” means but; the word asked about means very, or much."
+            "reason": "“al, alla” means to the, or in the manner of; the word asked about means very, or much."
           },
-          "dal-segno": {
+          "fortepiano": {
             "category": "wrong-category",
-            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means very, or much."
+            "reason": "“fortepiano (fp)” means loud, then immediately quiet; the word asked about means very, or much."
           }
         }
       },
@@ -680,7 +680,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "D3",
+                "pitch": "Ab2",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -708,14 +708,6 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Eb3",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
                 "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
@@ -724,7 +716,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb2",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -734,8 +734,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 flats, time signature 3/4. Bar 1: crotchet on the 3rd line; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet in the 3rd space; crotchet on the 3rd line; crotchet on the 2nd line. The tempo mark above the first bar says “ma non troppo”.",
-        "key": "Bb major",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet in the 1st space; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet on the 3rd line; crotchet in the 3rd space; crotchet on the 4th line. The tempo mark above the first bar says “ma non troppo”.",
+        "key": "Eb major",
         "timeSignature": "3/4",
         "tempoText": "ma non troppo"
       },
@@ -743,37 +743,37 @@
         "kind": "choice",
         "options": [
           {
+            "id": "al-alla",
+            "label": "in the style of a march"
+          },
+          {
+            "id": "senza",
+            "label": "without"
+          },
+          {
+            "id": "sforzando",
+            "label": "with a sudden strong accent"
+          },
+          {
             "id": "troppo",
             "label": "but not too much"
-          },
-          {
-            "id": "piu",
-            "label": "with more movement: faster"
-          },
-          {
-            "id": "e-ed",
-            "label": "and"
-          },
-          {
-            "id": "assai",
-            "label": "very quick"
           }
         ],
         "correctOptionIds": [
           "troppo"
         ],
         "diagnoses": {
-          "piu": {
+          "senza": {
             "category": "confused-similar-term",
-            "reason": "That is what “più” means, not “troppo”."
+            "reason": "That is what “senza” means, not “troppo”."
           },
-          "assai": {
+          "al-alla": {
             "category": "confused-similar-term",
-            "reason": "That is what “assai” means, not “troppo”."
+            "reason": "That is what “al, alla” means, not “troppo”."
           },
-          "e-ed": {
-            "category": "confused-similar-term",
-            "reason": "That is what “e, ed” means, not “troppo”."
+          "sforzando": {
+            "category": "wrong-category",
+            "reason": "That is what “sforzando (sf)” means, not “troppo”."
           }
         }
       },
@@ -802,20 +802,20 @@
         "kind": "choice",
         "options": [
           {
-            "id": "ma",
-            "label": "ma"
-          },
-          {
             "id": "a",
             "label": "a"
           },
           {
-            "id": "poco",
-            "label": "poco"
-          },
-          {
             "id": "assai",
             "label": "assai"
+          },
+          {
+            "id": "piu",
+            "label": "più"
+          },
+          {
+            "id": "piano",
+            "label": "piano (p)"
           }
         ],
         "correctOptionIds": [
@@ -824,15 +824,15 @@
         "diagnoses": {
           "a": {
             "category": "confused-similar-term",
-            "reason": "“a” means at, to, by or in the style of; the word asked about means very."
+            "reason": "“a” means at, to, by, for, in, or in the style of; the word asked about means very."
           },
-          "ma": {
+          "piu": {
             "category": "confused-similar-term",
-            "reason": "“ma” means but; the word asked about means very."
+            "reason": "“più” means more; the word asked about means very."
           },
-          "poco": {
-            "category": "confused-similar-term",
-            "reason": "“poco” means a little; the word asked about means very."
+          "piano": {
+            "category": "wrong-category",
+            "reason": "“piano (p)” means quiet; the word asked about means very."
           }
         }
       },

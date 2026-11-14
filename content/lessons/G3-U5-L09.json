@@ -9,17 +9,17 @@
     "successCriteria": [
       "I know marziale means in a military style.",
       "I know scherzando means playful and joking.",
-      "I know brio means vigour, as in con brio, and ritmico means with a bold, clear beat."
+      "I know brio means vigour, as in con brio, and ritmico means rhythmically."
     ]
   },
   "explanation": [
     {
       "kind": "text",
-      "text": "These four words describe the style of a piece. Marziale is military, like a march. Scherzando is playful, like a joke. Brio is vigour and spirit. Ritmico means the rhythm should be clear and bold."
+      "text": "These four words describe the style of a piece. Marziale is military, like a march. Scherzando is playful, like a joke. Brio is vigour and spirit. Ritmico means rhythmically: the rhythm should lead the music."
     },
     {
       "kind": "text",
-      "text": "“marziale” means in a military style. “scherzando” means playful and joking. “brio” means vigour and spirit. “ritmico” means rhythmically: with a bold, clear beat."
+      "text": "“marziale” means in a military style. “scherzando” means playful and joking. “brio” means vigour and spirit. “ritmico” means rhythmically."
     },
     {
       "kind": "text",
@@ -99,7 +99,7 @@
     },
     {
       "kind": "tip",
-      "text": "March: marziale. Joking: scherzando. Spirit: brio. Clear beat: ritmico."
+      "text": "March: marziale. Joking: scherzando. Spirit: brio. Rhythmically: ritmico."
     }
   ],
   "demonstration": {
@@ -313,37 +313,37 @@
         "kind": "choice",
         "options": [
           {
+            "id": "forza",
+            "label": "forza"
+          },
+          {
+            "id": "ritmico",
+            "label": "ritmico"
+          },
+          {
             "id": "repeat",
             "label": "repeat marks"
           },
           {
-            "id": "deciso",
-            "label": "deciso"
-          },
-          {
             "id": "brio",
             "label": "brio"
-          },
-          {
-            "id": "mesto",
-            "label": "mesto"
           }
         ],
         "correctOptionIds": [
           "brio"
         ],
         "diagnoses": {
-          "mesto": {
-            "category": "confused-similar-term",
-            "reason": "“mesto” means sad; the word asked about means vigour and spirit."
-          },
-          "deciso": {
-            "category": "confused-similar-term",
-            "reason": "“deciso” means with determination; the word asked about means vigour and spirit."
-          },
           "repeat": {
             "category": "wrong-category",
             "reason": "“repeat marks” means play the passage between the marks again; the word asked about means vigour and spirit."
+          },
+          "forza": {
+            "category": "confused-similar-term",
+            "reason": "“forza” means force, strength; the word asked about means vigour and spirit."
+          },
+          "ritmico": {
+            "category": "confused-similar-term",
+            "reason": "“ritmico” means rhythmically; the word asked about means vigour and spirit."
           }
         }
       },
@@ -446,7 +446,7 @@
           },
           {
             "id": "amore",
-            "label": "amore"
+            "label": "con amore"
           }
         ],
         "correctOptionIds": [
@@ -459,7 +459,7 @@
           },
           "amore": {
             "category": "confused-similar-term",
-            "reason": "“amore” means love; the word asked about means playful and joking."
+            "reason": "“con amore” means with love, lovingly; the word asked about means playful and joking."
           },
           "marziale": {
             "category": "confused-similar-term",
@@ -492,37 +492,37 @@
         "kind": "choice",
         "options": [
           {
-            "id": "triste",
-            "label": "sad and sorrowful"
-          },
-          {
-            "id": "ritmico",
-            "label": "rhythmically: with a bold, clear beat"
+            "id": "cantabile",
+            "label": "in a singing style"
           },
           {
             "id": "brio",
             "label": "vigour and spirit"
           },
           {
-            "id": "deciso",
-            "label": "with determination"
+            "id": "ritmico",
+            "label": "rhythmically"
+          },
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
           }
         ],
         "correctOptionIds": [
           "brio"
         ],
         "diagnoses": {
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “brio”."
+          },
           "ritmico": {
             "category": "confused-similar-term",
             "reason": "That is what “ritmico” means, not “brio”."
           },
-          "triste": {
+          "cantabile": {
             "category": "confused-similar-term",
-            "reason": "That is what “triste” means, not “brio”."
-          },
-          "deciso": {
-            "category": "confused-similar-term",
-            "reason": "That is what “deciso” means, not “brio”."
+            "reason": "That is what “cantabile” means, not “brio”."
           }
         }
       },
@@ -620,7 +620,7 @@
         "options": [
           {
             "id": "ritmico",
-            "label": "rhythmically: with a bold, clear beat"
+            "label": "rhythmically"
           },
           {
             "id": "mesto",
@@ -658,7 +658,7 @@
         "It describes a feeling or a style of playing, not a speed."
       ],
       "feedback": {
-        "correct": "Correct: ritmico means rhythmically: with a bold, clear beat.",
+        "correct": "Correct: ritmico means rhythmically.",
         "mistakes": {
           "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
           "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
@@ -789,7 +789,7 @@
   "recap": [
     "Marziale is military; scherzando is playful and joking.",
     "Brio is vigour: con brio means with vigour.",
-    "Ritmico asks for a bold, clear beat."
+    "Ritmico means rhythmically: let the rhythm lead."
   ],
   "spacedReview": [
     {
