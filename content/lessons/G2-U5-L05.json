@@ -1,0 +1,941 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U5-L05",
+  "lessonId": "G2-U5-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn seven small Italian words that join with other words to make a direction.",
+    "successCriteria": [
+      "I know a and alla can mean “in the style of”, and con means with.",
+      "I know e means and, ma means but, non means not and senza means without.",
+      "I can work out a short direction such as alla marcia."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Many directions are built from small Italian helper words. On their own they do not say how fast or how loudly to play: they join other words together. You will meet these seven again and again."
+    },
+    {
+      "kind": "text",
+      "text": "“a” means at, to, by or in the style of. “al, alla” means to the, or in the manner of. “con, col” means with. “e, ed” means and."
+    },
+    {
+      "kind": "text",
+      "text": "“ma” means but. “non” means not. “senza” means without."
+    },
+    {
+      "kind": "text",
+      "text": "Helper words build directions. Alla marcia means in the style of a march. A tempo means go back to the speed from before. When you see a helper word, read the whole direction one word at a time."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked a tempo.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "a tempo"
+      },
+      "caption": "The words a tempo above a bar: go back to the speed from before."
+    },
+    {
+      "kind": "tip",
+      "text": "con = with and senza = without are opposites. e = and, ma = but, non = not. a and alla both point to a style or manner."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked alla marcia.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "alla marcia"
+    },
+    "steps": [
+      "Look at the words above the first bar: alla marcia.",
+      "Alla means in the style of, and marcia means march, so the player should sound like a march.",
+      "The words do not change the notes. They change the way the notes are played."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked alla marcia."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u5-l05.guided-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “at, to, by or in the style of”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "e-ed",
+            "label": "e, ed"
+          },
+          {
+            "id": "grazioso",
+            "label": "grazioso"
+          },
+          {
+            "id": "con-col",
+            "label": "con, col"
+          },
+          {
+            "id": "a",
+            "label": "a"
+          }
+        ],
+        "correctOptionIds": [
+          "a"
+        ],
+        "diagnoses": {
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "“e, ed” means and; the word asked about means at, to, by or in the style of."
+          },
+          "con-col": {
+            "category": "confused-similar-term",
+            "reason": "“con, col” means with; the word asked about means at, to, by or in the style of."
+          },
+          "grazioso": {
+            "category": "confused-similar-term",
+            "reason": "“grazioso” means gracefully; the word asked about means at, to, by or in the style of."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: a means at, to, by or in the style of.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.guided-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is marked “alla marcia”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. Bar 1: crotchet in the 4th space; crotchet on the 4th line; crotchet on the 5th line. Bar 2: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 5th line. The tempo mark above the first bar says “alla marcia”.",
+        "key": "C major",
+        "timeSignature": "3/4",
+        "tempoText": "alla marcia"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "al-alla",
+            "label": "in the style of a march"
+          },
+          {
+            "id": "tenuto",
+            "label": "held: give the note its full length"
+          },
+          {
+            "id": "con-col",
+            "label": "with"
+          },
+          {
+            "id": "e-ed",
+            "label": "and"
+          }
+        ],
+        "correctOptionIds": [
+          "al-alla"
+        ],
+        "diagnoses": {
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “al, alla”."
+          },
+          "con-col": {
+            "category": "confused-similar-term",
+            "reason": "That is what “con, col” means, not “al, alla”."
+          },
+          "tenuto": {
+            "category": "wrong-category",
+            "reason": "That is what “tenuto” means, not “al, alla”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: al, alla means to the, or in the manner of.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.guided-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which word means “with”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piano",
+            "label": "piano (p)"
+          },
+          {
+            "id": "con-col",
+            "label": "con, col"
+          },
+          {
+            "id": "non",
+            "label": "non"
+          },
+          {
+            "id": "a",
+            "label": "a"
+          }
+        ],
+        "correctOptionIds": [
+          "con-col"
+        ],
+        "diagnoses": {
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "“a” means at, to, by or in the style of; the word asked about means with."
+          },
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "“non” means not; the word asked about means with."
+          },
+          "piano": {
+            "category": "wrong-category",
+            "reason": "“piano (p)” means quiet; the word asked about means with."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: con, col means with.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u5-l05.ind-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “a” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "presto",
+            "label": "very fast"
+          },
+          {
+            "id": "con-col",
+            "label": "with"
+          },
+          {
+            "id": "a",
+            "label": "at, to, by or in the style of"
+          },
+          {
+            "id": "non",
+            "label": "not"
+          }
+        ],
+        "correctOptionIds": [
+          "a"
+        ],
+        "diagnoses": {
+          "con-col": {
+            "category": "confused-similar-term",
+            "reason": "That is what “con, col” means, not “a”."
+          },
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "That is what “non” means, not “a”."
+          },
+          "presto": {
+            "category": "wrong-category",
+            "reason": "That is what “presto” means, not “a”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: a means at, to, by or in the style of.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.ind-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “alla marcia”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 2/4. Bar 1: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave. Bar 2: crotchet in the space just above the stave; crotchet on the 5th line. The tempo mark above the first bar says “alla marcia”.",
+        "key": "A major",
+        "timeSignature": "2/4",
+        "tempoText": "alla marcia"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "senza",
+            "label": "without"
+          },
+          {
+            "id": "con-col",
+            "label": "with"
+          },
+          {
+            "id": "al-alla",
+            "label": "in the style of a march"
+          },
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          }
+        ],
+        "correctOptionIds": [
+          "al-alla"
+        ],
+        "diagnoses": {
+          "senza": {
+            "category": "confused-similar-term",
+            "reason": "That is what “senza” means, not “al, alla”."
+          },
+          "con-col": {
+            "category": "confused-similar-term",
+            "reason": "That is what “con, col” means, not “al, alla”."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “al, alla”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: al, alla means to the, or in the manner of.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.ind-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “con, col” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fortissimo",
+            "label": "very loud"
+          },
+          {
+            "id": "non",
+            "label": "not"
+          },
+          {
+            "id": "ma",
+            "label": "but"
+          },
+          {
+            "id": "con-col",
+            "label": "with"
+          }
+        ],
+        "correctOptionIds": [
+          "con-col"
+        ],
+        "diagnoses": {
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "That is what “non” means, not “con, col”."
+          },
+          "ma": {
+            "category": "confused-similar-term",
+            "reason": "That is what “ma” means, not “con, col”."
+          },
+          "fortissimo": {
+            "category": "wrong-category",
+            "reason": "That is what “fortissimo (ff)” means, not “con, col”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: con, col means with.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.ind-4",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “and”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "a",
+            "label": "a"
+          },
+          {
+            "id": "e-ed",
+            "label": "e, ed"
+          },
+          {
+            "id": "decrescendo",
+            "label": "decrescendo (decresc.)"
+          },
+          {
+            "id": "ma",
+            "label": "ma"
+          }
+        ],
+        "correctOptionIds": [
+          "e-ed"
+        ],
+        "diagnoses": {
+          "ma": {
+            "category": "confused-similar-term",
+            "reason": "“ma” means but; the word asked about means and."
+          },
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "“a” means at, to, by or in the style of; the word asked about means and."
+          },
+          "decrescendo": {
+            "category": "wrong-category",
+            "reason": "“decrescendo (decresc.)” means gradually getting quieter; the word asked about means and."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: e, ed means and.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.ind-5",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “ma” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piano",
+            "label": "quiet"
+          },
+          {
+            "id": "a",
+            "label": "at, to, by or in the style of"
+          },
+          {
+            "id": "ma",
+            "label": "but"
+          },
+          {
+            "id": "e-ed",
+            "label": "and"
+          }
+        ],
+        "correctOptionIds": [
+          "ma"
+        ],
+        "diagnoses": {
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “ma”."
+          },
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "That is what “a” means, not “ma”."
+          },
+          "piano": {
+            "category": "wrong-category",
+            "reason": "That is what “piano (p)” means, not “ma”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: ma means but.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.ind-6",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “not”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "a",
+            "label": "a"
+          },
+          {
+            "id": "non",
+            "label": "non"
+          },
+          {
+            "id": "con-col",
+            "label": "con, col"
+          },
+          {
+            "id": "adagio",
+            "label": "adagio"
+          }
+        ],
+        "correctOptionIds": [
+          "non"
+        ],
+        "diagnoses": {
+          "con-col": {
+            "category": "confused-similar-term",
+            "reason": "“con, col” means with; the word asked about means not."
+          },
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "“a” means at, to, by or in the style of; the word asked about means not."
+          },
+          "adagio": {
+            "category": "wrong-category",
+            "reason": "“adagio” means slow; the word asked about means not."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: non means not.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l05.ind-7",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “senza” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "accelerando",
+            "label": "gradually getting faster"
+          },
+          {
+            "id": "senza",
+            "label": "without"
+          },
+          {
+            "id": "a",
+            "label": "at, to, by or in the style of"
+          },
+          {
+            "id": "e-ed",
+            "label": "and"
+          }
+        ],
+        "correctOptionIds": [
+          "senza"
+        ],
+        "diagnoses": {
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "That is what “a” means, not “senza”."
+          },
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “senza”."
+          },
+          "accelerando": {
+            "category": "wrong-category",
+            "reason": "That is what “accelerando (accel.)” means, not “senza”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: senza means without.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "A, alla, con, e, ma, non and senza are small helper words.",
+    "Con means with and senza means without; e means and, ma means but, non means not.",
+    "Read a direction one word at a time."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g2-link"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.13"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 2 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38). Phrases are limited to words taught by this lesson or earlier."
+  }
+}

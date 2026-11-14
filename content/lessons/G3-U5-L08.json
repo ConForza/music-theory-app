@@ -1,0 +1,866 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U5-L08",
+  "lessonId": "G3-U5-L08",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn six words of feeling: agitato, mesto, triste, amore, anima and animato.",
+    "successCriteria": [
+      "I know agitato is agitated and animato is animated and lively.",
+      "I know mesto and triste are both sad.",
+      "I know amore means love and anima means soul or spirit, as in con anima."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Composers use words of feeling to show the mood of the music. Agitato is restless. Mesto and triste are both sad. Amore is love. Anima is soul or spirit. Animato is animated and lively."
+    },
+    {
+      "kind": "text",
+      "text": "“agitato” means agitated and restless. “mesto” means sad. “triste” means sad and sorrowful. “amore” means love."
+    },
+    {
+      "kind": "text",
+      "text": "“anima” means soul or spirit. “animato” means animated and lively."
+    },
+    {
+      "kind": "text",
+      "text": "Amoroso means loving. Con anima means with feeling, or spirited. Animando means becoming more lively. Triste may also be written tristamente."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked con anima.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "con anima"
+      },
+      "caption": "Con anima above the first bar: with feeling, or spirited."
+    },
+    {
+      "kind": "tip",
+      "text": "Restless: agitato. Sad: mesto, triste. Love: amore. Soul or spirit: anima. Lively: animato."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked agitato.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "agitato"
+    },
+    "steps": [
+      "Look at the word above the first bar: agitato.",
+      "It means agitated: restless and unsettled.",
+      "It describes the mood. Play with energy and a feeling of unrest."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked agitato."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u5-l08.guided-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “agitato” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "agitato",
+            "label": "agitated and restless"
+          },
+          {
+            "id": "energico",
+            "label": "energetic"
+          },
+          {
+            "id": "rubato",
+            "label": "with some freedom of time: the player may push and pull the beat"
+          },
+          {
+            "id": "amore",
+            "label": "love"
+          }
+        ],
+        "correctOptionIds": [
+          "agitato"
+        ],
+        "diagnoses": {
+          "rubato": {
+            "category": "confused-similar-term",
+            "reason": "That is what “rubato” means, not “agitato”."
+          },
+          "amore": {
+            "category": "confused-similar-term",
+            "reason": "That is what “amore” means, not “agitato”."
+          },
+          "energico": {
+            "category": "confused-similar-term",
+            "reason": "That is what “energico” means, not “agitato”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: agitato means agitated and restless.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.guided-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is marked “mesto”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. Bar 1: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. Bar 2: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. The tempo mark above the first bar says “mesto”.",
+        "key": "Bb major",
+        "timeSignature": "2/4",
+        "tempoText": "mesto"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "cantabile",
+            "label": "in a singing style"
+          },
+          {
+            "id": "risoluto",
+            "label": "bold, strong and resolute"
+          },
+          {
+            "id": "mesto",
+            "label": "sad"
+          },
+          {
+            "id": "grazioso",
+            "label": "gracefully"
+          }
+        ],
+        "correctOptionIds": [
+          "mesto"
+        ],
+        "diagnoses": {
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "That is what “cantabile” means, not “mesto”."
+          },
+          "grazioso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “grazioso” means, not “mesto”."
+          },
+          "risoluto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “risoluto” means, not “mesto”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: mesto means sad.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.guided-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “triste” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "grazioso",
+            "label": "gracefully"
+          },
+          {
+            "id": "animato",
+            "label": "animated and lively"
+          },
+          {
+            "id": "triste",
+            "label": "sad and sorrowful"
+          },
+          {
+            "id": "cantabile",
+            "label": "in a singing style"
+          }
+        ],
+        "correctOptionIds": [
+          "triste"
+        ],
+        "diagnoses": {
+          "animato": {
+            "category": "confused-similar-term",
+            "reason": "That is what “animato” means, not “triste”."
+          },
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "That is what “cantabile” means, not “triste”."
+          },
+          "grazioso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “grazioso” means, not “triste”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: triste means sad and sorrowful.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u5-l08.ind-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “agitato” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "agitato",
+            "label": "agitated and restless"
+          },
+          {
+            "id": "semplice",
+            "label": "simple and plain"
+          },
+          {
+            "id": "amore",
+            "label": "love"
+          }
+        ],
+        "correctOptionIds": [
+          "agitato"
+        ],
+        "diagnoses": {
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “agitato”."
+          },
+          "amore": {
+            "category": "confused-similar-term",
+            "reason": "That is what “amore” means, not “agitato”."
+          },
+          "semplice": {
+            "category": "confused-similar-term",
+            "reason": "That is what “semplice” means, not “agitato”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: agitato means agitated and restless.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.ind-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a sad, mournful lament. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "cantabile",
+            "label": "cantabile"
+          },
+          {
+            "id": "risoluto",
+            "label": "risoluto"
+          },
+          {
+            "id": "maestoso",
+            "label": "maestoso"
+          },
+          {
+            "id": "mesto",
+            "label": "mesto"
+          }
+        ],
+        "correctOptionIds": [
+          "mesto"
+        ],
+        "diagnoses": {
+          "cantabile": {
+            "category": "confused-similar-term",
+            "reason": "“cantabile” means in a singing style; the word asked about means sad."
+          },
+          "maestoso": {
+            "category": "confused-similar-term",
+            "reason": "“maestoso” means majestically; the word asked about means sad."
+          },
+          "risoluto": {
+            "category": "confused-similar-term",
+            "reason": "“risoluto” means bold, strong and resolute; the word asked about means sad."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: mesto means sad.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.ind-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “triste” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ottava",
+            "label": "play an octave higher than written"
+          },
+          {
+            "id": "triste",
+            "label": "sad and sorrowful"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          },
+          {
+            "id": "grazioso",
+            "label": "gracefully"
+          }
+        ],
+        "correctOptionIds": [
+          "triste"
+        ],
+        "diagnoses": {
+          "grazioso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “grazioso” means, not “triste”."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “triste”."
+          },
+          "ottava": {
+            "category": "wrong-category",
+            "reason": "That is what “8va” means, not “triste”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: triste means sad and sorrowful.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.ind-4",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a tender song about love. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "giocoso",
+            "label": "giocoso"
+          },
+          {
+            "id": "dal-segno",
+            "label": "dal segno (D.S.)"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
+          },
+          {
+            "id": "amore",
+            "label": "amore"
+          }
+        ],
+        "correctOptionIds": [
+          "amore"
+        ],
+        "diagnoses": {
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "“dal segno (D.S.)” means repeat from the sign; the word asked about means love."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means love."
+          },
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "“giocoso” means playful and merry; the word asked about means love."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: amore means love.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.ind-5",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “anima” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "anima",
+            "label": "soul or spirit"
+          },
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          },
+          {
+            "id": "ottava",
+            "label": "play an octave higher than written"
+          }
+        ],
+        "correctOptionIds": [
+          "anima"
+        ],
+        "diagnoses": {
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “anima”."
+          },
+          "ottava": {
+            "category": "wrong-category",
+            "reason": "That is what “8va” means, not “anima”."
+          },
+          "fermata": {
+            "category": "wrong-category",
+            "reason": "That is what “pause (fermata)” means, not “anima”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: anima means soul or spirit.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l08.ind-6",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “animato”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. Bar 1: crotchet on the 3rd line; crotchet in the 3rd space. Bar 2: crotchet on the 4th line; crotchet on the 5th line. The tempo mark above the first bar says “animato”.",
+        "key": "Bb major",
+        "timeSignature": "2/4",
+        "tempoText": "animato"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pesante",
+            "label": "heavy"
+          },
+          {
+            "id": "animato",
+            "label": "animated and lively"
+          },
+          {
+            "id": "maestoso",
+            "label": "majestically"
+          },
+          {
+            "id": "dolce",
+            "label": "sweetly"
+          }
+        ],
+        "correctOptionIds": [
+          "animato"
+        ],
+        "diagnoses": {
+          "dolce": {
+            "category": "confused-similar-term",
+            "reason": "That is what “dolce” means, not “animato”."
+          },
+          "pesante": {
+            "category": "confused-similar-term",
+            "reason": "That is what “pesante” means, not “animato”."
+          },
+          "maestoso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “maestoso” means, not “animato”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: animato means animated and lively.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Agitato is restless; animato is lively.",
+    "Mesto and triste are both sad.",
+    "Amore is love; anima is soul or spirit."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g3-feelings"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s12"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.12"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 3 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38)."
+  }
+}

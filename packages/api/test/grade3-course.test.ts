@@ -27,12 +27,12 @@ async function learner() {
 }
 
 describe("the whole of Grade 3 is playable", () => {
-  it("has a real learner experience for all 36 nodes", () => {
-    expect(G3).toHaveLength(36);
+  it("has a real learner experience for all 42 nodes", () => {
+    expect(G3).toHaveLength(42);
     expect(G3.filter((n) => !course.isPlayable(n.id)).map((n) => n.id)).toEqual([]);
     expect(G3.filter((n) => n.contentStatus === "planned")).toEqual([]);
     const count = (t: string) => G3.filter((n) => n.type === t).length;
-    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("enrichment"), count("grade_assessment")]).toEqual([19, 5, 5, 5, 1, 1]);
+    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("enrichment"), count("grade_assessment")]).toEqual([25, 5, 5, 5, 1, 1]);
     expect(G3.filter((n) => ["lesson", "enrichment"].includes(n.type)).every((n) => course.lesson(n.id))).toBe(true);
     expect(G3.filter((n) => SESSION.includes(n.type)).every((n) => course.sessionKind(n.id))).toBe(true);
   });
@@ -59,8 +59,8 @@ describe("the whole of Grade 3 is playable", () => {
     const prog = (await c.get("/api/progress")).body;
     const g3 = prog.grades.find((g: { grade: number }) => g.grade === 3);
     // the optional upbeat lesson is not a required node
-    expect(g3.requiredNodes).toBe(35);
-    expect(g3.completedNodes).toBe(35);
+    expect(g3.requiredNodes).toBe(41);
+    expect(g3.completedNodes).toBe(41);
     expect(prog.nodes["G3-U2-E1"].state).not.toBe("completed");
     const results = (await c.get("/api/results")).body.results as Array<{ nodeId: string; passed: boolean }>;
     expect(results.filter((r) => r.nodeId === "G3-A" && r.passed)).toHaveLength(1);
@@ -89,7 +89,7 @@ describe("the whole of Grade 3 is playable", () => {
     expect(used.has("t.g3.upbeat-facts")).toBe(false);
     expect(G3.filter((n) => n.type !== "enrichment").some((n) => n.conceptIds?.includes("c.metre.anacrusis"))).toBe(false);
     // and the assessment's eligibility ignores it: Grade 3 required nodes exclude it
-    expect(G3.filter((n) => !n.optional)).toHaveLength(35);
+    expect(G3.filter((n) => !n.optional)).toHaveLength(41);
   }, 300_000);
 
   it("never lets a failed challenge or assessment complete a node or pay completion XP, and allows a retake", async () => {

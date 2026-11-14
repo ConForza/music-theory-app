@@ -1,0 +1,854 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U5-L08",
+  "lessonId": "G2-U5-L08",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Recognise three more signs that show how to touch a note: the wedge, the pointed accent and dots under a slur.",
+    "successCriteria": [
+      "I know a wedge means staccatissimo: as short as possible.",
+      "I know ∧ over a note, or ∨ under it, is a pointed accent: stronger than >.",
+      "I know dots under a slur mean the notes are only slightly separated."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Some signs tell the player how to touch one note. You already know the dot (staccato, short), the sideways V (accent) and the short line (tenuto, held). Here are three more."
+    },
+    {
+      "kind": "text",
+      "text": "A small wedge means staccatissimo: the note is as short as possible, and perhaps accented too. A pointed accent is written ∧ over a note or ∨ under it, and means an accent as strong as, or stronger than, >."
+    },
+    {
+      "kind": "text",
+      "text": "Dots under a slur mean semi-staccato: the notes are slightly separated, but not as much as with ordinary staccato dots."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "articulations": [
+                  "strong-accent"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Four crotchets in G major: the first note carries a pointed accent.",
+        "timeSignature": "4/4",
+        "key": "G major"
+      },
+      "caption": "The first note has a pointed accent (∧): play it with a strong stress, stronger than >."
+    },
+    {
+      "kind": "tip",
+      "text": "Dot = short. Wedge = shortest. Dots under a slur = slightly separated. > is an accent and ∧ or ∨ is a stronger one. The short line is tenuto: held."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "articulations": [
+                "staccatissimo"
+              ]
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "Four crotchets in G major: the second note carries a staccatissimo wedge.",
+      "timeSignature": "4/4",
+      "key": "G major"
+    },
+    "steps": [
+      "Look at the second note: it has a small wedge.",
+      "A wedge means staccatissimo: play it as short as you possibly can.",
+      "Compare it with an ordinary dot, which is short but not as short."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Four crotchets in G major: the second note carries a staccatissimo wedge."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u5-l08.guided-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “staccatissimo (the wedge sign)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "simile",
+            "label": "in the same way: carry on as before"
+          },
+          {
+            "id": "staccatissimo",
+            "label": "very short and detached"
+          },
+          {
+            "id": "allargando",
+            "label": "broadening: getting a little slower, and usually a little louder"
+          },
+          {
+            "id": "repeat",
+            "label": "play the passage between the marks again"
+          }
+        ],
+        "correctOptionIds": [
+          "staccatissimo"
+        ],
+        "diagnoses": {
+          "allargando": {
+            "category": "wrong-category",
+            "reason": "That is what “allargando” means, not “staccatissimo (the wedge sign)”."
+          },
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "That is what “repeat marks” means, not “staccatissimo (the wedge sign)”."
+          },
+          "simile": {
+            "category": "wrong-category",
+            "reason": "That is what “simile (sim.)” means, not “staccatissimo (the wedge sign)”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: a wedge means staccatissimo, as short as possible.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.guided-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Look at the marks on the second note. Which sign is it?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "articulations": [
+                  "strong-accent"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 1-bar melody in the bass clef, key signature of 1 sharp, time signature 4/4. Bar 1: crotchet in the 1st space; crotchet in the space just below the stave; crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. The second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it.",
+        "key": "G major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "staccatissimo",
+            "label": "wedge (staccatissimo)"
+          },
+          {
+            "id": "pointed-accent",
+            "label": "pointed accent (∧ or ∨)"
+          },
+          {
+            "id": "tenuto",
+            "label": "tenuto line"
+          },
+          {
+            "id": "accent",
+            "label": "accent (>)"
+          }
+        ],
+        "correctOptionIds": [
+          "pointed-accent"
+        ],
+        "diagnoses": {
+          "tenuto": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “tenuto line”: held: give the note its full length."
+          },
+          "staccatissimo": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “wedge (staccatissimo)”: very short and detached."
+          },
+          "accent": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “accent (>)”: emphasise the note."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Look closely at the shapes: the second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it. Compare it with each sign in the lesson."
+      ],
+      "feedback": {
+        "correct": "Correct: the sign ∧ or ∨: an accent: the note is stressed, as with >, and perhaps even more strongly.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.guided-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “dots under a slur” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semi-staccato",
+            "label": "the notes are slightly separated, but less than with ordinary staccato"
+          },
+          {
+            "id": "grave",
+            "label": "very slow and solemn"
+          },
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "fermata",
+            "label": "hold the note longer than its written value"
+          }
+        ],
+        "correctOptionIds": [
+          "semi-staccato"
+        ],
+        "diagnoses": {
+          "grave": {
+            "category": "wrong-category",
+            "reason": "That is what “grave” means, not “dots under a slur”."
+          },
+          "fermata": {
+            "category": "wrong-category",
+            "reason": "That is what “pause (fermata)” means, not “dots under a slur”."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “dots under a slur”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: dots under a slur: the notes are slightly separated, but less than with ordinary staccato.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u5-l08.ind-1",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which sign means “very short and detached”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "repeat",
+            "label": "repeat marks"
+          },
+          {
+            "id": "staccatissimo",
+            "label": "staccatissimo (the wedge sign)"
+          },
+          {
+            "id": "fine",
+            "label": "fine"
+          },
+          {
+            "id": "vivace",
+            "label": "vivace"
+          }
+        ],
+        "correctOptionIds": [
+          "staccatissimo"
+        ],
+        "diagnoses": {
+          "vivace": {
+            "category": "wrong-category",
+            "reason": "“vivace” means lively and quick; the word asked about means very short and detached."
+          },
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "“repeat marks” means play the passage between the marks again; the word asked about means very short and detached."
+          },
+          "fine": {
+            "category": "wrong-category",
+            "reason": "“fine” means the end; the word asked about means very short and detached."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: a wedge means staccatissimo, as short as possible.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.ind-2",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants a note that must be hit hard and clearly. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pointed-accent",
+            "label": "the sign ∧ (over a note) or ∨ (under it)"
+          },
+          {
+            "id": "allegretto",
+            "label": "allegretto"
+          },
+          {
+            "id": "fine",
+            "label": "fine"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
+          }
+        ],
+        "correctOptionIds": [
+          "pointed-accent"
+        ],
+        "diagnoses": {
+          "allegretto": {
+            "category": "wrong-category",
+            "reason": "“allegretto” means fairly quick, but not as fast as allegro; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
+          },
+          "fine": {
+            "category": "wrong-category",
+            "reason": "“fine” means the end; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: the sign ∧ or ∨: an accent: the note is stressed, as with >, and perhaps even more strongly.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.ind-3",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “dots under a slur” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "da-capo",
+            "label": "repeat from the beginning"
+          },
+          {
+            "id": "allegretto",
+            "label": "fairly quick, but not as fast as allegro"
+          },
+          {
+            "id": "tie",
+            "label": "join two notes of the same pitch into one longer sound"
+          },
+          {
+            "id": "semi-staccato",
+            "label": "the notes are slightly separated, but less than with ordinary staccato"
+          }
+        ],
+        "correctOptionIds": [
+          "semi-staccato"
+        ],
+        "diagnoses": {
+          "tie": {
+            "category": "wrong-category",
+            "reason": "That is what “tie” means, not “dots under a slur”."
+          },
+          "allegretto": {
+            "category": "wrong-category",
+            "reason": "That is what “allegretto” means, not “dots under a slur”."
+          },
+          "da-capo": {
+            "category": "wrong-category",
+            "reason": "That is what “da capo (D.C.)” means, not “dots under a slur”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: dots under a slur: the notes are slightly separated, but less than with ordinary staccato.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.ind-4",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which sign means “very short and detached”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "fine",
+            "label": "fine"
+          },
+          {
+            "id": "largo",
+            "label": "largo"
+          },
+          {
+            "id": "repeat",
+            "label": "repeat marks"
+          },
+          {
+            "id": "staccatissimo",
+            "label": "staccatissimo (the wedge sign)"
+          }
+        ],
+        "correctOptionIds": [
+          "staccatissimo"
+        ],
+        "diagnoses": {
+          "largo": {
+            "category": "wrong-category",
+            "reason": "“largo” means slow and broad; the word asked about means very short and detached."
+          },
+          "fine": {
+            "category": "wrong-category",
+            "reason": "“fine” means the end; the word asked about means very short and detached."
+          },
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "“repeat marks” means play the passage between the marks again; the word asked about means very short and detached."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: a wedge means staccatissimo, as short as possible.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.ind-5",
+      "templateId": "t.g2.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Look at the marks on the second note. Which sign is it?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "articulations": [
+                  "strong-accent"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 1-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet on the 4th line; crotchet in the 4th space; crotchet on the 4th line. The second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it.",
+        "key": "Eb major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "pointed-accent",
+            "label": "pointed accent (∧ or ∨)"
+          },
+          {
+            "id": "tenuto",
+            "label": "tenuto line"
+          },
+          {
+            "id": "staccatissimo",
+            "label": "wedge (staccatissimo)"
+          },
+          {
+            "id": "semi-staccato",
+            "label": "dots under a slur (semi-staccato)"
+          }
+        ],
+        "correctOptionIds": [
+          "pointed-accent"
+        ],
+        "diagnoses": {
+          "staccatissimo": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “wedge (staccatissimo)”: very short and detached."
+          },
+          "tenuto": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “tenuto line”: held: give the note its full length."
+          },
+          "semi-staccato": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “dots under a slur (semi-staccato)”: the notes are slightly separated, but less than with ordinary staccato."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Look closely at the shapes: the second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it. Compare it with each sign in the lesson."
+      ],
+      "feedback": {
+        "correct": "Correct: the sign ∧ or ∨: an accent: the note is stressed, as with >, and perhaps even more strongly.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g2-u5-l08.ind-6",
+      "templateId": "t.g2.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “dots under a slur” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semi-staccato",
+            "label": "the notes are slightly separated, but less than with ordinary staccato"
+          },
+          {
+            "id": "repeat",
+            "label": "play the passage between the marks again"
+          },
+          {
+            "id": "adagio",
+            "label": "slow"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          }
+        ],
+        "correctOptionIds": [
+          "semi-staccato"
+        ],
+        "diagnoses": {
+          "repeat": {
+            "category": "wrong-category",
+            "reason": "That is what “repeat marks” means, not “dots under a slur”."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “dots under a slur”."
+          },
+          "adagio": {
+            "category": "wrong-category",
+            "reason": "That is what “adagio” means, not “dots under a slur”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is about how a note is touched: how short, how stressed or how held."
+      ],
+      "feedback": {
+        "correct": "Correct: dots under a slur: the notes are slightly separated, but less than with ordinary staccato.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "The wedge is staccatissimo: as short as possible.",
+    "∧ over a note or ∨ under it is a pointed accent: stronger than >.",
+    "Dots under a slur mean semi-staccato: slightly separated."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g2-touch"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.13"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 2 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38). Signs are drawn by the notation engine. Staccatissimo existed in the vocabulary but was never taught; the Grade 2 touch-signs lesson already named it in its objective."
+  }
+}

@@ -74,9 +74,9 @@ describe("Grade 3 mastery capacity (Brief 07; thresholds unchanged)", () => {
 describe("Grade 4 mastery capacity (Brief 08; thresholds unchanged)", () => {
   const rows4 = auditCapacity(course, app.nodes, 4);
 
-  it("covers every Grade 4 concept (all 25), and every Grade 4 outcome has at least one audited concept", () => {
+  it("covers every Grade 4 concept (all 26), and every Grade 4 outcome has at least one audited concept", () => {
     const concepts = [...course.ix.concepts.values()].filter((c) => c.grade === 4);
-    expect(rows4.length).toBe(25);
+    expect(rows4.length).toBe(26);
     expect(rows4.length).toBe(concepts.length);
     const outcomes = new Set(concepts.flatMap((c) => c.outcomeIds));
     for (let k = 1; k <= 18; k++) expect(outcomes.has(`abrsm2020.g4.${String(k).padStart(2, "0")}`), `g4.${k}`).toBe(true);

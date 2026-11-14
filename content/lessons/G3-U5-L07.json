@@ -1,0 +1,950 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G3-U5-L07",
+  "lessonId": "G3-U5-L07",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Learn four gentle words, and two words that say how much: delicato, leggiero, tranquillo, semplice, ben and tanto.",
+    "successCriteria": [
+      "I know delicato is delicate and leggiero is light and nimble.",
+      "I know tranquillo means calm and semplice means simple and plain.",
+      "I know ben means well and tanto means so much, as in ben marcato and non tanto."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The first four words ask for gentle playing. Delicato is delicate, leggiero is light and nimble, tranquillo is calm and semplice is simple and plain. Ben and tanto are small words that join with another word."
+    },
+    {
+      "kind": "text",
+      "text": "“delicato” means delicate. “leggiero” means light and nimble. “tranquillo” means calm. “semplice” means simple and plain."
+    },
+    {
+      "kind": "text",
+      "text": "“ben” means well. “tanto” means so much."
+    },
+    {
+      "kind": "text",
+      "text": "Ben means well, so ben marcato means well marked: clearly emphasised. Tanto means so much, so non tanto means not so much."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in G major marked non tanto.",
+        "timeSignature": "4/4",
+        "key": "G major",
+        "tempoText": "non tanto"
+      },
+      "caption": "Non tanto: not so much. It softens the word it belongs with."
+    },
+    {
+      "kind": "tip",
+      "text": "Gentle: delicato, leggiero, tranquillo, semplice. Small words: ben = well, tanto = so much."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A two-bar melody in G major marked tranquillo.",
+      "timeSignature": "4/4",
+      "key": "G major",
+      "tempoText": "tranquillo"
+    },
+    "steps": [
+      "Look at the word above the first bar: tranquillo.",
+      "It means calm: play peacefully, without fuss.",
+      "It describes the mood, not the speed."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A two-bar melody in G major marked tranquillo."
+  },
+  "guided": [
+    {
+      "id": "i.g3-u5-l07.guided-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “delicato” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "delicato",
+            "label": "delicate"
+          },
+          {
+            "id": "rubato",
+            "label": "with some freedom of time: the player may push and pull the beat"
+          },
+          {
+            "id": "giocoso",
+            "label": "playful and merry"
+          },
+          {
+            "id": "simile",
+            "label": "in the same way: carry on as before"
+          }
+        ],
+        "correctOptionIds": [
+          "delicato"
+        ],
+        "diagnoses": {
+          "simile": {
+            "category": "wrong-category",
+            "reason": "That is what “simile (sim.)” means, not “delicato”."
+          },
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “giocoso” means, not “delicato”."
+          },
+          "rubato": {
+            "category": "confused-similar-term",
+            "reason": "That is what “rubato” means, not “delicato”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: delicato means delicate.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.guided-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is marked “leggiero”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C6",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D6",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 1 flat, time signature 2/4. Bar 1: crotchet in the space above the 1st ledger line above the stave; crotchet on the 2nd ledger line above the stave. Bar 2: crotchet in the space above the 2nd ledger line above the stave; crotchet in the space above the 1st ledger line above the stave. The tempo mark above the first bar says “leggiero”.",
+        "key": "F major",
+        "timeSignature": "2/4",
+        "tempoText": "leggiero"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "risoluto",
+            "label": "bold, strong and resolute"
+          },
+          {
+            "id": "dal-segno",
+            "label": "repeat from the sign"
+          },
+          {
+            "id": "pesante",
+            "label": "heavy"
+          },
+          {
+            "id": "leggiero",
+            "label": "light and nimble"
+          }
+        ],
+        "correctOptionIds": [
+          "leggiero"
+        ],
+        "diagnoses": {
+          "risoluto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “risoluto” means, not “leggiero”."
+          },
+          "dal-segno": {
+            "category": "wrong-category",
+            "reason": "That is what “dal segno (D.S.)” means, not “leggiero”."
+          },
+          "pesante": {
+            "category": "confused-similar-term",
+            "reason": "That is what “pesante” means, not “leggiero”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: leggiero means light and nimble.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.guided-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “tranquillo” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
+          },
+          {
+            "id": "con-moto",
+            "label": "with movement"
+          },
+          {
+            "id": "tranquillo",
+            "label": "calm"
+          },
+          {
+            "id": "rubato",
+            "label": "with some freedom of time: the player may push and pull the beat"
+          }
+        ],
+        "correctOptionIds": [
+          "tranquillo"
+        ],
+        "diagnoses": {
+          "rubato": {
+            "category": "confused-similar-term",
+            "reason": "That is what “rubato” means, not “tranquillo”."
+          },
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "That is what “M.M. ♩ = 72” means, not “tranquillo”."
+          },
+          "con-moto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “con moto” means, not “tranquillo”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: tranquillo means calm.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g3-u5-l07.ind-1",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “delicate”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "energico",
+            "label": "energico"
+          },
+          {
+            "id": "maestoso",
+            "label": "maestoso"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
+          },
+          {
+            "id": "delicato",
+            "label": "delicato"
+          }
+        ],
+        "correctOptionIds": [
+          "delicato"
+        ],
+        "diagnoses": {
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means delicate."
+          },
+          "maestoso": {
+            "category": "confused-similar-term",
+            "reason": "“maestoso” means majestically; the word asked about means delicate."
+          },
+          "energico": {
+            "category": "confused-similar-term",
+            "reason": "“energico” means energetic; the word asked about means delicate."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: delicato means delicate.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.ind-2",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants light, nimble notes, like tiptoeing. Which marking fits best?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "deciso",
+            "label": "deciso"
+          },
+          {
+            "id": "leggiero",
+            "label": "leggiero"
+          },
+          {
+            "id": "tie",
+            "label": "tie"
+          },
+          {
+            "id": "maestoso",
+            "label": "maestoso"
+          }
+        ],
+        "correctOptionIds": [
+          "leggiero"
+        ],
+        "diagnoses": {
+          "tie": {
+            "category": "wrong-category",
+            "reason": "“tie” means join two notes of the same pitch into one longer sound; the word asked about means light and nimble."
+          },
+          "maestoso": {
+            "category": "confused-similar-term",
+            "reason": "“maestoso” means majestically; the word asked about means light and nimble."
+          },
+          "deciso": {
+            "category": "confused-similar-term",
+            "reason": "“deciso” means with determination; the word asked about means light and nimble."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: leggiero means light and nimble.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.ind-3",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which word means “calm”?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "deciso",
+            "label": "deciso"
+          },
+          {
+            "id": "tranquillo",
+            "label": "tranquillo"
+          },
+          {
+            "id": "giocoso",
+            "label": "giocoso"
+          },
+          {
+            "id": "forza",
+            "label": "forza"
+          }
+        ],
+        "correctOptionIds": [
+          "tranquillo"
+        ],
+        "diagnoses": {
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "“giocoso” means playful and merry; the word asked about means calm."
+          },
+          "deciso": {
+            "category": "confused-similar-term",
+            "reason": "“deciso” means with determination; the word asked about means calm."
+          },
+          "forza": {
+            "category": "confused-similar-term",
+            "reason": "“forza” means force, strength; the word asked about means calm."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: tranquillo means calm.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.ind-4",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “semplice”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 2/4. Bar 1: crotchet on the 3rd line; crotchet in the 3rd space. Bar 2: crotchet in the 4th space; crotchet on the 5th line. The tempo mark above the first bar says “semplice”.",
+        "key": "C major",
+        "timeSignature": "2/4",
+        "tempoText": "semplice"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semplice",
+            "label": "simple and plain"
+          },
+          {
+            "id": "con-moto",
+            "label": "with movement"
+          },
+          {
+            "id": "tie",
+            "label": "join two notes of the same pitch into one longer sound"
+          },
+          {
+            "id": "giocoso",
+            "label": "playful and merry"
+          }
+        ],
+        "correctOptionIds": [
+          "semplice"
+        ],
+        "diagnoses": {
+          "con-moto": {
+            "category": "confused-similar-term",
+            "reason": "That is what “con moto” means, not “semplice”."
+          },
+          "giocoso": {
+            "category": "confused-similar-term",
+            "reason": "That is what “giocoso” means, not “semplice”."
+          },
+          "tie": {
+            "category": "wrong-category",
+            "reason": "That is what “tie” means, not “semplice”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "It describes a feeling or a style of playing, not a speed."
+      ],
+      "feedback": {
+        "correct": "Correct: semplice means simple and plain.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.ind-5",
+      "templateId": "t.g3.book-terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “ben” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piu",
+            "label": "more"
+          },
+          {
+            "id": "ben",
+            "label": "well"
+          },
+          {
+            "id": "largamente",
+            "label": "broadly"
+          },
+          {
+            "id": "meno",
+            "label": "less"
+          }
+        ],
+        "correctOptionIds": [
+          "ben"
+        ],
+        "diagnoses": {
+          "meno": {
+            "category": "confused-similar-term",
+            "reason": "That is what “meno” means, not “ben”."
+          },
+          "piu": {
+            "category": "confused-similar-term",
+            "reason": "That is what “più” means, not “ben”."
+          },
+          "largamente": {
+            "category": "wrong-category",
+            "reason": "That is what “largamente” means, not “ben”."
+          }
+        }
+      },
+      "hints": [
+        "Use what the lesson told you about the word.",
+        "It is a small word that joins with others to make a direction."
+      ],
+      "feedback": {
+        "correct": "Correct: ben means well.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g3-u5-l07.ind-6",
+      "templateId": "t.g3.book-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is marked “non tanto”. What does the marking ask the player to do?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 flats, time signature 4/4. Bar 1: crotchet in the 3rd space; crotchet on the 3rd line; crotchet on the 2nd line; crotchet on the 3rd line. Bar 2: crotchet in the 2nd space; crotchet on the 3rd line; crotchet on the 2nd line; crotchet on the 1st line. The tempo mark above the first bar says “non tanto”.",
+        "key": "Bb major",
+        "timeSignature": "4/4",
+        "tempoText": "non tanto"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "e-ed",
+            "label": "and"
+          },
+          {
+            "id": "troppo",
+            "label": "but not too much"
+          },
+          {
+            "id": "simile",
+            "label": "in the same way: carry on as before"
+          },
+          {
+            "id": "tanto",
+            "label": "not so much"
+          }
+        ],
+        "correctOptionIds": [
+          "tanto"
+        ],
+        "diagnoses": {
+          "e-ed": {
+            "category": "confused-similar-term",
+            "reason": "That is what “e, ed” means, not “tanto”."
+          },
+          "troppo": {
+            "category": "confused-similar-term",
+            "reason": "That is what “troppo” means, not “tanto”."
+          },
+          "simile": {
+            "category": "wrong-category",
+            "reason": "That is what “simile (sim.)” means, not “tanto”."
+          }
+        }
+      },
+      "hints": [
+        "Think about what the marking asks the player to do.",
+        "Read the direction one word at a time, using what the lessons taught about each word."
+      ],
+      "feedback": {
+        "correct": "Correct: tanto means so much.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Delicato is delicate and leggiero is light and nimble.",
+    "Tranquillo is calm and semplice is simple and plain.",
+    "Ben means well and tanto means so much."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g3.book-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g3.book-terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g3-gentle"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g3.s12"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g3.12"
+    ],
+    "notes": "Original wording. The terms are the reference list printed for Grade 3 (OPEN_QUESTIONS Q2: no authoritative list is published, so a qualified teacher must approve the list and its grade placement, Q38)."
+  }
+}

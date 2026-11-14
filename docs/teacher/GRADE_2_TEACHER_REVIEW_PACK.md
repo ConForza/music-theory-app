@@ -164,8 +164,8 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | scale-gap (U3-L01) | 3 | This is the scale of A major, going up. One note is missing and is shown as a rest. Which note belongs in the gap? _Shown: A bass-clef stave with eight semibreves going up a scale of A major, with one note replaced by a rest. The other notes are A, B, C♯, E, F♯, G♯, A._ | The answer is “D”. |
 | scale-gap (U3-L01) | 4 | This is the scale of D major, going up. One note is missing and is shown as a rest. Which note belongs in the gap? _Shown: A bass-clef stave with eight semibreves going up a scale of D major, with one note replaced by a rest. The other notes are D, E, G, A, B, C♯, D._ | The answer is “F♯”. |
 | key-signature (U3-L03) | 1 | Write the key signature of G major in the treble clef. | G major has F♯. |
-| key-signature (U3-L03) | 2 | Write the key signature of E♭ major in the bass clef. | Eb major has B♭ E♭ A♭. |
-| key-signature (U3-L03) | 3 | Write the key signature of B♭ major in the treble clef. | Bb major has B♭ E♭. |
+| key-signature (U3-L03) | 2 | Write the key signature of E♭ major in the bass clef. | E♭ major has B♭ E♭ A♭. |
+| key-signature (U3-L03) | 3 | Write the key signature of B♭ major in the treble clef. | B♭ major has B♭ E♭. |
 | key-signature (U3-L03) | 4 | Write the key signature of A major in the bass clef. | A major has F♯ C♯ G♯. |
 | key-facts (U3-L03) | 1 | Is the key signature of G major made of sharps or flats? | The answer is “Sharps”. |
 | key-facts (U3-L03) | 2 | Which major key has 3 flats? | The answer is “E♭ major”. |
@@ -223,6 +223,14 @@ See `GRADE_2_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | term-use (U5-L02) | 2 | What does “largo” mean? | The answer is “slow and broad”. |
 | term-use (U5-L02) | 3 | Which term or sign means “gracefully”? | The answer is “grazioso”. |
 | term-use (U5-L02) | 4 | This melody is marked “largo”. How should the player play it? _Shown: A 2-bar melody in the treble clef, key signature of 1 flat, time signature 2/4. Bar 1: crotchet in the 3rd space; crotchet on the 4th line. Bar 2: crotchet on the 5th line; quaver on the 1st ledger line above the stave; quaver on the 5th line. The tempo mark above the first bar says “largo”._ | The answer is “slow and broad”. |
+| book-terms (U5-L05) | 1 | What does “vivo” mean? | The answer is “lively and quick”. |
+| book-terms (U5-L05) | 2 | Which word means “and”? | The answer is “e, ed”. |
+| book-terms (U5-L05) | 3 | What does “ma” mean? | The answer is “but”. |
+| book-terms (U5-L05) | 4 | What does “ma” mean? | The answer is “but”. |
+| book-use (U5-L05) | 1 | This melody is marked “vivo”. What does the marking ask the player to do? _Shown: A 2-bar melody in the bass clef, key signature of 2 sharps, time signature 3/4. Bar 1: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave. Bar 2: crotchet on the 1st ledger line below the stave; crotchet in the space just below the stave; crotchet on the 1st ledger line below the stave. The tempo mark above the first bar says “vivo”._ | The answer is “lively and quick”. |
+| book-use (U5-L05) | 2 | This melody is marked “alla marcia”. What does the marking ask the player to do? _Shown: A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. Bar 1: crotchet in the 4th space; crotchet on the 4th line; crotchet on the 5th line. Bar 2: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 5th line. The tempo mark above the first bar says “alla marcia”._ | The answer is “in the style of a march”. |
+| book-use (U5-L05) | 3 | This melody is marked “allegro assai”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 1 flat, time signature 3/4. Bar 1: crotchet on the 3rd line; crotchet in the 3rd space; crotchet on the 4th line. Bar 2: crotchet in the 4th space; crotchet in the 3rd space; crotchet on the 4th line. The tempo mark above the first bar says “allegro assai”._ | The answer is “very quick”. |
+| book-use (U5-L05) | 4 | This melody is marked “a tempo”. What does the marking ask the player to do? _Shown: A 2-bar melody in the bass clef, key signature of 2 flats, time signature 4/4. Bar 1: crotchet on the 1st ledger line above the stave; crotchet on the 2nd ledger line above the stave; crotchet in the space above the 2nd ledger line above the stave; crotchet in the space above the 1st ledger line above the stave. Bar 2: crotchet on the 2nd ledger line above the stave; crotchet on the 1st ledger line above the stave; crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave. The tempo mark above the first bar says “a tempo”._ | The answer is “go back to the speed from before”. |
 | melody (U5-L04) | 1 | Look at this melody and answer the questions. _Shown: A two-bar melody in the bass clef with a key signature, time signature 4/4. The notes are G, E, F, A, B, A, C, D; the note marked x is the 6th note._ | 1. The answer is “4”. 2. The note is A. 3. This is the key signature of C major. |
 | melody (U5-L04) | 2 | Look at this melody and answer the questions. _Shown: A two-bar melody in the bass clef with a key signature, time signature 4/4. The notes are E, F♯, D, F♯, A, F♯, G♯, A; the note marked x is the 2nd note._ | 1. The answer is “4”. 2. The note is F♯. 3. This is the key signature of A major. |
 | melody (U5-L04) | 3 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are E, F, D, B, D, C, B, G; the note marked x is the 4th note._ | 1. The answer is “4”. 2. The note is B. 3. This is the key signature of C major. |
@@ -285,13 +293,13 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g2.10: 2 question(s) from tonic-triad, triad-notes (outcome g2.10)
 - abrsm2020.g2.11: 2 question(s) from degree, degree-note (outcome g2.11)
 
-### G2-U5-C: Unit challenge: Intervals, terms and melody reading (blueprint a.g2-u5 v2)
+### G2-U5-C: Unit challenge: Intervals, terms and melody reading (blueprint a.g2-u5 v3)
 
 - abrsm2020.g2.12: 2 question(s) from interval-number, interval-note, melody-detail (outcome g2.12)
-- abrsm2020.g2.13: 2 question(s) from terms, term-use, melody-detail (outcome g2.13)
+- abrsm2020.g2.13: 2 question(s) from terms, term-use, melody-detail, book-terms, book-use (outcome g2.13)
 - abrsm2020.g1.21: 2 question(s) from melody, melody-detail (outcome g1.21)
 
-### G2-A: Grade 2 practice assessment (blueprint a.g2 v2)
+### G2-A: Grade 2 practice assessment (blueprint a.g2 v3)
 
 - abrsm2020.g2.01: 2 question(s) from time-sig-read, bar-complete, beat-facts, bar-judge, melody-detail (outcome g2.01)
 - abrsm2020.g2.02: 2 question(s) from bar-complete, note-grouping, rest-grouping, rest-judge, rest-fix, bar-judge (outcome g2.02)
@@ -305,7 +313,7 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g2.10: 2 question(s) from tonic-triad, triad-notes (outcome g2.10)
 - abrsm2020.g2.11: 2 question(s) from degree, degree-note (outcome g2.11)
 - abrsm2020.g2.12: 2 question(s) from interval-number, interval-note, melody-detail (outcome g2.12)
-- abrsm2020.g2.13: 2 question(s) from terms, term-use, melody-detail (outcome g2.13)
+- abrsm2020.g2.13: 2 question(s) from terms, term-use, melody-detail, book-terms, book-use (outcome g2.13)
 - Earlier grades (cumulative): 4 question(s) from bar-complete, grouping, scale-build, interval-number, melody, melody (outcome g1.07, g1.12, g1.16, g1.21)
 
 **Scoring.** One mark for each question answered correctly at the first attempt, with no hints and no second tries. Pass marks (provisional, unchanged): unit challenge 70%, Grade 2 assessment 66%. These are in-app marks and are never shown as ABRSM marks; every result screen carries the 'not an ABRSM examination' statement.

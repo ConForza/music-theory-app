@@ -166,7 +166,7 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | octave-sound (U3-L02) | 4 | This note is marked 8vb. In the same clef, write the note that will actually sound, without the sign. You may use up to 4 ledger lines. _Shown: A bass-clef stave with one note on the 3rd line. The sign 8vb is written below it._ | D can go at D2. |
 | octave-transpose (U3-L03) | 1 | Write this melody an octave lower in the bass clef, keeping the key signature. _Shown: A four-note melody in the treble clef, C major: F, G, A, F._ | Transposed: F3, G3, A3, F3, in C major. |
 | octave-transpose (U3-L03) | 2 | Write this melody an octave higher in the treble clef (the same clef), keeping the key signature. _Shown: A four-note melody in the treble clef, A major: C♯, B, C♯, D._ | Transposed: C♯5, B4, C♯5, D5, in A major. |
-| octave-transpose (U3-L03) | 3 | Write this melody an octave lower in the treble clef, keeping the key signature. _Shown: A four-note melody in the bass clef, Eb major: E♭, D, E♭, F._ | Transposed: E♭3, D3, E♭3, F3, in Eb major. |
+| octave-transpose (U3-L03) | 3 | Write this melody an octave lower in the treble clef, keeping the key signature. _Shown: A four-note melody in the bass clef, Eb major: E♭, D, E♭, F._ | Transposed: E♭3, D3, E♭3, F3, in E♭ major. |
 | octave-transpose (U3-L03) | 4 | Write this melody an octave lower in the bass clef (the same clef), keeping the key signature. _Shown: A four-note melody in the bass clef, D minor: D, E, G, E._ | Transposed: D3, E3, G3, E3, in D minor. |
 | octave-pick (U3-L03) | 1 | This note is in the treble clef. It is to be written an octave lower in the bass clef. Where is the new note written? _Shown: A treble-clef stave with one note in the 2nd space._ | The answer is “On the 5th line”. |
 | octave-pick (U3-L03) | 2 | This note is in the bass clef. It is to be written an octave higher in the treble clef. Where is the new note written? _Shown: A bass-clef stave with one note in the space just above the stave._ | The answer is “On the 3rd line”. |
@@ -188,9 +188,9 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | scale-build-major (U4-L02) | 2 | Write the scale of A♭ major, ascending then descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is A♭4, B♭4, C5, D♭5, E♭5, F5, G5, A♭5, G5, F5, E♭5, D♭5, C5, B♭4, A♭4. |
 | scale-build-major (U4-L02) | 3 | Write the scale of E major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is E3, D♯3, C♯3, B2, A2, G♯2, F♯2, E2. |
 | scale-build-major (U4-L02) | 4 | Write the scale of E major, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is E4, F♯4, G♯4, A4, B4, C♯5, D♯5, E5. |
-| key-signature (U4-L02) | 1 | Name the major key with this key signature. | This is the key signature of Ab major. |
+| key-signature (U4-L02) | 1 | Name the major key with this key signature. | This is the key signature of A♭ major. |
 | key-signature (U4-L02) | 2 | Name the major key with this key signature. | This is the key signature of E major. |
-| key-signature (U4-L02) | 3 | Name the major key with this key signature. | This is the key signature of Ab major. |
+| key-signature (U4-L02) | 3 | Name the major key with this key signature. | This is the key signature of A♭ major. |
 | key-signature (U4-L02) | 4 | Write the key signature of E major in the treble clef. | E major has F♯ C♯ G♯ D♯. |
 | key-facts (U4-L02) | 1 | Which sharps or flats are in the key signature of E major? | The answer is “F♯, C♯, G♯ and D♯”. |
 | key-facts (U4-L02) | 2 | Which sharps or flats are in the key signature of E major? | The answer is “F♯, C♯, G♯ and D♯”. |
@@ -232,14 +232,22 @@ See `GRADE_3_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix a
 | term-use (U5-L03) | 2 | This melody is marked “sostenuto”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 1 sharp, time signature 9/8. Bar 1: dotted crotchet on the 3rd line; crotchet in the 2nd space; quaver on the 2nd line; crotchet in the 2nd space; quaver on the 3rd line. Bar 2: quaver in the 2nd space; quaver in the 3rd space; quaver in the 4th space; crotchet in the 4th space; quaver in the 3rd space; quaver on the 4th line; quaver on the 4th line; quaver in the 3rd space. The tempo mark above the first bar says “sostenuto”._ | The answer is “sustained”. |
 | term-use (U5-L03) | 3 | Which term or sign means “sustained”? | The answer is “sostenuto”. |
 | term-use (U5-L03) | 4 | What does “andantino” mean? | The answer is “a little faster than andante”. |
+| book-terms (U5-L05) | 1 | What does “ben” mean? | The answer is “well”. |
+| book-terms (U5-L05) | 2 | What does “mesto” mean? | The answer is “sad”. |
+| book-terms (U5-L05) | 3 | Which word means “rhythmically: with a bold, clear beat”? | The answer is “ritmico”. |
+| book-terms (U5-L05) | 4 | Which word means “sad”? | The answer is “mesto”. |
+| book-use (U5-L05) | 1 | This melody is marked “seconda volta”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 3 flats, time signature 4/4. Bar 1: crotchet on the 1st line; crotchet on the 1st ledger line below the stave; crotchet in the space below the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave. Bar 2: crotchet in the space below the 1st ledger line below the stave; crotchet in the space below the 2nd ledger line below the stave; crotchet on the 2nd ledger line below the stave; crotchet on the 1st ledger line below the stave. The tempo mark above the first bar says “seconda volta”._ | The answer is “the second time”. |
+| book-use (U5-L05) | 2 | A composer wants a passage that the player is allowed to take freely, at their own choice. Which marking fits best? | The answer is “ad libitum (ad lib.)”. |
+| book-use (U5-L05) | 3 | This melody is marked “alla breve”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 2 sharps, time signature 2/4. Bar 1: crotchet in the space just below the stave; crotchet in the 1st space. Bar 2: crotchet in the 2nd space; crotchet in the 1st space. The tempo mark above the first bar says “alla breve”._ | The answer is “two minim beats in a bar (the sign ¢), which usually feels quicker than the written notes look”. |
+| book-use (U5-L05) | 4 | This melody is marked “mesto”. What does the marking ask the player to do? _Shown: A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. Bar 1: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. Bar 2: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. The tempo mark above the first bar says “mesto”._ | The answer is “sad”. |
 | melody-detail (U5-L04) | 1 | Is this melody in simple time or compound time? _Shown: A 2-bar melody in the treble clef, key signature of 1 flat, time signature 9/8. Bar 1: dotted crotchet on the 1st line; dotted crotchet in the 1st space; quaver on the 1st line; quaver on the 2nd line; quaver in the 2nd space. Bar 2: crotchet on the 3rd line; quaver on the 4th line; quaver in the 3rd space; quaver on the 4th line; quaver in the 3rd space; dotted crotchet in the 3rd space._ | The answer is “Compound time”. |
 | melody-detail (U5-L04) | 2 | Which note is worth one beat in this melody's time signature? _Shown: A 2-bar melody in the bass clef, key signature of 4 sharps, time signature 9/8. Bar 1: dotted crotchet in the 3rd space; crotchet in the 3rd space; quaver in the 3rd space; crotchet on the 4th line; quaver on the 5th line. Bar 2: dotted crotchet in the 4th space; dotted crotchet on the 5th line; quaver on the 4th line; quaver in the 4th space; quaver on the 5th line._ | The answer is “A dotted crotchet”. |
 | melody-detail (U5-L04) | 3 | How many beats are there in each bar of this melody? _Shown: A 2-bar melody in the bass clef, key signature of 4 sharps, time signature 9/8. Bar 1: dotted crotchet on the 3rd line; dotted crotchet on the 4th line; crotchet on the 4th line; quaver on the 5th line. Bar 2: crotchet on the 5th line; quaver in the space just above the stave; crotchet in the 4th space; quaver on the 4th line; crotchet in the 4th space; quaver on the 4th line._ | The answer is “3”. |
 | melody-detail (U5-L04) | 4 | The melody is in F major. What is the interval from the tonic (the nearest tonic below the note) up to the note marked x? Give quality and number. _Shown: A 2-bar melody in the bass clef, key signature of 1 flat, time signature 9/8. Bar 1: dotted crotchet on the 4th line; crotchet in the 4th space; quaver on the 4th line; crotchet on the 4th line; quaver on the 4th line. Bar 2: crotchet on the 5th line (the note marked x); quaver in the space just above the stave; quaver on the 5th line; quaver on the 4th line; quaver on the 4th line; crotchet on the 4th line; quaver in the 4th space._ | The answer is “major 3rd”. |
 | melody (U5-L04) | 1 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are G, E, G, A, F, G, A, F; the note marked x is the octave note._ | 1. The answer is “4”. 2. The note is F. 3. This is the key signature of F major. |
-| melody (U5-L04) | 2 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 2/4. The notes are A♭, G, F, E♭; the note marked x is the 4th note._ | 1. The answer is “2”. 2. The note is E♭. 3. This is the key signature of Ab major. |
+| melody (U5-L04) | 2 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 2/4. The notes are A♭, G, F, E♭; the note marked x is the 4th note._ | 1. The answer is “2”. 2. The note is E♭. 3. This is the key signature of A♭ major. |
 | melody (U5-L04) | 3 | Look at this melody and answer the questions. _Shown: A two-bar melody in the bass clef with a key signature, time signature 2/4. The notes are E, F♯, A, C♯; the note marked x is the 2nd note._ | 1. The answer is “2”. 2. The note is F♯. 3. This is the key signature of D major. |
-| melody (U5-L04) | 4 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are B♭, C, E♭, F, E♭, G, F, A♭; the note marked x is the 3rd note._ | 1. The answer is “4”. 2. The note is E♭. 3. This is the key signature of Eb major. |
+| melody (U5-L04) | 4 | Look at this melody and answer the questions. _Shown: A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are B♭, C, E♭, F, E♭, G, F, A♭; the note marked x is the 3rd note._ | 1. The answer is “4”. 2. The note is E♭. 3. This is the key signature of E♭ major. |
 
 ## 4. Conventions the rule set enforces (please confirm each is Grade 3)
 
@@ -293,13 +301,13 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g3.09: 2 question(s) from tonic-triad, triad-notes (outcome g3.09)
 - abrsm2020.g3.10: 2 question(s) from degree, degree-note (outcome g3.10)
 
-### G3-U5-C: Unit challenge: Interval qualities and expression (blueprint a.g3-u5 v2)
+### G3-U5-C: Unit challenge: Interval qualities and expression (blueprint a.g3-u5 v3)
 
 - abrsm2020.g3.11: 2 question(s) from interval-quality, interval-name, interval-facts (outcome g3.11)
-- abrsm2020.g3.12: 2 question(s) from terms, term-use (outcome g3.12)
+- abrsm2020.g3.12: 2 question(s) from terms, term-use, book-terms, book-use (outcome g3.12)
 - abrsm2020.g1.21: 2 question(s) from melody, melody-detail (outcome g1.21)
 
-### G3-A: Grade 3 practice assessment (blueprint a.g3 v2)
+### G3-A: Grade 3 practice assessment (blueprint a.g3 v3)
 
 - abrsm2020.g3.01: 2 question(s) from time-signature, compound-facts, triplet-compare, triplet-bar, bar-complete (outcome g3.01)
 - abrsm2020.g3.02: 2 question(s) from bar-complete, compound-grouping, compound-judge, compound-rest-judge, compound-rest-write, demisemi-judge, demisemi-regroup (outcome g3.02)
@@ -313,10 +321,10 @@ The 2020 outline does not enumerate terms, so this list is provisional (Q2). It 
 - abrsm2020.g3.09: 2 question(s) from tonic-triad, triad-notes (outcome g3.09)
 - abrsm2020.g3.10: 2 question(s) from degree, degree-note (outcome g3.10)
 - abrsm2020.g3.11: 2 question(s) from interval-quality, interval-name, interval-facts (outcome g3.11)
-- abrsm2020.g3.12: 2 question(s) from terms, term-use (outcome g3.12)
+- abrsm2020.g3.12: 2 question(s) from terms, term-use, book-terms, book-use (outcome g3.12)
 - Grade 2 rhythm and metre: 2 question(s) from time-sig-read, bar-complete, rest-judge, triplet-read, note-grouping (outcome g2.01, g2.02, g2.03)
 - Grade 2 keys and scales: 2 question(s) from scale-build-major, scale-build-minor, key-signature, tonic-triad, degree-note (outcome g2.08, g2.09, g2.10, g2.11)
-- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail (outcome g2.13, g1.21)
+- Grade 2 terms and melodies: 2 question(s) from terms, melody-detail, book-terms, book-use (outcome g2.13, g1.21)
 
 **Scoring.** One mark for each question answered correctly at the first attempt, with no hints and no second tries. Pass marks (provisional, unchanged): unit challenge 70%, Grade 3 assessment 66%. These are in-app marks and are never shown as ABRSM marks; every result screen carries the 'not an ABRSM examination' statement.
 

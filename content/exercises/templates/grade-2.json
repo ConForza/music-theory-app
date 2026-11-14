@@ -331,7 +331,7 @@
         "alternativesNote": "Octave-specific: the prompt shows or names the exact pitch."
       },
       "ambiguityChecks": [
-        "Target pitch reachable with \u2264 2 ledger lines in the given clef."
+        "Target pitch reachable with ≤ 2 ledger lines in the given clef."
       ],
       "hints": [
         "Ledger lines continue the line/space pattern."
@@ -842,7 +842,7 @@
         "alternativesNote": "Each sub-question has its own acceptance rule."
       },
       "ambiguityChecks": [
-        "Original melodies only; Grade 1\u20132 vocabulary."
+        "Original melodies only; Grade 1–2 vocabulary."
       ],
       "hints": [
         "Find the bar first."
@@ -2129,6 +2129,118 @@
         "reviewRequirements": [
           "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
           "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.book-terms",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ],
+      "conceptIds": [
+        "c.terms.g2-link",
+        "c.terms.g2-more",
+        "c.terms.g2-character",
+        "c.terms.g2-touch"
+      ],
+      "promptPattern": "What does {term} mean? Which word means this? What does this direction mean?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. Wrong options never share a group or a meaning with it, and never come from a class of words that could also fit."
+      },
+      "ambiguityChecks": [
+        "Speed words never sit beside speed words, mood words only beside moods of another pole, and touch signs only beside other kinds of word.",
+        "A wrong option only ever shows a word that this lesson or an earlier one has taught (VOCAB_BOOK, OPEN_QUESTIONS Q2 and Q38)."
+      ],
+      "hints": [
+        "Use what the lesson told you about the word."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g2.book-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 2,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ],
+      "conceptIds": [
+        "c.terms.g2-link",
+        "c.terms.g2-more",
+        "c.terms.g2-character",
+        "c.terms.g2-touch"
+      ],
+      "promptPattern": "Which marking fits this description? What does this marking ask the player to do? Which sign is on these notes?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "3/8",
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "tuplets": [
+          "triplet"
+        ],
+        "maxLedgerLines": 2,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. Wrong options never share a group or a meaning with it, and never come from a class of words that could also fit."
+      },
+      "ambiguityChecks": [
+        "Speed words never sit beside speed words, mood words only beside moods of another pole, and touch signs only beside other kinds of word.",
+        "A wrong option only ever shows a word that this lesson or an earlier one has taught (VOCAB_BOOK, OPEN_QUESTIONS Q2 and Q38)."
+      ],
+      "hints": [
+        "Think about what the marking asks the player to do."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the engine."
         ],
         "reviewedBy": null
       }

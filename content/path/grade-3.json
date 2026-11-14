@@ -1047,11 +1047,59 @@
             ],
             "maxLedgerLines": 2
           }
+        },
+        {
+          "templateId": "t.g2.book-terms",
+          "conceptIds": [
+            "c.terms.g2-link",
+            "c.terms.g2-more",
+            "c.terms.g2-character",
+            "c.terms.g2-touch"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g2.book-use",
+          "conceptIds": [
+            "c.terms.g2-link",
+            "c.terms.g2-more",
+            "c.terms.g2-character",
+            "c.terms.g2-touch"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "3/8",
+              "2/4",
+              "3/4",
+              "4/4"
+            ],
+            "tuplets": [
+              "triplet"
+            ],
+            "maxLedgerLines": 2,
+            "keySignatures": true
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 1,
+      "contentVersion": 2,
       "contentStatus": "draft"
     },
     {
@@ -3800,6 +3848,432 @@
       "contentRef": "lessons/G3-U5-L03.json"
     },
     {
+      "id": "G3-U5-L05",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Speed and time",
+      "objective": "Learn six words about speed and time: adagietto, largamente, stringendo, alla breve, comodo and rubato.",
+      "conceptIds": [
+        "c.terms.g3-speed"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-speed"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-speed"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ],
+      "contentRef": "lessons/G3-U5-L05.json"
+    },
+    {
+      "id": "G3-U5-L06",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Strong words",
+      "objective": "Learn six strong words: forza, deciso, risoluto, pesante, marcato and energico.",
+      "conceptIds": [
+        "c.terms.g3-strong"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-strong"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-strong"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ],
+      "contentRef": "lessons/G3-U5-L06.json"
+    },
+    {
+      "id": "G3-U5-L07",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Gentle words, and how much",
+      "objective": "Learn four gentle words, and two words that say how much: delicato, leggiero, tranquillo, semplice, ben and tanto.",
+      "conceptIds": [
+        "c.terms.g3-gentle"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-gentle"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-gentle"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ],
+      "contentRef": "lessons/G3-U5-L07.json"
+    },
+    {
+      "id": "G3-U5-L08",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Feelings",
+      "objective": "Learn six words of feeling: agitato, mesto, triste, amore, anima and animato.",
+      "conceptIds": [
+        "c.terms.g3-feelings"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-feelings"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-feelings"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ],
+      "contentRef": "lessons/G3-U5-L08.json"
+    },
+    {
+      "id": "G3-U5-L09",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Style and character",
+      "objective": "Learn four words of style: marziale, scherzando, brio and ritmico.",
+      "conceptIds": [
+        "c.terms.g3-style"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-style"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-style"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ],
+      "contentRef": "lessons/G3-U5-L09.json"
+    },
+    {
+      "id": "G3-U5-L10",
+      "type": "lesson",
+      "unitId": "G3-U5",
+      "title": "Always, suddenly and in order",
+      "objective": "Learn six more words: sempre, subito, prima, seconda, volta and ad libitum.",
+      "conceptIds": [
+        "c.terms.g3-order"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-order"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-order"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 6,
+      "contentVersion": 1,
+      "contentStatus": "draft",
+      "bookSectionIds": [
+        "fs.g3.s12"
+      ],
+      "contentRef": "lessons/G3-U5-L10.json"
+    },
+    {
       "id": "G3-U5-L04",
       "type": "lesson",
       "unitId": "G3-U5",
@@ -4186,11 +4660,68 @@
             "intervalQuality": "number-and-quality",
             "intervalLowerNote": "tonic"
           }
+        },
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-speed",
+            "c.terms.g3-strong",
+            "c.terms.g3-gentle",
+            "c.terms.g3-feelings",
+            "c.terms.g3-style",
+            "c.terms.g3-order"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-speed",
+            "c.terms.g3-strong",
+            "c.terms.g3-gentle",
+            "c.terms.g3-feelings",
+            "c.terms.g3-style",
+            "c.terms.g3-order"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 1,
+      "contentVersion": 2,
       "contentStatus": "draft"
     },
     {
@@ -5191,11 +5722,68 @@
             ],
             "maxLedgerLines": 2
           }
+        },
+        {
+          "templateId": "t.g3.book-terms",
+          "conceptIds": [
+            "c.terms.g3-speed",
+            "c.terms.g3-strong",
+            "c.terms.g3-gentle",
+            "c.terms.g3-feelings",
+            "c.terms.g3-style",
+            "c.terms.g3-order"
+          ],
+          "scope": {}
+        },
+        {
+          "templateId": "t.g3.book-use",
+          "conceptIds": [
+            "c.terms.g3-speed",
+            "c.terms.g3-strong",
+            "c.terms.g3-gentle",
+            "c.terms.g3-feelings",
+            "c.terms.g3-style",
+            "c.terms.g3-order"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ],
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver"
+            ],
+            "maxDots": 1,
+            "maxLedgerLines": 2,
+            "keySignatures": true,
+            "minorForms": [
+              "harmonic"
+            ]
+          }
         }
       ],
       "optional": false,
       "estimatedMinutes": 6,
-      "contentVersion": 1,
+      "contentVersion": 2,
       "contentStatus": "draft"
     },
     {

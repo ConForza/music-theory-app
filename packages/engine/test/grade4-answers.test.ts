@@ -803,7 +803,8 @@ describe("version-safe vocabulary", () => {
     const hash = (s: string) => { let h = 2166136261 >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; };
     let n = 0;
     for (const t of ix.templates.values()) {
-      if (t.grade >= 4) continue;
+      // the `*.book-*` templates are new and carry VOCAB_BOOK in their fingerprint on purpose (terms-book.test.ts and the pinned-fingerprint test cover them)
+      if (t.grade >= 4 || music.isBookTemplate(t.id)) continue;
       const scope = t.scope as never;
       const old = hash(JSON.stringify(canonical({ rev: 1, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES } }))).toString(16).padStart(8, "0");
       expect(generationFingerprint(t, scope), t.id).toBe(old);

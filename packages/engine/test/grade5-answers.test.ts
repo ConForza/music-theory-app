@@ -652,7 +652,8 @@ describe("generation is deterministic, identities are stable, and the Grade 5 vo
     const g4Old = hash(JSON.stringify(canonical({ rev: 1, template: g4, scope: g4.scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES }, vocab4: music.VOCAB_G4 }))).toString(16).padStart(8, "0");
     expect(g4f).toBe(g4Old);
     for (const t of ix.templates.values()) {
-      if (t.grade >= 4) continue;
+      // the `*.book-*` templates are new and carry VOCAB_BOOK in their fingerprint on purpose (terms-book.test.ts and the pinned-fingerprint test cover them)
+      if (t.grade >= 4 || music.isBookTemplate(t.id)) continue;
       const old = hash(JSON.stringify(canonical({ rev: 1, template: t, scope: t.scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES } }))).toString(16).padStart(8, "0");
       expect(generationFingerprint(t, t.scope as never), t.id).toBe(old);
     }

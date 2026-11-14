@@ -60,7 +60,7 @@ await test("learner arriving from Grade 3: Grade 4 opens at its first lesson, la
   assert.equal(await page.locator('[data-node="G4-U1-L01"]').getAttribute("data-status"), "available");
   assert.equal(await page.locator('[data-node="G4-U1-L02"]').getAttribute("data-status"), "locked");
   assert.equal(await page.locator('[data-node="G4-U4-L01"]').getAttribute("data-status"), "locked");
-  assert.equal(await page.locator("[data-node]").count(), 41, "all 41 Grade 4 nodes are on the path");
+  assert.equal(await page.locator("[data-node]").count(), 42, "all 42 Grade 4 nodes are on the path");
   await noOverflow(page, "grade 4 path");
   await axe(page, "grade 4 path");
   await shot(page, "g4-01-path");
@@ -250,7 +250,7 @@ await test("complete progression to the Grade 4 assessment: below the pass mark 
   await shot(page, "g4-12-assessment-passed");
   const prog = await get(page, "/api/progress");
   assert.equal(prog.nodes["G4-A"].state, "completed");
-  assert.equal(prog.grades.find((g) => g.grade === 4).completedNodes, 41);
+  assert.equal(prog.grades.find((g) => g.grade === 4).completedNodes, 42);
   assert.equal((await get(page, "/api/achievements")).achievements.find((b) => b.id === "g4.grade-complete").earned, true);
   const results = (await get(page, "/api/results")).results.filter((r) => r.nodeId === "G4-A");
   assert.deepEqual(results.map((r) => r.passed).sort(), [false, true], "both results are recorded; the retake did not overwrite the first");
@@ -529,7 +529,7 @@ await test("tuplet accessibility: duplet notes are named duplets (Grade 4) and t
   const kt = g2items.findIndex((it) => it.prompt.includes("contains a triplet"));
   assert.ok(kt >= 0);
   const g2 = await grade4Learner(profiles.desktop);
-  await finishViaApi(S, g2.page, g2.userId, "G2-U5-L03");
+  await finishViaApi(S, g2.page, g2.userId, "G2-U5-L08");
   await playLessonInBrowser(g2.page, S, "G2-U5-L04", { stopAfter: kt });
   await g2.page.getByText(new RegExp(`Question ${kt + 1} of ${g2items.length}`)).waitFor();
   const tnames = await g2.page.locator("svg.notation-svg [role='button']").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
