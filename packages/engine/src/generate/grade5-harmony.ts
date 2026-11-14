@@ -534,6 +534,8 @@ export const approachChord5: Gen = (c): any => {
   if (okB.length !== 1) return null;
   const okA = accs[0]!.filter((x) => !okB.includes(x));
   if (!okA.length) return null;
+  // V before IV or before ii is a weak progression (the leading note does not resolve): never the only accepted approach chord
+  if (okA.length === 1 && okA[0] === "V" && (okB[0] === "IV" || okB[0] === "ii")) return null;
   const events: Ev[] = mel.map((p, i) => note(p, i < 3 ? "crotchet" : i === 3 ? "crotchet" : "minim", i === 3 ? { label: "A" } : i === 4 ? { label: "B" } : i === 5 ? { label: "C" } : {}));
   // 3 lead-in crotchets + A (crotchet) = bar 1; B and C (minims) = bar 2
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });

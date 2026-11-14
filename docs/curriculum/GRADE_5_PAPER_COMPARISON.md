@@ -81,6 +81,6 @@ The new templates are bound to lessons G5-U1-L01 to L03, G5-U2-L02 and G5-U3-L06
 
 Two reviews of head `daab5cd` found problems that this comparison missed. Each was checked against the code or the reference book before it was fixed.
 
-* **Missed by the comparison:** every paper's five-box chord question splits 2 + 3, so one cadence always needs an *approach chord*; intervals are sometimes set under a key signature (none were, here); and transposing carries accidentals (a G♯ becomes a B♮), which the melodies never exercised (chromatic notes now appear in major-key transposition melodies).
+* **Missed by the comparison:** every paper's five-box chord question covers two cadences, so one cadence always needs an *approach chord* (2 + 3 in 2023 D, 3 + 2 in the three other recent papers); intervals are sometimes set under a key signature (none were, here); and transposing carries accidentals (a G♯ becomes a B♮), which the melodies never exercised (chromatic notes now appear in major-key transposition melodies).
 * **"Checking a transposition: the skill is the same"** was wrong for the same reason.
 * **Still open for the owner:** whether the approach chord becomes compulsory (the book's section 11 says it may be asked; the papers always set it). It stays an optional enrichment until the owner decides.

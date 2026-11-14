@@ -390,10 +390,12 @@ function barWithTuplet(c: Ctx, ts: string, P: number[], d: Div): { bar: Ev[]; be
   const at = c.rng.pick(holders).s;
   const group = tupletEvent(d);
   const before: Ev[] = [];
-  const bar: Ev[] = [];
+  let bar: Ev[] = [];
+  const eventStart: number[] = [];
   let u = 0;
   while (u < total) {
     if (u === at) {
+      eventStart.push(u);
       bar.push(group);
       u += span;
       continue;
@@ -405,13 +407,16 @@ function barWithTuplet(c: Ctx, ts: string, P: number[], d: Div): { bar: Ev[]; be
     const k = c.rng.int(1, take);
     const v = valueOfUnits(ts, k);
     if (!v || !allowed(c, v.value, v.dots)) return null;
+    eventStart.push(u);
     bar.push(n(v.value, v.dots));
     u += k;
   }
   const idx = bar.indexOf(group);
+  // x/8: plain quavers (and shorter notes) of one group are beamed together, as buildBar does; x/4 crotchets cannot be beamed
+  if (parseTimeSignature(ts).bottom === 8) bar = beamed(bar, ts, P, eventStart);
   before.push(...bar.slice(0, idx));
   if (!barClean(bar, ts, P)) return null;
-  return { bar, before, group };
+  return { bar, before, group: bar[idx]! };
 }
 
 /** t.g5.irregular-division: read the bar, and say which note value the irregular group takes the time of. */

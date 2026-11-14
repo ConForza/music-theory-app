@@ -54,7 +54,7 @@ The pages (scan pages 60-80) were read directly in the PDF supplied with the bri
 
 | Section | Heading | Printed page | Lessons using it | Source note |
 |---|---|---|---|---|
-| 1 | Irregular Time Signatures | 105 | U1-L01, U1-L02 | 5/4, 7/4, 5/8, 7/8; combinations of twos and threes (p. 105) |
+| 1 | Irregular Time Signatures | 105 | U1-L01, U1-L02 | 5/4, 7/4, 5/8, 7/8; combinations of two- (or four-) and three-beat groups (p. 105) |
 | 2 | Irregular Time Divisions | 106 | U1-L03 | triplet, 5 and 6 and 7 in the time of 4, 9 in the time of 8 (pp. 106-107) |
 | 3 | The Tenor Clef; Octave Transpositions | 107 | U2-L01, U2-L02, U2-L03 | tenor clef on the fourth line; octave transposition with the right C clef and the right pitch (pp. 107-109) |
 | 4 | The Scales of F Sharp Major and D Sharp Minor | 109 | U3-L01 | F sharp major and D sharp minor, with and without key signatures (pp. 109-111) |
@@ -80,7 +80,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 |---|---|---|---|
 | c.metre.irregular | U1-L01 | time-signature 400, metre-facts 90, metre-mixed 285 | 775 |
 | c.metre.irregular-grouping | U1-L02 | grouping-judge 382, irregular-grouping 214, rest-judge 62, bar-complete 161 | 819 |
-| c.rhythm.irregular-divisions | U1-L03 | irregular-division 248, division-facts 20, division-write 16 | 284 |
+| c.rhythm.irregular-divisions | U1-L03 | irregular-division 255, division-facts 20, division-write 16 | 291 |
 | c.clefs.tenor | U2-L01 | tenor-read 55, tenor-write 21, tenor-facts 19 | 95 |
 | c.clefs.four-clefs | U2-L02 | four-clef-read 202, same-pitch 399, key-signature 83, clef-minor 357 | 1041 |
 | c.transposition.octave-any | U2-L03 | octave-transpose 400, clef-position 399 | 799 |
@@ -95,7 +95,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.chords.identify-inversions | U4-L03 | chord-in-passage 283, chord-identify 252, chord-build 220 | 755 |
 | c.cadences.types | U4-L04 | cadence-facts 12, cadence-identify 119 | 131 |
 | c.cadences.recognise | U4-L05 | cadence-find 83, cadence-identify 119 | 202 |
-| c.cadences.chord-choice | U4-L06, U4-E2 | cadence-chords 397, chord-choice 391, approach-chord 389 | 1177 |
+| c.cadences.chord-choice | U4-L06, U4-E2 | cadence-chords 397, chord-choice 391, approach-chord 387 | 1175 |
 | c.chords.cadential-six-four | U4-E1 |  | 0 |
 | c.ornaments.patterns | U5-L01 | ornament-facts 10, ornament-read 387 | 397 |
 | c.ornaments.replace-with-sign | U5-L02 | ornament-replace 296, ornament-figure 221 | 517 |
@@ -188,7 +188,7 @@ Adversarial answers are graded by the real engine in the same file and in `grade
 - Cadences: asked only in C, G, D and F major, only where both cadence chords are in root position, and a melody question accepts every pair of chords that contains the melody notes and makes the named cadence. The validator derives the possible cadence types from the melody, so a melody question is only generated when the melody allows exactly the named type.
 - Transposing instruments (Q36): the direction and the interval are always stated, and the question says whether the given music is written or concert pitch. The instrument's name is offered as a wrong answer for the key of a transposed part. Performance directions are not carried into the answer (they cannot be graded).
 - Chromatic intervals (Q32/Q27): never doubly augmented or diminished, as the book says; intervals between notes of one scale in a minor key follow the Grade 4 convention of naming the form where it matters.
-- Optional enrichment (Q8): the Ic–V progression and SATB in short and open score are playable but never compulsory (approach chords are compulsory since the review of PR #13: the book's section 11 says they may be asked and every practice paper sets five chord boxes split 2 + 3); transcription between short and open score is not assessed (the outline does not require it). In the approach-chord lesson the grader accepts any of I, ii, IV or V that holds the melody note for the approach chord (it does not check that the approach chord differs from the next chord).
+- Optional enrichment (Q8): the Ic–V progression and SATB in short and open score are playable but never compulsory (approach chords are compulsory since the review of PR #13: the book's section 11 says they may be asked and every practice paper sets five chord boxes for two cadences, so one cadence has an approach chord); transcription between short and open score is not assessed (the outline does not require it). In the approach-chord lesson the grader accepts any of I, ii, IV or V that holds the melody note for the approach chord (it does not check that the approach chord differs from the next chord).
 - The renderer announces irregular groups by size (quintuplet, sextuplet, septuplet, nonuplet) in its spoken names; the octave sign for open-score tenor parts is not drawn, so it is described in words only.
 - The pass marks and mastery thresholds are the provisional values from Briefs 04 and 05 (not changed); Grade 5 uses the exact-ratio comparison of Grade 4, Grades 1-3 keep the released rounded rule.
 
