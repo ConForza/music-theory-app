@@ -153,7 +153,12 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
     } catch (e) {
       throw new Error(`${nodeId} question ${n} (${it.item.templateId}, ${inputFor(S.course.ix, it.item, it.scope).kind}) "${it.item.prompt}": ${e.message}`, { cause: e });
     }
-    await page.locator(".feedback").getByText("Correct!").waitFor();
+    try {
+      await page.locator(".feedback").getByText("Correct!").waitFor();
+    } catch (e) {
+      const shown = await page.locator(".feedback").allInnerTexts().catch(() => []);
+      throw new Error(`${nodeId} question ${n} (${it.item.templateId}) "${it.item.prompt}" was answered with ${JSON.stringify(canonicalResponse(S.course.ix, it.item, it.scope))} but the feedback said ${JSON.stringify(shown)}`, { cause: e });
+    }
     if (opts.afterEach) await opts.afterEach(page, n);
     await page.getByRole("button", { name: /Continue|Finish/ }).click();
   }

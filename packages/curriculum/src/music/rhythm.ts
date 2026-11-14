@@ -77,7 +77,8 @@ export interface MetreStructure {
 /** Standard sub-group patterns for irregular metres. */
 export function irregularPatterns(top: number): number[][] {
   if (top === 5) return [[3, 2], [2, 3]];
-  if (top === 7) return [[2, 2, 3], [3, 2, 2], [2, 3, 2]];
+  // The reference book (p. 105): irregular bars are combinations of two- (or four-) and three-beat groups, and its own 7/8 example is 4+3.
+  if (top === 7) return [[2, 2, 3], [3, 2, 2], [2, 3, 2], [4, 3], [3, 4]];
   return [];
 }
 

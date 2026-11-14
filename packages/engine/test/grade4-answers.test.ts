@@ -797,13 +797,13 @@ describe("adversarial answers are refused by the real engine", () => {
 });
 
 describe("version-safe vocabulary", () => {
-  it("Grade 1-3 and 5 generation fingerprints are exactly what they were before Grade 4 vocabulary existed", () => {
+  it("Grade 1-3 generation fingerprints are exactly what they were before the Grade 4 and 5 vocabularies existed", () => {
     // the pre-Brief 08 fingerprint formula, recomputed here: vocabulary = TERMS, INSTRUMENTS, VOICES only
     const canonical = (v: unknown): unknown => (Array.isArray(v) ? v.map(canonical) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort().map((k) => [k, canonical((v as Record<string, unknown>)[k])])) : v);
     const hash = (s: string) => { let h = 2166136261 >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; };
     let n = 0;
     for (const t of ix.templates.values()) {
-      if (t.grade === 4) continue;
+      if (t.grade >= 4) continue;
       const scope = t.scope as never;
       const old = hash(JSON.stringify(canonical({ rev: 1, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES } }))).toString(16).padStart(8, "0");
       expect(generationFingerprint(t, scope), t.id).toBe(old);

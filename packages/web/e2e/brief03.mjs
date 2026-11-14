@@ -400,15 +400,18 @@ async function grade5Lesson() {
   await page.getByRole("button", { name: /Let's go|Continue/ }).click();
   await page.getByRole("button", { name: "Next" }).click();
   await page.getByRole("button", { name: "Try some questions" }).click();
-  const node = ix.nodeById.get("G5-U4-L06");
-  const lesson = curriculum.lessons.find((l) => l.file === node.contentRef).content;
+  // the server above runs the frozen Brief 04 content (where this example lesson is playable on its own), so the questions are read from that snapshot too
+  const legacy = loadCurriculum(join(root, "packages/api/test/fixtures/legacy-content")).curriculum;
+  const lix = buildIndex(legacy);
+  const node = lix.nodeById.get("G5-U4-L06");
+  const lesson = legacy.lessons.find((l) => l.file === node.contentRef).content;
   for (const item of [...lesson.guided, ...lesson.independent]) {
     await page.locator("#q-title").waitFor();
     const binding = node.exercises.find((b) => b.templateId === item.templateId);
     const { effectiveScope } = await import("@mtp/curriculum");
-    const scope = effectiveScope(ix, node, binding);
-    const input = inputFor(ix, item, scope);
-    const want = canonicalResponse(ix, item, scope);
+    const scope = effectiveScope(lix, node, binding);
+    const input = inputFor(lix, item, scope);
+    const want = canonicalResponse(lix, item, scope);
     const sent = page.waitForRequest((req) => req.url().includes("/attempts") && req.method() === "POST", { timeout: 15000 });
     sent.catch(() => undefined);
     await drive(page, page.locator("#answer-form"), input, want, "type");

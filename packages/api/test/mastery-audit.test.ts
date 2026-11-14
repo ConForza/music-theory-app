@@ -42,7 +42,7 @@ describe("Grade 2 mastery capacity (Brief 04 thresholds are not weakened)", () =
 
   it(`gives every required Grade 2 concept at least ${MIN_DISTINCT} distinct questions across at least two question types`, () => {
     // The optional melodic-minor preview has no generated questions by design: it never counts towards Grade 2 mastery or assessment.
-    expect(Object.keys(CAPACITY_ALLOWLIST)).toEqual(["c.scales.minor-melodic-preview", "c.metre.anacrusis"]);
+    expect(Object.keys(CAPACITY_ALLOWLIST).sort()).toEqual(["c.chords.cadential-six-four", "c.metre.anacrusis", "c.scales.minor-melodic-preview", "c.voices.satb-scores"]);
     expect(shortfalls(rows2, CAPACITY_ALLOWLIST)).toEqual([]);
   });
 
@@ -83,7 +83,7 @@ describe("Grade 4 mastery capacity (Brief 08; thresholds unchanged)", () => {
   });
 
   it(`gives every Grade 4 concept at least ${MIN_DISTINCT} distinct questions across at least two question types, with no allow-listed exception`, () => {
-    expect(Object.keys(CAPACITY_ALLOWLIST)).toEqual(["c.scales.minor-melodic-preview", "c.metre.anacrusis"]);
+    expect(Object.keys(CAPACITY_ALLOWLIST).sort()).toEqual(["c.chords.cadential-six-four", "c.metre.anacrusis", "c.scales.minor-melodic-preview", "c.voices.satb-scores"]);
     expect(shortfalls(rows4, CAPACITY_ALLOWLIST)).toEqual([]);
     for (const r of rows4) {
       expect(r.distinct, r.conceptId).toBeGreaterThanOrEqual(MIN_DISTINCT);

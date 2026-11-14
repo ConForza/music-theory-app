@@ -62,7 +62,7 @@ describe("review eligibility", () => {
   it("skips templates that have no generator, and concepts with no usable template", async () => {
     const { db, clock, app } = setupClock();
     const node = course.ix.nodeById.get(LESSON)!;
-    const fake = { ...node, conceptIds: ["c.fake"], exercises: [{ templateId: "t.g5.score", conceptIds: ["c.fake"], scope: {} }] };
+    const fake = { ...node, conceptIds: ["c.fake"], exercises: [{ templateId: "t.g5.no-generator", conceptIds: ["c.fake"], scope: {} }] };
     const patched = { ...course, ix: { ...course.ix, conceptTaughtBy: new Map([["c.fake", [fake]]]) } } as unknown as typeof course;
     const svc = new ReviewService(db, patched, clock, app.engagement.mastery, app.engagement.xp, app.engagement.activity, app.engagement.achievements, { maxConcepts: 4, itemsPerConcept: 2 });
     expect(svc.candidates("c.fake", new Set([LESSON]))).toEqual([]);
@@ -275,15 +275,14 @@ describe("a review session", () => {
     expect((await c.post(`/api/review/sessions/${session.id}/hint`, { itemId: "x", level: 1 })).status).toBe(404);
   });
 
-  it("includes earlier-grade concepts alongside later ones (all grades are eligible when due)", async () => {
+  it("reviews the concepts of every completed lesson", async () => {
     const { client, clock, db } = setupClock();
     const c = client();
     await register(c);
     await playNode(c, course, LESSON);
-    await playNode(c, course, "G5-U4-L06");
     clock.advanceDays(1);
     const { session } = (await c.post("/api/review/sessions")).body;
     const grades = new Set(sessionItems(db, session.id).map((s) => course.ix.concepts.get(s.conceptId)!.grade));
-    expect(grades).toEqual(new Set([1, 5]));
+    expect([...grades]).toEqual([1]); // no Grade 2-5 node is playable before its predecessors, so only Grade 1 concepts are eligible for a new learner
   });
 });

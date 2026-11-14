@@ -1,0 +1,960 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U5-L03",
+  "lessonId": "G5-U5-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name the voices of a choir and put the voice types in order of height.",
+    "successCriteria": [
+      "I know soprano, alto, tenor and bass are the four choral voices.",
+      "I know mezzo-soprano lies between soprano and alto, and baritone between tenor and bass.",
+      "I can tell a very high or very low part from its notes."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Choral music is usually written for four voices, from the highest to the lowest: soprano, alto, tenor and bass (SATB). Women and children often sing soprano and alto; men often sing tenor and bass."
+    },
+    {
+      "kind": "text",
+      "text": "Singers, especially solo singers, are also described by ranges in between. The mezzo-soprano lies between the soprano and the alto. The baritone lies between the tenor and the bass. So the six voices, from the highest to the lowest, are soprano, mezzo-soprano, alto, tenor, baritone, bass."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Four crotchets high in the treble stave: E, F, G, A.",
+        "timeSignature": "4/4"
+      },
+      "caption": "A part as high as this suits a soprano."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Four crotchets low in the bass stave: E, F, G, A.",
+        "timeSignature": "4/4"
+      },
+      "caption": "A part as low as this suits a bass."
+    },
+    {
+      "kind": "text",
+      "text": "You can often tell a part from its notes. A part that lies wholly above the highest note an alto can comfortably sing is a soprano part; one that lies wholly below the lowest note of a tenor is a bass part. In between, the ranges overlap, so you will only be asked about the very high and the very low."
+    },
+    {
+      "kind": "tip",
+      "text": "High to low: soprano, (mezzo-soprano), alto, tenor, (baritone), bass. Mezzo and baritone are the in-between voices."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "A5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "Four crotchets descending from A.",
+      "timeSignature": "4/4"
+    },
+    "steps": [
+      "The notes are all high in the treble stave.",
+      "They lie above the comfortable top of an alto.",
+      "So the part is for a soprano."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A high part: soprano."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u5-l03.guided-1",
+      "templateId": "t.g5.voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of the four voices of a mixed choir is the lowest?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          }
+        ],
+        "correctOptionIds": [
+          "bass"
+        ],
+        "diagnoses": {
+          "soprano": {
+            "category": "wrong-category",
+            "reason": "The soprano is not the lowest voice: the order, high to low, is soprano, alto, tenor, bass."
+          },
+          "alto": {
+            "category": "wrong-category",
+            "reason": "The alto is not the lowest voice: the order, high to low, is soprano, alto, tenor, bass."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "The tenor is not the lowest voice: the order, high to low, is soprano, alto, tenor, bass."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, alto, tenor, bass.",
+        "High to low: soprano, alto, tenor, bass."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.guided-2",
+      "templateId": "t.g5.voice-groups",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "baritone",
+            "label": "Baritone"
+          },
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "baritone"
+        ],
+        "diagnoses": {
+          "bass": {
+            "category": "wrong-category",
+            "reason": "The bass is one of the four choral voices: soprano, alto, tenor and bass."
+          },
+          "soprano": {
+            "category": "wrong-category",
+            "reason": "The soprano is one of the four choral voices: soprano, alto, tenor and bass."
+          },
+          "alto": {
+            "category": "wrong-category",
+            "reason": "The alto is one of the four choral voices: soprano, alto, tenor and bass."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass.",
+        "S, A, T and B are the four choral voices."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.guided-3",
+      "templateId": "t.g5.voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of the four voices of a mixed choir is the highest?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "bass",
+            "label": "Bass"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          }
+        ],
+        "correctOptionIds": [
+          "soprano"
+        ],
+        "diagnoses": {
+          "alto": {
+            "category": "wrong-category",
+            "reason": "The alto is not the highest voice: the order, high to low, is soprano, alto, tenor, bass."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "The tenor is not the highest voice: the order, high to low, is soprano, alto, tenor, bass."
+          },
+          "bass": {
+            "category": "wrong-category",
+            "reason": "The bass is not the highest voice: the order, high to low, is soprano, alto, tenor, bass."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, alto, tenor, bass.",
+        "High to low: soprano, alto, tenor, bass."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-l03.ind-1",
+      "templateId": "t.g5.voice-groups",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Singers, especially solo singers, are also classed in intermediate ranges. Which voice lies between the soprano and the alto?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "baritone",
+            "label": "Baritone"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          },
+          {
+            "id": "mezzo-soprano",
+            "label": "Mezzo-soprano"
+          }
+        ],
+        "correctOptionIds": [
+          "mezzo-soprano"
+        ],
+        "diagnoses": {
+          "bass": {
+            "category": "wrong-category",
+            "reason": "The mezzo-soprano is the voice between the soprano and the alto."
+          },
+          "baritone": {
+            "category": "wrong-category",
+            "reason": "The mezzo-soprano is the voice between the soprano and the alto."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "The mezzo-soprano is the voice between the soprano and the alto."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass.",
+        "Mezzo-soprano sits between soprano and alto; baritone between tenor and bass."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.ind-2",
+      "templateId": "t.g5.voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A choral part lies entirely below the lowest note a tenor can sing comfortably (C3). Which voice is it written for?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, 4/4. Bar 1: a note on the 2nd line; a note in the 1st space; a note in the space just below the stave; a note in the space just below the stave. Bar 2: a note in the space just below the stave; a minim rest.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "bass"
+        ],
+        "diagnoses": {
+          "soprano": {
+            "category": "wrong-category",
+            "reason": "This part is too low for a soprano: it lies below the range of the soprano."
+          },
+          "alto": {
+            "category": "wrong-category",
+            "reason": "This part is too low for a alto: it lies below the range of the alto."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "This part is too low for a tenor: it lies below the range of the tenor."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, alto, tenor, bass.",
+        "The soprano is the highest choral voice and the bass the lowest."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.ind-3",
+      "templateId": "t.g5.voice-groups",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "mezzo-soprano",
+            "label": "Mezzo-soprano"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "mezzo-soprano"
+        ],
+        "diagnoses": {
+          "alto": {
+            "category": "wrong-category",
+            "reason": "The alto is one of the four choral voices: soprano, alto, tenor and bass."
+          },
+          "soprano": {
+            "category": "wrong-category",
+            "reason": "The soprano is one of the four choral voices: soprano, alto, tenor and bass."
+          },
+          "bass": {
+            "category": "wrong-category",
+            "reason": "The bass is one of the four choral voices: soprano, alto, tenor and bass."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass.",
+        "S, A, T and B are the four choral voices."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.ind-4",
+      "templateId": "t.g5.voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A choral part lies entirely below the lowest note a tenor can sing comfortably (C3). Which voice is it written for?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, 4/4. Bar 1: a note in the space just below the stave; a note on the 2nd line; a note on the 2nd line; a note on the 1st ledger line below the stave. Bar 2: a note on the 1st ledger line below the stave; a minim rest.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "bass"
+        ],
+        "diagnoses": {
+          "soprano": {
+            "category": "wrong-category",
+            "reason": "This part is too low for a soprano: it lies below the range of the soprano."
+          },
+          "alto": {
+            "category": "wrong-category",
+            "reason": "This part is too low for a alto: it lies below the range of the alto."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "This part is too low for a tenor: it lies below the range of the tenor."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, alto, tenor, bass.",
+        "The soprano is the highest choral voice and the bass the lowest."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.ind-5",
+      "templateId": "t.g5.voice-groups",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "baritone",
+            "label": "Baritone"
+          },
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          }
+        ],
+        "correctOptionIds": [
+          "baritone"
+        ],
+        "diagnoses": {
+          "soprano": {
+            "category": "wrong-category",
+            "reason": "The soprano is one of the four choral voices: soprano, alto, tenor and bass."
+          },
+          "alto": {
+            "category": "wrong-category",
+            "reason": "The alto is one of the four choral voices: soprano, alto, tenor and bass."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "The tenor is one of the four choral voices: soprano, alto, tenor and bass."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass.",
+        "S, A, T and B are the four choral voices."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l03.ind-6",
+      "templateId": "t.g5.voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A choral part lies entirely above the top note an alto can sing comfortably (D5). Which voice is it written for?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, 4/4. Bar 1: a note on the 1st ledger line above the stave; a note on the 1st ledger line above the stave; a note on the 1st ledger line above the stave; a note in the 4th space. Bar 2: a note in the space just above the stave; a minim rest.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          }
+        ],
+        "correctOptionIds": [
+          "soprano"
+        ],
+        "diagnoses": {
+          "alto": {
+            "category": "wrong-category",
+            "reason": "This part is too high for a alto: it lies above the range of the alto."
+          },
+          "tenor": {
+            "category": "wrong-category",
+            "reason": "This part is too high for a tenor: it lies above the range of the tenor."
+          },
+          "bass": {
+            "category": "wrong-category",
+            "reason": "This part is too high for a bass: it lies above the range of the bass."
+          }
+        }
+      },
+      "hints": [
+        "High to low: soprano, alto, tenor, bass.",
+        "The soprano is the highest choral voice and the bass the lowest."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "The four choral voices: soprano, alto, tenor, bass.",
+    "Mezzo-soprano is between soprano and alto; baritone between tenor and bass.",
+    "A very high part is soprano; a very low part is bass."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.voices",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.voice-groups",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.voices",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.voices.types"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s13",
+      "fs.g5.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.14"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 15, Voices (p. 139, read in the PDF). The book gives no note ranges, so the ranges are provisional teaching values and only the two unmistakable extremes are asked (OPEN_QUESTIONS Q34)."
+  }
+}

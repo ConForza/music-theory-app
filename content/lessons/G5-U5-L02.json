@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U5-L02",
+  "lessonId": "G5-U5-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Replace written-out notes with the ornament sign that stands for them.",
+    "successCriteria": [
+      "I find the main note of a written-out figure.",
+      "I see whether the extra notes go above, below or both, and how often.",
+      "I choose the sign: trill, turn, upper mordent or lower mordent."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A composer may write out an ornament in ordinary notes, as a group of small values. You may be asked to replace such a group by the ornament sign. First find the main note: the note the ornament decorates, which is usually the first or the last of the group. Then look at where the other notes are, compared with the main note."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One note, C."
+      },
+      "caption": "A main note, C."
+    },
+    {
+      "kind": "text",
+      "text": "Three notes: the main note, the note above, then the main note again, is an upper mordent. The same with the note below is a lower mordent. Four notes: the note above, the main note, the note below, the main note, is a turn. When the turn sign stands to the right of its note, the note is played first, so the group has five notes: the main note, the note above, the main note, the note below, the main note. A longer group that alternates between the main note and the note above, often ending with the note below, is a trill."
+    },
+    {
+      "kind": "text",
+      "text": "Two notes, a step apart, can also be a written-out grace note. If the two notes are equal in length, the first is an appoggiatura: it takes half the value of the main note (two quavers stand for a crotchet). If the first is a very short note (a semiquaver or less) before a main note at least three times as long, it is an acciaccatura. In an exam the pair is bracketed, and the question says it is an ornament. Notice what the sign replaces. If you can see that a figure begins on the note below, it is a different, inverted pattern; you will not be asked about it. You are asked to replace written-out notes with a sign; you are not asked to write out the notes of an ornament from its sign. The sign must stand for exactly the notes shown."
+    },
+    {
+      "kind": "tip",
+      "text": "Main note first. One extra note above (then back): upper mordent. Below: lower mordent. Above, main, below, main (or main, above, main, below, main): turn. Long alternation with the note above: trill. Two notes: equal in length is an appoggiatura, very short then long is an acciaccatura."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "Three notes: E, F, E.",
+      "timeSignature": "3/4"
+    },
+    "steps": [
+      "The main note is E.",
+      "F is the note above E.",
+      "E, F, E is an upper mordent."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Written-out notes E F E: an upper mordent."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u5-l02.guided-1",
+      "templateId": "t.g5.ornament-replace",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note B. Which ornament sign could replace the pair?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "label": "A",
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "label": "B",
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 3 sharps, 3/4. a note marked A on the 5th line; a note marked B in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note on the 5th line.",
+        "key": "A major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "replace-written-out",
+        "mainNote": "B3",
+        "writtenOut": [
+          "A3",
+          "B3"
+        ],
+        "writtenOutValues": [
+          {
+            "value": "quaver",
+            "dots": 0
+          },
+          {
+            "value": "quaver",
+            "dots": 0
+          }
+        ],
+        "accepted": [
+          "appoggiatura"
+        ]
+      },
+      "hints": [
+        "Find the main note, then see where the extra notes go.",
+        "An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note."
+      ],
+      "feedback": {
+        "correct": "Yes: main note first.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.guided-2",
+      "templateId": "t.g5.ornament-figure",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A composer has written out an ornament on the note A as these notes: A, G♯, A. Which sign could replace the written-out notes?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 3 sharps. a note in the 2nd space; a note on the 2nd line; a note in the 2nd space.",
+        "key": "F# minor"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lower-mordent",
+            "label": "Lower mordent"
+          },
+          {
+            "id": "upper-mordent",
+            "label": "Upper mordent"
+          },
+          {
+            "id": "turn",
+            "label": "Turn"
+          },
+          {
+            "id": "trill",
+            "label": "Trill"
+          }
+        ],
+        "correctOptionIds": [
+          "lower-mordent"
+        ],
+        "diagnoses": {
+          "trill": {
+            "category": "trill-mordent-confusion",
+            "reason": "The figure is 3 notes around A: the extra note is below, which is not trill."
+          },
+          "turn": {
+            "category": "turn-inverted",
+            "reason": "The figure is 3 notes around A: the extra note is below, which is not turn."
+          },
+          "upper-mordent": {
+            "category": "upper-lower-mordent-swap",
+            "reason": "The figure is 3 notes around A: the extra note is below, which is not upper mordent."
+          }
+        }
+      },
+      "hints": [
+        "Find the main note, then where the extra notes go.",
+        "Find the main note, then see where the extra notes go: above, below, or both, and how often."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.guided-3",
+      "templateId": "t.g5.ornament-replace",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note A♭. Which ornament sign could replace the pair?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "label": "A",
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "label": "B",
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 3 flats, 3/4. a note marked A in the 4th space; a note marked B on the 5th line; a note on the 1st ledger line above the stave; a note in the 4th space.",
+        "key": "C minor",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "replace-written-out",
+        "mainNote": "Ab3",
+        "writtenOut": [
+          "G3",
+          "Ab3"
+        ],
+        "writtenOutValues": [
+          {
+            "value": "quaver",
+            "dots": 0
+          },
+          {
+            "value": "quaver",
+            "dots": 0
+          }
+        ],
+        "accepted": [
+          "appoggiatura"
+        ]
+      },
+      "hints": [
+        "Find the main note, then see where the extra notes go.",
+        "An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-l02.ind-1",
+      "templateId": "t.g5.ornament-figure",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer has written out an ornament on the note G♯ as these notes: G♯, A, G♯. Which sign could replace the written-out notes?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G#4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 3 sharps. a note on the 2nd line; a note in the 2nd space; a note on the 2nd line.",
+        "key": "F# minor"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "upper-mordent",
+            "label": "Upper mordent"
+          },
+          {
+            "id": "trill",
+            "label": "Trill"
+          },
+          {
+            "id": "lower-mordent",
+            "label": "Lower mordent"
+          },
+          {
+            "id": "turn",
+            "label": "Turn"
+          }
+        ],
+        "correctOptionIds": [
+          "upper-mordent"
+        ],
+        "diagnoses": {
+          "trill": {
+            "category": "trill-mordent-confusion",
+            "reason": "The figure is 3 notes around G♯: the extra note is above, which is not trill."
+          },
+          "turn": {
+            "category": "turn-inverted",
+            "reason": "The figure is 3 notes around G♯: the extra note is above, which is not turn."
+          },
+          "lower-mordent": {
+            "category": "upper-lower-mordent-swap",
+            "reason": "The figure is 3 notes around G♯: the extra note is above, which is not lower mordent."
+          }
+        }
+      },
+      "hints": [
+        "Find the main note, then where the extra notes go.",
+        "Find the main note, then see where the extra notes go: above, below, or both, and how often."
+      ],
+      "feedback": {
+        "correct": "Correct sign.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.ind-2",
+      "templateId": "t.g5.ornament-replace",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note G. Which ornament sign could replace the group?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 3 flats, 3/4. a note marked A in the 4th space; a note on the 5th line; a note in the 4th space; a note in the space just above the stave, with a natural sign in front; a note on the 4th line.",
+        "key": "C minor",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "replace-written-out",
+        "mainNote": "G3",
+        "writtenOut": [
+          "G3",
+          "Ab3",
+          "G3"
+        ],
+        "accepted": [
+          "upper-mordent"
+        ]
+      },
+      "hints": [
+        "Find the main note, then see where the extra notes go.",
+        "Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.ind-3",
+      "templateId": "t.g5.ornament-figure",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer has written out an ornament on the note C as these notes: C, D, C. Which sign could replace the written-out notes?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 2 flats. a note in the 3rd space; a note on the 4th line; a note in the 3rd space.",
+        "key": "Bb major"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "trill",
+            "label": "Trill"
+          },
+          {
+            "id": "lower-mordent",
+            "label": "Lower mordent"
+          },
+          {
+            "id": "upper-mordent",
+            "label": "Upper mordent"
+          },
+          {
+            "id": "turn",
+            "label": "Turn"
+          }
+        ],
+        "correctOptionIds": [
+          "upper-mordent"
+        ],
+        "diagnoses": {
+          "trill": {
+            "category": "trill-mordent-confusion",
+            "reason": "The figure is 3 notes around C: the extra note is above, which is not trill."
+          },
+          "turn": {
+            "category": "turn-inverted",
+            "reason": "The figure is 3 notes around C: the extra note is above, which is not turn."
+          },
+          "lower-mordent": {
+            "category": "upper-lower-mordent-swap",
+            "reason": "The figure is 3 notes around C: the extra note is above, which is not lower mordent."
+          }
+        }
+      },
+      "hints": [
+        "Find the main note, then where the extra notes go.",
+        "Find the main note, then see where the extra notes go: above, below, or both, and how often."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.ind-4",
+      "templateId": "t.g5.ornament-replace",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B♭. Which ornament sign could replace the group?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4. a note marked A on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
+        "key": "F major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "replace-written-out",
+        "mainNote": "Bb4",
+        "writtenOut": [
+          "Bb4",
+          "C5",
+          "Bb4"
+        ],
+        "accepted": [
+          "upper-mordent"
+        ]
+      },
+      "hints": [
+        "Find the main note, then see where the extra notes go.",
+        "Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.ind-5",
+      "templateId": "t.g5.ornament-figure",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer has written out an ornament on the note B as these notes: B, A, B. Which sign could replace the written-out notes?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, no sharps or flats in the key signature. a note on the 3rd line; a note in the 2nd space; a note on the 3rd line.",
+        "key": "A minor"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lower-mordent",
+            "label": "Lower mordent"
+          },
+          {
+            "id": "upper-mordent",
+            "label": "Upper mordent"
+          },
+          {
+            "id": "turn",
+            "label": "Turn"
+          },
+          {
+            "id": "trill",
+            "label": "Trill"
+          }
+        ],
+        "correctOptionIds": [
+          "lower-mordent"
+        ],
+        "diagnoses": {
+          "trill": {
+            "category": "trill-mordent-confusion",
+            "reason": "The figure is 3 notes around B: the extra note is below, which is not trill."
+          },
+          "turn": {
+            "category": "turn-inverted",
+            "reason": "The figure is 3 notes around B: the extra note is below, which is not turn."
+          },
+          "upper-mordent": {
+            "category": "upper-lower-mordent-swap",
+            "reason": "The figure is 3 notes around B: the extra note is below, which is not upper mordent."
+          }
+        }
+      },
+      "hints": [
+        "Find the main note, then where the extra notes go.",
+        "Find the main note, then see where the extra notes go: above, below, or both, and how often."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l02.ind-6",
+      "templateId": "t.g5.ornament-replace",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B♭. Which ornament sign could replace the group?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 3 flats, 3/4. a note marked A on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
+        "key": "Eb major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "ornament-sign",
+        "task": "replace-written-out",
+        "mainNote": "Bb4",
+        "writtenOut": [
+          "Bb4",
+          "Ab4",
+          "Bb4"
+        ],
+        "accepted": [
+          "lower-mordent"
+        ]
+      },
+      "hints": [
+        "Find the main note, then see where the extra notes go.",
+        "Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    }
+  ],
+  "recap": [
+    "Find the main note, then where the extra notes go.",
+    "Above and back: upper mordent. Below and back: lower mordent. Four notes around it: turn. Long alternation: trill.",
+    "You replace written-out notes with a sign; you are not asked to write out an ornament."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.ornament-replace",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.ornament-figure",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.ornament-replace",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.ornaments.replace-with-sign"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.13"
+    ],
+    "notes": "Original wording and original figures. Official outline: ornament assessment may ask for written-out notes to be replaced with signs, not for the realisation to be written from a sign. Only the four patterns a figure can identify are used; the small notes (acciaccatura, appoggiatura) cannot be told from a figure so they are not asked here."
+  }
+}

@@ -1,0 +1,1301 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U1-L01",
+  "lessonId": "G5-U1-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read 5/4, 7/4, 5/8 and 7/8 as combinations of groups of two (or four) and three beats.",
+    "successCriteria": [
+      "I can tell an irregular time signature from a regular one.",
+      "I know the upper figure counts the beats and the lower figure names the beat.",
+      "I know the same signature can be grouped in more than one way."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "So far every bar you have met had beats that were all alike: two, three or four of them, simple or compound. A time signature with five or seven beats in a bar is called irregular, because its beats cannot be shared out evenly. Instead the bar breaks into smaller groups of two and three beats (a group of four is also possible: seven beats may be 4 + 3). At Grade 5 the irregular signatures are 5/4, 7/4, 5/8 and 7/8."
+    },
+    {
+      "kind": "text",
+      "text": "Read them as you read any time signature. The upper figure says how many beats are in a bar; the lower figure says which note value is one beat: 4 is a crotchet, 8 is a quaver. So 5/4 is five crotchet beats, and 5/8 is five quaver beats. A bar of 7/8 holds seven quavers."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 5/4. The first has five crotchets. The second has a dotted minim followed by a minim.",
+        "questionAlternative": "Bar 1: crotchet, crotchet, crotchet, crotchet, crotchet. Bar 2: dotted minim, minim.",
+        "timeSignature": "5/4"
+      },
+      "caption": "Both bars of 5/4 add up to five crotchets. The second bar shows a 3 + 2 grouping."
+    },
+    {
+      "kind": "text",
+      "text": "Some questions list regular and irregular signatures together: work out the bar length first, and look for dotted beats or three-note beams (compound time) before you decide. A time signature does not say how the beats are grouped. Five beats may fall as 3 + 2 or 2 + 3; seven beats as 2 + 2 + 3, 3 + 2 + 2, 2 + 3 + 2 or, with a group of four, 4 + 3 or 3 + 4. The composer shows the grouping with note lengths and beams, and a piece usually keeps the same grouping from bar to bar."
+    },
+    {
+      "kind": "tip",
+      "text": "To find an irregular signature, add up one bar in the smallest beat: five beats or seven. The upper figure is 5 or 7; the lower figure is the value you counted in."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "continue"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 5/8: a group of three quavers then a group of two.",
+      "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 2 beamed together (quaver, quaver).",
+      "timeSignature": "5/8"
+    },
+    "steps": [
+      "Count the quavers: there are five.",
+      "Five quaver beats gives 5/8.",
+      "The beams show three, then two: a 3 + 2 grouping."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "One bar of 5/8 with five quavers, beamed in a group of three and a group of two."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u1-l01.guided-1",
+      "templateId": "t.g5.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many crotchets are there in one bar of 5/4?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "three"
+          },
+          {
+            "id": "4",
+            "label": "four"
+          },
+          {
+            "id": "5",
+            "label": "five"
+          },
+          {
+            "id": "6",
+            "label": "six"
+          },
+          {
+            "id": "7",
+            "label": "seven"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "beat-count-wrong",
+            "reason": "The upper figure of 5/4 says how many crotchets fill the bar: five."
+          },
+          "4": {
+            "category": "beat-count-wrong",
+            "reason": "The upper figure of 5/4 says how many crotchets fill the bar: five."
+          },
+          "6": {
+            "category": "beat-count-wrong",
+            "reason": "The upper figure of 5/4 says how many crotchets fill the bar: five."
+          },
+          "7": {
+            "category": "beat-count-wrong",
+            "reason": "The upper figure of 5/4 says how many crotchets fill the bar: five."
+          }
+        }
+      },
+      "hints": [
+        "The upper figure counts the units; the lower figure names the unit; groups are twos and threes, occasionally four.",
+        "The upper figure counts the beats in a bar; the lower figure says which note value is one beat."
+      ],
+      "feedback": {
+        "correct": "Yes: the upper figure counts the beats.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound.",
+          "wrong-category": "Check which group it belongs to."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.guided-2",
+      "templateId": "t.g5.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Add the time signature to this rhythm. The bars use the same grouping throughout.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, crotchet, quaver, quaver, quaver, quaver, crotchet. Bar 2: crotchet rest, crotchet, quaver, quaver, crotchet rest, quaver, quaver.",
+        "questionAlternative": "Bar 1: crotchet, crotchet, 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), crotchet. Bar 2: crotchet rest, crotchet, 2 beamed together (quaver, quaver), crotchet rest, 2 beamed together (quaver, quaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "5/4"
+        ]
+      },
+      "hints": [
+        "Add up the bar in one unit: the upper figure is how many units, the lower figure names the unit.",
+        "Add up the bar in the value of the lower figure. The upper figure is the number of those values in a bar. Irregular time has five or seven."
+      ],
+      "feedback": {
+        "correct": "Right: you added up the bar and named the beat.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.guided-3",
+      "templateId": "t.g5.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which of these groupings can a bar of 5/4 use? (Groups are usually of two or three beats, and occasionally of four.)",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3+3",
+            "label": "3+3"
+          },
+          {
+            "id": "2+3",
+            "label": "2+3"
+          },
+          {
+            "id": "4+1",
+            "label": "4+1"
+          },
+          {
+            "id": "2+2+1",
+            "label": "2+2+1"
+          }
+        ],
+        "correctOptionIds": [
+          "2+3"
+        ],
+        "diagnoses": {
+          "3+3": {
+            "category": "beat-count-wrong",
+            "reason": "3+3 is not a normal way to divide 5 beats: irregular bars are made of groups of two or three beats, and occasionally four."
+          },
+          "4+1": {
+            "category": "beat-count-wrong",
+            "reason": "4+1 is not a normal way to divide 5 beats: irregular bars are made of groups of two or three beats, and occasionally four."
+          },
+          "2+2+1": {
+            "category": "beat-count-wrong",
+            "reason": "2+2+1 is not a normal way to divide 5 beats: irregular bars are made of groups of two or three beats, and occasionally four."
+          }
+        }
+      },
+      "hints": [
+        "The upper figure counts the units; the lower figure names the unit; groups are twos and threes, occasionally four.",
+        "Groups are made of two or three beats (occasionally four), never one."
+      ],
+      "feedback": {
+        "correct": "Yes: groups of two or three, and occasionally four.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound.",
+          "wrong-category": "Check which group it belongs to."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u1-l01.ind-1",
+      "templateId": "t.g5.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm. The bars use the same grouping throughout.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver, quaver, quaver, quaver. Bar 2: quaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, quaver rest, crotchet rest.",
+        "questionAlternative": "Bar 1: 3 beamed together (semiquaver, semiquaver, quaver), 4 beamed together (semiquaver, semiquaver, quaver, quaver), 2 beamed together (quaver, quaver). Bar 2: 3 beamed together (quaver, semiquaver, semiquaver), 5 beamed together (semiquaver, semiquaver, semiquaver, semiquaver, quaver rest), crotchet rest."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "7/8"
+        ]
+      },
+      "hints": [
+        "Add up the bar in one unit: the upper figure is how many units, the lower figure names the unit.",
+        "Add up the bar in the value of the lower figure. The upper figure is the number of those values in a bar. Irregular time has five or seven."
+      ],
+      "feedback": {
+        "correct": "Correct signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.ind-2",
+      "templateId": "t.g5.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these is an irregular time signature?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4/4",
+            "label": "4/4"
+          },
+          {
+            "id": "5/8",
+            "label": "5/8"
+          },
+          {
+            "id": "6/8",
+            "label": "6/8"
+          },
+          {
+            "id": "3/4",
+            "label": "3/4"
+          }
+        ],
+        "correctOptionIds": [
+          "5/8"
+        ],
+        "diagnoses": {
+          "4/4": {
+            "category": "simple-compound-confusion",
+            "reason": "4/4 is simple time: its beats are all alike (quadruple). Irregular time has five or seven beats, made of twos and threes."
+          },
+          "6/8": {
+            "category": "simple-compound-confusion",
+            "reason": "6/8 is compound time: its beats are all alike (duple). Irregular time has five or seven beats, made of twos and threes."
+          },
+          "3/4": {
+            "category": "simple-compound-confusion",
+            "reason": "3/4 is simple time: its beats are all alike (triple). Irregular time has five or seven beats, made of twos and threes."
+          }
+        }
+      },
+      "hints": [
+        "The upper figure counts the units; the lower figure names the unit; groups are twos and threes, occasionally four.",
+        "Irregular signatures have five or seven beats in a bar, and the beats fall into unequal groups of two (or four) and three."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound.",
+          "wrong-category": "Check which group it belongs to."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.ind-3",
+      "templateId": "t.g5.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm. The bars use the same grouping throughout.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, crotchet, quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: semiquaver, semiquaver, semiquaver, semiquaver, quaver, quaver rest, semiquaver, semiquaver, quaver, quaver rest.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), crotchet, 5 beamed together (quaver, semiquaver, semiquaver, semiquaver, semiquaver). Bar 2: 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver), 2 beamed together (quaver, quaver rest), 4 beamed together (semiquaver, semiquaver, quaver, quaver rest)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "7/8"
+        ]
+      },
+      "hints": [
+        "Add up the bar in one unit: the upper figure is how many units, the lower figure names the unit.",
+        "Add up the bar in the value of the lower figure. The upper figure is the number of those values in a bar. Irregular time has five or seven."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.ind-4",
+      "templateId": "t.g5.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "One piece in 7/8 is felt as 2+2+3 and another as 3+4. What is true?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "both",
+            "label": "Both are possible; the time signature does not say which grouping to use, so the music (note lengths and beams) shows it"
+          },
+          {
+            "id": "first",
+            "label": "Only 2+2+3 is correct for 7/8"
+          },
+          {
+            "id": "second",
+            "label": "Only 3+4 is correct for 7/8"
+          },
+          {
+            "id": "neither",
+            "label": "7/8 always means the groups are equal"
+          }
+        ],
+        "correctOptionIds": [
+          "both"
+        ],
+        "diagnoses": {
+          "first": {
+            "category": "wrong-category",
+            "reason": "3+4 is also a normal grouping of 7/8."
+          },
+          "second": {
+            "category": "wrong-category",
+            "reason": "2+2+3 is also a normal grouping of 7/8."
+          },
+          "neither": {
+            "category": "wrong-category",
+            "reason": "Irregular time is unequal by nature: its groups are twos and threes."
+          }
+        }
+      },
+      "hints": [
+        "The upper figure counts the units; the lower figure names the unit; groups are twos and threes, occasionally four.",
+        "The time signature gives only the number of beats. How they fall into groups is up to the composer and is shown in the music."
+      ],
+      "feedback": {
+        "correct": "Yes: both groupings are possible.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound.",
+          "wrong-category": "Check which group it belongs to."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.ind-5",
+      "templateId": "t.g5.time-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm. The bars use the same grouping throughout.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, semiquaver, semiquaver, crotchet, quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: quaver, quaver, quaver rest, quaver, semiquaver, semiquaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, semiquaver, semiquaver), crotchet, 5 beamed together (quaver, semiquaver, semiquaver, semiquaver, semiquaver). Bar 2: 2 beamed together (quaver, quaver), 2 beamed together (quaver rest, quaver), 4 beamed together (semiquaver, semiquaver, quaver, quaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "7/8"
+        ]
+      },
+      "hints": [
+        "Add up the bar in one unit: the upper figure is how many units, the lower figure names the unit.",
+        "Add up the bar in the value of the lower figure. The upper figure is the number of those values in a bar. Irregular time has five or seven."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g5-u1-l01.ind-6",
+      "templateId": "t.g5.metre-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In 5/4, which note value is counted as one unit (one beat of the bar)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "minim",
+            "label": "minim"
+          },
+          {
+            "id": "crotchet",
+            "label": "crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "minim": {
+            "category": "beat-unit-wrong",
+            "reason": "The lower figure 4 stands for the crotchet, so 5/4 counts in crotchets."
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "The lower figure 4 stands for the crotchet, so 5/4 counts in crotchets."
+          },
+          "semiquaver": {
+            "category": "beat-unit-wrong",
+            "reason": "The lower figure 4 stands for the crotchet, so 5/4 counts in crotchets."
+          }
+        }
+      },
+      "hints": [
+        "The upper figure counts the units; the lower figure names the unit; groups are twos and threes, occasionally four.",
+        "The lower figure of a time signature names the note value that is counted: 4 is the crotchet, 8 the quaver."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound.",
+          "wrong-category": "Check which group it belongs to."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "recap": [
+    "Irregular time has five or seven beats, made of groups of two (or four) and three.",
+    "The upper figure counts the beats; the lower figure names the beat.",
+    "The signature does not give the grouping: the notes and beams do."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.time-signature",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.metre-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.time-signature",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.irregular"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s01"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.01"
+    ],
+    "notes": "Original wording. Follows Grade 5 outcome 1 and First Steps Grade 5 section 1 (p. 105, read in the PDF): five or seven beats; bars are combinations of two- (or four-) and three-beat groups (the book's own 7/8 example is 4+3); only 5/4, 7/4, 5/8 and 7/8 at Grade 5. Q30/Q35: grouping in x/4 is shown by note lengths because crotchets cannot be beamed."
+  }
+}
