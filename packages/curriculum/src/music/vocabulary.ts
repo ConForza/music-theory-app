@@ -225,14 +225,15 @@ export const VOCAB_G4 = { version: VOCAB_G4_VERSION, terms: TERMS_G4, techniques
 // fingerprint of Grade 5 templates only (engine/generate/index.ts).
 //
 // STATUS: provisional (OPEN_QUESTIONS Q2). The Italian and German lists are the ones the reference book (First Steps, Grade 5
-// section 15, pp. 140-142, read in the supplied PDF) gives for Grade 5; the official outline publishes no list, so a qualified
+// section 15, pp. 140-142, read in the supplied PDF) gives for Grade 5, and the French list printed on p. 104 (it is printed with the Grade 4
+// term pages; the Grade 5 papers test it, so it is taught here from version 2); the official outline publishes no list, so a qualified
 // teacher must confirm them. All meanings are newly written. Grade 4 terms are NOT in these lists, so a Grade 4 term never earns
 // Grade 5 terminology credit.
 // ---------------------------------------------------------------------------
 
-export const VOCAB_G5_VERSION = 1;
+export const VOCAB_G5_VERSION = 2; // 2: French terms added after comparing the course with eight Grade 5 papers (docs/curriculum/GRADE_5_PAPER_COMPARISON.md)
 
-export type TermLanguage = "italian" | "german" | "direction";
+export type TermLanguage = "italian" | "german" | "french" | "direction";
 export interface TermG5 {
   id: string;
   term: string;
@@ -290,6 +291,31 @@ export const TERMS_G5: TermG5[] = [
   { id: "wieder", term: "wieder", meaning: "again", language: "german", group: "again" },
   { id: "zart", term: "zart", meaning: "tender, delicate", language: "german", group: "tender" },
   { id: "zu", term: "zu", meaning: "to, too", language: "german", group: "to" },
+  { id: "fr-a", term: "à", meaning: "to, at", language: "french", group: "to" },
+  { id: "fr-anime", term: "animé", meaning: "animated, lively", language: "french", group: "lively" },
+  { id: "fr-assez", term: "assez", meaning: "enough, sufficiently", language: "french", group: "enough" },
+  { id: "fr-avec", term: "avec", meaning: "with", language: "french", group: "with" },
+  { id: "fr-cedez", term: "cédez", meaning: "yield: relax the speed", language: "french", group: "slow-down" },
+  { id: "fr-douce", term: "douce", meaning: "sweet, gentle", language: "french", group: "sweet" },
+  { id: "fr-en-dehors", term: "en dehors", meaning: "prominent (a direction to make a melody stand out)", language: "french", group: "prominent" },
+  { id: "fr-et", term: "et", meaning: "and", language: "french", group: "and" },
+  { id: "fr-leger", term: "léger", meaning: "light", language: "french", group: "light" },
+  { id: "fr-lent", term: "lent", meaning: "slow", language: "french", group: "slow" },
+  { id: "fr-mais", term: "mais", meaning: "but", language: "french", group: "but" },
+  { id: "fr-moderefr", term: "modéré", meaning: "at a moderate speed", language: "french", group: "moderate" },
+  { id: "fr-moins", term: "moins", meaning: "less", language: "french", group: "less" },
+  { id: "fr-non", term: "non", meaning: "not", language: "french", group: "not" },
+  { id: "fr-peu", term: "peu", meaning: "little", language: "french", group: "little" },
+  { id: "fr-plus", term: "plus", meaning: "more", language: "french", group: "more" },
+  { id: "fr-presser", term: "presser", meaning: "hurry (en pressant: hurrying on)", language: "french", group: "hurry-fr" },
+  { id: "fr-ralentir", term: "ralentir", meaning: "slow down", language: "french", group: "slow-down" },
+  { id: "fr-retenu", term: "retenu", meaning: "held back (en retenant: holding back, slowing a little)", language: "french", group: "slow-down" },
+  { id: "fr-sans", term: "sans", meaning: "without", language: "french", group: "without" },
+  { id: "fr-tres", term: "très", meaning: "very", language: "french", group: "very" },
+  { id: "fr-un", term: "un, une", meaning: "one, a", language: "french", group: "one" },
+  { id: "fr-vif", term: "vif", meaning: "lively", language: "french", group: "lively" },
+  { id: "fr-vite", term: "vite", meaning: "quick", language: "french", group: "fast" },
+  { id: "fr-sourdines", term: "sourdines", meaning: "mutes (avec sourdines: with mutes; sans sourdines: without mutes)", language: "french", group: "mutes" },
   { id: "una-corda", term: "una corda", meaning: "press the left (soft) pedal (literally “one string”)", language: "direction", group: "left-pedal" },
   { id: "tre-corde", term: "tre corde", meaning: "release the left pedal (literally “three strings”)", language: "direction", group: "release-left" },
   { id: "mano-sinistra", term: "mano sinistra (m.s.)", meaning: "left hand", language: "direction", group: "left-hand" },

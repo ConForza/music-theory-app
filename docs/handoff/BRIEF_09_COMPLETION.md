@@ -13,6 +13,8 @@
 5. Grade 5 golden question keys were removed from the Brief 04 guard (provisional generators); 246 Grade 1-3 keys stay pinned.
 6. Chord writing is asked in treble and bass clef, via an empty stave shown with the question (a build question's own stave follows the clef of the music it shows).
 
+7. After the owner supplied eight Grade 5 papers, French terms and five new templates were added (`docs/curriculum/GRADE_5_PAPER_COMPARISON.md`): `t.g5.metre-mixed`, `t.g5.rest-judge`, `t.g5.duration-facts`, `t.g5.clef-minor`, `t.g5.transpose-judge`. Vocabulary version is now 2. The papers' extra terms (P2) were not added: a teacher decides.
+
 ## Open decisions
 
 Q2 term lists; Q8 enrichment; Q13 key signatures in C clefs; Q14 writing versus identifying chords; Q27-Q33 inherited conventions; new Q34 voice ranges, Q35 grouping in irregular time, Q36 transposition wording. See the teacher pack, section 8.

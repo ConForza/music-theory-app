@@ -598,12 +598,12 @@
                   "label": "Grief"
                 },
                 {
-                  "id": "lusingando",
-                  "label": "Coaxing, in a sweet and persuasive style"
-                },
-                {
                   "id": "piacevole",
                   "label": "Pleasant"
+                },
+                {
+                  "id": "lusingando",
+                  "label": "Coaxing, in a sweet and persuasive style"
                 }
               ],
               "correctOptionIds": [
@@ -1354,10 +1354,10 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4, marked Lebhaft. Bar 1: a note in the 2nd space; a note marked B on the 3rd line, with a sideways S-shaped curl above it; a note in the 3rd space. Bar 2: a note on the 4th line; a note in the 3rd space; a note on the 3rd line.",
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4, marked Ruhig. Bar 1: a note in the 2nd space; a note marked B on the 3rd line, with a sideways S-shaped curl above it; a note in the 3rd space. Bar 2: a note on the 4th line; a note in the 3rd space; a note on the 3rd line.",
         "key": "F major",
         "timeSignature": "3/4",
-        "tempoText": "Lebhaft"
+        "tempoText": "Ruhig"
       },
       "answer": {
         "kind": "composite",
@@ -1406,29 +1406,29 @@
           },
           {
             "id": "term",
-            "prompt": "The melody is marked “lebhaft”. What does it ask?",
+            "prompt": "The melody is marked “ruhig”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
                 {
-                  "id": "voll",
-                  "label": "Full"
+                  "id": "traurig",
+                  "label": "Sad"
                 },
                 {
                   "id": "ein",
                   "label": "A, one"
                 },
                 {
-                  "id": "traurig",
-                  "label": "Sad"
+                  "id": "ruhig",
+                  "label": "Peaceful, calm"
                 },
                 {
-                  "id": "lebhaft",
-                  "label": "Lively"
+                  "id": "voll",
+                  "label": "Full"
                 }
               ],
               "correctOptionIds": [
-                "lebhaft"
+                "ruhig"
               ],
               "diagnoses": {
                 "ein": {
@@ -1465,16 +1465,16 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "D minor",
-                  "label": "D minor"
+                  "id": "F major",
+                  "label": "F major"
                 },
                 {
                   "id": "C major",
                   "label": "C major"
                 },
                 {
-                  "id": "F major",
-                  "label": "F major"
+                  "id": "D minor",
+                  "label": "D minor"
                 }
               ],
               "correctOptionIds": [
@@ -1892,16 +1892,16 @@
                   "label": "Grief"
                 },
                 {
-                  "id": "lacrimoso",
-                  "label": "Tearful, sad"
+                  "id": "smorzando",
+                  "label": "Dying away in tone and speed"
                 },
                 {
                   "id": "rinforzando",
                   "label": "Reinforcing: a sudden stress on a note or chord"
                 },
                 {
-                  "id": "smorzando",
-                  "label": "Dying away in tone and speed"
+                  "id": "lacrimoso",
+                  "label": "Tearful, sad"
                 }
               ],
               "correctOptionIds": [
@@ -2017,10 +2017,10 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4, marked Smorzando (smorz.). Bar 1: a note marked x on the 3rd line; a note in the 2nd space; a note in the 1st space. Bar 2: a note marked y on the 2nd line; a note marked B on the 1st line, with the letters tr above it; a note on the 2nd line.",
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4, marked Rinforzando (rf, rfz). Bar 1: a note marked x on the 3rd line; a note in the 2nd space; a note in the 1st space. Bar 2: a note marked y on the 2nd line; a note marked B on the 1st line, with the letters tr above it; a note on the 2nd line.",
         "key": "F major",
         "timeSignature": "3/4",
-        "tempoText": "Smorzando (smorz.)"
+        "tempoText": "Rinforzando (rf, rfz)"
       },
       "answer": {
         "kind": "composite",
@@ -2095,7 +2095,7 @@
           },
           {
             "id": "term",
-            "prompt": "The melody is marked “smorzando (smorz.)”. What does it ask?",
+            "prompt": "The melody is marked “rinforzando (rf, rfz)”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
@@ -2104,20 +2104,20 @@
                   "label": "Measure (alla misura: in strict time; senza misura: in free time)"
                 },
                 {
-                  "id": "smorzando",
-                  "label": "Dying away in tone and speed"
+                  "id": "piacevole",
+                  "label": "Pleasant"
+                },
+                {
+                  "id": "rinforzando",
+                  "label": "Reinforcing: a sudden stress on a note or chord"
                 },
                 {
                   "id": "volante",
                   "label": "Flying, fast"
-                },
-                {
-                  "id": "piacevole",
-                  "label": "Pleasant"
                 }
               ],
               "correctOptionIds": [
-                "smorzando"
+                "rinforzando"
               ],
               "diagnoses": {
                 "piacevole": {
@@ -2319,10 +2319,10 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Bassoon stave, key signature of 2 sharps, 4/4, marked Smorzando (smorz.). Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a note in the 3rd space; a note in the space just below the stave; a note in the 4th space. Bar 3: a note on the 4th line; a note on the 5th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave.",
+              "textAlternative": "Bassoon stave, key signature of 2 sharps, 4/4, marked Piacevole. Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a note in the 3rd space; a note in the space just below the stave; a note in the 4th space. Bar 3: a note on the 4th line; a note on the 5th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave.",
               "key": "D major",
               "timeSignature": "4/4",
-              "tempoText": "Smorzando (smorz.)"
+              "tempoText": "Piacevole"
             }
           },
           {
@@ -2429,7 +2429,7 @@
             }
           }
         ],
-        "textAlternative": "A short piece for bassoon and piano, four bars of 4/4. Bassoon stave, key signature of 2 sharps, 4/4, marked Smorzando (smorz.). Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a note in the 3rd space; a note in the space just below the stave; a note in the 4th space. Bar 3: a note on the 4th line; a note on the 5th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Piano (left hand) stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line. Bar 2: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 3: a chord of 3 notes: in the 1st space; in the 2nd space; in the 3rd space. Bar 4: a chord of 3 notes: in the space below the 1st ledger line below the stave; on the 4th line; on the 5th line."
+        "textAlternative": "A short piece for bassoon and piano, four bars of 4/4. Bassoon stave, key signature of 2 sharps, 4/4, marked Piacevole. Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a note in the 3rd space; a note in the space just below the stave; a note in the 4th space. Bar 3: a note on the 4th line; a note on the 5th line; a note in the 4th space; a note on the 5th line. Bar 4: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Piano (left hand) stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: on the 3rd line; on the 4th line; on the 5th line. Bar 2: a chord of 3 notes: on the 1st line; on the 3rd line; in the space just above the stave. Bar 3: a chord of 3 notes: in the 1st space; in the 2nd space; in the 3rd space. Bar 4: a chord of 3 notes: in the space below the 1st ledger line below the stave; on the 4th line; on the 5th line."
       },
       "answer": {
         "kind": "composite",
@@ -2512,21 +2512,21 @@
           },
           {
             "id": "term",
-            "prompt": "The piece is marked “smorzando (smorz.)”. What does it ask?",
+            "prompt": "The piece is marked “piacevole”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
                 {
-                  "id": "rinforzando",
-                  "label": "Reinforcing: a sudden stress on a note or chord"
-                },
-                {
-                  "id": "smorzando",
-                  "label": "Dying away in tone and speed"
+                  "id": "piacevole",
+                  "label": "Pleasant"
                 },
                 {
                   "id": "lusingando",
                   "label": "Coaxing, in a sweet and persuasive style"
+                },
+                {
+                  "id": "smorzando",
+                  "label": "Dying away in tone and speed"
                 },
                 {
                   "id": "dolore",
@@ -2534,12 +2534,12 @@
                 }
               ],
               "correctOptionIds": [
-                "smorzando"
+                "piacevole"
               ],
               "diagnoses": {
-                "rinforzando": {
+                "smorzando": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “rinforzando (rf, rfz)”."
+                  "reason": "That is the meaning of “smorzando (smorz.)”."
                 },
                 "dolore": {
                   "category": "confused-similar-term",
@@ -2559,16 +2559,16 @@
               "kind": "choice",
               "options": [
                 {
-                  "id": "B minor",
-                  "label": "B minor"
-                },
-                {
                   "id": "G major",
                   "label": "G major"
                 },
                 {
                   "id": "A major",
                   "label": "A major"
+                },
+                {
+                  "id": "B minor",
+                  "label": "B minor"
                 },
                 {
                   "id": "D major",
@@ -2688,10 +2688,10 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "An alto-clef stave, no sharps or flats in the key signature, 3/4, marked Voll. Bar 1: a note marked x on the 5th line; a note on the 4th line; a note in the 3rd space. Bar 2: a note marked y in the 4th space; a note marked B in the 3rd space, with the letters tr above it; a note on the 3rd line.",
+        "textAlternative": "An alto-clef stave, no sharps or flats in the key signature, 3/4, marked Presser. Bar 1: a note marked x on the 5th line; a note on the 4th line; a note in the 3rd space. Bar 2: a note marked y in the 4th space; a note marked B in the 3rd space, with the letters tr above it; a note on the 3rd line.",
         "key": "C major",
         "timeSignature": "3/4",
-        "tempoText": "Voll"
+        "tempoText": "Presser"
       },
       "answer": {
         "kind": "composite",
@@ -2766,42 +2766,42 @@
           },
           {
             "id": "term",
-            "prompt": "The melody is marked “voll”. What does it ask?",
+            "prompt": "The melody is marked “presser”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
                 {
-                  "id": "nicht",
-                  "label": "Not"
+                  "id": "fr-peu",
+                  "label": "Little"
                 },
                 {
-                  "id": "voll",
-                  "label": "Full"
+                  "id": "fr-plus",
+                  "label": "More"
                 },
                 {
-                  "id": "sehr",
-                  "label": "Very"
+                  "id": "fr-sans",
+                  "label": "Without"
                 },
                 {
-                  "id": "mit",
-                  "label": "With"
+                  "id": "fr-presser",
+                  "label": "Hurry (en pressant: hurrying on)"
                 }
               ],
               "correctOptionIds": [
-                "voll"
+                "fr-presser"
               ],
               "diagnoses": {
-                "sehr": {
+                "fr-plus": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “sehr”."
+                  "reason": "That is the meaning of “plus”."
                 },
-                "nicht": {
+                "fr-peu": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “nicht”."
+                  "reason": "That is the meaning of “peu”."
                 },
-                "mit": {
+                "fr-sans": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “mit”."
+                  "reason": "That is the meaning of “sans”."
                 }
               }
             }
@@ -2992,10 +2992,10 @@
                   "barline": "final"
                 }
               ],
-              "textAlternative": "Oboe stave, key signature of 1 flat, 4/4, marked Ein, eine. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 2: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note marked B in the 3rd space, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note in the 3rd space. Bar 4: a note on the 5th line; a note in the 3rd space; a note in the space above the 1st ledger line above the stave; a note in the 3rd space.",
+              "textAlternative": "Oboe stave, key signature of 1 flat, 4/4, marked Bewegt. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 2: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note marked B in the 3rd space, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note in the 3rd space. Bar 4: a note on the 5th line; a note in the 3rd space; a note in the space above the 1st ledger line above the stave; a note in the 3rd space.",
               "key": "F major",
               "timeSignature": "4/4",
-              "tempoText": "Ein, eine"
+              "tempoText": "Bewegt"
             }
           },
           {
@@ -3102,7 +3102,7 @@
             }
           }
         ],
-        "textAlternative": "A short piece for oboe and piano, four bars of 4/4. Oboe stave, key signature of 1 flat, 4/4, marked Ein, eine. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 2: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note marked B in the 3rd space, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note in the 3rd space. Bar 4: a note on the 5th line; a note in the 3rd space; a note in the space above the 1st ledger line above the stave; a note in the 3rd space. Piano (left hand) stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 2nd space; on the 5th line. Bar 2: a chord of 3 notes: on the 2nd line; on the 3rd line; in the 4th space. Bar 3: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 4: a chord of 3 notes: in the space just below the stave; on the 5th line; on the 1st ledger line above the stave."
+        "textAlternative": "A short piece for oboe and piano, four bars of 4/4. Oboe stave, key signature of 1 flat, 4/4, marked Bewegt. Bar 1: a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave. Bar 2: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note marked B in the 3rd space, with a short zig-zag above it with no line through it. Bar 3: a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note in the 3rd space; a note in the 3rd space. Bar 4: a note on the 5th line; a note in the 3rd space; a note in the space above the 1st ledger line above the stave; a note in the 3rd space. Piano (left hand) stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 2nd space; on the 5th line. Bar 2: a chord of 3 notes: on the 2nd line; on the 3rd line; in the 4th space. Bar 3: a chord of 3 notes: in the 2nd space; in the 3rd space; in the 4th space. Bar 4: a chord of 3 notes: in the space just below the stave; on the 5th line; on the 1st ledger line above the stave."
       },
       "answer": {
         "kind": "composite",
@@ -3197,10 +3197,18 @@
           },
           {
             "id": "term",
-            "prompt": "The piece is marked “ein, eine”. What does it ask?",
+            "prompt": "The piece is marked “bewegt”. What does it ask?",
             "answer": {
               "kind": "choice",
               "options": [
+                {
+                  "id": "bewegt",
+                  "label": "With movement, agitated"
+                },
+                {
+                  "id": "ein",
+                  "label": "A, one"
+                },
                 {
                   "id": "und",
                   "label": "And"
@@ -3208,23 +3216,15 @@
                 {
                   "id": "zu",
                   "label": "To, too"
-                },
-                {
-                  "id": "ein",
-                  "label": "A, one"
-                },
-                {
-                  "id": "breit",
-                  "label": "Broad, expansive"
                 }
               ],
               "correctOptionIds": [
-                "ein"
+                "bewegt"
               ],
               "diagnoses": {
-                "breit": {
+                "ein": {
                   "category": "confused-similar-term",
-                  "reason": "That is the meaning of “breit”."
+                  "reason": "That is the meaning of “ein, eine”."
                 },
                 "zu": {
                   "category": "confused-similar-term",

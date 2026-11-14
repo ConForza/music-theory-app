@@ -481,9 +481,9 @@ export const compoundFacts5: Gen = (c): any => {
 
 type InstKey = music.InstrumentKey;
 const INST_NAME: Record<InstKey, string> = { Bb: "B♭", A: "A", F: "F" };
-const INST_LABEL: Record<InstKey, string[]> = { Bb: ["clarinet in B♭", "trumpet in B♭"], A: ["clarinet in A"], F: ["horn in F", "cor anglais (in F)"] };
-const instIn = (c: Ctx): InstKey[] => (c.scope.instrumentTranspositions ?? []) as InstKey[];
-const ivText = (k: InstKey) => describeInterval(music.INSTRUMENT_INTERVAL[k]);
+export const INST_LABEL: Record<InstKey, string[]> = { Bb: ["clarinet in B♭", "trumpet in B♭"], A: ["clarinet in A"], F: ["horn in F", "cor anglais (in F)"] };
+export const instIn = (c: Ctx): InstKey[] => (c.scope.instrumentTranspositions ?? []) as InstKey[];
+export const ivText = (k: InstKey) => describeInterval(music.INSTRUMENT_INTERVAL[k]);
 
 /** t.g5.concert-facts: written and sounding pitch of one note, and the direction of the transposition. */
 export const concertFacts5: Gen = (c): any => {

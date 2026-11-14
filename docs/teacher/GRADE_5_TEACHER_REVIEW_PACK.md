@@ -44,7 +44,7 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 - [notation] At concert pitch, in D major.
 - [notation] Written for a clarinet in A, up a minor 3rd: F major.
 - Do not assume the accidentals stay the same. Every note moves by the same interval, so each note keeps its relation to the tonic. A G♯ in D major is an augmented 4th above the tonic; an augmented 4th above F is B natural, so the G♯ becomes B♮ in F major (not B♭).
-- Do not respell a note as its enharmonic twin. B natural could be written C♭ and would sound the same, but C♭ is a diminished 5th above F, not an augmented 4th, so it would be wrong. Always move the letter names by the interval. Copy over any performance directions (tempo, dynamics, slurs) that the original has, as you would for a real performance.
+- Do not respell a note as its enharmonic twin. B natural could be written C♭ and would sound the same, but C♭ is a diminished 5th above F, not an augmented 4th, so it would be wrong. Always move the letter names by the interval. Copy over any performance directions (tempo, dynamics, slurs) that the original has, as you would for a real performance. You may also be asked to check someone else's transposition: find the new key first and compare the key signature, then check each note against the interval, one at a time.
 - New key first, then the key signature, then every note by the same interval. Concert to written goes up; written to concert goes down.
 
 **Recap.** Find the new key first, then give the part its key signature. | Move every note by the same interval; adjust accidentals by the interval. | Never respell a note as its enharmonic twin.
@@ -86,6 +86,10 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | metre-facts (U1-L01) | 2 | One piece in 7/8 is felt as 2+3+2 and another as 3+2+2. What is true? | The answer is “Both are possible; the time signature does not say which grouping to use, so the music (note lengths and beams) shows it”. |
 | metre-facts (U1-L01) | 3 | How many crotchets are there in one bar of 5/4? | The answer is “five”. |
 | metre-facts (U1-L01) | 4 | In 7/4, which note value is counted as one unit (one beat of the bar)? | The answer is “crotchet”. |
+| metre-mixed (U1-L01) | 1 | Which time signature belongs to this rhythm? The bars use one time signature throughout. _Shown: Bar 1: crotchet, quaver, quaver, crotchet. Bar 2: 3 beamed together (quaver, quaver, quaver), 3 beamed together (quaver, quaver, quaver)._ | The answer is “6/8”. |
+| metre-mixed (U1-L01) | 2 | Which time signature belongs to this rhythm? The bars use one time signature throughout. _Shown: Bar 1: 2 beamed together (quaver, quaver), quaver, 2 beamed together (quaver, quaver), quaver, crotchet, 2 beamed together (quaver, quaver). Bar 2: dotted minim, crotchet, crotchet._ | The answer is “5/4”. |
+| metre-mixed (U1-L01) | 3 | Which time signature belongs to this rhythm? The bars use one time signature throughout. _Shown: Bar 1: 4 beamed together (quaver, semiquaver, semiquaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), crotchet. Bar 2: quaver rest, crotchet, crotchet rest, crotchet._ | The answer is “7/8”. |
+| metre-mixed (U1-L01) | 4 | Which time signature belongs to this rhythm? The bars use one time signature throughout. _Shown: Bar 1: quaver, crotchet, dotted crotchet, crotchet, quaver. Bar 2: quaver, crotchet, dotted crotchet, crotchet, quaver._ | The answer is “9/8”. |
 | grouping-judge (U1-L02) | 1 | This bar of 7/8 is beamed in groups. Which grouping do the beams show? _Shown: Bar 1: crotchet, 3 beamed together (quaver, quaver, quaver), 2 beamed together (quaver, quaver). Bar 2: crotchet, 4 beamed together (semiquaver, semiquaver, quaver, quaver), crotchet._ | The answer is “2+3+2”. |
 | grouping-judge (U1-L02) | 2 | This bar of 5/8 is beamed in groups. Which grouping do the beams show? _Shown: Bar 1: crotchet, quaver, 2 beamed together (quaver, quaver). Bar 2: 3 beamed together (quaver, quaver, quaver), crotchet._ | The answer is “3+2”. |
 | grouping-judge (U1-L02) | 3 | This bar of 5/8 is beamed in groups. Which grouping do the beams show? _Shown: Bar 1: dotted crotchet, crotchet. Bar 2: quaver, crotchet, 3 beamed together (semiquaver, semiquaver, quaver)._ | The answer is “3+2”. |
@@ -94,6 +98,10 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | irregular-grouping (U1-L02) | 2 | Rewrite this bar of 7/8 so that its notes are beamed to show a grouping of 3 + 2 + 2. The rhythm must sound exactly the same. _Shown: Bar 1: 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), 5 beamed together (semiquaver, semiquaver, quaver, semiquaver, semiquaver)._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | irregular-grouping (U1-L02) | 3 | Rewrite this bar of 5/8 so that its notes are beamed to show a grouping of 3 + 2. The rhythm must sound exactly the same. _Shown: Bar 1: quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | irregular-grouping (U1-L02) | 4 | Rewrite this bar of 7/8 so that its notes are beamed to show a grouping of 2 + 3 + 2. The rhythm must sound exactly the same. _Shown: Bar 1: quaver, semiquaver, semiquaver, quaver, quaver, quaver, quaver, quaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
+| rest-judge (U1-L02) | 1 | All three bars are in 9/8 (with dotted-note beats) and have two silent beats. Which bar writes its rests correctly? _Shown: Bar 1: quaver rest, quaver rest, quaver rest, crotchet, quaver, dotted crotchet rest. Bar 2: dotted crotchet rest, crotchet, quaver, dotted crotchet rest. Bar 3: dotted crotchet rest, crotchet, quaver, quaver rest, quaver rest, quaver rest._ | The answer is “Bar 2”. |
+| rest-judge (U1-L02) | 2 | All three bars are in 12/16 (with dotted-note beats) and have two silent beats. Which bar writes its rests correctly? _Shown: Bar 1: 3 beamed together (semiquaver, semiquaver, semiquaver), dotted quaver rest, semiquaver rest, semiquaver rest, semiquaver rest, quaver, semiquaver. Bar 2: 3 beamed together (semiquaver, semiquaver, semiquaver), semiquaver rest, semiquaver rest, semiquave_ | The answer is “Bar 3”. |
+| rest-judge (U1-L02) | 3 | All three bars are in 7/8 (grouped 3+2+2) and have two silent groups. Which bar writes its rests correctly? _Shown: Bar 1: quaver rest, quaver rest, quaver rest, crotchet, crotchet rest. Bar 2: dotted crotchet rest, crotchet, crotchet rest. Bar 3: dotted crotchet rest, crotchet, quaver rest, quaver rest._ | The answer is “Bar 2”. |
+| rest-judge (U1-L02) | 4 | All three bars are in 9/16 (with dotted-note beats) and have two silent beats. Which bar writes its rests correctly? _Shown: Bar 1: dotted quaver, semiquaver rest, semiquaver rest, semiquaver rest, dotted quaver rest. Bar 2: dotted quaver, dotted quaver rest, semiquaver rest, semiquaver rest, semiquaver rest. Bar 3: dotted quaver, dotted quaver rest, dotted quaver rest._ | The answer is “Bar 3”. |
 | bar-complete (U1-L02) | 1 | Complete this bar of 7/4 with notes or rests so that it follows a grouping of 2 + 3 + 2. The bar already begins with a quaver, then a quaver, then a quaver, then a quaver, then a crotchet, then a quaver, then a quaver, then a quaver, then a quaver. Two more beats are needed; no note may join two groups. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | bar-complete (U1-L02) | 2 | Complete this bar of 7/4 with notes or rests so that it follows a grouping of 3 + 2 + 2. The bar already begins with a quaver, then a quaver, then a minim. Four more beats are needed; no note may join two groups. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | bar-complete (U1-L02) | 3 | Complete this bar of 5/8 with notes or rests so that it follows a grouping of 2 + 3. The bar already begins with a semiquaver, then a semiquaver, then a semiquaver, then a semiquaver. Three more beats are needed; no note may join two groups. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
@@ -110,6 +118,10 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | division-write (U1-L03) | 2 | Finish this bar of 5/4, which already begins with a minim, then a crotchet, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group. | Compare your answer with the example. |
 | division-write (U1-L03) | 3 | Finish this bar of 7/4, which already begins with a minim, then a crotchet, then a crotchet, then a crotchet, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group. | Compare your answer with the example. |
 | division-write (U1-L03) | 4 | Finish this bar of 7/4, which already begins with a minim, then a crotchet, then a minim, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group. | Compare your answer with the example. |
+| duration-facts (U1-L03) | 1 | In 12/16, how many dotted-quaver beats are there in one bar? | The answer is “4”. |
+| duration-facts (U1-L03) | 2 | A dotted minim tied to a semiquaver lasts as long as how many semiquavers? | The answer is “13”. |
+| duration-facts (U1-L03) | 3 | A dotted crotchet tied to a dotted crotchet lasts as long as how many quavers? | The answer is “6”. |
+| duration-facts (U1-L03) | 4 | A dotted minim tied to a semiquaver lasts as long as how many demisemiquavers? | The answer is “26”. |
 | tenor-read (U2-L01) | 1 | Name this note in the tenor clef. _Shown: A tenor-clef stave. a note on the 4th line._ | The note is C. |
 | tenor-read (U2-L01) | 2 | Name this note in the tenor clef. _Shown: A tenor-clef stave. a note in the space just above the stave._ | The note is F. |
 | tenor-read (U2-L01) | 3 | Name this note in the tenor clef. _Shown: A tenor-clef stave. a note on the 2nd line._ | The note is F. |
@@ -134,6 +146,10 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | key-signature (U2-L02) | 2 | Write the key signature of F♯ minor in the alto clef. | F♯ minor has F♯ C♯ G♯. |
 | key-signature (U2-L02) | 3 | Write the key signature of F♯ minor in the treble clef. | F♯ minor has F♯ C♯ G♯. |
 | key-signature (U2-L02) | 4 | Write the key signature of C♯ minor in the alto clef. | C♯ minor has F♯ C♯ G♯ D♯. |
+| clef-minor (U2-L02) | 1 | The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it? _Shown: The same eight notes on three staves with three different clefs. Stave A (bass clef) stave, 4/4. Bar 1: a note in the 3rd space; a note on the 4th line. Bar 2: a note in the 4th space, with a flat sign in front; a note on the 5th line. Bar 3: a note in the spa_ | The answer is “Stave B”. |
+| clef-minor (U2-L02) | 2 | The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it? _Shown: The same eight notes on three staves with three different clefs. Stave A (alto clef) stave, 4/4. Bar 1: a note on the 1st line; a note in the 1st space. Bar 2: a note on the 2nd line, with a flat sign in front; a note in the 2nd space, with a flat sign in fron_ | The answer is “Stave A”. |
+| clef-minor (U2-L02) | 3 | The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it? _Shown: The same eight notes on three staves with three different clefs. Stave A (tenor clef) stave, 4/4. Bar 1: a note on the 4th line; a note in the 4th space. Bar 2: a note on the 5th line, with a flat sign in front; a note in the space just above the stave. Bar 3:_ | The answer is “Stave A”. |
+| clef-minor (U2-L02) | 4 | The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it? _Shown: The same eight notes on three staves with three different clefs. Stave A (alto clef) stave, 4/4. Bar 1: a note on the 4th line; a note in the 4th space, with a sharp sign in front. Bar 2: a note on the 5th line; a note in the space just above the stave. Bar 3:_ | The answer is “Stave A”. |
 | octave-transpose (U2-L03) | 1 | This melody is in the treble clef. Write it exactly one octave lower in the tenor clef, keeping the key signature. _Shown: A treble-clef stave, key signature of 4 flats, 3/4. Bar 1: a note in the 2nd space; a note on the 2nd line; a note in the 1st space. Bar 2: a note on the 2nd line; a note in the 2nd space; a note in the 3rd space._ | Transposed: A♭3, G3, F3, G3, A♭3, C4, in A♭ major. |
 | octave-transpose (U2-L03) | 2 | This melody is in the treble clef. Write it exactly one octave lower in the tenor clef, keeping the key signature. _Shown: A treble-clef stave, key signature of 3 flats, 4/4. Bar 1: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note on the 1st ledger line above th_ | Transposed: E♭4, G4, A♭4, G4, A♭4, in C minor. |
 | octave-transpose (U2-L03) | 3 | This melody is in the alto clef. Write it exactly one octave lower in the tenor clef, keeping the key signature. _Shown: An alto-clef stave, key signature of 2 sharps, 3/4. Bar 1: a note in the 2nd space; a note on the 3rd line; a note on the 2nd line, with a sharp sign in front. Bar 2: a note on the 3rd line; a note in the 3rd space; a note on the 4th line._ | Transposed: B2, C♯3, A♯2, C♯3, D3, E3, in B minor. |
@@ -186,6 +202,10 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | instrument-transpose (U3-L06) | 2 | This melody is the written part for a trumpet in B♭, which sounds a major 2nd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a major 2nd, and give it its new key signature. _Shown: A treble-clef stave, key signature of 5 sharps, 4/4, marked Moderato. Bar 1: a note in the 2nd space; a note in the 1st space, with a double sharp sign in front; a note in the 2nd space; a note in the 3rd space. Bar 2: a note on the 3rd line; a note in the 3rd_ | Transposed: G♯4, E♯4, G♯4, B4, A4, B4, C♯5, B4, in F♯ minor. |
 | instrument-transpose (U3-L06) | 3 | This melody is the written part for a clarinet in A, which sounds a minor 3rd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a minor 3rd, and give it its new key signature. _Shown: A treble-clef stave, key signature of 3 sharps, 3/4, marked Allegretto. Bar 1: a note on the 3rd line; a note in the 3rd space; a note on the 4th line. Bar 2: a note on the 5th line; a note in the space just above the stave; a note on the 1st ledger line above_ | Transposed: G♯4, A♯4, B4, D♯5, E♯5, F♯5, in F♯ major. |
 | instrument-transpose (U3-L06) | 4 | This melody is the written part for a trumpet in B♭, which sounds a major 2nd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a major 2nd, and give it its new key signature. _Shown: A treble-clef stave, key signature of 1 flat, 4/4, marked Allegretto. Bar 1: a note on the 4th line; a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note in the 4th space; a note on the _ | Transposed: C5, E♭5, G5, F5, D5, E♭5, D5, E♭5, in C minor. |
+| transpose-judge (U3-L06) | 1 | The top stave is the written part for the cor anglais (in F). A pupil has transposed it down a perfect 5th to give concert pitch (the cor anglais (in F) sounds a perfect 5th lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Written for the cor anglais (in F) (given) stave, key signature of 2 sharps, 3/4. Bar 1: a note on the 2nd line; a note on the 1st line; a note in the 1st space. Bar 2: a note in the 2nd space; a note on the 3rd line_ | The answer is “The bar and its key signature are correct”. |
+| transpose-judge (U3-L06) | 2 | The top stave is concert pitch. A pupil has transposed it up a perfect 5th to give the written part for the cor anglais (in F) (the cor anglais (in F) sounds a perfect 5th lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Concert pitch (given) stave, key signature of 4 flats, 3/4. Bar 1: a note on the 5th line; a note in the 4th space, with a natural sign in front; a note on the 5th line. Bar 2: a note in the space just above the stav_ | The answer is “Only the key signature is wrong”. |
+| transpose-judge (U3-L06) | 3 | The top stave is the written part for the clarinet in B♭. A pupil has transposed it down a major 2nd to give concert pitch (the clarinet in B♭ sounds a major 2nd lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Written for the clarinet in B♭ (given) stave, key signature of 4 flats, 3/4. Bar 1: a note in the 3rd space; a note in the 2nd space; a note on the 3rd line. Bar 2: a note in the 2nd space; a note on the 3rd line; a _ | The answer is “Only note 4 is wrong”. |
+| transpose-judge (U3-L06) | 4 | The top stave is the written part for the trumpet in B♭. A pupil has transposed it down a major 2nd to give concert pitch (the trumpet in B♭ sounds a major 2nd lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Written for the trumpet in B♭ (given) stave, key signature of 1 sharp, 3/4. Bar 1: a note on the 3rd line; a note in the 2nd space; a note in the 3rd space. Bar 2: a note on the 3rd line; a note in the 3rd space; a n_ | The answer is “The bar and its key signature are correct”. |
 | inversion-facts (U4-L01) | 1 | Chord IV in second inversion can also be shown with figures instead of a letter. Which figures show second inversion? | The answer is “6/4 (six-four)”. |
 | inversion-facts (U4-L01) | 2 | Above its lowest note, a triad in second inversion contains which intervals? | The answer is “a 6th and a 4th”. |
 | inversion-facts (U4-L01) | 3 | In the second inversion of chord IV in D♭ major, which note is in the bass (the lowest note)? | The answer is “D♭”. |
@@ -266,22 +286,22 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | instruments-more (U5-L05) | 2 | A full orchestra normally has how many trombones of each kind? | The answer is “Two tenor trombones and one bass trombone”. |
 | instruments-more (U5-L05) | 3 | Which of these instruments reads the tenor clef for its higher notes? | The answer is “bassoon”. |
 | instruments-more (U5-L05) | 4 | Which of these percussion instruments plays notes of definite pitch? | The answer is “glockenspiel”. |
-| terms (U5-L06) | 1 | An Italian term: what does “rinforzando (rf, rfz)” mean? | The answer is “Reinforcing: a sudden stress on a note or chord”. |
-| terms (U5-L06) | 2 | A German term: what does “immer” mean? | The answer is “Always”. |
-| terms (U5-L06) | 3 | An Italian term: what does “lacrimoso” mean? | The answer is “Tearful, sad”. |
-| terms (U5-L06) | 4 | An Italian term: what does “teneramente” mean? | The answer is “Tenderly (tenerezza: tenderness)”. |
-| term-use (U5-L06) | 1 | A composer wants the player to or, alternatively. Which direction would be printed? | The answer is “ossia”. |
-| term-use (U5-L06) | 2 | Which direction asks the player to do this: right hand? | The answer is “mano destra (m.d.)”. |
-| term-use (U5-L06) | 3 | A composer wants the player to as soft as possible, lifeless. Which direction would be printed? | The answer is “estinto”. |
+| terms (U5-L06) | 1 | An Italian term: what does “volante” mean? | The answer is “Flying, fast”. |
+| terms (U5-L06) | 2 | A French term: what does “douce” mean? | The answer is “Sweet, gentle”. |
+| terms (U5-L06) | 3 | An Italian term: what does “piangevole” mean? | The answer is “Plaintive, in the style of a lament”. |
+| terms (U5-L06) | 4 | A German term: what does “breit” mean? | The answer is “Broad, expansive”. |
+| term-use (U5-L06) | 1 | A composer wants the player to enough, sufficiently. Which direction would be printed? | The answer is “assez”. |
+| term-use (U5-L06) | 2 | Which direction asks the player to do this: left hand? | The answer is “mano sinistra (m.s.)”. |
+| term-use (U5-L06) | 3 | A composer wants the player to at the normal pitch (cancels an 8va sign). Which direction would be printed? | The answer is “loco”. |
 | term-use (U5-L06) | 4 | A pianist reads the direction “mano sinistra (m.s.)”. What should be done? | The answer is “Left hand”. |
 | score (U5-L07) | 1 | Look at this short piece for flute and piano and answer the questions. _Shown: A short piece for flute and piano, four bars of 4/4. Flute stave, no sharps or flats in the key signature, 4/4, marked Dolore. Bar 1: a note in the 3rd space; a note on the 4th line; a note in the 3rd space; a note on the 3rd line. Bar 2: a note in the 2nd spa_ | 1. The answer is “The treble clef”. 2. The answer is “Imperfect”. 3. The answer is “C major”. 4. The answer is “Grief”. |
 | score (U5-L07) | 2 | Look at this short piece for viola and piano and answer the questions. _Shown: A short piece for viola and piano, four bars of 4/4. Viola stave, no sharps or flats in the key signature, 4/4. Bar 1: a note on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note in the 2nd space. Bar 2: a note marked x on the 2nd line; a n_ | 1. The answer is “The alto clef”. 2. The answer is “Perfect”. 3. The answer is “C major”. 4. The interval is a major 3rd. |
 | score (U5-L07) | 3 | Look at this short piece for flute and piano and answer the questions. _Shown: A short piece for flute and piano, four bars of 4/4. Flute stave, no sharps or flats in the key signature, 4/4, marked Dolore. Bar 1: a note in the 3rd space; a note on the 3rd line; a note in the 3rd space; a note marked B on the 3rd line, with a short zig-za_ | 1. The answer is “Air blown across an edge (no reed)”. 2. The answer is “Imperfect”. 3. It is an upper mordent. 4. The answer is “Grief”. |
-| score (U5-L07) | 4 | Look at this short piece for bassoon and piano and answer the questions. _Shown: A short piece for bassoon and piano, four bars of 4/4. Bassoon stave, key signature of 2 sharps, 4/4, marked Smorzando (smorz.). Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd _ | 1. The answer is “The tenor clef”. 2. The answer is “Perfect”. 3. The answer is “Dying away in tone and speed”. 4. The answer is “D major”. |
+| score (U5-L07) | 4 | Look at this short piece for bassoon and piano and answer the questions. _Shown: A short piece for bassoon and piano, four bars of 4/4. Bassoon stave, key signature of 2 sharps, 4/4, marked Piacevole. Bar 1: a note in the 4th space; a note in the 4th space; a note on the 5th line; a note in the 4th space. Bar 2: a note in the 3rd space; a _ | 1. The answer is “The tenor clef”. 2. The answer is “Perfect”. 3. The answer is “Pleasant”. 4. The answer is “D major”. |
 | score-melody (U5-L07) | 1 | Look at this melody for the cello and answer the questions. _Shown: A tenor-clef stave, key signature of 1 flat, 3/4. Bar 1: a note marked x on the 3rd line; a note marked B in the 3rd space, with the letters tr above it; a note in the 4th space. Bar 2: a note marked y in the 3rd space; a note on the 4th line; a note on the 3r_ | 1. The answer is “The tenor clef”. 2. The answer is “F major”. 3. It is a trill. 4. The interval is a minor 2nd. |
-| score-melody (U5-L07) | 2 | Look at this melody for the recorder and answer the questions. _Shown: A treble-clef stave, key signature of 1 flat, 3/4, marked Lebhaft. Bar 1: a note in the 2nd space; a note marked B on the 3rd line, with a sideways S-shaped curl above it; a note in the 3rd space. Bar 2: a note on the 4th line; a note in the 3rd space; a note _ | 1. The answer is “Air blown across an edge (no reed)”. 2. The answer is “Lively”. 3. It is a turn. 4. The answer is “F major”. |
-| score-melody (U5-L07) | 3 | Look at this melody for the trumpet in B♭ and answer the questions. _Shown: A treble-clef stave, key signature of 1 flat, 3/4, marked Smorzando (smorz.). Bar 1: a note marked x on the 3rd line; a note in the 2nd space; a note in the 1st space. Bar 2: a note marked y on the 2nd line; a note marked B on the 1st line, with the letters tr_ | 1. The answer is “A tone lower than written”. 2. The interval is a minor 3rd. 3. It is a trill. 4. The answer is “Dying away in tone and speed”. |
-| score-melody (U5-L07) | 4 | Look at this melody for the viola and answer the questions. _Shown: An alto-clef stave, no sharps or flats in the key signature, 3/4, marked Voll. Bar 1: a note marked x on the 5th line; a note on the 4th line; a note in the 3rd space. Bar 2: a note marked y in the 4th space; a note marked B in the 3rd space, with the letters _ | 1. The answer is “The alto clef”. 2. The interval is a major 2nd. 3. It is a trill. 4. The answer is “Full”. |
+| score-melody (U5-L07) | 2 | Look at this melody for the recorder and answer the questions. _Shown: A treble-clef stave, key signature of 1 flat, 3/4, marked Ruhig. Bar 1: a note in the 2nd space; a note marked B on the 3rd line, with a sideways S-shaped curl above it; a note in the 3rd space. Bar 2: a note on the 4th line; a note in the 3rd space; a note on_ | 1. The answer is “Air blown across an edge (no reed)”. 2. The answer is “Peaceful, calm”. 3. It is a turn. 4. The answer is “F major”. |
+| score-melody (U5-L07) | 3 | Look at this melody for the trumpet in B♭ and answer the questions. _Shown: A treble-clef stave, key signature of 1 flat, 3/4, marked Rinforzando (rf, rfz). Bar 1: a note marked x on the 3rd line; a note in the 2nd space; a note in the 1st space. Bar 2: a note marked y on the 2nd line; a note marked B on the 1st line, with the letters_ | 1. The answer is “A tone lower than written”. 2. The interval is a minor 3rd. 3. It is a trill. 4. The answer is “Reinforcing: a sudden stress on a note or chord”. |
+| score-melody (U5-L07) | 4 | Look at this melody for the viola and answer the questions. _Shown: An alto-clef stave, no sharps or flats in the key signature, 3/4, marked Presser. Bar 1: a note marked x on the 5th line; a note on the 4th line; a note in the 3rd space. Bar 2: a note marked y in the 4th space; a note marked B in the 3rd space, with the lette_ | 1. The answer is “The alto clef”. 2. The interval is a major 2nd. 3. It is a trill. 4. The answer is “Hurry (en pressant: hurrying on)”. |
 
 ## 4. Conventions the rule set enforces (please confirm each is Grade 5)
 
@@ -349,6 +369,31 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | wieder | again | german |
 | zart | tender, delicate | german |
 | zu | to, too | german |
+| à | to, at | french |
+| animé | animated, lively | french |
+| assez | enough, sufficiently | french |
+| avec | with | french |
+| cédez | yield: relax the speed | french |
+| douce | sweet, gentle | french |
+| en dehors | prominent (a direction to make a melody stand out) | french |
+| et | and | french |
+| léger | light | french |
+| lent | slow | french |
+| mais | but | french |
+| modéré | at a moderate speed | french |
+| moins | less | french |
+| non | not | french |
+| peu | little | french |
+| plus | more | french |
+| presser | hurry (en pressant: hurrying on) | french |
+| ralentir | slow down | french |
+| retenu | held back (en retenant: holding back, slowing a little) | french |
+| sans | without | french |
+| très | very | french |
+| un, une | one, a | french |
+| vif | lively | french |
+| vite | quick | french |
+| sourdines | mutes (avec sourdines: with mutes; sans sourdines: without mutes) | french |
 | una corda | press the left (soft) pedal (literally “one string”) | direction |
 | tre corde | release the left pedal (literally “three strings”) | direction |
 | mano sinistra (m.s.) | left hand | direction |
@@ -385,21 +430,21 @@ The 2020 outline does not enumerate terms, so these lists are provisional (Q2): 
 
 ### G5-U1-C: Unit challenge: Irregular time and divisions (blueprint a.g5-u1 v1)
 
-- abrsm2020.g5.01: 3 question(s) from time-signature, metre-facts, irregular-grouping, grouping-judge, bar-complete (outcome g5.01)
+- abrsm2020.g5.01: 3 question(s) from time-signature, metre-facts, irregular-grouping, grouping-judge, bar-complete, metre-mixed, rest-judge, duration-facts (outcome g5.01)
 - abrsm2020.g5.02: 3 question(s) from irregular-division, division-facts, division-write (outcome g5.02)
 
 ### G5-U2-C: Unit challenge: Tenor clef and the four clefs (blueprint a.g5-u2 v1)
 
 - abrsm2020.g5.03: 2 question(s) from tenor-read, tenor-write, tenor-facts (outcome g5.03)
-- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature (outcome g5.04)
+- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature, clef-minor (outcome g5.04)
 - abrsm2020.g5.05: 2 question(s) from octave-transpose, clef-position (outcome g5.05)
 
 ### G5-U3-C: Unit challenge: Six-accidental keys, all intervals and transposing instruments (blueprint a.g5-u3 v1)
 
 - abrsm2020.g5.07: 2 question(s) from scale-build, key-signature, key-facts, scale-spot (outcome g5.07)
-- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature (outcome g5.04)
+- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature, clef-minor (outcome g5.04)
 - abrsm2020.g5.08: 2 question(s) from interval-any, interval-write, interval-compound, interval-facts, compound-facts (outcome g5.08)
-- abrsm2020.g5.06: 2 question(s) from instrument-transpose, concert-facts, transpose-key (outcome g5.06)
+- abrsm2020.g5.06: 2 question(s) from instrument-transpose, concert-facts, transpose-key, transpose-judge (outcome g5.06)
 
 ### G5-U4-C: Unit challenge: Inversions, chords and cadences (blueprint a.g5-u4 v1)
 
@@ -418,10 +463,10 @@ The 2020 outline does not enumerate terms, so these lists are provisional (Q2): 
 
 ### G5-A: Grade 5 practice assessment (blueprint a.g5 v1)
 
-- abrsm2020.g5.01: 2 question(s) from time-signature, metre-facts, irregular-grouping, grouping-judge, bar-complete (outcome g5.01)
+- abrsm2020.g5.01: 2 question(s) from time-signature, metre-facts, irregular-grouping, grouping-judge, bar-complete, metre-mixed, rest-judge, duration-facts (outcome g5.01)
 - abrsm2020.g5.02: 2 question(s) from irregular-division, division-facts, division-write (outcome g5.02)
 - abrsm2020.g5.03: 2 question(s) from tenor-read, tenor-write, tenor-facts (outcome g5.03)
-- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature (outcome g5.04)
+- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature, clef-minor (outcome g5.04)
 - abrsm2020.g5.05: 2 question(s) from octave-transpose, clef-position (outcome g5.05)
 - abrsm2020.g5.06: 2 question(s) from instrument-transpose, transpose-key (outcome g5.06)
 - abrsm2020.g5.07: 2 question(s) from scale-build, key-signature (outcome g5.07)

@@ -48,6 +48,7 @@ export const U2: Spec2[] = [
       { t: "t.g5.four-clef-read", c: ["c.clefs.four-clefs"], scope: four },
       { t: "t.g5.same-pitch", c: ["c.clefs.four-clefs"], scope: { keys: KEYS_OLD, clefs: CL4, maxLedgerLines: 2, accidentals: true, keySignatures: true } },
       { t: "t.g5.key-signature", c: ["c.clefs.four-clefs"], scope: { keys: KEYS_OLD, clefs: CL4 } },
+      { t: "t.g5.clef-minor", c: ["c.clefs.four-clefs"], scope: { keys: KEYS_OLD.filter((k) => k.endsWith("minor")), clefs: CL4, maxLedgerLines: 2 } },
     ],
     objective: { statement: "Read and write melodies and key signatures in the treble, alto, tenor and bass clefs.", criteria: ["I can write the same sounding note in a different clef.", "I place key signatures in the right order in every clef.", "I do not copy stave positions when I change clef."] },
     explain: [
@@ -55,7 +56,7 @@ export const U2: Spec2[] = [
       { music: bars("alto", [mel], "4/4", "A four-note phrase in the alto clef: G, A, B, C."), caption: "Alto clef: G A B C." },
       { music: bars("tenor", [mel], "4/4", "The same phrase in the tenor clef: G, A, B, C."), caption: "Tenor clef: the same pitches, written higher on the stave." },
       { music: bars("bass", [mel], "4/4", "The same phrase in the bass clef: G, A, B, C."), caption: "Bass clef: the same pitches again." },
-      { text: "Key signatures are written in the same order in every clef (F, C, G, D, A, E, B for sharps; B, E, A, D, G, C, F for flats), but the sharps and flats sit at different heights because the clefs differ. A key signature is read the same way in every clef: count the signs, then name the key." },
+      { text: "Key signatures are written in the same order in every clef (F, C, G, D, A, E, B for sharps; B, E, A, D, G, C, F for flats), but the sharps and flats sit at different heights because the clefs differ. A key signature is read the same way in every clef: count the signs, then name the key. You may also be shown the same notes on staves with different clefs and asked which clef turns them into a scale: name the notes in each clef, then check that the letter names run in order and the semitones fit a minor scale." },
       { tip: "To write the same sound in another clef: name the note, find its letter in the new clef, check the octave. Never copy the positions." },
     ],
     demo: { widget: "staff", music: st("alto", ["F4", "G4"], "An alto-clef stave in G major with F sharp and G.", { key: "G major", showKeySignature: true }), steps: ["The key signature is one sharp: F sharp.", "In the alto clef the sharp is on the fourth line... the key is G major.", "Name the notes using the signature."], text: "An alto-clef stave in G major." },

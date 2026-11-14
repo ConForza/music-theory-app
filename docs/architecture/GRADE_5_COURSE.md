@@ -19,8 +19,8 @@ The complete Grade 5 path: 25 lessons, 3 optional enrichment lessons, 5 unit pra
 ```
 packages/api/scripts/grade5/u1..u5.ts      compact lesson specs (teaching copy, notation, bindings, question picks), lib5.ts builders
 packages/api/scripts/author-grade5.ts      writes bindings, builds the lessons, DERIVES practice and review bindings, rebuilds blueprints and asserts their size
-packages/engine/src/generate/grade5*.ts    generators (rhythm, pitch, harmony, context) and the registry grade5.ts
-content/exercises/templates/grade-5.json   20 provisional templates (kept) + new ones (all `draft`)
+packages/engine/src/generate/grade5*.ts    generators (rhythm, pitch, harmony, context, extra) and the registry grade5.ts
+content/exercises/templates/grade-5.json   60 templates: 20 provisional (kept) + new ones, including five added after the paper comparison (all `draft`)
 content/policy/review-constraints.json     concept boundaries for the 28 Grade 5 concepts
 content/assessments/grade-5.json           five unit challenges and the Grade 5 blueprint (39 questions)
 packages/api/scripts/grade5-docs.ts        generates the audit and the teacher pack (`npm run docs:grade5 -w @mtp/api`)
@@ -60,3 +60,12 @@ The authoring script is idempotent (sections replaced by id, exact counts assert
 ## Testing
 
 `engine/test/grade5-answers.test.ts` (independent derivation, adversarial answers, determinism, fingerprints), `api/test/grade5-course.test.ts` (44 nodes, progression, failed and passed challenge and assessment, 25/26 of 39, Grade 3 21/32 and Grade 4 27/41 vs 28/41, retake, interruption, scope and later-unit wording, boundaries, enrichment, idempotent authoring), the Grade 5 block of the mastery audit, and `web/e2e/g5.mjs` (real-browser journeys on five viewports, keyboard, dark mode, reduced motion, 200% text at 320px, spoken descriptions, exact audio frequencies).
+
+## Additions after comparing the course with eight Grade 5 papers
+
+`docs/curriculum/GRADE_5_PAPER_COMPARISON.md` records what the papers showed. Decisions P1 and P3 to P7 were taken and built:
+
+* **French terms** (`VOCAB_G5` version 2): the book's French list plus *sourdines*; asked by `t.g5.terms` ("A French term: ...") and taught in G5-U5-L06. Synonym groups keep French words from being offered beside their German or Italian equivalents.
+* `grade5-extra.ts`: `t.g5.metre-mixed` (regular against irregular signatures; wrong choices always hold a different bar length), `t.g5.rest-judge` (rests in dotted-beat and irregular bars, decided by `music.checkBar`), `t.g5.duration-facts` (beats in a bar; dotted notes and ties counted in smaller values), `t.g5.clef-minor` (which clef makes the notes an ascending minor scale) and `t.g5.transpose-judge` (is a pupil's transposition right). All are bound to existing lessons, so practice and review draw on them, and all five also feed the unit challenges and the assessment. Counts of questions in every blueprint are unchanged.
+* Independent checks are in `packages/engine/test/grade5-extra.test.ts`.
+* Not built: tuplets in the mixed-metre question (the Grade 4 reader draws none), and anything for P2 (term list beyond the book), which is a teacher decision.

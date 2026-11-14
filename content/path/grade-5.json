@@ -144,6 +144,48 @@
             "rests": true,
             "ties": true
           }
+        },
+        {
+          "templateId": "t.g5.metre-mixed",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
         }
       ],
       "optional": false,
@@ -199,6 +241,34 @@
           "scope": {
             "timeSignatures": [
               "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g5.rest-judge",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "9/4",
+              "12/4",
+              "9/8",
+              "12/8",
+              "9/16",
+              "12/16",
+              "7/4",
               "7/8"
             ],
             "noteValues": [
@@ -341,6 +411,41 @@
               "irregular"
             ]
           }
+        },
+        {
+          "templateId": "t.g5.duration-facts",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "3/8",
+              "4/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
         }
       ],
       "optional": false,
@@ -412,6 +517,48 @@
           }
         },
         {
+          "templateId": "t.g5.metre-mixed",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
           "templateId": "t.g5.grouping-judge",
           "conceptIds": [
             "c.metre.irregular-grouping"
@@ -441,6 +588,34 @@
           "scope": {
             "timeSignatures": [
               "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g5.rest-judge",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "9/4",
+              "12/4",
+              "9/8",
+              "12/8",
+              "9/16",
+              "12/16",
+              "7/4",
               "7/8"
             ],
             "noteValues": [
@@ -558,6 +733,41 @@
             "tuplets": [
               "irregular"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.duration-facts",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "3/8",
+              "4/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
           }
         }
       ],
@@ -1457,6 +1667,34 @@
             "keySignatures": true,
             "doubleAccidentals": true
           }
+        },
+        {
+          "templateId": "t.g5.clef-minor",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
         }
       ],
       "optional": false,
@@ -1762,6 +2000,34 @@
           }
         },
         {
+          "templateId": "t.g5.clef-minor",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
+          }
+        },
+        {
           "templateId": "t.g5.octave-transpose",
           "conceptIds": [
             "c.transposition.octave-any"
@@ -1917,6 +2183,48 @@
           }
         },
         {
+          "templateId": "t.g5.metre-mixed",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
           "templateId": "t.g5.grouping-judge",
           "conceptIds": [
             "c.metre.irregular-grouping"
@@ -1946,6 +2254,34 @@
           "scope": {
             "timeSignatures": [
               "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g5.rest-judge",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "9/4",
+              "12/4",
+              "9/8",
+              "12/8",
+              "9/16",
+              "12/16",
+              "7/4",
               "7/8"
             ],
             "noteValues": [
@@ -2063,6 +2399,41 @@
             "tuplets": [
               "irregular"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.duration-facts",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "3/8",
+              "4/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
           }
         }
       ],
@@ -2722,6 +3093,54 @@
             "keySignatures": true,
             "doubleAccidentals": true
           }
+        },
+        {
+          "templateId": "t.g5.transpose-judge",
+          "conceptIds": [
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "doubleAccidentals": true
+          }
         }
       ],
       "optional": false,
@@ -3086,6 +3505,54 @@
             "keySignatures": true,
             "doubleAccidentals": true
           }
+        },
+        {
+          "templateId": "t.g5.transpose-judge",
+          "conceptIds": [
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "doubleAccidentals": true
+          }
         }
       ],
       "optional": false,
@@ -3156,6 +3623,48 @@
           }
         },
         {
+          "templateId": "t.g5.metre-mixed",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
           "templateId": "t.g5.grouping-judge",
           "conceptIds": [
             "c.metre.irregular-grouping"
@@ -3185,6 +3694,34 @@
           "scope": {
             "timeSignatures": [
               "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g5.rest-judge",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "9/4",
+              "12/4",
+              "9/8",
+              "12/8",
+              "9/16",
+              "12/16",
+              "7/4",
               "7/8"
             ],
             "noteValues": [
@@ -3302,6 +3839,41 @@
             "tuplets": [
               "irregular"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.duration-facts",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "3/8",
+              "4/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
           }
         },
         {
@@ -3469,6 +4041,34 @@
             "accidentals": true,
             "keySignatures": true,
             "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.clef-minor",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
           }
         },
         {
@@ -5185,6 +5785,48 @@
           }
         },
         {
+          "templateId": "t.g5.metre-mixed",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
           "templateId": "t.g5.grouping-judge",
           "conceptIds": [
             "c.metre.irregular-grouping"
@@ -5214,6 +5856,34 @@
           "scope": {
             "timeSignatures": [
               "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g5.rest-judge",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "9/4",
+              "12/4",
+              "9/8",
+              "12/8",
+              "9/16",
+              "12/16",
+              "7/4",
               "7/8"
             ],
             "noteValues": [
@@ -5331,6 +6001,41 @@
             "tuplets": [
               "irregular"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.duration-facts",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "3/8",
+              "4/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
           }
         },
         {
@@ -5504,6 +6209,34 @@
             "accidentals": true,
             "keySignatures": true,
             "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.clef-minor",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
           }
         },
         {
@@ -5866,6 +6599,54 @@
         },
         {
           "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.transpose-judge",
           "conceptIds": [
             "c.transposition.instrument"
           ],
@@ -6928,6 +7709,48 @@
           }
         },
         {
+          "templateId": "t.g5.metre-mixed",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "2/4",
+              "3/4",
+              "4/4",
+              "2/8",
+              "3/8",
+              "4/8",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "5/4",
+              "7/4",
+              "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
           "templateId": "t.g5.grouping-judge",
           "conceptIds": [
             "c.metre.irregular-grouping"
@@ -6957,6 +7780,34 @@
           "scope": {
             "timeSignatures": [
               "5/8",
+              "7/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
+          }
+        },
+        {
+          "templateId": "t.g5.rest-judge",
+          "conceptIds": [
+            "c.metre.irregular-grouping"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "9/4",
+              "12/4",
+              "9/8",
+              "12/8",
+              "9/16",
+              "12/16",
+              "7/4",
               "7/8"
             ],
             "noteValues": [
@@ -7074,6 +7925,41 @@
             "tuplets": [
               "irregular"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.duration-facts",
+          "conceptIds": [
+            "c.metre.irregular"
+          ],
+          "scope": {
+            "timeSignatures": [
+              "2/2",
+              "3/2",
+              "4/2",
+              "6/4",
+              "9/4",
+              "12/4",
+              "6/8",
+              "9/8",
+              "12/8",
+              "6/16",
+              "9/16",
+              "12/16",
+              "2/8",
+              "3/8",
+              "4/8"
+            ],
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver",
+              "demisemiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "ties": true
           }
         },
         {
@@ -7247,6 +8133,34 @@
             "accidentals": true,
             "keySignatures": true,
             "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.clef-minor",
+          "conceptIds": [
+            "c.clefs.four-clefs"
+          ],
+          "scope": {
+            "keys": [
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2
           }
         },
         {
@@ -7609,6 +8523,54 @@
         },
         {
           "templateId": "t.g5.instrument-transpose",
+          "conceptIds": [
+            "c.transposition.instrument"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "E major",
+              "Ab major",
+              "B major",
+              "Db major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble"
+            ],
+            "instrumentTranspositions": [
+              "Bb",
+              "A",
+              "F"
+            ],
+            "maxLedgerLines": 2,
+            "accidentals": true,
+            "keySignatures": true,
+            "doubleAccidentals": true
+          }
+        },
+        {
+          "templateId": "t.g5.transpose-judge",
           "conceptIds": [
             "c.transposition.instrument"
           ],

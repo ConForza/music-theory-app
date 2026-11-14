@@ -5,10 +5,10 @@
   "contentVersion": 1,
   "locale": "en-GB",
   "objective": {
-    "statement": "Know the Italian and German terms and directions of Grade 5 and use them.",
+    "statement": "Know the Italian, German and French terms and directions of Grade 5 and use them.",
     "successCriteria": [
       "I know the Italian terms of Grade 5.",
-      "I can translate simple German directions such as sehr langsam.",
+      "I can translate simple German and French directions such as sehr langsam or très lent.",
       "I know the piano pedal and hand directions."
     ]
   },
@@ -19,7 +19,7 @@
     },
     {
       "kind": "text",
-      "text": "German directions are built from short words: langsam (slow), schnell (fast), lebhaft (lively), ruhig (peaceful), bewegt (with movement), zart (tender), breit (broad), traurig (sad), süss (sweet), fröhlich (cheerful), mässig (at a moderate speed). Little words change them: sehr (very), etwas (somewhat), wenig (little), nicht (not), zu (too), immer (always), wieder (again), und (and), mit (with), ohne (without), aber (but). Sehr langsam is 'very slow'; mit Ausdruck is 'with expression'."
+      "text": "German directions are built from short words: langsam (slow), schnell (fast), lebhaft (lively), ruhig (peaceful), bewegt (with movement), zart (tender), breit (broad), traurig (sad), süss (sweet), fröhlich (cheerful), mässig (at a moderate speed). Little words change them: sehr (very), etwas (somewhat), wenig (little), nicht (not), zu (too), immer (always), wieder (again), und (and), mit (with), ohne (without), aber (but). Sehr langsam is 'very slow'; mit Ausdruck is 'with expression'. French directions work in the same way: lent (slow), vif (lively), vite (quick), léger (light), douce (sweet, gentle), modéré (at a moderate speed), animé (animated), with little words such as très (very), assez (enough), peu (little), plus (more), moins (less), sans (without), avec (with), mais (but), et (and); cédez, ralentir and retenu all ask for a slower speed, and avec sourdines means 'with mutes'. Très lent is 'very slow'."
     },
     {
       "kind": "notation",
@@ -152,42 +152,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "An Italian term: what does “rinforzando (rf, rfz)” mean?",
+      "prompt": "An Italian term: what does “volante” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "dolore",
-            "label": "Grief"
+            "id": "lacrimoso",
+            "label": "Tearful, sad"
           },
           {
-            "id": "rinforzando",
-            "label": "Reinforcing: a sudden stress on a note or chord"
+            "id": "smorzando",
+            "label": "Dying away in tone and speed"
           },
           {
-            "id": "lusingando",
-            "label": "Coaxing, in a sweet and persuasive style"
+            "id": "volante",
+            "label": "Flying, fast"
           },
           {
-            "id": "piangevole",
-            "label": "Plaintive, in the style of a lament"
+            "id": "lunga",
+            "label": "Long (as in lunga pausa, a long pause)"
           }
         ],
         "correctOptionIds": [
-          "rinforzando"
+          "volante"
         ],
         "diagnoses": {
-          "lusingando": {
+          "lunga": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “lusingando”."
+            "reason": "That is the meaning of “lunga”."
           },
-          "piangevole": {
+          "lacrimoso": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “piangevole”."
+            "reason": "That is the meaning of “lacrimoso”."
           },
-          "dolore": {
+          "smorzando": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “dolore”."
+            "reason": "That is the meaning of “smorzando (smorz.)”."
           }
         }
       },
@@ -211,42 +211,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "A composer wants the player to or, alternatively. Which direction would be printed?",
+      "prompt": "A composer wants the player to enough, sufficiently. Which direction would be printed?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "piangevole",
-            "label": "piangevole"
+            "id": "fr-douce",
+            "label": "douce"
           },
           {
-            "id": "teneramente",
-            "label": "teneramente"
+            "id": "fr-moderefr",
+            "label": "modéré"
           },
           {
-            "id": "doppio-movimento",
-            "label": "doppio movimento"
+            "id": "fr-lent",
+            "label": "lent"
           },
           {
-            "id": "ossia",
-            "label": "ossia"
+            "id": "fr-assez",
+            "label": "assez"
           }
         ],
         "correctOptionIds": [
-          "ossia"
+          "fr-assez"
         ],
         "diagnoses": {
-          "piangevole": {
+          "fr-douce": {
             "category": "confused-similar-term",
-            "reason": "“piangevole” means “plaintive, in the style of a lament”."
+            "reason": "“douce” means “sweet, gentle”."
           },
-          "teneramente": {
+          "fr-moderefr": {
             "category": "confused-similar-term",
-            "reason": "“teneramente” means “tenderly (tenerezza: tenderness)”."
+            "reason": "“modéré” means “at a moderate speed”."
           },
-          "doppio-movimento": {
+          "fr-lent": {
             "category": "confused-similar-term",
-            "reason": "“doppio movimento” means “twice as fast”."
+            "reason": "“lent” means “slow”."
           }
         }
       },
@@ -270,42 +270,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "A German term: what does “immer” mean?",
+      "prompt": "A French term: what does “douce” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "zu",
-            "label": "To, too"
+            "id": "fr-douce",
+            "label": "Sweet, gentle"
           },
           {
-            "id": "ohne",
-            "label": "Without"
+            "id": "fr-anime",
+            "label": "Animated, lively"
           },
           {
-            "id": "immer",
-            "label": "Always"
+            "id": "fr-non",
+            "label": "Not"
           },
           {
-            "id": "ausdruck",
-            "label": "Expression"
+            "id": "fr-lent",
+            "label": "Slow"
           }
         ],
         "correctOptionIds": [
-          "immer"
+          "fr-douce"
         ],
         "diagnoses": {
-          "ohne": {
+          "fr-anime": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “ohne”."
+            "reason": "That is the meaning of “animé”."
           },
-          "zu": {
+          "fr-non": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “zu”."
+            "reason": "That is the meaning of “non”."
           },
-          "ausdruck": {
+          "fr-lent": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “Ausdruck”."
+            "reason": "That is the meaning of “lent”."
           }
         }
       },
@@ -331,17 +331,13 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "An Italian term: what does “lacrimoso” mean?",
+      "prompt": "An Italian term: what does “piangevole” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "lacrimoso",
-            "label": "Tearful, sad"
-          },
-          {
-            "id": "teneramente",
-            "label": "Tenderly (tenerezza: tenderness)"
+            "id": "piangevole",
+            "label": "Plaintive, in the style of a lament"
           },
           {
             "id": "incalzando",
@@ -350,10 +346,14 @@
           {
             "id": "smorzando",
             "label": "Dying away in tone and speed"
+          },
+          {
+            "id": "teneramente",
+            "label": "Tenderly (tenerezza: tenderness)"
           }
         ],
         "correctOptionIds": [
-          "lacrimoso"
+          "piangevole"
         ],
         "diagnoses": {
           "incalzando": {
@@ -390,38 +390,38 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which direction asks the player to do this: right hand?",
+      "prompt": "Which direction asks the player to do this: left hand?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "tre-corde",
-            "label": "tre corde"
+            "id": "mano-sinistra",
+            "label": "mano sinistra (m.s.)"
           },
           {
             "id": "una-corda",
             "label": "una corda"
           },
           {
-            "id": "mano-destra",
-            "label": "mano destra (m.d.)"
+            "id": "tre-corde",
+            "label": "tre corde"
           },
           {
-            "id": "mano-sinistra",
-            "label": "mano sinistra (m.s.)"
+            "id": "mano-destra",
+            "label": "mano destra (m.d.)"
           }
         ],
         "correctOptionIds": [
-          "mano-destra"
+          "mano-sinistra"
         ],
         "diagnoses": {
           "una-corda": {
             "category": "confused-similar-term",
             "reason": "“una corda” means “press the left (soft) pedal (literally “one string”)”."
           },
-          "mano-sinistra": {
+          "mano-destra": {
             "category": "confused-similar-term",
-            "reason": "“mano sinistra (m.s.)” means “left hand”."
+            "reason": "“mano destra (m.d.)” means “right hand”."
           },
           "tre-corde": {
             "category": "confused-similar-term",
@@ -449,42 +449,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "An Italian term: what does “teneramente” mean?",
+      "prompt": "A German term: what does “breit” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "piacevole",
-            "label": "Pleasant"
+            "id": "voll",
+            "label": "Full"
           },
           {
-            "id": "dolore",
-            "label": "Grief"
+            "id": "etwas",
+            "label": "Somewhat, rather"
           },
           {
-            "id": "lacrimoso",
-            "label": "Tearful, sad"
+            "id": "ohne",
+            "label": "Without"
           },
           {
-            "id": "teneramente",
-            "label": "Tenderly (tenerezza: tenderness)"
+            "id": "breit",
+            "label": "Broad, expansive"
           }
         ],
         "correctOptionIds": [
-          "teneramente"
+          "breit"
         ],
         "diagnoses": {
-          "lacrimoso": {
+          "voll": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “lacrimoso”."
+            "reason": "That is the meaning of “voll”."
           },
-          "dolore": {
+          "etwas": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “dolore”."
+            "reason": "That is the meaning of “etwas”."
           },
-          "piacevole": {
+          "ohne": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “piacevole”."
+            "reason": "That is the meaning of “ohne”."
           }
         }
       },
@@ -508,10 +508,18 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A composer wants the player to as soft as possible, lifeless. Which direction would be printed?",
+      "prompt": "A composer wants the player to at the normal pitch (cancels an 8va sign). Which direction would be printed?",
       "answer": {
         "kind": "choice",
         "options": [
+          {
+            "id": "lusingando",
+            "label": "lusingando"
+          },
+          {
+            "id": "loco",
+            "label": "loco"
+          },
           {
             "id": "rinforzando",
             "label": "rinforzando (rf, rfz)"
@@ -519,18 +527,10 @@
           {
             "id": "lacrimoso",
             "label": "lacrimoso"
-          },
-          {
-            "id": "estinto",
-            "label": "estinto"
-          },
-          {
-            "id": "lusingando",
-            "label": "lusingando"
           }
         ],
         "correctOptionIds": [
-          "estinto"
+          "loco"
         ],
         "diagnoses": {
           "rinforzando": {
@@ -567,42 +567,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A German term: what does “immer” mean?",
+      "prompt": "A French term: what does “douce” mean?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "frohlich",
-            "label": "Cheerful, joyful"
-          },
-          {
-            "id": "breit",
-            "label": "Broad, expansive"
-          },
-          {
-            "id": "und",
+            "id": "fr-et",
             "label": "And"
           },
           {
-            "id": "immer",
-            "label": "Always"
+            "id": "fr-douce",
+            "label": "Sweet, gentle"
+          },
+          {
+            "id": "fr-moderefr",
+            "label": "At a moderate speed"
+          },
+          {
+            "id": "fr-assez",
+            "label": "Enough, sufficiently"
           }
         ],
         "correctOptionIds": [
-          "immer"
+          "fr-douce"
         ],
         "diagnoses": {
-          "und": {
+          "fr-assez": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “und”."
+            "reason": "That is the meaning of “assez”."
           },
-          "breit": {
+          "fr-et": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “breit”."
+            "reason": "That is the meaning of “et”."
           },
-          "frohlich": {
+          "fr-moderefr": {
             "category": "confused-similar-term",
-            "reason": "That is the meaning of “fröhlich”."
+            "reason": "That is the meaning of “modéré”."
           }
         }
       },
@@ -715,6 +715,6 @@
     "outcomeIds": [
       "abrsm2020.g5.12"
     ],
-    "notes": "Original meanings. The term list is the one in First Steps Grade 5 section 15 (pp. 140-142, read in the PDF); the official outline gives no list so a teacher must confirm it (OPEN_QUESTIONS Q2). Grade 4 terms are never asked here."
+    "notes": "Original meanings. The term list is the one in First Steps Grade 5 section 15 (pp. 140-142, read in the PDF) plus the French list printed on p. 104, which the Grade 5 practice papers test (GRADE_5_PAPER_COMPARISON P1); the official outline gives no list so a teacher must confirm it (OPEN_QUESTIONS Q2). Grade 4 terms are never asked here."
   }
 }

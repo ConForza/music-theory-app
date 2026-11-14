@@ -311,7 +311,7 @@ function options5(c: Ctx, target: music.TermG5, n = 3): music.TermG5[] {
   for (const t of [...same, ...rest]) if (!out.some((o) => o.group === t.group)) out.push(t);
   return out.slice(0, n);
 }
-const LANG_NOTE: Record<string, string> = { italian: "an Italian term", german: "a German term", direction: "a direction" };
+const LANG_NOTE: Record<string, string> = { italian: "an Italian term", german: "a German term", french: "a French term", direction: "a direction" };
 
 /** t.g5.terms: what a Grade 5 term (Italian, German, or a pedal or hand direction) means. Grade 4 terms are never asked. */
 export const terms5: Gen = (c): any => {

@@ -1,6 +1,6 @@
 # Grade 5 course compared with eight ABRSM Grade 5 papers
 
-**Status:** analysis only. No course content, template or grading rule was changed because of this document. Every change below needs the owner's approval (and, for content, teacher sign-off).
+**Status:** the owner approved P1 and P3 to P7 (P2 is a teacher decision). They are built and listed in section 6. Nothing else was changed because of this document, and all new content is `draft` until a teacher signs it off.
 
 **Papers read (supplied by the owner):** four practice papers in the current format (2023 D, 2024 A, 2024 B, 2025 C: 75 marks, 2 hours) and four past papers in the old format (2014 A, B, C and S: 100 marks, 2 hours). No mark schemes or examiner reports were supplied, so correct answers are inferred from the printed questions only.
 
@@ -62,3 +62,17 @@ Ranked by how likely they are to matter. "Recommend" is my suggestion, not a cha
 | P5 | Add duration facts (demisemiquaver equivalents, tied totals) | Yes |
 | P6 | Add the clef-for-minor-scale and judge-a-transposition templates | Yes, lower priority |
 | P7 | Note in lessons that capital and lowercase numerals are both accepted | Yes |
+
+## 6. What was built (owner approved "all suggestions")
+
+| # | Result |
+|---|---|
+| P1 | French terms added to `VOCAB_G5` (version 2): the book's list from p. 104 plus *sourdines*; taught in G5-U5-L06; asked by `t.g5.terms`. |
+| P2 | Not done: a teacher decides how far the list goes beyond the book (doloroso, a niente, tristamente, scherzando, con spirito). |
+| P3 | `t.g5.metre-mixed`. No tuplets in the bars yet: the Grade 4 reader it reuses draws none. |
+| P4 | `t.g5.rest-judge` for dotted-beat metres (9/x, 12/x) and irregular metres with three groups (7/4, 7/8). Two-group metres (6/x, 5/x) are not asked: they would leave only one silent group to misspell. |
+| P5 | `t.g5.duration-facts`: beats in a bar and dotted-note or tied-note sums. Tuplet totals in minim beats are not covered. |
+| P6 | `t.g5.clef-minor` and `t.g5.transpose-judge`. |
+| P7 | Already in the lesson in a different form, but the old wording said "either spelling is accepted", which is only true as a meaning: the app's input is a list that shows ii. The G5-U4-L02 text now says the exam prints capitals, lower case is also recognised, and the app's ii means the same as II. |
+
+The new templates are bound to lessons G5-U1-L01 to L03, G5-U2-L02 and G5-U3-L06, so practice and review use them, and all five are in the unit challenges and the assessment (question counts unchanged). The `duration-facts` template's regular-metre questions earn no concept credit, because the only Grade 5 concept it can attach to is the irregular-metre one: they are practice only.

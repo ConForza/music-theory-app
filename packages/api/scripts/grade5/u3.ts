@@ -186,6 +186,7 @@ export const U3: Spec2[] = [
       { t: "t.g5.instrument-transpose", c: ["c.transposition.instrument"], scope: tr },
       { t: "t.g5.transpose-key", c: ["c.transposition.instrument"], scope: tr },
       { t: "t.g5.concert-facts", c: ["c.transposition.instrument"], scope: tr },
+      { t: "t.g5.transpose-judge", c: ["c.transposition.instrument"], scope: tr },
     ],
     objective: { statement: "Transpose a short melody between concert pitch and the written part for an instrument in B♭, A or F, with the right key signature and accidentals.", criteria: ["I find the new key before moving the notes.", "I move every note by the same interval, adjusting accidentals by the interval.", "I do not respell a note as its enharmonic equivalent."] },
     explain: [
@@ -193,7 +194,7 @@ export const U3: Spec2[] = [
       { music: bars("treble", [["D5", "F#5", "A5", "F#5"]], "4/4", "A four-note phrase in D major at concert pitch: D, F sharp, A, F sharp.", "crotchet", { key: "D major", showKeySignature: true }), caption: "At concert pitch, in D major." },
       { music: bars("treble", [["F5", "A5", "C6", "A5"]], "4/4", "The same phrase written for a clarinet in A, in F major: F, A, C, A.", "crotchet", { key: "F major", showKeySignature: true }), caption: "Written for a clarinet in A, up a minor 3rd: F major." },
       { text: "Do not assume the accidentals stay the same. Every note moves by the same interval, so each note keeps its relation to the tonic. A G♯ in D major is an augmented 4th above the tonic; an augmented 4th above F is B natural, so the G♯ becomes B♮ in F major (not B♭)." },
-      { text: "Do not respell a note as its enharmonic twin. B natural could be written C♭ and would sound the same, but C♭ is a diminished 5th above F, not an augmented 4th, so it would be wrong. Always move the letter names by the interval. Copy over any performance directions (tempo, dynamics, slurs) that the original has, as you would for a real performance." },
+      { text: "Do not respell a note as its enharmonic twin. B natural could be written C♭ and would sound the same, but C♭ is a diminished 5th above F, not an augmented 4th, so it would be wrong. Always move the letter names by the interval. Copy over any performance directions (tempo, dynamics, slurs) that the original has, as you would for a real performance. You may also be asked to check someone else's transposition: find the new key first and compare the key signature, then check each note against the interval, one at a time." },
       { tip: "New key first, then the key signature, then every note by the same interval. Concert to written goes up; written to concert goes down." },
     ],
     demo: { widget: "staff", music: bars("treble", [["A4", "C5", "E5", "C5"]], "4/4", "A phrase in A minor at concert pitch.", "crotchet", { key: "A minor", showKeySignature: true }), steps: ["Concert pitch to the written part for a clarinet in B♭: up a tone.", "A minor up a tone is B minor.", "Move every note up a tone: B D F♯ D."], text: "A minor phrase moved up a tone to B minor." },

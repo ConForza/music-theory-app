@@ -1382,7 +1382,7 @@
       "conceptIds": [
         "c.terms.g5"
       ],
-      "promptPattern": "What a Grade 5 term (Italian, German, pedal or hand direction) means.",
+      "promptPattern": "What a Grade 5 term (Italian, German, French, pedal or hand direction) means.",
       "scope": {},
       "acceptance": {
         "spellingSensitive": false,
@@ -4045,6 +4045,393 @@
         }
       ],
       "difficulty": 5,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.metre-mixed",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ],
+      "conceptIds": [
+        "c.metre.irregular"
+      ],
+      "promptPattern": "Which time signature belongs to this rhythm? The choices mix regular and irregular signatures.",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "2/4",
+          "3/4",
+          "4/4",
+          "2/8",
+          "3/8",
+          "4/8",
+          "6/4",
+          "9/4",
+          "12/4",
+          "6/8",
+          "9/8",
+          "12/8",
+          "6/16",
+          "9/16",
+          "12/16",
+          "5/4",
+          "7/4",
+          "5/8",
+          "7/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one signature fits: the other signatures offered hold a different amount of music in a bar."
+      },
+      "ambiguityChecks": [
+        "Only signatures with a different bar length are offered as wrong answers, so one answer fits.",
+        "At least one wrong answer is of the other kind (regular against irregular)."
+      ],
+      "hints": [
+        "Add up one bar. Dotted beats or three beamed notes to a beat mean each beat divides into three; five or seven beats mean irregular time."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "beat-count-wrong",
+          "description": "Counts the bar wrongly or ignores the beat unit.",
+          "feedback": "Add up one bar in the value of the lower figure, then check the beat grouping."
+        }
+      ],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.rest-judge",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ],
+      "conceptIds": [
+        "c.metre.irregular-grouping"
+      ],
+      "promptPattern": "Which bar writes its rests correctly (compound or irregular time)?",
+      "scope": {
+        "timeSignatures": [
+          "9/4",
+          "12/4",
+          "9/8",
+          "12/8",
+          "9/16",
+          "12/16",
+          "7/4",
+          "7/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One bar is correct. A dotted-beat rest and a rest followed by a smaller rest are both accepted in compound time, and neither is offered as a wrong answer."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is correct; each wrong option writes one silent beat or group as several small rests.",
+        "The notes are identical in all three bars; only the rests differ."
+      ],
+      "hints": [
+        "Each silent group or beat is one rest, not a row of small ones."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "rest-grouping",
+          "description": "Writes a silent beat or group as several small rests.",
+          "feedback": "A silent beat or group is written as one rest that fills it."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.duration-facts",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ],
+      "conceptIds": [
+        "c.metre.irregular"
+      ],
+      "promptPattern": "Beats in a bar of a regular time signature, and note values counted in smaller values (dotted notes, ties).",
+      "scope": {
+        "timeSignatures": [
+          "2/2",
+          "3/2",
+          "4/2",
+          "6/4",
+          "9/4",
+          "12/4",
+          "6/8",
+          "9/8",
+          "12/8",
+          "6/16",
+          "9/16",
+          "12/16",
+          "2/8",
+          "3/8",
+          "4/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "One option is correct; wrong options are the common slips (forgetting the dot, not adding a tie)."
+      ],
+      "hints": [
+        "A dot adds half the note's own length. A tie adds the two lengths. Count everything in the smaller value."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "note-value-sum",
+          "description": "Miscounts how many small notes fit.",
+          "feedback": "Write each note as a number of the smaller value, then add."
+        },
+        {
+          "id": "dot-forgotten",
+          "description": "Leaves out the dot.",
+          "feedback": "A dot adds half the note's own length."
+        },
+        {
+          "id": "tie-not-added",
+          "description": "Gives one of the tied notes instead of the total.",
+          "feedback": "A tie joins the two notes: add their lengths."
+        },
+        {
+          "id": "beat-count-wrong",
+          "description": "Counts the beats wrongly or ignores the beat unit.",
+          "feedback": "Check which note value is one beat, then count how many fit in the bar."
+        }
+      ],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.clef-minor",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.04"
+      ],
+      "conceptIds": [
+        "c.clefs.four-clefs"
+      ],
+      "promptPattern": "Which clef makes these notes an ascending minor scale?",
+      "scope": {
+        "keys": [
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass",
+          "alto",
+          "tenor"
+        ],
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "Exactly one stave forms an ascending minor scale; the checker tests all three.",
+        "The accidentals are identical on every stave."
+      ],
+      "hints": [
+        "Name the notes in each clef, then check the letter names are in order and the semitones fall as in a minor scale."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "clef-confusion",
+          "description": "A note read against the wrong clef.",
+          "feedback": "Check which clef is printed, then name the notes."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.transpose-judge",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.06"
+      ],
+      "conceptIds": [
+        "c.transposition.concert-pitch",
+        "c.transposition.instrument"
+      ],
+      "promptPattern": "A pupil's transposition for or from a transposing instrument: what, if anything, is wrong?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "B major",
+          "Db major",
+          "F# major",
+          "Gb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble"
+        ],
+        "instrumentTranspositions": [
+          "Bb",
+          "A",
+          "F"
+        ],
+        "maxLedgerLines": 3,
+        "accidentals": true,
+        "keySignatures": true,
+        "doubleAccidentals": true
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "Exactly one statement is true: no mistake, only the key signature wrong, or one named note wrong."
+      ],
+      "hints": [
+        "Find the new key first, then move each note by the same interval and compare."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "transposition-check",
+          "description": "Misjudges which part of a transposition is wrong.",
+          "feedback": "Check the key signature against the new key, then each note against the interval."
+        }
+      ],
+      "difficulty": 4,
       "qa": {
         "status": "draft",
         "reviewRequirements": [

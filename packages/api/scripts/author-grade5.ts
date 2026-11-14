@@ -140,12 +140,12 @@ writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
 //    only ever draws from what has been taught, and a unit challenge only from its own unit and earlier ones (a template is dropped
 //    from a challenge whose unit comes before the unit that first teaches it). The optional enrichment templates appear nowhere here.
 const SECTION_TEMPLATES: Record<string, string[]> = {
-  "o-g5-01": ["t.g5.time-signature", "t.g5.metre-facts", "t.g5.irregular-grouping", "t.g5.grouping-judge", "t.g5.bar-complete"],
+  "o-g5-01": ["t.g5.time-signature", "t.g5.metre-facts", "t.g5.irregular-grouping", "t.g5.grouping-judge", "t.g5.bar-complete", "t.g5.metre-mixed", "t.g5.rest-judge", "t.g5.duration-facts"],
   "o-g5-02": ["t.g5.irregular-division", "t.g5.division-facts", "t.g5.division-write"],
   "o-g5-03": ["t.g5.tenor-read", "t.g5.tenor-write", "t.g5.tenor-facts"],
-  "o-g5-04": ["t.g5.four-clef-read", "t.g5.same-pitch", "t.g5.key-signature"],
+  "o-g5-04": ["t.g5.four-clef-read", "t.g5.same-pitch", "t.g5.key-signature", "t.g5.clef-minor"],
   "o-g5-05": ["t.g5.octave-transpose", "t.g5.clef-position"],
-  "o-g5-06": ["t.g5.instrument-transpose", "t.g5.concert-facts", "t.g5.transpose-key"],
+  "o-g5-06": ["t.g5.instrument-transpose", "t.g5.concert-facts", "t.g5.transpose-key", "t.g5.transpose-judge"],
   "o-g5-07": ["t.g5.scale-build", "t.g5.key-signature", "t.g5.key-facts", "t.g5.scale-spot"],
   "o-g5-08": ["t.g5.interval-any", "t.g5.interval-write", "t.g5.interval-compound", "t.g5.interval-facts", "t.g5.compound-facts"],
   "o-g5-09": ["t.g5.chord-identify", "t.g5.chord-build", "t.g5.inversion-facts", "t.g5.supertonic-facts", "t.g5.chord-in-passage"],

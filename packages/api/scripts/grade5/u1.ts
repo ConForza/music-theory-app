@@ -1,4 +1,4 @@
-import { IRR, bar, beamed, has, n, nd, r, rh, tup, type Spec2 } from "./lib5.ts";
+import { IRR, VALS, bar, beamed, has, n, nd, r, rh, tup, type Spec2 } from "./lib5.ts";
 
 const ts4 = ["5/4", "7/4"];
 export const U1: Spec2[] = [
@@ -8,13 +8,14 @@ export const U1: Spec2[] = [
     bind: [
       { t: "t.g5.time-signature", c: ["c.metre.irregular"], scope: rh(IRR) },
       { t: "t.g5.metre-facts", c: ["c.metre.irregular"], scope: rh(IRR) },
+      { t: "t.g5.metre-mixed", c: ["c.metre.irregular"], scope: { timeSignatures: ["2/2", "3/2", "4/2", "2/4", "3/4", "4/4", "2/8", "3/8", "4/8", "6/4", "9/4", "12/4", "6/8", "9/8", "12/8", "6/16", "9/16", "12/16", "5/4", "7/4", "5/8", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
     ],
     objective: { statement: "Read 5/4, 7/4, 5/8 and 7/8 as combinations of groups of two and three beats.", criteria: ["I can tell an irregular time signature from a regular one.", "I know the upper figure counts the beats and the lower figure names the beat.", "I know the same signature can be grouped in more than one way."] },
     explain: [
       { text: "So far every bar you have met had beats that were all alike: two, three or four of them, simple or compound. A time signature with five or seven beats in a bar is called irregular, because its beats cannot be shared out evenly. Instead the bar breaks into smaller groups of two and three beats. At Grade 5 the irregular signatures are 5/4, 7/4, 5/8 and 7/8." },
       { text: "Read them as you read any time signature. The upper figure says how many beats are in a bar; the lower figure says which note value is one beat: 4 is a crotchet, 8 is a quaver. So 5/4 is five crotchet beats, and 5/8 is five quaver beats. A bar of 7/8 holds seven quavers." },
       { music: bar([[n("crotchet"), n("crotchet"), n("crotchet"), n("crotchet"), n("crotchet")], [nd("minim"), n("minim")]], "Two bars of 5/4. The first has five crotchets. The second has a dotted minim followed by a minim.", "5/4"), caption: "Both bars of 5/4 add up to five crotchets. The second bar shows a 3 + 2 grouping." },
-      { text: "A time signature does not say how the beats are grouped. Five beats may fall as 3 + 2 or 2 + 3; seven beats as 2 + 2 + 3, 3 + 2 + 2 or 2 + 3 + 2. The composer shows the grouping with note lengths and beams, and a piece usually keeps the same grouping from bar to bar." },
+      { text: "Some questions list regular and irregular signatures together: work out the bar length first, and look for dotted beats or three-note beams (compound time) before you decide. A time signature does not say how the beats are grouped. Five beats may fall as 3 + 2 or 2 + 3; seven beats as 2 + 2 + 3, 3 + 2 + 2 or 2 + 3 + 2. The composer shows the grouping with note lengths and beams, and a piece usually keeps the same grouping from bar to bar." },
       { tip: "To find an irregular signature, add up one bar in the smallest beat: five beats or seven. The upper figure is 5 or 7; the lower figure is the value you counted in." },
     ],
     demo: { widget: "rhythm", music: bar([[n("quaver", { beam: "begin" }), n("quaver", { beam: "continue" }), n("quaver", { beam: "end" }), n("quaver", { beam: "begin" }), n("quaver", { beam: "end" })]], "A bar of 5/8: a group of three quavers then a group of two.", "5/8"), steps: ["Count the quavers: there are five.", "Five quaver beats gives 5/8.", "The beams show three, then two: a 3 + 2 grouping."], text: "One bar of 5/8 with five quavers, beamed in a group of three and a group of two." },
@@ -41,6 +42,7 @@ export const U1: Spec2[] = [
     bind: [
       { t: "t.g5.grouping-judge", c: ["c.metre.irregular-grouping"], scope: rh(["5/8", "7/8"]) },
       { t: "t.g5.irregular-grouping", c: ["c.metre.irregular-grouping"], scope: rh(["5/8", "7/8"]) },
+      { t: "t.g5.rest-judge", c: ["c.metre.irregular-grouping"], scope: { timeSignatures: ["9/4", "12/4", "9/8", "12/8", "9/16", "12/16", "7/4", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
       { t: "t.g5.bar-complete", c: ["c.metre.irregular-grouping"], scope: rh(IRR) },
     ],
     objective: { statement: "Group the notes and rests of an irregular bar so that they show the stated grouping.", criteria: ["I beam each group of two or three separately.", "I never let a note or a rest cross from one group into the next.", "I check the total, the grouping and the beams as three separate things."] },
@@ -77,13 +79,14 @@ export const U1: Spec2[] = [
       { t: "t.g5.irregular-division", c: ["c.rhythm.irregular-divisions"], scope: rh(IRR, true) },
       { t: "t.g5.division-facts", c: ["c.rhythm.irregular-divisions"], scope: rh(IRR, true) },
       { t: "t.g5.division-write", c: ["c.rhythm.irregular-divisions"], scope: rh(IRR, true) },
+      { t: "t.g5.duration-facts", c: ["c.metre.irregular"], scope: { timeSignatures: ["2/2", "3/2", "4/2", "6/4", "9/4", "12/4", "6/8", "9/8", "12/8", "6/16", "9/16", "12/16", "2/8", "3/8", "4/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
     ],
     objective: { statement: "Read and write groups of 5, 6, 7 and 9 notes played in the time of 4 or 8.", criteria: ["I can say how much time an irregular group takes.", "I choose the written value that fits the time.", "I check the group's ratio apart from the bar total."] },
     explain: [
       { text: "You already know the triplet: three equal notes played in the time normally taken by two. Other irregular divisions work the same way. A quintuplet puts five notes into the time of four, a sextuplet six into the time of four, a septuplet seven into the time of four, and a nonuplet nine into the time of eight. The number printed over the group is the number of notes." },
       { music: bar([[tup(5, 4, "semiquaver"), n("crotchet"), n("crotchet"), n("crotchet"), n("crotchet")]], "A bar of 5/4: a quintuplet of five semiquavers, then four crotchets.", "5/4"), caption: "Five semiquavers take the time of one crotchet, so the bar still adds up to five crotchets." },
       { text: "The written value depends on the time the group must fit. Five, six or seven notes in the time of a crotchet are written as semiquavers (two beams). Five, six or seven notes in the time of a quaver are written as demisemiquavers (three beams). Nine notes in the time of a crotchet are written as demisemiquavers; nine in the time of a minim are written as semiquavers." },
-      { text: "To work out how long a group lasts, imagine the ordinary notes it replaces. Five semiquavers in the time of four semiquavers last as long as four semiquavers: one crotchet. Check this separately from the bar total: first the group's length, then whether the bar adds up." },
+      { text: "To work out how long a group lasts, imagine the ordinary notes it replaces. Five semiquavers in the time of four semiquavers last as long as four semiquavers: one crotchet. Check this separately from the bar total: first the group's length, then whether the bar adds up. The same counting works for dotted notes and ties: write every note as a number of the smallest value and add. A dotted crotchet is three quavers or twelve demisemiquavers, and a dotted crotchet tied to a quaver is four quavers." },
       { tip: "Name the group (the number of notes), say what it replaces (the time of 4, or of 8), then say how long that is." },
     ],
     demo: { widget: "rhythm", music: bar([[tup(9, 8, "demisemiquaver"), n("minim"), n("minim")]], "A bar of 5/4: a nonuplet of nine demisemiquavers, then two minims.", "5/4"), steps: ["Nine notes replace eight demisemiquavers.", "Eight demisemiquavers last one crotchet.", "So the nonuplet lasts one crotchet, and the bar adds up to five crotchets."], text: "A nonuplet of nine demisemiquavers lasting one crotchet, then two minims." },
