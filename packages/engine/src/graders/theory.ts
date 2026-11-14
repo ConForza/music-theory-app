@@ -290,7 +290,7 @@ export const gradeTransposition: Grader<AnswerOf<"pitch-sequence">> = (c, a, r) 
     const t = transpose({ ...parseKey(d.sourceKey).tonic, octave: 4 }, iv, d.direction);
     return { tonic: { step: t.step, alter: t.alter }, mode: parseKey(d.sourceKey).mode } as music.Key;
   })();
-  const needsKeyChoice = d.interval !== "P8";
+  const needsKeyChoice = d.interval !== "P8" && d.interval !== "P1"; // an octave or a same-pitch copy keeps the key signature
   const keyOk = !needsKeyChoice || (r.kind === "pitch-sequence" && r.key !== undefined && keyFifths(parseKey(r.key)) === keyFifths(wantKey));
   const notesOk = got.length === want.length && marks.every((m) => m.ok);
   if (notesOk && keyOk) return right(null, { marks });

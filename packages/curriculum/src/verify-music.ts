@@ -48,6 +48,7 @@ import {
   type Pitch,
   type PitchClass,
 } from "./music/index.ts";
+import { checkBar as checkBarRule, metreStructures } from "./music/rhythm.ts";
 import type { AnswerSpec, ExerciseItem, Measure, MusicScope, NotationEvent, NotationFragment, NotationScore, SimpleAnswerSpec } from "./schema.ts";
 
 const ROMANS = ["I", "ii", "IV", "V"] as const;
@@ -377,7 +378,8 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         const source = parseKey(d.sourceKey);
         if (!music.key || !sameKey(parseKey(music.key), source)) report("TRANSPOSE_SOURCE_KEY", where, `Source key ${d.sourceKey} ≠ music key ${String(music.key)}`);
         const interval = parseInterval(d.interval);
-        if (interval.number === 8 && interval.quality === "P") {
+        // an octave (P8) or a same-pitch copy in another clef (P1, Brief 09) is a clef task, not an instrument transposition
+        if ((interval.number === 8 || interval.number === 1) && interval.quality === "P") {
           const clefs = sc.octaveTranspositionClefs ?? [];
           if (!clefs.includes(a.clef) || !clefs.includes(music.clef)) report("ANSWER_SCOPE", where, `Octave transposition ${music.clef} → ${a.clef} is not in scope here`);
         } else {
@@ -458,6 +460,15 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         if (a.task === "complete-bar" && a.given) {
           const first = measures[0]?.events ?? [];
           if (JSON.stringify(first.slice(0, a.given.length)) !== JSON.stringify(a.given)) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} does not begin with the given events`);
+        }
+        if (a.groupPattern && ts) {
+          const st = metreStructures(ts).find((x) => x.pattern?.join("+") === a.groupPattern!.join("+"));
+          if (!st) report("ANSWER_MISMATCH", where, `${a.groupPattern.join("+")} is not a standard grouping of ${ts}`);
+          else
+            measures.forEach((m, bi) => {
+              const issues = checkBarRule(voicesOf(m)[0] as never, st, { requireBeams: a.task === "regroup" });
+              if (issues.length) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1}, bar ${bi + 1}, does not follow the ${a.groupPattern!.join("+")} grouping: ${issues[0]!.message}`);
+            });
         }
         if (a.task === "add-tuplet" && !measures.some((m) => voicesOf(m).some((v) => v.some((e) => e.kind === "tuplet")))) {
           report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} contains no tuplet`);

@@ -95,10 +95,12 @@ function describeTotal(total: music.Fraction, cap_: music.Fraction, ts: string):
   return compare(total, cap_) > 0 ? `This bar is ${amount} too long for ${ts}.` : `This bar needs ${amount} more to fill ${ts}.`;
 }
 
-function judgeBars(c: ItemContext, bars: REvent[][], ts: string, map: Partial<Record<music.RhythmIssueCode, string>>, requireBeams: boolean): Verdict | null {
+function judgeBars(c: ItemContext, bars: REvent[][], ts: string, map: Partial<Record<music.RhythmIssueCode, string>>, requireBeams: boolean, pattern?: number[]): Verdict | null {
   const cap_ = barCapacity(parseTimeSignature(ts));
+  // Brief 09: a question that names the grouping (3+2, 2+2+3 ...) is judged against that grouping alone.
+  const named = pattern ? music.metreStructures(ts).find((s) => s.pattern?.join("+") === pattern.join("+")) : undefined;
   for (const [i, bar] of bars.entries()) {
-    const { issues, structure } = checkBarAnyPattern(bar, ts, { requireBeams });
+    const { issues, structure } = named ? { issues: music.checkBar(bar, named, { requireBeams }), structure: named } : checkBarAnyPattern(bar, ts, { requireBeams });
     if (!issues.length) continue;
     const first = issues[0]!;
     const where = bars.length > 1 ? `Bar ${i + 1}: ` : "";
@@ -144,7 +146,7 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
   if (a.task === "complete-bar") {
     const given = (a.given ?? []) as unknown as REvent[];
     if (bars.length !== 1 || shapeKey(bars[0]!.slice(0, given.length)) !== shapeKey(given)) return wrong(null, "Keep the notes that were given at the start of the bar, then add to them.");
-    const v = judgeBars(c, bars, ts, BAR_CATEGORY, false);
+    const v = judgeBars(c, bars, ts, BAR_CATEGORY, false, a.groupPattern);
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That bar adds up, but this question wants one of the patterns it describes.");
     return right();
@@ -159,7 +161,7 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
         return wrong(null, `${bars.length > 1 ? `Bar ${i + 1}: ` : ""}the rhythm must sound exactly the same as before; only the way it is written should change.`);
       }
     }
-    const v = judgeBars(c, bars, ts, GROUPING_CATEGORY, true);
+    const v = judgeBars(c, bars, ts, GROUPING_CATEGORY, true, a.groupPattern);
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That grouping is not one of the forms this question accepts.");
     return right();

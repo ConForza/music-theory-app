@@ -924,6 +924,8 @@ const RhythmAnswer = z
     accepted: z.array(z.array(Measure).min(1)).min(1),
     /** True when the grader accepts any answer satisfying the rules, not only the listed references. */
     acceptAnyRuleCompliant: z.boolean(),
+    /** Brief 09, irregular time: the beat grouping the question names (for example [3, 2] in 5/4). The bar is then judged against that grouping alone, not against every standard one. */
+    groupPattern: z.array(z.number().int().min(2).max(3)).min(2).optional(),
   })
   .strict();
 
