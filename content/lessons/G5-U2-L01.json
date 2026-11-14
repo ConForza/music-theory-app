@@ -563,12 +563,12 @@
         "kind": "choice",
         "options": [
           {
-            "id": "double bassoon",
-            "label": "double bassoon"
+            "id": "violin",
+            "label": "violin"
           },
           {
-            "id": "bass trombone",
-            "label": "bass trombone"
+            "id": "trumpet",
+            "label": "trumpet"
           },
           {
             "id": "cello",
@@ -587,13 +587,13 @@
             "category": "wrong-category",
             "reason": "No: the viola reads the alto clef (and sometimes the treble)."
           },
-          "bass trombone": {
+          "trumpet": {
             "category": "wrong-category",
-            "reason": "No: the bass trombone reads the bass clef."
+            "reason": "No: the trumpet reads the treble clef."
           },
-          "double bassoon": {
+          "violin": {
             "category": "wrong-category",
-            "reason": "No: the double bassoon reads the bass clef."
+            "reason": "No: the violin reads the treble clef."
           }
         }
       },

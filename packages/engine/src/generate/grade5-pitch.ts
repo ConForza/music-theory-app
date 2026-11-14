@@ -81,7 +81,7 @@ export const tenorFacts: Gen = (c): any => {
   }
   if (mode === "reads") {
     const reading = ["cello", "bassoon", "tenor trombone"];
-    const not: Array<[string, string]> = [["viola", "the viola reads the alto clef (and sometimes the treble)"], ["flute", "the flute reads the treble clef"], ["double bassoon", "the double bassoon reads the bass clef"], ["bass trombone", "the bass trombone reads the bass clef"]];
+    const not: Array<[string, string]> = [["viola", "the viola reads the alto clef (and sometimes the treble)"], ["flute", "the flute reads the treble clef"], ["violin", "the violin reads the treble clef"], ["trumpet", "the trumpet reads the treble clef"]];
     const right = c.rng.pick(reading);
     const wrongs = shuffled(c, not).slice(0, 3);
     const opts = shuffled(c, [[right, right] as [string, string], ...wrongs.map(([n]) => [n, n] as [string, string])]);

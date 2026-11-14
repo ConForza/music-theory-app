@@ -65,7 +65,6 @@ export const U1: Spec2[] = [
       { t: "t.g5.grouping-judge", when: has("composer wants"), correct: "Correct." },
       { t: "t.g5.irregular-grouping", correct: "Correct." },
       { t: "t.g5.bar-complete", correct: "Correct." },
-      { t: "t.g5.grouping-judge", when: has("composer wants"), correct: "Correct." },
     ],
     recap: ["Each group of two or three is written like a bar of its own.", "A beam never joins notes from two groups; no note or rest crosses a group.", "Check the total, the grouping and the beams separately."],
     review: [{ t: "t.g5.grouping-judge", afterDays: 1 }, { t: "t.g5.irregular-grouping", afterDays: 3 }, { t: "t.g5.bar-complete", afterDays: 7 }],
