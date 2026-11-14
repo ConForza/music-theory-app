@@ -231,7 +231,7 @@ export const supertonicFacts5: Gen = (c): any => {
 // Passages of chords on two staves
 // ---------------------------------------------------------------------------
 
-interface ChordSpec { roman: string; inv: Inv }
+export interface ChordSpec { roman: string; inv: Inv }
 interface Placed { spec: ChordSpec; bass: Pitch; upper: Pitch[] }
 
 /** Choose smooth voicings for a progression: the upper notes move as little as possible from chord to chord. */
@@ -309,13 +309,13 @@ export const chordInPassage5: Gen = (c): any => {
 };
 
 /** The root-position chord pairs that end a phrase, by cadence type. Only chords of the Grade 5 list. */
-const CAD_PAIRS: Record<"perfect" | "plagal" | "imperfect", Array<[string, string]>> = { perfect: [["V", "I"]], plagal: [["IV", "I"]], imperfect: [["I", "V"], ["ii", "V"], ["IV", "V"]] };
-const CAD_KEYS = (c: Ctx) => (c.scope.cadenceKeys?.length ? c.scope.cadenceKeys : ["C major", "G major", "D major", "F major"]);
+export const CAD_PAIRS: Record<"perfect" | "plagal" | "imperfect", Array<[string, string]>> = { perfect: [["V", "I"]], plagal: [["IV", "I"]], imperfect: [["I", "V"], ["ii", "V"], ["IV", "V"]] };
+export const CAD_KEYS = (c: Ctx) => (c.scope.cadenceKeys?.length ? c.scope.cadenceKeys : ["C major", "G major", "D major", "F major"]);
 const CAD_LABEL: Record<string, string> = { perfect: "Perfect", plagal: "Plagal", imperfect: "Imperfect" };
-const CAD_TYPES = (c: Ctx) => (c.scope.cadenceTypes?.length ? c.scope.cadenceTypes : ["perfect", "plagal", "imperfect"]) as Array<"perfect" | "plagal" | "imperfect">;
+export const CAD_TYPES = (c: Ctx) => (c.scope.cadenceTypes?.length ? c.scope.cadenceTypes : ["perfect", "plagal", "imperfect"]) as Array<"perfect" | "plagal" | "imperfect">;
 
 /** A four-chord phrase whose last two chords make the named cadence (root position); the first two are any chords that lead there. */
-function cadencePhrase(c: Ctx, key: music.Key, type: "perfect" | "plagal" | "imperfect", first?: ChordSpec[]): ChordSpec[] | null {
+export function cadencePhrase(c: Ctx, key: music.Key, type: "perfect" | "plagal" | "imperfect", first?: ChordSpec[]): ChordSpec[] | null {
   const [x, y] = c.rng.pick(CAD_PAIRS[type].filter(([a, b]) => romans(c).includes(a) && romans(c).includes(b)));
   if (!x) return null;
   const leads: ChordSpec[][] = first ? [first] : [[{ roman: "I", inv: "a" }, { roman: "IV", inv: "a" }], [{ roman: "I", inv: "a" }, { roman: "ii", inv: "b" }], [{ roman: "I", inv: "b" }, { roman: "IV", inv: "a" }], [{ roman: "I", inv: "a" }, { roman: "V", inv: "b" }]];

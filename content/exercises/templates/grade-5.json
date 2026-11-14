@@ -1208,32 +1208,74 @@
         "abrsm2020.g5.13"
       ],
       "conceptIds": [
-        "c.ornaments.patterns",
         "c.ornaments.replace-with-sign"
       ],
-      "promptPattern": "Replace the written-out notes in bar {bar} with the correct ornament sign.",
+      "promptPattern": "Replace written-out notes with the ornament sign (trill, turn, upper or lower mordent).",
       "scope": {
         "ornaments": [
           "trill",
           "turn",
           "upper-mordent",
-          "lower-mordent",
-          "acciaccatura",
-          "appoggiatura"
+          "lower-mordent"
+        ],
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "B major",
+          "Db major",
+          "F# major",
+          "Gb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1,
+        "accidentals": true,
+        "keySignatures": true,
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver",
+          "demisemiquaver"
+        ],
+        "timeSignatures": [
+          "3/4"
         ]
       },
       "acceptance": {
         "spellingSensitive": false,
         "octaveSensitive": false,
         "enharmonicPolicy": "not-applicable",
-        "multipleValidAnswers": true,
-        "alternativesNote": "Accepted alternative signs for the same ornament (e.g. trill symbol variants) are accepted. The reverse task (writing out a sign) is never assessed."
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one sign replaces the figure."
       },
       "ambiguityChecks": [
-        "Written-out figure maps to one ornament."
+        "Only signs that a written-out figure can identify are asked; writing out an ornament from its sign is never assessed."
       ],
       "hints": [
-        "Count the notes and their direction."
+        "Find the main note, then see where the extra notes go."
       ],
       "extraMistakeCategories": [],
       "difficulty": 4,
@@ -1258,23 +1300,29 @@
       "conceptIds": [
         "c.voices.types"
       ],
-      "promptPattern": "Which voice type …?",
-      "scope": {},
+      "promptPattern": "The voices: order, the four choral voices, intermediate voices and the two unmistakable ranges.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 2
+      },
       "acceptance": {
         "spellingSensitive": false,
         "octaveSensitive": false,
         "enharmonicPolicy": "not-applicable",
         "multipleValidAnswers": false,
-        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+        "alternativesNote": "One option is correct."
       },
       "ambiguityChecks": [
-        "Distinct ranges."
+        "Only the extremes of range are asked; ranges are provisional teaching values."
       ],
       "hints": [
-        "Highest to lowest: soprano … bass."
+        "High to low: soprano, alto, tenor, bass."
       ],
       "extraMistakeCategories": [],
-      "difficulty": 2,
+      "difficulty": 3,
       "qa": {
         "status": "draft",
         "reviewRequirements": [
@@ -1294,26 +1342,25 @@
         "abrsm2020.g5.15"
       ],
       "conceptIds": [
-        "c.instruments.sound-production",
         "c.instruments.extended"
       ],
-      "promptPattern": "Which family / clef / way of producing sound …?",
+      "promptPattern": "The extra Grade 5 instruments: relatives, the harp, trombones, percussion, tenor clef and non-orchestral instruments.",
       "scope": {},
       "acceptance": {
         "spellingSensitive": false,
         "octaveSensitive": false,
         "enharmonicPolicy": "not-applicable",
         "multipleValidAnswers": false,
-        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+        "alternativesNote": "One option is correct."
       },
       "ambiguityChecks": [
-        "One correct option."
+        "One option is correct."
       ],
       "hints": [
-        "Reed, lips, bow or strike?"
+        "Piccolo: flute. Cor anglais: oboe."
       ],
       "extraMistakeCategories": [],
-      "difficulty": 2,
+      "difficulty": 3,
       "qa": {
         "status": "draft",
         "reviewRequirements": [
@@ -1335,23 +1382,24 @@
       "conceptIds": [
         "c.terms.g5"
       ],
-      "promptPattern": "What does {term} mean?",
+      "promptPattern": "What a Grade 5 term (Italian, German, pedal or hand direction) means.",
       "scope": {},
       "acceptance": {
         "spellingSensitive": false,
         "octaveSensitive": false,
         "enharmonicPolicy": "not-applicable",
         "multipleValidAnswers": false,
-        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+        "alternativesNote": "One option is correct."
       },
       "ambiguityChecks": [
-        "Grade 5 vocabulary pending approval (Q2)."
+        "Wrong options are never synonyms of the right one.",
+        "Grade 4 terms are not asked."
       ],
       "hints": [
-        "Is it Italian or German?"
+        "Look for a word you know in another language."
       ],
       "extraMistakeCategories": [],
-      "difficulty": 2,
+      "difficulty": 3,
       "qa": {
         "status": "draft",
         "reviewRequirements": [
@@ -1375,52 +1423,30 @@
         "abrsm2020.g5.11",
         "abrsm2020.g5.12",
         "abrsm2020.g5.13",
-        "abrsm2020.g5.14",
         "abrsm2020.g5.15"
       ],
       "conceptIds": [
         "c.context.score-g5"
       ],
-      "promptPattern": "Look at this score and answer the questions.",
+      "promptPattern": "Look at a short piece for an instrument and piano and answer connected questions: instrument, cadence, key, chord, ornament, term and interval.",
       "scope": {
         "keys": [
           "C major",
           "G major",
           "D major",
-          "F major",
-          "A major",
-          "Bb major",
-          "Eb major",
-          "A minor",
-          "E minor",
-          "D minor",
-          "E major",
-          "Ab major",
-          "B minor",
-          "F# minor",
-          "C# minor",
-          "G minor",
-          "C minor",
-          "F minor",
-          "B major",
-          "Db major",
-          "G# minor",
-          "Bb minor",
-          "F# major",
-          "Gb major",
-          "D# minor",
-          "Eb minor"
+          "F major"
         ],
-        "clefs": [
-          "treble",
-          "bass",
-          "alto",
-          "tenor"
+        "cadenceKeys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
         ],
-        "intervalQuality": "number-and-quality",
-        "intervalLowerNote": "any",
-        "compoundIntervals": true,
-        "chromaticIntervals": true,
+        "cadenceTypes": [
+          "perfect",
+          "plagal",
+          "imperfect"
+        ],
         "chordDegrees": [
           "I",
           "ii",
@@ -1432,29 +1458,65 @@
           "b",
           "c"
         ],
+        "clefs": [
+          "treble",
+          "tenor",
+          "alto",
+          "bass"
+        ],
         "ornaments": [
           "trill",
           "turn",
           "upper-mordent",
-          "lower-mordent",
-          "acciaccatura",
-          "appoggiatura"
-        ]
+          "lower-mordent"
+        ],
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "any",
+        "chromaticIntervals": true,
+        "maxLedgerLines": 2,
+        "accidentals": true,
+        "keySignatures": true
       },
       "acceptance": {
         "spellingSensitive": false,
         "octaveSensitive": false,
         "enharmonicPolicy": "not-applicable",
         "multipleValidAnswers": true,
-        "alternativesNote": "Each sub-question has its own acceptance rule."
+        "alternativesNote": "Each question has its own acceptance rule."
       },
       "ambiguityChecks": [
-        "Original scores only; each question cites a bar."
+        "Original passages; every question is about something in the passage."
       ],
       "hints": [
-        "Find the bar first."
+        "Take the questions one at a time."
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "clef-confusion",
+          "description": "The clef misread.",
+          "feedback": "Find middle C in the printed clef."
+        },
+        {
+          "id": "wrong-interval",
+          "description": "The transposing interval wrong.",
+          "feedback": "B♭ a tone, A a minor 3rd, F a perfect 5th."
+        },
+        {
+          "id": "cadence-misnamed",
+          "description": "A cadence named wrongly.",
+          "feedback": "Name the last two chords first."
+        },
+        {
+          "id": "confused-similar-term",
+          "description": "A similar term confused.",
+          "feedback": "Compare the meanings."
+        },
+        {
+          "id": "wrong-category",
+          "description": "An item in the wrong group.",
+          "feedback": "Check which group it belongs to."
+        }
+      ],
       "difficulty": 5,
       "qa": {
         "status": "draft",
@@ -3358,6 +3420,133 @@
         }
       ],
       "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.ornament-facts",
+      "version": 1,
+      "familyId": "fam.ornament",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ],
+      "conceptIds": [
+        "c.ornaments.patterns"
+      ],
+      "promptPattern": "How the ornament signs are commonly performed, as descriptions.",
+      "scope": {
+        "ornaments": [
+          "trill",
+          "turn",
+          "upper-mordent",
+          "lower-mordent",
+          "acciaccatura",
+          "appoggiatura"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "Descriptions only: no question asks the learner to write out an ornament from its sign."
+      ],
+      "hints": [
+        "Recall the look of each sign and what it does to the main note."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.instrument-sound",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ],
+      "conceptIds": [
+        "c.instruments.sound-production"
+      ],
+      "promptPattern": "How the sound of an instrument is produced: single reed, double reed, edge, buzzing lips, plucked strings.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "One option is correct."
+      ],
+      "hints": [
+        "Think of what touches the player's lips."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.term-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 5,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g5.12"
+      ],
+      "conceptIds": [
+        "c.terms.g5"
+      ],
+      "promptPattern": "Applied terminology: German phrases, the term for a stated instruction, pedal and hand directions.",
+      "scope": {
+        "clefs": [
+          "treble"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct."
+      },
+      "ambiguityChecks": [
+        "Wrong options are never synonyms of the right one."
+      ],
+      "hints": [
+        "Translate word by word."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 4,
       "qa": {
         "status": "draft",
         "reviewRequirements": [
