@@ -283,21 +283,43 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write chord iib of C♯ minor in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
+      "prompt": "Write chord iib of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 4/4. a semibreve rest.",
+        "key": "F major",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "C# minor",
+        "key": "F major",
         "target": {
           "roman": "ii",
           "inversion": "b"
         },
         "acceptedVoicings": [
           [
-            "F#4",
-            "A4",
-            "D#5",
-            "F#5"
+            "Bb3",
+            "D4",
+            "G4",
+            "Bb4"
           ]
         ],
         "voices": 4
@@ -455,28 +477,50 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord iib of F minor in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
+      "prompt": "Write chord iia of F major in the bass clef, in root position (the root of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 1 flat, 4/4. a semibreve rest.",
+        "key": "F major",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "F minor",
+        "key": "F major",
         "target": {
           "roman": "ii",
-          "inversion": "b"
+          "inversion": "a"
         },
         "acceptedVoicings": [
           [
-            "Bb3",
-            "Db4",
-            "G4",
-            "Bb4"
+            "G2",
+            "Bb2",
+            "D3",
+            "G3"
           ]
         ],
         "voices": 4
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord ii is built on degree 2. Write its three notes, but put the 3rd lowest."
+        "Chord ii is built on degree 2. Write its three notes, but put the root lowest."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -625,27 +669,50 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord iia of A minor in the treble clef, in root position (the root of the chord is the lowest note), using exactly 3 notes. In a minor key this triad is diminished. Any spacing is correct.",
+      "prompt": "Write chord iic of D♯ minor in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 6 sharps, 4/4. a semibreve rest.",
+        "key": "D# minor",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "A minor",
+        "key": "D# minor",
         "target": {
           "roman": "ii",
-          "inversion": "a"
+          "inversion": "c"
         },
         "acceptedVoicings": [
           [
             "B3",
-            "D4",
-            "F4"
+            "E#4",
+            "G#4",
+            "B4"
           ]
         ],
-        "voices": 3
+        "voices": 4
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord ii is built on degree 2. Write its three notes, but put the root lowest."
+        "Chord ii is built on degree 2. Write its three notes, but put the 5th lowest."
       ],
       "feedback": {
         "correct": "Correct.",

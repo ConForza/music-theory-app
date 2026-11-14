@@ -90,9 +90,9 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.intervals.compound | U3-L04 | interval-compound 316, compound-facts 128 | 444 |
 | c.transposition.concert-pitch | U3-L05 | concert-facts 262, transpose-key 364 | 626 |
 | c.transposition.instrument | U3-L06 | instrument-transpose 400, transpose-key 364, concert-facts 262 | 1026 |
-| c.chords.inversions | U4-L01 | inversion-facts 283, chord-identify 308, chord-build 202 | 793 |
-| c.chords.supertonic | U4-L02 | supertonic-facts 200, chord-identify 85, chord-build 58 | 343 |
-| c.chords.identify-inversions | U4-L03 | chord-in-passage 283, chord-identify 252, chord-build 196 | 731 |
+| c.chords.inversions | U4-L01 | inversion-facts 283, chord-identify 308, chord-build 258 | 849 |
+| c.chords.supertonic | U4-L02 | supertonic-facts 200, chord-identify 85, chord-build 97 | 382 |
+| c.chords.identify-inversions | U4-L03 | chord-in-passage 283, chord-identify 252, chord-build 227 | 762 |
 | c.cadences.types | U4-L04 | cadence-facts 63, cadence-identify 119 | 182 |
 | c.cadences.recognise | U4-L05 | cadence-find 83, cadence-identify 119 | 202 |
 | c.cadences.chord-choice | U4-L06 | cadence-chords 397, chord-choice 400 | 797 |
@@ -185,7 +185,7 @@ Adversarial answers are graded by the real engine in the same file and in `grade
 - Ornaments: how each sign is performed is taught and asked only as a description. No question asks for the notes of an ornament to be written from its sign (the outline allows only replacing written-out notes with signs), and the inverted turn and the appoggiatura/acciaccatura cannot be told from a written-out figure, so they are never asked in the replacement task.
 - Irregular time (Q30, Q35): the grouping in x/4 is shown by note lengths because crotchets cannot be beamed; beamed grouping is read in x/8 only; a rest fills a whole group or a single unit, never a part of a group. These conventions are not verified by a teacher.
 - Key signatures in the alto and tenor clefs (Q13) are read and written with the clef named in the prompt; scales are asked in the treble and bass clefs only, as the book says.
-- Chord identification and writing (Q14) are both asked. Roman numerals follow the book's two accepted ways (letters a, b, c or figures) and either capital-only or lower-case numerals (Q33); the diminished sign is explained, not required. Chord writing uses the treble clef (a build question has no stave of its own, so its stave follows the first clef of the scope); chord identification uses both treble and bass clefs.
+- Chord identification and writing (Q14) are both asked. Roman numerals follow the book's two accepted ways (letters a, b, c or figures) and either capital-only or lower-case numerals (Q33); the diminished sign is explained, not required. Chord writing is asked in the treble and the bass clef: the question shows an empty stave in the asked clef with the key signature, and the learner writes any spacing and any doubling that has the right notes and the right lowest note.
 - Cadences: asked only in C, G, D and F major, only where both cadence chords are in root position, and a melody question accepts every pair of chords that contains the melody notes and makes the named cadence. The validator derives the possible cadence types from the melody, so a melody question is only generated when the melody allows exactly the named type.
 - Transposing instruments (Q36): the direction and the interval are always stated, and the question says whether the given music is written or concert pitch. The instrument's name is offered as a wrong answer for the key of a transposed part. Performance directions are not carried into the answer (they cannot be graded).
 - Chromatic intervals (Q32/Q27): never doubly augmented or diminished, as the book says; intervals between notes of one scale in a minor key follow the Grade 4 convention of naming the form where it matters.

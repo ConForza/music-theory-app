@@ -110,8 +110,8 @@ export const chordIdentify5: Gen = (c): any => {
 export const chordBuild5: Gen = (c): any => {
   const keyText = c.rng.pick(keysIn(c));
   const key = parseKey(keyText);
-  // A build question has no music of its own, so the learner's stave uses the scope's FIRST clef: the prompt must name that clef (chord identification uses both clefs).
-  const clef = ((c.scope.clefs?.length ? c.scope.clefs : ["treble"])[0] === "bass" ? "bass" : "treble") as "treble" | "bass";
+  // The learner's stave takes its clef from the music the question shows: an empty stave in the asked clef (treble or bass), with the key signature.
+  const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]).filter((x) => x === "treble" || x === "bass")) as "treble" | "bass";
   const roman = c.rng.pick(romans(c));
   const inv = c.rng.pick(invs(c));
   const voices = c.rng.pick([3, 3, 4]);
@@ -124,7 +124,9 @@ export const chordBuild5: Gen = (c): any => {
   const sorted = [...ex].sort((a, b) => diatonicNumber(a) - diatonicNumber(b));
   const bassWord = inv === "a" ? "the root" : inv === "b" ? "the 3rd" : "the 5th";
   const q = triadQuality(key, roman);
+  const empty = frag(clef, [{ events: [{ kind: "rest", duration: { value: "semibreve", dots: 0 }, wholeBar: true } as Ev] }], "An empty stave.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
+    music: { ...empty, textAlternative: `An empty ${clef}-clef stave with the key signature of ${keyWords(keyText)}: write the chord on it.` },
     prompt: `Write chord ${roman}${inv} of ${keyWords(keyText)} in the ${clef} clef, in ${INV_WORD[inv]} (${bassWord} of the chord is the lowest note), using exactly ${voices} notes${voices === 4 ? " (one note of the chord is written twice)" : ""}.${q === "diminished" ? " In a minor key this triad is diminished." : ""} Any spacing is correct.`,
     answer: { kind: "chord", task: "build", key: keyText, target: { roman: roman as "I", inversion: inv }, acceptedVoicings: [sorted.map(F)], voices },
     hints: [`Chord ${roman} is built on degree ${romanDegree(roman)}. Write its three notes, but put ${bassWord} lowest.`],

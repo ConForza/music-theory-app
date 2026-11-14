@@ -511,23 +511,46 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write chord Vc of F major in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct.",
+      "prompt": "Write chord Vc of F minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 4 flats, 4/4. a semibreve rest.",
+        "key": "F minor",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "F major",
+        "key": "F minor",
         "target": {
           "roman": "V",
           "inversion": "c"
         },
         "acceptedVoicings": [
           [
-            "G4",
-            "C5",
-            "E5"
+            "G2",
+            "C3",
+            "E3",
+            "G3"
           ]
         ],
-        "voices": 3
+        "voices": 4
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
@@ -886,28 +909,49 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord Vb of D♭ major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord IVc of F minor in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 4 flats, 4/4. a semibreve rest.",
+        "key": "F minor",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "Db major",
+        "key": "F minor",
         "target": {
-          "roman": "V",
-          "inversion": "b"
+          "roman": "IV",
+          "inversion": "c"
         },
         "acceptedVoicings": [
           [
-            "C4",
-            "Eb4",
-            "Ab4",
-            "C5"
+            "F4",
+            "Bb4",
+            "Db5"
           ]
         ],
-        "voices": 4
+        "voices": 3
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord V is built on degree 5. Write its three notes, but put the 3rd lowest."
+        "Chord IV is built on degree 4. Write its three notes, but put the 5th lowest."
       ],
       "feedback": {
         "correct": "Correct.",

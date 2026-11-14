@@ -295,28 +295,49 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write chord Vb of C♯ minor in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord IVc of C♯ minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 4 sharps, 4/4. a semibreve rest.",
+        "key": "C# minor",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
         "key": "C# minor",
         "target": {
-          "roman": "V",
-          "inversion": "b"
+          "roman": "IV",
+          "inversion": "c"
         },
         "acceptedVoicings": [
           [
-            "B#3",
-            "D#4",
-            "G#4",
-            "B#4"
+            "C#3",
+            "F#3",
+            "A3"
           ]
         ],
-        "voices": 4
+        "voices": 3
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord V is built on degree 5. Write its three notes, but put the 3rd lowest."
+        "Chord IV is built on degree 4. Write its three notes, but put the 5th lowest."
       ],
       "feedback": {
         "correct": "Right: the right note at the bottom.",
@@ -406,27 +427,50 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord IVc of F major in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct.",
+      "prompt": "Write chord Vb of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 4/4. a semibreve rest.",
+        "key": "F major",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
         "key": "F major",
         "target": {
-          "roman": "IV",
-          "inversion": "c"
+          "roman": "V",
+          "inversion": "b"
         },
         "acceptedVoicings": [
           [
-            "F4",
-            "Bb4",
-            "D5"
+            "E4",
+            "G4",
+            "C5",
+            "E5"
           ]
         ],
-        "voices": 3
+        "voices": 4
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord IV is built on degree 4. Write its three notes, but put the 5th lowest."
+        "Chord V is built on degree 5. Write its three notes, but put the 3rd lowest."
       ],
       "feedback": {
         "correct": "Correct chord.",
@@ -573,28 +617,50 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord Vb of F minor in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord Vc of A minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, no sharps or flats in the key signature, 4/4. a semibreve rest.",
+        "key": "A minor",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "chord",
         "task": "build",
-        "key": "F minor",
+        "key": "A minor",
         "target": {
           "roman": "V",
-          "inversion": "b"
+          "inversion": "c"
         },
         "acceptedVoicings": [
           [
-            "E4",
-            "G4",
-            "C5",
-            "E5"
+            "B2",
+            "E3",
+            "G#3",
+            "B3"
           ]
         ],
         "voices": 4
       },
       "hints": [
         "Write the three notes of the chord, with the right one at the bottom.",
-        "Chord V is built on degree 5. Write its three notes, but put the 3rd lowest."
+        "Chord V is built on degree 5. Write its three notes, but put the 5th lowest."
       ],
       "feedback": {
         "correct": "Correct.",

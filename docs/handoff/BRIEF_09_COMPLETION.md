@@ -11,7 +11,7 @@
 3. The Ic–V enrichment now unlocks after the cadence lessons (planned after L03) because its questions use cadence-key harmony.
 4. Enrichment nodes name an outcome (the lesson schema requires one) but are never mastery evidence.
 5. Grade 5 golden question keys were removed from the Brief 04 guard (provisional generators); 246 Grade 1-3 keys stay pinned.
-6. Chord writing uses the treble clef only (a build question's stave follows the first clef of its scope).
+6. Chord writing is asked in treble and bass clef, via an empty stave shown with the question (a build question's own stave follows the clef of the music it shows).
 
 ## Open decisions
 

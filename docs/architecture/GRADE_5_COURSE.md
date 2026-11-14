@@ -49,7 +49,7 @@ The authoring script is idempotent (sections replaced by id, exact counts assert
 * **Same pitch, one octave, copied positions** are three different relations, computed from real pitches.
 * **Inversions** are judged from the lowest note only; spacing and doubling are varied on purpose.
 * **Cadence melody questions** accept every pair of chords that contains the melody notes and makes the named cadence, and are generated only when the melody leaves exactly that cadence type possible (the validator derives the types).
-* **Chord writing** uses the scope's first clef (a build question has no stave of its own); chord identification uses treble and bass.
+* **Chord writing** is asked in the treble and the bass clef: the question shows an empty stave in the asked clef with the key signature (a build question has no music of its own, so this is how the clef reaches the learner's stave); chord identification also uses both clefs.
 * **Ornaments:** only replacing written-out notes with a sign is assessed; performance is described in words.
 * **Enrichment** (Ic–V, approach chords, SATB reading) is playable, bound to its own templates, and in no practice, review, challenge or assessment.
 
