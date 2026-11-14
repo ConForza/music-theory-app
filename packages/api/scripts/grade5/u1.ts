@@ -8,7 +8,7 @@ export const U1: Spec2[] = [
     bind: [
       { t: "t.g5.time-signature", c: ["c.metre.irregular"], scope: rh(IRR) },
       { t: "t.g5.metre-facts", c: ["c.metre.irregular"], scope: rh(IRR) },
-      { t: "t.g5.metre-mixed", c: ["c.metre.irregular"], scope: { timeSignatures: ["2/2", "3/2", "4/2", "2/4", "3/4", "4/4", "2/8", "3/8", "4/8", "6/4", "9/4", "12/4", "6/8", "9/8", "12/8", "6/16", "9/16", "12/16", "5/4", "7/4", "5/8", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
+      { t: "t.g5.metre-mixed", c: ["c.metre.irregular"], scope: { timeSignatures: ["2/2", "3/2", "4/2", "2/4", "3/4", "4/4", "2/8", "3/8", "4/8", "6/4", "9/4", "12/4", "6/8", "9/8", "12/8", "6/16", "9/16", "12/16", "5/4", "7/4", "5/8", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true, tuplets: ["duplet", "triplet"] } },
     ],
     objective: { statement: "Read 5/4, 7/4, 5/8 and 7/8 as combinations of groups of two and three beats.", criteria: ["I can tell an irregular time signature from a regular one.", "I know the upper figure counts the beats and the lower figure names the beat.", "I know the same signature can be grouped in more than one way."] },
     explain: [
@@ -42,7 +42,7 @@ export const U1: Spec2[] = [
     bind: [
       { t: "t.g5.grouping-judge", c: ["c.metre.irregular-grouping"], scope: rh(["5/8", "7/8"]) },
       { t: "t.g5.irregular-grouping", c: ["c.metre.irregular-grouping"], scope: rh(["5/8", "7/8"]) },
-      { t: "t.g5.rest-judge", c: ["c.metre.irregular-grouping"], scope: { timeSignatures: ["9/4", "12/4", "9/8", "12/8", "9/16", "12/16", "7/4", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
+      { t: "t.g5.rest-judge", c: ["c.metre.irregular-grouping"], scope: { timeSignatures: ["5/4", "5/8", "6/4", "6/8", "6/16", "9/4", "12/4", "9/8", "12/8", "9/16", "12/16", "7/4", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
       { t: "t.g5.bar-complete", c: ["c.metre.irregular-grouping"], scope: rh(IRR) },
     ],
     objective: { statement: "Group the notes and rests of an irregular bar so that they show the stated grouping.", criteria: ["I beam each group of two or three separately.", "I never let a note or a rest cross from one group into the next.", "I check the total, the grouping and the beams as three separate things."] },
@@ -79,6 +79,7 @@ export const U1: Spec2[] = [
       { t: "t.g5.irregular-division", c: ["c.rhythm.irregular-divisions"], scope: rh(IRR, true) },
       { t: "t.g5.division-facts", c: ["c.rhythm.irregular-divisions"], scope: rh(IRR, true) },
       { t: "t.g5.division-write", c: ["c.rhythm.irregular-divisions"], scope: rh(IRR, true) },
+      { t: "t.g5.metre-mixed", c: ["c.metre.irregular"], scope: { timeSignatures: ["2/2", "3/2", "4/2", "2/4", "3/4", "4/4", "2/8", "3/8", "4/8", "6/4", "9/4", "12/4", "6/8", "9/8", "12/8", "6/16", "9/16", "12/16", "5/4", "7/4", "5/8", "7/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true, tuplets: ["duplet", "triplet", "irregular"] } },
       { t: "t.g5.duration-facts", c: ["c.metre.irregular"], scope: { timeSignatures: ["2/2", "3/2", "4/2", "6/4", "9/4", "12/4", "6/8", "9/8", "12/8", "6/16", "9/16", "12/16", "2/8", "3/8", "4/8"], noteValues: VALS, maxDots: 1, rests: true, ties: true } },
     ],
     objective: { statement: "Read and write groups of 5, 6, 7 and 9 notes played in the time of 4 or 8.", criteria: ["I can say how much time an irregular group takes.", "I choose the written value that fits the time.", "I check the group's ratio apart from the bar total."] },

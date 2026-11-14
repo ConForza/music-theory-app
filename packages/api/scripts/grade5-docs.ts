@@ -202,7 +202,7 @@ t.push("## 7. Known ambiguities and limitations", "",
   "- The sounds are synthesised tones. No novice learner test has been run.",
   "- Questions are generated per learner; individual variants are not teacher-reviewed one by one, only the templates and the samples above.", "");
 t.push("## 8. Decisions needed", "",
-  "1. Confirm or replace the Grade 5 term list (Italian, German, pedal and hand directions) (Q2).",
+  "1. Confirm or replace the Grade 5 term list (Italian, German, French, pedal and hand directions) (Q2). The French list is the one printed on p. 104 of the reference book, which the Grade 5 practice papers test.",
   "2. Grade 5 term lists: should Grade 1-4 terms also be examined at Grade 5? The course asks Grade 5 terms only for Grade 5 credit (Q2).",
   "3. Irregular time (Q30, Q35): confirm showing the grouping by note lengths in x/4, by beams in x/8, and that a rest fills a whole group or one unit only.",
   "4. Key signatures in C clefs (Q13): confirm that alto and tenor key signatures are read and written, and that scales are asked in the treble and bass clefs only.",
@@ -212,9 +212,10 @@ t.push("## 8. Decisions needed", "",
   "8. Ornaments: confirm that describing performance in words is enough and that no 'write out the ornament' task is wanted at Grade 5; confirm the turn, mordent, trill, appoggiatura and acciaccatura wording.",
   "9. Transposing instruments (Q36): confirm that stating the interval, the direction and written or concert pitch in every question is right, and whether performance directions should be graded.",
   "10. Chromatic intervals: confirm that doubly augmented and doubly diminished intervals stay out, and the wording of 'diatonic' and 'chromatic'.",
-  "11. Cadences: confirm that cadence questions stay in C, G, D and F major with both chords in root position, and that any pair of chords containing the melody notes and making the named cadence is correct.",
+  "11. Cadences: confirm that cadence questions stay in C, G, D and F major with both chords in root position, and that any pair of chords containing the melody notes and making the named cadence is correct. (The Grade 5 practice papers do not require root position; the restriction only makes questions easier, so it can stay or go.)",
   "12. Confirm the assessment sample (32 Grade 5 + 7 earlier-grade questions), the unit challenge sizes (6, 6, 8, 6, 12), the provisional pass marks (70% challenge, 66% assessment; exact ratio: 26 of 39) and the mastery thresholds.",
-  "13. Sign off, or list changes for, the teaching copy of each lesson.", "");
+  "13. Terms beyond the book (Q37): the practice papers also use doloroso, a niente, tristamente, scherzando and con spirito, which are in no term list the course holds. Decide whether to add them to the Grade 5 list (a suggested answer: yes, they are common Italian terms and the papers print them), whether Grade 4 terms such as niente may be asked at Grade 5, and whether a term printed in a score may be asked when it is not on the list.",
+  "14. Sign off, or list changes for, the teaching copy of each lesson.", "");
 mkdirSync(join(root, "docs/teacher"), { recursive: true });
 writeFileSync(join(root, "docs/teacher/GRADE_5_TEACHER_REVIEW_PACK.md"), t.join("\n") + "\n");
 console.log("wrote docs/curriculum/GRADE_5_COMPLETION_AUDIT.md and docs/teacher/GRADE_5_TEACHER_REVIEW_PACK.md");

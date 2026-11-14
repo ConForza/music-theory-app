@@ -31,6 +31,56 @@ const measuresOf = (bars: Ev[][]): Measure[] => bars.map((events, i) => ({ event
 // t.g5.metre-mixed
 // ---------------------------------------------------------------------------
 
+
+// ---------------------------------------------------------------------------
+// bars with tuplets for t.g5.metre-mixed
+// ---------------------------------------------------------------------------
+
+/** Two bars in a regular or irregular signature, every one with at least one tuplet: triplets, quintuplets and septuplets in a beat of simple or irregular time, duplets in a compound beat. */
+function tupletBars(c: Ctx, ts: string): Ev[][] | null {
+  const kinds = c.scope.tuplets ?? [];
+  const st = music.metreStructures(ts)[0]!;
+  const { bottom, top } = parseTimeSignature(ts);
+  const compound = st.metre === "compound";
+  const beats = compound ? st.groups.length : top;
+  const beatF = compound ? mul(frac(1, bottom), frac(3)) : frac(1, bottom);
+  const kinds2: Array<"duplet" | "triplet" | "five" | "seven"> = compound ? (kinds.includes("duplet") ? ["duplet"] : []) : [...(kinds.includes("triplet") ? (["triplet"] as const) : []), ...(kinds.includes("irregular") ? (["five", "seven"] as const) : [])];
+  if (!kinds2.length) return null;
+  const beamNotes = (vs: Ev[]): Ev[] => vs.map((e, i) => ({ ...e, beam: i === 0 ? "begin" : i === vs.length - 1 ? "end" : "continue" }) as Ev);
+  const canBeam = (v: music.NoteValue) => v === "quaver" || v === "semiquaver" || v === "demisemiquaver";
+  const tuplet = (kind: "duplet" | "triplet" | "five" | "seven"): Ev | null => {
+    const count = kind === "duplet" ? 2 : kind === "triplet" ? 3 : kind === "five" ? 5 : 7;
+    const normal = kind === "duplet" ? 3 : 2 * (kind === "triplet" ? 1 : 2);
+    const each = kind === "duplet" ? valueFor(frac(1, bottom), 0) : kind === "triplet" ? valueFor(mul(beatF, frac(1, 2)), 0) : valueFor(mul(beatF, frac(1, 4)), 0);
+    if (!each) return null;
+    const notes = Array.from({ length: count }, () => n(each.value, 0));
+    return { kind: "tuplet", actual: count, normal, events: canBeam(each.value) ? beamNotes(notes) : notes } as Ev;
+  };
+  const plain = (): Ev[] | null => {
+    const whole = valueFor(beatF, 1);
+    if (!whole) return null;
+    if (compound) return c.rng.chance(0.5) ? [n(whole.value, whole.dots)] : (() => { const sub = valueFor(frac(1, bottom), 0); return sub ? (canBeam(sub.value) ? beamNotes : (x: Ev[]) => x)(Array.from({ length: 3 }, () => n(sub.value, 0))) : null; })();
+    const half = valueFor(mul(beatF, frac(1, 2)), 0);
+    return c.rng.chance(0.5) || !half ? [n(whole.value, whole.dots)] : canBeam(half.value) ? beamNotes([n(half.value, 0), n(half.value, 0)]) : [n(half.value, 0), n(half.value, 0)];
+  };
+  const bars: Ev[][] = [];
+  for (let b = 0; b < 2; b++) {
+    const tupletAt = c.rng.int(0, beats - 1);
+    const bar: Ev[] = [];
+    for (let k = 0; k < beats; k++) {
+      const piece = k === tupletAt || c.rng.chance(0.25) ? tuplet(c.rng.pick(kinds2)) : null;
+      const evs = piece ? [piece] : plain();
+      if (!evs) return null;
+      bar.push(...evs);
+    }
+    bars.push(bar);
+  }
+  if (JSON.stringify(bars[0]) === JSON.stringify(bars[1])) return null;
+  const s0 = music.metreStructures(ts)[0]!;
+  for (const b of bars) if (music.checkBar(b as unknown as music.REvent[], s0, { requireBeams: false }).some((x) => x.code === "bar-overfull" || x.code === "bar-underfull" || x.code === "tuplet-total-wrong")) return null;
+  return bars;
+}
+
 /** A bar (or two) shown without its time signature; the choices mix regular and irregular signatures. Only signatures of a different bar length are offered as wrong answers. */
 export const metreMixed5: Gen = (c): any => {
   const pool = c.scope.timeSignatures ?? [];
@@ -38,12 +88,22 @@ export const metreMixed5: Gen = (c): any => {
   const irregular = MAX_IRREGULAR.filter((t) => pool.includes(t));
   if (!regular.length || !irregular.length) return null;
   const useIrregular = c.rng.chance(0.5);
-  const inner = useIrregular
-    ? timeSigIrregular({ ...c, scope: { ...c.scope, timeSignatures: irregular } })
-    : timeSigRead4({ ...c, scope: { ...c.scope, timeSignatures: regular } });
-  if (!inner) return null;
-  const d = inner as any;
-  const ts: string = d.answer.accepted[0];
+  let d: any;
+  let ts: string;
+  if ((c.scope.tuplets ?? []).length && c.rng.chance(0.4)) {
+    // a bar with tuplets (a triplet or duplet, and in irregular time quintuplets and septuplets)
+    ts = c.rng.pick(useIrregular ? irregular : regular);
+    const bars = tupletBars(c, ts);
+    if (!bars) return null;
+    d = { music: rhythmLine(measuresOf(bars)) };
+  } else {
+    const inner = useIrregular
+      ? timeSigIrregular({ ...c, scope: { ...c.scope, timeSignatures: irregular } })
+      : timeSigRead4({ ...c, scope: { ...c.scope, timeSignatures: regular } });
+    if (!inner) return null;
+    d = inner as any;
+    ts = d.answer.accepted[0];
+  }
   const cap = barCapacity(parseTimeSignature(ts));
   const rivals = [...regular, ...irregular].filter((t) => t !== ts && !equals(barCapacity(parseTimeSignature(t)), cap));
   // always offer at least one signature of the other kind (regular against irregular), so the choice is really mixed
@@ -81,18 +141,48 @@ export const restJudge5: Gen = (c): any => {
   const structs = music.metreStructures(ts);
   const s = c.rng.pick(structs);
   const lens: number[] = s.metre === "irregular" ? s.pattern! : Array.from({ length: s.groups.length }, () => 3);
-  if (lens.length < 3) return null; // two silent groups and at least one sounding group are needed
   const unit = frac(1, bottom);
   const val = (k: number) => valueFor(mul(unit, frac(k)), 1);
   const unitV = val(1);
   if (!unitV) return null;
   const beamed = bottom >= 8;
   const sound = (L: number): Ev[] => {
-    const kind = c.rng.pick(L === 3 ? (["whole", "split", "two-one"] as const) : (["whole", "split"] as const));
+    const kind = c.rng.pick(L === 3 ? (["whole", "split", "two-one"] as const) : L === 1 ? (["whole"] as const) : (["whole", "split"] as const));
     if (kind === "whole") { const v = val(L); return v ? [n(v.value, v.dots)] : []; }
     if (kind === "two-one") { const a = val(2); return a ? [n(a.value, a.dots), n(unitV.value, unitV.dots)] : []; }
     return Array.from({ length: L }, (_, i) => n(unitV.value, unitV.dots, beamed ? { beam: i === 0 ? "begin" : i === L - 1 ? "end" : "continue" } : {}));
   };
+  if (lens.length === 2) {
+    // Two groups: the last unit of the first and the first unit of the second are silent. Right: a rest for each; wrong: one rest across the boundary.
+    const two = val(2);
+    if (!two) return null;
+    const part1 = sound(lens[0]! - 1);
+    const part2 = sound(lens[1]! - 1);
+    if (!part1.length || !part2.length) return null;
+    const copy = (xs: Ev[]) => xs.map((e) => ({ ...e }));
+    const make2 = (across: boolean): Ev[] => [...copy(part1), ...(across ? [r(two.value, two.dots)] : [r(unitV.value, unitV.dots), r(unitV.value, unitV.dots)]), ...copy(part2)];
+    const pair: Bar[] = [{ ev: make2(false), right: true }, { ev: make2(true), right: false }];
+    const iss = (b: Bar) => music.checkBar(b.ev as unknown as music.REvent[], s, { requireBeams: false });
+    if (iss(pair[0]!).length) return null;
+    const bad = iss(pair[1]!);
+    if (!bad.length || !bad.every((x) => x.code === "rest-across-beat")) return null;
+    const ord = shuffled(c, pair);
+    const at2 = ord.findIndex((b) => b.right);
+    const noun = s.metre === "irregular" ? "group" : "beat";
+    const unitWord = `${unitV.value}${unitV.dots ? " (dotted)" : ""}`;
+    return {
+      prompt: `Each bar is in ${ts} (${s.metre === "irregular" ? `grouped ${s.pattern!.join("+")}` : "with dotted-note beats"}). The last ${unitWord} of the first ${noun} and the first ${unitWord} of the second ${noun} are silent. Which bar writes the rests correctly?`,
+      music: rhythmLine(measuresOf(ord.map((b) => b.ev)), { timeSignature: ts }),
+      answer: {
+        kind: "choice",
+        options: ord.map((_, i) => ({ id: String(i + 1), label: `Bar ${i + 1}` })),
+        correctOptionIds: [String(at2 + 1)],
+        diagnoses: Object.fromEntries(ord.map((b, i) => [String(i + 1), b.right ? null : { category: "rest-grouping", reason: `A rest must not run across the line between two ${noun}s: each ${noun} needs its own rest.` }]).filter(([, v]) => v)),
+      },
+      hints: [`Each ${noun} is marked off from the next: a rest should not join the end of one to the start of the next.`],
+    };
+  }
+  if (lens.length < 3) return null;
   const idx = lens.map((_, i) => i);
   const picked = shuffled(c, idx).slice(0, 2);
   const [A, B] = picked as [number, number];

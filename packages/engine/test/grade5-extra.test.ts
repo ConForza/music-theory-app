@@ -77,7 +77,7 @@ describe("t.g5.duration-facts", () => {
 describe("t.g5.metre-mixed", () => {
   it("the bar length fixes the signature among the choices, and the choices mix regular and irregular signatures", () => {
     const IRR = ["5/4", "7/4", "5/8", "7/8"];
-    let regular = 0, irregular = 0;
+    let regular = 0, irregular = 0, withTuplets = 0;
     for (const it of items("G5-U1-L01", "t.g5.metre-mixed", 300)) {
       const ts = A(it).correctOptionIds[0] as string;
       const [top, bottom] = ts.split("/").map(Number);
@@ -87,15 +87,27 @@ describe("t.g5.metre-mixed", () => {
       const kinds = new Set((A(it).options as any[]).map((o) => IRR.includes(o.label)));
       expect(kinds.size, `${it.id}: both kinds offered`).toBe(2);
       if (IRR.includes(ts)) irregular++; else regular++;
+      const tuplets = it.music!.measures.flatMap((m) => (m.events as any[]).filter((e) => e.kind === "tuplet"));
+      if (tuplets.length) {
+        withTuplets++;
+        const compound = [6, 9, 12].includes(top!) && bottom! >= 4;
+        for (const t of tuplets) {
+          if (compound) expect([t.actual, t.normal], `${it.id}: only a duplet in compound time`).toEqual([2, 3]);
+          else expect([[3, 2], [5, 4], [7, 4]].some(([a, b]) => t.actual === a && t.normal === b), `${it.id}: ${t.actual}:${t.normal}`).toBe(true);
+          if (!IRR.includes(ts) && !compound) expect(t.actual, `${it.id}: only triplets in regular simple time`).toBe(3);
+        }
+      }
     }
     expect(regular).toBeGreaterThan(40);
     expect(irregular).toBeGreaterThan(40);
+    expect(withTuplets).toBeGreaterThan(30);
   });
 });
 
 describe("t.g5.rest-judge", () => {
   it("only the correct bar writes every silent group or beat as one rest, and the three bars sound the same", () => {
     let checked = 0;
+    let two = 0;
     for (const it of items("G5-U1-L02", "t.g5.rest-judge", 300)) {
       const m = /in (\d+)\/(\d+) \((?:grouped ([\d+]+)|with dotted-note beats)\)/.exec(it.prompt)!;
       const [top, bottom] = [Number(m[1]), Number(m[2])];
@@ -103,6 +115,15 @@ describe("t.g5.rest-judge", () => {
       const lens = m[3] ? m[3].split("+").map(Number) : Array.from({ length: top / 3 }, () => 3);
       const bounds = lens.reduce<number[]>((acc, L) => [...acc, acc[acc.length - 1]! + L * unit], [0]);
       const bars = it.music!.measures.map((x) => x.events as any[]);
+      if (bars.length === 2) {
+        // two groups: a rest that runs across the boundary is the wrong bar; the right bar gives each side its own rest
+        const across = bars.map((bar) => { let t = 0; let hit = false; for (const e of bar) { const l = len32(e); if (e.kind === "rest" && t < bounds[1]! && t + l > bounds[1]!) hit = true; t += l; } expect(t, it.id).toBe(top * unit); return hit; });
+        expect(across.filter((x) => !x).length, `${it.id}: exactly one bar keeps its rests inside the groups`).toBe(1);
+        expect(Number(A(it).correctOptionIds[0]) - 1, it.id).toBe(across.findIndex((x) => !x));
+        two++;
+        checked++;
+        continue;
+      }
       expect(bars.length, it.id).toBe(3);
       const fussy = bars.map((bar) => {
         let t = 0;
@@ -119,6 +140,7 @@ describe("t.g5.rest-judge", () => {
       checked++;
     }
     expect(checked).toBeGreaterThan(60);
+    expect(two).toBeGreaterThan(20);
   });
 });
 

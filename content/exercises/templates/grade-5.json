@@ -4101,7 +4101,12 @@
         ],
         "maxDots": 1,
         "rests": true,
-        "ties": true
+        "ties": true,
+        "tuplets": [
+          "duplet",
+          "triplet",
+          "irregular"
+        ]
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -4112,7 +4117,8 @@
       },
       "ambiguityChecks": [
         "Only signatures with a different bar length are offered as wrong answers, so one answer fits.",
-        "At least one wrong answer is of the other kind (regular against irregular)."
+        "At least one wrong answer is of the other kind (regular against irregular).",
+        "A bar with tuplets still holds a fixed amount of music: only signatures of a different bar length are offered as wrong answers."
       ],
       "hints": [
         "Add up one bar. Dotted beats or three beamed notes to a beat mean each beat divides into three; five or seven beats mean irregular time."
@@ -4149,6 +4155,11 @@
       "promptPattern": "Which bar writes its rests correctly (compound or irregular time)?",
       "scope": {
         "timeSignatures": [
+          "5/4",
+          "5/8",
+          "6/4",
+          "6/8",
+          "6/16",
           "9/4",
           "12/4",
           "9/8",
@@ -4178,7 +4189,8 @@
       },
       "ambiguityChecks": [
         "Exactly one option is correct; each wrong option writes one silent beat or group as several small rests.",
-        "The notes are identical in all three bars; only the rests differ."
+        "The notes are identical in all three bars; only the rests differ.",
+        "In a two-group bar the silent units straddle the boundary: one rest for each is right, a single rest across the boundary is wrong."
       ],
       "hints": [
         "Each silent group or beat is one rest, not a row of small ones."

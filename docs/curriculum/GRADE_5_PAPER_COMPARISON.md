@@ -68,9 +68,9 @@ Ranked by how likely they are to matter. "Recommend" is my suggestion, not a cha
 | # | Result |
 |---|---|
 | P1 | French terms added to `VOCAB_G5` (version 2): the book's list from p. 104 plus *sourdines*; taught in G5-U5-L06; asked by `t.g5.terms`. |
-| P2 | Not done: a teacher decides how far the list goes beyond the book (doloroso, a niente, tristamente, scherzando, con spirito). |
-| P3 | `t.g5.metre-mixed`. No tuplets in the bars yet: the Grade 4 reader it reuses draws none. |
-| P4 | `t.g5.rest-judge` for dotted-beat metres (9/x, 12/x) and irregular metres with three groups (7/4, 7/8). Two-group metres (6/x, 5/x) are not asked: they would leave only one silent group to misspell. |
+| P2 | Not done: a teacher decides how far the list goes beyond the book (doloroso, a niente, tristamente, scherzando, con spirito). Added to the teacher pack as item 13 and to `OPEN_QUESTIONS.md` as Q37. |
+| P3 | `t.g5.metre-mixed`. About 40% of its bars hold tuplets: triplets in simple time, duplets in compound time, and triplets, quintuplets and septuplets in irregular time. Tuplet bars come from a Grade 5 builder; the Grade 4 reader is untouched. |
+| P4 | `t.g5.rest-judge` for dotted-beat metres (9/x, 12/x) and 7/4, 7/8 (two silent groups, three bars), and for the two-group metres 5/x and 6/x (the last unit of the first group and the first unit of the second are silent: one rest for each is right, one rest across the boundary is wrong; two bars). |
 | P5 | `t.g5.duration-facts`: beats in a bar and dotted-note or tied-note sums. Tuplet totals in minim beats are not covered. |
 | P6 | `t.g5.clef-minor` and `t.g5.transpose-judge`. |
 | P7 | Already in the lesson in a different form, but the old wording said "either spelling is accepted", which is only true as a meaning: the app's input is a list that shows ii. The G5-U4-L02 text now says the exam prints capitals, lower case is also recognised, and the app's ii means the same as II. |
