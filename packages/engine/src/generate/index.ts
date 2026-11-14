@@ -132,6 +132,7 @@ export function generateItem(ix: CurriculumIndex, templateId: string, seed: numb
       if (severity === "error") issues.push(`${code}: ${message}`);
     });
     if (issues.length) {
+      if (process.env.GEN_DEBUG) console.error(`[reject] ${t.id}: ${issues[0]}`);
       problems.push(issues[0]!);
       continue;
     }

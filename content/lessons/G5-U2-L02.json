@@ -1,0 +1,1005 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U2-L02",
+  "lessonId": "G5-U2-L02",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read and write melodies and key signatures in the treble, alto, tenor and bass clefs.",
+    "successCriteria": [
+      "I can write the same sounding note in a different clef.",
+      "I place key signatures in the right order in every clef.",
+      "I do not copy stave positions when I change clef."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Here is the same four-note phrase, at exactly the same pitch, in the alto, tenor and bass clefs. The notes sound alike, but they sit at different heights on the stave, because each clef gives the lines and spaces different names. To change clef without changing the sound, name each note first and then write the same name in the new clef."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A four-note phrase in the alto clef: G, A, B, C.",
+        "timeSignature": "4/4"
+      },
+      "caption": "Alto clef: G A B C."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "The same phrase in the tenor clef: G, A, B, C.",
+        "timeSignature": "4/4"
+      },
+      "caption": "Tenor clef: the same pitches, written higher on the stave."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "The same phrase in the bass clef: G, A, B, C.",
+        "timeSignature": "4/4"
+      },
+      "caption": "Bass clef: the same pitches again."
+    },
+    {
+      "kind": "text",
+      "text": "Key signatures are written in the same order in every clef (F, C, G, D, A, E, B for sharps; B, E, A, D, G, C, F for flats), but the sharps and flats sit at different heights because the clefs differ. A key signature is read the same way in every clef: count the signs, then name the key."
+    },
+    {
+      "kind": "tip",
+      "text": "To write the same sound in another clef: name the note, find its letter in the new clef, check the octave. Never copy the positions."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "natural"
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "An alto-clef stave in G major with F sharp and G.",
+      "key": "G major"
+    },
+    "steps": [
+      "The key signature is one sharp: F sharp.",
+      "In the alto clef the sharp is on the fourth line... the key is G major.",
+      "Name the notes using the signature."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "An alto-clef stave in G major."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u2-l02.guided-1",
+      "templateId": "t.g5.four-clef-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name the note marked x. Give its letter name and any sharp or flat that the key signature gives it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A tenor-clef stave, key signature of 2 sharps, 4/4. Bar 1: a note in the 4th space; a note on the 5th line; a note marked x in the space just above the stave; a note in the 4th space. Bar 2: a note in the space just above the stave.",
+        "key": "B minor",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "F#4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Find the clef first, then apply the key signature.",
+        "Find the clef first: which line is middle C? Then count to the marked note, and apply the key signature."
+      ],
+      "feedback": {
+        "correct": "Yes: clef first, then the key signature.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.guided-2",
+      "templateId": "t.g5.same-pitch",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write this melody in the alto clef so that it sounds at exactly the same pitch. Keep the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A tenor-clef stave, key signature of 2 sharps, 3/4. Bar 1: a note in the 1st space; a note on the 1st line; a note in the space just below the stave. Bar 2: a note on the 1st ledger line below the stave; a note in the space just below the stave; a note in the space below the 1st ledger line below the stave.",
+        "key": "D major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "alto",
+        "key": "D major",
+        "accepted": [
+          [
+            "E3",
+            "D3",
+            "C#3",
+            "B2",
+            "C#3",
+            "A2"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P1",
+          "direction": "up",
+          "sourceKey": "D major"
+        }
+      },
+      "hints": [
+        "Name the notes in the first clef, then write the same notes in the second.",
+        "Find the first note's name in the tenor clef, then write that same note in the alto clef. Do not copy the positions on the stave: the clefs give the same positions different names."
+      ],
+      "feedback": {
+        "correct": "Right: named, then written in the new clef.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.guided-3",
+      "templateId": "t.g5.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write the key signature of F♯ minor in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "alto",
+        "accepted": [
+          "F# minor"
+        ]
+      },
+      "hints": [
+        "Count the sharps or flats and place them in the clef's order.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Right: the signs in order.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u2-l02.ind-1",
+      "templateId": "t.g5.four-clef-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name the note marked x. Give its letter name and any sharp or flat that the key signature gives it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "x",
+                "writtenAccidental": "sharp"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A tenor-clef stave, key signature of 1 sharp, 4/4. Bar 1: a note in the space just above the stave; a note in the 4th space, with a sharp sign in front; a note on the 5th line; a note on the 4th line. Bar 2: a note marked x in the 4th space, with a sharp sign in front.",
+        "key": "E minor",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "D#4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Find the clef first, then apply the key signature.",
+        "Find the clef first: which line is middle C? Then count to the marked note, and apply the key signature."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.ind-2",
+      "templateId": "t.g5.same-pitch",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write this melody in the alto clef so that it sounds at exactly the same pitch. Keep the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 4 sharps, 4/4. a note on the 2nd line; a note in the 2nd space; a note on the 3rd line; a note in the 3rd space.",
+        "key": "E major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "alto",
+        "key": "E major",
+        "accepted": [
+          [
+            "B2",
+            "C#3",
+            "D#3",
+            "E3"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P1",
+          "direction": "up",
+          "sourceKey": "E major"
+        }
+      },
+      "hints": [
+        "Name the notes in the first clef, then write the same notes in the second.",
+        "Find the first note's name in the bass clef, then write that same note in the alto clef. Do not copy the positions on the stave: the clefs give the same positions different names."
+      ],
+      "feedback": {
+        "correct": "Correct: the same pitch.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.ind-3",
+      "templateId": "t.g5.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of C♯ minor in the alto clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "alto",
+        "accepted": [
+          "C# minor"
+        ]
+      },
+      "hints": [
+        "Count the sharps or flats and place them in the clef's order.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct signature.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.ind-4",
+      "templateId": "t.g5.four-clef-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name the note marked x. Give its letter name and any sharp or flat that the key signature gives it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 2 flats, 4/4. Bar 1: a note on the 3rd line; a note in the 3rd space; a note marked x in the 2nd space; a note on the 2nd line. Bar 2: a note on the 1st line.",
+        "key": "Bb major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "Bb3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Find the clef first, then apply the key signature.",
+        "Find the clef first: which line is middle C? Then count to the marked note, and apply the key signature."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.ind-5",
+      "templateId": "t.g5.same-pitch",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write this melody in the alto clef so that it sounds at exactly the same pitch. Keep the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A tenor-clef stave, key signature of 4 flats, 4/4. a note in the 4th space; a note on the 5th line; a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave.",
+        "key": "Ab major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "alto",
+        "key": "Ab major",
+        "accepted": [
+          [
+            "Db4",
+            "Eb4",
+            "G4",
+            "Ab4"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P1",
+          "direction": "up",
+          "sourceKey": "Ab major"
+        }
+      },
+      "hints": [
+        "Name the notes in the first clef, then write the same notes in the second.",
+        "Find the first note's name in the tenor clef, then write that same note in the alto clef. Do not copy the positions on the stave: the clefs give the same positions different names."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u2-l02.ind-6",
+      "templateId": "t.g5.four-clef-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name the note marked x. Give its letter name and any sharp or flat that the key signature gives it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A tenor-clef stave, key signature of 1 flat, 3/4. Bar 1: a note in the 2nd space; a note on the 3rd line; a note on the 2nd line. Bar 2: a note in the 2nd space; a note marked x on the 3rd line; a note in the 2nd space.",
+        "key": "F major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "A3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Find the clef first, then apply the key signature.",
+        "Find the clef first: which line is middle C? Then count to the marked note, and apply the key signature."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    }
+  ],
+  "recap": [
+    "Name each note, then write the same name in the new clef.",
+    "Never copy the stave positions into a different clef.",
+    "Key signatures follow the same order of letters in every clef."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.four-clef-read",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.same-pitch",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.key-signature",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.clefs.four-clefs"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s03"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.04"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 3 (pp. 107-109): the same melody in alto, tenor and bass clefs at the same pitch. Q13: key signatures in C clefs are asked (alto in Grade 4, alto and tenor in Grade 5) with the clef named in the prompt; layout 'known' rather than 'written' is flagged for a teacher. Questions use at most one ledger line so the clef, not ledger lines, is what is tested."
+  }
+}

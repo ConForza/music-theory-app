@@ -445,10 +445,11 @@ export const cadenceChords5: Gen = (c): any => {
   const rs = romans(c);
   const accA = music.chordsContaining(key, [A], rs);
   const accB = music.chordsContaining(key, [B], rs);
-  const valid = accA.flatMap((x) => accB.filter((y) => classifyCadence(x, y) === type).map((y) => [x, y]));
-  if (!valid.length) return null;
-  const okA = [...new Set(valid.map((v) => v[0]!))];
-  const okB = [...new Set(valid.map((v) => v[1]!))];
+  // the validator derives the cadence types from EVERY chord that contains the melody notes, so the melody must leave only the named type possible
+  const pairs = accA.flatMap((x) => accB.map((y) => [x, y, classifyCadence(x, y)] as const)).filter((p) => p[2] && CAD_TYPES(c).includes(p[2]));
+  if (new Set(pairs.map((p) => p[2])).size !== 1 || pairs[0]?.[2] !== type) return null;
+  const okA = [...new Set(pairs.map((p) => p[0]))];
+  const okB = [...new Set(pairs.map((p) => p[1]))];
   const events: Ev[] = mel.map((p, i) => note(p, i < 4 ? "crotchet" : "minim", i === 4 ? { label: "A" } : i === 5 ? { label: "B" } : {}));
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   const typeWord = type === "imperfect" ? "an imperfect" : `a ${type}`;
@@ -495,15 +496,17 @@ export const approachChord5: Gen = (c): any => {
   const rs = romans(c);
   const pts = [mel[3]!, mel[4]!, mel[5]!];
   const accs = pts.map((p) => music.chordsContaining(key, [p], rs));
-  const valid = accs[1]!.flatMap((x) => accs[2]!.filter((y) => classifyCadence(x, y) === type).map((y) => [x, y]));
-  if (!valid.length || !accs[0]!.length) return null;
+  const pairs = accs[1]!.flatMap((x) => accs[2]!.map((y) => [x, y, classifyCadence(x, y)] as const)).filter((p) => p[2] && CAD_TYPES(c).includes(p[2]));
+  if (new Set(pairs.map((p) => p[2])).size !== 1 || pairs[0]?.[2] !== type || !accs[0]!.length) return null;
+  const okB = [...new Set(pairs.map((p) => p[0]))];
+  const okC = [...new Set(pairs.map((p) => p[1]))];
   const events: Ev[] = mel.map((p, i) => note(p, i < 3 ? "crotchet" : i === 3 ? "crotchet" : "minim", i === 3 ? { label: "A" } : i === 4 ? { label: "B" } : i === 5 ? { label: "C" } : {}));
   // 3 lead-in crotchets + A (crotchet) = bar 1; B and C (minims) = bar 2
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
     prompt: `In ${keyWords(keyText)}, B and C make a ${type} cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)`,
     music: f,
-    answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(pts[0]!)], accepted: accs[0] as never }, { label: "B", melodyPitches: [F(pts[1]!)], accepted: [...new Set(valid.map((v) => v[0]!))] as never }, { label: "C", melodyPitches: [F(pts[2]!)], accepted: [...new Set(valid.map((v) => v[1]!))] as never }], cadences: [{ labels: ["B", "C"], acceptedTypes: [type] }] },
+    answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(pts[0]!)], accepted: accs[0] as never }, { label: "B", melodyPitches: [F(pts[1]!)], accepted: okB as never }, { label: "C", melodyPitches: [F(pts[2]!)], accepted: okC as never }], cadences: [{ labels: ["B", "C"], acceptedTypes: [type] }] },
     hints: ["First choose the cadence chords for B and C. Then pick any of I, ii, IV or V that contains the melody note at A."],
   };
 };

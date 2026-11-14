@@ -103,7 +103,7 @@ export const tenorFacts: Gen = (c): any => {
   }
   const orders: Array<[string, string]> = [["tatb", "treble, alto, tenor, bass"], ["tbta", "treble, tenor, alto, bass"], ["btat", "bass, tenor, alto, treble"], ["atbt", "alto, treble, tenor, bass"]];
   return {
-    prompt: "Which list puts the four clefs in order, from the highest range of notes to the lowest?",
+    prompt: "Which list puts the four clefs, including the tenor clef, in order from the highest range of notes to the lowest?",
     answer: choiceAnswer(shuffled(c, orders), "tatb", { tbta: ["clef-confusion", "The tenor clef has a lower range than the alto clef."], btat: ["clef-confusion", "That list runs from lowest to highest."], atbt: ["clef-confusion", "The treble clef has the highest range of the four."] }),
     hints: ["Treble is highest, then alto, then tenor, and the bass clef covers the lowest notes."],
   };
@@ -315,19 +315,8 @@ const QUAL: Record<string, string> = { d: "diminished", m: "minor", M: "major", 
 const qualWord = (code: string) => `${QUAL[code[0]!]} ${music.ordinal(Number(code.slice(1)))}`;
 const SIMPLE_POOL = ["m2", "M2", "m3", "M3", "P4", "P5", "m6", "M6", "m7", "M7", "A1", "A2", "A3", "A4", "A5", "A6", "d3", "d4", "d5", "d6", "d7", "d8", "A7"].filter((x) => x !== "d8");
 
-/** Both notes occur in one major or minor scale (natural, harmonic or melodic): then the interval is diatonic. */
-export function isDiatonicPair(a: music.PitchClass, b: music.PitchClass): boolean {
-  const same = (x: music.PitchClass, y: music.PitchClass) => x.step === y.step && x.alter === y.alter;
-  for (const key of music.allKeys()) {
-    const forms: music.ScaleForm[] = key.mode === "major" ? ["major"] : ["natural", "harmonic", "melodic-ascending"];
-    for (const f of forms) {
-      const s = music.scale(key, f).slice(0, 7);
-      if (s.some((x) => same(x, a)) && s.some((x) => same(x, b))) return true;
-    }
-  }
-  return false;
-}
-export const isChromaticPair = (lower: Pitch, upper: Pitch) => !isDiatonicPair(lower, upper);
+export const isDiatonicPair = music.isDiatonicPair;
+export const isChromaticPair = (lower: Pitch, upper: Pitch) => music.isChromaticPairOfPitches(lower, upper);
 
 function randomPair(c: Ctx, codes: string[], clef: Clef, wantChromatic: boolean | null): { lower: Pitch; upper: Pitch; code: string } | null {
   const code = c.rng.pick(codes);

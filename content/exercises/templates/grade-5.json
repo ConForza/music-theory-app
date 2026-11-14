@@ -455,7 +455,7 @@
           "A",
           "F"
         ],
-        "maxLedgerLines": 2,
+        "maxLedgerLines": 3,
         "accidentals": true,
         "keySignatures": true,
         "doubleAccidentals": true
@@ -645,7 +645,7 @@
         "spellingSensitive": false,
         "octaveSensitive": false,
         "enharmonicPolicy": "not-applicable",
-        "multipleValidAnswers": true,
+        "multipleValidAnswers": false,
         "alternativesNote": "Either the major key or its relative minor is accepted when only the signature is shown."
       },
       "ambiguityChecks": [
@@ -1572,7 +1572,13 @@
       "hints": [
         "The upper figure counts the units; the lower figure names the unit; groups are twos and threes."
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "wrong-category",
+          "description": "An item in the wrong group.",
+          "feedback": "Check which group it belongs to."
+        }
+      ],
       "difficulty": 2,
       "qa": {
         "status": "draft",
@@ -1871,7 +1877,7 @@
         "spellingSensitive": false,
         "octaveSensitive": true,
         "enharmonicPolicy": "not-applicable",
-        "multipleValidAnswers": true,
+        "multipleValidAnswers": false,
         "alternativesNote": "Any position of the right letter that fits the ledger-line limit."
       },
       "ambiguityChecks": [
@@ -1925,7 +1931,18 @@
       "hints": [
         "A C clef marks middle C at its centre."
       ],
-      "extraMistakeCategories": [],
+      "extraMistakeCategories": [
+        {
+          "id": "clef-confusion",
+          "description": "The wrong clef or line named.",
+          "feedback": "Middle C is on the fourth line in the tenor clef, the middle line in the alto clef."
+        },
+        {
+          "id": "wrong-category",
+          "description": "An item in the wrong group.",
+          "feedback": "Check which group it belongs to."
+        }
+      ],
       "difficulty": 2,
       "qa": {
         "status": "draft",
@@ -1987,13 +2004,7 @@
         "maxLedgerLines": 2,
         "accidentals": true,
         "keySignatures": true,
-        "doubleAccidentals": true,
-        "octaveTranspositionClefs": [
-          "treble",
-          "bass",
-          "alto",
-          "tenor"
-        ]
+        "doubleAccidentals": true
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -2187,6 +2198,11 @@
           "id": "wrong-count",
           "description": "The number of sharps or flats wrong.",
           "feedback": "Count round the circle of fifths."
+        },
+        {
+          "id": "semitone-misplaced",
+          "description": "The wrong note named for the scale.",
+          "feedback": "Check the semitone below the tonic for the leading note."
         }
       ],
       "difficulty": 3,
@@ -2536,7 +2552,7 @@
           "A",
           "F"
         ],
-        "maxLedgerLines": 2,
+        "maxLedgerLines": 3,
         "accidentals": true,
         "keySignatures": true,
         "doubleAccidentals": true
@@ -2637,7 +2653,7 @@
           "A",
           "F"
         ],
-        "maxLedgerLines": 2,
+        "maxLedgerLines": 3,
         "accidentals": true,
         "keySignatures": true,
         "doubleAccidentals": true
@@ -2976,7 +2992,7 @@
     {
       "id": "t.g5.cadence-find",
       "version": 1,
-      "familyId": "fam.cadence",
+      "familyId": "fam.score-observation",
       "grade": 5,
       "mode": "apply-in-context",
       "outcomeIds": [

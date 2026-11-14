@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U5-L06",
+  "lessonId": "G5-U5-L06",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Know the Italian and German terms and directions of Grade 5 and use them.",
+    "successCriteria": [
+      "I know the Italian terms of Grade 5.",
+      "I can translate simple German directions such as sehr langsam.",
+      "I know the piano pedal and hand directions."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Grade 5 adds more Italian terms: for example attacca (go straight on to the next section), dolente (sad, mournful), doppio movimento (twice as fast), estinto (as soft as possible), incalzando (getting quicker), lusingando (coaxing), ossia (or, alternatively), piangevole (plaintive), rinforzando (reinforcing), smorzando (dying away), teneramente (tenderly), tosto (swift) and volante (flying, fast)."
+    },
+    {
+      "kind": "text",
+      "text": "German directions are built from short words: langsam (slow), schnell (fast), lebhaft (lively), ruhig (peaceful), bewegt (with movement), zart (tender), breit (broad), traurig (sad), süss (sweet), fröhlich (cheerful), mässig (at a moderate speed). Little words change them: sehr (very), etwas (somewhat), wenig (little), nicht (not), zu (too), immer (always), wieder (again), und (and), mit (with), ohne (without), aber (but). Sehr langsam is 'very slow'; mit Ausdruck is 'with expression'."
+    },
+    {
+      "kind": "text",
+      "text": "Pianists also meet directions for the pedals and hands: una corda (press the left pedal, literally 'one string'), tre corde (release the left pedal, 'three strings'), mano sinistra (m.s., left hand) and mano destra (m.d., right hand)."
+    },
+    {
+      "kind": "text",
+      "text": "Learn a term with its meaning in a short phrase, and notice words you already know. Terms with similar meanings (for example dolente and piangevole) are never offered as wrong answers for each other, so the right answer is always the only one that fits."
+    },
+    {
+      "kind": "tip",
+      "text": "German: translate word by word. Italian: link the term to its mood or action."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "Four crotchets, marked sehr langsam.",
+      "timeSignature": "4/4",
+      "tempoText": "Sehr langsam"
+    },
+    "steps": [
+      "Sehr means very.",
+      "Langsam means slow.",
+      "So the direction asks for very slow playing."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A phrase marked sehr langsam."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u5-l06.guided-1",
+      "templateId": "t.g5.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "An Italian term: what does “rinforzando (rf, rfz)” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "dolore",
+            "label": "Grief"
+          },
+          {
+            "id": "rinforzando",
+            "label": "Reinforcing: a sudden stress on a note or chord"
+          },
+          {
+            "id": "lusingando",
+            "label": "Coaxing, in a sweet and persuasive style"
+          },
+          {
+            "id": "piangevole",
+            "label": "Plaintive, in the style of a lament"
+          }
+        ],
+        "correctOptionIds": [
+          "rinforzando"
+        ],
+        "diagnoses": {
+          "lusingando": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “lusingando”."
+          },
+          "piangevole": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “piangevole”."
+          },
+          "dolore": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “dolore”."
+          }
+        }
+      },
+      "hints": [
+        "Look for a word you know in another language.",
+        "Look for a word you know in another language, or think about the mood or direction it describes."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.guided-2",
+      "templateId": "t.g5.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A composer wants the player to or, alternatively. Which direction would be printed?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piangevole",
+            "label": "piangevole"
+          },
+          {
+            "id": "teneramente",
+            "label": "teneramente"
+          },
+          {
+            "id": "doppio-movimento",
+            "label": "doppio movimento"
+          },
+          {
+            "id": "ossia",
+            "label": "ossia"
+          }
+        ],
+        "correctOptionIds": [
+          "ossia"
+        ],
+        "diagnoses": {
+          "piangevole": {
+            "category": "confused-similar-term",
+            "reason": "“piangevole” means “plaintive, in the style of a lament”."
+          },
+          "teneramente": {
+            "category": "confused-similar-term",
+            "reason": "“teneramente” means “tenderly (tenerezza: tenderness)”."
+          },
+          "doppio-movimento": {
+            "category": "confused-similar-term",
+            "reason": "“doppio movimento” means “twice as fast”."
+          }
+        }
+      },
+      "hints": [
+        "Translate word by word.",
+        "Think about which of the four terms has exactly that meaning."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.guided-3",
+      "templateId": "t.g5.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A German term: what does “immer” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "zu",
+            "label": "To, too"
+          },
+          {
+            "id": "ohne",
+            "label": "Without"
+          },
+          {
+            "id": "immer",
+            "label": "Always"
+          },
+          {
+            "id": "ausdruck",
+            "label": "Expression"
+          }
+        ],
+        "correctOptionIds": [
+          "immer"
+        ],
+        "diagnoses": {
+          "ohne": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “ohne”."
+          },
+          "zu": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “zu”."
+          },
+          "ausdruck": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “Ausdruck”."
+          }
+        }
+      },
+      "hints": [
+        "Look for a word you know in another language.",
+        "Look for a word you know in another language, or think about the mood or direction it describes."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-l06.ind-1",
+      "templateId": "t.g5.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "An Italian term: what does “lacrimoso” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "lacrimoso",
+            "label": "Tearful, sad"
+          },
+          {
+            "id": "teneramente",
+            "label": "Tenderly (tenerezza: tenderness)"
+          },
+          {
+            "id": "incalzando",
+            "label": "Getting quicker, pressing forward"
+          },
+          {
+            "id": "smorzando",
+            "label": "Dying away in tone and speed"
+          }
+        ],
+        "correctOptionIds": [
+          "lacrimoso"
+        ],
+        "diagnoses": {
+          "incalzando": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “incalzando”."
+          },
+          "teneramente": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “teneramente”."
+          },
+          "smorzando": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “smorzando (smorz.)”."
+          }
+        }
+      },
+      "hints": [
+        "Look for a word you know in another language.",
+        "Look for a word you know in another language, or think about the mood or direction it describes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.ind-2",
+      "templateId": "t.g5.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which direction asks the player to do this: right hand?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tre-corde",
+            "label": "tre corde"
+          },
+          {
+            "id": "una-corda",
+            "label": "una corda"
+          },
+          {
+            "id": "mano-destra",
+            "label": "mano destra (m.d.)"
+          },
+          {
+            "id": "mano-sinistra",
+            "label": "mano sinistra (m.s.)"
+          }
+        ],
+        "correctOptionIds": [
+          "mano-destra"
+        ],
+        "diagnoses": {
+          "una-corda": {
+            "category": "confused-similar-term",
+            "reason": "“una corda” means “press the left (soft) pedal (literally “one string”)”."
+          },
+          "mano-sinistra": {
+            "category": "confused-similar-term",
+            "reason": "“mano sinistra (m.s.)” means “left hand”."
+          },
+          "tre-corde": {
+            "category": "confused-similar-term",
+            "reason": "“tre corde” means “release the left pedal (literally “three strings”)”."
+          }
+        }
+      },
+      "hints": [
+        "Translate word by word.",
+        "Think about which of the four terms has exactly that meaning."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.ind-3",
+      "templateId": "t.g5.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "An Italian term: what does “teneramente” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "piacevole",
+            "label": "Pleasant"
+          },
+          {
+            "id": "dolore",
+            "label": "Grief"
+          },
+          {
+            "id": "lacrimoso",
+            "label": "Tearful, sad"
+          },
+          {
+            "id": "teneramente",
+            "label": "Tenderly (tenerezza: tenderness)"
+          }
+        ],
+        "correctOptionIds": [
+          "teneramente"
+        ],
+        "diagnoses": {
+          "lacrimoso": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “lacrimoso”."
+          },
+          "dolore": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “dolore”."
+          },
+          "piacevole": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “piacevole”."
+          }
+        }
+      },
+      "hints": [
+        "Look for a word you know in another language.",
+        "Look for a word you know in another language, or think about the mood or direction it describes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.ind-4",
+      "templateId": "t.g5.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A composer wants the player to as soft as possible, lifeless. Which direction would be printed?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "rinforzando",
+            "label": "rinforzando (rf, rfz)"
+          },
+          {
+            "id": "lacrimoso",
+            "label": "lacrimoso"
+          },
+          {
+            "id": "estinto",
+            "label": "estinto"
+          },
+          {
+            "id": "lusingando",
+            "label": "lusingando"
+          }
+        ],
+        "correctOptionIds": [
+          "estinto"
+        ],
+        "diagnoses": {
+          "rinforzando": {
+            "category": "confused-similar-term",
+            "reason": "“rinforzando (rf, rfz)” means “reinforcing: a sudden stress on a note or chord”."
+          },
+          "lusingando": {
+            "category": "confused-similar-term",
+            "reason": "“lusingando” means “coaxing, in a sweet and persuasive style”."
+          },
+          "lacrimoso": {
+            "category": "confused-similar-term",
+            "reason": "“lacrimoso” means “tearful, sad”."
+          }
+        }
+      },
+      "hints": [
+        "Translate word by word.",
+        "Think about which of the four terms has exactly that meaning."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.ind-5",
+      "templateId": "t.g5.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A German term: what does “immer” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "frohlich",
+            "label": "Cheerful, joyful"
+          },
+          {
+            "id": "breit",
+            "label": "Broad, expansive"
+          },
+          {
+            "id": "und",
+            "label": "And"
+          },
+          {
+            "id": "immer",
+            "label": "Always"
+          }
+        ],
+        "correctOptionIds": [
+          "immer"
+        ],
+        "diagnoses": {
+          "und": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “und”."
+          },
+          "breit": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “breit”."
+          },
+          "frohlich": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “fröhlich”."
+          }
+        }
+      },
+      "hints": [
+        "Look for a word you know in another language.",
+        "Look for a word you know in another language, or think about the mood or direction it describes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u5-l06.ind-6",
+      "templateId": "t.g5.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A pianist reads the direction “mano sinistra (m.s.)”. What should be done?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tre-corde",
+            "label": "Release the left pedal (literally “three strings”)"
+          },
+          {
+            "id": "una-corda",
+            "label": "Press the left (soft) pedal (literally “one string”)"
+          },
+          {
+            "id": "mano-destra",
+            "label": "Right hand"
+          },
+          {
+            "id": "mano-sinistra",
+            "label": "Left hand"
+          }
+        ],
+        "correctOptionIds": [
+          "mano-sinistra"
+        ],
+        "diagnoses": {
+          "una-corda": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “una corda”."
+          },
+          "tre-corde": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “tre corde”."
+          },
+          "mano-destra": {
+            "category": "confused-similar-term",
+            "reason": "That is the meaning of “mano destra (m.d.)”."
+          }
+        }
+      },
+      "hints": [
+        "Translate word by word.",
+        "Una corda and tre corde concern the left pedal; mano sinistra and mano destra name the hands."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Learn the Italian terms with their moods and actions.",
+    "Translate German directions word by word.",
+    "Una corda and tre corde concern the left pedal; m.s. and m.d. the hands."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.term-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g5"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.12"
+    ],
+    "notes": "Original meanings. The term list is the one in First Steps Grade 5 section 15 (pp. 140-142, read in the PDF); the official outline gives no list so a teacher must confirm it (OPEN_QUESTIONS Q2). Grade 4 terms are never asked here."
+  }
+}

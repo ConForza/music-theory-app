@@ -1,0 +1,634 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U3-L05",
+  "lessonId": "G5-U3-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Tell written pitch from concert pitch and say which way, and by how much, each kind of transposing instrument moves a note.",
+    "successCriteria": [
+      "I know written pitch is what is printed and concert pitch is what sounds.",
+      "I know B♭, A and F instruments sound a tone, a minor 3rd and a perfect 5th below the written note.",
+      "I do not confuse the instrument's name with the key of the music."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Some instruments sound higher or lower than the notes written for them. The double bass sounds an octave lower than written; the piccolo an octave higher. Others sound at other distances. A clarinet in B♭ or a trumpet in B♭ sounds a tone (a major 2nd) lower than written; a clarinet in A sounds a minor 3rd lower; a horn in F or a cor anglais sounds a perfect 5th lower."
+    },
+    {
+      "kind": "text",
+      "text": "The name tells you the note that sounds when the player reads a written C. A B♭ clarinet that reads a C sounds B♭. An A clarinet that reads C sounds A. A horn in F that reads C sounds F."
+    },
+    {
+      "kind": "text",
+      "text": "Musicians therefore separate WRITTEN pitch (the notes printed in the player's part) from CONCERT pitch (the pitch that really sounds). If a piece in G major is played by a piano and a B♭ clarinet, the piano part is written in G, but the clarinet part is written a tone higher, in A major, so that it sounds in G."
+    },
+    {
+      "kind": "text",
+      "text": "Always say which way you are going. From concert pitch to written pitch for these instruments you go UP (by a tone, a minor 3rd or a perfect 5th). From written pitch to concert pitch you go DOWN by the same interval. The name of the instrument (B♭, A or F) is not the key of the music: transpose the key of the music by the interval."
+    },
+    {
+      "kind": "tip",
+      "text": "Concert → written: up. Written → concert: down. B♭: a tone. A: a minor 3rd. F: a perfect 5th."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A four-note phrase in G major at concert pitch.",
+      "timeSignature": "4/4",
+      "key": "G major"
+    },
+    "steps": [
+      "This phrase is at concert pitch, in G major.",
+      "A clarinet in B♭ needs it written a tone higher.",
+      "G major up a tone is A major."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A phrase in G major; the written clarinet part is in A major."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u3-l05.guided-1",
+      "templateId": "t.g5.concert-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "An instrument “in B♭” sounds how far BELOW the note that is written for it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Bb",
+            "label": "a tone (major 2nd)"
+          },
+          {
+            "id": "A",
+            "label": "a minor 3rd"
+          },
+          {
+            "id": "F",
+            "label": "a perfect 5th"
+          },
+          {
+            "id": "C",
+            "label": "an octave"
+          }
+        ],
+        "correctOptionIds": [
+          "Bb"
+        ],
+        "diagnoses": {
+          "A": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in A, not for one in B♭."
+          },
+          "F": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in F, not for one in B♭."
+          },
+          "C": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in C an octave lower, not for one in B♭."
+          }
+        }
+      },
+      "hints": [
+        "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
+        "B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."
+      ],
+      "feedback": {
+        "correct": "Yes: the interval belongs to the instrument.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u3-l05.guided-2",
+      "templateId": "t.g5.transpose-key",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The written part for a clarinet in A is in B♭ major. In which key does it sound (concert pitch)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "A major",
+            "label": "A major"
+          },
+          {
+            "id": "Db major",
+            "label": "D♭ major"
+          },
+          {
+            "id": "Bb major",
+            "label": "B♭ major"
+          },
+          {
+            "id": "G major",
+            "label": "G major"
+          }
+        ],
+        "correctOptionIds": [
+          "G major"
+        ],
+        "diagnoses": {
+          "Db major": {
+            "category": "wrong-direction",
+            "reason": "That moves the key the wrong way: the sound is lower than the written part."
+          },
+          "A major": {
+            "category": "wrong-interval",
+            "reason": "A major is the name of the instrument, not the key of the music: transpose the key by the instrument's interval."
+          },
+          "Bb major": {
+            "category": "key-signature-missing",
+            "reason": "That is the key of the music you were given: a transposed part needs a different key signature."
+          }
+        }
+      },
+      "hints": [
+        "Move the key by the instrument's interval, in the right direction.",
+        "Move the key down a minor 3rd, as you would move any note."
+      ],
+      "feedback": {
+        "correct": "Right: the key moves by the interval.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u3-l05.ind-1",
+      "templateId": "t.g5.concert-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A clarinet in B♭ plays the written note C. Which note sounds (concert pitch)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "wrong-way",
+            "label": "D"
+          },
+          {
+            "id": "right",
+            "label": "B♭"
+          },
+          {
+            "id": "same",
+            "label": "C"
+          },
+          {
+            "id": "respelt",
+            "label": "C𝄫"
+          }
+        ],
+        "correctOptionIds": [
+          "right"
+        ],
+        "diagnoses": {
+          "wrong-way": {
+            "category": "wrong-direction",
+            "reason": "That moves the note the wrong way: written to concert goes down."
+          },
+          "same": {
+            "category": "wrong-interval",
+            "reason": "That is the note you were given: the clarinet in B♭ does not sound as it is written."
+          },
+          "respelt": {
+            "category": "enharmonic-respelling",
+            "reason": "That sounds the same but is spelt with the wrong letter name: the transposition moves every letter by the same number of steps."
+          }
+        }
+      },
+      "hints": [
+        "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
+        "The clarinet in B♭ is in B♭: it sounds a major 2nd below the written note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u3-l05.ind-2",
+      "templateId": "t.g5.transpose-key",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The written part for a horn in F is in B♭ minor. In which key does it sound (concert pitch)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "F minor",
+            "label": "F minor"
+          },
+          {
+            "id": "Eb minor",
+            "label": "E♭ minor"
+          },
+          {
+            "id": "Bb minor",
+            "label": "B♭ minor"
+          }
+        ],
+        "correctOptionIds": [
+          "Eb minor"
+        ],
+        "diagnoses": {
+          "F minor": {
+            "category": "wrong-direction",
+            "reason": "That moves the key the wrong way: the sound is lower than the written part."
+          },
+          "Bb minor": {
+            "category": "key-signature-missing",
+            "reason": "That is the key of the music you were given: a transposed part needs a different key signature."
+          }
+        }
+      },
+      "hints": [
+        "Move the key by the instrument's interval, in the right direction.",
+        "Move the key down a perfect 5th, as you would move any note."
+      ],
+      "feedback": {
+        "correct": "Correct key.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u3-l05.ind-3",
+      "templateId": "t.g5.concert-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "An instrument “in A” sounds how far BELOW the note that is written for it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Bb",
+            "label": "a tone (major 2nd)"
+          },
+          {
+            "id": "A",
+            "label": "a minor 3rd"
+          },
+          {
+            "id": "F",
+            "label": "a perfect 5th"
+          },
+          {
+            "id": "C",
+            "label": "an octave"
+          }
+        ],
+        "correctOptionIds": [
+          "A"
+        ],
+        "diagnoses": {
+          "Bb": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in B♭, not for one in A."
+          },
+          "F": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in F, not for one in A."
+          },
+          "C": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in C an octave lower, not for one in A."
+          }
+        }
+      },
+      "hints": [
+        "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
+        "B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u3-l05.ind-4",
+      "templateId": "t.g5.transpose-key",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A melody in A minor is at concert pitch. It is to be written as the part for a horn in F. In which key is the part written?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "D minor",
+            "label": "D minor"
+          },
+          {
+            "id": "A minor",
+            "label": "A minor"
+          },
+          {
+            "id": "F minor",
+            "label": "F minor"
+          },
+          {
+            "id": "E minor",
+            "label": "E minor"
+          }
+        ],
+        "correctOptionIds": [
+          "E minor"
+        ],
+        "diagnoses": {
+          "D minor": {
+            "category": "wrong-direction",
+            "reason": "That moves the key the wrong way: the written part is higher than the sound."
+          },
+          "F minor": {
+            "category": "wrong-interval",
+            "reason": "F minor is the name of the instrument, not the key of the music: transpose the key by the instrument's interval."
+          },
+          "A minor": {
+            "category": "key-signature-missing",
+            "reason": "That is the key of the music you were given: a transposed part needs a different key signature."
+          }
+        }
+      },
+      "hints": [
+        "Move the key by the instrument's interval, in the right direction.",
+        "Move the key up a perfect 5th, as you would move any note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u3-l05.ind-5",
+      "templateId": "t.g5.concert-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "You have the written part for a cor anglais (in F). To write it at concert pitch (as it sounds), which way do you transpose?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "r",
+            "label": "down a perfect 5th"
+          },
+          {
+            "id": "w",
+            "label": "up a perfect 5th"
+          },
+          {
+            "id": "i2",
+            "label": "down a minor 3rd"
+          },
+          {
+            "id": "i1",
+            "label": "down a major 2nd"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w": {
+            "category": "wrong-direction",
+            "reason": "That is the opposite direction. The cor anglais (in F) sounds perfect 5th lower than written, so the written part is higher than the sounding pitch."
+          },
+          "i1": {
+            "category": "wrong-interval",
+            "reason": "Right direction, wrong distance: the cor anglais (in F) is in F."
+          },
+          "i2": {
+            "category": "wrong-interval",
+            "reason": "Right direction, wrong distance: the cor anglais (in F) is in F."
+          }
+        }
+      },
+      "hints": [
+        "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
+        "Written pitch is always higher than concert pitch for these instruments. Concert to written goes up; written to concert goes down."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u3-l05.ind-6",
+      "templateId": "t.g5.transpose-key",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A melody in E major is at concert pitch. It is to be written as the part for a clarinet in A. In which key is the part written?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "G major",
+            "label": "G major"
+          },
+          {
+            "id": "E major",
+            "label": "E major"
+          },
+          {
+            "id": "C# major",
+            "label": "C♯ major"
+          },
+          {
+            "id": "A major",
+            "label": "A major"
+          }
+        ],
+        "correctOptionIds": [
+          "G major"
+        ],
+        "diagnoses": {
+          "C# major": {
+            "category": "wrong-direction",
+            "reason": "That moves the key the wrong way: the written part is higher than the sound."
+          },
+          "A major": {
+            "category": "wrong-interval",
+            "reason": "A major is the name of the instrument, not the key of the music: transpose the key by the instrument's interval."
+          },
+          "E major": {
+            "category": "key-signature-missing",
+            "reason": "That is the key of the music you were given: a transposed part needs a different key signature."
+          }
+        }
+      },
+      "hints": [
+        "Move the key by the instrument's interval, in the right direction.",
+        "Move the key up a minor 3rd, as you would move any note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "recap": [
+    "Written pitch is printed; concert pitch is what sounds.",
+    "B♭: a tone below; A: a minor 3rd below; F: a perfect 5th below.",
+    "Concert to written goes up; written to concert goes down."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.concert-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.transpose-key",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.concert-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.transposition.concert-pitch"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s12"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.06"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 12 (pp. 126-129, read in the PDF): double bass and piccolo (octave), then B flat, A and F; the example of a G major piano piece and a B flat clarinet. OPEN_QUESTIONS Q36: the direction and the interval are always stated."
+  }
+}

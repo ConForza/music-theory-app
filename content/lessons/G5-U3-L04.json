@@ -1,0 +1,632 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U3-L04",
+  "lessonId": "G5-U3-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name compound intervals, larger than an octave, in either of the two accepted ways.",
+    "successCriteria": [
+      "I count letter names beyond 8 for the number.",
+      "I know an octave and a 5th is a 12th, not a 13th.",
+      "I know the quality does not change when I use the compound name."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "An interval larger than an octave is a compound interval. Its number goes on counting past 8 in the same way: 9th, 10th, 11th, up to the 15th (two octaves). Count the letter names from the lower note to the upper note, counting both ends."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two semibreves: middle C, then the G an octave and a fifth above it."
+      },
+      "caption": "C up to the G above: a perfect 12th."
+    },
+    {
+      "kind": "text",
+      "text": "There is a trap. It is tempting to say 'an octave and a 5th' means 8 + 5 = 13. But the octave and the 5th share a note, so the number is 7 + 5 = 12: a 12th. To turn a simple interval into a compound one, add 7; to go back, subtract 7."
+    },
+    {
+      "kind": "text",
+      "text": "There is another way to number a compound interval: keep the number it would have inside the lower octave and add the word compound. A major 10th is a compound major 3rd; a perfect 12th is a compound perfect 5th; an augmented 11th is a compound augmented 4th. Both ways are accepted, and the quality is the same in each."
+    },
+    {
+      "kind": "tip",
+      "text": "Compound number = simple number + 7. The quality never changes: a major 3rd becomes a major 10th."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "G#5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "writtenAccidental": "sharp"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Two semibreves: E then G sharp an octave and a third above."
+    },
+    "steps": [
+      "Count: E to G is a 3rd inside the octave.",
+      "Add 7: a 10th.",
+      "E to G♯ is major: a major 10th (or compound major 3rd)."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "E up to the G sharp above the octave: a major 10th."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u3-l04.guided-1",
+      "templateId": "t.g5.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "An octave and a 3rd above the lower note: what is the number of the whole interval?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "9",
+            "label": "9th"
+          },
+          {
+            "id": "10",
+            "label": "10th"
+          },
+          {
+            "id": "11",
+            "label": "11th"
+          }
+        ],
+        "correctOptionIds": [
+          "10"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "compound-arithmetic",
+            "reason": "That is the simple interval inside the octave; the whole interval is larger than an octave."
+          },
+          "9": {
+            "category": "compound-arithmetic",
+            "reason": "Count up from the lower note: an octave is the 8th note, and the 3rd above that note is further on."
+          },
+          "11": {
+            "category": "compound-arithmetic",
+            "reason": "Adding 8 + 3 counts the shared note twice. An octave is 7 steps on top of the lower note, so 3 + 7 = 10."
+          }
+        }
+      },
+      "hints": [
+        "Add 7 to the simple number.",
+        "Add 7 to the number of the simple interval, because the octave and the interval share a note."
+      ],
+      "feedback": {
+        "correct": "Yes: add 7, not 8.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g5-u3-l04.guided-2",
+      "templateId": "t.g5.interval-compound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this interval, which is larger than an octave. Either form is correct: for example, major 10th, or compound major 3rd.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave. a note in the space just below the stave, with a sharp sign in front; a note in the space just above the stave."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "lower": "D#4",
+        "upper": "G5",
+        "acceptedIntervals": [
+          "d11",
+          "cd4"
+        ]
+      },
+      "hints": [
+        "Count letter names past 8, or count inside one octave and add 'compound'.",
+        "Count the letter names from the lower to the upper note (both ends): that is the number, even above 8. Or count the same interval inside one octave and say 'compound'. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Right: counted past 8.",
+        "mistakes": {
+          "counted-one-end-only": "Count both the lower and the upper note.",
+          "quality-from-wrong-key": "Compare the upper note with the major scale of the LOWER note.",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "The letter names decide the number, even when two spellings sound alike.",
+          "augmented-diminished-swap": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u3-l04.ind-1",
+      "templateId": "t.g5.interval-compound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval, which is larger than an octave. Either form is correct: for example, major 10th, or compound major 3rd.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Cb2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              },
+              {
+                "kind": "note",
+                "pitch": "Abb3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave. a note on the 2nd ledger line below the stave, with a flat sign in front; a note on the 5th line, with a double flat sign in front."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "lower": "Cb2",
+        "upper": "Abb3",
+        "acceptedIntervals": [
+          "m13",
+          "cm6"
+        ]
+      },
+      "hints": [
+        "Count letter names past 8, or count inside one octave and add 'compound'.",
+        "Count the letter names from the lower to the upper note (both ends): that is the number, even above 8. Or count the same interval inside one octave and say 'compound'. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Correct interval.",
+        "mistakes": {
+          "counted-one-end-only": "Count both the lower and the upper note.",
+          "quality-from-wrong-key": "Compare the upper note with the major scale of the LOWER note.",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "The letter names decide the number, even when two spellings sound alike.",
+          "augmented-diminished-swap": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g5-u3-l04.ind-2",
+      "templateId": "t.g5.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A major 9th is the same as a compound interval built on which simple interval? (Give the simple interval that is left when the octave is taken away.)",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "major 2nd"
+          },
+          {
+            "id": "3",
+            "label": "major 3rd"
+          },
+          {
+            "id": "9",
+            "label": "major 9th"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 9: 9 − 7 = 2. The quality does not change."
+          },
+          "9": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 9: 9 − 7 = 2. The quality does not change."
+          }
+        }
+      },
+      "hints": [
+        "Add 7 to the simple number.",
+        "Subtract 7 from the number to take away an octave. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g5-u3-l04.ind-3",
+      "templateId": "t.g5.interval-compound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval, which is larger than an octave. Either form is correct: for example, major 10th, or compound major 3rd.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave. a note on the 2nd line; a note in the space above the 2nd ledger line above the stave."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "lower": "B2",
+        "upper": "F4",
+        "acceptedIntervals": [
+          "d12",
+          "cd5"
+        ]
+      },
+      "hints": [
+        "Count letter names past 8, or count inside one octave and add 'compound'.",
+        "Count the letter names from the lower to the upper note (both ends): that is the number, even above 8. Or count the same interval inside one octave and say 'compound'. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both the lower and the upper note.",
+          "quality-from-wrong-key": "Compare the upper note with the major scale of the LOWER note.",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "The letter names decide the number, even when two spellings sound alike.",
+          "augmented-diminished-swap": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g5-u3-l04.ind-4",
+      "templateId": "t.g5.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A perfect 12th is the same as a compound interval built on which simple interval? (Give the simple interval that is left when the octave is taken away.)",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4",
+            "label": "perfect 4th"
+          },
+          {
+            "id": "5",
+            "label": "perfect 5th"
+          },
+          {
+            "id": "6",
+            "label": "perfect 6th"
+          },
+          {
+            "id": "12",
+            "label": "perfect 12th"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
+          },
+          "6": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
+          },
+          "12": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
+          }
+        }
+      },
+      "hints": [
+        "Add 7 to the simple number.",
+        "Subtract 7 from the number to take away an octave. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g5-u3-l04.ind-5",
+      "templateId": "t.g5.interval-compound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval, which is larger than an octave. Either form is correct: for example, major 10th, or compound major 3rd.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A#4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave. a note on the 2nd line; a note in the space above the 3rd ledger line above the stave, with a sharp sign in front."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "lower": "B2",
+        "upper": "A#4",
+        "acceptedIntervals": [
+          "M14",
+          "cM7"
+        ]
+      },
+      "hints": [
+        "Count letter names past 8, or count inside one octave and add 'compound'.",
+        "Count the letter names from the lower to the upper note (both ends): that is the number, even above 8. Or count the same interval inside one octave and say 'compound'. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both the lower and the upper note.",
+          "quality-from-wrong-key": "Compare the upper note with the major scale of the LOWER note.",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "The letter names decide the number, even when two spellings sound alike.",
+          "augmented-diminished-swap": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    },
+    {
+      "id": "i.g5-u3-l04.ind-6",
+      "templateId": "t.g5.interval-compound",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this interval, which is larger than an octave. Either form is correct: for example, major 10th, or compound major 3rd.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave. a note on the 1st line; a note on the 5th line."
+      },
+      "answer": {
+        "kind": "interval",
+        "task": "identify",
+        "lower": "E4",
+        "upper": "F5",
+        "acceptedIntervals": [
+          "m9",
+          "cm2"
+        ]
+      },
+      "hints": [
+        "Count letter names past 8, or count inside one octave and add 'compound'.",
+        "Count the letter names from the lower to the upper note (both ends): that is the number, even above 8. Or count the same interval inside one octave and say 'compound'. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "counted-one-end-only": "Count both the lower and the upper note.",
+          "quality-from-wrong-key": "Compare the upper note with the major scale of the LOWER note.",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "The letter names decide the number, even when two spellings sound alike.",
+          "augmented-diminished-swap": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
+    }
+  ],
+  "recap": [
+    "Compound intervals count on past 8.",
+    "An octave and a 5th is a 12th: add 7 to the simple number.",
+    "Both 'major 10th' and 'compound major 3rd' are accepted; the quality is the same."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.interval-compound",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.compound-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.interval-compound",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.intervals.compound"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s07"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.08"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 7 (pp. 114-115, read in the PDF): the trap of 8 + 5; two ways of numbering; the quality stays the same."
+  }
+}

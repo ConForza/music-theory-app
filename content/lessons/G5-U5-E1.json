@@ -1,0 +1,1335 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U5-E1",
+  "lessonId": "G5-U5-E1",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Optional: read SATB voices in short score and open score.",
+    "successCriteria": [
+      "I know soprano and alto share the upper stave and tenor and bass the lower stave in short score.",
+      "I know stems up for soprano and tenor, down for alto and bass.",
+      "I know this lesson is optional."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "This lesson is optional. It helps you read choral music, but you do not need it to complete Grade 5, and nothing in it is in the Grade 5 assessment."
+    },
+    {
+      "kind": "text",
+      "text": "The most common choir is SATB: soprano, alto, tenor, bass. Music for it is often written on two staves, called short score. The soprano and alto share the upper stave, the tenor and bass share the lower stave. The stems of soprano and tenor notes go up; the stems of alto and bass notes go down."
+    },
+    {
+      "kind": "text",
+      "text": "When a note is sung by two voices at once it is written with two stems, one up and one down. If each voice has a stave of its own, the music is in open score. In short score the tenor is written at actual pitch in the bass clef; in open score the tenor is often written in a treble clef an octave higher, with an 8 under the clef."
+    },
+    {
+      "kind": "tip",
+      "text": "Short score: two staves, stems tell the voices apart. Open score: a stave for every voice."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A chord on the upper stave.",
+      "key": "C major"
+    },
+    "steps": [
+      "The upper stave holds soprano and alto.",
+      "Stems up are the soprano; stems down are the alto.",
+      "The lower stave holds tenor and bass."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "SATB layout in short score."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u5-e1.guided-1",
+      "templateId": "t.g5.satb-voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This is four-part vocal music in short score (SATB): two voices share each stave. Which voice sings the note marked x?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "G4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "E4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "B4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "D4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "A4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "E4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note on the 2nd line. Bar 2: a note on the 3rd line. Bar 3: a note in the 2nd space. Bar 4: a note on the 1st line.",
+              "key": "C major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "G3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "D3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "G2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          },
+                          "label": "x"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "G3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 4th space. Bar 2: a note on the 3rd line. Bar 3: a note marked x in the 2nd space. Bar 4: a note in the 4th space.",
+              "key": "C major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "Four-part vocal music in short score: soprano and alto share the upper stave, tenor and bass share the lower stave. Upper stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note on the 2nd line. Bar 2: a note on the 3rd line. Bar 3: a note in the 2nd space. Bar 4: a note on the 1st line. Lower stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 4th space. Bar 2: a note on the 3rd line. Bar 3: a note marked x in the 2nd space. Bar 4: a note in the 4th space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "tenor"
+        ],
+        "diagnoses": {
+          "soprano": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          },
+          "alto": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          },
+          "bass": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          }
+        }
+      },
+      "hints": [
+        "Stave and stem direction tell the voices apart.",
+        "Upper stave: soprano (stem up) and alto (stem down). Lower stave: tenor (stem up) and bass (stem down)."
+      ],
+      "feedback": {
+        "correct": "Yes: stave and stem.",
+        "mistakes": {
+          "evidence-misread": "The upper stave holds soprano and alto; the lower holds tenor and bass; stems up for soprano and tenor.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u5-e1.guided-2",
+      "templateId": "t.g5.satb-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In short score, how are the four voices of a choir written?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "each",
+            "label": "Each voice has its own stave"
+          },
+          {
+            "id": "st",
+            "label": "The soprano and tenor share the upper stave"
+          },
+          {
+            "id": "sab",
+            "label": "The soprano, alto and tenor share the upper stave"
+          },
+          {
+            "id": "sa",
+            "label": "The soprano and alto share the upper stave; the tenor and bass share the lower stave"
+          }
+        ],
+        "correctOptionIds": [
+          "sa"
+        ],
+        "diagnoses": {
+          "st": {
+            "category": "evidence-misread",
+            "reason": "In short score soprano and alto share the upper stave, tenor and bass the lower."
+          },
+          "sab": {
+            "category": "evidence-misread",
+            "reason": "In short score soprano and alto share the upper stave, tenor and bass the lower."
+          },
+          "each": {
+            "category": "evidence-misread",
+            "reason": "That is open score. In short score the four voices share two staves."
+          }
+        }
+      },
+      "hints": [
+        "Short score uses two staves; open score four.",
+        "Short score uses two staves; open score uses four."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "evidence-misread": "Short score: two staves. Open score: one stave for each voice.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-e1.ind-1",
+      "templateId": "t.g5.satb-voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is four-part vocal music in short score (SATB): two voices share each stave. Which voice sings the note marked x?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "A4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          },
+                          "label": "x"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C5",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "E4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "D4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "A4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a note marked x in the 2nd space. Bar 2: a note in the 3rd space. Bar 3: a note in the 1st space. Bar 4: a note in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "G3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "Bb2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note in the 4th space. Bar 3: a note on the 4th line. Bar 4: a note in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "Four-part vocal music in short score: soprano and alto share the upper stave, tenor and bass share the lower stave. Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a note marked x in the 2nd space. Bar 2: a note in the 3rd space. Bar 3: a note in the 1st space. Bar 4: a note in the 2nd space. Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note in the 4th space. Bar 3: a note on the 4th line. Bar 4: a note in the 2nd space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "soprano"
+        ],
+        "diagnoses": {
+          "alto": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          },
+          "tenor": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          },
+          "bass": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          }
+        }
+      },
+      "hints": [
+        "Stave and stem direction tell the voices apart.",
+        "Upper stave: soprano (stem up) and alto (stem down). Lower stave: tenor (stem up) and bass (stem down)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "The upper stave holds soprano and alto; the lower holds tenor and bass; stems up for soprano and tenor.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u5-e1.ind-2",
+      "templateId": "t.g5.satb-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "When each voice of a choir has a stave of its own, the music is said to be in…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "open",
+            "label": "Open score"
+          },
+          {
+            "id": "short",
+            "label": "Short score"
+          },
+          {
+            "id": "piano",
+            "label": "Piano reduction"
+          },
+          {
+            "id": "tab",
+            "label": "Tablature"
+          }
+        ],
+        "correctOptionIds": [
+          "open"
+        ],
+        "diagnoses": {
+          "short": {
+            "category": "evidence-misread",
+            "reason": "Short score puts all four voices on two staves."
+          },
+          "piano": {
+            "category": "evidence-misread",
+            "reason": "A piano reduction is for a keyboard player, not a name for the layout of vocal parts."
+          },
+          "tab": {
+            "category": "evidence-misread",
+            "reason": "Tablature is for fretted instruments."
+          }
+        }
+      },
+      "hints": [
+        "Short score uses two staves; open score four.",
+        "Open score: four staves. Short score: two staves."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Short score: two staves. Open score: one stave for each voice.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u5-e1.ind-3",
+      "templateId": "t.g5.satb-voices",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This is four-part vocal music in short score (SATB): two voices share each stave. Which voice sings the note marked x?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "A4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "D4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "G4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "A4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C4",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note in the 1st space. Bar 3: a note on the 2nd line. Bar 4: a note in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "D3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "Bb2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "E3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "voices": [
+                    {
+                      "id": "v1",
+                      "stem": "up",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "C3",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "v2",
+                      "stem": "down",
+                      "events": [
+                        {
+                          "kind": "note",
+                          "pitch": "F2",
+                          "duration": {
+                            "value": "semibreve",
+                            "dots": 0
+                          },
+                          "label": "x"
+                        }
+                      ]
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 3rd line. Bar 3: a note in the 3rd space. Bar 4: a note in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "Four-part vocal music in short score: soprano and alto share the upper stave, tenor and bass share the lower stave. Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note in the 1st space. Bar 3: a note on the 2nd line. Bar 4: a note in the 2nd space. Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 3rd line. Bar 3: a note in the 3rd space. Bar 4: a note in the 2nd space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "soprano",
+            "label": "Soprano"
+          },
+          {
+            "id": "alto",
+            "label": "Alto"
+          },
+          {
+            "id": "tenor",
+            "label": "Tenor"
+          },
+          {
+            "id": "bass",
+            "label": "Bass"
+          }
+        ],
+        "correctOptionIds": [
+          "bass"
+        ],
+        "diagnoses": {
+          "soprano": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          },
+          "alto": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          },
+          "tenor": {
+            "category": "evidence-misread",
+            "reason": "Look at which stave the note is on and which way its stem goes: the stems of soprano and tenor notes go up; those of alto and bass notes go down. The upper stave holds soprano and alto; the lower stave holds tenor and bass."
+          }
+        }
+      },
+      "hints": [
+        "Stave and stem direction tell the voices apart.",
+        "Upper stave: soprano (stem up) and alto (stem down). Lower stave: tenor (stem up) and bass (stem down)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "The upper stave holds soprano and alto; the lower holds tenor and bass; stems up for soprano and tenor.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u5-e1.ind-4",
+      "templateId": "t.g5.satb-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In short score, which way do the stems of the voices on a shared stave go?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "down-up",
+            "label": "Soprano and tenor stems go down; alto and bass stems go up"
+          },
+          {
+            "id": "up-down",
+            "label": "Soprano and tenor stems go up; alto and bass stems go down"
+          },
+          {
+            "id": "all-up",
+            "label": "All stems go up"
+          },
+          {
+            "id": "high-low",
+            "label": "Stems go up on the upper stave and down on the lower stave"
+          }
+        ],
+        "correctOptionIds": [
+          "up-down"
+        ],
+        "diagnoses": {
+          "down-up": {
+            "category": "evidence-misread",
+            "reason": "The upper voice of each stave (soprano, tenor) has stems up; the lower voice (alto, bass) has stems down."
+          },
+          "all-up": {
+            "category": "evidence-misread",
+            "reason": "The upper voice of each stave (soprano, tenor) has stems up; the lower voice (alto, bass) has stems down."
+          },
+          "high-low": {
+            "category": "evidence-misread",
+            "reason": "The upper voice of each stave (soprano, tenor) has stems up; the lower voice (alto, bass) has stems down."
+          }
+        }
+      },
+      "hints": [
+        "Short score uses two staves; open score four.",
+        "The stems tell the two voices on one stave apart."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Short score: two staves. Open score: one stave for each voice.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "recap": [
+    "Short score: soprano and alto on the upper stave, tenor and bass on the lower.",
+    "Stems: up for soprano and tenor, down for alto and bass.",
+    "Open score: a stave for every voice. This lesson is optional."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.satb-voices",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.voices.satb-scores"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s13"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.14"
+    ],
+    "notes": "Optional enrichment (OPEN_QUESTIONS Q8). First Steps Grade 5 section 13 (pp. 129-132). Transcription between short and open score is NOT assessed: the official outline does not require it, so only reading the voices is offered here, and never compulsorily."
+  }
+}

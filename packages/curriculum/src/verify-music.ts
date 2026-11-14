@@ -380,7 +380,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         const interval = parseInterval(d.interval);
         // an octave (P8) or a same-pitch copy in another clef (P1, Brief 09) is a clef task, not an instrument transposition
         if ((interval.number === 8 || interval.number === 1) && interval.quality === "P") {
-          const clefs = sc.octaveTranspositionClefs ?? [];
+          const clefs = interval.number === 1 ? (sc.clefs ?? []) : (sc.octaveTranspositionClefs ?? []);
           if (!clefs.includes(a.clef) || !clefs.includes(music.clef)) report("ANSWER_SCOPE", where, `Octave transposition ${music.clef} → ${a.clef} is not in scope here`);
         } else {
           const ok = ["M2", "m3", "P5"].includes(d.interval) && (sc.instrumentTranspositions ?? []).length > 0;

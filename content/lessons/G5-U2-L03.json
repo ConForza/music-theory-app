@@ -1,0 +1,1346 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U2-L03",
+  "lessonId": "G5-U2-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Transpose a melody exactly one octave higher or lower using any of the four clefs, without confusing this with a change of clef at the same pitch.",
+    "successCriteria": [
+      "I can tell a copy at the same pitch from a copy one octave away.",
+      "I do not write a melody at the wrong pitch or in the wrong clef.",
+      "I keep the key signature when I transpose by an octave."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "You may be asked to write a melody an octave higher or lower in another clef. There are three different things a copy can be. It can sound at exactly the SAME pitch (only the clef changed). It can be EXACTLY ONE OCTAVE higher or lower. Or it can be wrong: the note positions on the stave have simply been copied into a different clef, so every note has changed to a different, unrelated pitch."
+    },
+    {
+      "kind": "text",
+      "text": "Two mistakes are very common. One is to use the wrong C clef: the alto instead of the tenor, or the other way round. The other is to write the melody at the wrong pitch: usually at the same pitch when an octave was asked, sometimes two octaves away. Read the question twice: which clef is wanted, and which way?"
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A four-note phrase in the tenor clef: C, D, E, F.",
+        "timeSignature": "4/4"
+      },
+      "caption": "A phrase in the tenor clef starting on middle C."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "The same phrase one octave higher, in the treble clef: C, D, E, F.",
+        "timeSignature": "4/4"
+      },
+      "caption": "One octave higher, in the treble clef: C D E F an octave above middle C."
+    },
+    {
+      "kind": "text",
+      "text": "To transpose by an octave: move each note eight letters up or down (the same letter name, the next octave number), then write it in the clef named. The key signature stays the same, because an octave is the same note names."
+    },
+    {
+      "kind": "tip",
+      "text": "Same pitch: same name and octave number. One octave away: same name, octave number one higher or lower. Neither: copied positions."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A four-note phrase in the alto clef starting on middle C.",
+      "timeSignature": "4/4"
+    },
+    "steps": [
+      "Name the first note: middle C (C4).",
+      "One octave lower is C3.",
+      "Write C3 in the clef the question names."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Middle C written in the alto clef; an octave lower is C3."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u2-l03.guided-1",
+      "templateId": "t.g5.clef-position",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A copyist has written this melody out again in the treble clef. How does the copy sound compared with the original?",
+      "score": {
+        "staves": [
+          {
+            "id": "original",
+            "label": "Original (tenor clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "tenor",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "F#4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "E4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "G4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Original (tenor clef) stave, key signature of 2 sharps, 4/4. a note in the 4th space; a note in the space just above the stave; a note on the 5th line; a note on the 1st ledger line above the stave.",
+              "key": "B minor",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "copy",
+            "label": "Copy (treble clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "F#4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "E4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "G4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Copy (treble clef) stave, key signature of 2 sharps, 4/4. a note in the space just below the stave; a note in the 1st space; a note on the 1st line; a note on the 2nd line.",
+              "key": "B minor",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A melody and a copy of it. Original (tenor clef) stave, key signature of 2 sharps, 4/4. a note in the 4th space; a note in the space just above the stave; a note on the 5th line; a note on the 1st ledger line above the stave. Copy (treble clef) stave, key signature of 2 sharps, 4/4. a note in the space just below the stave; a note in the 1st space; a note on the 1st line; a note on the 2nd line."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "same",
+            "label": "It sounds at exactly the same pitch"
+          },
+          {
+            "id": "up",
+            "label": "It sounds exactly one octave higher"
+          },
+          {
+            "id": "down",
+            "label": "It sounds exactly one octave lower"
+          },
+          {
+            "id": "different",
+            "label": "It sounds different, and not an octave away: only the positions on the stave were copied"
+          }
+        ],
+        "correctOptionIds": [
+          "same"
+        ],
+        "diagnoses": {
+          "up": {
+            "category": "wrong-octave",
+            "reason": "The copy is not exactly one octave higher: compare the letter names of the first notes."
+          },
+          "down": {
+            "category": "wrong-octave",
+            "reason": "The copy is not exactly one octave lower: compare the letter names of the first notes."
+          },
+          "different": {
+            "category": "wrong-clef",
+            "reason": "These notes are not at the positions of the original: the copy is a real change of pitch, not just a change of clef."
+          }
+        }
+      },
+      "hints": [
+        "Name the first note of each stave.",
+        "Name the first note of each stave. The same letter name and octave number is the same pitch."
+      ],
+      "feedback": {
+        "correct": "Yes: you compared the real pitches.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?",
+          "wrong-octave": "Compare the first note of each stave: same letter and octave number is the same pitch.",
+          "wrong-clef": "The same positions are different notes in a different clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u2-l03.guided-2",
+      "templateId": "t.g5.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This melody is in the treble clef. Write it exactly one octave lower in the tenor clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 4 flats, 3/4. Bar 1: a note in the 2nd space; a note on the 2nd line; a note in the 1st space. Bar 2: a note on the 2nd line; a note in the 2nd space; a note in the 3rd space.",
+        "key": "Ab major",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "tenor",
+        "key": "Ab major",
+        "accepted": [
+          [
+            "Ab3",
+            "G3",
+            "F3",
+            "G3",
+            "Ab3",
+            "C4"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "Ab major"
+        }
+      },
+      "hints": [
+        "Move every note exactly seven letter names, and write it in the clef named.",
+        "Work out the first note, move it an octave down, then write it in the tenor clef. Do not just copy the positions."
+      ],
+      "feedback": {
+        "correct": "Right: eight letters, in the right clef.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u2-l03.ind-1",
+      "templateId": "t.g5.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is in the treble clef. Write it exactly one octave lower in the tenor clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 3 flats, 4/4. Bar 1: a note in the 4th space; a note in the space just above the stave; a note on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note on the 1st ledger line above the stave.",
+        "key": "C minor",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "tenor",
+        "key": "C minor",
+        "accepted": [
+          [
+            "Eb4",
+            "G4",
+            "Ab4",
+            "G4",
+            "Ab4"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "C minor"
+        }
+      },
+      "hints": [
+        "Move every note exactly seven letter names, and write it in the clef named.",
+        "Work out the first note, move it an octave down, then write it in the tenor clef. Do not just copy the positions."
+      ],
+      "feedback": {
+        "correct": "Correct octave and clef.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u2-l03.ind-2",
+      "templateId": "t.g5.clef-position",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A copyist has written this melody out again in the tenor clef. How does the copy sound compared with the original?",
+      "score": {
+        "staves": [
+          {
+            "id": "original",
+            "label": "Original (treble clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "C#5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Original (treble clef) stave, key signature of 2 sharps, 4/4. a note on the 3rd line; a note on the 4th line; a note in the 3rd space; a note on the 4th line.",
+              "key": "B minor",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "copy",
+            "label": "Copy (tenor clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "tenor",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B3",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "C#4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Copy (tenor clef) stave, key signature of 2 sharps, 4/4. a note in the 3rd space; a note in the 4th space; a note on the 4th line; a note in the 4th space.",
+              "key": "B minor",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A melody and a copy of it. Original (treble clef) stave, key signature of 2 sharps, 4/4. a note on the 3rd line; a note on the 4th line; a note in the 3rd space; a note on the 4th line. Copy (tenor clef) stave, key signature of 2 sharps, 4/4. a note in the 3rd space; a note in the 4th space; a note on the 4th line; a note in the 4th space."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "same",
+            "label": "It sounds at exactly the same pitch"
+          },
+          {
+            "id": "up",
+            "label": "It sounds exactly one octave higher"
+          },
+          {
+            "id": "down",
+            "label": "It sounds exactly one octave lower"
+          },
+          {
+            "id": "different",
+            "label": "It sounds different, and not an octave away: only the positions on the stave were copied"
+          }
+        ],
+        "correctOptionIds": [
+          "down"
+        ],
+        "diagnoses": {
+          "same": {
+            "category": "wrong-octave",
+            "reason": "The copy does not sound the same: some or all of its notes are named differently."
+          },
+          "up": {
+            "category": "wrong-octave",
+            "reason": "The copy is not exactly one octave higher: compare the letter names of the first notes."
+          },
+          "different": {
+            "category": "wrong-clef",
+            "reason": "These notes are not at the positions of the original: the copy is a real change of pitch, not just a change of clef."
+          }
+        }
+      },
+      "hints": [
+        "Name the first note of each stave.",
+        "Name the first note of each stave. The same letter name and octave number is the same pitch."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?",
+          "wrong-octave": "Compare the first note of each stave: same letter and octave number is the same pitch.",
+          "wrong-clef": "The same positions are different notes in a different clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u2-l03.ind-3",
+      "templateId": "t.g5.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is in the alto clef. Write it exactly one octave lower in the tenor clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 2 sharps, 3/4. Bar 1: a note in the 2nd space; a note on the 3rd line; a note on the 2nd line, with a sharp sign in front. Bar 2: a note on the 3rd line; a note in the 3rd space; a note on the 4th line.",
+        "key": "B minor",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "tenor",
+        "key": "B minor",
+        "accepted": [
+          [
+            "B2",
+            "C#3",
+            "A#2",
+            "C#3",
+            "D3",
+            "E3"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "down",
+          "sourceKey": "B minor"
+        }
+      },
+      "hints": [
+        "Move every note exactly seven letter names, and write it in the clef named.",
+        "Work out the first note, move it an octave down, then write it in the tenor clef. Do not just copy the positions."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u2-l03.ind-4",
+      "templateId": "t.g5.clef-position",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A copyist has written this melody out again in the alto clef. How does the copy sound compared with the original?",
+      "score": {
+        "staves": [
+          {
+            "id": "original",
+            "label": "Original (tenor clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "tenor",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "A4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "F4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Original (tenor clef) stave, key signature of 1 flat, 4/4. a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space just above the stave; a note in the 4th space.",
+              "key": "D minor",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "copy",
+            "label": "Copy (alto clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "alto",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G3",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "A3",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "F3",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Copy (alto clef) stave, key signature of 1 flat, 4/4. a note in the 1st space; a note on the 2nd line; a note on the 1st line; a note on the 1st ledger line below the stave.",
+              "key": "D minor",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A melody and a copy of it. Original (tenor clef) stave, key signature of 1 flat, 4/4. a note on the 1st ledger line above the stave; a note in the space above the 1st ledger line above the stave; a note in the space just above the stave; a note in the 4th space. Copy (alto clef) stave, key signature of 1 flat, 4/4. a note in the 1st space; a note on the 2nd line; a note on the 1st line; a note on the 1st ledger line below the stave."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "same",
+            "label": "It sounds at exactly the same pitch"
+          },
+          {
+            "id": "up",
+            "label": "It sounds exactly one octave higher"
+          },
+          {
+            "id": "down",
+            "label": "It sounds exactly one octave lower"
+          },
+          {
+            "id": "different",
+            "label": "It sounds different, and not an octave away: only the positions on the stave were copied"
+          }
+        ],
+        "correctOptionIds": [
+          "down"
+        ],
+        "diagnoses": {
+          "same": {
+            "category": "wrong-octave",
+            "reason": "The copy does not sound the same: some or all of its notes are named differently."
+          },
+          "up": {
+            "category": "wrong-octave",
+            "reason": "The copy is not exactly one octave higher: compare the letter names of the first notes."
+          },
+          "different": {
+            "category": "wrong-clef",
+            "reason": "These notes are not at the positions of the original: the copy is a real change of pitch, not just a change of clef."
+          }
+        }
+      },
+      "hints": [
+        "Name the first note of each stave.",
+        "Name the first note of each stave. The same letter name and octave number is the same pitch."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?",
+          "wrong-octave": "Compare the first note of each stave: same letter and octave number is the same pitch.",
+          "wrong-clef": "The same positions are different notes in a different clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u2-l03.ind-5",
+      "templateId": "t.g5.octave-transpose",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This melody is in the tenor clef. Write it exactly one octave higher in the alto clef, keeping the key signature.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A tenor-clef stave, key signature of 2 sharps, 4/4. Bar 1: a note in the 2nd space; a note in the 3rd space; a note on the 4th line; a note on the 3rd line. Bar 2: a note in the 3rd space.",
+        "key": "D major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch-sequence",
+        "clef": "alto",
+        "key": "D major",
+        "accepted": [
+          [
+            "G4",
+            "B4",
+            "C#5",
+            "A4",
+            "B4"
+          ]
+        ],
+        "derivation": {
+          "rule": "transpose",
+          "interval": "P8",
+          "direction": "up",
+          "sourceKey": "D major"
+        }
+      },
+      "hints": [
+        "Move every note exactly seven letter names, and write it in the clef named.",
+        "Work out the first note, move it an octave up, then write it in the alto clef. Do not just copy the positions."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "Check the interval given in the question, and count letter names as well as semitones.",
+          "wrong-direction": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch.",
+          "key-signature-missing": "Work out the new key first and write its key signature.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original.",
+          "clef-confusion": "Check which clef is printed, then find middle C in it before counting."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    },
+    {
+      "id": "i.g5-u2-l03.ind-6",
+      "templateId": "t.g5.clef-position",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A copyist has written this melody out again in the treble clef. How does the copy sound compared with the original?",
+      "score": {
+        "staves": [
+          {
+            "id": "original",
+            "label": "Original (tenor clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "tenor",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "E4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "G#4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      },
+                      "writtenAccidental": "sharp"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "A4",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Original (tenor clef) stave, no sharps or flats in the key signature, 4/4. a note on the 4th line; a note on the 5th line; a note on the 1st ledger line above the stave, with a sharp sign in front; a note in the space above the 1st ledger line above the stave.",
+              "key": "A minor",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "copy",
+            "label": "Copy (treble clef)",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "E5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "G#5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      },
+                      "writtenAccidental": "sharp"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "A5",
+                      "duration": {
+                        "value": "crotchet",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Copy (treble clef) stave, no sharps or flats in the key signature, 4/4. a note in the 3rd space; a note in the 4th space; a note in the space just above the stave, with a sharp sign in front; a note on the 1st ledger line above the stave.",
+              "key": "A minor",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A melody and a copy of it. Original (tenor clef) stave, no sharps or flats in the key signature, 4/4. a note on the 4th line; a note on the 5th line; a note on the 1st ledger line above the stave, with a sharp sign in front; a note in the space above the 1st ledger line above the stave. Copy (treble clef) stave, no sharps or flats in the key signature, 4/4. a note in the 3rd space; a note in the 4th space; a note in the space just above the stave, with a sharp sign in front; a note on the 1st ledger line above the stave."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "same",
+            "label": "It sounds at exactly the same pitch"
+          },
+          {
+            "id": "up",
+            "label": "It sounds exactly one octave higher"
+          },
+          {
+            "id": "down",
+            "label": "It sounds exactly one octave lower"
+          },
+          {
+            "id": "different",
+            "label": "It sounds different, and not an octave away: only the positions on the stave were copied"
+          }
+        ],
+        "correctOptionIds": [
+          "up"
+        ],
+        "diagnoses": {
+          "same": {
+            "category": "wrong-octave",
+            "reason": "The copy does not sound the same: some or all of its notes are named differently."
+          },
+          "down": {
+            "category": "wrong-octave",
+            "reason": "The copy is not exactly one octave lower: compare the letter names of the first notes."
+          },
+          "different": {
+            "category": "wrong-clef",
+            "reason": "These notes are not at the positions of the original: the copy is a real change of pitch, not just a change of clef."
+          }
+        }
+      },
+      "hints": [
+        "Name the first note of each stave.",
+        "Name the first note of each stave. The same letter name and octave number is the same pitch."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?",
+          "wrong-octave": "Compare the first note of each stave: same letter and octave number is the same pitch.",
+          "wrong-clef": "The same positions are different notes in a different clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "A copy can be the same pitch, one octave away, or wrongly copied by position.",
+    "An octave: the same letter names, the octave number one more or one less.",
+    "Check which clef the question names."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.octave-transpose",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.clef-position",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.octave-transpose",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.transposition.octave-any"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s03"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.05"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 3 (pp. 108-109): transposing an octave using a different clef; two common mistakes (the wrong C clef; the wrong pitch). The three relations (same pitch, one octave, positions only) are computed from the real pitches. The tenor clef is always one of the two clefs of an octave-transposition question."
+  }
+}

@@ -1,0 +1,1288 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U1-L03",
+  "lessonId": "G5-U1-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read and write groups of 5, 6, 7 and 9 notes played in the time of 4 or 8.",
+    "successCriteria": [
+      "I can say how much time an irregular group takes.",
+      "I choose the written value that fits the time.",
+      "I check the group's ratio apart from the bar total."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "You already know the triplet: three equal notes played in the time normally taken by two. Other irregular divisions work the same way. A quintuplet puts five notes into the time of four, a sextuplet six into the time of four, a septuplet seven into the time of four, and a nonuplet nine into the time of eight. The number printed over the group is the number of notes."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 5,
+                "normal": 4,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ],
+                "label": "5"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 5/4: a quintuplet of five semiquavers, then four crotchets.",
+        "questionAlternative": "Bar 1: a group of 5 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet, crotchet, crotchet, crotchet.",
+        "timeSignature": "5/4"
+      },
+      "caption": "Five semiquavers take the time of one crotchet, so the bar still adds up to five crotchets."
+    },
+    {
+      "kind": "text",
+      "text": "The written value depends on the time the group must fit. Five, six or seven notes in the time of a crotchet are written as semiquavers (two beams). Five, six or seven notes in the time of a quaver are written as demisemiquavers (three beams). Nine notes in the time of a crotchet are written as demisemiquavers; nine in the time of a minim are written as semiquavers."
+    },
+    {
+      "kind": "text",
+      "text": "To work out how long a group lasts, imagine the ordinary notes it replaces. Five semiquavers in the time of four semiquavers last as long as four semiquavers: one crotchet. Check this separately from the bar total: first the group's length, then whether the bar adds up."
+    },
+    {
+      "kind": "tip",
+      "text": "Name the group (the number of notes), say what it replaces (the time of 4, or of 8), then say how long that is."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "tuplet",
+              "actual": 9,
+              "normal": 8,
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "demisemiquaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                }
+              ],
+              "label": "9"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 5/4: a nonuplet of nine demisemiquavers, then two minims.",
+      "questionAlternative": "Bar 1: a group of 9 of demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, minim, minim.",
+      "timeSignature": "5/4"
+    },
+    "steps": [
+      "Nine notes replace eight demisemiquavers.",
+      "Eight demisemiquavers last one crotchet.",
+      "So the nonuplet lasts one crotchet, and the bar adds up to five crotchets."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A nonuplet of nine demisemiquavers lasting one crotchet, then two minims."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u1-l03.guided-1",
+      "templateId": "t.g5.division-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "6 demisemiquavers are played as a sextuplet. They take the time of how many demisemiquavers of the usual length?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          },
+          {
+            "id": "6",
+            "label": "6"
+          },
+          {
+            "id": "8",
+            "label": "8"
+          }
+        ],
+        "correctOptionIds": [
+          "4"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "tuplet-number-wrong",
+            "reason": "A sextuplet of demisemiquavers takes the time of 4 of them."
+          },
+          "6": {
+            "category": "tuplet-ignored",
+            "reason": "6 is how many notes are written. The group is squeezed into the time of 4 ordinary demisemiquavers."
+          },
+          "8": {
+            "category": "tuplet-number-wrong",
+            "reason": "A sextuplet of demisemiquavers takes the time of 4 of them."
+          }
+        }
+      },
+      "hints": [
+        "Compare with a triplet: three notes in the time of two.",
+        "Compare with a triplet: three notes take the time of two."
+      ],
+      "feedback": {
+        "correct": "Yes: five in the time of four.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.guided-2",
+      "templateId": "t.g5.irregular-division",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The marked group of 6 semiquavers is a sextuplet. It is played in the time of which single note value?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 6,
+                "normal": 4,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ],
+                "label": "6"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: dotted minim, a group of 6 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
+        "questionAlternative": "Bar 1: dotted minim, a group of 6 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
+        "timeSignature": "5/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semiquaver",
+            "label": "a semiquaver"
+          },
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "minim",
+            "label": "a minim"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "tuplet-ignored",
+            "reason": "A semiquaver is the written value of each note in the group, not the length of the whole group."
+          },
+          "minim": {
+            "category": "tuplet-number-wrong",
+            "reason": "The group takes the time of 4 semiquavers, which is one crotchet, not one minim."
+          },
+          "quaver": {
+            "category": "tuplet-number-wrong",
+            "reason": "The group takes the time of 4 semiquavers, which is one crotchet, not one quaver."
+          }
+        }
+      },
+      "hints": [
+        "Work out how long the ordinary notes it replaces would last.",
+        "6 semiquavers are squeezed into the time that 4 semiquavers would take. Work out what 4 semiquavers make."
+      ],
+      "feedback": {
+        "correct": "Right: you found the time the group takes.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.guided-3",
+      "templateId": "t.g5.division-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "9 notes are to be played in the time of one minim. Which note value should each one be written as?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          },
+          {
+            "id": "demisemiquaver",
+            "label": "demisemiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "semiquaver"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "written-value-wrong",
+            "reason": "9 quavers are not the right length to take the time of one minim: the group needs semiquavers (each is about 8 to a minim)."
+          },
+          "demisemiquaver": {
+            "category": "written-value-wrong",
+            "reason": "9 demisemiquavers are not the right length to take the time of one minim: the group needs semiquavers (each is about 8 to a minim)."
+          }
+        }
+      },
+      "hints": [
+        "Compare with a triplet: three notes in the time of two.",
+        "Which note value would give 8 to the minim? Then squeeze 9 into that time."
+      ],
+      "feedback": {
+        "correct": "Yes: the value that fits the time.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u1-l03.ind-1",
+      "templateId": "t.g5.irregular-division",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The marked group of 5 demisemiquavers is a quintuplet. It is played in the time of which single note value?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 5,
+                "normal": 4,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "demisemiquaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "demisemiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "demisemiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "demisemiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "demisemiquaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ],
+                "label": "5"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet, a group of 5 of demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, quaver.",
+        "questionAlternative": "Bar 1: quaver, crotchet, a group of 5 of demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, quaver.",
+        "timeSignature": "5/8"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "minim",
+            "label": "a minim"
+          },
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          },
+          {
+            "id": "demisemiquaver",
+            "label": "a demisemiquaver"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          }
+        ],
+        "correctOptionIds": [
+          "quaver"
+        ],
+        "diagnoses": {
+          "demisemiquaver": {
+            "category": "tuplet-ignored",
+            "reason": "A demisemiquaver is the written value of each note in the group, not the length of the whole group."
+          },
+          "minim": {
+            "category": "tuplet-number-wrong",
+            "reason": "The group takes the time of 4 demisemiquavers, which is one quaver, not one minim."
+          },
+          "crotchet": {
+            "category": "tuplet-number-wrong",
+            "reason": "The group takes the time of 4 demisemiquavers, which is one quaver, not one crotchet."
+          }
+        }
+      },
+      "hints": [
+        "Work out how long the ordinary notes it replaces would last.",
+        "5 demisemiquavers are squeezed into the time that 4 demisemiquavers would take. Work out what 4 demisemiquavers make."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.ind-2",
+      "templateId": "t.g5.division-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Finish this bar of 5/4, which already begins with a dotted minim, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "complete-bar",
+        "timeSignature": "5/4",
+        "given": [
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "minim",
+              "dots": 1
+            }
+          }
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "tuplet",
+                  "actual": 9,
+                  "normal": 8,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ],
+                  "label": "9"
+                }
+              ],
+              "barline": "final"
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": false
+      },
+      "hints": [
+        "The group fills exactly one beat's worth of time; add it with the tuplet control.",
+        "The group of 9 semiquavers fills exactly the time of one minim. Add it with the tuplet button, then add the 9 notes."
+      ],
+      "feedback": {
+        "correct": "Correct group.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.ind-3",
+      "templateId": "t.g5.division-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What is a group of 6 equal notes played in the time of 4 usually called?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quintuplet",
+            "label": "quintuplet"
+          },
+          {
+            "id": "sextuplet",
+            "label": "sextuplet"
+          },
+          {
+            "id": "septuplet",
+            "label": "septuplet"
+          },
+          {
+            "id": "nonuplet",
+            "label": "nonuplet"
+          }
+        ],
+        "correctOptionIds": [
+          "sextuplet"
+        ],
+        "diagnoses": {
+          "quintuplet": {
+            "category": "tuplet-number-wrong",
+            "reason": "A quintuplet has 5 notes; this group has 6."
+          },
+          "septuplet": {
+            "category": "tuplet-number-wrong",
+            "reason": "A septuplet has 7 notes; this group has 6."
+          },
+          "nonuplet": {
+            "category": "tuplet-number-wrong",
+            "reason": "A nonuplet has 9 notes; this group has 6."
+          }
+        }
+      },
+      "hints": [
+        "Compare with a triplet: three notes in the time of two.",
+        "The name comes from the Latin number: quintuplet five, sextuplet six, septuplet seven, nonuplet nine."
+      ],
+      "feedback": {
+        "correct": "Correct name.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.ind-4",
+      "templateId": "t.g5.irregular-division",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The marked group of 5 semiquavers is a quintuplet. It is played in the time of which single note value?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 5,
+                "normal": 4,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "semiquaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ],
+                "label": "5"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: dotted minim, a group of 5 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
+        "questionAlternative": "Bar 1: dotted minim, a group of 5 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
+        "timeSignature": "5/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "a semiquaver"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "minim",
+            "label": "a minim"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "tuplet-ignored",
+            "reason": "A semiquaver is the written value of each note in the group, not the length of the whole group."
+          },
+          "minim": {
+            "category": "tuplet-number-wrong",
+            "reason": "The group takes the time of 4 semiquavers, which is one crotchet, not one minim."
+          },
+          "quaver": {
+            "category": "tuplet-number-wrong",
+            "reason": "The group takes the time of 4 semiquavers, which is one crotchet, not one quaver."
+          }
+        }
+      },
+      "hints": [
+        "Work out how long the ordinary notes it replaces would last.",
+        "5 semiquavers are squeezed into the time that 4 semiquavers would take. Work out what 4 semiquavers make."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.ind-5",
+      "templateId": "t.g5.division-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Finish this bar of 5/4, which already begins with a minim, then a crotchet, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group.",
+      "answer": {
+        "kind": "rhythm",
+        "task": "complete-bar",
+        "timeSignature": "5/4",
+        "given": [
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "minim",
+              "dots": 0
+            }
+          },
+          {
+            "kind": "note",
+            "pitch": "B4",
+            "duration": {
+              "value": "crotchet",
+              "dots": 0
+            }
+          }
+        ],
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "tuplet",
+                  "actual": 9,
+                  "normal": 8,
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "begin"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "continue"
+                    },
+                    {
+                      "kind": "note",
+                      "pitch": "B4",
+                      "duration": {
+                        "value": "semiquaver",
+                        "dots": 0
+                      },
+                      "beam": "end"
+                    }
+                  ],
+                  "label": "9"
+                }
+              ],
+              "barline": "final"
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": false
+      },
+      "hints": [
+        "The group fills exactly one beat's worth of time; add it with the tuplet control.",
+        "The group of 9 semiquavers fills exactly the time of one minim. Add it with the tuplet button, then add the 9 notes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g5-u1-l03.ind-6",
+      "templateId": "t.g5.division-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "6 notes are to be played in the time of one quaver. Which note value should each one be written as?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "quaver"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver"
+          },
+          {
+            "id": "demisemiquaver",
+            "label": "demisemiquaver"
+          }
+        ],
+        "correctOptionIds": [
+          "demisemiquaver"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "written-value-wrong",
+            "reason": "6 quavers are not the right length to take the time of one quaver: the group needs demisemiquavers (each is about 4 to a quaver)."
+          },
+          "semiquaver": {
+            "category": "written-value-wrong",
+            "reason": "6 semiquavers are not the right length to take the time of one quaver: the group needs demisemiquavers (each is about 4 to a quaver)."
+          }
+        }
+      },
+      "hints": [
+        "Compare with a triplet: three notes in the time of two.",
+        "Which note value would give 4 to the quaver? Then squeeze 6 into that time."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes in the group and compare with the time they must fit into.",
+          "written-value-wrong": "Choose the written value that makes the group fit the time it is meant to take.",
+          "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "recap": [
+    "Quintuplet 5:4, sextuplet 6:4, septuplet 7:4, nonuplet 9:8.",
+    "Notes in the time of a crotchet are semiquavers (or demisemiquavers for nine); in the time of a quaver, demisemiquavers.",
+    "Check the group's length, then the bar total."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.irregular-division",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.division-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.division-write",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.irregular-divisions"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s02"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.02"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 2 (pp. 106-107, read in the PDF): triplet as the simplest irregular division; 5, 6, 7 in the time of 4; 9 in the time of 8; written values adjust with the time they must fit. The nonuplet in the time of a minim is the book's 9-in-8 case."
+  }
+}

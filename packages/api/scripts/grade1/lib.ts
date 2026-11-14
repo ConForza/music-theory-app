@@ -104,7 +104,7 @@ export function buildLesson(a: Author, spec: Spec) {
   const inLesson = new Set<string>();
   const node = a.ix.nodeById.get(spec.node)!;
   if (!node) throw new Error(`Unknown node ${spec.node}`);
-  if (node.type !== "lesson") throw new Error(`${spec.node} is not a lesson`);
+  if (node.type !== "lesson" && node.type !== "enrichment") throw new Error(`${spec.node} is not a lesson or an enrichment node`);
   const lesson = {
     schemaVersion: 1,
     id: `lc.${node.id}`,

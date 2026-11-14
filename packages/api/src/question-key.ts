@@ -254,6 +254,14 @@ export interface ReviewConstraint {
   romans?: string[];
   /** Brief 08 review: the key (or answered signature) has at least one sharp or flat. */
   nonEmptySignature?: boolean;
+  /** Brief 09: the clef of the music or of the answer (or of any stave of a score) is one of these. */
+  clefs?: Array<"treble" | "bass" | "alto" | "tenor">;
+  /** Brief 09: the interval asked has two notes that share no major or minor scale (interval answers), or the prompt is about a semitone change / the same sound spelt two ways (facts). */
+  chromaticInterval?: boolean;
+  /** Brief 09: the interval is larger than an octave (interval answers), or the prompt is about compound numbering (facts). */
+  compoundInterval?: boolean;
+  /** Brief 09: the chord asked about is in one of these inversions ("b" first, "c" second); a question with no chord answer must be about an inversion in its prompt. */
+  inversions?: string[];
   /** Brief 08 review: a double sharp or flat is printed in the music, or is the pitch answered (or, with no music, the prompt is about one). */
   doubleSign?: boolean;
 }
@@ -427,8 +435,47 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
       .correctOptionIds?.[0];
     if (right) found.push(right);
     // no chord named in the answer (for example "which notes make chord IV?"): the chord the prompt names
-    if (!found.some((r) => /^[IV]+$/.test(r))) for (const m of item.prompt.matchAll(/\bchord (VII|VI|IV|V|III|II|I)\b/g)) found.push(m[1]!);
+    if (!found.some((r) => /^[IV]+$/.test(r))) for (const m of item.prompt.matchAll(/\bchord (VII|VI|IV|V|III|II|I|ii)\b/g)) found.push(m[1]!);
     if (!found.some((r) => c.romans!.includes(r))) return false;
+  }
+  if (c.clefs) {
+    const found: string[] = [];
+    if (item.music?.clef) found.push(item.music.clef);
+    const ac = (item.answer as { clef?: string }).clef;
+    if (ac) found.push(ac);
+    for (const st of item.score?.staves ?? []) found.push(st.music.clef);
+    if (!found.some((x) => c.clefs!.includes(x as never))) return false;
+  }
+  if (c.chromaticInterval) {
+    const a = item.answer as { kind?: string; lower?: string; upper?: string; acceptedPitches?: string[] };
+    if (a.kind === "interval") {
+      const other = a.upper ?? a.acceptedPitches?.[0];
+      if (!a.lower || !other) return false;
+      if (!music.isChromaticPairOfPitches(music.parsePitch(a.lower), music.parsePitch(other))) return false;
+    } else if (!/semitone|same sound/i.test(item.prompt)) return false;
+  }
+  if (c.compoundInterval) {
+    const a = item.answer as { kind?: string; acceptedIntervals?: string[]; target?: string };
+    if (a.kind === "interval") {
+      const codes = [...(a.acceptedIntervals ?? []), ...(a.target ? [a.target] : [])];
+      if (!codes.some((x) => x.startsWith("c") || Number(x.replace(/\D/g, "")) > 8)) return false;
+    } else if (!/compound|octave and|12th|10th|11th|13th|14th|15th/i.test(item.prompt)) return false;
+  }
+  if (c.inversions) {
+    const found: string[] = [];
+    const walk = (v: unknown) => {
+      if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === "object") {
+        for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
+          if (k === "inversion" && typeof x === "string") found.push(x);
+          else walk(x);
+        }
+      }
+    };
+    walk(item.answer);
+    if (found.length) {
+      if (!found.some((x) => c.inversions!.includes(x))) return false;
+    } else if (!/inversion|6\/3|6\/4|lowest note|bass/i.test(item.prompt)) return false;
   }
   if (c.nonEmptySignature) {
     const a = item.answer as { kind?: string; accidentals?: unknown[] };

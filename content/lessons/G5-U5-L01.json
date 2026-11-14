@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U5-L01",
+  "lessonId": "G5-U5-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Describe how each ornament sign is commonly performed.",
+    "successCriteria": [
+      "I know an acciaccatura is crushed and an appoggiatura leans on the main note.",
+      "I know a trill, a turn and the two mordents by what they do to the main note.",
+      "I know there is rarely one correct way to play an ornament."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "An ornament decorates a note. It may be written as a small note or as a sign above the note, and the time it takes always comes from the ordinary full-size notes. Because the exact rhythm of an ornament depends on the speed, the style, the mood and the period of the music, you are not asked to write out an ornament exactly. But you should know what each sign means in general."
+    },
+    {
+      "kind": "text",
+      "text": "The acciaccatura, or crushed note, is a small note with a stroke through its stem. It is played as quickly as possible just before the main note. The appoggiatura is a small note with no stroke. It leans on the main note: it takes time from it (half its value if the main note is undotted, two thirds if it is dotted), and it is stronger than the main note."
+    },
+    {
+      "kind": "text",
+      "text": "A trill (tr) means the written note alternates quickly with the note above it, for the length of the note; it often ends with the note below. A turn is a group of four notes: the note above, the written note, the note below and the written note again. The inverted turn starts on the note below instead."
+    },
+    {
+      "kind": "text",
+      "text": "The two signs that look like a short zig-zag are mordents. The upper mordent (a zig-zag without a line) is the written note, the note above, then the written note. The lower mordent (the zig-zag with a vertical line through it) is the written note, the note below, then the written note. The name 'mordent' alone is often applied to the upper form, so the two are named upper and lower."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Three crotchets: E, D, C. The first note carries a trill.",
+        "timeSignature": "3/4"
+      },
+      "caption": "Whatever its form, an ornament takes its time from the main note."
+    },
+    {
+      "kind": "tip",
+      "text": "Small note with a stroke: crushed and quick. Small note without a stroke: leans and takes time. Look at where the extra notes go: above, below, or both."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One note, G."
+    },
+    "steps": [
+      "An upper mordent: G, the note above (A), then G.",
+      "A lower mordent: G, the note below (F), then G.",
+      "The difference is where the extra note goes."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A note G with a mordent."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u5-l01.guided-1",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "An acciaccatura is played…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w2",
+            "label": "At the same time as a trill"
+          },
+          {
+            "id": "w0",
+            "label": "So that it takes half the value of the main note"
+          },
+          {
+            "id": "r",
+            "label": "As quickly as possible, just before the main note"
+          },
+          {
+            "id": "w1",
+            "label": "On the beat, with a strong accent"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "That describes the appoggiatura, which leans on the main note and takes part of its time."
+          },
+          "w1": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "An accent on the grace note belongs to the appoggiatura; the acciaccatura is crushed in."
+          },
+          "w2": {
+            "category": "trill-mordent-confusion",
+            "reason": "An acciaccatura is a single crushed note, not a trill."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.guided-2",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "An upper mordent is…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w0",
+            "label": "The written note, the note below, then the written note again"
+          },
+          {
+            "id": "r",
+            "label": "The written note, the note above, then the written note again"
+          },
+          {
+            "id": "w1",
+            "label": "The note above, the written note, the note below and the written note"
+          },
+          {
+            "id": "w2",
+            "label": "A rapid alternation of the written note and the note above for its whole length"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is a lower mordent: the extra note is below."
+          },
+          "w1": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is a turn."
+          },
+          "w2": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is a trill."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.guided-3",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Why is there rarely one 'correct' way to play an ornament?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w0",
+            "label": "Because every ornament sign has several unrelated meanings"
+          },
+          {
+            "id": "w2",
+            "label": "Because only singers may play them"
+          },
+          {
+            "id": "w1",
+            "label": "Because ornaments are never played in written music"
+          },
+          {
+            "id": "r",
+            "label": "The speed, style and period of the music affect the exact notes and rhythm"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "Each sign has a clear basic pattern; it is the rhythm and number of notes that vary."
+          },
+          "w1": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "Ornaments are played; how exactly depends on the music."
+          },
+          "w2": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "Ornaments are played by every kind of performer."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u5-l01.ind-1",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How much of the main note's value does an appoggiatura usually take when the main note is DOTTED?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "r",
+            "label": "Two thirds of it"
+          },
+          {
+            "id": "w0",
+            "label": "Half of it"
+          },
+          {
+            "id": "w1",
+            "label": "None of it"
+          },
+          {
+            "id": "w2",
+            "label": "One third of it"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "Half is the usual share for an undotted main note; a dotted note gives two thirds."
+          },
+          "w1": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "An appoggiatura takes time from the main note."
+          },
+          "w2": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "The usual share for a dotted main note is two thirds."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.ind-2",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "An appoggiatura (a small note with no stroke through its stem) is…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w0",
+            "label": "A crushed note played as fast as possible"
+          },
+          {
+            "id": "r",
+            "label": "A leaning note that takes time from the main note and is accented"
+          },
+          {
+            "id": "w1",
+            "label": "A sign that tells the player to repeat the bar"
+          },
+          {
+            "id": "w2",
+            "label": "A long trill that ends the piece"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "That describes the acciaccatura, the small note with the stroke."
+          },
+          "w1": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "Repeat signs are different marks; an appoggiatura is an ornament."
+          },
+          "w2": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "An appoggiatura is a single leaning note."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.ind-3",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A turn (a sideways S-shaped sign) is a group of four notes. It consists of…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w2",
+            "label": "The written note and the note above, repeated many times"
+          },
+          {
+            "id": "r",
+            "label": "The note above, the written note, the note below, then the written note again"
+          },
+          {
+            "id": "w0",
+            "label": "The written note, the note above, then the written note"
+          },
+          {
+            "id": "w1",
+            "label": "The written note, the note below, then the written note"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is an upper mordent: three notes."
+          },
+          "w1": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is a lower mordent: three notes."
+          },
+          "w2": {
+            "category": "trill-mordent-confusion",
+            "reason": "That describes a trill."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.ind-4",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A turn written directly over a note…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w2",
+            "label": "Is played before the beat as a crushed note"
+          },
+          {
+            "id": "r",
+            "label": "Begins at once, on the note above"
+          },
+          {
+            "id": "w1",
+            "label": "Begins on the note below"
+          },
+          {
+            "id": "w0",
+            "label": "Begins only after the note has been sounded"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is true of a turn placed to the right of the note, not directly over it."
+          },
+          "w1": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is the inverted turn."
+          },
+          "w2": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "That describes the acciaccatura."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.ind-5",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A lower mordent (the zig-zag with a short vertical line through it) is…",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w0",
+            "label": "The written note, the note above, then the written note again"
+          },
+          {
+            "id": "w2",
+            "label": "A rapid alternation of the written note and the note below"
+          },
+          {
+            "id": "r",
+            "label": "The written note, the note below, then the written note again"
+          },
+          {
+            "id": "w1",
+            "label": "The note below, the written note, the note above and the written note"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is an upper mordent: the extra note is above."
+          },
+          "w1": {
+            "category": "trill-mordent-confusion",
+            "reason": "That is an inverted turn, a different sign."
+          },
+          "w2": {
+            "category": "trill-mordent-confusion",
+            "reason": "A trill uses the note above."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    },
+    {
+      "id": "i.g5-u5-l01.ind-6",
+      "templateId": "t.g5.ornament-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How much of the main note's value does an appoggiatura usually take when the main note is not dotted?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "w0",
+            "label": "None: it takes no time at all"
+          },
+          {
+            "id": "w1",
+            "label": "All of it"
+          },
+          {
+            "id": "r",
+            "label": "Half of it"
+          },
+          {
+            "id": "w2",
+            "label": "One quarter of it"
+          }
+        ],
+        "correctOptionIds": [
+          "r"
+        ],
+        "diagnoses": {
+          "w0": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "That describes an acciaccatura. An appoggiatura takes time from the main note."
+          },
+          "w1": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "The main note still sounds after the appoggiatura, so it cannot take all of its value."
+          },
+          "w2": {
+            "category": "acciaccatura-appoggiatura-swap",
+            "reason": "The usual share is half when the main note is undotted (two thirds when it is dotted)."
+          }
+        }
+      },
+      "hints": [
+        "Recall the look of each sign and what it does to the main note.",
+        "Remember the look of each sign, and what it does to the main note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "upper-lower-mordent-swap": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below.",
+          "turn-inverted": "A turn starts on the note above; an inverted turn starts on the note below.",
+          "acciaccatura-appoggiatura-swap": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura).",
+          "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        },
+        "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
+      }
+    }
+  ],
+  "recap": [
+    "Acciaccatura: crushed, quick, before the main note. Appoggiatura: leans, takes half (or two thirds) of the main note.",
+    "Trill: alternates with the note above. Turn: above, main, below, main. Mordents: one extra note above (upper) or below (lower).",
+    "There is rarely one correct way to perform an ornament."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.ornament-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.ornament-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.ornament-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.ornaments.patterns"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s14"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.13"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 14 (pp. 132-138, read in the PDF). Brief 09: how ornaments are performed is explained in words and asked only as a description; writing out the realisation of a sign is never a compulsory assessed skill."
+  }
+}

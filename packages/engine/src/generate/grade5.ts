@@ -14,7 +14,7 @@ import { barComplete5, divisionFacts5, divisionWrite5, groupingJudge5, irregular
 /** Every stave a Grade 5 generator draws is described from the notation it really contains (grade4-text.ts), not from what the generator meant to draw. */
 const described = (g: Gen): Gen => (c) => {
   let raw: ReturnType<Gen>;
-  try { raw = g(c); } catch { return null; } // a candidate the rules cannot spell (for example a triple sharp) is simply not used
+  try { raw = g(c); } catch (e) { if (process.env.G5_DEBUG) console.error(String(e).slice(0, 200)); return null; } // a candidate the rules cannot spell (for example a triple sharp) is simply not used
   const d = raw as (Record<string, unknown> & { music?: { presentation?: string; textAlternative: string; questionAlternative?: string }; score?: never }) | null;
   if (!d) return d as never;
   const out: Record<string, unknown> = { ...d };
