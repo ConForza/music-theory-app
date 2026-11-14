@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: name an interval under a key signature (G major, treble clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08",
+    "abrsm2020.g5.04"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-identify.g-major-d5",
+    "templateId": "t.g5.interval-key-identify",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of G major is shown. Name the interval between these two notes (number and quality).",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "key": "G major",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "writtenAccidental": "natural"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Two notes in G major (one sharp, F♯): B4 and F♮5. The natural sign overrides the key signature. Both notes are minims."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "identify",
+      "key": "G major",
+      "lower": "B4",
+      "upper": "F5",
+      "acceptedIntervals": [
+        "d5"
+      ]
+    },
+    "hints": [
+      "Apply the key signature to both notes before you count.",
+      "Count the letter names for the number, then compare with the major scale on the lower note for the quality."
+    ],
+    "feedback": {
+      "correct": "Correct. The natural sign cancels the key signature's F♯ for this note, so the top note is F♮. B to F♮ is a diminished 5th; B to F♯ would be perfect.",
+      "mistakes": {
+        "accidental-not-applied": "Look at the sign beside the note. The natural sign cancels the key signature's F♯ for this note, so the top note is F♮. B to F♮ is a diminished 5th; B to F♯ would be perfect.",
+        "counted-one-end-only": "Count both notes: the lower note is 1, then every letter name up to and including the upper note.",
+        "quality-from-wrong-key": "Judge the quality against the major scale of the lower note, using the sharps or flats actually sounding."
+      },
+      "fallback": "The answer is a diminished 5. The natural sign cancels the key signature's F♯ for this note, so the top note is F♮. B to F♮ is a diminished 5th; B to F♯ would be perfect."
+    }
+  }
+}

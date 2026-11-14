@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 optional enrichment example: rewrite one bar from 3/4 to 9/8.",
+  "outcomeIds": [
+    "abrsm2020.g4.01"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s02"
+    ]
+  },
+  "item": {
+    "id": "i.g5-rewrite-metre.3-4-to-9-8-rest",
+    "templateId": "t.g5.rewrite-metre",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "learning",
+    "prompt": "Rewrite this bar of 3/4 in 9/8 so every note and rest keeps the same share of its beat. Beam by the new beats.",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "timeSignature": "3/4",
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "pitch": "B4"
+            },
+            {
+              "kind": "note",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "pitch": "B4",
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "pitch": "B4",
+              "beam": "end"
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One bar of 3/4 (three crotchet beats), unpitched rhythm on a single line."
+    },
+    "answer": {
+      "kind": "rhythm",
+      "task": "rewrite-metre",
+      "timeSignature": "9/8",
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                },
+                "pitch": "B4"
+              },
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "pitch": "B4",
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "pitch": "B4",
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": false
+    },
+    "hints": [
+      "3/4 has three crotchet beats; 9/8 has three dotted-crotchet beats. Match each beat to its partner."
+    ],
+    "feedback": {
+      "correct": "Correct. The three crotchet beats of 3/4 become three dotted-crotchet beats in 9/8. The rest takes the same share of its beat as the note it replaces, so it is dotted too.",
+      "mistakes": {
+        "values-copied-unchanged": "Copying the values leaves a bar of the wrong length for 9/8. Compare one beat in each time signature first.",
+        "rest-not-rewritten": "A rest fills the same share of the beat as a note, so it changes in exactly the same way.",
+        "dots-kept-in-simple-time": "A simple beat is undotted, so the dots must come off when going from compound to simple time.",
+        "beam-across-beats": "Start a new beam on each new beat so the beats stay visible."
+      },
+      "fallback": "The three crotchet beats of 3/4 become three dotted-crotchet beats in 9/8. The rest takes the same share of its beat as the note it replaces, so it is dotted too."
+    }
+  }
+}

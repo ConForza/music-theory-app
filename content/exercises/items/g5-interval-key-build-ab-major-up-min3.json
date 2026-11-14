@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: write an interval under a key signature (Ab major, treble clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-build.ab-major-up-min3",
+    "templateId": "t.g5.interval-key-build",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of Ab major is shown. Write the note a minor 3rd up from this note, adding an accidental only if the key signature does not already give it.",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "key": "Ab major",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Eb4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One minim, Eb4, under the key signature of Ab major."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "build",
+      "key": "Ab major",
+      "lower": "Eb4",
+      "target": "m3",
+      "direction": "up",
+      "acceptedPitches": [
+        "Gb4"
+      ]
+    },
+    "hints": [
+      "Find the letter name first, then decide what the interval needs on that letter.",
+      "Then compare with the key signature: write a sign only for the difference."
+    ],
+    "feedback": {
+      "correct": "Correct. E♭ up a minor 3rd is G♭. A♭ major has B♭, E♭, A♭ and D♭ but not G♭, so the G♭ needs its own flat sign.",
+      "mistakes": {
+        "redundant-or-missing-accidental": "E♭ up a minor 3rd is G♭. A♭ major has B♭, E♭, A♭ and D♭ but not G♭, so the G♭ needs its own flat sign.",
+        "accidental-not-applied": "Check what the key signature already gives that letter before adding a sign. E♭ up a minor 3rd is G♭. A♭ major has B♭, E♭, A♭ and D♭ but not G♭, so the G♭ needs its own flat sign.",
+        "enharmonic-spelling": "That sounds the same but uses the wrong letter name. An interval's number fixes the letter: count the letter names from the starting note."
+      },
+      "fallback": "E♭ up a minor 3rd is G♭. A♭ major has B♭, E♭, A♭ and D♭ but not G♭, so the G♭ needs its own flat sign."
+    }
+  }
+}

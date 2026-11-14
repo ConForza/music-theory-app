@@ -2,7 +2,7 @@
 
 # Learning path and prerequisite graph
 
-Five grade worlds · 27 units · 131 lessons · 5 optional enrichment nodes · 27 practice, 27 review, 27 unit-challenge and 5 grade-assessment nodes · 139 concepts.
+Five grade worlds · 27 units · 132 lessons · 6 optional enrichment nodes · 27 practice, 27 review, 27 unit-challenge and 5 grade-assessment nodes · 141 concepts.
 
 **Unlock rule:** a node unlocks when the nodes in *Unlocks after* are complete. When no list is authored, it unlocks after the previous required lesson, practice or review node. Unit challenges and grade assessments collect independent mastery evidence and never block the next lesson. Enrichment is optional, and no required node depends on it. The validator checks that every concept prerequisite is taught by a node that is guaranteed to be complete first.
 
@@ -412,6 +412,7 @@ Irregular time, tenor clef, four clefs, keys to six sharps/flats, all intervals,
 | `G5-U1-L01` | Lesson | Quintuple and septuple time | Read 5/4, 7/4, 5/8 and 7/8 as combinations of two- and three-beat groups. | `c.metre.irregular` (`c.metre.regular-all`) | g5.01 | `G4-U5-R1` | 6 |
 | `G5-U1-L02` | Lesson | Grouping in irregular time | Group notes and rests by the stated sub-groups in irregular bars. | `c.metre.irregular-grouping` (`c.metre.irregular`, `c.metre.regular-grouping`) | g5.01 | `G5-U1-L01` | 8 |
 | `G5-U1-L03` | Lesson | Irregular divisions | Read groups of 5, 6, 7 or 9 notes in the time of a beat and choose the written value. | `c.rhythm.irregular-divisions` (`c.rhythm.duplets`, `c.rhythm.triplets-mixed`, `c.rhythm.demisemiquavers`) | g5.02 | `G5-U1-L02` | 8 |
+| `G5-U1-E1` | Enrichment (optional) | Rewriting between simple and compound time | Optional: rewrite a bar from simple to compound time (and back) so each note keeps its share of the beat. | `c.metre.rewrite-simple-compound` (`c.metre.compound-signatures`, `c.metre.regular-grouping`) | — | `G5-U1-L03` | 8 |
 | `G5-U1-P1` | Practice | Practice: Fives and sevens | Mixed independent practice of everything in this unit. | — | g5.01, g5.02 | `G5-U1-L03` | 6 |
 | `G5-U1-R1` | Review | Review: Grade 4 foundations | Revisit earlier material so it stays fresh. | — | g4.01, g4.02, g4.03, g4.04, g4.05, g4.06, g4.07, g4.08, g4.09, g4.10, g4.11, g4.12, g4.13, g4.14, g4.15, g4.16, g4.17, g4.18 | `G5-U1-P1` | 6 |
 | `G5-U1-C` | Unit challenge | Unit challenge: Fives and sevens | Show independently, without hints, what you can do from this unit. | — | see `a.g5-u1` | `G5-U1-R1` | 8 |
@@ -441,7 +442,8 @@ Refinements to the provisional unit map: Instrument transposition (book §12) mo
 | `G5-U3-L02` | Lesson | G flat major and E flat minor | Build G♭ major and E♭ minor and see that they are enharmonic with F♯ major and D♯ minor. | `c.scales.keys-six-flats` (`c.scales.keys-five-flats`, `c.accidentals.enharmonic`, `c.clefs.four-clefs`) | g5.07, g5.04 | `G5-U3-L01` | 8 |
 | `G5-U3-L03` | Lesson | Chromatic intervals | Name intervals whose notes are not in one scale, such as augmented 6ths and diminished 6ths. | `c.intervals.chromatic` (`c.intervals.augmented-diminished`, `c.scales.keys-six-sharps`, `c.scales.keys-six-flats`) | g5.08 | `G5-U3-L02` | 8 |
 | `G5-U3-L04` | Lesson | Compound intervals | Name intervals larger than an octave as compound or by number (e.g. 12th). | `c.intervals.compound` (`c.intervals.chromatic`) | g5.08 | `G5-U3-L03` | 6 |
-| `G5-U3-L05` | Lesson | Written pitch and concert pitch | Explain why some instruments sound at a different pitch from the written note. | `c.transposition.concert-pitch` (`c.intervals.any-diatonic`) | g5.06 | `G5-U3-L04` | 6 |
+| `G5-U3-L07` | Lesson | Intervals under a key signature | Name and write intervals when a key signature supplies sharps or flats, and spot where a written accidental changes them. | `c.intervals.in-key-signature` (`c.intervals.chromatic`, `c.scales.keys-six-flats`) | g5.08 | `G5-U3-L04` | 8 |
+| `G5-U3-L05` | Lesson | Written pitch and concert pitch | Explain why some instruments sound at a different pitch from the written note. | `c.transposition.concert-pitch` (`c.intervals.any-diatonic`) | g5.06 | `G5-U3-L07` | 6 |
 | `G5-U3-L06` | Lesson | Transposing for B flat, A and F instruments | Transpose a short melody between concert and written pitch, adjusting the key signature and accidentals. | `c.transposition.instrument` (`c.transposition.concert-pitch`, `c.intervals.chromatic`, `c.scales.keys-six-sharps`, `c.scales.keys-six-flats`) | g5.06 | `G5-U3-L05` | 10 |
 | `G5-U3-P1` | Practice | Practice: Keys, intervals and transposing | Mixed independent practice of everything in this unit. | — | g5.07, g5.04, g5.08, g5.06 | `G5-U3-L06` | 6 |
 | `G5-U3-R1` | Review | Review: earlier units | Spaced review of earlier units in this grade, mixed with the new unit. | — | g5.01, g5.02, g5.03, g5.04, g5.05 | `G5-U3-P1` | 6 |

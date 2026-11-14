@@ -194,6 +194,54 @@
       ]
     },
     {
+      "id": "G5-U1-E1",
+      "type": "enrichment",
+      "unitId": "G5-U1",
+      "title": "Rewriting between simple and compound time",
+      "objective": "Optional: rewrite a bar from simple to compound time (and back) so each note keeps its share of the beat.",
+      "conceptIds": [
+        "c.metre.rewrite-simple-compound"
+      ],
+      "outcomeIds": [],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.rewrite-metre",
+          "conceptIds": [
+            "c.metre.rewrite-simple-compound"
+          ],
+          "scope": {
+            "noteValues": [
+              "minim",
+              "crotchet",
+              "quaver",
+              "semiquaver"
+            ],
+            "maxDots": 1,
+            "rests": true,
+            "timeSignatures": [
+              "2/4",
+              "3/4",
+              "4/4",
+              "6/8",
+              "9/8",
+              "12/8"
+            ]
+          }
+        }
+      ],
+      "unlockAfter": [
+        "G5-U1-L03"
+      ],
+      "optional": true,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s02"
+      ]
+    },
+    {
       "id": "G5-U1-P1",
       "type": "practice",
       "unitId": "G5-U1",
@@ -1651,6 +1699,137 @@
       ]
     },
     {
+      "id": "G5-U3-L07",
+      "type": "lesson",
+      "unitId": "G5-U3",
+      "title": "Intervals under a key signature",
+      "objective": "Name and write intervals when a key signature supplies sharps or flats, and spot where a written accidental changes them.",
+      "conceptIds": [
+        "c.intervals.in-key-signature"
+      ],
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ],
+      "reviewOutcomeIds": [],
+      "exercises": [
+        {
+          "templateId": "t.g5.interval-key-identify",
+          "conceptIds": [
+            "c.intervals.in-key-signature"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": false,
+            "chromaticIntervals": true,
+            "doubleAccidentals": false,
+            "noteValues": [
+              "semibreve",
+              "minim"
+            ],
+            "accidentals": true,
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g5.interval-key-build",
+          "conceptIds": [
+            "c.intervals.in-key-signature"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": false,
+            "chromaticIntervals": true,
+            "doubleAccidentals": false,
+            "noteValues": [
+              "semibreve",
+              "minim"
+            ],
+            "accidentals": true,
+            "keySignatures": true
+          }
+        }
+      ],
+      "optional": false,
+      "estimatedMinutes": 8,
+      "contentVersion": 1,
+      "contentStatus": "planned",
+      "bookSectionIds": [
+        "fs.g5.s06"
+      ]
+    },
+    {
       "id": "G5-U3-L05",
       "type": "lesson",
       "unitId": "G5-U3",
@@ -1976,6 +2155,114 @@
               "A",
               "F"
             ]
+          }
+        },
+        {
+          "templateId": "t.g5.interval-key-identify",
+          "conceptIds": [
+            "c.intervals.in-key-signature"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": false,
+            "chromaticIntervals": true,
+            "doubleAccidentals": false,
+            "noteValues": [
+              "semibreve",
+              "minim"
+            ],
+            "accidentals": true,
+            "keySignatures": true
+          }
+        },
+        {
+          "templateId": "t.g5.interval-key-build",
+          "conceptIds": [
+            "c.intervals.in-key-signature"
+          ],
+          "scope": {
+            "keys": [
+              "C major",
+              "G major",
+              "D major",
+              "F major",
+              "A major",
+              "Bb major",
+              "Eb major",
+              "A minor",
+              "E minor",
+              "D minor",
+              "E major",
+              "Ab major",
+              "B minor",
+              "F# minor",
+              "C# minor",
+              "G minor",
+              "C minor",
+              "F minor",
+              "B major",
+              "Db major",
+              "G# minor",
+              "Bb minor",
+              "F# major",
+              "Gb major",
+              "D# minor",
+              "Eb minor"
+            ],
+            "clefs": [
+              "treble",
+              "bass",
+              "alto",
+              "tenor"
+            ],
+            "maxLedgerLines": 2,
+            "intervalQuality": "number-and-quality",
+            "intervalLowerNote": "any",
+            "compoundIntervals": false,
+            "chromaticIntervals": true,
+            "doubleAccidentals": false,
+            "noteValues": [
+              "semibreve",
+              "minim"
+            ],
+            "accidentals": true,
+            "keySignatures": true
           }
         }
       ],

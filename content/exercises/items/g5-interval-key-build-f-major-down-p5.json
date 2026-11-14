@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: write an interval under a key signature (F major, treble clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-build.f-major-down-p5",
+    "templateId": "t.g5.interval-key-build",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of F major is shown. Write the note a perfect 5th down from this note, adding an accidental only if the key signature does not already give it.",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "key": "F major",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One minim, F5, under the key signature of F major."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "build",
+      "key": "F major",
+      "lower": "F5",
+      "target": "P5",
+      "direction": "down",
+      "acceptedPitches": [
+        "Bb4"
+      ]
+    },
+    "hints": [
+      "Find the letter name first, then decide what the interval needs on that letter.",
+      "Then compare with the key signature: write a sign only for the difference."
+    ],
+    "feedback": {
+      "correct": "Correct. F down a perfect 5th is B♭. F major's signature already has B♭, so the note is written with no accidental.",
+      "mistakes": {
+        "redundant-or-missing-accidental": "F down a perfect 5th is B♭. F major's signature already has B♭, so the note is written with no accidental.",
+        "accidental-not-applied": "Check what the key signature already gives that letter before adding a sign. F down a perfect 5th is B♭. F major's signature already has B♭, so the note is written with no accidental.",
+        "enharmonic-spelling": "That sounds the same but uses the wrong letter name. An interval's number fixes the letter: count the letter names from the starting note."
+      },
+      "fallback": "F down a perfect 5th is B♭. F major's signature already has B♭, so the note is written with no accidental."
+    }
+  }
+}

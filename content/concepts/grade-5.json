@@ -515,6 +515,43 @@
       ],
       "status": "enrichment",
       "outcomeIds": []
+    },
+    {
+      "id": "c.intervals.in-key-signature",
+      "grade": 5,
+      "domain": "intervals",
+      "title": "Intervals under a key signature",
+      "summary": "The key signature already sharpens or flattens notes; a written accidental overrides it for the rest of the bar. Name and write intervals from the sounding spelling, not from the bare letters.",
+      "prerequisiteIds": [
+        "c.intervals.chromatic",
+        "c.scales.keys-six-flats"
+      ],
+      "rulesetIds": [
+        "rules.interval",
+        "rules.key-signature",
+        "rules.accidental.bar-state"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ]
+    },
+    {
+      "id": "c.metre.rewrite-simple-compound",
+      "grade": 5,
+      "domain": "metre",
+      "title": "Rewriting between simple and compound time",
+      "summary": "Keep each note's share of its beat: a simple beat (crotchet) becomes a compound beat (dotted crotchet), so every value gains a dot, and the reverse. Optional consolidation of Grade 4 time-signature work; not a Grade 5 syllabus outcome.",
+      "prerequisiteIds": [
+        "c.metre.compound-signatures",
+        "c.metre.regular-grouping"
+      ],
+      "rulesetIds": [
+        "rules.grouping.compound",
+        "rules.duration.rational"
+      ],
+      "status": "enrichment",
+      "outcomeIds": []
     }
   ]
 }

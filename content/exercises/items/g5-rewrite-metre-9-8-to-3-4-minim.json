@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 optional enrichment example: rewrite one bar from 9/8 to 3/4.",
+  "outcomeIds": [
+    "abrsm2020.g4.01"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s02"
+    ]
+  },
+  "item": {
+    "id": "i.g5-rewrite-metre.9-8-to-3-4-minim",
+    "templateId": "t.g5.rewrite-metre",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "learning",
+    "prompt": "Rewrite this bar of 9/8 in 3/4 so every note and rest keeps the same share of its beat. Beam by the new beats.",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "timeSignature": "9/8",
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "duration": {
+                "value": "minim",
+                "dots": 1
+              },
+              "pitch": "B4"
+            },
+            {
+              "kind": "note",
+              "duration": {
+                "value": "crotchet",
+                "dots": 1
+              },
+              "pitch": "B4"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One bar of 9/8 (three dotted-crotchet beats), unpitched rhythm on a single line."
+    },
+    "answer": {
+      "kind": "rhythm",
+      "task": "rewrite-metre",
+      "timeSignature": "3/4",
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "pitch": "B4"
+              },
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "pitch": "B4"
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": false
+    },
+    "hints": [
+      "9/8 has three dotted-crotchet beats; 3/4 has three crotchet beats. Match each beat to its partner."
+    ],
+    "feedback": {
+      "correct": "Correct. A dotted minim lasts two dotted-crotchet beats of 9/8, so it becomes a minim (two crotchet beats) in 3/4; the dotted crotchet becomes a crotchet.",
+      "mistakes": {
+        "values-copied-unchanged": "Copying the values leaves a bar of the wrong length for 3/4. Compare one beat in each time signature first.",
+        "rest-not-rewritten": "A rest fills the same share of the beat as a note, so it changes in exactly the same way.",
+        "dots-kept-in-simple-time": "A simple beat is undotted, so the dots must come off when going from compound to simple time.",
+        "beam-across-beats": "Start a new beam on each new beat so the beats stay visible."
+      },
+      "fallback": "A dotted minim lasts two dotted-crotchet beats of 9/8, so it becomes a minim (two crotchet beats) in 3/4; the dotted crotchet becomes a crotchet."
+    }
+  }
+}

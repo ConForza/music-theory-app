@@ -480,6 +480,23 @@ function checkAssessments(ix: CurriculumIndex, err: Reporter) {
         if (!s.templateIds.some((t) => ix.templates.get(t)?.outcomeIds.includes(o))) err("ASSESSMENT_OUTCOME_WITHOUT_TEMPLATE", `${a.id}#${s.id}`, `No template in the section assesses ${o}`);
       }
     }
+    for (const s of a.sections) {
+      // Balance rules must be satisfiable and refer only to the section's own templates.
+      const mix = s.mix ?? [];
+      const seen = new Set<string>();
+      let minTotal = 0;
+      for (const m of mix) {
+        if (seen.has(m.templateId)) err("ASSESSMENT_MIX", `${a.id}#${s.id}`, `Template ${m.templateId} is listed twice in mix`);
+        seen.add(m.templateId);
+        if (!s.templateIds.includes(m.templateId)) err("ASSESSMENT_MIX", `${a.id}#${s.id}`, `mix names ${m.templateId}, which is not in the section's templateIds`);
+        if (m.max !== undefined && m.max < m.min) err("ASSESSMENT_MIX", `${a.id}#${s.id}`, `mix for ${m.templateId} has max ${m.max} below min ${m.min}`);
+        if (m.max !== undefined && m.max === 0) err("ASSESSMENT_MIX", `${a.id}#${s.id}`, `mix for ${m.templateId} has max 0: remove it from templateIds instead`);
+        minTotal += m.min;
+      }
+      if (minTotal > s.itemCount) err("ASSESSMENT_MIX", `${a.id}#${s.id}`, `mix minimums (${minTotal}) exceed itemCount (${s.itemCount})`);
+      const capacity = s.templateIds.reduce((sum, t) => sum + (mix.find((m) => m.templateId === t)?.max ?? s.itemCount), 0);
+      if (capacity < s.itemCount) err("ASSESSMENT_MIX", `${a.id}#${s.id}`, `mix maximums allow only ${capacity} of ${s.itemCount} items`);
+    }
     const anode = ix.nodes.find((n) => n.assessmentId === a.id);
     if (anode) {
       const avail = conceptsAvailableAt(ix, anode, true);

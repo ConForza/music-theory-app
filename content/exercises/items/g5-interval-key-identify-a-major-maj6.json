@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: name an interval under a key signature (A major, treble clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08",
+    "abrsm2020.g5.04"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-identify.a-major-maj6",
+    "templateId": "t.g5.interval-key-identify",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of A major is shown. Name the interval between these two notes (number and quality).",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "key": "A major",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C#5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Two notes in A major (three sharps): E4 and C♯5. The C♯ comes from the key signature. Both notes are minims."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "identify",
+      "key": "A major",
+      "lower": "E4",
+      "upper": "C#5",
+      "acceptedIntervals": [
+        "M6"
+      ]
+    },
+    "hints": [
+      "Apply the key signature to both notes before you count.",
+      "Count the letter names for the number, then compare with the major scale on the lower note for the quality."
+    ],
+    "feedback": {
+      "correct": "Correct. A major has F♯, C♯ and G♯, so the C is C♯. E to C♯ is a major 6th; E to C♮ would be a minor 6th.",
+      "mistakes": {
+        "ignored-key-signature": "Read the notes as bare letters? A major has F♯, C♯ and G♯, so the C is C♯. E to C♯ is a major 6th; E to C♮ would be a minor 6th.",
+        "counted-one-end-only": "Count both notes: the lower note is 1, then every letter name up to and including the upper note.",
+        "quality-from-wrong-key": "Judge the quality against the major scale of the lower note, using the sharps or flats actually sounding."
+      },
+      "fallback": "The answer is a minor ajor 6. A major has F♯, C♯ and G♯, so the C is C♯. E to C♯ is a major 6th; E to C♮ would be a minor 6th."
+    }
+  }
+}

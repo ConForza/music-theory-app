@@ -14,6 +14,7 @@ import {
   barCapacity,
   chromaticNumber,
   classifyCadence,
+  classifyTimeSignature,
   diatonicNumber,
   dotted,
   enharmonic,
@@ -454,6 +455,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
     case "rhythm": {
       const ts = a.timeSignature ?? music?.timeSignature;
       if (a.task === "equivalent-value" && !a.target) report("RHYTHM_TARGET", where, "equivalent-value needs a target");
+      if (a.task === "rewrite-metre" && (!music?.timeSignature || !ts)) report("RHYTHM_TARGET", where, "rewrite-metre needs a shown fragment with a time signature and a target time signature");
       if (a.task !== "equivalent-value" && !ts) report("RHYTHM_TARGET", where, `${a.task} needs a time signature`);
       a.accepted.forEach((measures, i) => {
         // Rhythm answers are unpitched: check them as a rhythm line so no clef or pitch knowledge is assumed.
@@ -467,6 +469,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
           const first = measures[0]?.events ?? [];
           if (JSON.stringify(first.slice(0, a.given.length)) !== JSON.stringify(a.given)) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} does not begin with the given events`);
         }
+        if (a.task === "rewrite-metre") checkRewriteMetre(music, ts, measures, `${where}#accepted[${i}]`, report);
         if (a.task === "add-tuplet" && !measures.some((m) => voicesOf(m).some((v) => v.some((e) => e.kind === "tuplet")))) {
           report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} contains no tuplet`);
         }
@@ -509,6 +512,15 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       const key = a.key ? parseKey(a.key) : undefined;
       if (a.key) keyInScope(a.key);
       const lower = parsePitch(a.lower);
+      // The notation shown must be the interval asked about, with the key signature and any written accidentals
+      // already applied (fragment pitches are sounding spellings, so a signature never changes them).
+      if (music) {
+        if (music.key && a.key && music.key !== a.key) report("INTERVAL_KEY_MISMATCH", where, `Answer key ${a.key} ≠ key shown on the stave (${music.key})`);
+        const shown = pitchedEvents(music).flatMap((e) => pitchesOf(e).map((n) => parsePitch(n.pitch)));
+        const expected = a.task === "identify" && a.upper ? [lower, parsePitch(a.upper)] : [lower];
+        const matches = shown.length === expected.length && expected.every((x) => shown.some((y) => samePitch(x, y))) && shown.every((y) => expected.some((x) => samePitch(x, y)));
+        if (!matches) report("INTERVAL_NOTES_MISMATCH", where, `The stave shows [${shown.map(formatPitch).join(" ")}] but the answer is about [${expected.map(formatPitch).join(" ")}]`);
+      }
       // Diatonic membership uses only the scale forms this task may draw on (e.g. harmonic minor only at Grade 2).
       const forms = key ? allowedForms(key, sc, a.minorForm) : [];
       if (key && key.mode === "minor" && forms.length === 0) {
@@ -672,6 +684,64 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       return;
     }
   }
+}
+
+
+/** Length of one beat as a fraction of a semibreve: the beat unit (simple) or the dotted beat unit (compound). */
+function beatLength(ts: string): Fraction {
+  const p = parseTimeSignature(ts);
+  return classifyTimeSignature(ts).metre === "compound" ? frac(3, p.bottom) : frac(1, p.bottom);
+}
+
+/**
+ * Rewrite between simple and compound time keeping each value's share of its beat. A crotchet beat (2/4) becomes
+ * a dotted-crotchet beat (6/8): every note and rest gains a dot. In reverse, every value must already be dotted
+ * and loses it. Absolute length changes (a 2/4 bar is shorter than a 6/8 bar); the relationships do not.
+ */
+function checkRewriteMetre(music: NotationFragment | undefined, target: string | undefined, accepted: Measure[], where: string, report: Report) {
+  if (!music?.timeSignature || !target) return;
+  const from = classifyTimeSignature(music.timeSignature);
+  const to = classifyTimeSignature(target);
+  if (from.metre === to.metre || from.metre === "irregular" || to.metre === "irregular") {
+    report("REWRITE_METRE", where, `${music.timeSignature} → ${target} must be one simple and one compound regular metre`);
+    return;
+  }
+  if (from.beats !== to.beats) report("REWRITE_METRE", where, `${music.timeSignature} has ${from.beats} beats but ${target} has ${to.beats}`);
+  if (music.measures.length !== accepted.length) report("ANSWER_MISMATCH", where, `Expected ${music.measures.length} bar(s), found ${accepted.length}`);
+  const toCompound = to.metre === "compound";
+  music.measures.forEach((m, bi) => {
+    const src = voicesOf(m)[0] ?? [];
+    const got = voicesOf(accepted[bi] ?? { events: [] } as unknown as Measure)[0] ?? [];
+    if (voicesOf(m).length > 1) report("REWRITE_METRE", where, `Bar ${bi + 1}: only a single voice can be rewritten`);
+    const derived: Array<{ kind: string; value: string; dots: number }> = [];
+    for (const e of src) {
+      if (e.kind === "tuplet" || e.kind === "chord" || (e.kind !== "rest" && e.tieToNext)) {
+        report("REWRITE_METRE", where, `Bar ${bi + 1}: tuplets, chords and ties are outside this exercise`);
+        continue;
+      }
+      const dots = e.duration.dots ?? 0;
+      if (toCompound ? dots !== 0 : dots !== 1) {
+        report("REWRITE_METRE", where, `Bar ${bi + 1}: a ${e.duration.value} with ${dots} dot(s) cannot keep its share of the beat when rewritten from ${music.timeSignature} to ${target}`);
+        continue;
+      }
+      derived.push({ kind: e.kind, value: e.duration.value, dots: toCompound ? 1 : 0 });
+    }
+    const actual = got.filter((e) => e.kind !== "tuplet").map((e) => ({ kind: e.kind, value: (e as Inner).duration.value, dots: (e as Inner).duration.dots ?? 0 }));
+    if (JSON.stringify(actual) !== JSON.stringify(derived)) {
+      report("ANSWER_MISMATCH", where, `Bar ${bi + 1}: expected ${derived.map((d) => `${d.kind}:${d.value}${".".repeat(d.dots)}`).join(" ")}; found ${actual.map((d) => `${d.kind}:${d.value}${".".repeat(d.dots)}`).join(" ")}`);
+    }
+    // Grouping: a beam never crosses a beat of the target metre.
+    const beat = beatLength(target);
+    const beatIndex = (f: Fraction) => Math.floor((f.n * beat.d) / (f.d * beat.n));
+    let begin: Fraction | undefined;
+    timeline(got, barCapacity(parseTimeSignature(target))).forEach(({ e, onset }) => {
+      if (e.beam === "begin") begin = onset;
+      if (begin && (e.beam === "continue" || e.beam === "end") && beatIndex(onset) !== beatIndex(begin)) {
+        report("REWRITE_GROUPING", where, `Bar ${bi + 1}: a beam crosses a beat boundary in ${target}`);
+      }
+      if (e.beam === "end") begin = undefined;
+    });
+  });
 }
 
 /** Verify one item against a musical scope: notation, score and answer. */

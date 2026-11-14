@@ -566,6 +566,18 @@ export const AssessmentTemplate = z
             outcomeIds: z.array(OutcomeId).min(1),
             templateIds: z.array(TemplateId).min(1),
             itemCount: z.number().int().min(1),
+            /**
+             * Optional balance rules for the seeded sampler (added in assessment version 2; absent = no limits).
+             * `min` guarantees at least that many items from the template; `max` caps how many may be drawn.
+             * Templates not listed are unrestricted. Sections still assess every outcome they list.
+             */
+            mix: z
+              .array(
+                z
+                  .object({ templateId: TemplateId, min: z.number().int().min(0).default(0), max: z.number().int().min(0).optional() })
+                  .strict(),
+              )
+              .optional(),
           })
           .strict(),
       )
@@ -870,8 +882,13 @@ const PitchSequenceAnswer = z
 const RhythmAnswer = z
   .object({
     kind: z.literal("rhythm"),
-    task: z.enum(["complete-bar", "regroup", "place-barlines", "equivalent-value", "add-tuplet"]),
+    task: z.enum(["complete-bar", "regroup", "place-barlines", "equivalent-value", "add-tuplet", "rewrite-metre"]),
     timeSignature: TimeSignatureName.optional(),
+    /**
+     * rewrite-metre: the fragment shown is in one metre (simple or compound) and `timeSignature` is the other
+     * metre with the same number of beats. Each note and rest keeps its share of the beat, so every value gains
+     * (simple → compound) or loses (compound → simple) one dot. Beams stay within a beat.
+     */
     /** For equivalent-value: total length in semibreves as a fraction [numerator, denominator]. */
     target: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
     /** Events supplied to the learner; complete-bar answers must start with them. */

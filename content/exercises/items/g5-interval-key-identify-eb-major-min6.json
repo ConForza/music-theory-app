@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: name an interval under a key signature (Eb major, treble clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08",
+    "abrsm2020.g5.04"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-identify.eb-major-min6",
+    "templateId": "t.g5.interval-key-identify",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of Eb major is shown. Name the interval between these two notes (number and quality).",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "key": "Eb major",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "C4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "Ab4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Two notes in E♭ major (three flats, B♭ E♭ A♭): C4 and A♭4. The A♭ comes from the key signature. Both notes are minims."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "identify",
+      "key": "Eb major",
+      "lower": "C4",
+      "upper": "Ab4",
+      "acceptedIntervals": [
+        "m6"
+      ]
+    },
+    "hints": [
+      "Apply the key signature to both notes before you count.",
+      "Count the letter names for the number, then compare with the major scale on the lower note for the quality."
+    ],
+    "feedback": {
+      "correct": "Correct. E♭ major has B♭, E♭ and A♭, so the A is A♭. C to A♭ is a minor 6th; C to A♮ would be a major 6th.",
+      "mistakes": {
+        "ignored-key-signature": "Read the notes as bare letters? E♭ major has B♭, E♭ and A♭, so the A is A♭. C to A♭ is a minor 6th; C to A♮ would be a major 6th.",
+        "counted-one-end-only": "Count both notes: the lower note is 1, then every letter name up to and including the upper note.",
+        "quality-from-wrong-key": "Judge the quality against the major scale of the lower note, using the sharps or flats actually sounding."
+      },
+      "fallback": "The answer is a minor 6. E♭ major has B♭, E♭ and A♭, so the A is A♭. C to A♭ is a minor 6th; C to A♮ would be a major 6th."
+    }
+  }
+}

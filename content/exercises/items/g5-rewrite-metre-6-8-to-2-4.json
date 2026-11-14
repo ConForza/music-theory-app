@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 optional enrichment example: rewrite one bar from 6/8 to 2/4.",
+  "outcomeIds": [
+    "abrsm2020.g4.01"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s02"
+    ]
+  },
+  "item": {
+    "id": "i.g5-rewrite-metre.6-8-to-2-4",
+    "templateId": "t.g5.rewrite-metre",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "learning",
+    "prompt": "Rewrite this bar of 6/8 in 2/4 so every note and rest keeps the same share of its beat. Beam by the new beats.",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "timeSignature": "6/8",
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "duration": {
+                "value": "quaver",
+                "dots": 1
+              },
+              "pitch": "B4",
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "duration": {
+                "value": "quaver",
+                "dots": 1
+              },
+              "pitch": "B4",
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "duration": {
+                "value": "crotchet",
+                "dots": 1
+              },
+              "pitch": "B4"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One bar of 6/8 (two dotted-crotchet beats), unpitched rhythm on a single line."
+    },
+    "answer": {
+      "kind": "rhythm",
+      "task": "rewrite-metre",
+      "timeSignature": "2/4",
+      "accepted": [
+        [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "pitch": "B4",
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "pitch": "B4",
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "pitch": "B4"
+              }
+            ]
+          }
+        ]
+      ],
+      "acceptAnyRuleCompliant": false
+    },
+    "hints": [
+      "6/8 has two dotted-crotchet beats; 2/4 has two crotchet beats. Match each beat to its partner."
+    ],
+    "feedback": {
+      "correct": "Correct. Going from compound to simple time, the dotted-crotchet beat becomes a crotchet beat, so each dot is removed: two dotted quavers become two quavers, and the dotted crotchet becomes a crotchet.",
+      "mistakes": {
+        "values-copied-unchanged": "Copying the values leaves a bar of the wrong length for 2/4. Compare one beat in each time signature first.",
+        "rest-not-rewritten": "A rest fills the same share of the beat as a note, so it changes in exactly the same way.",
+        "dots-kept-in-simple-time": "A simple beat is undotted, so the dots must come off when going from compound to simple time.",
+        "beam-across-beats": "Start a new beam on each new beat so the beats stay visible."
+      },
+      "fallback": "Going from compound to simple time, the dotted-crotchet beat becomes a crotchet beat, so each dot is removed: two dotted quavers become two quavers, and the dotted crotchet becomes a crotchet."
+    }
+  }
+}

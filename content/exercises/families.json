@@ -24,8 +24,8 @@
           "feedback": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
         }
       ],
-      "correctFeedback": "Correct — and you can explain why.",
-      "fallbackFeedback": "Not quite. Read the explanation, then try a similar question.",
+      "correctFeedback": "Correct. Check you can say why each of the other options is wrong; that is what makes the answer stick.",
+      "fallbackFeedback": "Not quite. Re-read the explanation, compare each option with it, then try a similar question.",
       "accessibility": {
         "keyboardOperable": true,
         "screenReaderEquivalent": "Options are a native list of buttons with full text labels; any music shown has a text description.",
@@ -577,8 +577,8 @@
           "feedback": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
         }
       ],
-      "correctFeedback": "Correct — number and quality both match.",
-      "fallbackFeedback": "Not quite. Count the letter names first, then compare with the major scale on the lower note.",
+      "correctFeedback": "Correct — number and quality both match. Remember the key signature has already sharpened or flattened the notes it names, unless a written sign overrides it.",
+      "fallbackFeedback": "Not quite. Apply the key signature and any written accidentals to both notes, count the letter names for the number, then compare with the major scale on the lower note.",
       "accessibility": {
         "keyboardOperable": true,
         "screenReaderEquivalent": "Both notes are announced by name; build tasks use letter/accidental pickers.",
@@ -809,8 +809,8 @@
           "feedback": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
         }
       ],
-      "correctFeedback": "Correct — that's the right ornament.",
-      "fallbackFeedback": "Not quite. Compare the shape of the sign with each ornament's pattern.",
+      "correctFeedback": "Correct — that written-out figure is one ornament, and its sign belongs on the principal note.",
+      "fallbackFeedback": "Not quite. Count the written-out notes, then ask whether they begin above or below the principal note and whether they come before the beat or take time from the note.",
       "accessibility": {
         "keyboardOperable": true,
         "screenReaderEquivalent": "Signs are described in words and the written-out figures are listed note by note.",

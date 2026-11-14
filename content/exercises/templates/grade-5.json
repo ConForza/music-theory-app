@@ -975,7 +975,7 @@
     },
     {
       "id": "t.g5.ornament-replace",
-      "version": 1,
+      "version": 2,
       "familyId": "fam.ornament",
       "grade": 5,
       "mode": "build",
@@ -986,7 +986,7 @@
         "c.ornaments.patterns",
         "c.ornaments.replace-with-sign"
       ],
-      "promptPattern": "Replace the written-out notes in bar {bar} with the correct ornament sign.",
+      "promptPattern": "The written-out notes in bar {bar} (marked {label}) are the performed version of one ornament on its principal note. Write the ornament that stands for them: a sign above the principal note, or a small note before it for an acciaccatura or appoggiatura.",
       "scope": {
         "ornaments": [
           "trill",
@@ -1005,10 +1005,14 @@
         "alternativesNote": "Accepted alternative signs for the same ornament (e.g. trill symbol variants) are accepted. The reverse task (writing out a sign) is never assessed."
       },
       "ambiguityChecks": [
-        "Written-out figure maps to one ornament."
+        "Written-out figure maps to one ornament.",
+        "The prompt names the principal note (by label) and says where the ornament goes; the learner never has to guess which note carries it.",
+        "Written-out figures use only the standard realisations taught in G5-U5-L01 (for example a turn begins on the note above); a figure that could also be read as another ornament at the same speed is not generated.",
+        "An acciaccatura is generated only as a very short note and an appoggiatura only as a note taking about half the principal note's value, so duration, not guesswork, separates them."
       ],
       "hints": [
-        "Count the notes and their direction."
+        "Count the written-out notes, then check whether they begin above or below the principal note and whether they return to it.",
+        "Decide whether the figure is quick and before the beat (acciaccatura) or takes time from the principal note (appoggiatura)."
       ],
       "extraMistakeCategories": [],
       "difficulty": 4,
@@ -1023,7 +1027,7 @@
     },
     {
       "id": "t.g5.voices",
-      "version": 1,
+      "version": 2,
       "familyId": "fam.choice",
       "grade": 5,
       "mode": "identify",
@@ -1033,7 +1037,7 @@
       "conceptIds": [
         "c.voices.types"
       ],
-      "promptPattern": "Which voice type …?",
+      "promptPattern": "Which voice type sings this part? The part is described by its written range on a stave or by a typical role; every option set includes the voice types next to the correct one.",
       "scope": {},
       "acceptance": {
         "spellingSensitive": false,
@@ -1043,10 +1047,13 @@
         "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
       },
       "ambiguityChecks": [
-        "Distinct ranges."
+        "Distinct ranges.",
+        "Range prompts give the actual lowest and highest notes, never only 'highest' or 'lowest', so the answer cannot be found by picking the extreme option.",
+        "Options always include the neighbouring voice type(s) (for example alto beside mezzo-soprano, baritone beside tenor and bass) so elimination from the extremes does not work.",
+        "Range figures come only from the course's published range table (open question Q15); until a teacher confirms that table, range prompts are not generated and items use role or order comparisons."
       ],
       "hints": [
-        "Highest to lowest: soprano … bass."
+        "Compare the lowest and highest notes of the part with where each voice type usually sits, then choose the voice whose range holds the whole part."
       ],
       "extraMistakeCategories": [],
       "difficulty": 2,
@@ -1231,6 +1238,287 @@
       ],
       "extraMistakeCategories": [],
       "difficulty": 5,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.interval-key-identify",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.08",
+        "abrsm2020.g5.04"
+      ],
+      "conceptIds": [
+        "c.intervals.in-key-signature",
+        "c.clefs.four-clefs"
+      ],
+      "promptPattern": "A key signature is shown. Name the interval between these two notes (number and quality).",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "B major",
+          "Db major",
+          "G# minor",
+          "Bb minor",
+          "F# major",
+          "Gb major",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass",
+          "alto",
+          "tenor"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim"
+        ],
+        "keySignatures": true,
+        "accidentals": true,
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "any",
+        "chromaticIntervals": true,
+        "compoundIntervals": false,
+        "doubleAccidentals": false,
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct; the interval is named from the sounding spelling after the key signature and written accidentals are applied."
+      },
+      "ambiguityChecks": [
+        "Each item has at least one note whose spelling depends on the key signature, so the answer differs from the bare-letter reading.",
+        "A note that departs from the signature carries its own written accidental; no accidental is implied.",
+        "Intervals within one octave, nameable as d/m/M/P/A; no double accidentals."
+      ],
+      "hints": [
+        "Apply the key signature to both notes before you count."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "ignored-key-signature",
+          "description": "Read the notes as bare letter names, ignoring the sharps or flats of the key signature.",
+          "feedback": "The key signature changes every note on that letter, in every octave. Apply it to both notes first, then work out the interval."
+        },
+        {
+          "id": "accidental-not-applied",
+          "description": "Overlooked a written accidental (sharp, flat or natural) that overrides the key signature.",
+          "feedback": "A sign written beside a note overrides the key signature for that note and for the same pitch later in the bar. Check each note for its own sign."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.interval-key-build",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 5,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ],
+      "conceptIds": [
+        "c.intervals.in-key-signature"
+      ],
+      "promptPattern": "A key signature is shown. Write the note a {interval} {direction} this note, adding an accidental only if the key signature does not already give it.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "A minor",
+          "E minor",
+          "D minor",
+          "E major",
+          "Ab major",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "B major",
+          "Db major",
+          "G# minor",
+          "Bb minor",
+          "F# major",
+          "Gb major",
+          "D# minor",
+          "Eb minor"
+        ],
+        "clefs": [
+          "treble",
+          "bass",
+          "alto",
+          "tenor"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim"
+        ],
+        "keySignatures": true,
+        "accidentals": true,
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "any",
+        "chromaticIntervals": true,
+        "compoundIntervals": false,
+        "doubleAccidentals": false,
+        "maxLedgerLines": 2
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": true,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one spelling is correct; a note that sounds right with the wrong letter name is rejected."
+      },
+      "ambiguityChecks": [
+        "The answer's accidental is derived from the interval, then compared with the key signature to decide whether a sign must be written.",
+        "Half the items need a written accidental and half need none, so a sign is never always (or never) required.",
+        "Intervals within one octave; no double accidentals."
+      ],
+      "hints": [
+        "Find the letter first, then decide what the interval needs on that letter, and compare with the key signature."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "ignored-key-signature",
+          "description": "Read the notes as bare letter names, ignoring the sharps or flats of the key signature.",
+          "feedback": "The key signature changes every note on that letter, in every octave. Apply it to both notes first, then work out the interval."
+        },
+        {
+          "id": "accidental-not-applied",
+          "description": "Overlooked a written accidental (sharp, flat or natural) that overrides the key signature.",
+          "feedback": "A sign written beside a note overrides the key signature for that note and for the same pitch later in the bar. Check each note for its own sign."
+        },
+        {
+          "id": "redundant-or-missing-accidental",
+          "description": "Right pitch spelling intended but a sign was added where the key signature already gives it, or left off where it was needed.",
+          "feedback": "Ask what the note must be, then ask what the key signature already gives that letter. Write a sign only for the difference."
+        }
+      ],
+      "difficulty": 4,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.rewrite-metre",
+      "version": 1,
+      "familyId": "fam.bar-builder",
+      "grade": 5,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g4.01"
+      ],
+      "conceptIds": [
+        "c.metre.rewrite-simple-compound"
+      ],
+      "promptPattern": "Rewrite this bar of {fromTimeSignature} in {toTimeSignature} so every note and rest keeps the same share of its beat. Beam by the new beats.",
+      "scope": {
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "9/8",
+          "12/8"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One rewrite is correct: each value gains a dot (simple to compound) or loses its dot (compound to simple); beams stay within a beat."
+      },
+      "ambiguityChecks": [
+        "Only regular simple/compound pairs with the same number of beats (2/4–6/8, 3/4–9/8, 4/4–12/8).",
+        "Simple to compound uses undotted values only; compound to simple uses fully dotted values only (an undotted compound value would need a triplet, which is outside this exercise).",
+        "No ties, tuplets or chords; the prompt states that the beat relationships, not the bar length, are preserved."
+      ],
+      "hints": [
+        "Name the beat in each time signature. A crotchet beat becomes a dotted crotchet beat, so each value gains a dot."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "values-copied-unchanged",
+          "description": "Copied the note values into the new time signature unchanged.",
+          "feedback": "The beat is a different length in the new time signature. Compare one beat in each: a crotchet beat in 2/4 is a dotted crotchet beat in 6/8, so each value must change with it."
+        },
+        {
+          "id": "rest-not-rewritten",
+          "description": "Rewrote the notes but left a rest unchanged.",
+          "feedback": "Rests follow the same rule as notes: they fill the same share of the beat, so they need the same change."
+        },
+        {
+          "id": "dots-kept-in-simple-time",
+          "description": "Kept the dots when rewriting from compound to simple time.",
+          "feedback": "A simple beat is undotted (a crotchet or minim), so the dot that made each compound beat disappears."
+        },
+        {
+          "id": "beam-across-beats",
+          "description": "Beamed notes from different beats together.",
+          "feedback": "Keep each beat's notes together and start a new beam on each new beat, so the beats can be seen."
+        }
+      ],
+      "difficulty": 3,
       "qa": {
         "status": "draft",
         "reviewRequirements": [

@@ -117,7 +117,7 @@ erDiagram
 | Source book | the count isn't 75 (19/14/12/15/15), sections are misnumbered, printed pages go backwards, a core section is unmapped or untaught, or a classification/grade is inconsistent |
 | Prerequisites & path | untaught prerequisite, cycle, later-grade prerequisite, forward unlock, required→optional dependency, review of untaught outcome, malformed unit/grade structure |
 | Exercises | no registered deterministic grader, no feedback, scope beyond grade, later-grade outcome/concept, multiple answers declared but unsupported |
-| Assessments | outcome/template above the grade, enrichment-only template, unit challenge missing a unit outcome, grade assessment missing a grade outcome, challenge testing something not yet taught |
+| Assessments | outcome/template above the grade, enrichment-only template, unit challenge missing a unit outcome, grade assessment missing a grade outcome, challenge testing something not yet taught, unsatisfiable or malformed section `mix` balance rules (`ASSESSMENT_MIX`) |
 | Bindings | binding concept not yet taught, binding scope wider than the template or the taught scope, template dimension not narrowed explicitly |
 | Music verification | **any** accepted alternative differs from the derived answer (note reading, staff positions, scales, chromatic scales, transposition, intervals, chords and inversions, ornaments, cadence chords/types, composite parts), missing/incorrect accidentals (including ties across bar-lines), malformed ties/beams, bars or voices that don't add up (tuplets, chords, whole-bar rests), content outside the node's effective scope |
 | IDs | duplicates, bad patterns, grade-prefix mismatch |

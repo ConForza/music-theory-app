@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: write an interval under a key signature (E minor, bass clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-build.e-minor-up-maj3",
+    "templateId": "t.g5.interval-key-build",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of E minor is shown. Write the note a major 3rd up from this note, adding an accidental only if the key signature does not already give it.",
+    "music": {
+      "presentation": "stave",
+      "clef": "bass",
+      "key": "E minor",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B2",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "One minim, B2, under the key signature of E minor."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "build",
+      "key": "E minor",
+      "lower": "B2",
+      "target": "M3",
+      "direction": "up",
+      "acceptedPitches": [
+        "D#3"
+      ]
+    },
+    "hints": [
+      "Find the letter name first, then decide what the interval needs on that letter.",
+      "Then compare with the key signature: write a sign only for the difference."
+    ],
+    "feedback": {
+      "correct": "Correct. B up a major 3rd is D♯. E minor's signature has only F♯, so the D♯ needs its own sharp sign (it is the raised 7th).",
+      "mistakes": {
+        "redundant-or-missing-accidental": "B up a major 3rd is D♯. E minor's signature has only F♯, so the D♯ needs its own sharp sign (it is the raised 7th).",
+        "accidental-not-applied": "Check what the key signature already gives that letter before adding a sign. B up a major 3rd is D♯. E minor's signature has only F♯, so the D♯ needs its own sharp sign (it is the raised 7th).",
+        "enharmonic-spelling": "That sounds the same but uses the wrong letter name. An interval's number fixes the letter: count the letter names from the starting note."
+      },
+      "fallback": "B up a major 3rd is D♯. E minor's signature has only F♯, so the D♯ needs its own sharp sign (it is the raised 7th)."
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example: name an interval under a key signature (F# major, alto clef).",
+  "outcomeIds": [
+    "abrsm2020.g5.08",
+    "abrsm2020.g5.04"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 10 addendum)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s06"
+    ]
+  },
+  "item": {
+    "id": "i.g5-interval-key-identify.fsharp-major-alto-min3",
+    "templateId": "t.g5.interval-key-identify",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "The key signature of F# major is shown. Name the interval between these two notes (number and quality).",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "key": "F# major",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G#3",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B3",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Two notes in F♯ major (six sharps) in the alto clef: G♯3 and B3. The G♯ comes from the key signature. Both notes are minims."
+    },
+    "answer": {
+      "kind": "interval",
+      "task": "identify",
+      "key": "F# major",
+      "lower": "G#3",
+      "upper": "B3",
+      "acceptedIntervals": [
+        "m3"
+      ]
+    },
+    "hints": [
+      "Apply the key signature to both notes before you count.",
+      "Count the letter names for the number, then compare with the major scale on the lower note for the quality."
+    ],
+    "feedback": {
+      "correct": "Correct. F♯ major has six sharps (F♯ C♯ G♯ D♯ A♯ E♯), so the G is G♯. G♯ to B is a minor 3rd; G♮ to B would be a major 3rd.",
+      "mistakes": {
+        "ignored-key-signature": "Read the notes as bare letters? F♯ major has six sharps (F♯ C♯ G♯ D♯ A♯ E♯), so the G is G♯. G♯ to B is a minor 3rd; G♮ to B would be a major 3rd.",
+        "counted-one-end-only": "Count both notes: the lower note is 1, then every letter name up to and including the upper note.",
+        "quality-from-wrong-key": "Judge the quality against the major scale of the lower note, using the sharps or flats actually sounding."
+      },
+      "fallback": "The answer is a minor 3. F♯ major has six sharps (F♯ C♯ G♯ D♯ A♯ E♯), so the G is G♯. G♯ to B is a minor 3rd; G♮ to B would be a major 3rd."
+    }
+  }
+}

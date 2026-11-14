@@ -7,7 +7,7 @@
       "kind": "unit_challenge",
       "grade": 5,
       "unitId": "G5-U1",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Irregular time and divisions",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -22,7 +22,17 @@
             "t.g5.time-signature",
             "t.g5.irregular-grouping"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.time-signature",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.irregular-grouping",
+              "min": 1
+            }
+          ]
         },
         {
           "id": "o-g5-02",
@@ -44,7 +54,7 @@
       "kind": "unit_challenge",
       "grade": 5,
       "unitId": "G5-U2",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Tenor clef and the four clefs",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -71,7 +81,18 @@
             "t.g5.four-clef-read",
             "t.g5.key-signature"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.tenor-read",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.key-signature",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-05",
@@ -93,7 +114,7 @@
       "kind": "unit_challenge",
       "grade": 5,
       "unitId": "G5-U3",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Six-accidental keys, all intervals and transposing instruments",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -108,7 +129,18 @@
             "t.g5.scale-build",
             "t.g5.key-signature"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.scale-build",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.key-signature",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-04",
@@ -117,9 +149,21 @@
             "abrsm2020.g5.04"
           ],
           "templateIds": [
-            "t.g5.key-signature"
+            "t.g5.key-signature",
+            "t.g5.interval-key-identify"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.key-signature",
+              "min": 0,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.interval-key-identify",
+              "min": 1
+            }
+          ]
         },
         {
           "id": "o-g5-08",
@@ -129,9 +173,27 @@
           ],
           "templateIds": [
             "t.g5.interval-any",
-            "t.g5.interval-compound"
+            "t.g5.interval-compound",
+            "t.g5.interval-key-build"
           ],
-          "itemCount": 2
+          "itemCount": 3,
+          "mix": [
+            {
+              "templateId": "t.g5.interval-any",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.interval-compound",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.interval-key-build",
+              "min": 1,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-06",
@@ -153,7 +215,7 @@
       "kind": "unit_challenge",
       "grade": 5,
       "unitId": "G5-U4",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Inversions, chords and cadences",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -168,7 +230,17 @@
             "t.g5.chord-identify",
             "t.g5.chord-build"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.chord-identify",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.chord-build",
+              "min": 1
+            }
+          ]
         },
         {
           "id": "o-g5-11",
@@ -180,7 +252,18 @@
             "t.g5.cadence-identify",
             "t.g5.cadence-chords"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.cadence-identify",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.cadence-chords",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-10",
@@ -202,7 +285,7 @@
       "kind": "unit_challenge",
       "grade": 5,
       "unitId": "G5-U5",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Ornaments, voices, instruments and the score",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -217,7 +300,18 @@
             "t.g5.ornament-replace",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.ornament-replace",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-14",
@@ -229,7 +323,19 @@
             "t.g5.voices",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.voices",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-15",
@@ -241,7 +347,18 @@
             "t.g5.instruments",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.instruments",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-12",
@@ -253,7 +370,18 @@
             "t.g5.terms",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.terms",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-16",
@@ -286,7 +414,7 @@
       "kind": "grade_assessment",
       "grade": 5,
       "unitId": null,
-      "version": 1,
+      "version": 2,
       "title": "Grade 5 practice assessment",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -301,7 +429,17 @@
             "t.g5.time-signature",
             "t.g5.irregular-grouping"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.time-signature",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.irregular-grouping",
+              "min": 1
+            }
+          ]
         },
         {
           "id": "o-g5-02",
@@ -333,10 +471,19 @@
           ],
           "templateIds": [
             "t.g5.tenor-read",
-            "t.g5.four-clef-read",
-            "t.g5.key-signature"
+            "t.g5.four-clef-read"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.tenor-read",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.four-clef-read",
+              "min": 1
+            }
+          ]
         },
         {
           "id": "o-g5-05",
@@ -370,7 +517,18 @@
             "t.g5.scale-build",
             "t.g5.key-signature"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.scale-build",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.key-signature",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-08",
@@ -381,9 +539,32 @@
           "templateIds": [
             "t.g5.interval-any",
             "t.g5.interval-compound",
-            "t.g5.score"
+            "t.g5.interval-key-identify",
+            "t.g5.interval-key-build"
           ],
-          "itemCount": 2
+          "itemCount": 4,
+          "mix": [
+            {
+              "templateId": "t.g5.interval-any",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.interval-compound",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.interval-key-identify",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.interval-key-build",
+              "min": 1,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-09",
@@ -396,7 +577,22 @@
             "t.g5.chord-build",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 3,
+          "mix": [
+            {
+              "templateId": "t.g5.chord-identify",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.chord-build",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-10",
@@ -420,7 +616,18 @@
             "t.g5.cadence-chords",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.cadence-identify",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-12",
@@ -432,7 +639,18 @@
             "t.g5.terms",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.terms",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-13",
@@ -444,7 +662,18 @@
             "t.g5.ornament-replace",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.ornament-replace",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-14",
@@ -456,7 +685,19 @@
             "t.g5.voices",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.voices",
+              "min": 1,
+              "max": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-15",
@@ -468,7 +709,18 @@
             "t.g5.instruments",
             "t.g5.score"
           ],
-          "itemCount": 2
+          "itemCount": 2,
+          "mix": [
+            {
+              "templateId": "t.g5.instruments",
+              "min": 1
+            },
+            {
+              "templateId": "t.g5.score",
+              "min": 0,
+              "max": 1
+            }
+          ]
         },
         {
           "id": "o-g5-16",
