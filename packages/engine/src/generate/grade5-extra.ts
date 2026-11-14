@@ -184,8 +184,9 @@ export const restJudge5: Gen = (c): any => {
   }
   if (lens.length < 3) return null;
   const idx = lens.map((_, i) => i);
-  const picked = shuffled(c, idx).slice(0, 2);
-  const [A, B] = picked as [number, number];
+  // In a four-beat bar a silent half (beats 1-2 or 3-4) is one two-beat rest by convention (Q21), so those two beats are never the silent pair
+  const pairs = idx.flatMap((x) => idx.filter((y) => y > x).map((y) => [x, y] as [number, number])).filter(([x, y]) => !(lens.length === 4 && ((x === 0 && y === 1) || (x === 2 && y === 3))));
+  const [A, B] = c.rng.pick(pairs);
   const base: Array<Ev[] | "rest"> = lens.map((L, i) => (i === A || i === B ? "rest" : sound(L)));
   if (base.some((g) => g !== "rest" && !g.length)) return null;
   const restOf = (L: number): Ev[] => { const v = val(L); return v ? [r(v.value, v.dots)] : []; };

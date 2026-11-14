@@ -215,7 +215,8 @@ t.push("## 8. Decisions needed", "",
   "11. Cadences: confirm that cadence questions stay in C, G, D and F major with both chords in root position, and that any pair of chords containing the melody notes and making the named cadence is correct. (The Grade 5 practice papers do not require root position; the restriction only makes questions easier, so it can stay or go.)",
   "12. Confirm the assessment sample (32 Grade 5 + 7 earlier-grade questions), the unit challenge sizes (6, 6, 8, 6, 12), the provisional pass marks (70% challenge, 66% assessment; exact ratio: 26 of 39) and the mastery thresholds.",
   "13. Terms outside the book's Grade 5 list (Q37): the practice papers use con spirito, which is in none of the book's lists; tristamente, scherzando and niente are in the book's Grade 3 and 4 lists. Decide whether Grade 1-4 terms may be asked at Grade 5, and whether a term printed in a score may be asked when it is not on the Grade 5 list. (The Grade 2-4 term lists in the app are incomplete against the book; completing them is separate work.)",
-  "14. Sign off, or list changes for, the teaching copy of each lesson.", "");
+  "14. Silent half of a four-beat bar (Q21): the owner wants one two-beat rest to be the only accepted form, as the book and standard practice say. The checker still accepts two crotchet rests in Grades 1-4 because changing it alters released question identities; confirm the convention and approve the migration.",
+  "15. Sign off, or list changes for, the teaching copy of each lesson.", "");
 mkdirSync(join(root, "docs/teacher"), { recursive: true });
 writeFileSync(join(root, "docs/teacher/GRADE_5_TEACHER_REVIEW_PACK.md"), t.join("\n") + "\n");
 console.log("wrote docs/curriculum/GRADE_5_COMPLETION_AUDIT.md and docs/teacher/GRADE_5_TEACHER_REVIEW_PACK.md");

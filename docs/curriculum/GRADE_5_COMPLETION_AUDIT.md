@@ -79,7 +79,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | Concept | Taught in | Question types (distinct questions each) | Total distinct |
 |---|---|---|---|
 | c.metre.irregular | U1-L01 | time-signature 400, metre-facts 90, metre-mixed 285 | 775 |
-| c.metre.irregular-grouping | U1-L02 | grouping-judge 382, irregular-grouping 214, rest-judge 61, bar-complete 161 | 818 |
+| c.metre.irregular-grouping | U1-L02 | grouping-judge 382, irregular-grouping 214, rest-judge 62, bar-complete 161 | 819 |
 | c.rhythm.irregular-divisions | U1-L03 | irregular-division 248, division-facts 20, division-write 16 | 284 |
 | c.clefs.tenor | U2-L01 | tenor-read 55, tenor-write 21, tenor-facts 19 | 95 |
 | c.clefs.four-clefs | U2-L02 | four-clef-read 202, same-pitch 399, key-signature 83, clef-minor 357 | 1041 |
