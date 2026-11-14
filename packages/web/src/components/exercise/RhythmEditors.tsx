@@ -36,9 +36,18 @@ export function rhythmFragment(bars: REv[][], ts: string | null, finalBar = true
   } as NotationFragment;
 }
 
-function beamBar(evs: REv[], ts: string | null): REv[] {
+/** Beam a bar by its time signature; in irregular time by the grouping the question names (7/8 as 2+3+2 is not 7/8 as 2+2+3). */
+export function beamBar(evs: REv[], ts: string | null, pattern?: number[]): REv[] {
   if (!ts) return evs;
   try {
+    const named = pattern?.length ? music.metreStructures(ts).find((s) => s.pattern?.join("+") === pattern.join("+")) : undefined;
+    if (named) return music.autoBeam(evs as unknown as music.REvent[], named) as unknown as REv[];
+    // No grouping named (or not irregular time): beam by the first pattern that makes the bar read cleanly, else by the default one.
+    const all = music.metreStructures(ts);
+    for (const s of all) {
+      const beamed = music.autoBeam(evs as unknown as music.REvent[], s);
+      if (all.length === 1 || music.checkBar(beamed, s, { requireBeams: true }).length === 0) return beamed as unknown as REv[];
+    }
     return music.autoBeam(evs as unknown as music.REvent[], music.metreStructure(ts)) as unknown as REv[];
   } catch {
     return evs;
@@ -85,7 +94,7 @@ export function RhythmBuilder({ input, value, onChange, disabled, exam = false }
   const lockedCount = active === 0 ? given.length : 0;
 
   const emit = (next: REv[][]) => {
-    const shaped = next.map((b) => beamBar(b.map(strip), ts));
+    const shaped = next.map((b) => beamBar(b.map(strip), ts, input.groupPattern));
     onChange(shaped.some((b) => b.length > lockedCountOf(shaped, b)) || shaped.some((b, i) => b.length && (i > 0 || !given.length)) ? { kind: "rhythm", measures: shaped.map((events) => ({ events: events.length ? events : [] })) as Rhythm["measures"] } : null);
   };
   const lockedCountOf = (all: REv[][], b: REv[]) => (all.indexOf(b) === 0 ? given.length : 0);
@@ -123,7 +132,7 @@ export function RhythmBuilder({ input, value, onChange, disabled, exam = false }
   const clear = () => emit(bars.map((b, i) => (i === 0 ? b.slice(0, given.length) : [])));
   // Equivalent-value tasks: the length to match is the answer, so only the learner's own length is read back.
   const meter = input.mode === "equivalent-value" ? ownLength(bar) : remaining(bar, ts, undefined, exam);
-  const display = rhythmFragment(bars.map((b) => beamBar(b.map(strip), ts)), ts, input.mode !== "equivalent-value");
+  const display = rhythmFragment(bars.map((b) => beamBar(b.map(strip), ts, input.groupPattern)), ts, input.mode !== "equivalent-value");
 
   return (
     <div className="rhythm-builder">

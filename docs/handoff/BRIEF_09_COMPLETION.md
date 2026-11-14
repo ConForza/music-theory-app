@@ -15,6 +15,8 @@
 
 7. After the owner supplied eight Grade 5 papers, French terms and five new templates were added (`docs/curriculum/GRADE_5_PAPER_COMPARISON.md`): `t.g5.metre-mixed`, `t.g5.rest-judge`, `t.g5.duration-facts`, `t.g5.clef-minor`, `t.g5.transpose-judge`. Vocabulary version is now 2. The papers' extra terms (P2) were not added: a teacher decides.
 
+8. **Bug found and fixed (web).** The note-entry rhythm editor beamed every bar by the FIRST pattern of an irregular signature (7/8 as 2+2+3), so a correct bar for "grouping 2 + 3 + 2" was sent beamed the wrong way and refused. It showed up as an intermittent "Unit 1 end to end" failure in the browser suite (it depended on which grouping the seed drew). The rhythm input now carries the question's `groupPattern`, the editor beams by it (or by the first pattern that reads cleanly when none is named), and `web/src/test/rhythm-beam.test.ts` pins it. Grades 1-4 are unaffected: only irregular signatures have more than one pattern.
+
 ## Open decisions
 
 Q2 term lists; Q8 enrichment; Q13 key signatures in C clefs; Q14 writing versus identifying chords; Q27-Q33 inherited conventions; new Q34 voice ranges, Q35 grouping in irregular time, Q36 transposition wording. See the teacher pack, section 8.

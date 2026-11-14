@@ -55,6 +55,8 @@ export type ItemInput =
       rests: boolean;
       ties: boolean;
       tuplets: Array<{ actual: number; normal: number }>;
+      /** Irregular time: the sub-group pattern the question names (for example [2, 3, 2]); the editor beams by it instead of the signature's default pattern. */
+      groupPattern?: number[];
     }
   | { kind: "rhythm-grouping"; timeSignature: string; measures: Array<{ events: RhythmShape[] }> }
   | { kind: "barlines"; timeSignature: string; events: RhythmShape[]; final: boolean }
@@ -172,6 +174,7 @@ function inputForAnswer(c: ItemContext, a: SimpleAnswerSpec): Exclude<ItemInput,
         rests: sc.rests !== false,
         ties: Boolean(sc.ties) || mode === "equivalent-value",
         tuplets: tupletsFor(sc),
+        ...(a.groupPattern?.length ? { groupPattern: a.groupPattern } : {}),
         // The equivalent length is the answer to an equivalent-value task, so it is never sent (review R5).
       });
       if (a.task === "complete-bar") return builder("complete-bar", 1, (a.given ?? []).map(shape)) as never;

@@ -209,3 +209,17 @@ describe("French terms (Grade 5 vocabulary version 2)", () => {
     expect(seen.size).toBeGreaterThan(10);
   });
 });
+
+describe("rhythm input", () => {
+  it("a bar to complete in irregular time tells the editor which grouping the question names", async () => {
+    const { inputFor } = await import("../src/index.ts");
+    let n = 0;
+    for (const it of items("G5-U1-L02", "t.g5.bar-complete", 100)) {
+      const inp = inputFor(ix, it, scopeOf("G5-U1-L02", "t.g5.bar-complete")) as any;
+      expect(inp.kind).toBe("rhythm-builder");
+      expect(inp.groupPattern, it.id).toEqual(A(it).groupPattern);
+      n++;
+    }
+    expect(n).toBeGreaterThan(40);
+  });
+});
