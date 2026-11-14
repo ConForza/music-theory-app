@@ -189,7 +189,7 @@ export const U4: Spec2[] = [
       { text: "Work in two steps. First, for each marked note, list every chord of I, ii, IV and V that contains it. In C major the melody note C is in chord I (C E G) and chord IV (F A C); the note D is in chord ii (D F A) and chord V (G B D). Look at the notes of each chord to make your list." },
       { music: chords("treble", [["C4", "E4", "G4"], ["D4", "F4", "A4"], ["F4", "A4", "C5"], ["G4", "B4", "D5"]], "The notes of the four chords of C major: I (C E G), ii (D F A), IV (F A C), V (G B D).", cmaj), caption: "The four chords you may choose from in C major." },
       { text: "Second, look for a pair that makes the cadence. If the cadence is perfect, you need V then I. If it is plagal, IV then I. If it is imperfect, the second chord is V and the first is I, ii or IV. A note such as G fits I and V, so both V–I and I–V can be made: check which cadence the question wants. There is often more than one correct pair." },
-      { text: "A melody often has five marked notes: the first is an approach chord, and the next four are the two cadences. The approach chord comes just before the two cadence chords and is chosen from I, ii, IV and V in the same way: it must contain its melody note. Choose the cadence chords first. A cadence is two different chords, so the approach chord must not be the same as the first chord of the cadence that follows it: after choosing, check that it differs from that chord." },
+      { text: "An examination melody often has five marked notes for two cadences. One cadence has two chords and the other has three, because one of them has an approach chord in front of it, so the approach chord is the first marked note or the third. The approach chord comes just before the two cadence chords and is chosen from I, ii, IV and V in the same way: it must contain its melody note. Choose the cadence chords first. A cadence is two different chords, so the approach chord must not be the same as the first chord of the cadence that follows it: after choosing, check that it differs from that chord." },
       { tip: "List the chords that contain each melody note, then pick a pair that makes the named cadence. Any valid pair is correct. An approach chord holds its melody note and differs from the chord after it." },
     ],
     demo: { widget: "staff", music: chords("treble", [["G4", "B4", "D5"], ["C5", "E5", "G5"]], "Two chords in C major: V then I.", cmaj), steps: ["Melody notes: D then C.", "D is in V (G B D); C is in I (C E G).", "V followed by I: a perfect cadence."], text: "V–I in C major." },
@@ -240,7 +240,7 @@ export const U4: Spec2[] = [
     explain: [
       { text: "This lesson is extra practice. The approach chord is taught in the lesson on choosing chords at cadence points, and it can be asked in the Grade 5 assessment; here you can practise it further." },
       { text: "An approach chord is a chord before two cadence chords, so that three chords make a short progression: for example IV, ii, V or IV, V, I. At Grade 5 a suitable approach chord can always be found among I, ii, IV and V." },
-      { tip: "Choose the cadence chords first. Then pick any of I, ii, IV or V that contains the melody note before them." },
+      { tip: "Choose the cadence chords first. Then pick any of I, ii, IV or V that contains the melody note before them and differs from the chord at B." },
     ],
     demo: { widget: "staff", music: chords("treble", [["F4", "A4", "C5"], ["D4", "F4", "A4"], ["G4", "B4", "D5"]], "Three chords in C major: IV, ii, V.", cmaj), steps: ["The cadence is the last two chords: ii–V.", "The chord before them is IV.", "IV is the approach chord."], text: "IV, ii, V in C major." },
     guided: [{ t: "t.g5.approach-chord", correct: "Yes: the approach chord holds its melody note." }],
@@ -251,6 +251,6 @@ export const U4: Spec2[] = [
     ],
     recap: ["An approach chord comes before the two cadence chords.", "Choose it from I, ii, IV or V, and make it different from the chord at B.", "This lesson is extra practice."],
     review: [{ t: "t.g5.approach-chord", afterDays: 7 }],
-    notes: "Extra practice only (the approach chord itself is compulsory since the review of PR #13: First Steps Grade 5 section 11, pp. 124-126, and every practice paper sets five chord boxes split 2 + 3). The grader accepts any chord of I, ii, IV or V that holds the melody note and is not the chord at B.",
+    notes: "Extra practice only (the approach chord itself is compulsory since the review of PR #13: First Steps Grade 5 section 11, pp. 124-126, and every practice paper sets five chord boxes for two cadences). The grader accepts any chord of I, ii, IV or V that holds the melody note and is not the chord at B.",
   },
 ];

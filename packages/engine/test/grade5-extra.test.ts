@@ -336,3 +336,66 @@ describe("fixes after the independent reviews of PR #13", () => {
     expect(chromatic).toBeGreaterThan(10);
   });
 });
+
+describe("small fixes from the final educational recheck", () => {
+  it("V is never the only accepted approach chord before IV or ii", () => {
+    let n = 0;
+    for (const it of items("G5-U4-L06", "t.g5.approach-chord", 400)) {
+      const [pa, pb] = A(it).points as any[];
+      expect(pa.accepted.length === 1 && pa.accepted[0] === "V" && ["IV", "ii"].includes(pb.accepted[0]), it.id).toBe(false);
+      n++;
+    }
+    expect(n).toBeGreaterThan(40);
+  });
+
+  it("the score's cadence question does not name the chords", () => {
+    let n = 0;
+    for (const it of items("G5-U5-L07", "t.g5.score", 200)) {
+      const parts = (A(it).parts ?? []) as any[];
+      for (const p of parts) if (/What cadence do the last two chords/.test(p.prompt ?? "")) { expect(p.prompt, it.id).not.toMatch(/They are/); n++; }
+      expect(it.prompt, it.id).not.toMatch(/\(They are/);
+    }
+    expect(n).toBeGreaterThanOrEqual(0);
+  });
+
+  it("plain quavers of one group are beamed together in x/8 tuplet bars", () => {
+    let bars = 0;
+    for (const it of items("G5-U1-L03", "t.g5.irregular-division", 400)) {
+      const ts = it.music?.timeSignature ?? "";
+      if (!/\/8$/.test(ts)) continue;
+      const evs = (it.music!.measures.flatMap((m) => m.events as any[])) as any[];
+      // a quaver that follows a beamed quaver without a beam of its own would be a gap inside a run: none may end a run and start nothing
+      evs.forEach((e, k) => { if (e.kind === "note" && e.beam === "begin") expect(evs[k + 1]?.beam, `${it.id} note ${k}`).toMatch(/continue|end/); });
+      bars++;
+    }
+    expect(bars).toBeGreaterThan(20);
+  });
+});
+
+describe("written-out appoggiatura and acciaccatura (the bracketed pair)", () => {
+  it("both are asked, with lengths that tell them apart, and the answer follows the lengths", () => {
+    const LEN: Record<string, number> = { crotchet: 8, quaver: 4, semiquaver: 2, demisemiquaver: 1 };
+    const seen = { appoggiatura: 0, acciaccatura: 0 };
+    for (const it of items("G5-U5-L02", "t.g5.ornament-replace", 600)) {
+      const a = A(it);
+      if (!["appoggiatura", "acciaccatura"].includes(a.accepted[0])) continue;
+      const evs = (it.music!.measures.flatMap((m) => m.events as any[]) as any[]);
+      const [g, m] = [evs[0], evs[1]];
+      expect([g.label, m.label], it.id).toEqual(["A", "B"]);
+      const len = (e: any) => LEN[e.duration.value]! * (e.duration.dots ? 1.5 : 1);
+      expect(Math.abs(steps(pn(g.pitch)) - steps(pn(m.pitch))), `${it.id}: a step apart`).toBe(1);
+      expect(m.pitch, `${it.id}: B is the main note`).toBe(a.mainNote);
+      if (a.accepted[0] === "appoggiatura") expect(len(g), it.id).toBe(len(m));
+      else { expect(len(g), it.id).toBeLessThanOrEqual(2); expect(len(m), it.id).toBeGreaterThanOrEqual(3 * len(g)); }
+      expect(a.writtenOutValues.map((v: any) => v.value), it.id).toEqual([g.duration.value, m.duration.value]);
+      // the real grader accepts the right sign and refuses the other grace sign
+      const scope = scopeOf("G5-U5-L02", "t.g5.ornament-replace");
+      const other = a.accepted[0] === "appoggiatura" ? "acciaccatura" : "appoggiatura";
+      expect(gradeItem(ix, it, { kind: "ornament", sign: a.accepted[0] } as never, scope).correct, it.id).toBe(true);
+      expect(gradeItem(ix, it, { kind: "ornament", sign: other } as never, scope).correct, it.id).toBe(false);
+      seen[a.accepted[0] as "appoggiatura"]++;
+    }
+    expect(seen.appoggiatura).toBeGreaterThan(20);
+    expect(seen.acciaccatura).toBeGreaterThan(20);
+  });
+});

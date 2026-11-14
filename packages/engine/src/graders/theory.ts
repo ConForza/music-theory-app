@@ -338,7 +338,7 @@ export const gradeChromatic: Grader<AnswerOf<"pitch-sequence">> = (_c, a, r) => 
 
 export const gradeOrnament: Grader<AnswerOf<"ornament-sign">> = (_c, a, r) => {
   if (r.kind !== "ornament") throw new EngineError("response_mismatch", "Expected an ornament");
-  const truth = a.task === "name-sign" ? a.sign! : music.classifyOrnamentFigure(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch));
+  const truth = a.task === "name-sign" ? a.sign! : music.classifyWrittenOut(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch), a.writtenOutValues);
   const ok = truth !== null && truth !== "inverted-turn" && r.sign === truth;
   if (ok || a.accepted.includes(r.sign) && truth !== null && truth !== "inverted-turn" && a.accepted.includes(truth as never)) return right();
   const pair = (x: string, y: string) => (r.sign === x && truth === y) || (r.sign === y && truth === x);

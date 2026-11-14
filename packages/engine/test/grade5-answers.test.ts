@@ -555,7 +555,11 @@ describe("Unit 5: ornaments, voices, instruments, terms and the score", () => {
       const main = pn(a.mainNote);
       const figure = (a.writtenOut as string[]).map((p) => steps(pn(p)) - steps(main));
       const pattern = figure.join();
-      const truth = pattern === "0,1,0" ? "upper-mordent" : pattern === "0,-1,0" ? "lower-mordent" : (pattern === "1,0,-1,0" || pattern === "0,1,0,-1,0") ? "turn" : figure.slice(0, 6).every((x, i) => x === (i % 2 === 0 ? 1 : 0)) && figure.slice(-2).join() === "-1,0" ? "trill" : null;
+      const LEN: Record<string, number> = { crotchet: 8, quaver: 4, semiquaver: 2, demisemiquaver: 1 };
+      const len = (v: { value: string; dots?: number }) => LEN[v.value]! * (v.dots ? 1.5 : 1);
+      // two notes a step apart, the second on the main note: equal lengths are an appoggiatura, a very short note before a long one an acciaccatura
+      const pair = figure.length === 2 && figure[1] === 0 && Math.abs(figure[0]!) === 1 ? (len(a.writtenOutValues[0]) === len(a.writtenOutValues[1]) ? "appoggiatura" : len(a.writtenOutValues[0]) <= 2 && len(a.writtenOutValues[1]) >= 3 * len(a.writtenOutValues[0]) ? "acciaccatura" : null) : undefined;
+      const truth = pair !== undefined ? pair : pattern === "0,1,0" ? "upper-mordent" : pattern === "0,-1,0" ? "lower-mordent" : (pattern === "1,0,-1,0" || pattern === "0,1,0,-1,0") ? "turn" : figure.slice(0, 6).every((x, i) => x === (i % 2 === 0 ? 1 : 0)) && figure.slice(-2).join() === "-1,0" ? "trill" : null;
       expect(truth, it.id).toBe(a.accepted[0]);
       n++;
     }

@@ -14,7 +14,7 @@ import {
   barCapacity,
   chromaticNumber,
   classifyCadence,
-  classifyOrnamentFigure,
+  classifyWrittenOut,
   identifyTriad,
   diatonicNumber,
   dotted,
@@ -269,8 +269,8 @@ function identifyChord(key: Key, pitches: Pitch[]): { roman: string; inversion: 
   return identifyTriad(key, pitches, ROMANS);
 }
 
-function classifyOrnament(main: Pitch, figure: Pitch[]): string | null {
-  const shape = classifyOrnamentFigure(main, figure);
+function classifyOrnament(main: Pitch, figure: Pitch[], values?: Array<{ value: import("./music/duration.ts").NoteValue; dots?: number }>): string | null {
+  const shape = classifyWrittenOut(main, figure, values);
   return shape === "inverted-turn" ? null : shape;
 }
 
@@ -632,7 +632,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
     }
     case "ornament-sign": {
       for (const o of a.accepted) if (!(sc.ornaments ?? []).includes(o)) report("ANSWER_SCOPE", where, `Ornament ${o} is not in scope here`);
-      const derived = a.task === "name-sign" ? a.sign! : classifyOrnament(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch));
+      const derived = a.task === "name-sign" ? a.sign! : classifyOrnament(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch), a.writtenOutValues);
       if (!derived) {
         report("ANSWER_UNSOLVABLE", where, "Written-out figure does not match a mordent, turn or trill pattern");
         return;
