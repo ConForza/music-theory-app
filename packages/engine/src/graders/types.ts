@@ -7,6 +7,8 @@ export interface Verdict {
   correct: boolean;
   category: string | null;
   reason: string | null;
+  /** A note shown to the learner after a CORRECT answer (a convention worth knowing); never changes the verdict. */
+  note?: string;
   /** Per-element marks for sequences and progressions (index into the learner's answer). */
   marks?: Array<{ index: number; ok: boolean }>;
   parts?: Array<{ id: string; correct: boolean; category: string | null; reason: string | null }>;

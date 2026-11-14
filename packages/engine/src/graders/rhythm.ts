@@ -112,6 +112,29 @@ function judgeBars(c: ItemContext, bars: REvent[][], ts: string, map: Partial<Re
   return null;
 }
 
+
+/**
+ * Q21: two one-beat rests for a silent half of a four-beat bar (beats 1-2 or 3-4) are accepted in every grade, but the convention is one
+ * two-beat rest. Rather than refuse released answers, the learner is told, after a correct answer.
+ */
+const HALF_BAR_NOTE = "Well done. One thing to know: when a silent half of a four-beat bar falls on beats 1-2 or 3-4, the convention is to write it as one two-beat rest (a minim rest in 4/4) rather than two one-beat rests. Both are accepted here.";
+function halfBarRestNote(bars: REvent[][], ts: string | undefined): string | undefined {
+  if (!ts) return undefined;
+  const st = music.metreStructures(ts)[0];
+  if (!st || st.metre === "irregular" || st.groups.length !== 4) return undefined;
+  const beat = mul(st.capacity, frac(1, 4));
+  const half = mul(st.capacity, frac(1, 2));
+  for (const bar of bars) {
+    let t = frac(0);
+    const evs = bar.map((e) => { const on = t; const len = music.eventLength(e); t = add(t, len); return { e, on, len }; });
+    for (const start of [frac(0), half]) {
+      const inHalf = evs.filter((x) => x.e.kind !== "tuplet" && compare(x.on, start) >= 0 && compare(add(x.on, x.len), add(start, half)) <= 0);
+      if (inHalf.length === 2 && inHalf.every((x) => x.e.kind === "rest" && equals(x.len, beat))) return HALF_BAR_NOTE;
+    }
+  }
+  return undefined;
+}
+
 const matchesReference = (bars: REvent[][], accepted: Measure[][]) => accepted.some((ref) => fromMeasures(ref).length === bars.length && fromMeasures(ref).every((m, i) => shapeKey(m) === shapeKey(bars[i]!)));
 
 export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
@@ -149,7 +172,7 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
     const v = judgeBars(c, bars, ts, BAR_CATEGORY, false, a.groupPattern);
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That bar adds up, but this question wants one of the patterns it describes.");
-    return right();
+    return right(null, { note: halfBarRestNote(bars, ts) });
   }
 
   if (a.task === "regroup") {
@@ -164,7 +187,7 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
     const v = judgeBars(c, bars, ts, GROUPING_CATEGORY, true, a.groupPattern);
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That grouping is not one of the forms this question accepts.");
-    return right();
+    return right(null, { note: halfBarRestNote(bars, ts) });
   }
 
   if (a.task === "add-tuplet") {
@@ -187,7 +210,7 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
     const v = judgeBars(c, bars, ts, { ...BAR_CATEGORY, "tuplet-total-wrong": "tuplet-total-wrong", "bar-overfull": "tuplet-total-wrong", "bar-underfull": "tuplet-total-wrong" }, false);
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That bar is correct music, but this question wants the pattern it describes.");
-    return right();
+    return right(null, { note: halfBarRestNote(bars, ts) });
   }
 
   throw new EngineError("response_mismatch", "Use the bar-line tool for this question");
