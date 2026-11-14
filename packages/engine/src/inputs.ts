@@ -55,6 +55,8 @@ export type ItemInput =
       rests: boolean;
       ties: boolean;
       tuplets: Array<{ actual: number; normal: number }>;
+      /** Irregular time: the sub-group pattern the question names (for example [2, 3, 2]); the editor beams by it instead of the signature's default pattern. */
+      groupPattern?: number[];
     }
   | { kind: "rhythm-grouping"; timeSignature: string; measures: Array<{ events: RhythmShape[] }> }
   | { kind: "barlines"; timeSignature: string; events: RhythmShape[]; final: boolean }
@@ -90,7 +92,7 @@ function tupletsFor(sc: MusicScope): Array<{ actual: number; normal: number }> {
   const out: Array<{ actual: number; normal: number }> = [];
   if (t.includes("triplet")) out.push({ actual: 3, normal: 2 });
   if (t.includes("duplet")) out.push({ actual: 2, normal: 3 });
-  if (t.includes("irregular")) out.push({ actual: 5, normal: 4 }, { actual: 6, normal: 4 }, { actual: 7, normal: 4 });
+  if (t.includes("irregular")) out.push({ actual: 5, normal: 4 }, { actual: 6, normal: 4 }, { actual: 7, normal: 4 }, { actual: 9, normal: 8 });
   return out;
 }
 
@@ -148,7 +150,7 @@ function inputForAnswer(c: ItemContext, a: SimpleAnswerSpec): Exclude<ItemInput,
       }
       if (d.rule === "chromatic") return { kind: "pitch-sequence", purpose: "chromatic", ...base, length: 13, given: [d.start] };
       const sourceLen = item.music ? item.music.measures.flatMap((m) => (m.events ? [m.events] : (m.voices ?? []).map((v) => v.events))).flat().flatMap((e) => (e.kind === "tuplet" ? e.events : [e])).filter((e) => e.kind !== "rest").length : a.accepted[0]!.length;
-      const octave = d.interval === "P8";
+      const octave = d.interval === "P8" || d.interval === "P1";
       return {
         kind: "pitch-sequence",
         purpose: "transposition",
@@ -172,6 +174,7 @@ function inputForAnswer(c: ItemContext, a: SimpleAnswerSpec): Exclude<ItemInput,
         rests: sc.rests !== false,
         ties: Boolean(sc.ties) || mode === "equivalent-value",
         tuplets: tupletsFor(sc),
+        ...(a.groupPattern?.length ? { groupPattern: a.groupPattern } : {}),
         // The equivalent length is the answer to an equivalent-value task, so it is never sent (review R5).
       });
       if (a.task === "complete-bar") return builder("complete-bar", 1, (a.given ?? []).map(shape)) as never;

@@ -1,0 +1,2498 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U4-L05",
+  "lessonId": "G5-U4-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Find and name the cadences in a short musical passage.",
+    "successCriteria": [
+      "I locate the two chords of a cadence point.",
+      "I name each chord and then the cadence.",
+      "I do not name a cadence from the melody alone."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In a real piece a cadence is made by several things together: the rhythm, the rise and fall of the melody, and the chords. At Grade 5 the cadence points are marked for you, and what is tested is whether you can tell from the chords what kind of cadence it is."
+    },
+    {
+      "kind": "text",
+      "text": "Look at the two chords at the marked place. Name each one by its root and position, then check them against the three patterns: V–I, IV–I, or a pair ending on V. A phrase can have more than one cadence point: a first cadence in the middle, and a last cadence at the end."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C5"
+                  },
+                  {
+                    "pitch": "E5"
+                  },
+                  {
+                    "pitch": "G5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "B4"
+                  },
+                  {
+                    "pitch": "D5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "F4"
+                  },
+                  {
+                    "pitch": "A4"
+                  },
+                  {
+                    "pitch": "C5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C5"
+                  },
+                  {
+                    "pitch": "E5"
+                  },
+                  {
+                    "pitch": "G5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A phrase in C major with four chords, one in each bar: I, V, IV, I. The first cadence point is bars 1 to 2 (I–V). The last is bars 3 to 4 (IV–I).",
+        "key": "C major"
+      },
+      "caption": "I–V (imperfect) at the first cadence point, IV–I (plagal) at the last."
+    },
+    {
+      "kind": "text",
+      "text": "A cadence is the harmony: do not name it from the melody or the rhythm alone. The same melody could be harmonised in more than one way, and some questions accept more than one pair of chords. The question always tells you where the cadence is."
+    },
+    {
+      "kind": "tip",
+      "text": "Name the chords first. Then compare with V–I, IV–I and endings on V."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "D5"
+                },
+                {
+                  "pitch": "F#5"
+                },
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "C#5"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A phrase ending in D major: I then V.",
+      "key": "D major"
+    },
+    "steps": [
+      "Chords: D F♯ A is I; A C♯ E is V.",
+      "I followed by V ends on the dominant.",
+      "An imperfect cadence."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "I–V in D major: an imperfect cadence."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u4-l05.guided-1",
+      "templateId": "t.g5.cadence-find",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This phrase in D major has two cadence points: A–B in the first two bars, and C–D in the last two. Name each cadence.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "A"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C#4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "B"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord marked A of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord marked B of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "A2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note on the 3rd line. Bar 2: a note in the 1st space. Bar 3: a note on the 1st line. Bar 4: a note in the space below the 1st ledger line below the stave.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord marked A of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord marked B of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note on the 3rd line. Bar 2: a note in the 1st space. Bar 3: a note on the 1st line. Bar 4: a note in the space below the 1st ledger line below the stave."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "first",
+            "prompt": "What cadence do the chords at A and B make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "imperfect"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "plagal": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          },
+          {
+            "id": "second",
+            "prompt": "What cadence do the chords at C and D make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "plagal"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "imperfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Name each pair of chords.",
+        "Name each chord first. Then: V–I perfect, IV–I plagal, ending on V imperfect."
+      ],
+      "feedback": {
+        "correct": "Yes: each cadence point named separately.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "chord-lacks-melody-note": "Each chord must contain its melody note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.guided-2",
+      "templateId": "t.g5.cadence-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This phrase in C major has one chord in each bar. Which cadence do the last two chords make?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 2: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line.",
+              "key": "C major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "B2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 2nd line. Bar 3: a note in the space just below the stave. Bar 4: a note on the 1st line.",
+              "key": "C major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 2: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Lower stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 2nd line. Bar 3: a note in the space just below the stave. Bar 4: a note on the 1st line."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
+        ],
+        "correctOptionIds": [
+          "imperfect"
+        ],
+        "diagnoses": {
+          "perfect": {
+            "category": "cadence-misnamed",
+            "reason": "A perfect cadence is V followed by I. Name the last two chords first."
+          },
+          "plagal": {
+            "category": "cadence-misnamed",
+            "reason": "A plagal cadence is IV followed by I. Name the last two chords first."
+          }
+        }
+      },
+      "hints": [
+        "Name the last two chords, then compare with V–I, IV–I and endings on V.",
+        "Name the last two chords (root first), then compare with V–I (perfect), IV–I (plagal), and any cadence that ends on V (imperfect)."
+      ],
+      "feedback": {
+        "correct": "Right.",
+        "mistakes": {
+          "chord-lacks-melody-note": "Each chord must contain its melody note.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.guided-3",
+      "templateId": "t.g5.cadence-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This phrase in D major has one chord in each bar. Which cadence do the last two chords make?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "A4"
+                        },
+                        {
+                          "pitch": "C#5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        },
+                        {
+                          "pitch": "D5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 3: a chord marked C of 3 notes: on the 1st line; in the 2nd space; in the 3rd space. Bar 4: a chord marked D of 3 notes: in the 1st space; in the 2nd space; on the 4th line.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "A2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note in the space below the 1st ledger line below the stave. Bar 2: a note on the 1st line. Bar 3: a note in the 1st space. Bar 4: a note on the 3rd line.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 3: a chord marked C of 3 notes: on the 1st line; in the 2nd space; in the 3rd space. Bar 4: a chord marked D of 3 notes: in the 1st space; in the 2nd space; on the 4th line. Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note in the space below the 1st ledger line below the stave. Bar 2: a note on the 1st line. Bar 3: a note in the 1st space. Bar 4: a note on the 3rd line."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
+        ],
+        "correctOptionIds": [
+          "perfect"
+        ],
+        "diagnoses": {
+          "plagal": {
+            "category": "cadence-misnamed",
+            "reason": "A plagal cadence is IV followed by I. Name the last two chords first."
+          },
+          "imperfect": {
+            "category": "cadence-misnamed",
+            "reason": "An imperfect cadence ends on the dominant chord (V). Name the last two chords first."
+          }
+        }
+      },
+      "hints": [
+        "Name the last two chords, then compare with V–I, IV–I and endings on V.",
+        "Name the last two chords (root first), then compare with V–I (perfect), IV–I (plagal), and any cadence that ends on V (imperfect)."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "chord-lacks-melody-note": "Each chord must contain its melody note.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u4-l05.ind-1",
+      "templateId": "t.g5.cadence-find",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This phrase in G major has two cadence points: A–B in the first two bars, and C–D in the last two. Name each cadence.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "A"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "B"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 sharp, 4/4. Bar 1: a chord marked A of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Bar 2: a chord marked B of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line.",
+              "key": "G major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "A2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 1st space. Bar 2: a note on the 3rd line. Bar 3: a note in the 2nd space. Bar 4: a note on the 1st line.",
+              "key": "G major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 sharp, 4/4. Bar 1: a chord marked A of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Bar 2: a chord marked B of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Lower stave stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 1st space. Bar 2: a note on the 3rd line. Bar 3: a note in the 2nd space. Bar 4: a note on the 1st line."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "first",
+            "prompt": "What cadence do the chords at A and B make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "imperfect"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "plagal": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          },
+          {
+            "id": "second",
+            "prompt": "What cadence do the chords at C and D make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "plagal"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "imperfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Name each pair of chords.",
+        "Name each chord first. Then: V–I perfect, IV–I plagal, ending on V imperfect."
+      ],
+      "feedback": {
+        "correct": "Correct cadences.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "chord-lacks-melody-note": "Each chord must contain its melody note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.ind-2",
+      "templateId": "t.g5.cadence-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This phrase in D major has one chord in each bar. Which cadence do the last two chords make?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C#4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C#3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note on the 3rd line. Bar 2: a note in the 2nd space. Bar 3: a note on the 1st line. Bar 4: a note in the space below the 1st ledger line below the stave.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note on the 3rd line. Bar 2: a note in the 2nd space. Bar 3: a note on the 1st line. Bar 4: a note in the space below the 1st ledger line below the stave."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
+        ],
+        "correctOptionIds": [
+          "plagal"
+        ],
+        "diagnoses": {
+          "perfect": {
+            "category": "cadence-misnamed",
+            "reason": "A perfect cadence is V followed by I. Name the last two chords first."
+          },
+          "imperfect": {
+            "category": "cadence-misnamed",
+            "reason": "An imperfect cadence ends on the dominant chord (V). Name the last two chords first."
+          }
+        }
+      },
+      "hints": [
+        "Name the last two chords, then compare with V–I, IV–I and endings on V.",
+        "Name the last two chords (root first), then compare with V–I (perfect), IV–I (plagal), and any cadence that ends on V (imperfect)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "chord-lacks-melody-note": "Each chord must contain its melody note.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.ind-3",
+      "templateId": "t.g5.cadence-find",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This phrase in F major has two cadence points: A–B in the first two bars, and C–D in the last two. Name each cadence.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "Bb4"
+                        },
+                        {
+                          "pitch": "D5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "A"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        },
+                        {
+                          "pitch": "C5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "B"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "Bb4"
+                        },
+                        {
+                          "pitch": "D5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "C5"
+                        },
+                        {
+                          "pitch": "E5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord marked A of 3 notes: in the 1st space; on the 3rd line; on the 4th line. Bar 2: a chord marked B of 3 notes: in the 1st space; in the 2nd space; in the 3rd space. Bar 3: a chord marked C of 3 notes: on the 2nd line; on the 3rd line; on the 4th line. Bar 4: a chord marked D of 3 notes: on the 2nd line; in the 3rd space; in the 4th space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "Bb2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note on the 2nd line. Bar 2: a note in the space just below the stave. Bar 3: a note on the 1st line. Bar 4: a note in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord marked A of 3 notes: in the 1st space; on the 3rd line; on the 4th line. Bar 2: a chord marked B of 3 notes: in the 1st space; in the 2nd space; in the 3rd space. Bar 3: a chord marked C of 3 notes: on the 2nd line; on the 3rd line; on the 4th line. Bar 4: a chord marked D of 3 notes: on the 2nd line; in the 3rd space; in the 4th space. Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note on the 2nd line. Bar 2: a note in the space just below the stave. Bar 3: a note on the 1st line. Bar 4: a note in the 2nd space."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "first",
+            "prompt": "What cadence do the chords at A and B make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "plagal"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "imperfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          },
+          {
+            "id": "second",
+            "prompt": "What cadence do the chords at C and D make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "imperfect"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "plagal": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Name each pair of chords.",
+        "Name each chord first. Then: V–I perfect, IV–I plagal, ending on V imperfect."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "chord-lacks-melody-note": "Each chord must contain its melody note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.ind-4",
+      "templateId": "t.g5.cadence-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This phrase in F major has one chord in each bar. Which cadence do the last two chords make?",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "Bb4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 3: a chord marked C of 3 notes: in the space just below the stave; in the 1st space; on the 3rd line. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "E2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "Bb2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the space just below the stave. Bar 2: a note on the 1st ledger line below the stave. Bar 3: a note on the 2nd line. Bar 4: a note in the space just below the stave.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 3: a chord marked C of 3 notes: in the space just below the stave; in the 1st space; on the 3rd line. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note in the space just below the stave. Bar 2: a note on the 1st ledger line below the stave. Bar 3: a note on the 2nd line. Bar 4: a note in the space just below the stave."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "perfect",
+            "label": "Perfect"
+          },
+          {
+            "id": "plagal",
+            "label": "Plagal"
+          },
+          {
+            "id": "imperfect",
+            "label": "Imperfect"
+          }
+        ],
+        "correctOptionIds": [
+          "plagal"
+        ],
+        "diagnoses": {
+          "perfect": {
+            "category": "cadence-misnamed",
+            "reason": "A perfect cadence is V followed by I. Name the last two chords first."
+          },
+          "imperfect": {
+            "category": "cadence-misnamed",
+            "reason": "An imperfect cadence ends on the dominant chord (V). Name the last two chords first."
+          }
+        }
+      },
+      "hints": [
+        "Name the last two chords, then compare with V–I, IV–I and endings on V.",
+        "Name the last two chords (root first), then compare with V–I (perfect), IV–I (plagal), and any cadence that ends on V (imperfect)."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "chord-lacks-melody-note": "Each chord must contain its melody note.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.ind-5",
+      "templateId": "t.g5.cadence-find",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This phrase in F major has two cadence points: A–B in the first two bars, and C–D in the last two. Name each cadence.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "Bb4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "A"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "C5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "B"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "Bb4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord marked A of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 2: a chord marked B of 3 notes: on the 1st line; on the 2nd line; in the 3rd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; in the 1st space; on the 3rd line. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "Bb2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note on the 1st line. Bar 2: a note in the 2nd space. Bar 3: a note on the 2nd line. Bar 4: a note in the space just below the stave.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord marked A of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 2: a chord marked B of 3 notes: on the 1st line; on the 2nd line; in the 3rd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; in the 1st space; on the 3rd line. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note on the 1st line. Bar 2: a note in the 2nd space. Bar 3: a note on the 2nd line. Bar 4: a note in the space just below the stave."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "first",
+            "prompt": "What cadence do the chords at A and B make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "imperfect"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "plagal": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          },
+          {
+            "id": "second",
+            "prompt": "What cadence do the chords at C and D make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "plagal"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "imperfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Name each pair of chords.",
+        "Name each chord first. Then: V–I perfect, IV–I plagal, ending on V imperfect."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "chord-lacks-melody-note": "Each chord must contain its melody note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u4-l05.ind-6",
+      "templateId": "t.g5.cadence-find",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This phrase in G major has two cadence points: A–B in the first two bars, and C–D in the last two. Name each cadence.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "A"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "B"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 sharp, 4/4. Bar 1: a chord marked A of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 2: a chord marked B of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line.",
+              "key": "G major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 3rd line. Bar 3: a note in the 2nd space. Bar 4: a note on the 1st line.",
+              "key": "G major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 sharp, 4/4. Bar 1: a chord marked A of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 2: a chord marked B of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Lower stave stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 3rd line. Bar 3: a note in the 2nd space. Bar 4: a note on the 1st line."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "first",
+            "prompt": "What cadence do the chords at A and B make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "imperfect"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "plagal": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          },
+          {
+            "id": "second",
+            "prompt": "What cadence do the chords at C and D make?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "perfect",
+                  "label": "Perfect"
+                },
+                {
+                  "id": "plagal",
+                  "label": "Plagal"
+                },
+                {
+                  "id": "imperfect",
+                  "label": "Imperfect"
+                }
+              ],
+              "correctOptionIds": [
+                "plagal"
+              ],
+              "diagnoses": {
+                "perfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                },
+                "imperfect": {
+                  "category": "cadence-misnamed",
+                  "reason": "Name the two chords at the cadence point first, then compare with V–I, IV–I and endings on V."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Name each pair of chords.",
+        "Name each chord first. Then: V–I perfect, IV–I plagal, ending on V imperfect."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "chord-lacks-melody-note": "Each chord must contain its melody note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "recap": [
+    "A phrase may have several cadence points; name each pair of chords.",
+    "Use the harmony, not the melody, to name a cadence.",
+    "The question marks where the cadence is."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.cadence-find",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.cadence-identify",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.cadence-find",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.cadences.recognise"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s11"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.11"
+    ],
+    "notes": "Original wording and passages. First Steps Grade 5 section 11: cadence points are indicated; cadences are produced by rhythm, melody and harmony, but only the chords are tested."
+  }
+}

@@ -924,6 +924,8 @@ const RhythmAnswer = z
     accepted: z.array(z.array(Measure).min(1)).min(1),
     /** True when the grader accepts any answer satisfying the rules, not only the listed references. */
     acceptAnyRuleCompliant: z.boolean(),
+    /** Brief 09, irregular time: the beat grouping the question names (for example [3, 2] in 5/4). The bar is then judged against that grouping alone, not against every standard one. */
+    groupPattern: z.array(z.number().int().min(2).max(3)).min(2).optional(),
   })
   .strict();
 
@@ -992,6 +994,8 @@ const OrnamentAnswer = z
     /** replace-written-out: the written-out figure and its main note. */
     mainNote: PitchName.optional(),
     writtenOut: z.array(PitchName).min(2).optional(),
+    /** The written value of each note of `writtenOut`; needed to tell an appoggiatura from an acciaccatura (two notes). */
+    writtenOutValues: z.array(z.object({ value: NoteValueName, dots: z.number().int().min(0).max(2).optional() }).strict()).optional(),
     accepted: z.array(OrnamentName).min(1),
   })
   .strict()

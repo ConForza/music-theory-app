@@ -37,6 +37,8 @@ describe("grader registry", () => {
   it("registers all 22 families", () => expect(curriculum!.families.families).toHaveLength(22));
 });
 
+const HALF_BAR_NOTE = "Well done. One thing to know: when a silent half of a four-beat bar falls on beats 1-2 or 3-4, the convention is to write it as one two-beat rest (a minim rest in 4/4) rather than two one-beat rests. Both are accepted here.";
+
 describe("authored items: correct answers pass, wrong answers fail, inputs never leak answers", () => {
   for (const item of authored) {
     it(item.id, () => {
@@ -45,7 +47,8 @@ describe("authored items: correct answers pass, wrong answers fail, inputs never
       for (const k of LEAKY_KEYS) expect(json.includes(`"${k}"`), `${k} in input`).toBe(false);
       const good = gradeItem(ix, item, canonicalResponse(ix, item));
       expect(good.correct, JSON.stringify(good)).toBe(true);
-      expect(good.message).toBe(item.feedback.correct);
+      // a correct bar may carry the half-bar rest convention (Q21) after the authored message; nothing else is ever added
+      expect([item.feedback.correct, `${item.feedback.correct} ${HALF_BAR_NOTE}`]).toContain(good.message);
       const bad = wrongResponse(ix, item);
       if (bad) {
         const res = gradeItem(ix, item, bad);
@@ -375,5 +378,25 @@ describe("safety and determinism", () => {
       }),
       { numRuns: 400 },
     );
+  });
+});
+
+describe("Q21: a silent half bar written as two one-beat rests is accepted, with a note about the convention", () => {
+  const withNote = authored.filter((i) => {
+    const r = gradeItem(ix, i, canonicalResponse(ix, i));
+    return r.correct && r.message.endsWith(HALF_BAR_NOTE);
+  });
+  it("is accepted and annotated for the authored bars that use two crotchet rests, and never changes the verdict", () => {
+    expect(withNote.length).toBeGreaterThan(0);
+    for (const i of withNote) expect(gradeItem(ix, i, canonicalResponse(ix, i)).correct, i.id).toBe(true);
+  });
+  it("is not added to answers that already use one two-beat rest, or to wrong answers", () => {
+    for (const i of authored) {
+      if (withNote.includes(i)) continue;
+      const r = gradeItem(ix, i, canonicalResponse(ix, i));
+      expect(r.message.includes("One thing to know"), i.id).toBe(false);
+      const bad = wrongResponse(ix, i);
+      if (bad) expect(gradeItem(ix, i, bad).message.includes("One thing to know"), i.id).toBe(false);
+    }
   });
 });

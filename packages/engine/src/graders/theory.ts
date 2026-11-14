@@ -290,7 +290,7 @@ export const gradeTransposition: Grader<AnswerOf<"pitch-sequence">> = (c, a, r) 
     const t = transpose({ ...parseKey(d.sourceKey).tonic, octave: 4 }, iv, d.direction);
     return { tonic: { step: t.step, alter: t.alter }, mode: parseKey(d.sourceKey).mode } as music.Key;
   })();
-  const needsKeyChoice = d.interval !== "P8";
+  const needsKeyChoice = d.interval !== "P8" && d.interval !== "P1"; // an octave or a same-pitch copy keeps the key signature
   const keyOk = !needsKeyChoice || (r.kind === "pitch-sequence" && r.key !== undefined && keyFifths(parseKey(r.key)) === keyFifths(wantKey));
   const notesOk = got.length === want.length && marks.every((m) => m.ok);
   if (notesOk && keyOk) return right(null, { marks });
@@ -338,7 +338,7 @@ export const gradeChromatic: Grader<AnswerOf<"pitch-sequence">> = (_c, a, r) => 
 
 export const gradeOrnament: Grader<AnswerOf<"ornament-sign">> = (_c, a, r) => {
   if (r.kind !== "ornament") throw new EngineError("response_mismatch", "Expected an ornament");
-  const truth = a.task === "name-sign" ? a.sign! : music.classifyOrnamentFigure(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch));
+  const truth = a.task === "name-sign" ? a.sign! : music.classifyWrittenOut(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch), a.writtenOutValues);
   const ok = truth !== null && truth !== "inverted-turn" && r.sign === truth;
   if (ok || a.accepted.includes(r.sign) && truth !== null && truth !== "inverted-turn" && a.accepted.includes(truth as never)) return right();
   const pair = (x: string, y: string) => (r.sign === x && truth === y) || (r.sign === y && truth === x);

@@ -49,7 +49,7 @@ function canonical(ix: CurriculumIndex, item: ExerciseItem, a: SimpleAnswerSpec,
       return { kind: "staff-position", pitch: F(t[0] ?? P(a.accepted[0]!)) };
     }
     case "pitch-sequence":
-      return { kind: "pitch-sequence", pitches: [...a.accepted[0]!], ...(a.key && a.derivation.rule === "transpose" && a.derivation.interval !== "P8" ? { key: a.key } : {}) };
+      return { kind: "pitch-sequence", pitches: [...a.accepted[0]!], ...(a.key && a.derivation.rule === "transpose" && a.derivation.interval !== "P8" && a.derivation.interval !== "P1" ? { key: a.key } : {}) };
     case "rhythm":
       if (a.task === "place-barlines") {
         const events = a.accepted[0]!.flatMap((m) => m.events ?? []);

@@ -252,18 +252,18 @@ describe("musical verification of authored content", () => {
 
   it("detects an invalid chord that lacks the melody note", () => {
     const codes = mutate((c) => {
-      const item = lesson(c, "G5-U4-L06").independent[1]!;
+      const item = lesson(c, "G5-U4-L06").independent.find((i) => i.answer.kind === "chord-progression")!;
       if (item.answer.kind !== "chord-progression") throw new Error("fixture changed");
-      item.answer.points[0]!.accepted = ["IV", "V"];
+      item.answer.points[0]!.accepted = ["I", "ii", "IV", "V"]; // no melody note is in all four chords
     });
     expect(codes).toContain("ANSWER_MISMATCH");
   });
 
   it("detects a misnamed cadence", () => {
     const codes = mutate((c) => {
-      const item = lesson(c, "G5-U4-L06").independent[1]!;
+      const item = lesson(c, "G5-U4-L06").independent.find((i) => i.answer.kind === "chord-progression")!;
       if (item.answer.kind !== "chord-progression") throw new Error("fixture changed");
-      item.answer.cadences[0]!.acceptedTypes = ["perfect"];
+      item.answer.cadences[0]!.acceptedTypes = [item.answer.cadences[0]!.acceptedTypes[0] === "perfect" ? "plagal" : "perfect"];
     });
     expect(codes).toContain("CADENCE_TYPE_MISMATCH");
   });

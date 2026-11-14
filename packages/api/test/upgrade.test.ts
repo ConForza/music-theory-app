@@ -58,7 +58,7 @@ describe("a learner from the Brief 04 world meets the full Grade 1 course", () =
     expect(nodes["G1-U1-L01"]!.state).toBe("available");
     expect(nodes["G1-U3-L04"]!.state).toBe("available"); // L03 stays complete, so its dependants open (documented)
     expect(nodes["G1-U3-L02"]!.state).toBe("locked");
-    expect(nodes["G5-U4-L06"]!.state).toBe("available");
+    expect(nodes["G5-U4-L06"]!.state).toBe("locked"); // Grade 5 is playable (Brief 09) but waits for its predecessors
     expect((await n.post("/api/lessons/G1-U3-L04/start")).status).toBe(200);
   });
 });

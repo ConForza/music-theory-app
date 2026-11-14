@@ -1,0 +1,776 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U4-L01",
+  "lessonId": "G5-U4-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Say whether a triad is in root position, first inversion or second inversion, from its lowest note.",
+    "successCriteria": [
+      "I know the lowest note decides the position.",
+      "I know spacing and a doubled note make no difference.",
+      "I can use letters (a, b, c) or figures (5/3, 6/3, 6/4)."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In earlier grades every triad was in root position: the root is the lowest note, and the other two notes are a 3rd and a 5th above it. This is also called a five-three chord, because of those two intervals above the bass."
+    },
+    {
+      "kind": "text",
+      "text": "A triad can be rearranged so that the 3rd or the 5th is the lowest note instead. If the 3rd is lowest, it is in first inversion (a six-three chord, written 6/3 because the other notes are a 6th and a 3rd above the lowest note). If the 5th is lowest, it is in second inversion (a six-four chord, 6/4)."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "C4"
+                  },
+                  {
+                    "pitch": "E4"
+                  },
+                  {
+                    "pitch": "G4"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "E4"
+                  },
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "C5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "C5"
+                  },
+                  {
+                    "pitch": "E5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Three chords of C major: C, E, G (root position); E, G, C (first inversion); G, C, E (second inversion), each from the bottom up.",
+        "key": "C major"
+      },
+      "caption": "Chord I of C major in root position (a), first inversion (b) and second inversion (c)."
+    },
+    {
+      "kind": "text",
+      "text": "To name a chord in a key, give its Roman numeral (the chord's root, I, IV or V) and its position. You may add a letter to the numeral: Ia, Ib, Ic. Or you may add figures: I with 5/3, 6/3 or 6/4. Both ways are accepted."
+    },
+    {
+      "kind": "text",
+      "text": "The position depends only on which note of the triad is lowest. It does not matter how far apart the upper notes are, or whether a note is doubled (written twice, an octave apart). First find the root by arranging the notes in a stack of thirds; then look at the lowest note."
+    },
+    {
+      "kind": "tip",
+      "text": "Root lowest: a. Third lowest: b. Fifth lowest: c. Spacing and doubling never change the position."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A chord of G major: B, D, G from the bottom up.",
+      "key": "G major"
+    },
+    "steps": [
+      "Stack in thirds: G B D. The root is G.",
+      "The lowest note is B, the 3rd of the chord.",
+      "So it is chord I in first inversion: Ib."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A chord of G major with B lowest: Ib."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u4-l01.guided-1",
+      "templateId": "t.g5.inversion-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In the second inversion of chord IV in D♭ major, which note is in the bass (the lowest note)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "B♭",
+            "label": "B♭"
+          },
+          {
+            "id": "D♭",
+            "label": "D♭"
+          },
+          {
+            "id": "A♭",
+            "label": "A♭"
+          },
+          {
+            "id": "G♭",
+            "label": "G♭"
+          }
+        ],
+        "correctOptionIds": [
+          "D♭"
+        ],
+        "diagnoses": {
+          "G♭": {
+            "category": "root-confused-with-bass",
+            "reason": "G♭ is the root of the chord, but in an inversion the root is not the lowest note."
+          },
+          "B♭": {
+            "category": "wrong-degree",
+            "reason": "In second inversion the 5th of the chord is the lowest note."
+          },
+          "A♭": {
+            "category": "wrong-degree",
+            "reason": "A♭ is not a note of chord IV."
+          }
+        }
+      },
+      "hints": [
+        "First inversion: the 3rd is in the bass. Second inversion: the 5th.",
+        "Second inversion: the 5th of the chord is in the bass."
+      ],
+      "feedback": {
+        "correct": "Yes: the lowest note decides.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.guided-2",
+      "templateId": "t.g5.chord-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this chord in G minor: give its Roman numeral and its position (a, b or c). For example, IVb.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "Eb4"
+                  },
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "C5"
+                  },
+                  {
+                    "pitch": "Eb5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 2 flats. a chord of 4 notes: on the 1st line; on the 2nd line; in the 3rd space; in the 4th space.",
+        "key": "G minor"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "G minor",
+        "acceptedChords": [
+          {
+            "roman": "IV",
+            "inversion": "b"
+          }
+        ]
+      },
+      "hints": [
+        "Find the root by stacking the notes in 3rds, then look at the lowest note.",
+        "Rearrange the notes into a stack of 3rds to find the root, then look at the LOWEST note: root (a), 3rd (b) or 5th (c). Spacing and doubled notes do not matter."
+      ],
+      "feedback": {
+        "correct": "Right: the root first, then the lowest note.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.guided-3",
+      "templateId": "t.g5.chord-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write chord IVc of C♯ minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 4 sharps, 4/4. a semibreve rest.",
+        "key": "C# minor",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "C# minor",
+        "target": {
+          "roman": "IV",
+          "inversion": "c"
+        },
+        "acceptedVoicings": [
+          [
+            "C#3",
+            "F#3",
+            "A3"
+          ]
+        ],
+        "voices": 3
+      },
+      "hints": [
+        "Write the three notes of the chord, with the right one at the bottom.",
+        "Chord IV is built on degree 4. Write its three notes, but put the 5th lowest."
+      ],
+      "feedback": {
+        "correct": "Right: the right note at the bottom.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u4-l01.ind-1",
+      "templateId": "t.g5.chord-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this chord in E♭ major: give its Roman numeral and its position (a, b or c). For example, IVb.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "D2"
+                  },
+                  {
+                    "pitch": "F2"
+                  },
+                  {
+                    "pitch": "Bb2"
+                  },
+                  {
+                    "pitch": "F3"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 3 flats. a chord of 4 notes: in the space below the 1st ledger line below the stave; in the space just below the stave; on the 2nd line; on the 4th line.",
+        "key": "Eb major"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "Eb major",
+        "acceptedChords": [
+          {
+            "roman": "V",
+            "inversion": "b"
+          }
+        ]
+      },
+      "hints": [
+        "Find the root by stacking the notes in 3rds, then look at the lowest note.",
+        "Rearrange the notes into a stack of 3rds to find the root, then look at the LOWEST note: root (a), 3rd (b) or 5th (c). Spacing and doubled notes do not matter."
+      ],
+      "feedback": {
+        "correct": "Correct chord.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.ind-2",
+      "templateId": "t.g5.chord-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write chord Vb of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 4/4. a semibreve rest.",
+        "key": "F major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "F major",
+        "target": {
+          "roman": "V",
+          "inversion": "b"
+        },
+        "acceptedVoicings": [
+          [
+            "E4",
+            "G4",
+            "C5",
+            "E5"
+          ]
+        ],
+        "voices": 4
+      },
+      "hints": [
+        "Write the three notes of the chord, with the right one at the bottom.",
+        "Chord V is built on degree 5. Write its three notes, but put the 3rd lowest."
+      ],
+      "feedback": {
+        "correct": "Correct chord.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.ind-3",
+      "templateId": "t.g5.inversion-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Chord IV in second inversion can also be shown with figures instead of a letter. Which figures show second inversion?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "6/4",
+            "label": "6/4 (six-four)"
+          },
+          {
+            "id": "5/3",
+            "label": "5/3 (five-three)"
+          },
+          {
+            "id": "6/3",
+            "label": "6/3 (six-three)"
+          },
+          {
+            "id": "6/5",
+            "label": "6/5 (six-five)"
+          }
+        ],
+        "correctOptionIds": [
+          "6/4"
+        ],
+        "diagnoses": {
+          "5/3": {
+            "category": "inversion-misread",
+            "reason": "5/3 stands for root position: a 5th and a 3rd above the bass."
+          },
+          "6/3": {
+            "category": "inversion-misread",
+            "reason": "The figures give the intervals above the bass: 6 and 4 for second inversion."
+          },
+          "6/5": {
+            "category": "inversion-misread",
+            "reason": "6/5 is not a triad position: it belongs to chords of four notes."
+          }
+        }
+      },
+      "hints": [
+        "First inversion: the 3rd is in the bass. Second inversion: the 5th.",
+        "The figures name the intervals above the lowest note: root position 5/3, first inversion 6/3, second inversion 6/4."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.ind-4",
+      "templateId": "t.g5.chord-identify",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this chord in G minor: give its Roman numeral and its position (a, b or c). For example, IVb.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "A2"
+                  },
+                  {
+                    "pitch": "D4"
+                  },
+                  {
+                    "pitch": "F#4",
+                    "writtenAccidental": "sharp"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 2 flats. a chord of 3 notes: in the 1st space; in the space above the 1st ledger line above the stave; in the space above the 2nd ledger line above the stave with a sharp sign.",
+        "key": "G minor"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "identify",
+        "key": "G minor",
+        "acceptedChords": [
+          {
+            "roman": "V",
+            "inversion": "c"
+          }
+        ]
+      },
+      "hints": [
+        "Find the root by stacking the notes in 3rds, then look at the lowest note.",
+        "Rearrange the notes into a stack of 3rds to find the root, then look at the LOWEST note: root (a), 3rd (b) or 5th (c). Spacing and doubled notes do not matter."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.ind-5",
+      "templateId": "t.g5.chord-build",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write chord Vc of A minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "wholeBar": true
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A bass-clef stave, no sharps or flats in the key signature, 4/4. a semibreve rest.",
+        "key": "A minor",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "chord",
+        "task": "build",
+        "key": "A minor",
+        "target": {
+          "roman": "V",
+          "inversion": "c"
+        },
+        "acceptedVoicings": [
+          [
+            "B2",
+            "E3",
+            "G#3",
+            "B3"
+          ]
+        ],
+        "voices": 4
+      },
+      "hints": [
+        "Write the three notes of the chord, with the right one at the bottom.",
+        "Chord V is built on degree 5. Write its three notes, but put the 5th lowest."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    },
+    {
+      "id": "i.g5-u4-l01.ind-6",
+      "templateId": "t.g5.inversion-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Above its lowest note, a triad in second inversion contains which intervals?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "a 6th and a 4th",
+            "label": "a 6th and a 4th"
+          },
+          {
+            "id": "a 5th and a 3rd",
+            "label": "a 5th and a 3rd"
+          },
+          {
+            "id": "a 5th and a 4th",
+            "label": "a 5th and a 4th"
+          },
+          {
+            "id": "a 6th and a 3rd",
+            "label": "a 6th and a 3rd"
+          }
+        ],
+        "correctOptionIds": [
+          "a 6th and a 4th"
+        ],
+        "diagnoses": {
+          "a 5th and a 3rd": {
+            "category": "inversion-misread",
+            "reason": "That is root position."
+          },
+          "a 6th and a 3rd": {
+            "category": "inversion-misread",
+            "reason": "Count the intervals from the lowest note to each of the other two notes."
+          },
+          "a 5th and a 4th": {
+            "category": "inversion-misread",
+            "reason": "Count the intervals from the lowest note to each of the other two notes."
+          }
+        }
+      },
+      "hints": [
+        "First inversion: the 3rd is in the bass. Second inversion: the 5th.",
+        "Root position: 5th and 3rd. First inversion: 6th and 3rd. Second inversion: 6th and 4th."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-degree": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root.",
+          "root-confused-with-bass": "In an inversion the lowest note is not the root: stack the notes in 3rds to find the root.",
+          "inversion-misread": "The LOWEST note decides the position: root, 3rd or 5th of the chord.",
+          "leading-note-not-raised": "In minor keys, chords use the harmonic minor, so the leading note is raised.",
+          "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        },
+        "fallback": "Not quite. Find the root first, then the bass note."
+      }
+    }
+  ],
+  "recap": [
+    "Root position: root lowest (5/3). First inversion: 3rd lowest (6/3). Second inversion: 5th lowest (6/4).",
+    "Only the lowest note decides the position.",
+    "Name a chord by its Roman numeral and a letter (a, b, c) or figures."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.chord-identify",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.chord-build",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.inversion-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.chords.inversions"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s08"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.09"
+    ],
+    "notes": "Original wording. First Steps Grade 5 sections 8-9 (pp. 115-117, read in the PDF): five-three, six-three and six-four chords; a, b, c or figures. The inversion is judged by the lowest note only (identifyTriad); spacing and doubling are varied on purpose. OPEN_QUESTIONS Q14 and Q33: both identifying and writing are asked; letters and figures are accepted."
+  }
+}

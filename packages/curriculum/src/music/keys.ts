@@ -153,3 +153,20 @@ export function signaturePitches(key: Key, clef: "treble" | "bass" | "alto" | "t
   if (f === 0) return [];
   return f > 0 ? SIGNATURE_PLACEMENT[clef].sharps.slice(0, f) : SIGNATURE_PLACEMENT[clef].flats.slice(0, -f);
 }
+
+/**
+ * Brief 09: both spelt notes occur in one major or minor scale (natural, harmonic or ascending melodic form, up to seven sharps or
+ * flats). An interval between two such notes is diatonic; any other pair is chromatic (First Steps, Grade 5 section 6).
+ */
+export function isDiatonicPair(a: PitchClass, b: PitchClass): boolean {
+  const same = (x: PitchClass, y: PitchClass) => x.step === y.step && x.alter === y.alter;
+  for (const key of allKeys()) {
+    const forms: ScaleForm[] = key.mode === "major" ? ["major"] : ["natural", "harmonic", "melodic-ascending"];
+    for (const f of forms) {
+      const notes = scale(key, f).slice(0, 7);
+      if (notes.some((x) => same(x, a)) && notes.some((x) => same(x, b))) return true;
+    }
+  }
+  return false;
+}
+export const isChromaticPairOfPitches = (a: PitchClass, b: PitchClass) => !isDiatonicPair(a, b);

@@ -98,6 +98,8 @@ export function gradeItem(ix: CurriculumIndex, item: ExerciseItem, rawResponse: 
     requireKind(input, r);
     v = gradeSimple(c, item.answer, r, true);
   }
-  const out = clean(v);
-  return { ...out, graderId: v.graderId, message: messageFor(c, out.correct, out.category) };
+  const { note, ...rest } = v;
+  const out = clean(rest);
+  const base = messageFor(c, out.correct, out.category);
+  return { ...out, graderId: v.graderId, message: out.correct && note ? `${base} ${note}` : base };
 }

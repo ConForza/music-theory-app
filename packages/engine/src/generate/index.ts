@@ -29,6 +29,7 @@ import { GRADE1_GENERATORS } from "./grade1.ts";
 import { GRADE2_GENERATORS } from "./grade2.ts";
 import { GRADE3_GENERATORS } from "./grade3.ts";
 import { GRADE4_GENERATORS } from "./grade4.ts";
+import { GRADE5_GENERATORS } from "./grade5.ts";
 
 export { canonicalResponse, wrongResponse } from "./canonical.ts";
 
@@ -49,7 +50,7 @@ export interface GeneratedItem {
   };
 }
 
-const generatorFor = (t: ExerciseTemplate) => GRADE1_GENERATORS[t.id] ?? GRADE2_GENERATORS[t.id] ?? GRADE3_GENERATORS[t.id] ?? GRADE4_GENERATORS[t.id] ?? GENERATORS[t.familyId]?.(t);
+const generatorFor = (t: ExerciseTemplate) => GRADE1_GENERATORS[t.id] ?? GRADE2_GENERATORS[t.id] ?? GRADE3_GENERATORS[t.id] ?? GRADE4_GENERATORS[t.id] ?? GRADE5_GENERATORS[t.id] ?? GENERATORS[t.familyId]?.(t);
 export const generatorTemplateIds = (ix: CurriculumIndex): string[] => [...ix.templates.values()].filter((t) => generatorFor(t) !== undefined).map((t) => t.id);
 
 /**
@@ -63,8 +64,8 @@ const canonical = (v: unknown): unknown =>
   Array.isArray(v) ? v.map(canonical) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort().map((k) => [k, canonical((v as Record<string, unknown>)[k])])) : v;
 
 export function generationFingerprint(t: ExerciseTemplate, scope: MusicScope): string {
-  // Grade 4 vocabulary is versioned and joins the fingerprint of Grade 4 templates only: Grade 1-3 identities are byte-for-byte unchanged.
-  const inputs = { rev: GENERATOR_REVISION, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES }, ...(t.grade === 4 ? { vocab4: music.VOCAB_G4 } : {}) };
+  // Grade 4 and Grade 5 vocabularies are versioned and join the fingerprint of their own grade's templates only: Grade 1-3 identities are byte-for-byte unchanged.
+  const inputs = { rev: GENERATOR_REVISION, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES }, ...(t.grade === 4 ? { vocab4: music.VOCAB_G4 } : {}), ...(t.grade === 5 ? { vocab5: music.VOCAB_G5 } : {}) };
   return hashString(JSON.stringify(canonical(inputs))).toString(16).padStart(8, "0");
 }
 
@@ -131,6 +132,7 @@ export function generateItem(ix: CurriculumIndex, templateId: string, seed: numb
       if (severity === "error") issues.push(`${code}: ${message}`);
     });
     if (issues.length) {
+      if (process.env.GEN_DEBUG) console.error(`[reject] ${t.id}: ${issues[0]}`);
       problems.push(issues[0]!);
       continue;
     }
