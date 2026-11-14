@@ -760,48 +760,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "An instrument “in F” sounds how far BELOW the note that is written for it?",
+      "prompt": "A clarinet in A plays the written note D. Which note sounds (concert pitch)?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "Bb",
-            "label": "a tone (major 2nd)"
+            "id": "same",
+            "label": "D"
           },
           {
-            "id": "A",
-            "label": "a minor 3rd"
+            "id": "wrong-way",
+            "label": "F"
           },
           {
-            "id": "F",
-            "label": "a perfect 5th"
+            "id": "respelt",
+            "label": "C♭"
           },
           {
-            "id": "C",
-            "label": "an octave"
+            "id": "right",
+            "label": "B"
           }
         ],
         "correctOptionIds": [
-          "F"
+          "right"
         ],
         "diagnoses": {
-          "Bb": {
-            "category": "wrong-interval",
-            "reason": "That is the distance for an instrument in B♭, not for one in F."
+          "wrong-way": {
+            "category": "wrong-direction",
+            "reason": "That moves the note the wrong way: written to concert goes down."
           },
-          "A": {
+          "same": {
             "category": "wrong-interval",
-            "reason": "That is the distance for an instrument in A, not for one in F."
+            "reason": "That is the note you were given: the clarinet in A does not sound as it is written."
           },
-          "C": {
-            "category": "wrong-interval",
-            "reason": "That is the distance for an instrument in C an octave lower, not for one in F."
+          "respelt": {
+            "category": "enharmonic-respelling",
+            "reason": "That sounds the same but is spelt with the wrong letter name: the transposition moves every letter by the same number of steps."
           }
         }
       },
       "hints": [
         "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
-        "B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."
+        "The clarinet in A is in A: it sounds a minor 3rd below the written note."
       ],
       "feedback": {
         "correct": "Correct.",

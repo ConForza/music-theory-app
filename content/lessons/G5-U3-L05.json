@@ -26,6 +26,57 @@
       "text": "Musicians therefore separate WRITTEN pitch (the notes printed in the player's part) from CONCERT pitch (the pitch that really sounds). If a piece in G major is played by a piano and a B♭ clarinet, the piano part is written in G, but the clarinet part is written a tone higher, in A major, so that it sounds in G."
     },
     {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A four-note phrase in A major, as written for a clarinet in B♭: A, B, C sharp, A.",
+        "timeSignature": "4/4",
+        "key": "A major"
+      },
+      "caption": "The written clarinet part in A major. It sounds a tone lower, in G major."
+    },
+    {
       "kind": "text",
       "text": "Always say which way you are going. From concert pitch to written pitch for these instruments you go UP (by a tone, a minor 3rd or a perfect 5th). From written pitch to concert pitch you go DOWN by the same interval. The name of the instrument (B♭, A or F) is not the key of the music: transpose the key of the music by the interval."
     },
@@ -220,15 +271,13 @@
         },
         "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
       }
-    }
-  ],
-  "independent": [
+    },
     {
-      "id": "i.g5-u3-l05.ind-1",
+      "id": "i.g5-u3-l05.guided-3",
       "templateId": "t.g5.concert-facts",
       "templateVersion": 1,
       "seed": null,
-      "evidence": "independent",
+      "evidence": "learning",
       "prompt": "A clarinet in B♭ plays the written note C. Which note sounds (concert pitch)?",
       "answer": {
         "kind": "choice",
@@ -271,6 +320,71 @@
       "hints": [
         "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
         "The clarinet in B♭ is in B♭: it sounds a major 2nd below the written note."
+      ],
+      "feedback": {
+        "correct": "Yes: concert to written goes up.",
+        "mistakes": {
+          "wrong-octave": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away.",
+          "wrong-clef": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up.",
+          "wrong-interval": "B♭ is a tone, A a minor 3rd and F a perfect 5th.",
+          "wrong-direction": "Written pitch is higher than concert pitch for these instruments.",
+          "key-signature-missing": "A transposed part needs the key signature of its new key.",
+          "accidental-not-adjusted": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key.",
+          "enharmonic-respelling": "Move every letter by the same number of steps."
+        },
+        "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u3-l05.ind-1",
+      "templateId": "t.g5.concert-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "An instrument “in A” sounds how far BELOW the note that is written for it?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Bb",
+            "label": "a tone (major 2nd)"
+          },
+          {
+            "id": "A",
+            "label": "a minor 3rd"
+          },
+          {
+            "id": "F",
+            "label": "a perfect 5th"
+          },
+          {
+            "id": "C",
+            "label": "an octave"
+          }
+        ],
+        "correctOptionIds": [
+          "A"
+        ],
+        "diagnoses": {
+          "Bb": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in B♭, not for one in A."
+          },
+          "F": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in F, not for one in A."
+          },
+          "C": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in C an octave lower, not for one in A."
+          }
+        }
+      },
+      "hints": [
+        "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
+        "B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -347,48 +461,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "An instrument “in A” sounds how far BELOW the note that is written for it?",
+      "prompt": "You have the written part for a cor anglais (in F). To write it at concert pitch (as it sounds), which way do you transpose?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "Bb",
-            "label": "a tone (major 2nd)"
+            "id": "r",
+            "label": "down a perfect 5th"
           },
           {
-            "id": "A",
-            "label": "a minor 3rd"
+            "id": "w",
+            "label": "up a perfect 5th"
           },
           {
-            "id": "F",
-            "label": "a perfect 5th"
+            "id": "i2",
+            "label": "down a minor 3rd"
           },
           {
-            "id": "C",
-            "label": "an octave"
+            "id": "i1",
+            "label": "down a major 2nd"
           }
         ],
         "correctOptionIds": [
-          "A"
+          "r"
         ],
         "diagnoses": {
-          "Bb": {
-            "category": "wrong-interval",
-            "reason": "That is the distance for an instrument in B♭, not for one in A."
+          "w": {
+            "category": "wrong-direction",
+            "reason": "That is the opposite direction. The cor anglais (in F) sounds perfect 5th lower than written, so the written part is higher than the sounding pitch."
           },
-          "F": {
+          "i1": {
             "category": "wrong-interval",
-            "reason": "That is the distance for an instrument in F, not for one in A."
+            "reason": "Right direction, wrong distance: the cor anglais (in F) is in F."
           },
-          "C": {
+          "i2": {
             "category": "wrong-interval",
-            "reason": "That is the distance for an instrument in C an octave lower, not for one in A."
+            "reason": "Right direction, wrong distance: the cor anglais (in F) is in F."
           }
         }
       },
       "hints": [
         "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
-        "B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."
+        "Written pitch is always higher than concert pitch for these instruments. Concert to written goes up; written to concert goes down."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -473,48 +587,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "You have the written part for a cor anglais (in F). To write it at concert pitch (as it sounds), which way do you transpose?",
+      "prompt": "An instrument “in F” sounds how far BELOW the note that is written for it?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "r",
-            "label": "down a perfect 5th"
+            "id": "Bb",
+            "label": "a tone (major 2nd)"
           },
           {
-            "id": "w",
-            "label": "up a perfect 5th"
+            "id": "A",
+            "label": "a minor 3rd"
           },
           {
-            "id": "i2",
-            "label": "down a minor 3rd"
+            "id": "F",
+            "label": "a perfect 5th"
           },
           {
-            "id": "i1",
-            "label": "down a major 2nd"
+            "id": "C",
+            "label": "an octave"
           }
         ],
         "correctOptionIds": [
-          "r"
+          "F"
         ],
         "diagnoses": {
-          "w": {
-            "category": "wrong-direction",
-            "reason": "That is the opposite direction. The cor anglais (in F) sounds perfect 5th lower than written, so the written part is higher than the sounding pitch."
-          },
-          "i1": {
+          "Bb": {
             "category": "wrong-interval",
-            "reason": "Right direction, wrong distance: the cor anglais (in F) is in F."
+            "reason": "That is the distance for an instrument in B♭, not for one in F."
           },
-          "i2": {
+          "A": {
             "category": "wrong-interval",
-            "reason": "Right direction, wrong distance: the cor anglais (in F) is in F."
+            "reason": "That is the distance for an instrument in A, not for one in F."
+          },
+          "C": {
+            "category": "wrong-interval",
+            "reason": "That is the distance for an instrument in C an octave lower, not for one in F."
           }
         }
       },
       "hints": [
         "B♭ sounds a tone lower than written, A a minor 3rd, F a perfect 5th.",
-        "Written pitch is always higher than concert pitch for these instruments. Concert to written goes up; written to concert goes down."
+        "B♭ instruments sound a tone lower than written, A instruments a minor 3rd lower, F instruments a perfect 5th lower."
       ],
       "feedback": {
         "correct": "Correct.",

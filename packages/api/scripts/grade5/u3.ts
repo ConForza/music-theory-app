@@ -131,6 +131,7 @@ export const U3: Spec2[] = [
     guided: [
       { t: "t.g5.compound-facts", when: has("number of the whole interval"), correct: "Yes: add 7, not 8." },
       { t: "t.g5.interval-compound", correct: "Right: counted past 8." },
+      { t: "t.g5.compound-facts", correct: "Yes: the quality stays the same." },
     ],
     independent: [
       { t: "t.g5.interval-compound", correct: "Correct interval." },
@@ -156,6 +157,7 @@ export const U3: Spec2[] = [
       { text: "Some instruments sound higher or lower than the notes written for them. The double bass sounds an octave lower than written; the piccolo an octave higher. Others sound at other distances. A clarinet in B♭ or a trumpet in B♭ sounds a tone (a major 2nd) lower than written; a clarinet in A sounds a minor 3rd lower; a horn in F or a cor anglais sounds a perfect 5th lower." },
       { text: "The name tells you the note that sounds when the player reads a written C. A B♭ clarinet that reads a C sounds B♭. An A clarinet that reads C sounds A. A horn in F that reads C sounds F." },
       { text: "Musicians therefore separate WRITTEN pitch (the notes printed in the player's part) from CONCERT pitch (the pitch that really sounds). If a piece in G major is played by a piano and a B♭ clarinet, the piano part is written in G, but the clarinet part is written a tone higher, in A major, so that it sounds in G." },
+      { music: bars("treble", [["A4", "B4", "C#5", "A4"]], "4/4", "A four-note phrase in A major, as written for a clarinet in B♭: A, B, C sharp, A.", "crotchet", { key: "A major", showKeySignature: true }), caption: "The written clarinet part in A major. It sounds a tone lower, in G major." },
       { text: "Always say which way you are going. From concert pitch to written pitch for these instruments you go UP (by a tone, a minor 3rd or a perfect 5th). From written pitch to concert pitch you go DOWN by the same interval. The name of the instrument (B♭, A or F) is not the key of the music: transpose the key of the music by the interval." },
       { tip: "Concert → written: up. Written → concert: down. B♭: a tone. A: a minor 3rd. F: a perfect 5th." },
     ],
@@ -163,6 +165,7 @@ export const U3: Spec2[] = [
     guided: [
       { t: "t.g5.concert-facts", when: has("how far"), correct: "Yes: the interval belongs to the instrument." },
       { t: "t.g5.transpose-key", correct: "Right: the key moves by the interval." },
+      { t: "t.g5.concert-facts", correct: "Yes: concert to written goes up." },
     ],
     independent: [
       { t: "t.g5.concert-facts", correct: "Correct." },

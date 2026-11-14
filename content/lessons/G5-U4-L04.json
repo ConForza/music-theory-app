@@ -552,6 +552,66 @@
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
       }
+    },
+    {
+      "id": "i.g5-u4-l04.guided-3",
+      "templateId": "t.g5.cadence-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which cadences end on the tonic chord?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "perfect-plagal",
+            "label": "A perfect cadence and a plagal cadence"
+          },
+          {
+            "id": "perfect-imperfect",
+            "label": "A perfect cadence and an imperfect cadence"
+          },
+          {
+            "id": "plagal-imperfect",
+            "label": "A plagal cadence and an imperfect cadence"
+          },
+          {
+            "id": "imperfect",
+            "label": "Only an imperfect cadence"
+          }
+        ],
+        "correctOptionIds": [
+          "perfect-plagal"
+        ],
+        "diagnoses": {
+          "perfect-imperfect": {
+            "category": "cadence-misnamed",
+            "reason": "An imperfect cadence ends on V, not on the tonic."
+          },
+          "plagal-imperfect": {
+            "category": "cadence-misnamed",
+            "reason": "An imperfect cadence ends on V, not on the tonic."
+          },
+          "imperfect": {
+            "category": "cadence-misnamed",
+            "reason": "Imperfect cadences end on V; the two that end on the tonic are the perfect and plagal cadences."
+          }
+        }
+      },
+      "hints": [
+        "V–I perfect; IV–I plagal; I–V, ii–V and IV–V imperfect.",
+        "V–I and IV–I both end on I."
+      ],
+      "feedback": {
+        "correct": "Yes: V–I is perfect.",
+        "mistakes": {
+          "chord-lacks-melody-note": "Each chord must contain its melody note.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "cadence-misnamed": "Name the last two chords first: V–I perfect, IV–I plagal, ending on V imperfect.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
     }
   ],
   "independent": [
@@ -786,48 +846,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which cadences end on the tonic chord?",
+      "prompt": "Which pair of chords makes a plagal cadence?",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "perfect-plagal",
-            "label": "A perfect cadence and a plagal cadence"
+            "id": "ii–V",
+            "label": "ii–V"
           },
           {
-            "id": "perfect-imperfect",
-            "label": "A perfect cadence and an imperfect cadence"
+            "id": "V–I",
+            "label": "V–I"
           },
           {
-            "id": "plagal-imperfect",
-            "label": "A plagal cadence and an imperfect cadence"
+            "id": "IV–I",
+            "label": "IV–I"
           },
           {
-            "id": "imperfect",
-            "label": "Only an imperfect cadence"
+            "id": "I–V",
+            "label": "I–V"
           }
         ],
         "correctOptionIds": [
-          "perfect-plagal"
+          "IV–I"
         ],
         "diagnoses": {
-          "perfect-imperfect": {
+          "ii–V": {
             "category": "cadence-misnamed",
-            "reason": "An imperfect cadence ends on V, not on the tonic."
+            "reason": "ii–V makes a imperfect cadence, not a plagal one."
           },
-          "plagal-imperfect": {
+          "V–I": {
             "category": "cadence-misnamed",
-            "reason": "An imperfect cadence ends on V, not on the tonic."
+            "reason": "V–I makes a perfect cadence, not a plagal one."
           },
-          "imperfect": {
+          "I–V": {
             "category": "cadence-misnamed",
-            "reason": "Imperfect cadences end on V; the two that end on the tonic are the perfect and plagal cadences."
+            "reason": "I–V makes a imperfect cadence, not a plagal one."
           }
         }
       },
       "hints": [
         "V–I perfect; IV–I plagal; I–V, ii–V and IV–V imperfect.",
-        "V–I and IV–I both end on I."
+        "V–I perfect; IV–I plagal; I–V, ii–V and IV–V are imperfect."
       ],
       "feedback": {
         "correct": "Correct.",
@@ -1071,14 +1131,10 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Which pair of chords makes a plagal cadence?",
+      "prompt": "Which pair of chords makes an imperfect cadence?",
       "answer": {
         "kind": "choice",
         "options": [
-          {
-            "id": "ii–V",
-            "label": "ii–V"
-          },
           {
             "id": "V–I",
             "label": "V–I"
@@ -1088,25 +1144,21 @@
             "label": "IV–I"
           },
           {
-            "id": "I–V",
-            "label": "I–V"
+            "id": "ii–V",
+            "label": "ii–V"
           }
         ],
         "correctOptionIds": [
-          "IV–I"
+          "ii–V"
         ],
         "diagnoses": {
-          "ii–V": {
-            "category": "cadence-misnamed",
-            "reason": "ii–V makes a imperfect cadence, not a plagal one."
-          },
           "V–I": {
             "category": "cadence-misnamed",
-            "reason": "V–I makes a perfect cadence, not a plagal one."
+            "reason": "V–I makes a perfect cadence, not an imperfect one."
           },
-          "I–V": {
+          "IV–I": {
             "category": "cadence-misnamed",
-            "reason": "I–V makes a imperfect cadence, not a plagal one."
+            "reason": "IV–I makes a plagal cadence, not an imperfect one."
           }
         }
       },

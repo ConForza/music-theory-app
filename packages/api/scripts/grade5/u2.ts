@@ -96,6 +96,7 @@ export const U2: Spec2[] = [
     guided: [
       { t: "t.g5.clef-position", correct: "Yes: you compared the real pitches." },
       { t: "t.g5.octave-transpose", correct: "Right: eight letters, in the right clef." },
+      { t: "t.g5.clef-position", correct: "Yes: the pitches, not the positions." },
     ],
     independent: [
       { t: "t.g5.octave-transpose", correct: "Correct octave and clef." },

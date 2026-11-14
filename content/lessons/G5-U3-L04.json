@@ -227,6 +227,59 @@
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
       }
+    },
+    {
+      "id": "i.g5-u3-l04.guided-3",
+      "templateId": "t.g5.compound-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "A major 9th is the same as a compound interval built on which simple interval? (Give the simple interval that is left when the octave is taken away.)",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "major 2nd"
+          },
+          {
+            "id": "3",
+            "label": "major 3rd"
+          },
+          {
+            "id": "9",
+            "label": "major 9th"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "3": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 9: 9 − 7 = 2. The quality does not change."
+          },
+          "9": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 9: 9 − 7 = 2. The quality does not change."
+          }
+        }
+      },
+      "hints": [
+        "Add 7 to the simple number.",
+        "Subtract 7 from the number to take away an octave. The quality stays the same."
+      ],
+      "feedback": {
+        "correct": "Yes: the quality stays the same.",
+        "mistakes": {
+          "counted-one-end-only": "Count both notes: the bottom note is 1, then every letter name up to and including the top note.",
+          "quality-from-wrong-key": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?",
+          "compound-arithmetic": "An octave and a 5th is a 12th: add 7, not 8.",
+          "enharmonic-spelling": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans.",
+          "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        },
+        "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
+      }
     }
   ],
   "independent": [
@@ -299,34 +352,42 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A major 9th is the same as a compound interval built on which simple interval? (Give the simple interval that is left when the octave is taken away.)",
+      "prompt": "A perfect 12th is the same as a compound interval built on which simple interval? (Give the simple interval that is left when the octave is taken away.)",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "2",
-            "label": "major 2nd"
+            "id": "4",
+            "label": "perfect 4th"
           },
           {
-            "id": "3",
-            "label": "major 3rd"
+            "id": "5",
+            "label": "perfect 5th"
           },
           {
-            "id": "9",
-            "label": "major 9th"
+            "id": "6",
+            "label": "perfect 6th"
+          },
+          {
+            "id": "12",
+            "label": "perfect 12th"
           }
         ],
         "correctOptionIds": [
-          "2"
+          "5"
         ],
         "diagnoses": {
-          "3": {
+          "4": {
             "category": "compound-arithmetic",
-            "reason": "Take 7 away from 9: 9 − 7 = 2. The quality does not change."
+            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
           },
-          "9": {
+          "6": {
             "category": "compound-arithmetic",
-            "reason": "Take 7 away from 9: 9 − 7 = 2. The quality does not change."
+            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
+          },
+          "12": {
+            "category": "compound-arithmetic",
+            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
           }
         }
       },
@@ -413,48 +474,40 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A perfect 12th is the same as a compound interval built on which simple interval? (Give the simple interval that is left when the octave is taken away.)",
+      "prompt": "Another way to say “compound augmented 3rd” is…",
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "4",
-            "label": "perfect 4th"
+            "id": "augmented 10th",
+            "label": "augmented 10th"
           },
           {
-            "id": "5",
-            "label": "perfect 5th"
+            "id": "augmented 3rd",
+            "label": "augmented 3rd"
           },
           {
-            "id": "6",
-            "label": "perfect 6th"
-          },
-          {
-            "id": "12",
-            "label": "perfect 12th"
+            "id": "augmented 11th",
+            "label": "augmented 11th"
           }
         ],
         "correctOptionIds": [
-          "5"
+          "augmented 10th"
         ],
         "diagnoses": {
-          "4": {
+          "augmented 11th": {
             "category": "compound-arithmetic",
-            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
+            "reason": "That adds 8, not 7: the octave and the interval share a note."
           },
-          "6": {
+          "augmented 3rd": {
             "category": "compound-arithmetic",
-            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
-          },
-          "12": {
-            "category": "compound-arithmetic",
-            "reason": "Take 7 away from 12: 12 − 7 = 5. The quality does not change."
+            "reason": "A compound interval is larger than an octave; this is the simple interval inside it."
           }
         }
       },
       "hints": [
         "Add 7 to the simple number.",
-        "Subtract 7 from the number to take away an octave. The quality stays the same."
+        "Compound 3rd = 10th, compound 4th = 11th, compound 5th = 12th: add 7."
       ],
       "feedback": {
         "correct": "Correct.",

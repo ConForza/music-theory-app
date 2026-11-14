@@ -128,6 +128,7 @@ export const U4: Spec2[] = [
     guided: [
       { t: "t.g5.cadence-facts", when: has("Which pair"), correct: "Yes: IV–I is plagal." },
       { t: "t.g5.cadence-identify", correct: "Right: the last two chords name the cadence." },
+      { t: "t.g5.cadence-facts", correct: "Yes: V–I is perfect." },
     ],
     independent: [
       { t: "t.g5.cadence-identify", correct: "Correct cadence." },
@@ -192,6 +193,7 @@ export const U4: Spec2[] = [
     demo: { widget: "staff", music: chords("treble", [["G4", "B4", "D5"], ["C5", "E5", "G5"]], "Two chords in C major: V then I.", cmaj), steps: ["Melody notes: D then C.", "D is in V (G B D); C is in I (C E G).", "V followed by I: a perfect cadence."], text: "V–I in C major." },
     guided: [
       { t: "t.g5.cadence-chords", correct: "Yes: each chord holds its melody note." },
+      { t: "t.g5.chord-choice", correct: "Yes: the pair fits both notes and the cadence." },
       { t: "t.g5.chord-choice", correct: "Right." },
     ],
     independent: [

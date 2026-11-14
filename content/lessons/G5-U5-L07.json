@@ -26,6 +26,94 @@
       "text": "Last, look at the details on the notes: an ornament sign (trill, turn or mordent), or an interval between two marked notes, where you count letter names for the number and use the key for the quality. Each question points at something printed, so the answer is always in the score."
     },
     {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars for the cello in the tenor clef, in C major: A, C, E, C then D, F, A, D.",
+        "timeSignature": "4/4",
+        "key": "C major",
+        "tempoText": "Teneramente"
+      },
+      "caption": "A cello line in the tenor clef, marked teneramente: clef, key, time signature and direction all tell you something."
+    },
+    {
       "kind": "tip",
       "text": "Clef and key first; then the instrument and markings; then the chords and cadence; then the marked notes."
     }

@@ -410,6 +410,99 @@
         "Check each chord contains its melody note, then check the pair makes the cadence named."
       ],
       "feedback": {
+        "correct": "Yes: the pair fits both notes and the cadence.",
+        "mistakes": {
+          "chord-lacks-melody-note": "Each chord must contain its melody note.",
+          "non-cadential-pair": "Cadences are V–I, IV–I, or end on V.",
+          "cadence-misnamed": "Name the last two chords first.",
+          "wrong-key": "Check the key signature and the final note — then build the chords in that key."
+        },
+        "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
+      }
+    },
+    {
+      "id": "i.g5-u4-l06.guided-3",
+      "templateId": "t.g5.chord-choice",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes a perfect cadence?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "label": "B"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A in the 2nd space; a note marked B in the space just above the stave.",
+        "key": "G major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ii–V",
+            "label": "ii–V"
+          },
+          {
+            "id": "I–IV",
+            "label": "I–IV"
+          },
+          {
+            "id": "V–IV",
+            "label": "V–IV"
+          },
+          {
+            "id": "V–I",
+            "label": "V–I"
+          }
+        ],
+        "correctOptionIds": [
+          "V–I"
+        ],
+        "diagnoses": {
+          "ii–V": {
+            "category": "chord-lacks-melody-note",
+            "reason": "Chord V does not contain its melody note (G)."
+          },
+          "I–IV": {
+            "category": "chord-lacks-melody-note",
+            "reason": "Chord I does not contain its melody note (A)."
+          },
+          "V–IV": {
+            "category": "cadence-misnamed",
+            "reason": "V–IV contains both melody notes but makes no cadence, not a perfect one."
+          }
+        }
+      },
+      "hints": [
+        "Check each chord holds its melody note, then check the cadence.",
+        "Check each chord contains its melody note, then check the pair makes the cadence named."
+      ],
+      "feedback": {
         "correct": "Right.",
         "mistakes": {
           "chord-lacks-melody-note": "Each chord must contain its melody note.",
@@ -555,7 +648,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes a perfect cadence?",
+      "prompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes an imperfect cadence?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -565,7 +658,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A4",
+                "pitch": "B4",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -574,7 +667,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "G5",
+                "pitch": "A4",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -585,7 +678,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A in the 2nd space; a note marked B in the space just above the stave.",
+        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A on the 3rd line; a note marked B in the 2nd space.",
         "key": "G major",
         "timeSignature": "4/4"
       },
@@ -593,37 +686,37 @@
         "kind": "choice",
         "options": [
           {
+            "id": "I–ii",
+            "label": "I–ii"
+          },
+          {
+            "id": "IV–I",
+            "label": "IV–I"
+          },
+          {
+            "id": "I–V",
+            "label": "I–V"
+          },
+          {
             "id": "ii–V",
             "label": "ii–V"
-          },
-          {
-            "id": "I–IV",
-            "label": "I–IV"
-          },
-          {
-            "id": "V–IV",
-            "label": "V–IV"
-          },
-          {
-            "id": "V–I",
-            "label": "V–I"
           }
         ],
         "correctOptionIds": [
-          "V–I"
+          "I–V"
         ],
         "diagnoses": {
           "ii–V": {
             "category": "chord-lacks-melody-note",
-            "reason": "Chord V does not contain its melody note (G)."
+            "reason": "Chord ii does not contain its melody note (B)."
           },
-          "I–IV": {
+          "IV–I": {
             "category": "chord-lacks-melody-note",
-            "reason": "Chord I does not contain its melody note (A)."
+            "reason": "Chord IV does not contain its melody note (B)."
           },
-          "V–IV": {
+          "I–ii": {
             "category": "cadence-misnamed",
-            "reason": "V–IV contains both melody notes but makes no cadence, not a perfect one."
+            "reason": "I–ii contains both melody notes but makes no cadence, not an imperfect one."
           }
         }
       },
@@ -784,7 +877,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B4",
+                "pitch": "E5",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -804,7 +897,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A on the 3rd line; a note marked B in the 2nd space.",
+        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A in the 4th space; a note marked B in the 2nd space.",
         "key": "G major",
         "timeSignature": "4/4"
       },
@@ -812,37 +905,37 @@
         "kind": "choice",
         "options": [
           {
-            "id": "I–ii",
-            "label": "I–ii"
+            "id": "V–ii",
+            "label": "V–ii"
           },
           {
-            "id": "IV–I",
-            "label": "IV–I"
+            "id": "IV–ii",
+            "label": "IV–ii"
           },
           {
-            "id": "I–V",
-            "label": "I–V"
+            "id": "I–IV",
+            "label": "I–IV"
           },
           {
-            "id": "ii–V",
-            "label": "ii–V"
+            "id": "IV–V",
+            "label": "IV–V"
           }
         ],
         "correctOptionIds": [
-          "I–V"
+          "IV–V"
         ],
         "diagnoses": {
-          "ii–V": {
+          "I–IV": {
             "category": "chord-lacks-melody-note",
-            "reason": "Chord ii does not contain its melody note (B)."
+            "reason": "Chord I does not contain its melody note (E)."
           },
-          "IV–I": {
+          "V–ii": {
             "category": "chord-lacks-melody-note",
-            "reason": "Chord IV does not contain its melody note (B)."
+            "reason": "Chord V does not contain its melody note (E)."
           },
-          "I–ii": {
+          "IV–ii": {
             "category": "cadence-misnamed",
-            "reason": "I–ii contains both melody notes but makes no cadence, not an imperfect one."
+            "reason": "IV–ii contains both melody notes but makes no cadence, not an imperfect one."
           }
         }
       },
@@ -993,7 +1086,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes an imperfect cadence?",
+      "prompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes a perfect cadence?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -1003,7 +1096,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "E5",
+                "pitch": "F#5",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -1012,7 +1105,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "A4",
+                "pitch": "B4",
                 "duration": {
                   "value": "minim",
                   "dots": 0
@@ -1023,7 +1116,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A in the 4th space; a note marked B in the 2nd space.",
+        "textAlternative": "A treble-clef stave, key signature of 1 sharp, 4/4. a note marked A on the 5th line; a note marked B on the 3rd line.",
         "key": "G major",
         "timeSignature": "4/4"
       },
@@ -1031,37 +1124,37 @@
         "kind": "choice",
         "options": [
           {
-            "id": "V–ii",
-            "label": "V–ii"
-          },
-          {
-            "id": "IV–ii",
-            "label": "IV–ii"
+            "id": "V–I",
+            "label": "V–I"
           },
           {
             "id": "I–IV",
             "label": "I–IV"
           },
           {
-            "id": "IV–V",
-            "label": "IV–V"
+            "id": "ii–IV",
+            "label": "ii–IV"
+          },
+          {
+            "id": "ii–I",
+            "label": "ii–I"
           }
         ],
         "correctOptionIds": [
-          "IV–V"
+          "V–I"
         ],
         "diagnoses": {
           "I–IV": {
             "category": "chord-lacks-melody-note",
-            "reason": "Chord I does not contain its melody note (E)."
+            "reason": "Chord I does not contain its melody note (F♯)."
           },
-          "V–ii": {
+          "ii–I": {
             "category": "chord-lacks-melody-note",
-            "reason": "Chord V does not contain its melody note (E)."
+            "reason": "Chord ii does not contain its melody note (F♯)."
           },
-          "IV–ii": {
-            "category": "cadence-misnamed",
-            "reason": "IV–ii contains both melody notes but makes no cadence, not an imperfect one."
+          "ii–IV": {
+            "category": "chord-lacks-melody-note",
+            "reason": "Chord ii does not contain its melody note (F♯)."
           }
         }
       },
