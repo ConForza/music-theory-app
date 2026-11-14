@@ -47,11 +47,11 @@
     },
     {
       "kind": "text",
-      "text": "Notice what the sign replaces. If you can see that a figure begins on the note below, it is a different, inverted pattern; you will not be asked about it. You are asked to replace written-out notes with a sign; you are not asked to write out the notes of an ornament from its sign. The sign must stand for exactly the notes shown."
+      "text": "Two notes, a step apart, can also be a written-out grace note. If the two notes are equal in length, the first is an appoggiatura: it takes half the value of the main note (two quavers stand for a crotchet). If the first is a very short note (a semiquaver or less) before a main note at least three times as long, it is an acciaccatura. In an exam the pair is bracketed, and the question says it is an ornament. Notice what the sign replaces. If you can see that a figure begins on the note below, it is a different, inverted pattern; you will not be asked about it. You are asked to replace written-out notes with a sign; you are not asked to write out the notes of an ornament from its sign. The sign must stand for exactly the notes shown."
     },
     {
       "kind": "tip",
-      "text": "Main note first. One extra note above (then back): upper mordent. Below: lower mordent. Above, main, below, main (or main, above, main, below, main): turn. Long alternation with the note above: trill."
+      "text": "Main note first. One extra note above (then back): upper mordent. Below: lower mordent. Above, main, below, main (or main, above, main, below, main): turn. Long alternation with the note above: trill. Two notes: equal in length is an appoggiatura, very short then long is an acciaccatura."
     }
   ],
   "demonstration": {
@@ -112,7 +112,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B. Which ornament sign could replace the group?",
+      "prompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note B. Which ornament sign could replace the pair?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -122,22 +122,13 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B3",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "begin",
-                "label": "A"
-              },
-              {
-                "kind": "note",
                 "pitch": "A3",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
                 },
-                "beam": "continue"
+                "label": "A",
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -146,6 +137,7 @@
                   "value": "quaver",
                   "dots": 0
                 },
+                "label": "B",
                 "beam": "end"
               },
               {
@@ -168,7 +160,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 3 sharps, 3/4. a note marked A in the space just above the stave; a note on the 5th line; a note in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note on the 5th line.",
+        "textAlternative": "A bass-clef stave, key signature of 3 sharps, 3/4. a note marked A on the 5th line; a note marked B in the space just above the stave; a note in the space above the 1st ledger line above the stave; a note on the 5th line.",
         "key": "A major",
         "timeSignature": "3/4"
       },
@@ -177,17 +169,26 @@
         "task": "replace-written-out",
         "mainNote": "B3",
         "writtenOut": [
-          "B3",
           "A3",
           "B3"
         ],
+        "writtenOutValues": [
+          {
+            "value": "quaver",
+            "dots": 0
+          },
+          {
+            "value": "quaver",
+            "dots": 0
+          }
+        ],
         "accepted": [
-          "lower-mordent"
+          "appoggiatura"
         ]
       },
       "hints": [
         "Find the main note, then see where the extra notes go.",
-        "Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."
+        "An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note."
       ],
       "feedback": {
         "correct": "Yes: main note first.",
@@ -306,7 +307,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note A♭. Which ornament sign could replace the group?",
+      "prompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note A♭. Which ornament sign could replace the pair?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -316,22 +317,13 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Ab3",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "begin",
-                "label": "A"
-              },
-              {
-                "kind": "note",
                 "pitch": "G3",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
                 },
-                "beam": "continue"
+                "label": "A",
+                "beam": "begin"
               },
               {
                 "kind": "note",
@@ -340,6 +332,7 @@
                   "value": "quaver",
                   "dots": 0
                 },
+                "label": "B",
                 "beam": "end"
               },
               {
@@ -362,7 +355,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 3 flats, 3/4. a note marked A on the 5th line; a note in the 4th space; a note on the 5th line; a note on the 1st ledger line above the stave; a note in the 4th space.",
+        "textAlternative": "A bass-clef stave, key signature of 3 flats, 3/4. a note marked A in the 4th space; a note marked B on the 5th line; a note on the 1st ledger line above the stave; a note in the 4th space.",
         "key": "C minor",
         "timeSignature": "3/4"
       },
@@ -371,17 +364,26 @@
         "task": "replace-written-out",
         "mainNote": "Ab3",
         "writtenOut": [
-          "Ab3",
           "G3",
           "Ab3"
         ],
+        "writtenOutValues": [
+          {
+            "value": "quaver",
+            "dots": 0
+          },
+          {
+            "value": "quaver",
+            "dots": 0
+          }
+        ],
         "accepted": [
-          "lower-mordent"
+          "appoggiatura"
         ]
       },
       "hints": [
         "Find the main note, then see where the extra notes go.",
-        "Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."
+        "An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note."
       ],
       "feedback": {
         "correct": "Yes.",
@@ -512,7 +514,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Ab3",
+                "pitch": "G3",
                 "duration": {
                   "value": "semiquaver",
                   "dots": 0
@@ -522,16 +524,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "G3",
-                "duration": {
-                  "value": "semiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "F3",
+                "pitch": "Ab3",
                 "duration": {
                   "value": "semiquaver",
                   "dots": 0
@@ -542,7 +535,7 @@
                 "kind": "note",
                 "pitch": "G3",
                 "duration": {
-                  "value": "semiquaver",
+                  "value": "quaver",
                   "dots": 0
                 },
                 "beam": "end"
@@ -568,7 +561,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A bass-clef stave, key signature of 3 flats, 3/4. a note marked A on the 5th line; a note in the 4th space; a note on the 4th line; a note in the 4th space; a note in the space just above the stave, with a natural sign in front; a note on the 4th line.",
+        "textAlternative": "A bass-clef stave, key signature of 3 flats, 3/4. a note marked A in the 4th space; a note on the 5th line; a note in the 4th space; a note in the space just above the stave, with a natural sign in front; a note on the 4th line.",
         "key": "C minor",
         "timeSignature": "3/4"
       },
@@ -577,13 +570,12 @@
         "task": "replace-written-out",
         "mainNote": "G3",
         "writtenOut": [
-          "Ab3",
           "G3",
-          "F3",
+          "Ab3",
           "G3"
         ],
         "accepted": [
-          "turn"
+          "upper-mordent"
         ]
       },
       "hints": [
@@ -719,7 +711,7 @@
                 "kind": "note",
                 "pitch": "Bb4",
                 "duration": {
-                  "value": "quaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
                 "beam": "begin",
@@ -729,7 +721,7 @@
                 "kind": "note",
                 "pitch": "C5",
                 "duration": {
-                  "value": "demisemiquaver",
+                  "value": "semiquaver",
                   "dots": 0
                 },
                 "beam": "continue"
@@ -738,25 +730,7 @@
                 "kind": "note",
                 "pitch": "Bb4",
                 "duration": {
-                  "value": "demisemiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "A4",
-                "duration": {
-                  "value": "demisemiquaver",
-                  "dots": 0
-                },
-                "beam": "continue"
-              },
-              {
-                "kind": "note",
-                "pitch": "Bb4",
-                "duration": {
-                  "value": "demisemiquaver",
+                  "value": "quaver",
                   "dots": 0
                 },
                 "beam": "end"
@@ -781,7 +755,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4. a note marked A on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
+        "textAlternative": "A treble-clef stave, key signature of 1 flat, 3/4. a note marked A on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
         "key": "F major",
         "timeSignature": "3/4"
       },
@@ -792,12 +766,10 @@
         "writtenOut": [
           "Bb4",
           "C5",
-          "Bb4",
-          "A4",
           "Bb4"
         ],
         "accepted": [
-          "turn"
+          "upper-mordent"
         ]
       },
       "hints": [
@@ -941,7 +913,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C5",
+                "pitch": "Ab4",
                 "duration": {
                   "value": "semiquaver",
                   "dots": 0
@@ -977,7 +949,7 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A treble-clef stave, key signature of 3 flats, 3/4. a note marked A on the 3rd line; a note in the 3rd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
+        "textAlternative": "A treble-clef stave, key signature of 3 flats, 3/4. a note marked A on the 3rd line; a note in the 2nd space; a note on the 3rd line; a note on the 4th line; a note in the 2nd space.",
         "key": "Eb major",
         "timeSignature": "3/4"
       },
@@ -987,11 +959,11 @@
         "mainNote": "Bb4",
         "writtenOut": [
           "Bb4",
-          "C5",
+          "Ab4",
           "Bb4"
         ],
         "accepted": [
-          "upper-mordent"
+          "lower-mordent"
         ]
       },
       "hints": [

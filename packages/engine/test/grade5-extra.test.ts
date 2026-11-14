@@ -371,3 +371,31 @@ describe("small fixes from the final educational recheck", () => {
     expect(bars).toBeGreaterThan(20);
   });
 });
+
+describe("written-out appoggiatura and acciaccatura (the bracketed pair)", () => {
+  it("both are asked, with lengths that tell them apart, and the answer follows the lengths", () => {
+    const LEN: Record<string, number> = { crotchet: 8, quaver: 4, semiquaver: 2, demisemiquaver: 1 };
+    const seen = { appoggiatura: 0, acciaccatura: 0 };
+    for (const it of items("G5-U5-L02", "t.g5.ornament-replace", 600)) {
+      const a = A(it);
+      if (!["appoggiatura", "acciaccatura"].includes(a.accepted[0])) continue;
+      const evs = (it.music!.measures.flatMap((m) => m.events as any[]) as any[]);
+      const [g, m] = [evs[0], evs[1]];
+      expect([g.label, m.label], it.id).toEqual(["A", "B"]);
+      const len = (e: any) => LEN[e.duration.value]! * (e.duration.dots ? 1.5 : 1);
+      expect(Math.abs(steps(pn(g.pitch)) - steps(pn(m.pitch))), `${it.id}: a step apart`).toBe(1);
+      expect(m.pitch, `${it.id}: B is the main note`).toBe(a.mainNote);
+      if (a.accepted[0] === "appoggiatura") expect(len(g), it.id).toBe(len(m));
+      else { expect(len(g), it.id).toBeLessThanOrEqual(2); expect(len(m), it.id).toBeGreaterThanOrEqual(3 * len(g)); }
+      expect(a.writtenOutValues.map((v: any) => v.value), it.id).toEqual([g.duration.value, m.duration.value]);
+      // the real grader accepts the right sign and refuses the other grace sign
+      const scope = scopeOf("G5-U5-L02", "t.g5.ornament-replace");
+      const other = a.accepted[0] === "appoggiatura" ? "acciaccatura" : "appoggiatura";
+      expect(gradeItem(ix, it, { kind: "ornament", sign: a.accepted[0] } as never, scope).correct, it.id).toBe(true);
+      expect(gradeItem(ix, it, { kind: "ornament", sign: other } as never, scope).correct, it.id).toBe(false);
+      seen[a.accepted[0] as "appoggiatura"]++;
+    }
+    expect(seen.appoggiatura).toBeGreaterThan(20);
+    expect(seen.acciaccatura).toBeGreaterThan(20);
+  });
+});

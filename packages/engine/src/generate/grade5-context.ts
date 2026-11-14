@@ -30,7 +30,7 @@ const ornamentsIn = (c: Ctx) => (c.scope.ornaments?.length ? c.scope.ornaments :
 
 /** t.g5.ornament-replace: written-out notes at the start of a bar are replaced by one sign (the only assessed ornament skill). */
 export const ornamentReplace5: Gen = (c): any => {
-  const signs = ornamentsIn(c).filter((s) => ["trill", "turn", "upper-mordent", "lower-mordent"].includes(s));
+  const signs = ornamentsIn(c).filter((s) => ["trill", "turn", "upper-mordent", "lower-mordent", "appoggiatura", "acciaccatura"].includes(s));
   if (!signs.length) return null;
   const keyText = c.rng.pick(keysIn(c).filter((k) => Math.abs(music.keyFifths(parseKey(k))) <= 4));
   const key = parseKey(keyText);
@@ -44,6 +44,32 @@ export const ornamentReplace5: Gen = (c): any => {
   const down = at(idx - 1);
   if (!fitsIn(clef, [main, up, down], 1)) return null;
   const sign = c.rng.pick(signs);
+  if (sign === "appoggiatura" || sign === "acciaccatura") {
+    // A written-out appoggiatura takes half the main note's value (two equal notes); a written-out acciaccatura is a very short note before a
+    // main note at least three times as long. The pair is marked A and B (bracketed in an exam paper), so it is clear they are the ornament.
+    const grace = c.rng.chance(0.5) ? up : down;
+    if (!fitsIn(clef, [grace], 1)) return null;
+    type V = [music.NoteValue, number];
+    const [gv, mv]: [V, V] = sign === "appoggiatura" ? (c.rng.chance(0.5) ? [["quaver", 0], ["quaver", 0]] : [["crotchet", 0], ["crotchet", 0]]) : [["semiquaver", 0], ["quaver", 1]];
+    const beams = gv[0] !== "crotchet";
+    const pair: Ev[] = [
+      note(grace, gv[0], { label: "A", ...(beams ? { beam: "begin" } : {}) }),
+      { ...note(main, mv[0], { label: "B", ...(beams ? { beam: "end" } : {}) }), duration: { value: mv[0], dots: mv[1] } } as Ev,
+    ];
+    const filler = (d: number) => note(at(d), "crotchet");
+    const events: Ev[] = beams ? [...pair, filler(idx + 2), filler(idx - 1)] : [...pair, filler(idx + 2)];
+    const ts3 = "3/4";
+    if (music.checkBarAnyPattern(events as unknown as music.REvent[], ts3).issues.some((x) => x.code === "bar-overfull" || x.code === "bar-underfull")) return null;
+    const written = [grace, main];
+    const values = [{ value: gv[0], dots: gv[1] }, { value: mv[0], dots: mv[1] }];
+    if (music.classifyWrittenOut(main, written, values) !== sign) return null;
+    return {
+      prompt: `The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the pair?`,
+      music: frag(clef, [{ events, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts3 }),
+      answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: written.map(F), writtenOutValues: values, accepted: [sign] },
+      hints: ["An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note."],
+    };
+  }
   const figures: Record<string, Array<[Pitch, music.NoteValue]>> = {
     "upper-mordent": [[main, "semiquaver"], [up, "semiquaver"], [main, "quaver"]],
     "lower-mordent": [[main, "semiquaver"], [down, "semiquaver"], [main, "quaver"]],

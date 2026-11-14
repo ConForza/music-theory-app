@@ -98,7 +98,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.cadences.chord-choice | U4-L06, U4-E2 | cadence-chords 397, chord-choice 391, approach-chord 387 | 1175 |
 | c.chords.cadential-six-four | U4-E1 |  | 0 |
 | c.ornaments.patterns | U5-L01 | ornament-facts 10, ornament-read 387 | 397 |
-| c.ornaments.replace-with-sign | U5-L02 | ornament-replace 296, ornament-figure 221 | 517 |
+| c.ornaments.replace-with-sign | U5-L02 | ornament-replace 338, ornament-figure 221 | 559 |
 | c.voices.types | U5-L03 | voices 224, voice-groups 11 | 235 |
 | c.instruments.sound-production | U5-L04 | instrument-sound 13, instrument-which 340 | 353 |
 | c.instruments.extended | U5-L05 | instruments 8, instruments-more 103 | 111 |

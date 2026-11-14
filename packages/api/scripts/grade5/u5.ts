@@ -2,7 +2,7 @@ import { CK, KEYS_G5, bars, chords, st, type Spec2 } from "./lib5.ts";
 
 const orn = ["trill", "turn", "upper-mordent", "lower-mordent", "acciaccatura", "appoggiatura"];
 const ornSc = { ornaments: orn };
-const replaceSc = { ornaments: ["trill", "turn", "upper-mordent", "lower-mordent"], keys: KEYS_G5, clefs: ["treble", "bass"], maxLedgerLines: 1, accidentals: true, keySignatures: true, noteValues: ["minim", "crotchet", "quaver", "semiquaver", "demisemiquaver"], timeSignatures: ["3/4"] };
+const replaceSc = { ornaments: ["trill", "turn", "upper-mordent", "lower-mordent", "appoggiatura", "acciaccatura"], maxDots: 1, keys: KEYS_G5, clefs: ["treble", "bass"], maxLedgerLines: 1, accidentals: true, keySignatures: true, noteValues: ["minim", "crotchet", "quaver", "semiquaver", "demisemiquaver"], timeSignatures: ["3/4"] };
 const scoreSc = { keys: CK, cadenceKeys: CK, cadenceTypes: ["perfect", "plagal", "imperfect"], chordDegrees: ["I", "ii", "IV", "V"], inversions: ["a", "b", "c"], clefs: ["treble", "tenor", "alto", "bass"], ornaments: ["trill", "turn", "upper-mordent", "lower-mordent"], intervalQuality: "number-and-quality", intervalLowerNote: "any", chromaticIntervals: true, maxLedgerLines: 2, accidentals: true, keySignatures: true };
 
 export const U5: Spec2[] = [
@@ -40,14 +40,14 @@ export const U5: Spec2[] = [
   {
     node: "G5-U5-L02",
     version: 1,
-    bind: [{ t: "t.g5.ornament-replace", c: ["c.ornaments.replace-with-sign"], scope: replaceSc }, { t: "t.g5.ornament-figure", c: ["c.ornaments.replace-with-sign"], scope: { ...replaceSc, clefs: ["treble"] } }],
+    bind: [{ t: "t.g5.ornament-replace", c: ["c.ornaments.replace-with-sign"], scope: replaceSc }, { t: "t.g5.ornament-figure", c: ["c.ornaments.replace-with-sign"], scope: { ...replaceSc, ornaments: ["trill", "turn", "upper-mordent", "lower-mordent"], clefs: ["treble"] } }],
     objective: { statement: "Replace written-out notes with the ornament sign that stands for them.", criteria: ["I find the main note of a written-out figure.", "I see whether the extra notes go above, below or both, and how often.", "I choose the sign: trill, turn, upper mordent or lower mordent."] },
     explain: [
       { text: "A composer may write out an ornament in ordinary notes, as a group of small values. You may be asked to replace such a group by the ornament sign. First find the main note: the note the ornament decorates, which is usually the first or the last of the group. Then look at where the other notes are, compared with the main note." },
       { music: st("treble", ["C5"], "One note, C."), caption: "A main note, C." },
       { text: "Three notes: the main note, the note above, then the main note again, is an upper mordent. The same with the note below is a lower mordent. Four notes: the note above, the main note, the note below, the main note, is a turn. When the turn sign stands to the right of its note, the note is played first, so the group has five notes: the main note, the note above, the main note, the note below, the main note. A longer group that alternates between the main note and the note above, often ending with the note below, is a trill." },
-      { text: "Notice what the sign replaces. If you can see that a figure begins on the note below, it is a different, inverted pattern; you will not be asked about it. You are asked to replace written-out notes with a sign; you are not asked to write out the notes of an ornament from its sign. The sign must stand for exactly the notes shown." },
-      { tip: "Main note first. One extra note above (then back): upper mordent. Below: lower mordent. Above, main, below, main (or main, above, main, below, main): turn. Long alternation with the note above: trill." },
+      { text: "Two notes, a step apart, can also be a written-out grace note. If the two notes are equal in length, the first is an appoggiatura: it takes half the value of the main note (two quavers stand for a crotchet). If the first is a very short note (a semiquaver or less) before a main note at least three times as long, it is an acciaccatura. In an exam the pair is bracketed, and the question says it is an ornament. Notice what the sign replaces. If you can see that a figure begins on the note below, it is a different, inverted pattern; you will not be asked about it. You are asked to replace written-out notes with a sign; you are not asked to write out the notes of an ornament from its sign. The sign must stand for exactly the notes shown." },
+      { tip: "Main note first. One extra note above (then back): upper mordent. Below: lower mordent. Above, main, below, main (or main, above, main, below, main): turn. Long alternation with the note above: trill. Two notes: equal in length is an appoggiatura, very short then long is an acciaccatura." },
     ],
     demo: { widget: "staff", music: bars("treble", [["E5", "F5", "E5"]], "3/4", "Three notes: E, F, E.", "crotchet"), steps: ["The main note is E.", "F is the note above E.", "E, F, E is an upper mordent."], text: "Written-out notes E F E: an upper mordent." },
     guided: [

@@ -1210,13 +1210,15 @@
       "conceptIds": [
         "c.ornaments.replace-with-sign"
       ],
-      "promptPattern": "Replace written-out notes with the ornament sign (trill, turn, upper or lower mordent).",
+      "promptPattern": "Replace written-out notes with the ornament sign (trill, turn, upper or lower mordent, appoggiatura or acciaccatura).",
       "scope": {
         "ornaments": [
           "trill",
           "turn",
           "upper-mordent",
-          "lower-mordent"
+          "lower-mordent",
+          "appoggiatura",
+          "acciaccatura"
         ],
         "keys": [
           "C major",
@@ -1262,7 +1264,8 @@
         ],
         "timeSignatures": [
           "3/4"
-        ]
+        ],
+        "maxDots": 1
       },
       "acceptance": {
         "spellingSensitive": false,
@@ -1272,7 +1275,8 @@
         "alternativesNote": "Exactly one sign replaces the figure."
       },
       "ambiguityChecks": [
-        "Only signs that a written-out figure can identify are asked; writing out an ornament from its sign is never assessed."
+        "Only signs that a written-out figure can identify are asked; writing out an ornament from its sign is never assessed.",
+        "A two-note pair (marked A and B, as the bracketed pair of an exam paper) is an appoggiatura when the notes are equal in length and an acciaccatura when the first is a semiquaver or less and the main note at least three times as long."
       ],
       "hints": [
         "Find the main note, then see where the extra notes go."

@@ -994,6 +994,8 @@ const OrnamentAnswer = z
     /** replace-written-out: the written-out figure and its main note. */
     mainNote: PitchName.optional(),
     writtenOut: z.array(PitchName).min(2).optional(),
+    /** The written value of each note of `writtenOut`; needed to tell an appoggiatura from an acciaccatura (two notes). */
+    writtenOutValues: z.array(z.object({ value: NoteValueName, dots: z.number().int().min(0).max(2).optional() }).strict()).optional(),
     accepted: z.array(OrnamentName).min(1),
   })
   .strict()
