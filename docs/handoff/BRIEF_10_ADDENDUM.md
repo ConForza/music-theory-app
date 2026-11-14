@@ -25,6 +25,7 @@
 - **Rule taught:** each note and rest keeps its share of its beat. A crotchet beat (2/4) becomes a dotted-crotchet beat (6/8), so every value gains a dot; going back, every dot is removed. The bar length changes (a 6/8 bar is longer than a 2/4 bar); the beat relationships do not.
 - Pairs allowed: 2/4↔6/8, 3/4↔9/8, 4/4↔12/8. Beams must stay within a beat of the new metre (`REWRITE_GROUPING`).
 - **Limit by design:** compound → simple only accepts fully dotted bars. A compound bar with three undotted quavers per beat would need triplets, which is a different exercise (deferred).
+- **Book evidence (added after the reference book was supplied):** *First Steps* Grade 4 §4 (Duplets, printed pp. 82–83) teaches that a compound rhythm with duplets, or a simple rhythm with triplets, can be written in either metre at the same beat speed, and that dotting each value is the equivalent notation. This matches the rule used here (6/8 dotted-quaver pair = 2/4 quaver pair). It also shows the skill is a **Grade 4** topic (duplets, outcome `abrsm2020.g4.04`), which supports keeping it out of Grade 5 assessments. The book is authoring reference only; it is not exam-paper evidence.
 - **Scope evidence and decision:** the syllabus outline in `content/syllabus` lists time signatures (`g4.01`), irregular time signatures (`g5.01`) and irregular divisions (`g5.02`) only. Current examination papers were not available in this repository, so compulsory status could not be confirmed. It therefore stays optional, mapped only to `g4.01`, and excluded from every assessment. A test enforces that.
 
 ### 3. Assessment balance
@@ -45,7 +46,7 @@ The 16 Grade 5 outcomes are still each sampled by a template that targets them. 
 ### 4. Wording
 
 - **Ornaments** (`t.g5.ornament-replace` v2): the prompt now says the written-out notes belong to one ornament on a *named* principal note and where the sign goes (above it, or a small note before it). Acciaccatura/appoggiatura are separated by duration, not by guesswork; non-standard figures are not generated.
-- **Voices** (`t.g5.voices` v2): the hint no longer reveals the highest-to-lowest order. Prompts must give actual notes (never just "highest/lowest") and always include the neighbouring voice types, so the answer cannot be found by elimination from the extremes. **Range-in-pitch prompts are not generated until a teacher confirms a range table (Q15)**: published ranges vary, and this repository must not guess.
+- **Voices** (`t.g5.voices` v2): the hint no longer reveals the highest-to-lowest order. Prompts must give actual notes (never just "highest/lowest") and always include the neighbouring voice types, so the answer cannot be found by elimination from the extremes. **Range-in-pitch prompts are not generated until a teacher confirms a range table (Q15)**: published ranges vary, and this repository must not guess. The reference book (Grade 5 §15) confirms the six voice types and their order only (mezzo-soprano between soprano and alto, baritone between tenor and bass) and gives no ranges, which matches this approach.
 - **Contextual explanations:** family feedback for choices, intervals and ornaments now says *why* and what to check next; every new item has a specific correct-answer explanation and per-mistake feedback.
 
 ## Identities and history
