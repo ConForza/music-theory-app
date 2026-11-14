@@ -98,12 +98,12 @@ for (const spec of specs) rmSync(join(root, `lessons/${spec.node}.json`), { forc
 const a = startAuthoring();
 const built = specs.map((spec) => ({ spec, lesson: buildLesson(a, spec) }));
 for (const { spec, lesson } of built) {
-  writeFileSync(join(root, `lessons/${spec.node}.json`), JSON.stringify(lesson, null, 2) + "\n");
   const n = byId.get(spec.node)!;
   if (isOptional(spec.node)) {
     // Optional enrichment: the lesson says so, and it never counts towards mastery, a challenge or the assessment.
-    (lesson.mastery as { completion: string }).completion = "Optional enrichment. It is complete when every step has been answered correctly. It never counts towards Grade 5 mastery, a unit challenge or the Grade 5 assessment, and it never gates any other node.";
+    (lesson.mastery as { completion: string }).completion = spec.node === "G5-U4-E2" ? "Optional extra practice with approach chords. It is complete when every step has been answered correctly. It is never required and gates no other node; its answers count as practice of choosing chords at cadence points, like any other practice of that concept." : "Optional enrichment. It is complete when every step has been answered correctly. It never counts towards Grade 5 mastery, a unit challenge or the Grade 5 assessment, and it never gates any other node.";
   }
+  writeFileSync(join(root, `lessons/${spec.node}.json`), JSON.stringify(lesson, null, 2) + "\n"); // after the optional-node wording is set, so it is what is stored
   n.contentRef = `lessons/${spec.node}.json`;
   n.contentStatus = "draft";
   console.log(`wrote ${spec.node}: ${lesson.guided.length} guided, ${lesson.independent.length} independent`);
@@ -138,7 +138,7 @@ writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
 
 // 4. Blueprints. Sections keep their outcomes; the template lists name every template that can honestly evidence the outcome. A section
 //    only ever draws from what has been taught, and a unit challenge only from its own unit and earlier ones (a template is dropped
-//    from a challenge whose unit comes before the unit that first teaches it). The optional enrichment templates appear nowhere here.
+//    from a challenge whose unit comes before the unit that first teaches it). The optional enrichment templates (Ic-V, SATB) appear nowhere here; the approach chord is compulsory (review of PR #13).
 const SECTION_TEMPLATES: Record<string, string[]> = {
   "o-g5-01": ["t.g5.time-signature", "t.g5.metre-facts", "t.g5.irregular-grouping", "t.g5.grouping-judge", "t.g5.bar-complete", "t.g5.metre-mixed", "t.g5.rest-judge", "t.g5.duration-facts"],
   "o-g5-02": ["t.g5.irregular-division", "t.g5.division-facts", "t.g5.division-write"],
@@ -149,7 +149,7 @@ const SECTION_TEMPLATES: Record<string, string[]> = {
   "o-g5-07": ["t.g5.scale-build", "t.g5.key-signature", "t.g5.key-facts", "t.g5.scale-spot"],
   "o-g5-08": ["t.g5.interval-any", "t.g5.interval-write", "t.g5.interval-compound", "t.g5.interval-facts", "t.g5.compound-facts"],
   "o-g5-09": ["t.g5.chord-identify", "t.g5.chord-build", "t.g5.inversion-facts", "t.g5.supertonic-facts", "t.g5.chord-in-passage"],
-  "o-g5-10": ["t.g5.cadence-chords"],
+  "o-g5-10": ["t.g5.cadence-chords", "t.g5.approach-chord"],
   "o-g5-11": ["t.g5.cadence-identify", "t.g5.cadence-find", "t.g5.cadence-facts", "t.g5.cadence-chords"],
   "o-g5-12": ["t.g5.terms", "t.g5.term-use"],
   "o-g5-13": ["t.g5.ornament-replace", "t.g5.ornament-facts"],
@@ -191,7 +191,7 @@ for (const bp of as.assessments) {
   if (bp.id === "a.g5") bp.sections = [...bp.sections.filter((s: { id: string }) => s.id !== EARLIER.id), { ...EARLIER }];
   if (new Set(bp.sections.map((s: { id: string }) => s.id)).size !== bp.sections.length) throw new Error(`${bp.id} has duplicate section ids`);
   for (const s of bp.sections) if (!s.templateIds.length) throw new Error(`${bp.id}/${s.id} has no templates`);
-  for (const s of bp.sections) for (const t of s.templateIds as string[]) if (/satb|six-four|approach/.test(t)) throw new Error(`${bp.id} must never contain an optional enrichment template (${t})`);
+  for (const s of bp.sections) for (const t of s.templateIds as string[]) if (/satb|six-four/.test(t)) throw new Error(`${bp.id} must never contain an optional enrichment template (${t})`);
   const total = bp.sections.reduce((n: number, s: { itemCount: number }) => n + s.itemCount, 0);
   if (total !== EXPECT[bp.id]) throw new Error(`${bp.id} has ${total} questions, expected exactly ${EXPECT[bp.id]}`);
   if (bp.kind === "unit_challenge" && total < 6) throw new Error(`${bp.id} has too few questions to be a fair check`);

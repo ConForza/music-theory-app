@@ -11,7 +11,7 @@ The complete Grade 5 path: 25 lessons, 3 optional enrichment lessons, 5 unit pra
 | G5-U1 | Irregular time and divisions | 5/4, 7/4, 5/8, 7/8; grouping in twos and threes; quintuplets to nonuplets |
 | G5-U2 | Tenor clef and four-clef reading | the tenor clef; reading four clefs and same-pitch copies; octave transposition between any clefs |
 | G5-U3 | Six-accidental keys, intervals, transposing instruments | F♯ major / D♯ minor; G♭ major / E♭ minor; chromatic intervals; compound intervals; written and concert pitch; transposing for B♭, A and F |
-| G5-U4 | Inversions and cadences | inversions; the supertonic chord; chords in passages; cadence types; finding cadences; chords at cadence points; optional Ic–V and approach chords |
+| G5-U4 | Inversions and cadences | inversions; the supertonic chord; chords in passages; cadence types; finding cadences; chords at cadence points, including the approach chord; optional Ic–V |
 | G5-U5 | Ornaments, voices, instruments, score reading | how ornaments are performed; replacing written-out notes with signs; voices; how instruments make sound; more instruments; Grade 5 terms; reading a score; optional SATB |
 
 ## Content pipeline
@@ -51,7 +51,7 @@ The authoring script is idempotent (sections replaced by id, exact counts assert
 * **Cadence melody questions** accept every pair of chords that contains the melody notes and makes the named cadence, and are generated only when the melody leaves exactly that cadence type possible (the validator derives the types).
 * **Chord writing** is asked in the treble and the bass clef: the question shows an empty stave in the asked clef with the key signature (a build question has no music of its own, so this is how the clef reaches the learner's stave); chord identification also uses both clefs.
 * **Ornaments:** only replacing written-out notes with a sign is assessed; performance is described in words.
-* **Enrichment** (Ic–V, approach chords, SATB reading) is playable, bound to its own templates, and in no practice, review, challenge or assessment.
+* **Enrichment** (Ic–V, SATB reading) is playable, bound to its own templates, and in no practice, review, challenge or assessment. The approach chord is compulsory (taught in G5-U4-L06, asked in Unit 4 practice, review, the challenge and the assessment); G5-U4-E2 is extra practice on the same template.
 
 ## Assessment
 

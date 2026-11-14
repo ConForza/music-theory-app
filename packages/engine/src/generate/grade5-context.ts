@@ -67,7 +67,7 @@ export const ornamentReplace5: Gen = (c): any => {
   if (music.checkBarAnyPattern(full as unknown as music.REvent[], ts).issues.some((x) => x.code === "bar-overfull" || x.code === "bar-underfull")) return null;
   const f = frag(clef, [{ events: full, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts });
   return {
-    prompt: `The beamed group of small notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the group?`,
+    prompt: `The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the group?`,
     music: f,
     answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: fig.map(([p]) => F(p)), accepted: [sign] },
     hints: ["Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."],

@@ -2,7 +2,7 @@
 
 # Learning path and prerequisite graph
 
-Five grade worlds · 27 units · 131 lessons · 5 optional enrichment nodes · 27 practice, 27 review, 27 unit-challenge and 5 grade-assessment nodes · 139 concepts.
+Five grade worlds · 27 units · 131 lessons · 5 optional enrichment nodes · 27 practice, 27 review, 27 unit-challenge and 5 grade-assessment nodes · 138 concepts.
 
 **Unlock rule:** a node unlocks when the nodes in *Unlocks after* are complete. When no list is authored, it unlocks after the previous required lesson, practice or review node. Unit challenges and grade assessments collect independent mastery evidence and never block the next lesson. Enrichment is optional, and no required node depends on it. The validator checks that every concept prerequisite is taught by a node that is guaranteed to be complete first.
 
@@ -462,7 +462,7 @@ Refinements to the provisional unit map: The Ic–V (six-four, five-three) progr
 | `G5-U4-L05` | Lesson | Hearing and finding cadences | Identify cadences at the ends of phrases in short original passages. | `c.cadences.recognise` (`c.cadences.types`) | g5.11 | `G5-U4-L04` | 7 |
 | `G5-U4-L06` | Lesson | Choosing chords at cadence points | Choose chords that fit marked melody notes and make the intended cadence. | `c.cadences.chord-choice` (`c.cadences.recognise`, `c.chords.identify-inversions`) | g5.10, g5.11 | `G5-U4-L05` | 10 |
 | `G5-U4-E1` | Enrichment (optional) | The six-four, five-three progression | Optional: recognise Ic–V over the dominant bass. | `c.chords.cadential-six-four` (`c.chords.identify-inversions`) | — | `G5-U4-L06` | 6 |
-| `G5-U4-E2` | Enrichment (optional) | Approach chords | Optional: choose a chord before a two-chord cadence. | `c.cadences.approach-chord` (`c.cadences.chord-choice`) | — | `G5-U4-L06` | 6 |
+| `G5-U4-E2` | Enrichment (optional) | Approach chords | Optional: choose a chord before a two-chord cadence. | `c.cadences.chord-choice` (`c.cadences.recognise`, `c.chords.identify-inversions`) | — | `G5-U4-L06` | 6 |
 | `G5-U4-P1` | Practice | Practice: Harmony | Mixed independent practice of everything in this unit. | — | g5.09, g5.11, g5.10 | `G5-U4-L06` | 6 |
 | `G5-U4-R1` | Review | Review: earlier units | Spaced review of earlier units in this grade, mixed with the new unit. | — | g5.01, g5.02, g5.03, g5.04, g5.05, g5.07, g5.08, g5.06 | `G5-U4-P1` | 6 |
 | `G5-U4-C` | Unit challenge | Unit challenge: Harmony | Show independently, without hints, what you can do from this unit. | — | see `a.g5-u4` | `G5-U4-R1` | 8 |

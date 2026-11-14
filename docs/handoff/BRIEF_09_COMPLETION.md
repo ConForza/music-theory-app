@@ -24,9 +24,9 @@ Q2 term lists; Q8 enrichment; Q13 key signatures in C clefs; Q14 writing versus 
 ## For Brief 10 (placement, practice examinations, release preparation)
 
 * Placement and practice exams can draw on every Grade 1-5 template; Grade 5 questions carry `VOCAB_G5` in their fingerprint, Grades 4 and 5 compare pass marks as exact ratios, Grades 1-3 keep the rounded rule: a practice exam should say which rule it uses per grade.
-* Optional enrichment templates (`t.g5.cadential-six-four`, `t.g5.approach-chord`, `t.g5.satb-voices`, `t.g5.satb-facts`) must stay out of placement and exams.
+* Optional enrichment templates (`t.g5.cadential-six-four`, `t.g5.satb-voices`, `t.g5.satb-facts`) must stay out of placement and exams. `t.g5.approach-chord` is compulsory and may be used.
 * A reviewer should look at: `engine/src/generate/grade5-*.ts`, `curriculum/music/vocabulary.ts` (`VOCAB_G5`), `review-constraints.json` and the new fields in `question-key.ts`, `author-grade5.ts`.
 
 ## Known limitations
 
-Synthesised sound only; all content draft; voice ranges are provisional; the approach-chord grader does not check that the approach chord differs from the next chord; the octave sign of open-score tenors is described in words only; instrument clefs are 'normally'; the renderer's irregular-group names are announced by size.
+Synthesised sound only; all content draft; voice ranges are provisional; the approach-chord grader checks the approach chord and the cadence chords as separate points, so the generator only asks where the chord at B is the single possible one and refuses it at A; the octave sign of open-score tenors is described in words only; instrument clefs are 'normally'; the renderer's irregular-group names are announced by size.

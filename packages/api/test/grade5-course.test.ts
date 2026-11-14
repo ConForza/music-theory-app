@@ -466,7 +466,8 @@ describe("the three enrichment nodes are genuinely optional", () => {
   });
 
   it("appear in no challenge, no assessment, no practice and no review, and gate nothing", () => {
-    const optionalTemplates = new Set(E.flatMap((id) => course.ix.nodeById.get(id)!.exercises.map((b) => b.templateId)));
+    // G5-U4-E2 is extra practice for the approach chord, which is compulsory since the review of PR #13, so its template is not optional
+    const optionalTemplates = new Set(E.filter((id) => id !== "G5-U4-E2").flatMap((id) => course.ix.nodeById.get(id)!.exercises.map((b) => b.templateId)));
     for (const bp of course.ix.assessments.values()) for (const s of bp.sections) for (const t of s.templateIds) expect(optionalTemplates.has(t), `${bp.id} ${t}`).toBe(false);
     for (const n of G5.filter((x) => ["practice", "review"].includes(x.type))) for (const b of n.exercises) expect(optionalTemplates.has(b.templateId), `${n.id} ${b.templateId}`).toBe(false);
     for (const n of G5) if (!E.includes(n.id)) for (const dep of n.resolvedUnlockAfter) expect(E.includes(dep), `${n.id} waits for ${dep}`).toBe(false);
@@ -480,7 +481,8 @@ describe("the three enrichment nodes are genuinely optional", () => {
     for (const id of E) expect(prog.nodes[id].state).not.toBe("completed");
     for (const id of E) await ensureDone(c, app, userId, id);
     const rows = db.prepare("SELECT DISTINCT concept_id FROM mastery_evidence WHERE user_id = ? AND node_id IN ('G5-U4-E1','G5-U4-E2','G5-U5-E1')").all(userId) as Array<{ concept_id: string }>;
-    for (const r of rows) expect(["c.chords.cadential-six-four", "c.cadences.approach-chord", "c.voices.satb-scores"], r.concept_id).toContain(r.concept_id);
+    // G5-U4-E2 is extra practice with the approach chord, which belongs to the compulsory concept of choosing chords at cadence points
+    for (const r of rows) expect(["c.chords.cadential-six-four", "c.cadences.chord-choice", "c.voices.satb-scores"], r.concept_id).toContain(r.concept_id);
   }, 1_800_000);
 });
 

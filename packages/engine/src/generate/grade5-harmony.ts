@@ -538,7 +538,7 @@ export const approachChord5: Gen = (c): any => {
   // 3 lead-in crotchets + A (crotchet) = bar 1; B and C (minims) = bar 2
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
-    prompt: `In ${keyWords(keyText)}, B and C make a ${type} cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)`,
+    prompt: `In ${keyWords(keyText)}, B and C make ${type === "imperfect" ? "an" : "a"} ${type} cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)`,
     music: f,
     answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(pts[0]!)], accepted: okA as never }, { label: "B", melodyPitches: [F(pts[1]!)], accepted: okB as never }, { label: "C", melodyPitches: [F(pts[2]!)], accepted: okC as never }], cadences: [{ labels: ["B", "C"], acceptedTypes: [type] }] },
     hints: ["First choose the cadence chords for B and C. Then pick a chord for A that contains its melody note and is different from the chord at B: a cadence needs two different chords."],
