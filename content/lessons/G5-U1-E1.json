@@ -1,0 +1,814 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U1-E1",
+  "lessonId": "G5-U1-E1",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Optional: rewrite a bar between simple and compound time so that every note keeps its share of its beat.",
+    "successCriteria": [
+      "I know a crotchet beat in simple time becomes a dotted-crotchet beat in compound time.",
+      "I give each note and rest the same share of its beat as before.",
+      "I beam the new bar as its time signature requires."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The same rhythm can be written in simple or compound time. In 2/4 each beat is a crotchet and divides into two quavers. In 6/8 each beat is a dotted crotchet. If a note takes the whole beat in one, it takes the whole beat in the other, and half a beat stays half a beat. This is optional enrichment: it is not part of the Grade 5 outline and is never assessed."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 2/4: a crotchet, then two beamed quavers.",
+        "questionAlternative": "Bar 1: crotchet, 2 beamed together (quaver, quaver).",
+        "timeSignature": "2/4"
+      },
+      "caption": "2/4: a whole beat, then a beat divided into two halves."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 6/8: a dotted crotchet, then two beamed dotted quavers.",
+        "questionAlternative": "Bar 1: dotted crotchet, 2 beamed together (dotted quaver, dotted quaver).",
+        "timeSignature": "6/8"
+      },
+      "caption": "6/8: the same shares of the beat. Every value has gained a dot."
+    },
+    {
+      "kind": "text",
+      "text": "To rewrite from simple to compound time, give every note and rest a dot; to go back, take every dot away. A beat in compound time is a dotted note, so a dot keeps each note's share of the beat. The bar itself becomes longer in compound time (a bar of 6/8 is longer than a bar of 2/4), but the beats are the same. The pairs are 2/4 and 6/8, 3/4 and 9/8, 4/4 and 12/8. Then beam the notes beat by beat, as the new time signature requires."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 2/4: two beamed quavers, then a crotchet.",
+      "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), crotchet.",
+      "timeSignature": "2/4"
+    },
+    "steps": [
+      "Two quavers share the first beat: half a beat each.",
+      "In 6/8 half a beat is a dotted quaver.",
+      "A crotchet fills a whole beat; in 6/8 that is a dotted crotchet."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "From 2/4 to 6/8: add a dot to every note."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u1-e1.guided-1",
+      "templateId": "t.g5.rewrite-metre",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This bar is written in 9/8, where the beat is a dotted crotchet. Rewrite it in 3/4, where the beat is a crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 3/4 requires.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 1
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 1
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: dotted quaver, dotted semiquaver, dotted semiquaver, dotted crotchet, dotted quaver rest, dotted quaver.",
+        "questionAlternative": "Bar 1: 3 beamed together (dotted quaver, dotted semiquaver, dotted semiquaver), dotted crotchet, dotted quaver rest, dotted quaver.",
+        "timeSignature": "9/8"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "3/4",
+        "fromTimeSignature": "9/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                }
+              ],
+              "barline": "final"
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Compare the beat in each time signature, and write each note as the same share of its beat.",
+        "Compare the beats: in 9/8 a beat is a dotted crotchet and in 3/4 it is a crotchet. Write each note or rest as the same share of its beat as before. The bar will be a different length: that is correct."
+      ],
+      "feedback": {
+        "correct": "Yes: every note keeps its share of its beat.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows.",
+          "values-copied": "A beat in compound time is a dotted note, so each value gains a dot (and loses it going back).",
+          "bar-overfull": "Count the beats of the new time signature.",
+          "bar-underfull": "Count the beats of the new time signature."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u1-e1.ind-1",
+      "templateId": "t.g5.rewrite-metre",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar is written in 12/8, where the beat is a dotted crotchet. Rewrite it in 4/4, where the beat is a crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 4/4 requires.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 1
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 1
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 1
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 1
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: dotted crotchet, dotted semiquaver, dotted semiquaver, dotted quaver, dotted quaver, dotted semiquaver, dotted semiquaver, dotted quaver rest, dotted quaver.",
+        "questionAlternative": "Bar 1: dotted crotchet, 3 beamed together (dotted semiquaver, dotted semiquaver, dotted quaver), 3 beamed together (dotted quaver, dotted semiquaver, dotted semiquaver), dotted quaver rest, dotted quaver.",
+        "timeSignature": "12/8"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "4/4",
+        "fromTimeSignature": "12/8",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  },
+                  "beam": "begin"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
+                    "dots": 0
+                  },
+                  "beam": "continue"
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "semiquaver",
+                    "dots": 0
+                  },
+                  "beam": "end"
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                }
+              ],
+              "barline": "final"
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Compare the beat in each time signature, and write each note as the same share of its beat.",
+        "Compare the beats: in 12/8 a beat is a dotted crotchet and in 4/4 it is a crotchet. Write each note or rest as the same share of its beat as before. The bar will be a different length: that is correct."
+      ],
+      "feedback": {
+        "correct": "Correct rewriting.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows.",
+          "values-copied": "A beat in compound time is a dotted note, so each value gains a dot (and loses it going back).",
+          "bar-overfull": "Count the beats of the new time signature.",
+          "bar-underfull": "Count the beats of the new time signature."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g5-u1-e1.ind-2",
+      "templateId": "t.g5.rewrite-metre",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar is written in 4/4, where the beat is a crotchet. Rewrite it in 12/8, where the beat is a dotted crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 12/8 requires.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: minim, crotchet, quaver rest, quaver.",
+        "questionAlternative": "Bar 1: minim, crotchet, quaver rest, quaver.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "12/8",
+        "fromTimeSignature": "4/4",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 1
+                  }
+                }
+              ],
+              "barline": "final"
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Compare the beat in each time signature, and write each note as the same share of its beat.",
+        "Compare the beats: in 4/4 a beat is a crotchet and in 12/8 it is a dotted crotchet. Write each note or rest as the same share of its beat as before. The bar will be a different length: that is correct."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows.",
+          "values-copied": "A beat in compound time is a dotted note, so each value gains a dot (and loses it going back).",
+          "bar-overfull": "Count the beats of the new time signature.",
+          "bar-underfull": "Count the beats of the new time signature."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g5-u1-e1.ind-3",
+      "templateId": "t.g5.rewrite-metre",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This bar is written in 3/4, where the beat is a crotchet. Rewrite it in 9/8, where the beat is a dotted crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 9/8 requires.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, crotchet, quaver rest, quaver.",
+        "questionAlternative": "Bar 1: crotchet, crotchet, quaver rest, quaver.",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "9/8",
+        "fromTimeSignature": "3/4",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 1
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 1
+                  }
+                }
+              ],
+              "barline": "final"
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Compare the beat in each time signature, and write each note as the same share of its beat.",
+        "Compare the beats: in 3/4 a beat is a crotchet and in 9/8 it is a dotted crotchet. Write each note or rest as the same share of its beat as before. The bar will be a different length: that is correct."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows.",
+          "values-copied": "A beat in compound time is a dotted note, so each value gains a dot (and loses it going back).",
+          "bar-overfull": "Count the beats of the new time signature.",
+          "bar-underfull": "Count the beats of the new time signature."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "recap": [
+    "Each note and rest keeps its share of its beat.",
+    "Simple to compound: add a dot to every value. Compound to simple: take every dot away.",
+    "The bar changes length; the beats do not."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.rewrite-metre",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.rewrite-metre",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.rewrite-metre",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.rewrite-simple-compound"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "Optional enrichment. It is complete when every step has been answered correctly. It never counts towards Grade 5 mastery, a unit challenge or the Grade 5 assessment, and it never gates any other node."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [],
+    "outcomeIds": [
+      "abrsm2020.g4.01"
+    ],
+    "notes": "Original wording. Optional enrichment (OPEN_QUESTIONS Q16): the outline lists no such outcome; First Steps Grade 4 section 4 (duplets) supports the beat-share rule. Compound to simple only for fully dotted bars (no triplets). Never assessed."
+  }
+}

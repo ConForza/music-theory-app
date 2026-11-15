@@ -215,5 +215,39 @@ export const U3: Spec2[] = [
     review: [{ t: "t.g5.instrument-transpose", afterDays: 1 }, { t: "t.g5.transpose-key", afterDays: 3 }, { t: "t.g5.instrument-transpose", afterDays: 7 }],
     notes: "Original wording. First Steps Grade 5 section 12 (pp. 127-129): a melody in D major written for a clarinet in A is in F major; accidentals are not copied; a B flat is not respelt as C flat; performance directions are carried over. Direction, interval and written or concert pitch are always stated (Q36).",
   },
+  {
+    node: "G5-U3-L07",
+    version: 1,
+    bind: [
+      { t: "t.g5.interval-key-identify", c: ["c.intervals.in-key-signature"], scope: { clefs: ["treble", "bass", "alto"] } },
+      { t: "t.g5.interval-key-build", c: ["c.intervals.in-key-signature"], scope: { clefs: CL2 } },
+    ],
+    objective: { statement: "Name and write intervals on a stave that has a key signature.", criteria: ["I work out what each note really is before I name the interval.", "I know a written natural, sharp or flat overrides the key signature for that note.", "I add a sign to a note I write only when the key signature does not already give it."] },
+    explain: [
+      { text: "When a stave has a key signature, it changes every note of those letters, in every octave, unless a sign in front of a note says otherwise. So before you name an interval, work out what each note is: first the key signature, then any sign written in front of the note." },
+      { music: st("treble", ["F#4", "A4"], "In D major, F sharp then A.", { key: "D major", showKeySignature: true }), caption: "D major (F♯ and C♯): the first note is F♯, so F♯ up to A is a minor 3rd. F up to A with no signature would be a major 3rd." },
+      { text: "A sign in front of a note beats the key signature for that note. In G major the signature gives F♯, but a natural sign makes that note F♮. B up to F♮ is a diminished 5th; B up to F♯ would be a perfect 5th." },
+      { music: st("treble", ["B4", "F5"], "In G major, B then F natural, written with a natural sign.", { key: "G major", showKeySignature: true }), caption: "G major: the natural sign cancels the signature's F♯, so this is B up to F♮, a diminished 5th." },
+      { text: "Writing an interval works the same way, in reverse. Find the letter by counting, then the accidental the quality needs, and compare that with what the key signature already gives the letter. If they match, write no sign. If they differ, write the sign. A minor 3rd above E♭ is G♭; in A♭ major the signature has no flat on G, so the G♭ needs a flat sign. A major 3rd above E♭ is G♮, and it needs no sign." },
+      { tip: "Signature first, then any sign in front of the note, then count letters and check the quality." },
+    ],
+    demo: { widget: "staff", music: st("treble", ["F#4", "A4"], "In D major, F sharp then A.", { key: "D major", showKeySignature: true }), steps: ["The key signature of D major sharpens F and C, so the first note is F♯.", "Letters F to A: a 3rd.", "F♯ to A is three semitones: a minor 3rd."], text: "A minor 3rd in D major." },
+    guided: [
+      { t: "t.g5.interval-key-identify", correct: "Yes: the key signature first, then the interval." },
+      { t: "t.g5.interval-key-identify", correct: "Yes: each note worked out before naming the interval." },
+      { t: "t.g5.interval-key-build", correct: "Right: letter first, then check the key signature." },
+    ],
+    independent: [
+      { t: "t.g5.interval-key-identify", correct: "Correct interval." },
+      { t: "t.g5.interval-key-build", correct: "Correct note." },
+      { t: "t.g5.interval-key-identify", correct: "Correct." },
+      { t: "t.g5.interval-key-build", correct: "Correct." },
+      { t: "t.g5.interval-key-identify", correct: "Correct." },
+      { t: "t.g5.interval-key-build", correct: "Correct." },
+    ],
+    recap: ["The key signature applies to every note of its letters until a sign in front of a note overrides it.", "Work out each note first, then count letters for the number and check the quality.", "When writing a note, add a sign only where the key signature does not give it."],
+    review: [{ t: "t.g5.interval-key-identify", afterDays: 1 }, { t: "t.g5.interval-key-build", afterDays: 3 }, { t: "t.g5.interval-key-identify", afterDays: 7 }],
+    notes: "Original wording and examples (reconciled from PR #14, whose items are not copied). Interval spellings are computed by the rules (intervalBetween, transpose, signatureAlter) and re-derived independently in grade5-interval-key.test.ts.",
+  },
 ];
 void KEYS_OLD; void NEWK; void iq; void rline;

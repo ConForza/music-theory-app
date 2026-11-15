@@ -105,7 +105,7 @@
       "kind": "unit_challenge",
       "grade": 5,
       "unitId": "G5-U3",
-      "version": 1,
+      "version": 2,
       "title": "Unit challenge: Six-accidental keys, all intervals and transposing instruments",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -149,7 +149,9 @@
             "t.g5.interval-write",
             "t.g5.interval-compound",
             "t.g5.interval-facts",
-            "t.g5.compound-facts"
+            "t.g5.compound-facts",
+            "t.g5.interval-key-identify",
+            "t.g5.interval-key-build"
           ],
           "itemCount": 2
         },
@@ -255,7 +257,8 @@
             "abrsm2020.g5.14"
           ],
           "templateIds": [
-            "t.g5.voices"
+            "t.g5.voices",
+            "t.g5.voice-groups"
           ],
           "itemCount": 2
         },
@@ -314,7 +317,7 @@
       "kind": "grade_assessment",
       "grade": 5,
       "unitId": null,
-      "version": 1,
+      "version": 2,
       "title": "Grade 5 practice assessment",
       "hintsAllowed": false,
       "evidence": "independent",
@@ -372,7 +375,6 @@
           "templateIds": [
             "t.g5.four-clef-read",
             "t.g5.same-pitch",
-            "t.g5.key-signature",
             "t.g5.clef-minor"
           ],
           "itemCount": 2
@@ -421,10 +423,22 @@
           ],
           "templateIds": [
             "t.g5.interval-any",
-            "t.g5.interval-write",
+            "t.g5.interval-key-identify",
             "t.g5.interval-compound"
           ],
-          "itemCount": 2
+          "itemCount": 1
+        },
+        {
+          "id": "o-g5-08b",
+          "title": "abrsm2020.g5.08 (writing)",
+          "outcomeIds": [
+            "abrsm2020.g5.08"
+          ],
+          "templateIds": [
+            "t.g5.interval-write",
+            "t.g5.interval-key-build"
+          ],
+          "itemCount": 1
         },
         {
           "id": "o-g5-09",
@@ -494,7 +508,8 @@
             "abrsm2020.g5.14"
           ],
           "templateIds": [
-            "t.g5.voices"
+            "t.g5.voices",
+            "t.g5.voice-groups"
           ],
           "itemCount": 2
         },

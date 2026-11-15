@@ -43,6 +43,8 @@ export function soundingProfile(events: REvent[], bar?: music.Fraction): string[
   return out.map((x) => `${x.kind}@${formatFraction(x.onset)}+${formatFraction(x.len)}`);
 }
 
+const stripBeam = (e: REvent): REvent => { if (e.kind === "tuplet") return e; const { beam: _b, ...rest } = e as RInner & { beam?: string }; return rest as REvent; };
+
 /** Values, dots, ties, rests and tuplets the learner may use at this point of the course. */
 function scopeProblem(bars: REvent[][], sc: MusicScope): string | null {
   for (const bar of bars) {
@@ -173,6 +175,27 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That bar adds up, but this question wants one of the patterns it describes.");
     return right(null, { note: halfBarRestNote(bars, ts) });
+  }
+
+  if (a.task === "regroup" && a.fromTimeSignature) {
+    // Rewriting between simple and compound time: each note and rest keeps its share of ITS BEAT (the bar itself changes length).
+    const shown = c.item.music ? fromMeasures(c.item.music.measures) : fromMeasures(a.accepted[0]!);
+    if (bars.length !== shown.length) return wrong(null, `Rewrite all ${shown.length} bar(s).`);
+    const from = a.fromTimeSignature;
+    const direction = classifyTimeSignature(ts).metre === "compound" ? "simple-to-compound" : "compound-to-simple";
+    for (const [i, bar] of bars.entries()) {
+      const where = bars.length > 1 ? `Bar ${i + 1}: ` : "";
+      const capTo = barCapacity(parseTimeSignature(ts));
+      // The commonest slip first: the values were copied unchanged, so nothing was rescaled to the new beat.
+      if (shapeKey(bar.map(stripBeam)) === shapeKey(shown[i]!.map(stripBeam))) return wrong("values-copied", `${where}You have written the same values as before, but a beat is now ${direction === "simple-to-compound" ? "a dotted note" : "an undotted note"}, so each note and rest must ${direction === "simple-to-compound" ? "gain a dot" : "lose its dot"} to keep its share of the beat.`);
+      const total = totalLength(bar, capTo);
+      if (!equals(total, capTo)) return wrong(compare(total, capTo) > 0 ? "bar-overfull" : "bar-underfull", where + describeTotal(total, capTo, ts));
+      if (music.beatProfile(bar, ts).join() !== music.beatProfile(shown[i]!, from).join()) return wrong(null, `${where}Each note and rest must keep its share of its beat: if it filled a whole beat before, it fills a whole beat now; if it was half a beat, it is half a beat now.`);
+    }
+    const v = judgeBars(c, bars, ts, GROUPING_CATEGORY, true);
+    if (v) return v;
+    if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That is not one of the forms this question accepts.");
+    return right(null, { note: "Well done. Notice that the bar itself is now a different length, while every note keeps its share of its beat." });
   }
 
   if (a.task === "regroup") {

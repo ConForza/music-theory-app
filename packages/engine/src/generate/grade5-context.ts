@@ -67,7 +67,7 @@ export const ornamentReplace5: Gen = (c): any => {
       prompt: `The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the pair?`,
       music: frag(clef, [{ events, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts3 }),
       answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: written.map(F), writtenOutValues: values, accepted: [sign] },
-      hints: ["An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note."],
+      hints: ["An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note. In both cases the sign is a small note written before the main note; for the other ornaments the sign is written above the main note."],
     };
   }
   const figures: Record<string, Array<[Pitch, music.NoteValue]>> = {
@@ -200,7 +200,7 @@ export const voices5: Gen = (c): any => {
   if (mode === "highest" || mode === "lowest") {
     const right = mode === "highest" ? "soprano" : "bass";
     const ids = ["soprano", "alto", "tenor", "bass"];
-    return { prompt: `Which of the four voices of a mixed choir is the ${mode === "highest" ? "highest" : "lowest"}?`, answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `The ${x} is not the ${mode === "highest" ? "highest" : "lowest"} voice: the order, high to low, is soprano, alto, tenor, bass.`]]))), hints: ["High to low: soprano, alto, tenor, bass."] };
+    return { prompt: `Which of the four voices of a mixed choir is the ${mode === "highest" ? "highest" : "lowest"}?`, answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `The ${x} is not the ${mode === "highest" ? "highest" : "lowest"} voice: the order, high to low, is soprano, alto, tenor, bass.`]]))), hints: ["Picture the four voices of a choir arranged by pitch. Decide which voice sits at the very top of that arrangement and which at the very bottom, then choose."] };
   }
   // range: a part wholly in the soprano-only or the bass-only zone
   const sop = c.rng.chance(0.5);
@@ -215,7 +215,7 @@ export const voices5: Gen = (c): any => {
     prompt: `A choral part lies entirely ${sop ? "above the top note an alto can sing comfortably (D5)" : "below the lowest note a tenor can sing comfortably (C3)"}. Which voice is it written for?`,
     music: f,
     answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `This part is too ${sop ? "high" : "low"} for a ${x}: it lies ${sop ? "above" : "below"} the range of the ${x}.`]]))),
-    hints: ["The soprano is the highest choral voice and the bass the lowest."],
+    hints: [`Compare the notes with the limit the question gives. Which voices can sing notes that far ${sop ? "above" : "below"} it, and which cannot?`],
   };
 };
 

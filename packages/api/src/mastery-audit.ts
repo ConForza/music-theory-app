@@ -74,5 +74,6 @@ export const CAPACITY_ALLOWLIST: Record<string, string> = {
   "c.scales.minor-melodic-preview": "optional enrichment with fixed questions only, never assessed or counted (deferred to Grade 3)",
   "c.chords.cadential-six-four": "optional enrichment (Ic-V, OPEN_QUESTIONS Q8): generated and playable, but never assessed or counted towards mastery",
   "c.voices.satb-scores": "optional enrichment (SATB in short and open score, OPEN_QUESTIONS Q8): generated and playable, but never assessed or counted towards mastery",
+  "c.metre.rewrite-simple-compound": "optional enrichment (rewriting between simple and compound time, OPEN_QUESTIONS Q16): one template, generated and playable, but never assessed or counted towards mastery",
   "c.metre.anacrusis": "optional enrichment (upbeat starts, OPEN_QUESTIONS Q5) with fixed questions only, never assessed or counted",
 };

@@ -59,7 +59,7 @@ await test("learner arriving from Grade 4: Grade 5 opens at its first lesson, la
   assert.equal(await page.locator('[data-node="G5-U1-L01"]').getAttribute("data-status"), "available");
   assert.equal(await page.locator('[data-node="G5-U1-L02"]').getAttribute("data-status"), "locked");
   assert.equal(await page.locator('[data-node="G5-U4-L01"]').getAttribute("data-status"), "locked");
-  assert.equal(await page.locator("[data-node]").count(), 44, "all 44 Grade 5 nodes (41 required, 3 optional) are on the path");
+  assert.equal(await page.locator("[data-node]").count(), 46, "all 46 Grade 5 nodes (42 required, 4 optional) are on the path");
   await noOverflow(page, "grade 4 path");
   await axe(page, "grade 4 path");
   await shot(page, "g5-01-path");

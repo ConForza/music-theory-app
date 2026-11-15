@@ -1,3 +1,4 @@
+import { plainNote } from "@mtp/engine";
 import { IRR, VALS, bar, beamed, has, n, nd, r, rh, tup, type Spec2 } from "./lib5.ts";
 
 const ts4 = ["5/4", "7/4"];
@@ -107,6 +108,28 @@ export const U1: Spec2[] = [
     recap: ["Quintuplet 5:4, sextuplet 6:4, septuplet 7:4, nonuplet 9:8.", "Notes in the time of a crotchet are semiquavers (or demisemiquavers for nine); in the time of a quaver, demisemiquavers.", "Check the group's length, then the bar total."],
     review: [{ t: "t.g5.irregular-division", afterDays: 1 }, { t: "t.g5.division-facts", afterDays: 3 }, { t: "t.g5.division-write", afterDays: 7 }],
     notes: "Original wording. First Steps Grade 5 section 2 (pp. 106-107, read in the PDF): triplet as the simplest irregular division; 5, 6, 7 in the time of 4; 9 in the time of 8; written values adjust with the time they must fit. The nonuplet in the time of a minim is the book's 9-in-8 case.",
+  },
+  {
+    node: "G5-U1-E1",
+    version: 1,
+    bind: [{ t: "t.g5.rewrite-metre", c: ["c.metre.rewrite-simple-compound"], scope: { timeSignatures: ["2/4", "3/4", "4/4", "6/8", "9/8", "12/8"], noteValues: ["minim", "crotchet", "quaver", "semiquaver"], maxDots: 1, rests: true, ties: false } }],
+    objective: { statement: "Optional: rewrite a bar between simple and compound time so that every note keeps its share of its beat.", criteria: ["I know a crotchet beat in simple time becomes a dotted-crotchet beat in compound time.", "I give each note and rest the same share of its beat as before.", "I beam the new bar as its time signature requires."] },
+    explain: [
+      { text: "The same rhythm can be written in simple or compound time. In 2/4 each beat is a crotchet and divides into two quavers. In 6/8 each beat is a dotted crotchet. If a note takes the whole beat in one, it takes the whole beat in the other, and half a beat stays half a beat. This is optional enrichment: it is not part of the Grade 5 outline and is never assessed." },
+      { music: bar([[n("crotchet"), n("quaver", { beam: "begin" }), n("quaver", { beam: "end" })]], "A bar of 2/4: a crotchet, then two beamed quavers.", "2/4"), caption: "2/4: a whole beat, then a beat divided into two halves." },
+      { music: bar([[plainNote("crotchet" as never, 1, {}), plainNote("quaver" as never, 1, { beam: "begin" }), plainNote("quaver" as never, 1, { beam: "end" })]], "A bar of 6/8: a dotted crotchet, then two beamed dotted quavers.", "6/8"), caption: "6/8: the same shares of the beat. Every value has gained a dot." },
+      { text: "To rewrite from simple to compound time, give every note and rest a dot; to go back, take every dot away. A beat in compound time is a dotted note, so a dot keeps each note's share of the beat. The bar itself becomes longer in compound time (a bar of 6/8 is longer than a bar of 2/4), but the beats are the same. The pairs are 2/4 and 6/8, 3/4 and 9/8, 4/4 and 12/8. Then beam the notes beat by beat, as the new time signature requires." },
+    ],
+    demo: { widget: "rhythm", music: bar([[n("quaver", { beam: "begin" }), n("quaver", { beam: "end" }), n("crotchet")]], "A bar of 2/4: two beamed quavers, then a crotchet.", "2/4"), steps: ["Two quavers share the first beat: half a beat each.", "In 6/8 half a beat is a dotted quaver.", "A crotchet fills a whole beat; in 6/8 that is a dotted crotchet."], text: "From 2/4 to 6/8: add a dot to every note." },
+    guided: [{ t: "t.g5.rewrite-metre", correct: "Yes: every note keeps its share of its beat." }],
+    independent: [
+      { t: "t.g5.rewrite-metre", correct: "Correct rewriting." },
+      { t: "t.g5.rewrite-metre", correct: "Correct." },
+      { t: "t.g5.rewrite-metre", correct: "Correct." },
+    ],
+    recap: ["Each note and rest keeps its share of its beat.", "Simple to compound: add a dot to every value. Compound to simple: take every dot away.", "The bar changes length; the beats do not."],
+    review: [{ t: "t.g5.rewrite-metre", afterDays: 1 }, { t: "t.g5.rewrite-metre", afterDays: 3 }, { t: "t.g5.rewrite-metre", afterDays: 7 }],
+    notes: "Original wording. Optional enrichment (OPEN_QUESTIONS Q16): the outline lists no such outcome; First Steps Grade 4 section 4 (duplets) supports the beat-share rule. Compound to simple only for fully dotted bars (no triplets). Never assessed.",
   },
 ];
 void r; void ts4;

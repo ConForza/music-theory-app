@@ -87,8 +87,10 @@ for (const spec of specs) {
   n.contentVersion = spec.version;
   // The Ic-V enrichment uses cadence-key harmony, so it follows the cadence lessons (it was planned after the chord lessons).
   if (spec.node === "G5-U4-E1") (n as Record<string, unknown>).unlockAfter = ["G5-U4-L06"];
+  // Optional rewriting between simple and compound time (PR #14, reconciled): it follows the last Unit 1 lesson and gates nothing.
+  if (spec.node === "G5-U1-E1") (n as Record<string, unknown>).unlockAfter = ["G5-U1-L03"];
   // Optional enrichment nodes name the outcome they relate to (the lesson schema requires one); they are never mastery evidence.
-  if (isOptional(spec.node)) n.outcomeIds = [{ "G5-U4-E1": "abrsm2020.g5.09", "G5-U4-E2": "abrsm2020.g5.10", "G5-U5-E1": "abrsm2020.g5.14" }[spec.node]!];
+  if (isOptional(spec.node)) n.outcomeIds = [{ "G5-U1-E1": "abrsm2020.g4.01", "G5-U4-E1": "abrsm2020.g5.09", "G5-U4-E2": "abrsm2020.g5.10", "G5-U5-E1": "abrsm2020.g5.14" }[spec.node]!];
   // The passage lesson was planned without a book section; section 15 ("General Questions") is its model, so it is named for the provenance record.
 }
 writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
@@ -147,22 +149,24 @@ const SECTION_TEMPLATES: Record<string, string[]> = {
   "o-g5-05": ["t.g5.octave-transpose", "t.g5.clef-position"],
   "o-g5-06": ["t.g5.instrument-transpose", "t.g5.concert-facts", "t.g5.transpose-key", "t.g5.transpose-judge"],
   "o-g5-07": ["t.g5.scale-build", "t.g5.key-signature", "t.g5.key-facts", "t.g5.scale-spot"],
-  "o-g5-08": ["t.g5.interval-any", "t.g5.interval-write", "t.g5.interval-compound", "t.g5.interval-facts", "t.g5.compound-facts"],
+  "o-g5-08": ["t.g5.interval-any", "t.g5.interval-write", "t.g5.interval-compound", "t.g5.interval-facts", "t.g5.compound-facts", "t.g5.interval-key-identify", "t.g5.interval-key-build"],
   "o-g5-09": ["t.g5.chord-identify", "t.g5.chord-build", "t.g5.inversion-facts", "t.g5.supertonic-facts", "t.g5.chord-in-passage"],
   "o-g5-10": ["t.g5.cadence-chords", "t.g5.approach-chord"],
   "o-g5-11": ["t.g5.cadence-identify", "t.g5.cadence-find", "t.g5.cadence-facts", "t.g5.cadence-chords"],
   "o-g5-12": ["t.g5.terms", "t.g5.term-use"],
   "o-g5-13": ["t.g5.ornament-replace", "t.g5.ornament-facts"],
-  "o-g5-14": ["t.g5.voices"],
+  "o-g5-14": ["t.g5.voices", "t.g5.voice-groups"],
   "o-g5-15": ["t.g5.instruments", "t.g5.instrument-sound"],
   "o-g5-16": ["t.g5.score"],
   "o-g1-21": ["t.g5.score"],
 };
 /** In the Grade assessment the skills that are CONSTRUCTED (transposing, scales, intervals, chords, cadences) are asked by construction or in a real passage, not by facts alone. */
 const FINAL_ONLY: Record<string, string[]> = {
+  // Balance (sampled on 150 real assessments of the Grade 5 blueprint before this change): key signatures were drawn by both o-g5-04 and o-g5-07, so two of the 32 Grade 5 questions were key-signature questions in 55% of runs. The four-clef outcome keeps its other templates; the key signature is still asked (once) under o-g5-07.
+  "o-g5-04": ["t.g5.four-clef-read", "t.g5.same-pitch", "t.g5.clef-minor"],
   "o-g5-06": ["t.g5.instrument-transpose", "t.g5.transpose-key"],
   "o-g5-07": ["t.g5.scale-build", "t.g5.key-signature"],
-  "o-g5-08": ["t.g5.interval-any", "t.g5.interval-write", "t.g5.interval-compound"],
+  "o-g5-08": ["t.g5.interval-any", "t.g5.interval-key-identify", "t.g5.interval-compound"],
   "o-g5-09": ["t.g5.chord-identify", "t.g5.chord-build", "t.g5.chord-in-passage"],
   "o-g5-11": ["t.g5.cadence-identify", "t.g5.cadence-find"],
 };
@@ -184,14 +188,24 @@ for (const bp of as.assessments) {
   const unitIndex = bp.kind === "unit_challenge" ? units.indexOf(String(bp.unitId)) : 99;
   for (const s of bp.sections) {
     if (SECTION_TEMPLATES[s.id]) s.templateIds = (bp.id === "a.g5" && FINAL_ONLY[s.id] ? FINAL_ONLY[s.id]! : SECTION_TEMPLATES[s.id]!).filter((t) => (firstUnit.get(t) ?? 0) <= unitIndex);
-    if (bp.id === "a.g5" && s.id.startsWith("o-g5-")) s.itemCount = 2;
+    if (bp.id === "a.g5" && s.id.startsWith("o-g5-")) s.itemCount = s.id === "o-g5-08" ? 1 : 2;
     if (bp.id === "a.g5-u1") s.itemCount = 3;
   }
+  // Balance (sampled: 28% of runs had no interval-WRITING question at all): in the Grade assessment the two interval questions are one naming
+  // question (simple, compound or under a key signature) and one writing question (plain or under a key signature), so every run asks both
+  // skills while the blueprint stays at 39 questions and the pass mark is unchanged. Both sections evidence outcome g5.08.
+  if (bp.id === "a.g5") {
+    bp.sections = bp.sections.filter((x: { id: string }) => x.id !== "o-g5-08b");
+    const at = bp.sections.findIndex((x: { id: string }) => x.id === "o-g5-08");
+    bp.sections.splice(at + 1, 0, { id: "o-g5-08b", title: "abrsm2020.g5.08 (writing)", outcomeIds: ["abrsm2020.g5.08"], templateIds: ["t.g5.interval-write", "t.g5.interval-key-build"], itemCount: 1 });
+  }
+  // The blueprints that changed composition move to version 2, so a stored result stays attributable to the blueprint it was taken on.
+  if (bp.id === "a.g5" || bp.id === "a.g5-u3") bp.version = 2;
   // Idempotent: the earlier-grade section is replaced, never appended to; ids must stay unique.
   if (bp.id === "a.g5") bp.sections = [...bp.sections.filter((s: { id: string }) => s.id !== EARLIER.id), { ...EARLIER }];
   if (new Set(bp.sections.map((s: { id: string }) => s.id)).size !== bp.sections.length) throw new Error(`${bp.id} has duplicate section ids`);
   for (const s of bp.sections) if (!s.templateIds.length) throw new Error(`${bp.id}/${s.id} has no templates`);
-  for (const s of bp.sections) for (const t of s.templateIds as string[]) if (/satb|six-four/.test(t)) throw new Error(`${bp.id} must never contain an optional enrichment template (${t})`);
+  for (const s of bp.sections) for (const t of s.templateIds as string[]) if (/satb|six-four|rewrite-metre/.test(t)) throw new Error(`${bp.id} must never contain an optional enrichment template (${t})`);
   const total = bp.sections.reduce((n: number, s: { itemCount: number }) => n + s.itemCount, 0);
   if (total !== EXPECT[bp.id]) throw new Error(`${bp.id} has ${total} questions, expected exactly ${EXPECT[bp.id]}`);
   if (bp.kind === "unit_challenge" && total < 6) throw new Error(`${bp.id} has too few questions to be a fair check`);
