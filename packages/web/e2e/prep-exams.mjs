@@ -75,7 +75,8 @@ for (const grade of [1, 2, 3, 4, 5]) {
     // outcomes, levels and an estimate that is cautious after a single attempt
     assert.equal(await page.getByTestId("outcomes").locator("li").count(), bp.sections.filter((s) => s.outcomeId).length);
     assert.ok((await page.locator('[data-level="needs_review"]').count()) + (await page.locator('[data-level="developing"]').count()) >= 1, "the outcome answered wrongly is flagged");
-    assert.ok((await page.locator('[data-level="mastered"]').count()) >= bp.sections.filter((s) => s.outcomeId).length - 1);
+    // every wrong answer lowers at most one outcome below Mastered
+    assert.ok((await page.locator('[data-level="mastered"]').count()) >= bp.sections.filter((s) => s.outcomeId).length - wrongSent);
     const ready = await page.getByTestId("readiness").innerText();
     assert.ok(!/On track/.test(ready), `one mock cannot say On track: ${ready}`);
     await page.getByText(/not an ABRSM result/).first().waitFor();
