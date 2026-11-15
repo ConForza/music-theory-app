@@ -590,3 +590,6 @@ html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
 .quick-card > div { flex: 1 1 14rem; min-width: 0; }
 .quick-card .h3 { margin: 0 0 0.2rem; }
 .quick-card p[role="status"] { flex-basis: 100%; margin: 0; }
+/* A fieldset will not shrink below its longest unbroken line by default, so a long legend (Settings, examination setup) could push the page sideways at large text. */
+.segmented { min-width: 0; max-width: 100%; }
+.segmented legend { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
