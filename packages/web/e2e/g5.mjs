@@ -220,6 +220,9 @@ await test("complete progression to the Grade 5 assessment: below the pass mark 
   const pageErrors = [];
   page.on("pageerror", (e) => pageErrors.push(e.message));
   page.on("console", (m) => { if (m.type() === "error") pageErrors.push(`console: ${m.text()}`); });
+  const netFails = [];
+  page.on("response", (r) => { if (r.status() >= 400) netFails.push(`${r.status()} ${r.url().replace(S.base, "")}`); });
+  page.on("requestfailed", (r) => netFails.push(`failed ${r.url().replace(S.base, "")} ${r.failure()?.errorText}`));
   for (const n of G5.filter((x) => x.type === "unit_challenge")) await finishViaApi(S, page, userId, n.id);
   await finishViaApi(S, page, userId, "G5-U5-R1");
   const g5 = (await get(page, "/api/progress")).grades.find((g) => g.grade === 5);
@@ -269,7 +272,7 @@ await test("complete progression to the Grade 5 assessment: below the pass mark 
   const results = (await get(page, "/api/results")).results.filter((r) => r.nodeId === "G5-A");
   assert.deepEqual(results.map((r) => r.passed).sort(), [false, true], "both results are recorded; the retake did not overwrite the first");
   await page.goto("/progress");
-  try { await page.getByRole("heading", { level: 1 }).waitFor({ timeout: 15000 }); } catch (e) { throw new Error(`${e.message.split("\n")[0]} | page errors: ${JSON.stringify(pageErrors)} | body: ${(await page.locator("body").innerText()).slice(0, 300)}`, { cause: e }); }
+  try { await page.getByRole("heading", { level: 1 }).waitFor({ timeout: 15000 }); } catch (e) { throw new Error(`${e.message.split("\n")[0]} | page errors: ${JSON.stringify(pageErrors)} | network: ${JSON.stringify(netFails.slice(-8))} | body: ${(await page.locator("body").innerText()).slice(0, 300)}`, { cause: e }); }
   await noOverflow(page, "progress");
   await axe(page, "progress");
   await ctx.close();
