@@ -23,7 +23,7 @@ import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { learnerTime, recordExposure } from "./mastery-service.ts";
 import type { NodeRunService } from "./node-run.ts";
-import { questionKey } from "./question-key.ts";
+import { questionKey, visibleKey } from "./question-key.ts";
 import {
   LEVEL_LABEL,
   examBlueprint,
@@ -237,6 +237,9 @@ export class PrepService {
       const scope = this.nodes.taughtUnion(t, node);
       if (!scope) continue;
       const accept = (it: ExerciseItem) => {
+        // The picker already refuses a question that LOOKS like one on this paper (`visibleKey`); a question with the same identity (same music and
+        // answer) under different surface details is refused here too, so no paper can ask the same thing twice.
+        if (used.has(`q:${questionKey(it)}`)) return false;
         const credited = this.nodes.creditedConcepts(it, node);
         return outcome ? credited.some((c) => wanted.has(c)) : credited.length > 0;
       };
@@ -249,7 +252,8 @@ export class PrepService {
       const gradeOutcomeIds = new Set([...this.course.ix.outcomes.values()].filter((o) => o.grade <= scopeGrade).map((o) => o.id));
       const outcomeIds = [...new Set(credited.flatMap((c) => this.course.ix.concepts.get(c)?.outcomeIds ?? []).filter((o) => gradeOutcomeIds.has(o)))];
       const key = questionKey(got.item);
-      used.add(key);
+      used.add(visibleKey(got.item));
+      used.add(`q:${key}`);
       return {
         itemId: got.item.id,
         templateId: got.item.templateId,

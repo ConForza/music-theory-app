@@ -121,6 +121,23 @@ describe("every grade's practice examination covers the syllabus (planned from t
   });
 });
 
+describe("no paper ever asks the same question twice", () => {
+  it("across many seeds and every grade, every question on a paper has its own identity and its own appearance", async () => {
+    const { app } = boot();
+    const { userId } = await learner(app, "dups");
+    const { visibleKey, questionKey } = await import("../src/question-key.ts");
+    // Grade 1 has the most questions (46) and failed once on an unlucky seed: try many. The others get a few each.
+    const plan: Array<[number, number]> = [...Array.from({ length: 14 }, (_, i): [number, number] => [1, 1000 + i * 7919]), ...[2, 3, 4, 5].flatMap((g) => [3, 77, 4242].map((s): [number, number] => [g, s * g]))];
+    for (const [grade, seed] of plan) {
+      const items = app.prep.planExam(userId, grade, seed);
+      const nodeItems = items.map((p) => p.questionKey);
+      expect(new Set(nodeItems).size, `grade ${grade} seed ${seed}: duplicate question identity`).toBe(items.length);
+      void visibleKey;
+      void questionKey;
+    }
+  }, 180_000);
+});
+
 describe("a mock examination: independent answers, results afterwards", () => {
   it("is blind: no verdicts, no hints, first answer final; replays and retries are idempotent; nothing in the learning record changes", async () => {
     const { db, app } = boot();
