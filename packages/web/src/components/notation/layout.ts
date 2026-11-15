@@ -9,7 +9,7 @@
  */
 import * as music from "@mtp/curriculum/music";
 import type { Measure, NotationEvent, NotationFragment, NotationScore } from "@mtp/curriculum";
-import { ARTIC_GLYPH, BEAMS, CLEF_GLYPH, ENGRAVING, FLAGS, G, ORNAMENT_GLYPH, restGlyph, SIGN_GLYPH, WIDTH } from "./glyphs";
+import { ARTIC_GLYPH, ARTIC_GLYPH_BELOW, BEAMS, CLEF_GLYPH, ENGRAVING, FLAGS, G, ORNAMENT_GLYPH, restGlyph, SIGN_GLYPH, WIDTH } from "./glyphs";
 
 type Inner = Exclude<NotationEvent, { kind: "tuplet" }>;
 type Clef = music.Clef;
@@ -349,7 +349,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
             reach(Math.min(y(10), y(hi + 4)) - 1.4);
             return;
           }
-          const ch = ARTIC_GLYPH[a];
+          const ch = (artUp ? ARTIC_GLYPH[a] : (ARTIC_GLYPH_BELOW[a] ?? ARTIC_GLYPH[a]));
           if (!ch) return;
           const ay = artUp ? y(hi + 2 + k) : y(lo - 2 - k) + 0.4;
           ev.glyphs.push({ x: nx + hw / 2 - 0.5, y: ay, ch, cls: "n-glyph" });

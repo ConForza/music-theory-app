@@ -47,17 +47,17 @@ describe("Grade 1 prerequisites are strict", () => {
     expect(g5.every(([, v]) => v.state === "locked")).toBe(true);
     // Grade 2 is playable (Brief 06) but a new learner cannot reach any of it: its first lesson waits for the last Grade 1 review.
     const g2 = Object.entries(nodes).filter(([id]) => id.startsWith("G2-"));
-    expect(g2.length).toBe(41);
+    expect(g2.length).toBe(45);
     expect(g2.every(([, v]) => v.state === "locked")).toBe(true);
     expect(nodes["G2-U1-L01"]!.lockedBy).toEqual(["G1-U7-R1"]);
     // Grade 3 is playable (Brief 07) but its first lesson waits for the last Grade 2 review.
     const g3 = Object.entries(nodes).filter(([id]) => id.startsWith("G3-"));
-    expect(g3.length).toBe(36);
+    expect(g3.length).toBe(42);
     expect(g3.every(([, v]) => v.state === "locked")).toBe(true);
     expect(nodes["G3-U1-L01"]!.lockedBy).toEqual(["G2-U5-R1"]);
     // Grade 4 is playable (Brief 08) but its first lesson waits for the last Grade 3 review (the established Grade 3 prerequisite policy).
     const g4 = Object.entries(nodes).filter(([id]) => id.startsWith("G4-"));
-    expect(g4.length).toBe(41);
+    expect(g4.length).toBe(42);
     expect(g4.every(([, v]) => v.state === "locked")).toBe(true);
     expect(nodes["G4-U1-L01"]!.lockedBy).toEqual(["G3-U5-R1"]);
   });

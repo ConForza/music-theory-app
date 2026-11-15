@@ -51,7 +51,7 @@ Outcome IDs are atomic decompositions of the numbered items in the official outl
 | `g2.10` | 3 | Write and recognise the tonic triads (root position) of the Grade 2 keys. | `G2-U3-L04`, `G2-U4-L05` | `t.g2.tonic-triad`, `t.g2.triad-notes` | `G2-U4-R1`, `G2-U5-R1`, `G3-U1-R1` | `a.g2-u3`, `a.g2-u4`, `a.g2`, `a.g3` | G2 §12 | planned |
 | `g2.11` | 3 | Identify scale degrees by number in the Grade 2 keys. | `G2-U3-L04`, `G2-U4-L05` | `t.g2.degree`, `t.g2.degree-note` | `G2-U4-R1`, `G2-U5-R1`, `G3-U1-R1` | `a.g2-u3`, `a.g2-u4`, `a.g2`, `a.g3` | G2 §9 | planned |
 | `g2.12` | 3 | Identify and write intervals above the tonic, by number only, in the Grade 2 major and minor keys. | `G2-U5-L01` | `t.g2.interval-number`, `t.g2.melody`, `t.g2.interval-note`, `t.g2.melody-detail` | `G2-U5-R1`, `G3-U1-R1` | `a.g2-u5`, `a.g2` | G2 §13 | planned |
-| `g2.13` | 4 | Understand more terms and signs in common use (Grade 2). | `G2-U5-L02`, `G2-U5-L03` | `t.g2.terms`, `t.g2.melody`, `t.g2.term-use`, `t.g2.melody-detail` | `G2-U5-R1`, `G3-U1-R1` | `a.g2-u5`, `a.g2`, `a.g3` | G2 §14 | planned |
+| `g2.13` | 4 | Understand more terms and signs in common use (Grade 2). | `G2-U5-L02`, `G2-U5-L03`, `G2-U5-L05`, `G2-U5-L06`, `G2-U5-L07`, `G2-U5-L08` | `t.g2.terms`, `t.g2.melody`, `t.g2.term-use`, `t.g2.melody-detail`, `t.g2.book-terms`, `t.g2.book-use` | `G2-U5-R1`, `G3-U1-R1` | `a.g2-u5`, `a.g2`, `a.g3` | G2 §14 | planned |
 
 ## Grade 3
 
@@ -68,7 +68,7 @@ Outcome IDs are atomic decompositions of the numbered items in the official outl
 | `g3.09` | 3 | Write and recognise tonic triads (root position) in all Grade 3 keys. | `G3-U4-L05` | `t.g3.tonic-triad`, `t.g3.triad-notes` | `G3-U5-R1`, `G4-U1-R1` | `a.g3-u4`, `a.g3` | G3 §10 | planned |
 | `g3.10` | 3 | Identify scale degrees by number in all Grade 3 keys. | `G3-U4-L05` | `t.g3.degree`, `t.g3.degree-note` | `G3-U5-R1`, `G4-U1-R1` | `a.g3-u4`, `a.g3` | G3 §11 | planned |
 | `g3.11` | 3 | Identify and write intervals above the tonic by number and type (quality) in all Grade 3 keys. | `G3-U5-L01`, `G3-U5-L02` | `t.g3.interval-quality`, `t.g3.melody`, `t.g3.interval-facts`, `t.g3.interval-name` | `G3-U5-R1`, `G4-U1-R1` | `a.g3-u5`, `a.g3`, `a.g4` | G3 §11 | planned |
-| `g3.12` | 4 | Understand more terms and signs (Grade 3). | `G3-U5-L03` | `t.g3.terms`, `t.g3.melody`, `t.g3.term-use` | `G3-U5-R1`, `G4-U1-R1` | `a.g3-u5`, `a.g3` | G3 §12 | planned |
+| `g3.12` | 4 | Understand more terms and signs (Grade 3). | `G3-U5-L03`, `G3-U5-L05`, `G3-U5-L06`, `G3-U5-L07`, `G3-U5-L08`, `G3-U5-L09`, `G3-U5-L10` | `t.g3.terms`, `t.g3.melody`, `t.g3.term-use`, `t.g3.book-terms`, `t.g3.book-use` | `G3-U5-R1`, `G4-U1-R1` | `a.g3-u5`, `a.g3` | G3 §12 | planned |
 
 ## Grade 4
 
@@ -89,7 +89,7 @@ Outcome IDs are atomic decompositions of the numbered items in the official outl
 | `g4.13` | 3 | Identify and write any interval up to an octave between two diatonic notes in any Grade 4 key. | `G4-U4-L01`, `G4-U4-L02` | `t.g4.interval-diatonic`, `t.g4.interval-write`, `t.g4.interval-facts` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u4`, `a.g4`, `a.g5` | G4 §9 | planned |
 | `g4.14` | 4 | Write and recognise root-position triads on the tonic, subdominant and dominant in any Grade 4 key. | `G4-U4-L03` | `t.g4.primary-triad`, `t.g4.triad-notes`, `t.g4.triad-id`, `t.g4.chord-build` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u4`, `a.g4` | G4 §10 | planned |
 | `g4.15` | 4 | Identify root-position chords on the tonic, subdominant and dominant in any Grade 4 key (harmonic minor in minor keys). | `G4-U4-L04`, `G4-U4-L05` | `t.g4.chord-in-passage`, `t.g4.triad-id`, `t.g4.chord-spread`, `t.g4.chord-root`, `t.g4.chord-build`, `t.g4.chord-passage-pick` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u4`, `a.g4`, `a.g5` | G4 §11 | planned |
-| `g4.16` | 5 | Understand more terms and signs (Grade 4). | `G4-U5-L03`, `G4-U5-L04` | `t.g4.terms`, `t.g4.passage`, `t.g4.technique-facts`, `t.g4.term-use`, `t.g4.passage-directions`, `t.g4.technique-use` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u5`, `a.g4` | G4 §15 | planned |
+| `g4.16` | 5 | Understand more terms and signs (Grade 4). | `G4-U5-L03`, `G4-U5-L04`, `G4-U5-L06` | `t.g4.terms`, `t.g4.passage`, `t.g4.technique-facts`, `t.g4.term-use`, `t.g4.passage-directions`, `t.g4.technique-use`, `t.g4.book-terms`, `t.g4.book-use` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u5`, `a.g4` | G4 §15 | planned |
 | `g4.17` | 5 | Recognise and name the trill, turn, upper and lower mordent, acciaccatura and appoggiatura. | `G4-U5-L01` | `t.g4.ornament-name`, `t.g4.passage`, `t.g4.ornament-spot`, `t.g4.ornament-facts`, `t.g4.ornament-bar`, `t.g4.passage-directions` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u5`, `a.g4`, `a.g5` | G4 §13 | planned |
 | `g4.18` | 5 | Answer simple questions about standard orchestral instruments related to a passage of music. | `G4-U5-L02`, `G4-U5-L03`, `G4-U5-L05` | `t.g4.instruments`, `t.g4.passage`, `t.g4.technique-facts`, `t.g4.passage-directions`, `t.g4.instrument-range`, `t.g4.technique-use` | `G4-U5-R1`, `G5-U1-R1` | `a.g4-u5`, `a.g4`, `a.g5` | G4 §15 | planned |
 

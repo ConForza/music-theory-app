@@ -2304,6 +2304,127 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g3.book-terms",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "conceptIds": [
+        "c.terms.g3-speed",
+        "c.terms.g3-strong",
+        "c.terms.g3-gentle",
+        "c.terms.g3-feelings",
+        "c.terms.g3-style",
+        "c.terms.g3-order"
+      ],
+      "promptPattern": "What does {term} mean? Which word means this? What does this direction mean?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. Wrong options never share a group or a meaning with it, and never come from a class of words that could also fit."
+      },
+      "ambiguityChecks": [
+        "Speed words never sit beside speed words, mood words only beside moods of another pole, and touch signs only beside other kinds of word.",
+        "A wrong option only ever shows a word that this lesson or an earlier one has taught (VOCAB_BOOK, OPEN_QUESTIONS Q2 and Q38)."
+      ],
+      "hints": [
+        "Use what the lesson told you about the word."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g3.book-use",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 3,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ],
+      "conceptIds": [
+        "c.terms.g3-speed",
+        "c.terms.g3-strong",
+        "c.terms.g3-gentle",
+        "c.terms.g3-feelings",
+        "c.terms.g3-style",
+        "c.terms.g3-order"
+      ],
+      "promptPattern": "Which marking fits this description? What does this marking ask the player to do? Which sign is on these notes?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver"
+        ],
+        "maxDots": 1,
+        "maxLedgerLines": 2,
+        "keySignatures": true,
+        "minorForms": [
+          "harmonic"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct. Wrong options never share a group or a meaning with it, and never come from a class of words that could also fit."
+      },
+      "ambiguityChecks": [
+        "Speed words never sit beside speed words, mood words only beside moods of another pole, and touch signs only beside other kinds of word.",
+        "A wrong option only ever shows a word that this lesson or an earlier one has taught (VOCAB_BOOK, OPEN_QUESTIONS Q2 and Q38)."
+      ],
+      "hints": [
+        "Think about what the marking asks the player to do."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

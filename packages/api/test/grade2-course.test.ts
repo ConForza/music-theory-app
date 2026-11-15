@@ -24,12 +24,12 @@ async function learner() {
 }
 
 describe("the whole of Grade 2 is playable", () => {
-  it("has a real learner experience for all 41 nodes", () => {
-    expect(G2).toHaveLength(41);
+  it("has a real learner experience for all 45 nodes", () => {
+    expect(G2).toHaveLength(45);
     expect(G2.filter((n) => !course.isPlayable(n.id)).map((n) => n.id)).toEqual([]);
     expect(G2.filter((n) => n.contentStatus === "planned")).toEqual([]);
     const count = (t: string) => G2.filter((n) => n.type === t).length;
-    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("enrichment"), count("grade_assessment")]).toEqual([24, 5, 5, 5, 1, 1]);
+    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("enrichment"), count("grade_assessment")]).toEqual([28, 5, 5, 5, 1, 1]);
     // lessons and the optional preview are authored lessons; the rest are built by the server
     expect(G2.filter((n) => ["lesson", "enrichment"].includes(n.type)).every((n) => course.lesson(n.id))).toBe(true);
     expect(G2.filter((n) => ["practice", "review", "unit_challenge", "grade_assessment"].includes(n.type)).every((n) => course.sessionKind(n.id))).toBe(true);
@@ -57,8 +57,8 @@ describe("the whole of Grade 2 is playable", () => {
     const prog = (await c.get("/api/progress")).body;
     const g2 = prog.grades.find((g: { grade: number }) => g.grade === 2);
     // the optional preview is not a required node
-    expect(g2.requiredNodes).toBe(40);
-    expect(g2.completedNodes).toBe(40);
+    expect(g2.requiredNodes).toBe(44);
+    expect(g2.completedNodes).toBe(44);
     expect(prog.nodes["G2-U4-E1"].state).not.toBe("completed");
     const results = (await c.get("/api/results")).body.results as Array<{ nodeId: string; passed: boolean }>;
     expect(results.filter((r) => r.nodeId === "G2-A" && r.passed)).toHaveLength(1);

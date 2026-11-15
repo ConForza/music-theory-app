@@ -136,6 +136,11 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
     if (st?.answered && view.firstAttemptOnly) { await page.getByRole("button", { name: /Continue|Finish/ }).click().catch(() => {}); continue; }
     const q = page.locator("section.question");
     await q.waitFor();
+    // Wait until THIS question's prompt is on screen. After "Continue" the previous question's section can still be in the DOM for a moment, and
+    // driving an editor from the next question's spec against it fails ("9 in the time of 8" is on no earlier question's palette), which on a slow
+    // runner showed up as a Grade 5 nonuplet question timing out although the editor offered the button (the server view always did).
+    const head = it.item.prompt.replace(/\s+/g, " ").trim().slice(0, 40);
+    await page.waitForFunction((t) => (document.querySelector("section.question .q-prompt")?.textContent ?? "").replace(/\s+/g, " ").trim().startsWith(t), head, { timeout: 30000 }).catch(async (e) => { throw new Error(`${nodeId} question ${n}: expected prompt "${head}" but the page shows "${(await page.locator("section.question").first().innerText().catch(() => "?")).slice(0, 120).replace(/\n/g, " | ")}"`, { cause: e }); });
     // Wrong answers are only injected on choice questions: an unfinished rhythm or stave answer cannot be submitted at all,
     // and a half-built answer would otherwise be left on screen before the right one is driven.
     const isChoice = inputFor(S.course.ix, it.item, it.scope).kind === "choice";

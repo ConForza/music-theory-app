@@ -75,13 +75,19 @@ export const SIGN_GLYPH: Record<Sign, { ch: string; w: number }> = {
 };
 
 export const ORNAMENT_GLYPH: Record<string, string> = { trill: G.trill, turn: G.turn, "upper-mordent": G.upperMordent, "lower-mordent": G.lowerMordent };
+/** Marks drawn BELOW a note: the two asymmetric ones need their own glyphs (SMuFL articStaccatissimoBelow U+E4A7, articMarcatoBelow U+E4AD, articTenutoStaccatoBelow U+E4B3), or a wedge or ∧ under a note points the wrong way. */
+export const ARTIC_GLYPH_BELOW: Record<string, string> = {
+  staccatissimo: "\uE4A7",
+  "strong-accent": "\uE4AD",
+  "semi-staccato": "\uE4B3",
+};
 export const ARTIC_GLYPH: Record<string, string> = {
   staccato: G.staccatoAbove,
   staccatissimo: G.staccatissimoAbove,
   accent: G.accentAbove,
   "strong-accent": G.marcatoAbove,
   tenuto: G.tenutoAbove,
-  "semi-staccato": G.tenutoAbove,
+  "semi-staccato": "\uE4B2", // articTenutoStaccatoAbove (a dot with a line): a single note marked semi-staccato, not a plain tenuto line
 };
 
 /** Clef glyph and the staff position its origin sits on (0 = bottom line). */
