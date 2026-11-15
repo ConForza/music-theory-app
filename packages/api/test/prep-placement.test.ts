@@ -149,6 +149,27 @@ describe("placement end to end", () => {
     expect((await L.c.get("/api/progress")).body.nodes["G1-A"].state).toBe("completed");
   }, 180_000);
 
+  it("finishing early never counts an unanswered question as wrong, and never suggests a grade the learner did not get to", async () => {
+    const ctx = boot();
+    const L = await learner(ctx.app);
+    const id = (await L.c.post("/api/placement/start", {})).body.id as string;
+    // answer all of Grade 1 correctly (the check grows), then only 3 of the 6 Grade 2 questions, then stop
+    const items1 = ctx.app.prep.internalItems(L.userId, id);
+    await answerAll(ctx.app, L.c, L.userId, id);
+    expect(items1).toHaveLength(6);
+    const items = ctx.app.prep.internalItems(L.userId, id);
+    expect(items).toHaveLength(12);
+    await answerAll(ctx.app, L.c, L.userId, id, () => false, (i) => i >= 6 && i < 9);
+    expect((await L.c.post(`/api/prep/attempts/${id}/complete`, {})).status).toBe(409);
+    const done = (await L.c.post(`/api/prep/attempts/${id}/complete`, { allowUnanswered: true })).body;
+    expect(done.recommendedGrade).toBe(2);
+    expect(done.allSecure).toBe(false);
+    expect(done.stages).toEqual([{ grade: 1, asked: 6, correct: 6, level: "secure" }]);
+    expect(done.notAssessed).toContain(2);
+    expect(done.gaps).toEqual([]); // nothing was answered wrongly
+    expect(done.explanation).toMatch(/finished early/);
+  }, 60_000);
+
   it("replays are safe: the same answer command twice, completing twice and accepting twice change nothing more", async () => {
     const ctx = boot();
     const L = await learner(ctx.app);

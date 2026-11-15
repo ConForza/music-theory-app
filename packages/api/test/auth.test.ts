@@ -124,10 +124,10 @@ describe("settings", () => {
     await register(c);
     const patch = (settings: unknown) => c.call("PATCH", "/api/me/profile", { settings });
     await patch({ theme: "dark" });
-    expect((await patch({ motion: "reduce" })).body.profile.settings).toEqual({ theme: "dark", motion: "reduce", sound: true });
-    expect((await patch({ sound: false })).body.profile.settings).toEqual({ theme: "dark", motion: "reduce", sound: false });
-    expect((await patch({ theme: "light" })).body.profile.settings).toEqual({ theme: "light", motion: "reduce", sound: false });
-    expect((await c.get("/api/me")).body.profile.settings).toEqual({ theme: "light", motion: "reduce", sound: false }); // survives a reload
+    expect((await patch({ motion: "reduce" })).body.profile.settings).toEqual({ theme: "dark", motion: "reduce", sound: true, examExtraTime: 0 });
+    expect((await patch({ sound: false })).body.profile.settings).toEqual({ theme: "dark", motion: "reduce", sound: false, examExtraTime: 0 });
+    expect((await patch({ theme: "light" })).body.profile.settings).toEqual({ theme: "light", motion: "reduce", sound: false, examExtraTime: 0 });
+    expect((await c.get("/api/me")).body.profile.settings).toEqual({ theme: "light", motion: "reduce", sound: false, examExtraTime: 0 }); // survives a reload
     expect((await patch({ theme: "purple" })).status).toBe(400);
     expect((await patch({ volume: 3 })).status).toBe(400);
   });

@@ -697,11 +697,23 @@ export class PrepService {
 
   private summarisePlacement(userId: string, row: AttemptRow, planned: PlannedPrepItem[], by: ReturnType<PrepService["responses"]>, at: string): PlacementSummary {
     const cfg = this.rubricOf(row);
-    const stages: StageResult[] = [...new Set(planned.map((i) => i.stage!))].sort((a, b) => a - b).map((grade) => {
+    // A probe only counts once every one of its questions was answered: an unanswered question is "not assessed", never "wrong".
+    const all = [...new Set(planned.map((i) => i.stage!))].sort((a, b) => a - b).map((grade) => {
       const mine = planned.filter((i) => i.stage === grade);
-      return { grade, asked: mine.length, correct: mine.filter((i) => by.get(i.itemId)?.firstCorrect).length, missed: mine.filter((i) => !by.get(i.itemId)?.firstCorrect).map((i) => i.outcomeId!) };
+      const answered = mine.filter((i) => by.get(i.itemId)?.attempts);
+      return { grade, asked: mine.length, answered: answered.length, correct: mine.filter((i) => by.get(i.itemId)?.firstCorrect).length, missed: answered.filter((i) => !by.get(i.itemId)?.firstCorrect).map((i) => i.outcomeId!) };
     });
+    const stages: StageResult[] = all.filter((s) => s.answered === s.asked);
+    const unfinished = all.find((s) => s.answered < s.asked);
     const rec = recommendPlacement(stages, cfg);
+    // Stopping part-way through a probe: the learner has demonstrated nothing at that grade or above, so the suggestion cannot be higher than it.
+    const stoppedAt = unfinished && unfinished.grade < rec.recommendedGrade ? unfinished.grade : null;
+    if (stoppedAt !== null) {
+      rec.recommendedGrade = stoppedAt;
+      rec.allSecure = false;
+    }
+    if (unfinished) rec.notAssessed = [...new Set([...rec.notAssessed, unfinished.grade])].sort((a, b) => a - b);
+    if (unfinished) stages.push({ grade: unfinished.grade, asked: unfinished.asked, correct: unfinished.correct, missed: unfinished.missed });
     const gaps: PlacementSummary["gaps"] = [];
     for (const s of stages) {
       for (const outcomeId of s.missed) {
@@ -711,7 +723,9 @@ export class PrepService {
       }
     }
     const g = rec.recommendedGrade;
-    const explanation = rec.allSecure
+    const explanation = stoppedAt !== null
+      ? `You finished early, so we can only suggest what you have shown so far: Grade ${g} is the first grade you did not complete a set of questions for. Take the check again whenever you like, or start at Grade ${g} or any grade below it.`
+      : rec.allSecure
       ? `You answered the key questions from Grades 1 to 4 with confidence, so Grade 5 is a sensible place to begin. Placement is advice about where to start: it does not complete any grade or award any grade badge.`
       : rec.decidedBy === 1
         ? `Some Grade 1 ideas were not secure yet, so we recommend starting at Grade 1. The lessons below cover exactly what to look at first.`
