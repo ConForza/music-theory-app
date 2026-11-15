@@ -20,6 +20,20 @@ export function reachableCanonical(S, item, scope) {
   return first;
 }
 
+/** A wrong answer the controls can actually give: the engine's own wrong answer can use a value that is not on offer (a time signature of 3/8 where only 2, 4, 6, 9 and 12 are offered). */
+export function reachableWrong(S, item, scope) {
+  const input = inputFor(S.course.ix, item, scope);
+  const bad = wrongResponse(S.course.ix, item, scope);
+  if (input.kind === "time-signature") {
+    const right = canonicalResponse(S.course.ix, item, scope);
+    const top = input.tops.find((t) => t !== right.top);
+    return top ? { kind: "time-signature", top, bottom: right.bottom } : null;
+  }
+  // Only choice questions are answered wrongly on purpose (as in the earlier journeys): for a bar, a beaming or a stave the engine's "wrong answer" can be the
+  // question as given, an unfinished answer, which cannot be submitted at all and so is no way to answer wrongly.
+  return input.kind === "choice" ? bad : null;
+}
+
 const promptStart = (it) => it.item.prompt.replace(/\s+/g, " ").trim().slice(0, 40);
 
 /** Wait until the question whose prompt starts like `it`'s is the one on screen (the previous one can linger for a moment). */
@@ -48,7 +62,7 @@ export async function playPrep(page, S, userId, attemptId, opts = {}) {
     if (i >= items.length || i >= (opts.stopAfter ?? Infinity)) break;
     const { item, scope, planned } = items[i];
     await onQuestion(page, { item }, `${attemptId} question ${i + 1}`, i + 1);
-    const bad = opts.wrong?.(i, planned) ? wrongResponse(S.course.ix, item, scope) : null;
+    const bad = opts.wrong?.(i, planned) ? reachableWrong(S, item, scope) : null;
     const response = bad ?? reachableCanonical(S, item, scope);
     if (opts.beforeAnswer) await opts.beforeAnswer(page, i, item);
     try {

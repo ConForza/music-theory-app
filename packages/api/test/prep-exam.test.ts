@@ -67,22 +67,33 @@ describe("every grade's practice examination covers the syllabus (planned from t
   }
 
   it("valid musical alternatives are marked correct (every accepted spelling, key name or time signature, not only the first)", () => {
+    // Fixed seeds over every template a paper can use, so the test never depends on which questions a random paper happened to contain.
     let tested = 0;
+    const seen = new Set<string>();
     for (const g of [1, 2, 3, 4, 5]) {
-      const { id, userId } = started[g]!;
-      for (const { item, scope } of app.prep.internalItems(userId, id)) {
-        const a = item.answer as { kind: string; accepted?: unknown[] };
-        if (!["pitch", "key", "time-signature", "ornament"].includes(a.kind) || !Array.isArray(a.accepted) || a.accepted.length < 2) continue;
-        for (const alt of a.accepted) {
-          const asAlt = { ...item, answer: { ...item.answer, accepted: [alt] } } as typeof item;
-          const response = canonicalResponse(course.ix, asAlt, scope);
-          expect(gradeItem(course.ix, item, response, scope).correct, `${item.id}: accepted alternative ${JSON.stringify(alt)}`).toBe(true);
-          tested++;
+      const node = course.ix.nodeById.get(`G${g}-A`)!;
+      for (const s of app.prep.blueprint(g).sections) {
+        for (const t of s.templateIds) {
+          const scope = app.nodes.taughtUnion(t, node);
+          if (!scope) continue;
+          for (let seed = 1; seed <= 60; seed++) {
+            const item = app.nodes.gen(t, seed, scope);
+            const a = item?.answer as { kind: string; accepted?: unknown[] } | undefined;
+            if (!item || !a || !["pitch", "key", "time-signature", "ornament"].includes(a.kind) || !Array.isArray(a.accepted) || a.accepted.length < 2) continue;
+            if (seen.has(`${t}:${JSON.stringify(a.accepted)}`)) continue;
+            seen.add(`${t}:${JSON.stringify(a.accepted)}`);
+            for (const alt of a.accepted) {
+              const asAlt = { ...item, answer: { ...item.answer, accepted: [alt] } } as typeof item;
+              const response = canonicalResponse(course.ix, asAlt, scope);
+              expect(gradeItem(course.ix, item, response, scope).correct, `${item.id}: accepted alternative ${JSON.stringify(alt)}`).toBe(true);
+              tested++;
+            }
+          }
         }
       }
     }
-    expect(tested).toBeGreaterThan(0);
-  });
+    expect(tested).toBeGreaterThan(10);
+  }, 120_000);
 
   it("every question can be answered with the controls it offers (a correct answer is always among the options shown)", async () => {
     const { inputFor } = await import("@mtp/engine");

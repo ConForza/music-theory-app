@@ -5,7 +5,7 @@
 // Run: npm run build && node --import tsx e2e/prep-exams.mjs   (SHOTS=dir saves screenshots; ONLY=text runs matching tests)
 import assert from "node:assert/strict";
 import { chromium, devices } from "playwright";
-import { attemptIdFromUrl, axe, get, guest, noOverflow, playPrep, post, serve, shot } from "./preplib.mjs";
+import { attemptIdFromUrl, axe, get, guest, noOverflow, playPrep, post, reachableWrong, serve, shot } from "./preplib.mjs";
 
 const S = await serve({ waive: false });
 const browser = await chromium.launch();
@@ -60,9 +60,10 @@ for (const grade of [1, 2, 3, 4, 5]) {
     const id = await startFromHub(page, grade, "mock");
     await page.getByRole("button", { name: /Let's go/ }).click();
     const bp = blueprint(grade);
-    const first = bp.sections.find((s) => s.outcomeId).outcomeId;
-    // the first outcome's two questions are answered wrongly on purpose
-    const n = await playPrep(page, S, userId, id, { wrong: (_i, p) => p.outcomeId === first });
+    // Two questions are answered wrongly on purpose: the first two (of the first outcome onwards) for which the controls can give a wrong answer.
+    const wrongAt = new Set(S.app.prep.internalItems(userId, id).flatMap((it, i) => (reachableWrong(S, it.item, it.scope) ? [i] : [])).slice(0, 2));
+    assert.equal(wrongAt.size, 2, "two questions can be answered wrongly");
+    const n = await playPrep(page, S, userId, id, { wrong: (i) => wrongAt.has(i) });
     assert.equal(n, bp.totalItems);
     await page.waitForURL(/\/results\//);
     await page.getByRole("heading", { name: "Your result" }).waitFor();
