@@ -49,6 +49,27 @@ describe("the new nodes", () => {
     for (const bp of course.ix.assessments.values()) for (const s of bp.sections) expect(s.templateIds, `${bp.id}/${s.id}`).not.toContain("t.g5.rewrite-metre");
   });
 
+  it("the frozen lesson questions only use signs the lesson teaches (a natural cancelling the signature, or a sign on a letter the signature leaves natural), in every key", () => {
+    const L = ["C", "D", "E", "F", "G", "A", "B"];
+    const SHARPS = ["F", "C", "G", "D", "A", "E", "B"];
+    const FLATS = ["B", "E", "A", "D", "G", "C", "F"];
+    const MAJ: Record<string, number> = { C: 0, G: 1, D: 2, A: 3, E: 4, B: 5, "F#": 6, F: -1, Bb: -2, Eb: -3, Ab: -4, Db: -5, Gb: -6 };
+    const MIN: Record<string, number> = { A: 0, E: 1, B: 2, "F#": 3, "C#": 4, "G#": 5, "D#": 6, D: -1, G: -2, C: -3, F: -4, Bb: -5, Eb: -6 };
+    const sig = (key: string, letter: string) => { const [t, m] = key.split(" "); const f = (m === "major" ? MAJ : MIN)[t!]!; return f > 0 && SHARPS.slice(0, f).includes(letter) ? 1 : f < 0 && FLATS.slice(0, -f).includes(letter) ? -1 : 0; };
+    const alter = (p: string) => { const m = /^([A-G])(bb|b|#|x)?\d$/.exec(p)!; return { letter: m[1]!, a: ({ bb: -2, b: -1, "": 0, "#": 1, x: 2 } as Record<string, number>)[m[2] ?? ""]! }; };
+    const items = course.authoredItems("G5-U3-L07");
+    expect(items.length).toBeGreaterThanOrEqual(9);
+    for (const it of items) {
+      const a = it.answer as unknown as { key: string; lower: string; upper?: string; acceptedPitches?: string[] };
+      for (const p of [a.lower, a.upper ?? a.acceptedPitches![0]!]) {
+        const { letter, a: x } = alter(p);
+        const g = sig(a.key, letter);
+        expect(x === g || (g !== 0 && x === 0) || (g === 0 && Math.abs(x) === 1), `${it.id}: ${p} in ${a.key}`).toBe(true);
+      }
+      expect(L).toContain(alter(a.lower).letter);
+    }
+  });
+
   it("both are completed through the real server, with evidence for the new concept only (and none for compulsory concepts from the optional node)", async () => {
     const { db, app, c, userId } = await learner();
     expect((await c.get("/api/progress")).body.nodes["G5-U3-L07"].state).toBe("available");

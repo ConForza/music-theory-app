@@ -3,7 +3,7 @@
  * t.g5.rewrite-metre: rewrite a bar between simple and compound time (PR #14, optional enrichment only; never assessed).
  *
  * Rule taught: every note and rest keeps its share of its BEAT. A crotchet beat (2/4, 3/4, 4/4) becomes a dotted-crotchet beat (6/8, 9/8, 12/8),
- * so each value gains a dot; going back, each dot is removed. The bar changes length; the beat relationships do not. Pairs: 2/4-6/8, 3/4-9/8,
+ * so each value gains a dot; going back, each dot is removed. The written total of note values changes; the number of beats and the time the bar lasts do not. Pairs: 2/4-6/8, 3/4-9/8,
  * 4/4-12/8. Compound to simple is only asked for fully dotted bars (a bar with three undotted quavers per beat would need triplets, a different
  * exercise). Both bars are checked with the rhythm rules (`checkBar`, beams required) and with `music.beatProfile`, the same check the grader uses.
  *
@@ -65,6 +65,6 @@ export const rewriteMetre5: Gen = (c: Ctx): any => {
     prompt: `This bar is written in ${from}, where the beat is a ${beatName(from)}. Rewrite it in ${to}, where the beat is a ${beatName(to)}. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as ${to} requires.`,
     music: rhythmLine([{ events: shown, barline: "final" }], { timeSignature: from }),
     answer: { kind: "rhythm", task: "regroup", timeSignature: to, fromTimeSignature: from, accepted: [[{ events: answer, barline: "final" }]], acceptAnyRuleCompliant: true },
-    hints: [`Compare the beats: in ${from} a beat is a ${beatName(from)} and in ${to} it is a ${beatName(to)}. Write each note or rest as the same share of its beat as before. The bar will be a different length: that is correct.`],
+    hints: [`Compare the beats: in ${from} a beat is a ${beatName(from)} and in ${to} it is a ${beatName(to)}. Write each note or rest as the same share of its beat as before. The bar adds up to a different total of note values (more quavers in compound time), but it has the same number of beats and lasts just as long: that is correct.`],
   };
 };

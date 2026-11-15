@@ -67,7 +67,7 @@ export const ornamentReplace5: Gen = (c): any => {
       prompt: `The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the pair?`,
       music: frag(clef, [{ events, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts3 }),
       answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: written.map(F), writtenOutValues: values, accepted: [sign] },
-      hints: ["An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note. In both cases the sign is a small note written before the main note; for the other ornaments the sign is written above the main note."],
+      hints: ["An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note. In both cases the sign is a small note written before the main note; for the other ornaments the sign is usually written above the main note."],
     };
   }
   const figures: Record<string, Array<[Pitch, music.NoteValue]>> = {
@@ -200,7 +200,7 @@ export const voices5: Gen = (c): any => {
   if (mode === "highest" || mode === "lowest") {
     const right = mode === "highest" ? "soprano" : "bass";
     const ids = ["soprano", "alto", "tenor", "bass"];
-    return { prompt: `Which of the four voices of a mixed choir is the ${mode === "highest" ? "highest" : "lowest"}?`, answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `The ${x} is not the ${mode === "highest" ? "highest" : "lowest"} voice: the order, high to low, is soprano, alto, tenor, bass.`]]))), hints: ["Picture the four voices of a choir arranged by pitch. Decide which voice sits at the very top of that arrangement and which at the very bottom, then choose."] };
+    return { prompt: `Which of the four voices of a mixed choir is the ${mode === "highest" ? "highest" : "lowest"}?`, answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `The ${x} is not the ${mode === "highest" ? "highest" : "lowest"} voice: the order, high to low, is soprano, alto, tenor, bass.`]]))), ownHints: true, hints: ["Picture the four voices of a choir arranged by pitch. Decide which voice sits at the very top of that arrangement and which at the very bottom.", "The four voices are alto, bass, soprano and tenor (in alphabetical order). Put them in order of pitch in your head, then pick the end of that order which the question asks for."] };
   }
   // range: a part wholly in the soprano-only or the bass-only zone
   const sop = c.rng.chance(0.5);
@@ -215,6 +215,7 @@ export const voices5: Gen = (c): any => {
     prompt: `A choral part lies entirely ${sop ? "above the top note an alto can sing comfortably (D5)" : "below the lowest note a tenor can sing comfortably (C3)"}. Which voice is it written for?`,
     music: f,
     answer: choiceAnswer(shuffled(c, opt(ids)), right, Object.fromEntries(ids.filter((x) => x !== right).map((x) => [x, ["wrong-category", `This part is too ${sop ? "high" : "low"} for a ${x}: it lies ${sop ? "above" : "below"} the range of the ${x}.`]]))),
+    ownHints: true,
     hints: [`Compare the notes with the limit the question gives. Which voices can sing notes that far ${sop ? "above" : "below"} it, and which cannot?`],
   };
 };
@@ -227,16 +228,16 @@ export const voiceGroups5: Gen = (c): any => {
     const pair = c.rng.pick([["soprano", "alto", "mezzo-soprano"], ["tenor", "bass", "baritone"]] as const);
     const ids = ["mezzo-soprano", "baritone", "alto", "tenor", "soprano", "bass"].filter((x) => x !== pair[0] && x !== pair[1] && x !== pair[2]);
     const opts = [pair[2], ...shuffled(c, ids).slice(0, 3)];
-    return { prompt: `Singers, especially solo singers, are also classed in intermediate ranges. Which voice lies between the ${pair[0]} and the ${pair[1]}?`, answer: choiceAnswer(shuffled(c, opt(opts)), pair[2], Object.fromEntries(opts.filter((x) => x !== pair[2]).map((x) => [x, ["wrong-category", `The ${pair[2]} is the voice between the ${pair[0]} and the ${pair[1]}.`]]))), hints: ["Mezzo-soprano sits between soprano and alto; baritone between tenor and bass."] };
+    return { prompt: `Singers, especially solo singers, are also classed in intermediate ranges. Which voice lies between the ${pair[0]} and the ${pair[1]}?`, answer: choiceAnswer(shuffled(c, opt(opts)), pair[2], Object.fromEntries(opts.filter((x) => x !== pair[2]).map((x) => [x, ["wrong-category", `The ${pair[2]} is the voice between the ${pair[0]} and the ${pair[1]}.`]]))), ownHints: true, hints: ["Think of the six voices in order of pitch. Find where the two voices named in the question sit, and look for the option that fits between them."] };
   }
   if (mode === "satb" || mode === "not-choral") {
     const wrong = c.rng.pick(["mezzo-soprano", "baritone"]);
     const ids = ["soprano", "alto", "tenor", "bass"];
     const opts = [...shuffled(c, ids).slice(0, 3), wrong];
-    return { prompt: "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?", answer: choiceAnswer(shuffled(c, opt(opts)), wrong, Object.fromEntries(opts.filter((x) => x !== wrong).map((x) => [x, ["wrong-category", `The ${x} is one of the four choral voices: soprano, alto, tenor and bass.`]]))), hints: ["S, A, T and B are the four choral voices."] };
+    return { prompt: "Choral music is usually written for four voices: SATB. Which of these voices is NOT one of the four?", answer: choiceAnswer(shuffled(c, opt(opts)), wrong, Object.fromEntries(opts.filter((x) => x !== wrong).map((x) => [x, ["wrong-category", `The ${x} is one of the four choral voices: soprano, alto, tenor and bass.`]]))), ownHints: true, hints: ["A standard mixed choir sings in four voices. Decide which option is an in-between voice rather than one of those four."] };
   }
   const lists: Array<[string, string]> = [["a", "Soprano, mezzo-soprano, alto, tenor, baritone, bass"], ["b", "Soprano, alto, mezzo-soprano, tenor, baritone, bass"], ["c", "Soprano, mezzo-soprano, alto, baritone, tenor, bass"], ["d", "Bass, baritone, tenor, alto, mezzo-soprano, soprano"]];
-  return { prompt: "Which list gives all six voices in order, from the highest to the lowest?", answer: choiceAnswer(shuffled(c, lists), "a", { b: ["wrong-category", "The mezzo-soprano lies between the soprano and the alto, not below the alto."], c: ["wrong-category", "The baritone lies between the tenor and the bass, so it comes after the tenor."], d: ["wrong-category", "That list runs from the lowest voice to the highest."] }), hints: ["High to low: soprano, mezzo-soprano, alto, tenor, baritone, bass."] };
+  return { prompt: "Which list gives all six voices in order, from the highest to the lowest?", answer: choiceAnswer(shuffled(c, lists), "a", { b: ["wrong-category", "The mezzo-soprano lies between the soprano and the alto, not below the alto."], c: ["wrong-category", "The baritone lies between the tenor and the bass, so it comes after the tenor."], d: ["wrong-category", "That list runs from the lowest voice to the highest."] }), ownHints: true, hints: ["Start from the highest voice and place the others in order of pitch. Check where the voice that lies between two others comes in each list."] };
 };
 
 // ---------------------------------------------------------------------------

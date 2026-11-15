@@ -89,7 +89,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.scales.keys-six-flats | U3-L02 | scale-build 27, key-facts 14, scale-spot 18, key-signature 16 | 75 |
 | c.intervals.chromatic | U3-L03 | interval-any 232, interval-write 225, interval-facts 323 | 780 |
 | c.intervals.compound | U3-L04 | interval-compound 316, compound-facts 71 | 387 |
-| c.intervals.in-key-signature | U3-L07 | interval-key-identify 387, interval-key-build 396 | 783 |
+| c.intervals.in-key-signature | U3-L07 | interval-key-identify 385, interval-key-build 395 | 780 |
 | c.transposition.concert-pitch | U3-L05 | concert-facts 82, transpose-key 180 | 262 |
 | c.transposition.instrument | U3-L06 | instrument-transpose 400, transpose-key 180, concert-facts 82, transpose-judge 400 | 1062 |
 | c.chords.inversions | U4-L01 | inversion-facts 145, chord-identify 308, chord-build 249 | 702 |

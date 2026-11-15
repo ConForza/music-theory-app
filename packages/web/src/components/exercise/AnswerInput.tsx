@@ -97,7 +97,7 @@ function StaveAnswer({ input, value, onChange, disabled, marks }: { input: Extra
         given={input.shown}
         accidentals={input.accidentals}
         doubleAccidentals={input.doubleAccidentals}
-        label={input.shown ? `Write the upper note on a ${input.clef} stave` : `Note position on a ${input.clef} stave`}
+        label={input.shown ? `Write the new note on a ${input.clef} stave` : `Note position on a ${input.clef} stave`}
         announceNames={Boolean(input.shown)}
       />
     );

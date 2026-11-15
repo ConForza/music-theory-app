@@ -115,6 +115,17 @@ describe("intervals under a key signature (identify)", () => {
     expect(signs.size).toBeGreaterThanOrEqual(3);
   });
 
+  it("never writes a sign the lesson does not teach: no sharp where the signature flats a letter, no flat where it sharps one (review of PR #16, finding C)", () => {
+    for (const it of list) {
+      const a = A(it);
+      for (const n of seen(it)) {
+        const sig = sigAlter(a.key, LETTERS[n.l]!);
+        const ok = n.alter === sig || (sig !== 0 && n.alter === 0) || (sig === 0 && Math.abs(n.alter) === 1);
+        expect(ok, `${it.id}: ${fmt(n)} in ${a.key}`).toBe(true);
+      }
+    }
+  });
+
   it("uses sharp and flat keys, major and minor, and three clefs", () => {
     const keys = new Set(list.map((i) => A(i).key as string));
     expect([...keys].some((k) => fifths(k) > 0)).toBe(true);
@@ -168,6 +179,16 @@ describe("intervals under a key signature (write)", () => {
       expect(steps(goal) > steps(start), it.id).toBe(a.direction === "up");
       expect(it.music!.key, it.id).toBe(a.key);
       expect(seen(it).map(fmt), it.id).toEqual([fmt(start)]);
+    }
+  });
+
+  it("the given note and the note to write only carry signs the lesson teaches (review of PR #16, finding C)", () => {
+    for (const it of list) {
+      const a = A(it);
+      for (const p of [pn(a.lower), pn(a.acceptedPitches[0])]) {
+        const sig = sigAlter(a.key, LETTERS[p.l]!);
+        expect(p.alter === sig || (sig !== 0 && p.alter === 0) || (sig === 0 && Math.abs(p.alter) === 1), `${it.id}: ${fmt(p)} in ${a.key}`).toBe(true);
+      }
     }
   });
 

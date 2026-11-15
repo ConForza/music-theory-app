@@ -87,4 +87,12 @@ describe("t.g5.rewrite-metre", () => {
       expect(pairs[from], it.id).toBe(to);
     }
   });
+
+  it("the wording never says the bar lasts longer: at the same beat speed the two bars last equally long (review of PR #16, finding B)", () => {
+    for (const it of items.slice(0, 60)) {
+      const text = [it.prompt, ...(it.hints ?? [])].join(" ");
+      expect(text, it.id).not.toMatch(/different length|becomes longer|is longer/);
+      expect(text, it.id).toMatch(/same number of beats and lasts just as long|same beat speed/);
+    }
+  });
 });

@@ -11,6 +11,8 @@ const { parsePitch, parseKey, formatPitch, formatKey, keyFifths, samePitch, enha
 type Pitch = music.Pitch;
 const pretty = (p: string) => p.replace(/#/g, "♯").replace(/b(?=\d|$| )/g, "♭").replace(/x/g, "𝄪");
 const fmt = (p: Pitch) => pretty(formatPitch(p));
+/** "a" or "an" before an ordinal or interval name ("an octave", "an 8th", "an 11th", "a 3rd"). */
+const article = (w: string) => (/^(8|11|18|[aeiou])/i.test(w) ? "an" : "a");
 
 // ---- key signatures -----------------------------------------------------
 
@@ -180,8 +182,8 @@ export const gradeInterval: Grader<AnswerOf<"interval">> = (c, a, r) => {
     return wrong(swap ? "augmented-diminished-swap" : "quality-from-wrong-key", `${fmt(got)} makes ${q ? `a ${q}` : "the wrong quality"}. Keep the letter and change the accidental.`);
   }
   if (Math.abs(gotNumber - wantNumber) === 7) return wrong("compound-arithmetic", `${fmt(got)} is an octave out.`);
-  if (Math.abs(gotNumber - wantNumber) === 1) return wrong("counted-one-end-only", `${fmt(got)} makes a ${music.ordinal(gotNumber)}. Count the lower note as 1.`);
-  return wrong(null, `${fmt(got)} makes a ${music.ordinal(gotNumber)}.`);
+  if (Math.abs(gotNumber - wantNumber) === 1) return wrong("counted-one-end-only", `${fmt(got)} makes ${article(music.ordinal(gotNumber))} ${music.ordinal(gotNumber)}. Count the note you were given as 1.`);
+  return wrong(null, `${fmt(got)} makes ${article(music.ordinal(gotNumber))} ${music.ordinal(gotNumber)}.`);
 };
 
 // ---- chords and cadences -------------------------------------------------

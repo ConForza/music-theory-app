@@ -44,12 +44,20 @@ export function bareInterval(lower: Pitch, upper: Pitch, key: music.Key): string
   }
 }
 
-/** A pitch of the given letter whose accidental is the signature's (kept) or a different one (an overriding sign), within one accidental. */
+/**
+ * The signs a note may carry that differ from what the key signature gives its letter. Only signs the lesson teaches are used (review of PR #16, finding C):
+ * a NATURAL that cancels a sharp or flat of the signature, or a sharp or flat on a letter the signature leaves natural. A sharp on a letter the signature
+ * flattens (B♯ in D♭ major), or a flat on a letter it sharpens (E♭ in F♯ major), is never used: that opposite-direction case is not taught here.
+ */
+export const overrideAlters = (sig: number): number[] => (sig === 0 ? [-1, 1] : [0]);
+/** Is this accidental one the lesson teaches for a letter whose signature accidental is `sig`? (the signature's own, a cancelling natural, or a sign on a natural letter) */
+export const taughtAlter = (alter: number, sig: number): boolean => alter === sig || overrideAlters(sig).includes(alter);
+
+/** A pitch of the given letter whose accidental is the signature's (kept) or a different, taught one (an overriding sign). */
 function spell(c: Ctx, key: music.Key, step: music.Step, overrides: boolean): { alter: number } | null {
   const sig = signatureAlter(key, step);
   if (!overrides) return { alter: sig };
-  const others = [-1, 0, 1].filter((a) => a !== sig);
-  return { alter: c.rng.pick(others) };
+  return { alter: c.rng.pick(overrideAlters(sig)) };
 }
 
 const OCT: Record<Clef, number[]> = { treble: [4], bass: [2, 3], alto: [3, 4], tenor: [3, 4] };
@@ -116,12 +124,14 @@ export const intervalKeyBuild5: Gen = (c): any => {
   const wantSign = c.rng.chance(0.55);
   for (let attempt = 0; attempt < 40; attempt++) {
     const start: Pitch = { step: c.rng.pick(music.STEPS), alter: 0, octave: c.rng.pick(OCT[clef]) };
-    start.alter = c.rng.chance(0.8) ? signatureAlter(key, start.step) : c.rng.pick([-1, 0, 1].filter((a) => a !== signatureAlter(key, start.step)));
+    start.alter = c.rng.chance(0.8) ? signatureAlter(key, start.step) : c.rng.pick(overrideAlters(signatureAlter(key, start.step)));
     const code = c.rng.pick(["m2", "M2", "m3", "M3", "P4", "P5", "m6", "M6", "m7", "M7", "A4", "d5", "A2", "d7", "A5", "d4"]);
     const down = c.rng.chance(0.4);
     let goal: Pitch;
     try { goal = transpose(start, parseInterval(code), down ? "down" : "up"); } catch { continue; }
     if (Math.abs(goal.alter) > 1 || Math.abs(start.alter) > 1) continue;
+    // the learner must never need a sign the lesson does not teach (an opposite-direction sign such as a sharp where the signature gives a flat)
+    if (!taughtAlter(goal.alter, signatureAlter(key, goal.step))) continue;
     if (!fitsIn(clef, [start, goal], 2)) continue;
     const needsSign = goal.alter !== signatureAlter(key, goal.step);
     if (needsSign !== wantSign && attempt < 30) continue;

@@ -94,7 +94,7 @@ function finish(ix: CurriculumIndex, t: ExerciseTemplate, seed: number, d: Draft
     ...(d.music ? { music: d.music } : {}),
     ...(d.score ? { score: d.score } : {}),
     answer: d.answer,
-    hints: [...t.hints, ...(d.hints ?? [])].slice(0, 4),
+    hints: (d.ownHints && d.hints?.length ? [...d.hints] : [...t.hints, ...(d.hints ?? [])]).slice(0, 4),
     feedback: { correct: d.correct ?? fam.correctFeedback, mistakes, fallback: fam.fallbackFeedback },
   };
 }
