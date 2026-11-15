@@ -195,7 +195,7 @@ export const gradeRhythm: Grader<AnswerOf<"rhythm">> = (c, a, r) => {
     const v = judgeBars(c, bars, ts, GROUPING_CATEGORY, true);
     if (v) return v;
     if (!a.acceptAnyRuleCompliant && !matchesReference(bars, a.accepted)) return wrong(null, "That is not one of the forms this question accepts.");
-    return right(null, { note: "Well done. Notice that the bar itself is now a different length, while every note keeps its share of its beat." });
+    return right();
   }
 
   if (a.task === "regroup") {

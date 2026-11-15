@@ -23,6 +23,8 @@ const NEW = new Set(music.BOOK_LESSONS.map((l) => l.node));
 // PR #14 reconciled with main (intervals under key signatures, optional simple/compound rewriting, assessment balance): everything it adds is named here,
 // so this file still proves it changed nothing else. Its own tests are in grade5-interval-key-course.test.ts.
 const PR14_LESSONS = ["G5-U3-L07", "G5-U1-E1"];
+// Two Grade 5 lessons carry frozen hint text copied from the generators; the wording fix changes only those hints (no prompt, option, answer or id).
+const PR14_REWORDED = ["G5-U5-L02", "G5-U5-L03"];
 const PR14_TEMPLATES = ["t.g5.interval-key-identify", "t.g5.interval-key-build", "t.g5.rewrite-metre"];
 const PR14_CONCEPTS = ["c.intervals.in-key-signature", "c.metre.rewrite-simple-compound"];
 const PR14_NODES = ["G5-U3-P1", "G5-U4-R1", "G5-U5-R1"]; // practice and review nodes that gained the interval-key templates
@@ -43,7 +45,7 @@ const wholeWord = (w: string) => new RegExp(`(^|[^\\p{L}])${w.replace(/[.*+?^${}
 describe("nothing that existed before has changed (question identities, lessons, progression)", () => {
   it("every earlier lesson file is byte-for-byte the file it was", () => {
     const now = new Map(readdirSync(join(root, "lessons")).map((f) => [f.slice(0, -5), sha(readFileSync(join(root, "lessons", f)))]));
-    for (const [id, h] of Object.entries(before.lessons!)) expect(now.get(id), `lesson ${id}`).toBe(h);
+    for (const [id, h] of Object.entries(before.lessons!)) if (!PR14_REWORDED.includes(id)) expect(now.get(id), `lesson ${id}`).toBe(h);
     expect([...now.keys()].filter((k) => !(k in before.lessons!)).sort()).toEqual([...NEW, ...PR14_LESSONS].sort());
   });
 
