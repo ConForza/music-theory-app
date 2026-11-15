@@ -129,7 +129,7 @@ export const U1: Spec2[] = [
     ],
     recap: ["Each note and rest keeps its share of its beat.", "Simple to compound: add a dot to every value. Compound to simple: take every dot away.", "The bar changes length; the beats do not."],
     review: [{ t: "t.g5.rewrite-metre", afterDays: 1 }, { t: "t.g5.rewrite-metre", afterDays: 3 }, { t: "t.g5.rewrite-metre", afterDays: 7 }],
-    notes: "Original wording. Optional enrichment (OPEN_QUESTIONS Q16): the outline lists no such outcome; First Steps Grade 4 section 4 (duplets) supports the beat-share rule. Compound to simple only for fully dotted bars (no triplets). Never assessed.",
+    notes: "Original wording. Optional enrichment (OPEN_QUESTIONS Q39): the outline lists no such outcome; First Steps Grade 4 section 4 (duplets) supports the beat-share rule. Compound to simple only for fully dotted bars (no triplets). Never assessed.",
   },
 ];
 void r; void ts4;

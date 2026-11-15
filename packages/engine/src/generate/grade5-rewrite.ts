@@ -7,8 +7,8 @@
  * 4/4-12/8. Compound to simple is only asked for fully dotted bars (a bar with three undotted quavers per beat would need triplets, a different
  * exercise). Both bars are checked with the rhythm rules (`checkBar`, beams required) and with `music.beatProfile`, the same check the grader uses.
  *
- * Status (OPEN_QUESTIONS Q16): the outline lists no such outcome and current papers were not available, so the question is optional enrichment,
- * mapped only to the Grade 4 time-signature outcome, and no assessment blueprint may name it.
+ * Status (OPEN_QUESTIONS Q39): the outline lists no such outcome. The owner (a teacher) confirmed that earlier-grade material can appear in a later grade's paper,
+ * and decided to keep this optional enrichment: mapped only to the Grade 4 time-signature outcome, and no assessment blueprint may name it.
  */
 import { music } from "@mtp/curriculum";
 import { n, r, rhythmLine, type Gen } from "./families.ts";
