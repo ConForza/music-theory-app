@@ -55,6 +55,7 @@ export async function playPrep(page, S, userId, attemptId, opts = {}) {
       await answerOnScreen(page, S, item, scope, response);
     } catch (e) {
       const shown = await page.locator("section.question").first().innerText().catch(() => "?");
+      if (process.env.DUMP) (await import("node:fs")).writeFileSync(process.env.DUMP, JSON.stringify({ itemId: item.id, answer: item.answer, input: inputFor(S.course.ix, item, scope), scopeTs: scope.timeSignatures, music: item.music, prompt: item.prompt, shown }, null, 1));
       throw new Error(`${attemptId} question ${i + 1} (${item.templateId}) "${item.prompt}" with ${JSON.stringify(response)}: ${e.message.split("\n")[0]} | on screen: ${shown.replace(/\s+/g, " ").slice(0, 300)}`, { cause: e });
     }
     if (blind) {
