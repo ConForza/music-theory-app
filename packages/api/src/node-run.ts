@@ -46,7 +46,15 @@ interface PlannedItem {
   conceptIds: string[];
   sectionId?: string;
   outcomeId?: string;
+  /** Challenge and assessment: the version of the blueprint this question was planned from, so a run that is still open when the content changes is recorded against the blueprint it was delivered from (review of PR #16). */
+  blueprintVersion?: number;
 }
+
+/**
+ * Runs planned before the planner recorded a blueprint version carry no `blueprintVersion`. They were planned from the blueprint that was live before the change
+ * below, so that is what they are recorded against. Every other blueprint kept its composition, so its current version is right.
+ */
+const VERSION_BEFORE_RECORDING: Record<string, number> = { "a.g5": 1, "a.g5-u3": 1 };
 
 interface SessionRow {
   id: string;
@@ -267,7 +275,7 @@ export class NodeRunService {
           const scope = this.taughtUnion(t, node)!;
           const probe = (it: ExerciseItem) => this.creditedConcepts(it, node).some((c) => wanted.has(c));
           const got = this.pick(t, scope, seedOf(userId, node.id, run, salt, s.id, i, t), this.seenByLearner(userId, this.conceptsOf(t, node)), used, probe);
-          if (got && push(got.item, got.seed, { mode: "taught" }, this.creditedConcepts(got.item, node), { sectionId: s.id, outcomeId: s.outcomeIds[0] })) {
+          if (got && push(got.item, got.seed, { mode: "taught" }, this.creditedConcepts(got.item, node), { sectionId: s.id, outcomeId: s.outcomeIds[0], blueprintVersion: blueprint.version })) {
             made++;
             break;
           }
@@ -575,7 +583,9 @@ export class NodeRunService {
         Object.assign(summary, { score: correct, percent, passPercent, passed, disclaimer: ASSESSMENT_DISCLAIMER });
         this.fillAssessmentDetail(userId, node, row, planned, attempts, summary);
         const bp = this.course.ix.assessments.get(node.assessmentId!)!;
-        this.db.prepare("INSERT INTO assessment_results (user_id,node_id,run,kind,assessment_id,assessment_version,score,max_score,percent,pass_percent,passed,detail,curriculum_version,completed_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)").run(userId, nodeId, row.run, kind, bp.id, bp.version, correct, planned.length, percent, passPercent, passed ? 1 : 0, JSON.stringify({ sections: summary.sections, outcomes: summary.outcomes, mistakes: summary.mistakes }), this.course.version, t);
+        // The blueprint this run was DELIVERED from, not the one that is current now (a run can be open across a deployment).
+        const deliveredVersion = planned.find((p) => p.blueprintVersion !== undefined)?.blueprintVersion ?? VERSION_BEFORE_RECORDING[bp.id] ?? bp.version;
+        this.db.prepare("INSERT INTO assessment_results (user_id,node_id,run,kind,assessment_id,assessment_version,score,max_score,percent,pass_percent,passed,detail,curriculum_version,completed_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)").run(userId, nodeId, row.run, kind, bp.id, deliveredVersion, correct, planned.length, percent, passPercent, passed ? 1 : 0, JSON.stringify({ sections: summary.sections, outcomes: summary.outcomes, mistakes: summary.mistakes }), this.course.version, t);
       }
       this.db.prepare("UPDATE node_sessions SET status = ?, completed_at = ?, summary = ? WHERE user_id = ? AND node_id = ? AND run = ?").run(passed ? "complete" : "not_passed", t, JSON.stringify(summary), userId, nodeId, row.run);
       const stale = (lp.completed_content_version ?? 0) < node.contentVersion;

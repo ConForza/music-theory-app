@@ -67,7 +67,9 @@ export async function drive(page, scope, input, r, how) {
     case "staff-position": {
       const p = music.parsePitch(r.pitch);
       const pos = music.staffPosition(input.clef, p);
-      if (input.shown || how === "type") return typeNotes(scope, [r.pitch]);
+      // A stave that carries the key signature (intervals under a key signature) is driven like a learner would: by position, then by the sign the note needs
+      // beyond what the signature already gives. Typing the sounding pitch would hide a stave that ignores its key.
+      if ((input.shown && !input.keyOnStave) || (how === "type" && !input.keyOnStave)) return typeNotes(scope, [r.pitch]);
       if (how === "tap") await tapStave(page, scope, pos);
       else {
         const slider = scope.getByRole("slider");
@@ -75,6 +77,12 @@ export async function drive(page, scope, input, r, how) {
         await page.keyboard.press("ArrowUp"); // first press writes the note on the middle line
         for (let i = 4; i < pos; i++) await page.keyboard.press("ArrowUp");
         for (let i = 4; i > pos; i--) await page.keyboard.press("ArrowDown");
+      }
+      if (input.keyOnStave) {
+        const sig = music.signatureAlter(music.parseKey(input.key), p.step);
+        const label = p.alter === sig ? "no accidental sign written" : p.alter === 0 ? SIGN_LABEL[""] : SIGN_LABEL[{ [-2]: "bb", [-1]: "b", 1: "#", 2: "x" }[p.alter]];
+        await scope.getByLabel(label, { exact: true }).check();
+        return;
       }
       if (p.alter !== 0 || input.accidentals) await scope.getByLabel(p.alter === 0 ? "no accidental sign written" : SIGN_LABEL[{ [-2]: "bb", [-1]: "b", 1: "#", 2: "x" }[p.alter]], { exact: true }).check();
       return;

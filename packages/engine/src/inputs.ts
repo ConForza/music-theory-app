@@ -27,6 +27,8 @@ export type ItemInput =
       key?: string;
       /** Notes already printed on the stave (e.g. the lower note of an interval to build from). */
       shown?: string[];
+      /** Draw this key's signature on the ANSWER stave and read unsigned notes in it (intervals under a key signature). Other questions with a given note keep an unsigned answer stave. */
+      keyOnStave?: boolean;
     }
   | { kind: "keyboard"; from: string; to: string; spelling: boolean }
   | {
@@ -213,7 +215,7 @@ function inputForAnswer(c: ItemContext, a: SimpleAnswerSpec): Exclude<ItemInput,
           compound: Boolean(sc.compoundIntervals),
         };
       }
-      return { kind: "staff-position", clef: clefOf(), maxLedgerLines: sc.maxLedgerLines ?? 2, accidentals: true, doubleAccidentals: Boolean(sc.doubleAccidentals), ...(a.key ? { key: a.key } : {}), shown: [a.lower] };
+      return { kind: "staff-position", clef: clefOf(), maxLedgerLines: sc.maxLedgerLines ?? 2, accidentals: true, doubleAccidentals: Boolean(sc.doubleAccidentals), ...(a.key ? { key: a.key } : {}), ...(a.key && c.template.id.startsWith("t.g5.interval-key") ? { keyOnStave: true } : {}), shown: [a.lower] };
     }
     case "chord":
       if (a.task === "identify") return { kind: "chord-name", romans: sc.chordDegrees?.length ? sc.chordDegrees : ["I"], inversions: sc.inversions?.length ? sc.inversions : ["a"] };

@@ -110,6 +110,28 @@ describe("the new nodes", () => {
   }, 900_000);
 });
 
+describe("an assessment that is open when the content changes is recorded against the blueprint it was delivered from (review of PR #16, P2)", () => {
+  async function finishOpenRun(stripVersion: boolean) {
+    const { db, app, c, userId } = await learner("open", true);
+    expect((await c.post("/api/nodes/G5-A/start")).status).toBe(200);
+    if (stripVersion) {
+      // a run planned by the build before this change: its questions carry no blueprint version
+      const row = db.prepare("SELECT items FROM node_sessions WHERE user_id = ? AND node_id = 'G5-A'").get(userId) as { items: string };
+      const items = (JSON.parse(row.items) as Array<Record<string, unknown>>).map(({ blueprintVersion: _v, ...rest }) => rest);
+      db.prepare("UPDATE node_sessions SET items = ? WHERE user_id = ? AND node_id = 'G5-A'").run(JSON.stringify(items), userId);
+    }
+    const done = await playSession(c, app, userId, "G5-A");
+    expect(done.body.passed).toBe(true);
+    return db.prepare("SELECT assessment_version, max_score FROM assessment_results WHERE user_id = ? AND node_id = 'G5-A'").get(userId) as { assessment_version: number; max_score: number };
+  }
+  it("a run planned before the change (no recorded version) is stored as blueprint version 1, with its 39 questions", async () => {
+    expect(await finishOpenRun(true)).toEqual({ assessment_version: 1, max_score: 39 });
+  }, 600_000);
+  it("a run planned by this build is stored as blueprint version 2", async () => {
+    expect(await finishOpenRun(false)).toEqual({ assessment_version: 2, max_score: 39 });
+  }, 600_000);
+});
+
 describe("a learner who finished Grades 1-5 before this change", () => {
   it("keeps every completion, result, evidence row and badge; only the new lesson waits for them", async () => {
     const { db, c, userId } = await learner("old");
