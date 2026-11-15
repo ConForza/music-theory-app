@@ -8,7 +8,7 @@
  * Same pipeline as Grades 1-3 (author-grade3.ts): lessons are compact specs, their questions are PICKED from the generators inside each
  * lesson's own taught scope and FROZEN as fixed items with stable ids.
  */
-import { readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildLesson, startAuthoring } from "./grade1/lib.ts";
@@ -21,6 +21,18 @@ import type { Spec2 } from "./grade2/lib2.ts";
 import { mergeScope } from "@mtp/curriculum";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../../content");
+/**
+ * Every file is replaced atomically (write a temporary file, then rename it over the old one) and no lesson file is deleted first. Other test files load the
+ * whole curriculum while `grade5-course.test.ts` runs this script (to prove it is idempotent); deleting the lessons first left a window in which a parallel
+ * test saw "Required content file is missing" (seen in CI as a failed suite, not a failed test). The temporary file lives outside content/ so no loader can see it.
+ */
+const scratch = join(root, "../node_modules/.cache/author-grade5"); // same file system, outside every directory a loader scans, and git-ignored
+const writeAtomic = (file: string, text: string) => {
+  mkdirSync(scratch, { recursive: true });
+  const tmp = join(scratch, `${file.split("/").pop()}.${process.pid}.tmp`);
+  writeFileSync(tmp, text);
+  renameSync(tmp, file);
+};
 const specs: Spec2[] = [...U1, ...U2, ...U3, ...U4, ...U5];
 const isOptional = (node: string) => /-E\d$/.test(node);
 const pathFile = join(root, "path/grade-5.json");
@@ -93,10 +105,9 @@ for (const spec of specs) {
   if (isOptional(spec.node)) n.outcomeIds = [{ "G5-U1-E1": "abrsm2020.g4.01", "G5-U4-E1": "abrsm2020.g5.09", "G5-U4-E2": "abrsm2020.g5.10", "G5-U5-E1": "abrsm2020.g5.14" }[spec.node]!];
   // The passage lesson was planned without a book section; section 15 ("General Questions") is its model, so it is named for the provenance record.
 }
-writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
+writeAtomic(pathFile, JSON.stringify(path, null, 2) + "\n");
 
 // 2. Build the lessons from the bindings just written.
-for (const spec of specs) rmSync(join(root, `lessons/${spec.node}.json`), { force: true });
 const a = startAuthoring();
 const built = specs.map((spec) => ({ spec, lesson: buildLesson(a, spec) }));
 for (const { spec, lesson } of built) {
@@ -105,7 +116,7 @@ for (const { spec, lesson } of built) {
     // Optional enrichment: the lesson says so, and it never counts towards mastery, a challenge or the assessment.
     (lesson.mastery as { completion: string }).completion = spec.node === "G5-U4-E2" ? "Optional extra practice with approach chords. It is complete when every step has been answered correctly. It is never required and gates no other node; its answers count as practice of choosing chords at cadence points, like any other practice of that concept." : "Optional enrichment. It is complete when every step has been answered correctly. It never counts towards Grade 5 mastery, a unit challenge or the Grade 5 assessment, and it never gates any other node.";
   }
-  writeFileSync(join(root, `lessons/${spec.node}.json`), JSON.stringify(lesson, null, 2) + "\n"); // after the optional-node wording is set, so it is what is stored
+  writeAtomic(join(root, `lessons/${spec.node}.json`), JSON.stringify(lesson, null, 2) + "\n"); // after the optional-node wording is set, so it is what is stored
   n.contentRef = `lessons/${spec.node}.json`;
   n.contentStatus = "draft";
   console.log(`wrote ${spec.node}: ${lesson.guided.length} guided, ${lesson.independent.length} independent`);
@@ -142,7 +153,7 @@ units.forEach((u, k) => {
   }
 });
 nodes.find((n) => n.type === "grade_assessment")!.contentStatus = "draft";
-writeFileSync(pathFile, JSON.stringify(path, null, 2) + "\n");
+writeAtomic(pathFile, JSON.stringify(path, null, 2) + "\n");
 
 // 4. Blueprints. Sections keep their outcomes; the template lists name every template that can honestly evidence the outcome. A section
 //    only ever draws from what has been taught, and a unit challenge only from its own unit and earlier ones (a template is dropped
@@ -226,5 +237,5 @@ for (const bp of as.assessments) {
   if (earlier >= need / 2) throw new Error("earlier-grade questions could decide the Grade 5 assessment");
   console.log(`Grade 5 assessment: ${total} questions (${total - earlier} Grade 5, ${earlier} earlier), pass mark ${passPercent}% = ${need} right, so at least ${need - earlier} must be Grade 5 answers`);
 }
-writeFileSync(asFile, JSON.stringify(as, null, 2) + "\n");
+writeAtomic(asFile, JSON.stringify(as, null, 2) + "\n");
 console.log("assessments updated");

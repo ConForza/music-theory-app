@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app.ts";
 import { openDb } from "../src/db.ts";
@@ -68,6 +69,17 @@ describe("the new nodes", () => {
       }
       expect(L).toContain(alter(a.lower).letter);
     }
+  });
+
+  it("the lesson teaches before it assesses: a worked example of a flat sign in a sharp key and of a natural cancelling the signature, with the book section that teaches it (review of PR #16, finding C)", () => {
+    const lesson = JSON.parse(readFileSync(new URL("../../../content/lessons/G5-U3-L07.json", import.meta.url), "utf8")) as { explanation: Array<{ text?: string; music?: { key?: string; measures: Array<{ events: Array<{ pitch: string; writtenAccidental?: string }> }> } }> };
+    const shown = lesson.explanation.flatMap((b) => (b.music ? [b.music] : []));
+    const flatInSharpKey = shown.find((m) => m.key === "D major" && m.measures[0]!.events.some((e) => e.pitch === "A♭4" || e.pitch === "Ab4"));
+    expect(flatInSharpKey, "a worked example with a written flat under a sharp signature").toBeTruthy();
+    expect(flatInSharpKey!.measures[0]!.events.map((e) => e.writtenAccidental)).toEqual(["natural", "flat"]);
+    expect(shown.some((m) => m.key === "G major" && m.measures[0]!.events.some((e) => e.writtenAccidental === "natural"))).toBe(true);
+    expect(lesson.explanation.map((b) => b.text ?? "").join(" ")).toMatch(/a sign always means exactly what it says/i);
+    expect(course.ix.nodeById.get("G5-U3-L07")!.bookSectionIds).toEqual(["fs.g5.s06", "fs.g4.s09"]);
   });
 
   it("both are completed through the real server, with evidence for the new concept only (and none for compulsory concepts from the optional node)", async () => {

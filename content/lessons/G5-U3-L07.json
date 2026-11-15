@@ -15,7 +15,7 @@
   "explanation": [
     {
       "kind": "text",
-      "text": "When a stave has a key signature, it changes every note of those letters, in every octave, unless a sign in front of a note says otherwise. So before you name an interval, work out what each note is: first the key signature, then any sign written in front of the note."
+      "text": "When a stave has a key signature, it changes every note of those letters, in every octave, unless a sign in front of a note says otherwise. So before you name an interval, work out what each note is: first the key signature, then any sign written in front of the note. The name of an interval depends only on the two notes themselves, not on the key signature they happen to be written in."
     },
     {
       "kind": "notation",
@@ -52,7 +52,7 @@
     },
     {
       "kind": "text",
-      "text": "A sign in front of a note beats the key signature for that note. In G major the signature gives F♯, but a natural sign makes that note F♮. B up to F♮ is a diminished 5th; B up to F♯ would be a perfect 5th."
+      "text": "A sign in front of a note beats the key signature for that note, and a sign always means exactly what it says. In G major the signature gives F♯, but a natural sign makes that note F♮: B up to F♮ is a diminished 5th, where B up to F♯ would be a perfect 5th. A sign can also go on a letter the signature leaves alone, in either direction, even in a sharp key: in D major a flat sign gives A♭, not A♮."
     },
     {
       "kind": "notation",
@@ -89,12 +89,43 @@
       "caption": "G major: the natural sign cancels the signature's F♯, so this is B up to F♮, a diminished 5th."
     },
     {
-      "kind": "text",
-      "text": "Writing an interval works the same way, in reverse. Find the letter by counting, then the accidental the quality needs, and compare that with what the key signature already gives the letter. If they match, write no sign. If they differ, write the sign. A minor 3rd above E♭ is G♭; in A♭ major the signature has no flat on G, so the G♭ needs a flat sign. A major 3rd above E♭ is G♮, and it needs no sign."
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "writtenAccidental": "flat"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "In D major, C natural then A flat, each written with its own sign.",
+        "key": "D major"
+      },
+      "caption": "D major (F♯ and C♯): the natural sign cancels the signature's C♯, and the flat sign gives A♭ even though the key is a sharp key. C♮ up to A♭ is a minor 6th."
     },
     {
-      "kind": "tip",
-      "text": "Signature first, then any sign in front of the note, then count letters and check the quality."
+      "kind": "text",
+      "text": "Writing an interval works the same way, in reverse. Find the letter by counting, then the accidental the quality needs, and compare that with what the key signature already gives the letter. If they match, write no sign. If they differ, write the sign. A minor 3rd above E♭ is G♭; in A♭ major the signature has no flat on G, so the G♭ needs a flat sign. A major 3rd above E♭ is G♮, and it needs no sign. Signature first, then any sign in front of the note, then count letters and check the quality."
     }
   ],
   "demonstration": {
@@ -714,7 +745,8 @@
     "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
     "originality": "original",
     "bookSectionIds": [
-      "fs.g5.s06"
+      "fs.g5.s06",
+      "fs.g4.s09"
     ],
     "outcomeIds": [
       "abrsm2020.g5.08"

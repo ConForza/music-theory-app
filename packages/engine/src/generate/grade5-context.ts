@@ -67,7 +67,7 @@ export const ornamentReplace5: Gen = (c): any => {
       prompt: `The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the pair?`,
       music: frag(clef, [{ events, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts3 }),
       answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: written.map(F), writtenOutValues: values, accepted: [sign] },
-      hints: ["An appoggiatura takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note. In both cases the sign is a small note written before the main note; for the other ornaments the sign is usually written above the main note."],
+      hints: ["An appoggiatura usually takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note. In both cases the sign is a small note written before the main note; for the other ornaments the sign is usually written above the main note."],
     };
   }
   const figures: Record<string, Array<[Pitch, music.NoteValue]>> = {
