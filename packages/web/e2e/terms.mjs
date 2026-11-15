@@ -23,7 +23,6 @@ const test = async (name, fn) => {
     log("✗", name, "-", e.message.split("\n").slice(0, 6).join(" | "));
   }
 };
-const NEW = new Set(music.BOOK_LESSONS.map((l) => l.node));
 const profiles = {
   iphone: devices["iPhone 14"],
   "phone-320": { viewport: { width: 320, height: 640 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
@@ -32,10 +31,12 @@ const profiles = {
 const ctxFor = (p, extra = {}) => browser.newContext({ ...p, baseURL: S.base, ...extra });
 
 /** Mark every node before `nodeId` completed (as a learner who did the old course up to there), except the new terminology lessons. */
-function completeBefore(userId, nodeId) {
+function completeBefore(userId, nodeId, fromGrade = 2) {
   const now = S.clock.now().toISOString();
   const cut = S.course.ix.nodeById.get(nodeId).order;
-  for (const n of S.course.nodes.filter((x) => x.order < cut && !NEW.has(x.id))) {
+  // the new lessons of EARLIER grades are done (Grade 3's first new lesson waits for Grade 2's last, Grade 4's for Grade 3's); this grade's are not
+  const open = new Set(music.BOOK_LESSONS.filter((l) => l.grade >= fromGrade).map((l) => l.node));
+  for (const n of S.course.nodes.filter((x) => x.order < cut && !open.has(x.id))) {
     S.db.prepare("DELETE FROM lesson_progress WHERE user_id = ? AND node_id = ?").run(userId, n.id);
     S.db.prepare("INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES (?,?,1,0,'questions',?,?,?,?,?,?)").run(userId, n.id, n.contentVersion, S.course.version, now, now, now, n.contentVersion);
   }
@@ -43,7 +44,7 @@ function completeBefore(userId, nodeId) {
 async function learnerAt(grade, firstNew, p = profiles.desktop, extra = {}) {
   const ctx = await ctxFor(p, extra);
   const { page, userId } = await guest(ctx);
-  completeBefore(userId, firstNew);
+  completeBefore(userId, firstNew, grade);
   await selectGrade(page, grade);
   return { ctx, page, userId };
 }

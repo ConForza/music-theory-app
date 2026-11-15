@@ -135,10 +135,15 @@ export class NodeRunService {
    */
   private taughtToLearner(userId: string, templateId: string, node: OrderedNode): boolean {
     if (!music.isBookTemplate(templateId)) return true;
-    const lessons = this.teachingNodesBefore(node).filter((n) => n.type === "lesson" && n.exercises.some((b) => b.templateId === templateId));
-    if (!lessons.length) return false;
+    // A `*.book-*` question draws its wrong options from the book vocabulary of every earlier new lesson, including earlier grades' (terms-book.ts, `pool`),
+    // so the learner must have completed EVERY new lesson of this template's grade and of the grades before it (review of PR #15, P2): not only the
+    // lessons that bind this template.
+    const grade = Number(templateId.slice(3, 4));
+    const needed = music.BOOK_LESSONS.filter((l) => l.grade <= grade && (this.course.ix.nodeById.get(l.node)?.order ?? Infinity) <= node.order).map((l) => l.node);
+    const bound = this.teachingNodesBefore(node).some((n) => n.type === "lesson" && n.exercises.some((b) => b.templateId === templateId));
+    if (!bound || !needed.length) return false;
     const done = new Set((this.db.prepare("SELECT node_id FROM lesson_progress WHERE user_id = ? AND completed_at IS NOT NULL").all(userId) as Array<{ node_id: string }>).map((r) => r.node_id));
-    return lessons.every((n) => done.has(n.id));
+    return needed.every((id) => done.has(id));
   }
 
   private scopeOf(si: PlannedItem, node: OrderedNode): MusicScope | null {

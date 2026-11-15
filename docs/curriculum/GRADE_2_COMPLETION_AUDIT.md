@@ -96,10 +96,10 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.terms.g2-words | U5-L02 | terms 52, term-use 145 | 197 |
 | c.terms.g2-signs | U5-L03 | terms 31, term-use 105 | 136 |
 | c.context.melody-g2 | U5-L04 | melody 400, melody-detail 400 | 800 |
-| c.terms.g2-link | U5-L05 | book-terms 137, book-use 46 | 183 |
+| c.terms.g2-link | U5-L05 | book-terms 137, book-use 39 | 176 |
 | c.terms.g2-more | U5-L06 | book-terms 100, book-use 142 | 242 |
-| c.terms.g2-character | U5-L07 | book-terms 105, book-use 138 | 243 |
-| c.terms.g2-touch | U5-L08 | book-terms 58, book-use 74 | 132 |
+| c.terms.g2-character | U5-L07 | book-terms 105, book-use 139 | 244 |
+| c.terms.g2-touch | U5-L08 | book-terms 58, book-use 80 | 138 |
 
 Required concepts below the capacity rule: **0**.
 

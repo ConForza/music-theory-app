@@ -503,14 +503,14 @@
       "prompt": "This melody is marked “grave”. What does the marking ask the player to do?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "G2",
+                "pitch": "F5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -518,15 +518,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb2",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "C3",
+                "pitch": "G5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -538,7 +530,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Ab2",
+                "pitch": "A5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -546,15 +538,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb2",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "D3",
+                "pitch": "C6",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -564,25 +548,25 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet on the 1st line; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet in the 1st space; crotchet on the 2nd line; crotchet on the 3rd line. The tempo mark above the first bar says “grave”.",
-        "key": "Eb major",
-        "timeSignature": "3/4",
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 1 flat, time signature 2/4. Bar 1: crotchet on the 5th line; crotchet in the space just above the stave. Bar 2: crotchet on the 1st ledger line above the stave; crotchet on the 2nd ledger line above the stave. The tempo mark above the first bar says “grave”.",
+        "key": "F major",
+        "timeSignature": "2/4",
         "tempoText": "grave"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "fortepiano",
-            "label": "loud, then immediately quiet"
-          },
-          {
             "id": "da-capo",
             "label": "repeat from the beginning"
           },
           {
-            "id": "ottava",
-            "label": "play an octave higher than written"
+            "id": "accent",
+            "label": "emphasise the note"
+          },
+          {
+            "id": "fortepiano",
+            "label": "loud, then immediately quiet"
           },
           {
             "id": "grave",
@@ -593,13 +577,13 @@
           "grave"
         ],
         "diagnoses": {
-          "ottava": {
-            "category": "wrong-category",
-            "reason": "That is what “8va” means, not “grave”."
-          },
           "da-capo": {
             "category": "wrong-category",
             "reason": "That is what “da capo (D.C.)” means, not “grave”."
+          },
+          "accent": {
+            "category": "wrong-category",
+            "reason": "That is what “accent (>)” means, not “grave”."
           },
           "fortepiano": {
             "category": "wrong-category",
@@ -691,37 +675,37 @@
         "kind": "choice",
         "options": [
           {
-            "id": "maestoso",
-            "label": "maestoso"
+            "id": "dolce",
+            "label": "dolce"
           },
           {
-            "id": "fine",
-            "label": "fine"
+            "id": "maestoso",
+            "label": "maestoso"
           },
           {
             "id": "giocoso",
             "label": "giocoso"
           },
           {
-            "id": "slur",
-            "label": "slur"
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
           }
         ],
         "correctOptionIds": [
           "giocoso"
         ],
         "diagnoses": {
-          "slur": {
-            "category": "wrong-category",
-            "reason": "“slur” means play the notes under the curve smoothly; the word asked about means playful and merry."
-          },
           "maestoso": {
             "category": "confused-similar-term",
             "reason": "“maestoso” means majestically; the word asked about means playful and merry."
           },
-          "fine": {
+          "metronome-mark": {
             "category": "wrong-category",
-            "reason": "“fine” means the end; the word asked about means playful and merry."
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means playful and merry."
+          },
+          "dolce": {
+            "category": "confused-similar-term",
+            "reason": "“dolce” means sweetly; the word asked about means playful and merry."
           }
         }
       },

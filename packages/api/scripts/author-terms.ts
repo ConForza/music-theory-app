@@ -146,6 +146,9 @@ for (const g of grades) {
     contentVersion: 1,
     contentStatus: "draft",
     bookSectionIds: [SECTION[g]],
+    // The first new lesson of Grades 3 and 4 also waits for the last new lesson of the grade before: its questions show that grade's new words as wrong
+    // options (review of PR #15, P2). Historical completions are untouched.
+    ...(l.node === mine[0]!.node && g > 2 ? { unlockAfter: [ANCHOR[g], music.BOOK_LESSONS.filter((x) => x.grade === g - 1).at(-1)!.node] } : {}),
     ...(keep.get(l.node)?.contentRef ? { contentRef: keep.get(l.node)!.contentRef } : {}),
   }));
   doc.nodes = [...base.slice(0, at + 1), ...fresh, ...base.slice(at + 1)];

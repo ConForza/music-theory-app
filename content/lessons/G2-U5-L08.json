@@ -482,48 +482,98 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "A composer wants a note that must be hit hard and clearly. Which marking fits best?",
+      "prompt": "Look at the marks on the second note. Which sign is it?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "articulations": [
+                  "strong-accent"
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 1-bar melody in the bass clef, key signature of 3 sharps, time signature 4/4. Bar 1: crotchet on the 1st ledger line above the stave; crotchet in the space just above the stave; crotchet in the space above the 1st ledger line above the stave; crotchet on the 2nd ledger line above the stave. The second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it.",
+        "key": "A major",
+        "timeSignature": "4/4"
+      },
       "answer": {
         "kind": "choice",
         "options": [
           {
+            "id": "staccatissimo",
+            "label": "wedge (staccatissimo)"
+          },
+          {
             "id": "pointed-accent",
-            "label": "the sign ∧ (over a note) or ∨ (under it)"
+            "label": "pointed accent (∧ or ∨)"
           },
           {
-            "id": "allegretto",
-            "label": "allegretto"
+            "id": "tenuto",
+            "label": "tenuto line"
           },
           {
-            "id": "fine",
-            "label": "fine"
-          },
-          {
-            "id": "metronome-mark",
-            "label": "M.M. ♩ = 72"
+            "id": "staccato",
+            "label": "staccato dot"
           }
         ],
         "correctOptionIds": [
           "pointed-accent"
         ],
         "diagnoses": {
-          "allegretto": {
-            "category": "wrong-category",
-            "reason": "“allegretto” means fairly quick, but not as fast as allegro; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
+          "tenuto": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “tenuto line”: held: give the note its full length."
           },
-          "fine": {
-            "category": "wrong-category",
-            "reason": "“fine” means the end; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
+          "staccatissimo": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “wedge (staccatissimo)”: very short and detached."
           },
-          "metronome-mark": {
-            "category": "wrong-category",
-            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
+          "staccato": {
+            "category": "confused-similar-term",
+            "reason": "That sign is “staccato dot”: short and detached."
           }
         }
       },
       "hints": [
         "Think about what the marking asks the player to do.",
-        "It is about how a note is touched: how short, how stressed or how held."
+        "Look closely at the shapes: the second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it. Compare it with each sign in the lesson."
       ],
       "feedback": {
         "correct": "Correct: the sign ∧ or ∨: an accent: the note is stressed, as with >, and perhaps even more strongly.",
@@ -659,90 +709,48 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Look at the marks on the second note. Which sign is it?",
-      "music": {
-        "presentation": "stave",
-        "clef": "bass",
-        "showKeySignature": true,
-        "measures": [
-          {
-            "events": [
-              {
-                "kind": "note",
-                "pitch": "F3",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "G3",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                },
-                "articulations": [
-                  "strong-accent"
-                ]
-              },
-              {
-                "kind": "note",
-                "pitch": "F3",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              }
-            ],
-            "barline": "final"
-          }
-        ],
-        "textAlternative": "A 1-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet on the 4th line; crotchet in the 4th space; crotchet on the 4th line. The second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it.",
-        "key": "Eb major",
-        "timeSignature": "3/4"
-      },
+      "prompt": "A composer wants a note that must be hit hard and clearly. Which marking fits best?",
       "answer": {
         "kind": "choice",
         "options": [
           {
             "id": "pointed-accent",
-            "label": "pointed accent (∧ or ∨)"
+            "label": "the sign ∧ (over a note) or ∨ (under it)"
           },
           {
-            "id": "tenuto",
-            "label": "tenuto line"
+            "id": "allegretto",
+            "label": "allegretto"
           },
           {
-            "id": "staccatissimo",
-            "label": "wedge (staccatissimo)"
+            "id": "fine",
+            "label": "fine"
           },
           {
-            "id": "semi-staccato",
-            "label": "dots inside a slur (semi-staccato)"
+            "id": "metronome-mark",
+            "label": "M.M. ♩ = 72"
           }
         ],
         "correctOptionIds": [
           "pointed-accent"
         ],
         "diagnoses": {
-          "staccatissimo": {
-            "category": "confused-similar-term",
-            "reason": "That sign is “wedge (staccatissimo)”: very short and detached."
+          "allegretto": {
+            "category": "wrong-category",
+            "reason": "“allegretto” means fairly quick, but not as fast as allegro; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
           },
-          "tenuto": {
-            "category": "confused-similar-term",
-            "reason": "That sign is “tenuto line”: held: give the note its full length."
+          "fine": {
+            "category": "wrong-category",
+            "reason": "“fine” means the end; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
           },
-          "semi-staccato": {
-            "category": "confused-similar-term",
-            "reason": "That sign is “dots inside a slur (semi-staccato)”: the notes are slightly separated, but less than with ordinary staccato dots."
+          "metronome-mark": {
+            "category": "wrong-category",
+            "reason": "“M.M. ♩ = 72” means 72 crotchet beats in a minute; the word asked about means an accent: the note is stressed, as with >, and perhaps even more strongly."
           }
         }
       },
       "hints": [
         "Think about what the marking asks the player to do.",
-        "Look closely at the shapes: the second note has a pointed arrowhead (an upside-down V, ∧) above it, or a V (∨) below it. Compare it with each sign in the lesson."
+        "It is about how a note is touched: how short, how stressed or how held."
       ],
       "feedback": {
         "correct": "Correct: the sign ∧ or ∨: an accent: the note is stressed, as with >, and perhaps even more strongly.",

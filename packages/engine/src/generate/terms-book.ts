@@ -142,6 +142,15 @@ function distractors(c: Ctx, target: T, grade: number, need = 3, filter: (d: T) 
   return picks.length === need ? picks : null;
 }
 
+/**
+ * Wrong options for a question that shows a PHRASE gloss ("allegro assai: very quick"). The distractor is chosen by the owner word's class, but what is
+ * shown is a gloss, so a word's class is not enough: a speed word's gloss ("very fast") says the same as a phrase about speed. For a little word's phrase
+ * only other little words, order words and signs are offered, and every wrong option shows its plain meaning, never a gloss borrowed from one of its
+ * own phrases (review of PR #15, P2: "very quick" beside "very fast").
+ */
+const phraseDistractors = (c: Ctx, target: T, grade: number): T[] | null =>
+  distractors(c, target, grade, 3, (d) => target.cls !== "word" || d.cls === "word" || d.cls === "structure" || d.cls === "mark");
+
 const why = (target: T, d: T, side: "meaning" | "term") =>
   diag(target.opposite.includes(d.id) ? "opposite-meaning" : d.category === target.category ? "confused-similar-term" : "wrong-category", side === "meaning" ? `That is what “${d.term}” means, not “${target.term}”.` : `“${d.term}” means ${d.meaning}; the word asked about means ${target.meaning}.`);
 const diagnoses = (target: T, picks: T[], side: "meaning" | "term") => Object.fromEntries(picks.map((p) => [p.id, why(target, p, side)]));
@@ -170,11 +179,11 @@ export const bookTerms: Gen = (c) => {
     return { prompt: `Which ${target.cls === "touch" || target.cls === "mark" ? "sign" : "word"} means “${target.meaning}”?`, answer: { kind: "choice", options: opts(c, target, picks, (t) => t.term), correctOptionIds: [target.id], diagnoses: diagnoses(target, picks, "term") }, hints: [hint] };
   }
   const ph = c.rng.pick(target.phrases!);
-  // Wrong options: the gloss of a phrase or word from another term, never one that repeats the right gloss.
-  const labelOf = (t: T) => (t.id === target.id ? ph.meaning : t.phrases?.length ? c.rng.pick(t.phrases).meaning : t.meaning);
-  const labelled = c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: labelOf(t) }));
+  const pp = phraseDistractors(c, target, grade);
+  if (!pp) return null;
+  const labelled = c.rng.shuffle([target, ...pp]).map((t) => ({ id: t.id, label: t.id === target.id ? ph.meaning : t.meaning }));
   if (new Set(labelled.map((x) => x.label.toLowerCase())).size < labelled.length) return null;
-  return { prompt: `What does the direction “${ph.phrase}” mean?`, answer: { kind: "choice", options: labelled, correctOptionIds: [target.id], diagnoses: diagnoses(target, picks, "meaning") }, hints: ["Take the direction one word at a time, using what the lessons taught about each word."] };
+  return { prompt: `What does the direction “${ph.phrase}” mean?`, answer: { kind: "choice", options: labelled, correctOptionIds: [target.id], diagnoses: diagnoses(target, pp, "meaning") }, hints: ["Take the direction one word at a time, using what the lessons taught about each word."] };
 };
 
 // ---------------------------------------------------------------------------
@@ -275,9 +284,9 @@ function oldSign(id: string): T {
 /** Little words, order words and the like: ask for the gloss of a short direction that uses them. */
 function phraseUse(c: Ctx, target: T, grade: number) {
   const ph = target.phrases?.length ? c.rng.pick(target.phrases) : null;
-  const picks = distractors(c, target, grade);
+  const picks = ph ? phraseDistractors(c, target, grade) : null;
   if (!ph || !picks) return null;
-  const labelled = c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: t.id === target.id ? ph.meaning : t.phrases?.length ? c.rng.pick(t.phrases).meaning : t.meaning }));
+  const labelled = c.rng.shuffle([target, ...picks]).map((t) => ({ id: t.id, label: t.id === target.id ? ph.meaning : t.meaning }));
   if (new Set(labelled.map((x) => x.label.toLowerCase())).size < labelled.length) return null;
   const m = tune(c, { tempo: ph.phrase });
   return {

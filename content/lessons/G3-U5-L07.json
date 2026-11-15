@@ -782,7 +782,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "G4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -790,7 +790,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "F#4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -798,7 +798,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -810,7 +818,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "Bb3",
+                "pitch": "G4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -818,7 +826,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "F#4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -826,7 +834,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -836,29 +852,29 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 3/4. Bar 1: crotchet on the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave; crotchet on the 1st ledger line below the stave. Bar 2: crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave; crotchet on the 2nd ledger line below the stave. The tempo mark above the first bar says “non tanto”.",
-        "key": "Bb major",
-        "timeSignature": "3/4",
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 1 sharp, time signature 4/4. Bar 1: crotchet on the 2nd line; crotchet in the 1st space; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet on the 2nd line; crotchet in the 1st space; crotchet in the 2nd space; crotchet on the 2nd line. The tempo mark above the first bar says “non tanto”.",
+        "key": "G major",
+        "timeSignature": "4/4",
         "tempoText": "non tanto"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "piu",
-            "label": "with more movement: faster"
-          },
-          {
-            "id": "senza",
-            "label": "without"
+            "id": "fine",
+            "label": "the end"
           },
           {
             "id": "tanto",
             "label": "not so much"
           },
           {
-            "id": "forte",
-            "label": "loud"
+            "id": "piu",
+            "label": "more"
+          },
+          {
+            "id": "senza",
+            "label": "without"
           }
         ],
         "correctOptionIds": [
@@ -873,9 +889,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “più” means, not “tanto”."
           },
-          "forte": {
+          "fine": {
             "category": "wrong-category",
-            "reason": "That is what “forte (f)” means, not “tanto”."
+            "reason": "That is what “fine” means, not “tanto”."
           }
         }
       },

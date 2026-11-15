@@ -263,7 +263,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "G3",
+                "pitch": "F3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -271,7 +271,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F3",
+                "pitch": "G3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -291,15 +291,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B3",
-                "duration": {
-                  "value": "crotchet",
-                  "dots": 0
-                }
-              },
-              {
-                "kind": "note",
-                "pitch": "C4",
+                "pitch": "F3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -312,12 +304,20 @@
                   "value": "crotchet",
                   "dots": 0
                 }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
               }
             ],
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. Bar 1: crotchet in the 4th space; crotchet on the 4th line; crotchet on the 5th line. Bar 2: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 5th line. The tempo mark above the first bar says “alla marcia”.",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 3/4. Bar 1: crotchet on the 4th line; crotchet in the 4th space; crotchet on the 5th line. Bar 2: crotchet on the 4th line; crotchet on the 5th line; crotchet on the 1st ledger line above the stave. The tempo mark above the first bar says “alla marcia”.",
         "key": "C major",
         "timeSignature": "3/4",
         "tempoText": "alla marcia"
@@ -326,16 +326,16 @@
         "kind": "choice",
         "options": [
           {
-            "id": "al-alla",
-            "label": "in the style of a march"
-          },
-          {
-            "id": "tenuto",
-            "label": "held: give the note its full length"
-          },
-          {
             "id": "con-col",
             "label": "with"
+          },
+          {
+            "id": "metronome-mark",
+            "label": "72 crotchet beats in a minute"
+          },
+          {
+            "id": "al-alla",
+            "label": "in the style of a march"
           },
           {
             "id": "e-ed",
@@ -354,9 +354,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “con, col” means, not “al, alla”."
           },
-          "tenuto": {
+          "metronome-mark": {
             "category": "wrong-category",
-            "reason": "That is what “tenuto” means, not “al, alla”."
+            "reason": "That is what “M.M. ♩ = 72” means, not “al, alla”."
           }
         }
       },
@@ -510,7 +510,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B3",
+                "pitch": "Bb2",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -518,7 +518,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "C#4",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -530,7 +538,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "B3",
+                "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -538,7 +546,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -548,14 +564,22 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 2/4. Bar 1: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave. Bar 2: crotchet in the space just above the stave; crotchet on the 5th line. The tempo mark above the first bar says “alla marcia”.",
-        "key": "A major",
-        "timeSignature": "2/4",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 flats, time signature 3/4. Bar 1: crotchet on the 2nd line; crotchet in the 2nd space; crotchet on the 2nd line. Bar 2: crotchet on the 3rd line; crotchet on the 4th line; crotchet on the 3rd line. The tempo mark above the first bar says “alla marcia”.",
+        "key": "Bb major",
+        "timeSignature": "3/4",
         "tempoText": "alla marcia"
       },
       "answer": {
         "kind": "choice",
         "options": [
+          {
+            "id": "fine",
+            "label": "the end"
+          },
+          {
+            "id": "al-alla",
+            "label": "in the style of a march"
+          },
           {
             "id": "senza",
             "label": "without"
@@ -563,14 +587,6 @@
           {
             "id": "con-col",
             "label": "with"
-          },
-          {
-            "id": "al-alla",
-            "label": "in the style of a march"
-          },
-          {
-            "id": "da-capo",
-            "label": "repeat from the beginning"
           }
         ],
         "correctOptionIds": [
@@ -585,9 +601,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “con, col” means, not “al, alla”."
           },
-          "da-capo": {
+          "fine": {
             "category": "wrong-category",
-            "reason": "That is what “da capo (D.C.)” means, not “al, alla”."
+            "reason": "That is what “fine” means, not “al, alla”."
           }
         }
       },

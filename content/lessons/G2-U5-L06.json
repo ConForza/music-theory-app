@@ -256,7 +256,7 @@
       "prompt": "This melody is marked “meno mosso”. What does the marking ask the player to do?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
@@ -271,7 +271,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "D4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -279,7 +279,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "E4",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -299,7 +307,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "C#4",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -307,7 +315,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "A3",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -317,25 +333,25 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 1 sharp, time signature 3/4. Bar 1: crotchet in the space just above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 2nd ledger line above the stave. Bar 2: crotchet in the space above the 1st ledger line above the stave; crotchet on the 1st ledger line above the stave; crotchet on the 5th line. The tempo mark above the first bar says “meno mosso”.",
-        "key": "G major",
-        "timeSignature": "3/4",
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 3 sharps, time signature 4/4. Bar 1: crotchet in the space below the 1st ledger line below the stave; crotchet in the space just below the stave; crotchet in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave. Bar 2: crotchet in the space just below the stave; crotchet on the 1st ledger line below the stave; crotchet in the space just below the stave; crotchet in the space below the 1st ledger line below the stave. The tempo mark above the first bar says “meno mosso”.",
+        "key": "A major",
+        "timeSignature": "4/4",
         "tempoText": "meno mosso"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "troppo",
-            "label": "but not too much"
-          },
-          {
-            "id": "metronome-mark",
-            "label": "72 crotchet beats in a minute"
-          },
-          {
             "id": "meno",
             "label": "with less movement: slower"
+          },
+          {
+            "id": "slur",
+            "label": "play the notes under the curve smoothly"
+          },
+          {
+            "id": "troppo",
+            "label": "too much"
           },
           {
             "id": "e-ed",
@@ -354,9 +370,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “troppo” means, not “meno”."
           },
-          "metronome-mark": {
+          "slur": {
             "category": "wrong-category",
-            "reason": "That is what “M.M. ♩ = 72” means, not “meno”."
+            "reason": "That is what “slur” means, not “meno”."
           }
         }
       },
@@ -503,14 +519,14 @@
       "prompt": "This melody is marked “meno mosso”. What does the marking ask the player to do?",
       "music": {
         "presentation": "stave",
-        "clef": "treble",
+        "clef": "bass",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "D4",
+                "pitch": "G3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -518,7 +534,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb3",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -530,7 +554,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "C4",
+                "pitch": "G3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -538,7 +562,15 @@
               },
               {
                 "kind": "note",
-                "pitch": "D4",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -548,9 +580,9 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. Bar 1: crotchet in the space just below the stave; crotchet in the space below the 1st ledger line below the stave. Bar 2: crotchet on the 1st ledger line below the stave; crotchet in the space just below the stave. The tempo mark above the first bar says “meno mosso”.",
-        "key": "Bb major",
-        "timeSignature": "2/4",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 sharps, time signature 3/4. Bar 1: crotchet in the 4th space; crotchet in the space just above the stave; crotchet on the 5th line. Bar 2: crotchet in the 4th space; crotchet on the 4th line; crotchet on the 5th line. The tempo mark above the first bar says “meno mosso”.",
+        "key": "D major",
+        "timeSignature": "3/4",
         "tempoText": "meno mosso"
       },
       "answer": {
@@ -558,19 +590,19 @@
         "options": [
           {
             "id": "al-alla",
-            "label": "in the style of a march"
+            "label": "to the, or in the manner of"
           },
           {
-            "id": "meno",
-            "label": "with less movement: slower"
+            "id": "troppo",
+            "label": "too much"
           },
           {
             "id": "non",
             "label": "not"
           },
           {
-            "id": "mezzo-piano",
-            "label": "moderately quiet"
+            "id": "meno",
+            "label": "with less movement: slower"
           }
         ],
         "correctOptionIds": [
@@ -585,9 +617,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “al, alla” means, not “meno”."
           },
-          "mezzo-piano": {
-            "category": "wrong-category",
-            "reason": "That is what “mezzo piano (mp)” means, not “meno”."
+          "troppo": {
+            "category": "confused-similar-term",
+            "reason": "That is what “troppo” means, not “meno”."
           }
         }
       },
@@ -673,14 +705,14 @@
       "prompt": "This melody is marked “ma non troppo”. What does the marking ask the player to do?",
       "music": {
         "presentation": "stave",
-        "clef": "bass",
+        "clef": "treble",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "Ab2",
+                "pitch": "A5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -688,7 +720,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Bb2",
+                "pitch": "F#5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -696,7 +728,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "C3",
+                "pitch": "E5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -708,7 +740,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "D3",
+                "pitch": "C#5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -716,7 +748,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "Eb3",
+                "pitch": "E5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -724,7 +756,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "F3",
+                "pitch": "G5",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -734,8 +766,8 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 flats, time signature 3/4. Bar 1: crotchet in the 1st space; crotchet on the 2nd line; crotchet in the 2nd space. Bar 2: crotchet on the 3rd line; crotchet in the 3rd space; crotchet on the 4th line. The tempo mark above the first bar says “ma non troppo”.",
-        "key": "Eb major",
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 sharps, time signature 3/4. Bar 1: crotchet on the 1st ledger line above the stave; crotchet on the 5th line; crotchet in the 4th space. Bar 2: crotchet in the 3rd space; crotchet in the 4th space; crotchet in the space just above the stave. The tempo mark above the first bar says “ma non troppo”.",
+        "key": "D major",
         "timeSignature": "3/4",
         "tempoText": "ma non troppo"
       },
@@ -743,16 +775,16 @@
         "kind": "choice",
         "options": [
           {
-            "id": "al-alla",
-            "label": "in the style of a march"
+            "id": "fine",
+            "label": "the end"
           },
           {
             "id": "senza",
             "label": "without"
           },
           {
-            "id": "sforzando",
-            "label": "with a sudden strong accent"
+            "id": "al-alla",
+            "label": "to the, or in the manner of"
           },
           {
             "id": "troppo",
@@ -771,9 +803,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “al, alla” means, not “troppo”."
           },
-          "sforzando": {
+          "fine": {
             "category": "wrong-category",
-            "reason": "That is what “sforzando (sf)” means, not “troppo”."
+            "reason": "That is what “fine” means, not “troppo”."
           }
         }
       },

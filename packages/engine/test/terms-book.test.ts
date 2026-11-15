@@ -205,3 +205,44 @@ describe("generation fingerprints", () => {
     expect(others).toBeGreaterThan(230);
   });
 });
+
+describe("phrase questions show glosses that cannot also be right (review of PR #15, P2)", () => {
+  const classOf = (id: string): string => BOOK.get(id)?.cls ?? (OLD.get(id)!.category === "structure" ? "structure" : OLD.get(id)!.category === "sign" ? "mark" : "other");
+  it("seeds 1456 and 7744 of t.g2.book-terms (the reviewer's reproductions) no longer offer presto beside “allegro assai”", () => {
+    const node = ix.nodeById.get("G2-U5-L06")!;
+    const b = node.exercises.find((x) => x.templateId === "t.g2.book-terms")!;
+    for (const seed of [1456, 7744]) {
+      const it = generateItem(ix, "t.g2.book-terms", seed, { scope: effectiveScope(ix, node, b) }).item;
+      const ids = (it.answer as { options: Array<{ id: string }> }).options.map((o) => o.id);
+      if (/allegro assai/.test(it.prompt)) expect(ids).not.toContain("presto");
+    }
+  });
+  it("whenever a little word's phrase is asked, every wrong option is another little word, an order word or a sign, shown by its plain meaning", () => {
+    let checked = 0;
+    for (const q of questions) {
+      const owner = BOOK.get(target(q));
+      if (!owner || owner.cls !== "word" || !owner.phrases?.length) continue;
+      const p = q.item.prompt;
+      const m = /^(?:What does the direction|This melody is marked|A score says) “(.+?)”/.exec(p);
+      if (!m || !owner.phrases.some((x) => x.phrase === m[1])) continue;
+      for (const o of options(q).filter((x) => x.id !== target(q))) {
+        expect(["word", "structure", "mark"], `${p}: ${o.id}`).toContain(classOf(o.id));
+        expect(o.label, `${p}: ${o.id} is shown by a gloss, not its plain meaning`).toBe(termOf(o.id).meaning);
+      }
+      checked++;
+    }
+    expect(checked).toBeGreaterThan(40);
+  });
+  it("no phrase question about a speed phrase offers a speed word, and none about a loudness phrase offers a loudness word", () => {
+    for (const q of questions) {
+      const m = /^(?:What does the direction|This melody is marked|A score says) “(.+?)”/.exec(q.item.prompt);
+      if (!m || !BOOK.get(target(q))?.phrases?.some((x) => x.phrase === m[1])) continue; // a phrase gloss only (a plain term's meaning may mention "louder")
+      const label = options(q).find((o) => o.id === target(q))!.label.toLowerCase();
+      for (const o of options(q).filter((x) => x.id !== target(q))) {
+        const t = termOf(o.id);
+        if (/quick|fast|slow|lively|speed|movement/.test(label)) expect(speedy(t.category), `${q.item.prompt}: ${o.id}`).toBe(false);
+        if (/quiet|loud|soft/.test(label)) expect(t.category, `${q.item.prompt}: ${o.id}`).not.toBe("dynamics");
+      }
+    }
+  });
+});

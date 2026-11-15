@@ -106,10 +106,15 @@ describe("nothing that existed before has changed (question identities, lessons,
     }
     const p = (await c.get("/api/progress")).body.nodes as Record<string, { state: string; lockedBy: string[]; reviewAvailable: boolean }>;
     for (const n of old) expect(p[n.id]!.state, n.id).toBe("completed");
-    // each grade's first new lesson is open (its prerequisite was completed), the rest of the chain waits behind it
+    // Grade 2's first new lesson is open (its prerequisite was completed). The first new lesson of Grades 3 and 4 also waits for the last new lesson
+    // of the grade before, because its questions show that grade's new words (review of PR #15, P2). The rest of each chain waits behind its first.
     for (const g of [2, 3, 4]) {
       const mine = music.BOOK_LESSONS.filter((l) => l.grade === g);
-      expect(p[mine[0]!.node]!.state, mine[0]!.node).toBe("available");
+      if (g === 2) expect(p[mine[0]!.node]!.state, mine[0]!.node).toBe("available");
+      else {
+        expect(p[mine[0]!.node]!.state, mine[0]!.node).toBe("locked");
+        expect(p[mine[0]!.node]!.lockedBy, mine[0]!.node).toEqual([music.BOOK_LESSONS.filter((x) => x.grade === g - 1).at(-1)!.node]);
+      }
       for (let k = 1; k < mine.length; k++) {
         expect(p[mine[k]!.node]!.state).toBe("locked");
         expect(p[mine[k]!.node]!.lockedBy).toEqual([mine[k - 1]!.node]);
@@ -296,12 +301,21 @@ describe("the generated terminology document is current", () => {
 
 describe("every printed entry is taught, practised and assessable, on strict evidence", () => {
   it("each of the 167 entries has a lesson that teaches it (a question that asks it, a whole-name mention, or hand-checked words), is practised, and is assessable", async () => {
-    const { rows } = await import("../scripts/terminology-inventory.ts");
-    expect(rows).toHaveLength(167);
-    for (const r of rows) {
-      expect(r.taughtAt, `${r.entry.id} has no lesson that teaches it`).toBeTruthy();
-      expect(r.status, r.entry.id).toBe("assessed");
+    // The Grade 4 idempotency test (grade4-course.test.ts) re-runs author-grade4 and then author-terms, and for a moment between the two the committed
+    // Grade 4 blueprints lack this work's templates. Vitest runs test files in parallel, so a read in that window sees a transient file: re-read (fresh
+    // module) up to three times before judging. A real gap fails every attempt.
+    let failure = "";
+    for (let attempt = 0; attempt < 3; attempt++) {
+      failure = "";
+      const { rows } = (await import(/* @vite-ignore */ `../scripts/terminology-inventory.ts?attempt=${attempt}`)) as typeof import("../scripts/terminology-inventory.ts");
+      if (rows.length !== 167) failure = `${rows.length} rows`;
+      for (const r of rows) {
+        if (!r.taughtAt) failure ||= `${r.entry.id} has no lesson that teaches it`;
+        else if (r.status !== "assessed") failure ||= `${r.entry.id} is ${r.status}`;
+      }
+      if (!failure) break;
     }
+    expect(failure).toBe("");
   }, 300_000);
   it("the hand-checked evidence sentences are really in the lessons they cite", () => {
     const inv = readJson("source-book/terminology-inventory.json").entries as Array<{ id: string; evidence?: { lesson: string; text: string } }>;
@@ -309,4 +323,82 @@ describe("every printed entry is taught, practised and assessable, on strict evi
     expect(withEvidence.length).toBeGreaterThan(0);
     for (const e of withEvidence) expect(lessonText(e.evidence!.lesson), e.id).toContain(tidy(e.evidence!.text).trim());
   });
+});
+
+describe("a returning learner is only shown words from lessons they have completed, in every option (review of PR #15, P2)", () => {
+  const register_ = async (k: number) => {
+    const db = openDb(":memory:");
+    const app = createApp({ db, course });
+    const c = new Client(app);
+    const me = await register(c, `returning${k}`);
+    return { db, app, c, userId: me.body.user.id as string };
+  };
+  const completeRows = (db: ReturnType<typeof openDb>, userId: string, upTo: string, skip: (id: string) => boolean) => {
+    const cut = course.ix.nodeById.get(upTo)!.order;
+    for (const n of course.nodes.filter((x) => x.order <= cut && !skip(x.id))) {
+      const v = n.type === "practice" || n.type === "review" ? 1 : n.contentVersion;
+      db.prepare(`INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES (?,?,1,0,'questions',?,?,?,?,?,?)`).run(userId, n.id, v, course.version, "2026-01-01", "2026-01-01", "2026-01-01", v);
+    }
+  };
+  const bookOf = <T extends { itemId: string }>(items: T[]) => items.filter((i) => music.isBookTemplate(parseGeneratedItemId(i.itemId)?.templateId ?? ""));
+  const old = new Map([...music.TERMS, ...music.TERMS_G4].map((t) => [t.id, (t as { firstGrade?: number }).firstGrade ?? 4]));
+  /** Every option of every new-word question comes from a completed new lesson or from a term taught before this work. */
+  const allTaught = (items: Array<{ item: ExerciseItem }>, completed: Set<string>, grade: number) => {
+    for (const it of items) {
+      for (const o of (it.item.answer as { options: Array<{ id: string }> }).options) {
+        const lesson = music.BOOK_LESSONS.find((l) => l.termIds.includes(o.id));
+        if (lesson) expect(completed.has(lesson.node), `${it.item.prompt}: option ${o.id} is taught by ${lesson.node}, which is not completed`).toBe(true);
+        else expect(old.get(o.id) ?? 99, `${o.id} is not a term taught before Grade ${grade}`).toBeLessThanOrEqual(grade);
+      }
+    }
+  };
+
+  it("the first new Grade 3 and Grade 4 lessons wait for the grade before's last new lesson; historical completions stay", async () => {
+    const { db, c, userId } = await register_(0);
+    completeRows(db, userId, "G4-U5-R1", (id) => NEW.has(id));
+    const p = (await c.get("/api/progress")).body.nodes as Record<string, { state: string; lockedBy: string[] }>;
+    expect(p["G3-U5-L05"]).toMatchObject({ state: "locked", lockedBy: ["G2-U5-L08"] });
+    expect(p["G4-U5-L06"]).toMatchObject({ state: "locked", lockedBy: ["G3-U5-L10"] });
+    expect(p["G3-U5-R1"]!.state).toBe("completed");
+    expect(p["G4-U5-C"]!.state).not.toBe("locked");
+  }, 120_000);
+
+  it("Grade 3: a learner who completed the six new Grade 3 lessons but no new Grade 2 lesson is offered no new-word question; with both grades done every option is taught", async () => {
+    const g3 = new Set(music.BOOK_LESSONS.filter((l) => l.grade === 3).map((l) => l.node));
+    const g2 = new Set(music.BOOK_LESSONS.filter((l) => l.grade === 2).map((l) => l.node));
+    let seen = 0;
+    for (let k = 0; k < 6; k++) {
+      // the odd historical state: Grade 3's new lessons completed, Grade 2's not
+      const a = await register_(10 + k);
+      completeRows(a.db, a.userId, "G3-U5-L04", (id) => g2.has(id) || (NEW.has(id) && !g3.has(id)) || id === "G3-U5-P1");
+      for (const id of g3) a.db.prepare(`INSERT OR REPLACE INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES (?,?,1,0,'questions',1,?,?,?,?,1)`).run(a.userId, id, course.version, "2026-01-01", "2026-01-01", "2026-01-01");
+      expect((await a.c.post("/api/nodes/G3-U5-P1/start")).status).toBe(200);
+      expect(bookOf(a.app.nodes.internalItems(a.userId, "G3-U5-P1")), `legacy-${k}`).toEqual([]);
+      // both grades completed
+      const b = await register_(20 + k);
+      completeRows(b.db, b.userId, "G3-U5-L04", (id) => id === "G3-U5-P1");
+      expect((await b.c.post("/api/nodes/G3-U5-P1/start")).status).toBe(200);
+      const items = bookOf(b.app.nodes.internalItems(b.userId, "G3-U5-P1"));
+      seen += items.length;
+      allTaught(items, new Set(course.nodes.filter((n) => n.type === "lesson").map((n) => n.id)), 3);
+    }
+    expect(seen, "the guarded practice does ask new words once everything is done").toBeGreaterThan(5);
+  }, 300_000);
+
+  it("Grade 4: a learner who has not completed the new Grade 3 lessons is offered no Grade 4 new-word question in the unit challenge", async () => {
+    let seen = 0;
+    for (let k = 0; k < 6; k++) {
+      const a = await register_(30 + k);
+      completeRows(a.db, a.userId, "G4-U5-R1", (id) => music.BOOK_LESSONS.some((l) => l.node === id && l.grade >= 3));
+      expect((await a.c.post("/api/nodes/G4-U5-C/start")).status).toBe(200);
+      expect(bookOf(a.app.nodes.internalItems(a.userId, "G4-U5-C")), `g4 legacy-${k}`).toEqual([]);
+      const b = await register_(40 + k);
+      completeRows(b.db, b.userId, "G4-U5-R1", () => false);
+      expect((await b.c.post("/api/nodes/G4-U5-C/start")).status).toBe(200);
+      const items = bookOf(b.app.nodes.internalItems(b.userId, "G4-U5-C"));
+      seen += items.length;
+      allTaught(items, new Set(course.nodes.filter((n) => n.type === "lesson").map((n) => n.id)), 4);
+    }
+    expect(seen).toBeGreaterThan(0);
+  }, 300_000);
 });

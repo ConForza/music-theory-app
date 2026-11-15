@@ -106,7 +106,7 @@ Brief 04's thresholds are unchanged (proficient: 4 distinct correct across 2 tem
 | c.instruments.techniques | U5-L03 | technique-facts 141, technique-use 140 | 281 |
 | c.terms.g4 | U5-L04 | terms 357, term-use 381 | 738 |
 | c.context.passage-g4 | U5-L05 | passage 400, passage-directions 400 | 800 |
-| c.terms.g4-more | U5-L06 | book-terms 395, book-use 399 | 794 |
+| c.terms.g4-more | U5-L06 | book-terms 394, book-use 399 | 793 |
 
 Concepts below the capacity rule: **0**.
 

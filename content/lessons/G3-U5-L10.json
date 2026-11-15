@@ -263,7 +263,43 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "F3",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C#3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -276,14 +312,10 @@
                   "value": "crotchet",
                   "dots": 0
                 }
-              }
-            ]
-          },
-          {
-            "events": [
+              },
               {
                 "kind": "note",
-                "pitch": "F3",
+                "pitch": "F#3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -291,7 +323,7 @@
               },
               {
                 "kind": "note",
-                "pitch": "G3",
+                "pitch": "E3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -301,9 +333,9 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the bass clef, key signature of 2 flats, time signature 2/4. Bar 1: crotchet on the 4th line; crotchet on the 3rd line. Bar 2: crotchet on the 4th line; crotchet in the 4th space. The tempo mark above the first bar says “subito piano”.",
-        "key": "Bb major",
-        "timeSignature": "2/4",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 4/4. Bar 1: crotchet in the 1st space; crotchet on the 2nd line; crotchet on the 1st line; crotchet on the 2nd line. Bar 2: crotchet in the 2nd space; crotchet on the 3rd line; crotchet on the 4th line; crotchet in the 3rd space. The tempo mark above the first bar says “subito piano”.",
+        "key": "A major",
+        "timeSignature": "4/4",
         "tempoText": "subito piano"
       },
       "answer": {
@@ -314,16 +346,16 @@
             "label": "suddenly quiet"
           },
           {
-            "id": "da-capo",
-            "label": "repeat from the beginning"
-          },
-          {
             "id": "e-ed",
             "label": "and"
           },
           {
+            "id": "non",
+            "label": "not"
+          },
+          {
             "id": "ben",
-            "label": "well marked: clearly emphasised"
+            "label": "well"
           }
         ],
         "correctOptionIds": [
@@ -338,9 +370,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “e, ed” means, not “subito”."
           },
-          "da-capo": {
-            "category": "wrong-category",
-            "reason": "That is what “da capo (D.C.)” means, not “subito”."
+          "non": {
+            "category": "confused-similar-term",
+            "reason": "That is what “non” means, not “subito”."
           }
         }
       },
@@ -430,37 +462,37 @@
         "kind": "choice",
         "options": [
           {
-            "id": "con-col",
-            "label": "with"
+            "id": "meno",
+            "label": "less"
+          },
+          {
+            "id": "a",
+            "label": "at, to, by, for, in, or in the style of"
           },
           {
             "id": "sempre",
             "label": "always short and detached"
           },
           {
-            "id": "ben",
-            "label": "well marked: clearly emphasised"
-          },
-          {
-            "id": "marcato",
-            "label": "emphatic and accented"
+            "id": "con-col",
+            "label": "with"
           }
         ],
         "correctOptionIds": [
           "sempre"
         ],
         "diagnoses": {
+          "a": {
+            "category": "confused-similar-term",
+            "reason": "That is what “a” means, not “sempre”."
+          },
           "con-col": {
             "category": "confused-similar-term",
             "reason": "That is what “con, col” means, not “sempre”."
           },
-          "ben": {
+          "meno": {
             "category": "confused-similar-term",
-            "reason": "That is what “ben” means, not “sempre”."
-          },
-          "marcato": {
-            "category": "wrong-category",
-            "reason": "That is what “marcato (marc.)” means, not “sempre”."
+            "reason": "That is what “meno” means, not “sempre”."
           }
         }
       },
@@ -487,14 +519,14 @@
       "prompt": "This melody is marked “subito piano”. What does the marking ask the player to do?",
       "music": {
         "presentation": "stave",
-        "clef": "treble",
+        "clef": "bass",
         "showKeySignature": true,
         "measures": [
           {
             "events": [
               {
                 "kind": "note",
-                "pitch": "E4",
+                "pitch": "D3",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -502,7 +534,23 @@
               },
               {
                 "kind": "note",
-                "pitch": "G#4",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -514,7 +562,7 @@
             "events": [
               {
                 "kind": "note",
-                "pitch": "A4",
+                "pitch": "F2",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -522,7 +570,23 @@
               },
               {
                 "kind": "note",
-                "pitch": "C#5",
+                "pitch": "D2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B1",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C2",
                 "duration": {
                   "value": "crotchet",
                   "dots": 0
@@ -532,29 +596,29 @@
             "barline": "final"
           }
         ],
-        "textAlternative": "A 2-bar melody in the treble clef, key signature of 3 sharps, time signature 2/4. Bar 1: crotchet on the 1st line; crotchet on the 2nd line. Bar 2: crotchet in the 2nd space; crotchet in the 3rd space. The tempo mark above the first bar says “subito piano”.",
-        "key": "A major",
-        "timeSignature": "2/4",
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of no sharps or flats, time signature 4/4. Bar 1: crotchet on the 3rd line; crotchet in the 3rd space; crotchet in the 2nd space; crotchet in the 1st space. Bar 2: crotchet in the space just below the stave; crotchet in the space below the 1st ledger line below the stave; crotchet in the space below the 2nd ledger line below the stave; crotchet on the 2nd ledger line below the stave. The tempo mark above the first bar says “subito piano”.",
+        "key": "C major",
+        "timeSignature": "4/4",
         "tempoText": "subito piano"
       },
       "answer": {
         "kind": "choice",
         "options": [
           {
-            "id": "senza",
-            "label": "without"
-          },
-          {
-            "id": "assai",
-            "label": "very quick"
-          },
-          {
-            "id": "tanto",
-            "label": "not so much"
+            "id": "non",
+            "label": "not"
           },
           {
             "id": "subito",
             "label": "suddenly quiet"
+          },
+          {
+            "id": "tanto",
+            "label": "so much"
+          },
+          {
+            "id": "assai",
+            "label": "very"
           }
         ],
         "correctOptionIds": [
@@ -569,9 +633,9 @@
             "category": "confused-similar-term",
             "reason": "That is what “tanto” means, not “subito”."
           },
-          "senza": {
+          "non": {
             "category": "confused-similar-term",
-            "reason": "That is what “senza” means, not “subito”."
+            "reason": "That is what “non” means, not “subito”."
           }
         }
       },
@@ -600,19 +664,19 @@
         "kind": "choice",
         "options": [
           {
-            "id": "fortepiano",
-            "label": "loud, then immediately quiet"
+            "id": "con-moto",
+            "label": "with movement"
+          },
+          {
+            "id": "pesante",
+            "label": "heavy"
           },
           {
             "id": "prima",
             "label": "the first time"
           },
           {
-            "id": "espressivo",
-            "label": "expressively"
-          },
-          {
-            "id": "rallentando",
+            "id": "ritardando",
             "label": "gradually getting slower"
           }
         ],
@@ -620,17 +684,17 @@
           "prima"
         ],
         "diagnoses": {
-          "rallentando": {
+          "pesante": {
             "category": "wrong-category",
-            "reason": "That is what “rallentando (rall.)” means, not “prima, primo”."
+            "reason": "That is what “pesante” means, not “prima, primo”."
           },
-          "espressivo": {
+          "ritardando": {
             "category": "wrong-category",
-            "reason": "That is what “espressivo (espress.)” means, not “prima, primo”."
+            "reason": "That is what “ritardando (rit.)” means, not “prima, primo”."
           },
-          "fortepiano": {
+          "con-moto": {
             "category": "wrong-category",
-            "reason": "That is what “fortepiano (fp)” means, not “prima, primo”."
+            "reason": "That is what “con moto” means, not “prima, primo”."
           }
         }
       },
