@@ -65,14 +65,17 @@ function ExamResult({ result, summary: s, readiness }: { result: Result; summary
 
       {mock && (
         <section className="card" aria-labelledby="ready-h">
-          <h2 id="ready-h" className="h3">Estimated readiness</h2>
+          <h2 id="ready-h" className="h3">{readiness?.visible ? "Estimated readiness" : "On your own"}</h2>
           <p className="big-number" data-testid="independent">{s.independentPercent === null ? "No independent evidence" : <><strong>{s.independentPercent}%</strong> right on your own</>}</p>
-          {readiness && (
+          {readiness?.visible && (
             <>
               <p><span className={`pill readiness readiness-${readiness.label}`} data-testid="readiness">{READINESS_WORDS[readiness.label]}</span></p>
               <p>{readiness.detail}</p>
               <p className="muted small">{readiness.note}</p>
             </>
+          )}
+          {readiness && !readiness.visible && (
+            <p className="muted small" data-testid="readiness-gated">{readiness.note}</p>
           )}
         </section>
       )}
@@ -98,6 +101,7 @@ function ExamResult({ result, summary: s, readiness }: { result: Result; summary
         <section className="card" aria-labelledby="read-h">
           <h2 id="read-h" className="h3">Reading music in context</h2>
           <p>{s.scoreReading.correct} of {s.scoreReading.questions} right. These questions combine several ideas in one piece of notation.</p>
+          {s.scoreReading.skills && <p className="muted small" data-testid="score-reading-skills">{s.scoreReading.skills}</p>}
         </section>
       )}
 

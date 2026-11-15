@@ -11,7 +11,7 @@ import { backfillPracticeExposure } from "./backfill.ts";
 import { NodeRunService } from "./node-run.ts";
 import { PrepService } from "./prep.ts";
 import { RevisionService } from "./revision.ts";
-import { DEFAULT_PREP, type PrepConfig } from "./prep-config.ts";
+import { DEFAULT_PREP, gatesFromEnv, type PrepConfig, type ReleaseGates } from "./prep-config.ts";
 import { Engagement } from "./engagement.ts";
 import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
 import { LearnerResponse } from "@mtp/engine";
@@ -59,6 +59,8 @@ export interface AppOptions {
   prepStartsPer10Min?: number;
   /** Brief 10 product defaults (tests override them; production uses DEFAULT_PREP). */
   prep?: PrepConfig;
+  /** What learners may be shown. Omitted: read from the environment (`MTP_SHOW_READINESS`), which is OFF unless set to `teacher-approved`. */
+  releaseGates?: ReleaseGates;
   /** Expose POST /api/test/clock so browser journeys can move time forward. For tests only; never enable in production. */
   testClock?: boolean;
 }
@@ -137,7 +139,7 @@ export function createApp(opts: AppOptions) {
     } catch {
       throw new ApiError(429, "rate_limited", "You've started several papers in a short time. Finish or resume one, or wait a few minutes before starting another. Your open paper is still saved.");
     }
-  });
+  }, opts.releaseGates ?? gatesFromEnv());
   const planIpLimiter = new RateLimiter(60, 10 * 60_000);
   const revision = new RevisionService(db, course, clock, engagement, prep, opts.prep ?? DEFAULT_PREP);
   // One-time recovery for historical practice without exposure identities; idempotent on startup.

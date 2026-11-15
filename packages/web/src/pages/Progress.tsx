@@ -52,7 +52,7 @@ export function Progress() {
 
       <section className="card" aria-labelledby="pr-h">
         <h2 id="pr-h">Practice results</h2>
-        <p className="muted small">Your practice examinations and placement checks, with an estimate of readiness for each grade. Our own practice assessments, not ABRSM results.</p>
+        <p className="muted small">Your practice examinations and placement checks, grade by grade. Our own practice assessments, not ABRSM results.</p>
         <Link className="btn btn-ghost" to="/progress/results">See my practice results</Link>
       </section>
 

@@ -77,8 +77,12 @@ for (const grade of [1, 2, 3, 4, 5]) {
     assert.ok((await page.locator('[data-level="needs_review"]').count()) + (await page.locator('[data-level="developing"]').count()) >= 1, "the outcome answered wrongly is flagged");
     // every wrong answer lowers at most one outcome below Mastered
     assert.ok((await page.locator('[data-level="mastered"]').count()) >= bp.sections.filter((s) => s.outcomeId).length - wrongSent);
-    const ready = await page.getByTestId("readiness").innerText();
-    assert.ok(!/Consistently secure/.test(ready), `one mock cannot say Consistently secure: ${ready}`);
+    // The readiness release gate is OFF by default: the score and the independent percentage stay, no classification is shown.
+    assert.equal(await page.getByTestId("readiness").count(), 0, "no readiness classification while the gate is off");
+    await page.getByTestId("readiness-gated").waitFor();
+    assert.match(await page.getByTestId("readiness-gated").innerText(), /not shown yet/);
+    assert.doesNotMatch(await page.getByRole("main").innerText(), /Consistently secure|Needs review\b.*readiness|Estimated readiness/);
+    assert.match(await page.getByTestId("independent").innerText(), /right on your own|No independent evidence/);
     await page.getByText(/not an ABRSM result/).first().waitFor();
     assert.equal(await page.getByTestId("review-wrong").count(), wrongSent);
     await page.getByTestId("review-wrong").first().getByText("The answer:").waitFor();
@@ -108,7 +112,8 @@ await test("practice mode: hints and feedback after every question, a way to mov
   await page.getByText("Practice mode.").waitFor();
   assert.equal(await page.getByTestId("readiness").count(), 0, "practice mode shows no readiness");
   const r = await get(page, "/api/prep/results");
-  assert.equal(r.grades[1].readiness.label, "not_enough_evidence");
+  assert.equal(r.grades[1].readiness.visible, false);
+  assert.equal(r.grades[1].readiness.label, undefined, "no label is sent while the gate is off");
   assert.equal(r.grades[1].readiness.ignored[0].reason, "practice_mode");
   await ctx.close();
 });
@@ -190,7 +195,8 @@ await test("results history: every attempt, the estimate by grade, and outcome-b
   await page.getByRole("link", { name: "See my practice results" }).click();
   await page.getByRole("heading", { name: "Your practice results" }).waitFor();
   const g2 = page.getByTestId("results-grade-2");
-  await g2.getByText("Consistently secure").waitFor();
+  await g2.getByTestId("readiness-gated").waitFor();
+  assert.equal(await g2.getByText("Consistently secure").count(), 0, "no classification while the gate is off");
   assert.equal(await page.getByTestId("history").locator("li").count(), 2);
   await g2.getByText("Outcome by outcome").click();
   await g2.getByText("Right both times").first().waitFor();
@@ -281,6 +287,32 @@ await test("200% text size: the examination screens stay usable", async () => {
   await page.locator("section.question").waitFor();
   await noOverflow(page, "200% question");
   await ctx.close();
+});
+
+// The same journey on a deployment that has switched the readiness gate ON (teacher-approved): the classification appears. Proves the display
+// still works behind the gate, and that evidence collected while it was off is simply read when it is on.
+await test("readiness gate ON: the classification is shown on the result and in the history", async () => {
+  const S2 = await serve({ waive: false, gates: { readiness: true } });
+  try {
+    const ctx = await browser.newContext({ ...profiles.desktop, baseURL: S2.base });
+    const { page, userId } = await guest(ctx);
+    for (const seed of [101, 202]) {
+      const a = await post(page, "/api/exams/2/start", { mode: "mock", seed });
+      const id = a.body.id;
+      for (const it of S2.app.prep.internalItems(userId, id)) {
+        const { canonicalResponse } = await import("@mtp/engine");
+        await post(page, `/api/prep/attempts/${id}/answers`, { attemptId: crypto.randomUUID(), itemId: it.item.id, response: canonicalResponse(S2.course.ix, it.item, it.scope) });
+      }
+      await post(page, `/api/prep/attempts/${id}/complete`, {});
+      await post(page, "/api/test/clock", { advanceDays: 1 });
+    }
+    await page.goto("/progress/results");
+    await page.getByTestId("results-grade-2").getByText("Consistently secure").waitFor();
+    assert.equal(await page.getByTestId("readiness-gated").count(), 0);
+    await ctx.close();
+  } finally {
+    S2.close();
+  }
 });
 
 await browser.close();

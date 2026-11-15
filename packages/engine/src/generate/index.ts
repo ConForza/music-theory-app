@@ -61,12 +61,21 @@ export const generatorTemplateIds = (ix: CurriculumIndex): string[] => [...ix.te
  */
 export const GENERATOR_REVISION = 1;
 
+/**
+ * Per-template generator revisions: bump a template's entry when a fix changes what ITS (template, version, seed) produces. The revision joins that
+ * template's fingerprint only, so every other template's identity is byte-for-byte unchanged, while an id minted before the fix is refused as
+ * stale (never silently regenerated as a different question). Stored scores, responses and mastery evidence are untouched.
+ *
+ *   t.g1.middle-c-find, t.g5.score-melody, t.g5.term-use: question-quality fixes after the educational review of PR #18.
+ */
+export const TEMPLATE_REVISIONS: Record<string, number> = { "t.g1.middle-c-find": 2, "t.g5.score-melody": 2, "t.g5.term-use": 2 };
+
 const canonical = (v: unknown): unknown =>
   Array.isArray(v) ? v.map(canonical) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort().map((k) => [k, canonical((v as Record<string, unknown>)[k])])) : v;
 
 export function generationFingerprint(t: ExerciseTemplate, scope: MusicScope): string {
   // Grade 4 and Grade 5 vocabularies are versioned and join the fingerprint of their own grade's templates only: Grade 1-3 identities are byte-for-byte unchanged. The terminology completion vocabulary (VOCAB_BOOK) joins the fingerprint of the `*.book-*` templates only, so no earlier template's identity moves either.
-  const inputs = { rev: GENERATOR_REVISION, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES }, ...(t.grade === 4 ? { vocab4: music.VOCAB_G4 } : {}), ...(t.grade === 5 ? { vocab5: music.VOCAB_G5 } : {}), ...(music.isBookTemplate(t.id) ? { vocabBook: music.VOCAB_BOOK } : {}) };
+  const inputs = { rev: GENERATOR_REVISION, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES }, ...(t.grade === 4 ? { vocab4: music.VOCAB_G4 } : {}), ...(t.grade === 5 ? { vocab5: music.VOCAB_G5 } : {}), ...(music.isBookTemplate(t.id) ? { vocabBook: music.VOCAB_BOOK } : {}), ...(TEMPLATE_REVISIONS[t.id] ? { templateRevision: TEMPLATE_REVISIONS[t.id] } : {}) };
   return hashString(JSON.stringify(canonical(inputs))).toString(16).padStart(8, "0");
 }
 

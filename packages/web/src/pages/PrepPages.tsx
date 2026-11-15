@@ -32,7 +32,8 @@ export function ExamHub() {
             <li key={g.grade} className="card exam-card" data-grade={g.grade} data-testid={`exam-${g.grade}`}>
               <h2 className="h3">Grade {g.grade}</h2>
               <p className="muted small">{g.questions} questions across {g.outcomes} syllabus outcomes</p>
-              <p className="small"><span className={`pill readiness readiness-${g.readiness.label}`}>{READINESS_WORDS[g.readiness.label]}</span>{g.readiness.percent !== null && <span className="muted"> · about {g.readiness.percent}% on your own</span>}</p>
+              {g.readiness.visible && <p className="small"><span className={`pill readiness readiness-${g.readiness.label}`}>{READINESS_WORDS[g.readiness.label]}</span>{g.readiness.percent !== null && <span className="muted"> · about {g.readiness.percent}% on your own</span>}</p>}
+              {!g.readiness.visible && g.mockAttempts > 0 && <p className="muted small">{g.mockAttempts} mock {g.mockAttempts === 1 ? "examination" : "examinations"} taken</p>}
               {g.open.length > 0 && <p className="small" role="status">In progress: {g.open.map((o) => MODE_WORDS[o.mode]).join(", ")}</p>}
               <Link className="btn btn-primary btn-small" to={`/practice/exam/${g.grade}`} aria-label={`Grade ${g.grade} practice examination`}>{g.open.length ? "Continue" : "Open"}</Link>
             </li>
@@ -117,10 +118,10 @@ export function ExamSetup() {
         </div>
       </fieldset>
       {mode === "practice" ? (
-        <p className="notice">Practice mode is for learning. Because you have help, it is <strong>not counted</strong> in your estimated readiness.</p>
+        <p className="notice">Practice mode is for learning. Because you have help, it is <strong>not counted</strong> as independent evidence.</p>
       ) : (
         <>
-          <p className="notice">A mock examination counts towards your <strong>estimated readiness</strong>. You will not be told what was right or wrong until you finish. Your first answer to each question is final.</p>
+          <p className="notice">A mock examination records what you can do <strong>on your own</strong>. You will not be told what was right or wrong until you finish. Your first answer to each question is final.</p>
           <div className="switch-row">
             <label className="switch"><input type="checkbox" role="switch" checked={timed} onChange={(e) => setTimed(e.target.checked)} /><span>Use a timer (optional)</span><small>{`${minutes} for this paper. Our own default, not an ABRSM time allowance. Speed is never part of your score.`}</small></label>
           </div>
@@ -152,7 +153,7 @@ export function ExamSetup() {
         <ul>
           <li>Every outcome of the grade is asked {2} times, with new music each time, so one slip does not hide what you know. Four more questions read several ideas from one piece of notation.</li>
           <li>Each question is worth one mark, and a question with several parts needs every part right. These are our own product settings, not ABRSM marking.</li>
-          <li>Estimated readiness uses only mock-examination questions you answered on your own, without hints, and it can say "Consistently secure" only after two such attempts on different days, each at or above our line. Any question you leave unanswered counts as not right.</li>
+          <li>Only mock-examination questions you answered on your own, without hints, count as independent evidence. Any question you leave unanswered counts as not right. An estimate of readiness is not shown yet: it will appear once a teacher has reviewed how it is worked out and the questions.</li>
           <li>It never gives XP or grade badges, and it never changes your path.</li>
         </ul>
       </details>
@@ -232,9 +233,15 @@ export function ResultsPage() {
       {data.grades.filter((g) => g.progress.attempts.length || g.readiness.ignored.length).map((g) => (
         <section key={g.grade} className="card" aria-labelledby={`g${g.grade}-h`} data-grade={g.grade} data-testid={`results-grade-${g.grade}`}>
           <h2 id={`g${g.grade}-h`} className="h3">Grade {g.grade}</h2>
-          <p><span className={`pill readiness readiness-${g.readiness.label}`}>{READINESS_WORDS[g.readiness.label]}</span> <span className="muted small">Estimated readiness</span></p>
-          <p>{g.readiness.detail}</p>
-          <p className="muted small">{g.readiness.note}</p>
+          {g.readiness.visible ? (
+            <>
+              <p><span className={`pill readiness readiness-${g.readiness.label}`}>{READINESS_WORDS[g.readiness.label]}</span> <span className="muted small">Estimated readiness</span></p>
+              <p>{g.readiness.detail}</p>
+              <p className="muted small">{g.readiness.note}</p>
+            </>
+          ) : (
+            <p className="muted small" data-testid="readiness-gated">{g.readiness.note}</p>
+          )}
           {g.progress.attempts.length > 0 && (
             <>
               <h3 className="h4">Mock examinations</h3>

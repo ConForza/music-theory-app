@@ -38,7 +38,7 @@ import {
   type ReadinessAttempt,
   type StageResult,
 } from "./prep-blueprint.ts";
-import { DEFAULT_PREP, PREP_DISCLAIMER, READINESS_NOTE, type PrepConfig } from "./prep-config.ts";
+import { DEFAULT_GATES, DEFAULT_PREP, PREP_DISCLAIMER, READINESS_GATED_NOTE, READINESS_NOTE, SCORE_READING_SKILLS, type PrepConfig, type ReleaseGates } from "./prep-config.ts";
 
 export type PrepMode = "practice" | "mock" | "placement";
 export type PrepKind = "exam" | "placement";
@@ -146,7 +146,8 @@ export interface ExamSummary {
   outcomesTotal: number;
   outcomesAssessed: number;
   notAssessed: string[];
-  scoreReading: { questions: number; correct: number; outcomes: string[] };
+  /** `skills`: what these questions really cover where that is narrower than the syllabus (Grades 2 and 3); absent in results stored before it existed. */
+  scoreReading: { questions: number; correct: number; outcomes: string[]; skills?: string | null };
   mistakes: Array<{ category: string; label: string; tip: string; count: number }>;
   review: ReviewEntry[];
   recommendations: Array<{ kind: "lesson" | "revision"; title: string; nodeId?: string; conceptId?: string; why: string }>;
@@ -200,6 +201,8 @@ export class PrepService {
     readonly cfg: PrepConfig = DEFAULT_PREP,
     /** Called just before a NEW paper or check is planned (never when an open one is resumed): planning runs on the server's one thread, so it is rationed. */
     private admit: (userId: string) => void = () => undefined,
+    /** What learners may be shown (see `ReleaseGates`). Default: no readiness classification. */
+    readonly gates: ReleaseGates = DEFAULT_GATES,
   ) {
     // No audio is ever required (every family is answerable without sound), but a template that listened would be excluded here regardless:
     // a learner with sound off or hearing loss must never lose marks. (A test asserts this set equals the full generatable set today.)
@@ -770,7 +773,7 @@ export class PrepService {
       outcomesTotal: outcomes.length,
       outcomesAssessed: assessed,
       notAssessed: outcomes.filter((o) => o.level === "not_assessed").map((o) => o.outcomeId),
-      scoreReading: { questions: reading.length, correct: reading.filter(firstOk).length, outcomes: [...new Set(reading.flatMap((i) => i.outcomeIds))] },
+      scoreReading: { questions: reading.length, correct: reading.filter(firstOk).length, outcomes: [...new Set(reading.flatMap((i) => i.outcomeIds))], skills: SCORE_READING_SKILLS[row.grade ?? 0] ?? null },
       mistakes: [...counts].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([category, count]) => ({ category, count, label: this.categories.get(category)?.label ?? category, tip: this.categories.get(category)?.tip ?? "" })),
       review,
       recommendations,
@@ -872,9 +875,23 @@ export class PrepService {
     });
   }
 
-  readinessFor(userId: string, grade: number) {
+  /** The full estimate, whether or not it may be shown. Internal: evidence is always collected and this is what a teacher review would read. */
+  readinessEvidence(userId: string, grade: number) {
     const r = readiness(this.completedExamAttempts(userId, grade), { rubricVersion: this.cfg.rubricVersion, blueprintVersion: this.cfg.blueprintVersion }, this.cfg);
     return { ...r, note: READINESS_NOTE };
+  }
+
+  /**
+   * What a client receives. With the release gate off (the default) there is NO classification, percentage or explanation: only that it is not
+   * shown, how many mock attempts the evidence already holds, and which attempts the rules would set aside. Individual attempt scores are
+   * not part of this object and are unaffected.
+   */
+  readinessFor(userId: string, grade: number):
+    | ({ visible: true } & ReturnType<PrepService["readinessEvidence"]>)
+    | { visible: false; attemptsUsed: number; ignored: Array<{ id: string; reason: string }>; note: string } {
+    const full = this.readinessEvidence(userId, grade);
+    if (this.gates.readiness) return { visible: true, ...full };
+    return { visible: false, attemptsUsed: full.attemptsUsed, ignored: full.ignored, note: READINESS_GATED_NOTE };
   }
 
   /** The grade whose first lesson the path opens for this learner (the latest accepted placement), or null. */

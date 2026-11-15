@@ -32,8 +32,39 @@ export function rhythmFragment(bars: REv[][], ts: string | null, finalBar = true
     showKeySignature: false,
     ...(ts ? { timeSignature: ts } : {}),
     measures: measures.length && measures.some((m) => m.events.length) ? measures : [{ events: [] as NotationEvent[] }],
-    textAlternative: bars.map((b, i) => `Bar ${i + 1}: ${b.length ? b.map((e) => (e.kind === "tuplet" ? `${e.actual === 3 ? "triplet" : e.actual === 2 ? "duplet" : `group of ${e.actual}`} (${e.events.map(words).join(", ")})` : words(e))).join(", ") : "empty"}.`).join(" "),
+    textAlternative: describeBars(bars),
   } as NotationFragment;
+}
+
+/**
+ * The words for what is drawn, INCLUDING the beams: a run of joined notes reads "2 beamed together (quaver, semiquaver)". Without this the
+ * description of a grouping question was the same before and after the learner joined or split any beam, so a screen-reader user could not
+ * tell what they had done (educational review of PR #18, Grade 2 note grouping).
+ */
+export function describeBars(bars: REv[][]): string {
+  return bars
+    .map((b, i) => {
+      const parts: string[] = [];
+      let group: string[] | null = null;
+      for (const e of b) {
+        if (e.kind === "tuplet") {
+          parts.push(`${e.actual === 3 ? "triplet" : e.actual === 2 ? "duplet" : `group of ${e.actual}`} (${e.events.map(words).join(", ")})`);
+          continue;
+        }
+        const beam = (e as Inner).beam;
+        if (beam === "begin") group = [words(e)];
+        else if (group && (beam === "continue" || beam === "end")) {
+          group.push(words(e));
+          if (beam === "end") {
+            parts.push(`${group.length} beamed together (${group.join(", ")})`);
+            group = null;
+          }
+        } else parts.push(words(e));
+      }
+      if (group) parts.push(`${group.length} beamed together (${group.join(", ")})`);
+      return `Bar ${i + 1}: ${b.length ? parts.join(", ") : "empty"}.`;
+    })
+    .join(" ");
 }
 
 /** Beam a bar by its time signature; in irregular time by the grouping the question names (7/8 as 2+3+2 is not 7/8 as 2+2+3). */

@@ -82,5 +82,34 @@ export const DEFAULT_PREP: PrepConfig = {
 /** Words that must accompany every practice exam, placement and readiness display. Never an ABRSM result. */
 export const PREP_DISCLAIMER =
   "This is Music Theory Path's own practice assessment. It is not an ABRSM examination, it does not follow ABRSM's paper layout, marks or timings, and nothing here is an ABRSM result, a certificate or a prediction that you will pass.";
+/**
+ * Release gates: switches that decide what learners are SHOWN, kept apart from `PrepConfig` on purpose. The rubric is copied into every attempt and
+ * versions what a result MEANS; a gate only controls display, so flipping it never changes, re-scores or discards any recorded evidence.
+ *
+ * `readiness` is OFF unless the deployment sets `MTP_SHOW_READINESS=teacher-approved`. It stays off until a teacher has approved the thresholds
+ * and the question-quality corrections (docs/architecture/REVISION_PLACEMENT_EXAMS.md, "Readiness release gate"). While it is off the server
+ * still records everything and still computes the estimate internally (`PrepService.readinessEvidence`), but never sends the label, the
+ * percentage or the explanation to a client.
+ */
+export interface ReleaseGates {
+  readiness: boolean;
+}
+export const DEFAULT_GATES: ReleaseGates = { readiness: false };
+export function gatesFromEnv(env: Record<string, string | undefined> = process.env): ReleaseGates {
+  return { readiness: env.MTP_SHOW_READINESS === "teacher-approved" };
+}
+/**
+ * What the score-reading questions of Grades 2 and 3 actually ask. Their melody generator (`fam.score-observation`, shared with Grade 1) makes a
+ * two-bar crotchet melody in 2/4, 3/4 or 4/4 and in a MAJOR key and asks three things; it never uses 2/2, 3/2, 4/2, 3/8, compound time, minor keys,
+ * intervals or terms, although the Grade 2 and 3 syllabus (and the templates' scope) allow them. Until a teacher decides whether to broaden those
+ * generators (docs/architecture/REVISION_PLACEMENT_EXAMS.md, "Grade 2 and 3 score reading"), the result says plainly what the section covered.
+ * `prep-score-reading.test.ts` fails if the generators stop matching this text, so the label cannot drift from the questions.
+ */
+export const SCORE_READING_SKILLS: Record<number, string> = {
+  2: "In Grade 2 these questions check three earlier skills on a short melody: counting crotchet beats in 2/4, 3/4 or 4/4, naming a note, and naming a major key from its key signature. They do not yet ask about 2/2, 3/2, 3/8, minor keys, intervals or terms, so they say little about those.",
+  3: "In Grade 3 these questions check three earlier skills on a short melody: counting crotchet beats in 2/4, 3/4 or 4/4, naming a note, and naming a major key from its key signature. They do not yet ask about compound time, minor keys, intervals or terms, so they say little about those.",
+};
+export const READINESS_GATED_NOTE =
+  "An estimate of readiness is not shown yet. It will appear once a teacher has reviewed how it is worked out and the practice questions. Your score, the topics to revise and your mock results below are unaffected, and every answer you give is kept.";
 export const READINESS_NOTE =
   "An estimate from the independent questions you answered in mock examinations, without hints. It is our own guide to where to practise next, not an ABRSM result or a promise of a pass.";

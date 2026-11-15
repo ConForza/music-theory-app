@@ -15,7 +15,7 @@
 import { music, type Measure } from "@mtp/curriculum";
 import { frag, type Gen } from "./families.ts";
 import { CAD_KEYS, CAD_PAIRS, CAD_TYPES, cadencePhrase, voicings, type ChordSpec } from "./grade5-harmony.ts";
-import { F, choiceAnswer, diag, fitsIn, keyWords, keysIn, melodyIn5, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
+import { F, choiceAnswer, diag, fitsIn, keyWords, keysIn, melodyIn5, note, pretty, scaleDegrees, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
 const { parseKey, diatonicNumber, classifyCadence, intervalBetween, identifyTriad, romanDegree } = music;
 const T = music.TERMS_G5;
@@ -390,9 +390,11 @@ export const termUse5: Gen = (c): any => {
   const target = c.rng.pick(T.filter((t) => t.language !== "german" && termGroupSize(t.group) === 1 && !["pochettino", "misura", "lunga"].includes(t.id)));
   const wrongs = options5(c, target);
   if (wrongs.length < 3) return null;
+  // The glossary meaning is a phrase of any kind ("grief", "mutes", "go straight on", "or, alternatively"), so it is only ever QUOTED, never fitted
+  // into a sentence as if it were a verb ("A composer wants the player to grief" was the old wording).
   const heading = mode === "heading";
   return {
-    prompt: heading ? `A composer wants the player to ${target.meaning}. Which direction would be printed?` : `Which direction asks the player to do this: ${target.meaning}?`,
+    prompt: heading ? `Which of these terms has the meaning “${target.meaning}”?` : `Which of these terms means “${target.meaning}”?`,
     answer: choiceAnswer(shuffled(c, [target, ...wrongs].map((t) => [t.id, t.term] as [string, string])), target.id, Object.fromEntries(wrongs.map((t) => [t.id, ["confused-similar-term", `“${t.term}” means “${t.meaning}”.`]]))),
     hints: ["Think about which of the four terms has exactly that meaning."],
   };
@@ -533,14 +535,46 @@ const SOLO: Array<{ id: string; name: string; clef: "treble" | "tenor" | "alto";
   { id: "cor-anglais", name: "cor anglais (in F)", clef: "treble", transposes: "F" },
   { id: "cello", name: "cello", clef: "tenor" }, { id: "bassoon", name: "bassoon", clef: "tenor" }, { id: "trombone-tenor", name: "tenor trombone", clef: "tenor" }, { id: "viola", name: "viola", clef: "alto" },
 ];
+/**
+ * A melody that PROVES its key. A key signature fits two keys (a major key and its relative minor), so the notes themselves must say which: the
+ * melody begins and ends on the tonic, and in a minor key the note just before the final tonic is the raised 7th (the leading note), which the
+ * relative major's scale does not contain. Without this, "C major" and "A minor" were equally consistent with a melody that never touched either tonic.
+ * Returns null when the changed melody no longer fits the clef or leaps too far.
+ */
+export function withKeyEvidence(key: music.Key, mel: Pitch[], clef: Clef): Pitch[] | null {
+  const last = mel.length - 1;
+  if (last < 3) return null;
+  const nearTonic = (to: Pitch): Pitch => {
+    let best: Pitch | null = null;
+    for (const o of [to.octave - 1, to.octave, to.octave + 1]) {
+      const cand = { ...key.tonic, octave: o } as Pitch;
+      if (!best || Math.abs(diatonicNumber(cand) - diatonicNumber(to)) < Math.abs(diatonicNumber(best) - diatonicNumber(to))) best = cand;
+    }
+    return best!;
+  };
+  const out = [...mel];
+  out[0] = nearTonic(mel[0]!);
+  out[last] = nearTonic(mel[last]!);
+  if (key.mode === "minor") {
+    const leading = scaleDegrees(key)[6]!;
+    out[last - 1] = { ...leading, octave: music.stepIndex(key.tonic.step) === 0 ? out[last]!.octave - 1 : out[last]!.octave } as Pitch;
+  }
+  if (!fitsIn(clef, out, 1) || out.some((p) => Math.abs(music.staffPosition(clef, p) - 4) > 7)) return null;
+  for (let i = 1; i < out.length; i++) if (Math.abs(diatonicNumber(out[i]!) - diatonicNumber(out[i - 1]!)) > 5) return null;
+  return out;
+}
+
 export const scoreMelody5: Gen = (c): any => {
   const inst = c.rng.pick(SOLO);
   const clef = inst.clef;
   const keyText = c.rng.pick(keysIn(c).filter((k) => Math.abs(music.keyFifths(parseKey(k))) <= 4));
   const key = parseKey(keyText);
-  const mel = melodyIn5(c, key, clef, 6, 1);
-  if (!mel) return null;
+  const rough = melodyIn5(c, key, clef, 6, 1);
+  if (!rough) return null;
   const wanted = c.rng.shuffle(["key", "term", "ornament", "interval"]).slice(0, 3);
+  // Whenever the key is asked, the melody itself gives the evidence (tonic at both ends; the raised 7th in minor).
+  const mel = wanted.includes("key") ? withKeyEvidence(key, rough, clef) : rough;
+  if (!mel) return null;
   const withOrn = wanted.includes("ornament");
   const withInt = wanted.includes("interval");
   const ornAt = c.rng.pick([1, 4]);
@@ -565,7 +599,7 @@ export const scoreMelody5: Gen = (c): any => {
       const other = inst.transposes ? music.formatKey(music.writtenKeyFor(key, inst.transposes)) : music.formatKey(music.relativeKey(key));
       const ids = [...new Set([target, keyText, other, dom])];
       if (ids.length < 3) return null;
-      parts.push({ id: "key", prompt: inst.transposes ? `This is the written part for the ${inst.name}. In which key does the music sound (concert pitch)?` : "What is the key of the melody?", answer: choiceAnswer(shuffled(c, ids.map((x) => [x, keyWords(x)] as [string, string])), target, Object.fromEntries(ids.filter((x) => x !== target).map((x) => [x, [x === keyText && inst.transposes ? "key-signature-missing" : "wrong-category", x === keyText && inst.transposes ? "That is the key written in the part. The instrument sounds lower than written, so the music sounds in a different key." : `${keyWords(x)} has a different key signature or lies the wrong way from the written key.`]])) as any) });
+      parts.push({ id: "key", prompt: inst.transposes ? `This is the written part for the ${inst.name}. In which key does the music sound (concert pitch)?` : "What is the key of the melody?", answer: choiceAnswer(shuffled(c, ids.map((x) => [x, keyWords(x)] as [string, string])), target, Object.fromEntries(ids.filter((x) => x !== target).map((x) => [x, [x === keyText && inst.transposes ? "key-signature-missing" : "wrong-category", x === keyText && inst.transposes ? "That is the key written in the part. The instrument sounds lower than written, so the music sounds in a different key." : !inst.transposes && x === other ? `${keyWords(x)} shares the key signature, but the melody begins and ends on ${keyWords(music.formatPitchClass(key.tonic))}${key.mode === "minor" ? ` and uses the raised 7th (${keyWords(music.formatPitchClass(scaleDegrees(key)[6]!))}), which the relative major does not` : ""}, so the key is ${keyWords(keyText)}.` : `${keyWords(x)} has a different key signature or lies the wrong way from the written key.`]])) as any) });
     } else if (w === "ornament") parts.push({ id: "ornament", prompt: "What is the ornament on the note marked B?", answer: { kind: "ornament-sign", task: "name-sign", sign, accepted: [sign] } });
     else if (w === "term") {
       const wr = options5(c, term);

@@ -213,7 +213,7 @@ export function PrepPlayer() {
                   ? "A few questions from each grade, starting with Grade 1. We stop as soon as we know where you'd best begin, so it is between 6 and 24 questions. There are no hints, and your first answer to each question counts."
                   : a.mode === "mock"
                     ? "Answer on your own, as in an examination. There are no hints, your first answer to each question counts, and you will not be told what was right or wrong until you finish. Then you get a full breakdown."
-                    : "Take your time. Hints are there if you need them, you get feedback after every question, and you can try again after a slip. Because you have help, this does not count towards your readiness estimate."}
+                    : "Take your time. Hints are there if you need them, you get feedback after every question, and you can try again after a slip. Because you have help, this does not count as independent evidence."}
               </p>
               <p className="muted small"><Icon name="clock" size={16} /> {placement ? "Starting with 6 questions" : `${total} questions`} · Your answers save as you go{answered > 0 ? ` · ${answered} done` : ""}</p>
               {timing?.timed && remaining !== null && (

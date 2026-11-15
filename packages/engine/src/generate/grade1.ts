@@ -1193,6 +1193,21 @@ export const melodyDetail: Gen = (c) => {
 // Unit 3 extra: finding middle C
 // ---------------------------------------------------------------------------
 
+/**
+ * Where a note sits, described exactly. `geom` says "on a ledger line" for any position beyond the stave, which is wrong for a note in the SPACE
+ * beyond a ledger line: in the bass clef both C4 (on the first ledger line) and D4 (in the space above it) read "on a ledger line above the
+ * stave", so the written description of "which note is middle C?" could not tell them apart. Used by middle-c-find; `geom` itself is unchanged
+ * so every other question's stored text (and fingerprint) stays as it was.
+ */
+export function exactGeom(clef: Clef, p: Pitch): string {
+  const pos = staffPosition(clef, p);
+  if (pos >= 0 && pos <= 8) return geom(clef, p);
+  if (pos === 9) return "in the space just above the stave";
+  if (pos === -1) return "in the space just below the stave";
+  if (pos > 9) return pos % 2 === 0 ? `on the ${ORD((pos - 8) / 2)} ledger line above the stave` : `in the space above the ${ORD((pos - 9) / 2)} ledger line above the stave`;
+  return pos % 2 === 0 ? `on the ${ORD(-pos / 2)} ledger line below the stave` : `in the space below the ${ORD((-pos - 1) / 2)} ledger line below the stave`;
+}
+
 /** t.g1.middle-c-find: which of four written notes is middle C? */
 export const middleCFind: Gen = (c) => {
   const clef = c.rng.pick((c.scope.clefs?.length ? c.scope.clefs : ["treble"]) as Array<"treble" | "bass">);
@@ -1205,7 +1220,7 @@ export const middleCFind: Gen = (c) => {
   const idx = seq.indexOf("C4");
   return {
     prompt: `Which of these notes is middle C?`,
-    music: frag(clef, [{ events: seq.map((p) => note(p, "crotchet")) }], `Four ${clef}-clef notes in a row: ${seq.map((q, k) => `note ${k + 1} ${geom(clef, music.parsePitch(q))}`).join("; ")}.`, { timeSignature: "4/4" }),
+    music: frag(clef, [{ events: seq.map((p) => note(p, "crotchet")) }], `Four ${clef}-clef notes in a row: ${seq.map((q, k) => `note ${k + 1} ${exactGeom(clef, music.parsePitch(q))}`).join("; ")}.`, { timeSignature: "4/4" }),
     answer: { kind: "choice", options: [1, 2, 3, 4].map((x) => ({ id: String(x), label: `Note ${x}` })), correctOptionIds: [String(idx + 1)], diagnoses: Object.fromEntries([1, 2, 3, 4].filter((x) => x !== idx + 1).map((x) => [String(x), { category: "ledger-miscount", reason: `Middle C is the note on the short ledger line, ${clef === "treble" ? "just below" : "just above"} the stave.` }])) },
     hints: [`Middle C sits on its own short ledger line, ${clef === "treble" ? "below the treble stave" : "above the bass stave"}.`],
   };

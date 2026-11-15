@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- tests read loosely typed answer specs */
 import { buildIndex, effectiveScope, loadCurriculum, music, type ExerciseItem } from "@mtp/curriculum";
 import { describe, expect, it } from "vitest";
-import { canonicalResponse, generateItem, generationFingerprint, gradeItem, templateScope, wrongResponse } from "../src/index.ts";
+import { canonicalResponse, generateItem, generationFingerprint, gradeItem, TEMPLATE_REVISIONS, templateScope, wrongResponse } from "../src/index.ts";
 
 /**
  * Independent check of the Brief 09 (Grade 5) generators. The generators write their own answers and the engine's solvability gate
@@ -657,7 +657,7 @@ describe("generation is deterministic, identities are stable, and the Grade 5 vo
     expect(g4f).toBe(g4Old);
     for (const t of ix.templates.values()) {
       // the `*.book-*` templates are new and carry VOCAB_BOOK in their fingerprint on purpose (terms-book.test.ts and the pinned-fingerprint test cover them)
-      if (t.grade >= 4 || music.isBookTemplate(t.id)) continue;
+      if (t.grade >= 4 || music.isBookTemplate(t.id) || TEMPLATE_REVISIONS[t.id]) continue; // revised templates carry their revision on purpose (release-blockers.test.ts)
       const old = hash(JSON.stringify(canonical({ rev: 1, template: t, scope: t.scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES } }))).toString(16).padStart(8, "0");
       expect(generationFingerprint(t, t.scope as never), t.id).toBe(old);
     }

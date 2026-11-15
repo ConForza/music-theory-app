@@ -1,8 +1,11 @@
 import type { PrepReadiness } from "../api/client";
 
+/** Only a readiness the server chose to show has a label (the release gate is off by default: see packages/api/src/prep-config.ts). */
+export type ShownReadiness = Extract<PrepReadiness, { visible: true }>;
+
 export const LEVEL_WORDS: Record<string, string> = { mastered: "Right both times", developing: "Developing", needs_review: "Needs review", not_assessed: "Not yet assessed" };
 export const MODE_WORDS: Record<"practice" | "mock" | "placement", string> = { practice: "Practice mode", mock: "Mock examination", placement: "Placement check" };
-export const READINESS_WORDS: Record<PrepReadiness["label"], string> = { on_track: "Consistently secure", developing: "Developing", needs_review: "Needs review", not_enough_evidence: "Not enough evidence yet" };
+export const READINESS_WORDS: Record<ShownReadiness["label"], string> = { on_track: "Consistently secure", developing: "Developing", needs_review: "Needs review", not_enough_evidence: "Not enough evidence yet" };
 
 /** "54 min", "1 h 5 min": a duration for people, rounded up to the minute. */
 export function minutesText(seconds: number): string {

@@ -1,6 +1,6 @@
 import { buildIndex, effectiveScope, loadCurriculum, music, type ExerciseItem } from "@mtp/curriculum";
 import { describe, expect, it } from "vitest";
-import { canonicalResponse, generateItem, generationFingerprint, gradeItem, solutionFor, wrongResponse } from "../src/index.ts";
+import { canonicalResponse, generateItem, generationFingerprint, gradeItem, TEMPLATE_REVISIONS, solutionFor, wrongResponse } from "../src/index.ts";
 
 /**
  * Independent check of the Brief 08 (Grade 4) generators. The generators write their own answers and the engine's solvability gate grades
@@ -804,7 +804,7 @@ describe("version-safe vocabulary", () => {
     let n = 0;
     for (const t of ix.templates.values()) {
       // the `*.book-*` templates are new and carry VOCAB_BOOK in their fingerprint on purpose (terms-book.test.ts and the pinned-fingerprint test cover them)
-      if (t.grade >= 4 || music.isBookTemplate(t.id)) continue;
+      if (t.grade >= 4 || music.isBookTemplate(t.id) || TEMPLATE_REVISIONS[t.id]) continue; // revised templates carry their revision on purpose (release-blockers.test.ts)
       const scope = t.scope as never;
       const old = hash(JSON.stringify(canonical({ rev: 1, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES } }))).toString(16).padStart(8, "0");
       expect(generationFingerprint(t, scope), t.id).toBe(old);
