@@ -83,7 +83,8 @@ for (const grade of [1, 2, 3, 4, 5]) {
     assert.match(await page.getByTestId("readiness-gated").innerText(), /not shown yet/);
     assert.doesNotMatch(await page.getByRole("main").innerText(), /Consistently secure|Needs review\b.*readiness|Estimated readiness/);
     assert.match(await page.getByTestId("independent").innerText(), /right on your own|No independent evidence/);
-    await page.getByText(/not an ABRSM result/).first().waitFor();
+    // the always-shown disclaimer (the readiness note that also says "not an ABRSM result" is behind the gate)
+    await page.getByText(/not an ABRSM examination/).first().waitFor();
     assert.equal(await page.getByTestId("review-wrong").count(), wrongSent);
     await page.getByTestId("review-wrong").first().getByText("The answer:").waitFor();
     await page.getByRole("heading", { name: "What to do next" }).waitFor();
