@@ -261,7 +261,7 @@ await test("complete progression to the Grade 5 assessment: below the pass mark 
   await shot(page, "g5-12-assessment-passed");
   const prog = await get(page, "/api/progress");
   assert.equal(prog.nodes["G5-A"].state, "completed");
-  assert.equal(prog.grades.find((g) => g.grade === 5).completedNodes, 41);
+  assert.equal(prog.grades.find((g) => g.grade === 5).completedNodes, 42);
   assert.equal((await get(page, "/api/achievements")).achievements.find((b) => b.id === "g5.grade-complete").earned, true);
   const results = (await get(page, "/api/results")).results.filter((r) => r.nodeId === "G5-A");
   assert.deepEqual(results.map((r) => r.passed).sort(), [false, true], "both results are recorded; the retake did not overwrite the first");

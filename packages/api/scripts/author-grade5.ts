@@ -127,7 +127,13 @@ const lessonsOf = (u: string) => nodes.filter((n) => n.unitId === u && n.type ==
 const keepMelodies = (nodes.find((n) => n.id === "G5-U5-R1")!.exercises as Binding[]).filter((b) => /^t\.g([123]\.melody|4\.passage)$/.test(b.templateId));
 units.forEach((u, k) => {
   for (const n of nodes.filter((x) => x.unitId === u)) {
-    if (n.type === "practice") { n.exercises = merge(lessonsOf(u).flatMap((l) => l.exercises)); n.contentStatus = "draft"; }
+    if (n.type === "practice") {
+      n.exercises = merge(lessonsOf(u).flatMap((l) => l.exercises));
+      // A practice session draws at most ten questions, taking the bindings in order, so a lesson added last would never be practised (found in the browser journey for G5-U3-L07):
+      // the interval-key templates of Unit 3 come first. The relative order of every other binding is unchanged.
+      if (u === "G5-U3") n.exercises = [...n.exercises.filter((b) => b.templateId.startsWith("t.g5.interval-key")), ...n.exercises.filter((b) => !b.templateId.startsWith("t.g5.interval-key"))];
+      n.contentStatus = "draft";
+    }
     if (n.type === "review") {
       if (k > 0) n.exercises = [...merge(units.slice(0, k === 4 ? 5 : k).flatMap((x) => lessonsOf(x).flatMap((l) => l.exercises))), ...(k === 4 ? keepMelodies : [])];
       n.contentStatus = "draft";
