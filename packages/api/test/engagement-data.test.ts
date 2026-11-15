@@ -99,7 +99,7 @@ describe("persistence and migration", () => {
     const dir = mkdtempSync(join(tmpdir(), "mig-"));
     const src = join(import.meta.dirname, "../migrations");
     mkdirSync(join(dir, "m"));
-    for (const f of readdirSync(src).filter((f) => !/^00[345678]/.test(f))) copyFileSync(join(src, f), join(dir, "m", f));
+    for (const f of readdirSync(src).filter((f) => !/^00[3456789]/.test(f))) copyFileSync(join(src, f), join(dir, "m", f));
     const db = new DatabaseSync(":memory:");
     db.exec("PRAGMA foreign_keys = ON;");
     expect(migrate(db, join(dir, "m"))).toEqual(["001_init.sql", "002_practice.sql"]);

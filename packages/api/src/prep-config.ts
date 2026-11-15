@@ -1,0 +1,81 @@
+/**
+ * Brief 10 product defaults. Every number here is an explicit, configurable PRODUCT choice made for this app:
+ *
+ *   - none of them is an ABRSM mark scheme, pass mark, paper length or time allowance (those cannot be confirmed from the syllabus
+ *     documents this project holds, so none is claimed);
+ *   - they are read once when an attempt starts and copied into that attempt (`prep_attempts.rubric`), so changing them later never
+ *     rewrites the meaning of a result that has already been recorded;
+ *   - `RUBRIC_VERSION` must be raised whenever a number here changes how an answer is scored or how a label is chosen.
+ *
+ * Teacher sign-off on all of these is still outstanding (docs/architecture/REVISION_PLACEMENT_EXAMS.md, "Decisions awaiting a teacher").
+ */
+export const RUBRIC_VERSION = 1;
+/** Version of how a practice exam / placement check is composed from the curriculum (which outcomes, how many questions, how templates rotate). */
+export const BLUEPRINT_VERSION = 1;
+
+export interface PrepConfig {
+  rubricVersion: number;
+  blueprintVersion: number;
+  exam: {
+    /** Questions drawn for every syllabus outcome introduced at the grade. Two lets the report separate "slip" from "gap". */
+    itemsPerOutcome: number;
+    /** Extra questions that combine several ideas in one piece of notation (melodies, passages, scores). */
+    scoreReadingItems: number;
+    /** Product default for the optional timer. NOT an ABRSM duration. Total time = questions x this, plus any accommodation. */
+    secondsPerQuestion: number;
+    /** Extra time the learner may choose (a profile accommodation). Scoring never uses speed, so extra time costs nothing. */
+    extraTimeChoices: number[];
+    /** An answer arriving this long after the deadline is still accepted (network delay); later ones are refused. */
+    graceSeconds: number;
+  };
+  placement: {
+    /** Questions in each grade's probe. */
+    probeItems: number;
+    /** Highest grade probed: Grade 5 is the destination, so Grades 1-4 are its prerequisites. */
+    probeGrades: number[];
+    /** Fraction of a probe answered correctly to be "secure": the learner can start above this grade. */
+    secureRatio: number;
+    /** Fraction for "partial": worth a catch-up lesson, but not by itself a reason to start lower. */
+    partialRatio: number;
+  };
+  readiness: {
+    /** Share of the grade's outcomes that need independent evidence before any estimate is given. */
+    minCoverage: number;
+    /** Independent percentage for the "On track" label (needs two qualifying mock attempts) and for "Developing". */
+    onTrackPercent: number;
+    developingPercent: number;
+    /** Mock attempts, newest first, that the estimate looks at. */
+    window: number;
+    /** Qualifying attempts needed before "On track" can be shown. */
+    minAttemptsForOnTrack: number;
+    /** An outcome with this share of its independent questions right is "Mastered" (needs at least two). */
+    outcomeMasteredRatio: number;
+  };
+  revision: {
+    /** Pace used to turn "5 minutes" into a number of questions. */
+    secondsPerQuestion: number;
+    minMinutes: number;
+    maxMinutes: number;
+    defaultMinutes: number;
+    /** Answered questions needed before finishing early still counts as a review session for the daily goal. */
+    minAnsweredForCredit: number;
+    /** Weak: this many wrong answers among the last `weakWindow` independent answers, or any lapse. */
+    weakWrongInWindow: number;
+    weakWindow: number;
+  };
+}
+
+export const DEFAULT_PREP: PrepConfig = {
+  rubricVersion: RUBRIC_VERSION,
+  blueprintVersion: BLUEPRINT_VERSION,
+  exam: { itemsPerOutcome: 2, scoreReadingItems: 4, secondsPerQuestion: 90, extraTimeChoices: [0, 25, 50, 100], graceSeconds: 5 },
+  placement: { probeItems: 6, probeGrades: [1, 2, 3, 4], secureRatio: 0.8, partialRatio: 0.5 },
+  readiness: { minCoverage: 0.8, onTrackPercent: 75, developingPercent: 55, window: 2, minAttemptsForOnTrack: 2, outcomeMasteredRatio: 1 },
+  revision: { secondsPerQuestion: 40, minMinutes: 3, maxMinutes: 10, defaultMinutes: 5, minAnsweredForCredit: 5, weakWrongInWindow: 2, weakWindow: 5 },
+};
+
+/** Words that must accompany every practice exam, placement and readiness display. Never an ABRSM result. */
+export const PREP_DISCLAIMER =
+  "This is Music Theory Path's own practice assessment. It is not an ABRSM examination, it does not follow ABRSM's paper layout, marks or timings, and nothing here is an ABRSM result, a certificate or a prediction that you will pass.";
+export const READINESS_NOTE =
+  "An estimate from the independent questions you answered in mock examinations, without hints. It is our own guide to where to practise next, not an ABRSM result or a promise of a pass.";

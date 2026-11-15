@@ -8,6 +8,7 @@ import { stopAll, cue } from "../lib/audio";
 import { friendlyDate, plural } from "../lib/progression";
 import { useApp } from "../state/app";
 import { ActionBar, Question } from "./LessonSteps";
+import { RevisePanel } from "./Revise";
 
 const asFailure = (e: unknown, fallback: string) => (e instanceof ApiFailure ? e : new ApiFailure(0, "network", fallback));
 
@@ -72,6 +73,8 @@ export function ReviewHub() {
         {data.waiting > 0 && <p className="muted small">{plural(data.waiting, "topic")} will be ready for review once {data.waiting === 1 ? "its" : "their"} lesson is finished.</p>}
         {note && <p role="status" className="muted">{note}</p>}
       </section>
+
+      <RevisePanel />
 
       {empty && (
         <section className="card" aria-labelledby="empty-h">

@@ -5,6 +5,7 @@ import { Icon } from "../components/Icon";
 import { ErrorState, Loading, NotFoundView } from "../components/Shell";
 import { stopAll } from "../lib/audio";
 import { Question, type QuestionApi } from "./LessonSteps";
+import { ExamHub } from "./PrepPages";
 
 const practiceApi: QuestionApi = { attempt: api.practiceAttempt, hint: api.practiceHint };
 
@@ -21,9 +22,10 @@ export function Practice() {
   if (!data) return <Loading label="Loading practice…" />;
   return (
     <div className="page practice-page">
-      <header className="page-head">
+      <ExamHub />
+      <header className="page-head lab-head">
         <p className="eyebrow">Practice lab</p>
-        <h1>Try every kind of question</h1>
+        <h2 className="h1">Try every kind of question</h2>
         <p className="lede-small">Short sets that use the real music tools: the stave, the keyboard, rhythms, scales, intervals and chords. Practice here is optional: it does not change your path, earn XP or count towards mastery, so you can try things freely, with hints. <Link to="/review">Review</Link> is where topics become mastered.</p>
       </header>
       <ul className="practice-grid">

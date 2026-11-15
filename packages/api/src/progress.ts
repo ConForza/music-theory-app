@@ -7,7 +7,7 @@ import { gradeResponse, revealSolution, type GradeResult, type Response } from "
 import type { Clock } from "./clock.ts";
 import { systemClock } from "./clock.ts";
 import type { Engagement } from "./engagement.ts";
-import { computeNodeStates, nextNodeForGrade, type NodeProgress, type PathPolicy, type ProgressRow } from "./path-state.ts";
+import { computeNodeStates, nextNodeForGrade, placedGradeOf, type NodeProgress, type PathPolicy, type ProgressRow } from "./path-state.ts";
 
 export const PHASES = ["intro", "teach", "demo", "questions"] as const;
 export type Phase = (typeof PHASES)[number];
@@ -67,7 +67,7 @@ export class ProgressService {
   }
 
   states(userId: string) {
-    return computeNodeStates(this.course, this.rows(userId), this.policy);
+    return computeNodeStates(this.course, this.rows(userId), this.policy, placedGradeOf(this.db, userId));
   }
 
   /** Everything the map and dashboard need, computed from the curriculum graph and this learner's rows. */

@@ -52,7 +52,7 @@ interface SessionRow {
   summary: string | null;
 }
 
-interface Candidate {
+export interface Candidate {
   nodeId: string;
   templateId: string;
   scope: MusicScope;
@@ -117,7 +117,7 @@ export class ReviewService {
    * question the learner has already met (same music and answer under any seed) is skipped while a fresh one exists.
    * Deterministic: it walks seeds upwards from `base`, so the stored seed regenerates the same question.
    */
-  private generateFor(c: Candidate, conceptId: string, base: number, avoid: Set<string>): { item: ExerciseItem; seed: number } | null {
+  generateFor(c: Candidate, conceptId: string, base: number, avoid: Set<string>): { item: ExerciseItem; seed: number } | null {
     const constraint = this.constraints.get(conceptId);
     let fallback: { item: ExerciseItem; seed: number } | null = null;
     for (let k = 0; k < 300; k++) {
@@ -158,7 +158,7 @@ export class ReviewService {
     return keys;
   }
 
-  private resolve(si: SessionItem): { item: ExerciseItem; scope: MusicScope } | null {
+  resolve(si: SessionItem): { item: ExerciseItem; scope: MusicScope } | null {
     const node = this.course.ix.nodeById.get(si.nodeId);
     const binding = node?.exercises.find((b) => b.templateId === si.templateId);
     if (!node || !binding) return null;

@@ -16,7 +16,10 @@ export function RequireAuth() {
 /** Pages for people who are not signed in yet. */
 export function PublicOnly() {
   const { me } = useApp();
+  const loc = useLocation();
   if (me === undefined) return <Loading />;
-  if (me?.profile.onboarded) return <Navigate to="/learn" replace />;
+  // Onboarding can finish somewhere other than the path: "find my level" goes to the placement check. Only that one address is honoured.
+  const next = (loc.state as { next?: string } | null)?.next === "/placement" ? "/placement" : "/learn";
+  if (me?.profile.onboarded) return <Navigate to={next} replace />;
   return <Outlet />;
 }

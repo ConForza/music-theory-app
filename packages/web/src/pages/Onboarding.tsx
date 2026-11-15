@@ -56,6 +56,18 @@ export function Onboarding() {
     else setStep("account");
   }
 
+  /** "I'm not sure": a guest account is made if needed (nothing is asked of the learner), then the placement check opens. */
+  function choosePlacement() {
+    if (busy) return;
+    void save(async () => {
+      if (!me) setMe(await api.guest());
+      // Saving the profile ends onboarding, and the onboarding guard then sends the learner on: tell it where to.
+      nav("/onboarding", { replace: true, state: { next: "/placement" } });
+      await updateProfile({ experience: "some", selectedGrade: 1, onboarded: true });
+      nav("/placement", { replace: true });
+    }, "your setup");
+  }
+
   function chooseNew() {
     if (busy) return;
     setExperience("new");
@@ -119,8 +131,13 @@ export function Onboarding() {
       {step === "grade" && (
         <section aria-labelledby="q2">
           <h1 id="q2">Where would you like to begin?</h1>
-          <p className="lede-small">Each grade is its own world. Grade 1 is the gentle start; later grades build on it. A placement check is planned for a later release.</p>
+          <p className="lede-small">Each grade is its own world. Grade 1 is the gentle start; later grades build on it.</p>
           <GradeCards course={course.data} selected={grade} saving={busy ? grade : null} onPick={chooseGrade} />
+          <div className="card placement-offer">
+            <h2 className="h3">Not sure which grade?</h2>
+            <p className="muted small">A short placement check suggests where to start. It never completes a grade, and you can always choose a lower one.</p>
+            <button type="button" className="btn btn-ghost" onClick={choosePlacement} disabled={busy}>Find my level</button>
+          </div>
           {retryBox}
           {busy && <Loading label="Saving…" />}
         </section>

@@ -29,7 +29,7 @@ import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { STATE_ORDER, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { learnerTime, recordExposure } from "./mastery-service.ts";
 import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "./question-key.ts";
-import { computeNodeStates, type PathPolicy } from "./path-state.ts";
+import { computeNodeStates, placedGradeOf, type PathPolicy } from "./path-state.ts";
 
 /** Words shown with every result: this is practice material, never an examination outcome. */
 export const ASSESSMENT_DISCLAIMER = "This is Music Theory Path's own practice check. It is not an ABRSM examination, and passing it is not an ABRSM result or certificate.";
@@ -122,7 +122,7 @@ export class NodeRunService {
   }
 
   /** Everything a template may use at `node`: the union of its lesson bindings' effective scopes up to that point. */
-  private taughtUnion(templateId: string, node: OrderedNode): MusicScope | null {
+  taughtUnion(templateId: string, node: OrderedNode): MusicScope | null {
     const key = `${templateId}|${node.id}`;
     if (this.unionCache.has(key)) return this.unionCache.get(key)!;
     let scope: MusicScope | null = null;
@@ -141,7 +141,7 @@ export class NodeRunService {
    * practice, review, challenge or assessment run never shows a word the learner has not been taught. Every other template is unaffected:
    * for them reaching the node already implies having completed its lessons.
    */
-  private taughtToLearner(userId: string, templateId: string, node: OrderedNode): boolean {
+  taughtToLearner(userId: string, templateId: string, node: OrderedNode): boolean {
     if (!music.isBookTemplate(templateId)) return true;
     // A `*.book-*` question draws its wrong options from the book vocabulary of every earlier new lesson, including earlier grades' (terms-book.ts, `pool`),
     // so the learner must have completed EVERY new lesson of this template's grade and of the grades before it (review of PR #15, P2): not only the
@@ -188,7 +188,7 @@ export class NodeRunService {
 
   // ---- planning ------------------------------------------------------------------------------------------------
 
-  private gen(templateId: string, seed: number, scope: MusicScope, pin?: { version: number; fingerprint: string }): ExerciseItem | null {
+  gen(templateId: string, seed: number, scope: MusicScope, pin?: { version: number; fingerprint: string }): ExerciseItem | null {
     try {
       return generateItem(this.course.ix, templateId, seed, { scope, evidence: "independent", ...(pin ?? {}) }).item;
     } catch (e) {
@@ -198,7 +198,7 @@ export class NodeRunService {
   }
 
   /** Walk seeds upward from `base` for a question that is new to this run and, where possible, new to the learner. */
-  private pick(templateId: string, scope: MusicScope, base: number, avoid: Set<string>, usedInRun: Set<string>, accept: (i: ExerciseItem) => boolean): { item: ExerciseItem; seed: number } | null {
+  pick(templateId: string, scope: MusicScope, base: number, avoid: Set<string>, usedInRun: Set<string>, accept: (i: ExerciseItem) => boolean): { item: ExerciseItem; seed: number } | null {
     let fallback: { item: ExerciseItem; seed: number } | null = null;
     for (let k = 0; k < 400; k++) {
       const seed = (base + k) % 2 ** 31;
@@ -301,7 +301,7 @@ export class NodeRunService {
 
   private states(userId: string) {
     const rows = this.db.prepare("SELECT node_id, run, run_open, phase, content_version, completed_at, completed_content_version FROM lesson_progress WHERE user_id = ?").all(userId) as never[];
-    return computeNodeStates(this.course, rows, this.policy);
+    return computeNodeStates(this.course, rows, this.policy, placedGradeOf(this.db, userId));
   }
 
   private nodeOf(userId: string, nodeId: string): { node: OrderedNode; kind: SessionKind } {

@@ -7,6 +7,7 @@ import { RecentBadges, ReviewNudge, StatusStrip, WelcomeBack } from "../componen
 import { LearningPath } from "../components/LearningPath";
 import { describeNode } from "../lib/pathView";
 import { useApp, useCourseData } from "../state/app";
+import { QuickReviewCard } from "./Revise";
 
 export const prefersReducedMotion = () =>
   document.documentElement.dataset.motion === "reduce" ||
@@ -50,6 +51,8 @@ export function Learn() {
           <ReviewNudge e={engagement.data} />
         </>
       )}
+
+      {data.progress.totals.lessonsCompleted > 0 && <QuickReviewCard />}
 
       {next && v ? (
         <section className="next-card" aria-labelledby="next-h">
