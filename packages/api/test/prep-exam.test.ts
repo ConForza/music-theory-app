@@ -233,6 +233,8 @@ describe("a mock examination: independent answers, results afterwards", () => {
       const id = (await c.post("/api/exams/2/start", { mode: "mock", seed })).body.id as string;
       await answerAll(app, c, userId, id);
       expect((await c.post(`/api/prep/attempts/${id}/complete`, {})).status).toBe(200);
+      // "Consistently secure" needs the two attempts on different days
+      await c.post("/api/test/clock", { advanceDays: 1 });
     }
     const r = (await c.get("/api/prep/results")).body.grades[1].readiness;
     expect(r).toMatchObject({ label: "on_track", attemptsUsed: 2, percent: 100 });
@@ -248,8 +250,74 @@ describe("a mock examination: independent answers, results afterwards", () => {
     expect(early.body.notAssessed.length).toBeGreaterThan(0);
     expect(early.body.outcomes.filter((o: { level: string }) => o.level === "not_assessed").length).toBe(early.body.notAssessed.length);
     const after = (await c.get("/api/prep/results")).body.grades[1].readiness;
-    expect(after.ignored.some((x: { id: string; reason: string }) => x.id === id && x.reason === "low_coverage")).toBe(true);
+    expect(after.ignored.some((x: { id: string; reason: string }) => x.id === id && x.reason === "too_few_answered")).toBe(true);
     expect(db.prepare("SELECT COUNT(*) AS c FROM prep_attempts WHERE user_id = ? AND status = 'complete'").get(userId)).toEqual({ c: 3 });
+  }, 120_000);
+});
+
+describe("review fixes: what the numbers tell a learner", () => {
+  it("a mostly blank mock is scored against the whole paper and gives no estimate at all", async () => {
+    const { app } = boot();
+    const { c, userId } = await learner(app);
+    const id = (await c.post("/api/exams/2/start", { mode: "mock", seed: 5 })).body.id as string;
+    const n = app.prep.blueprint(2).totalItems;
+    await answerAll(app, c, userId, id, () => false, (i) => i < 10);
+    const s = (await c.post(`/api/prep/attempts/${id}/complete`, { allowUnanswered: true })).body;
+    expect(s.score).toBe(10);
+    expect(s.independentQuestions).toBe(n); // every unanswered question is counted, as not right
+    expect(s.independentPercent).toBe(Math.round((100 * 10) / n));
+    const r = (await c.get("/api/prep/results")).body.grades[1].readiness;
+    expect(r.label).toBe("not_enough_evidence");
+    expect(r.ignored).toEqual([{ id, reason: "too_few_answered" }]);
+  }, 60_000);
+
+  it("a recommendation sends the learner to the lesson for the question they missed, not the outcome's first lesson", async () => {
+    const { app } = boot();
+    const { c, userId } = await learner(app);
+    const id = (await c.post("/api/exams/5/start", { mode: "mock", seed: 9 })).body.id as string;
+    const items = app.prep.internalItems(userId, id);
+    // miss a question of a broad outcome (g5.07: keys and scales): its concepts differ between questions
+    const target = items.findIndex((i) => i.planned.outcomeId === "abrsm2020.g5.07");
+    await answerAll(app, c, userId, id, (i) => i === target);
+    const s = (await c.post(`/api/prep/attempts/${id}/complete`, {})).body;
+    const missed = items[target]!.planned.conceptIds;
+    const teaches = (nodeId: string) => missed.some((cid) => (course.ix.conceptTaughtBy.get(cid) ?? []).some((n) => n.id === nodeId));
+    const lessons = s.recommendations.filter((r: { kind: string }) => r.kind === "lesson");
+    expect(lessons.length).toBeGreaterThan(0);
+    expect(lessons.some((r: { nodeId: string }) => teaches(r.nodeId))).toBe(true);
+    const row = s.outcomes.find((o: { outcomeId: string }) => o.outcomeId === "abrsm2020.g5.07");
+    expect(row.revisit.some((nodeId: string) => teaches(nodeId))).toBe(true);
+    const rev = s.recommendations.find((r: { kind: string; conceptId?: string }) => r.kind === "revision" && missed.includes(r.conceptId!));
+    expect(rev, "the revision topic is one of the missed question's concepts").toBeDefined();
+  }, 60_000);
+
+  it("a missed score-reading question still produces advice", async () => {
+    const { app } = boot();
+    const { c, userId } = await learner(app);
+    const id = (await c.post("/api/exams/3/start", { mode: "mock", seed: 3 })).body.id as string;
+    const items = app.prep.internalItems(userId, id);
+    const reading = items.findIndex((i) => i.planned.combined);
+    // a wrong answer can only be built for some question types: use the first reading question that has one
+    const { wrongResponse } = await import("@mtp/engine");
+    const idx = items.findIndex((i) => i.planned.combined && wrongResponse(course.ix, i.item, i.scope));
+    expect(idx).toBeGreaterThanOrEqual(0);
+    void reading;
+    await answerAll(app, c, userId, id, (i) => i === idx);
+    const s = (await c.post(`/api/prep/attempts/${id}/complete`, {})).body;
+    expect(s.recommendations.some((r: { why: string }) => /Reading music in context/.test(r.why))).toBe(true);
+  }, 60_000);
+
+  it("the same question never appears twice in a paper, however its options are shuffled (the seeds that failed review)", async () => {
+    const { contentKey } = await import("../src/prep.ts");
+    const { app } = boot();
+    for (const [grade, seeds] of [[1, [23, 71, 11, 37, 53]], [2, [71, 11, 23]], [5, [23, 71]]] as Array<[number, number[]]>) {
+      for (const seed of seeds) {
+        const u = await learner(app, `d${grade}${seed}`);
+        const id = (await u.c.post(`/api/exams/${grade}/start`, { mode: "mock", seed })).body.id as string;
+        const keys = app.prep.internalItems(u.userId, id).map((i) => contentKey(i.item));
+        expect(new Set(keys).size, `grade ${grade} seed ${seed}: the same question twice`).toBe(keys.length);
+      }
+    }
   }, 120_000);
 });
 
@@ -397,7 +465,7 @@ describe("persistence, versions and compatibility", () => {
     await answerAll(app, c, userId, id, (i) => i === 0);
     const done = (await c.post(`/api/prep/attempts/${id}/complete`, {})).body;
     const row = db.prepare("SELECT seed, rubric_version, blueprint_version, curriculum_version, rubric, items FROM prep_attempts WHERE id = ?").get(id) as { seed: number; rubric_version: number; blueprint_version: number; curriculum_version: string; rubric: string; items: string };
-    expect(row).toMatchObject({ seed: 4242, rubric_version: 1, blueprint_version: 1, curriculum_version: course.version });
+    expect(row).toMatchObject({ seed: 4242, rubric_version: DEFAULT_PREP.rubricVersion, blueprint_version: 1, curriculum_version: course.version });
     expect(JSON.parse(row.rubric).readiness.onTrackPercent).toBe(DEFAULT_PREP.readiness.onTrackPercent);
     const planned = JSON.parse(row.items) as Array<{ seed: number; templateVersion: number; fingerprint: string }>;
     expect(planned.every((p) => Number.isInteger(p.seed) && p.templateVersion >= 1 && p.fingerprint.length > 0)).toBe(true);
@@ -406,11 +474,11 @@ describe("persistence, versions and compatibility", () => {
     expect(JSON.parse(resp[0]!.response)).toHaveProperty("kind");
     expect(resp[0]!.correct).toBe(0);
     // the rules move on: a new app on the SAME database with rubric version 2
-    const next = boot({ db, prep: { ...DEFAULT_PREP, rubricVersion: 2, readiness: { ...DEFAULT_PREP.readiness, onTrackPercent: 90 } } });
+    const next = boot({ db, prep: { ...DEFAULT_PREP, rubricVersion: DEFAULT_PREP.rubricVersion + 1, readiness: { ...DEFAULT_PREP.readiness, onTrackPercent: 90 } } });
     const c2 = new Client(next.app);
     c2.cookie = c.cookie;
     const hist = (await c2.get("/api/prep/results")).body;
-    expect(hist.results[0]).toMatchObject({ id, rubricVersion: 1, superseded: true, percent: done.percent });
+    expect(hist.results[0]).toMatchObject({ id, rubricVersion: DEFAULT_PREP.rubricVersion, superseded: true, percent: done.percent });
     expect(hist.results[0].supersededNote).toMatch(/earlier rules/);
     expect(hist.grades[0].readiness.ignored).toEqual([{ id, reason: "older_rules" }]);
     // and the stored result is returned exactly as it was

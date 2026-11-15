@@ -79,7 +79,7 @@ function ExamResult({ result, summary: s, readiness }: { result: Result; summary
 
       <section aria-labelledby="out-h">
         <h2 id="out-h">By syllabus outcome</h2>
-        <p className="muted small">{mock ? "Each outcome had two questions. Mastered means both were right on your own." : "Practice-mode levels: your first try, with any hints you used."}</p>
+        <p className="muted small">{mock ? "Each outcome had two questions. Right both times means both were right on your own. With only two questions an outcome can look better or worse than it is, so treat each as a pointer, not a verdict." : "Practice-mode levels: your first try, with any hints you used."}</p>
         <ul className="plain concept-list" data-testid="outcomes">
           {s.outcomes.map((o) => {
             const level = mock ? o.level : o.practiceLevel;
@@ -246,6 +246,19 @@ function PlacementResult({ id, result, summary: s }: { id: string; result: Resul
             ))}
           </ul>
         </section>
+      )}
+
+      {s.notChecked.length > 0 && (
+        <details className="card" data-testid="not-checked">
+          <summary>Not checked: what this short check did not ask about</summary>
+          <p className="muted small">The check asks a handful of questions a grade, so a "secure" grade means those questions went well, not that every topic was tested. These were not asked:</p>
+          {s.notChecked.map((n) => (
+            <div key={n.grade}>
+              <h3 className="h4">Grade {n.grade}</h3>
+              <ul className="plain">{n.statements.map((t) => <li key={t}>{t}</li>)}</ul>
+            </div>
+          ))}
+        </details>
       )}
 
       <section className="card callout" aria-labelledby="start-h">

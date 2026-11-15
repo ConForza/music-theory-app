@@ -52,6 +52,19 @@ describe("placement end to end", () => {
     expect(r.summary.stages.map((s: { grade: number; level: string }) => [s.grade, s.level])).toEqual([[1, "secure"], [2, "secure"], [3, "secure"], [4, "secure"]]);
     expect(r.summary.explanation).toMatch(/does not complete any grade/);
     expect(r.summary.disclaimer).toMatch(/not an ABRSM/);
+    // it says plainly what a short check did NOT ask, and does not overclaim
+    expect(r.summary.explanation).not.toMatch(/exactly|key questions/);
+    expect(r.summary.explanation).toMatch(/short check/);
+    expect(r.summary.notChecked.map((n: { grade: number }) => n.grade)).toEqual([1, 2, 3, 4]);
+    const asked = new Set(ctx.app.prep.internalItems(L.userId, r.id).map((i) => i.planned.outcomeId));
+    for (const n of r.summary.notChecked) {
+      for (const stmt of n.statements) {
+        const o = [...course.ix.outcomes.values()].find((x) => x.statement === stmt)!;
+        expect(o.grade).toBe(n.grade);
+        expect(asked.has(o.id)).toBe(false);
+      }
+      expect(n.statements.length).toBeGreaterThan(5); // most of each grade was not asked
+    }
     // each probe's questions come from that grade
     expect([...new Set(stageOf(ctx.app, L.userId, r.id))]).toEqual([1, 2, 3, 4]);
     expect(protectedCounts(ctx.db, L.userId)).toEqual(before);

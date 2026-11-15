@@ -85,6 +85,40 @@ describe("what is weak, what is due and what is simply untested", () => {
   }, 60_000);
 });
 
+describe("a mock's weak-topic flag is narrow, and practice clears it", () => {
+  it("flags only the concepts of the questions actually missed, and clears them once the learner answers them right in revision", async () => {
+    const ctx = boot();
+    const L = await learner(ctx.app);
+    completeGrades(ctx.app, ctx.db, L.userId, 1);
+    const id = (await L.c.post("/api/exams/1/start", { mode: "mock", seed: 17 })).body.id as string;
+    const items = ctx.app.prep.internalItems(L.userId, id);
+    const { wrongResponse } = await import("@mtp/engine");
+    const target = items.findIndex((i) => !i.planned.combined && i.planned.conceptIds.length > 0 && wrongResponse(course.ix, i.item, i.scope));
+    expect(target).toBeGreaterThanOrEqual(0);
+    await answerAll(ctx.app, L.c, L.userId, id, (i) => i === target);
+    await L.c.post(`/api/prep/attempts/${id}/complete`, {});
+    const missed = new Set(items[target]!.planned.conceptIds);
+    const flagged = ctx.app.revision.insights(L.userId).filter((c) => c.examWeak);
+    expect(flagged.length).toBeGreaterThan(0);
+    for (const c of flagged) expect(missed.has(c.conceptId), `${c.conceptId} was not in the missed question`).toBe(true);
+    // the outcome has other concepts: they are NOT flagged
+    const outcome = items[target]!.planned.outcomeId!;
+    const siblings = [...course.ix.concepts.values()].filter((c) => c.outcomeIds.includes(outcome) && !missed.has(c.id));
+    for (const c of siblings) expect(flagged.some((f) => f.conceptId === c.id)).toBe(false);
+    // practise one flagged topic and get it right twice, first time: the flag goes
+    const concept = flagged[0]!.conceptId;
+    await L.c.post("/api/test/clock", { advanceMinutes: 5 });
+    const sess = (await L.c.post("/api/revision/sessions", { mode: "explore", conceptId: concept, minutes: 3 })).body.session;
+    const rows = JSON.parse((ctx.db.prepare("SELECT items FROM revision_sessions WHERE user_id = ? AND id = ?").get(L.userId, sess.id) as { items: string }).items) as Array<{ itemId: string }>;
+    for (const r of rows.slice(0, 2)) {
+      const it = ctx.app.engagement.review.resolve(r as never)!;
+      const res = await L.c.post(`/api/revision/sessions/${sess.id}/attempts`, { attemptId: cmd(), itemId: r.itemId, response: canonicalResponse(course.ix, it.item, it.scope) });
+      expect(res.body.correct).toBe(true);
+    }
+    expect(ctx.app.revision.insights(L.userId).find((c) => c.conceptId === concept)!.examWeak).toBe(false);
+  }, 90_000);
+});
+
 describe("quick review", () => {
   it("builds 3, 5 or 10 minutes of questions, weakest first, with no repeated question and one clear session at a time", async () => {
     const ctx = boot();

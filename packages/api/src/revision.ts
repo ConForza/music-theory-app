@@ -136,15 +136,19 @@ export class RevisionService {
 
   // ---- what is weak, due, untested -------------------------------------------------------------------------------------------
 
-  /** Outcome levels from the learner's newest independent mock examination of each grade: a topic found weak there is flagged here. */
+  /**
+   * Topics a recent independent mock examination found the learner got wrong: the concepts of the questions actually missed (not every concept of the outcome).
+   * The flag is a prompt to practise, not a verdict that lasts until the next full mock: it clears once the learner has since answered the topic right, first time and
+   * without help, in at least two revision questions and not got one wrong.
+   */
   private examWeakConcepts(userId: string): Set<string> {
     const weak = new Set<string>();
     if (!this.prep) return weak;
-    for (let g = 1; g <= 5; g++) {
-      for (const o of this.prep.progressFor(userId, g).outcomes) {
-        if (o.level !== "needs_review") continue;
-        for (const c of this.course.ix.concepts.values()) if (c.outcomeIds.includes(o.outcomeId)) weak.add(c.id);
-      }
+    const since = this.db.prepare("SELECT correct FROM revision_attempts WHERE user_id = ? AND concept_id = ? AND attempt_number = 1 AND created_at > ? ORDER BY created_at");
+    for (const [conceptId, at] of this.prep.latestMockMissed(userId)) {
+      const later = (since.all(userId, conceptId, at) as Array<{ correct: number }>).map((r) => r.correct === 1);
+      const cleared = later.length >= 2 && later.every(Boolean);
+      if (!cleared) weak.add(conceptId);
     }
     return weak;
   }
@@ -186,7 +190,7 @@ export class RevisionService {
       const reasons: string[] = [];
       if (m?.needsRecovery) reasons.push("You missed this in a review, so it is coming back sooner.");
       if (wrong >= this.cfg.revision.weakWrongInWindow) reasons.push(`${wrong} of your last ${window.length} independent answers were not right.`);
-      if (flaggedByExam) reasons.push("A recent mock examination found this topic needs review.");
+      if (flaggedByExam) reasons.push("A recent mock examination found you missed this. Answer it right a couple of times in revision and this goes away.");
       if (due && !weak) reasons.push("It is time to check this again so it stays fresh.");
       if (untested) reasons.push("You have been taught this, but have not yet answered questions on it on your own, so we do not know yet.");
       if (trend === "improving") reasons.push("Your recent answers are better than your earlier ones.");

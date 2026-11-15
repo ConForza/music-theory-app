@@ -75,8 +75,8 @@ it("times are shown for people and read out in words", () => {
 });
 
 it("the wording of levels and readiness is the cautious one, and never says pass, certificate or a grade", () => {
-  expect(Object.values(READINESS_WORDS)).toEqual(["On track", "Developing", "Needs review", "Not enough evidence yet"]);
-  expect(Object.values(LEVEL_WORDS)).toEqual(["Mastered", "Developing", "Needs review", "Not yet assessed"]);
+  expect(Object.values(READINESS_WORDS)).toEqual(["Consistently secure", "Developing", "Needs review", "Not enough evidence yet"]);
+  expect(Object.values(LEVEL_WORDS)).toEqual(["Right both times", "Developing", "Needs review", "Not yet assessed"]);
   for (const w of [...Object.values(READINESS_WORDS), ...Object.values(LEVEL_WORDS)]) expect(w).not.toMatch(/pass|certificate|grade|ABRSM/i);
   expect(levelClass("needs_review")).toBe("level-needs-review");
 });

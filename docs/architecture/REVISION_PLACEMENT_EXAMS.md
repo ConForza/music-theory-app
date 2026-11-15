@@ -94,6 +94,7 @@ All tables carry `user_id` with `ON DELETE CASCADE`; every query filters by it, 
 * **Score reading:** `scoreReadingItems` = **4** extra questions from multi-part templates that put several ideas into one piece of notation (melodies, passages, scores: `melody`, `passage`, `passage-directions`, `chord-in-passage`, `score`, `score-melody`). Single-question reads (`melody-detail`, `chord-passage-pick`) are deliberately excluded: they test one idea and count under that idea's outcome.
 * Paper sizes with the defaults: Grade 1: 46, Grade 2: 30, Grade 3: 28, Grade 4: 40, Grade 5: 36 questions. (Earlier-grade outcomes are not repeated in a later paper; later grades' templates rest on them and revision/placement cover them: see limitations.)
 * **Balance** follows the syllabus: questions per domain = outcomes per domain x `itemsPerOutcome` (tested for each grade).
+* **No question twice.** Two questions with the same prompt, music and correct answer are the same question however their options are shuffled (`contentKey`); a paper never contains both. (The first version compared the options, so three of thirty reviewed papers asked the same thing twice.)
 * **Selection** (`planOne`): the template used for each question rotates from a position derived from the attempt seed, then seeds are walked for music that is new to the paper and, where possible, new to the learner (everything seen in lessons, practice, reviews, earlier papers and any hint or feedback). Questions are generated inside the grade's cumulative taught scope (`taughtUnion` at the grade's assessment node), exactly as the in-course assessment does.
 * **Variation and repeatability:** the seed is stored. The same seed for a fresh learner reproduces the paper; different seeds share fewer than 25% of questions in the tests (see `docs/curriculum/PRACTICE_EXAM_COVERAGE.md` for measured overlap).
 * **Access:** a learner can take any grade's practice examination at any time; they do not have to have finished the grade's lessons. This is deliberate: it is also for learners who studied elsewhere.
@@ -125,20 +126,22 @@ All tables carry `user_id` with `ON DELETE CASCADE`; every query filters by it, 
 4. **Stop rule:** the check stops at the first probe that is not secure, so it is between 6 and 24 questions, never a full five-grade examination.
 5. **Recommendation:** the lowest grade whose probe was not secure; Grade 5 if Grades 1-4 were all secure. A strong later probe cannot lift a weak earlier one (there is no later probe: it stops).
 6. **Gaps:** every missed outcome is listed with the lessons that teach it: `start-here` for the recommended grade, `catch-up` for a lower grade the learner passed overall but slipped on (a "mostly there" Grade 2 probe still lists its slip as a catch-up lesson, as the brief's melodic-minor / compound-time example asks).
+7. **What it did not ask:** the result lists, per grade covered, the outcomes the short check did not ask about ("Not checked"), and the wording says plainly that "secure" means the questions asked went well, not that every topic was tested (about 24 of the 64 Grade 1-4 outcomes are probed).
 7. **Choosing:** the learner may start at any grade from 1 up to the recommendation, with no penalty; never above what was demonstrated. Choosing sets the profile's selected grade and records a `placement_starts` row.
 8. **What placement is not:** it completes nothing, awards no badge or XP, writes no `assessment_results`, and is labelled "advice about where to start". Retaking adds a new attempt; the previous start is marked superseded; lesson progress is untouched (tested with real completed lessons).
 
 ### 4.4 Results and estimated readiness
 
 * **Per outcome** (`outcomeLevel`, independent answers only): *Not yet assessed* (no independent answer), *Needs review* (none right), *Developing* (some right, or only one asked), *Mastered* (both of two right). Practice-mode attempts also show a labelled "practice level", which is never evidence.
-* **Estimated readiness per grade** (`readiness`), deliberately cautious:
+* **Estimated readiness per grade** (`readiness`, rubric version 2), deliberately cautious:
   * only **mock** attempts count; practice-mode attempts are listed as ignored;
   * only attempts scored under the **current** rubric and blueprint are pooled (older ones keep their own result and say "scored under earlier rules");
-  * an attempt needs independent evidence for >= 80% of the grade's outcomes;
-  * estimate = pooled independent percentage of the newest 2 qualifying attempts;
-  * **"On track" (>= 75%) needs two qualifying attempts**; one attempt can say at most "Developing" ("one more would give a steadier estimate"); >= 55% is "Developing"; below is "Needs review"; with no qualifying attempt it says "Not enough independent evidence yet".
-* Wording: "Practice assessment", "Estimated readiness", "Developing", "Needs review". Never a pass, a certificate, a grade or an ABRSM mark; asserted in tests.
-* Errors are explained with the exercise family's own mistake categories ("what went wrong, in plain words"), then the rule that was broken, then the worked answer, after the attempt has closed. Recommendations point at the lesson that teaches each weak outcome and at a three-minute revision session on its topic.
+  * **an unanswered question is not right.** An attempt needs at least 90% of its *questions* answered (`minAnsweredShare`) and independent evidence for at least 80% of the grade's outcomes; the percentage is out of every question that could have been independent evidence, answered or not (so 10 right out of 13 answered on a 36-question paper is 28%, never 77%);
+  * estimate = pooled percentage of the newest 2 qualifying attempts, and the text says how many questions it rests on and that the true figure could easily be 10 points either way;
+  * **"Consistently secure" (`on_track`) needs two qualifying attempts on different days, EACH at or above 75%.** A strong paper followed by a weak one (90% then 60% pools to 75%) is "Developing", as is a pair on the same day; >= 55% pooled is "Developing"; below is "Needs review"; with no qualifying attempt it says "Not enough independent evidence yet".
+* Outcome levels in an exam result are worded "Right both times", "Developing", "Needs review", "Not yet assessed" (the first was "Mastered"; renamed after review because two questions cannot show mastery, and to keep it apart from concept mastery in Review), with a line saying each outcome rests on only two questions.
+* Wording: "Practice assessment", "Estimated readiness", "Consistently secure", "Developing", "Needs review". Never a pass, a certificate, a grade or an ABRSM mark; asserted in tests.
+* Errors are explained with the exercise family's own mistake categories ("what went wrong, in plain words"), then the rule that was broken, then the worked answer, after the attempt has closed. Recommendations point at the lesson (and a three-minute revision session) for the concepts of the questions the learner actually missed, not the outcome's first concept; a missed score-reading question, which belongs to no single outcome, produces advice from the concepts it exercised.
 
 ### 4.5 Personalised revision
 
@@ -146,7 +149,7 @@ All tables carry `user_id` with `ON DELETE CASCADE`; every query filters by it, 
 
 | Status | Rule | Why it is separate |
 |---|---|---|
-| **weak** | `needsRecovery`, or >= 2 wrong among the last 5 independent answers, or a recent independent mock found its outcome "needs review" | repeated errors on their own |
+| **weak** | `needsRecovery`, or >= 2 wrong among the last 5 independent answers, or the learner got a question on it wrong in their newest independent mock (only the concepts of the questions actually missed, not every concept of the outcome); that last flag clears once they answer it right first time in at least two revision questions without a miss | repeated errors on their own |
 | **due** | its spaced-review date has come | time, not skill |
 | **untested** | taught, but **no independent answer yet** (and no mock evidence) | **unknown is not weak** |
 | **learning** | some evidence, still building | |
@@ -172,13 +175,13 @@ The official ABRSM Grades 1-5 theory syllabus is the authority for what is exami
 |---|---|---|
 | Rhythm | time signature from a bar (incl. tuplets), compound-to-simple rewriting, durations, grouping, correct rests | g5.01, g5.02 |
 | Pitch | note in the tenor clef, enharmonic equivalents, checking a transposition for a clarinet in A, comparing bars at pitch | g5.03, g5.04, g5.05, g5.06 |
-| Keys and scales | key signatures in four clefs, key of a melody, completing a harmonic minor scale, chromatic scales, scale-degree names | g5.07 |
+| Keys and scales | key signatures in four clefs, key of a melody, completing a harmonic minor scale, chromatic scales, scale-degree names | g5.07 (chromatic scales are a **Grade 4** outcome (g4.x); no Grade 5 template asks them, a gap in the Grade 5 paper that a teacher should decide on) |
 | Intervals | name, quality and write simple and compound intervals | g5.08 |
 | Chords | chords at cadences, naming cadences, naming inverted chords | g5.09, g5.10, g5.11 |
 | Terms, signs, instruments | terms, written-out ornaments, instrument facts | g5.12 to g5.15 |
 | Music in context | questions over a cello-and-piano score | g5.16 and the score-reading section |
 
-Every skill seen has an outcome, a template pool and, in the blueprint, two questions. Two differences are **deliberate and recorded for a teacher**, not hidden: (1) that paper weights sections by *marks* (Keys and scales 15 of 75, the rest 10) while this blueprint weights by *outcome* (two questions each); (2) that paper is labelled *"2 hours maximum"* and *"75 marks"*. **Neither the marks nor the two hours is adopted**: they belong to a practice paper whose relation to the current online examination has not been independently verified, so the product claims no official weighting or duration. The timer default (90 s per question) is ours and is labelled as such everywhere it appears.
+Every skill seen has an outcome, a template pool and, in the blueprint, two questions, **except chromatic scales**: they appear in the paper's Keys and scales section but are a Grade 4 outcome here, and no Grade 5 template asks them (so the statement in an earlier version of this document that every skill was covered was too strong). Two differences are **deliberate and recorded for a teacher**, not hidden: (1) that paper weights sections by *marks* (Keys and scales 15 of 75, the rest 10) while this blueprint weights by *outcome* (two questions each); (2) that paper is labelled *"2 hours maximum"* and *"75 marks"*. **Neither the marks nor the two hours is adopted**: they belong to a practice paper whose relation to the current online examination has not been independently verified, so the product claims no official weighting or duration. The timer default (90 s per question) is ours and is labelled as such everywhere it appears.
 
 ## 7. Verification
 
@@ -202,7 +205,7 @@ All of these are product defaults in `packages/api/src/prep-config.ts`, versione
 1. Is **2 questions per outcome + 4 score-reading questions** a fair, representative paper? Would a teacher weight domains differently, or add earlier-grade outcomes to later papers?
 2. The score-reading templates: are they genuinely "combining musical concepts" at the right difficulty for each grade?
 3. **Placement:** probe length (6), the secure (80%) and partial (50%) lines, and whether stopping at the first non-secure probe misplaces learners with uneven knowledge.
-4. **Readiness:** the 75% / 55% lines, the 80% coverage requirement, and "two attempts before *On track*". These are *app* thresholds; none is an ABRSM pass mark.
+4. **Readiness:** the 75% / 55% lines, the 80% outcome-coverage and 90% answered-questions requirements, and "two attempts on different days, each at the line, before *Consistently secure*". These are *app* thresholds; none is an ABRSM pass mark.
 5. **Timer:** 90 seconds per question and extra time of 25 / 50 / 100%. ABRSM's actual online-paper timings should be verified before any "close to the real thing" wording is ever used.
 6. "Weak" (2 wrong in the last 5 independent answers) and the quick-review pace (40 s per question).
 7. Wording of the explanations of mistakes (these reuse the existing family feedback, which is itself awaiting review).
@@ -215,3 +218,12 @@ All of these are product defaults in `packages/api/src/prep-config.ts`, versione
 * Estimated readiness is only as good as the question pool: a few templates (for example some rhythm-writing tasks) have no constructible "wrong answer" for tests, so the browser suites build their deliberate wrong answers only where one exists.
 * The browser suites run against a local build; the public CI matrix is the evidence for the shared branch.
 * No teacher has reviewed any of this; `npm run validate:release` still fails until one has, as before.
+
+### Raised by the educational review of PR #18, not changed here (owner or earlier-brief decisions)
+
+1. **Weighting.** Two questions per outcome weights every outcome equally; the supplied paper weights Keys and scales at 15 of 75 and the Grade 5 blueprint gives them 2 of 36. The review recommends 3-4 questions for broad outcomes (keys, scales, chords, intervals) and 1 for narrow recall (voices, instrument families), and a carried-forward section of about 15-20% earlier-grade items in Grades 3-5. That changes paper sizes and the blueprint version; it is a teacher decision, recorded here and not made.
+2. **Score-reading as one mark.** Multi-part score-reading questions are all-or-nothing and feed no outcome; the review recommends part marks or reporting each part against its outcome.
+3. **Grade 2 and 3 score reading tests Grade 1 skills.** The melody generators (`t.g2.melody`, `t.g3.melody`) only ever produce 2/4, 3/4 and 4/4 and major keys, although their scope allows 2/2, 3/2, 4/2, 3/8, compound time and minor keys (checked directly). Fixing it means changing those generators, which belong to the earlier course briefs.
+4. **Unanswerable or wrong items from earlier generators** now sit in a no-feedback mock: Grade 5 `t.g5.score-melody` key questions whose melody never contains the tonic (a relative minor is equally consistent); `t.g1.middle-c-find` (C4 and D4 both described as "on a ledger line above the stave"); `t.g2.note-grouping` (identical text before and after regrouping); a missing verb in `t.g5.term-use`; some single-glossary-word distractors and generic feedback. They need a generator-level fix and a re-audit; **readiness should not be shown to learners until a teacher has decided how to handle them.**
+5. **Near-repeats** of one fact through different templates (for example the same Italian term three times) are not caught by the identity rule above.
+6. **Timer.** A flat 90 seconds per question treats a voice question the same as a 15-note scale; it stays optional and off by default.

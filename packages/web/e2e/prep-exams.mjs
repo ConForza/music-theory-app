@@ -78,7 +78,7 @@ for (const grade of [1, 2, 3, 4, 5]) {
     // every wrong answer lowers at most one outcome below Mastered
     assert.ok((await page.locator('[data-level="mastered"]').count()) >= bp.sections.filter((s) => s.outcomeId).length - wrongSent);
     const ready = await page.getByTestId("readiness").innerText();
-    assert.ok(!/On track/.test(ready), `one mock cannot say On track: ${ready}`);
+    assert.ok(!/Consistently secure/.test(ready), `one mock cannot say Consistently secure: ${ready}`);
     await page.getByText(/not an ABRSM result/).first().waitFor();
     assert.equal(await page.getByTestId("review-wrong").count(), wrongSent);
     await page.getByTestId("review-wrong").first().getByText("The answer:").waitFor();
@@ -168,15 +168,17 @@ await test("results history: every attempt, the estimate by grade, and outcome-b
       await post(page, `/api/prep/attempts/${id}/answers`, { attemptId: crypto.randomUUID(), itemId: it.item.id, response: canonicalResponse(S.course.ix, it.item, it.scope) });
     }
     await post(page, `/api/prep/attempts/${id}/complete`, {});
+    // "Consistently secure" needs the two attempts to be on different days
+    await post(page, "/api/test/clock", { advanceDays: 1 });
   }
   await page.goto("/progress");
   await page.getByRole("link", { name: "See my practice results" }).click();
   await page.getByRole("heading", { name: "Your practice results" }).waitFor();
   const g2 = page.getByTestId("results-grade-2");
-  await g2.getByText("On track").waitFor();
+  await g2.getByText("Consistently secure").waitFor();
   assert.equal(await page.getByTestId("history").locator("li").count(), 2);
   await g2.getByText("Outcome by outcome").click();
-  await g2.getByText("Mastered").first().waitFor();
+  await g2.getByText("Right both times").first().waitFor();
   await noOverflow(page, "results");
   await axe(page, "results history");
   await shot(page, "prep-results");

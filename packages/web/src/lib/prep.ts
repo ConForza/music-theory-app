@@ -1,8 +1,8 @@
 import type { PrepReadiness } from "../api/client";
 
-export const LEVEL_WORDS: Record<string, string> = { mastered: "Mastered", developing: "Developing", needs_review: "Needs review", not_assessed: "Not yet assessed" };
+export const LEVEL_WORDS: Record<string, string> = { mastered: "Right both times", developing: "Developing", needs_review: "Needs review", not_assessed: "Not yet assessed" };
 export const MODE_WORDS: Record<"practice" | "mock" | "placement", string> = { practice: "Practice mode", mock: "Mock examination", placement: "Placement check" };
-export const READINESS_WORDS: Record<PrepReadiness["label"], string> = { on_track: "On track", developing: "Developing", needs_review: "Needs review", not_enough_evidence: "Not enough evidence yet" };
+export const READINESS_WORDS: Record<PrepReadiness["label"], string> = { on_track: "Consistently secure", developing: "Developing", needs_review: "Needs review", not_enough_evidence: "Not enough evidence yet" };
 
 /** "54 min", "1 h 5 min": a duration for people, rounded up to the minute. */
 export function minutesText(seconds: number): string {

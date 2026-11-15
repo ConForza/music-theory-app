@@ -7,9 +7,12 @@
  *     rewrites the meaning of a result that has already been recorded;
  *   - `RUBRIC_VERSION` must be raised whenever a number here changes how an answer is scored or how a label is chosen.
  *
+ * Rubric 2 (educational review of PR #18): unanswered mock questions count as not right for readiness; an attempt needs 90% of its questions answered;
+ * "Consistently secure" needs EACH of the two newest attempts to reach the line, on different days.
+ *
  * Teacher sign-off on all of these is still outstanding (docs/architecture/REVISION_PLACEMENT_EXAMS.md, "Decisions awaiting a teacher").
  */
-export const RUBRIC_VERSION = 1;
+export const RUBRIC_VERSION = 2;
 /** Version of how a practice exam / placement check is composed from the curriculum (which outcomes, how many questions, how templates rotate). */
 export const BLUEPRINT_VERSION = 1;
 
@@ -41,14 +44,16 @@ export interface PrepConfig {
   readiness: {
     /** Share of the grade's outcomes that need independent evidence before any estimate is given. */
     minCoverage: number;
-    /** Independent percentage for the "On track" label (needs two qualifying mock attempts) and for "Developing". */
+    /** Share of the paper's QUESTIONS that must have been answered for an attempt to count at all: an unanswered question scores nothing, so a mostly-blank paper is no evidence. */
+    minAnsweredShare: number;
+    /** Independent percentage for the "Consistently secure" label (`on_track`) (needs two qualifying mock attempts) and for "Developing". */
     onTrackPercent: number;
     developingPercent: number;
     /** Mock attempts, newest first, that the estimate looks at. */
     window: number;
-    /** Qualifying attempts needed before "On track" can be shown. */
+    /** Qualifying attempts needed before "Consistently secure" can be shown. */
     minAttemptsForOnTrack: number;
-    /** An outcome with this share of its independent questions right is "Mastered" (needs at least two). */
+    /** An outcome with this share of its independent questions right is "Right both times" (needs at least two). */
     outcomeMasteredRatio: number;
   };
   revision: {
@@ -70,7 +75,7 @@ export const DEFAULT_PREP: PrepConfig = {
   blueprintVersion: BLUEPRINT_VERSION,
   exam: { itemsPerOutcome: 2, scoreReadingItems: 4, secondsPerQuestion: 90, extraTimeChoices: [0, 25, 50, 100], graceSeconds: 5 },
   placement: { probeItems: 6, probeGrades: [1, 2, 3, 4], secureRatio: 0.8, partialRatio: 0.5 },
-  readiness: { minCoverage: 0.8, onTrackPercent: 75, developingPercent: 55, window: 2, minAttemptsForOnTrack: 2, outcomeMasteredRatio: 1 },
+  readiness: { minCoverage: 0.8, minAnsweredShare: 0.9, onTrackPercent: 75, developingPercent: 55, window: 2, minAttemptsForOnTrack: 2, outcomeMasteredRatio: 1 },
   revision: { secondsPerQuestion: 40, minMinutes: 3, maxMinutes: 10, defaultMinutes: 5, minAnsweredForCredit: 5, weakWrongInWindow: 2, weakWindow: 5 },
 };
 

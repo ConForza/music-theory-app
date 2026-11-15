@@ -179,6 +179,9 @@ describe("estimated readiness: cautious by construction", () => {
     curriculumVersion: "1",
     independentQuestions: 36,
     independentCorrect: 30,
+    questions: 36,
+    answered: 36,
+    day: `2026-03-${String(day).padStart(2, "0")}`,
     outcomesTotal: 16,
     outcomesAssessed: 16,
     ...over,
@@ -193,13 +196,38 @@ describe("estimated readiness: cautious by construction", () => {
     expect(r.label).toBe("not_enough_evidence");
     expect(r.ignored).toEqual([{ id: "p1", reason: "practice_mode" }]);
   });
-  it("one excellent mock gives 'Developing', never 'On track': one good day is not an estimate", () => {
+  it("one excellent mock gives 'Developing', never 'Consistently secure': one good day is not an estimate", () => {
     const r = readiness([att("m1", 1, { independentCorrect: 36 })], now, cfg);
     expect(r.label).toBe("developing");
     expect(r.detail).toMatch(/one more/i);
   });
-  it("two good mocks give 'On track'", () => {
-    expect(readiness([att("m1", 1), att("m2", 2)], now, cfg)).toMatchObject({ label: "on_track", percent: 83, attemptsUsed: 2 });
+  it("two good mocks on different days give 'Consistently secure', with the sampling uncertainty stated", () => {
+    const r = readiness([att("m1", 1), att("m2", 2)], now, cfg);
+    expect(r).toMatchObject({ label: "on_track", title: "Consistently secure", percent: 83, attemptsUsed: 2 });
+    expect(r.detail).toMatch(/10 points either way/);
+    expect(r.detail).toMatch(/not an ABRSM result/);
+  });
+  it("two good mocks on the SAME day are not enough: a good day is not consistency", () => {
+    const r = readiness([att("m1", 1, { day: "2026-03-01" }), att("m2", 1, { day: "2026-03-01" })], now, cfg);
+    expect(r.label).toBe("developing");
+    expect(r.detail).toMatch(/different day/);
+  });
+  it("a strong paper followed by a weak one cannot read as consistently secure, even though the pooled figure is respectable", () => {
+    // 90% then 60% pools to 75%, the line: the newest paper alone is 60%
+    const r = readiness([att("m1", 1, { independentCorrect: 32 }), att("m2", 2, { independentCorrect: 22 })], now, cfg);
+    expect(r.percent).toBe(75);
+    expect(r.label).toBe("developing");
+    expect(r.detail).toMatch(/did not all reach the line/);
+  });
+  it("unanswered questions count as not right: a third of a paper cannot make an estimate", () => {
+    // 13 of 36 answered, 10 right: the score is 10/36, never "77%"
+    const thin = att("t", 1, { answered: 13, independentCorrect: 10 });
+    const r = readiness([thin, att("t2", 2, { answered: 13, independentCorrect: 10 })], now, cfg);
+    expect(r.label).toBe("not_enough_evidence");
+    expect(r.ignored.map((i) => i.reason)).toEqual(["too_few_answered", "too_few_answered"]);
+    // and an attempt that does qualify is scored out of the whole paper
+    const almost = readiness([att("a", 1, { answered: 33, independentCorrect: 20 })], now, cfg);
+    expect(almost.percent).toBe(56);
   });
   it("a weak recent mock pulls an estimate down (newest attempts are used)", () => {
     const r = readiness([att("m1", 1), att("m2", 2), att("m3", 3, { independentCorrect: 12 })], now, cfg);
@@ -218,7 +246,7 @@ describe("estimated readiness: cautious by construction", () => {
     expect(r.ignored.map((i) => i.reason)).toEqual(["older_rules", "older_rules"]);
   });
   it("the labels are the cautious ones and never claim an ABRSM result, a pass or a grade", () => {
-    const titles = new Set(["Not enough independent evidence yet", "Developing", "On track", "Needs review"]);
+    const titles = new Set(["Not enough independent evidence yet", "Developing", "Consistently secure", "Needs review"]);
     for (const a of [[], [att("m1", 1)], [att("m1", 1), att("m2", 2)], [att("m1", 1, { independentCorrect: 5 })]]) {
       const r = readiness(a, now, cfg);
       expect(titles.has(r.title)).toBe(true);

@@ -152,7 +152,7 @@ export function ExamSetup() {
         <ul>
           <li>Every outcome of the grade is asked {2} times, with new music each time, so one slip does not hide what you know. Four more questions read several ideas from one piece of notation.</li>
           <li>Each question is worth one mark, and a question with several parts needs every part right. These are our own product settings, not ABRSM marking.</li>
-          <li>Estimated readiness uses only mock-examination questions you answered on your own, without hints, and only after two such attempts can it say "On track".</li>
+          <li>Estimated readiness uses only mock-examination questions you answered on your own, without hints, and it can say "Consistently secure" only after two such attempts on different days, each at or above our line. Any question you leave unanswered counts as not right.</li>
           <li>It never gives XP or grade badges, and it never changes your path.</li>
         </ul>
       </details>

@@ -194,7 +194,7 @@ export function recommendPlacement(results: StageResult[], cfg: PrepConfig): Pla
 // ---- results and readiness ----------------------------------------------------------------------------------------------
 
 export type OutcomeLevel = "mastered" | "developing" | "needs_review" | "not_assessed";
-export const LEVEL_LABEL: Record<OutcomeLevel, string> = { mastered: "Mastered", developing: "Developing", needs_review: "Needs review", not_assessed: "Not yet assessed" };
+export const LEVEL_LABEL: Record<OutcomeLevel, string> = { mastered: "Right both times", developing: "Developing", needs_review: "Needs review", not_assessed: "Not yet assessed" };
 
 /**
  * One outcome in one attempt. Only INDEPENDENT answers (mock mode, no hints, a question not previously seen with help) count: a
@@ -213,8 +213,14 @@ export interface ReadinessAttempt {
   rubricVersion: number;
   blueprintVersion: number;
   curriculumVersion: string;
+  /** Questions on the paper that were not coached, answered or not: an unanswered one counts as not right. */
   independentQuestions: number;
   independentCorrect: number;
+  /** The paper's size and how many questions were answered. */
+  questions: number;
+  answered: number;
+  /** The learner-local calendar day it was finished (the two attempts behind "On track" must be on different days). */
+  day: string;
   /** Outcomes of the grade, and how many got any independent evidence. */
   outcomesTotal: number;
   outcomesAssessed: number;
@@ -229,16 +235,18 @@ export interface Readiness {
   percent: number | null;
   attemptsUsed: number;
   /** Attempts ignored: practice-mode, or scored under an earlier rubric or blueprint (their results stay, but are not mixed in). */
-  ignored: Array<{ id: string; reason: "practice_mode" | "older_rules" | "low_coverage" }>;
+  ignored: Array<{ id: string; reason: "practice_mode" | "older_rules" | "low_coverage" | "too_few_answered" }>;
 }
 
 /**
  * The estimated readiness for ONE grade, from its attempts. Cautious by construction:
  *   - only mock attempts (independent, no hints) are used; practice-mode attempts are listed as ignored;
  *   - only attempts scored under the CURRENT rubric and blueprint are mixed together (older ones keep their own meaning);
- *   - an attempt must have independent evidence for at least `minCoverage` of the grade's outcomes;
- *   - the estimate is the pooled independent percentage of the newest `window` qualifying attempts;
- *   - "On track" additionally needs `minAttemptsForOnTrack` qualifying attempts, so a single good day cannot produce it.
+ *   - an attempt needs at least `minAnsweredShare` of its QUESTIONS answered (an unanswered question scores nothing) and independent evidence
+ *     for at least `minCoverage` of the grade's outcomes;
+ *   - the estimate is the pooled independent percentage of the newest `window` qualifying attempts, counting every unanswered question as not right;
+ *   - "Consistently secure" (`on_track`) needs `minAttemptsForOnTrack` qualifying attempts on different days, EACH at or above the line: a strong
+ *     paper followed by a weak one pools to a respectable number, and must not read as "on track".
  */
 export function readiness(attempts: ReadinessAttempt[], current: { rubricVersion: number; blueprintVersion: number }, cfg: PrepConfig): Readiness {
   const sorted = [...attempts].sort((a, b) => b.completedAt.localeCompare(a.completedAt));
@@ -247,24 +255,29 @@ export function readiness(attempts: ReadinessAttempt[], current: { rubricVersion
   for (const a of sorted) {
     if (a.mode !== "mock") ignored.push({ id: a.id, reason: "practice_mode" });
     else if (a.rubricVersion !== current.rubricVersion || a.blueprintVersion !== current.blueprintVersion) ignored.push({ id: a.id, reason: "older_rules" });
+    else if (a.questions === 0 || a.answered / a.questions < cfg.readiness.minAnsweredShare) ignored.push({ id: a.id, reason: "too_few_answered" });
     else if (a.outcomesTotal === 0 || a.outcomesAssessed / a.outcomesTotal < cfg.readiness.minCoverage) ignored.push({ id: a.id, reason: "low_coverage" });
     else usable.push(a);
   }
   const used = usable.slice(0, cfg.readiness.window);
   const basedOn = used.map((a) => a.id);
   if (!used.length) {
-    return { label: "not_enough_evidence", title: "Not enough independent evidence yet", detail: "Take a mock examination (no hints, answers on your own) to get an estimate. Practice-mode attempts help you learn but are not counted here.", basedOn, percent: null, attemptsUsed: 0, ignored };
+    return { label: "not_enough_evidence", title: "Not enough independent evidence yet", detail: `Take a full mock examination (no hints, answering at least ${Math.round(100 * cfg.readiness.minAnsweredShare)}% of the questions on your own) to get an estimate. Practice-mode attempts help you learn but are not counted here.`, basedOn, percent: null, attemptsUsed: 0, ignored };
   }
   const q = used.reduce((n, a) => n + a.independentQuestions, 0);
   const c = used.reduce((n, a) => n + a.independentCorrect, 0);
   const percent = q ? Math.round((100 * c) / q) : 0;
-  const onTrackOk = used.length >= cfg.readiness.minAttemptsForOnTrack && percent >= cfg.readiness.onTrackPercent;
-  if (onTrackOk) {
-    return { label: "on_track", title: "On track", detail: `About ${percent}% right on your own across your last ${used.length} mock examinations. This is our own estimate, not an ABRSM result: keep revising the topics marked Developing.`, basedOn, percent, attemptsUsed: used.length, ignored };
+  const each = used.map((a) => (a.independentQuestions ? (100 * a.independentCorrect) / a.independentQuestions : 0));
+  const days = new Set(used.map((a) => a.day)).size;
+  const spread = `Even so, with about ${q} questions the true figure could easily be 10 points either way.`;
+  const enough = used.length >= cfg.readiness.minAttemptsForOnTrack;
+  if (enough && days >= 2 && each.every((p) => p >= cfg.readiness.onTrackPercent)) {
+    return { label: "on_track", title: "Consistently secure", detail: `Right on your own in each of your last ${used.length} mock examinations (about ${percent}% of ${q} questions, on different days). This is our own estimate, not an ABRSM result. ${spread}`, basedOn, percent, attemptsUsed: used.length, ignored };
   }
   if (percent >= cfg.readiness.developingPercent) {
-    const more = percent >= cfg.readiness.onTrackPercent && used.length < cfg.readiness.minAttemptsForOnTrack;
-    return { label: "developing", title: "Developing", detail: more ? `About ${percent}% right on your own in one mock examination. One more would give a steadier estimate.` : `About ${percent}% right on your own. You are getting there: revise the topics marked Needs review or Developing, then try another mock.`, basedOn, percent, attemptsUsed: used.length, ignored };
+    const nearly = percent >= cfg.readiness.onTrackPercent || each.some((p) => p >= cfg.readiness.onTrackPercent);
+    const why = !enough ? "One more mock examination would give a steadier estimate." : days < 2 ? "Taking the next one on a different day shows whether it lasts." : each.some((p) => p < cfg.readiness.onTrackPercent) ? "Your most recent papers did not all reach the line, so it is not yet consistent." : "";
+    return { label: "developing", title: "Developing", detail: nearly ? `About ${percent}% right on your own (${q} questions). ${why}` : `About ${percent}% right on your own (${q} questions). You are getting there: revise the topics marked Needs review or Developing, then try another mock.`, basedOn, percent, attemptsUsed: used.length, ignored };
   }
-  return { label: "needs_review", title: "Needs review", detail: `About ${percent}% right on your own. That is a useful starting point: the topics below show where to focus, and the lessons explain each one.`, basedOn, percent, attemptsUsed: used.length, ignored };
+  return { label: "needs_review", title: "Needs review", detail: `About ${percent}% right on your own (${q} questions, counting any you left unanswered). That is a useful starting point: the topics below show where to focus, and the lessons explain each one.`, basedOn, percent, attemptsUsed: used.length, ignored };
 }

@@ -15,7 +15,7 @@
  */
 import { type ExerciseItem, type MusicScope } from "@mtp/curriculum";
 import { generatorTemplateIds, hashString, parseGeneratedItemId, solutionFor } from "@mtp/engine";
-import type { Clock } from "./clock.ts";
+import { localDate, type Clock } from "./clock.ts";
 import type { Course, LearnerItem } from "./course.ts";
 import type { Db } from "./db.ts";
 import { tx } from "./db.ts";
@@ -27,6 +27,7 @@ import { questionKey, visibleKey } from "./question-key.ts";
 import {
   LEVEL_LABEL,
   examBlueprint,
+  gradeOutcomes,
   outcomeLevel,
   probeOutcomes,
   readiness,
@@ -89,6 +90,8 @@ export interface ReviewEntry {
   index: number;
   itemId: string;
   outcomeId: string | null;
+  /** Concepts the question exercised: where a missed question sends the learner (lessons, revision, the weak-topic flag). */
+  conceptIds: string[];
   section: string;
   prompt: string;
   answered: boolean;
@@ -164,10 +167,22 @@ export interface PlacementSummary {
   allSecure: boolean;
   stages: Array<{ grade: number; asked: number; correct: number; level: "secure" | "partial" | "weak" }>;
   notAssessed: number[];
+  /** Outcomes of the grades the check covered that it did not ask about. */
+  notChecked: Array<{ grade: number; statements: string[] }>;
   gaps: Array<{ outcomeId: string; statement: string; grade: number; kind: "start-here" | "catch-up"; lessons: Array<{ nodeId: string; title: string }> }>;
   explanation: string;
   disclaimer: string;
   completedAt: string;
+}
+
+/**
+ * What a question ASKS, ignoring how its options happen to be shuffled: the prompt, the music and the correct answer's wording. Two questions with the
+ * same content key are the same question to a learner ("Which rest lasts as long as a quaver?" twice), however different their option order.
+ */
+export function contentKey(item: ExerciseItem): string {
+  const a = item.answer as { kind: string; options?: Array<{ id: string; label: string }>; correctOptionIds?: string[] };
+  const correct = a.options && a.correctOptionIds ? a.options.filter((o) => a.correctOptionIds!.includes(o.id)).map((o) => o.label).sort() : a;
+  return `c:${JSON.stringify([item.prompt, item.music ?? null, (item as { score?: unknown }).score ?? null, correct])}`;
 }
 
 const seedOf = (...parts: Array<string | number>) => (hashString(parts.join("|")) >>> 0) % 2 ** 31;
@@ -239,7 +254,7 @@ export class PrepService {
       const accept = (it: ExerciseItem) => {
         // The picker already refuses a question that LOOKS like one on this paper (`visibleKey`); a question with the same identity (same music and
         // answer) under different surface details is refused here too, so no paper can ask the same thing twice.
-        if (used.has(`q:${questionKey(it)}`)) return false;
+        if (used.has(`q:${questionKey(it)}`) || used.has(contentKey(it))) return false;
         const credited = this.nodes.creditedConcepts(it, node);
         return outcome ? credited.some((c) => wanted.has(c)) : credited.length > 0;
       };
@@ -254,6 +269,7 @@ export class PrepService {
       const key = questionKey(got.item);
       used.add(visibleKey(got.item));
       used.add(`q:${key}`);
+      used.add(contentKey(got.item));
       return {
         itemId: got.item.id,
         templateId: got.item.templateId,
@@ -579,6 +595,23 @@ export class PrepService {
     return { ok: true as const, status: this.row(userId, attemptId).status };
   }
 
+  /** The lesson that teaches each of these concepts (the first playable one), de-duplicated: where to send a learner who missed THAT question, not the outcome's first lesson. */
+  private lessonsForConcepts(conceptIds: string[], limit = 2): Array<{ nodeId: string; title: string }> {
+    const out: Array<{ nodeId: string; title: string }> = [];
+    for (const c of conceptIds) {
+      const n = (this.course.ix.conceptTaughtBy.get(c) ?? []).find((x) => x.type === "lesson" && this.course.isPlayable(x.id));
+      if (n && !out.some((o) => o.nodeId === n.id)) out.push({ nodeId: n.id, title: n.title });
+      if (out.length >= limit) break;
+    }
+    return out;
+  }
+  /** The concepts of the questions the learner did not get right in an outcome, most specific first: those that belong to the outcome itself, then any other credited. */
+  private missedConcepts(items: PlannedPrepItem[], outcomeId: string | null): string[] {
+    const own = new Set(outcomeId ? [...this.course.ix.concepts.values()].filter((c) => c.outcomeIds.includes(outcomeId)).map((c) => c.id) : []);
+    const mine = items.flatMap((i) => i.conceptIds);
+    return [...new Set([...mine.filter((c) => own.has(c)), ...mine])];
+  }
+
   private lessonsFor(outcomeId: string, limit = 2): Array<{ nodeId: string; title: string }> {
     const nodes = (this.course.ix.outcomeTaughtBy.get(outcomeId) ?? []).filter((n) => this.course.isPlayable(n.id) && n.type === "lesson").slice(0, limit);
     return nodes.map((n) => ({ nodeId: n.id, title: n.title }));
@@ -611,14 +644,16 @@ export class PrepService {
         level,
         levelLabel: LEVEL_LABEL[level],
         practiceLevel: outcomeLevel(answered, correct, cfg),
-        revisit: this.lessonsFor(s.outcomeId!).map((l) => l.nodeId),
+        // Send the learner to the lesson for what they actually missed; only when nothing specific is known, to the outcome's own first lessons.
+        revisit: (this.lessonsForConcepts(this.missedConcepts(mine.filter((i) => !firstOk(i)), s.outcomeId), 2).length ? this.lessonsForConcepts(this.missedConcepts(mine.filter((i) => !firstOk(i)), s.outcomeId), 2) : this.lessonsFor(s.outcomeId!)).map((l) => l.nodeId),
       });
     }
     const reading = planned.filter((i) => i.combined);
     const score = planned.filter(firstOk).length;
     const answered = planned.filter((i) => by.get(i.itemId)?.attempts).length;
-    const indep = planned.filter(independentOf);
-    const independentCorrect = indep.filter(firstOk).length;
+    // For readiness every question that could have been independent evidence counts, answered or not: an unanswered question scores nothing.
+    const indep = planned.filter((si) => mock && !si.coached);
+    const independentCorrect = indep.filter((si) => independentOf(si) && firstOk(si)).length;
     const assessed = outcomes.filter((o) => o.level !== "not_assessed").length;
     // Plain explanations of the mistakes made, grouped by what went wrong, in the family's own words.
     const counts = new Map<string, number>();
@@ -644,6 +679,7 @@ export class PrepService {
         index: index + 1,
         itemId: si.itemId,
         outcomeId: si.outcomeId,
+        conceptIds: si.conceptIds,
         section: bp.sections.find((s) => s.id === si.sectionId)?.statement ?? "",
         prompt: r.item.prompt,
         answered: Boolean(a?.attempts),
@@ -659,10 +695,21 @@ export class PrepService {
     const weak = outcomes.filter((o) => (mock ? o.level === "needs_review" || o.level === "developing" : o.practiceLevel === "needs_review" || o.practiceLevel === "developing"));
     const recommendations: ExamSummary["recommendations"] = [];
     for (const o of weak.sort((a, b) => Number((b.level === "needs_review" || b.practiceLevel === "needs_review")) - Number((a.level === "needs_review" || a.practiceLevel === "needs_review"))).slice(0, 5)) {
-      const lesson = this.lessonsFor(o.outcomeId, 1)[0];
+      // The lesson and the revision topic are those of the questions this learner missed in the outcome, not the outcome's first concept.
+      const missed = this.missedConcepts(planned.filter((i) => i.outcomeId === o.outcomeId && !firstOk(i)), o.outcomeId);
+      const lesson = (missed.length ? this.lessonsForConcepts(missed, 1) : this.lessonsFor(o.outcomeId, 1))[0];
       if (lesson) recommendations.push({ kind: "lesson", title: lesson.title, nodeId: lesson.nodeId, why: o.statement });
-      const concept = [...this.course.ix.concepts.values()].find((c) => c.outcomeIds.includes(o.outcomeId));
+      const concept = this.course.ix.concepts.get(missed[0] ?? "") ?? [...this.course.ix.concepts.values()].find((c) => c.outcomeIds.includes(o.outcomeId));
       if (concept) recommendations.push({ kind: "revision", title: `Practise: ${concept.title}`, conceptId: concept.id, why: o.statement });
+    }
+    // Reading-in-context questions belong to no single outcome, so an error there used to produce no advice at all: point at what they exercised.
+    const readingMissed = reading.filter((i) => by.get(i.itemId)?.attempts && !firstOk(i));
+    if (readingMissed.length) {
+      const concepts = this.missedConcepts(readingMissed, null);
+      const lesson = this.lessonsForConcepts(concepts, 1)[0];
+      if (lesson) recommendations.push({ kind: "lesson", title: lesson.title, nodeId: lesson.nodeId, why: "Reading music in context: " + (this.course.ix.concepts.get(concepts[0] ?? "")?.title ?? "ideas from the passage you missed") });
+      const concept = this.course.ix.concepts.get(concepts[0] ?? "");
+      if (concept) recommendations.push({ kind: "revision", title: `Practise: ${concept.title}`, conceptId: concept.id, why: "Reading music in context" });
     }
     const started = new Date(row.started_at).getTime();
     return {
@@ -730,13 +777,17 @@ export class PrepService {
     const explanation = stoppedAt !== null
       ? `You finished early, so we can only suggest what you have shown so far: Grade ${g} is the first grade you did not complete a set of questions for. Take the check again whenever you like, or start at Grade ${g} or any grade below it.`
       : rec.allSecure
-      ? `You answered the key questions from Grades 1 to 4 with confidence, so Grade 5 is a sensible place to begin. Placement is advice about where to start: it does not complete any grade or award any grade badge.`
+      ? `You answered the questions we asked from Grades 1 to 4 well, so Grade 5 is a sensible place to begin. This is a short check (a handful of questions a grade, not every topic: see "Not checked" below), so it is advice about where to start, not proof you know everything before it. It does not complete any grade or award any grade badge.`
       : rec.decidedBy === 1
-        ? `Some Grade 1 ideas were not secure yet, so we recommend starting at Grade 1. The lessons below cover exactly what to look at first.`
+        ? `Some Grade 1 ideas were not secure yet, so we recommend starting at Grade 1. The lessons below are the places to look at first (a short check cannot find every gap).`
         : `You were secure on the questions up to Grade ${g - 1}, but not yet on every Grade ${g} idea, so we recommend starting at Grade ${g}. Any earlier topics you missed are listed as catch-up lessons. You can start lower at any time, with no penalty.`;
+    // What the short check did NOT ask: the other outcomes of every grade it covered. Said plainly on the result, so "secure" is never read as "everything was tested".
+    const asked = new Set(planned.filter((i) => by.get(i.itemId)?.attempts).map((i) => i.outcomeId));
+    const notChecked = [...new Set(planned.map((i) => i.stage!))].sort((a, b) => a - b).map((grade) => ({ grade, statements: gradeOutcomes(this.course, grade).filter((o) => !asked.has(o.id)).map((o) => o.statement) })).filter((x) => x.statements.length);
     return {
       kind: "placement",
       label: "Placement check",
+      notChecked,
       rubricVersion: row.rubric_version,
       blueprintVersion: row.blueprint_version,
       curriculumVersion: row.curriculum_version,
@@ -781,9 +832,10 @@ export class PrepService {
 
   private completedExamAttempts(userId: string, grade: number): ReadinessAttempt[] {
     const rows = this.db.prepare("SELECT id, mode, completed_at, rubric_version, blueprint_version, curriculum_version, summary FROM prep_attempts WHERE user_id = ? AND kind = 'exam' AND grade = ? AND status = 'complete' ORDER BY completed_at DESC").all(userId, grade) as Array<{ id: string; mode: "practice" | "mock"; completed_at: string; rubric_version: number; blueprint_version: number; curriculum_version: string; summary: string }>;
+    const tz = learnerTime(this.db, this.clock, userId).tz;
     return rows.map((r) => {
       const s = JSON.parse(r.summary) as ExamSummary;
-      return { id: r.id, completedAt: r.completed_at, mode: r.mode, rubricVersion: r.rubric_version, blueprintVersion: r.blueprint_version, curriculumVersion: r.curriculum_version, independentQuestions: s.independentQuestions, independentCorrect: s.independentCorrect, outcomesTotal: s.outcomesTotal, outcomesAssessed: s.outcomesAssessed };
+      return { questions: s.questions, answered: s.answered, day: localDate(new Date(r.completed_at), tz), id: r.id, completedAt: r.completed_at, mode: r.mode, rubricVersion: r.rubric_version, blueprintVersion: r.blueprint_version, curriculumVersion: r.curriculum_version, independentQuestions: s.independentQuestions, independentCorrect: s.independentCorrect, outcomesTotal: s.outcomesTotal, outcomesAssessed: s.outcomesAssessed };
     });
   }
 
@@ -886,6 +938,23 @@ export class PrepService {
       const r = this.resolve(planned);
       return r ? [{ planned, item: r.item, scope: r.scope }] : [];
     });
+  }
+
+  /**
+   * The concepts the learner got wrong on their NEWEST independent mock of each grade (current rubric), with when that mock finished. Only the concepts of
+   * the questions actually missed, not every concept of the outcome (an outcome such as "all keys to six sharps or flats" covers many).
+   */
+  latestMockMissed(userId: string): Map<string, string> {
+    const out = new Map<string, string>();
+    for (let g = 1; g <= 5; g++) {
+      const r = this.db.prepare("SELECT completed_at, summary FROM prep_attempts WHERE user_id = ? AND kind = 'exam' AND grade = ? AND mode = 'mock' AND status = 'complete' AND rubric_version = ? ORDER BY completed_at DESC LIMIT 1").get(userId, g, this.cfg.rubricVersion) as { completed_at: string; summary: string } | undefined;
+      if (!r) continue;
+      for (const e of (JSON.parse(r.summary) as ExamSummary).review) {
+        if (!e.answered || e.correct || !e.independent) continue;
+        for (const c of e.conceptIds ?? []) if (!out.has(c) || out.get(c)! < r.completed_at) out.set(c, r.completed_at);
+      }
+    }
+    return out;
   }
 
   /** Progress across attempts for one grade: each outcome's level in the latest mock and the change since the one before. */

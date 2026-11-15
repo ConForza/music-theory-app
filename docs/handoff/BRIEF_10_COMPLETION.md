@@ -25,7 +25,7 @@ Rules, the audit matrix against `main`, every product default and what a teacher
 
 1. Is two questions per outcome plus four multi-part score-reading questions a representative paper? Does the weighting (per outcome, not per ABRSM section marks) mislead anyone?
 2. The placement rule and its wording ("advice about where to start", never a grade).
-3. Readiness wording: "Estimated readiness", "On track" only after two independent mock attempts. Is "On track" safe, given it is *our* number?
+3. Readiness wording: "Estimated readiness", "Consistently secure" only after two independent mock attempts on different days, each at the line, with unanswered questions counted as not right (rubric 2, after the first review). Is "Consistently secure" safe, given it is *our* number?
 4. The explanations of mistakes (they reuse family feedback, themselves unreviewed) and the order of results: score, readiness, outcomes, strengths/weaknesses, plain-words mistakes, next steps, answers.
 5. Weak-topic practice: explanation first, then questions recorded as learning. Is two wrong in the last five a fair meaning of "weak"? Is "untested is not weak" visible enough?
 
@@ -50,3 +50,4 @@ npm run build && npm run e2e                     # every browser shard, includin
 5. Practice mode keeps the engine's existing "worked answer after three misses" rule; the full set of worked answers is shown after finishing.
 6. The "Not yet tested" list on the Review hub shows the first twelve topics only.
 7. Not done, by instruction: Brief 11's release audit, deployment, marking the PR ready, merging.
+8. **Educational review of PR #18** (changes required, 11 defects). Fixed in this PR: readiness no longer counts a mostly blank paper (1), no longer pools a decline into a pass (2), labels renamed (rubric 2); no paper asks the same question twice (4); recommendations and revisit links use the concepts of the questions missed (6); the exam weak flag is narrow and clears with practice (7); placement says what it did not check (8); documentation overstatement corrected (11). **Not fixed here, for owner or earlier-brief decisions** (see the last section of the architecture doc): Grade 2/3 score-reading generators (3), unanswerable items in older generators (5, 9, 10), question weighting and carried-forward items, part marks, near-repeats.
