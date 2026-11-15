@@ -149,6 +149,21 @@ describe("quick review", () => {
     }
   }, 60_000);
 
+  it("always fills the length that was asked for, with no question twice, across many sessions (a topic that cannot make a fresh question must not leave it short)", async () => {
+    const ctx = boot();
+    const L = await learner(ctx.app);
+    completeGrades(ctx.app, ctx.db, L.userId, 1);
+    for (let k = 0; k < 40; k++) {
+      const minutes = [3, 5, 10][k % 3]!;
+      const want = ctx.app.revision.questionsFor(minutes);
+      const s = (await L.c.post("/api/revision/sessions", { mode: "quick", minutes })).body.session;
+      expect(s.items, `session ${k} (${minutes} min)`).toHaveLength(want);
+      const keys = (JSON.parse((ctx.db.prepare("SELECT items FROM revision_sessions WHERE user_id = ? AND id = ?").get(L.userId, s.id) as { items: string }).items) as Array<{ itemId: string }>).map((r) => visibleKey(ctx.app.engagement.review.resolve(r as never)!.item));
+      expect(new Set(keys).size).toBe(keys.length);
+      await L.c.post(`/api/revision/sessions/${s.id}/abandon`);
+    }
+  }, 120_000);
+
   it("is a fresh set each time: questions the learner has already answered are not repeated", async () => {
     const ctx = boot();
     const L = await learner(ctx.app);

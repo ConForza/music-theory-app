@@ -307,19 +307,23 @@ export class RevisionService {
       return { c, cands, made: 0 };
     });
     const items: RevItem[] = [];
-    let guard = 0;
-    while (items.length < total && guard++ < perConcept * 3) {
-      let progressed = false;
+    // Fill to the length asked for: a topic whose question type cannot make a fresh question just now (or can only repeat one) must not leave the session short, so each
+    // further round lets every topic try again, and no question already in the session is ever added twice.
+    const usedKeys = new Set<string>();
+    for (let round = 0; round < 6 && items.length < total; round++) {
+      const cap = perConcept + round;
       for (const p of plans) {
         if (items.length >= total) break;
-        if (p.made >= perConcept || !p.cands.length) continue;
+        if (p.made >= cap || !p.cands.length) continue;
         const cand: Candidate = p.cands[p.made % p.cands.length]!;
         const gen = this.engagement.review.generateFor(cand, p.c.conceptId, seedFor(sessionId, p.c.conceptId, cand.templateId, p.made), avoid);
         const g = gen && parseGeneratedItemId(gen.item.id);
         p.made++;
-        progressed = true;
         if (!gen || !g) continue;
-        avoid.add(questionKey(gen.item));
+        const key = questionKey(gen.item);
+        if (usedKeys.has(key)) continue;
+        usedKeys.add(key);
+        avoid.add(key);
         items.push({
           itemId: gen.item.id,
           kind: "review",
@@ -332,7 +336,6 @@ export class RevisionService {
           reason: typeof reason === "function" ? reason(p.c) : reason,
         });
       }
-      if (!progressed) break;
     }
     return items;
   }
@@ -358,7 +361,7 @@ export class RevisionService {
       // still being learned, then solid ones that have gone longest without a check. Nothing here is invented: every topic is one that was taught.
       const urgent = insights.filter((c) => c.status === "weak" || c.status === "due");
       const rest = [...insights.filter((c) => c.status === "untested"), ...insights.filter((c) => c.status === "learning"), ...insights.filter((c) => c.status === "solid")];
-      const chosen = [...urgent, ...rest].slice(0, Math.ceil(total / per));
+      const chosen = [...urgent, ...rest].slice(0, Math.ceil(total / per) + 3);
       items = this.build(userId, id, chosen, total, per, (c) => (c.status === "weak" ? "weak" : c.status === "due" ? "due" : c.status === "untested" ? "untested" : "keep-fresh"));
       used = { minutes };
     } else if (mode === "weak") {
