@@ -6,7 +6,7 @@
 import assert from "node:assert/strict";
 import { chromium, devices } from "playwright";
 import { canonicalResponse } from "@mtp/engine";
-import { attemptIdFromUrl, axe, get, guest, noOverflow, onQuestion, answerOnScreen, playPrep, post, serve, shot } from "./preplib.mjs";
+import { attemptIdFromUrl, axe, get, guest, noOverflow, onQuestion, answerOnScreen, playPrep, post, reachableWrong, serve, shot } from "./preplib.mjs";
 
 const S = await serve({ waive: false });
 const browser = await chromium.launch();
@@ -100,13 +100,16 @@ await test("a beginner's check stops after one probe and suggests Grade 1 with t
   await page.waitForURL(/\/placement\/run\//);
   const id = attemptIdFromUrl(page);
   await page.getByRole("button", { name: /Let's go/ }).click();
-  const n = await playPrep(page, S, userId, id, { wrong: (i) => i < 4 });
+  // three questions answered wrongly: the first three for which the controls can give a wrong answer (two are enough to make the probe not secure)
+  const wrongAt = new Set(S.app.prep.internalItems(userId, id).flatMap((it, i) => (reachableWrong(S, it.item, it.scope) ? [i] : [])).slice(0, 3));
+  assert.ok(wrongAt.size >= 2, `at least two questions of the probe can be answered wrongly (${wrongAt.size})`);
+  const n = await playPrep(page, S, userId, id, { wrong: (i) => wrongAt.has(i) });
   assert.equal(n, 6);
   await page.waitForURL(/\/results\//);
   await page.getByRole("heading", { name: "We suggest starting at Grade 1" }).waitFor();
   await page.getByText(/Not assessed: Grade 2, 3, 4/).waitFor();
   const gaps = page.getByTestId("gaps").locator("li");
-  assert.equal(await gaps.count(), 4);
+  assert.equal(await gaps.count(), wrongAt.size);
   await gaps.first().getByRole("link").first().waitFor();
   await page.getByRole("button", { name: "Start at Grade 1" }).click();
   await page.waitForURL(/\/learn/);
