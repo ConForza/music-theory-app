@@ -791,7 +791,7 @@ export class PrepService {
     const unfinished = all.find((s) => s.answered < s.asked);
     const rec = recommendPlacement(stages, cfg);
     // Stopping part-way through a probe: the learner has demonstrated nothing at that grade or above, so the suggestion cannot be higher than it.
-    const stoppedAt = unfinished && unfinished.grade < rec.recommendedGrade ? unfinished.grade : null;
+    const stoppedAt = unfinished && unfinished.grade <= rec.recommendedGrade ? unfinished.grade : null;
     if (stoppedAt !== null) {
       rec.recommendedGrade = stoppedAt;
       rec.allSecure = false;
