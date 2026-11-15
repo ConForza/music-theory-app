@@ -433,6 +433,68 @@ await test("audible pitch is exact: the notes played for a demonstration have th
   }
 });
 
+await test("intervals under a key signature in the browser (G5-U3-L07): the signature is on the stave and in its spoken description, a wrong answer is explained, the lesson completes, and the new concept gets evidence", async () => {
+  for (const [name, profile] of [["desktop", profiles.desktop], ["iphone", profiles.iphone]]) {
+    const { ctx, page, userId } = await grade5Learner(profile);
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await finishViaApi(S, page, userId, "G5-U3-L06");
+    assert.equal((await get(page, "/api/progress")).nodes["G5-U3-L07"].state, "available", `${name}: the new lesson is open once L06 is done`);
+    const seenLabels = [];
+    const feedback = [];
+    await playLessonInBrowser(page, S, "G5-U3-L07", {
+      wrongAt: 0,
+      afterTeach: async (p) => { await noOverflow(p, `${name} teach`); await axe(p, `${name} key-signature teaching`); await shot(p, `g5-ik-01-teach-${name}`); },
+      afterWrong: async (p) => { seenLabels.push(...(await labelsOf(p))); feedback.push(await p.locator(".feedback").innerText()); await shot(p, `g5-ik-02-wrong-${name}`); },
+    });
+    await page.getByRole("heading", { name: "Lesson complete!" }).waitFor();
+    await noOverflow(page, `${name} lesson complete`);
+    assert.ok(feedback[0] && feedback[0].length > 40, `${name}: the first wrong answer got a specific explanation`);
+    assert.ok(seenLabels.some((l) => /key/i.test(l) && /(sharp|flat)/i.test(l)), `${name}: the spoken stave description names the key signature: ${JSON.stringify(seenLabels)}`);
+    const prog = await get(page, "/api/progress");
+    assert.equal(prog.nodes["G5-U3-L07"].state, "completed");
+    const ev = S.db.prepare("SELECT DISTINCT concept_id FROM mastery_evidence WHERE user_id = ? AND node_id = 'G5-U3-L07'").all(userId).map((r) => r.concept_id);
+    assert.deepEqual(ev, ["c.intervals.in-key-signature"]);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
+
+await test("intervals under a key signature in the unit practice: the unit practice draws the new templates and is completed in the browser", async () => {
+  const { ctx, page, userId } = await grade5Learner(profiles.desktop);
+  await finishViaApi(S, page, userId, "G5-U3-L07");
+  const items = S.course.authoredItems("G5-U3-L07").filter((i) => i.templateId === "t.g5.interval-key-identify");
+  assert.ok(items.length >= 3, "the lesson has key-signature naming questions");
+  const started = await post(page, "/api/nodes/G5-U3-P1/start");
+  assert.equal(started.status, 200);
+  await playNodeInBrowser(page, S, userId, "G5-U3-P1", { wrong: 1 });
+  await page.getByRole("heading", { name: "Practice complete" }).waitFor();
+  const used = S.db.prepare("SELECT DISTINCT template_id FROM node_attempts WHERE user_id = ? AND node_id = 'G5-U3-P1'").all(userId).map((r) => r.template_id);
+  assert.ok(used.some((t) => t.startsWith("t.g5.interval-key")), `the practice drew a key-signature interval question: ${used}`);
+  await ctx.close();
+});
+
+await test("optional rewriting between simple and compound time (G5-U1-E1): playable in the browser with the rhythm editor, never required, and the compulsory path does not need it", async () => {
+  const { ctx, page, userId } = await grade5Learner(profiles.desktop);
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/learn");
+  await page.locator('[data-node="G5-U1-E1"]').waitFor();
+  assert.equal(await page.locator('[data-node="G5-U1-E1"]').getAttribute("data-status"), "locked", "it waits for the Unit 1 lessons");
+  await finishViaApi(S, page, userId, "G5-U1-L03");
+  const before = (await get(page, "/api/progress")).nodes;
+  assert.equal(before["G5-U1-E1"].state, "available");
+  assert.equal(before["G5-U1-P1"].state, "available", "Unit 1 practice does not wait for the optional node");
+  await playLessonInBrowser(page, S, "G5-U1-E1", {
+    afterTeach: async (p) => { await noOverflow(p, "rewrite teach"); await axe(p, "rewrite teaching"); await shot(p, "g5-rw-01-teach"); },
+  });
+  await page.getByRole("heading", { name: "Lesson complete!" }).waitFor();
+  const prog = await get(page, "/api/progress");
+  assert.equal(prog.nodes["G5-U1-E1"].state, "completed");
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
 await browser.close();
 S.close();
 if (failures) {
