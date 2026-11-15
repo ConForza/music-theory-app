@@ -206,6 +206,14 @@ See `GRADE_5_COMPLETION_AUDIT.md` sections 2-4 for the outcome coverage matrix (
 | transpose-judge (U3-L06) | 2 | The top stave is concert pitch. A pupil has transposed it up a perfect 5th to give the written part for the cor anglais (in F) (the cor anglais (in F) sounds a perfect 5th lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Concert pitch (given) stave, key signature of 4 flats, 3/4. Bar 1: a note on the 5th line; a note in the 4th space, with a natural sign in front; a note on the 5th line. Bar 2: a note in the space just above the stav_ | The answer is “Only the key signature is wrong”. |
 | transpose-judge (U3-L06) | 3 | The top stave is the written part for the clarinet in B♭. A pupil has transposed it down a major 2nd to give concert pitch (the clarinet in B♭ sounds a major 2nd lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Written for the clarinet in B♭ (given) stave, key signature of 4 flats, 3/4. Bar 1: a note in the 3rd space; a note in the 2nd space; a note on the 3rd line. Bar 2: a note in the 2nd space; a note on the 3rd line; a _ | The answer is “Only note 3 is wrong”. |
 | transpose-judge (U3-L06) | 4 | The top stave is the written part for the trumpet in B♭. A pupil has transposed it down a major 2nd to give concert pitch (the trumpet in B♭ sounds a major 2nd lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true? _Shown: A melody and a pupil's transposition of it. Written for the trumpet in B♭ (given) stave, key signature of 1 sharp, 3/4. Bar 1: a note on the 3rd line; a note in the 2nd space; a note in the 3rd space. Bar 2: a note on the 3rd line; a note in the 3rd space; a n_ | The answer is “The bar and its key signature are correct”. |
+| interval-key-identify (U3-L07) | 1 | The key signature shows 2 sharps (B minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave. _Shown: A treble-clef stave, key signature of 2 sharps. a note in the 1st space; a note in the 2nd space._ | The interval is a minor 3rd. |
+| interval-key-identify (U3-L07) | 2 | The key signature shows 5 flats (B♭ minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave. _Shown: A treble-clef stave, key signature of 5 flats. a note in the space just below the stave, with a natural sign in front; a note in the 1st space._ | The interval is a minor 3rd. |
+| interval-key-identify (U3-L07) | 3 | The key signature shows 2 flats (G minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave. _Shown: A treble-clef stave, key signature of 2 flats. a note on the 1st line; a note in the 3rd space._ | The interval is a major 6th. |
+| interval-key-identify (U3-L07) | 4 | The key signature shows 6 sharps (F♯ major). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave. _Shown: A treble-clef stave, key signature of 6 sharps. a note in the space just below the stave; a note on the 1st line, with a natural sign in front._ | The interval is a minor 2nd. |
+| interval-key-build (U3-L07) | 1 | The key signature shows 3 flats (C minor). Write the note that is a perfect 4th above the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one. _Shown: A bass-clef stave, key signature of 3 flats. a note on the 1st line._ | The note is C3. |
+| interval-key-build (U3-L07) | 2 | The key signature shows 1 flat (F major). Write the note that is a minor 3rd below the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one. _Shown: A bass-clef stave, key signature of 1 flat. a note in the space just below the stave._ | The note is D2. |
+| interval-key-build (U3-L07) | 3 | The key signature shows 3 sharps (A major). Write the note that is an augmented 4th above the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one. _Shown: A bass-clef stave, key signature of 3 sharps. a note in the space below the 1st ledger line below the stave._ | The note is G♯2. |
+| interval-key-build (U3-L07) | 4 | The key signature shows 1 flat (F major). Write the note that is a perfect 5th below the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one. _Shown: A treble-clef stave, key signature of 1 flat. a note on the 3rd line._ | The note is E♭4. |
 | inversion-facts (U4-L01) | 1 | Chord IV in second inversion can also be shown with figures instead of a letter. Which figures show second inversion? | The answer is “6/4 (six-four)”. |
 | inversion-facts (U4-L01) | 2 | Above its lowest note, a triad in second inversion contains which intervals? | The answer is “a 6th and a 4th”. |
 | inversion-facts (U4-L01) | 3 | In the second inversion of chord IV in D♭ major, which note is in the bass (the lowest note)? | The answer is “D♭”. |
@@ -446,11 +454,11 @@ The 2020 outline does not enumerate terms, so these lists are provisional (Q2): 
 - abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature, clef-minor (outcome g5.04)
 - abrsm2020.g5.05: 2 question(s) from octave-transpose, clef-position (outcome g5.05)
 
-### G5-U3-C: Unit challenge: Six-accidental keys, all intervals and transposing instruments (blueprint a.g5-u3 v1)
+### G5-U3-C: Unit challenge: Six-accidental keys, all intervals and transposing instruments (blueprint a.g5-u3 v2)
 
 - abrsm2020.g5.07: 2 question(s) from scale-build, key-signature, key-facts, scale-spot (outcome g5.07)
 - abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature, clef-minor (outcome g5.04)
-- abrsm2020.g5.08: 2 question(s) from interval-any, interval-write, interval-compound, interval-facts, compound-facts (outcome g5.08)
+- abrsm2020.g5.08: 2 question(s) from interval-any, interval-write, interval-compound, interval-facts, compound-facts, interval-key-identify, interval-key-build (outcome g5.08)
 - abrsm2020.g5.06: 2 question(s) from instrument-transpose, concert-facts, transpose-key, transpose-judge (outcome g5.06)
 
 ### G5-U4-C: Unit challenge: Inversions, chords and cadences (blueprint a.g5-u4 v1)
@@ -462,28 +470,29 @@ The 2020 outline does not enumerate terms, so these lists are provisional (Q2): 
 ### G5-U5-C: Unit challenge: Ornaments, voices, instruments and the score (blueprint a.g5-u5 v1)
 
 - abrsm2020.g5.13: 2 question(s) from ornament-replace, ornament-facts (outcome g5.13)
-- abrsm2020.g5.14: 2 question(s) from voices (outcome g5.14)
+- abrsm2020.g5.14: 2 question(s) from voices, voice-groups (outcome g5.14)
 - abrsm2020.g5.15: 2 question(s) from instruments, instrument-sound (outcome g5.15)
 - abrsm2020.g5.12: 2 question(s) from terms, term-use (outcome g5.12)
 - abrsm2020.g5.16: 2 question(s) from score (outcome g5.16)
 - abrsm2020.g1.21: 2 question(s) from score (outcome g1.21)
 
-### G5-A: Grade 5 practice assessment (blueprint a.g5 v1)
+### G5-A: Grade 5 practice assessment (blueprint a.g5 v2)
 
 - abrsm2020.g5.01: 2 question(s) from time-signature, metre-facts, irregular-grouping, grouping-judge, bar-complete, metre-mixed, rest-judge, duration-facts (outcome g5.01)
 - abrsm2020.g5.02: 2 question(s) from irregular-division, division-facts, division-write (outcome g5.02)
 - abrsm2020.g5.03: 2 question(s) from tenor-read, tenor-write, tenor-facts (outcome g5.03)
-- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, key-signature, clef-minor (outcome g5.04)
+- abrsm2020.g5.04: 2 question(s) from four-clef-read, same-pitch, clef-minor (outcome g5.04)
 - abrsm2020.g5.05: 2 question(s) from octave-transpose, clef-position (outcome g5.05)
 - abrsm2020.g5.06: 2 question(s) from instrument-transpose, transpose-key (outcome g5.06)
 - abrsm2020.g5.07: 2 question(s) from scale-build, key-signature (outcome g5.07)
-- abrsm2020.g5.08: 2 question(s) from interval-any, interval-write, interval-compound (outcome g5.08)
+- abrsm2020.g5.08: 1 question(s) from interval-any, interval-key-identify, interval-compound (outcome g5.08)
+- abrsm2020.g5.08 (writing): 1 question(s) from interval-write, interval-key-build (outcome g5.08)
 - abrsm2020.g5.09: 2 question(s) from chord-identify, chord-build, chord-in-passage (outcome g5.09)
 - abrsm2020.g5.10: 2 question(s) from cadence-chords, approach-chord (outcome g5.10)
 - abrsm2020.g5.11: 2 question(s) from cadence-identify, cadence-find (outcome g5.11)
 - abrsm2020.g5.12: 2 question(s) from terms, term-use (outcome g5.12)
 - abrsm2020.g5.13: 2 question(s) from ornament-replace, ornament-facts (outcome g5.13)
-- abrsm2020.g5.14: 2 question(s) from voices (outcome g5.14)
+- abrsm2020.g5.14: 2 question(s) from voices, voice-groups (outcome g5.14)
 - abrsm2020.g5.15: 2 question(s) from instruments, instrument-sound (outcome g5.15)
 - abrsm2020.g5.16: 2 question(s) from score (outcome g5.16)
 - Earlier grades (cumulative): 7 question(s) from time-signature, regular-grouping, octave-transpose-alto, chromatic-scale, interval-diatonic, chord-in-passage, ornament-name, instruments, passage (outcome g4.01, g4.07, g4.12, g4.13, g4.15, g4.17, g4.18)

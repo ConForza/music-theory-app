@@ -664,3 +664,25 @@ describe("generation is deterministic, identities are stable, and the Grade 5 vo
     expect(music.VOCAB_G5.terms.map((x) => x.id).filter((id) => music.TERMS_G4.some((y) => y.id === id))).toEqual([]);
   });
 });
+
+describe("voice hints never give the answer away (review of PR #16, finding A)", () => {
+  it("no hint of any voices question lists the voices in order, and the first hint is a way of thinking, not the answer", () => {
+    for (const t of ["t.g5.voices", "t.g5.voice-groups"]) {
+      const scope = scopeOf("G5-U5-L03", t);
+      const hints = new Set<string>();
+      let n = 0;
+      for (let s = 1; s <= 150; s++) {
+        let it: ExerciseItem;
+        try { it = generateItem(ix, t, s, { scope }).item; } catch { continue; }
+        n++;
+        for (const h of it.hints ?? []) {
+          hints.add(h);
+          expect(h, `${t} seed ${s}`).not.toMatch(/high to low|highest to lowest|soprano, alto, tenor,? (and )?bass|soprano is the highest|bass the lowest/i);
+        }
+        expect(it.hints?.length, `${t} seed ${s}`).toBeGreaterThanOrEqual(1);
+      }
+      expect(n).toBeGreaterThan(50);
+      expect(hints.size).toBeGreaterThan(0);
+    }
+  });
+});

@@ -59,7 +59,7 @@ await test("learner arriving from Grade 4: Grade 5 opens at its first lesson, la
   assert.equal(await page.locator('[data-node="G5-U1-L01"]').getAttribute("data-status"), "available");
   assert.equal(await page.locator('[data-node="G5-U1-L02"]').getAttribute("data-status"), "locked");
   assert.equal(await page.locator('[data-node="G5-U4-L01"]').getAttribute("data-status"), "locked");
-  assert.equal(await page.locator("[data-node]").count(), 44, "all 44 Grade 5 nodes (41 required, 3 optional) are on the path");
+  assert.equal(await page.locator("[data-node]").count(), 46, "all 46 Grade 5 nodes (42 required, 4 optional) are on the path");
   await noOverflow(page, "grade 4 path");
   await axe(page, "grade 4 path");
   await shot(page, "g5-01-path");
@@ -217,6 +217,12 @@ await test("resumes after an interruption: part-way through a lesson and part-wa
 
 await test("complete progression to the Grade 5 assessment: below the pass mark with what to revisit, then a retake that passes and earns the grade badge", async () => {
   const { ctx, page, userId } = await grade5Learner(profiles.desktop);
+  const pageErrors = [];
+  page.on("pageerror", (e) => pageErrors.push(e.message));
+  page.on("console", (m) => { if (m.type() === "error") pageErrors.push(`console: ${m.text()}`); });
+  const netFails = [];
+  page.on("response", (r) => { if (r.status() >= 400) netFails.push(`${r.status()} ${r.url().replace(S.base, "")}`); });
+  page.on("requestfailed", (r) => netFails.push(`failed ${r.url().replace(S.base, "")} ${r.failure()?.errorText}`));
   for (const n of G5.filter((x) => x.type === "unit_challenge")) await finishViaApi(S, page, userId, n.id);
   await finishViaApi(S, page, userId, "G5-U5-R1");
   const g5 = (await get(page, "/api/progress")).grades.find((g) => g.grade === 5);
@@ -261,12 +267,12 @@ await test("complete progression to the Grade 5 assessment: below the pass mark 
   await shot(page, "g5-12-assessment-passed");
   const prog = await get(page, "/api/progress");
   assert.equal(prog.nodes["G5-A"].state, "completed");
-  assert.equal(prog.grades.find((g) => g.grade === 5).completedNodes, 41);
+  assert.equal(prog.grades.find((g) => g.grade === 5).completedNodes, 42);
   assert.equal((await get(page, "/api/achievements")).achievements.find((b) => b.id === "g5.grade-complete").earned, true);
   const results = (await get(page, "/api/results")).results.filter((r) => r.nodeId === "G5-A");
   assert.deepEqual(results.map((r) => r.passed).sort(), [false, true], "both results are recorded; the retake did not overwrite the first");
   await page.goto("/progress");
-  await page.getByRole("heading", { level: 1 }).waitFor();
+  try { await page.getByRole("heading", { level: 1 }).waitFor({ timeout: 15000 }); } catch (e) { throw new Error(`${e.message.split("\n")[0]} | page errors: ${JSON.stringify(pageErrors)} | network: ${JSON.stringify(netFails.slice(-8))} | body: ${(await page.locator("body").innerText()).slice(0, 300)}`, { cause: e }); }
   await noOverflow(page, "progress");
   await axe(page, "progress");
   await ctx.close();
@@ -431,6 +437,68 @@ await test("audible pitch is exact: the notes played for a demonstration have th
     assert.ok(Math.abs(hz(semisOf("A4")) / hz(semisOf("A4") - 2) - 2 ** (2 / 12)) < 1e-9);
     await ctx.close();
   }
+});
+
+await test("intervals under a key signature in the browser (G5-U3-L07): the signature is on the stave and in its spoken description, a wrong answer is explained, the lesson completes, and the new concept gets evidence", async () => {
+  for (const [name, profile] of [["desktop", profiles.desktop], ["iphone", profiles.iphone]]) {
+    const { ctx, page, userId } = await grade5Learner(profile);
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await finishViaApi(S, page, userId, "G5-U3-L06");
+    assert.equal((await get(page, "/api/progress")).nodes["G5-U3-L07"].state, "available", `${name}: the new lesson is open once L06 is done`);
+    const seenLabels = [];
+    const feedback = [];
+    await playLessonInBrowser(page, S, "G5-U3-L07", {
+      wrongAt: 0,
+      afterTeach: async (p) => { await noOverflow(p, `${name} teach`); await axe(p, `${name} key-signature teaching`); await shot(p, `g5-ik-01-teach-${name}`); },
+      afterWrong: async (p) => { seenLabels.push(...(await labelsOf(p))); feedback.push(await p.locator(".feedback").innerText()); await shot(p, `g5-ik-02-wrong-${name}`); },
+    });
+    await page.getByRole("heading", { name: "Lesson complete!" }).waitFor();
+    await noOverflow(page, `${name} lesson complete`);
+    assert.ok(feedback[0] && feedback[0].length > 40, `${name}: the first wrong answer got a specific explanation`);
+    assert.ok(seenLabels.some((l) => /key/i.test(l) && /(sharp|flat)/i.test(l)), `${name}: the spoken stave description names the key signature: ${JSON.stringify(seenLabels)}`);
+    const prog = await get(page, "/api/progress");
+    assert.equal(prog.nodes["G5-U3-L07"].state, "completed");
+    const ev = S.db.prepare("SELECT DISTINCT concept_id FROM mastery_evidence WHERE user_id = ? AND node_id = 'G5-U3-L07'").all(userId).map((r) => r.concept_id);
+    assert.deepEqual(ev, ["c.intervals.in-key-signature"]);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
+
+await test("intervals under a key signature in the unit practice: the unit practice draws the new templates and is completed in the browser", async () => {
+  const { ctx, page, userId } = await grade5Learner(profiles.desktop);
+  await finishViaApi(S, page, userId, "G5-U3-L07");
+  const items = S.course.authoredItems("G5-U3-L07").filter((i) => i.templateId === "t.g5.interval-key-identify");
+  assert.ok(items.length >= 3, "the lesson has key-signature naming questions");
+  const started = await post(page, "/api/nodes/G5-U3-P1/start");
+  assert.equal(started.status, 200);
+  await playNodeInBrowser(page, S, userId, "G5-U3-P1", { wrong: 1 });
+  await page.getByRole("heading", { name: "Practice complete" }).waitFor();
+  const used = S.db.prepare("SELECT DISTINCT template_id FROM node_attempts WHERE user_id = ? AND node_id = 'G5-U3-P1'").all(userId).map((r) => r.template_id);
+  assert.ok(used.some((t) => t.startsWith("t.g5.interval-key")), `the practice drew a key-signature interval question: ${used}`);
+  await ctx.close();
+});
+
+await test("optional rewriting between simple and compound time (G5-U1-E1): playable in the browser with the rhythm editor, never required, and the compulsory path does not need it", async () => {
+  const { ctx, page, userId } = await grade5Learner(profiles.desktop);
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/learn");
+  await page.locator('[data-node="G5-U1-E1"]').waitFor();
+  assert.equal(await page.locator('[data-node="G5-U1-E1"]').getAttribute("data-status"), "locked", "it waits for the Unit 1 lessons");
+  await finishViaApi(S, page, userId, "G5-U1-L03");
+  const before = (await get(page, "/api/progress")).nodes;
+  assert.equal(before["G5-U1-E1"].state, "available");
+  assert.equal(before["G5-U1-P1"].state, "available", "Unit 1 practice does not wait for the optional node");
+  await playLessonInBrowser(page, S, "G5-U1-E1", {
+    afterTeach: async (p) => { await noOverflow(p, "rewrite teach"); await axe(p, "rewrite teaching"); await shot(p, "g5-rw-01-teach"); },
+  });
+  await page.getByRole("heading", { name: "Lesson complete!" }).waitFor();
+  const prog = await get(page, "/api/progress");
+  assert.equal(prog.nodes["G5-U1-E1"].state, "completed");
+  assert.deepEqual(errors, []);
+  await ctx.close();
 });
 
 await browser.close();

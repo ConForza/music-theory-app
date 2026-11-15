@@ -20,6 +20,15 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, "../../../content");
 const before = JSON.parse(readFileSync(join(here, "fixtures/content-before-terms.json"), "utf8")) as Record<string, Record<string, unknown>>;
 const NEW = new Set(music.BOOK_LESSONS.map((l) => l.node));
+// PR #14 reconciled with main (intervals under key signatures, optional simple/compound rewriting, assessment balance): everything it adds is named here,
+// so this file still proves it changed nothing else. Its own tests are in grade5-interval-key-course.test.ts.
+const PR14_LESSONS = ["G5-U3-L07", "G5-U1-E1"];
+// Two Grade 5 lessons carry frozen hint text copied from the generators; the wording fix changes only those hints (no prompt, option, answer or id).
+const PR14_REWORDED = ["G5-U5-L02", "G5-U5-L03"];
+const PR14_TEMPLATES = ["t.g5.interval-key-identify", "t.g5.interval-key-build", "t.g5.rewrite-metre"];
+const PR14_CONCEPTS = ["c.intervals.in-key-signature", "c.metre.rewrite-simple-compound"];
+const PR14_NODES = ["G5-U3-P1", "G5-U4-R1", "G5-U5-R1"]; // practice and review nodes that gained the interval-key templates
+const PR14_SECTIONS = ["a.g5/o-g5-04", "a.g5/o-g5-08"]; // rebalanced sections of the Grade 5 assessment (a.g5/o-g5-08b is new)
 const sha = (b: Buffer | string) => createHash("sha256").update(b).digest("hex").slice(0, 16);
 const hash = (o: unknown) => createHash("sha256").update(JSON.stringify(sortKeys(o))).digest("hex").slice(0, 16);
 function sortKeys(v: unknown): unknown {
@@ -36,16 +45,16 @@ const wholeWord = (w: string) => new RegExp(`(^|[^\\p{L}])${w.replace(/[.*+?^${}
 describe("nothing that existed before has changed (question identities, lessons, progression)", () => {
   it("every earlier lesson file is byte-for-byte the file it was", () => {
     const now = new Map(readdirSync(join(root, "lessons")).map((f) => [f.slice(0, -5), sha(readFileSync(join(root, "lessons", f)))]));
-    for (const [id, h] of Object.entries(before.lessons!)) expect(now.get(id), `lesson ${id}`).toBe(h);
-    expect([...now.keys()].filter((k) => !(k in before.lessons!)).sort()).toEqual([...NEW].sort());
+    for (const [id, h] of Object.entries(before.lessons!)) if (!PR14_REWORDED.includes(id)) expect(now.get(id), `lesson ${id}`).toBe(h);
+    expect([...now.keys()].filter((k) => !(k in before.lessons!)).sort()).toEqual([...NEW, ...PR14_LESSONS].sort());
   });
 
   it("every earlier template, concept and concept boundary is unchanged, and the only new ones are this work's", () => {
     const templates = new Map(course.ix.templates);
     for (const [id, h] of Object.entries(before.templates!)) expect(hash(templates.get(id)), `template ${id}`).toBe(h);
-    expect([...templates.keys()].filter((k) => !(k in before.templates!)).sort()).toEqual([...music.BOOK_TEMPLATE_IDS].sort());
+    expect([...templates.keys()].filter((k) => !(k in before.templates!)).sort()).toEqual([...music.BOOK_TEMPLATE_IDS, ...PR14_TEMPLATES].sort());
     for (const [id, h] of Object.entries(before.concepts!)) expect(hash(course.ix.concepts.get(id)), `concept ${id}`).toBe(h);
-    expect([...course.ix.concepts.keys()].filter((k) => !(k in before.concepts!)).sort()).toEqual(music.BOOK_LESSONS.map((l) => l.conceptId).sort());
+    expect([...course.ix.concepts.keys()].filter((k) => !(k in before.concepts!)).sort()).toEqual([...music.BOOK_LESSONS.map((l) => l.conceptId), ...PR14_CONCEPTS].sort());
     const rc = readJson("policy/review-constraints.json").constraints as Array<{ conceptId: string }>;
     for (const [id, h] of Object.entries(before.constraints!)) expect(hash(rc.find((c) => c.conceptId === id)), `constraint ${id}`).toBe(h);
   });
@@ -55,6 +64,13 @@ describe("nothing that existed before has changed (question identities, lessons,
     const nodes = new Map([1, 2, 3, 4, 5].flatMap((g) => (readJson(`path/grade-${g}.json`).nodes as Array<{ id: string; exercises?: Array<{ templateId: string }>; contentVersion: number }>).map((n) => [n.id, n] as const)));
     for (const [id, h] of Object.entries(before.pathNodes!)) {
       const raw = nodes.get(id)!;
+      if (PR14_NODES.includes(id)) {
+        // gained only the interval-key templates: without them the node is exactly what it was
+        const stripped = { ...raw, exercises: raw.exercises!.filter((b) => !PR14_TEMPLATES.includes(b.templateId)) };
+        expect(raw.exercises!.length, id).toBeGreaterThan(stripped.exercises.length);
+        expect(hash(stripped), `node ${id}`).toBe(h);
+        continue;
+      }
       if (!TOUCHED.includes(id)) {
         expect(hash(raw), `node ${id}`).toBe(h);
         continue;
@@ -68,16 +84,17 @@ describe("nothing that existed before has changed (question identities, lessons,
   });
 
   it("changed no earlier blueprint section: the item counts and outcomes are the same, so every pass mark and exact ratio is the same; only template lists grew", () => {
-    const VERSIONS: Record<string, number> = { "a.g2": 3, "a.g2-u5": 3, "a.g3": 3, "a.g3-u5": 3, "a.g4": 2, "a.g4-u5": 2 };
+    const VERSIONS: Record<string, number> = { "a.g2": 3, "a.g2-u5": 3, "a.g3": 3, "a.g3-u5": 3, "a.g4": 2, "a.g4-u5": 2, "a.g5": 2, "a.g5-u3": 2 };
     for (const a of course.ix.assessments.values()) {
       expect(a.version, a.id).toBe(VERSIONS[a.id] ?? (before.blueprintVersions as Record<string, number>)[a.id]);
       for (const s of a.sections) {
         const key = `${a.id}/${s.id}`;
+        if (PR14_SECTIONS.includes(key) || key === "a.g5/o-g5-08b") continue; // rebalanced on purpose; pinned exactly in grade5-interval-key-course.test.ts
         const { templateIds, ...rest } = s;
         expect(hash(rest), key).toBe(before.assessments![key]);
         const was = (before.sectionTemplates as Record<string, string[]>)[key]!;
         expect(templateIds.slice(0, was.length), key).toEqual(was);
-        for (const extra of templateIds.slice(was.length)) expect(music.BOOK_TEMPLATE_IDS, key).toContain(extra);
+        for (const extra of templateIds.slice(was.length)) expect([...music.BOOK_TEMPLATE_IDS, ...PR14_TEMPLATES, "t.g5.voice-groups"], key).toContain(extra);
       }
     }
     const total = (id: string) => course.ix.assessments.get(id)!.sections.reduce((n, s) => n + s.itemCount, 0);
@@ -90,7 +107,7 @@ describe("nothing that existed before has changed (question identities, lessons,
     const was = JSON.parse(readFileSync(join(here, "fixtures/fingerprints-before-terms.json"), "utf8")) as Record<string, string>;
     expect(Object.keys(was).length).toBeGreaterThan(1400);
     for (const [k, v] of Object.entries(was)) expect(now[k], k).toBe(v);
-    expect(Object.keys(now).filter((k) => !(k in was)).every((k) => /book-|G[234]-U5-L(0[5-9]|10)\|/.test(k))).toBe(true);
+    expect(Object.keys(now).filter((k) => !(k in was)).every((k) => /book-|G[234]-U5-L(0[5-9]|10)\||interval-key|rewrite-metre|G5-U3-L07\||G5-U1-E1\|/.test(k))).toBe(true);
   }, 400_000);
 
   it("a learner who had finished everything before keeps every completion, and finds only the new lessons waiting", async () => {

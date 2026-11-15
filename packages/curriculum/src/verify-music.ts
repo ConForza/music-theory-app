@@ -12,6 +12,7 @@ import { effectiveScope, intersectScope, taughtScope, type CurriculumIndex } fro
 import {
   add,
   barCapacity,
+  classifyTimeSignature,
   chromaticNumber,
   classifyCadence,
   classifyWrittenOut,
@@ -48,7 +49,7 @@ import {
   type Pitch,
   type PitchClass,
 } from "./music/index.ts";
-import { checkBar as checkBarRule, metreStructures } from "./music/rhythm.ts";
+import { beatProfile, checkBar as checkBarRule, metreStructures } from "./music/rhythm.ts";
 import type { AnswerSpec, ExerciseItem, Measure, MusicScope, NotationEvent, NotationFragment, NotationScore, SimpleAnswerSpec } from "./schema.ts";
 
 const ROMANS = ["I", "ii", "IV", "V"] as const;
@@ -468,6 +469,21 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
             measures.forEach((m, bi) => {
               const issues = checkBarRule(voicesOf(m)[0] as never, st, { requireBeams: a.task === "regroup" });
               if (issues.length) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1}, bar ${bi + 1}, does not follow the ${a.groupPattern!.join("+")} grouping: ${issues[0]!.message}`);
+            });
+        }
+        if (a.fromTimeSignature) {
+          // Rewriting between simple and compound time: every note and rest keeps its share of its beat, and the shown bars are in the other metre.
+          const shown = music?.measures ?? [];
+          if (a.task !== "regroup") report("ANSWER_MISMATCH", where, "fromTimeSignature is only valid with the regroup task");
+          else if (!ts || !music) report("RHYTHM_TARGET", where, "A rewrite needs the shown bars and the metre to write in");
+          else if (classifyTimeSignature(a.fromTimeSignature).metre === classifyTimeSignature(ts).metre) report("ANSWER_MISMATCH", where, `${a.fromTimeSignature} and ${ts} are both ${classifyTimeSignature(ts).metre} time: a rewrite goes between simple and compound`);
+          else if (shown.length !== measures.length) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} has ${measures.length} bars; the shown music has ${shown.length}`);
+          else if (music.timeSignature && music.timeSignature !== a.fromTimeSignature) report("ANSWER_MISMATCH", where, `The shown music is in ${music.timeSignature}, not ${a.fromTimeSignature}`);
+          else
+            measures.forEach((m, bi) => {
+              const got = beatProfile(voicesOf(m)[0] as never, ts).join();
+              const was = beatProfile(voicesOf(shown[bi]!)[0] as never, a.fromTimeSignature!).join();
+              if (got !== was) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1}, bar ${bi + 1}: in ${ts} the notes do not keep their share of the beat they had in ${a.fromTimeSignature}`);
             });
         }
         if (a.task === "add-tuplet" && !measures.some((m) => voicesOf(m).some((v) => v.some((e) => e.kind === "tuplet")))) {

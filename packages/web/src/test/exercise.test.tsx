@@ -180,3 +180,31 @@ describe("R11: practice generation recovers after a failed attempt", () => {
     globalThis.fetch = real;
   });
 });
+
+describe("the answer stave honours the key of an interval question (review of PR #16, P2)", () => {
+  const input = (keyOnStave: boolean): ItemInput => ({ kind: "staff-position", clef: "treble", maxLedgerLines: 2, accidentals: true, doubleAccidentals: false, key: "A major", shown: ["D4"], ...(keyOnStave ? { keyOnStave: true } : {}) });
+  async function place(keyOnStave: boolean) {
+    const user = userEvent.setup();
+    let last: LearnerResponse | null = null;
+    render(<Harness input={input(keyOnStave)} onValue={(r) => (last = r)} />);
+    const pitch = () => (last as { pitch: string } | null)?.pitch ?? "";
+    await user.click(screen.getByRole("button", { name: "Move note up" }));
+    // walk up to a letter that A major sharpens (F, C or G)
+    for (let i = 0; i < 8 && !/^[FCG]/.test(pitch()); i++) await user.click(screen.getByRole("button", { name: "Move note up" }));
+    expect(pitch()).toMatch(/^[FCG]/);
+    return { user, pitch };
+  }
+  it("with the key on the stave an unsigned note takes the signature's sharp, and a natural sign cancels it", async () => {
+    const { user, pitch } = await place(true);
+    expect(pitch(), "no sign written: the signature supplies the sharp").toMatch(/^[FCG]#\d$/);
+    await user.click(screen.getByLabelText("natural (no sharp or flat)"));
+    expect(pitch(), "a written natural cancels it").toMatch(/^[FCG]\d$/);
+    await user.click(screen.getByLabelText("sharp"));
+    expect(pitch(), "an explicit sharp on a sharpened letter is still that sharp").toMatch(/^[FCG]#\d$/);
+  });
+  it("without the flag, a question with a given note keeps its unsigned answer stave (earlier grades are unchanged)", async () => {
+    const { pitch } = await place(false);
+    expect(pitch(), "unsigned notes are naturals there").toMatch(/^[FCG]\d$/);
+  });
+});
+

@@ -47,7 +47,7 @@ function StaveAnswer({ input, value, onChange, disabled, marks }: { input: Extra
   const uid = useId();
   const [written, setWritten] = useState<Written[]>([]);
   // The key signature drawn on the answer stave is the one unsigned notes are read in.
-  const [key, setKey] = useState<string | undefined>(input.kind === "pitch-sequence" ? input.key : input.kind === "staff-position" && !input.shown ? input.key : undefined);
+  const [key, setKey] = useState<string | undefined>(input.kind === "pitch-sequence" ? input.key : input.kind === "staff-position" && (!input.shown || input.keyOnStave) ? input.key : undefined);
   void value;
   // A key signature with no sharps or flats (C major, A minor) is a real answer: it needs its own control, because an untouched stave is "no answer yet".
   const [noAccidentals, setNoAccidentals] = useState(false);
@@ -97,7 +97,7 @@ function StaveAnswer({ input, value, onChange, disabled, marks }: { input: Extra
         given={input.shown}
         accidentals={input.accidentals}
         doubleAccidentals={input.doubleAccidentals}
-        label={input.shown ? `Write the upper note on a ${input.clef} stave` : `Note position on a ${input.clef} stave`}
+        label={input.shown ? `Write the new note on a ${input.clef} stave` : `Note position on a ${input.clef} stave`}
         announceNames={Boolean(input.shown)}
       />
     );

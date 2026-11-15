@@ -926,6 +926,12 @@ const RhythmAnswer = z
     acceptAnyRuleCompliant: z.boolean(),
     /** Brief 09, irregular time: the beat grouping the question names (for example [3, 2] in 5/4). The bar is then judged against that grouping alone, not against every standard one. */
     groupPattern: z.array(z.number().int().min(2).max(3)).min(2).optional(),
+    /**
+     * Rewriting between simple and compound time (optional enrichment): the notation shown is in this metre and `timeSignature` is the metre to write in.
+     * Every note and rest must keep its share of its beat (a crotchet beat in 2/4 becomes a dotted-crotchet beat in 6/8, so each value gains a dot).
+     * Only valid with task "regroup".
+     */
+    fromTimeSignature: TimeSignatureName.optional(),
   })
   .strict();
 

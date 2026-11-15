@@ -22,6 +22,8 @@ export interface Draft {
   score?: NotationScore;
   answer: AnswerSpec;
   hints?: string[];
+  /** When true, `hints` are ALL the hints of the item: the template-level hints are not shown first (used where a template-level hint would give the answer away). */
+  ownHints?: boolean;
   correct?: string;
 }
 export type Gen = (ctx: GenCtx) => Draft | null;

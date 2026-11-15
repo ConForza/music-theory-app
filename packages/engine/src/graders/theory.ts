@@ -11,6 +11,8 @@ const { parsePitch, parseKey, formatPitch, formatKey, keyFifths, samePitch, enha
 type Pitch = music.Pitch;
 const pretty = (p: string) => p.replace(/#/g, "♯").replace(/b(?=\d|$| )/g, "♭").replace(/x/g, "𝄪");
 const fmt = (p: Pitch) => pretty(formatPitch(p));
+/** "a" or "an" before an ordinal or interval name ("an octave", "an 8th", "an 11th", "a 3rd"). */
+const article = (w: string) => (/^(8|11|18|[aeiou])/i.test(w) ? "an" : "a");
 
 // ---- key signatures -----------------------------------------------------
 
@@ -126,6 +128,17 @@ export const gradeInterval: Grader<AnswerOf<"interval">> = (c, a, r) => {
     const qualityOk = !qualityMatters || r.quality === truth.quality;
     if (numberOk && qualityOk) return right();
     const said = r.quality ? describeInterval({ number, quality: r.quality }) : `${music.ordinal(number)}`;
+    // Intervals under a key signature (t.g5.interval-key-*): name the specific slip of reading the letters and ignoring the signature.
+    if (a.key && c.template.id.startsWith("t.g5.interval-key") && r.quality) {
+      const key = parseKey(a.key);
+      const bare = (p: music.Pitch) => (music.signatureAlter(key, p.step) === p.alter ? { ...p, alter: 0 } : p);
+      try {
+        const ignored = intervalBetween(bare(lower), bare(parsePitch(a.upper!)));
+        if (ignored.number === number && ignored.quality === r.quality) return wrong("ignored-key-signature", `${said} is what the notes would be with no key signature. In ${a.key.replace(/b/g, "♭").replace(/#/g, "♯")} the signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first, then the interval.`);
+      } catch {
+        /* the bare reading is not a valid interval: fall through to the ordinary feedback */
+      }
+    }
     if (!numberOk) {
       const semis = chromaticNumber(parsePitch(a.upper!)) - chromaticNumber(lower);
       if (qualityMatters && r.quality) {
@@ -150,6 +163,11 @@ export const gradeInterval: Grader<AnswerOf<"interval">> = (c, a, r) => {
   const targets = interval ? [transpose(lower, interval, a.direction!)] : diatonicTargets(c, a, numberOnly!);
   if (targets.some((t) => samePitch(t, got))) return right();
   const t0 = targets[0]!;
+  // Intervals under a key signature: the right letter, but a sign the signature does not give was left out (the note is read with the signature's accidental instead).
+  if (a.key && c.template.id.startsWith("t.g5.interval-key") && got.step === t0.step && got.alter !== t0.alter) {
+    const sig = music.signatureAlter(parseKey(a.key), t0.step);
+    if (t0.alter !== sig && got.alter === sig) return wrong("accidental-not-applied", `${fmt(got)} is the right letter, but this note needs ${t0.alter === 0 ? "a natural sign" : t0.alter > 0 ? "a sharp sign" : "a flat sign"} because the key signature gives ${t0.step} ${sig === 0 ? "no sign" : sig > 0 ? "a sharp" : "a flat"}. Write the sign in front of the note.`);
+  }
   const gotNumber = Math.abs(diatonicNumber(got) - diatonicNumber(lower)) + 1;
   const wantNumber = Math.abs(diatonicNumber(t0) - diatonicNumber(lower)) + 1;
   if (targets.some((t) => enharmonic(t, got))) return wrong("enharmonic-spelling", `${fmt(got)} sounds right but is spelt with the wrong letter: the interval number fixes the letter name.`);
@@ -164,8 +182,8 @@ export const gradeInterval: Grader<AnswerOf<"interval">> = (c, a, r) => {
     return wrong(swap ? "augmented-diminished-swap" : "quality-from-wrong-key", `${fmt(got)} makes ${q ? `a ${q}` : "the wrong quality"}. Keep the letter and change the accidental.`);
   }
   if (Math.abs(gotNumber - wantNumber) === 7) return wrong("compound-arithmetic", `${fmt(got)} is an octave out.`);
-  if (Math.abs(gotNumber - wantNumber) === 1) return wrong("counted-one-end-only", `${fmt(got)} makes a ${music.ordinal(gotNumber)}. Count the lower note as 1.`);
-  return wrong(null, `${fmt(got)} makes a ${music.ordinal(gotNumber)}.`);
+  if (Math.abs(gotNumber - wantNumber) === 1) return wrong("counted-one-end-only", `${fmt(got)} makes ${article(music.ordinal(gotNumber))} ${music.ordinal(gotNumber)}. Count the note you were given as 1.`);
+  return wrong(null, `${fmt(got)} makes ${article(music.ordinal(gotNumber))} ${music.ordinal(gotNumber)}.`);
 };
 
 // ---- chords and cadences -------------------------------------------------

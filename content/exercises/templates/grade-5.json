@@ -4456,6 +4456,296 @@
         ],
         "reviewedBy": null
       }
+    },
+    {
+      "id": "t.g5.interval-key-identify",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 5,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ],
+      "conceptIds": [
+        "c.intervals.in-key-signature"
+      ],
+      "promptPattern": "Name the interval between two notes written under a key signature (the signature applies to both notes unless a sign overrides it).",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass",
+          "alto"
+        ],
+        "keys": [
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "B major",
+          "Db major",
+          "F# major",
+          "Gb major",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "minorForms": [
+          "harmonic",
+          "melodic"
+        ],
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "any",
+        "chromaticIntervals": true,
+        "doubleAccidentals": false,
+        "accidentals": true,
+        "maxLedgerLines": 2,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One name is correct: the sounding spelling of the two notes fixes number and quality."
+      },
+      "ambiguityChecks": [
+        "The key signature is shown on the stave and named in the prompt.",
+        "Every note is spelt by the signature or by a written accidental; no double accidentals; simple intervals within an octave.",
+        "The answer is derived from the sounding spelling of the notes, never from the bare letters."
+      ],
+      "hints": [
+        "Work out what each note really is (signature, then any sign in front of it), then count letters for the number and compare with the major scale of the lower note for the quality."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "counted-one-end-only",
+          "description": "Letter names counted from one end only.",
+          "feedback": "Count both the lower and the upper note."
+        },
+        {
+          "id": "quality-from-wrong-key",
+          "description": "Quality read against the wrong scale.",
+          "feedback": "Compare the upper note with the major scale of the LOWER note."
+        },
+        {
+          "id": "augmented-diminished-swap",
+          "description": "Augmented and diminished confused.",
+          "feedback": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        {
+          "id": "enharmonic-spelling",
+          "description": "An interval named from its sound, not its spelling.",
+          "feedback": "The letter names decide the number, even when two spellings sound alike."
+        },
+        {
+          "id": "ignored-key-signature",
+          "description": "The notes were read as bare letters, ignoring the key signature.",
+          "feedback": "The key signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first."
+        }
+      ],
+      "difficulty": 5,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.interval-key-build",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 5,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ],
+      "conceptIds": [
+        "c.intervals.in-key-signature"
+      ],
+      "promptPattern": "Write the note that makes a named interval above or below a note, on a stave with a key signature.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "keys": [
+          "G major",
+          "D major",
+          "F major",
+          "A major",
+          "Bb major",
+          "Eb major",
+          "E major",
+          "Ab major",
+          "B major",
+          "Db major",
+          "F# major",
+          "Gb major",
+          "E minor",
+          "D minor",
+          "B minor",
+          "F# minor",
+          "C# minor",
+          "G minor",
+          "C minor",
+          "F minor",
+          "G# minor",
+          "Bb minor",
+          "D# minor",
+          "Eb minor"
+        ],
+        "minorForms": [
+          "harmonic",
+          "melodic"
+        ],
+        "intervalQuality": "number-and-quality",
+        "intervalLowerNote": "any",
+        "chromaticIntervals": true,
+        "doubleAccidentals": false,
+        "accidentals": true,
+        "maxLedgerLines": 2,
+        "keySignatures": true
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one spelling is correct; writing a sign the signature already gives is not wrong."
+      },
+      "ambiguityChecks": [
+        "The key signature is shown on the stave and named in the prompt.",
+        "Every note is spelt by the signature or by a written accidental; no double accidentals; simple intervals within an octave.",
+        "The answer is derived from the sounding spelling of the notes, never from the bare letters."
+      ],
+      "hints": [
+        "Letter name first, then compare the note you need with what the key signature gives that letter; add a sign only if they differ."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "counted-one-end-only",
+          "description": "Letter names counted from one end only.",
+          "feedback": "Count both the lower and the upper note."
+        },
+        {
+          "id": "quality-from-wrong-key",
+          "description": "Quality read against the wrong scale.",
+          "feedback": "Compare the upper note with the major scale of the LOWER note."
+        },
+        {
+          "id": "augmented-diminished-swap",
+          "description": "Augmented and diminished confused.",
+          "feedback": "Larger by a semitone: diminished, minor, major, augmented."
+        },
+        {
+          "id": "enharmonic-spelling",
+          "description": "An interval named from its sound, not its spelling.",
+          "feedback": "The letter names decide the number, even when two spellings sound alike."
+        },
+        {
+          "id": "accidental-not-applied",
+          "description": "A sign the key signature does not give was left out.",
+          "feedback": "The note needs a sharp, flat or natural sign in front of it: check what the key signature gives that letter."
+        }
+      ],
+      "difficulty": 5,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g5.rewrite-metre",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 5,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g4.01"
+      ],
+      "conceptIds": [
+        "c.metre.rewrite-simple-compound"
+      ],
+      "promptPattern": "Rewrite a bar between simple and compound time (2/4 and 6/8, 3/4 and 9/8, 4/4 and 12/8): every note and rest keeps its share of its beat.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "9/8",
+          "12/8"
+        ],
+        "noteValues": [
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1,
+        "rests": true,
+        "ties": false
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Any spelling of the same beat shares that follows the beaming rules of the new time signature is accepted; compound-to-simple only for fully dotted bars (no triplets)."
+      },
+      "ambiguityChecks": [
+        "Both bars are checked with the rhythm rules (beams required) and have the same profile measured in beats.",
+        "Compound to simple is only asked for fully dotted bars."
+      ],
+      "hints": [
+        "Compare the beat in each time signature, and write each note as the same share of its beat."
+      ],
+      "extraMistakeCategories": [
+        {
+          "id": "values-copied",
+          "description": "The values were copied unchanged between simple and compound time.",
+          "feedback": "A beat in compound time is a dotted note, so each value gains a dot (and loses it going back)."
+        },
+        {
+          "id": "bar-overfull",
+          "description": "The rewritten bar holds too much.",
+          "feedback": "Count the beats of the new time signature."
+        },
+        {
+          "id": "bar-underfull",
+          "description": "The rewritten bar holds too little.",
+          "feedback": "Count the beats of the new time signature."
+        }
+      ],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher decides whether this belongs in Grade 5 at all (OPEN_QUESTIONS Q39) and reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
     }
   ]
 }

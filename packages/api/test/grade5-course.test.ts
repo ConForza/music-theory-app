@@ -35,17 +35,17 @@ async function learner() {
 }
 
 describe("the whole of Grade 5 is playable", () => {
-  it("has a real learner experience for all 44 nodes (41 required, 3 optional)", () => {
-    expect(G5).toHaveLength(44);
+  it("has a real learner experience for all 46 nodes (42 required, 4 optional)", () => {
+    expect(G5).toHaveLength(46);
     expect(G5.filter((n) => !course.isPlayable(n.id)).map((n) => n.id)).toEqual([]);
     expect(G5.filter((n) => n.contentStatus === "planned")).toEqual([]);
     const count = (t: string) => G5.filter((n) => n.type === t).length;
-    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("grade_assessment"), count("enrichment")]).toEqual([25, 5, 5, 5, 1, 3]);
+    expect([count("lesson"), count("practice"), count("review"), count("unit_challenge"), count("grade_assessment"), count("enrichment")]).toEqual([26, 5, 5, 5, 1, 4]);
     expect(G5.filter((n) => n.type === "lesson").every((n) => course.lesson(n.id))).toBe(true);
     expect(G5.filter((n) => SESSION.includes(n.type)).every((n) => course.sessionKind(n.id))).toBe(true);
-    // exactly the three enrichment nodes are optional; the other 41 are required
-    expect(G5.filter((n) => n.optional).map((n) => n.id).sort()).toEqual(["G5-U4-E1", "G5-U4-E2", "G5-U5-E1"]);
-    expect(G5.filter((n) => !n.optional)).toHaveLength(41);
+    // exactly the four enrichment nodes are optional; the other 42 are required
+    expect(G5.filter((n) => n.optional).map((n) => n.id).sort()).toEqual(["G5-U1-E1", "G5-U4-E1", "G5-U4-E2", "G5-U5-E1"]);
+    expect(G5.filter((n) => !n.optional)).toHaveLength(42);
   });
 
   it("starts after the last Grade 3 review (the established prerequisite policy), and a new learner cannot skip into it", async () => {
@@ -69,8 +69,8 @@ describe("the whole of Grade 5 is playable", () => {
     for (const n of G5.filter((x) => x.type === "unit_challenge")) await ensureDone(c, app, userId, n.id);
     const prog = (await c.get("/api/progress")).body;
     const g5 = prog.grades.find((g: { grade: number }) => g.grade === 5);
-    expect(g5.requiredNodes).toBe(41);
-    expect(g5.completedNodes).toBe(41);
+    expect(g5.requiredNodes).toBe(42);
+    expect(g5.completedNodes).toBe(42);
     const results = (await c.get("/api/results")).body.results as Array<{ nodeId: string; passed: boolean }>;
     expect(results.filter((r) => r.nodeId === "G5-A" && r.passed)).toHaveLength(1);
     expect(results.filter((r) => /^G5-U\d-C$/.test(r.nodeId) && r.passed)).toHaveLength(5);
@@ -452,7 +452,7 @@ describe("compatibility: Grades 3 and 4 keep their own pass rules next to Grade 
 });
 
 describe("the three enrichment nodes are genuinely optional", () => {
-  const E = ["G5-U4-E1", "G5-U4-E2", "G5-U5-E1"];
+  const E = ["G5-U1-E1", "G5-U4-E1", "G5-U4-E2", "G5-U5-E1"];
   it("are playable with authored lessons, marked optional, and bound to their own optional templates only", () => {
     for (const id of E) {
       const n = course.ix.nodeById.get(id)!;
@@ -460,7 +460,7 @@ describe("the three enrichment nodes are genuinely optional", () => {
       expect(n.type, id).toBe("enrichment");
       expect(course.isPlayable(id), id).toBe(true);
       expect(course.authoredItems(id).length, id).toBeGreaterThanOrEqual(3);
-      expect(n.exercises.every((b) => /six-four|approach|satb/.test(b.templateId)), id).toBe(true);
+      expect(n.exercises.every((b) => /six-four|approach|satb|rewrite-metre/.test(b.templateId)), id).toBe(true);
     }
     expect(course.authoredItems("G5-U5-E1").some((i) => i.templateId === "t.g5.satb-voices")).toBe(true);
   });
@@ -480,9 +480,9 @@ describe("the three enrichment nodes are genuinely optional", () => {
     expect(prog.nodes["G5-A"].state).toBe("completed");
     for (const id of E) expect(prog.nodes[id].state).not.toBe("completed");
     for (const id of E) await ensureDone(c, app, userId, id);
-    const rows = db.prepare("SELECT DISTINCT concept_id FROM mastery_evidence WHERE user_id = ? AND node_id IN ('G5-U4-E1','G5-U4-E2','G5-U5-E1')").all(userId) as Array<{ concept_id: string }>;
+    const rows = db.prepare("SELECT DISTINCT concept_id FROM mastery_evidence WHERE user_id = ? AND node_id IN ('G5-U1-E1','G5-U4-E1','G5-U4-E2','G5-U5-E1')").all(userId) as Array<{ concept_id: string }>;
     // G5-U4-E2 is extra practice with the approach chord, which belongs to the compulsory concept of choosing chords at cadence points
-    for (const r of rows) expect(["c.chords.cadential-six-four", "c.cadences.chord-choice", "c.voices.satb-scores"], r.concept_id).toContain(r.concept_id);
+    for (const r of rows) expect(["c.chords.cadential-six-four", "c.cadences.chord-choice", "c.metre.rewrite-simple-compound", "c.voices.satb-scores"], r.concept_id).toContain(r.concept_id);
   }, 1_800_000);
 });
 

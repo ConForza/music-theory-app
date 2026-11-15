@@ -17,6 +17,7 @@ import {
   compare,
   dotted,
   equals,
+  formatFraction,
   frac,
   isZero,
   lt,
@@ -543,4 +544,26 @@ export function danglingTies(bars: REvent[][]): number[] {
     if (!next || next.kind === "rest") out.push(i);
   });
   return out;
+}
+
+
+/**
+ * What is heard, measured in BEATS of the metre: attacks (tied notes merged) and silences (adjacent rests merged) with their onset and length as
+ * fractions of a beat. A bar of 2/4 and its rewriting in 6/8 give the same profile when every note keeps its share of its beat.
+ */
+export function beatProfile(events: REvent[], tsText: string): string[] {
+  const st = metreStructure(tsText);
+  const beat = st.beatUnit;
+  const per = (x: Fraction) => formatFraction(mul(x, frac(beat.d, beat.n)));
+  const tl = flatten(events, barCapacity(parseTimeSignature(tsText)));
+  const out: Array<{ kind: "n" | "r"; onset: Fraction; len: Fraction }> = [];
+  let tieOpen = false;
+  for (const t of tl) {
+    const kind = t.e.kind === "rest" ? "r" : "n";
+    const last = out[out.length - 1];
+    if (last && ((kind === "n" && tieOpen) || (kind === "r" && last.kind === "r"))) last.len = add(last.len, t.dur);
+    else out.push({ kind, onset: t.onset, len: t.dur });
+    tieOpen = kind === "n" && Boolean((t.e as { tieToNext?: boolean }).tieToNext);
+  }
+  return out.map((x) => `${x.kind}@${per(x.onset)}+${per(x.len)}`);
 }
