@@ -6,6 +6,7 @@ Brief 02 builds the mechanisms; the legal decisions below are for the owner befo
 * Data minimisation: nickname, email (sign-in only), password hash, lesson answers. Guests store no personal data.
 * No public profiles, followers, leaderboards, adverts or third-party analytics. Reminder notifications are off and not offered yet.
 * Export (`GET /api/me/export`) and deletion (`DELETE /api/me`, cascading) from Settings.
+* Brief 10 adds `prep_attempts`, `prep_responses`, `prep_hint_uses`, `placement_starts`, `revision_sessions` and `revision_attempts`: the practice-examination and placement questions (as seeds), the learner's raw answers, hints, results, where they chose to start, and revision sessions. All are keyed to the learner with `ON DELETE CASCADE`, included in the export, never shown to anyone else, and never used for rankings or leaderboards (there are none). The optional extra-time setting is stored in the learner's own settings and is never part of a score or shown with a result.
 * Session cookie is first-party, `HttpOnly`, `SameSite=Lax`.
 
 **Owner decisions before launch**

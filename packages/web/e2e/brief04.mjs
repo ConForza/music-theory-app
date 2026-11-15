@@ -615,7 +615,7 @@ async function preferencesCombine() {
   await page.waitForTimeout(1300);
   await page.getByRole("switch", { name: /Play sounds/ }).uncheck();
   await page.waitForTimeout(1300);
-  const want = { theme: "dark", motion: "reduce", sound: false };
+  const want = { theme: "dark", motion: "reduce", sound: false, examExtraTime: 0 };
   assert.deepEqual((await api(page, "GET", "/api/me")).body.profile.settings, want);
   await page.reload();
   await page.getByRole("heading", { name: "Look and feel" }).waitFor();

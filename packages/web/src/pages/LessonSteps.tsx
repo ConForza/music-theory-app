@@ -155,7 +155,8 @@ export function Question({
   eyebrow,
   continueLabel = "Continue",
   wrongAction,
-  final = false,
+  final: finalProp = false,
+  blind = false,
 }: {
   nodeId: string;
   item: LearnerItem;
@@ -170,7 +171,10 @@ export function Question({
   wrongAction?: (result: AttemptResult & { remedialItemId?: string | null }) => { label: string; onClick: () => void } | null;
   /** Challenge and assessment: the first answer is final, so a wrong answer moves on (no retry, no hints). */
   final?: boolean;
+  /** Mock examination and placement: the answer is saved but its verdict is NOT shown until the attempt is finished. Implies `final`. */
+  blind?: boolean;
 }) {
+  const final = finalProp || blind;
   const send: QuestionApi = source ?? { attempt: (id, itemId, r) => api.attempt(nodeId, id, itemId, r), hint: (itemId, level) => api.hint(nodeId, itemId, level) };
   const [response, setResponse] = useState<AnswerResponse | null>(null);
   const [result, setResult] = useState<AttemptResult | null>(null);
@@ -196,7 +200,8 @@ export function Question({
       const r = await send.attempt(pending.current.id, item.id, response);
       pending.current = null;
       setResult(r);
-      cue(r.correct ? "correct" : "wrong");
+      // A blind (mock or placement) answer gives no verdict, so it must not sound like one either.
+      if (!blind) cue(r.correct ? "correct" : "wrong");
     } catch (e) {
       setError(e instanceof ApiFailure ? (e.isNetwork ? "Your answer didn't send. Check your connection and press Check again." : e.message) : "Something went wrong.");
     } finally {
@@ -256,10 +261,11 @@ export function Question({
         )}
         {error && <p className="form-error" role="alert">{error}</p>}
       </section>
-      <ActionBar tone={result ? (result.correct ? "good" : "try") : undefined}>
+      <ActionBar tone={result && !blind ? (result.correct ? "good" : "try") : undefined}>
         {/* One live region that is always mounted, so the verdict is spoken when it fills in (focus also moves to the next button). */}
         <div className="feedback" role="status" aria-live="polite">
-          {result && (
+          {result && blind && <p className="feedback-title"><Icon name="check" size={24} strokeWidth={3} /> Answer saved</p>}
+          {result && !blind && (
             <>
               <p className="feedback-title"><Icon name={result.correct ? "check" : "info"} size={24} strokeWidth={3} /> {result.correct ? "Correct!" : final ? "Not this time" : "Not quite"}</p>
               <p>{result.message}</p>

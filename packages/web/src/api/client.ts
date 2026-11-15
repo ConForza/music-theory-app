@@ -1,4 +1,4 @@
-import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService, NodeRunService } from "@mtp/api";
+import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService, NodeRunService, PrepService, RevisionService, ExamSummary, PlacementSummary } from "@mtp/api";
 import type { LearnerResponse } from "@mtp/engine";
 
 export type { CourseView, LearnerLesson, RunState, CompletionSummary };
@@ -12,6 +12,8 @@ export interface Settings {
   theme: "system" | "light" | "dark";
   motion: "system" | "reduce" | "full";
   sound: boolean;
+  /** Extra time (percent) added to a timed mock examination: 0, 25, 50 or 100. An accommodation, never part of a score. */
+  examExtraTime: number;
 }
 export interface User {
   id: string;
@@ -63,6 +65,22 @@ export type NodeSession = ReturnType<NodeRunService["view"]>;
 export type NodeResult = ReturnType<NodeRunService["complete"]> & { rewards?: LessonRewards };
 export type AssessmentResults = ReturnType<NodeRunService["results"]>;
 export type ReviewSessionItem = ReviewSession["items"][number];
+/** Brief 10: placement, practice examinations and revision. */
+export type PrepOverview = ReturnType<PrepService["overview"]>;
+export type PrepAttempt = ReturnType<PrepService["view"]>;
+export type PrepResult = ReturnType<PrepService["result"]>;
+export type PrepHistory = ReturnType<PrepService["history"]>;
+export type PrepReadiness = ReturnType<PrepService["readinessFor"]>;
+export type PrepProgress = ReturnType<PrepService["progressFor"]>;
+export type PrepResults = { results: PrepHistory; grades: Array<{ grade: number; readiness: PrepReadiness; progress: PrepProgress }> };
+export type { ExamSummary, PlacementSummary };
+export type PrepAnswer = ({ recorded: true; replayed: boolean; attemptNumber: number; itemsPlanned: number } & Partial<AttemptResult>) | (AttemptResult & { recorded: true });
+export type RevisionOverview = ReturnType<RevisionService["overview"]>;
+export type RevisionExplore = ReturnType<RevisionService["explore"]>;
+export type RevisionStart = ReturnType<RevisionService["start"]>;
+export type RevisionSession = ReturnType<RevisionService["view"]>;
+export type RevisionSummary = ReturnType<RevisionService["complete"]>;
+export type RevisionInsight = RevisionOverview["weak"][number];
 export type ReviewAttemptResult = AttemptResult & { kind: "review" | "remedial"; counted: boolean; remedialItemId: string | null; nextDueDate: string | null };
 export type ReviewSummary = ReturnType<ReviewService["complete"]>;
 export interface AchievementEntry {
@@ -280,6 +298,47 @@ export const api = {
     return retrying(sc, () => request<NodeResult>("POST", `/api/nodes/${encodeURIComponent(id)}/complete`, {}, { scope: sc }));
   },
   results: () => request<{ results: AssessmentResults }>("GET", "/api/results", undefined, { scope }),
+  // Brief 10: placement and practice examinations. Same account binding and idempotent retries as every other attempt.
+  prep: () => request<PrepOverview>("GET", "/api/prep", undefined, { scope }),
+  prepResults: () => request<PrepResults>("GET", "/api/prep/results", undefined, { scope }),
+  startExam: (grade: number, b: { mode: "practice" | "mock"; timed?: boolean; extraTimePercent?: number }) => {
+    const sc = scope;
+    return retrying(sc, () => request<PrepAttempt>("POST", `/api/exams/${grade}/start`, b, { scope: sc }));
+  },
+  startPlacement: () => {
+    const sc = scope;
+    return retrying(sc, () => request<PrepAttempt>("POST", "/api/placement/start", {}, { scope: sc }));
+  },
+  prepAttempt: (id: string) => request<PrepAttempt>("GET", `/api/prep/attempts/${encodeURIComponent(id)}`, undefined, { scope }),
+  prepResult: (id: string) => request<PrepResult>("GET", `/api/prep/attempts/${encodeURIComponent(id)}/result`, undefined, { scope }),
+  prepHint: (id: string, itemId: string, level: number) => request<{ hint: string; level: number }>("POST", `/api/prep/attempts/${encodeURIComponent(id)}/hint`, { itemId, level }, { scope }),
+  prepAnswer: (id: string, attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<PrepAnswer>("POST", `/api/prep/attempts/${encodeURIComponent(id)}/answers`, { attemptId, itemId, response }, { scope: sc }));
+  },
+  prepComplete: (id: string, allowUnanswered = false) => {
+    const sc = scope;
+    return retrying(sc, () => request<(ExamSummary | PlacementSummary) & { alreadyComplete: boolean }>("POST", `/api/prep/attempts/${encodeURIComponent(id)}/complete`, allowUnanswered ? { allowUnanswered: true } : {}, { scope: sc }));
+  },
+  prepAbandon: (id: string) => request<{ ok: true }>("POST", `/api/prep/attempts/${encodeURIComponent(id)}/abandon`, {}, { scope }),
+  prepAccept: (id: string, startGrade: number) => request<{ startGrade: number; recommendedGrade: number }>("POST", `/api/prep/attempts/${encodeURIComponent(id)}/accept`, { startGrade }, { scope }),
+  // Brief 10: personalised revision.
+  revision: () => request<RevisionOverview>("GET", "/api/revision", undefined, { scope }),
+  revisionExplore: () => request<RevisionExplore>("GET", "/api/revision/explore", undefined, { scope }),
+  startRevision: (b: { mode: "quick" | "weak" | "explore" | "mixed"; minutes?: number; conceptId?: string; grade?: number; unitId?: string; familyId?: string }) => {
+    const sc = scope;
+    return retrying(sc, () => request<RevisionStart>("POST", "/api/revision/sessions", b, { scope: sc }));
+  },
+  revisionSession: (id: string) => request<RevisionSession>("GET", `/api/revision/sessions/${encodeURIComponent(id)}`, undefined, { scope }),
+  revisionAttempt: (sessionId: string, attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<AttemptResult>("POST", `/api/revision/sessions/${encodeURIComponent(sessionId)}/attempts`, { attemptId, itemId, response }, { scope: sc }));
+  },
+  completeRevision: (id: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<RevisionSummary>("POST", `/api/revision/sessions/${encodeURIComponent(id)}/complete`, {}, { scope: sc }));
+  },
+  abandonRevision: (id: string) => request<{ ok: true }>("POST", `/api/revision/sessions/${encodeURIComponent(id)}/abandon`, {}, { scope }),
   complete: (id: string) => {
     const sc = scope;
     return retrying(sc, () => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `${L(id)}/complete`, {}, { scope: sc }));

@@ -10,6 +10,10 @@ import { Practice, PracticeMore, PracticeSetPlayer } from "./pages/Practice";
 import { Profile } from "./pages/Profile";
 import { ReviewHub, ReviewPlayer } from "./pages/Review";
 import { Progress } from "./pages/Progress";
+import { PrepPlayer } from "./pages/PrepPlayer";
+import { ExamSetup, PlacementIntro, ResultsPage } from "./pages/PrepPages";
+import { PrepResultPage } from "./pages/PrepResult";
+import { ExplorePage, RevisionPlayer } from "./pages/Revise";
 import { Settings } from "./pages/Settings";
 import { SignIn } from "./pages/SignIn";
 import { Unit } from "./pages/Unit";
@@ -46,12 +50,20 @@ export function App() {
       <Route element={<RequireAuth />}>
         <Route path="/lesson/:nodeId" element={<NodePlayer />} />
         <Route path="/review/session/:sessionId" element={<ReviewPlayer />} />
+        <Route path="/revision/session/:sessionId" element={<RevisionPlayer />} />
+        <Route path="/exam/run/:attemptId" element={<PrepPlayer />} />
+        <Route path="/placement/run/:attemptId" element={<PrepPlayer />} />
         <Route path="/practice/more/:templateId" element={<PracticeMore />} />
         <Route path="/practice/:setId" element={<PracticeSetPlayer />} />
         <Route element={<Shell />}>
           <Route path="/learn" element={<Learn />} />
           <Route path="/grades" element={<Grades />} />
           <Route path="/review" element={<ReviewHub />} />
+          <Route path="/review/explore" element={<ExplorePage />} />
+          <Route path="/placement" element={<PlacementIntro />} />
+          <Route path="/practice/exam/:grade" element={<ExamSetup />} />
+          <Route path="/results/:attemptId" element={<PrepResultPage />} />
+          <Route path="/progress/results" element={<ResultsPage />} />
           <Route path="/practice" element={<Practice />} />
           <Route path="/unit/:unitId" element={<Unit />} />
           <Route path="/progress" element={<Progress />} />

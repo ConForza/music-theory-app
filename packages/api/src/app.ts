@@ -9,6 +9,9 @@ import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
 import { backfillPracticeExposure } from "./backfill.ts";
 import { NodeRunService } from "./node-run.ts";
+import { PrepService } from "./prep.ts";
+import { RevisionService } from "./revision.ts";
+import { DEFAULT_PREP, gatesFromEnv, type PrepConfig, type ReleaseGates } from "./prep-config.ts";
 import { Engagement } from "./engagement.ts";
 import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
 import { LearnerResponse } from "@mtp/engine";
@@ -18,6 +21,8 @@ export const Settings = z
     theme: z.enum(["system", "light", "dark"]).default("system"),
     motion: z.enum(["system", "reduce", "full"]).default("system"),
     sound: z.boolean().default(true),
+    /** Brief 10 accommodation: extra time (percent) added to a timed mock examination. Never changes a score. */
+    examExtraTime: z.number().int().refine((v) => [0, 25, 50, 100].includes(v), "Choose 0, 25, 50 or 100.").default(0),
   })
   .strict();
 export type Settings = z.infer<typeof Settings>;
@@ -30,6 +35,7 @@ const SettingsPatch = z
     theme: z.enum(["system", "light", "dark"]).optional(),
     motion: z.enum(["system", "reduce", "full"]).optional(),
     sound: z.boolean().optional(),
+    examExtraTime: z.number().int().refine((v) => [0, 25, 50, 100].includes(v), "Choose 0, 25, 50 or 100.").optional(),
   })
   .strict();
 
@@ -49,6 +55,12 @@ export interface AppOptions {
   trustedProxyHops?: number;
   /** The server's clock (tests and browser journeys inject one). Never taken from a request. */
   clock?: Clock;
+  /** New practice papers or placement checks one learner may start per 10 minutes (default 4). Planning one costs the server's single thread about 0.4 to 3 s, so it is rationed; resuming an open one is free. */
+  prepStartsPer10Min?: number;
+  /** Brief 10 product defaults (tests override them; production uses DEFAULT_PREP). */
+  prep?: PrepConfig;
+  /** What learners may be shown. Omitted: read from the environment (`MTP_SHOW_READINESS`), which is OFF unless set to `teacher-approved`. */
+  releaseGates?: ReleaseGates;
   /** Expose POST /api/test/clock so browser journeys can move time forward. For tests only; never enable in production. */
   testClock?: boolean;
 }
@@ -120,6 +132,16 @@ export function createApp(opts: AppOptions) {
   const policy = { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true };
   const nodes = new NodeRunService(db, course, policy, clock, engagement);
   const practice = new PracticeService(db, course, clock);
+  const planLimiter = new RateLimiter(opts.prepStartsPer10Min ?? 4, 10 * 60_000);
+  const prep = new PrepService(db, course, clock, nodes, opts.prep ?? DEFAULT_PREP, (userId) => {
+    try {
+      planLimiter.check(`plan:${userId}`);
+    } catch {
+      throw new ApiError(429, "rate_limited", "You've started several papers in a short time. Finish or resume one, or wait a few minutes before starting another. Your open paper is still saved.");
+    }
+  }, opts.releaseGates ?? gatesFromEnv());
+  const planIpLimiter = new RateLimiter(60, 10 * 60_000);
+  const revision = new RevisionService(db, course, clock, engagement, prep, opts.prep ?? DEFAULT_PREP);
   // One-time recovery for historical practice without exposure identities; idempotent on startup.
   backfillPracticeExposure(db, practice, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
@@ -256,6 +278,13 @@ export function createApp(opts: AppOptions) {
       reviewSessions: all("SELECT * FROM review_sessions WHERE user_id = ? ORDER BY started_at"),
       reviewAttempts: all("SELECT * FROM review_attempts WHERE user_id = ? ORDER BY created_at"),
       questionExposure: all("SELECT * FROM question_exposure WHERE user_id = ? ORDER BY occurred_at"),
+      // Brief 10: placement checks, practice examinations (questions, raw responses, hints, results) and revision sessions.
+      prepAttempts: all("SELECT * FROM prep_attempts WHERE user_id = ? ORDER BY started_at"),
+      prepResponses: all("SELECT * FROM prep_responses WHERE user_id = ? ORDER BY created_at"),
+      prepHintUses: all("SELECT * FROM prep_hint_uses WHERE user_id = ? ORDER BY created_at"),
+      placementStarts: all("SELECT * FROM placement_starts WHERE user_id = ? ORDER BY accepted_at"),
+      revisionSessions: all("SELECT * FROM revision_sessions WHERE user_id = ? ORDER BY started_at"),
+      revisionAttempts: all("SELECT * FROM revision_attempts WHERE user_id = ? ORDER BY created_at"),
     };
   });
 
@@ -340,6 +369,58 @@ export function createApp(opts: AppOptions) {
   });
   route("POST", "/api/review/sessions/:id/complete", true, (ctx) => engagement.review.complete(ctx.user!.id, ctx.params[0]!));
 
+  // ---- placement and practice examinations (Brief 10) ----------------------------------------------------------------
+  const ExamStart = z.object({ mode: z.enum(["practice", "mock"]), timed: z.boolean().optional(), extraTimePercent: z.number().int().min(0).max(100).optional(), seed: z.number().int().min(0).max(2 ** 31 - 1).optional() }).strict();
+  route("GET", "/api/prep", true, (ctx) => prep.overview(ctx.user!.id));
+  route("POST", "/api/exams/:grade/start", true, async (ctx) => {
+    planIpLimiter.check(`planip:${ctx.client}`);
+    const b = parse(ExamStart, await ctx.body());
+    // The learner's saved accommodation applies unless this request chooses another.
+    const extra = b.extraTimePercent ?? profileOf(ctx.user!.id).settings.examExtraTime;
+    return prep.startExam(ctx.user!.id, Number(ctx.params[0]), { mode: b.mode, timed: b.timed, extraTimePercent: extra, seed: b.seed });
+  });
+  route("POST", "/api/placement/start", true, async (ctx) => {
+    planIpLimiter.check(`planip:${ctx.client}`);
+    const b = parse(z.object({ seed: z.number().int().min(0).max(2 ** 31 - 1).optional() }).strict(), await ctx.body());
+    return prep.startPlacement(ctx.user!.id, b.seed);
+  });
+  route("GET", "/api/prep/attempts/:id", true, (ctx) => prep.view(ctx.user!.id, ctx.params[0]!));
+  route("GET", "/api/prep/attempts/:id/result", true, (ctx) => prep.result(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/prep/attempts/:id/hint", true, async (ctx) => {
+    const b = parse(z.object({ itemId: z.string().min(1).max(100), level: z.number().int().min(1).max(10) }).strict(), await ctx.body());
+    return prep.hint(ctx.user!.id, ctx.params[0]!, b.itemId, b.level);
+  });
+  route("POST", "/api/prep/attempts/:id/answers", true, async (ctx) => {
+    const b = parse(AttemptBody, await ctx.body());
+    return prep.answer(ctx.user!.id, ctx.params[0]!, b.attemptId, b.itemId, b.response);
+  });
+  route("POST", "/api/prep/attempts/:id/complete", true, async (ctx) => {
+    const b = parse(z.object({ allowUnanswered: z.boolean().optional() }).strict(), await ctx.body());
+    return prep.complete(ctx.user!.id, ctx.params[0]!, b);
+  });
+  route("POST", "/api/prep/attempts/:id/abandon", true, (ctx) => prep.abandon(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/prep/attempts/:id/accept", true, async (ctx) => {
+    const b = parse(z.object({ startGrade: z.number().int().min(1).max(5) }).strict(), await ctx.body());
+    return prep.accept(ctx.user!.id, ctx.params[0]!, b.startGrade);
+  });
+  route("GET", "/api/prep/results", true, (ctx) => ({ results: prep.history(ctx.user!.id), grades: [1, 2, 3, 4, 5].map((g) => ({ grade: g, readiness: prep.readinessFor(ctx.user!.id, g), progress: prep.progressFor(ctx.user!.id, g) })) }));
+
+  // ---- personalised revision (Brief 10) --------------------------------------------------------------------------------------
+  const RevisionStart = z.object({ mode: z.enum(["quick", "weak", "explore", "mixed"]), minutes: z.number().int().min(1).max(60).optional(), conceptId: z.string().min(1).max(100).optional(), grade: z.number().int().min(1).max(5).optional(), unitId: z.string().min(1).max(100).optional(), familyId: z.string().min(1).max(100).optional() }).strict();
+  route("GET", "/api/revision", true, (ctx) => revision.overview(ctx.user!.id));
+  route("GET", "/api/revision/explore", true, (ctx) => revision.explore(ctx.user!.id));
+  route("POST", "/api/revision/sessions", true, async (ctx) => {
+    const { mode, ...params } = parse(RevisionStart, await ctx.body());
+    return revision.start(ctx.user!.id, mode, params);
+  });
+  route("GET", "/api/revision/sessions/:id", true, (ctx) => revision.view(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/revision/sessions/:id/attempts", true, async (ctx) => {
+    const b = parse(AttemptBody, await ctx.body());
+    return revision.attempt(ctx.user!.id, ctx.params[0]!, b.attemptId, b.itemId, b.response);
+  });
+  route("POST", "/api/revision/sessions/:id/complete", true, (ctx) => revision.complete(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/revision/sessions/:id/abandon", true, (ctx) => revision.abandon(ctx.user!.id, ctx.params[0]!));
+
   if (opts.testClock) {
     route("POST", "/api/test/clock", false, async (ctx) => {
       const b = parse(z.object({ set: z.string().datetime().optional(), advanceDays: z.number().min(0).max(400).optional(), advanceMinutes: z.number().min(0).max(100000).optional() }).strict(), await ctx.body());
@@ -411,6 +492,6 @@ export function createApp(opts: AppOptions) {
     }
   }
 
-  return { fetch, progress, practice, engagement, nodes, clock, db };
+  return { fetch, progress, practice, engagement, nodes, prep, revision, clock, db };
 }
 export type App = ReturnType<typeof createApp>;

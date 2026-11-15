@@ -105,6 +105,12 @@ export function Settings() {
         </label>
       </section>
 
+      <section className="card" aria-labelledby="time-h">
+        <h2 id="time-h">Practice examinations</h2>
+        <p className="muted small">If you use the optional timer in a mock examination, you can add extra time. It is an accommodation: you never need to explain it, and it has no effect on your score. Timed attempts never use sound, and turning sound off never costs a mark.</p>
+        <Segmented legend="Extra time in timed mocks" value={String(s.examExtraTime ?? 0)} options={[{ v: "0", label: "None" }, { v: "25", label: "+25%" }, { v: "50", label: "+50%" }, { v: "100", label: "+100%" }]} onChange={(v) => save("examExtraTime", "your extra-time setting", { examExtraTime: Number(v) })} />
+      </section>
+
       <section className="card" aria-labelledby="goal-h">
         <h2 id="goal-h">Daily goal</h2>
         <p className="muted small">A meaningful session is a lesson finished or a review completed. Opening the app doesn't count. The goal and streak are optional, and missing a day never takes anything away.</p>

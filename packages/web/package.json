@@ -9,7 +9,7 @@
     "build": "tsc --noEmit -p tsconfig.json && vite build",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
-    "e2e": "npm run e2e:foundation && npm run e2e:early && npm run e2e:advanced && npm run e2e:grade5",
+    "e2e": "npm run e2e:foundation && npm run e2e:early && npm run e2e:advanced && npm run e2e:grade5 && npm run e2e:prep",
     "e2e:brief02": "node e2e/run.mjs",
     "e2e:followup": "node e2e/followup.mjs",
     "e2e:brief03": "node --import tsx e2e/brief03.mjs",
@@ -22,7 +22,10 @@
     "e2e:terms": "node --import tsx e2e/terms.mjs",
     "e2e:foundation": "node e2e/run.mjs && node e2e/followup.mjs && node --import tsx e2e/brief03.mjs && node --import tsx e2e/brief04.mjs",
     "e2e:early": "node --import tsx e2e/g1.mjs && node --import tsx e2e/g2.mjs",
-    "e2e:advanced": "node --import tsx e2e/g3.mjs && node --import tsx e2e/g4.mjs && node --import tsx e2e/terms.mjs"
+    "e2e:advanced": "node --import tsx e2e/g3.mjs && node --import tsx e2e/g4.mjs && node --import tsx e2e/terms.mjs",
+    "e2e:prep-exams": "node --import tsx e2e/prep-exams.mjs",
+    "e2e:prep-flows": "node --import tsx e2e/prep-flows.mjs",
+    "e2e:prep": "npm run e2e:prep-exams && npm run e2e:prep-flows"
   },
   "devDependencies": {
     "@mtp/api": "0.1.0",

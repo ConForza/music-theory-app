@@ -1,6 +1,6 @@
 import { buildIndex, effectiveScope, loadCurriculum, music, type ExerciseItem, type MusicScope } from "@mtp/curriculum";
 import { describe, expect, it } from "vitest";
-import { canonicalResponse, generateItem, generationFingerprint, gradeItem, hashString, wrongResponse } from "../src/index.ts";
+import { canonicalResponse, generateItem, generationFingerprint, gradeItem, TEMPLATE_REVISIONS, hashString, wrongResponse } from "../src/index.ts";
 
 /**
  * Independent check of the terminology completion generators (t.gN.book-terms, t.gN.book-use).
@@ -191,6 +191,7 @@ describe("generation fingerprints", () => {
   it("carry VOCAB_BOOK for the book templates only; every other template hashes exactly as before this work", () => {
     let others = 0;
     for (const t of ix.templates.values()) {
+      if (TEMPLATE_REVISIONS[t.id]) continue; // revised on purpose (release-blockers.test.ts)
       const scope = effectiveScope(ix, ix.nodes.find((n) => n.exercises.some((b) => b.templateId === t.id)) ?? ix.nodes[0]!, { templateId: t.id, conceptIds: [], scope: t.scope });
       // the formula as it was before this work (Grade 4 and 5 vocabularies only)
       const before = { rev: 1, template: t, scope, vocab: { terms: music.TERMS, instruments: music.INSTRUMENTS, voices: music.VOICES }, ...(t.grade === 4 ? { vocab4: music.VOCAB_G4 } : {}), ...(t.grade === 5 ? { vocab5: music.VOCAB_G5 } : {}) };

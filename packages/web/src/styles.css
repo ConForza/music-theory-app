@@ -548,3 +548,48 @@ html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
 .segmented label { min-width: 0; max-width: 100%; }
 .segmented span { overflow-wrap: anywhere; }
 .card p, .card li, .card small { overflow-wrap: anywhere; }
+
+/* ---- Brief 10: placement, practice examinations, results and revision ------------------------------------------------ */
+.h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 0.5rem; }
+.h4 { font-size: 1rem; margin: 0.9rem 0 0.25rem; }
+.lab-head { margin-top: 2rem; }
+.exam-hub { margin-bottom: 1.5rem; }
+.exam-grid { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: 0.9rem; grid-template-columns: 1fr; }
+@media (min-width: 34rem) { .exam-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.exam-card { border-top: 6px solid var(--world); margin: 0; min-width: 0; }
+.exam-card .h3 { margin: 0 0 0.2rem; }
+.notice { background: var(--brand-soft); color: var(--ink); border-left: 6px solid var(--brand); border-radius: 12px; padding: 0.7rem 0.9rem; margin: 0.8rem 0; }
+.notice p { margin: 0.25rem 0; }
+.link-button { appearance: none; background: none; border: 0; padding: 0; font: inherit; color: var(--brand-strong); text-decoration: underline; cursor: pointer; min-height: 32px; text-align: left; }
+.link-button:disabled { opacity: 0.6; cursor: not-allowed; }
+.action-row { margin: 1.2rem 0; }
+.finish-early { display: flex; justify-content: center; margin: 0.5rem 0 5.5rem; }
+.exam-clock { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 800; font-variant-numeric: tabular-nums; padding: 0.25rem 0.7rem; border-radius: 999px; background: var(--surface-2, var(--surface)); border: 2px solid var(--line-strong); color: var(--ink); white-space: nowrap; }
+.exam-clock.is-low { border-color: var(--danger); color: var(--danger); }
+.prep-player .player-bar { gap: 0.6rem; }
+.pill.level-mastered, .pill.readiness-on_track, .pill.level-stage-secure { background: var(--good-soft); color: var(--good); }
+.pill.level-developing, .pill.readiness-developing, .pill.level-stage-partial { background: var(--brand-soft); color: var(--brand-strong); }
+.pill.level-needs-review, .pill.readiness-needs_review, .pill.level-stage-weak { background: var(--try-soft); color: var(--try); }
+.pill.level-not-assessed, .pill.readiness-not_enough_evidence { background: var(--surface-2, var(--surface)); color: var(--muted); border: 1px solid var(--line-strong); }
+.stage-list li { padding: 0.3rem 0; }
+.topic-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.3rem 0.6rem; padding: 0.2rem 0; }
+.chip-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip-list li { min-width: 0; }
+.switch-row { margin: 0.6rem 0; }
+.attempt-trend { padding-left: 1.2rem; }
+.review-list { display: grid; gap: 0.8rem; }
+.review-list .card { margin: 0; }
+.revise-panel { margin: 1rem 0 1.5rem; }
+.revise-panel .card { margin-bottom: 0.9rem; }
+.placement-offer { margin-top: 1rem; }
+.prep-result .big-number { font-size: 1.4rem; margin: 0.2rem 0 0.5rem; }
+.segmented small { display: block; font-weight: 600; font-size: 0.8rem; }
+.exam-setup .segmented label, .explore-page .segmented label { flex: 1 1 10rem; }
+@media (max-width: 400px) { .exam-clock { font-size: 0.9rem; padding: 0.2rem 0.5rem; } .prep-result .concept-head { align-items: flex-start; } }
+.quick-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem 1rem; }
+.quick-card > div { flex: 1 1 14rem; min-width: 0; }
+.quick-card .h3 { margin: 0 0 0.2rem; }
+.quick-card p[role="status"] { flex-basis: 100%; margin: 0; }
+/* A fieldset will not shrink below its longest unbroken line by default, so a long legend (Settings, examination setup) could push the page sideways at large text. */
+.segmented { min-width: 0; max-width: 100%; }
+.segmented legend { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }

@@ -33,16 +33,22 @@ export interface PathPolicy {
 }
 
 /** Pure: which nodes are locked/available/in progress/completed for one learner. Never uses XP. */
-export function computeNodeStates(course: Course, rows: ProgressRow[], policy: PathPolicy): Map<string, NodeProgress> {
+export function computeNodeStates(course: Course, rows: ProgressRow[], policy: PathPolicy, placedGrade: number | null = null): Map<string, NodeProgress> {
   const byNode = new Map(rows.map((r) => [r.node_id, r]));
   const out = new Map<string, NodeProgress>();
   const complete = (id: string) => Boolean(byNode.get(id)?.completed_at);
+  // Brief 10 (placement): a learner who chose to start at Grade N after a placement check finds that grade's first lesson open without having
+  // finished the grades before it. Those earlier nodes are NOT marked complete (so no badge, XP or streak is ever earned by placing in): they
+  // simply stop blocking nodes of Grade N and above. Without an accepted placement (`placedGrade` null) nothing here changes.
+  const placedPast = (id: string) => placedGrade !== null && (course.ix.nodeById.get(id)?.grade ?? Infinity) < placedGrade;
 
   for (const n of course.nodes) {
     const row = byNode.get(n.id);
     const playable = course.isPlayable(n.id);
     const lockedBy = n.resolvedUnlockAfter.filter((p) => {
-      if (complete(p)) return false;
+      // The waiver is for nodes of the grade the learner chose and above. A node of an EARLIER grade keeps its own prerequisites: otherwise starting
+      // at Grade 4 would open (and let a learner pass) the Grade 1 assessment with no lesson done, and so earn its badge.
+      if (complete(p) || (n.grade >= (placedGrade ?? Infinity) && placedPast(p))) return false;
       if (policy.waiveUnwrittenPrerequisites && !course.isPlayable(p)) return false;
       return true;
     });
@@ -74,4 +80,10 @@ export function nextNodeForGrade(course: Course, states: Map<string, NodeProgres
     nodes.find((n) => states.get(n.id)?.state === "available")?.id ??
     null
   );
+}
+
+/** The grade a learner chose to start at after a placement check (the latest, not superseded), or null when they never placed. */
+export function placedGradeOf(db: { prepare(sql: string): { get(...a: unknown[]): unknown } }, userId: string): number | null {
+  const r = db.prepare("SELECT start_grade FROM placement_starts WHERE user_id = ? AND superseded_at IS NULL ORDER BY accepted_at DESC LIMIT 1").get(userId) as { start_grade: number } | undefined;
+  return r?.start_grade ?? null;
 }
