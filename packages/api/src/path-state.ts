@@ -46,7 +46,9 @@ export function computeNodeStates(course: Course, rows: ProgressRow[], policy: P
     const row = byNode.get(n.id);
     const playable = course.isPlayable(n.id);
     const lockedBy = n.resolvedUnlockAfter.filter((p) => {
-      if (complete(p) || placedPast(p)) return false;
+      // The waiver is for nodes of the grade the learner chose and above. A node of an EARLIER grade keeps its own prerequisites: otherwise starting
+      // at Grade 4 would open (and let a learner pass) the Grade 1 assessment with no lesson done, and so earn its badge.
+      if (complete(p) || (n.grade >= (placedGrade ?? Infinity) && placedPast(p))) return false;
       if (policy.waiveUnwrittenPrerequisites && !course.isPlayable(p)) return false;
       return true;
     });

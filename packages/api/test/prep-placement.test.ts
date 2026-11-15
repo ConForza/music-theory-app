@@ -127,6 +127,42 @@ describe("placement end to end", () => {
     expect(ctx.app.prep.placedGrade(L.userId)).toBe(1);
   }, 120_000);
 
+  it("choosing Grade 4 opens Grade 4 only: the earlier grades keep their own prerequisites, so no earlier grade assessment can be passed (or its badge earned) by placing in", async () => {
+    const ctx = boot();
+    const L = await learner(ctx.app);
+    const r = await runPlacement(ctx, L, { 4: 3 });
+    expect(r.summary.recommendedGrade).toBe(4);
+    await L.c.post(`/api/prep/attempts/${r.id}/accept`, { startGrade: 4 });
+    const nodes = (await L.c.get("/api/progress")).body.nodes as Record<string, { state: string }>;
+    const firstOf = (g: number) => course.nodes.find((n) => n.grade === g && !n.optional && course.isPlayable(n.id))!.id;
+    expect(nodes[firstOf(4)]!.state).toBe("available");
+    for (const a of ["G1-A", "G2-A", "G3-A"]) expect(nodes[a]!.state, a).toBe("locked");
+    // and the API refuses to start them
+    for (const a of ["G1-A", "G2-A", "G3-A"]) expect((await L.c.post(`/api/nodes/${a}/start`)).status, a).toBe(403);
+    expect((await L.c.get("/api/achievements")).body.achievements.filter((x: { earned: boolean }) => x.earned)).toHaveLength(0);
+  }, 120_000);
+
+  it("a change to the thresholds while a check is open changes nothing for that check: it follows the rules it started with and cannot recommend an untested grade", async () => {
+    const { DEFAULT_PREP } = await import("../src/prep-config.ts");
+    const ctx = boot();
+    const L = await learner(ctx.app);
+    const id = (await L.c.post("/api/placement/start", {})).body.id as string;
+    // the deployment now runs stricter lines (secure at 90%): this open check must still use 80%
+    const strict = boot({ db: ctx.db, prep: { ...DEFAULT_PREP, placement: { ...DEFAULT_PREP.placement, secureRatio: 0.9 } } });
+    const c2 = new (await import("./helpers.ts")).Client(strict.app);
+    c2.cookie = L.c.cookie;
+    // answer Grade 1 with exactly 5 of 6 right: secure under the snapshot (0.8), not under the new default (0.9)
+    const items = strict.app.prep.internalItems(L.userId, id);
+    await answerAll(strict.app, c2, L.userId, id, (i) => i === 0, undefined);
+    expect(items).toHaveLength(6);
+    const grown = strict.app.prep.internalItems(L.userId, id);
+    expect(grown).toHaveLength(12); // the next probe was planned: the check carried on
+    const done = (await c2.post(`/api/prep/attempts/${id}/complete`, { allowUnanswered: true })).body;
+    expect(done.recommendedGrade).toBe(2); // never Grade 5 on a single probe
+    expect(done.allSecure).toBe(false);
+    expect((await c2.post(`/api/prep/attempts/${id}/accept`, { startGrade: 5 })).status).toBe(400);
+  }, 120_000);
+
   it("a placement is not a grade assessment: no result row, no grade badge, and the grade assessment node stays locked", async () => {
     const ctx = boot();
     const L = await learner(ctx.app);

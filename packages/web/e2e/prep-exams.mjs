@@ -131,6 +131,21 @@ await test("interrupted attempt: close the page part-way, return later on the sa
   await ctx.close();
 });
 
+await test("an attempt whose questions were ALL answered before the learner left finishes when it is reopened (no dead end at the last question)", async () => {
+  const { ctx, page, userId } = await newLearner(profiles.iphone);
+  const { canonicalResponse } = await import("@mtp/engine");
+  const id = (await post(page, "/api/exams/3/start", { mode: "mock", seed: 61 })).body.id;
+  for (const it of S.app.prep.internalItems(userId, id)) await post(page, `/api/prep/attempts/${id}/answers`, { attemptId: crypto.randomUUID(), itemId: it.item.id, response: canonicalResponse(S.course.ix, it.item, it.scope) });
+  assert.equal((await get(page, `/api/prep/attempts/${id}`)).status, "open");
+  await page.goto(`/exam/run/${id}`);
+  await page.getByText("Welcome back").waitFor();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.waitForURL(/\/results\//, { timeout: 15000 });
+  await page.getByRole("heading", { name: "Your result" }).waitFor();
+  assert.equal((await get(page, `/api/prep/attempts/${id}`)).status, "complete");
+  await ctx.close();
+});
+
 await test("timed mock: the clock is shown and explained, extra time is offered, time running out saves the answers and finishes", async () => {
   const { ctx, page, userId } = await newLearner();
   // A skewable clock for this page only (the real timers keep running, so the page stays fully interactive): moving it forward is how

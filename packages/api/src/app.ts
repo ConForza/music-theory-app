@@ -55,6 +55,8 @@ export interface AppOptions {
   trustedProxyHops?: number;
   /** The server's clock (tests and browser journeys inject one). Never taken from a request. */
   clock?: Clock;
+  /** New practice papers or placement checks one learner may start per 10 minutes (default 4). Planning one costs the server's single thread about 0.4 to 3 s, so it is rationed; resuming an open one is free. */
+  prepStartsPer10Min?: number;
   /** Brief 10 product defaults (tests override them; production uses DEFAULT_PREP). */
   prep?: PrepConfig;
   /** Expose POST /api/test/clock so browser journeys can move time forward. For tests only; never enable in production. */
@@ -128,7 +130,15 @@ export function createApp(opts: AppOptions) {
   const policy = { waiveUnwrittenPrerequisites: opts.waiveUnwrittenPrerequisites ?? true };
   const nodes = new NodeRunService(db, course, policy, clock, engagement);
   const practice = new PracticeService(db, course, clock);
-  const prep = new PrepService(db, course, clock, nodes, opts.prep ?? DEFAULT_PREP);
+  const planLimiter = new RateLimiter(opts.prepStartsPer10Min ?? 4, 10 * 60_000);
+  const prep = new PrepService(db, course, clock, nodes, opts.prep ?? DEFAULT_PREP, (userId) => {
+    try {
+      planLimiter.check(`plan:${userId}`);
+    } catch {
+      throw new ApiError(429, "rate_limited", "You've started several papers in a short time. Finish or resume one, or wait a few minutes before starting another. Your open paper is still saved.");
+    }
+  });
+  const planIpLimiter = new RateLimiter(60, 10 * 60_000);
   const revision = new RevisionService(db, course, clock, engagement, prep, opts.prep ?? DEFAULT_PREP);
   // One-time recovery for historical practice without exposure identities; idempotent on startup.
   backfillPracticeExposure(db, practice, clock);
@@ -361,12 +371,14 @@ export function createApp(opts: AppOptions) {
   const ExamStart = z.object({ mode: z.enum(["practice", "mock"]), timed: z.boolean().optional(), extraTimePercent: z.number().int().min(0).max(100).optional(), seed: z.number().int().min(0).max(2 ** 31 - 1).optional() }).strict();
   route("GET", "/api/prep", true, (ctx) => prep.overview(ctx.user!.id));
   route("POST", "/api/exams/:grade/start", true, async (ctx) => {
+    planIpLimiter.check(`planip:${ctx.client}`);
     const b = parse(ExamStart, await ctx.body());
     // The learner's saved accommodation applies unless this request chooses another.
     const extra = b.extraTimePercent ?? profileOf(ctx.user!.id).settings.examExtraTime;
     return prep.startExam(ctx.user!.id, Number(ctx.params[0]), { mode: b.mode, timed: b.timed, extraTimePercent: extra, seed: b.seed });
   });
   route("POST", "/api/placement/start", true, async (ctx) => {
+    planIpLimiter.check(`planip:${ctx.client}`);
     const b = parse(z.object({ seed: z.number().int().min(0).max(2 ** 31 - 1).optional() }).strict(), await ctx.body());
     return prep.startPlacement(ctx.user!.id, b.seed);
   });

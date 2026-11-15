@@ -321,6 +321,52 @@ describe("review fixes: what the numbers tell a learner", () => {
   }, 120_000);
 });
 
+describe("technical review: help obtained after the paper was planned", () => {
+  it("a question the learner was shown with help BEFORE answering it is coached, even if the help came after the mock started; help after the answer changes nothing", async () => {
+    const { db, app } = boot();
+    const { c, userId } = await learner(app);
+    const { recordExposure } = await import("../src/mastery-service.ts");
+    const id = (await c.post("/api/exams/1/start", { mode: "mock", seed: 42 })).body.id as string;
+    const items = app.prep.internalItems(userId, id);
+    expect(items.every((i) => !i.planned.coached)).toBe(true); // nothing was coached when it was planned
+    // the learner now gets help on the first 5 questions in the practice lab, then answers the paper
+    await c.post("/api/test/clock", { advanceMinutes: 1 });
+    for (const it of items.slice(0, 5)) recordExposure(db, userId, it.planned.questionKey, "practice-hint", app.clock.now().toISOString());
+    await c.post("/api/test/clock", { advanceMinutes: 1 });
+    await answerAll(app, c, userId, id);
+    // help on question 6 that arrives AFTER it was answered cannot make that answer coached
+    await c.post("/api/test/clock", { advanceMinutes: 1 });
+    recordExposure(db, userId, items[5]!.planned.questionKey, "practice-attempt", app.clock.now().toISOString());
+    const s = (await c.post(`/api/prep/attempts/${id}/complete`, {})).body;
+    expect(s.coachedQuestions).toBe(5);
+    expect(s.independentQuestions).toBe(s.questions - 5);
+    expect(s.review.slice(0, 5).every((r: { independent: boolean }) => !r.independent)).toBe(true);
+    expect(s.review[5].independent).toBe(true);
+    // two such papers never reach "Consistently secure"
+    const r = (await c.get("/api/prep/results")).body.grades[0].readiness;
+    expect(r.label).not.toBe("on_track");
+  }, 60_000);
+});
+
+describe("technical review: placement start, admission, resume", () => {
+  it("rations new papers per learner, while resuming an open one is always free and abandoning does not reset the count", async () => {
+    const { app } = boot({ startsPer10Min: 2 });
+    const { c } = await learner(app);
+    const a = await c.post("/api/exams/1/start", { mode: "mock" });
+    const b = await c.post("/api/exams/2/start", { mode: "mock" });
+    expect([a.status, b.status]).toEqual([200, 200]);
+    const third = await c.post("/api/exams/3/start", { mode: "mock" });
+    expect(third.status).toBe(429);
+    expect(third.body.error.code).toBe("rate_limited");
+    expect((await c.post("/api/exams/1/start", { mode: "mock" })).body.id).toBe(a.body.id); // resuming costs nothing
+    await c.post(`/api/prep/attempts/${a.body.id}/abandon`);
+    expect((await c.post("/api/exams/1/start", { mode: "mock" })).status).toBe(429); // regenerating straight away is still limited
+    // another learner is unaffected
+    const other = await learner(app, "other");
+    expect((await other.c.post("/api/exams/1/start", { mode: "mock" })).status).toBe(200);
+  }, 60_000);
+});
+
 describe("practice mode is for learning and never becomes independent evidence", () => {
   it("gives hints and immediate feedback; its score and levels are labelled as practice and add nothing to readiness", async () => {
     const { db, app } = boot();

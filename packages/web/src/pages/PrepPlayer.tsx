@@ -125,6 +125,25 @@ export function PrepPlayer() {
     }
   }, [remaining, started, finishing, finish]);
 
+  // An attempt whose questions were ALL answered before the learner left (or on another device) resumes at the end: there is no question to show, so it settles
+  // straight away. A placement check may still grow, so it looks once more before finishing.
+  const settle = useCallback(async () => {
+    if (!attempt) return;
+    if (attempt.kind === "placement") {
+      try {
+        const fresh = await reload();
+        setLoad({ status: "ready", attempt: fresh });
+        if (fresh.items.length > attempt.items.length) return setIdx(attempt.items.length);
+      } catch {
+        /* completion re-checks everything on the server */
+      }
+    }
+    void finish(false);
+  }, [attempt, reload, finish]);
+  useEffect(() => {
+    if (started && finishing === null && attempt && attempt.items.length > 0 && idx >= attempt.items.length) void settle();
+  }, [started, finishing, attempt, idx, settle]);
+
   const total = attempt?.items.length ?? 0;
   const source = useMemo(
     () => ({

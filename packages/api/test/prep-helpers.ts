@@ -5,9 +5,9 @@ import type { PrepConfig } from "../src/prep-config.ts";
 import { Client, realCourse } from "./helpers.ts";
 
 /** An app on the SHIPPED content (all five grades), with a controllable clock, as the Brief 05+ suites use. */
-export function boot(opts: { prep?: PrepConfig; db?: ReturnType<typeof openDb> } = {}) {
+export function boot(opts: { prep?: PrepConfig; db?: ReturnType<typeof openDb>; startsPer10Min?: number } = {}) {
   const db = opts.db ?? openDb(":memory:");
-  const app = createApp({ db, course: realCourse(), waiveUnwrittenPrerequisites: false, testClock: true, ...(opts.prep ? { prep: opts.prep } : {}) });
+  const app = createApp({ db, course: realCourse(), waiveUnwrittenPrerequisites: false, testClock: true, prepStartsPer10Min: opts.startsPer10Min ?? 100_000, ...(opts.prep ? { prep: opts.prep } : {}) });
   return { db, app, course: realCourse() };
 }
 

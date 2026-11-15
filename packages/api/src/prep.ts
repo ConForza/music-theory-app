@@ -198,6 +198,8 @@ export class PrepService {
     private clock: Clock,
     private nodes: NodeRunService,
     readonly cfg: PrepConfig = DEFAULT_PREP,
+    /** Called just before a NEW paper or check is planned (never when an open one is resumed): planning runs on the server's one thread, so it is rationed. */
+    private admit: (userId: string) => void = () => undefined,
   ) {
     // No audio is ever required (every family is answerable without sound), but a template that listened would be excluded here regardless:
     // a learner with sound off or hearing loss must never lose marks. (A test asserts this set equals the full generatable set today.)
@@ -308,8 +310,8 @@ export class PrepService {
   }
 
   /** The questions for one placement probe (one grade). */
-  planProbe(userId: string, grade: number, attemptSeed: number, alreadyUsed: Set<string>): PlannedPrepItem[] {
-    const picks = probeOutcomes(this.course, grade, this.cfg.placement.probeItems, this.generatable);
+  planProbe(userId: string, grade: number, attemptSeed: number, alreadyUsed: Set<string>, cfg: PrepConfig = this.cfg): PlannedPrepItem[] {
+    const picks = probeOutcomes(this.course, grade, cfg.placement.probeItems, this.generatable);
     const avoid = new Set([...this.metKeys(userId), ...this.helpedKeys(userId)]);
     const helped = this.helpedKeys(userId);
     const bp = this.blueprint(grade);
@@ -391,6 +393,7 @@ export class PrepService {
     const id = tx(this.db, () => {
       const open = this.db.prepare("SELECT id FROM prep_attempts WHERE user_id = ? AND kind = 'exam' AND grade = ? AND mode = ? AND status = 'open'").get(userId, grade, opts.mode) as { id: string } | undefined;
       if (open) return open.id;
+      this.admit(userId);
       const seed = opts.seed ?? newSeed();
       const items = this.planExam(userId, grade, seed);
       const limit = opts.timed ? Math.ceil(items.length * this.cfg.exam.secondsPerQuestion * (1 + extra / 100)) : null;
@@ -409,6 +412,7 @@ export class PrepService {
     const id = tx(this.db, () => {
       const open = this.db.prepare("SELECT id FROM prep_attempts WHERE user_id = ? AND kind = 'placement' AND status = 'open'").get(userId) as { id: string } | undefined;
       if (open) return open.id;
+      this.admit(userId);
       const s = seed ?? newSeed();
       const first = this.cfg.placement.probeGrades[0]!;
       const items = this.planProbe(userId, first, s, new Set());
@@ -555,10 +559,13 @@ export class PrepService {
     const mine = items.filter((i) => i.stage === last);
     if (!mine.every((i) => by.get(i.itemId)?.attempts)) return false;
     const correct = mine.filter((i) => by.get(i.itemId)?.firstCorrect).length;
-    if (stageLevel({ asked: mine.length, correct }, this.cfg) !== "secure") return false;
-    const next = this.cfg.placement.probeGrades.find((g) => g > last);
+    // The attempt's OWN rubric, as stored when it began: the lines and the grades in force at the start decide every step of it, so a change to the defaults
+    // while a check is open can neither stop it early nor change what it recommends.
+    const cfg = this.rubricOf(row);
+    if (stageLevel({ asked: mine.length, correct }, cfg) !== "secure") return false;
+    const next = cfg.placement.probeGrades.find((g) => g > last);
     if (!next) return false;
-    const more = this.planProbe(userId, next, row.seed, new Set(items.map((i) => i.questionKey)));
+    const more = this.planProbe(userId, next, row.seed, new Set(items.map((i) => i.questionKey)), cfg);
     this.db.prepare("UPDATE prep_attempts SET items = ? WHERE user_id = ? AND id = ?").run(JSON.stringify([...items, ...more]), userId, row.id);
     return true;
   }
@@ -617,12 +624,38 @@ export class PrepService {
     return nodes.map((n) => ({ nodeId: n.id, title: n.title }));
   }
 
+  /** The paper's questions the learner had been shown with help (or with the answer) by the time they answered them: the planning-time flag plus everything recorded since. */
+  private coachedItems(userId: string, attemptId: string, planned: PlannedPrepItem[], mock: boolean): Set<string> {
+    const out = new Set(planned.filter((i) => i.coached).map((i) => i.itemId));
+    if (!mock) return out;
+    const answeredAt = new Map((this.db.prepare("SELECT item_id, created_at FROM prep_responses WHERE user_id = ? AND attempt_id = ? AND attempt_number = 1").all(userId, attemptId) as Array<{ item_id: string; created_at: string }>).map((r) => [r.item_id, r.created_at]));
+    // The earliest moment each question identity was shown with help, from every record of help the learner has.
+    const helpedAt = new Map<string, string>();
+    const note = (k: string, at: string) => {
+      if (!helpedAt.has(k) || helpedAt.get(k)! > at) helpedAt.set(k, at);
+    };
+    for (const r of this.db.prepare("SELECT question_key AS k, occurred_at AS at FROM question_exposure WHERE user_id = ?").all(userId) as Array<{ k: string; at: string }>) note(r.k, r.at);
+    for (const r of this.db.prepare("SELECT question_key AS k, occurred_at AS at FROM mastery_evidence WHERE user_id = ? AND source IN ('guided-step','hinted-step','retry-after-reveal','remedial-step')").all(userId) as Array<{ k: string; at: string }>) note(r.k, r.at);
+    for (const r of this.db.prepare("SELECT items, completed_at AS at FROM prep_attempts WHERE user_id = ? AND status = 'complete' AND id <> ?").all(userId, attemptId) as Array<{ items: string; at: string }>) {
+      for (const it of JSON.parse(r.items) as PlannedPrepItem[]) note(it.questionKey, r.at);
+    }
+    for (const si of planned) {
+      const h = helpedAt.get(si.questionKey);
+      const a = answeredAt.get(si.itemId);
+      if (h !== undefined && (a === undefined || h <= a)) out.add(si.itemId);
+    }
+    return out;
+  }
+
   private summariseExam(userId: string, row: AttemptRow, planned: PlannedPrepItem[], by: ReturnType<PrepService["responses"]>, at: string, timedOut: boolean): ExamSummary {
     const cfg = this.rubricOf(row);
     const grade = row.grade!;
     const mock = row.mode === "mock";
     const bp = this.blueprint(grade);
-    const independentOf = (si: PlannedPrepItem) => mock && !si.coached && Boolean(by.get(si.itemId)?.attempts) && (by.get(si.itemId)?.hints ?? 0) === 0;
+    // Help can arrive AFTER the paper was planned (hints and feedback in the practice lab, a practice exam, a lesson). A question the learner was shown with help
+    // at or before the moment they answered it is coached whatever the planning-time flag said; help that came after the answer does not change it.
+    const coachedIds = this.coachedItems(userId, row.id, planned, mock);
+    const independentOf = (si: PlannedPrepItem) => mock && !coachedIds.has(si.itemId) && Boolean(by.get(si.itemId)?.attempts) && (by.get(si.itemId)?.hints ?? 0) === 0;
     const firstOk = (si: PlannedPrepItem) => Boolean(by.get(si.itemId)?.firstCorrect);
     const outcomes: OutcomeResult[] = [];
     for (const s of bp.sections.filter((x) => x.outcomeId)) {
@@ -652,7 +685,7 @@ export class PrepService {
     const score = planned.filter(firstOk).length;
     const answered = planned.filter((i) => by.get(i.itemId)?.attempts).length;
     // For readiness every question that could have been independent evidence counts, answered or not: an unanswered question scores nothing.
-    const indep = planned.filter((si) => mock && !si.coached);
+    const indep = planned.filter((si) => mock && !coachedIds.has(si.itemId));
     const independentCorrect = indep.filter((si) => independentOf(si) && firstOk(si)).length;
     const assessed = outcomes.filter((o) => o.level !== "not_assessed").length;
     // Plain explanations of the mistakes made, grouped by what went wrong, in the family's own words.
@@ -731,7 +764,7 @@ export class PrepService {
       independentQuestions: indep.length,
       independentCorrect,
       independentPercent: indep.length ? Math.round((100 * independentCorrect) / indep.length) : null,
-      coachedQuestions: planned.filter((i) => i.coached).length,
+      coachedQuestions: mock ? planned.filter((i) => coachedIds.has(i.itemId)).length : planned.filter((i) => i.coached).length,
       hintsUsed: [...by.values()].reduce((n, s) => n + s.hints, 0),
       outcomes,
       outcomesTotal: outcomes.length,

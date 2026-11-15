@@ -151,6 +151,13 @@ describe("placement recommendation: how the starting grade is calculated", () =>
   it("is independent of the order the results arrive in", () => {
     expect(recommendPlacement([stage(3, 6), stage(1, 6), stage(2, 3)], cfg).recommendedGrade).toBe(2);
   });
+  it("a recommendation never rests on a grade nobody asked about (an incomplete set of probes caps it at the first unprobed grade)", () => {
+    const r = recommendPlacement([stage(1, 6)], cfg);
+    expect(r.recommendedGrade).toBe(2);
+    expect(r.allSecure).toBe(false);
+    expect(r.notAssessed).toEqual([2, 3, 4]);
+    expect(recommendPlacement([stage(1, 6), stage(2, 6), stage(3, 6)], cfg).recommendedGrade).toBe(4);
+  });
   it("boundary: exactly the secure ratio is secure; one below is not", () => {
     const c: PrepConfig = { ...cfg, placement: { ...cfg.placement, secureRatio: 0.8 } };
     expect(stageLevel({ asked: 5, correct: 4 }, c)).toBe("secure");
@@ -218,6 +225,16 @@ describe("estimated readiness: cautious by construction", () => {
     expect(r.percent).toBe(75);
     expect(r.label).toBe("developing");
     expect(r.detail).toMatch(/did not all reach the line/);
+  });
+  it("thresholds use the exact ratio, not the rounded one: 41 of 55 is 74.5%, below a line of 75", () => {
+    // 21/28 = 75.0 and 20/27 = 74.07: the second is below the line on its own, and pooled 41/55 = 74.55 rounds to 75 but is not 75
+    const r = readiness([att("m1", 1, { independentQuestions: 28, independentCorrect: 21, questions: 28, answered: 28 }), att("m2", 2, { independentQuestions: 27, independentCorrect: 20, questions: 27, answered: 27 })], now, cfg);
+    expect(r.percent).toBe(75); // what is shown
+    expect(r.label).toBe("developing"); // what is decided
+    // and at the lower line: 41 of 75 is 54.67%, which displays as 55 but is below 55
+    const low = readiness([att("m3", 1, { independentQuestions: 75, independentCorrect: 41, questions: 75, answered: 75 })], now, cfg);
+    expect(low.percent).toBe(55);
+    expect(low.label).toBe("needs_review");
   });
   it("unanswered questions count as not right: a third of a paper cannot make an estimate", () => {
     // 13 of 36 answered, 10 right: the score is 10/36, never "77%"

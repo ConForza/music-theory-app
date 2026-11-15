@@ -172,7 +172,8 @@ export function stageLevel(s: Pick<StageResult, "asked" | "correct">, cfg: PrepC
  * The placement rule, in one place:
  *   1. Probes are taken from the lowest grade upward, and stop at the first one that is not secure.
  *   2. A probe is secure when at least `secureRatio` of its questions were right first time, without hints.
- *   3. The recommended start is the lowest grade whose probe was not secure; if all of Grades 1-4 were secure, it is Grade 5.
+ *   3. The recommended start is the lowest grade whose probe was not secure; if all of Grades 1-4 were secure, it is Grade 5; if some grade was never probed, it is
+ *      the first of those (a recommendation never rests on a grade that was not asked about).
  *   4. A partial result recommends starting THERE (not lower) and lists the missed outcomes as catch-up lessons; a weak result
  *      recommends starting there too, since nothing below it was weak. The learner may always choose a lower grade.
  * The result is advice about where to begin. It is never a grade completion, and never an ABRSM result.
@@ -182,8 +183,10 @@ export function recommendPlacement(results: StageResult[], cfg: PrepConfig): Pla
   const failed = stages.find((s) => s.level !== "secure");
   const top = Math.max(...cfg.placement.probeGrades) + 1;
   const probed = new Set(stages.map((s) => s.grade));
+  // A grade is only recommended if everything below it was probed and secure: never above the first grade nobody asked about.
+  const unprobed = cfg.placement.probeGrades.find((g) => !probed.has(g));
   return {
-    recommendedGrade: failed ? failed.grade : top,
+    recommendedGrade: failed ? failed.grade : (unprobed ?? top),
     stages,
     allSecure: !failed && stages.length === cfg.placement.probeGrades.length,
     decidedBy: failed?.grade ?? null,
@@ -266,7 +269,9 @@ export function readiness(attempts: ReadinessAttempt[], current: { rubricVersion
   }
   const q = used.reduce((n, a) => n + a.independentQuestions, 0);
   const c = used.reduce((n, a) => n + a.independentCorrect, 0);
-  const percent = q ? Math.round((100 * c) / q) : 0;
+  // Thresholds are compared on the exact ratio (41 of 55 is 74.5%, below a line of 75); only what is DISPLAYED is rounded.
+  const exact = q ? (100 * c) / q : 0;
+  const percent = Math.round(exact);
   const each = used.map((a) => (a.independentQuestions ? (100 * a.independentCorrect) / a.independentQuestions : 0));
   const days = new Set(used.map((a) => a.day)).size;
   const spread = `Even so, with about ${q} questions the true figure could easily be 10 points either way.`;
@@ -274,8 +279,8 @@ export function readiness(attempts: ReadinessAttempt[], current: { rubricVersion
   if (enough && days >= 2 && each.every((p) => p >= cfg.readiness.onTrackPercent)) {
     return { label: "on_track", title: "Consistently secure", detail: `Right on your own in each of your last ${used.length} mock examinations (about ${percent}% of ${q} questions, on different days). This is our own estimate, not an ABRSM result. ${spread}`, basedOn, percent, attemptsUsed: used.length, ignored };
   }
-  if (percent >= cfg.readiness.developingPercent) {
-    const nearly = percent >= cfg.readiness.onTrackPercent || each.some((p) => p >= cfg.readiness.onTrackPercent);
+  if (exact >= cfg.readiness.developingPercent) {
+    const nearly = exact >= cfg.readiness.onTrackPercent || each.some((p) => p >= cfg.readiness.onTrackPercent);
     const why = !enough ? "One more mock examination would give a steadier estimate." : days < 2 ? "Taking the next one on a different day shows whether it lasts." : each.some((p) => p < cfg.readiness.onTrackPercent) ? "Your most recent papers did not all reach the line, so it is not yet consistent." : "";
     return { label: "developing", title: "Developing", detail: nearly ? `About ${percent}% right on your own (${q} questions). ${why}` : `About ${percent}% right on your own (${q} questions). You are getting there: revise the topics marked Needs review or Developing, then try another mock.`, basedOn, percent, attemptsUsed: used.length, ignored };
   }
