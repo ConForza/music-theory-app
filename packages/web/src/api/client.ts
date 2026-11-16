@@ -34,6 +34,8 @@ export interface Profile {
 export interface Me {
   user: User;
   profile: Profile;
+  /** When this sign-in ends, from the server. For a guest, `guestAccessEndsInDays` is the whole days left (their only way back to their progress). */
+  session?: { expiresAt: string | null; guestAccessEndsInDays: number | null; guestWarningDays: number };
 }
 export interface AttemptResult {
   correct: boolean;

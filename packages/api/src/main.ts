@@ -5,7 +5,8 @@ import { createApp } from "./app.ts";
 import { testClockEnabled } from "./config.ts";
 import { loadCourse } from "./course.ts";
 import { openDb } from "./db.ts";
-import { createHttpServer } from "./server.ts";
+import { retentionPolicyFromEnv } from "./retention.ts";
+import { startServer } from "./startup.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.PORT ?? 8787);
@@ -23,12 +24,34 @@ const app = createApp({
   // Browser journeys only: needs explicit MTP_TEST_CLOCK=1 and NODE_ENV=test.
   testClock: testClockEnabled(process.env),
   allowedOrigins: (process.env.MTP_ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
+  // Optional override of the per-address guest-creation limit (default 60 per 15 minutes); a positive whole number only.
+  ...(/^[1-9]\d{0,5}$/.test(process.env.MTP_GUEST_CREATIONS_PER_15_MIN ?? "") ? { guestCreationsPer15Min: Number(process.env.MTP_GUEST_CREATIONS_PER_15_MIN) } : {}),
 });
-// Sample the review question pools before accepting requests, so no learner's request ever does it (it blocked the one server thread for
-// 15-25 s). Set MTP_WARM_POOLS=0 to skip (development); the pools are then filled on first use as before.
-if (process.env.MTP_WARM_POOLS !== "0") {
-  const t0 = Date.now();
-  const n = app.engagement.review.warmPools();
-  console.log(`Review pools ready: ${n} candidates in ${((Date.now() - t0) / 1000).toFixed(1)} s`);
-}
-createHttpServer(app, staticDir).listen(port, () => console.log(`Music Theory Path listening on http://localhost:${port} (db: ${dbPath})`));
+const secure = process.env.MTP_SECURE_COOKIES === "1";
+startServer({
+  app,
+  staticDir,
+  port,
+  http: { https: secure, trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0, securityHeaders: process.env.MTP_SECURITY_HEADERS === "proxy" ? "proxy" : "app" },
+  // Set MTP_WARM_POOLS=0 only for local development: the pools are then sampled inside learners' requests (a 15-25 s stall each restart).
+  warmPools: process.env.MTP_WARM_POOLS !== "0",
+  retention: retentionPolicyFromEnv(),
+}).then(
+  (running) => {
+    console.log(`Music Theory Path listening on http://localhost:${running.port} (db: ${dbPath})`);
+    let exiting = false;
+    for (const signal of ["SIGTERM", "SIGINT"] as const) {
+      process.on(signal, () => {
+        if (exiting) return;
+        exiting = true;
+        console.log(`${signal} received: finishing requests in flight, then stopping.`);
+        void running.stop().then(() => process.exit(0));
+      });
+    }
+  },
+  (e: unknown) => {
+    // A failed start must be visible to the process supervisor: say why and exit non-zero without ever opening the port.
+    console.error(e instanceof Error ? e.message : e);
+    process.exit(1);
+  },
+);

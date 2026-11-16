@@ -61,6 +61,11 @@ export interface AppOptions {
   prep?: PrepConfig;
   /** What learners may be shown. Omitted: read from the environment (`MTP_SHOW_READINESS`), which is OFF unless set to `teacher-approved`. */
   releaseGates?: ReleaseGates;
+  /**
+   * New guest accounts one client address may create per 15 minutes (default 60: room for a class or a household behind one address,
+   * far below what an automated loop needs). Counted per process; see docs/development/DEPLOYMENT.md.
+   */
+  guestCreationsPer15Min?: number;
   /** Expose POST /api/test/clock so browser journeys can move time forward. For tests only; never enable in production. */
   testClock?: boolean;
 }
@@ -149,6 +154,8 @@ export function createApp(opts: AppOptions) {
   const loginLimiter = new RateLimiter(10);
   const loginIpLimiter = new RateLimiter(60);
   const registerLimiter = new RateLimiter(20);
+  // Guest accounts need no email or password, so creating them is limited per address as registration is (audit #19: 300 from one address in 1.4 s).
+  const guestLimiter = new RateLimiter(opts.guestCreationsPer15Min ?? 60);
   const routes: Route[] = [];
   const route = (method: string, path: string, needsAuth: boolean, handler: Handler) =>
     routes.push({ method, pattern: new RegExp(`^${path.replace(/:[a-zA-Z]+/g, "([^/]+)")}$`), needsAuth, handler });
@@ -167,10 +174,19 @@ export function createApp(opts: AppOptions) {
     };
     return { experience: p.experience, selectedGrade: p.selected_grade, onboarded: p.onboarded === 1, settings: Settings.parse(JSON.parse(p.settings)), timezone: p.timezone, dailyGoal: p.daily_goal };
   };
-  const me = (user: auth.User) => ({ user, profile: profileOf(user.id) });
+  /**
+   * `session.expiresAt` is when THIS sign-in ends (the server's stored expiry, never a client value). A guest has no other way back to
+   * their progress, so the app warns them before it; `guestAccessEndsInDays` is the whole days left, computed with the server's clock.
+   */
+  const me = (user: auth.User, token?: string) => {
+    const expiresAt = auth.sessionExpiry(db, token);
+    const days = expiresAt ? Math.max(0, Math.floor((new Date(expiresAt).getTime() - Date.now()) / 86400_000)) : null;
+    return { user, profile: profileOf(user.id), session: { expiresAt, guestAccessEndsInDays: user.isGuest ? days : null, guestWarningDays: auth.GUEST_WARNING_DAYS } };
+  };
   const startSession = (ctx: Ctx, userId: string) => {
     const s = auth.createSession(db, userId);
     ctx.cookies.push(sessionCookie(s.token, s.maxAgeSeconds));
+    ctx.token = s.token;
   };
   const nodeParam = (id: string) => {
     if (!course.ix.nodeById.has(id)) throw new ApiError(404, "not_found", "That lesson does not exist.");
@@ -182,10 +198,12 @@ export function createApp(opts: AppOptions) {
 
   // ---- accounts -----------------------------------------------------------
   route("POST", "/api/auth/guest", false, async (ctx) => {
-    if (ctx.user) return me(ctx.user);
+    // A caller who already has a session gets it back and creates nothing, so only genuinely new accounts are counted.
+    if (ctx.user) return me(ctx.user, ctx.token);
+    guestLimiter.check(`guest:${ctx.client}`);
     const user = auth.createUser(db, { displayName: "Guest" });
     startSession(ctx, user.id);
-    return me(user);
+    return me(user, ctx.token);
   });
 
   route("POST", "/api/auth/register", false, async (ctx) => {
@@ -198,7 +216,7 @@ export function createApp(opts: AppOptions) {
       // creating nothing. A caller with no session, or another account's, still gets email_taken and must sign in.
       if (ctx.user?.id === existing.id) {
         loginLimiter.check(`login:${body.email}`);
-        if (existing.passwordHash && (await auth.verifyPassword(body.password, existing.passwordHash))) return me(ctx.user);
+        if (existing.passwordHash && (await auth.verifyPassword(body.password, existing.passwordHash))) return me(ctx.user, ctx.token);
       }
       throw new ApiError(409, "email_taken", "That email is already registered. Try signing in.");
     }
@@ -206,11 +224,11 @@ export function createApp(opts: AppOptions) {
     if (ctx.user?.isGuest) {
       // Upgrade in place: the guest's progress stays attached to the same learner.
       const user = auth.upgradeGuest(db, ctx.user.id, { displayName: body.displayName, email: body.email, passwordHash });
-      return me(user);
+      return me(user, ctx.token);
     }
     const user = auth.createUser(db, { displayName: body.displayName, email: body.email, passwordHash });
     startSession(ctx, user.id);
-    return me(user);
+    return me(user, ctx.token);
   });
 
   route("POST", "/api/auth/login", false, async (ctx) => {
@@ -224,7 +242,7 @@ export function createApp(opts: AppOptions) {
     if (ctx.token) auth.destroySession(db, ctx.token);
     startSession(ctx, found.id);
     const { passwordHash: _omit, ...user } = found;
-    return me(user);
+    return me(user, ctx.token);
   });
 
   route("POST", "/api/auth/logout", false, (ctx) => {
@@ -233,7 +251,7 @@ export function createApp(opts: AppOptions) {
     return { ok: true };
   });
 
-  route("GET", "/api/me", true, (ctx) => me(ctx.user!));
+  route("GET", "/api/me", true, (ctx) => me(ctx.user!, ctx.token));
 
   route("PATCH", "/api/me/profile", true, async (ctx) => {
     const patch = parse(ProfilePatch, await ctx.body());
@@ -252,7 +270,7 @@ export function createApp(opts: AppOptions) {
       ctx.user!.id,
     );
     if (patch.displayName) db.prepare("UPDATE users SET display_name = ? WHERE id = ?").run(patch.displayName, ctx.user!.id);
-    return me({ ...ctx.user!, displayName: patch.displayName ?? ctx.user!.displayName });
+    return me({ ...ctx.user!, displayName: patch.displayName ?? ctx.user!.displayName }, ctx.token);
   });
 
   route("GET", "/api/me/export", true, (ctx) => {

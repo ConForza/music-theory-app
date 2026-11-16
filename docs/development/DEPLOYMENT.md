@@ -22,12 +22,18 @@ the operating system reports for the TCP connection, so that is the default.
 * IPv4-mapped IPv6 addresses count as the IPv4 address, and other IPv6 addresses are grouped by their /64, so one
   household cannot mint unlimited keys from its delegated prefix.
 
-Also set `MTP_SECURE_COOKIES=1` when served over HTTPS and `x-forwarded-proto` is set by the proxy.
+Also set `MTP_SECURE_COOKIES=1` when the site is served over HTTPS. That setting is what declares the deployment HTTPS: cookies become
+`Secure`, the public origin used by the same-origin check becomes `https://<host>`, and `Strict-Transport-Security` is sent.
+`x-forwarded-proto` is **not** trusted by default (a client can send it); it is read only when `MTP_TRUST_PROXY_HOPS` is set, and then only
+the last entry, the one written by the proxy nearest the app. **Behind an HTTPS proxy you must set `MTP_SECURE_COOKIES=1`** (or
+`MTP_TRUST_PROXY_HOPS`), otherwise sign-in and every other POST is refused with 403 `bad_origin`, because the browser's `Origin` is `https://…`
+and the app believes it is serving `http://…`. Before this change the app believed any `x-forwarded-proto` it was sent.
 
 ## What the limits are
 
 | Endpoint | Key | Limit (per process, 15-minute fixed window) |
 | --- | --- | --- |
+| `POST /api/auth/guest` | caller address | 60 (override: `MTP_GUEST_CREATIONS_PER_15_MIN`) |
 | `POST /api/auth/register` | caller address | 20 |
 | `POST /api/auth/login` | email | 10 |
 | `POST /api/auth/login` | caller address | 60 |
@@ -64,3 +70,73 @@ lessons blocked the server's single thread for 15 to 25 seconds after every rest
 Starting a practice examination still plans its paper on the same single thread (about 0.5 to 3 s each). That is acceptable for individual
 learners; a whole class starting papers at the same moment will queue, so do not rely on it for classroom use until planning yields or moves
 off the request thread.
+
+## Guest accounts (final release hardening)
+
+`POST /api/auth/guest` creates an account with no email or password, so it is limited per caller address: 60 new guests per 15 minutes
+(room for a class or a household behind one address; the audit's loop created 300 in 1.4 s). A caller who already has a session gets it
+back and is not counted. Over the limit the answer is HTTP 429 `{"error":{"code":"rate_limited",…}}`, the same shape as the sign-in limiters.
+
+Limits of this design, the same as for the other limiters above: counters are per process and in memory (a restart resets them, and N
+processes allow N times the quota); the window is fixed; a distributed attacker with many addresses is not stopped. A school with more than
+60 learners behind one address who all start as guests within 15 minutes will see the limit: raise `MTP_GUEST_CREATIONS_PER_15_MIN` for that
+deployment, or have learners register. Edge rate limiting at the proxy or CDN remains the recommended first layer for a public launch.
+
+## Security headers: which layer sets what
+
+By default **the app sets all of them on every response** (API, web app, assets, errors), so they are present with or without a proxy:
+
+| Header | Value | Set by |
+|---|---|---|
+| `Content-Security-Policy` | `default-src 'self'; script-src 'self' 'sha256-…'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'` | app |
+| `X-Content-Type-Options` | `nosniff` | app |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | app |
+| `X-Frame-Options` | `DENY` (with `frame-ancestors 'none'`) | app |
+| `Cross-Origin-Opener-Policy` | `same-origin` | app |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` | app |
+| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` | app, **only when `MTP_SECURE_COOKIES=1`** |
+| TLS certificates, HTTP to HTTPS redirect | - | the reverse proxy or host (the app does neither) |
+
+There is no `unsafe-inline` and no `unsafe-eval`. The one inline script (the theme snippet in `index.html`, which avoids a flash of the wrong
+theme) is allowed by its SHA-256 hash, computed from the built file at start-up, so changing the snippet needs no manual step. The music
+font is registered with the Font Loading API instead of an injected `<style>` element for the same reason.
+
+If you prefer the reverse proxy to own the headers, set `MTP_SECURITY_HEADERS=proxy`: the app then sends none, so the two layers can never
+send conflicting policies. In that case the proxy must send the whole table above, with the script hash taken from the built `index.html`
+(`inlineScriptHashes` in `server.ts` prints it). Do not set `proxy` unless the proxy is actually configured: there is no check that it is.
+
+`includeSubDomains` in HSTS assumes every subdomain of the production host is HTTPS. Confirm that for the real domain before launch; HSTS
+is hard to undo once browsers have seen it. `preload` is deliberately not sent.
+
+## Start-up, readiness and shutdown (final release hardening)
+
+**No hosting configuration exists in this repository** (no Dockerfile, Procfile, compose file, platform manifest, proxy configuration or
+service unit), so nothing about the production host could be verified. What the application itself does is tested
+(`packages/api/test/release-hardening.test.ts`) and is as follows.
+
+| Item | Behaviour |
+|---|---|
+| Start command | `npm start` (runs `node --import tsx src/main.ts` in `packages/api`), after `npm ci && npm run build` |
+| Port | `PORT` (default 8787), all interfaces |
+| Data | one SQLite file at `MTP_DB`; it must be on persistent storage and backed up |
+| Warm-up | review question pools are sampled **before** the port opens: measured 38.0, 39.1 and 40.8 s (three runs, 4-core machine, full Grades 1-5 content, 376 candidates), about 190 MB resident memory |
+| Readiness | the port is closed until warm-up and housekeeping have finished, so "TCP connect succeeds" or `GET /api/health` returning 200 means ready. There is no separate liveness state |
+| Failed start | if warm-up throws, or samples nothing, the process prints the reason and **exits with status 1 without opening the port**. It never starts half-warmed |
+| First request after start | first `GET /api/review` over HTTP after a warmed start: 55 ms for a learner with Grades 1-4 complete and Grade 5 in progress, 33 ms for a learner with Grades 1-5 complete (it was 15 to 25 s before PR #20) |
+| Shutdown | on `SIGTERM` or `SIGINT`: stop accepting connections, let requests in flight finish (up to 10 s), close the database, exit 0. Measured 0.02-0.03 s when idle |
+| Processes | exactly one. SQLite and the in-memory limiters assume a single process; do not run two against one database file |
+
+What the host must provide, **to be confirmed by the owner for the chosen provider**:
+
+1. **Start-up grace of at least 60 seconds** (90 s on a small shared CPU) before health checks count as failures. Many platforms default to
+   far less; with a shorter grace the process is killed during warm-up and restarts forever.
+2. **Stop grace of at least 15 seconds** between `SIGTERM` and `SIGKILL`.
+3. **Deploys cause downtime of about the warm-up time** unless the host keeps the old process serving until the new one is ready. That is
+   only safe if the two never write the same SQLite file at once; with one file the practical choice is a short maintenance window, or a
+   host that starts the new process, waits for readiness, then stops the old one, accepting a few seconds in which both have the file open
+   (WAL mode tolerates this; the in-memory limiters and review pools are simply rebuilt).
+4. **A restart policy** that restarts on a non-zero exit, with back-off, and alerts if start-up fails repeatedly.
+5. HTTPS termination, and the two settings in "Who is calling?" above.
+
+`MTP_WARM_POOLS=0` exists for local development only. Do not use it to make production start faster: it moves the same work into
+learners' requests, which is the 15 to 25 second stall that PR #20 removed. The server prints a warning when it is set.

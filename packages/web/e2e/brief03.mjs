@@ -377,7 +377,9 @@ async function display() {
     for (const set of sets) {
       await page.goto(`/practice/${set.id}?q=1`);
       await page.locator("#q-title").waitFor();
-      if (name === "large-text-320") await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+      // Set through the style object, not an injected <style> element: the app's Content-Security-Policy (style-src 'self') blocks injected
+      // style elements, and this check must run under the policy the app really ships with. The effect on the page is the same.
+      if (name === "large-text-320") await page.evaluate(() => document.documentElement.style.setProperty("font-size", "200%", "important"));
       await page.evaluate(() => document.fonts.ready);
       try {
         await noOverflow(page, `${name} ${set.id}`);

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router";
+import { GuestExpiryNotice } from "./GuestNotice";
 import { useApp } from "../state/app";
 import { ApiFailure } from "../api/client";
 import { Icon, Logo, type IconName } from "./Icon";
@@ -15,7 +16,7 @@ const TABS: Array<{ to: string; label: string; icon: IconName }> = [
 
 /** Main app frame: side rail on large screens, bottom tabs on phones. The lesson player lives outside it. */
 export function Shell() {
-  const { refreshProgress, engagement } = useApp();
+  const { refreshProgress, engagement, me } = useApp();
   const due = engagement.status === "ready" ? engagement.data.review.dueCount : 0;
   const { pathname } = useLocation();
   // Progress changes inside the lesson player, so re-read it whenever a main page is shown.
@@ -45,6 +46,7 @@ export function Shell() {
         </ul>
       </nav>
       <main id="main" tabIndex={-1} className="main">
+        {pathname !== "/profile" && <GuestExpiryNotice me={me} />}
         <Outlet />
       </main>
     </div>

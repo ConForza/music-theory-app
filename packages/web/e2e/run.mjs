@@ -182,6 +182,9 @@ async function journey(p) {
   await page.getByRole("link", { name: "Back to the path" }).click();
   await page.waitForURL("**/learn");
   await page.locator('[data-node="G1-U3-L03"]').waitFor();
+  // The path is drawn from the progress the app already holds and is refreshed when the page opens, so for a moment it can still show the
+  // lesson as in progress. Wait for the refreshed state instead of reading the attribute once (this read lost that race on a CI runner).
+  await page.locator('[data-node="G1-U3-L03"][data-status="completed"]').waitFor();
   assert.equal(await page.locator('[data-node="G1-U3-L03"]').getAttribute("data-status"), "completed");
   await page.locator('[data-node="G1-U3-L03"]').scrollIntoViewIfNeeded();
   await page.waitForTimeout(900);
