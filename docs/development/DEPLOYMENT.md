@@ -50,3 +50,17 @@ Production requirements (to be scheduled in Brief 11): a shared store (Redis or 
 `RateLimiter` interface; a sliding window or token bucket; progressive back-off and CAPTCHA/step-up for repeated
 failures rather than hard per-email lockout; alerting on 429 spikes; and edge rate limiting at the proxy or CDN as a
 first layer.
+
+## Start-up: review question pools (Brief 11)
+
+Before it starts listening, the server samples the review question pool of every concept (`ReviewService.warmPools`, called from `main.ts`).
+With the full Grades 1-5 content this takes roughly 25 to 40 seconds on one core, and the log line `Review pools ready: N candidates in S s`
+marks the end of it. Allow for it in health checks and rolling deploys: the port is not open until it has finished.
+
+It is done at start-up because it used to happen inside a learner's request: the first `GET /api/review` from a learner with many completed
+lessons blocked the server's single thread for 15 to 25 seconds after every restart, stalling every other learner (release audit, issue #19, F3).
+`MTP_WARM_POOLS=0` skips it for local development; the pools are then filled on first use, with that cost.
+
+Starting a practice examination still plans its paper on the same single thread (about 0.5 to 3 s each). That is acceptable for individual
+learners; a whole class starting papers at the same moment will queue, so do not rely on it for classroom use until planning yields or moves
+off the request thread.

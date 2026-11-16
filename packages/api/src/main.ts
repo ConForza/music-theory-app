@@ -24,4 +24,11 @@ const app = createApp({
   testClock: testClockEnabled(process.env),
   allowedOrigins: (process.env.MTP_ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
 });
+// Sample the review question pools before accepting requests, so no learner's request ever does it (it blocked the one server thread for
+// 15-25 s). Set MTP_WARM_POOLS=0 to skip (development); the pools are then filled on first use as before.
+if (process.env.MTP_WARM_POOLS !== "0") {
+  const t0 = Date.now();
+  const n = app.engagement.review.warmPools();
+  console.log(`Review pools ready: ${n} candidates in ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+}
 createHttpServer(app, staticDir).listen(port, () => console.log(`Music Theory Path listening on http://localhost:${port} (db: ${dbPath})`));
