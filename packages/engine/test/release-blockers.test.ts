@@ -145,3 +145,47 @@ describe("history is protected: a question minted before a fix is refused as sta
     expect(fresh.item.id).toContain(generationFingerprint(t, scope));
   });
 });
+
+/**
+ * Brief 11 release audit, F1: in simple quadruple time the bar-completion grader rejected the correct single-note answers (crotchet + dotted minim,
+ * crotchet-minim-crotchet) with "use a tie", and accepted the tied spelling the lessons and the reference book mark wrong.
+ */
+describe("bar completion in four-beat bars: a whole-beat note may cross the middle of the bar", () => {
+  const n = (value: string, dots = 0, tie = false) => ({ kind: "note", duration: { value, dots }, ...(tie ? { tieToNext: true } : {}) });
+  const find = (templateId: string, ts: string, given: string[]) => {
+    for (let s = 1; s < 400; s++) {
+      try {
+        const item = generateItem(ix, templateId, s, {}).item;
+        const a = item.answer;
+        if (a.kind === "rhythm" && a.timeSignature === ts && JSON.stringify((a.given ?? []).map((e) => (e as { duration: { value: string } }).duration.value)) === JSON.stringify(given)) return item;
+      } catch {
+        /* next seed */
+      }
+    }
+    throw new Error(`no ${templateId} item in ${ts} with given ${given.join(",")}`);
+  };
+  const grade = (item: ExerciseItem, events: unknown[]) => gradeItem(ix, item, { kind: "rhythm", measures: [{ events }] } as never, templateScope(ix, ix.templates.get(item.templateId)!));
+
+  it("Grade 1, 4/4 after one crotchet: dotted minim and minim + crotchet are right; the tied spelling is not", () => {
+    const item = find("t.g1.bar-complete", "4/4", ["crotchet"]);
+    expect(grade(item, [n("crotchet"), n("minim", 1)]).correct).toBe(true);
+    expect(grade(item, [n("crotchet"), n("minim"), n("crotchet")]).correct).toBe(true);
+    const tied = grade(item, [n("crotchet"), n("crotchet", 0, true), n("crotchet"), n("crotchet")]);
+    expect(tied.correct).toBe(false);
+    expect(tied.category).toBe("unnecessary-tie");
+  });
+  it("Grade 2, 4/2 after one minim: semibreve + minim is right; minim tied to minim is not", () => {
+    const item = find("t.g2.bar-complete", "4/2", ["minim"]);
+    expect(grade(item, [n("minim"), n("semibreve"), n("minim")]).correct).toBe(true);
+    expect(grade(item, [n("minim"), n("minim", 0, true), n("minim"), n("minim")]).correct).toBe(false);
+  });
+  it("Grade 2, a 4/4 bar with a triplet may also hold a minim on beat 2", () => {
+    const item = seeds("t.g2.triplet", 200).find((i) => i.answer.kind === "rhythm" && i.answer.task === "add-tuplet" && i.answer.timeSignature === "4/4")!;
+    const triplet = { kind: "tuplet", actual: 3, normal: 2, events: [n("quaver"), n("quaver"), n("quaver")] };
+    expect(grade(item, [n("crotchet"), n("minim"), triplet]).correct).toBe(true);
+  });
+  it("a two-beat REST across the middle is still wrong", () => {
+    const item = find("t.g1.bar-complete", "4/4", ["crotchet"]);
+    expect(grade(item, [n("crotchet"), { kind: "rest", duration: { value: "minim", dots: 0 } }, n("crotchet")]).correct).toBe(false);
+  });
+});

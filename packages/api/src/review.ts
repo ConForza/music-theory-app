@@ -135,27 +135,58 @@ export class ReviewService {
   }
 
   private poolCache = new Map<string, Map<string, string>>();
+  /** Distinct question identities one candidate (concept, template, teaching scope) can produce. Independent of who is asking, so it can be filled before any request. */
+  private candidatePool = new Map<string, string[]>();
+  private candidateKeys(conceptId: string, c: Candidate): string[] {
+    const id = `${this.course.version}|${conceptId}|${c.templateId}|${JSON.stringify(c.scope)}`;
+    const hit = this.candidatePool.get(id);
+    if (hit) return hit;
+    const constraint = this.constraints.get(conceptId);
+    const keys = new Set<string>();
+    for (let seed = 0; seed < 300; seed++) {
+      const item = this.generate(c, seed);
+      if (item && (!constraint || satisfies(item, constraint))) keys.add(questionKey(item));
+    }
+    const out = [...keys];
+    this.candidatePool.set(id, out);
+    return out;
+  }
   /**
    * Every distinct question (by identity) a concept can be asked inside its teaching boundary today, found by sampling
    * seeds. Used to tell a learner honestly when the remaining pool cannot reach the next level, instead of promising progress
-   * the content cannot yet provide. Cached per concept and template set for the life of the process.
+   * the content cannot yet provide. The sampling is cached per candidate (concept, template, scope), which does not depend on the
+   * learner, so `warmPools` can do all of it at start-up: sampling inside a request blocked the server's one thread for 15-25 s for a
+   * learner with many completed lessons (Brief 11 audit, F3).
    */
   poolKeys(conceptId: string, completed: Set<string>): Map<string, string> {
     const cands = this.candidates(conceptId, completed);
-    // Cache depends on each providing node, template and its effective teaching scope.
     const id = `${this.course.version}|${conceptId}|${cands.map((c) => `${c.nodeId}:${c.templateId}:${JSON.stringify(c.scope)}`).join(";")}`;
     const hit = this.poolCache.get(id);
     if (hit) return hit;
-    const constraint = this.constraints.get(conceptId);
     const keys = new Map<string, string>(); // question identity -> the template that asks it
-    for (const c of cands) {
-      for (let seed = 0; seed < 300; seed++) {
-        const item = this.generate(c, seed);
-        if (item && (!constraint || satisfies(item, constraint))) keys.set(questionKey(item), c.templateId);
-      }
-    }
+    for (const c of cands) for (const k of this.candidateKeys(conceptId, c)) keys.set(k, c.templateId);
     this.poolCache.set(id, keys);
     return keys;
+  }
+
+  /**
+   * Fill the per-candidate pools for every concept and every lesson binding that can review it. Call once before the server starts
+   * listening; afterwards no request samples seeds for a pool. Returns how many candidates were sampled.
+   */
+  warmPools(): number {
+    let n = 0;
+    for (const [conceptId, nodes] of this.course.ix.conceptTaughtBy) {
+      for (const node of nodes as OrderedNode[]) {
+        if (!this.course.isPlayable(node.id)) continue;
+        for (const b of node.exercises) {
+          if (!b.conceptIds.includes(conceptId) || !this.generatable.has(b.templateId)) continue;
+          const before = this.candidatePool.size;
+          this.candidateKeys(conceptId, { nodeId: node.id, templateId: b.templateId, scope: effectiveScope(this.course.ix, node, b) });
+          if (this.candidatePool.size > before) n++;
+        }
+      }
+    }
+    return n;
   }
 
   resolve(si: SessionItem): { item: ExerciseItem; scope: MusicScope } | null {

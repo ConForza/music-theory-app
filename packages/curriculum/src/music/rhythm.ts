@@ -384,8 +384,11 @@ export function checkBar(events: REvent[], m: MetreStructure, opts: BarCheckOpti
   tl.forEach((t) => {
     if (t.e.kind === "rest" || t.tuplet !== undefined) return;
     const end = add(t.onset, t.dur);
-    if (middle && !isZero(t.onset) && crosses(t.onset, end, middle)) {
-      push("note-across-middle", t.index, "A note starting after beat 1 should not run across the middle of the bar; use a tie.");
+    // A note that starts ON a beat and lasts a whole number of beats may cross the middle of a four-beat bar (crotchet, minim, crotchet; or
+    // crotchet, dotted minim, in 4/4): a single note is preferred to a tie there. Only a note that starts or ends between beats hides the middle.
+    const wholeBeats = bounds.some((b) => equals(b, t.onset)) && bounds.some((b) => equals(b, end));
+    if (middle && !isZero(t.onset) && crosses(t.onset, end, middle) && !wholeBeats) {
+      push("note-across-middle", t.index, "A note that starts or ends between beats should not run across the middle of the bar; use a tie.");
       return;
     }
     if (compoundLike) {

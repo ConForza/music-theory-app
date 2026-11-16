@@ -159,7 +159,10 @@ export function StaveEditor({ clef, mode, keyName, maxLedgerLines, accidentals, 
       if (mode === "signature") {
         onChange(ps.map((p) => ({ pos: music.staffPosition(clef, p), sign: p.alter < 0 ? "b" : "#" })));
       } else {
-        const written = toWritten(clef, keyName, [...(mode === "sequence" ? givenPitches : []), ...ps]).slice(mode === "sequence" ? givenPitches.length : 0);
+        // The given notes are printed in the same bar in single and sequence mode, so the sign a typed note needs depends on them: typing E after a
+        // printed E sharp must write a natural sign, or the stave would read the note back as E sharp (Brief 11 audit, F2).
+        const before = mode === "sequence" || mode === "single" ? givenPitches : [];
+        const written = toWritten(clef, keyName, [...before, ...ps]).slice(before.length);
         if (written.some((w) => w.pos < lo || w.pos > hi)) throw new Error("range");
         onChange(mode === "single" ? written.slice(-1) : written);
       }

@@ -83,4 +83,4 @@ npm run check      # typecheck, lint, curriculum validation, generated-doc check
 npm run e2e        # real-browser journeys (needs `npm run build` and Playwright's Chromium)
 ```
 
-Environment: `PORT`, `MTP_DB` (SQLite path), `MTP_STATIC_DIR`, `MTP_SECURE_COOKIES`, `MTP_ALLOWED_ORIGINS`, `MTP_WAIVE_UNWRITTEN`, `MTP_TRUST_PROXY_HOPS`, and `MTP_TEST_CLOCK=1` together with `NODE_ENV=test` (browser journeys only; exposes `POST /api/test/clock`; the flag alone does nothing).
+Environment: `PORT`, `MTP_DB` (SQLite path), `MTP_STATIC_DIR`, `MTP_SECURE_COOKIES`, `MTP_ALLOWED_ORIGINS`, `MTP_WAIVE_UNWRITTEN`, `MTP_TRUST_PROXY_HOPS`, `MTP_WARM_POOLS` (set to `0` to skip sampling the review question pools at start-up; see DEPLOYMENT.md), and `MTP_TEST_CLOCK=1` together with `NODE_ENV=test` (browser journeys only; exposes `POST /api/test/clock`; the flag alone does nothing).

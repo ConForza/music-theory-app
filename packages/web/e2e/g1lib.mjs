@@ -21,9 +21,12 @@ export async function serve(opts = {}) {
   const clock = new ManualClock(new Date(opts.start ?? "2026-03-02T12:00:00Z"));
   const db = openDb(join(mkdtempSync(join(tmpdir(), "g1-")), "g1.sqlite"));
   const app = createApp({ db, course, clock, testClock: true, waiveUnwrittenPrerequisites: opts.waive ?? true, ...(opts.gates ? { releaseGates: opts.gates } : {}) });
+  // Start as production does (main.ts): the review question pools are sampled before the server listens, never inside a learner's request.
+  app.engagement.review.warmPools();
   const server = createHttpServer(app, join(root, "packages/web/dist"));
-  const port = 8800 + Math.floor(Math.random() * 150);
-  await new Promise((r) => server.listen(port, r));
+  // Port 0: the operating system picks a free port, so suites run side by side never collide (a random port from a fixed range did).
+  await new Promise((r) => server.listen(0, r));
+  const port = server.address().port;
   return { app, course, clock, db, base: `http://localhost:${port}`, close: () => server.close() };
 }
 

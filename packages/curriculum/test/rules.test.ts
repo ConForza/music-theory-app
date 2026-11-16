@@ -143,6 +143,19 @@ describe("rhythm: bar totals and grouping", () => {
     expect(codes([d("crotchet"), n("quaver"), n("minim")], "4/4")).toEqual([]); // dotted crotchet on the beat
     expect(codes([n("semibreve")], "4/4")).toEqual([]);
   });
+  it("lets a whole-beat note cross the middle of a four-beat bar and prefers it to a tie (Brief 11 audit, F1)", () => {
+    const tied = (v: Parameters<typeof n>[0]) => n(v, { tieToNext: true });
+    // First Steps Grade 1 section 18 and Grade 2 section 4: these single notes are right, their tied spellings are wrong.
+    expect(codes([n("crotchet"), d("minim")], "4/4")).toEqual([]);
+    expect(codes([n("crotchet"), n("minim"), n("crotchet")], "4/4")).toEqual([]);
+    expect(codes([n("minim"), n("semibreve"), n("minim")], "4/2")).toEqual([]);
+    expect(codes([n("crotchet"), tied("crotchet"), n("crotchet"), n("crotchet")], "4/4")).toContain("unnecessary-tie");
+    expect(codes([n("crotchet"), tied("crotchet"), n("minim")], "4/4")).toContain("tie-instead-of-dot");
+    expect(codes([n("minim"), tied("minim"), n("minim"), n("minim")], "4/2")).toContain("unnecessary-tie");
+    // A note that starts between beats still may not hide the middle of the bar.
+    expect(codes([n("crotchet"), n("quaver"), n("minim"), n("quaver")], "4/4", { requireBeams: false })).toContain("note-across-middle");
+    expect(codes([n("crotchet"), d("crotchet"), n("quaver"), n("crotchet")], "4/4", { requireBeams: false })).toContain("note-across-middle");
+  });
   it("reports overfull and underfull bars", () => {
     expect(codes([n("minim"), n("minim")], "3/4")).toContain("bar-overfull");
     expect(codes([n("minim")], "3/4")).toContain("bar-underfull");
@@ -181,8 +194,11 @@ describe("rhythm: bar totals and grouping", () => {
   it("finds ties that could be written as one value", () => {
     expect(codes([n("crotchet", { tieToNext: true }), n("crotchet"), n("minim")], "4/4")).toContain("unnecessary-tie");
     expect(codes([n("minim", { tieToNext: true }), n("crotchet"), n("crotchet")], "4/4")).toContain("tie-instead-of-dot");
-    // Needed to show the middle of the bar: not reported.
-    expect(codes([n("crotchet"), n("crotchet", { tieToNext: true }), n("crotchet"), n("crotchet")], "4/4")).toEqual([]);
+    // Brief 11 audit, F1: this tie is NOT needed (a minim on beat 2 is the standard spelling), so it is reported. The earlier expectation
+    // here ("needed to show the middle of the bar") was the defect: it is the form the reference book marks incorrect.
+    expect(codes([n("crotchet"), n("crotchet", { tieToNext: true }), n("crotchet"), n("crotchet")], "4/4")).toContain("unnecessary-tie");
+    // A tie IS needed, and not reported, where the single note would start between beats and hide the middle of the bar.
+    expect(codes([n("crotchet"), n("quaver"), n("quaver", { tieToNext: true }), n("quaver"), n("quaver"), n("crotchet")], "4/4", { requireBeams: false })).toEqual([]);
   });
   it("accepts an irregular bar under any standard sub-grouping (5/8 and 7/8 alternatives)", () => {
     const q = () => n("quaver");
