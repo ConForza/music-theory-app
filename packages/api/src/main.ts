@@ -2,12 +2,18 @@ import { mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createApp } from "./app.ts";
-import { testClockEnabled } from "./config.ts";
+import { railwayProblem, testClockEnabled } from "./config.ts";
+import { createPreviewGate } from "./preview-gate.ts";
 import { loadCourse } from "./course.ts";
 import { openDb } from "./db.ts";
 import { retentionPolicyFromEnv } from "./retention.ts";
 import { startServer } from "./startup.ts";
 
+const problem = railwayProblem(process.env);
+if (problem) {
+  console.error(problem);
+  process.exit(1);
+}
 const here = dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.PORT ?? 8787);
 const dbPath = resolve(process.env.MTP_DB ?? resolve(here, "../data/mtp.sqlite"));
@@ -28,11 +34,14 @@ const app = createApp({
   ...(/^[1-9]\d{0,5}$/.test(process.env.MTP_GUEST_CREATIONS_PER_15_MIN ?? "") ? { guestCreationsPer15Min: Number(process.env.MTP_GUEST_CREATIONS_PER_15_MIN) } : {}),
 });
 const secure = process.env.MTP_SECURE_COOKIES === "1";
+// Private preview: MTP_PREVIEW_GATE=1 puts every route except read-only /api/health behind per-tester credentials (see preview-gate.ts).
+const gate = process.env.MTP_PREVIEW_GATE === "1" ? createPreviewGate(process.env.MTP_PREVIEW_ACCESS) : undefined;
+if (gate) console.log(`Preview access gate ON: ${gate.testers} invited tester(s).${gate.testers === 0 ? " Nobody can sign in." : ""}`);
 startServer({
   app,
   staticDir,
   port,
-  http: { https: secure, trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0, securityHeaders: process.env.MTP_SECURITY_HEADERS === "proxy" ? "proxy" : "app" },
+  http: { https: secure, trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0, securityHeaders: process.env.MTP_SECURITY_HEADERS === "proxy" ? "proxy" : "app", ...(gate ? { gate } : {}) },
   // Set MTP_WARM_POOLS=0 only for local development: the pools are then sampled inside learners' requests (a 15-25 s stall each restart).
   warmPools: process.env.MTP_WARM_POOLS !== "0",
   retention: retentionPolicyFromEnv(),
