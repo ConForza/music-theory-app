@@ -2,6 +2,8 @@
 
 These questions need a decision from the product owner or a qualified music-theory teacher. Each says what the app currently does, so work can go ahead without inventing requirements. None of them blocks Brief 02.
 
+> Owner decisions of 16 November 2026 (private preview) and their links to these questions: [`docs/signoff/OWNER_DECISION_RECORD.md`](../signoff/OWNER_DECISION_RECORD.md). No row below has been changed by them.
+
 | ID | Question | Current handling | Who decides | Blocks |
 |---|---|---|---|---|
 | <a id="q1"></a>**Q1** | **Is the July 2020 outline still the current Grades 1–5 syllabus?** The PDF downloaded and was hashed. abrsm.org's HTML pages were blocked by bot protection from the build environment, and a web search found no newer version. | `release.syllabus.newerRevisionCheck.result = "inconclusive"`. The release gate fails until this is `none_found`. | Owner: check abrsm.org in a browser | Release (Brief 11) |
