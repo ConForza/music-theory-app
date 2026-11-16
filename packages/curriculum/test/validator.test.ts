@@ -252,18 +252,18 @@ describe("musical verification of authored content", () => {
 
   it("detects an invalid chord that lacks the melody note", () => {
     const codes = mutate((c) => {
-      const item = lesson(c, "G5-U4-L06").independent[1]!;
+      const item = lesson(c, "G5-U4-L06").independent.find((i) => i.answer.kind === "chord-progression")!;
       if (item.answer.kind !== "chord-progression") throw new Error("fixture changed");
-      item.answer.points[0]!.accepted = ["IV", "V"];
+      item.answer.points[0]!.accepted = ["I", "ii", "IV", "V"]; // no melody note is in all four chords
     });
     expect(codes).toContain("ANSWER_MISMATCH");
   });
 
   it("detects a misnamed cadence", () => {
     const codes = mutate((c) => {
-      const item = lesson(c, "G5-U4-L06").independent[1]!;
+      const item = lesson(c, "G5-U4-L06").independent.find((i) => i.answer.kind === "chord-progression")!;
       if (item.answer.kind !== "chord-progression") throw new Error("fixture changed");
-      item.answer.cadences[0]!.acceptedTypes = ["perfect"];
+      item.answer.cadences[0]!.acceptedTypes = [item.answer.cadences[0]!.acceptedTypes[0] === "perfect" ? "plagal" : "perfect"];
     });
     expect(codes).toContain("CADENCE_TYPE_MISMATCH");
   });
@@ -435,7 +435,7 @@ describe("review regressions (R3–R7)", () => {
 
   it("R6: lesson content and path node versions must agree", () => {
     const codes = mutate((c) => {
-      lesson(c, "G1-U3-L03").contentVersion = 2;
+      lesson(c, "G1-U3-L03").contentVersion += 1;
     });
     expect(codes).toContain("LESSON_VERSION_MISMATCH");
   });
@@ -444,7 +444,7 @@ describe("review regressions (R3–R7)", () => {
     const { toPosixPath } = await import("../src/load.ts");
     expect(toPosixPath("lessons\\G1-U3-L03.json")).toBe("lessons/G1-U3-L03.json");
     const codes = mutate((c) => {
-      c.lessons[0]!.file = "lessons\\G1-U3-L03.json";
+      c.lessons.find((l) => l.content.lessonId === "G1-U3-L03")!.file = "lessons\\G1-U3-L03.json";
       node(c, "G1-U3-L03").contentRef = "lessons\\G1-U3-L03.json";
     });
     expect(codes).toEqual([]);
@@ -513,6 +513,7 @@ describe("re-review regressions (C1, C2)", () => {
     return mutate((c) => {
       const raw = firstLesson();
       edit(raw);
+      c.lessons = c.lessons.filter((l) => l.content.lessonId !== "G1-U1-L01"); // the shipped lesson is replaced by the test's own
       c.lessons.push({ file: "lessons/G1-U1-L01.json", content: LessonContent.parse(raw) });
       const n = node(c, "G1-U1-L01");
       n.contentRef = "lessons/G1-U1-L01.json";

@@ -12,8 +12,11 @@ import { effectiveScope, intersectScope, taughtScope, type CurriculumIndex } fro
 import {
   add,
   barCapacity,
+  classifyTimeSignature,
   chromaticNumber,
   classifyCadence,
+  classifyWrittenOut,
+  identifyTriad,
   diatonicNumber,
   dotted,
   enharmonic,
@@ -39,7 +42,6 @@ import {
   signatureAlter,
   staffPosition,
   transpose,
-  triad,
   triadContains,
   type Fraction,
   type Interval,
@@ -47,10 +49,10 @@ import {
   type Pitch,
   type PitchClass,
 } from "./music/index.ts";
+import { beatProfile, checkBar as checkBarRule, metreStructures } from "./music/rhythm.ts";
 import type { AnswerSpec, ExerciseItem, Measure, MusicScope, NotationEvent, NotationFragment, NotationScore, SimpleAnswerSpec } from "./schema.ts";
 
 const ROMANS = ["I", "ii", "IV", "V"] as const;
-const INVERSIONS = ["a", "b", "c"] as const;
 const ACCIDENTAL_ALTER: Record<string, number> = { sharp: 1, flat: -1, natural: 0, "double-sharp": 2, "double-flat": -2 };
 const BEAMABLE = new Set(["quaver", "semiquaver", "demisemiquaver"]);
 
@@ -265,31 +267,15 @@ function scaleMembers(key: Key, forms: Array<"major" | MinorScaleForm>): PitchCl
 }
 
 function identifyChord(key: Key, pitches: Pitch[]): { roman: string; inversion: string } | null {
-  for (const r of ROMANS) {
-    const t = triad(key, r);
-    const allIn = pitches.every((p) => t.some((x) => samePitchClassSpelling(x, p)));
-    const allPresent = t.every((x) => pitches.some((p) => samePitchClassSpelling(x, p)));
-    if (allIn && allPresent) {
-      const bass = [...pitches].sort((a, b) => chromaticNumber(a) - chromaticNumber(b) || diatonicNumber(a) - diatonicNumber(b))[0]!;
-      const idx = t.findIndex((x) => samePitchClassSpelling(x, bass));
-      return { roman: r, inversion: INVERSIONS[idx]! };
-    }
-  }
-  return null;
+  return identifyTriad(key, pitches, ROMANS);
 }
 
-function classifyOrnament(main: Pitch, figure: Pitch[]): string | null {
-  const steps = figure.map((p) => diatonicNumber(p) - diatonicNumber(main));
-  const is = (pattern: number[]) => steps.length === pattern.length && steps.every((s, i) => s === pattern[i]);
-  if (is([0, 1, 0])) return "upper-mordent";
-  if (is([0, -1, 0])) return "lower-mordent";
-  if (is([1, 0, -1, 0]) || is([0, 1, 0, -1, 0])) return "turn";
-  const core = steps.slice(-2).join() === "-1,0" ? steps.slice(0, -2) : steps;
-  if (core.length >= 4 && core.every((s, i) => s === (core[0] === 1 ? (i % 2 === 0 ? 1 : 0) : i % 2 === 0 ? 0 : 1))) return "trill";
-  return null;
+function classifyOrnament(main: Pitch, figure: Pitch[], values?: Array<{ value: import("./music/duration.ts").NoteValue; dots?: number }>): string | null {
+  const shape = classifyWrittenOut(main, figure, values);
+  return shape === "inverted-turn" ? null : shape;
 }
 
-function deriveScale(keyName: string, form: "major" | "harmonic" | "melodic", direction: string, start: Pitch): Pitch[] {
+export function deriveScale(keyName: string, form: "major" | "harmonic" | "melodic", direction: string, start: Pitch): Pitch[] {
   const key = parseKey(keyName);
   const asc = scale(key, form === "major" ? "major" : form === "harmonic" ? "harmonic" : "melodic-ascending");
   const withOctaves = (pcs: PitchClass[], from: Pitch, step: 1 | -1) => {
@@ -325,6 +311,13 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       if (new Set(ids).size !== ids.length) report("CHOICE_DUPLICATE", where, "Option ids must be unique");
       for (const c of a.correctOptionIds) if (!ids.includes(c)) report("CHOICE_UNKNOWN", where, `Correct option ${c} is not an option`);
       if (a.correctOptionIds.length === ids.length) report("CHOICE_TRIVIAL", where, "Every option is correct");
+      if (a.kind === "choice" && a.diagnoses) {
+        for (const [opt, d] of Object.entries(a.diagnoses)) {
+          if (!ids.includes(opt)) report("CHOICE_DIAGNOSIS", where, `Diagnosis for unknown option ${opt}`);
+          else if (a.correctOptionIds.includes(opt)) report("CHOICE_DIAGNOSIS", where, `The correct option ${opt} cannot carry a mistake diagnosis`);
+          if (!(d.category in item.feedback.mistakes)) report("CHOICE_DIAGNOSIS", where, `Diagnosis category ${d.category} has no feedback on the item`);
+        }
+      }
       return;
     }
     case "pitch": {
@@ -348,6 +341,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         } else {
           ok = sameSound && (a.relation === "same-sound" || !samePitchClassSpelling(p, ref));
         }
+        if (a.letter && p.step !== a.letter) report("ANSWER_MISMATCH", where, `Accepted alternative ${acc} does not use the letter ${a.letter} the task requires`);
         if (!ok) report("ANSWER_MISMATCH", where, `Accepted alternative ${acc} is not correct for ${formatPitch(ref)} (${a.relation}, spelling ${a.spellingSensitive ? "sensitive" : "insensitive"}, octave ${a.octaveSensitive ? "sensitive" : "insensitive"})`);
         if (Math.abs(p.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, `${acc} uses a double accidental, which is not in scope here`);
       }
@@ -385,8 +379,9 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
         const source = parseKey(d.sourceKey);
         if (!music.key || !sameKey(parseKey(music.key), source)) report("TRANSPOSE_SOURCE_KEY", where, `Source key ${d.sourceKey} ≠ music key ${String(music.key)}`);
         const interval = parseInterval(d.interval);
-        if (interval.number === 8 && interval.quality === "P") {
-          const clefs = sc.octaveTranspositionClefs ?? [];
+        // an octave (P8) or a same-pitch copy in another clef (P1, Brief 09) is a clef task, not an instrument transposition
+        if ((interval.number === 8 || interval.number === 1) && interval.quality === "P") {
+          const clefs = interval.number === 1 ? (sc.clefs ?? []) : (sc.octaveTranspositionClefs ?? []);
           if (!clefs.includes(a.clef) || !clefs.includes(music.clef)) report("ANSWER_SCOPE", where, `Octave transposition ${music.clef} → ${a.clef} is not in scope here`);
         } else {
           const ok = ["M2", "m3", "P5"].includes(d.interval) && (sc.instrumentTranspositions ?? []).length > 0;
@@ -467,6 +462,30 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
           const first = measures[0]?.events ?? [];
           if (JSON.stringify(first.slice(0, a.given.length)) !== JSON.stringify(a.given)) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} does not begin with the given events`);
         }
+        if (a.groupPattern && ts) {
+          const st = metreStructures(ts).find((x) => x.pattern?.join("+") === a.groupPattern!.join("+"));
+          if (!st) report("ANSWER_MISMATCH", where, `${a.groupPattern.join("+")} is not a standard grouping of ${ts}`);
+          else
+            measures.forEach((m, bi) => {
+              const issues = checkBarRule(voicesOf(m)[0] as never, st, { requireBeams: a.task === "regroup" });
+              if (issues.length) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1}, bar ${bi + 1}, does not follow the ${a.groupPattern!.join("+")} grouping: ${issues[0]!.message}`);
+            });
+        }
+        if (a.fromTimeSignature) {
+          // Rewriting between simple and compound time: every note and rest keeps its share of its beat, and the shown bars are in the other metre.
+          const shown = music?.measures ?? [];
+          if (a.task !== "regroup") report("ANSWER_MISMATCH", where, "fromTimeSignature is only valid with the regroup task");
+          else if (!ts || !music) report("RHYTHM_TARGET", where, "A rewrite needs the shown bars and the metre to write in");
+          else if (classifyTimeSignature(a.fromTimeSignature).metre === classifyTimeSignature(ts).metre) report("ANSWER_MISMATCH", where, `${a.fromTimeSignature} and ${ts} are both ${classifyTimeSignature(ts).metre} time: a rewrite goes between simple and compound`);
+          else if (shown.length !== measures.length) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} has ${measures.length} bars; the shown music has ${shown.length}`);
+          else if (music.timeSignature && music.timeSignature !== a.fromTimeSignature) report("ANSWER_MISMATCH", where, `The shown music is in ${music.timeSignature}, not ${a.fromTimeSignature}`);
+          else
+            measures.forEach((m, bi) => {
+              const got = beatProfile(voicesOf(m)[0] as never, ts).join();
+              const was = beatProfile(voicesOf(shown[bi]!)[0] as never, a.fromTimeSignature!).join();
+              if (got !== was) report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1}, bar ${bi + 1}: in ${ts} the notes do not keep their share of the beat they had in ${a.fromTimeSignature}`);
+            });
+        }
         if (a.task === "add-tuplet" && !measures.some((m) => voicesOf(m).some((v) => v.some((e) => e.kind === "tuplet")))) {
           report("ANSWER_MISMATCH", where, `Accepted alternative ${i + 1} contains no tuplet`);
         }
@@ -525,6 +544,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
           if (!key) report("ANSWER_SCOPE", where, "A key is required for diatonic interval tasks");
           else if (!inKey(lower) || !inKey(upperPitch)) report("ANSWER_SCOPE", where, `${formatPitch(lower)}–${formatPitch(upperPitch)} is not in the ${forms.join("/")} form(s) of ${a.key} allowed here`);
         }
+        if (sc.intervalQuality === "number-and-quality" && !"MmP".includes(iv.quality) && !sc.augmentedDiminished && !sc.chromaticIntervals) report("ANSWER_SCOPE", where, `${iv.quality}${iv.number} is an augmented or diminished interval, which is not in scope here`);
         if (Math.abs(upperPitch.alter) === 2 && !sc.doubleAccidentals) report("ANSWER_SCOPE", where, "Double accidentals are not in scope here");
       };
       if (a.task === "identify") {
@@ -619,6 +639,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
       } else {
         scopeChord(a.target!);
         a.acceptedVoicings?.forEach((v, i) => {
+          if (a.voices !== undefined && v.length !== a.voices) report("ANSWER_MISMATCH", where, `Voicing ${i + 1} has ${v.length} notes but the item asks for ${a.voices}`);
           const d = identifyChord(key, v.map(parsePitch));
           if (!d || d.roman !== a.target!.roman || d.inversion !== a.target!.inversion) report("ANSWER_MISMATCH", where, `Voicing ${i + 1} [${v.join(" ")}] is ${d ? d.roman + d.inversion : "not a I/ii/IV/V chord"}, not ${a.target!.roman}${a.target!.inversion}`);
         });
@@ -627,7 +648,7 @@ export function checkAnswer(item: ExerciseItem, answer: AnswerSpec | SimpleAnswe
     }
     case "ornament-sign": {
       for (const o of a.accepted) if (!(sc.ornaments ?? []).includes(o)) report("ANSWER_SCOPE", where, `Ornament ${o} is not in scope here`);
-      const derived = a.task === "name-sign" ? a.sign! : classifyOrnament(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch));
+      const derived = a.task === "name-sign" ? a.sign! : classifyOrnament(parsePitch(a.mainNote!), a.writtenOut!.map(parsePitch), a.writtenOutValues);
       if (!derived) {
         report("ANSWER_UNSOLVABLE", where, "Written-out figure does not match a mordent, turn or trill pattern");
         return;
@@ -758,6 +779,21 @@ export function verifyLessonMusic(ix: CurriculumIndex): Issue[] {
     const tpl = ix.templates.get(content.item.templateId);
     if (tpl) for (const o of content.outcomeIds) if (!tpl.outcomeIds.includes(o)) report("PROVENANCE_OUTCOME", file, `${o} is not targeted by ${tpl.id}`);
     issues.push(...verifyStandaloneItem(ix, content.item, `${file}#${content.item.id}`));
+  }
+  for (const { file, content } of ix.c.showcase) {
+    const fams = new Set<string>();
+    for (const it of content.items) {
+      issues.push(...verifyStandaloneItem(ix, it, `${file}#${it.id}`));
+      const tpl = ix.templates.get(it.templateId);
+      if (tpl) fams.add(tpl.familyId);
+    }
+    for (const f of content.familyIds) if (!fams.has(f)) report("SHOWCASE_FAMILY", file, `Set lists ${f} but has no item from that family`);
+    for (const f of fams) if (!content.familyIds.includes(f)) report("SHOWCASE_FAMILY", file, `Item family ${f} is not listed in familyIds`);
+    for (const p of content.practice) if (!ix.templates.has(p.templateId)) report("UNKNOWN_REF", file, `Practice template ${p.templateId} not found`);
+  }
+  if (ix.c.showcase.length) {
+    const covered = new Set(ix.c.showcase.flatMap((x) => x.content.items).map((it) => ix.templates.get(it.templateId)?.familyId));
+    for (const f of ix.c.families.families) if (!covered.has(f.id)) report("SHOWCASE_COVERAGE", "exercises/showcase", `No demonstration item for ${f.id}`);
   }
   return issues;
 }

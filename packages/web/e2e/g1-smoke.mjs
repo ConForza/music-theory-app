@@ -1,0 +1,14 @@
+import assert from "node:assert/strict";
+import { chromium } from "playwright";
+import { finishViaApi, guest, playNodeInBrowser, serve, get } from "./g1lib.mjs";
+const S = await serve();
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ baseURL: S.base, viewport: { width: 390, height: 844 } });
+const { page, userId } = await guest(ctx);
+await finishViaApi(S, page, userId, "G1-U3-L07");
+await playNodeInBrowser(page, S, userId, "G1-U3-P1");
+await page.getByText("Practice complete").waitFor();
+const prog = await get(page, "/api/progress");
+assert.equal(prog.nodes["G1-U3-P1"].state, "completed");
+console.log("smoke ok");
+await browser.close(); S.close(); process.exit(0);

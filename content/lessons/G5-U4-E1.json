@@ -1,0 +1,1251 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U4-E1",
+  "lessonId": "G5-U4-E1",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Optional: recognise the six-four five-three progression on the dominant (Ic–V).",
+    "successCriteria": [
+      "I know a second-inversion tonic chord followed by the dominant chord is the 6/4–5/3 progression.",
+      "I know both chords have the dominant note in the bass.",
+      "I know this lesson is optional."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "This lesson is optional. It helps you read harmony, but you do not need it to complete Grade 5, and nothing in it is in the Grade 5 assessment."
+    },
+    {
+      "kind": "text",
+      "text": "A common progression is a second-inversion tonic chord (Ic) followed by the dominant chord in root position (V). Both chords have the dominant note in the bass. It is called a six-four five-three, because the first chord has a 6th and a 4th above its bass, and the second a 5th and a 3rd."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "C5"
+                  },
+                  {
+                    "pitch": "E5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "chord",
+                "notes": [
+                  {
+                    "pitch": "G4"
+                  },
+                  {
+                    "pitch": "B4"
+                  },
+                  {
+                    "pitch": "D5"
+                  }
+                ],
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Ic then V in C major: C major chord with G in the bass, then G major chord.",
+        "key": "C major"
+      },
+      "caption": "Ic–V in C major: G is the lowest note of both chords."
+    },
+    {
+      "kind": "tip",
+      "text": "Ic–V: both chords have the dominant note lowest; the first is a 6/4, the second a 5/3."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "G4"
+                },
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "chord",
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "F#4"
+                },
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "Ic then V in G major.",
+      "key": "G major"
+    },
+    "steps": [
+      "Both chords have D, the dominant, lowest.",
+      "The first is G major in second inversion (Ic).",
+      "The second is D major in root position (V)."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Ic–V in G major."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u4-e1.guided-1",
+      "templateId": "t.g5.cadential-six-four",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This passage in G major has one chord in each bar. Look at the last two chords, C and D.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "C5"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 sharp, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 2: a chord of 3 notes: on the 1st line; on the 2nd line; in the 3rd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space.",
+              "key": "G major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 4th space. Bar 2: a note in the 2nd space. Bar 3: a note on the 3rd line. Bar 4: a note on the 3rd line.",
+              "key": "G major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 sharp, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 2: a chord of 3 notes: on the 1st line; on the 2nd line; in the 3rd space. Bar 3: a chord marked C of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 4: a chord marked D of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Lower stave stave, key signature of 1 sharp, 4/4. Bar 1: a note in the 4th space. Bar 2: a note in the 2nd space. Bar 3: a note on the 3rd line. Bar 4: a note on the 3rd line."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "chord-c",
+            "prompt": "Name chord C (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "G major",
+              "pitches": [
+                "D3",
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "I",
+                  "inversion": "c"
+                }
+              ]
+            }
+          },
+          {
+            "id": "chord-d",
+            "prompt": "Name chord D (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "G major",
+              "pitches": [
+                "D3",
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "V",
+                  "inversion": "a"
+                }
+              ]
+            }
+          },
+          {
+            "id": "progression",
+            "prompt": "Do chords C and D make the six-four five-three progression on the dominant (a second-inversion tonic chord followed by the dominant chord in root position)?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "yes",
+                  "label": "Yes"
+                },
+                {
+                  "id": "no",
+                  "label": "No"
+                }
+              ],
+              "correctOptionIds": [
+                "yes"
+              ],
+              "diagnoses": {
+                "no": {
+                  "category": "evidence-misread",
+                  "reason": "Chord C is the tonic in second inversion (Ic) and chord D is the dominant in root position: that is the 6/4–5/3 progression."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Both chords have the dominant note in the bass.",
+        "In a six-four five-three progression both chords have the dominant note in the bass: the second-inversion tonic, then the dominant chord in root position."
+      ],
+      "feedback": {
+        "correct": "Yes: the dominant note is in the bass.",
+        "mistakes": {
+          "evidence-misread": "Look again at the lowest note of each chord.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u4-e1.ind-1",
+      "templateId": "t.g5.cadential-six-four",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage in D major has one chord in each bar. Look at the last two chords, C and D.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F#4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C#4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 3: a chord marked C of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F#3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "A3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note on the 3rd line. Bar 2: a note in the 4th space. Bar 3: a note on the 4th line. Bar 4: a note on the 5th line.",
+              "key": "D major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 2 sharps, 4/4. Bar 1: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Bar 3: a chord marked C of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; on the 1st line; in the 2nd space. Lower stave stave, key signature of 2 sharps, 4/4. Bar 1: a note on the 3rd line. Bar 2: a note in the 4th space. Bar 3: a note on the 4th line. Bar 4: a note on the 5th line."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "chord-c",
+            "prompt": "Name chord C (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "D major",
+              "pitches": [
+                "F#3",
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "I",
+                  "inversion": "b"
+                }
+              ]
+            }
+          },
+          {
+            "id": "chord-d",
+            "prompt": "Name chord D (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "D major",
+              "pitches": [
+                "A3",
+                "C#4",
+                "E4",
+                "A4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "V",
+                  "inversion": "a"
+                }
+              ]
+            }
+          },
+          {
+            "id": "progression",
+            "prompt": "Do chords C and D make the six-four five-three progression on the dominant (a second-inversion tonic chord followed by the dominant chord in root position)?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "yes",
+                  "label": "Yes"
+                },
+                {
+                  "id": "no",
+                  "label": "No"
+                }
+              ],
+              "correctOptionIds": [
+                "no"
+              ],
+              "diagnoses": {
+                "yes": {
+                  "category": "evidence-misread",
+                  "reason": "Look at the lowest note of chord C: for this progression it must be the 5th of the tonic chord (the dominant note), which is in the bass of both chords."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Both chords have the dominant note in the bass.",
+        "In a six-four five-three progression both chords have the dominant note in the bass: the second-inversion tonic, then the dominant chord in root position."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the lowest note of each chord.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u4-e1.ind-2",
+      "templateId": "t.g5.cadential-six-four",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage in F major has one chord in each bar. Look at the last two chords, C and D.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "Bb4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: in the space just below the stave; in the 1st space; on the 3rd line. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "F3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "Bb3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note on the 4th line. Bar 2: a note in the space just above the stave. Bar 3: a note in the 2nd space. Bar 4: a note in the 2nd space.",
+              "key": "F major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, key signature of 1 flat, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 2: a chord of 3 notes: in the space just below the stave; in the 1st space; on the 3rd line. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Lower stave stave, key signature of 1 flat, 4/4. Bar 1: a note on the 4th line. Bar 2: a note in the space just above the stave. Bar 3: a note in the 2nd space. Bar 4: a note in the 2nd space."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "chord-c",
+            "prompt": "Name chord C (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "F major",
+              "pitches": [
+                "C3",
+                "C4",
+                "F4",
+                "A4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "I",
+                  "inversion": "c"
+                }
+              ]
+            }
+          },
+          {
+            "id": "chord-d",
+            "prompt": "Name chord D (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "F major",
+              "pitches": [
+                "C3",
+                "C4",
+                "E4",
+                "G4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "V",
+                  "inversion": "a"
+                }
+              ]
+            }
+          },
+          {
+            "id": "progression",
+            "prompt": "Do chords C and D make the six-four five-three progression on the dominant (a second-inversion tonic chord followed by the dominant chord in root position)?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "yes",
+                  "label": "Yes"
+                },
+                {
+                  "id": "no",
+                  "label": "No"
+                }
+              ],
+              "correctOptionIds": [
+                "yes"
+              ],
+              "diagnoses": {
+                "no": {
+                  "category": "evidence-misread",
+                  "reason": "Chord C is the tonic in second inversion (Ic) and chord D is the dominant in root position: that is the 6/4–5/3 progression."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Both chords have the dominant note in the bass.",
+        "In a six-four five-three progression both chords have the dominant note in the bass: the second-inversion tonic, then the dominant chord in root position."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the lowest note of each chord.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g5-u4-e1.ind-3",
+      "templateId": "t.g5.cadential-six-four",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage in C major has one chord in each bar. Look at the last two chords, C and D.",
+      "score": {
+        "staves": [
+          {
+            "id": "upper",
+            "label": "Upper stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "treble",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "E4"
+                        },
+                        {
+                          "pitch": "G4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "C4"
+                        },
+                        {
+                          "pitch": "F4"
+                        },
+                        {
+                          "pitch": "A4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "C"
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "chord",
+                      "notes": [
+                        {
+                          "pitch": "D4"
+                        },
+                        {
+                          "pitch": "G4"
+                        },
+                        {
+                          "pitch": "B4"
+                        }
+                      ],
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      },
+                      "label": "D"
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Upper stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 2: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line.",
+              "key": "C major",
+              "timeSignature": "4/4"
+            }
+          },
+          {
+            "id": "lower",
+            "label": "Lower stave",
+            "music": {
+              "presentation": "stave",
+              "clef": "bass",
+              "showKeySignature": true,
+              "measures": [
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "C3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "D3",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "A2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "events": [
+                    {
+                      "kind": "note",
+                      "pitch": "G2",
+                      "duration": {
+                        "value": "semibreve",
+                        "dots": 0
+                      }
+                    }
+                  ],
+                  "barline": "final"
+                }
+              ],
+              "textAlternative": "Lower stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 3rd line. Bar 3: a note in the 1st space. Bar 4: a note on the 1st line.",
+              "key": "C major",
+              "timeSignature": "4/4"
+            }
+          }
+        ],
+        "textAlternative": "A passage of chords on two staves, one chord in each bar. Upper stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a chord of 3 notes: on the 1st ledger line below the stave; on the 1st line; on the 2nd line. Bar 2: a chord of 3 notes: in the space just below the stave; in the 1st space; in the 2nd space. Bar 3: a chord marked C of 3 notes: on the 1st ledger line below the stave; in the 1st space; in the 2nd space. Bar 4: a chord marked D of 3 notes: in the space just below the stave; on the 2nd line; on the 3rd line. Lower stave stave, no sharps or flats in the key signature, 4/4. Bar 1: a note in the 2nd space. Bar 2: a note on the 3rd line. Bar 3: a note in the 1st space. Bar 4: a note on the 1st line."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "chord-c",
+            "prompt": "Name chord C (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "C major",
+              "pitches": [
+                "A2",
+                "C4",
+                "F4",
+                "A4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "IV",
+                  "inversion": "b"
+                }
+              ]
+            }
+          },
+          {
+            "id": "chord-d",
+            "prompt": "Name chord D (Roman numeral and position).",
+            "answer": {
+              "kind": "chord",
+              "task": "identify",
+              "key": "C major",
+              "pitches": [
+                "G2",
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "acceptedChords": [
+                {
+                  "roman": "V",
+                  "inversion": "a"
+                }
+              ]
+            }
+          },
+          {
+            "id": "progression",
+            "prompt": "Do chords C and D make the six-four five-three progression on the dominant (a second-inversion tonic chord followed by the dominant chord in root position)?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "yes",
+                  "label": "Yes"
+                },
+                {
+                  "id": "no",
+                  "label": "No"
+                }
+              ],
+              "correctOptionIds": [
+                "no"
+              ],
+              "diagnoses": {
+                "yes": {
+                  "category": "evidence-misread",
+                  "reason": "Look at the lowest note of chord C: for this progression it must be the 5th of the tonic chord (the dominant note), which is in the bass of both chords."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Both chords have the dominant note in the bass.",
+        "In a six-four five-three progression both chords have the dominant note in the bass: the second-inversion tonic, then the dominant chord in root position."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the lowest note of each chord.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "recap": [
+    "Ic–V: both chords have the dominant note in the bass.",
+    "The first chord is the tonic in second inversion.",
+    "This lesson is optional."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.cadential-six-four",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.chords.cadential-six-four"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "Optional enrichment. It is complete when every step has been answered correctly. It never counts towards Grade 5 mastery, a unit challenge or the Grade 5 assessment, and it never gates any other node."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s10"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.09"
+    ],
+    "notes": "Optional enrichment (OPEN_QUESTIONS Q8). First Steps Grade 5 section 10 (pp. 120-122): the 6/4 5/3 progression on the dominant only. Never compulsory, never mastery evidence, never in an assessment."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@mtp/engine",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Music Theory Path exercise engine: deterministic graders (engine.json contracts), learner response and input contracts, seeded exercise generators.",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mtp/curriculum": "0.1.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "fast-check": "^4.10.2",
+    "typescript": "^5.6.3",
+    "vitest": "^5.1.0"
+  }
+}

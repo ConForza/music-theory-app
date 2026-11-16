@@ -4,7 +4,7 @@
     {
       "dimension": "keys",
       "value": "C major",
-      "conceptId": "c.scales.major-pattern"
+      "conceptId": "c.pitch.letter-names"
     },
     {
       "dimension": "keys",
@@ -39,17 +39,17 @@
     {
       "dimension": "keys",
       "value": "A minor",
-      "conceptId": "c.scales.minor-harmonic-g2"
+      "conceptId": "c.scales.minor-concept"
     },
     {
       "dimension": "keys",
       "value": "E minor",
-      "conceptId": "c.scales.minor-harmonic-g2"
+      "conceptId": "c.scales.minor-concept"
     },
     {
       "dimension": "keys",
       "value": "D minor",
-      "conceptId": "c.scales.minor-harmonic-g2"
+      "conceptId": "c.scales.minor-concept"
     },
     {
       "dimension": "keys",
@@ -144,17 +144,17 @@
     {
       "dimension": "timeSignatures",
       "value": "2/4",
-      "conceptId": "c.metre.simple-crotchet"
+      "conceptId": "c.metre.bars"
     },
     {
       "dimension": "timeSignatures",
       "value": "3/4",
-      "conceptId": "c.metre.simple-crotchet"
+      "conceptId": "c.metre.bars"
     },
     {
       "dimension": "timeSignatures",
       "value": "4/4",
-      "conceptId": "c.metre.simple-crotchet"
+      "conceptId": "c.metre.bars"
     },
     {
       "dimension": "timeSignatures",
@@ -314,7 +314,7 @@
     {
       "dimension": "clefs",
       "value": "treble",
-      "conceptId": "c.clefs.treble-lines"
+      "conceptId": "c.clefs.stave"
     },
     {
       "dimension": "clefs",
@@ -344,6 +344,11 @@
     {
       "dimension": "maxLedgerLines",
       "value": 3,
+      "conceptId": "c.pitch.ledger-extended"
+    },
+    {
+      "dimension": "maxLedgerLines",
+      "value": 4,
       "conceptId": "c.pitch.ledger-extended"
     },
     {
@@ -555,6 +560,11 @@
       "dimension": "blackKeys",
       "value": true,
       "conceptId": "c.accidentals.signs"
+    },
+    {
+      "dimension": "augmentedDiminished",
+      "value": true,
+      "conceptId": "c.intervals.augmented-diminished"
     }
   ]
 }

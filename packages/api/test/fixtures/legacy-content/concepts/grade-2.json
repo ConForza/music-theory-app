@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "grade": 2,
+  "concepts": [
+    {
+      "id": "c.metre.minim-beats",
+      "grade": 2,
+      "domain": "metre",
+      "title": "Minim-beat time signatures",
+      "summary": "Bottom 2 = minim beats; 2/2 may be written as alla breve.",
+      "prerequisiteIds": [
+        "c.metre.simple-crotchet"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification",
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ]
+    },
+    {
+      "id": "c.metre.quaver-beats",
+      "grade": 2,
+      "domain": "metre",
+      "title": "3/8",
+      "summary": "Bottom 8 = quaver beats; three per bar.",
+      "prerequisiteIds": [
+        "c.metre.simple-crotchet"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification",
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ]
+    },
+    {
+      "id": "c.metre.beat-classification",
+      "grade": 2,
+      "domain": "metre",
+      "title": "Duple, triple, quadruple",
+      "summary": "Number of beats per bar names the time; the same notes can be felt in 2 or in 4.",
+      "prerequisiteIds": [
+        "c.metre.minim-beats",
+        "c.metre.quaver-beats"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.triplets",
+      "grade": 2,
+      "domain": "rhythm",
+      "title": "Triplets",
+      "summary": "Three equal notes in the time of two of the same value, marked 3.",
+      "prerequisiteIds": [
+        "c.rhythm.values-short",
+        "c.rhythm.beams"
+      ],
+      "rulesetIds": [
+        "rules.tuplet"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.03"
+      ]
+    },
+    {
+      "id": "c.rhythm.triplets-mixed",
+      "grade": 2,
+      "domain": "rhythm",
+      "title": "Triplet groups with rests",
+      "summary": "Triplet groups may include rests and unequal values that total three units.",
+      "prerequisiteIds": [
+        "c.rhythm.triplets",
+        "c.rhythm.rests"
+      ],
+      "rulesetIds": [
+        "rules.tuplet"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.04"
+      ]
+    },
+    {
+      "id": "c.metre.grouping-g2",
+      "grade": 2,
+      "domain": "metre",
+      "title": "Grouping notes in Grade 2 times",
+      "summary": "Beam within beats (minim beats in x/2); six quavers in 3/8; eight semiquavers per minim.",
+      "prerequisiteIds": [
+        "c.metre.minim-beats",
+        "c.metre.quaver-beats",
+        "c.metre.grouping-g1"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ]
+    },
+    {
+      "id": "c.metre.rest-grouping-beats",
+      "grade": 2,
+      "domain": "metre",
+      "title": "Rests by beat",
+      "summary": "Normally each silent beat begins with its own rest; whole-bar rests use the semibreve rest.",
+      "prerequisiteIds": [
+        "c.metre.rests-in-bars-g1",
+        "c.metre.grouping-g2"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ]
+    },
+    {
+      "id": "c.metre.rest-grouping-half-bar",
+      "grade": 2,
+      "domain": "metre",
+      "title": "Half-bar rests",
+      "summary": "In quadruple time a two-beat rest may fill either half of the bar but not beats 2–3.",
+      "prerequisiteIds": [
+        "c.metre.rest-grouping-beats"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ]
+    },
+    {
+      "id": "c.metre.rest-grouping-subdivisions",
+      "grade": 2,
+      "domain": "metre",
+      "title": "Part-beat rests",
+      "summary": "Each subdivision of a beat begins with a new rest; order reverses when the note is at the start.",
+      "prerequisiteIds": [
+        "c.metre.rest-grouping-half-bar"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.02"
+      ]
+    },
+    {
+      "id": "c.pitch.ledger-two",
+      "grade": 2,
+      "domain": "pitch",
+      "title": "Two ledger lines",
+      "summary": "Ledger lines continue the stave pattern; Grade 2 uses up to two.",
+      "prerequisiteIds": [
+        "c.pitch.middle-c"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.05"
+      ]
+    },
+    {
+      "id": "c.clefs.same-pitch-treble-bass",
+      "grade": 2,
+      "domain": "clefs",
+      "title": "Same pitch, two clefs",
+      "summary": "Notes around middle C can be written in either clef at the same pitch.",
+      "prerequisiteIds": [
+        "c.pitch.ledger-two"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "supporting",
+      "outcomeIds": [
+        "abrsm2020.g2.05"
+      ]
+    },
+    {
+      "id": "c.scales.major-a",
+      "grade": 2,
+      "domain": "scales",
+      "title": "A major",
+      "summary": "F♯, C♯ and G♯ keep the major pattern.",
+      "prerequisiteIds": [
+        "c.scales.writing-g1"
+      ],
+      "rulesetIds": [
+        "rules.scale.major"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.08"
+      ]
+    },
+    {
+      "id": "c.scales.major-bb-eb",
+      "grade": 2,
+      "domain": "scales",
+      "title": "B♭ and E♭ major",
+      "summary": "B♭ major: B♭ E♭; E♭ major: B♭ E♭ A♭.",
+      "prerequisiteIds": [
+        "c.scales.writing-g1"
+      ],
+      "rulesetIds": [
+        "rules.scale.major"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.08"
+      ]
+    },
+    {
+      "id": "c.keys.signatures-g2-major",
+      "grade": 2,
+      "domain": "keys",
+      "title": "Order of sharps and flats (to three)",
+      "summary": "Each new key adds one sharp or flat in a fixed order; never mixed.",
+      "prerequisiteIds": [
+        "c.scales.major-a",
+        "c.scales.major-bb-eb",
+        "c.keys.signatures-g1"
+      ],
+      "rulesetIds": [
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.08"
+      ]
+    },
+    {
+      "id": "c.chords.tonic-triad-g2-major",
+      "grade": 2,
+      "domain": "chords",
+      "title": "Tonic triads in new major keys",
+      "summary": "Degrees 1-3-5 in A, B♭ and E♭ major.",
+      "prerequisiteIds": [
+        "c.keys.signatures-g2-major",
+        "c.chords.tonic-triad"
+      ],
+      "rulesetIds": [
+        "rules.chord.triad",
+        "rules.scale.degrees"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ]
+    },
+    {
+      "id": "c.scales.minor-concept",
+      "grade": 2,
+      "domain": "scales",
+      "title": "Minor scales",
+      "summary": "Minor scales have a semitone between degrees 2 and 3.",
+      "prerequisiteIds": [
+        "c.scales.major-pattern"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-harmonic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.07"
+      ]
+    },
+    {
+      "id": "c.keys.relative",
+      "grade": 2,
+      "domain": "keys",
+      "title": "Relative keys",
+      "summary": "Keys sharing a key signature; the relative minor's tonic is a minor 3rd below the major's.",
+      "prerequisiteIds": [
+        "c.scales.minor-concept",
+        "c.keys.signatures-g1"
+      ],
+      "rulesetIds": [
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.06"
+      ]
+    },
+    {
+      "id": "c.scales.minor-harmonic",
+      "grade": 2,
+      "domain": "scales",
+      "title": "Harmonic minor",
+      "summary": "Key-signature notes plus a raised 7th, same up and down; includes a three-semitone step 6–7.",
+      "prerequisiteIds": [
+        "c.keys.relative"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-harmonic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.07",
+        "abrsm2020.g2.09"
+      ]
+    },
+    {
+      "id": "c.scales.minor-harmonic-g2",
+      "grade": 2,
+      "domain": "scales",
+      "title": "A, E, D harmonic minor",
+      "summary": "G♯ in A minor, D♯ in E minor, C♯ in D minor — written as accidentals.",
+      "prerequisiteIds": [
+        "c.scales.minor-harmonic"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-harmonic",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.09"
+      ]
+    },
+    {
+      "id": "c.keys.minor-g2",
+      "grade": 2,
+      "domain": "keys",
+      "title": "Minor keys A, E, D",
+      "summary": "Key signatures as relatives; minor tonic triads; degrees by number.",
+      "prerequisiteIds": [
+        "c.scales.minor-harmonic-g2",
+        "c.chords.tonic-triad-g2-major"
+      ],
+      "rulesetIds": [
+        "rules.key-signature",
+        "rules.chord.triad",
+        "rules.scale.degrees"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.09",
+        "abrsm2020.g2.10",
+        "abrsm2020.g2.11"
+      ]
+    },
+    {
+      "id": "c.scales.minor-melodic-preview",
+      "grade": 2,
+      "domain": "scales",
+      "title": "Melodic minor preview",
+      "summary": "A listen-and-look preview of raised 6th and 7th ascending; not assessed in Grade 2.",
+      "prerequisiteIds": [
+        "c.scales.minor-harmonic"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-melodic"
+      ],
+      "status": "enrichment",
+      "outcomeIds": []
+    },
+    {
+      "id": "c.intervals.above-tonic-number-g2",
+      "grade": 2,
+      "domain": "intervals",
+      "title": "Interval numbers in Grade 2 keys",
+      "summary": "Interval number is unchanged by sharps or flats; harmonic or melodic.",
+      "prerequisiteIds": [
+        "c.intervals.above-tonic-number",
+        "c.keys.minor-g2"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.12"
+      ]
+    },
+    {
+      "id": "c.terms.g2-words",
+      "grade": 2,
+      "domain": "terms",
+      "title": "Grade 2 terms",
+      "summary": "Additional Italian tempo and character words.",
+      "prerequisiteIds": [
+        "c.terms.tempo-g1"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ]
+    },
+    {
+      "id": "c.terms.g2-signs",
+      "grade": 2,
+      "domain": "terms",
+      "title": "Grade 2 signs",
+      "summary": "Accent shapes, semi-staccato, staccatissimo and tenuto.",
+      "prerequisiteIds": [
+        "c.terms.articulation-g1"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g2.13"
+      ]
+    },
+    {
+      "id": "c.context.melody-g2",
+      "grade": 2,
+      "domain": "context",
+      "title": "Reading a melody (Grade 2)",
+      "summary": "Apply Grade 2 time, keys, intervals and terms to a melody.",
+      "prerequisiteIds": [
+        "c.context.melody-g1",
+        "c.terms.g2-words",
+        "c.terms.g2-signs",
+        "c.intervals.above-tonic-number-g2",
+        "c.metre.grouping-g2"
+      ],
+      "rulesetIds": [
+        "rules.score.observation"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ]
+    }
+  ]
+}

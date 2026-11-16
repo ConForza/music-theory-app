@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "grade": 3,
+  "concepts": [
+    {
+      "id": "c.metre.compound-concept",
+      "grade": 3,
+      "domain": "metre",
+      "title": "Simple vs compound",
+      "summary": "Simple beats divide in two; compound beats are dotted and divide in three.",
+      "prerequisiteIds": [
+        "c.metre.beat-classification",
+        "c.rhythm.dots"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ]
+    },
+    {
+      "id": "c.metre.compound-signatures",
+      "grade": 3,
+      "domain": "metre",
+      "title": "6/8, 9/8, 12/8",
+      "summary": "Two, three or four dotted-crotchet beats; compare 6/8 with 3/4.",
+      "prerequisiteIds": [
+        "c.metre.compound-concept"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification",
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ]
+    },
+    {
+      "id": "c.metre.compound-grouping-notes",
+      "grade": 3,
+      "domain": "metre",
+      "title": "Compound note grouping",
+      "summary": "Beam in whole dotted beats; dotted notes for full beats; ties across beats.",
+      "prerequisiteIds": [
+        "c.metre.compound-signatures",
+        "c.metre.grouping-g2"
+      ],
+      "rulesetIds": [
+        "rules.grouping.compound"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ]
+    },
+    {
+      "id": "c.metre.compound-grouping-rests",
+      "grade": 3,
+      "domain": "metre",
+      "title": "Compound rest grouping",
+      "summary": "A silent beat as a dotted crotchet rest or crotchet + quaver rest; part-beat rest order.",
+      "prerequisiteIds": [
+        "c.metre.compound-grouping-notes",
+        "c.metre.rest-grouping-subdivisions"
+      ],
+      "rulesetIds": [
+        "rules.grouping.compound"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.02"
+      ]
+    },
+    {
+      "id": "c.metre.triplet-compound",
+      "grade": 3,
+      "domain": "metre",
+      "title": "Triplets and compound time",
+      "summary": "A triplet beat sounds like a compound beat; triplets are the exception in simple time.",
+      "prerequisiteIds": [
+        "c.metre.compound-signatures",
+        "c.rhythm.triplets"
+      ],
+      "rulesetIds": [
+        "rules.tuplet",
+        "rules.metre.classification"
+      ],
+      "status": "supporting",
+      "outcomeIds": [
+        "abrsm2020.g3.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.demisemiquavers",
+      "grade": 3,
+      "domain": "rhythm",
+      "title": "Demisemiquavers",
+      "summary": "Half a semiquaver: three flags/beams; rest with three hooks.",
+      "prerequisiteIds": [
+        "c.rhythm.values-short",
+        "c.rhythm.rests"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.03"
+      ]
+    },
+    {
+      "id": "c.rhythm.demisemiquaver-grouping",
+      "grade": 3,
+      "domain": "rhythm",
+      "title": "Grouping demisemiquavers",
+      "summary": "Beam in subdivisions of the beat for readability; rests follow the usual order.",
+      "prerequisiteIds": [
+        "c.rhythm.demisemiquavers",
+        "c.metre.compound-grouping-rests"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple",
+        "rules.grouping.compound"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.03",
+        "abrsm2020.g3.02"
+      ]
+    },
+    {
+      "id": "c.metre.anacrusis",
+      "grade": 3,
+      "domain": "metre",
+      "title": "Upbeat (anacrusis)",
+      "summary": "An opening upbeat is usually balanced by a shorter final bar.",
+      "prerequisiteIds": [
+        "c.metre.bar-completion",
+        "c.metre.compound-signatures"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "supporting",
+      "outcomeIds": []
+    },
+    {
+      "id": "c.pitch.ledger-extended",
+      "grade": 3,
+      "domain": "pitch",
+      "title": "Extended ledger lines",
+      "summary": "Continuing the ledger-line pattern beyond two lines.",
+      "prerequisiteIds": [
+        "c.pitch.ledger-two"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ]
+    },
+    {
+      "id": "c.pitch.octave-signs",
+      "grade": 3,
+      "domain": "pitch",
+      "title": "Octave signs",
+      "summary": "8va above / 8vb below means play an octave higher / lower.",
+      "prerequisiteIds": [
+        "c.pitch.ledger-extended",
+        "c.terms.directions-g1"
+      ],
+      "rulesetIds": [
+        "rules.clef.position",
+        "rules.vocabulary.terms"
+      ],
+      "status": "supporting",
+      "outcomeIds": [
+        "abrsm2020.g3.04"
+      ]
+    },
+    {
+      "id": "c.transposition.octave-treble-bass",
+      "grade": 3,
+      "domain": "transposition",
+      "title": "Octave transposition (treble ↔ bass)",
+      "summary": "Every note moves exactly one octave; the clef may change; spelling is kept.",
+      "prerequisiteIds": [
+        "c.pitch.ledger-extended",
+        "c.clefs.same-pitch-treble-bass"
+      ],
+      "rulesetIds": [
+        "rules.transpose.octave",
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.05"
+      ]
+    },
+    {
+      "id": "c.scales.minor-melodic",
+      "grade": 3,
+      "domain": "scales",
+      "title": "Melodic minor",
+      "summary": "Raised 6th and 7th ascending; key-signature notes descending; minor keys use both forms.",
+      "prerequisiteIds": [
+        "c.scales.minor-harmonic-g2"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-melodic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.08"
+      ]
+    },
+    {
+      "id": "c.scales.major-e-ab",
+      "grade": 3,
+      "domain": "scales",
+      "title": "E and A♭ major",
+      "summary": "E major adds D♯; A♭ major adds D♭.",
+      "prerequisiteIds": [
+        "c.keys.signatures-g2-major"
+      ],
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.06"
+      ]
+    },
+    {
+      "id": "c.scales.minor-sharp-g3",
+      "grade": 3,
+      "domain": "scales",
+      "title": "Sharp minor keys to four sharps",
+      "summary": "Relatives of D, A and E major.",
+      "prerequisiteIds": [
+        "c.scales.minor-melodic",
+        "c.scales.major-e-ab",
+        "c.keys.relative"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08"
+      ]
+    },
+    {
+      "id": "c.scales.minor-flat-g3",
+      "grade": 3,
+      "domain": "scales",
+      "title": "Flat minor keys to four flats",
+      "summary": "Relatives of B♭, E♭ and A♭ major; raised notes may need naturals.",
+      "prerequisiteIds": [
+        "c.scales.minor-melodic",
+        "c.scales.major-e-ab",
+        "c.keys.relative"
+      ],
+      "rulesetIds": [
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.08"
+      ]
+    },
+    {
+      "id": "c.keys.signatures-g3",
+      "grade": 3,
+      "domain": "keys",
+      "title": "Keys to four sharps/flats",
+      "summary": "All major and minor key signatures up to four; tonic triads; degrees by number.",
+      "prerequisiteIds": [
+        "c.scales.minor-sharp-g3",
+        "c.scales.minor-flat-g3"
+      ],
+      "rulesetIds": [
+        "rules.key-signature",
+        "rules.chord.triad",
+        "rules.scale.degrees"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.06",
+        "abrsm2020.g3.07",
+        "abrsm2020.g3.09",
+        "abrsm2020.g3.10"
+      ]
+    },
+    {
+      "id": "c.intervals.quality-perfect",
+      "grade": 3,
+      "domain": "intervals",
+      "title": "Perfect intervals",
+      "summary": "Above the tonic the 4th, 5th and octave are perfect in major and minor keys.",
+      "prerequisiteIds": [
+        "c.intervals.above-tonic-number-g2",
+        "c.keys.signatures-g3"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.11"
+      ]
+    },
+    {
+      "id": "c.intervals.quality-major-minor",
+      "grade": 3,
+      "domain": "intervals",
+      "title": "Major and minor intervals",
+      "summary": "2nd always major above the tonic; 3rd/6th/7th major or minor depending on key and form.",
+      "prerequisiteIds": [
+        "c.intervals.quality-perfect",
+        "c.scales.minor-melodic"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.11"
+      ]
+    },
+    {
+      "id": "c.terms.g3",
+      "grade": 3,
+      "domain": "terms",
+      "title": "Grade 3 terms",
+      "summary": "Additional Italian terms of tempo, mood and manner.",
+      "prerequisiteIds": [
+        "c.terms.g2-words"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g3.12"
+      ]
+    },
+    {
+      "id": "c.context.melody-g3",
+      "grade": 3,
+      "domain": "context",
+      "title": "Reading a melody (Grade 3)",
+      "summary": "Apply compound time, keys, interval qualities and terms to a melody.",
+      "prerequisiteIds": [
+        "c.context.melody-g2",
+        "c.terms.g3",
+        "c.intervals.quality-major-minor",
+        "c.metre.compound-grouping-notes"
+      ],
+      "rulesetIds": [
+        "rules.score.observation"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g1.21"
+      ]
+    }
+  ]
+}

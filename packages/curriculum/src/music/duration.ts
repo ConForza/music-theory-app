@@ -89,3 +89,39 @@ export function classifyTimeSignature(text: string): { metre: Metre; beats: Beat
   if (irregular[ts.top]) return { metre: "irregular", beats: irregular[ts.top]! };
   throw new Error(`Time signature ${text} is outside the Grades 1–5 vocabulary`);
 }
+
+export function sub(a: Fraction, b: Fraction): Fraction {
+  return frac(a.n * b.d - b.n * a.d, a.d * b.d);
+}
+
+/** Negative when a < b, zero when equal, positive when a > b. */
+export function compare(a: Fraction, b: Fraction): number {
+  return a.n * b.d - b.n * a.d;
+}
+
+export const lt = (a: Fraction, b: Fraction) => compare(a, b) < 0;
+export const lte = (a: Fraction, b: Fraction) => compare(a, b) <= 0;
+export const isZero = (a: Fraction) => a.n === 0;
+
+export function formatFraction(f: Fraction): string {
+  return f.d === 1 ? String(f.n) : `${f.n}/${f.d}`;
+}
+
+/** British names for note values (and rests), used in learner feedback. */
+export const VALUE_NAMES: Record<NoteValue, string> = {
+  breve: "breve",
+  semibreve: "semibreve",
+  minim: "minim",
+  crotchet: "crotchet",
+  quaver: "quaver",
+  semiquaver: "semiquaver",
+  demisemiquaver: "demisemiquaver",
+};
+
+/** The single (possibly dotted) value with exactly this duration, if one exists (up to `maxDots`). */
+export function valueFor(duration: Fraction, maxDots = 2): { value: NoteValue; dots: number } | null {
+  for (const value of Object.keys(NOTE_VALUES) as NoteValue[]) {
+    for (let dots = 0; dots <= maxDots; dots++) if (equals(dotted(value, dots), duration)) return { value, dots };
+  }
+  return null;
+}

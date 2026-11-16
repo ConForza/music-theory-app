@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "id": "s.keyboard",
+  "title": "The keyboard",
+  "summary": "Find white and black keys, and hear tones and semitones.",
+  "grade": 1,
+  "order": 2,
+  "familyIds": [
+    "fam.keyboard"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path content team (Brief 03)",
+    "originality": "original",
+    "notes": "Items drawn from the seeded generators with a teaching-point filter, then fixed. Music and answers come from the rule engine; prompts and feedback are original."
+  },
+  "review": {
+    "status": "pending",
+    "reviewedBy": null
+  },
+  "items": [
+    {
+      "id": "i.showcase.keyboard.1",
+      "templateId": "t.g1.keyboard",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Find C on the keyboard. Any C is correct.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "C4",
+        "relation": "same",
+        "accepted": [
+          "C4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Use the group of two black keys to find C, D and E.",
+        "Look for the groups of two and three black keys. C is just to the left of a group of two black keys."
+      ],
+      "feedback": {
+        "correct": "Spot on. The black-key groups are your map.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.showcase.keyboard.2",
+      "templateId": "t.g1.keyboard",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Find B♭ on the keyboard. Any octave is correct.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "Bb4",
+        "relation": "same-sound",
+        "accepted": [
+          "A#4",
+          "Bb4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": false
+      },
+      "hints": [
+        "Use the group of two black keys to find C, D and E.",
+        "A flat is the key just to the left of (below) B."
+      ],
+      "feedback": {
+        "correct": "Yes. A black key has two names; both are the same key here.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    },
+    {
+      "id": "i.showcase.keyboard.3",
+      "templateId": "t.g1.tone-semitone",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Is the distance between these two keys a tone or a semitone?",
+      "music": {
+        "presentation": "keyboard",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Two highlighted piano keys: C and the next-but-one key above it, D."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tone",
+            "label": "A tone"
+          },
+          {
+            "id": "semitone",
+            "label": "A semitone"
+          }
+        ],
+        "correctOptionIds": [
+          "tone"
+        ]
+      },
+      "hints": [
+        "Count the keys between them, black and white.",
+        "A semitone is from one key to the very next key, black or white. A tone is two semitones."
+      ],
+      "feedback": {
+        "correct": "Right. Count the keys in between, black and white.",
+        "mistakes": {
+          "white-key-off-by-one": "Close — you're one white key away. Use the groups of two and three black keys to find your place.",
+          "black-key-neighbour": "Sharps are just to the right; flats are just to the left.",
+          "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        },
+        "fallback": "Not quite. Find the nearest group of black keys and count from there."
+      }
+    }
+  ],
+  "practice": [
+    {
+      "templateId": "t.g1.keyboard",
+      "label": "Find more keys"
+    }
+  ]
+}

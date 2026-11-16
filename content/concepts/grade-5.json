@@ -38,6 +38,22 @@
       ]
     },
     {
+      "id": "c.metre.rewrite-simple-compound",
+      "grade": 5,
+      "domain": "metre",
+      "title": "Rewriting between simple and compound time",
+      "summary": "Each note and rest keeps its share of its beat: a crotchet beat becomes a dotted-crotchet beat, so every value gains a dot (optional enrichment).",
+      "prerequisiteIds": [
+        "c.metre.compound-signatures",
+        "c.metre.regular-all"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification"
+      ],
+      "status": "supporting",
+      "outcomeIds": []
+    },
+    {
       "id": "c.rhythm.irregular-divisions",
       "grade": 5,
       "domain": "rhythm",
@@ -186,6 +202,24 @@
       ],
       "rulesetIds": [
         "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ]
+    },
+    {
+      "id": "c.intervals.in-key-signature",
+      "grade": 5,
+      "domain": "intervals",
+      "title": "Intervals under a key signature",
+      "summary": "Name and write intervals on a stave with a key signature: the signature applies to every note unless a written sign overrides it.",
+      "prerequisiteIds": [
+        "c.intervals.chromatic"
+      ],
+      "rulesetIds": [
+        "rules.interval",
+        "rules.key-signature"
       ],
       "status": "core",
       "outcomeIds": [
@@ -353,21 +387,6 @@
       ],
       "rulesetIds": [
         "rules.chord.function-inversion"
-      ],
-      "status": "supporting",
-      "outcomeIds": []
-    },
-    {
-      "id": "c.cadences.approach-chord",
-      "grade": 5,
-      "domain": "cadences",
-      "title": "Approach chords",
-      "summary": "A chord from I, ii, IV or V leading into the cadence.",
-      "prerequisiteIds": [
-        "c.cadences.chord-choice"
-      ],
-      "rulesetIds": [
-        "rules.cadence"
       ],
       "status": "supporting",
       "outcomeIds": []

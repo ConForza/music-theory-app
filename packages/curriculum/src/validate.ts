@@ -107,6 +107,7 @@ function checkIds(c: Curriculum, err: Reporter) {
   const itemIds = [
     ...c.lessons.flatMap((l) => [...l.content.guided, ...l.content.independent]),
     ...c.items.map((i) => i.content.item),
+    ...c.showcase.flatMap((x) => x.content.items),
   ].map((i) => i.id);
   itemIds.forEach((i) => record(i, "exercise item"));
   c.lessons.forEach((l) => record(l.content.id, "lesson content"));
@@ -610,6 +611,7 @@ function checkProvenance(ix: CurriculumIndex, repoRoot: string, err: Reporter) {
   const docs: Array<[string, unknown]> = [
     ...ix.c.lessons.map((l) => [l.file, l.content] as [string, unknown]),
     ...ix.c.items.map((i) => [i.file, i.content.item] as [string, unknown]),
+    ...ix.c.showcase.map((x) => [x.file, x.content.items] as [string, unknown]),
   ];
   for (const [file, content] of docs) {
     const strings: Array<[string, string]> = [];

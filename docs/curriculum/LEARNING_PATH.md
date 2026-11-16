@@ -2,7 +2,7 @@
 
 # Learning path and prerequisite graph
 
-Five grade worlds · 27 units · 131 lessons · 5 optional enrichment nodes · 27 practice, 27 review, 27 unit-challenge and 5 grade-assessment nodes · 139 concepts.
+Five grade worlds · 27 units · 143 lessons · 6 optional enrichment nodes · 27 practice, 27 review, 27 unit-challenge and 5 grade-assessment nodes · 151 concepts.
 
 **Unlock rule:** a node unlocks when the nodes in *Unlocks after* are complete. When no list is authored, it unlocks after the previous required lesson, practice or review node. Unit challenges and grade assessments collect independent mastery evidence and never block the next lesson. Enrichment is optional, and no required node depends on it. The validator checks that every concept prerequisite is taught by a node that is guaranteed to be complete first.
 
@@ -226,7 +226,11 @@ Refinements to the provisional unit map: Book §11 (melodic minor) and the melod
 | `G2-U5-L01` | Lesson | Intervals in the new keys | Give the number of intervals above the tonic in all Grade 2 major and minor keys. | `c.intervals.above-tonic-number-g2` (`c.intervals.above-tonic-number`, `c.keys.minor-g2`) | g2.12 | `G2-U4-R1` | 6 |
 | `G2-U5-L02` | Lesson | More tempo and character words | Understand the Grade 2 tempo and character terms. | `c.terms.g2-words` (`c.terms.tempo-g1`) | g2.13 | `G2-U5-L01` | 6 |
 | `G2-U5-L03` | Lesson | Accents and touch signs | Recognise accents, semi-staccato, staccatissimo and tenuto signs. | `c.terms.g2-signs` (`c.terms.articulation-g1`) | g2.13 | `G2-U5-L02` | 5 |
-| `G2-U5-L04` | Lesson | Looking closely at a melody (Grade 2) | Answer questions about an original melody using Grades 1–2 knowledge. | `c.context.melody-g2` (`c.context.melody-g1`, `c.terms.g2-words`, `c.terms.g2-signs`, `c.intervals.above-tonic-number-g2`, `c.metre.grouping-g2`) | g1.21 | `G2-U5-L03` | 8 |
+| `G2-U5-L05` | Lesson | Little words that change a direction | Learn seven small Italian words that join with other words to make a direction. | `c.terms.g2-link` (`c.terms.g2-signs`) | g2.13 | `G2-U5-L03` | 6 |
+| `G2-U5-L06` | Lesson | More, less, very and too much | Learn words that say how much: more, less, very and too much, and the word for movement. | `c.terms.g2-more` (`c.terms.g2-link`) | g2.13 | `G2-U5-L05` | 6 |
+| `G2-U5-L07` | Lesson | More tempo and character words | Learn six more words of speed and character: allargando, grave, larghetto, giocoso, simile and vivo. | `c.terms.g2-character` (`c.terms.g2-more`) | g2.13 | `G2-U5-L06` | 6 |
+| `G2-U5-L08` | Lesson | Wedge, pointed accent and dots inside a slur | Recognise three more signs that show how to touch a note: the wedge, the pointed accent and dots inside a slur. | `c.terms.g2-touch` (`c.terms.g2-character`) | g2.13 | `G2-U5-L07` | 6 |
+| `G2-U5-L04` | Lesson | Looking closely at a melody (Grade 2) | Answer questions about an original melody using Grades 1–2 knowledge. | `c.context.melody-g2` (`c.context.melody-g1`, `c.terms.g2-words`, `c.terms.g2-signs`, `c.intervals.above-tonic-number-g2`, `c.metre.grouping-g2`) | g1.21 | `G2-U5-L08` | 8 |
 | `G2-U5-P1` | Practice | Practice: Intervals and expression | Mixed independent practice of everything in this unit. | — | g2.12, g2.13, g1.21 | `G2-U5-L04` | 6 |
 | `G2-U5-R1` | Review | Grade review | Cumulative spaced review of the whole grade before the unit challenge and grade assessment. | — | g2.01, g2.03, g2.04, g2.02, g2.05, g2.08, g2.10, g2.11, g2.07, g2.06, g2.09, g2.12, g2.13, g1.21 | `G2-U5-P1` | 6 |
 | `G2-U5-C` | Unit challenge | Unit challenge: Intervals and expression | Show independently, without hints, what you can do from this unit. | — | see `a.g2-u5` | `G2-U5-R1` | 8 |
@@ -307,7 +311,13 @@ Refinements to the provisional unit map: Melodic minor (book Grade 2 §§9, 11) 
 | `G3-U5-L01` | Lesson | Perfect intervals | Recognise perfect unisons, 4ths, 5ths and octaves above the tonic. | `c.intervals.quality-perfect` (`c.intervals.above-tonic-number-g2`, `c.keys.signatures-g3`) | g3.11 | `G3-U4-R1` | 6 |
 | `G3-U5-L02` | Lesson | Major and minor intervals | Name 2nds, 3rds, 6ths and 7ths above the tonic as major or minor in major and minor keys. | `c.intervals.quality-major-minor` (`c.intervals.quality-perfect`, `c.scales.minor-melodic`) | g3.11 | `G3-U5-L01` | 8 |
 | `G3-U5-L03` | Lesson | Grade 3 terms | Understand the Grade 3 performance terms. | `c.terms.g3` (`c.terms.g2-words`) | g3.12 | `G3-U5-L02` | 6 |
-| `G3-U5-L04` | Lesson | Looking closely at a melody (Grade 3) | Answer questions about an original melody in compound time. | `c.context.melody-g3` (`c.context.melody-g2`, `c.terms.g3`, `c.intervals.quality-major-minor`, `c.metre.compound-grouping-notes`) | g1.21 | `G3-U5-L03` | 8 |
+| `G3-U5-L05` | Lesson | Speed and time | Learn six words about speed and time: adagietto, largamente, stringendo, alla breve, comodo and rubato. | `c.terms.g3-speed` (`c.terms.g3`) | g3.12 | `G3-U5-L03`, `G2-U5-L08` | 6 |
+| `G3-U5-L06` | Lesson | Strong words | Learn six strong words: forza, deciso, risoluto, pesante, marcato and energico. | `c.terms.g3-strong` (`c.terms.g3-speed`) | g3.12 | `G3-U5-L05` | 6 |
+| `G3-U5-L07` | Lesson | Gentle words, and how much | Learn four gentle words, and two words that say how much: delicato, leggiero, tranquillo, semplice, ben and tanto. | `c.terms.g3-gentle` (`c.terms.g3-strong`) | g3.12 | `G3-U5-L06` | 6 |
+| `G3-U5-L08` | Lesson | Feelings | Learn six words of feeling: agitato, mesto, triste, amore, anima and animato. | `c.terms.g3-feelings` (`c.terms.g3-gentle`) | g3.12 | `G3-U5-L07` | 6 |
+| `G3-U5-L09` | Lesson | Style and character | Learn four words of style: marziale, scherzando, brio and ritmico. | `c.terms.g3-style` (`c.terms.g3-feelings`) | g3.12 | `G3-U5-L08` | 6 |
+| `G3-U5-L10` | Lesson | Always, suddenly and in order | Learn six more words: sempre, subito, prima, seconda, volta and ad libitum. | `c.terms.g3-order` (`c.terms.g3-style`) | g3.12 | `G3-U5-L09` | 6 |
+| `G3-U5-L04` | Lesson | Looking closely at a melody (Grade 3) | Answer questions about an original melody in compound time. | `c.context.melody-g3` (`c.context.melody-g2`, `c.terms.g3`, `c.intervals.quality-major-minor`, `c.metre.compound-grouping-notes`) | g1.21 | `G3-U5-L10` | 8 |
 | `G3-U5-P1` | Practice | Practice: Naming intervals exactly | Mixed independent practice of everything in this unit. | — | g3.11, g3.12, g1.21 | `G3-U5-L04` | 6 |
 | `G3-U5-R1` | Review | Grade review | Cumulative spaced review of the whole grade before the unit challenge and grade assessment. | — | g3.01, g3.02, g3.03, g3.04, g3.05, g3.08, g3.06, g3.07, g3.09, g3.10, g3.11, g3.12, g1.21 | `G3-U5-P1` | 6 |
 | `G3-U5-C` | Unit challenge | Unit challenge: Naming intervals exactly | Show independently, without hints, what you can do from this unit. | — | see `a.g3-u5` | `G3-U5-R1` | 8 |
@@ -390,8 +400,9 @@ Refinements to the provisional unit map: Alto-clef key signatures move to G4-U3 
 | `G4-U5-L01` | Lesson | Ornament signs | Recognise and name the trill, turn, upper and lower mordent, acciaccatura and appoggiatura. | `c.ornaments.signs` (`c.terms.articulation-g1`) | g4.17 | `G4-U4-R1` | 6 |
 | `G4-U5-L02` | Lesson | The orchestra | Name the orchestral families and order instruments by range. | `c.instruments.orchestra` (`c.clefs.alto`) | g4.18 | `G4-U5-L01` | 7 |
 | `G4-U5-L03` | Lesson | Playing techniques and directions | Understand mutes, pizzicato/arco, bowing marks and similar directions. | `c.instruments.techniques` (`c.instruments.orchestra`) | g4.18, g4.16 | `G4-U5-L02` | 6 |
-| `G4-U5-L04` | Lesson | Grade 4 terms (Italian and French) | Understand the Grade 4 terms, including French directions. | `c.terms.g4` (`c.terms.g3`) | g4.16 | `G4-U5-L03` | 6 |
-| `G4-U5-L05` | Lesson | Looking closely at a passage (Grade 4) | Answer questions about an original passage: chords, intervals, ornaments and instruments. | `c.context.passage-g4` (`c.context.melody-g3`, `c.chords.identify-in-passage`, `c.ornaments.signs`, `c.instruments.techniques`, `c.terms.g4`, `c.intervals.augmented-diminished`) | g4.18, g1.21 | `G4-U5-L04` | 9 |
+| `G4-U5-L04` | Lesson | Grade 4 Italian terms | Understand the Grade 4 Italian terms. | `c.terms.g4` (`c.terms.g3`) | g4.16 | `G4-U5-L03` | 6 |
+| `G4-U5-L06` | Lesson | Two more Grade 4 words | Learn two more Grade 4 words: veloce and voce. | `c.terms.g4-more` (`c.terms.g4`) | g4.16 | `G4-U5-L04`, `G3-U5-L10` | 6 |
+| `G4-U5-L05` | Lesson | Looking closely at a passage (Grade 4) | Answer questions about an original passage: chords, intervals, ornaments and instruments. | `c.context.passage-g4` (`c.context.melody-g3`, `c.chords.identify-in-passage`, `c.ornaments.signs`, `c.instruments.techniques`, `c.terms.g4`, `c.intervals.augmented-diminished`) | g4.18, g1.21 | `G4-U5-L06` | 9 |
 | `G4-U5-P1` | Practice | Practice: Ornaments and the orchestra | Mixed independent practice of everything in this unit. | — | g4.17, g4.18, g4.16, g1.21 | `G4-U5-L05` | 6 |
 | `G4-U5-R1` | Review | Grade review | Cumulative spaced review of the whole grade before the unit challenge and grade assessment. | — | g4.02, g4.03, g4.01, g4.04, g4.08, g4.09, g4.05, g4.06, g4.07, g4.10, g4.11, g4.12, g4.13, g4.14, g4.15, g4.17, g4.18, g4.16, g1.21 | `G4-U5-P1` | 6 |
 | `G4-U5-C` | Unit challenge | Unit challenge: Ornaments and the orchestra | Show independently, without hints, what you can do from this unit. | — | see `a.g4-u5` | `G4-U5-R1` | 8 |
@@ -412,6 +423,7 @@ Irregular time, tenor clef, four clefs, keys to six sharps/flats, all intervals,
 | `G5-U1-L01` | Lesson | Quintuple and septuple time | Read 5/4, 7/4, 5/8 and 7/8 as combinations of two- and three-beat groups. | `c.metre.irregular` (`c.metre.regular-all`) | g5.01 | `G4-U5-R1` | 6 |
 | `G5-U1-L02` | Lesson | Grouping in irregular time | Group notes and rests by the stated sub-groups in irregular bars. | `c.metre.irregular-grouping` (`c.metre.irregular`, `c.metre.regular-grouping`) | g5.01 | `G5-U1-L01` | 8 |
 | `G5-U1-L03` | Lesson | Irregular divisions | Read groups of 5, 6, 7 or 9 notes in the time of a beat and choose the written value. | `c.rhythm.irregular-divisions` (`c.rhythm.duplets`, `c.rhythm.triplets-mixed`, `c.rhythm.demisemiquavers`) | g5.02 | `G5-U1-L02` | 8 |
+| `G5-U1-E1` | Enrichment (optional) | Rewriting between simple and compound time | Optional: rewrite a bar between 2/4 and 6/8, 3/4 and 9/8, or 4/4 and 12/8, keeping every note's share of its beat. | `c.metre.rewrite-simple-compound` (`c.metre.compound-signatures`, `c.metre.regular-all`) | — | `G5-U1-L03` | 6 |
 | `G5-U1-P1` | Practice | Practice: Fives and sevens | Mixed independent practice of everything in this unit. | — | g5.01, g5.02 | `G5-U1-L03` | 6 |
 | `G5-U1-R1` | Review | Review: Grade 4 foundations | Revisit earlier material so it stays fresh. | — | g4.01, g4.02, g4.03, g4.04, g4.05, g4.06, g4.07, g4.08, g4.09, g4.10, g4.11, g4.12, g4.13, g4.14, g4.15, g4.16, g4.17, g4.18 | `G5-U1-P1` | 6 |
 | `G5-U1-C` | Unit challenge | Unit challenge: Fives and sevens | Show independently, without hints, what you can do from this unit. | — | see `a.g5-u1` | `G5-U1-R1` | 8 |
@@ -443,7 +455,8 @@ Refinements to the provisional unit map: Instrument transposition (book §12) mo
 | `G5-U3-L04` | Lesson | Compound intervals | Name intervals larger than an octave as compound or by number (e.g. 12th). | `c.intervals.compound` (`c.intervals.chromatic`) | g5.08 | `G5-U3-L03` | 6 |
 | `G5-U3-L05` | Lesson | Written pitch and concert pitch | Explain why some instruments sound at a different pitch from the written note. | `c.transposition.concert-pitch` (`c.intervals.any-diatonic`) | g5.06 | `G5-U3-L04` | 6 |
 | `G5-U3-L06` | Lesson | Transposing for B flat, A and F instruments | Transpose a short melody between concert and written pitch, adjusting the key signature and accidentals. | `c.transposition.instrument` (`c.transposition.concert-pitch`, `c.intervals.chromatic`, `c.scales.keys-six-sharps`, `c.scales.keys-six-flats`) | g5.06 | `G5-U3-L05` | 10 |
-| `G5-U3-P1` | Practice | Practice: Keys, intervals and transposing | Mixed independent practice of everything in this unit. | — | g5.07, g5.04, g5.08, g5.06 | `G5-U3-L06` | 6 |
+| `G5-U3-L07` | Lesson | Intervals under a key signature | Name and write intervals on a stave with a key signature, applying the signature and any sign that overrides it. | `c.intervals.in-key-signature` (`c.intervals.chromatic`) | g5.08 | `G5-U3-L06` | 10 |
+| `G5-U3-P1` | Practice | Practice: Keys, intervals and transposing | Mixed independent practice of everything in this unit. | — | g5.07, g5.04, g5.08, g5.06 | `G5-U3-L07` | 6 |
 | `G5-U3-R1` | Review | Review: earlier units | Spaced review of earlier units in this grade, mixed with the new unit. | — | g5.01, g5.02, g5.03, g5.04, g5.05 | `G5-U3-P1` | 6 |
 | `G5-U3-C` | Unit challenge | Unit challenge: Keys, intervals and transposing | Show independently, without hints, what you can do from this unit. | — | see `a.g5-u3` | `G5-U3-R1` | 8 |
 
@@ -461,8 +474,8 @@ Refinements to the provisional unit map: The Ic–V (six-four, five-three) progr
 | `G5-U4-L04` | Lesson | Perfect, plagal and imperfect cadences | Recognise the three cadences by their chords in C, G, D and F major. | `c.cadences.types` (`c.chords.identify-in-passage`, `c.chords.supertonic`) | g5.11 | `G5-U4-L03` | 7 |
 | `G5-U4-L05` | Lesson | Hearing and finding cadences | Identify cadences at the ends of phrases in short original passages. | `c.cadences.recognise` (`c.cadences.types`) | g5.11 | `G5-U4-L04` | 7 |
 | `G5-U4-L06` | Lesson | Choosing chords at cadence points | Choose chords that fit marked melody notes and make the intended cadence. | `c.cadences.chord-choice` (`c.cadences.recognise`, `c.chords.identify-inversions`) | g5.10, g5.11 | `G5-U4-L05` | 10 |
-| `G5-U4-E1` | Enrichment (optional) | The six-four, five-three progression | Optional: recognise Ic–V over the dominant bass. | `c.chords.cadential-six-four` (`c.chords.identify-inversions`) | — | `G5-U4-L03` | 6 |
-| `G5-U4-E2` | Enrichment (optional) | Approach chords | Optional: choose a chord before a two-chord cadence. | `c.cadences.approach-chord` (`c.cadences.chord-choice`) | — | `G5-U4-L06` | 6 |
+| `G5-U4-E1` | Enrichment (optional) | The six-four, five-three progression | Optional: recognise Ic–V over the dominant bass. | `c.chords.cadential-six-four` (`c.chords.identify-inversions`) | — | `G5-U4-L06` | 6 |
+| `G5-U4-E2` | Enrichment (optional) | Approach chords | Optional: choose a chord before a two-chord cadence. | `c.cadences.chord-choice` (`c.cadences.recognise`, `c.chords.identify-inversions`) | — | `G5-U4-L06` | 6 |
 | `G5-U4-P1` | Practice | Practice: Harmony | Mixed independent practice of everything in this unit. | — | g5.09, g5.11, g5.10 | `G5-U4-L06` | 6 |
 | `G5-U4-R1` | Review | Review: earlier units | Spaced review of earlier units in this grade, mixed with the new unit. | — | g5.01, g5.02, g5.03, g5.04, g5.05, g5.07, g5.08, g5.06 | `G5-U4-P1` | 6 |
 | `G5-U4-C` | Unit challenge | Unit challenge: Harmony | Show independently, without hints, what you can do from this unit. | — | see `a.g5-u4` | `G5-U4-R1` | 8 |

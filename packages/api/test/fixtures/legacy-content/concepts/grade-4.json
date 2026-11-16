@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 1,
+  "grade": 4,
+  "concepts": [
+    {
+      "id": "c.rhythm.breve",
+      "grade": 4,
+      "domain": "rhythm",
+      "title": "The breve",
+      "summary": "Two semibreves long; the breve rest fills a silent bar of 4/2.",
+      "prerequisiteIds": [
+        "c.rhythm.values-long",
+        "c.metre.minim-beats"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.02"
+      ]
+    },
+    {
+      "id": "c.rhythm.double-dots",
+      "grade": 4,
+      "domain": "rhythm",
+      "title": "Double dots",
+      "summary": "The second dot adds half of what the first dot added.",
+      "prerequisiteIds": [
+        "c.rhythm.dots"
+      ],
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.03"
+      ]
+    },
+    {
+      "id": "c.metre.regular-all",
+      "grade": 4,
+      "domain": "metre",
+      "title": "Regular time signatures",
+      "summary": "Simple and compound duple, triple and quadruple with any beat value (e.g. 6/4, 9/16, 2/8).",
+      "prerequisiteIds": [
+        "c.metre.compound-signatures",
+        "c.metre.minim-beats",
+        "c.metre.quaver-beats"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.01"
+      ]
+    },
+    {
+      "id": "c.metre.regular-grouping",
+      "grade": 4,
+      "domain": "metre",
+      "title": "Grouping in all regular times",
+      "summary": "Compound grouping with doubled or halved values.",
+      "prerequisiteIds": [
+        "c.metre.regular-all",
+        "c.metre.compound-grouping-rests"
+      ],
+      "rulesetIds": [
+        "rules.grouping.simple",
+        "rules.grouping.compound"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.duplets",
+      "grade": 4,
+      "domain": "rhythm",
+      "title": "Duplets",
+      "summary": "Two equal notes in the time of three, marked 2 (or written as dotted notes).",
+      "prerequisiteIds": [
+        "c.metre.compound-signatures",
+        "c.rhythm.triplets"
+      ],
+      "rulesetIds": [
+        "rules.tuplet"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.04"
+      ]
+    },
+    {
+      "id": "c.accidentals.double",
+      "grade": 4,
+      "domain": "accidentals",
+      "title": "Double sharps and flats",
+      "summary": "𝄪 raises and 𝄫 lowers by two semitones; cancellation within the bar.",
+      "prerequisiteIds": [
+        "c.accidentals.cancellation"
+      ],
+      "rulesetIds": [
+        "rules.pitch.spelling",
+        "rules.accidental.bar-state"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.08"
+      ]
+    },
+    {
+      "id": "c.accidentals.enharmonic",
+      "grade": 4,
+      "domain": "accidentals",
+      "title": "Enharmonic equivalents",
+      "summary": "Most notes have three names; spelling follows letter-name context.",
+      "prerequisiteIds": [
+        "c.accidentals.double",
+        "c.pitch.keyboard"
+      ],
+      "rulesetIds": [
+        "rules.enharmonic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.09"
+      ]
+    },
+    {
+      "id": "c.clefs.alto",
+      "grade": 4,
+      "domain": "clefs",
+      "title": "Alto clef",
+      "summary": "C clef centred on the third line; used mainly by the viola.",
+      "prerequisiteIds": [
+        "c.clefs.stave",
+        "c.pitch.middle-c"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.05"
+      ]
+    },
+    {
+      "id": "c.clefs.same-pitch-three",
+      "grade": 4,
+      "domain": "clefs",
+      "title": "Same pitch in three clefs",
+      "summary": "Compare positions of one pitch across treble, alto and bass.",
+      "prerequisiteIds": [
+        "c.clefs.alto",
+        "c.clefs.same-pitch-treble-bass"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.06"
+      ]
+    },
+    {
+      "id": "c.transposition.octave-alto",
+      "grade": 4,
+      "domain": "transposition",
+      "title": "Octave transposition (alto)",
+      "summary": "Exact octave change between treble/bass and alto clef.",
+      "prerequisiteIds": [
+        "c.clefs.same-pitch-three",
+        "c.transposition.octave-treble-bass"
+      ],
+      "rulesetIds": [
+        "rules.transpose.octave",
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.07"
+      ]
+    },
+    {
+      "id": "c.scales.keys-five-sharps",
+      "grade": 4,
+      "domain": "scales",
+      "title": "Five sharps",
+      "summary": "B major and G♯ minor; F𝄪 is the raised 7th of G♯ minor.",
+      "prerequisiteIds": [
+        "c.keys.signatures-g3",
+        "c.accidentals.double"
+      ],
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.10"
+      ]
+    },
+    {
+      "id": "c.scales.keys-five-flats",
+      "grade": 4,
+      "domain": "scales",
+      "title": "Five flats",
+      "summary": "D♭ major and its relative B♭ minor.",
+      "prerequisiteIds": [
+        "c.keys.signatures-g3"
+      ],
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.10"
+      ]
+    },
+    {
+      "id": "c.keys.signatures-alto",
+      "grade": 4,
+      "domain": "keys",
+      "title": "Alto-clef key signatures",
+      "summary": "Placement of sharps and flats in the alto clef.",
+      "prerequisiteIds": [
+        "c.clefs.alto",
+        "c.scales.keys-five-sharps",
+        "c.scales.keys-five-flats"
+      ],
+      "rulesetIds": [
+        "rules.key-signature",
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.05",
+        "abrsm2020.g4.10"
+      ]
+    },
+    {
+      "id": "c.scales.technical-names",
+      "grade": 4,
+      "domain": "scales",
+      "title": "Technical names",
+      "summary": "Tonic, supertonic, mediant, subdominant, dominant, submediant, leading note.",
+      "prerequisiteIds": [
+        "c.scales.degree-numbers",
+        "c.scales.minor-melodic"
+      ],
+      "rulesetIds": [
+        "rules.scale.degrees"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.11"
+      ]
+    },
+    {
+      "id": "c.scales.chromatic",
+      "grade": 4,
+      "domain": "scales",
+      "title": "Chromatic scale",
+      "summary": "All semitones; every line/space at least once, at most twice; spell to suit any key signature.",
+      "prerequisiteIds": [
+        "c.accidentals.enharmonic",
+        "c.pitch.tones-semitones"
+      ],
+      "rulesetIds": [
+        "rules.scale.chromatic"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.12"
+      ]
+    },
+    {
+      "id": "c.intervals.any-diatonic",
+      "grade": 4,
+      "domain": "intervals",
+      "title": "Intervals between diatonic notes",
+      "summary": "Name by the scale on the lower note; key signature does not change the interval.",
+      "prerequisiteIds": [
+        "c.intervals.quality-major-minor",
+        "c.scales.keys-five-sharps",
+        "c.scales.keys-five-flats"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.13"
+      ]
+    },
+    {
+      "id": "c.intervals.augmented-diminished",
+      "grade": 4,
+      "domain": "intervals",
+      "title": "Augmented and diminished",
+      "summary": "A semitone larger than major/perfect = augmented; smaller than minor/perfect = diminished.",
+      "prerequisiteIds": [
+        "c.intervals.any-diatonic"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.13"
+      ]
+    },
+    {
+      "id": "c.chords.primary-triads",
+      "grade": 4,
+      "domain": "chords",
+      "title": "Primary triads",
+      "summary": "Triads on degrees 1, 4, 5; harmonic minor in minor keys; optional roman numerals.",
+      "prerequisiteIds": [
+        "c.chords.tonic-triad",
+        "c.scales.technical-names",
+        "c.scales.minor-harmonic"
+      ],
+      "rulesetIds": [
+        "rules.chord.triad"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.14"
+      ]
+    },
+    {
+      "id": "c.chords.root-position-chords",
+      "grade": 4,
+      "domain": "chords",
+      "title": "Root-position chords",
+      "summary": "A chord may double/space triad notes; root position when the root is in the bass.",
+      "prerequisiteIds": [
+        "c.chords.primary-triads"
+      ],
+      "rulesetIds": [
+        "rules.chord.function-inversion"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.15"
+      ]
+    },
+    {
+      "id": "c.chords.identify-in-passage",
+      "grade": 4,
+      "domain": "chords",
+      "title": "Chords in context",
+      "summary": "Key + bass note → chord function in root position.",
+      "prerequisiteIds": [
+        "c.chords.root-position-chords"
+      ],
+      "rulesetIds": [
+        "rules.chord.function-inversion"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.15"
+      ]
+    },
+    {
+      "id": "c.ornaments.signs",
+      "grade": 4,
+      "domain": "ornaments",
+      "title": "Ornament signs",
+      "summary": "Six ornaments by sign and name; small notes do not count in the bar.",
+      "prerequisiteIds": [
+        "c.terms.articulation-g1"
+      ],
+      "rulesetIds": [
+        "rules.ornament.signs"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.17"
+      ]
+    },
+    {
+      "id": "c.instruments.orchestra",
+      "grade": 4,
+      "domain": "instruments",
+      "title": "Orchestral families",
+      "summary": "Strings, woodwind, brass, percussion; ranges and usual clefs.",
+      "prerequisiteIds": [
+        "c.clefs.alto"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.instruments"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.18"
+      ]
+    },
+    {
+      "id": "c.instruments.techniques",
+      "grade": 4,
+      "domain": "instruments",
+      "title": "Techniques and directions",
+      "summary": "con/senza sordini, pizz., arco, up/down bow, sul G, sul ponticello.",
+      "prerequisiteIds": [
+        "c.instruments.orchestra"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.instruments",
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.18",
+        "abrsm2020.g4.16"
+      ]
+    },
+    {
+      "id": "c.terms.g4",
+      "grade": 4,
+      "domain": "terms",
+      "title": "Grade 4 terms",
+      "summary": "Further Italian terms and common French directions.",
+      "prerequisiteIds": [
+        "c.terms.g3"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.16"
+      ]
+    },
+    {
+      "id": "c.context.passage-g4",
+      "grade": 4,
+      "domain": "context",
+      "title": "Reading a passage (Grade 4)",
+      "summary": "Apply Grade 4 knowledge to an authored passage with instrument questions.",
+      "prerequisiteIds": [
+        "c.context.melody-g3",
+        "c.chords.identify-in-passage",
+        "c.ornaments.signs",
+        "c.instruments.techniques",
+        "c.terms.g4",
+        "c.intervals.augmented-diminished"
+      ],
+      "rulesetIds": [
+        "rules.score.observation"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g4.18",
+        "abrsm2020.g1.21"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U5-L05",
+  "lessonId": "G4-U5-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Answer questions about intervals, ornaments, directions and instruments in a short passage.",
+    "successCriteria": [
+      "I read the clef, key signature and directions first.",
+      "I answer each question with the right rule.",
+      "I use what I know of the instrument named in the question."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "In the examination, music theory questions often come together in a short piece of music. A single passage may ask about intervals, ornaments, performance directions and the instrument it is written for. Each question uses something you already know; the skill is knowing where to look."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "trill",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto stave in D minor, 3/4, marked affettuoso: D, F with a trill sign (marked A), then A below.",
+        "key": "D minor",
+        "timeSignature": "3/4",
+        "tempoText": "Affettuoso"
+      },
+      "caption": "A passage for the viola: alto clef, D minor, marked affettuoso, with a trill on the note marked A."
+    },
+    {
+      "kind": "text",
+      "text": "Method: (1) look at the clef and the key signature: here the alto clef, one flat, D minor. (2) Read the words above the stave: affettuoso, tenderly. (3) Check each sign on the notes: the trill. (4) Think about the instrument: the viola is a string instrument that normally reads the alto clef. Then answer each question on its own, one rule at a time."
+    },
+    {
+      "kind": "tip",
+      "text": "Clef, key, words, signs, instrument. Answer each question with the rule that belongs to it."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "alto",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "D4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "F4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              },
+              "ornament": "trill",
+              "label": "A"
+            },
+            {
+              "kind": "note",
+              "pitch": "A3",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "An alto stave in D minor, 3/4, marked affettuoso, with a trill on the second note.",
+      "key": "D minor",
+      "timeSignature": "3/4",
+      "tempoText": "Affettuoso"
+    },
+    "steps": [
+      "Alto clef: the viola's clef.",
+      "Affettuoso: tenderly.",
+      "The sign above the note marked A is a trill."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A short passage for the viola in D minor, marked affettuoso, with a trill."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u5-l05.guided-1",
+      "templateId": "t.g4.passage",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This passage is for the viola. Look at the passage and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "lower-mordent",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "y"
+              },
+              {
+                "kind": "note",
+                "pitch": "Db4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 4 flats, 3/4, marked Affettuoso. Bar 1: a note in the 2nd space; a note marked x on the 2nd line; a note in the 2nd space. Bar 2: a note marked A on the 2nd line, with a short zig-zag above it with a short vertical line through it; a note marked y on the 3rd line; a note in the 3rd space.",
+        "key": "Ab major",
+        "timeSignature": "3/4",
+        "tempoText": "Affettuoso"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "family",
+            "prompt": "To which family of the orchestra does the viola belong?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "strings",
+                  "label": "Strings"
+                },
+                {
+                  "id": "woodwind",
+                  "label": "Woodwind"
+                },
+                {
+                  "id": "brass",
+                  "label": "Brass"
+                },
+                {
+                  "id": "percussion",
+                  "label": "Percussion"
+                }
+              ],
+              "correctOptionIds": [
+                "strings"
+              ],
+              "diagnoses": {
+                "woodwind": {
+                  "category": "wrong-category",
+                  "reason": "The viola belongs to the string family."
+                },
+                "brass": {
+                  "category": "wrong-category",
+                  "reason": "The viola belongs to the string family."
+                },
+                "percussion": {
+                  "category": "wrong-category",
+                  "reason": "The viola belongs to the string family."
+                }
+              }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "lower-mordent",
+              "accepted": [
+                "lower-mordent"
+              ]
+            }
+          },
+          {
+            "id": "interval",
+            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
+            "answer": {
+              "kind": "interval",
+              "task": "identify",
+              "key": "Ab major",
+              "lower": "Ab3",
+              "upper": "C4",
+              "acceptedIntervals": [
+                "M3"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Take the questions one at a time, using the clef, the key signature, the printed direction and the marks on the notes."
+      ],
+      "feedback": {
+        "correct": "Yes: each question used a different rule.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.guided-2",
+      "templateId": "t.g4.passage-directions",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This passage is for the viola. Answer the questions about the directions in it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "upper-mordent",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, no sharps or flats in the key signature, 3/4, marked Con fuoco · arco. Bar 1: a note on the 3rd line; a note marked A in the 2nd space, with a short zig-zag above it with no line through it; a note in the 1st space, with a sharp sign in front. Bar 2: a note on the 2nd line; a note in the 2nd space; a note in the 3rd space.",
+        "key": "A minor",
+        "timeSignature": "3/4",
+        "tempoText": "Con fuoco · arco"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "technique",
+            "prompt": "The viola part is marked arco. What does it ask the player to do?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "sul-ponticello",
+                  "label": "Play with the bow near the bridge"
+                },
+                {
+                  "id": "up-bow",
+                  "label": "Play this note with an up-bow"
+                },
+                {
+                  "id": "arco",
+                  "label": "Play with the bow (usually to cancel pizzicato)"
+                },
+                {
+                  "id": "pizzicato",
+                  "label": "Pluck the strings with the fingers instead of using the bow"
+                }
+              ],
+              "correctOptionIds": [
+                "arco"
+              ],
+              "diagnoses": {
+                "pizzicato": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of pizzicato (pizz.)."
+                },
+                "up-bow": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of the sign ∨ (up-bow)."
+                },
+                "sul-ponticello": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of sul ponticello."
+                }
+              }
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “con fuoco”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "con-fuoco",
+                  "label": "With fire"
+                },
+                {
+                  "id": "affettuoso",
+                  "label": "Tenderly, with affection"
+                },
+                {
+                  "id": "sonoro",
+                  "label": "With a full, resonant tone"
+                },
+                {
+                  "id": "sopra",
+                  "label": "Above"
+                }
+              ],
+              "correctOptionIds": [
+                "con-fuoco"
+              ],
+              "diagnoses": {
+                "affettuoso": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “affettuoso”."
+                },
+                "sonoro": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “sonoro”."
+                },
+                "sopra": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “sopra”."
+                }
+              }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "upper-mordent",
+              "accepted": [
+                "upper-mordent"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Read each part on its own.",
+        "Read the words printed above the stave and the sign on the marked note."
+      ],
+      "feedback": {
+        "correct": "Right: the directions and the sign.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.guided-3",
+      "templateId": "t.g4.passage",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "This passage is for the clarinet. Look at the passage and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "grace": {
+                  "kind": "appoggiatura",
+                  "pitches": [
+                    "F4"
+                  ]
+                },
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, no sharps or flats in the key signature, 3/4, marked Tempo giusto. Bar 1: a note on the 2nd line; a note on the 1st line; a note on the 2nd line. Bar 2: a note in the 1st space; a note marked A on the 1st line, with a small note before it with no stroke through its stem; a note in the 1st space.",
+        "key": "C major",
+        "timeSignature": "3/4",
+        "tempoText": "Tempo giusto"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "family",
+            "prompt": "To which family of the orchestra does the clarinet belong?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "strings",
+                  "label": "Strings"
+                },
+                {
+                  "id": "woodwind",
+                  "label": "Woodwind"
+                },
+                {
+                  "id": "brass",
+                  "label": "Brass"
+                },
+                {
+                  "id": "percussion",
+                  "label": "Percussion"
+                }
+              ],
+              "correctOptionIds": [
+                "woodwind"
+              ],
+              "diagnoses": {
+                "strings": {
+                  "category": "wrong-category",
+                  "reason": "The clarinet belongs to the woodwind family."
+                },
+                "brass": {
+                  "category": "wrong-category",
+                  "reason": "The clarinet belongs to the woodwind family."
+                },
+                "percussion": {
+                  "category": "wrong-category",
+                  "reason": "The clarinet belongs to the woodwind family."
+                }
+              }
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “tempo giusto”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "tempo-giusto",
+                  "label": "In strict, exact time"
+                },
+                {
+                  "id": "presto-possibile",
+                  "label": "As fast as possible"
+                },
+                {
+                  "id": "morendo",
+                  "label": "Dying away"
+                },
+                {
+                  "id": "quasi",
+                  "label": "As if, almost like"
+                }
+              ],
+              "correctOptionIds": [
+                "tempo-giusto"
+              ],
+              "diagnoses": {
+                "presto-possibile": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “presto possibile”."
+                },
+                "quasi": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “quasi”."
+                },
+                "morendo": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “morendo”."
+                }
+              }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "appoggiatura",
+              "accepted": [
+                "appoggiatura"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Take the questions one at a time, using the clef, the key signature, the printed direction and the marks on the notes."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u5-l05.ind-1",
+      "templateId": "t.g4.passage",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage is for the trombone. Look at the passage and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "G#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "y"
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble-clef stave, key signature of 3 sharps, 3/4, marked Appassionato. Bar 1: a note on the 5th line; a note marked x on the 1st ledger line above the stave; a note in the space just above the stave. Bar 2: a note in the 4th space, with a sharp sign in front; a note marked y in the space just above the stave; a note on the 5th line.",
+        "key": "F# minor",
+        "timeSignature": "3/4",
+        "tempoText": "Appassionato"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "clef",
+            "prompt": "The trombone normally reads one clef. Is this passage written in that clef?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "yes",
+                  "label": "Yes: the treble clef is normal for the trombone"
+                },
+                {
+                  "id": "no",
+                  "label": "No: the trombone normally reads a different clef"
+                }
+              ],
+              "correctOptionIds": [
+                "no"
+              ],
+              "diagnoses": {
+                "yes": {
+                  "category": "wrong-category",
+                  "reason": "The trombone normally reads the bass clef, but this passage is written in the treble clef."
+                }
+              }
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “appassionato”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "con-fuoco",
+                  "label": "With fire"
+                },
+                {
+                  "id": "morendo",
+                  "label": "Dying away"
+                },
+                {
+                  "id": "appassionato",
+                  "label": "With passion"
+                },
+                {
+                  "id": "quasi",
+                  "label": "As if, almost like"
+                }
+              ],
+              "correctOptionIds": [
+                "appassionato"
+              ],
+              "diagnoses": {
+                "con-fuoco": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “con fuoco”."
+                },
+                "quasi": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “quasi”."
+                },
+                "morendo": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “morendo”."
+                }
+              }
+            }
+          },
+          {
+            "id": "interval",
+            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
+            "answer": {
+              "kind": "interval",
+              "task": "identify",
+              "key": "F# minor",
+              "lower": "G#5",
+              "upper": "A5",
+              "acceptedIntervals": [
+                "m2"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Take the questions one at a time, using the clef, the key signature, the printed direction and the marks on the notes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.ind-2",
+      "templateId": "t.g4.passage-directions",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage is for the viola. Answer the questions about the directions in it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Ab3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "upper-mordent",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 3 flats, 3/4, marked Cantando · senza sordino. Bar 1: a note on the 2nd line; a note on the 1st line; a note in the space just below the stave. Bar 2: a note marked A on the 1st ledger line below the stave, with a short zig-zag above it with no line through it; a note in the space just below the stave; a note on the 1st line.",
+        "key": "Eb major",
+        "timeSignature": "3/4",
+        "tempoText": "Cantando · senza sordino"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "technique",
+            "prompt": "The viola part is marked senza sordino (senza sord.). What does it ask the player to do?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "con-sordino",
+                  "label": "Play with the mute on"
+                },
+                {
+                  "id": "arco",
+                  "label": "Play with the bow (usually to cancel pizzicato)"
+                },
+                {
+                  "id": "sul-ponticello",
+                  "label": "Play with the bow near the bridge"
+                },
+                {
+                  "id": "senza-sordino",
+                  "label": "Play without the mute"
+                }
+              ],
+              "correctOptionIds": [
+                "senza-sordino"
+              ],
+              "diagnoses": {
+                "con-sordino": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of con sordino (con sord.)."
+                },
+                "arco": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of arco."
+                },
+                "sul-ponticello": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of sul ponticello."
+                }
+              }
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “cantando”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "con-fuoco",
+                  "label": "With fire"
+                },
+                {
+                  "id": "sonoro",
+                  "label": "With a full, resonant tone"
+                },
+                {
+                  "id": "cantando",
+                  "label": "In a singing style"
+                },
+                {
+                  "id": "come-sopra",
+                  "label": "As above"
+                }
+              ],
+              "correctOptionIds": [
+                "cantando"
+              ],
+              "diagnoses": {
+                "sonoro": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “sonoro”."
+                },
+                "con-fuoco": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “con fuoco”."
+                },
+                "come-sopra": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “come sopra”."
+                }
+              }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "upper-mordent",
+              "accepted": [
+                "upper-mordent"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Read each part on its own.",
+        "Read the words printed above the stave and the sign on the marked note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.ind-3",
+      "templateId": "t.g4.passage",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage is for the viola. Look at the passage and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "y"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 3 flats, 3/4, marked Facile. Bar 1: a note in the 1st space; a note marked x in the space just below the stave; a note on the 1st ledger line below the stave. Bar 2: a note on the 1st line; a note in the space just below the stave; a note marked y on the 1st ledger line below the stave.",
+        "key": "C minor",
+        "timeSignature": "3/4",
+        "tempoText": "Facile"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "clef",
+            "prompt": "The viola normally reads one clef. Is this passage written in that clef?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "yes",
+                  "label": "Yes: the alto clef is normal for the viola"
+                },
+                {
+                  "id": "no",
+                  "label": "No: the viola normally reads a different clef"
+                }
+              ],
+              "correctOptionIds": [
+                "yes"
+              ],
+              "diagnoses": {
+                "no": {
+                  "category": "wrong-category",
+                  "reason": "The viola normally reads the alto clef, and this passage is written in it."
+                }
+              }
+            }
+          },
+          {
+            "id": "interval",
+            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
+            "answer": {
+              "kind": "interval",
+              "task": "identify",
+              "key": "C minor",
+              "lower": "D3",
+              "upper": "Eb3",
+              "acceptedIntervals": [
+                "m2"
+              ]
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “facile”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "sotto-voce",
+                  "label": "In an undertone, very softly"
+                },
+                {
+                  "id": "facile",
+                  "label": "Easily, without effort"
+                },
+                {
+                  "id": "appassionato",
+                  "label": "With passion"
+                },
+                {
+                  "id": "sonoro",
+                  "label": "With a full, resonant tone"
+                }
+              ],
+              "correctOptionIds": [
+                "facile"
+              ],
+              "diagnoses": {
+                "sonoro": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “sonoro”."
+                },
+                "appassionato": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “appassionato”."
+                },
+                "sotto-voce": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “sotto voce”."
+                }
+              }
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Take the questions one at a time, using the clef, the key signature, the printed direction and the marks on the notes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.ind-4",
+      "templateId": "t.g4.passage-directions",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage is for the viola. Answer the questions about the directions in it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "turn",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 1 flat, 3/4, marked Cantando · pizzicato. Bar 1: a note in the 3rd space; a note on the 4th line; a note on the 5th line. Bar 2: a note marked A in the 4th space, with a sideways S-shaped curl above it; a note on the 4th line; a note in the 4th space.",
+        "key": "D minor",
+        "timeSignature": "3/4",
+        "tempoText": "Cantando · pizzicato"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "technique",
+            "prompt": "The viola part is marked pizzicato (pizz.). What does it ask the player to do?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "senza-sordino",
+                  "label": "Play without the mute"
+                },
+                {
+                  "id": "arco",
+                  "label": "Play with the bow (usually to cancel pizzicato)"
+                },
+                {
+                  "id": "pizzicato",
+                  "label": "Pluck the strings with the fingers instead of using the bow"
+                },
+                {
+                  "id": "sul-g",
+                  "label": "Play on the G string"
+                }
+              ],
+              "correctOptionIds": [
+                "pizzicato"
+              ],
+              "diagnoses": {
+                "arco": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of arco."
+                },
+                "senza-sordino": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of senza sordino (senza sord.)."
+                },
+                "sul-g": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of sul G."
+                }
+              }
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “cantando”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "appassionato",
+                  "label": "With passion"
+                },
+                {
+                  "id": "con-fuoco",
+                  "label": "With fire"
+                },
+                {
+                  "id": "calando",
+                  "label": "Getting softer and (usually) slower"
+                },
+                {
+                  "id": "cantando",
+                  "label": "In a singing style"
+                }
+              ],
+              "correctOptionIds": [
+                "cantando"
+              ],
+              "diagnoses": {
+                "appassionato": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “appassionato”."
+                },
+                "con-fuoco": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “con fuoco”."
+                },
+                "calando": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “calando”."
+                }
+              }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "turn",
+              "accepted": [
+                "turn"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Read each part on its own.",
+        "Read the words printed above the stave and the sign on the marked note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.ind-5",
+      "templateId": "t.g4.passage",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage is for the bassoon. Look at the passage and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "turn",
+                "label": "A"
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "y"
+              },
+              {
+                "kind": "note",
+                "pitch": "Bb2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bass-clef stave, key signature of 2 flats, 3/4, marked Presto possibile. Bar 1: a note on the 1st ledger line above the stave; a note marked x on the 5th line; a note in the 4th space. Bar 2: a note marked A in the 3rd space, with a sideways S-shaped curl above it; a note marked y on the 3rd line; a note on the 2nd line.",
+        "key": "Bb major",
+        "timeSignature": "3/4",
+        "tempoText": "Presto possibile"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "family",
+            "prompt": "To which family of the orchestra does the bassoon belong?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "strings",
+                  "label": "Strings"
+                },
+                {
+                  "id": "woodwind",
+                  "label": "Woodwind"
+                },
+                {
+                  "id": "brass",
+                  "label": "Brass"
+                },
+                {
+                  "id": "percussion",
+                  "label": "Percussion"
+                }
+              ],
+              "correctOptionIds": [
+                "woodwind"
+              ],
+              "diagnoses": {
+                "strings": {
+                  "category": "wrong-category",
+                  "reason": "The bassoon belongs to the woodwind family."
+                },
+                "brass": {
+                  "category": "wrong-category",
+                  "reason": "The bassoon belongs to the woodwind family."
+                },
+                "percussion": {
+                  "category": "wrong-category",
+                  "reason": "The bassoon belongs to the woodwind family."
+                }
+              }
+            }
+          },
+          {
+            "id": "interval",
+            "prompt": "What is the interval from the lower to the higher of the notes marked x and y? (Quality and number.)",
+            "answer": {
+              "kind": "interval",
+              "task": "identify",
+              "key": "Bb major",
+              "lower": "D3",
+              "upper": "A3",
+              "acceptedIntervals": [
+                "P5"
+              ]
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "turn",
+              "accepted": [
+                "turn"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Take the questions one at a time, using the clef, the key signature, the printed direction and the marks on the notes."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g4-u5-l05.ind-6",
+      "templateId": "t.g4.passage-directions",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "This passage is for the viola. Answer the questions about the directions in it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "alto",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "ornament": "trill",
+                "label": "A"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "An alto-clef stave, key signature of 2 sharps, 3/4, marked Tempo giusto · sul ponticello. Bar 1: a note in the 3rd space; a note on the 4th line; a note marked A in the 3rd space, with the letters tr above it. Bar 2: a note on the 4th line; a note in the 4th space; a note in the 3rd space.",
+        "key": "B minor",
+        "timeSignature": "3/4",
+        "tempoText": "Tempo giusto · sul ponticello"
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "technique",
+            "prompt": "The viola part is marked sul ponticello. What does it ask the player to do?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "senza-sordino",
+                  "label": "Play without the mute"
+                },
+                {
+                  "id": "con-sordino",
+                  "label": "Play with the mute on"
+                },
+                {
+                  "id": "sul-ponticello",
+                  "label": "Play with the bow near the bridge"
+                },
+                {
+                  "id": "down-bow",
+                  "label": "Play this note with a down-bow"
+                }
+              ],
+              "correctOptionIds": [
+                "sul-ponticello"
+              ],
+              "diagnoses": {
+                "senza-sordino": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of senza sordino (senza sord.)."
+                },
+                "con-sordino": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of con sordino (con sord.)."
+                },
+                "down-bow": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of the sign ⊓ (down-bow)."
+                }
+              }
+            }
+          },
+          {
+            "id": "term",
+            "prompt": "The passage is marked “tempo giusto”. What does it ask?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "presto-possibile",
+                  "label": "As fast as possible"
+                },
+                {
+                  "id": "tempo-giusto",
+                  "label": "In strict, exact time"
+                },
+                {
+                  "id": "morendo",
+                  "label": "Dying away"
+                },
+                {
+                  "id": "niente",
+                  "label": "Nothing (as in “to nothing”)"
+                }
+              ],
+              "correctOptionIds": [
+                "tempo-giusto"
+              ],
+              "diagnoses": {
+                "presto-possibile": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “presto possibile”."
+                },
+                "niente": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “niente”."
+                },
+                "morendo": {
+                  "category": "confused-similar-term",
+                  "reason": "That is the meaning of “morendo”."
+                }
+              }
+            }
+          },
+          {
+            "id": "ornament",
+            "prompt": "What is the ornament on the note marked A?",
+            "answer": {
+              "kind": "ornament-sign",
+              "task": "name-sign",
+              "sign": "trill",
+              "accepted": [
+                "trill"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Read each part on its own.",
+        "Read the words printed above the stave and the sign on the marked note."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part.",
+          "wrong-category": "Check which group each belongs to.",
+          "confused-similar-term": "Compare the meanings carefully.",
+          "ornament-confused": "Check the shape of the sign: letters, a curl, a zig-zag, or a small note."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "recap": [
+    "Look at the clef, key signature and printed directions first.",
+    "Answer each question with the rule that belongs to it.",
+    "Use what you know about the instrument named."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.passage",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.passage-directions",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.passage",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.context.passage-g4"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.18",
+      "abrsm2020.g1.21"
+    ],
+    "notes": "Original wording and original passages (the book has no passage for this unit; section 15 'General Questions' is the model). The passages are generated, short, written for a named orchestral instrument and combine an instrument question with an interval, an ornament or a performance direction. Every passage carries a question about the instrument, so it is always evidence for the orchestra outcome; the interval, ornament and term parts are counted only by their own templates elsewhere."
+  }
+}

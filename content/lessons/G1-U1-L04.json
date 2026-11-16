@@ -1,0 +1,964 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U1-L04",
+  "lessonId": "G1-U1-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Match each note value with the rest of the same length.",
+    "successCriteria": [
+      "I know a rest is a silence with a symbol for each note length.",
+      "I can match each note value to its rest.",
+      "I can count rests and notes together."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Music is made of silence as well as sound. A rest is a sign for silence, and every note value has a rest that lasts exactly as long."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve followed by a semibreve rest, then a minim followed by a minim rest.",
+        "questionAlternative": "Bar 1: semibreve, semibreve rest, minim, minim rest."
+      },
+      "caption": "The semibreve rest hangs below a line; the minim rest sits on top of it."
+    },
+    {
+      "kind": "text",
+      "text": "The semibreve rest is a small block hanging from the 4th line. The minim rest is the same block sitting on top of the 3rd line. Both last as long as their notes."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A crotchet, a quaver and a semiquaver, each followed by the rest of the same length.",
+        "questionAlternative": "Bar 1: crotchet, crotchet rest, quaver, quaver rest, semiquaver, semiquaver rest."
+      },
+      "caption": "Crotchet, quaver and semiquaver rests. Each lasts as long as the note beside it."
+    },
+    {
+      "kind": "tip",
+      "text": "Count rests by their value, exactly as you count notes. Two crotchet rests are two beats of silence; a minim rest on its own is already two beats. Just say nothing!"
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "begin"
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              },
+              "beam": "end"
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Two bars. The first has a crotchet, a crotchet rest and a minim. The second has two quavers, a crotchet rest and a crotchet.",
+      "questionAlternative": "Bar 1: crotchet, crotchet rest, minim. Bar 2: 2 beamed together (quaver, quaver), crotchet rest, crotchet."
+    },
+    "steps": [
+      "Press Play all and tap the beat. Notice that the rest takes up a beat of silence.",
+      "Count the first bar: 'one, (rest), three-four'. The rest is one beat.",
+      "In the second bar, the two quavers fill beat one, then the rest is beat two."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Two bars of rhythm with a one-beat rest in each. Playing them shows that the silence lasts exactly as long as a note."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u1-l04.guided-1",
+      "templateId": "t.g1.rest",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which rest lasts as long as a semiquaver?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One semiquaver.",
+        "questionAlternative": "Bar 1: semiquaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semiquaver",
+            "label": "semiquaver rest"
+          },
+          {
+            "id": "semibreve",
+            "label": "semibreve rest"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver rest"
+          },
+          {
+            "id": "minim",
+            "label": "minim rest"
+          }
+        ],
+        "correctOptionIds": [
+          "semiquaver"
+        ],
+        "diagnoses": {
+          "semibreve": {
+            "category": "note-rest-confusion",
+            "reason": "A semibreve rest is as long as a semibreve. A rest has the same name and the same length as its note, so you need the semiquaver rest."
+          },
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "A quaver rest is as long as a quaver. A rest has the same name and the same length as its note, so you need the semiquaver rest."
+          },
+          "minim": {
+            "category": "note-rest-confusion",
+            "reason": "A minim rest is as long as a minim. A rest has the same name and the same length as its note, so you need the semiquaver rest."
+          }
+        }
+      },
+      "hints": [
+        "Semibreve rests hang below a line; minim rests sit on top of one.",
+        "Every note value has a rest of the same length and the same name."
+      ],
+      "feedback": {
+        "correct": "Every note has a rest of the same name.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.guided-2",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many crotchet beats do these notes and rests last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, minim rest.",
+        "questionAlternative": "Bar 1: crotchet, minim rest."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "1"
+          },
+          {
+            "id": "3",
+            "label": "1½"
+          },
+          {
+            "id": "6",
+            "label": "3"
+          },
+          {
+            "id": "12",
+            "label": "6"
+          }
+        ],
+        "correctOptionIds": [
+          "6"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "note-rest-confusion",
+            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
+          },
+          "3": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          },
+          "12": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "Rests count just like notes.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u1-l04.ind-1",
+      "templateId": "t.g1.rest",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which rest lasts as long as a minim?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One minim.",
+        "questionAlternative": "Bar 1: minim."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "quaver",
+            "label": "quaver rest"
+          },
+          {
+            "id": "semibreve",
+            "label": "semibreve rest"
+          },
+          {
+            "id": "minim",
+            "label": "minim rest"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver rest"
+          }
+        ],
+        "correctOptionIds": [
+          "minim"
+        ],
+        "diagnoses": {
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "A quaver rest is as long as a quaver. A rest has the same name and the same length as its note, so you need the minim rest."
+          },
+          "semibreve": {
+            "category": "note-rest-confusion",
+            "reason": "A semibreve rest is as long as a semibreve. A rest has the same name and the same length as its note, so you need the minim rest."
+          },
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "A semiquaver rest is as long as a semiquaver. A rest has the same name and the same length as its note, so you need the minim rest."
+          }
+        }
+      },
+      "hints": [
+        "Semibreve rests hang below a line; minim rests sit on top of one.",
+        "Every note value has a rest of the same length and the same name."
+      ],
+      "feedback": {
+        "correct": "The rest that matches the note.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-2",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes and rests last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: semibreve, quaver rest, minim.",
+        "questionAlternative": "Bar 1: semibreve, quaver rest, minim."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "12",
+            "label": "6"
+          },
+          {
+            "id": "13",
+            "label": "6½"
+          },
+          {
+            "id": "15",
+            "label": "7½"
+          },
+          {
+            "id": "26",
+            "label": "13"
+          }
+        ],
+        "correctOptionIds": [
+          "13"
+        ],
+        "diagnoses": {
+          "12": {
+            "category": "note-rest-confusion",
+            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
+          },
+          "26": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "Counted the silence too.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-3",
+      "templateId": "t.g1.rest",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which rest lasts as long as a semibreve?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One semibreve.",
+        "questionAlternative": "Bar 1: semibreve."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semiquaver",
+            "label": "semiquaver rest"
+          },
+          {
+            "id": "semibreve",
+            "label": "semibreve rest"
+          },
+          {
+            "id": "crotchet",
+            "label": "crotchet rest"
+          },
+          {
+            "id": "minim",
+            "label": "minim rest"
+          }
+        ],
+        "correctOptionIds": [
+          "semibreve"
+        ],
+        "diagnoses": {
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "A semiquaver rest is as long as a semiquaver. A rest has the same name and the same length as its note, so you need the semibreve rest."
+          },
+          "crotchet": {
+            "category": "note-rest-confusion",
+            "reason": "A crotchet rest is as long as a crotchet. A rest has the same name and the same length as its note, so you need the semibreve rest."
+          },
+          "minim": {
+            "category": "note-rest-confusion",
+            "reason": "A minim rest is as long as a minim. A rest has the same name and the same length as its note, so you need the semibreve rest."
+          }
+        }
+      },
+      "hints": [
+        "Semibreve rests hang below a line; minim rests sit on top of one.",
+        "Every note value has a rest of the same length and the same name."
+      ],
+      "feedback": {
+        "correct": "Correct match.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-4",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes and rests last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver rest, minim, crotchet.",
+        "questionAlternative": "Bar 1: quaver rest, minim, crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "6",
+            "label": "3"
+          },
+          {
+            "id": "7",
+            "label": "3½"
+          },
+          {
+            "id": "9",
+            "label": "4½"
+          },
+          {
+            "id": "14",
+            "label": "7"
+          }
+        ],
+        "correctOptionIds": [
+          "7"
+        ],
+        "diagnoses": {
+          "6": {
+            "category": "note-rest-confusion",
+            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
+          },
+          "14": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "Notes and rests added correctly.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-5",
+      "templateId": "t.g1.rest",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which rest lasts as long as a crotchet?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "One crotchet.",
+        "questionAlternative": "Bar 1: crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semibreve",
+            "label": "semibreve rest"
+          },
+          {
+            "id": "quaver",
+            "label": "quaver rest"
+          },
+          {
+            "id": "semiquaver",
+            "label": "semiquaver rest"
+          },
+          {
+            "id": "crotchet",
+            "label": "crotchet rest"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "semibreve": {
+            "category": "note-rest-confusion",
+            "reason": "A semibreve rest is as long as a semibreve. A rest has the same name and the same length as its note, so you need the crotchet rest."
+          },
+          "quaver": {
+            "category": "note-rest-confusion",
+            "reason": "A quaver rest is as long as a quaver. A rest has the same name and the same length as its note, so you need the crotchet rest."
+          },
+          "semiquaver": {
+            "category": "note-rest-confusion",
+            "reason": "A semiquaver rest is as long as a semiquaver. A rest has the same name and the same length as its note, so you need the crotchet rest."
+          }
+        }
+      },
+      "hints": [
+        "Semibreve rests hang below a line; minim rests sit on top of one.",
+        "Every note value has a rest of the same length and the same name."
+      ],
+      "feedback": {
+        "correct": "Right again.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    },
+    {
+      "id": "i.g1-u1-l04.ind-6",
+      "templateId": "t.g1.note-total",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many crotchet beats do these notes and rests last altogether?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet rest, minim rest.",
+        "questionAlternative": "Bar 1: quaver, crotchet rest, minim rest."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "½"
+          },
+          {
+            "id": "7",
+            "label": "3½"
+          },
+          {
+            "id": "9",
+            "label": "4½"
+          },
+          {
+            "id": "14",
+            "label": "7"
+          }
+        ],
+        "correctOptionIds": [
+          "7"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "note-rest-confusion",
+            "reason": "A rest lasts as long as the note of the same name, so rests count towards the total too."
+          },
+          "14": {
+            "category": "halved-or-doubled",
+            "reason": "Count again, one note at a time, in crotchet beats."
+          }
+        }
+      },
+      "hints": [
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼.",
+        "Count in crotchet beats: semibreve 4, minim 2, crotchet 1, quaver ½, semiquaver ¼. A dot adds half again.",
+        "Add the beats one note or rest at a time."
+      ],
+      "feedback": {
+        "correct": "A silent beat still counts.",
+        "mistakes": {
+          "halved-or-doubled": "That value is twice (or half) as long. Count it in crotchet beats and compare.",
+          "dot-misread": "Remember: a dot adds half of the note's own value. Work out that half, then add it.",
+          "note-rest-confusion": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it.",
+          "tie-dot-confusion": "A tie joins two notes into one sound, so add both values together.",
+          "tuplet-ignored": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        },
+        "fallback": "Not quite. Try counting each value in crotchet beats."
+      }
+    }
+  ],
+  "recap": [
+    "A rest is a sign for silence.",
+    "Every note value has a rest with the same name and the same length.",
+    "Count rests exactly like notes."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.rest",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.note-total",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.rest",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.rests"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s11"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.02"
+    ],
+    "notes": "Original wording. Follows Grade 1 outcome 02 (rests). Rest shapes are drawn by the renderer from the engraving font."
+  }
+}

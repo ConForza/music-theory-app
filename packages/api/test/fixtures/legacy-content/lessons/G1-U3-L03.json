@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G1-U3-L03",
+  "lessonId": "G1-U3-L03",
+  "contentVersion": 2,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read and write the five notes that sit on the lines of the treble clef.",
+    "successCriteria": [
+      "I can name any treble-clef line note without counting from the bottom every time.",
+      "I can place E, G, B, D or F on the correct line when asked.",
+      "I can explain why the treble clef is also called the G clef."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The treble clef is drawn so that its inner curl wraps around the second line up. That line is G — which is why the treble clef is also called the G clef."
+    },
+    {
+      "kind": "text",
+      "text": "Once you know G, the other lines follow by skipping a letter each time: the bottom line is E, then G, B, D and F at the top."
+    },
+    {
+      "kind": "tip",
+      "text": "Make up your own sentence to remember E–G–B–D–F, for example 'Every Gorilla Buys Delicious Fruit'. Silly sentences are easier to remember!"
+    },
+    {
+      "kind": "notation",
+      "caption": "The five line notes of the treble clef, from the bottom line to the top.",
+      "music": {
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "E"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "G"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "B"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "D"
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                },
+                "label": "F"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A treble-clef stave with five semibreves rising from the bottom line to the top line, labelled E, G, B, D and F."
+      }
+    }
+  ],
+  "demonstration": {
+    "widget": "staff-and-keyboard",
+    "music": {
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "G4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "G"
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "E"
+            },
+            {
+              "kind": "note",
+              "pitch": "F5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              },
+              "label": "F"
+            }
+          ]
+        }
+      ],
+      "textAlternative": "Three treble-clef notes: G on the second line, E on the bottom line and F on the top line, each linked to its key on the keyboard."
+    },
+    "steps": [
+      "The clef's curl highlights the second line; the G key lights up on the keyboard and sounds.",
+      "Move down one line (skipping the space) to the bottom line: E. The keyboard shows E just below G with F in between.",
+      "Jump to the top line: F. The keyboard shows that the top-line F is higher than the F in the bottom space.",
+      "The learner taps each line in turn and hears its note."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "Each step is also announced as text: clef curl → second line is G; bottom line is E; top line is F. Sound is optional."
+  },
+  "guided": [
+    {
+      "id": "i.g1-u3-l03.guided-1",
+      "templateId": "t.g1.note-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The clef curls around this line. What is the note?",
+      "music": {
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve on the second line of a treble-clef stave."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "G4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Which line does the curl of the treble clef wrap around?",
+        "It is the second line up — and the clef is named after it."
+      ],
+      "feedback": {
+        "correct": "Yes — G. The treble clef marks G on the second line.",
+        "mistakes": {
+          "counted-from-top": "Lines are counted from the bottom. This is the second line up, not the second line down.",
+          "off-by-step": "You're one step away. The curl of the clef points to this exact line: G.",
+          "clef-confusion": "In the bass clef this line would be B, but this stave has a treble clef."
+        },
+        "fallback": "This is G — the line the treble clef curls around."
+      }
+    },
+    {
+      "id": "i.g1-u3-l03.guided-2",
+      "templateId": "t.g1.note-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Start from G and skip up one letter to the next line. What is this note?",
+      "music": {
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A semibreve on the middle (third) line of a treble-clef stave."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "B4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "G is the line below this one.",
+        "From one line to the next you skip a letter: G, (A), B."
+      ],
+      "feedback": {
+        "correct": "Right — B, on the middle line.",
+        "mistakes": {
+          "line-space-swap": "A is in the space just below. This note has the line running through it, so it's B.",
+          "off-by-step": "Count from G: G is the line below, the space is A, and this line is B.",
+          "clef-confusion": "In the bass clef the middle line is D. Check the clef: this is treble, so it's B."
+        },
+        "fallback": "It's B. Line notes skip a letter: G, then B."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g1-u3-l03.independent-1",
+      "templateId": "t.g1.note-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note.",
+      "music": {
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A minim on the fourth line of a treble-clef stave, stem pointing down."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "D5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "feedback": {
+        "correct": "Correct — D, on the fourth line.",
+        "mistakes": {
+          "counted-from-top": "Count lines from the bottom: this is the fourth line up, D.",
+          "line-space-swap": "C and E are in the spaces either side. The line runs through this note, so it's D.",
+          "off-by-step": "Count up the lines: E, G, B, D — this is the fourth.",
+          "clef-confusion": "That would be its name in the bass clef. In treble, the fourth line is D."
+        },
+        "fallback": "It's D: E, G, B, D, F from the bottom line up."
+      }
+    },
+    {
+      "id": "i.g1-u3-l03.independent-2",
+      "templateId": "t.g1.note-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note.",
+      "music": {
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A crotchet on the bottom line of a treble-clef stave, stem pointing up."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "E4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "feedback": {
+        "correct": "Correct — E, on the bottom line.",
+        "mistakes": {
+          "counted-from-top": "Counting from the top would give F. Always count from the bottom: this is the first line, E.",
+          "off-by-step": "One line up from E is G; this is the bottom line itself — E.",
+          "clef-confusion": "In the bass clef the bottom line is G. This is a treble clef, so it's E."
+        },
+        "fallback": "It's E — the bottom line of the treble clef."
+      }
+    },
+    {
+      "id": "i.g1-u3-l03.independent-3",
+      "templateId": "t.g1.note-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Put an F on a line of this treble-clef stave.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "F",
+          "alter": 0,
+          "position": "line",
+          "maxLedgerLines": 0
+        },
+        "accepted": [
+          "F5"
+        ],
+        "octaveSensitive": true
+      },
+      "feedback": {
+        "correct": "Yes — the top line is F.",
+        "mistakes": {
+          "line-space-swap": "That note is in a space, but the question asks for an F on a line. The F on a line is the top line.",
+          "wrong-octave": "That's an F, but it's in a space. The only F on a line of the treble stave is the top line.",
+          "clef-confusion": "In the bass clef F is on the fourth line, but this is a treble clef."
+        },
+        "fallback": "The F on a line is the top line of the treble stave."
+      }
+    },
+    {
+      "id": "i.g1-u3-l03.independent-4",
+      "templateId": "t.g1.note-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Put a G on a line of the treble-clef stave.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "treble",
+        "target": {
+          "step": "G",
+          "alter": 0,
+          "position": "line",
+          "maxLedgerLines": 0
+        },
+        "accepted": [
+          "G4"
+        ],
+        "octaveSensitive": true
+      },
+      "feedback": {
+        "correct": "Correct — G on the second line, where the clef curls.",
+        "mistakes": {
+          "line-space-swap": "That's a space. G is on the second line — the one the clef curls around.",
+          "counted-from-top": "That's the second line from the top (D). Count from the bottom.",
+          "wrong-octave": "There is a G just above the stave, but it sits in a space, not on a line. The G on a line is the second line."
+        },
+        "fallback": "G is the second line up, marked by the treble clef's curl."
+      }
+    }
+  ],
+  "recap": [
+    "The treble clef curls around G on the second line.",
+    "The line notes from the bottom are E, G, B, D, F.",
+    "Lines and spaces are always counted from the bottom."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g1.note-read",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g1.note-write",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g1.note-read",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.clefs.treble-lines"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered (with retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 01 example)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g1.s05",
+      "fs.g1.s06"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g1.08",
+      "abrsm2020.g1.09"
+    ],
+    "notes": "Original wording and examples. The mnemonic sentence is the author's own; learners are encouraged to invent their own. Book sections are recorded only as subject pointers."
+  }
+}

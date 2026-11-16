@@ -1,0 +1,1613 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U5-L04",
+  "lessonId": "G2-U5-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read a short melody and find the key, the time signature, the beats and the marks.",
+    "successCriteria": [
+      "I can read the key signature and time signature at the start.",
+      "I can find a triplet and say which bar it is in.",
+      "I can say what a Grade 2 word or sign tells the player."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Reading a melody means putting together everything you know. Go through it in the same order each time."
+    },
+    {
+      "kind": "text",
+      "text": "First the clef and the key signature: which key is it, and which sharps or flats are in the scale? Then the time signature: how many beats, and which note is the beat."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                },
+                "dynamic": "mf"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A four-bar tune in A major, 2/2, marked mf. Bar 1: A minim, C sharp minim. Bar 2: E, D, C sharp, B crotchets. Bar 3: A minim, E minim. Bar 4: A semibreve.",
+        "timeSignature": "2/2",
+        "key": "A major"
+      },
+      "caption": "This original tune is in A major (three sharps), 2/2 (two minim beats) and marked mf."
+    },
+    {
+      "kind": "text",
+      "text": "Next look for rests, triplets, ties and dots in each bar. Then the marks: words above the stave, dynamics under it, and signs on single notes."
+    },
+    {
+      "kind": "text",
+      "text": "Finally, use the key. You can find the tonic, the tonic triad or the interval from the tonic for any note in the melody."
+    },
+    {
+      "kind": "tip",
+      "text": "Clef, key, time signature, then bar by bar: rhythms, then marks."
+    }
+  ],
+  "demonstration": {
+    "widget": "score",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C#5",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              },
+              "dynamic": "mf"
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C#5",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ]
+        },
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "A4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A four-bar tune in A major, 2/2, marked mf. Bar 1: A minim, C sharp minim. Bar 2: E, D, C sharp, B crotchets. Bar 3: A minim, E minim. Bar 4: A semibreve.",
+      "timeSignature": "2/2",
+      "key": "A major"
+    },
+    "steps": [
+      "Three sharps: the key is A major. The time signature is 2/2: two minim beats.",
+      "Bar 1 has two minims. Bar 2 has four crotchets. Count them in minim beats: two crotchets to a beat.",
+      "The mark mf under the second note of bar 1 tells you to play moderately loud."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A short tune in A major, 2/2, marked mf."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u5-l04.guided-1",
+      "templateId": "t.g2.melody-detail",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many beats are there in each bar of this melody?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of no sharps or flats, time signature 3/2. Bar 1: minim in the space just below the stave; minim on the 1st line; minim on the 1st ledger line below the stave. Bar 2: minim in the space just below the stave; minim on the 1st line; minim in the space just below the stave.",
+        "key": "C major",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          },
+          {
+            "id": "4",
+            "label": "4"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "evidence-misread",
+            "reason": "The top number of the time signature says how many beats are in a bar."
+          },
+          "4": {
+            "category": "evidence-misread",
+            "reason": "The top number of the time signature says how many beats are in a bar."
+          }
+        }
+      },
+      "hints": [
+        "Read the clef, key, time signature and marks in turn.",
+        "Read the time signature."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.guided-2",
+      "templateId": "t.g2.melody-detail",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The melody is in a major key. Which key is it?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G5",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 sharps, time signature 4/2. Bar 1: minim in the 2nd space; minim on the 2nd line; crotchet in the 2nd space; crotchet in the 3rd space; minim on the 4th line. Bar 2: crotchet in the 4th space; crotchet on the 5th line; minim in the 4th space; minim on the 5th line; minim in the space just above the stave.",
+        "key": "D major",
+        "timeSignature": "4/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "G major",
+            "label": "G major"
+          },
+          {
+            "id": "Eb major",
+            "label": "E♭ major"
+          },
+          {
+            "id": "F major",
+            "label": "F major"
+          },
+          {
+            "id": "D major",
+            "label": "D major"
+          }
+        ],
+        "correctOptionIds": [
+          "D major"
+        ],
+        "diagnoses": {
+          "G major": {
+            "category": "evidence-misread",
+            "reason": "G major has 1 sharps, which does not match the key signature on the stave."
+          },
+          "Eb major": {
+            "category": "evidence-misread",
+            "reason": "E♭ major has 3 flats, which does not match the key signature on the stave."
+          },
+          "F major": {
+            "category": "evidence-misread",
+            "reason": "F major has 1 flats, which does not match the key signature on the stave."
+          }
+        }
+      },
+      "hints": [
+        "Read the clef, key, time signature and marks in turn.",
+        "Count the sharps or flats in the key signature."
+      ],
+      "feedback": {
+        "correct": "Correct key.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.guided-3",
+      "templateId": "t.g2.melody",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Look at this melody and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "C3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in the bass clef with a key signature, time signature 4/4. The notes are G, E, F, A, B, A, C, D; the note marked x is the 6th note.",
+        "key": "C major",
+        "timeSignature": "4/4",
+        "questionAlternative": "A two-bar melody in the bass clef with a key signature of no sharps or flats, time signature 4/4. The notes sit: 1st line, 1st ledger line below the stave, space just below the stave, 1st space, 2nd line, 1st space, 2nd space, 3rd line; the note marked x is the 6th note."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "beats",
+            "prompt": "How many crotchet beats are in each bar?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "2",
+                  "label": "2"
+                },
+                {
+                  "id": "3",
+                  "label": "3"
+                },
+                {
+                  "id": "4",
+                  "label": "4"
+                }
+              ],
+              "correctOptionIds": [
+                "4"
+              ]
+            }
+          },
+          {
+            "id": "marked",
+            "prompt": "Name the note marked x.",
+            "answer": {
+              "kind": "pitch",
+              "reference": "A2",
+              "relation": "same",
+              "accepted": [
+                "A2"
+              ],
+              "octaveSensitive": false,
+              "spellingSensitive": true
+            }
+          },
+          {
+            "id": "key",
+            "prompt": "The melody is in a major key. Which one?",
+            "answer": {
+              "kind": "key-signature",
+              "task": "name-key",
+              "clef": "bass",
+              "accepted": [
+                "C major"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Use the time signature for the beats, the stave for the note, and the key signature for the key."
+      ],
+      "feedback": {
+        "correct": "Good: you read each part of the melody.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u5-l04.ind-1",
+      "templateId": "t.g2.melody-detail",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which bar of the melody contains a triplet?",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "D4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "Eb4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "D4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the treble clef, key signature of 2 flats, time signature 2/4. Bar 1: a triplet group of three notes sharing one beat (quaver in the space just below the stave, then quaver on the 1st line, then quaver in the space just below the stave); crotchet in the 1st space. Bar 2: crotchet on the 1st line; quaver in the 1st space; quaver on the 2nd line.",
+        "key": "Bb major",
+        "timeSignature": "2/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "evidence-misread",
+            "reason": "Look for the bracket marked 3 over a group of three notes joined by a beam."
+          }
+        }
+      },
+      "hints": [
+        "Read the clef, key, time signature and marks in turn.",
+        "A triplet is a group of three notes with a 3 above or below."
+      ],
+      "feedback": {
+        "correct": "You found the triplet.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.ind-2",
+      "templateId": "t.g2.melody-detail",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The melody is marked “presto”. Which description of the way to play it is right?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C#3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 3 sharps, time signature 4/2. Bar 1: minim on the 3rd line; minim in the 2nd space; minim on the 3rd line; minim in the 3rd space. Bar 2: minim on the 3rd line; minim in the 3rd space; minim on the 4th line; crotchet in the 4th space; crotchet in the 3rd space. The tempo mark above the first bar says “presto”.",
+        "key": "A major",
+        "timeSignature": "4/2",
+        "tempoText": "presto"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "largo",
+            "label": "slow and broad"
+          },
+          {
+            "id": "andante",
+            "label": "at a walking pace"
+          },
+          {
+            "id": "presto",
+            "label": "very fast"
+          },
+          {
+            "id": "adagio",
+            "label": "slow"
+          }
+        ],
+        "correctOptionIds": [
+          "presto"
+        ],
+        "diagnoses": {
+          "adagio": {
+            "category": "evidence-misread",
+            "reason": "“adagio” means “slow”, which is a different marking."
+          },
+          "andante": {
+            "category": "evidence-misread",
+            "reason": "“andante” means “at a walking pace”, which is a different marking."
+          },
+          "largo": {
+            "category": "evidence-misread",
+            "reason": "“largo” means “slow and broad”, which is a different marking."
+          }
+        }
+      },
+      "hints": [
+        "Read the clef, key, time signature and marks in turn.",
+        "“presto” is a tempo marking."
+      ],
+      "feedback": {
+        "correct": "You applied the word to the tune.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.ind-3",
+      "templateId": "t.g2.melody",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Look at this melody and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              },
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in the bass clef with a key signature, time signature 4/4. The notes are E, F♯, D, F♯, A, F♯, G♯, A; the note marked x is the 2nd note.",
+        "key": "A major",
+        "timeSignature": "4/4",
+        "questionAlternative": "A two-bar melody in the bass clef with a key signature of 3 sharps, time signature 4/4. The notes sit: 3rd space, 4th line, 3rd line, 4th line, 5th line, 4th line, 4th space, 5th line; the note marked x is the 2nd note."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "beats",
+            "prompt": "How many crotchet beats are in each bar?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "2",
+                  "label": "2"
+                },
+                {
+                  "id": "3",
+                  "label": "3"
+                },
+                {
+                  "id": "4",
+                  "label": "4"
+                }
+              ],
+              "correctOptionIds": [
+                "4"
+              ]
+            }
+          },
+          {
+            "id": "marked",
+            "prompt": "Name the note marked x.",
+            "answer": {
+              "kind": "pitch",
+              "reference": "F#3",
+              "relation": "same",
+              "accepted": [
+                "F#3"
+              ],
+              "octaveSensitive": false,
+              "spellingSensitive": true
+            }
+          },
+          {
+            "id": "key",
+            "prompt": "The melody is in a major key. Which one?",
+            "answer": {
+              "kind": "key-signature",
+              "task": "name-key",
+              "clef": "bass",
+              "accepted": [
+                "A major"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Use the time signature for the beats, the stave for the note, and the key signature for the key."
+      ],
+      "feedback": {
+        "correct": "Good reading.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.ind-4",
+      "templateId": "t.g2.melody-detail",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The melody is in G major. What is the interval, by number, from the tonic up to the note marked x? (Use the nearest tonic below the note.)",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 1 sharp, time signature 3/2. Bar 1: minim in the 4th space; minim in the space just above the stave; minim on the 5th line. Bar 2: minim on the 1st ledger line above the stave; minim on the 2nd ledger line above the stave; crotchet on the 1st ledger line above the stave; crotchet in the space above the 1st ledger line above the stave (the note marked x).",
+        "key": "G major",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "2",
+            "label": "2nd"
+          },
+          {
+            "id": "3",
+            "label": "3rd"
+          },
+          {
+            "id": "4",
+            "label": "4th"
+          },
+          {
+            "id": "5",
+            "label": "5th"
+          },
+          {
+            "id": "6",
+            "label": "6th"
+          },
+          {
+            "id": "7",
+            "label": "7th"
+          }
+        ],
+        "correctOptionIds": [
+          "5"
+        ],
+        "diagnoses": {
+          "4": {
+            "category": "evidence-misread",
+            "reason": "Count the tonic itself as 1 when you count up to the note."
+          },
+          "6": {
+            "category": "evidence-misread",
+            "reason": "Count the tonic itself as 1 when you count up to the note."
+          }
+        }
+      },
+      "hints": [
+        "Read the clef, key, time signature and marks in turn.",
+        "Find the tonic of the key, then count up to the marked note, counting the tonic as 1."
+      ],
+      "feedback": {
+        "correct": "Correct interval.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.ind-5",
+      "templateId": "t.g2.melody-detail",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which note is worth one beat in this melody's time signature?",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "G2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#2",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D2",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A 2-bar melody in the bass clef, key signature of 1 sharp, time signature 4/2. Bar 1: crotchet on the 1st line; crotchet on the 1st ledger line below the stave; minim in the space just below the stave; minim in the space below the 1st ledger line below the stave; crotchet on the 1st ledger line below the stave; crotchet in the space just below the stave. Bar 2: minim on the 1st ledger line below the stave; minim in the space below the 1st ledger line below the stave; minim in the space just below the stave; minim in the space below the 1st ledger line below the stave.",
+        "key": "G major",
+        "timeSignature": "4/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "minim",
+            "label": "a minim"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          }
+        ],
+        "correctOptionIds": [
+          "minim"
+        ],
+        "diagnoses": {
+          "crotchet": {
+            "category": "evidence-misread",
+            "reason": "The bottom number of the time signature names the beat: 2 = minim, 4 = crotchet, 8 = quaver."
+          },
+          "quaver": {
+            "category": "evidence-misread",
+            "reason": "The bottom number of the time signature names the beat: 2 = minim, 4 = crotchet, 8 = quaver."
+          }
+        }
+      },
+      "hints": [
+        "Read the clef, key, time signature and marks in turn.",
+        "Read the bottom number of the time signature."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    },
+    {
+      "id": "i.g2-u5-l04.ind-6",
+      "templateId": "t.g2.melody",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Look at this melody and answer the questions.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "x"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A two-bar melody in the treble clef with a key signature, time signature 4/4. The notes are E, F, D, B, D, C, B, G; the note marked x is the 4th note.",
+        "key": "C major",
+        "timeSignature": "4/4",
+        "questionAlternative": "A two-bar melody in the treble clef with a key signature of no sharps or flats, time signature 4/4. The notes sit: 4th space, 5th line, 4th line, 3rd line, 4th line, 3rd space, 3rd line, 2nd line; the note marked x is the 4th note."
+      },
+      "answer": {
+        "kind": "composite",
+        "parts": [
+          {
+            "id": "beats",
+            "prompt": "How many crotchet beats are in each bar?",
+            "answer": {
+              "kind": "choice",
+              "options": [
+                {
+                  "id": "2",
+                  "label": "2"
+                },
+                {
+                  "id": "3",
+                  "label": "3"
+                },
+                {
+                  "id": "4",
+                  "label": "4"
+                }
+              ],
+              "correctOptionIds": [
+                "4"
+              ]
+            }
+          },
+          {
+            "id": "marked",
+            "prompt": "Name the note marked x.",
+            "answer": {
+              "kind": "pitch",
+              "reference": "B4",
+              "relation": "same",
+              "accepted": [
+                "B4"
+              ],
+              "octaveSensitive": false,
+              "spellingSensitive": true
+            }
+          },
+          {
+            "id": "key",
+            "prompt": "The melody is in a major key. Which one?",
+            "answer": {
+              "kind": "key-signature",
+              "task": "name-key",
+              "clef": "treble",
+              "accepted": [
+                "C major"
+              ]
+            }
+          }
+        ]
+      },
+      "hints": [
+        "Find the bar first.",
+        "Use the time signature for the beats, the stave for the note, and the key signature for the key."
+      ],
+      "feedback": {
+        "correct": "Good.",
+        "mistakes": {
+          "evidence-misread": "Look again at the bar the question points to — find the exact note or sign first.",
+          "concept-misapplied": "You found the right place, but check the rule you used — see the hint for that part."
+        },
+        "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
+      }
+    }
+  ],
+  "recap": [
+    "Read in order: clef, key, time signature, bars, marks.",
+    "The key tells you the sharps or flats; the time signature tells you the beats.",
+    "Words and signs tell you how to play."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.melody-detail",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.melody",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.melody-detail",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.context.melody-g2"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [],
+    "outcomeIds": [
+      "abrsm2020.g1.21"
+    ],
+    "notes": "Original wording and tunes. Follows Grade 2 outcomes 1, 3, 5, 12 and 13 in context. Melodies are major-key only in this release; minor melodies are a teacher decision (see the teacher review pack)."
+  }
+}

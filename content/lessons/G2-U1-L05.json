@@ -1,0 +1,1385 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U1-L05",
+  "lessonId": "G2-U1-L05",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand triplet groups that include rests or notes of different lengths.",
+    "successCriteria": [
+      "I know a triplet group can contain rests.",
+      "I know a group can hold a crotchet and a quaver instead of three equal notes.",
+      "I can check that a group adds up to three units."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A triplet does not always have three notes of the same length. A rest can take the place of one of the notes, and a longer note can stand for two of the three parts."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 2/4: a triplet group of two quavers and a quaver rest, then a crotchet.",
+        "questionAlternative": "Bar 1: a triplet of quaver, quaver, quaver rest, crotchet.",
+        "timeSignature": "2/4"
+      },
+      "caption": "Two quavers and a quaver rest, all marked 3. The rest is a silent third of the group."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A bar of 2/4: a triplet group made of a crotchet and a quaver, then a crotchet.",
+        "questionAlternative": "Bar 1: a triplet of crotchet, quaver, crotchet.",
+        "timeSignature": "2/4"
+      },
+      "caption": "A crotchet and a quaver, marked 3: the crotchet is two of the three parts. It is still played in the time of one beat."
+    },
+    {
+      "kind": "text",
+      "text": "To check a group, add up the written lengths in units of the smallest note: here the crotchet counts as 2 and the quaver as 1. A complete triplet group adds up to 3 units."
+    },
+    {
+      "kind": "tip",
+      "text": "Count in units: 1 for the short note or rest, 2 for the one twice as long. A triplet group always adds up to 3."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "tuplet",
+              "actual": 3,
+              "normal": 2,
+              "events": [
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "crotchet",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A bar of 2/4: a triplet group starting with a quaver rest, then two quavers, and a crotchet.",
+      "questionAlternative": "Bar 1: a triplet of quaver rest, quaver, quaver, crotchet.",
+      "timeSignature": "2/4"
+    },
+    "steps": [
+      "Count the parts of the group: a rest, a note and a note make three.",
+      "The rest is silent, but it still takes its share of the beat.",
+      "All three parts together are played in the time of one crotchet beat."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A triplet group in 2/4: a quaver rest then two quavers, followed by a crotchet."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u1-l05.guided-1",
+      "templateId": "t.g2.triplet-mixed",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many notes are actually played in the triplet group? A rest is silence, so do not count it.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "minim",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (minim rest, crotchet), minim, minim, minim.",
+        "questionAlternative": "Bar 1: a triplet (minim rest, crotchet), minim, minim, minim.",
+        "timeSignature": "4/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "tuplet-number-wrong",
+            "reason": "That counts a rest as a note. Only the notes are played; the rest is a silence."
+          },
+          "3": {
+            "category": "tuplet-number-wrong",
+            "reason": "That counts a rest as a note. Only the notes are played; the rest is a silence."
+          }
+        }
+      },
+      "hints": [
+        "Rests and notes inside the group total three units.",
+        "Look inside the bracket and count the notes. Skip the rests."
+      ],
+      "feedback": {
+        "correct": "Yes: a rest is silence, not a note.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.guided-2",
+      "templateId": "t.g2.triplet-mixed",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "The whole triplet group (notes and rests together) is played in the time of how long?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (quaver, crotchet), crotchet, crotchet, crotchet.",
+        "questionAlternative": "Bar 1: a triplet (quaver, crotchet), crotchet, crotchet, crotchet.",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "half",
+            "label": "half a crotchet beat"
+          },
+          {
+            "id": "one",
+            "label": "one crotchet beat"
+          },
+          {
+            "id": "one-half",
+            "label": "one and a half crotchet beats"
+          },
+          {
+            "id": "two",
+            "label": "2 crotchet beats"
+          }
+        ],
+        "correctOptionIds": [
+          "one"
+        ],
+        "diagnoses": {
+          "one-half": {
+            "category": "tuplet-total-wrong",
+            "reason": "The written values add up to one and a half crotchet beats, but a triplet is played in the time of two of its units, which is one beat. The 3 sign tells you to squeeze the group."
+          },
+          "half": {
+            "category": "tuplet-total-wrong",
+            "reason": "A triplet fills one whole beat, not half a beat."
+          },
+          "two": {
+            "category": "tuplet-total-wrong",
+            "reason": "A triplet fills one beat. Check which note is the beat in this time signature."
+          }
+        }
+      },
+      "hints": [
+        "Rests and notes inside the group total three units.",
+        "A triplet group takes the time of two of its units, which is the length of one beat."
+      ],
+      "feedback": {
+        "correct": "Yes: one beat, however the group is divided.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.guided-3",
+      "templateId": "t.g2.triplet-fill",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Each group is marked 3, so it must add up to three quavers of written length (notes and rests together). Which group is complete?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "continue"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (quaver, quaver, quaver). Bar 2: a triplet (quaver, quaver, quaver, quaver rest). Bar 3: a triplet (quaver, quaver rest).",
+        "questionAlternative": "Bar 1: a triplet (quaver, quaver, quaver). Bar 2: a triplet (quaver, quaver, quaver, quaver rest). Bar 3: a triplet (quaver, quaver rest)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Group 1"
+          },
+          {
+            "id": "2",
+            "label": "Group 2"
+          },
+          {
+            "id": "3",
+            "label": "Group 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "tuplet-total-wrong",
+            "reason": "Group 2 adds up to 4 quavers' worth, which is too much for a triplet."
+          },
+          "3": {
+            "category": "tuplet-total-wrong",
+            "reason": "Group 3 adds up to only 2 quavers' worth, so it is missing something."
+          }
+        }
+      },
+      "hints": [
+        "Add up the units in each group: it must come to three.",
+        "Add up the written lengths in each group. A quaver counts as 1; a note or rest twice as long counts as 2."
+      ],
+      "feedback": {
+        "correct": "You added the units correctly.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u1-l05.ind-1",
+      "templateId": "t.g2.triplet-mixed",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes are actually played in the triplet group? A rest is silence, so do not count it.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "minim",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (crotchet rest, minim), minim, minim, minim.",
+        "questionAlternative": "Bar 1: a triplet (crotchet rest, minim), minim, minim, minim.",
+        "timeSignature": "4/2"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "tuplet-number-wrong",
+            "reason": "That counts a rest as a note. Only the notes are played; the rest is a silence."
+          },
+          "3": {
+            "category": "tuplet-number-wrong",
+            "reason": "That counts a rest as a note. Only the notes are played; the rest is a silence."
+          }
+        }
+      },
+      "hints": [
+        "Rests and notes inside the group total three units.",
+        "Look inside the bracket and count the notes. Skip the rests."
+      ],
+      "feedback": {
+        "correct": "Correct count of played notes.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.ind-2",
+      "templateId": "t.g2.triplet-fill",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Each group is marked 3, so it must add up to three crotchets of written length (notes and rests together). Which group is complete?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "minim",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "minim",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (crotchet, crotchet). Bar 2: a triplet (crotchet rest, crotchet, crotchet). Bar 3: a triplet (minim, minim).",
+        "questionAlternative": "Bar 1: a triplet (crotchet, crotchet). Bar 2: a triplet (crotchet rest, crotchet, crotchet). Bar 3: a triplet (minim, minim)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Group 1"
+          },
+          {
+            "id": "2",
+            "label": "Group 2"
+          },
+          {
+            "id": "3",
+            "label": "Group 3"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "tuplet-total-wrong",
+            "reason": "Group 1 adds up to only 2 crotchets' worth, so it is missing something."
+          },
+          "3": {
+            "category": "tuplet-total-wrong",
+            "reason": "Group 3 adds up to 4 crotchets' worth, which is too much for a triplet."
+          }
+        }
+      },
+      "hints": [
+        "Add up the units in each group: it must come to three.",
+        "Add up the written lengths in each group. A crotchet counts as 1; a note or rest twice as long counts as 2."
+      ],
+      "feedback": {
+        "correct": "That group adds up to three units.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.ind-3",
+      "templateId": "t.g2.triplet-mixed",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "The whole triplet group (notes and rests together) is played in the time of how long?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (quaver, crotchet rest), crotchet.",
+        "questionAlternative": "Bar 1: a triplet (quaver, crotchet rest), crotchet.",
+        "timeSignature": "2/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "half",
+            "label": "half a crotchet beat"
+          },
+          {
+            "id": "one",
+            "label": "one crotchet beat"
+          },
+          {
+            "id": "one-half",
+            "label": "one and a half crotchet beats"
+          },
+          {
+            "id": "two",
+            "label": "2 crotchet beats"
+          }
+        ],
+        "correctOptionIds": [
+          "one"
+        ],
+        "diagnoses": {
+          "one-half": {
+            "category": "tuplet-total-wrong",
+            "reason": "The written values add up to one and a half crotchet beats, but a triplet is played in the time of two of its units, which is one beat. The 3 sign tells you to squeeze the group."
+          },
+          "half": {
+            "category": "tuplet-total-wrong",
+            "reason": "A triplet fills one whole beat, not half a beat."
+          },
+          "two": {
+            "category": "tuplet-total-wrong",
+            "reason": "A triplet fills one beat. Check which note is the beat in this time signature."
+          }
+        }
+      },
+      "hints": [
+        "Rests and notes inside the group total three units.",
+        "A triplet group takes the time of two of its units, which is the length of one beat."
+      ],
+      "feedback": {
+        "correct": "A triplet group always fills the time of two units.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.ind-4",
+      "templateId": "t.g2.triplet-mixed",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "A triplet is divided into three equal parts. Which part of this triplet is silent?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, crotchet, a triplet (quaver, quaver rest, quaver).",
+        "questionAlternative": "Bar 1: crotchet, crotchet, a triplet (quaver, quaver rest, quaver).",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "0",
+            "label": "The first of the three parts"
+          },
+          {
+            "id": "1",
+            "label": "The second of the three parts"
+          },
+          {
+            "id": "2",
+            "label": "The third of the three parts"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "0": {
+            "category": "tuplet-number-wrong",
+            "reason": "That part is a note. Look for the rest sign inside the bracket and count which place it takes."
+          },
+          "2": {
+            "category": "tuplet-number-wrong",
+            "reason": "That part is a note. Look for the rest sign inside the bracket and count which place it takes."
+          }
+        }
+      },
+      "hints": [
+        "Rests and notes inside the group total three units.",
+        "Find the rest inside the bracket and count which place it takes."
+      ],
+      "feedback": {
+        "correct": "You found the rest in the group.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.ind-5",
+      "templateId": "t.g2.triplet-fill",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Each group is marked 3, so it must add up to three quavers of written length (notes and rests together). Which group is complete?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "crotchet",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (crotchet, quaver). Bar 2: a triplet (crotchet, quaver rest, quaver). Bar 3: a triplet (quaver rest, quaver).",
+        "questionAlternative": "Bar 1: a triplet (crotchet, quaver). Bar 2: a triplet (crotchet, quaver rest, quaver). Bar 3: a triplet (quaver rest, quaver)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Group 1"
+          },
+          {
+            "id": "2",
+            "label": "Group 2"
+          },
+          {
+            "id": "3",
+            "label": "Group 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "tuplet-total-wrong",
+            "reason": "Group 2 adds up to 4 quavers' worth, which is too much for a triplet."
+          },
+          "3": {
+            "category": "tuplet-total-wrong",
+            "reason": "Group 3 adds up to only 2 quavers' worth, so it is missing something."
+          }
+        }
+      },
+      "hints": [
+        "Add up the units in each group: it must come to three.",
+        "Add up the written lengths in each group. A quaver counts as 1; a note or rest twice as long counts as 2."
+      ],
+      "feedback": {
+        "correct": "Correct again.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    },
+    {
+      "id": "i.g2-u1-l05.ind-6",
+      "templateId": "t.g2.triplet-mixed",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "How many notes are actually played in the triplet group? A rest is silence, so do not count it.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "tuplet",
+                "actual": 3,
+                "normal": 2,
+                "events": [
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "begin"
+                  },
+                  {
+                    "kind": "note",
+                    "pitch": "B4",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    },
+                    "beam": "end"
+                  },
+                  {
+                    "kind": "rest",
+                    "duration": {
+                      "value": "quaver",
+                      "dots": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: a triplet (quaver, quaver, quaver rest), crotchet, crotchet.",
+        "questionAlternative": "Bar 1: a triplet (quaver, quaver, quaver rest), crotchet, crotchet.",
+        "timeSignature": "3/4"
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "tuplet-number-wrong",
+            "reason": "Count only the notes in the bracket: the rests are silences, but every note sounds."
+          },
+          "3": {
+            "category": "tuplet-number-wrong",
+            "reason": "That counts a rest as a note. Only the notes are played; the rest is a silence."
+          }
+        }
+      },
+      "hints": [
+        "Rests and notes inside the group total three units.",
+        "Look inside the bracket and count the notes. Skip the rests."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
+          "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
+          "written-value-wrong": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        },
+        "fallback": "Not quite. Ask: how many notes, in the time of how many?"
+      }
+    }
+  ],
+  "recap": [
+    "A triplet group can contain rests.",
+    "A longer note can stand for two of the three parts.",
+    "A complete group adds up to three units."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.triplet-mixed",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.triplet-fill",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.triplet-mixed",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.rhythm.triplets-mixed"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s02"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.04"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 4. Only groups that add up to three units are taught; duplets are Grade 3."
+  }
+}

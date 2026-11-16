@@ -1,0 +1,600 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U3-L03",
+  "lessonId": "G2-U3-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Write and recognise the key signatures of A, B♭ and E♭ major.",
+    "successCriteria": [
+      "I know sharps are added in the order F C G D A E B.",
+      "I know flats are added in the order B E A D G C F.",
+      "I can write the key signature of A, B♭ and E♭ major."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A key signature collects a key's sharps or flats at the start of the stave, so they do not need to be written before each note."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "A4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble stave with a key signature of three sharps: F, C and G.",
+        "timeSignature": "4/4",
+        "key": "A major"
+      },
+      "caption": "Three sharps, F♯ C♯ G♯: the key signature of A major."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Bb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble stave with a key signature of two flats: B and E.",
+        "timeSignature": "4/4",
+        "key": "Bb major"
+      },
+      "caption": "Two flats, B♭ and E♭: the key signature of B♭ major."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Eb4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble stave with a key signature of three flats: B, E and A.",
+        "timeSignature": "4/4",
+        "key": "Eb major"
+      },
+      "caption": "Three flats, B♭ E♭ A♭: the key signature of E♭ major."
+    },
+    {
+      "kind": "text",
+      "text": "Sharps are always added in the order F, C, G, D, A, E, B and flats in the order B, E, A, D, G, C, F. A key uses the first few in the list."
+    },
+    {
+      "kind": "tip",
+      "text": "Sharp keys: the key note is a semitone above the last sharp. Flat keys: the key note is the second-last flat (one flat: F major)."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": true,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "Eb4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "A treble stave with three flats: B, E and A.",
+      "timeSignature": "4/4",
+      "key": "Eb major"
+    },
+    "steps": [
+      "Start the flat order: B, E, A.",
+      "E♭ major has three flats, so it uses B♭, E♭ and A♭.",
+      "The key note is the second-last flat: the flats are B♭, E♭, A♭, so the key is E♭."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A treble stave with the key signature of E flat major: three flats, B, E and A."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u3-l03.guided-1",
+      "templateId": "t.g2.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "How many sharps or flats are in the key signature of A major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "0",
+            "label": "0"
+          },
+          {
+            "id": "1",
+            "label": "1"
+          },
+          {
+            "id": "2",
+            "label": "2"
+          },
+          {
+            "id": "3",
+            "label": "3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "0": {
+            "category": "wrong-count",
+            "reason": "Count again for A major. Remember: A major has three sharps, B♭ major two flats, E♭ major three flats, and A minor none."
+          },
+          "1": {
+            "category": "wrong-count",
+            "reason": "Count again for A major. Remember: A major has three sharps, B♭ major two flats, E♭ major three flats, and A minor none."
+          },
+          "2": {
+            "category": "wrong-count",
+            "reason": "Count again for A major. Remember: A major has three sharps, B♭ major two flats, E♭ major three flats, and A minor none."
+          }
+        }
+      },
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F.",
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Yes: count the signs for the key.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.guided-2",
+      "templateId": "t.g2.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write the key signature of E♭ major in the bass clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "bass",
+        "accepted": [
+          "Eb major"
+        ]
+      },
+      "hints": [
+        "Recall the order of sharps or flats.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Key signature correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.guided-3",
+      "templateId": "t.g2.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which major key has 3 flats?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "G major",
+            "label": "G major"
+          },
+          {
+            "id": "C major",
+            "label": "C major"
+          },
+          {
+            "id": "D major",
+            "label": "D major"
+          },
+          {
+            "id": "F major",
+            "label": "F major"
+          },
+          {
+            "id": "Eb major",
+            "label": "E♭ major"
+          }
+        ],
+        "correctOptionIds": [
+          "Eb major"
+        ],
+        "diagnoses": {
+          "G major": {
+            "category": "wrong-count",
+            "reason": "G major has 1 sharp, so it is not the one."
+          },
+          "C major": {
+            "category": "wrong-count",
+            "reason": "C major has no sharps or flats, so it is not the one."
+          },
+          "D major": {
+            "category": "wrong-count",
+            "reason": "D major has 2 sharps, so it is not the one."
+          },
+          "F major": {
+            "category": "wrong-count",
+            "reason": "F major has 1 flat, so it is not the one."
+          }
+        }
+      },
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F.",
+        "Sharps add in the order F C G D A E B; flats in the order B E A D G C F. Work out which key owns that many."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u3-l03.ind-1",
+      "templateId": "t.g2.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of B♭ major in the treble clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "treble",
+        "accepted": [
+          "Bb major"
+        ]
+      },
+      "hints": [
+        "Recall the order of sharps or flats.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.ind-2",
+      "templateId": "t.g2.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which sharps or flats are in the key signature of B♭ major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Bb,Eb",
+            "label": "B♭ and E♭"
+          },
+          {
+            "id": "F#,C#",
+            "label": "F♯ and C♯"
+          },
+          {
+            "id": "F#",
+            "label": "F♯"
+          },
+          {
+            "id": "Bb",
+            "label": "B♭"
+          }
+        ],
+        "correctOptionIds": [
+          "Bb,Eb"
+        ],
+        "diagnoses": {
+          "F#": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D, A, E, B and flats in the order B, E, A, D, G, C, F."
+          },
+          "F#,C#": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D, A, E, B and flats in the order B, E, A, D, G, C, F."
+          },
+          "Bb": {
+            "category": "wrong-order",
+            "reason": "Check which notes are sharpened or flattened in this key: sharps are added in the order F, C, G, D, A, E, B and flats in the order B, E, A, D, G, C, F."
+          }
+        }
+      },
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F.",
+        "Sharps are added in the order F C G D A E B. Flats are added in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct signs.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.ind-3",
+      "templateId": "t.g2.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write the key signature of A major in the bass clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "bass",
+        "accepted": [
+          "A major"
+        ]
+      },
+      "hints": [
+        "Recall the order of sharps or flats.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.ind-4",
+      "templateId": "t.g2.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What is the last flat (the one added at the end) in the key signature of B♭ major?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "Ab",
+            "label": "A♭"
+          },
+          {
+            "id": "Bb",
+            "label": "B♭"
+          },
+          {
+            "id": "Eb",
+            "label": "E♭"
+          }
+        ],
+        "correctOptionIds": [
+          "Eb"
+        ],
+        "diagnoses": {
+          "Ab": {
+            "category": "wrong-order",
+            "reason": "Count along the order of flats (B♭, E♭, A♭, D♭, G♭ ...) for as many as B♭ major has, and stop on the last one."
+          },
+          "Bb": {
+            "category": "wrong-order",
+            "reason": "Count along the order of flats (B♭, E♭, A♭, D♭, G♭ ...) for as many as B♭ major has, and stop on the last one."
+          }
+        }
+      },
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F.",
+        "Flats are added in this order: B♭, E♭, A♭, D♭, G♭ ..."
+      ],
+      "feedback": {
+        "correct": "Right: the last one in the order.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.ind-5",
+      "templateId": "t.g2.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name the major key with this key signature.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "treble",
+        "accepted": [
+          "Bb major"
+        ]
+      },
+      "hints": [
+        "Recall the order of sharps or flats.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Written correctly.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.g2-u3-l03.ind-6",
+      "templateId": "t.g2.key-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is the key signature of A major made of sharps or flats?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sharps",
+            "label": "Sharps"
+          },
+          {
+            "id": "flats",
+            "label": "Flats"
+          }
+        ],
+        "correctOptionIds": [
+          "sharps"
+        ],
+        "diagnoses": {
+          "flats": {
+            "category": "mixed-sharps-flats",
+            "reason": "A key signature uses only sharps or only flats, never both. Sharp keys go up in fifths from C (G, D, A) and flat keys go down (F, B♭, E♭)."
+          }
+        }
+      },
+      "hints": [
+        "Sharps are added in the order F C G D A E B; flats in the order B E A D G C F.",
+        "G, D and A major use sharps. F, B♭ and E♭ major use flats."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    }
+  ],
+  "recap": [
+    "Sharps: F C G D A E B. Flats: B E A D G C F.",
+    "A major: three sharps. B♭ major: two flats. E♭ major: three flats.",
+    "Each sign goes on its own line or space in the key signature."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.key-signature",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.key-facts",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.key-signature",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.keys.signatures-g2-major"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s08"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.08"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 8. Grade 1 key signatures (G, D, F) return through the cumulative practice and review nodes."
+  }
+}

@@ -27,7 +27,7 @@ export const ID_PATTERNS = {
   assessment: /^a\.g[1-5](-u\d)?$/,
   grader: /^g\.[a-z0-9]+(-[a-z0-9]+)*$/,
   ruleset: /^rules\.[a-z0-9]+(-[a-z0-9]+)*(\.[a-z0-9]+(-[a-z0-9]+)*)*$/,
-  lessonContent: /^lc\.G[1-5]-U\d-L\d{2}$/,
+  lessonContent: /^lc\.G[1-5]-U\d-(L\d{2}|E\d)$/,
   item: /^i\.[a-z0-9]+(-[a-z0-9]+)*(\.[a-z0-9]+(-[a-z0-9]+)*)*$/,
 } as const;
 
@@ -104,6 +104,8 @@ export const MusicScope = z
     intervalLowerNote: IntervalLowerNote.optional(),
     compoundIntervals: z.boolean().optional(),
     chromaticIntervals: z.boolean().optional(),
+    /** Brief 08: augmented and diminished intervals that arise between two notes of one scale (the quality choices a learner is offered, and the answers a generator may ask). */
+    augmentedDiminished: z.boolean().optional(),
     chordDegrees: z.array(RomanName).optional(),
     inversions: z.array(InversionName).optional(),
     cadenceTypes: z.array(CadenceName).optional(),
@@ -143,7 +145,7 @@ export const GradeScopeFile = z
 
 export const SCOPE_DIMENSIONS = [
   "keys", "minorForms", "timeSignatures", "noteValues", "maxDots", "tuplets", "clefs", "maxLedgerLines",
-  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "chordDegrees", "inversions",
+  "intervalQuality", "intervalLowerNote", "compoundIntervals", "chromaticIntervals", "augmentedDiminished", "chordDegrees", "inversions",
   "cadenceTypes", "cadenceKeys", "instrumentTranspositions", "octaveTranspositionClefs", "ornaments", "degreeNaming",
   "doubleAccidentals", "accidentals", "blackKeys", "keySignatures", "rests", "ties",
 ] as const;
@@ -596,14 +598,27 @@ export const ProgressionPolicy = z
         perNodeType: z.record(NodeType, z.number().int().min(0)),
         firstCompletionOnly: z.boolean(),
         dailyCapPerNode: z.number().int().min(0),
+        /** Brief 04: XP totals at which the learner reaches the next milestone (ascending). Engagement only. */
+        milestones: z.array(z.number().int().min(1)).min(1).optional(),
         note: NonEmpty,
       })
       .strict(),
+    /** Brief 04: daily goal and streak rules (optional; the app supplies defaults when absent). */
+    daily: z
+      .object({
+        defaultSessions: z.number().int().min(0).max(5),
+        maxSessions: z.number().int().min(1).max(5),
+        note: NonEmpty,
+      })
+      .strict()
+      .optional(),
     mastery: z
       .object({
         states: z.array(MasteryState).length(6),
         evidenceCounts: z.array(z.enum(["independent-step", "practice-item", "review-item", "assessment-item"])),
         evidenceExcluded: z.array(z.enum(["hinted-step", "guided-step", "worked-example", "retry-after-reveal"])),
+        /** Brief 04: bump when thresholds or evidence rules change; projections record the version they were built with. */
+        rulesVersion: z.number().int().min(1).optional(),
         thresholds: z
           .object({
             proficient: z
@@ -626,6 +641,11 @@ export const ProgressionPolicy = z
       .object({
         intervalsDays: z.array(z.number().int().min(1)).min(3),
         lapseResetsTo: z.number().int().min(0),
+        /** Brief 04: review session shape. */
+        session: z
+          .object({ maxConcepts: z.number().int().min(1).max(10), itemsPerConcept: z.number().int().min(1).max(3) })
+          .strict()
+          .optional(),
         note: NonEmpty,
       })
       .strict(),
@@ -638,6 +658,11 @@ export const ProgressionPolicy = z
       })
       .strict(),
     readiness: z.object({ passThresholdPercent: z.number().int(), note: NonEmpty }).strict(),
+    /** Brief 05: in-app pass marks for unit challenges and the Grade assessment (provisional; not ABRSM marks). */
+    assessments: z
+      .object({ unitChallengePassPercent: z.number().int().min(1).max(100), gradePassPercent: z.number().int().min(1).max(100), note: NonEmpty })
+      .strict()
+      .optional(),
   })
   .strict();
 export type ProgressionPolicy = z.infer<typeof ProgressionPolicy>;
@@ -761,9 +786,16 @@ export const NotationFragment = z
     showKeySignature: z.boolean().default(true),
     timeSignature: TimeSignatureName.optional(),
     tempoText: z.string().optional(),
+    /** Brief 07: an octave sign (8va = 1, 8vb = -1) covers this fragment. Display stays at the written octave; playback sounds it one octave away. */
+    octaveShift: z.union([z.literal(1), z.literal(-1)]).optional(),
     measures: z.array(Measure).min(1),
     /** Text description for screen readers and no-graphics mode. */
     textAlternative: NonEmpty,
+    /**
+     * What a learner is told in a question, when the full description would give the answer away. It replaces `textAlternative`
+     * for the learner and is never part of a question's identity (so wording fixes cannot disturb stored mastery history).
+     */
+    questionAlternative: z.string().min(1).optional(),
   })
   .strict();
 export type NotationFragment = z.infer<typeof NotationFragment>;
@@ -798,7 +830,17 @@ export const IntervalCode = z
 const Option = z.object({ id: NonEmpty, label: NonEmpty }).strict();
 
 const ChoiceAnswer = z
-  .object({ kind: z.literal("choice"), options: z.array(Option).min(2), correctOptionIds: z.array(NonEmpty).length(1) })
+  .object({
+    kind: z.literal("choice"),
+    options: z.array(Option).min(2),
+    correctOptionIds: z.array(NonEmpty).length(1),
+    /**
+     * Brief 05: why a specific wrong option is wrong. Keyed by option id; `category` must be a mistake category the item has
+     * feedback for, and `reason` is shown to the learner who chose it (it must not give the answer away). Options without
+     * an entry fall back to the generic message.
+     */
+    diagnoses: z.record(z.string(), z.object({ category: NonEmpty, reason: NonEmpty }).strict()).optional(),
+  })
   .strict();
 const MultiChoiceAnswer = z
   .object({ kind: z.literal("multi-choice"), options: z.array(Option).min(2), correctOptionIds: z.array(NonEmpty).min(1) })
@@ -815,6 +857,8 @@ const PitchAnswer = z
     reference: PitchName.optional(),
     /** "same-sound": accepted answers must sound like `reference`; "different-spelling": and be spelt differently. */
     relation: z.enum(["same", "same-sound", "different-spelling"]).default("same"),
+    /** Brief 08: the answer must use this letter name (an enharmonic task that names the letter). */
+    letter: z.enum(["A", "B", "C", "D", "E", "F", "G"]).optional(),
   })
   .strict();
 
@@ -880,6 +924,14 @@ const RhythmAnswer = z
     accepted: z.array(z.array(Measure).min(1)).min(1),
     /** True when the grader accepts any answer satisfying the rules, not only the listed references. */
     acceptAnyRuleCompliant: z.boolean(),
+    /** Brief 09, irregular time: the beat grouping the question names (for example [3, 2] in 5/4). The bar is then judged against that grouping alone, not against every standard one. */
+    groupPattern: z.array(z.number().int().min(2).max(3)).min(2).optional(),
+    /**
+     * Rewriting between simple and compound time (optional enrichment): the notation shown is in this metre and `timeSignature` is the metre to write in.
+     * Every note and rest must keep its share of its beat (a crotchet beat in 2/4 becomes a dotted-crotchet beat in 6/8, so each value gains a dot).
+     * Only valid with task "regroup".
+     */
+    fromTimeSignature: TimeSignatureName.optional(),
   })
   .strict();
 
@@ -931,6 +983,8 @@ const ChordAnswer = z
     acceptedChords: z.array(ChordId).optional(),
     /** build: example correct voicings; the grader accepts any voicing with the right notes and bass. */
     acceptedVoicings: z.array(z.array(PitchName).min(3)).optional(),
+    /** Brief 08, build: the learner must write exactly this many notes (four notes = one note of the triad is doubled). Absent = any number. */
+    voices: z.number().int().min(3).max(5).optional(),
   })
   .strict()
   .refine((a) => (a.task === "identify" ? Boolean(a.acceptedChords?.length) : Boolean(a.target && a.acceptedVoicings?.length)), {
@@ -946,6 +1000,8 @@ const OrnamentAnswer = z
     /** replace-written-out: the written-out figure and its main note. */
     mainNote: PitchName.optional(),
     writtenOut: z.array(PitchName).min(2).optional(),
+    /** The written value of each note of `writtenOut`; needed to tell an appoggiatura from an acciaccatura (two notes). */
+    writtenOutValues: z.array(z.object({ value: NoteValueName, dots: z.number().int().min(0).max(2).optional() }).strict()).optional(),
     accepted: z.array(OrnamentName).min(1),
   })
   .strict()
@@ -1106,3 +1162,28 @@ export const StandaloneItemFile = z
   })
   .strict();
 export type StandaloneItemFile = z.infer<typeof StandaloneItemFile>;
+
+// ---- Demonstration sets (Brief 03) -----------------------------------------
+//
+// Original, fixed exercise items grouped by teaching area, used by the practice lab to show every exercise
+// family working end to end. Items are verified like standalone items (template scope within its grade).
+// `practice` names templates whose seeded generator offers "more like this" variations.
+// Migration note: new optional content folder content/exercises/showcase; no existing file changes shape.
+
+export const ShowcaseFile = z
+  .object({
+    schemaVersion: z.literal(1),
+    id: z.string().regex(/^s\.[a-z0-9]+(-[a-z0-9]+)*$/),
+    title: NonEmpty,
+    summary: NonEmpty,
+    /** Lowest grade of the items in the set (for ordering). */
+    grade: Grade,
+    order: z.number().int().min(1),
+    familyIds: z.array(FamilyId).min(1),
+    provenance: z.object({ authoredBy: NonEmpty, originality: z.literal("original"), notes: NonEmpty }).strict(),
+    review: z.object({ status: ReviewState, reviewedBy: z.string().nullable() }).strict(),
+    items: z.array(ExerciseItem).min(1),
+    practice: z.array(z.object({ templateId: TemplateId, label: NonEmpty }).strict()).default([]),
+  })
+  .strict();
+export type ShowcaseFile = z.infer<typeof ShowcaseFile>;

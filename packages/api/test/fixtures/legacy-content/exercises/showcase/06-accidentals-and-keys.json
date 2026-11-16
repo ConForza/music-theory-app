@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "id": "s.accidentals-and-keys",
+  "title": "Accidentals and key signatures",
+  "summary": "How long accidentals last, key signatures in every clef, and enharmonic spellings.",
+  "grade": 1,
+  "order": 6,
+  "familyIds": [
+    "fam.accidental-state",
+    "fam.key-signature",
+    "fam.enharmonic"
+  ],
+  "provenance": {
+    "authoredBy": "Music Theory Path content team (Brief 03)",
+    "originality": "original",
+    "notes": "Items drawn from the seeded generators with a teaching-point filter, then fixed. Music and answers come from the rule engine; prompts and feedback are original."
+  },
+  "review": {
+    "status": "pending",
+    "reviewedBy": null
+  },
+  "items": [
+    {
+      "id": "i.showcase.accidentals-and-keys.1",
+      "templateId": "t.g1.accidental-state",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E#5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "writtenAccidental": "natural"
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "treble clef, key signature: 1 sharp, 4/4. Bar 1: E 4th space with a sharp sign, E 4th space with a natural sign, D 4th line, E 4th space (marked *).",
+        "key": "G major",
+        "timeSignature": "4/4"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "E5"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Go through the bar from the beginning.",
+        "A bar-line cancels accidentals unless a tie crosses it.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Correct. You followed the accidental through the bar and stopped at the bar-line.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.showcase.accidentals-and-keys.2",
+      "templateId": "t.g1.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name the major key with this key signature.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "treble",
+        "accepted": [
+          "F major"
+        ]
+      },
+      "hints": [
+        "F♯ sits on the top line in treble and the fourth line in bass.",
+        "For sharps, the key is a semitone above the last sharp. For flats, it is the second-to-last flat (F major has one flat)."
+      ],
+      "feedback": {
+        "correct": "Right. You read the key signature and named the key.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.showcase.accidentals-and-keys.3",
+      "templateId": "t.g2.key-signature",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write the key signature of D minor in the bass clef.",
+      "answer": {
+        "kind": "key-signature",
+        "task": "write-signature",
+        "clef": "bass",
+        "accepted": [
+          "D minor"
+        ]
+      },
+      "hints": [
+        "Recall the order of sharps or flats.",
+        "Sharps are written in the order F C G D A E B; flats in the order B E A D G C F."
+      ],
+      "feedback": {
+        "correct": "Well written: right accidentals, right order, right places for the bass clef.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.showcase.accidentals-and-keys.4",
+      "templateId": "t.g2.relative-key",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What is the relative major of D minor?",
+      "answer": {
+        "kind": "key-signature",
+        "task": "name-key",
+        "clef": "bass",
+        "accepted": [
+          "F major"
+        ]
+      },
+      "hints": [
+        "Same key signature, different tonic.",
+        "Relative keys share a key signature. The relative minor starts on the 6th note of the major scale."
+      ],
+      "feedback": {
+        "correct": "Yes. Relative keys share a key signature.",
+        "mistakes": {
+          "wrong-count": "Count again: each key has a fixed number of sharps or flats.",
+          "wrong-order": "Key signatures always follow the same order. Check which comes first.",
+          "wrong-placement": "The accidentals are right, but some are on the wrong line or space for this clef.",
+          "relative-confusion": "That key shares this key signature, but it's the relative key. Check the tonic.",
+          "mixed-sharps-flats": "A key signature uses only sharps or only flats."
+        },
+        "fallback": "Not quite. Recall the order of sharps or flats and count how many the key needs."
+      }
+    },
+    {
+      "id": "i.showcase.accidentals-and-keys.5",
+      "templateId": "t.g4.double-accidental",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it.",
+      "music": {
+        "presentation": "stave",
+        "clef": "bass",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "Gx3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "writtenAccidental": "double-sharp"
+              },
+              {
+                "kind": "note",
+                "pitch": "A#3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A#3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F#3",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "G#4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "label": "*"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "bass clef, key signature: 5 sharps, 6/8. Bar 1: G 4th space with a double sharp sign, A 5th line, A 5th line, B space just above the stave, F 4th line, G 3rd ledger line above the stave (marked *).",
+        "key": "B major",
+        "timeSignature": "6/8"
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "G#4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "𝄪 raises by two semitones.",
+        "An accidental lasts until the end of the bar, but only on its own line or space. A key signature applies in every octave."
+      ],
+      "feedback": {
+        "correct": "Correct. The double accidental lasts for the rest of the bar too.",
+        "mistakes": {
+          "accidental-forgotten": "An accidental keeps working for the rest of the bar on that line or space.",
+          "accidental-carried-over-barline": "A bar-line cancels accidentals — unless the note is tied across it.",
+          "key-signature-ignored": "Don't forget the key signature: it affects every note with that letter name.",
+          "different-octave-assumed": "An accidental only affects notes on the same line or space — not the same letter in another octave.",
+          "tie-over-barline": "A tie carries the accidental into the next bar, but only for the tied note."
+        },
+        "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
+      }
+    },
+    {
+      "id": "i.showcase.accidentals-and-keys.6",
+      "templateId": "t.g4.enharmonic",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Give a note that sounds the same as E but has a different letter name.",
+      "answer": {
+        "kind": "pitch",
+        "reference": "E4",
+        "relation": "different-spelling",
+        "accepted": [
+          "Dx4",
+          "Fb4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true
+      },
+      "hints": [
+        "Find it on the keyboard first.",
+        "Find the key on the keyboard, then name it from the white key on either side."
+      ],
+      "feedback": {
+        "correct": "Yes. Same key on the piano, different letter name.",
+        "mistakes": {
+          "same-spelling-given": "The question asks for a different name for the same sound.",
+          "not-same-pitch": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        },
+        "fallback": "Not quite. Find the key on the keyboard, then list every name it can have."
+      }
+    }
+  ],
+  "practice": [
+    {
+      "templateId": "t.g1.accidental-state",
+      "label": "More accidentals"
+    },
+    {
+      "templateId": "t.g4.key-signature",
+      "label": "More key signatures"
+    }
+  ]
+}

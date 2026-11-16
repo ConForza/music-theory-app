@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "mtp-curriculum",
+  "version": "0.2.1",
+  "status": "draft",
+  "createdAt": "2026-11-09",
+  "publishedAt": null,
+  "scope": {
+    "grades": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "syllabus": {
+    "authorityId": "abrsm2020",
+    "publisher": "ABRSM (Associated Board of the Royal Schools of Music)",
+    "title": "The ABRSM Music Theory Syllabus from 2020: Grades 1 to 5 (syllabus outline)",
+    "documentDate": "2020-07",
+    "url": "https://www.abrsm.org/sites/default/files/2023-09/music-theory-syllabus-outline-grades-1-5-from-2020.pdf",
+    "retrievedAt": "2026-11-09",
+    "sha256": "25d9485520db3ba1e2f693a022105a7cb22b045e3d99f8bab1f272cbbf555788",
+    "newerRevisionCheck": {
+      "checkedAt": "2026-11-09",
+      "result": "inconclusive",
+      "method": "Official PDF downloaded and hashed; abrsm.org HTML pages were blocked by the site's bot protection from the build environment; a public web search found no newer Grades 1–5 theory syllabus.",
+      "notes": "No evidence of a revision after the 2020 outline was found, but this could not be confirmed on abrsm.org itself. A human must confirm currency on abrsm.org before release (see docs/curriculum/OPEN_QUESTIONS.md, Q1)."
+    }
+  },
+  "sourceBook": {
+    "id": "first-steps",
+    "title": "First Steps in Music Theory: Grades 1 to 5",
+    "author": "Eric Taylor",
+    "publisher": "ABRSM Publishing",
+    "firstPublished": 1999,
+    "isbn": "978 1 86096 090 1",
+    "usage": "authoring-reference-only",
+    "sectionCount": 75
+  },
+  "teacherReview": {
+    "status": "pending",
+    "reviewer": null,
+    "signedOffAt": null,
+    "notes": "No qualified music-teacher review has taken place. All coverage is PLANNED coverage, not verified coverage."
+  },
+  "changelog": [
+    {
+      "version": "0.1.0",
+      "date": "2026-11-09",
+      "summary": "Brief 01: first curriculum audit, outcome decomposition, learning graph, schemas and validator."
+    },
+    {
+      "version": "0.2.0",
+      "date": "2026-11-09",
+      "summary": "Review corrections: typed answer contracts for every exercise family (with scale/chromatic derivations), notation for tuplets, beams, chords, voices, whole-bar rests and annotations, lesson-level exercise bindings with taught-scope enforcement, verification of every accepted alternative, tied accidentals, lesson/node version agreement, platform-independent paths and line endings."
+    },
+    {
+      "version": "0.2.1",
+      "date": "2026-11-09",
+      "summary": "Re-review corrections: presentation-aware notation (stave / rhythm-line / keyboard) so early rhythm and keyboard lessons need no untaught clef; interval checks honour the allowed minor forms (membership and numbered builds), with optional minorForm."
+    }
+  ]
+}

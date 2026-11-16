@@ -1,0 +1,1029 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U1-L03",
+  "lessonId": "G2-U1-L03",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Name a time as duple, triple or quadruple, and say which beat note it uses.",
+    "successCriteria": [
+      "I know duple means 2 beats, triple 3 and quadruple 4.",
+      "I can name the time from the top number.",
+      "I can tell the beat note from the bottom number."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "A time signature can be described in two parts: how many beats in a bar, and what kind of beat."
+    },
+    {
+      "kind": "text",
+      "text": "Two beats in a bar is called duple time. Three beats is triple time. Four beats is quadruple time."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 1
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 2/2: duple time.",
+        "questionAlternative": "Bar 1: minim, minim. Bar 2: dotted minim, crotchet.",
+        "timeSignature": "2/2"
+      },
+      "caption": "2/2: duple time with minim beats."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Two bars of 3/8: triple time.",
+        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver). Bar 2: crotchet, quaver.",
+        "timeSignature": "3/8"
+      },
+      "caption": "3/8: triple time with quaver beats."
+    },
+    {
+      "kind": "text",
+      "text": "The same set of notes can be felt in different ways, so always read the signature, not just the notes. Four crotchets can be 4/4 (quadruple) or, grouped in twos, two beats of a minim in 2/2."
+    },
+    {
+      "kind": "tip",
+      "text": "Duple = 2, triple = 3, quadruple = 4. The top number gives the name; the bottom number gives the beat."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "minim",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "One bar of 4/2: four minims, quadruple time.",
+      "questionAlternative": "Bar 1: minim, minim, minim, minim.",
+      "timeSignature": "4/2"
+    },
+    "steps": [
+      "Count 1, 2, 3, 4: four beats, so it is quadruple time.",
+      "Each beat is a minim, because the bottom number is 2.",
+      "So 4/2 is quadruple time with minim beats."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 4/2 with four minims: quadruple time with minim beats."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u1-l03.guided-1",
+      "templateId": "t.g2.beat-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Is 2/2 duple, triple or quadruple time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "duple",
+            "label": "Duple"
+          },
+          {
+            "id": "triple",
+            "label": "Triple"
+          },
+          {
+            "id": "quadruple",
+            "label": "Quadruple"
+          }
+        ],
+        "correctOptionIds": [
+          "duple"
+        ],
+        "diagnoses": {
+          "triple": {
+            "category": "beat-count-wrong",
+            "reason": "Triple time has 3 beats in a bar. 2/2 has 2, so it is duple."
+          },
+          "quadruple": {
+            "category": "beat-count-wrong",
+            "reason": "Quadruple time has 4 beats in a bar. 2/2 has 2, so it is duple."
+          }
+        }
+      },
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note.",
+        "Duple means two beats in a bar, triple means three and quadruple means four. Count the beats from the top number."
+      ],
+      "feedback": {
+        "correct": "Yes: you named the time from its top number.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.guided-2",
+      "templateId": "t.g2.beat-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In 3/2, which note is worth one beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semibreve",
+            "label": "a semibreve"
+          },
+          {
+            "id": "minim",
+            "label": "a minim"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          }
+        ],
+        "correctOptionIds": [
+          "minim"
+        ],
+        "diagnoses": {
+          "semibreve": {
+            "category": "beat-unit-wrong",
+            "reason": "Check the bottom number of 3/2: 2 means minim beats, 4 means crotchet beats and 8 means quaver beats."
+          },
+          "crotchet": {
+            "category": "beat-unit-wrong",
+            "reason": "Check the bottom number of 3/2: 2 means minim beats, 4 means crotchet beats and 8 means quaver beats."
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "Check the bottom number of 3/2: 2 means minim beats, 4 means crotchet beats and 8 means quaver beats."
+          }
+        }
+      },
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note.",
+        "The bottom number tells you which note is the beat: 2 = minim, 4 = crotchet, 8 = quaver."
+      ],
+      "feedback": {
+        "correct": "Yes: the bottom number names the beat.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.guided-3",
+      "templateId": "t.g2.time-sig-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 1
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: dotted quaver, semiquaver, crotchet. Bar 2: quaver, quaver, dotted quaver, semiquaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (dotted quaver, semiquaver), crotchet. Bar 2: 2 beamed together (quaver, quaver), 2 beamed together (dotted quaver, semiquaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "2/4"
+        ]
+      },
+      "hints": [
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u1-l03.ind-1",
+      "templateId": "t.g2.beat-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is 3/2 duple, triple or quadruple time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "duple",
+            "label": "Duple"
+          },
+          {
+            "id": "triple",
+            "label": "Triple"
+          },
+          {
+            "id": "quadruple",
+            "label": "Quadruple"
+          }
+        ],
+        "correctOptionIds": [
+          "triple"
+        ],
+        "diagnoses": {
+          "duple": {
+            "category": "beat-count-wrong",
+            "reason": "Duple time has 2 beats in a bar. 3/2 has 3, so it is triple."
+          },
+          "quadruple": {
+            "category": "beat-count-wrong",
+            "reason": "Quadruple time has 4 beats in a bar. 3/2 has 3, so it is triple."
+          }
+        }
+      },
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note.",
+        "Duple means two beats in a bar, triple means three and quadruple means four. Count the beats from the top number."
+      ],
+      "feedback": {
+        "correct": "Named correctly.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.ind-2",
+      "templateId": "t.g2.beat-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Is 2/4 duple, triple or quadruple time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "duple",
+            "label": "Duple"
+          },
+          {
+            "id": "triple",
+            "label": "Triple"
+          },
+          {
+            "id": "quadruple",
+            "label": "Quadruple"
+          }
+        ],
+        "correctOptionIds": [
+          "duple"
+        ],
+        "diagnoses": {
+          "triple": {
+            "category": "beat-count-wrong",
+            "reason": "Triple time has 3 beats in a bar. 2/4 has 2, so it is duple."
+          },
+          "quadruple": {
+            "category": "beat-count-wrong",
+            "reason": "Quadruple time has 4 beats in a bar. 2/4 has 2, so it is duple."
+          }
+        }
+      },
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note.",
+        "Duple means two beats in a bar, triple means three and quadruple means four. Count the beats from the top number."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.ind-3",
+      "templateId": "t.g2.time-sig-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add the time signature to this rhythm.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: minim, crotchet. Bar 2: quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver.",
+        "questionAlternative": "Bar 1: minim, crotchet. Bar 2: 3 beamed together (quaver, semiquaver, semiquaver), 2 beamed together (quaver, quaver), 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver)."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "3/4"
+        ]
+      },
+      "hints": [
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
+      ],
+      "feedback": {
+        "correct": "Right: you read the beats from the notes.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.ind-4",
+      "templateId": "t.g2.beat-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which time signature has 3 minim beats in each bar?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "4/2",
+            "label": "4/2"
+          },
+          {
+            "id": "4/4",
+            "label": "4/4"
+          },
+          {
+            "id": "2/2",
+            "label": "2/2"
+          },
+          {
+            "id": "3/2",
+            "label": "3/2"
+          }
+        ],
+        "correctOptionIds": [
+          "3/2"
+        ],
+        "diagnoses": {
+          "4/2": {
+            "category": "beat-count-wrong",
+            "reason": "4/2 has the right kind of beat but 4 of them in a bar."
+          },
+          "4/4": {
+            "category": "beat-count-wrong",
+            "reason": "4/4 has 4 crotchet beats in a bar."
+          },
+          "2/2": {
+            "category": "beat-count-wrong",
+            "reason": "2/2 has the right kind of beat but 2 of them in a bar."
+          }
+        }
+      },
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note.",
+        "The top number counts the beats; the bottom number names the note that is the beat."
+      ],
+      "feedback": {
+        "correct": "You matched the beats to the signature.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.ind-5",
+      "templateId": "t.g2.beat-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In 3/4, which note is worth one beat?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "semibreve",
+            "label": "a semibreve"
+          },
+          {
+            "id": "minim",
+            "label": "a minim"
+          },
+          {
+            "id": "crotchet",
+            "label": "a crotchet"
+          },
+          {
+            "id": "quaver",
+            "label": "a quaver"
+          }
+        ],
+        "correctOptionIds": [
+          "crotchet"
+        ],
+        "diagnoses": {
+          "semibreve": {
+            "category": "beat-unit-wrong",
+            "reason": "Check the bottom number of 3/4: 2 means minim beats, 4 means crotchet beats and 8 means quaver beats."
+          },
+          "minim": {
+            "category": "beat-unit-wrong",
+            "reason": "Check the bottom number of 3/4: 2 means minim beats, 4 means crotchet beats and 8 means quaver beats."
+          },
+          "quaver": {
+            "category": "beat-unit-wrong",
+            "reason": "Check the bottom number of 3/4: 2 means minim beats, 4 means crotchet beats and 8 means quaver beats."
+          }
+        }
+      },
+      "hints": [
+        "The top number counts the beats; the bottom number names the beat note.",
+        "The bottom number tells you which note is the beat: 2 = minim, 4 = crotchet, 8 = quaver."
+      ],
+      "feedback": {
+        "correct": "Correct beat note.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    },
+    {
+      "id": "i.g2-u1-l03.ind-6",
+      "templateId": "t.g2.time-sig-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Add a time signature that fits this rhythm. More than one may fit; give any one of them.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "continue"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver, quaver. Bar 2: quaver, quaver, semiquaver, semiquaver, quaver, minim.",
+        "questionAlternative": "Bar 1: 3 beamed together (semiquaver, semiquaver, quaver), 3 beamed together (quaver, semiquaver, semiquaver), 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver). Bar 2: 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), minim."
+      },
+      "answer": {
+        "kind": "time-signature",
+        "accepted": [
+          "4/4",
+          "2/2"
+        ]
+      },
+      "hints": [
+        "Add up each bar, then look at how the notes are grouped into beats.",
+        "Add up each bar, then look at how the notes are grouped into beats."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beat-count-wrong": "Count the beats in one complete bar again — that gives the top number.",
+          "beat-unit-wrong": "The beat count is right, but what kind of note is each beat? That gives the bottom number.",
+          "simple-compound-confusion": "Do the beats split into two or into three? Two means simple time; three means compound."
+        },
+        "fallback": "Not quite. Find the beat first, then count how many fit in a bar."
+      }
+    }
+  ],
+  "recap": [
+    "Duple is 2 beats, triple is 3, quadruple is 4.",
+    "The top number names the time; the bottom number names the beat.",
+    "Read the whole time signature, not just the notes."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.beat-facts",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.time-sig-read",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.beat-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.beat-classification"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s01"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.01"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 1. Duple/triple/quadruple are taught as names for the number of beats, not as a feel."
+  }
+}

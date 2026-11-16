@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G5-U2-L01",
+  "lessonId": "G5-U2-L01",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Read and write notes in the tenor clef, whose middle C is on the fourth line.",
+    "successCriteria": [
+      "I know the tenor clef is a C clef centred on the fourth line.",
+      "I can find middle C and name notes around it.",
+      "I do not mix up the tenor clef and the alto clef."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "The tenor clef is another C clef, like the alto clef you already know. A C clef is drawn so that the middle of the sign marks middle C. The only difference between the two is where the sign is centred: the alto clef is centred on the middle (third) line, and the tenor clef is centred on the fourth line from the bottom. So in the tenor clef, middle C is on the fourth line."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A tenor-clef stave with one semibreve, middle C, on the fourth line from the bottom."
+      },
+      "caption": "Tenor clef: middle C is on the fourth line."
+    },
+    {
+      "kind": "text",
+      "text": "From middle C you can count to any other note, one letter for each line and space. The line below is A, the space above is D, the top line is E. The bottom line of the tenor clef is D, a seventh below middle C; the lines are D, F, A, C and E, from the bottom up."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "D3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "A3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "E4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A tenor-clef stave with five semibreves on the five lines: D, F, A, C, E."
+      },
+      "caption": "The five lines of the tenor clef, from the bottom: D F A C E."
+    },
+    {
+      "kind": "text",
+      "text": "The treble clef covers the highest notes, the alto clef lower ones, the tenor clef lower still, and the bass clef the lowest of all. The tenor clef is used by cellos, bassoons and tenor trombones for their higher notes; it is no longer used for singers. Because the alto and tenor clefs look so alike, always check which one is printed before you name a note."
+    },
+    {
+      "kind": "tip",
+      "text": "Alto: middle C on the middle line. Tenor: middle C on the fourth line, one line higher. Find middle C first, then count."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "tenor",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E4",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A tenor-clef stave with one semibreve on the top line."
+    },
+    "steps": [
+      "Find middle C: the fourth line.",
+      "The top line is the next line up: E.",
+      "The note is E."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A note on the top line of the tenor clef is E."
+  },
+  "guided": [
+    {
+      "id": "i.g5-u2-l01.guided-1",
+      "templateId": "t.g5.tenor-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In the tenor clef, which line of the stave does middle C sit on?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "first",
+            "label": "the bottom line"
+          },
+          {
+            "id": "second",
+            "label": "the second line from the bottom"
+          },
+          {
+            "id": "third",
+            "label": "the middle line"
+          },
+          {
+            "id": "fourth",
+            "label": "the fourth line from the bottom (the second line from the top)"
+          },
+          {
+            "id": "fifth",
+            "label": "the top line"
+          }
+        ],
+        "correctOptionIds": [
+          "fourth"
+        ],
+        "diagnoses": {
+          "third": {
+            "category": "clef-confusion",
+            "reason": "Middle C is on the middle line in the alto clef. The tenor clef is centred one line higher: on the fourth line."
+          },
+          "first": {
+            "category": "clef-confusion",
+            "reason": "The bottom line is the first line. In the bass clef middle C is above the stave; in the tenor clef it is on the fourth line."
+          },
+          "second": {
+            "category": "clef-confusion",
+            "reason": "In the tenor clef middle C is on the fourth line: the clef's centre is drawn on that line."
+          },
+          "fifth": {
+            "category": "clef-confusion",
+            "reason": "The tenor clef is centred on the fourth line, so middle C is there, not on the top line."
+          }
+        }
+      },
+      "hints": [
+        "A C clef marks middle C at its centre.",
+        "A C clef is drawn so that its centre sits on the line that is middle C. The alto clef is centred on the middle line; the tenor clef on the line above it."
+      ],
+      "feedback": {
+        "correct": "Yes: the fourth line.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group it belongs to.",
+          "clef-confusion": "Middle C is on the fourth line in the tenor clef, the middle line in the alto clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.guided-2",
+      "templateId": "t.g5.tenor-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Name this note in the tenor clef.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "C4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A tenor-clef stave. a note on the 4th line."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "C4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle C is on the fourth line of the tenor clef: count up or down from it.",
+        "The note is on the 4th line. The bottom line of the tenor clef is D: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Right: counted from middle C.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.guided-3",
+      "templateId": "t.g5.tenor-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Write F in the tenor clef. You may use up to 2 ledger lines. Any F that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "tenor",
+        "target": {
+          "step": "F",
+          "alter": 0,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "F2",
+          "F3",
+          "F4"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Middle C is on the fourth line of the tenor clef.",
+        "In the tenor clef the bottom line is D. Count up one letter for each line and space until you reach F."
+      ],
+      "feedback": {
+        "correct": "Right: placed in the tenor clef.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g5-u2-l01.ind-1",
+      "templateId": "t.g5.tenor-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the tenor clef.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F4",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A tenor-clef stave. a note in the space just above the stave."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "F4"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle C is on the fourth line of the tenor clef: count up or down from it.",
+        "The note is on the space just above the stave. The bottom line of the tenor clef is D: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct note.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.ind-2",
+      "templateId": "t.g5.tenor-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write D♭ in the tenor clef. You may use up to 2 ledger lines. Any D♭ that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "tenor",
+        "target": {
+          "step": "D",
+          "alter": -1,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "Db3",
+          "Db4"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Middle C is on the fourth line of the tenor clef.",
+        "In the tenor clef the bottom line is D. Count up one letter for each line and space until you reach D."
+      ],
+      "feedback": {
+        "correct": "Correct position.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.ind-3",
+      "templateId": "t.g5.tenor-read",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Name this note in the tenor clef.",
+      "music": {
+        "presentation": "stave",
+        "clef": "tenor",
+        "showKeySignature": true,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "F3",
+                "duration": {
+                  "value": "semibreve",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "A tenor-clef stave. a note on the 2nd line."
+      },
+      "answer": {
+        "kind": "pitch",
+        "accepted": [
+          "F3"
+        ],
+        "octaveSensitive": false,
+        "spellingSensitive": true,
+        "relation": "same"
+      },
+      "hints": [
+        "Middle C is on the fourth line of the tenor clef: count up or down from it.",
+        "The note is on the 2nd line. The bottom line of the tenor clef is D: count up (or down) one letter for each line and space."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "line-space-swap": "Look closely: is the line running through the note-head, or is the note sitting between two lines?",
+          "clef-confusion": "That would be right in another clef. Check the clef at the start of the stave first.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "off-by-step": "You're one step away. Find a note you know for certain and count up or down from it.",
+          "ledger-miscount": "Count the ledger lines one at a time, from the stave outwards.",
+          "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        },
+        "fallback": "Not quite. Start from the clef and count from a note you know."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.ind-4",
+      "templateId": "t.g5.tenor-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Two of the four clefs in use today are called C clefs, because the centre of the sign marks middle C. Which two?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "ta",
+            "label": "treble and alto"
+          },
+          {
+            "id": "bt",
+            "label": "bass and tenor"
+          },
+          {
+            "id": "tb",
+            "label": "treble and bass"
+          },
+          {
+            "id": "at",
+            "label": "alto and tenor"
+          }
+        ],
+        "correctOptionIds": [
+          "at"
+        ],
+        "diagnoses": {
+          "tb": {
+            "category": "clef-confusion",
+            "reason": "The treble clef marks G and the bass clef marks F; they are G and F clefs."
+          },
+          "ta": {
+            "category": "clef-confusion",
+            "reason": "The treble clef is a G clef. The two C clefs are the alto and the tenor."
+          },
+          "bt": {
+            "category": "clef-confusion",
+            "reason": "The bass clef is an F clef. The two C clefs are the alto and the tenor."
+          }
+        }
+      },
+      "hints": [
+        "A C clef marks middle C at its centre.",
+        "Look at where the centre of each clef sign sits: only the alto and tenor signs mark middle C."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group it belongs to.",
+          "clef-confusion": "Middle C is on the fourth line in the tenor clef, the middle line in the alto clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.ind-5",
+      "templateId": "t.g5.tenor-write",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Write A♯ in the tenor clef. You may use up to 2 ledger lines. Any A♯ that fits is correct.",
+      "answer": {
+        "kind": "staff-position",
+        "clef": "tenor",
+        "target": {
+          "step": "A",
+          "alter": 1,
+          "position": "any",
+          "maxLedgerLines": 2
+        },
+        "accepted": [
+          "A#2",
+          "A#3",
+          "A#4"
+        ],
+        "octaveSensitive": true
+      },
+      "hints": [
+        "Middle C is on the fourth line of the tenor clef.",
+        "In the tenor clef the bottom line is D. Count up one letter for each line and space until you reach A."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "wrong-octave": "That's the right letter name, but in a different octave. Check which one the question asks for.",
+          "line-space-swap": "Nearly — move it between a line and a space and check again.",
+          "clef-confusion": "That position would be right in a different clef. Look at the clef first.",
+          "ledger-miscount": "Count the ledger lines needed — one for each line above or below the stave.",
+          "counted-from-top": "Lines and spaces are counted from the bottom of the stave upwards.",
+          "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
+        },
+        "fallback": "Not quite. Find a reference note and count lines and spaces from it."
+      }
+    },
+    {
+      "id": "i.g5-u2-l01.ind-6",
+      "templateId": "t.g5.tenor-facts",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which of these instruments can read the tenor clef (as well as the bass clef)?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "violin",
+            "label": "violin"
+          },
+          {
+            "id": "trumpet",
+            "label": "trumpet"
+          },
+          {
+            "id": "cello",
+            "label": "cello"
+          },
+          {
+            "id": "viola",
+            "label": "viola"
+          }
+        ],
+        "correctOptionIds": [
+          "cello"
+        ],
+        "diagnoses": {
+          "viola": {
+            "category": "wrong-category",
+            "reason": "No: the viola reads the alto clef (and sometimes the treble)."
+          },
+          "trumpet": {
+            "category": "wrong-category",
+            "reason": "No: the trumpet reads the treble clef."
+          },
+          "violin": {
+            "category": "wrong-category",
+            "reason": "No: the violin reads the treble clef."
+          }
+        }
+      },
+      "hints": [
+        "A C clef marks middle C at its centre.",
+        "The tenor clef is used by the higher notes of low instruments, to avoid many ledger lines above the bass stave."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Close, but that one means something different. Compare the two meanings side by side, then try again.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group it belongs to.",
+          "clef-confusion": "Middle C is on the fourth line in the tenor clef, the middle line in the alto clef."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "The tenor clef is a C clef centred on the fourth line: middle C is there.",
+    "The lines are D F A C E, from the bottom.",
+    "Always check whether the clef is alto or tenor before you name a note."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g5.tenor-read",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g5.tenor-write",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g5.tenor-facts",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.clefs.tenor"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g5.s03"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g5.03"
+    ],
+    "notes": "Original wording. First Steps Grade 5 section 3 (pp. 107-109, read in the PDF): tenor clef centred on the fourth line; the order of the four ranges; used by cellos, bassoons and tenor trombones, no longer by singers."
+  }
+}

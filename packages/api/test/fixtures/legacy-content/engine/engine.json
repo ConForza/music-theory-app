@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "rulesets": [
+    {
+      "id": "rules.duration.rational",
+      "title": "Rational durations",
+      "description": "Exact note/rest durations as fractions of a semibreve, including dots and tuplets.",
+      "referenceImplementation": "packages/curriculum/src/music/duration.ts"
+    },
+    {
+      "id": "rules.metre.classification",
+      "title": "Metre classification",
+      "description": "Simple/compound/irregular and duple/triple/quadruple/quintuple/septuple classification of time signatures.",
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
+    },
+    {
+      "id": "rules.grouping.simple",
+      "title": "Grouping in simple time",
+      "description": "Beaming and rest-grouping conventions in simple time, including the half-bar rules in quadruple time and accepted alternatives.",
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
+    },
+    {
+      "id": "rules.grouping.compound",
+      "title": "Grouping in compound time",
+      "description": "Beaming and rest-grouping conventions for dotted beats, including both accepted forms of a silent dotted-crotchet beat.",
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
+    },
+    {
+      "id": "rules.grouping.irregular",
+      "title": "Grouping in irregular time",
+      "description": "Grouping by the stated sub-groups (e.g. 3+2, 2+2+3) in 5/4, 7/4, 5/8, 7/8.",
+      "referenceImplementation": "packages/curriculum/src/music/rhythm.ts"
+    },
+    {
+      "id": "rules.tuplet",
+      "title": "Tuplets",
+      "description": "Triplets, duplets and irregular divisions: member durations and correct written values.",
+      "referenceImplementation": "packages/curriculum/src/music/duration.ts"
+    },
+    {
+      "id": "rules.pitch.spelling",
+      "title": "Written pitch",
+      "description": "Letter name, alteration and octave are separate; spelling equality differs from enharmonic equality.",
+      "referenceImplementation": "packages/curriculum/src/music/pitch.ts"
+    },
+    {
+      "id": "rules.keyboard.layout",
+      "title": "Keyboard layout",
+      "description": "White/black key layout and the mapping between keys and spelt pitches.",
+      "referenceImplementation": "packages/curriculum/src/music/pitch.ts"
+    },
+    {
+      "id": "rules.clef.position",
+      "title": "Clefs and staff positions",
+      "description": "Staff positions and ledger lines for treble, bass, alto and tenor clefs.",
+      "referenceImplementation": "packages/curriculum/src/music/clefs.ts"
+    },
+    {
+      "id": "rules.accidental.bar-state",
+      "title": "Accidental state",
+      "description": "An accidental applies to its line/space for the rest of the bar, through ties over the bar-line, until cancelled.",
+      "referenceImplementation": "packages/curriculum/src/music/accidentals.ts"
+    },
+    {
+      "id": "rules.key-signature",
+      "title": "Key signatures",
+      "description": "Order and count of sharps/flats; placement per clef; relative keys.",
+      "referenceImplementation": "packages/curriculum/src/music/keys.ts"
+    },
+    {
+      "id": "rules.scale.major",
+      "title": "Major scales",
+      "description": "Tone/semitone pattern with one note per letter name.",
+      "referenceImplementation": "packages/curriculum/src/music/keys.ts"
+    },
+    {
+      "id": "rules.scale.minor-harmonic",
+      "title": "Harmonic minor",
+      "description": "Natural minor with raised 7th, same ascending and descending.",
+      "referenceImplementation": "packages/curriculum/src/music/keys.ts"
+    },
+    {
+      "id": "rules.scale.minor-melodic",
+      "title": "Melodic minor",
+      "description": "Raised 6th and 7th ascending; key-signature notes descending.",
+      "referenceImplementation": "packages/curriculum/src/music/keys.ts"
+    },
+    {
+      "id": "rules.scale.chromatic",
+      "title": "Chromatic scale",
+      "description": "All semitones; each line/space used at least once and at most twice; spelling policy.",
+      "referenceImplementation": "packages/curriculum/src/music/chromatic.ts"
+    },
+    {
+      "id": "rules.scale.degrees",
+      "title": "Scale degrees",
+      "description": "Degree numbers and technical names.",
+      "referenceImplementation": "packages/curriculum/src/music/keys.ts"
+    },
+    {
+      "id": "rules.interval",
+      "title": "Intervals",
+      "description": "Interval number and quality from written pitches, simple and compound, order-insensitive.",
+      "referenceImplementation": "packages/curriculum/src/music/interval.ts"
+    },
+    {
+      "id": "rules.enharmonic",
+      "title": "Enharmonic equivalence",
+      "description": "Same sounding pitch, different spelling; tasks state whether spelling or sound is assessed.",
+      "referenceImplementation": "packages/curriculum/src/music/pitch.ts"
+    },
+    {
+      "id": "rules.chord.triad",
+      "title": "Triads",
+      "description": "Root-position triads on scale degrees; harmonic minor for chord work in minor keys.",
+      "referenceImplementation": "packages/curriculum/src/music/chords.ts"
+    },
+    {
+      "id": "rules.chord.function-inversion",
+      "title": "Chord function and inversion",
+      "description": "Chord identity from pitch content; inversion from the bass note, independent of upper-voice spacing.",
+      "referenceImplementation": "packages/curriculum/src/music/chords.ts"
+    },
+    {
+      "id": "rules.cadence",
+      "title": "Cadences",
+      "description": "Perfect (V–I), plagal (IV–I), imperfect (I/ii/IV–V); chord must contain the melody note(s).",
+      "referenceImplementation": "packages/curriculum/src/music/chords.ts"
+    },
+    {
+      "id": "rules.transpose.octave",
+      "title": "Octave transposition",
+      "description": "Moving a melody exactly one octave, optionally into another clef, preserving spelling.",
+      "referenceImplementation": "packages/curriculum/src/music/interval.ts"
+    },
+    {
+      "id": "rules.transpose.instrument",
+      "title": "Instrument transposition",
+      "description": "Written ↔ concert pitch for B♭ (M2), A (m3) and F (P5) instruments with key-signature change and accidental respelling.",
+      "referenceImplementation": "packages/curriculum/src/music/transposing.ts"
+    },
+    {
+      "id": "rules.ornament.signs",
+      "title": "Ornament signs",
+      "description": "Recognition of trill, turn, upper/lower mordent, acciaccatura, appoggiatura and matching written-out patterns to signs.",
+      "referenceImplementation": "packages/curriculum/src/music/ornaments.ts"
+    },
+    {
+      "id": "rules.vocabulary.terms",
+      "title": "Terms and signs",
+      "description": "Controlled vocabulary of performance terms and signs per grade (list pending authoritative source).",
+      "referenceImplementation": "packages/curriculum/src/music/vocabulary.ts"
+    },
+    {
+      "id": "rules.vocabulary.instruments",
+      "title": "Instruments",
+      "description": "Controlled vocabulary of instruments, families, clefs, transpositions and sound production.",
+      "referenceImplementation": "packages/curriculum/src/music/vocabulary.ts"
+    },
+    {
+      "id": "rules.vocabulary.voices",
+      "title": "Voices",
+      "description": "Voice types and ranges.",
+      "referenceImplementation": "packages/curriculum/src/music/vocabulary.ts"
+    },
+    {
+      "id": "rules.score.observation",
+      "title": "Score observation",
+      "description": "Composite questions about an authored score; each sub-question delegates to a deterministic grader.",
+      "referenceImplementation": "packages/engine/src/grade.ts"
+    }
+  ],
+  "graders": [
+    {
+      "id": "g.choice-exact",
+      "title": "Single choice",
+      "answerKind": "choice",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "description": "Exactly one option id is correct; option sets are authored or generated with no duplicate meanings."
+    },
+    {
+      "id": "g.multi-choice-set",
+      "title": "Multiple choice set",
+      "answerKind": "multi-choice",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "description": "Answer must equal the set of correct option ids."
+    },
+    {
+      "id": "g.duration-equivalence",
+      "title": "Duration equivalence",
+      "answerKind": "rhythm",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "description": "Compares total rational duration of the learner's notes/rests with the target; any combination of the permitted values is accepted unless the task restricts it."
+    },
+    {
+      "id": "g.rhythm-bar",
+      "title": "Bar completion and grouping",
+      "answerKind": "rhythm",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.duration.rational",
+        "rules.grouping.simple",
+        "rules.grouping.compound",
+        "rules.grouping.irregular"
+      ],
+      "description": "Checks the bar sums to the time signature and that grouping follows the conventions; every grouping the conventions accept is accepted."
+    },
+    {
+      "id": "g.grouping-check",
+      "title": "Grouping correction",
+      "answerKind": "rhythm",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.grouping.simple",
+        "rules.grouping.compound",
+        "rules.grouping.irregular"
+      ],
+      "description": "Classifies each beam/rest/tie choice against the grouping rules; alternatives listed by the rules are accepted."
+    },
+    {
+      "id": "g.barlines",
+      "title": "Bar-line placement",
+      "answerKind": "rhythm",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.duration.rational"
+      ],
+      "description": "Bar-line positions must match cumulative durations for the given time signature."
+    },
+    {
+      "id": "g.time-signature",
+      "title": "Time signature",
+      "answerKind": "time-signature",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.duration.rational",
+        "rules.metre.classification"
+      ],
+      "description": "Derives the time signature from bar totals and beat grouping; generator rejects rhythms that fit more than one listed answer."
+    },
+    {
+      "id": "g.tuplet",
+      "title": "Tuplet",
+      "answerKind": "rhythm",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.tuplet",
+        "rules.duration.rational"
+      ],
+      "description": "Checks tuplet number, written value and total duration; equivalent notations (e.g. a duplet written with a 2 or as dotted notes) are accepted where the task allows."
+    },
+    {
+      "id": "g.pitch-spelling",
+      "title": "Pitch spelling",
+      "answerKind": "pitch",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.pitch.spelling",
+        "rules.enharmonic"
+      ],
+      "description": "Compares letter and alteration (and octave when required) against a set of accepted spellings; enharmonic answers are rejected unless the task assesses sound only."
+    },
+    {
+      "id": "g.staff-position",
+      "title": "Staff position",
+      "answerKind": "staff-position",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.clef.position",
+        "rules.pitch.spelling"
+      ],
+      "description": "Maps the clicked/typed staff position and accidental to a written pitch in the given clef."
+    },
+    {
+      "id": "g.keyboard-key",
+      "title": "Keyboard key",
+      "answerKind": "pitch",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.keyboard.layout",
+        "rules.enharmonic"
+      ],
+      "description": "Maps a key press to the set of spellings it represents and applies the task's spelling policy."
+    },
+    {
+      "id": "g.accidental-state",
+      "title": "Accidental state",
+      "answerKind": "pitch",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.accidental.bar-state",
+        "rules.key-signature"
+      ],
+      "description": "Computes the sounding written pitch of a note from key signature, earlier accidentals in the bar and ties."
+    },
+    {
+      "id": "g.scale-spelling",
+      "title": "Scale spelling",
+      "answerKind": "pitch-sequence",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic",
+        "rules.key-signature"
+      ],
+      "description": "Generates the reference scale from the key and form and compares spelt notes, direction and octave."
+    },
+    {
+      "id": "g.key-signature",
+      "title": "Key signature",
+      "answerKind": "key-signature",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.key-signature",
+        "rules.clef.position"
+      ],
+      "description": "Checks accidental set, order and per-clef placement."
+    },
+    {
+      "id": "g.degree",
+      "title": "Scale degree",
+      "answerKind": "choice",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.scale.degrees"
+      ],
+      "description": "Derives the degree number or technical name of a note in a key."
+    },
+    {
+      "id": "g.interval",
+      "title": "Interval",
+      "answerKind": "interval",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.interval",
+        "rules.pitch.spelling"
+      ],
+      "description": "Derives number and quality from written pitches; accepts both compound numbering styles (12th / compound 5th); for build tasks, the written note must be spelt correctly."
+    },
+    {
+      "id": "g.chord-function",
+      "title": "Chord function",
+      "answerKind": "chord",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.chord.triad",
+        "rules.chord.function-inversion"
+      ],
+      "description": "Identifies chord degree and inversion from pitch content and bass; any voicing with the right notes and bass is accepted."
+    },
+    {
+      "id": "g.cadence-choice",
+      "title": "Cadence chord choice",
+      "answerKind": "chord-progression",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.cadence",
+        "rules.chord.triad"
+      ],
+      "description": "Each chosen chord must contain the marked melody note(s) and consecutive cadence chords must form a permitted cadence; every valid combination is accepted."
+    },
+    {
+      "id": "g.transposition",
+      "title": "Transposition",
+      "answerKind": "pitch-sequence",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": false,
+      "rulesetIds": [
+        "rules.transpose.octave",
+        "rules.transpose.instrument",
+        "rules.pitch.spelling"
+      ],
+      "description": "Transposes the source by the stated interval and compares spelling, octave, clef and key signature."
+    },
+    {
+      "id": "g.chromatic-scale",
+      "title": "Chromatic scale",
+      "answerKind": "pitch-sequence",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.scale.chromatic",
+        "rules.pitch.spelling"
+      ],
+      "description": "Checks all twelve semitones in order, each letter used once or twice, and the task's accidental policy."
+    },
+    {
+      "id": "g.ornament-sign",
+      "title": "Ornament sign",
+      "answerKind": "ornament-sign",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.ornament.signs"
+      ],
+      "description": "Matches a written-out figure to its sign (accepting standard alternative signs) or a sign to its name."
+    },
+    {
+      "id": "g.composite",
+      "title": "Composite score item",
+      "answerKind": "composite",
+      "deterministic": true,
+      "supportsMultipleValidAnswers": true,
+      "rulesetIds": [
+        "rules.score.observation"
+      ],
+      "description": "A sequence of sub-questions about one authored score; each sub-question names its own deterministic grader."
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "status": "provisional",
+  "rulesVersion": 1,
+  "disclaimer": "Badges are in-app recognition of practice progress. They are not ABRSM certificates, grades or results, and ABRSM does not endorse this app.",
+  "achievements": [
+    {
+      "id": "g1.treble-line-notes",
+      "grade": 1,
+      "title": "Treble line reader",
+      "description": "Show you can read the five treble-clef line notes: enough varied, first-try answers without hints.",
+      "condition": {
+        "type": "concepts",
+        "conceptIds": [
+          "c.clefs.treble-lines"
+        ],
+        "minState": "proficient"
+      }
+    },
+    {
+      "id": "g1.both-clefs",
+      "grade": 1,
+      "title": "Two-clef reader",
+      "description": "Read notes in both the treble and the bass clef: proficient with the treble line and space notes and the bass clef.",
+      "condition": {
+        "type": "concepts",
+        "conceptIds": [
+          "c.clefs.treble-lines",
+          "c.clefs.treble-spaces",
+          "c.clefs.bass"
+        ],
+        "minState": "proficient"
+      }
+    },
+    {
+      "id": "g1.major-scales",
+      "grade": 1,
+      "title": "First four scales",
+      "description": "Show you know the C, G, D and F major scales: proficient with the scale pattern, G and D major, and F major.",
+      "condition": {
+        "type": "concepts",
+        "conceptIds": [
+          "c.scales.major-pattern",
+          "c.scales.major-sharp-g1",
+          "c.scales.major-f"
+        ],
+        "minState": "proficient"
+      }
+    },
+    {
+      "id": "g2.triplets",
+      "grade": 2,
+      "title": "Triplet master",
+      "description": "Master Grade 2 triplets: independent evidence over several days, including a successful review.",
+      "condition": {
+        "type": "concepts",
+        "conceptIds": [
+          "c.rhythm.triplets"
+        ],
+        "minState": "mastered"
+      }
+    },
+    {
+      "id": "g3.compound-time",
+      "grade": 3,
+      "title": "Compound-time challenger",
+      "description": "Succeed in the Grade 3 compound-time unit challenge.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G3-U1-C"
+        ]
+      }
+    },
+    {
+      "id": "g4.chromatic-spelling",
+      "grade": 4,
+      "title": "Chromatic speller",
+      "description": "Spell the chromatic scale correctly with varied first-try answers.",
+      "condition": {
+        "type": "concepts",
+        "conceptIds": [
+          "c.scales.chromatic"
+        ],
+        "minState": "proficient"
+      }
+    },
+    {
+      "id": "g5.cadence-challenge",
+      "grade": 5,
+      "title": "Cadence challenger",
+      "description": "Complete the Grade 5 harmony unit challenge, which includes the cadence tasks.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G5-U4-C"
+        ]
+      }
+    },
+    {
+      "id": "g1.grade-complete",
+      "grade": 1,
+      "title": "Grade 1 complete (practice assessment)",
+      "description": "Pass the Grade 1 practice assessment. Finishing lessons or earning XP never awards this. It is an in-app practice badge, not an ABRSM result.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G1-A"
+        ]
+      }
+    },
+    {
+      "id": "g2.grade-complete",
+      "grade": 2,
+      "title": "Grade 2 complete (practice assessment)",
+      "description": "Pass the Grade 2 practice assessment. Finishing lessons or earning XP never awards this. It is an in-app practice badge, not an ABRSM result.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G2-A"
+        ]
+      }
+    },
+    {
+      "id": "g3.grade-complete",
+      "grade": 3,
+      "title": "Grade 3 complete (practice assessment)",
+      "description": "Pass the Grade 3 practice assessment. Finishing lessons or earning XP never awards this. It is an in-app practice badge, not an ABRSM result.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G3-A"
+        ]
+      }
+    },
+    {
+      "id": "g4.grade-complete",
+      "grade": 4,
+      "title": "Grade 4 complete (practice assessment)",
+      "description": "Pass the Grade 4 practice assessment. Finishing lessons or earning XP never awards this. It is an in-app practice badge, not an ABRSM result.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G4-A"
+        ]
+      }
+    },
+    {
+      "id": "g5.grade-complete",
+      "grade": 5,
+      "title": "Grade 5 complete (practice assessment)",
+      "description": "Pass the Grade 5 practice assessment. Finishing lessons or earning XP never awards this. It is an in-app practice badge, not an ABRSM result.",
+      "condition": {
+        "type": "nodes",
+        "nodeIds": [
+          "G5-A"
+        ]
+      }
+    }
+  ]
+}

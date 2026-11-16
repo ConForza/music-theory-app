@@ -1,0 +1,520 @@
+{
+  "schemaVersion": 1,
+  "grade": 5,
+  "concepts": [
+    {
+      "id": "c.metre.irregular",
+      "grade": 5,
+      "domain": "metre",
+      "title": "Irregular time signatures",
+      "summary": "Five or seven beats, usually felt as 3+2, 2+3, 4+3, 2+2+3 etc.",
+      "prerequisiteIds": [
+        "c.metre.regular-all"
+      ],
+      "rulesetIds": [
+        "rules.metre.classification"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ]
+    },
+    {
+      "id": "c.metre.irregular-grouping",
+      "grade": 5,
+      "domain": "metre",
+      "title": "Grouping in irregular time",
+      "summary": "Each sub-group is grouped like a complete two-, three- or four-beat bar; prompts state the grouping.",
+      "prerequisiteIds": [
+        "c.metre.irregular",
+        "c.metre.regular-grouping"
+      ],
+      "rulesetIds": [
+        "rules.grouping.irregular"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.01"
+      ]
+    },
+    {
+      "id": "c.rhythm.irregular-divisions",
+      "grade": 5,
+      "domain": "rhythm",
+      "title": "Irregular divisions",
+      "summary": "Quintuplets, sextuplets, septuplets, groups of 9; written value depends on the beat.",
+      "prerequisiteIds": [
+        "c.rhythm.duplets",
+        "c.rhythm.triplets-mixed",
+        "c.rhythm.demisemiquavers"
+      ],
+      "rulesetIds": [
+        "rules.tuplet"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.02"
+      ]
+    },
+    {
+      "id": "c.clefs.tenor",
+      "grade": 5,
+      "domain": "clefs",
+      "title": "Tenor clef",
+      "summary": "C clef centred on the fourth line; used by cello, bassoon, tenor trombone.",
+      "prerequisiteIds": [
+        "c.clefs.alto"
+      ],
+      "rulesetIds": [
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.03"
+      ]
+    },
+    {
+      "id": "c.clefs.four-clefs",
+      "grade": 5,
+      "domain": "clefs",
+      "title": "Four clefs",
+      "summary": "Relative ranges of the four clefs; key-signature layouts in alto and tenor.",
+      "prerequisiteIds": [
+        "c.clefs.tenor",
+        "c.keys.signatures-alto"
+      ],
+      "rulesetIds": [
+        "rules.clef.position",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.04"
+      ]
+    },
+    {
+      "id": "c.transposition.octave-any",
+      "grade": 5,
+      "domain": "transposition",
+      "title": "Octave transposition (any clef)",
+      "summary": "Avoid same-pitch and two-octave mistakes; don't confuse alto and tenor.",
+      "prerequisiteIds": [
+        "c.clefs.four-clefs",
+        "c.transposition.octave-alto"
+      ],
+      "rulesetIds": [
+        "rules.transpose.octave",
+        "rules.clef.position"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.05"
+      ]
+    },
+    {
+      "id": "c.scales.keys-six-sharps",
+      "grade": 5,
+      "domain": "scales",
+      "title": "Six sharps",
+      "summary": "F♯ major and D♯ minor (C𝄪 as raised 7th).",
+      "prerequisiteIds": [
+        "c.scales.keys-five-sharps",
+        "c.clefs.four-clefs"
+      ],
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.04"
+      ]
+    },
+    {
+      "id": "c.scales.keys-six-flats",
+      "grade": 5,
+      "domain": "scales",
+      "title": "Six flats",
+      "summary": "G♭ major and E♭ minor (C♭ in the signature).",
+      "prerequisiteIds": [
+        "c.scales.keys-five-flats",
+        "c.accidentals.enharmonic",
+        "c.clefs.four-clefs"
+      ],
+      "rulesetIds": [
+        "rules.scale.major",
+        "rules.scale.minor-harmonic",
+        "rules.scale.minor-melodic",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.07",
+        "abrsm2020.g5.04"
+      ]
+    },
+    {
+      "id": "c.intervals.chromatic",
+      "grade": 5,
+      "domain": "intervals",
+      "title": "Chromatic intervals",
+      "summary": "Name by adjusting the major/perfect interval on the lower note; chromatic vs diatonic semitone.",
+      "prerequisiteIds": [
+        "c.intervals.augmented-diminished",
+        "c.scales.keys-six-sharps",
+        "c.scales.keys-six-flats"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ]
+    },
+    {
+      "id": "c.intervals.compound",
+      "grade": 5,
+      "domain": "intervals",
+      "title": "Compound intervals",
+      "summary": "An octave plus a 5th is a 12th (8+5−1) or a compound 5th; quality unchanged.",
+      "prerequisiteIds": [
+        "c.intervals.chromatic"
+      ],
+      "rulesetIds": [
+        "rules.interval"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.08"
+      ]
+    },
+    {
+      "id": "c.transposition.concert-pitch",
+      "grade": 5,
+      "domain": "transposition",
+      "title": "Written vs concert pitch",
+      "summary": "B♭ instruments sound a major 2nd lower, A a minor 3rd lower, F a perfect 5th lower; octave transposers.",
+      "prerequisiteIds": [
+        "c.intervals.any-diatonic"
+      ],
+      "rulesetIds": [
+        "rules.transpose.instrument"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.06"
+      ]
+    },
+    {
+      "id": "c.transposition.instrument",
+      "grade": 5,
+      "domain": "transposition",
+      "title": "Instrument transposition",
+      "summary": "Transpose the key first, then each note by the given interval, respelling accidentals by degree.",
+      "prerequisiteIds": [
+        "c.transposition.concert-pitch",
+        "c.intervals.chromatic",
+        "c.scales.keys-six-sharps",
+        "c.scales.keys-six-flats"
+      ],
+      "rulesetIds": [
+        "rules.transpose.instrument",
+        "rules.interval",
+        "rules.key-signature"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.06"
+      ]
+    },
+    {
+      "id": "c.chords.inversions",
+      "grade": 5,
+      "domain": "chords",
+      "title": "Inversions",
+      "summary": "The bass note decides the inversion: root (a), 3rd (b), 5th (c).",
+      "prerequisiteIds": [
+        "c.chords.primary-triads",
+        "c.intervals.compound"
+      ],
+      "rulesetIds": [
+        "rules.chord.function-inversion"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.09"
+      ]
+    },
+    {
+      "id": "c.chords.supertonic",
+      "grade": 5,
+      "domain": "chords",
+      "title": "Supertonic chord",
+      "summary": "ii is minor in major keys and diminished in minor keys.",
+      "prerequisiteIds": [
+        "c.chords.primary-triads",
+        "c.intervals.augmented-diminished"
+      ],
+      "rulesetIds": [
+        "rules.chord.triad"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.09"
+      ]
+    },
+    {
+      "id": "c.chords.identify-inversions",
+      "grade": 5,
+      "domain": "chords",
+      "title": "Chord identification",
+      "summary": "Function + inversion, independent of spacing and doubling; a/b/c or figures.",
+      "prerequisiteIds": [
+        "c.chords.inversions",
+        "c.chords.supertonic",
+        "c.scales.keys-six-sharps",
+        "c.scales.keys-six-flats"
+      ],
+      "rulesetIds": [
+        "rules.chord.function-inversion"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.09"
+      ]
+    },
+    {
+      "id": "c.cadences.types",
+      "grade": 5,
+      "domain": "cadences",
+      "title": "Cadence types",
+      "summary": "Perfect V–I, plagal IV–I, imperfect ending on V (from I, ii or IV).",
+      "prerequisiteIds": [
+        "c.chords.identify-in-passage",
+        "c.chords.supertonic"
+      ],
+      "rulesetIds": [
+        "rules.cadence"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.11"
+      ]
+    },
+    {
+      "id": "c.cadences.recognise",
+      "grade": 5,
+      "domain": "cadences",
+      "title": "Cadences in context",
+      "summary": "Cadences mark the ends of phrases, like punctuation.",
+      "prerequisiteIds": [
+        "c.cadences.types"
+      ],
+      "rulesetIds": [
+        "rules.cadence"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.11"
+      ]
+    },
+    {
+      "id": "c.cadences.chord-choice",
+      "grade": 5,
+      "domain": "cadences",
+      "title": "Chords at cadence points",
+      "summary": "Each chord must contain the melody note(s); pairs must make a cadence; several answers can be right.",
+      "prerequisiteIds": [
+        "c.cadences.recognise",
+        "c.chords.identify-inversions"
+      ],
+      "rulesetIds": [
+        "rules.cadence",
+        "rules.chord.triad"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.10",
+        "abrsm2020.g5.11"
+      ]
+    },
+    {
+      "id": "c.chords.cadential-six-four",
+      "grade": 5,
+      "domain": "chords",
+      "title": "Ic–V progression",
+      "summary": "Second-inversion tonic to root-position dominant over the same bass.",
+      "prerequisiteIds": [
+        "c.chords.identify-inversions"
+      ],
+      "rulesetIds": [
+        "rules.chord.function-inversion"
+      ],
+      "status": "supporting",
+      "outcomeIds": []
+    },
+    {
+      "id": "c.cadences.approach-chord",
+      "grade": 5,
+      "domain": "cadences",
+      "title": "Approach chords",
+      "summary": "A chord from I, ii, IV or V leading into the cadence.",
+      "prerequisiteIds": [
+        "c.cadences.chord-choice"
+      ],
+      "rulesetIds": [
+        "rules.cadence"
+      ],
+      "status": "supporting",
+      "outcomeIds": []
+    },
+    {
+      "id": "c.ornaments.patterns",
+      "grade": 5,
+      "domain": "ornaments",
+      "title": "Ornament patterns",
+      "summary": "Typical realisations of each sign; interpretation depends on style and tempo.",
+      "prerequisiteIds": [
+        "c.ornaments.signs"
+      ],
+      "rulesetIds": [
+        "rules.ornament.signs"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ]
+    },
+    {
+      "id": "c.ornaments.replace-with-sign",
+      "grade": 5,
+      "domain": "ornaments",
+      "title": "Ornament replacement",
+      "summary": "Match written-out figures to signs (never the reverse in assessment).",
+      "prerequisiteIds": [
+        "c.ornaments.patterns"
+      ],
+      "rulesetIds": [
+        "rules.ornament.signs"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.13"
+      ]
+    },
+    {
+      "id": "c.voices.types",
+      "grade": 5,
+      "domain": "voices",
+      "title": "Voice types",
+      "summary": "Soprano, mezzo-soprano, alto, tenor, baritone, bass.",
+      "prerequisiteIds": [],
+      "rulesetIds": [
+        "rules.vocabulary.voices"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.14"
+      ]
+    },
+    {
+      "id": "c.instruments.sound-production",
+      "grade": 5,
+      "domain": "instruments",
+      "title": "Sound production and clefs",
+      "summary": "Bowed/plucked strings, single/double reeds and flutes, lip-buzzed brass, struck percussion; instrument clefs.",
+      "prerequisiteIds": [
+        "c.instruments.orchestra",
+        "c.clefs.tenor"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.instruments"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ]
+    },
+    {
+      "id": "c.instruments.extended",
+      "grade": 5,
+      "domain": "instruments",
+      "title": "Extended instruments",
+      "summary": "Piccolo, cor anglais, bass clarinet, double bassoon, tuned/untuned percussion, piano pedals, organ, guitar, saxophone, recorder.",
+      "prerequisiteIds": [
+        "c.instruments.sound-production",
+        "c.transposition.concert-pitch"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.instruments"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.15"
+      ]
+    },
+    {
+      "id": "c.terms.g5",
+      "grade": 5,
+      "domain": "terms",
+      "title": "Grade 5 terms",
+      "summary": "Further Italian terms and common German directions; repeat signs.",
+      "prerequisiteIds": [
+        "c.terms.g4"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.terms"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.12"
+      ]
+    },
+    {
+      "id": "c.context.score-g5",
+      "grade": 5,
+      "domain": "context",
+      "title": "Score observation (Grade 5)",
+      "summary": "Apply all Grades 1–5 knowledge to an authored score: harmony, intervals, instruments, ornaments, terms.",
+      "prerequisiteIds": [
+        "c.context.passage-g4",
+        "c.cadences.chord-choice",
+        "c.ornaments.replace-with-sign",
+        "c.instruments.extended",
+        "c.voices.types",
+        "c.terms.g5",
+        "c.transposition.instrument",
+        "c.intervals.compound"
+      ],
+      "rulesetIds": [
+        "rules.score.observation"
+      ],
+      "status": "core",
+      "outcomeIds": [
+        "abrsm2020.g5.16",
+        "abrsm2020.g1.21"
+      ]
+    },
+    {
+      "id": "c.voices.satb-scores",
+      "grade": 5,
+      "domain": "voices",
+      "title": "SATB short and open score",
+      "summary": "Stem directions in short score; tenor part in treble clef an octave higher in open score.",
+      "prerequisiteIds": [
+        "c.voices.types",
+        "c.clefs.four-clefs"
+      ],
+      "rulesetIds": [
+        "rules.vocabulary.voices",
+        "rules.clef.position"
+      ],
+      "status": "enrichment",
+      "outcomeIds": []
+    }
+  ]
+}

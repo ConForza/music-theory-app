@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "note": "Review questions are generated inside a lesson's effective scope, which is coarser than what one concept teaches (for example, treble line notes versus all treble stave notes). A constraint here narrows generated questions to exactly the material a concept introduced; a question that breaks it is never served, and one that breaks it on regeneration is treated as stale.",
+  "constraints": [
+    { "conceptId": "c.clefs.treble-lines", "clef": "treble", "staffPositions": "lines" },
+    { "conceptId": "c.clefs.treble-spaces", "clef": "treble", "staffPositions": "spaces" }
+  ]
+}

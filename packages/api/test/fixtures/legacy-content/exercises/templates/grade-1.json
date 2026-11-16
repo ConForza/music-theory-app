@@ -1,0 +1,989 @@
+{
+  "schemaVersion": 1,
+  "grade": 1,
+  "templates": [
+    {
+      "id": "t.g1.note-value",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.01",
+        "abrsm2020.g1.02"
+      ],
+      "conceptIds": [
+        "c.rhythm.values-long",
+        "c.rhythm.values-short",
+        "c.rhythm.rests"
+      ],
+      "promptPattern": "How many {beatUnit} beats does this {noteOrRest} last? / Which value lasts as long as {target}?",
+      "scope": {
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 0
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+      },
+      "ambiguityChecks": [
+        "Each option has a distinct duration.",
+        "Target uses only values in scope."
+      ],
+      "hints": [
+        "Count everything in crotchet beats.",
+        "A semibreve lasts four crotchet beats."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.rest",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.02"
+      ],
+      "conceptIds": [
+        "c.rhythm.rests"
+      ],
+      "promptPattern": "Which rest matches this {noteValue}? / Name this rest.",
+      "scope": {
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+      },
+      "ambiguityChecks": [
+        "Semibreve and minim rests are shown on a stave so hanging/sitting is visible."
+      ],
+      "hints": [
+        "Semibreve rests hang below a line; minim rests sit on top of one."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.tie-dot",
+      "version": 1,
+      "familyId": "fam.note-value",
+      "grade": 1,
+      "mode": "compare",
+      "outcomeIds": [
+        "abrsm2020.g1.03",
+        "abrsm2020.g1.04"
+      ],
+      "conceptIds": [
+        "c.rhythm.ties",
+        "c.rhythm.dots"
+      ],
+      "promptPattern": "What is the total value of these tied notes? / Which dotted note equals {tiedPair}? / Can a dot replace this tie?",
+      "scope": {
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Any combination of permitted values with the same total is accepted when the task asks for an equivalent; a single-note answer is required only when the prompt says so."
+      },
+      "ambiguityChecks": [
+        "Ties only join notes of the same pitch.",
+        "Dot-across-bar-line items explicitly state the bar-line position."
+      ],
+      "hints": [
+        "A dot adds half the note's own value.",
+        "A tie adds the two values together."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.time-signature",
+      "version": 1,
+      "familyId": "fam.time-signature",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.05"
+      ],
+      "conceptIds": [
+        "c.metre.simple-crotchet"
+      ],
+      "promptPattern": "Add the missing time signature to this rhythm.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct."
+      },
+      "ambiguityChecks": [
+        "Rhythm must contain at least two complete bars.",
+        "Reject rhythms equally valid in 2/4 and 4/4 unless beaming disambiguates (e.g. a minim crossing beat 2–3 or whole-bar semibreve)."
+      ],
+      "hints": [
+        "Count the crotchet beats in one bar."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.barlines",
+      "version": 1,
+      "familyId": "fam.barlines",
+      "grade": 1,
+      "mode": "correct",
+      "outcomeIds": [
+        "abrsm2020.g1.06"
+      ],
+      "conceptIds": [
+        "c.metre.bars"
+      ],
+      "promptPattern": "Add the bar-lines to this rhythm in {timeSignature}.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct."
+      },
+      "ambiguityChecks": [
+        "Bar-line positions are unique for the given time signature.",
+        "First note starts on beat 1 (no upbeat at Grade 1)."
+      ],
+      "hints": [
+        "Count beats from the last bar-line you added.",
+        "Finish with a double bar-line."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.bar-complete",
+      "version": 1,
+      "familyId": "fam.bar-builder",
+      "grade": 1,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.06",
+        "abrsm2020.g1.07"
+      ],
+      "conceptIds": [
+        "c.metre.bar-completion",
+        "c.metre.grouping-g1"
+      ],
+      "promptPattern": "Complete this bar of {timeSignature} using {allowedValues}.",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Every combination that totals the bar and follows the grouping rules is accepted; equally clear beaming alternatives are both accepted."
+      },
+      "ambiguityChecks": [
+        "At least one valid completion exists using the allowed values.",
+        "Prompt states whether a single note/rest is required."
+      ],
+      "hints": [
+        "How many beats are still missing?",
+        "Group within beats so each beat is visible."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.grouping",
+      "version": 1,
+      "familyId": "fam.grouping",
+      "grade": 1,
+      "mode": "correct",
+      "outcomeIds": [
+        "abrsm2020.g1.07",
+        "abrsm2020.g1.02"
+      ],
+      "conceptIds": [
+        "c.metre.grouping-g1",
+        "c.metre.ties-in-bars",
+        "c.metre.rests-in-bars-g1"
+      ],
+      "promptPattern": "This bar is hard to read. Choose the clearest way to write it. / Which grouping is correct?",
+      "scope": {
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "noteValues": [
+          "semibreve",
+          "minim",
+          "crotchet",
+          "quaver",
+          "semiquaver"
+        ],
+        "maxDots": 1
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Where conventions allow more than one clear grouping (e.g. four quavers as one or two beamed groups in 2/4), every such option is marked correct."
+      },
+      "ambiguityChecks": [
+        "Exactly one option is unclear/incorrect in 'spot the error' items.",
+        "Grouping alternatives are checked against the full rule set before items are released."
+      ],
+      "hints": [
+        "Mark where each beat starts.",
+        "In 4/4 don't hide the middle of the bar."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.note-read",
+      "version": 1,
+      "familyId": "fam.note-read",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.08",
+        "abrsm2020.g1.09"
+      ],
+      "conceptIds": [
+        "c.clefs.stave",
+        "c.clefs.treble-lines",
+        "c.clefs.treble-spaces",
+        "c.clefs.bass",
+        "c.pitch.middle-c"
+      ],
+      "promptPattern": "Name this note.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Letter name (and accidental if shown) must match; octave is not asked at Grade 1."
+      },
+      "ambiguityChecks": [
+        "Ledger lines only for middle C.",
+        "Accidentals appear only after G1-U4 concepts are taught."
+      ],
+      "hints": [
+        "Find the clef's reference note first (G on line 2 in treble, F on line 4 in bass).",
+        "Count lines and spaces from the bottom."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.note-write",
+      "version": 1,
+      "familyId": "fam.note-write",
+      "grade": 1,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g1.09"
+      ],
+      "conceptIds": [
+        "c.clefs.treble-lines",
+        "c.clefs.treble-spaces",
+        "c.clefs.bass",
+        "c.pitch.middle-c",
+        "c.pitch.note-writing"
+      ],
+      "promptPattern": "Write {pitchName} in the {clef} clef. / Write middle C.",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Any octave of the letter name on the stave is accepted unless the prompt names middle C or a specific position."
+      },
+      "ambiguityChecks": [
+        "If the letter appears more than once on the stave, either position is accepted unless the prompt specifies one."
+      ],
+      "hints": [
+        "Start from the clef's reference line.",
+        "Middle C needs one ledger line."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.keyboard",
+      "version": 1,
+      "familyId": "fam.keyboard",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.10"
+      ],
+      "conceptIds": [
+        "c.pitch.keyboard",
+        "c.accidentals.signs",
+        "c.pitch.middle-c"
+      ],
+      "promptPattern": "Find {pitchName} on the keyboard. / Name the highlighted key.",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "When naming a black key, both sharp and flat names are accepted unless the prompt asks for one (e.g. 'name it as a flat')."
+      },
+      "ambiguityChecks": [
+        "Prompt states which spelling is wanted when a black key is named."
+      ],
+      "hints": [
+        "Use the group of two black keys to find C, D and E."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.accidental-state",
+      "version": 1,
+      "familyId": "fam.accidental-state",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.10"
+      ],
+      "conceptIds": [
+        "c.accidentals.bar-rule",
+        "c.accidentals.cancellation"
+      ],
+      "promptPattern": "What is the name of the note marked *? / Which accidental is unnecessary?",
+      "scope": {
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct."
+      },
+      "ambiguityChecks": [
+        "Key-signature items only use keys whose signatures have been taught."
+      ],
+      "hints": [
+        "Go through the bar from the beginning.",
+        "A bar-line cancels accidentals unless a tie crosses it."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.tone-semitone",
+      "version": 1,
+      "familyId": "fam.keyboard",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.11"
+      ],
+      "conceptIds": [
+        "c.pitch.tones-semitones"
+      ],
+      "promptPattern": "Is the distance between these two keys a tone or a semitone?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct."
+      },
+      "ambiguityChecks": [
+        "Pairs are adjacent or next-but-one keys only."
+      ],
+      "hints": [
+        "Count the keys between them, black and white."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.scale-build",
+      "version": 1,
+      "familyId": "fam.scale-builder",
+      "grade": 1,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g1.11",
+        "abrsm2020.g1.12"
+      ],
+      "conceptIds": [
+        "c.scales.major-pattern",
+        "c.scales.major-sharp-g1",
+        "c.scales.major-f",
+        "c.scales.writing-g1"
+      ],
+      "promptPattern": "Write the scale of {key}, {direction}, in the {clef} clef, {withOrWithout} key signature. Mark the semitones.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": true,
+        "enharmonicPolicy": "reject",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Spelling is assessed: G♭ for F♯ is wrong. Either octave that fits the stave with ≤1 ledger line is accepted unless a starting note is given."
+      },
+      "ambiguityChecks": [
+        "Starting note given or both octaves accepted.",
+        "Semitone marking is graded separately from note spelling."
+      ],
+      "hints": [
+        "One note on every line and space.",
+        "Semitones fall between degrees 3–4 and 7–8."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.key-signature",
+      "version": 1,
+      "familyId": "fam.key-signature",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.13"
+      ],
+      "conceptIds": [
+        "c.keys.signature-concept",
+        "c.keys.signatures-g1"
+      ],
+      "promptPattern": "Name the major key with this key signature. / Write the key signature of {key} in the {clef} clef.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ]
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Written signatures are checked for the exact line/space in the given clef."
+      },
+      "ambiguityChecks": [
+        "Grade 1 keys are named as major keys only."
+      ],
+      "hints": [
+        "F♯ sits on the top line in treble and the fourth line in bass."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.degree",
+      "version": 1,
+      "familyId": "fam.degree",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.15"
+      ],
+      "conceptIds": [
+        "c.scales.degree-numbers"
+      ],
+      "promptPattern": "In {key}, which degree of the scale is this note?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "degreeNaming": "number"
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Exactly one answer is correct."
+      },
+      "ambiguityChecks": [
+        "Degree 8 is always answered as 1."
+      ],
+      "hints": [
+        "The tonic is degree 1."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.tonic-triad",
+      "version": 1,
+      "familyId": "fam.triad-chord",
+      "grade": 1,
+      "mode": "build",
+      "outcomeIds": [
+        "abrsm2020.g1.14"
+      ],
+      "conceptIds": [
+        "c.chords.tonic-triad"
+      ],
+      "promptPattern": "Write the tonic triad of {key} in the {clef} clef, {withOrWithout} key signature. / Which key has this tonic triad?",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "chordDegrees": [
+          "I"
+        ],
+        "inversions": [
+          "a"
+        ],
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Close position root-position triad on any octave of the tonic within the ledger-line limit."
+      },
+      "ambiguityChecks": [
+        "Accidental needed when written without key signature is checked (e.g. F♯ in D major)."
+      ],
+      "hints": [
+        "Use degrees 1, 3 and 5."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.interval-number",
+      "version": 1,
+      "familyId": "fam.interval",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.16"
+      ],
+      "conceptIds": [
+        "c.intervals.number",
+        "c.intervals.above-tonic-number"
+      ],
+      "promptPattern": "Give the number of this interval (e.g. 3rd). / Write a note above the tonic to make a {number}.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "intervalQuality": "number-only",
+        "intervalLowerNote": "tonic",
+        "compoundIntervals": false,
+        "maxLedgerLines": 1
+      },
+      "acceptance": {
+        "spellingSensitive": true,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "Number only. Build tasks require the scale note of the key (with its key-signature accidental)."
+      },
+      "ambiguityChecks": [
+        "Lower note is always the tonic of a Grade 1 key.",
+        "Upper note is within an octave."
+      ],
+      "hints": [
+        "Count both notes.",
+        "Use the notes of the scale."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 2,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.terms",
+      "version": 1,
+      "familyId": "fam.choice",
+      "grade": 1,
+      "mode": "identify",
+      "outcomeIds": [
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.19",
+        "abrsm2020.g1.20"
+      ],
+      "conceptIds": [
+        "c.terms.tempo-g1",
+        "c.terms.dynamics-g1",
+        "c.terms.directions-g1",
+        "c.terms.articulation-g1"
+      ],
+      "promptPattern": "What does {term} mean? / Which sign means {meaning}?",
+      "scope": {},
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": false,
+        "alternativesNote": "One option is correct; distractors are checked to have clearly different meanings."
+      },
+      "ambiguityChecks": [
+        "Term list must come from the approved Grade 1 vocabulary (pending — OPEN_QUESTIONS Q2)."
+      ],
+      "hints": [
+        "Is it about speed, volume or touch?"
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 1,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    },
+    {
+      "id": "t.g1.melody",
+      "version": 1,
+      "familyId": "fam.score-observation",
+      "grade": 1,
+      "mode": "apply-in-context",
+      "outcomeIds": [
+        "abrsm2020.g1.21",
+        "abrsm2020.g1.05",
+        "abrsm2020.g1.09",
+        "abrsm2020.g1.13",
+        "abrsm2020.g1.16",
+        "abrsm2020.g1.17",
+        "abrsm2020.g1.18",
+        "abrsm2020.g1.20"
+      ],
+      "conceptIds": [
+        "c.context.melody-g1"
+      ],
+      "promptPattern": "Look at this melody and answer the questions.",
+      "scope": {
+        "keys": [
+          "C major",
+          "G major",
+          "D major",
+          "F major"
+        ],
+        "clefs": [
+          "treble",
+          "bass"
+        ],
+        "timeSignatures": [
+          "2/4",
+          "3/4",
+          "4/4"
+        ],
+        "maxLedgerLines": 1,
+        "intervalQuality": "number-only",
+        "intervalLowerNote": "tonic"
+      },
+      "acceptance": {
+        "spellingSensitive": false,
+        "octaveSensitive": false,
+        "enharmonicPolicy": "not-applicable",
+        "multipleValidAnswers": true,
+        "alternativesNote": "Each sub-question has its own acceptance rule."
+      },
+      "ambiguityChecks": [
+        "Melodies are original and use only Grade 1 vocabulary.",
+        "Every sub-question refers to a specific bar or note."
+      ],
+      "hints": [
+        "Read the question, then find the bar it refers to."
+      ],
+      "extraMistakeCategories": [],
+      "difficulty": 3,
+      "qa": {
+        "status": "draft",
+        "reviewRequirements": [
+          "Qualified music teacher reviews a seeded sample of at least 20 generated items.",
+          "Golden answer fixtures pass in the Brief 03 engine."
+        ],
+        "reviewedBy": null
+      }
+    }
+  ]
+}

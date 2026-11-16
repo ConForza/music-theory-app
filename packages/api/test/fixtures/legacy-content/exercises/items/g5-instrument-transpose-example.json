@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "description": "Grade 5 example item: transpose an original concert-pitch melody to written pitch for clarinet in B flat, including respelling a chromatic note.",
+  "outcomeIds": ["abrsm2020.g5.06"],
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 01 example)",
+    "originality": "original",
+    "bookSectionIds": ["fs.g5.s12"]
+  },
+  "item": {
+    "id": "i.g5-instrument-transpose.example-1",
+    "templateId": "t.g5.instrument-transpose",
+    "templateVersion": 1,
+    "seed": null,
+    "evidence": "independent",
+    "prompt": "This melody is written at concert pitch. Transpose it UP a major 2nd, as it would be written for a clarinet in B♭. Use the correct new key signature.",
+    "music": {
+      "clef": "treble",
+      "key": "F major",
+      "showKeySignature": true,
+      "timeSignature": "4/4",
+      "tempoText": "Andante",
+      "measures": [
+        {
+          "events": [
+            { "kind": "note", "pitch": "F4", "duration": { "value": "crotchet", "dots": 0 } },
+            { "kind": "note", "pitch": "A4", "duration": { "value": "crotchet", "dots": 0 } },
+            { "kind": "note", "pitch": "C5", "duration": { "value": "crotchet", "dots": 0 } },
+            { "kind": "note", "pitch": "B4", "duration": { "value": "crotchet", "dots": 0 }, "writtenAccidental": "natural" }
+          ]
+        },
+        {
+          "events": [
+            { "kind": "note", "pitch": "C5", "duration": { "value": "crotchet", "dots": 0 } },
+            { "kind": "note", "pitch": "D5", "duration": { "value": "crotchet", "dots": 0 } },
+            { "kind": "note", "pitch": "C5", "duration": { "value": "minim", "dots": 0 } }
+          ]
+        }
+      ],
+      "textAlternative": "Two bars in F major, 4/4, Andante. Bar 1: F, A, C, B natural (crotchets). Bar 2: C, D (crotchets), C (minim)."
+    },
+    "answer": {
+      "kind": "pitch-sequence",
+      "clef": "treble",
+      "key": "G major",
+      "accepted": [["G4", "B4", "D5", "C#5", "D5", "E5", "D5"]],
+      "derivation": { "rule": "transpose", "interval": "M2", "direction": "up", "sourceKey": "F major" }
+    },
+    "hints": [
+      "First find the new key: a major 2nd above F major.",
+      "B♮ is a raised 4th degree in F major. What is the raised 4th degree in the new key?"
+    ],
+    "feedback": {
+      "correct": "Correct. The new key is G major (one sharp), and the B♮ — a raised 4th in F — becomes C♯, the raised 4th in G. Remember to keep the tempo marking 'Andante'.",
+      "mistakes": {
+        "wrong-direction": "A B♭ clarinet sounds a tone lower than written, so its written part must be a tone HIGHER than concert pitch.",
+        "key-signature-missing": "Write the new key signature first: a major 2nd above F major is G major, with one sharp (F♯).",
+        "accidental-not-adjusted": "Don't copy the natural sign. B♮ is a raised 4th in F major; the raised 4th in G major is C♯.",
+        "enharmonic-respelling": "D♭ sounds the same as C♯, but each note must move up by a 2nd in letter names: B → C, so it is C♯.",
+        "wrong-octave": "Each note moves up by just a 2nd, so the melody stays in almost the same register."
+      },
+      "fallback": "Written for clarinet in B♭: G major — G, B, D, C♯ | D, E, D."
+    }
+  }
+}

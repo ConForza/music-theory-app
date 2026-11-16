@@ -1,0 +1,849 @@
+{
+  "schemaVersion": 1,
+  "families": [
+    {
+      "id": "fam.choice",
+      "title": "Choose the answer",
+      "interaction": "choice",
+      "graderId": "g.choice-exact",
+      "answerKind": "choice",
+      "mistakeCategories": [
+        {
+          "id": "confused-similar-term",
+          "description": "Picked a term with a related but different meaning.",
+          "feedback": "Close, but that one means something different. Compare the two meanings side by side, then try again."
+        },
+        {
+          "id": "opposite-meaning",
+          "description": "Picked the opposite meaning (e.g. louder for quieter).",
+          "feedback": "That's the opposite direction. Look again at which way the music should change."
+        },
+        {
+          "id": "wrong-category",
+          "description": "Picked an answer from a different category (e.g. a tempo word for a dynamic).",
+          "feedback": "That answer belongs to a different kind of instruction. Ask yourself: is this about speed, volume, or how the notes are played?"
+        }
+      ],
+      "correctFeedback": "Correct — and you can explain why.",
+      "fallbackFeedback": "Not quite. Read the explanation, then try a similar question.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Options are a native list of buttons with full text labels; any music shown has a text description.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.note-value",
+      "title": "Note and rest values",
+      "interaction": "choice",
+      "graderId": "g.duration-equivalence",
+      "answerKind": "rhythm",
+      "mistakeCategories": [
+        {
+          "id": "halved-or-doubled",
+          "description": "Chose a value twice or half as long as the target.",
+          "feedback": "That value is twice (or half) as long. Count it in crotchet beats and compare."
+        },
+        {
+          "id": "dot-misread",
+          "description": "Ignored or mis-added a dot.",
+          "feedback": "Remember: a dot adds half of the note's own value. Work out that half, then add it."
+        },
+        {
+          "id": "note-rest-confusion",
+          "description": "Confused a note with its matching rest, or two similar-looking rests.",
+          "feedback": "Check the shape carefully. A rest that hangs below its line lasts longer than one that sits on top of it."
+        },
+        {
+          "id": "tie-dot-confusion",
+          "description": "Treated a tie or a dot incorrectly when totalling.",
+          "feedback": "A tie joins two notes into one sound, so add both values together."
+        },
+        {
+          "id": "tuplet-ignored",
+          "description": "Counted tuplet notes at their written value.",
+          "feedback": "Those notes are a tuplet, so they share a different amount of time. Look at the number written over them."
+        }
+      ],
+      "correctFeedback": "Correct — those durations match exactly.",
+      "fallbackFeedback": "Not quite. Try counting each value in crotchet beats.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Values are announced by name and length in beats; the rhythm can be stepped through note by note with the keyboard.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.bar-builder",
+      "title": "Build a bar",
+      "interaction": "rhythm-builder",
+      "graderId": "g.rhythm-bar",
+      "answerKind": "rhythm",
+      "mistakeCategories": [
+        {
+          "id": "bar-overfull",
+          "description": "Too many beats for the time signature.",
+          "feedback": "This bar holds more beats than the time signature allows. Count the beats again and remove the extra."
+        },
+        {
+          "id": "bar-underfull",
+          "description": "Too few beats for the time signature.",
+          "feedback": "There's still room in this bar. Count how many beats are missing."
+        },
+        {
+          "id": "grouping-obscures-beat",
+          "description": "Grouping hides where a beat begins.",
+          "feedback": "The beats add up, but it's hard to see where each beat starts. Regroup the notes so every beat is visible."
+        },
+        {
+          "id": "unnecessary-tie",
+          "description": "A tie is used where one note value would do.",
+          "feedback": "You can write those tied notes as a single note (or a dotted note). That's easier to read."
+        },
+        {
+          "id": "rest-grouping",
+          "description": "Rests are not grouped by beat.",
+          "feedback": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
+        }
+      ],
+      "correctFeedback": "Correct — the bar is complete and easy to read.",
+      "fallbackFeedback": "Not quite. Check the beat total first, then how the notes are grouped.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Each slot is a labelled list position; the learner adds values from a named palette and hears or reads the running beat total.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.time-signature",
+      "title": "Time signature",
+      "interaction": "choice",
+      "graderId": "g.time-signature",
+      "answerKind": "time-signature",
+      "mistakeCategories": [
+        {
+          "id": "beat-count-wrong",
+          "description": "Wrong number of beats per bar.",
+          "feedback": "Count the beats in one complete bar again — that gives the top number."
+        },
+        {
+          "id": "beat-unit-wrong",
+          "description": "Right number of beats but wrong beat value.",
+          "feedback": "The beat count is right, but what kind of note is each beat? That gives the bottom number."
+        },
+        {
+          "id": "simple-compound-confusion",
+          "description": "Confused simple and compound time.",
+          "feedback": "Do the beats split into two or into three? Two means simple time; three means compound."
+        }
+      ],
+      "correctFeedback": "Correct — the beats and beat value both match.",
+      "fallbackFeedback": "Not quite. Find the beat first, then count how many fit in a bar.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "The rhythm is presented as a text list of values per bar with beat markers.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.barlines",
+      "title": "Add the bar-lines",
+      "interaction": "barline-placer",
+      "graderId": "g.barlines",
+      "answerKind": "rhythm",
+      "mistakeCategories": [
+        {
+          "id": "bar-overfull",
+          "description": "A bar contains too many beats.",
+          "feedback": "One of your bars holds too many beats. Count from the last bar-line."
+        },
+        {
+          "id": "bar-underfull",
+          "description": "A bar contains too few beats.",
+          "feedback": "One of your bars is short. Count from the last bar-line."
+        },
+        {
+          "id": "missing-final-double-barline",
+          "description": "Forgot the final double bar-line.",
+          "feedback": "Music ends with a double bar-line — add it at the very end."
+        }
+      ],
+      "correctFeedback": "Correct — every bar has the right number of beats.",
+      "fallbackFeedback": "Not quite. Count beats from the start, bar by bar.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "The learner moves through gaps between notes with arrow keys and toggles a bar-line; running totals are announced.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.grouping",
+      "title": "Group notes and rests",
+      "interaction": "rhythm-grouping",
+      "graderId": "g.grouping-check",
+      "answerKind": "rhythm",
+      "mistakeCategories": [
+        {
+          "id": "beam-across-middle",
+          "description": "Beamed across the middle of a four-beat bar.",
+          "feedback": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle."
+        },
+        {
+          "id": "rest-across-beat",
+          "description": "A single rest covers parts of two beats.",
+          "feedback": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next."
+        },
+        {
+          "id": "half-bar-rest-misplaced",
+          "description": "A two-beat rest is placed in the middle of a four-beat bar.",
+          "feedback": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats."
+        },
+        {
+          "id": "tie-instead-of-dot",
+          "description": "Used a tie inside a beat where a dotted note is clearer.",
+          "feedback": "A dotted note says the same thing more simply here."
+        },
+        {
+          "id": "compound-beat-hidden",
+          "description": "In compound time the dotted beat is hidden by the grouping.",
+          "feedback": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        }
+      ],
+      "correctFeedback": "Correct — the grouping shows every beat clearly.",
+      "fallbackFeedback": "Not quite. Mark where each beat starts, then regroup.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Beams and rests are listed per beat; the learner chooses a grouping option for each beat from a list.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.tuplet",
+      "title": "Tuplets",
+      "interaction": "rhythm-builder",
+      "graderId": "g.tuplet",
+      "answerKind": "rhythm",
+      "mistakeCategories": [
+        {
+          "id": "tuplet-total-wrong",
+          "description": "The tuplet group does not fill the intended time.",
+          "feedback": "A tuplet still fills a fixed amount of time. Check which beat it replaces."
+        },
+        {
+          "id": "tuplet-number-wrong",
+          "description": "Wrong tuplet number.",
+          "feedback": "Count the notes that share the beat — that's the number to write over the group."
+        },
+        {
+          "id": "written-value-wrong",
+          "description": "Notes written with the wrong value or number of beams.",
+          "feedback": "Use the note value the group would have if it divided normally — then add the tuplet number."
+        }
+      ],
+      "correctFeedback": "Correct — the group fits the beat exactly.",
+      "fallbackFeedback": "Not quite. Ask: how many notes, in the time of how many?",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Tuplet groups are described as 'n notes in the time of m'; values are chosen from a list.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.note-read",
+      "title": "Read a note",
+      "interaction": "staff-read",
+      "graderId": "g.pitch-spelling",
+      "answerKind": "pitch",
+      "mistakeCategories": [
+        {
+          "id": "line-space-swap",
+          "description": "Read a line note as a space note or vice versa.",
+          "feedback": "Look closely: is the line running through the note-head, or is the note sitting between two lines?"
+        },
+        {
+          "id": "clef-confusion",
+          "description": "Read the note as if in a different clef.",
+          "feedback": "That would be right in another clef. Check the clef at the start of the stave first."
+        },
+        {
+          "id": "counted-from-top",
+          "description": "Counted lines or spaces from the top instead of the bottom.",
+          "feedback": "Lines and spaces are counted from the bottom of the stave upwards."
+        },
+        {
+          "id": "off-by-step",
+          "description": "Answered the letter name one step away.",
+          "feedback": "You're one step away. Find a note you know for certain and count up or down from it."
+        },
+        {
+          "id": "ledger-miscount",
+          "description": "Miscounted ledger lines.",
+          "feedback": "Count the ledger lines one at a time, from the stave outwards."
+        },
+        {
+          "id": "accidental-ignored",
+          "description": "Ignored an accidental or key signature.",
+          "feedback": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
+        }
+      ],
+      "correctFeedback": "Correct — you read that note accurately.",
+      "fallbackFeedback": "Not quite. Start from the clef and count from a note you know.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Each note is reachable with arrow keys and announced as clef, line/space number and ledger lines; answers are typed or picked from letter buttons.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.note-write",
+      "title": "Write a note",
+      "interaction": "staff-write",
+      "graderId": "g.staff-position",
+      "answerKind": "staff-position",
+      "mistakeCategories": [
+        {
+          "id": "wrong-octave",
+          "description": "Correct letter in the wrong octave.",
+          "feedback": "That's the right letter name, but in a different octave. Check which one the question asks for."
+        },
+        {
+          "id": "line-space-swap",
+          "description": "Placed on a line instead of a space or vice versa.",
+          "feedback": "Nearly — move it between a line and a space and check again."
+        },
+        {
+          "id": "clef-confusion",
+          "description": "Placed as if in a different clef.",
+          "feedback": "That position would be right in a different clef. Look at the clef first."
+        },
+        {
+          "id": "ledger-miscount",
+          "description": "Wrong number of ledger lines.",
+          "feedback": "Count the ledger lines needed — one for each line above or below the stave."
+        },
+        {
+          "id": "counted-from-top",
+          "description": "Counted lines or spaces from the top instead of the bottom.",
+          "feedback": "Lines and spaces are counted from the bottom of the stave upwards."
+        },
+        {
+          "id": "accidental-missing",
+          "description": "Required accidental missing or wrong.",
+          "feedback": "The position is right, but the note needs its sharp, flat or natural."
+        }
+      ],
+      "correctFeedback": "Correct — that note is in exactly the right place.",
+      "fallbackFeedback": "Not quite. Find a reference note and count lines and spaces from it.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Up/down arrow keys move a cursor through staff positions with announced pitch names; accidentals are toggled with keys.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.keyboard",
+      "title": "Find it on the keyboard",
+      "interaction": "keyboard",
+      "graderId": "g.keyboard-key",
+      "answerKind": "pitch",
+      "mistakeCategories": [
+        {
+          "id": "white-key-off-by-one",
+          "description": "Pressed a neighbouring white key.",
+          "feedback": "Close — you're one white key away. Use the groups of two and three black keys to find your place."
+        },
+        {
+          "id": "black-key-neighbour",
+          "description": "Pressed the black key on the wrong side.",
+          "feedback": "Sharps are just to the right; flats are just to the left."
+        },
+        {
+          "id": "enharmonic-spelling",
+          "description": "Right key, but the task asks for a particular spelling.",
+          "feedback": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
+        }
+      ],
+      "correctFeedback": "Correct — that's the key.",
+      "fallbackFeedback": "Not quite. Find the nearest group of black keys and count from there.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Keys are buttons in pitch order announced by name; the learner can type a letter name instead of pressing a key.",
+        "withoutSound": "Sound is optional reinforcement only.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.accidental-state",
+      "title": "Which note sounds?",
+      "interaction": "staff-read",
+      "graderId": "g.accidental-state",
+      "answerKind": "pitch",
+      "mistakeCategories": [
+        {
+          "id": "accidental-forgotten",
+          "description": "Forgot that an accidental lasts for the rest of the bar.",
+          "feedback": "An accidental keeps working for the rest of the bar on that line or space."
+        },
+        {
+          "id": "accidental-carried-over-barline",
+          "description": "Carried an accidental into the next bar.",
+          "feedback": "A bar-line cancels accidentals — unless the note is tied across it."
+        },
+        {
+          "id": "key-signature-ignored",
+          "description": "Ignored the key signature.",
+          "feedback": "Don't forget the key signature: it affects every note with that letter name."
+        },
+        {
+          "id": "different-octave-assumed",
+          "description": "Applied an accidental to the same letter in a different octave.",
+          "feedback": "An accidental only affects notes on the same line or space — not the same letter in another octave."
+        },
+        {
+          "id": "tie-over-barline",
+          "description": "Missed that a tie carries the accidental over the bar-line.",
+          "feedback": "A tie carries the accidental into the next bar, but only for the tied note."
+        }
+      ],
+      "correctFeedback": "Correct — you tracked the accidentals perfectly.",
+      "fallbackFeedback": "Not quite. Go through the bar from the start, tracking each accidental.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Bars are read note by note with the active key signature and accidental state announced.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.scale-builder",
+      "title": "Build a scale",
+      "interaction": "scale-builder",
+      "graderId": "g.scale-spelling",
+      "answerKind": "pitch-sequence",
+      "mistakeCategories": [
+        {
+          "id": "semitone-misplaced",
+          "description": "Tones and semitones are in the wrong places.",
+          "feedback": "Check the pattern of tones and semitones — the semitones aren't where they belong."
+        },
+        {
+          "id": "letter-skipped-or-repeated",
+          "description": "A letter name is skipped or used twice (enharmonic spelling).",
+          "feedback": "Each letter name appears once. You've used one letter twice and skipped another — respell that note."
+        },
+        {
+          "id": "wrong-minor-form",
+          "description": "Used the wrong minor form.",
+          "feedback": "Check which form of the minor scale is asked for, and which notes that form changes."
+        },
+        {
+          "id": "melodic-descent-not-restored",
+          "description": "Melodic minor descending still has raised 6th/7th.",
+          "feedback": "Coming down, the melodic minor uses the notes of the key signature — undo the raised 6th and 7th."
+        },
+        {
+          "id": "key-signature-misapplied",
+          "description": "Key signature wrong, or accidentals duplicated alongside it.",
+          "feedback": "With a key signature, notes it covers don't need accidentals. Without one, every sharp or flat must be written."
+        },
+        {
+          "id": "wrong-direction-or-octave",
+          "description": "Scale written in the wrong direction or octave.",
+          "feedback": "Check whether the question asks for ascending or descending, and which octave to start on."
+        }
+      ],
+      "correctFeedback": "Correct — every note is spelt and placed correctly.",
+      "fallbackFeedback": "Not quite. Write one note per letter name first, then check the tones and semitones.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "The scale is built note by note from letter and accidental pickers; each choice and the interval from the previous note are announced.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.key-signature",
+      "title": "Key signatures and keys",
+      "interaction": "key-signature-builder",
+      "graderId": "g.key-signature",
+      "answerKind": "key-signature",
+      "mistakeCategories": [
+        {
+          "id": "wrong-count",
+          "description": "Wrong number of sharps/flats.",
+          "feedback": "Count again: each key has a fixed number of sharps or flats."
+        },
+        {
+          "id": "wrong-order",
+          "description": "Sharps/flats in the wrong order.",
+          "feedback": "Key signatures always follow the same order. Check which comes first."
+        },
+        {
+          "id": "wrong-placement",
+          "description": "Correct accidentals in the wrong positions for the clef.",
+          "feedback": "The accidentals are right, but some are on the wrong line or space for this clef."
+        },
+        {
+          "id": "relative-confusion",
+          "description": "Confused a key with its relative major/minor.",
+          "feedback": "That key shares this key signature, but it's the relative key. Check the tonic."
+        },
+        {
+          "id": "mixed-sharps-flats",
+          "description": "Mixed sharps and flats.",
+          "feedback": "A key signature uses only sharps or only flats."
+        }
+      ],
+      "correctFeedback": "Correct — that key signature is exactly right.",
+      "fallbackFeedback": "Not quite. Recall the order of sharps or flats and count how many the key needs.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Accidentals are added from a list; their positions are announced as line/space names in the current clef.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.degree",
+      "title": "Scale degrees",
+      "interaction": "choice",
+      "graderId": "g.degree",
+      "answerKind": "choice",
+      "mistakeCategories": [
+        {
+          "id": "counted-from-wrong-note",
+          "description": "Counted degrees from a note other than the tonic.",
+          "feedback": "Count from the tonic (the key note) as degree 1."
+        },
+        {
+          "id": "off-by-one",
+          "description": "Counted the starting note as 0.",
+          "feedback": "The tonic itself is degree 1 — count it too."
+        },
+        {
+          "id": "name-number-mismatch",
+          "description": "Matched the wrong technical name to a degree.",
+          "feedback": "Check the technical name that belongs to that degree number."
+        }
+      ],
+      "correctFeedback": "Correct — that's the right degree.",
+      "fallbackFeedback": "Not quite. Write out the scale from the tonic and count.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Notes and options are announced in text.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.interval",
+      "title": "Intervals",
+      "interaction": "interval-explorer",
+      "graderId": "g.interval",
+      "answerKind": "interval",
+      "mistakeCategories": [
+        {
+          "id": "counted-one-end-only",
+          "description": "Interval number off by one (did not count both notes).",
+          "feedback": "Count both notes: the bottom note is 1, then every letter name up to and including the top note."
+        },
+        {
+          "id": "quality-from-wrong-key",
+          "description": "Quality judged from the wrong key or scale.",
+          "feedback": "Judge the quality by imagining the major scale on the lower note. Is the top note in it?"
+        },
+        {
+          "id": "compound-arithmetic",
+          "description": "Added 8 instead of 7 for a compound interval.",
+          "feedback": "An octave plus a 5th is a 12th, not a 13th: the shared note is counted only once."
+        },
+        {
+          "id": "enharmonic-spelling",
+          "description": "Built the right sound with the wrong letter name.",
+          "feedback": "That sounds right, but intervals depend on letter names. Check how many letter names the interval spans."
+        },
+        {
+          "id": "augmented-diminished-swap",
+          "description": "Confused augmented with diminished (or major with minor).",
+          "feedback": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
+        }
+      ],
+      "correctFeedback": "Correct — number and quality both match.",
+      "fallbackFeedback": "Not quite. Count the letter names first, then compare with the major scale on the lower note.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Both notes are announced by name; build tasks use letter/accidental pickers.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.triad-chord",
+      "title": "Triads and chords",
+      "interaction": "chord-builder",
+      "graderId": "g.chord-function",
+      "answerKind": "chord",
+      "mistakeCategories": [
+        {
+          "id": "wrong-degree",
+          "description": "Identified the wrong scale degree as the root.",
+          "feedback": "Find the root: rearrange the notes into stacked 3rds — the lowest note of that stack is the root."
+        },
+        {
+          "id": "root-confused-with-bass",
+          "description": "Assumed the bass note is always the root.",
+          "feedback": "The lowest note isn't always the root. Stack the notes in 3rds to find it, then check the inversion."
+        },
+        {
+          "id": "inversion-misread",
+          "description": "Wrong inversion letter or figures.",
+          "feedback": "Inversion depends on which note of the triad is in the bass: root (a), 3rd (b) or 5th (c)."
+        },
+        {
+          "id": "leading-note-not-raised",
+          "description": "In a minor key, missed the raised leading note.",
+          "feedback": "In minor keys, chords use the harmonic minor, so the leading note is raised."
+        },
+        {
+          "id": "note-missing",
+          "description": "A triad note is missing or wrong.",
+          "feedback": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
+        }
+      ],
+      "correctFeedback": "Correct — right chord and right position.",
+      "fallbackFeedback": "Not quite. Find the root first, then the bass note.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Chord notes are listed from the bass upward by name; answers are picked from labelled options.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.cadence",
+      "title": "Cadences",
+      "interaction": "cadence-chooser",
+      "graderId": "g.cadence-choice",
+      "answerKind": "chord-progression",
+      "mistakeCategories": [
+        {
+          "id": "chord-lacks-melody-note",
+          "description": "Chosen chord does not contain the melody note.",
+          "feedback": "The chord must include the melody note above it. Check the notes of the chord you chose."
+        },
+        {
+          "id": "non-cadential-pair",
+          "description": "The two chords do not form a perfect, plagal or imperfect cadence.",
+          "feedback": "Those two chords don't make one of the cadences. A cadence ends on chord I or chord V."
+        },
+        {
+          "id": "cadence-misnamed",
+          "description": "The cadence is named incorrectly.",
+          "feedback": "Look at the second chord: ending on V makes an imperfect cadence; V–I is perfect; IV–I is plagal."
+        },
+        {
+          "id": "wrong-key",
+          "description": "Chords chosen in the wrong key.",
+          "feedback": "Check the key signature and the final note — then build the chords in that key."
+        }
+      ],
+      "correctFeedback": "Correct — those chords fit the melody and make the cadence.",
+      "fallbackFeedback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Melody notes and chord options are listed by name; chord choices are made from labelled buttons; cadence names from a list.",
+        "withoutSound": "Sound playback of the cadence is optional and has an equivalent text description.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.transposition",
+      "title": "Transpose",
+      "interaction": "transposition-editor",
+      "graderId": "g.transposition",
+      "answerKind": "pitch-sequence",
+      "mistakeCategories": [
+        {
+          "id": "wrong-octave",
+          "description": "Melody written in the wrong octave (or same pitch).",
+          "feedback": "Check the octave: the new version should be exactly one octave higher or lower — not the same pitch, and not two octaves away."
+        },
+        {
+          "id": "wrong-clef",
+          "description": "Used the wrong clef (e.g. alto instead of tenor).",
+          "feedback": "Look at which clef the question asks for — alto and tenor clefs are easy to mix up."
+        },
+        {
+          "id": "wrong-interval",
+          "description": "Transposed by the wrong interval.",
+          "feedback": "Check the interval given in the question, and count letter names as well as semitones."
+        },
+        {
+          "id": "wrong-direction",
+          "description": "Transposed in the wrong direction (written ↔ concert).",
+          "feedback": "Think about the instrument: a B♭ instrument sounds lower than written, so written notes are higher than concert pitch."
+        },
+        {
+          "id": "key-signature-missing",
+          "description": "New key signature missing or wrong.",
+          "feedback": "Work out the new key first and write its key signature."
+        },
+        {
+          "id": "accidental-not-adjusted",
+          "description": "Copied an accidental instead of transposing it.",
+          "feedback": "Accidentals change too. Work out what each altered note is in the original key, then find the same degree in the new key."
+        },
+        {
+          "id": "enharmonic-respelling",
+          "description": "Right sound, wrong spelling.",
+          "feedback": "That sounds right, but the spelling is wrong. Keep each note the same interval number above its original."
+        }
+      ],
+      "correctFeedback": "Correct — every note is transposed, spelt and placed correctly.",
+      "fallbackFeedback": "Not quite. Transpose the key first, then each note, then check accidentals.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Source notes are listed by name; the answer is entered note by note with letter/accidental/octave pickers.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.chromatic-scale",
+      "title": "Chromatic scale",
+      "interaction": "scale-builder",
+      "graderId": "g.chromatic-scale",
+      "answerKind": "pitch-sequence",
+      "mistakeCategories": [
+        {
+          "id": "letter-used-three-times",
+          "description": "A letter name is used three times.",
+          "feedback": "Each letter name can appear at most twice in a chromatic scale."
+        },
+        {
+          "id": "letter-missing",
+          "description": "A letter name is missing.",
+          "feedback": "Every letter name must appear at least once."
+        },
+        {
+          "id": "not-all-semitones",
+          "description": "Steps that are not semitones.",
+          "feedback": "Every step in a chromatic scale is a semitone. Check where the gap is bigger."
+        },
+        {
+          "id": "unnecessary-accidentals",
+          "description": "Spelling that ignores the key signature and adds needless accidentals.",
+          "feedback": "That's correct but harder to read. With this key signature, choose spellings that need fewer accidentals."
+        }
+      ],
+      "correctFeedback": "Correct — a clear, correctly spelt chromatic scale.",
+      "fallbackFeedback": "Not quite. Check that each step is a semitone and each letter appears once or twice.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Built note by note with letter/accidental pickers; semitone steps are announced.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.enharmonic",
+      "title": "Enharmonic equivalents",
+      "interaction": "choice",
+      "graderId": "g.pitch-spelling",
+      "answerKind": "pitch",
+      "mistakeCategories": [
+        {
+          "id": "same-spelling-given",
+          "description": "Gave the same spelling instead of a different one.",
+          "feedback": "The question asks for a different name for the same sound."
+        },
+        {
+          "id": "not-same-pitch",
+          "description": "Gave a note that sounds different.",
+          "feedback": "That note sounds at a different pitch. An enharmonic equivalent must sound exactly the same."
+        }
+      ],
+      "correctFeedback": "Correct — same sound, different spelling.",
+      "fallbackFeedback": "Not quite. Find the key on the keyboard, then list every name it can have.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Keys and spellings are announced in text.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.ornament",
+      "title": "Ornaments",
+      "interaction": "choice",
+      "graderId": "g.ornament-sign",
+      "answerKind": "ornament-sign",
+      "mistakeCategories": [
+        {
+          "id": "upper-lower-mordent-swap",
+          "description": "Confused upper and lower mordent.",
+          "feedback": "Check the direction: the upper mordent goes up to the note above; the lower mordent goes down to the note below."
+        },
+        {
+          "id": "turn-inverted",
+          "description": "Confused a turn with an inverted turn.",
+          "feedback": "A turn starts on the note above; an inverted turn starts on the note below."
+        },
+        {
+          "id": "acciaccatura-appoggiatura-swap",
+          "description": "Confused acciaccatura and appoggiatura.",
+          "feedback": "Look for the slash through the small note: with it, the note is crushed in quickly (acciaccatura); without it, it takes time from the main note (appoggiatura)."
+        },
+        {
+          "id": "trill-mordent-confusion",
+          "description": "Confused a trill with a mordent.",
+          "feedback": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
+        }
+      ],
+      "correctFeedback": "Correct — that's the right ornament.",
+      "fallbackFeedback": "Not quite. Compare the shape of the sign with each ornament's pattern.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "Signs are described in words and the written-out figures are listed note by note.",
+        "withoutSound": "Optional audio examples have text descriptions.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    },
+    {
+      "id": "fam.score-observation",
+      "title": "Questions on a score",
+      "interaction": "score-annotation",
+      "graderId": "g.composite",
+      "answerKind": "composite",
+      "mistakeCategories": [
+        {
+          "id": "evidence-misread",
+          "description": "Misread the relevant bar/note in the score.",
+          "feedback": "Look again at the bar the question points to — find the exact note or sign first."
+        },
+        {
+          "id": "concept-misapplied",
+          "description": "Applied the right idea in the wrong way.",
+          "feedback": "You found the right place, but check the rule you used — see the hint for that part."
+        }
+      ],
+      "correctFeedback": "Correct — you read the score carefully and applied the theory.",
+      "fallbackFeedback": "Not quite. Find the bar the question mentions, then answer one part at a time.",
+      "accessibility": {
+        "keyboardOperable": true,
+        "screenReaderEquivalent": "The score is navigable bar by bar and note by note with a full text description; each sub-question is a standard accessible widget.",
+        "withoutSound": "All information is visual or textual; no sound is required.",
+        "withoutColour": "Correctness is shown with icons and text as well as colour."
+      }
+    }
+  ]
+}

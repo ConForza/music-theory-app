@@ -13,6 +13,7 @@ import {
   LessonContent,
   ProgressionPolicy,
   ScopeIntroductionsFile,
+  ShowcaseFile,
   SourceBookFile,
   StandaloneItemFile,
   SyllabusFile,
@@ -43,6 +44,8 @@ export interface Curriculum {
   policy: z.infer<typeof ProgressionPolicy>;
   lessons: Array<{ file: string; content: z.infer<typeof LessonContent> }>;
   items: Array<{ file: string; content: z.infer<typeof StandaloneItemFile> }>;
+  /** Demonstration sets for the practice lab (Brief 03). */
+  showcase: Array<{ file: string; content: z.infer<typeof ShowcaseFile> }>;
 }
 
 export const DEFAULT_CONTENT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../content");
@@ -122,12 +125,16 @@ export function loadCurriculum(root: string = DEFAULT_CONTENT_ROOT): { curriculu
   const items = listJson(join(root, "exercises/items"))
     .map((p) => ({ file: toPosixPath(relative(root, p)), content: parse(StandaloneItemFile, p) }))
     .filter((x): x is { file: string; content: z.infer<typeof StandaloneItemFile> } => x.content !== undefined);
+  const showcase = listJson(join(root, "exercises/showcase"))
+    .map((p) => ({ file: toPosixPath(relative(root, p)), content: parse(ShowcaseFile, p) }))
+    .filter((x): x is { file: string; content: z.infer<typeof ShowcaseFile> } => x.content !== undefined)
+    .sort((a, b) => a.content.order - b.content.order);
 
   if (!release || !syllabus || !scope || !scopeIntroductions || !engine || !families || !book || !policy || issues.some((i) => i.severity === "error")) {
     return { issues };
   }
   return {
-    curriculum: { root, release, syllabus, scope, scopeIntroductions, engine, families, templates, concepts, worlds, assessments, book, policy, lessons, items },
+    curriculum: { root, release, syllabus, scope, scopeIntroductions, engine, families, templates, concepts, worlds, assessments, book, policy, lessons, items, showcase },
     issues,
   };
 }

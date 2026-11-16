@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G4-U5-L04",
+  "lessonId": "G4-U5-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Understand the Grade 4 Italian terms.",
+    "successCriteria": [
+      "I know the terms of expression: affettuoso, amabile, appassionato, cantando, facile, con fuoco, nobilmente, sonoro.",
+      "I know the terms for changes of speed and fading: affrettando, calando, morendo, perdendosi, l'istesso tempo.",
+      "I know the words that point back or around: come prima, come sopra, quasi, sopra, sotto voce, niente, tempo giusto, presto possibile."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Grade 4 adds more Italian words for the way music should sound. Some describe character: affettuoso (tenderly), amabile (in a pleasant, amiable way), appassionato (with passion), cantando (in a singing style), facile (easily), con fuoco (with fire), nobilmente (nobly) and sonoro (with a full, resonant tone)."
+    },
+    {
+      "kind": "text",
+      "text": "Some describe changes: affrettando (hurrying), calando (getting softer and usually slower), morendo (dying away) and perdendosi (fading away until lost). L'istesso tempo means 'at the same speed as before': the beat stays the same even when the time signature changes. Tempo giusto means in strict, exact time, and presto possibile means as fast as possible."
+    },
+    {
+      "kind": "text",
+      "text": "Others are small words that join with others: come prima (as before) and come sopra (as above), quasi (as if, almost like), sopra (above), sotto voce (in an undertone, very softly) and niente (nothing, as in 'fading to nothing')."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "stave",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "E5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "D5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "C5",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "A treble stave in 3/4 marked affettuoso: three falling crotchets, E, D and C.",
+        "timeSignature": "3/4",
+        "tempoText": "Affettuoso"
+      },
+      "caption": "A direction printed above the first bar sets the character: here, affettuoso, tenderly."
+    },
+    {
+      "kind": "tip",
+      "text": "Learn them in three groups: character (affettuoso ... sonoro), change (affrettando, calando, morendo, perdendosi ...), and joining words (come, quasi, sopra, sotto, niente)."
+    }
+  ],
+  "demonstration": {
+    "widget": "staff",
+    "music": {
+      "presentation": "stave",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "E5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "D5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "C5",
+              "duration": {
+                "value": "semibreve",
+                "dots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "textAlternative": "A treble stave with three notes going down: E, D, C, for a passage marked morendo."
+    },
+    "steps": [
+      "The notes fall away.",
+      "Marked morendo, the music dies away.",
+      "Calando and perdendosi are close cousins: all fade."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A falling phrase, marked morendo."
+  },
+  "guided": [
+    {
+      "id": "i.g4-u5-l04.guided-1",
+      "templateId": "t.g4.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "What does “affrettando” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "presto-possibile",
+            "label": "As fast as possible"
+          },
+          {
+            "id": "calando",
+            "label": "Getting softer and (usually) slower"
+          },
+          {
+            "id": "l-istesso-tempo",
+            "label": "At the same speed as before"
+          },
+          {
+            "id": "affrettando",
+            "label": "Hurrying, pressing on"
+          }
+        ],
+        "correctOptionIds": [
+          "affrettando"
+        ],
+        "diagnoses": {
+          "l-istesso-tempo": {
+            "category": "confused-similar-term",
+            "reason": "At the same speed as before is the meaning of “l'istesso tempo”."
+          },
+          "calando": {
+            "category": "confused-similar-term",
+            "reason": "Getting softer and (usually) slower is the meaning of “calando”."
+          },
+          "presto-possibile": {
+            "category": "wrong-category",
+            "reason": "As fast as possible is the meaning of “presto possibile”."
+          }
+        }
+      },
+      "hints": [
+        "Which kind of direction is it?",
+        "“affrettando” is an Italian direction of the kind: change of speed."
+      ],
+      "feedback": {
+        "correct": "Yes: that is the meaning.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.guided-2",
+      "templateId": "t.g4.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "In the middle of a piece for piano, a bar is marked “sotto voce”. What should the player do?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sonoro",
+            "label": "With a full, resonant tone"
+          },
+          {
+            "id": "morendo",
+            "label": "Dying away"
+          },
+          {
+            "id": "sotto-voce",
+            "label": "In an undertone, very softly"
+          },
+          {
+            "id": "l-istesso-tempo",
+            "label": "At the same speed as before"
+          }
+        ],
+        "correctOptionIds": [
+          "sotto-voce"
+        ],
+        "diagnoses": {
+          "morendo": {
+            "category": "wrong-category",
+            "reason": "Dying away is what “morendo” asks. Check the word again."
+          },
+          "l-istesso-tempo": {
+            "category": "wrong-category",
+            "reason": "At the same speed as before is what “l'istesso tempo” asks. Check the word again."
+          },
+          "sonoro": {
+            "category": "wrong-category",
+            "reason": "With a full, resonant tone is what “sonoro” asks. Check the word again."
+          }
+        }
+      },
+      "hints": [
+        "Think about the meaning of the Italian word.",
+        "“sotto voce” is an Italian direction of the kind: dynamics."
+      ],
+      "feedback": {
+        "correct": "Right: the term that fits.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.guided-3",
+      "templateId": "t.g4.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Which direction asks the player to play this way: in strict, exact time?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "tempo-giusto",
+            "label": "tempo giusto"
+          },
+          {
+            "id": "presto-possibile",
+            "label": "presto possibile"
+          },
+          {
+            "id": "facile",
+            "label": "facile"
+          },
+          {
+            "id": "sopra",
+            "label": "sopra"
+          }
+        ],
+        "correctOptionIds": [
+          "tempo-giusto"
+        ],
+        "diagnoses": {
+          "presto-possibile": {
+            "category": "confused-similar-term",
+            "reason": "“presto possibile” means as fast as possible."
+          },
+          "sopra": {
+            "category": "wrong-category",
+            "reason": "“sopra” means above."
+          },
+          "facile": {
+            "category": "wrong-category",
+            "reason": "“facile” means easily, without effort."
+          }
+        }
+      },
+      "hints": [
+        "Which kind of direction is it?",
+        "Think of the Italian word that means “in strict, exact time”."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g4-u5-l04.ind-1",
+      "templateId": "t.g4.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "What does “sonoro” mean?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "nobilmente",
+            "label": "Nobly"
+          },
+          {
+            "id": "quasi",
+            "label": "As if, almost like"
+          },
+          {
+            "id": "sonoro",
+            "label": "With a full, resonant tone"
+          },
+          {
+            "id": "come-prima",
+            "label": "As before"
+          }
+        ],
+        "correctOptionIds": [
+          "sonoro"
+        ],
+        "diagnoses": {
+          "nobilmente": {
+            "category": "confused-similar-term",
+            "reason": "Nobly is the meaning of “nobilmente”."
+          },
+          "quasi": {
+            "category": "confused-similar-term",
+            "reason": "As if, almost like is the meaning of “quasi”."
+          },
+          "come-prima": {
+            "category": "wrong-category",
+            "reason": "As before is the meaning of “come prima”."
+          }
+        }
+      },
+      "hints": [
+        "Which kind of direction is it?",
+        "“sonoro” is an Italian direction of the kind: expression."
+      ],
+      "feedback": {
+        "correct": "Correct meaning.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.ind-2",
+      "templateId": "t.g4.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "In the middle of a piece for piano, a bar is marked “sopra”. What should the player do?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "come-prima",
+            "label": "As before"
+          },
+          {
+            "id": "sopra",
+            "label": "Above"
+          },
+          {
+            "id": "con-fuoco",
+            "label": "With fire"
+          },
+          {
+            "id": "come-sopra",
+            "label": "As above"
+          }
+        ],
+        "correctOptionIds": [
+          "sopra"
+        ],
+        "diagnoses": {
+          "come-sopra": {
+            "category": "confused-similar-term",
+            "reason": "As above is what “come sopra” asks. Check the word again."
+          },
+          "come-prima": {
+            "category": "confused-similar-term",
+            "reason": "As before is what “come prima” asks. Check the word again."
+          },
+          "con-fuoco": {
+            "category": "wrong-category",
+            "reason": "With fire is what “con fuoco” asks. Check the word again."
+          }
+        }
+      },
+      "hints": [
+        "Think about the meaning of the Italian word.",
+        "“sopra” is an Italian direction of the kind: structure."
+      ],
+      "feedback": {
+        "correct": "Correct term.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.ind-3",
+      "templateId": "t.g4.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which direction asks the player to play this way: as if, almost like?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "affettuoso",
+            "label": "affettuoso"
+          },
+          {
+            "id": "quasi",
+            "label": "quasi"
+          },
+          {
+            "id": "cantando",
+            "label": "cantando"
+          },
+          {
+            "id": "calando",
+            "label": "calando"
+          }
+        ],
+        "correctOptionIds": [
+          "quasi"
+        ],
+        "diagnoses": {
+          "cantando": {
+            "category": "confused-similar-term",
+            "reason": "“cantando” means in a singing style."
+          },
+          "affettuoso": {
+            "category": "confused-similar-term",
+            "reason": "“affettuoso” means tenderly, with affection."
+          },
+          "calando": {
+            "category": "wrong-category",
+            "reason": "“calando” means getting softer and (usually) slower."
+          }
+        }
+      },
+      "hints": [
+        "Which kind of direction is it?",
+        "Think of the Italian word that means “as if, almost like”."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.ind-4",
+      "templateId": "t.g4.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Your teacher asks you to play a new piece. The first line of music is marked “facile”. What should the player do?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sonoro",
+            "label": "With a full, resonant tone"
+          },
+          {
+            "id": "nobilmente",
+            "label": "Nobly"
+          },
+          {
+            "id": "tempo-giusto",
+            "label": "In strict, exact time"
+          },
+          {
+            "id": "facile",
+            "label": "Easily, without effort"
+          }
+        ],
+        "correctOptionIds": [
+          "facile"
+        ],
+        "diagnoses": {
+          "sonoro": {
+            "category": "confused-similar-term",
+            "reason": "With a full, resonant tone is what “sonoro” asks. Check the word again."
+          },
+          "nobilmente": {
+            "category": "confused-similar-term",
+            "reason": "Nobly is what “nobilmente” asks. Check the word again."
+          },
+          "tempo-giusto": {
+            "category": "wrong-category",
+            "reason": "In strict, exact time is what “tempo giusto” asks. Check the word again."
+          }
+        }
+      },
+      "hints": [
+        "Think about the meaning of the Italian word.",
+        "“facile” is an Italian direction of the kind: expression."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.ind-5",
+      "templateId": "t.g4.terms",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Which direction asks the player to play this way: nobly?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "calando",
+            "label": "calando"
+          },
+          {
+            "id": "nobilmente",
+            "label": "nobilmente"
+          },
+          {
+            "id": "facile",
+            "label": "facile"
+          },
+          {
+            "id": "amabile",
+            "label": "amabile"
+          }
+        ],
+        "correctOptionIds": [
+          "nobilmente"
+        ],
+        "diagnoses": {
+          "amabile": {
+            "category": "confused-similar-term",
+            "reason": "“amabile” means in a pleasant, amiable way."
+          },
+          "facile": {
+            "category": "confused-similar-term",
+            "reason": "“facile” means easily, without effort."
+          },
+          "calando": {
+            "category": "wrong-category",
+            "reason": "“calando” means getting softer and (usually) slower."
+          }
+        }
+      },
+      "hints": [
+        "Which kind of direction is it?",
+        "Think of the Italian word that means “nobly”."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    },
+    {
+      "id": "i.g4-u5-l04.ind-6",
+      "templateId": "t.g4.term-use",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Your teacher asks you to play a new piece. The first line of music is marked “appassionato”. What should the player do?",
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "sopra",
+            "label": "Above"
+          },
+          {
+            "id": "facile",
+            "label": "Easily, without effort"
+          },
+          {
+            "id": "con-fuoco",
+            "label": "With fire"
+          },
+          {
+            "id": "appassionato",
+            "label": "With passion"
+          }
+        ],
+        "correctOptionIds": [
+          "appassionato"
+        ],
+        "diagnoses": {
+          "facile": {
+            "category": "confused-similar-term",
+            "reason": "Easily, without effort is what “facile” asks. Check the word again."
+          },
+          "con-fuoco": {
+            "category": "confused-similar-term",
+            "reason": "With fire is what “con fuoco” asks. Check the word again."
+          },
+          "sopra": {
+            "category": "wrong-category",
+            "reason": "Above is what “sopra” asks. Check the word again."
+          }
+        }
+      },
+      "hints": [
+        "Think about the meaning of the Italian word.",
+        "“appassionato” is an Italian direction of the kind: expression."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "confused-similar-term": "Compare the meanings carefully.",
+          "opposite-meaning": "That's the opposite direction. Look again at which way the music should change.",
+          "wrong-category": "Check which group each belongs to."
+        },
+        "fallback": "Not quite. Read the explanation, then try a similar question."
+      }
+    }
+  ],
+  "recap": [
+    "Terms of character: affettuoso, amabile, appassionato, cantando, facile, con fuoco, nobilmente, sonoro.",
+    "Terms of change: affrettando, calando, morendo, perdendosi, l'istesso tempo.",
+    "Joining words: come prima, come sopra, quasi, sopra, sotto voce, niente, tempo giusto, presto possibile."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g4.terms",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g4.term-use",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g4.terms",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.terms.g4"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g4.s15"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g4.16"
+    ],
+    "notes": "Original wording. Follows Grade 4 outcome 16 and First Steps Grade 4 section 15 (p. 103, read in the PDF), which states that its list is the Grade 4 list of the companion workbook. OPEN_QUESTIONS Q2: the official outline does not publish a term list, so these 21 terms are provisional and need teacher confirmation. Terms with (nearly) the same meaning (calando, morendo, perdendosi) are never offered as alternatives to one another and are never asked as 'which term means ...'. Grade 1-3 terms are never asked here, so no earlier-grade fact can earn Grade 4 credit."
+  }
+}

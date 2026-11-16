@@ -1,0 +1,1646 @@
+{
+  "schemaVersion": 1,
+  "id": "lc.G2-U2-L04",
+  "lessonId": "G2-U2-L04",
+  "contentVersion": 1,
+  "locale": "en-GB",
+  "objective": {
+    "statement": "Write rests for part of a beat so that no rest runs across a beat line.",
+    "successCriteria": [
+      "I know a rest stops at the end of its beat.",
+      "I know to start a new rest for the next beat.",
+      "I can fix a rest that crosses a beat line."
+    ]
+  },
+  "explanation": [
+    {
+      "kind": "text",
+      "text": "Sometimes only part of a beat is silent. A quaver in 2/4 is half a crotchet beat, so a quaver rest fills the other half."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 2/4: a quaver, a quaver rest, then a crotchet.",
+        "questionAlternative": "Bar 1: quaver, quaver rest, crotchet.",
+        "timeSignature": "2/4"
+      },
+      "caption": "A quaver and a quaver rest together fill the first beat."
+    },
+    {
+      "kind": "text",
+      "text": "If the silence runs from part of one beat into the next, it needs a rest for each beat. A single rest must not stretch across the beat line."
+    },
+    {
+      "kind": "notation",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "One bar of 2/4: a quaver, then two quaver rests, then a quaver.",
+        "questionAlternative": "Bar 1: quaver, quaver rest, quaver rest, quaver.",
+        "timeSignature": "2/4"
+      },
+      "caption": "Right: the silence between the two quavers is two quaver rests, one before and one after the beat line."
+    },
+    {
+      "kind": "text",
+      "text": "A crotchet rest in that gap would start in the middle of beat 1 and finish in the middle of beat 2: it hides where beat 2 begins."
+    },
+    {
+      "kind": "tip",
+      "text": "Finish the rest for this beat, then start a new rest for the next beat."
+    }
+  ],
+  "demonstration": {
+    "widget": "rhythm",
+    "music": {
+      "presentation": "rhythm-line",
+      "clef": "treble",
+      "showKeySignature": false,
+      "measures": [
+        {
+          "events": [
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "rest",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            },
+            {
+              "kind": "note",
+              "pitch": "B4",
+              "duration": {
+                "value": "quaver",
+                "dots": 0
+              }
+            }
+          ],
+          "barline": "final"
+        }
+      ],
+      "textAlternative": "One bar of 2/4: a quaver, two quaver rests, a quaver.",
+      "questionAlternative": "Bar 1: quaver, quaver rest, quaver rest, quaver.",
+      "timeSignature": "2/4"
+    },
+    "steps": [
+      "The first beat is a quaver and a quaver rest.",
+      "The second beat starts with another quaver rest, then a quaver.",
+      "No rest crosses the beat line, so each beat is clear."
+    ],
+    "audio": {
+      "playback": "synth-generated",
+      "optional": true
+    },
+    "textAlternative": "A bar of 2/4: a quaver, two quaver rests and a quaver."
+  },
+  "guided": [
+    {
+      "id": "i.g2-u2-l04.guided-1",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "All three bars are in 3/4. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, quaver, quaver, crotchet rest, quaver. Bar 2: quaver, quaver, quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, crotchet rest, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), quaver, crotchet rest, quaver. Bar 2: 2 beamed together (quaver, quaver), quaver, quaver rest, quaver rest, quaver. Bar 3: quaver, crotchet rest, quaver, 2 beamed together (quaver, quaver)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "2"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          },
+          "3": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/4 has three crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Yes: no rest crosses the beat line.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.guided-2",
+      "templateId": "t.g2.rest-fix",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "Rewrite this bar so that the rest does not run on from part of a beat into the next beat. It must sound exactly the same.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet rest, quaver.",
+        "questionAlternative": "Bar 1: quaver, crotchet rest, quaver.",
+        "timeSignature": "2/4"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "2/4",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "quaver",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Finish the rest for the first beat, then start a new rest for the next beat.",
+        "Each beat is counted separately: finish the rest for the first beat, then start a new rest for the next beat."
+      ],
+      "feedback": {
+        "correct": "You stopped the rest at the beat line.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.guided-3",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "learning",
+      "prompt": "All three bars are in 4/2. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet, minim, minim. Bar 3: crotchet, crotchet, minim, crotchet, minim rest, crotchet.",
+        "questionAlternative": "Bar 1: crotchet, crotchet, minim, crotchet, crotchet rest, crotchet rest, crotchet. Bar 2: crotchet, minim rest, crotchet, minim, minim. Bar 3: crotchet, crotchet, minim, crotchet, minim rest, crotchet."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "1"
+        ],
+        "diagnoses": {
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          },
+          "3": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "4/2 has four minim beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "independent": [
+    {
+      "id": "i.g2-u2-l04.ind-1",
+      "templateId": "t.g2.rest-fix",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Rewrite this bar so that the rest does not run on from part of a beat into the next beat. It must sound exactly the same.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: minim, crotchet, minim rest, crotchet.",
+        "questionAlternative": "Bar 1: minim, crotchet, minim rest, crotchet.",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "3/2",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Finish the rest for the first beat, then start a new rest for the next beat.",
+        "Each beat is counted separately: finish the rest for the first beat, then start a new rest for the next beat."
+      ],
+      "feedback": {
+        "correct": "Rewritten correctly.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.ind-2",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/4. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: quaver, crotchet rest, quaver, quaver, quaver. Bar 2: crotchet, quaver, crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest, quaver, quaver, quaver.",
+        "questionAlternative": "Bar 1: quaver, crotchet rest, quaver, 2 beamed together (quaver, quaver). Bar 2: crotchet, quaver, crotchet rest, quaver. Bar 3: quaver, quaver rest, quaver rest, quaver, 2 beamed together (quaver, quaver)."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/4 has three crotchet beats in each bar."
+      ],
+      "feedback": {
+        "correct": "That bar groups its rests correctly.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.ind-3",
+      "templateId": "t.g2.rest-fix",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Rewrite this bar so that the rest does not run on from part of a beat into the next beat. It must sound exactly the same.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, minim rest, crotchet.",
+        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet.",
+        "timeSignature": "2/2"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "2/2",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Finish the rest for the first beat, then start a new rest for the next beat.",
+        "Each beat is counted separately: finish the rest for the first beat, then start a new rest for the next beat."
+      ],
+      "feedback": {
+        "correct": "Well fixed.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.ind-4",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/2. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, minim rest, crotchet, minim. Bar 2: minim, crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet rest, crotchet, minim.",
+        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet, minim. Bar 2: minim, crotchet, minim rest, crotchet. Bar 3: crotchet, crotchet rest, crotchet rest, crotchet, minim."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/2 has three minim beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Correct.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.ind-5",
+      "templateId": "t.g2.rest-fix",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "Rewrite this bar so that the rest does not run on from part of a beat into the next beat. It must sound exactly the same.",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "crotchet",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "minim",
+                  "dots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "textAlternative": "Bar 1: crotchet, minim rest, crotchet, minim.",
+        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet, minim.",
+        "timeSignature": "3/2"
+      },
+      "answer": {
+        "kind": "rhythm",
+        "task": "regroup",
+        "timeSignature": "3/2",
+        "accepted": [
+          [
+            {
+              "events": [
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "rest",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "crotchet",
+                    "dots": 0
+                  }
+                },
+                {
+                  "kind": "note",
+                  "pitch": "B4",
+                  "duration": {
+                    "value": "minim",
+                    "dots": 0
+                  }
+                }
+              ]
+            }
+          ]
+        ],
+        "acceptAnyRuleCompliant": true
+      },
+      "hints": [
+        "Finish the rest for the first beat, then start a new rest for the next beat.",
+        "Each beat is counted separately: finish the rest for the first beat, then start a new rest for the next beat."
+      ],
+      "feedback": {
+        "correct": "A rest for each beat.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    },
+    {
+      "id": "i.g2-u2-l04.ind-6",
+      "templateId": "t.g2.rest-judge",
+      "templateVersion": 1,
+      "seed": null,
+      "evidence": "independent",
+      "prompt": "All three bars are in 3/8. In each bar, a silence starts halfway through one beat and ends halfway through the next. Which bar writes the rests correctly?",
+      "music": {
+        "presentation": "rhythm-line",
+        "clef": "treble",
+        "showKeySignature": false,
+        "measures": [
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "begin"
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                },
+                "beam": "end"
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              }
+            ]
+          },
+          {
+            "events": [
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "quaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "rest",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              },
+              {
+                "kind": "note",
+                "pitch": "B4",
+                "duration": {
+                  "value": "semiquaver",
+                  "dots": 0
+                }
+              }
+            ],
+            "barline": "final"
+          }
+        ],
+        "textAlternative": "Bar 1: semiquaver, quaver rest, semiquaver, semiquaver, semiquaver. Bar 2: quaver, semiquaver, quaver rest, semiquaver. Bar 3: quaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver.",
+        "questionAlternative": "Bar 1: semiquaver, quaver rest, semiquaver, 2 beamed together (semiquaver, semiquaver). Bar 2: quaver, semiquaver, quaver rest, semiquaver. Bar 3: quaver, semiquaver, semiquaver rest, semiquaver rest, semiquaver."
+      },
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "1",
+            "label": "Bar 1"
+          },
+          {
+            "id": "2",
+            "label": "Bar 2"
+          },
+          {
+            "id": "3",
+            "label": "Bar 3"
+          }
+        ],
+        "correctOptionIds": [
+          "3"
+        ],
+        "diagnoses": {
+          "1": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          },
+          "2": {
+            "category": "rest-across-beat",
+            "reason": "That rest runs on from the middle of one beat into the next. Finish the rest for the first beat, then start a new rest for the next beat."
+          }
+        }
+      },
+      "hints": [
+        "Each beat shows its own rest, except that a two-beat rest may fill half of a four-beat bar.",
+        "3/8 has three quaver beats in each bar."
+      ],
+      "feedback": {
+        "correct": "Yes.",
+        "mistakes": {
+          "beam-across-middle": "In four-beat bars, keep the two halves of the bar visible — don't beam across the middle.",
+          "rest-across-beat": "That rest hides where a beat begins. Use one rest to finish the beat, and another for the next.",
+          "half-bar-rest-misplaced": "A two-beat rest can fill the first or second half of a four-beat bar, but not the middle two beats.",
+          "tie-instead-of-dot": "A dotted note says the same thing more simply here.",
+          "compound-beat-hidden": "In compound time each beat is a dotted note split into three. Group in threes so each beat shows."
+        },
+        "fallback": "Not quite. Mark where each beat starts, then regroup."
+      }
+    }
+  ],
+  "recap": [
+    "A rest stops at the end of its beat.",
+    "Start a new rest for the next beat.",
+    "The rests and notes in a beat should add up to that beat."
+  ],
+  "spacedReview": [
+    {
+      "templateId": "t.g2.rest-fix",
+      "afterDays": 1
+    },
+    {
+      "templateId": "t.g2.rest-judge",
+      "afterDays": 3
+    },
+    {
+      "templateId": "t.g2.rest-fix",
+      "afterDays": 7
+    }
+  ],
+  "mastery": {
+    "conceptIds": [
+      "c.metre.rest-grouping-subdivisions"
+    ],
+    "countsAsEvidence": "independent-steps-only",
+    "completion": "The lesson is complete when every step has been answered correctly (retries allowed). Only first-attempt, hint-free independent answers count as mastery evidence; guided steps never do."
+  },
+  "provenance": {
+    "authoredBy": "Music Theory Path curriculum team (Brief 05, drafted with AI assistance; pending qualified teacher review)",
+    "originality": "original",
+    "bookSectionIds": [
+      "fs.g2.s04"
+    ],
+    "outcomeIds": [
+      "abrsm2020.g2.02"
+    ],
+    "notes": "Original wording. Follows Grade 2 outcome 2. Only undotted rests are used; dotted rests wait for later grades (OPEN_QUESTIONS Q4)."
+  }
+}
