@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import { SignOutButton } from "../components/SignOutButton";
 import { useApp, useCourseData } from "../state/app";
+import { friendlyEndDate, guestDaysLeft } from "../components/GuestNotice";
 import { RegisterForm } from "./AccountForm";
 
 export function Profile() {
@@ -10,6 +11,8 @@ export function Profile() {
   const { user, profile } = me!;
   const world = data.status === "ready" ? data.course.worlds[profile.selectedGrade - 1] : undefined;
   const t = data.status === "ready" ? data.progress.totals : undefined;
+  const daysLeft = guestDaysLeft(me);
+  const endDate = friendlyEndDate(me?.session?.expiresAt);
   return (
     <div className="page" data-grade={profile.selectedGrade}>
       <header className="profile-head">
@@ -23,7 +26,8 @@ export function Profile() {
       {user.isGuest && (
         <section className="card callout" aria-labelledby="save-h">
           <h2 id="save-h"><Icon name="info" size={22} /> Keep your progress safe</h2>
-          <p>You're using a guest profile, which lives in this browser. Create an account and everything you've done so far comes with you, on any device.</p>
+          <p>You're using a guest profile. It lives only in this browser, and guest access ends {daysLeft === null ? "after a while" : daysLeft <= 0 ? "today" : daysLeft === 1 ? "tomorrow" : `in ${daysLeft} days`}{endDate ? ` (${endDate})` : ""}. After that, or if this browser's data is cleared, there is no way back to your guest progress.</p>
+          <p>You don't have to register to keep learning. If you'd like to keep your progress, create a free account and everything you've done so far comes with you, on any device.</p>
           <RegisterForm submitLabel="Create my account" onDone={refreshProgress} />
         </section>
       )}

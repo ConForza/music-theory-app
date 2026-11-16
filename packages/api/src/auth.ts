@@ -96,6 +96,16 @@ export function userForToken(db: Db, token: string | undefined): User | undefine
   return r ? toUser(r) : undefined;
 }
 
+/** How many days before a guest's sign-in ends the app starts warning them (a display setting, not a retention policy). */
+export const GUEST_WARNING_DAYS = 14;
+
+/** When the session behind this token ends (ISO), or null if there is none. */
+export function sessionExpiry(db: Db, token: string | undefined): string | null {
+  if (!token) return null;
+  const r = db.prepare("SELECT expires_at FROM sessions WHERE token_hash = ?").get(sha256(token)) as { expires_at: string } | undefined;
+  return r?.expires_at ?? null;
+}
+
 export function destroySession(db: Db, token: string | undefined) {
   if (token) db.prepare("DELETE FROM sessions WHERE token_hash = ?").run(sha256(token));
 }

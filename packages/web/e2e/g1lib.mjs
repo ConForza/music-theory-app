@@ -20,7 +20,9 @@ export async function serve(opts = {}) {
   const course = loadCourse();
   const clock = new ManualClock(new Date(opts.start ?? "2026-03-02T12:00:00Z"));
   const db = openDb(join(mkdtempSync(join(tmpdir(), "g1-")), "g1.sqlite"));
-  const app = createApp({ db, course, clock, testClock: true, waiveUnwrittenPrerequisites: opts.waive ?? true, ...(opts.gates ? { releaseGates: opts.gates } : {}) });
+  // Every browser in a suite comes from 127.0.0.1, so the per-address guest limit (60 per 15 minutes in production) is lifted here; the limit
+  // itself is tested in packages/api/test/release-hardening.test.ts.
+  const app = createApp({ db, course, clock, testClock: true, guestCreationsPer15Min: 100_000, waiveUnwrittenPrerequisites: opts.waive ?? true, ...(opts.gates ? { releaseGates: opts.gates } : {}) });
   // Start as production does (main.ts): the review question pools are sampled before the server listens, never inside a learner's request.
   app.engagement.review.warmPools();
   const server = createHttpServer(app, join(root, "packages/web/dist"));

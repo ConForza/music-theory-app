@@ -150,7 +150,7 @@ export function Onboarding() {
           <RegisterForm onDone={() => finish(experience!, grade!)} />
           <div className="or"><span>or</span></div>
           <button className="btn btn-quiet btn-large" onClick={asGuest} disabled={busy}>Try it as a guest</button>
-          <p className="fine-print">Guest progress stays with this browser. You can turn it into an account from your profile at any time and keep everything you've done. <Link to="/signin">Sign in instead</Link></p>
+          <p className="fine-print">Guest progress stays with this browser, and guest access ends after about two months. You can turn it into an account from your profile at any time and keep everything you've done. <Link to="/signin">Sign in instead</Link></p>
           {retryBox}
         </section>
       )}
