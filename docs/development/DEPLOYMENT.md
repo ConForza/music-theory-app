@@ -110,9 +110,8 @@ is hard to undo once browsers have seen it. `preload` is deliberately not sent.
 
 ## Start-up, readiness and shutdown (final release hardening)
 
-**No hosting configuration exists in this repository** (no Dockerfile, Procfile, compose file, platform manifest, proxy configuration or
-service unit), so nothing about the production host could be verified. What the application itself does is tested
-(`packages/api/test/release-hardening.test.ts`) and is as follows.
+The Railway private-preview configuration now lives in `railway.json` and is documented in [`RAILWAY.md`](RAILWAY.md). The application itself is
+tested (`packages/api/test/release-hardening.test.ts`, `railway-preview.test.ts`) and behaves as follows.
 
 | Item | Behaviour |
 |---|---|
@@ -131,10 +130,10 @@ What the host must provide, **to be confirmed by the owner for the chosen provid
 1. **Start-up grace of at least 60 seconds** (90 s on a small shared CPU) before health checks count as failures. Many platforms default to
    far less; with a shorter grace the process is killed during warm-up and restarts forever.
 2. **Stop grace of at least 15 seconds** between `SIGTERM` and `SIGKILL`.
-3. **Deploys cause downtime of about the warm-up time** unless the host keeps the old process serving until the new one is ready. That is
-   only safe if the two never write the same SQLite file at once; with one file the practical choice is a short maintenance window, or a
-   host that starts the new process, waits for readiness, then stops the old one, accepting a few seconds in which both have the file open
-   (WAL mode tolerates this; the in-memory limiters and review pools are simply rebuilt).
+3. **Single writer, always.** Two processes with the same SQLite file open for writing are **not** acceptable, not even briefly: the release
+   audit (PR #21) reproduced 227 of 400 writes failing with two overlapping processes, against 0 of 400 with one. WAL mode does not make
+   overlapping writers safe. The old process must have **stopped** (exited after `SIGTERM`) before its replacement writes. Deploys therefore
+   cause downtime of about the warm-up time; plan for a stop-first maintenance window rather than a zero-downtime rollout.
 4. **A restart policy** that restarts on a non-zero exit, with back-off, and alerts if start-up fails repeatedly.
 5. HTTPS termination, and the two settings in "Who is calling?" above.
 

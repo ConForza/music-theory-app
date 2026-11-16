@@ -3,6 +3,7 @@ import { createServer, type IncomingMessage, type Server } from "node:http";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import type { App } from "./app.ts";
+import { GATE_REALM, type PreviewGate } from "./preview-gate.ts";
 
 const TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -40,6 +41,8 @@ export interface HttpOptions {
   trustedProxyHops?: number;
   /** "app" (default): this process sets the security headers on every response. "proxy": a reverse proxy is configured to set them, so the app sends none. */
   securityHeaders?: "app" | "proxy";
+  /** Private preview (issue #24): when given, every request except read-only /api/health needs an invited tester's credentials. */
+  gate?: PreviewGate;
 }
 
 /**
@@ -110,6 +113,11 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       const proto = publicScheme(req.headers["x-forwarded-proto"], opts);
       const url = new URL(req.url ?? "/", `${proto}://${host}`);
       let response: Response;
+      if (opts.gate && !opts.gate.allows(req.method ?? "GET", url.pathname, req.headers.authorization)) {
+        res.writeHead(401, { ...secure, "www-authenticate": GATE_REALM, "cache-control": "no-store", "x-robots-tag": "noindex", "content-type": "text/plain; charset=utf-8" });
+        res.end("Private preview: invited testers only.");
+        return;
+      }
       if (url.pathname.startsWith("/api/")) {
         response = await app.fetch(await toRequest(req, `${proto}://${host}`), { remoteAddress: req.socket.remoteAddress });
       } else if (staticDir) {
@@ -117,7 +125,7 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       } else {
         response = new Response("Not found", { status: 404 });
       }
-      const out: Record<string, string | string[]> = { ...secure };
+      const out: Record<string, string | string[]> = { ...secure, ...(opts.gate ? { "x-robots-tag": "noindex" } : {}) };
       response.headers.forEach((v, k) => {
         if (k !== "set-cookie") out[k] = v;
       });
