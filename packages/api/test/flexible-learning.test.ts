@@ -5,7 +5,7 @@
 import { copyFileSync, mkdirSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { canonicalResponse, wrongResponse } from "@mtp/engine";
 import { DatabaseSync } from "node:sqlite";
 import { migrate } from "../src/db.ts";
@@ -14,6 +14,13 @@ import { Client, correctResponse, playLesson, realCourse } from "./helpers.ts";
 import { boot, completeGrades, learner, protectedCounts } from "./prep-helpers.ts";
 
 const course = realCourse();
+
+// Production samples every topic's question pool before it listens (startup.ts warms the review pools), so the topic-practice overview
+// answers in about 30 ms. Tests do not warm them, so the capacities (shared per loaded curriculum) are filled once here rather than inside
+// whichever test happens to ask first, where a slow CI runner can take longer than the per-test timeout.
+beforeAll(() => {
+  boot().app.topics.overview("warm-up");
+}, 180_000);
 const id = () => crypto.randomUUID();
 const lessonsOf = (unitId: string) => course.nodes.filter((n) => n.unitId === unitId && n.type === "lesson").map((n) => n.id);
 
