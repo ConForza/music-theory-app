@@ -32,6 +32,8 @@ import type { Candidate, SessionItem } from "./review.ts";
 
 export const TOPIC_PRACTICE_COUNTS = [5, 10, 20] as const;
 export type TopicCount = (typeof TOPIC_PRACTICE_COUNTS)[number];
+const MAX_COUNT = Math.max(...TOPIC_PRACTICE_COUNTS);
+const CAPACITY = new WeakMap<Course, Map<string, number>>();
 export type ScopeKind = "grade" | "area" | "unit" | "topic";
 
 /**
@@ -137,6 +139,22 @@ export class TopicPracticeService {
     return this.engagement.review.candidates(conceptId, this.gradeLessons(grade));
   }
 
+  /**
+   * How many different questions a topic can supply at this grade, up to the largest count on offer (20). Learner-independent and cached
+   * (see `ReviewService.distinctUpTo`). Used to tell the learner BEFORE they start when a topic is small, and to stop planning a topic once
+   * it has given everything it has.
+   */
+  capacity(conceptId: string, grade: number): number {
+    // Content-determined, so shared by every service built on the same loaded curriculum (one per process in production, where the
+    // review pools are also warmed at start-up and this costs about 30 ms for every topic of every grade).
+    let byCourse = CAPACITY.get(this.course);
+    if (!byCourse) CAPACITY.set(this.course, (byCourse = new Map()));
+    const key = `${grade}|${conceptId}`;
+    let n = byCourse.get(key);
+    if (n === undefined) byCourse.set(key, (n = this.engagement.review.distinctUpTo(conceptId, this.gradeLessons(grade), MAX_COUNT)));
+    return n;
+  }
+
   /** Learner-independent, derived from the curriculum once per grade. */
   catalogue(grade: number): GradeCatalogue {
     const hit = this.catalogues.get(grade);
@@ -172,15 +190,22 @@ export class TopicPracticeService {
       counts: [...TOPIC_PRACTICE_COUNTS],
       defaultCount: 10 as TopicCount,
       note: TOPIC_PRACTICE_NOTE,
+      /** Every `available` below is the number of different questions a choice can supply, or null when it can fill the largest count. */
       grades: this.course.view.worlds.map((w) => {
         const c = this.catalogue(w.grade);
         const title = new Map(c.topics.map((t) => [t.conceptId, t.title]));
+        const cap = (ids: string[]) => {
+          let n = 0;
+          for (const id of ids) if ((n += this.capacity(id, c.grade)) >= MAX_COUNT) return null;
+          return n;
+        };
         return {
           grade: c.grade,
           title: c.title,
           topicCount: c.topics.length,
-          areas: c.areas.map((a) => ({ areaId: a.areaId, title: a.title, topics: a.topics.map((id) => ({ conceptId: id, title: title.get(id)! })) })),
-          units: c.units.map((u) => ({ unitId: u.unitId, title: u.title, sequence: u.sequence, topics: u.topics.length })),
+          available: cap(c.topics.map((t) => t.conceptId)),
+          areas: c.areas.map((a) => ({ areaId: a.areaId, title: a.title, available: cap(a.topics), topics: a.topics.map((id) => ({ conceptId: id, title: title.get(id)!, available: cap([id]) })) })),
+          units: c.units.map((u) => ({ unitId: u.unitId, title: u.title, sequence: u.sequence, topics: u.topics.length, available: cap(u.topics) })),
         };
       }),
       open: open ? { id: open.id, grade: open.grade, label: this.label(open.grade, open.scope_kind, open.scope_id), startedAt: open.started_at } : null,
@@ -225,6 +250,9 @@ export class TopicPracticeService {
       t,
       cands: [...this.candidates(t.conceptId, grade)].sort((a, b) => hash(`${sessionId}|${a.templateId}`) - hash(`${sessionId}|${b.templateId}`)),
       seen: this.engagement.mastery.seenKeys(userId, t.conceptId),
+      // A small topic stops as soon as it has given every different question it has, instead of searching for more that do not exist.
+      limit: this.capacity(t.conceptId, grade),
+      got: 0,
       made: 0,
       misses: 0,
       done: false,
@@ -234,7 +262,7 @@ export class TopicPracticeService {
     for (let round = 0; items.length < total && plans.some((p) => !p.done) && round < total * 3; round++) {
       for (const p of plans) {
         if (items.length >= total) break;
-        if (p.done || !p.cands.length) {
+        if (p.done || !p.cands.length || (p.limit < MAX_COUNT && p.got >= p.limit)) {
           p.done = true;
           continue;
         }
@@ -252,6 +280,7 @@ export class TopicPracticeService {
           continue;
         }
         p.misses = 0;
+        p.got++;
         used.add(questionKey(gen.item));
         items.push({ itemId: gen.item.id, kind: "review", conceptId: p.t.conceptId, nodeId: cand.nodeId, templateId: cand.templateId, templateVersion: gen.item.templateVersion, seed: gen.seed, fingerprint: g.fingerprint, lessonId: p.t.lessons[0]?.nodeId ?? null });
       }

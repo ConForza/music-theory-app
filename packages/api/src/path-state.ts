@@ -31,6 +31,8 @@ export interface NodeProgress {
    * genuine lesson completion, but it does not yet count towards unlocking the guided steps after it.
    */
   outOfSequence: boolean;
+  /** For an `outOfSequence` node: the guided prerequisites it is still waiting for (empty otherwise), so the screen can name the real next step. */
+  waitingFor: string[];
 }
 
 export interface PathPolicy {
@@ -96,6 +98,7 @@ export function computeNodeStates(course: Course, rows: ProgressRow[], policy: P
       reviewAvailable: Boolean(completedAt) && (row!.completed_content_version ?? 0) < n.contentVersion,
       replayOpen: Boolean(completedAt) && row!.run_open === 1,
       outOfSequence: explored && lockedBy.length > 0,
+      waitingFor: explored ? lockedBy : [],
     });
   }
   return out;

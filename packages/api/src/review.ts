@@ -169,6 +169,35 @@ export class ReviewService {
     return keys;
   }
 
+  private cappedCount = new Map<string, number>();
+  /**
+   * How many DIFFERENT questions (by identity), up to `cap`, a concept can be asked within these lessons' teaching scopes. Reads the
+   * warmed per-candidate pools when they exist (production warms them at start-up); otherwise samples seeds only until `cap` distinct
+   * questions are found, so a large pool costs a few generations and only a genuinely small one is sampled in full. Cached.
+   */
+  distinctUpTo(conceptId: string, completed: Set<string>, cap: number): number {
+    const cands = this.candidates(conceptId, completed);
+    const id = `${this.course.version}|${conceptId}|${cap}|${cands.map((c) => `${c.nodeId}:${c.templateId}`).join(";")}`;
+    const hit = this.cappedCount.get(id);
+    if (hit !== undefined) return hit;
+    const constraint = this.constraints.get(conceptId);
+    const keys = new Set<string>();
+    for (const c of cands) {
+      const warm = this.candidatePool.get(`${this.course.version}|${conceptId}|${c.templateId}|${JSON.stringify(c.scope)}`);
+      if (warm) for (const k of warm) keys.add(k);
+      else {
+        for (let seed = 0; seed < 300 && keys.size < cap; seed++) {
+          const item = this.generate(c, seed);
+          if (item && (!constraint || satisfies(item, constraint))) keys.add(questionKey(item));
+        }
+      }
+      if (keys.size >= cap) break;
+    }
+    const n = Math.min(cap, keys.size);
+    this.cappedCount.set(id, n);
+    return n;
+  }
+
   /**
    * Fill the per-candidate pools for every concept and every lesson binding that can review it. Call once before the server starts
    * listening; afterwards no request samples seeds for a pool. Returns how many candidates were sampled.

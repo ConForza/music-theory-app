@@ -622,3 +622,9 @@ html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
 .topic-start { position: sticky; bottom: calc(var(--tab-h) + env(safe-area-inset-bottom)); z-index: 4; display: grid; gap: 0.35rem; justify-items: stretch; padding: 0.75rem 0; background: var(--bg); }
 .topic-start p { margin: 0; text-align: center; }
 @media (min-width: 860px) { .topic-start { bottom: 0; } }
+.node-badge-explored { left: -4px; right: auto; color: var(--brand-strong); }
+.pill-explored { background: var(--brand-soft); color: var(--brand-strong); }
+.topic-small { font-weight: 600; color: var(--muted); }
+.topic-choice.is-selected .topic-small { color: inherit; }
+.segmented label.is-disabled span { opacity: 0.45; border-style: dashed; }
+.segmented label.is-disabled input { cursor: not-allowed; }

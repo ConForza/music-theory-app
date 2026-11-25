@@ -62,6 +62,20 @@ await test("Explore: a fresh learner opens a Grade 5 lesson ahead of the path, c
   const prog = await get(page, "/api/progress");
   assert.equal(prog.grades[0].nextNodeId, "G1-U1-L01", "the guided path has not moved");
   assert.equal((await get(page, "/api/me")).profile.selectedGrade, 1);
+  // the explored completion is tagged, and the next lesson's lock names the real missing step
+  await page.goto("/unit/G5-U3");
+  await page.locator('[data-node="G5-U3-L03"] .pill-explored').waitFor();
+  assert.match(await page.locator('[data-node="G5-U3-L04"]').innerText(), /which you've already explored, will count then/);
+  await axe(page, "unit page with an explored lesson");
+  await noOverflow(page, "unit page with an explored lesson");
+  await shot(page, "unit-explored");
+  // and on the path itself (viewing Grade 5 here is the learner's own choice, not something exploring did)
+  await page.evaluate(() => fetch("/api/me/profile", { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ selectedGrade: 5 }) }));
+  await page.goto("/learn");
+  const marked = page.locator('[data-node="G5-U3-L03"]');
+  await marked.locator(".node-badge-explored").waitFor();
+  assert.match(await marked.getAttribute("aria-label"), /explored ahead of your path/);
+  await axe(page, "path with an explored lesson");
   await ctx.close();
 });
 
@@ -86,7 +100,7 @@ await test("Practise a topic: Grade 5 -> Keys and scales -> a topic -> 5 questio
   await noOverflow(page, "topic picker");
   await picker.getByRole("radio", { name: "Grade 5" }).check();
   await picker.locator("details[data-area=keys] summary").click();
-  await picker.getByRole("button", { name: "Six flats" }).click();
+  await picker.getByRole("button", { name: /^Six flats/ }).click();
   await picker.getByRole("radio", { name: "5 questions" }).check();
   await shot(page, "topic-picker");
   await page.getByTestId("topic-start").click();
@@ -134,13 +148,14 @@ await test("Practise a topic: a narrow topic with fewer different questions says
   const picker = page.getByTestId("topic-practice");
   await picker.getByRole("radio", { name: "Grade 2" }).check();
   await picker.locator("details[data-area=keys] summary").click();
-  await picker.getByRole("button", { name: "Melodic minor preview" }).click();
-  await picker.getByRole("radio", { name: "20 questions" }).check();
+  await picker.getByRole("button", { name: /^Melodic minor preview/ }).click();
+  assert.equal(await picker.getByRole("radio", { name: "20 questions" }).isDisabled(), true, "a count the topic cannot fill is not offered");
+  assert.match(await page.getByTestId("topic-start-note").innerText(), /only \d+ different/);
   await page.getByTestId("topic-start").click();
   await page.getByTestId("topic-shortfall").waitFor();
   const id = new URL(page.url()).pathname.split("/").pop();
   const items = S.app.topics.internalItems(userId, id);
-  assert.ok(items.length < 20);
+  assert.ok(items.length < 5);
   assert.ok(items.every((x) => x.conceptId === "c.scales.minor-melodic-preview"));
   await ctx.close();
 });

@@ -93,7 +93,7 @@ export function NodeRun({ nodeId }: { nodeId: string }) {
 
   const lockedTitles = useMemo(() => {
     if (load.status !== "error" || load.error.code !== "locked" || data.status !== "ready") return null;
-    return lockReason({ lockedBy: (load.error.details.lockedBy as string[]) ?? [] } as never, data.titleOf);
+    return lockReason({ lockedBy: (load.error.details.lockedBy as string[]) ?? [] } as never, data.titleOf, data.progress.nodes);
   }, [load, data]);
 
   if (load.status === "loading") return <Loading label="Getting your questions ready…" />;

@@ -68,6 +68,7 @@ export function ExploreLessons() {
         <p className="eyebrow">Learn</p>
         <h1>Explore lessons</h1>
         <p className="lede-small">Open any lesson, in any grade, in any order. Your guided path stays exactly where it is. A lesson you finish here counts as done; lessons you skip are not marked complete.</p>
+        <p className="muted small">Later grades build on earlier ones, so a lesson can use skills from earlier grades.</p>
       </header>
       <GradePicker value={grade} onChange={(g) => setParams({ grade: String(g) }, { replace: true })} legend="Choose a grade to explore" />
       <h2 className="h3">Grade {grade}: {world.learnerTitle}</h2>
@@ -87,7 +88,7 @@ export function ExploreLessons() {
                   <li key={n.id} className="explore-row" data-node={n.id} data-status={v.status}>
                     <span className="explore-title">
                       <strong>{n.title}</strong>
-                      <span className="muted small">{n.optional ? "Extra · " : ""}about {n.estimatedMinutes} min{v.status === "completed" ? " · done" : v.status === "in_progress" ? " · in progress" : v.status === "locked" ? " · ahead of your path" : ""}</span>
+                      <span className="muted small">{n.optional ? "Extra · " : ""}about {n.estimatedMinutes} min{v.status === "completed" ? (v.explored ? " · done (explored)" : " · done") : v.status === "in_progress" ? " · in progress" : v.status === "locked" ? " · ahead of your path" : ""}</span>
                     </span>
                     {ready ? (
                       <Link className={v.status === "completed" ? "btn btn-ghost btn-small" : "btn btn-primary btn-small"} to={`/lesson/${n.id}?explore=1`} aria-label={`${label}: ${n.title}`}>{label}</Link>
@@ -112,6 +113,8 @@ interface Choice {
   kind: TopicScopeKind;
   id: string;
   label: string;
+  /** Different questions this choice can supply, or null when it can fill the largest count. */
+  available: number | null;
 }
 
 const REASON: Record<string, string> = { no_questions: "We couldn't make questions for that just now. Please try another topic or try again." };
@@ -140,7 +143,12 @@ export function useTopicStarter() {
 
 function ChoiceToggle({ c, className = "", chosen, onPick }: { c: Choice; className?: string; chosen: Choice | null; onPick: (c: Choice) => void }) {
   const on = chosen?.kind === c.kind && chosen.id === c.id;
-  return <button type="button" className={`topic-choice${on ? " is-selected" : ""} ${className}`} aria-pressed={on} onClick={() => onPick(c)}>{c.label}</button>;
+  return (
+    <button type="button" className={`topic-choice${on ? " is-selected" : ""} ${className}`} aria-pressed={on} onClick={() => onPick(c)}>
+      {c.label}
+      {c.available !== null && <span className="topic-small"> · only {c.available} different {c.available === 1 ? "question" : "questions"}</span>}
+    </button>
+  );
 }
 
 /** The top of the Practice tab: grade, then the whole grade, an area, a topic or a unit, then 5, 10 or 20 questions. */
@@ -163,29 +171,34 @@ export function TopicPicker() {
   if (!data) return <Loading label="Loading topics…" />;
   const g = data.grades.find((x) => x.grade === grade) ?? data.grades[0]!;
   const pick = (c: Choice) => setChoice((cur) => (cur && cur.kind === c.kind && cur.id === c.id ? null : c));
+  // A count the chosen topic cannot fill is not offered (the smallest always is). The saved preference is kept for the next topic.
+  const avail = choice?.available ?? null;
+  const allowed = (n: number) => avail === null || n <= avail || n === Math.min(...data.counts);
+  const useCount = allowed(count) ? count : Math.max(...data.counts.filter(allowed));
   const go = () => {
     if (!choice) return;
     remember.set({ grade, count });
-    void start({ grade, kind: choice.kind, id: choice.id, count });
+    void start({ grade, kind: choice.kind, id: choice.id, count: useCount });
   };
   return (
     <section className="topic-practice" aria-labelledby="tp-h" data-testid="topic-practice">
       <p className="eyebrow">Practise a topic</p>
       <h1 id="tp-h">Choose what you want to work on</h1>
       <p className="lede-small">Practice: choose what you want to work on. Any grade, any topic, and you don't need to have done the lessons first. Fresh questions every time, with hints. It doesn't change your path, earn XP or count towards mastery.</p>
+      <p className="muted small">Later grades build on earlier ones, so questions can use skills from earlier grades.</p>
       {data.open && (
         <p className="card callout" role="status">You have a practice session open: {data.open.label} (Grade {data.open.grade}). <Link to={`/practice/topic/${data.open.id}`}>Carry on</Link></p>
       )}
       <GradePicker value={grade} onChange={setGrade} />
       <ul className="plain topic-choices" aria-label={`Grade ${grade} topics`}>
-        <li><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "grade", id: String(grade), label: `Mixed: all of Grade ${grade}` }} className="is-mixed" /></li>
+        <li><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "grade", id: String(grade), label: `Mixed: all of Grade ${grade}`, available: g.available }} className="is-mixed" /></li>
         {g.areas.map((a) => (
           <li key={a.areaId}>
             <details className="topic-area" data-area={a.areaId}>
               <summary><span>{a.title}</span> <span className="muted small">{a.topics.length} {a.topics.length === 1 ? "topic" : "topics"}</span></summary>
               <ul className="plain">
-                {a.topics.length > 1 && <li><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "area", id: a.areaId, label: `All of ${a.title.toLowerCase()}` }} /></li>}
-                {a.topics.map((t) => <li key={t.conceptId}><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "topic", id: t.conceptId, label: t.title }} /></li>)}
+                {a.topics.length > 1 && <li><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "area", id: a.areaId, label: `All of ${a.title.toLowerCase()}`, available: a.available }} /></li>}
+                {a.topics.map((t) => <li key={t.conceptId}><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "topic", id: t.conceptId, label: t.title, available: t.available }} /></li>)}
               </ul>
             </details>
           </li>
@@ -193,7 +206,7 @@ export function TopicPicker() {
         <li>
           <details className="topic-area" data-area="units">
             <summary><span>By unit</span> <span className="muted small">{g.units.length} units</span></summary>
-            <ul className="plain">{g.units.map((u) => <li key={u.unitId}><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "unit", id: u.unitId, label: `Unit ${u.sequence}: ${u.title}` }} /></li>)}</ul>
+            <ul className="plain">{g.units.map((u) => <li key={u.unitId}><ChoiceToggle chosen={choice} onPick={pick} c={{ kind: "unit", id: u.unitId, label: `Unit ${u.sequence}: ${u.title}`, available: u.available }} /></li>)}</ul>
           </details>
         </li>
       </ul>
@@ -201,7 +214,7 @@ export function TopicPicker() {
         <legend>How many questions?</legend>
         <div>
           {data.counts.map((n) => (
-            <label key={n} className={count === n ? "is-selected" : ""}><input type="radio" name="topic-count" aria-label={`${n} questions`} checked={count === n} onChange={() => setCount(n)} /><span aria-hidden="true">{n}</span></label>
+            <label key={n} className={`${useCount === n ? "is-selected" : ""}${allowed(n) ? "" : " is-disabled"}`}><input type="radio" name="topic-count" aria-label={`${n} questions`} checked={useCount === n} disabled={!allowed(n)} onChange={() => setCount(n)} /><span aria-hidden="true">{n}</span></label>
           ))}
         </div>
       </fieldset>
@@ -209,7 +222,11 @@ export function TopicPicker() {
         <button type="button" className="btn btn-primary btn-large" disabled={!choice || busy} onClick={go} data-testid="topic-start">
           {busy ? "Getting questions…" : choice ? `Start: ${choice.label}` : "Choose a topic above"}
         </button>
-        {choice && <p className="muted small">Grade {grade} · {count} questions</p>}
+        {choice && (
+          <p className="muted small" data-testid="topic-start-note">
+            Grade {grade} · {avail !== null && avail < useCount ? `${avail} questions: this topic has only ${avail} different ones at the moment` : `${useCount} questions`}
+          </p>
+        )}
         {note && <p role="status" className="form-error">{note}</p>}
       </div>
     </section>

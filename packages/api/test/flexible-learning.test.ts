@@ -116,12 +116,12 @@ describe("Explore lessons: free access to any written lesson", () => {
     const { c } = await learner(app);
     await exploreAndComplete(c, "G1-U1-L02");
     let s = await states(c);
-    expect(s["G1-U1-L02"]).toMatchObject({ state: "completed", outOfSequence: true });
-    expect(s["G1-U1-L03"]!.state).toBe("locked"); // not opened by the explored completion
+    expect(s["G1-U1-L02"]).toMatchObject({ state: "completed", outOfSequence: true, waitingFor: ["G1-U1-L01"] });
+    expect(s["G1-U1-L03"]).toMatchObject({ state: "locked", lockedBy: ["G1-U1-L02"] }); // not opened by the explored completion
     expect(s["G1-U1-L01"]!.state).toBe("available"); // the guided start is still where it was
     expect((await playLesson(c, course, "G1-U1-L01")).status).toBe(200);
     s = await states(c);
-    expect(s["G1-U1-L02"]).toMatchObject({ state: "completed", outOfSequence: false });
+    expect(s["G1-U1-L02"]).toMatchObject({ state: "completed", outOfSequence: false, waitingFor: [] });
     expect(s["G1-U1-L03"]!.state).toBe("available"); // no replay needed
   });
 
@@ -246,6 +246,21 @@ describe("Practise a topic: any grade, area, unit or topic, no lesson first", ()
     expect(cross.body.error.code).toBe("bad_scope");
     expect((await c.post("/api/topic-practice/sessions", { grade: 1, kind: "area", id: "cadences", count: 5 })).status).toBe(400);
     expect((await c.post("/api/topic-practice/sessions", { grade: 1, kind: "unit", id: "G2-U1", count: 5 })).status).toBe(400);
+  });
+
+  it("small topics are flagged before starting: the overview gives how many different questions they have (null when 20 are available)", async () => {
+    const { app } = boot();
+    const { c } = await learner(app);
+    const ov = (await c.get("/api/topic-practice")).body;
+    const topic = (g: number, id: string) => ov.grades[g - 1].areas.flatMap((a: { topics: Array<{ conceptId: string; available: number | null }> }) => a.topics).find((t: { conceptId: string }) => t.conceptId === id);
+    const small = topic(2, "c.scales.minor-melodic-preview");
+    expect(small.available).toBeGreaterThan(0);
+    expect(small.available).toBeLessThan(20);
+    expect(topic(5, "c.intervals.compound").available).toBeNull();
+    for (const g of ov.grades) expect(g.available).toBeNull(); // every grade can fill 20 when mixed
+    // the session gives exactly what the overview promised, and stops there
+    const s = await startTopic(c, { grade: 2, kind: "topic", id: "c.scales.minor-melodic-preview", count: 20 });
+    expect(s.items.length).toBe(small.available);
   });
 
   it("a narrow topic that cannot supply enough different questions says so, with no other topic added", async () => {
