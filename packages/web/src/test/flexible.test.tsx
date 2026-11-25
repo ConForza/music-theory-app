@@ -1,0 +1,98 @@
+/** Flexible learning in the UI: Practise a topic (choose, play, finish, repeat) and Explore lessons, against the shipped content. */
+import { cleanup, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { api } from "../api/client";
+import { renderApp, startApi } from "./harness";
+
+vi.mock("../lib/audio", async (orig) => ({ ...(await orig<typeof import("../lib/audio")>()), cue: vi.fn(), stopAll: vi.fn(), playPitch: vi.fn(), playTimed: vi.fn() }));
+
+beforeEach(() => {
+  window.scrollTo = () => undefined;
+  Element.prototype.scrollIntoView = () => undefined;
+  try {
+    localStorage.clear();
+  } catch {
+    /* ignore */
+  }
+});
+afterEach(() => cleanup());
+
+async function guest(selectedGrade = 1) {
+  const h = startApi({ waive: false, real: true });
+  await api.guest();
+  await api.patchProfile({ onboarded: true, experience: "new", selectedGrade });
+  return h;
+}
+
+describe("Practise a topic", () => {
+  it("a fresh guest picks Grade 5 → Keys and scales → a topic → 5 questions, plays, finishes early and practises again", async () => {
+    const h = await guest(1);
+    const user = userEvent.setup();
+    renderApp("/practice");
+    const picker = await screen.findByTestId("topic-practice");
+    expect(within(picker).getByRole("heading", { level: 1, name: "Choose what you want to work on" })).toBeInTheDocument();
+    await user.click(within(picker).getByRole("radio", { name: "Grade 5" }));
+    await user.click(within(picker).getByText("Keys, scales and key signatures"));
+    await user.click(within(picker).getByRole("button", { name: "Six sharps" }));
+    await user.click(within(picker).getByRole("radio", { name: "5 questions" }));
+    await user.click(within(picker).getByRole("button", { name: "Start: Six sharps" }));
+    expect(await screen.findByText(/Grade 5 · Six sharps · Question 1 of 5/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Not sure\? Learn it:/ })).toHaveAttribute("href", expect.stringMatching(/^\/lesson\/G5-U3-L01\?explore=1$/));
+    await user.click(screen.getByRole("button", { name: "Finish now" }));
+    const done = await screen.findByTestId("topic-summary");
+    expect(within(done).getByRole("heading", { name: "Stopped early, and that's fine" })).toBeInTheDocument();
+    expect(within(done).getByText(/doesn't change your path, earn XP or count towards mastery/)).toBeInTheDocument();
+    const before = h.calls.filter((c) => c === "POST /api/topic-practice/sessions").length;
+    await user.click(screen.getByRole("button", { name: "Practise again" }));
+    expect(await screen.findByText(/Grade 5 · Six sharps · Question 1 of 5/)).toBeInTheDocument();
+    expect(h.calls.filter((c) => c === "POST /api/topic-practice/sessions").length).toBe(before + 1);
+    // nothing about the guided path changed
+    expect((await api.me()).profile.selectedGrade).toBe(1);
+    expect((await api.progress()).totals.lessonsCompleted).toBe(0);
+  }, 60_000);
+
+  it("a narrow topic that has fewer different questions says so on the first question", async () => {
+    await guest(2);
+    const user = userEvent.setup();
+    renderApp("/practice");
+    const picker = await screen.findByTestId("topic-practice");
+    await user.click(within(picker).getByRole("radio", { name: "Grade 2" }));
+    await user.click(within(picker).getByText("Keys, scales and key signatures"));
+    await user.click(within(picker).getByRole("button", { name: "Melodic minor preview" }));
+    await user.click(within(picker).getByRole("radio", { name: "20 questions" }));
+    await user.click(within(picker).getByRole("button", { name: /^Start:/ }));
+    const note = await screen.findByTestId("topic-shortfall");
+    expect(note).toHaveTextContent(/not 20\. Nothing from other topics has been added/);
+  }, 60_000);
+});
+
+describe("Explore lessons", () => {
+  it("lists every grade's units and lessons; opening one ahead of the path gives advice, not a lock, and the path does not move", async () => {
+    await guest(1);
+    const user = userEvent.setup();
+    renderApp("/learn");
+    await user.click(await screen.findByRole("link", { name: /Explore lessons/ }));
+    expect(await screen.findByRole("heading", { level: 1, name: "Explore lessons" })).toBeInTheDocument();
+    await user.click(screen.getByRole("radio", { name: "Grade 5" }));
+    const unit = await screen.findByRole("region", { name: /Unit 3:/ });
+    const open = within(unit).getAllByRole("link", { name: /^Open:/ })[2]!;
+    expect(open).toHaveAttribute("href", "/lesson/G5-U3-L03?explore=1");
+    await user.click(open);
+    const note = await screen.findByTestId("explore-note");
+    expect(note).toHaveTextContent(/exploring ahead of your guided path/);
+    expect(within(note).getAllByRole("link").length).toBeGreaterThan(0);
+    await waitFor(async () => expect((await api.progress()).nodes["G5-U3-L03"]!.state).toBe("in_progress"));
+    const prog = await api.progress();
+    expect(prog.nodes["G5-U3-L03"]!.outOfSequence).toBe(true);
+    expect(prog.grades[0]!.nextNodeId).toBe("G1-U1-L01");
+    expect((await api.me()).profile.selectedGrade).toBe(1);
+  }, 60_000);
+
+  it("a locked lesson opened from the guided path offers to explore it instead", async () => {
+    await guest(1);
+    renderApp("/lesson/G1-U1-L03");
+    expect(await screen.findByRole("heading", { name: "This lesson is locked" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Explore it anyway" })).toHaveAttribute("href", "/lesson/G1-U1-L03?explore=1");
+  }, 30_000);
+});

@@ -43,6 +43,10 @@ export function Learn() {
           <Icon name="down" size={20} />
         </Link>
       </header>
+      <nav className="learn-ways" aria-label="Other ways to learn">
+        <Link className="btn btn-ghost btn-small" to={`/learn/explore?grade=${grade}`}><Icon name="path" size={18} /> Explore lessons</Link>
+        <Link className="btn btn-ghost btn-small" to="/practice"><Icon name="sparkle" size={18} /> Practise a topic</Link>
+      </nav>
 
       {engagement.status === "ready" && (
         <>
@@ -71,7 +75,7 @@ export function Learn() {
       )}
 
       {engagement.status === "ready" && engagement.data.achievements.recent.length > 0 && <RecentBadges e={engagement.data} />}
-      <p className="preview-note"><Icon name="info" size={16} /> <span>Early preview: lessons marked “Coming soon” are still being written, so you can open the ready ones in any order.</span></p>
+      <p className="preview-note"><Icon name="info" size={16} /> <span>The path takes you through each grade in order. To jump ahead, use Explore lessons to open any lesson, or Practise a topic to work on anything you choose.</span></p>
       <Legend />
       <LearningPath data={data} world={world} currentId={currentId} />
     </div>

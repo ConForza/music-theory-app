@@ -29,7 +29,7 @@ import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { STATE_ORDER, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { learnerTime, recordExposure } from "./mastery-service.ts";
 import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "./question-key.ts";
-import { computeNodeStates, placedGradeOf, type PathPolicy } from "./path-state.ts";
+import { PROGRESS_ROWS_SQL, computeNodeStates, placedGradeOf, type PathPolicy } from "./path-state.ts";
 
 /** Words shown with every result: this is practice material, never an examination outcome. */
 export const ASSESSMENT_DISCLAIMER = "This is Music Theory Path's own practice check. It is not an ABRSM examination, and passing it is not an ABRSM result or certificate.";
@@ -300,7 +300,7 @@ export class NodeRunService {
   // ---- access ---------------------------------------------------------------------------------------------------
 
   private states(userId: string) {
-    const rows = this.db.prepare("SELECT node_id, run, run_open, phase, content_version, completed_at, completed_content_version FROM lesson_progress WHERE user_id = ?").all(userId) as never[];
+    const rows = this.db.prepare(PROGRESS_ROWS_SQL).all(userId) as never[];
     return computeNodeStates(this.course, rows, this.policy, placedGradeOf(this.db, userId));
   }
 

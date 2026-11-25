@@ -1,4 +1,4 @@
-import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService, NodeRunService, PrepService, RevisionService, ExamSummary, PlacementSummary } from "@mtp/api";
+import type { CourseView, LearnerLesson, ProgressService, RunState, CompletionSummary, PracticeService, Engagement, ReviewService, NodeRunService, PrepService, RevisionService, ExamSummary, PlacementSummary, TopicPracticeService, TopicPracticeSummary } from "@mtp/api";
 import type { LearnerResponse } from "@mtp/engine";
 
 export type { CourseView, LearnerLesson, RunState, CompletionSummary };
@@ -96,6 +96,15 @@ export interface AchievementEntry {
   need: number;
   available: boolean;
 }
+/** A lesson as opened, with how the learner reached it (guided, or explored ahead of the path, with foundation lessons to suggest). */
+export type OpenedLesson = ReturnType<ProgressService["lessonFor"]>;
+export type LessonAccess = OpenedLesson["access"];
+/** Flexible learning: targeted topic practice. */
+export type TopicOverview = ReturnType<TopicPracticeService["overview"]>;
+export type TopicSession = ReturnType<TopicPracticeService["view"]>;
+export type TopicStartResult = ReturnType<TopicPracticeService["start"]>;
+export type TopicScopeKind = "grade" | "area" | "unit" | "topic";
+export type TopicSummary = TopicPracticeSummary & { alreadyComplete: boolean };
 export type PracticeCatalogue = ReturnType<PracticeService["catalogue"]>;
 export type PracticeSet = ReturnType<PracticeService["set"]>;
 export type GeneratedItem = ReturnType<PracticeService["generate"]>;
@@ -247,10 +256,11 @@ export const api = {
   exportData: () => request<unknown>("GET", "/api/me/export", undefined, { scope }),
   deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me", undefined, { scope }),
   progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal, scope }),
-  lesson: (id: string) => request<LearnerLesson>("GET", L(id), undefined, { scope }),
-  start: (id: string) => {
+  // `explore`: open a written lesson ahead of the guided path (flexible learning). The server decides what that means for unlocking.
+  lesson: (id: string, explore = false) => request<OpenedLesson>("GET", `${L(id)}${explore ? "?explore=1" : ""}`, undefined, { scope }),
+  start: (id: string, explore = false) => {
     const sc = scope;
-    return retrying(sc, () => request<RunState>("POST", `${L(id)}/start`, {}, { scope: sc }));
+    return retrying(sc, () => request<RunState>("POST", `${L(id)}/start`, explore ? { explore: true } : {}, { scope: sc }));
   },
   setPhase: (id: string, phase: string) => request<unknown>("PUT", `${L(id)}/phase`, { phase }, { scope }),
   hint: (id: string, itemId: string, level: number) => request<{ hint: string; level: number }>("POST", `${L(id)}/hint`, { itemId, level }, { scope }),
@@ -339,6 +349,19 @@ export const api = {
   completeRevision: (id: string) => {
     const sc = scope;
     return retrying(sc, () => request<RevisionSummary>("POST", `/api/revision/sessions/${encodeURIComponent(id)}/complete`, {}, { scope: sc }));
+  },
+  // Flexible learning: practise any topic. Starting is NOT retried automatically (each start plans a new session); answers are idempotent.
+  topicPractice: () => request<TopicOverview>("GET", "/api/topic-practice", undefined, { scope }),
+  startTopicPractice: (b: { grade: number; kind: TopicScopeKind; id: string; count: number }) => request<TopicStartResult>("POST", "/api/topic-practice/sessions", b, { scope }),
+  topicSession: (id: string) => request<TopicSession>("GET", `/api/topic-practice/sessions/${encodeURIComponent(id)}`, undefined, { scope }),
+  topicHint: (sessionId: string, itemId: string, level: number) => request<{ hint: string; level: number }>("POST", `/api/topic-practice/sessions/${encodeURIComponent(sessionId)}/hint`, { itemId, level }, { scope }),
+  topicAttempt: (sessionId: string, attemptId: string, itemId: string, response: AnswerResponse) => {
+    const sc = scope;
+    return retrying(sc, () => request<AttemptResult>("POST", `/api/topic-practice/sessions/${encodeURIComponent(sessionId)}/attempts`, { attemptId, itemId, response }, { scope: sc }));
+  },
+  completeTopicPractice: (id: string) => {
+    const sc = scope;
+    return retrying(sc, () => request<TopicSummary>("POST", `/api/topic-practice/sessions/${encodeURIComponent(id)}/complete`, {}, { scope: sc }));
   },
   abandonRevision: (id: string) => request<{ ok: true }>("POST", `/api/revision/sessions/${encodeURIComponent(id)}/abandon`, {}, { scope }),
   complete: (id: string) => {

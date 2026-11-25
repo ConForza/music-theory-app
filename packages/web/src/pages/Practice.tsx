@@ -6,6 +6,7 @@ import { ErrorState, Loading, NotFoundView } from "../components/Shell";
 import { stopAll } from "../lib/audio";
 import { Question, type QuestionApi } from "./LessonSteps";
 import { ExamHub } from "./PrepPages";
+import { TopicPicker } from "./Flexible";
 
 const practiceApi: QuestionApi = { attempt: api.practiceAttempt, hint: api.practiceHint };
 
@@ -22,6 +23,7 @@ export function Practice() {
   if (!data) return <Loading label="Loading practice…" />;
   return (
     <div className="page practice-page">
+      <TopicPicker />
       <ExamHub />
       <header className="page-head lab-head">
         <p className="eyebrow">Practice lab</p>

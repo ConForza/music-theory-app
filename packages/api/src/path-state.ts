@@ -10,6 +10,11 @@ export interface ProgressRow {
   content_version: number;
   completed_at: string | null;
   completed_content_version: number | null;
+  /**
+   * 1 when the learner opened this lesson through Explore while the guided path still had it locked (migration 010). Absent or 0 for
+   * every row written before flexible learning existed, so those rows behave exactly as they always did.
+   */
+  explored?: number;
 }
 
 export interface NodeProgress {
@@ -21,6 +26,11 @@ export interface NodeProgress {
   reviewAvailable: boolean;
   /** A replay or refresher run is open on an already-completed node. */
   replayOpen: boolean;
+  /**
+   * Opened through Explore ahead of the guided path, and its guided prerequisites are still not satisfied. Its completion (if any) is a
+   * genuine lesson completion, but it does not yet count towards unlocking the guided steps after it.
+   */
+  outOfSequence: boolean;
 }
 
 export interface PathPolicy {
@@ -32,6 +42,13 @@ export interface PathPolicy {
   waiveUnwrittenPrerequisites: boolean;
 }
 
+/**
+ * The one query every caller of `computeNodeStates` uses to read a learner's rows. Shared so that no service (lessons, server-built
+ * practice/review/challenge/assessment runs) can compute path states from a narrower view of the facts than another.
+ */
+export const PROGRESS_ROWS_SQL =
+  "SELECT node_id, run, run_open, phase, content_version, completed_at, completed_content_version, explored FROM lesson_progress WHERE user_id = ?";
+
 /** Pure: which nodes are locked/available/in progress/completed for one learner. Never uses XP. */
 export function computeNodeStates(course: Course, rows: ProgressRow[], policy: PathPolicy, placedGrade: number | null = null): Map<string, NodeProgress> {
   const byNode = new Map(rows.map((r) => [r.node_id, r]));
@@ -42,17 +59,28 @@ export function computeNodeStates(course: Course, rows: ProgressRow[], policy: P
   // simply stop blocking nodes of Grade N and above. Without an accepted placement (`placedGrade` null) nothing here changes.
   const placedPast = (id: string) => placedGrade !== null && (course.ix.nodeById.get(id)?.grade ?? Infinity) < placedGrade;
 
+  // Flexible learning: whether a completed node counts as a satisfied prerequisite for the guided steps after it. A node completed through
+  // the guided path always does (this is every row written before migration 010, so nothing changes for them). A lesson completed through
+  // Explore while it was still locked counts only once its OWN guided prerequisites are satisfied: finishing the last lesson of a unit out of
+  // order therefore never opens that unit's practice, review or challenge, nor (by the same chain) the grade assessment and its badge. The
+  // moment the learner completes the earlier lessons, the explored completion starts counting with no replay needed. Nodes are visited in
+  // path order and prerequisites always come earlier (validated), so `satisfied` is filled before it is read; the fallback is defensive.
+  const satisfied = new Map<string, boolean>();
+  const counts = (id: string) => satisfied.get(id) ?? complete(id);
+
   for (const n of course.nodes) {
     const row = byNode.get(n.id);
     const playable = course.isPlayable(n.id);
     const lockedBy = n.resolvedUnlockAfter.filter((p) => {
       // The waiver is for nodes of the grade the learner chose and above. A node of an EARLIER grade keeps its own prerequisites: otherwise starting
       // at Grade 4 would open (and let a learner pass) the Grade 1 assessment with no lesson done, and so earn its badge.
-      if (complete(p) || (n.grade >= (placedGrade ?? Infinity) && placedPast(p))) return false;
+      if (counts(p) || (n.grade >= (placedGrade ?? Infinity) && placedPast(p))) return false;
       if (policy.waiveUnwrittenPrerequisites && !course.isPlayable(p)) return false;
       return true;
     });
     const completedAt = row?.completed_at ?? null;
+    const explored = row?.explored === 1;
+    satisfied.set(n.id, Boolean(completedAt) && (!explored || lockedBy.length === 0));
     let state: NodeState;
     if (completedAt) state = "completed";
     else if (!playable) state = "coming_soon";
@@ -67,14 +95,18 @@ export function computeNodeStates(course: Course, rows: ProgressRow[], policy: P
       completedAt,
       reviewAvailable: Boolean(completedAt) && (row!.completed_content_version ?? 0) < n.contentVersion,
       replayOpen: Boolean(completedAt) && row!.run_open === 1,
+      outOfSequence: explored && lockedBy.length > 0,
     });
   }
   return out;
 }
 
-/** The node the learner should do next within a grade: the open lesson, else the first available required one. */
+/**
+ * The node the learner should do next within a grade: the open lesson, else the first available required one. A lesson the learner is
+ * exploring ahead of the path is never the guided "next" step, so exploring cannot move the learner's guided destination.
+ */
 export function nextNodeForGrade(course: Course, states: Map<string, NodeProgress>, grade: number): string | null {
-  const nodes = course.nodes.filter((n) => n.grade === grade && !n.optional);
+  const nodes = course.nodes.filter((n) => n.grade === grade && !n.optional && !states.get(n.id)?.outOfSequence);
   return (
     nodes.find((n) => states.get(n.id)?.state === "in_progress")?.id ??
     nodes.find((n) => states.get(n.id)?.state === "available")?.id ??

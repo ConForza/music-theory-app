@@ -55,6 +55,10 @@ export function NodeSheet({ data, nodeId, onClose }: { data: CourseData; nodeId:
           {v.openable && v.action && (
             <Link className="btn btn-primary" to={`/lesson/${node.id}`}>{v.action}</Link>
           )}
+          {/* Flexible learning: an authored lesson ahead of the path can be explored; practice, checkpoints and assessments cannot. */}
+          {v.status === "locked" && node.playKind === "lesson" && (
+            <Link className="btn btn-ghost" to={`/lesson/${node.id}?explore=1`}>Explore this lesson anyway</Link>
+          )}
           <button type="button" className="btn btn-quiet" onClick={onClose}>{v.openable ? "Not now" : "Got it"}</button>
         </div>
       </div>

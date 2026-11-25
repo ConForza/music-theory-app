@@ -7,7 +7,7 @@ import { gradeResponse, revealSolution, type GradeResult, type Response } from "
 import type { Clock } from "./clock.ts";
 import { systemClock } from "./clock.ts";
 import type { Engagement } from "./engagement.ts";
-import { computeNodeStates, nextNodeForGrade, placedGradeOf, type NodeProgress, type PathPolicy, type ProgressRow } from "./path-state.ts";
+import { PROGRESS_ROWS_SQL, computeNodeStates, nextNodeForGrade, placedGradeOf, type NodeProgress, type PathPolicy, type ProgressRow } from "./path-state.ts";
 
 export const PHASES = ["intro", "teach", "demo", "questions"] as const;
 export type Phase = (typeof PHASES)[number];
@@ -59,11 +59,7 @@ export class ProgressService {
   }
 
   rows(userId: string): ProgressRow[] {
-    return this.db
-      .prepare(
-        "SELECT node_id, run, run_open, phase, content_version, completed_at, completed_content_version FROM lesson_progress WHERE user_id = ?",
-      )
-      .all(userId) as unknown as ProgressRow[];
+    return this.db.prepare(PROGRESS_ROWS_SQL).all(userId) as unknown as ProgressRow[];
   }
 
   states(userId: string) {
@@ -119,16 +115,57 @@ export class ProgressService {
     };
   }
 
-  /** The lesson, if it exists and this learner may open it. Throws a specific error otherwise. */
-  openableLesson(userId: string, nodeId: string): LearnerLesson {
+  /**
+   * The lesson, if it exists and this learner may open it. Throws a specific error otherwise.
+   *
+   * `explore` (flexible learning) lets a learner open an authored lesson that the guided path still has locked. It is the ONLY thing it
+   * relaxes: a lesson that is not written stays `coming_soon`, and a server-built node (unit practice, review, challenge, grade assessment)
+   * can never be explored, so assessment eligibility always comes from the guided path. Without `explore` the guided rule is unchanged.
+   */
+  openableLesson(userId: string, nodeId: string, opts: { explore?: boolean } = {}): LearnerLesson {
     const node = this.course.ix.nodeById.get(nodeId);
     if (!node) throw new ApiError(404, "not_found", "That lesson does not exist.");
     const state = this.states(userId).get(nodeId)!;
     if (state.state === "coming_soon") throw new ApiError(409, "coming_soon", "This lesson is still being written.");
-    if (state.state === "locked") throw new ApiError(403, "locked", "Finish the earlier lessons first.", { lockedBy: state.lockedBy });
     const lesson = this.course.lesson(nodeId);
+    if (state.state === "locked" && !(opts.explore && lesson)) throw new ApiError(403, "locked", "Finish the earlier lessons first.", { lockedBy: state.lockedBy, explorable: Boolean(lesson) });
     if (!lesson) throw new ApiError(409, "not_a_lesson", "That is a practice activity, not a lesson.");
     return lesson;
+  }
+
+  /**
+   * The lesson plus how the learner is reaching it. When it is ahead of their guided path (`outOfSequence`), `foundations` lists up to
+   * three not-yet-completed lessons that teach what this lesson builds on (from the curriculum's concept prerequisites), so the screen can
+   * advise rather than block. Nothing here records anything.
+   */
+  lessonFor(userId: string, nodeId: string, opts: { explore?: boolean } = {}) {
+    const lesson = this.openableLesson(userId, nodeId, opts);
+    const states = this.states(userId);
+    const st = states.get(nodeId)!;
+    const outOfSequence = st.state === "locked" || st.outOfSequence;
+    return { ...lesson, access: { mode: outOfSequence ? ("explore" as const) : ("guided" as const), outOfSequence, foundations: outOfSequence ? this.foundations(nodeId, states) : [] } };
+  }
+
+  private foundations(nodeId: string, states: Map<string, NodeProgress>): Array<{ nodeId: string; title: string; grade: number }> {
+    const node = this.course.ix.nodeById.get(nodeId)!;
+    const own = new Set(node.conceptIds);
+    const out = new Map<string, { nodeId: string; title: string; grade: number; order: number }>();
+    const add = (n: { id: string; title: string; grade: number; order: number }) => {
+      if (n.id !== nodeId && states.get(n.id)?.state !== "completed" && this.course.lesson(n.id) && !out.has(n.id)) out.set(n.id, { nodeId: n.id, title: n.title, grade: n.grade, order: n.order });
+    };
+    for (const cid of node.conceptIds) {
+      for (const pre of this.course.ix.concepts.get(cid)?.prerequisiteIds ?? []) {
+        if (own.has(pre)) continue;
+        const teach = (this.course.ix.conceptTaughtBy.get(pre) ?? []).find((n) => n.type === "lesson" && this.course.isPlayable(n.id));
+        if (teach) add(teach);
+      }
+    }
+    // Nothing in the concept graph: point at the guided step that is still missing just before it.
+    if (!out.size) {
+      const first = this.course.nodes.find((n) => n.order < node.order && n.unitId === node.unitId && n.type === "lesson" && !n.optional && states.get(n.id)?.state !== "completed");
+      if (first) add(first);
+    }
+    return [...out.values()].sort((a, b) => b.order - a.order).slice(0, 3).map(({ order: _o, ...rest }) => rest);
   }
 
   private row(userId: string, nodeId: string) {
@@ -138,25 +175,28 @@ export class ProgressService {
   }
 
   /** Begin or resume. Idempotent: calling it twice returns the same run. */
-  start(userId: string, nodeId: string): RunState {
-    const lesson = this.openableLesson(userId, nodeId);
+  start(userId: string, nodeId: string, opts: { explore?: boolean } = {}): RunState {
+    const lesson = this.openableLesson(userId, nodeId, opts);
     const t = this.now();
     tx(this.db, () => {
       const row = this.row(userId, nodeId);
+      // Decided by the server from its own state, inside the transaction: the guided path still has this lesson locked, so it is being
+      // explored ahead. The mark only ever goes on; it never removes a completion and never changes rows that were not explored.
+      const ahead = this.states(userId).get(nodeId)!.state === "locked";
       if (!row) {
         this.db
           .prepare(
-            "INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at) VALUES (?,?,1,1,'intro',?,?,?,?)",
+            "INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,explored) VALUES (?,?,1,1,'intro',?,?,?,?,?)",
           )
-          .run(userId, nodeId, lesson.contentVersion, this.course.version, t, t);
+          .run(userId, nodeId, lesson.contentVersion, this.course.version, t, t, ahead ? 1 : 0);
       } else if (!row.run_open || row.content_version !== lesson.contentVersion) {
         // A closed run is replayed, or the lesson changed under an unfinished run: start a clean run.
         // Old attempts remain in the log under their own run and content version.
         this.db
           .prepare(
-            "UPDATE lesson_progress SET run = run + 1, run_open = 1, phase = 'intro', content_version = ?, curriculum_version = ?, started_at = ?, updated_at = ? WHERE user_id = ? AND node_id = ?",
+            "UPDATE lesson_progress SET run = run + 1, run_open = 1, phase = 'intro', content_version = ?, curriculum_version = ?, started_at = ?, updated_at = ?, explored = CASE WHEN ? THEN 1 ELSE explored END WHERE user_id = ? AND node_id = ?",
           )
-          .run(lesson.contentVersion, this.course.version, t, t, userId, nodeId);
+          .run(lesson.contentVersion, this.course.version, t, t, ahead ? 1 : 0, userId, nodeId);
       }
     });
     return this.runState(userId, nodeId);

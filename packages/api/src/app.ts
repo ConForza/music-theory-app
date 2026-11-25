@@ -11,6 +11,7 @@ import { backfillPracticeExposure } from "./backfill.ts";
 import { NodeRunService } from "./node-run.ts";
 import { PrepService } from "./prep.ts";
 import { RevisionService } from "./revision.ts";
+import { TopicPracticeService } from "./topic-practice.ts";
 import { DEFAULT_PREP, gatesFromEnv, type PrepConfig, type ReleaseGates } from "./prep-config.ts";
 import { Engagement } from "./engagement.ts";
 import { ManualClock, isValidTimezone, systemClock, type Clock } from "./clock.ts";
@@ -57,6 +58,8 @@ export interface AppOptions {
   clock?: Clock;
   /** New practice papers or placement checks one learner may start per 10 minutes (default 4). Planning one costs the server's single thread about 0.4 to 3 s, so it is rationed; resuming an open one is free. */
   prepStartsPer10Min?: number;
+  /** New topic-practice sessions one learner may start per 10 minutes (default 30). Planning one generates up to 20 questions; viewing or resuming is free. */
+  topicStartsPer10Min?: number;
   /** Brief 10 product defaults (tests override them; production uses DEFAULT_PREP). */
   prep?: PrepConfig;
   /** What learners may be shown. Omitted: read from the environment (`MTP_SHOW_READINESS`), which is OFF unless set to `teacher-approved`. */
@@ -147,6 +150,14 @@ export function createApp(opts: AppOptions) {
   }, opts.releaseGates ?? gatesFromEnv());
   const planIpLimiter = new RateLimiter(60, 10 * 60_000);
   const revision = new RevisionService(db, course, clock, engagement, prep, opts.prep ?? DEFAULT_PREP);
+  const topicLimiter = new RateLimiter(opts.topicStartsPer10Min ?? 30, 10 * 60_000);
+  const topics = new TopicPracticeService(db, course, clock, engagement, (userId) => {
+    try {
+      topicLimiter.check(`topic:${userId}`);
+    } catch {
+      throw new ApiError(429, "rate_limited", "You've started a lot of practice sessions in a short time. Carry on with the one you have, or wait a few minutes.");
+    }
+  });
   // One-time recovery for historical practice without exposure identities; idempotent on startup.
   backfillPracticeExposure(db, practice, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
@@ -303,6 +314,10 @@ export function createApp(opts: AppOptions) {
       placementStarts: all("SELECT * FROM placement_starts WHERE user_id = ? ORDER BY accepted_at"),
       revisionSessions: all("SELECT * FROM revision_sessions WHERE user_id = ? ORDER BY started_at"),
       revisionAttempts: all("SELECT * FROM revision_attempts WHERE user_id = ? ORDER BY created_at"),
+      // Flexible learning: targeted topic practice (formative; never evidence).
+      topicPracticeSessions: all("SELECT * FROM topic_practice_sessions WHERE user_id = ? ORDER BY started_at"),
+      topicPracticeAttempts: all("SELECT * FROM topic_practice_attempts WHERE user_id = ? ORDER BY created_at"),
+      topicPracticeHintUses: all("SELECT * FROM topic_practice_hint_uses WHERE user_id = ? ORDER BY created_at"),
     };
   });
 
@@ -315,9 +330,14 @@ export function createApp(opts: AppOptions) {
   // ---- progress & lessons -------------------------------------------------
   route("GET", "/api/progress", true, (ctx) => progress.overview(ctx.user!.id));
 
-  route("GET", "/api/lessons/:nodeId", true, (ctx) => progress.openableLesson(ctx.user!.id, nodeParam(ctx.params[0]!)));
+  // `?explore=1` / `{ explore: true }` (flexible learning): open an authored lesson ahead of the guided path. It never opens unwritten content
+  // or a server-built node, and the server decides what that does to unlocking (see path-state.ts); the flag only states the learner's intent.
+  route("GET", "/api/lessons/:nodeId", true, (ctx) => progress.lessonFor(ctx.user!.id, nodeParam(ctx.params[0]!), { explore: ctx.url.searchParams.get("explore") === "1" }));
 
-  route("POST", "/api/lessons/:nodeId/start", true, (ctx) => progress.start(ctx.user!.id, nodeParam(ctx.params[0]!)));
+  route("POST", "/api/lessons/:nodeId/start", true, async (ctx) => {
+    const b = parse(z.object({ explore: z.boolean().optional() }).strict(), await ctx.body());
+    return progress.start(ctx.user!.id, nodeParam(ctx.params[0]!), { explore: b.explore === true });
+  });
 
   route("PUT", "/api/lessons/:nodeId/phase", true, async (ctx) => {
     const { phase } = parse(z.object({ phase: z.enum(PHASES) }).strict(), await ctx.body());
@@ -439,6 +459,28 @@ export function createApp(opts: AppOptions) {
   route("POST", "/api/revision/sessions/:id/complete", true, (ctx) => revision.complete(ctx.user!.id, ctx.params[0]!));
   route("POST", "/api/revision/sessions/:id/abandon", true, (ctx) => revision.abandon(ctx.user!.id, ctx.params[0]!));
 
+  // ---- targeted topic practice (flexible learning) -----------------------------------------------------------------------------
+  // Any grade, area, unit or topic, with no lesson required first. Formative: never completion, XP, mastery or readiness evidence.
+  const TopicStart = z.object({ grade: z.number().int().min(1).max(5), kind: z.enum(["grade", "area", "unit", "topic"]), id: z.string().min(1).max(100), count: z.union([z.literal(5), z.literal(10), z.literal(20)]) }).strict();
+  const topicIpLimiter = new RateLimiter(180, 10 * 60_000);
+  route("GET", "/api/topic-practice", true, (ctx) => topics.overview(ctx.user!.id));
+  route("POST", "/api/topic-practice/sessions", true, async (ctx) => {
+    const b = parse(TopicStart, await ctx.body());
+    topicIpLimiter.check(`topicip:${ctx.client}`);
+    return topics.start(ctx.user!.id, b);
+  });
+  route("GET", "/api/topic-practice/sessions/:id", true, (ctx) => topics.view(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/topic-practice/sessions/:id/hint", true, async (ctx) => {
+    const b = parse(z.object({ itemId: z.string().min(1).max(100), level: z.number().int().min(1).max(10) }).strict(), await ctx.body());
+    return topics.hint(ctx.user!.id, ctx.params[0]!, b.itemId, b.level);
+  });
+  route("POST", "/api/topic-practice/sessions/:id/attempts", true, async (ctx) => {
+    const b = parse(AttemptBody, await ctx.body());
+    return topics.attempt(ctx.user!.id, ctx.params[0]!, b.attemptId, b.itemId, b.response);
+  });
+  route("POST", "/api/topic-practice/sessions/:id/complete", true, (ctx) => topics.complete(ctx.user!.id, ctx.params[0]!));
+  route("POST", "/api/topic-practice/sessions/:id/abandon", true, (ctx) => topics.abandon(ctx.user!.id, ctx.params[0]!));
+
   if (opts.testClock) {
     route("POST", "/api/test/clock", false, async (ctx) => {
       const b = parse(z.object({ set: z.string().datetime().optional(), advanceDays: z.number().min(0).max(400).optional(), advanceMinutes: z.number().min(0).max(100000).optional() }).strict(), await ctx.body());
@@ -510,6 +552,6 @@ export function createApp(opts: AppOptions) {
     }
   }
 
-  return { fetch, progress, practice, engagement, nodes, prep, revision, clock, db };
+  return { fetch, progress, practice, engagement, nodes, prep, revision, topics, clock, db };
 }
 export type App = ReturnType<typeof createApp>;

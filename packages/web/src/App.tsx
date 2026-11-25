@@ -14,6 +14,7 @@ import { PrepPlayer } from "./pages/PrepPlayer";
 import { ExamSetup, PlacementIntro, ResultsPage } from "./pages/PrepPages";
 import { PrepResultPage } from "./pages/PrepResult";
 import { ExplorePage, RevisionPlayer } from "./pages/Revise";
+import { ExploreLessons, TopicPlayer } from "./pages/Flexible";
 import { Settings } from "./pages/Settings";
 import { SignIn } from "./pages/SignIn";
 import { Unit } from "./pages/Unit";
@@ -53,10 +54,12 @@ export function App() {
         <Route path="/revision/session/:sessionId" element={<RevisionPlayer />} />
         <Route path="/exam/run/:attemptId" element={<PrepPlayer />} />
         <Route path="/placement/run/:attemptId" element={<PrepPlayer />} />
+        <Route path="/practice/topic/:sessionId" element={<TopicPlayer />} />
         <Route path="/practice/more/:templateId" element={<PracticeMore />} />
         <Route path="/practice/:setId" element={<PracticeSetPlayer />} />
         <Route element={<Shell />}>
           <Route path="/learn" element={<Learn />} />
+          <Route path="/learn/explore" element={<ExploreLessons />} />
           <Route path="/grades" element={<Grades />} />
           <Route path="/review" element={<ReviewHub />} />
           <Route path="/review/explore" element={<ExplorePage />} />

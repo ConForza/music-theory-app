@@ -24,10 +24,11 @@ export function Step({ title, children, eyebrow }: { title: string; children: Re
   );
 }
 
-export function Intro({ lesson, title, minutes, onNext, resumed }: { lesson: LearnerLesson; title: string; minutes: number; onNext: () => void; resumed: boolean }) {
+export function Intro({ lesson, title, minutes, onNext, resumed, notice }: { lesson: LearnerLesson; title: string; minutes: number; onNext: () => void; resumed: boolean; notice?: ReactNode }) {
   return (
     <>
       <Step title={title} eyebrow={resumed ? "Welcome back" : "Today's goal"}>
+        {notice}
         <p className="lede-small">{lesson.objective.statement}</p>
         <h2 className="h3">By the end you'll be able to:</h2>
         <ul className="checklist">

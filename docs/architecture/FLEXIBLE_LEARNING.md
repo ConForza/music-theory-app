@@ -1,0 +1,128 @@
+# Flexible learning: Explore lessons and Practise a topic
+
+> Practice material only. Nothing here is an ABRSM examination, result or prediction. Nothing here has been reviewed by a teacher; no syllabus content, musical convention, exam weighting, marking or readiness threshold was changed.
+
+Music Theory Path had one way in: the guided, prerequisite-based path. After testing on real phones, the owner asked for two more, **without weakening the guided path**:
+
+| Mode | What the learner gets | Where |
+|---|---|---|
+| **Guided learning** (unchanged) | The structured path, prerequisites, unit practice/review/checkpoints, grade assessments, mastery and rewards. Still the recommended route for beginners. | Learn tab |
+| **Explore lessons** (new) | Open any written lesson in any grade, in any order. No placement test, no earlier grade or lesson required. Advice about foundations instead of a lock. | Learn → *Explore lessons*; *Explore this lesson anyway* on a locked lesson; *Learn it* links from practice |
+| **Practise a topic** (new) | Grade 1-5 → the whole grade (mixed), a practice area, a unit or a single topic → 5, 10 or 20 fresh questions, immediately. No lesson required first. | Practice tab (top), Learn → *Practise a topic* |
+
+Learner-facing wording: **Learn** – study new material; **Practice** – choose what you want to work on; **Review** – revisit material and strengthen your knowledge; **Examinations** – test yourself across a grade.
+
+## 1. Before and after, for the learner
+
+| Situation | Before | After |
+|---|---|---|
+| A Grade 5 student opens the app for the first time | Must work through Grades 1-4 (or take placement and accept a start grade) before any Grade 5 lesson opens | *Explore lessons* → Grade 5 → any lesson, at once. Placement is still offered, optional |
+| A student taps a locked lesson | "Finish the earlier lessons first." Dead end | Same message, plus *Explore it anyway*. Opening it shows "You're exploring ahead of your guided path" and up to three lessons that teach what it builds on |
+| A teacher says "practise cadences tonight" | Only possible after finishing the cadence lessons (revision is restricted to taught topics); the practice lab is organised by question type, not topic | Practice → Grade 5 → Cadences → *Cadences in context* → 10 → Start (4 taps from the Practice tab) |
+| Repeat the same practice | Navigate the picker again | *Practise again* on the summary: fresh questions, same choice, one tap |
+| Topic has few distinct questions | n/a | The session is shorter and says so ("has 4 different questions at the moment… Nothing from other topics has been added") |
+| Return to Grade 1 after exploring Grade 5 | n/a | Guided Grade 1 path, selected grade and "next up" are exactly where they were; explored lessons stay completed |
+| Tab order | Learn, Review, Practice, Progress | Learn, Practice, Review, Progress (as the brief recommends) |
+
+## 2. The safeguards (the important part)
+
+The brief asks that these be separate. They are, and each is decided by the server:
+
+| Concept | Where it lives | What exploring / topic practice can do to it |
+|---|---|---|
+| Permission to open a lesson | `ProgressService.openableLesson(…, { explore })` | Explore may open a **written, authored lesson** the guided path has locked. It never opens unwritten content (`coming_soon`) and **never opens a server-built node** (unit practice, unit review, unit checkpoint, grade assessment). |
+| Selected grade | `profiles.selected_grade` | Untouched. The Explore and topic pickers have their own grade control that is never saved to the profile (the topic picker remembers its last grade in `localStorage` only, as a convenience). |
+| Accepted placement | `placement_starts` | Untouched. Placement remains an optional recommendation. |
+| Genuine lesson completion | `lesson_progress.completed_at` | An explored lesson completes through the **unchanged** completion rule (every question right in the current run, at the current content version), and earns that lesson's normal XP, daily activity and its own lesson-attempt evidence. Skipped lessons are never touched. |
+| Unlocking the guided path | `computeNodeStates` | An explored completion counts as a satisfied prerequisite **only once its own guided prerequisites are satisfied** (see 2.1). |
+| Independent evidence of knowledge | `mastery_evidence`, `concept_mastery` | Topic practice records **none**. Explored lessons record exactly what the same lesson records on the path (its authored evidence levels, hints, attempt counts), for that lesson's own concepts, never its prerequisites'. |
+| Unit and grade completion, qualification badges | unit challenge / grade assessment nodes, `assessment_results`, `achievements_awarded` | Unreachable by exploring (2.1). Topic practice never writes them. |
+| XP, streaks, achievements | `xp_ledger`, `daily_activity`, `achievements_awarded` | Topic practice: none (the practice-lab rule). Explored lesson: the lesson's normal award, once (source-keyed, as before). |
+| Help and answer exposure | `question_exposure` | Every topic-practice answer (`practice-attempt`) and hint (`practice-hint`) is recorded, so the question can never again be fresh independent evidence in Review, revision or a mock examination (`PrepService.helpedKeys` / `coachedItems` and `MasteryService.seenKeys` read this table). |
+| Personalised revision eligibility | `RevisionService.accessSet` (taught lessons + below placement) | Unchanged. Topic practice is a separate activity, not a removal of taught-scope enforcement. A lesson genuinely completed through Explore is "taught", so it becomes revisable like any completed lesson. |
+
+### 2.1 Why exploring cannot unlock assessments
+
+The guided path is a chain: `L01 → L02 → … → P1 (unit practice) → R1 (unit review) → C (checkpoint)`, the next unit's `L01` hangs off `R1`, and the grade assessment hangs off the last unit's `R1`. If an explored completion simply counted as "complete", finishing the **last lesson of a unit** out of order would open that unit's practice, then review, then checkpoint — and by the same chain, finishing the last lesson of the grade would open the **grade assessment and its badge**.
+
+So migration 010 adds `lesson_progress.explored`, set **by the server** (never a client field) when a learner starts a lesson through Explore **while the guided path has it locked**. `computeNodeStates` then treats a completed node as a satisfied prerequisite if it was not explored, or if its own guided prerequisites are satisfied (computed in path order, so the rule chains). Consequences, all tested:
+
+* Exploring and completing every lesson of Grade 5 Unit 3 and Unit 5 out of order leaves `G5-U3-P1/R1/C`, `G5-U5-P1/R1/C` and `G5-A` locked, refuses `/api/nodes/*/start`, writes no `assessment_results` and awards no grade badge.
+* The chain **heals by itself**: a learner who explored `G1-U1-L02` and later completes `G1-U1-L01` finds `G1-U1-L03` open, with no replay.
+* An explored lesson left part-way is never the guided "next step" (`nextNodeForGrade` skips `outOfSequence`), so exploring cannot move the learner's guided destination or the dashboard recommendation.
+* Exploring a lesson that the guided path already has open is ordinary guided study (`explored` stays 0).
+* Every row written before migration 010 has `explored = 0`, so for existing learners `computeNodeStates` is byte-for-byte the old rule (including the placement waiver and the unwritten-prerequisite waiver).
+
+`NodeProgress` gains `outOfSequence` (explored, prerequisites still unmet), used by the UI and by `nextNodeForGrade`. Every caller of `computeNodeStates` now reads rows through one shared query (`PROGRESS_ROWS_SQL`); before this change the server-built-node service read its own narrower column list, which would have silently ignored the new mark.
+
+## 3. Practise a topic: how questions are chosen
+
+`packages/api/src/topic-practice.ts` (`TopicPracticeService`). No new generator, grader, scope rule or curriculum list.
+
+* **What a grade offers** is derived from the curriculum: the concepts taught by that grade's playable lessons (and enrichments) that have at least one generator. Grades differ (Grade 1: 41 topics in 7 areas; Grade 5: 29 topics in 10 areas; Cadences appears only in Grade 5, and so on).
+* **Practice areas** group the curriculum's own `domain` enum into learner headings (`PRACTICE_AREAS`): Notes, clefs and notation (pitch, clefs, accidentals); Rhythm, rests and time signatures (rhythm, metre); Keys, scales and key signatures (scales, keys); Intervals; Chords and harmony; Cadences; Transposition; Musical terms and signs (terms, ornaments); Score reading (context); Instruments and voices. This is a presentation mapping of a fixed schema enum, not a topic list: an area with nothing at a grade does not appear. Units come straight from the path.
+* **Which questions**: for each topic, `ReviewService.candidates(concept, that grade's lessons)` — the templates bound to the lesson that teaches it, **in that lesson's effective teaching scope** — and `ReviewService.generateFor`, which enforces the concept-level boundary (`satisfies`) and walks seeds deterministically. So a Grade 5 topic is asked exactly as the Grade 5 lesson frames it. A grade's "mixed" practice is that grade's topics, interleaved across areas.
+* **No duplicates; fresh repeats**: questions are distinct by `questionKey` within a session; questions the learner has already met (including in earlier topic practice) are avoided while new ones exist, so *Practise again* brings different questions (tested: zero overlap on a topic with enough variety).
+* **Insufficient variety is explicit**: a topic is exhausted when every one of its question types stops producing new questions. The session is then shorter and carries `shortfall: { requested, available }`, shown on the first question. It is **never padded from another topic**. Measured: Grade 2 *Melodic minor preview* gives 4 different questions; Grade 1 *Treble clef space notes* 10.
+* **Playing**: server grading; hints (logged); the engine's feedback and reason on every answer; the worked answer after three wrong tries (the existing `REVEAL_AFTER_WRONG`); "Move on"; "Not sure? Learn it" (opens the teaching lesson in Explore mode); "Finish now" at any time.
+* **Summary**: first-attempt accuracy (a hinted answer is not first-attempt), per-topic results, the questions missed first time with what went wrong and the worked answer (only for questions the learner answered, which are already recorded as exposed), lesson links, *Practise again*, *Choose another topic*.
+* **Sessions**: idempotent client command ids, as everywhere; one open session per learner (starting another closes the previous one, keeping its answers; the open one is offered to resume); isolation by `user_id` (another learner gets 404); exported with the learner's data; deleted with the account (`ON DELETE CASCADE`). Starting a new session is rationed (30 per learner per 10 minutes, 180 per address); viewing and answering are not. Planning measured 40-250 ms for normal choices and up to ~0.7 s for an exhausted narrow topic.
+
+## 4. Data and routes
+
+**Migration `010_flexible_learning.sql` (additive):** `lesson_progress.explored INTEGER NOT NULL DEFAULT 0`; new tables `topic_practice_sessions`, `topic_practice_attempts`, `topic_practice_hint_uses` (all `user_id … ON DELETE CASCADE`). No existing row is rewritten. No onboarding, progress, XP, streak, badge, mastery, placement, assessment or setting changes for existing users. Open sessions of every existing kind are unaffected.
+
+**Routes:**
+
+* `GET /api/lessons/:id?explore=1`, `POST /api/lessons/:id/start {explore: true}` — the only change to existing routes; without the flag behaviour is as before (a locked lesson is 403, now with `explorable` in the error). The start body is strictly validated (no other field is accepted). `GET /api/lessons/:id` also returns `access: { mode, outOfSequence, foundations[] }`.
+* `GET /api/topic-practice`, `POST /api/topic-practice/sessions {grade, kind: grade|area|unit|topic, id, count: 5|10|20}`, `GET /api/topic-practice/sessions/:id`, `POST …/:id/hint`, `POST …/:id/attempts`, `POST …/:id/complete`, `POST …/:id/abandon`. No route accepts or returns a correctness claim, score or answer key; a choice that does not belong to the chosen grade is a 400 (`bad_scope`).
+
+**Web:** `pages/Flexible.tsx` (Explore lessons page, topic picker, topic player and summary); `Lesson.tsx` (explore mode, advisory, *Explore it anyway*); `NodeSheet.tsx` (*Explore this lesson anyway* on locked lessons only); `Learn.tsx` (two entry buttons; the preview note now describes the real behaviour); `Practice.tsx` (topic practice first, then examinations, then the practice lab); `Shell.tsx` (tab order).
+
+## 5. Decisions and departures from the brief
+
+1. **Explore covers authored lessons (and optional enrichment lessons) only.** Unit practice, unit review, unit checkpoints and grade assessments stay on the guided path. Topic practice covers the "practise anything" need without opening assessment eligibility. *(The brief says "any available lesson"; these nodes are not lessons.)*
+2. **An explored completion is a real completion but counts for unlocking only once its prerequisites are met** (2.1). This is the mechanism behind "must not falsely award unit or grade completion, qualification badges or mastery of prerequisites".
+3. **Explored lessons earn their normal XP and their own evidence.** The brief allows this ("subject to the existing evidence and completion requirements"). Concept badges (mastery-based) can therefore be earned through explored lessons plus genuine later review, exactly as on the path; grade/checkpoint badges cannot.
+4. **Topic practice never counts for the daily goal or streak** (practice-lab rule), as well as no XP, mastery, completion or readiness.
+5. **Hints are offered in topic practice**; the worked answer follows three wrong tries and appears in the summary for missed questions. All of it is recorded as exposure.
+6. **Mixed practice for a grade uses the topics introduced in that grade**, each in its lesson's scope (which already includes earlier-grade material the lesson builds on). Earlier grades' topics are one tap away by switching grade.
+7. **Navigation**: tabs reordered to Learn, Practice, Review, Progress (brief's recommendation). The Practice page now leads with topic practice; the examinations heading became an `h2` (one `h1` per page). The Learn page's old "Early preview… open the ready ones in any order" note, which was no longer true, now points to Explore and topic practice. No other existing screen changed.
+8. **One open topic-practice session per learner**: starting another closes the previous one (answers kept). This keeps "resume" unambiguous across devices.
+
+## 6. Limitations and genuinely unresolved issues
+
+* **No visual marker on the guided path for an explored completion.** It shows as *Completed* (true), while the lessons before it stay locked; `outOfSequence` is available for a future marker. Owner/UX decision.
+* **Topic scope follows the lesson binding.** Some lessons' scopes include earlier-grade material (e.g. Grade 5 *Six sharps* can ask for the key signature in the alto clef, a Grade 4 clef). This is the existing, reviewed lesson scope, not something this PR introduced; a teacher may want to look at it.
+* **Near-repeats across templates** (the same fact through two templates) are not detected, as already noted for examinations.
+* **A narrow topic can be small** (4-11 distinct questions on a few Grade 1-2 topics). Handled transparently; enlarging those pools is content work outside this brief.
+* **Generation cost** for an exhausted narrow topic (~0.7 s on the server's one thread) is bounded by rationing, not removed.
+* **The `explored` mark is never cleared.** It does not need to be (the rule heals once prerequisites are done), but exports will show it.
+* **Placement + Explore interaction**: a learner placed at Grade N who explores a lower-grade lesson is treated by the same rule (the lower-grade node keeps its own prerequisites, as placement already required).
+* **Physical iPhone verification has not been done by me.** Everything below "automated" in section 7 is from Chromium (Playwright device emulation and jsdom), not a device.
+
+## 7. Verification
+
+**Automated (run in CI):**
+
+| Requirement | Test |
+|---|---|
+| Fresh learner completes a Grade 5 lesson without Grades 1-4; later unit without earlier units; skipped lessons stay uncompleted; return to Grade 1; guided path still enforced; direct API cannot manufacture marks, completions, rewards or eligibility; placement unaffected; pre-010 rows keep their meaning; guest conversion | `packages/api/test/flexible-learning.test.ts` (Explore and migration blocks) |
+| Fresh guest practises a Grade 5 topic; topic/area/unit/mixed selections stay in scope and in grade; counts 5/10/20; refusal of out-of-grade choices; shortfall; hints, marking, explanations, worked answers, finish early, summary; fresh repeats; no XP/mastery/completion/readiness; exposure recorded and read by mock-exam independence and review; revision eligibility unchanged; idempotency, one open session, isolation, export | `packages/api/test/flexible-learning.test.ts` (Practise a topic block) |
+| UI journeys (jsdom, real API) | `packages/web/src/test/flexible.test.tsx` |
+| Real-browser journeys: explore + play a Grade 5 lesson through the real controls with nothing else opening; *Explore it anyway*; topic practice answered through the real controls, summary, *Practise again* with different questions, finish early; shortfall; iPhone 14 / 320 px / tablet / desktop-dark with axe (WCAG 2.1 AA serious/critical) and no sideways scroll | `packages/web/e2e/flexible.mjs` (in the `prep` browser shard) |
+| Regression: every existing API, UI and browser suite | `npm run check`, CI browser shards |
+
+**Manual acceptance on a physical iPhone (installed PWA) — for the owner:**
+
+1. Open the installed app. Learn shows the grade chip, then *Explore lessons* and *Practise a topic* side by side; both are easy to tap with a thumb.
+2. *Explore lessons* → tap **5** → Unit 3 → *Open* on "Chromatic intervals". A notice says you are exploring ahead of your guided path, with links to lessons that help. Tap *Let's go* and play the lesson; notation renders; sound plays if sound is on.
+3. Finish it. Close. Learn (Grade 1) still says "Next up: Beats, crotchets, minims and semibreves". Switch the Learn grade to 5: the explored lesson shows *Completed*; Unit 3 practice/checkpoint and the Grade 5 assessment show as locked.
+4. On the Grade 1 path tap a locked lesson: the sheet offers *Explore this lesson anyway*.
+5. Practice tab → **5** → *Keys, scales and key signatures* → *Six flats* → **10** → *Start*. The start button stays visible above the tab bar and clear of the home indicator.
+6. Answer a few, use *Need a hint?*, get one wrong three times (the answer appears), tap *Not sure? Learn it* and come back with the close button, then *Finish now*. The summary lists the missed question with the answer and a lesson link.
+7. *Practise again*: new questions, no extra taps. Close and reopen the app: Practice offers *Carry on* for the open session.
+8. Practice → **2** → *Keys, scales…* → *Melodic minor preview* → **20**: the first question explains there are only 4 different questions.
+9. Settings → Dark theme, and iOS larger text: repeat steps 2 and 5; nothing is cut off, nothing scrolls sideways; VoiceOver reads the grade buttons as "Grade 1"… and the counts as "5 questions"….
+10. Profile → Progress: XP unchanged by topic practice; the explored lesson's XP is there once.
+11. Rotate to landscape on the question screen; then airplane mode mid-answer: the answer is not lost, *Check* again works once back online.
