@@ -166,6 +166,8 @@ One existing rule gains an optional input, and it is the only change to progress
 
 * **`computeNodeStates(course, rows, policy, placedGrade = null)`.** For a learner who has **accepted a placement start at Grade N**, nodes of grades below N no longer block nodes of grade N and above from unlocking. **The waiver applies only to nodes of grade N and above**: a node of an earlier grade keeps its own prerequisites, so placing in at Grade 4 does not open (or let anyone pass) the Grade 1-3 assessments and earn their badges. Those earlier nodes stay exactly as they were: not completed, no badge, no XP. For every learner without an accepted placement, `placedGrade` is `null` and behaviour is byte-for-byte the same (the whole existing progression suite passes unmodified). Choosing a lower grade later, or re-placing, simply moves that boundary; nothing already completed or in progress is touched. Tests: `prep-placement.test.ts` ("choosing a starting grade...", "taking placement again...").
 
+*Later change (flexible learning, migration 010):* `computeNodeStates` also treats a lesson completed through Explore while it was locked as a satisfied prerequisite only once its own guided prerequisites are satisfied. Rows written before that migration are unaffected, so the placement behaviour above is unchanged; see [FLEXIBLE_LEARNING.md](FLEXIBLE_LEARNING.md).
+
 Everything else the brief names as protected (progression rules, XP amounts and caps, badge conditions, pass thresholds, historical results) is untouched. Two existing tests that list the migration files were updated for `009_prep.sql`.
 
 ## 6. Sources and originality

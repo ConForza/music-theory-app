@@ -1,11 +1,10 @@
-import { useEffect } from "react";
 import { Link } from "react-router";
 import { ErrorState, Loading } from "../components/Shell";
 import { Icon } from "../components/Icon";
 import { Legend } from "../components/Legend";
 import { RecentBadges, ReviewNudge, StatusStrip, WelcomeBack } from "../components/Engagement";
 import { LearningPath } from "../components/LearningPath";
-import { describeNode } from "../lib/pathView";
+import { describeNode, lockReason } from "../lib/pathView";
 import { useApp, useCourseData } from "../state/app";
 import { QuickReviewCard } from "./Revise";
 
@@ -18,12 +17,9 @@ export function Learn() {
   const data = useCourseData();
   const grade = me!.profile.selectedGrade;
 
+  // The page opens at the top, so the grade, the next step and the other ways to learn are all in view on a phone; the path below marks the
+  // current step without scrolling the page to it (review of PR #26, finding 5: the old automatic scroll hid Explore and Practise a topic).
   const currentId = data.status === "ready" ? data.progress.grades[grade - 1]?.nextNodeId ?? null : null;
-  useEffect(() => {
-    if (!currentId) return;
-    const el = document.querySelector<HTMLElement>(`[data-node="${currentId}"]`);
-    el?.scrollIntoView?.({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
-  }, [currentId, data.status]);
 
   if (data.status === "loading") return <Loading label="Loading your path…" />;
   if (data.status === "error") return <ErrorState error={data.error} onRetry={reloadAll} />;
@@ -31,7 +27,11 @@ export function Learn() {
   const world = data.course.worlds[grade - 1]!;
   const next = currentId ? data.nodes.get(currentId)! : null;
   const v = next ? describeNode(next, data.progress.nodes[next.id]) : null;
-  const finished = data.progress.grades[grade - 1]!.completedNodes > 0;
+  const gp = data.progress.grades[grade - 1]!;
+  const finished = gp.completedNodes > 0 && gp.completedNodes >= gp.writtenNodes;
+  // No next step, but written work remains: the guided path is waiting on earlier steps (an earlier grade, or the lessons before ones explored
+  // ahead). Say what, instead of "every ready lesson is done" (review of PR #26, finding 4).
+  const blocked = !next && !finished ? world.nodes.find((n) => !n.optional && n.playable && data.progress.nodes[n.id]?.state === "locked" && (data.progress.nodes[n.id]?.lockedBy ?? []).some((id) => data.nodes.get(id)?.playable)) : undefined;
   const elsewhere = data.course.worlds.find((w) => w.grade !== grade && data.progress.grades[w.grade - 1]!.nextNodeId);
 
   return (
@@ -43,6 +43,10 @@ export function Learn() {
           <Icon name="down" size={20} />
         </Link>
       </header>
+      <nav className="learn-ways" aria-label="Other ways to learn">
+        <Link className="btn btn-ghost btn-small" to={`/learn/explore?grade=${grade}`}><Icon name="path" size={18} /> Explore lessons</Link>
+        <Link className="btn btn-ghost btn-small" to="/practice"><Icon name="sparkle" size={18} /> Practise a topic</Link>
+      </nav>
 
       {engagement.status === "ready" && (
         <>
@@ -62,6 +66,15 @@ export function Learn() {
           <p className="muted small"><Icon name="clock" size={16} /> About {next.estimatedMinutes} minutes</p>
           <Link className="btn btn-primary btn-large" to={`/lesson/${next.id}`}>{v.action}</Link>
         </section>
+      ) : blocked ? (
+        <section className="next-card is-empty" aria-labelledby="next-h" data-testid="guided-blocked">
+          <h2 id="next-h">Your Grade {grade} path continues after earlier steps</h2>
+          <p>{lockReason(data.progress.nodes[blocked.id], data.titleOf, data.progress.nodes)}{gp.exploredNodes > 0 ? ` The ${gp.exploredNodes === 1 ? "lesson" : `${gp.exploredNodes} lessons`} you completed here through Explore will count then.` : ""} Meanwhile you can explore any lesson or practise any topic.</p>
+          <div className="row">
+            <Link className="btn btn-primary" to={`/learn/explore?grade=${grade}`}>Explore Grade {grade} lessons</Link>
+            <Link className="btn btn-ghost" to="/grades">Choose a grade</Link>
+          </div>
+        </section>
       ) : (
         <section className="next-card is-empty" aria-labelledby="next-h">
           <h2 id="next-h">{finished ? `You've done every ready lesson in Grade ${grade}` : `Nothing to start in Grade ${grade} just yet`}</h2>
@@ -71,7 +84,7 @@ export function Learn() {
       )}
 
       {engagement.status === "ready" && engagement.data.achievements.recent.length > 0 && <RecentBadges e={engagement.data} />}
-      <p className="preview-note"><Icon name="info" size={16} /> <span>Early preview: lessons marked “Coming soon” are still being written, so you can open the ready ones in any order.</span></p>
+      <p className="preview-note"><Icon name="info" size={16} /> <span>The path takes you through each grade in order. To jump ahead, use Explore lessons to open any lesson, or Practise a topic to work on anything you choose.</span></p>
       <Legend />
       <LearningPath data={data} world={world} currentId={currentId} />
     </div>

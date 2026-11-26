@@ -72,6 +72,7 @@ Notation is drawn by the Brief 03 renderer (`components/notation`, Bravura SMuFL
 | 04 Progression | **Done.** XP ledger, daily goal and streak, concept mastery evidence + projections, adaptive review sessions and badges are new tables/services (migration 003) derived from the attempt log; `computeNodeStates` is unchanged and remains the single authority for unlocking. See [PROGRESSION.md](PROGRESSION.md). |
 | 05–09 Content | Add `LessonContent` files and set `contentRef`/`contentStatus` on nodes; they appear on the path automatically. Turn `waiveUnwrittenPrerequisites` off when a grade is complete. |
 | 10 Placement | `profiles.experience` records the learner's declared level; placement should write completion through the same server-verified route. |
+| Flexible learning | **Done.** Explore lessons (`?explore=1` on the lesson routes, `lesson_progress.explored`, migration 010) and Practise a topic (`TopicPracticeService`, `/api/topic-practice/*`). `computeNodeStates` counts an explored completion towards unlocking only once its own prerequisites are met, so assessments stay guided. See [FLEXIBLE_LEARNING.md](FLEXIBLE_LEARNING.md). |
 
 ## Running it
 

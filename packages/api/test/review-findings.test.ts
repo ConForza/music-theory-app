@@ -509,7 +509,9 @@ describe("historical practice exposure (Brief 03 databases)", () => {
     const clock = new ManualClock(new Date("2026-03-02T12:00:00Z"));
     const app = createApp({ db: db as never, course, clock });
     expect((db.prepare("SELECT COUNT(DISTINCT question_key) AS n FROM question_exposure").get() as { n: number }).n).toBe(want.size); // recovered
-    expect(db.prepare("SELECT name FROM data_backfills").all()).toEqual([{ name: "practice-exposure-from-brief-03-history" }]);
+    expect(db.prepare("SELECT name FROM data_backfills ORDER BY name").all()).toEqual([{ name: "practice-exposure-from-brief-03-history" }, { name: "visible-identity-for-help-records" }]);
+    // review of PR #26 (P1): the recovered exposures also carry the order-insensitive identity
+    expect((db.prepare("SELECT COUNT(*) AS n FROM question_exposure WHERE visible_key IS NULL").get() as { n: number }).n).toBe(0);
     const c = new Client(app);
     c.cookie = `${COOKIE}=${token}`;
     await finishLesson(c);
@@ -521,7 +523,7 @@ describe("historical practice exposure (Brief 03 databases)", () => {
     for (const r of results.filter((x) => x.si.kind === "review" && x.si.templateId === tpl)) expect(r.body.counted).toBe(false);
     // Running the app again repairs nothing twice and changes nothing.
     createApp({ db: db as never, course, clock });
-    expect((db.prepare("SELECT COUNT(*) AS n FROM data_backfills").get() as { n: number }).n).toBe(1);
+    expect((db.prepare("SELECT COUNT(*) AS n FROM data_backfills").get() as { n: number }).n).toBe(2);
   });
 
   it("repairs a database that already took the earlier migrations without touching legitimate credit", async () => {

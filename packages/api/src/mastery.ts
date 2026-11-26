@@ -34,6 +34,8 @@ export interface EvidenceRow {
   itemId: string;
   /** Stable identity of what was asked, independent of seed (defaults to the item id). */
   questionKey?: string;
+  /** What the learner saw, whatever the option order. Absent on rows recorded before migration 011. */
+  visibleKey?: string | null;
   /** Decided when recorded: false if the learner had already been shown this question (ledger or practice). Default true. */
   fresh?: boolean;
   templateId: string;
@@ -138,8 +140,10 @@ export function foldConcept(conceptId: string, rows: EvidenceRow[], rules: Maste
     const key = r.questionKey ?? r.itemId;
     // Fresh = the learner had never met this question when they answered. Outside-the-ledger exposure (practice) was decided at
     // write time and stored on the row, so event order, not a timestamp, decides it.
-    const fresh = (r.fresh ?? true) && !seenKeys.has(key);
+    // Either identity: the same question with its options reordered is not new (rows from before migration 011 have only `key`).
+    const fresh = (r.fresh ?? true) && !seenKeys.has(key) && !(r.visibleKey && seenKeys.has(r.visibleKey));
     seenKeys.add(key);
+    if (r.visibleKey) seenKeys.add(r.visibleKey);
     // The review schedule starts at the learner's first activity on the concept, even if nothing has been answered
     // correctly yet: someone who needed retries is exactly who should be asked again, with a fresh question.
     if (sch.idx === null) schedule(r.localDate, 0);

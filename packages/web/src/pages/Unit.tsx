@@ -23,7 +23,7 @@ export function Unit() {
       <div className="progress" role="progressbar" aria-label="Unit progress" aria-valuemin={0} aria-valuemax={gp.requiredNodes} aria-valuenow={gp.completedNodes}>
         <span style={{ width: `${(gp.completedNodes / Math.max(1, gp.requiredNodes)) * 100}%` }} />
       </div>
-      <p className="muted small">{gp.completedNodes} of {gp.requiredNodes} steps complete{gp.writtenNodes < gp.requiredNodes ? ` · ${gp.writtenNodes} ready to play` : ""}</p>
+      <p className="muted small">{gp.completedNodes} of {gp.requiredNodes} steps complete{gp.exploredNodes ? ` · ${gp.exploredNodes} explored ahead, counted once the steps before them are done` : ""}{gp.writtenNodes < gp.requiredNodes ? ` · ${gp.writtenNodes} ready to play` : ""}</p>
       <ol className="unit-list">
         {nodes.map((n) => {
           const p = data.progress.nodes[n.id];
@@ -34,11 +34,12 @@ export function Unit() {
                 <p className="muted small">{v.kindLabel}{n.optional ? " · optional" : ""} · about {n.estimatedMinutes} min</p>
                 <h2>{n.title}</h2>
                 <p>{n.objective}</p>
-                {v.status === "locked" && <p className="small"><Icon name="lock" size={16} /> {lockReason(p, data.titleOf)}</p>}
+                {v.status === "locked" && <p className="small"><Icon name="lock" size={16} /> {lockReason(p, data.titleOf, data.progress.nodes)}</p>}
                 {n.practiceOnly && <p className="muted small">Practice only, not an official exam.</p>}
               </div>
               <div className="unit-row-side">
                 <span className={`pill status-${v.status}`}>{v.statusLabel}</span>
+                {v.explored && <span className="pill pill-explored">Explored</span>}
                 {v.openable && v.action && <Link className={v.status === "available" || v.status === "in_progress" ? "btn btn-primary btn-small" : "btn btn-ghost btn-small"} to={`/lesson/${n.id}`} aria-label={`${v.action}: ${n.title}`}>{v.action}</Link>}
               </div>
             </li>

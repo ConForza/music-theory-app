@@ -15,7 +15,7 @@ import { tx } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { systemClock, type Clock } from "./clock.ts";
-import { recordExposure } from "./mastery-service.ts";
+import { exposeItem } from "./mastery-service.ts";
 import { questionKey } from "./question-key.ts";
 
 const now = () => new Date().toISOString();
@@ -98,7 +98,7 @@ export class PracticeService {
     if (level < 1 || level > item.hints.length) throw new ApiError(400, "bad_request", "No such hint.");
     this.db.prepare("INSERT OR IGNORE INTO practice_hint_uses (user_id,item_id,level,created_at) VALUES (?,?,?,?)").run(userId, itemId, level, now());
     // Practice earns no mastery credit, but a question seen here can never again be fresh independent evidence.
-    recordExposure(this.db, userId, questionKey(item), "practice-hint", this.clock.now().toISOString());
+    exposeItem(this.db, userId, item, "practice-hint", this.clock.now().toISOString());
     return { hint: item.hints[level - 1]!, level };
   }
 
@@ -123,7 +123,7 @@ export class PracticeService {
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         )
         .run(userId, attemptId, itemId, item.templateId, item.templateVersion, seed, this.course.version, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, next, now());
-      recordExposure(this.db, userId, questionKey(item), "practice-attempt", this.clock.now().toISOString());
+      exposeItem(this.db, userId, item, "practice-attempt", this.clock.now().toISOString());
       return next;
     });
     return this.result(item, scope, graded.correct, graded.category, n, false, graded);

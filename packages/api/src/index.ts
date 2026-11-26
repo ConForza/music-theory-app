@@ -22,3 +22,4 @@ export * from "./prep.ts";
 export * from "./prep-config.ts";
 export * from "./prep-blueprint.ts";
 export * from "./revision.ts";
+export * from "./topic-practice.ts";

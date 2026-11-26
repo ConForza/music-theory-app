@@ -42,6 +42,8 @@ export function PathNodeButton({
       </span>
       {v.status === "in_progress" && <span className="node-ring" aria-hidden="true" />}
       {v.status === "review_available" && <span className="node-badge" aria-hidden="true"><Icon name="repeat" size={14} strokeWidth={3} /></span>}
+      {/* Explored ahead of the path: a different corner and glyph from "review available", and spoken in the label (never colour or shape alone). */}
+      {v.explored && <span className="node-badge node-badge-explored" aria-hidden="true"><Icon name="path" size={14} strokeWidth={3} /></span>}
     </>
   );
   const label = nodeAriaLabel(node, v);

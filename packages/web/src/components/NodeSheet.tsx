@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import type { CourseData } from "../state/app";
-import { describeNode, lockReason } from "../lib/pathView";
+import { describeNode, lockReason, missingSteps } from "../lib/pathView";
 import { Icon } from "./Icon";
 
 /** Bottom sheet / dialog explaining a node: why it is locked, that it is coming soon, or how to replay it. */
@@ -34,8 +34,12 @@ export function NodeSheet({ data, nodeId, onClose }: { data: CourseData; nodeId:
   }, [onClose]);
 
   const message =
-    v.status === "locked" ? lockReason(p, data.titleOf)
+    v.status === "locked" ? lockReason(p, data.titleOf, data.progress.nodes)
     : v.status === "coming_soon" ? "This one is still being written, so there is nothing to open yet. Everything marked ready is fully playable."
+    : v.status === "completed" && v.explored ? (() => {
+        const need = missingSteps(p?.waitingFor ?? [], data.progress.nodes).need;
+        return `You completed this through Explore. It will count on your guided path once you finish ${need.length ? `“${need.map(data.titleOf).join("” and “")}”` : "the lessons before it"}.`;
+      })()
     : v.status === "completed" ? "You've completed this. Practising again won't change your progress."
     : v.status === "review_available" ? "This lesson has been improved since you finished it. A quick refresher keeps it fresh."
     : "";
@@ -45,6 +49,7 @@ export function NodeSheet({ data, nodeId, onClose }: { data: CourseData; nodeId:
       <div className="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" tabIndex={-1} ref={ref} onClick={(e) => e.stopPropagation()}>
         <div className="sheet-head">
           <span className={`pill status-${v.status}`}>{v.statusLabel}</span>
+          {v.explored && <span className="pill pill-explored">Explored</span>}
           <span className="muted">{v.kindLabel} · about {node.estimatedMinutes} min</span>
         </div>
         <h2 id="sheet-title">{node.title}</h2>
@@ -54,6 +59,10 @@ export function NodeSheet({ data, nodeId, onClose }: { data: CourseData; nodeId:
         <div className="sheet-actions">
           {v.openable && v.action && (
             <Link className="btn btn-primary" to={`/lesson/${node.id}`}>{v.action}</Link>
+          )}
+          {/* Flexible learning: an authored lesson ahead of the path can be explored; practice, checkpoints and assessments cannot. */}
+          {v.status === "locked" && node.playKind === "lesson" && (
+            <Link className="btn btn-ghost" to={`/lesson/${node.id}?explore=1`}>Explore this lesson anyway</Link>
           )}
           <button type="button" className="btn btn-quiet" onClick={onClose}>{v.openable ? "Not now" : "Got it"}</button>
         </div>

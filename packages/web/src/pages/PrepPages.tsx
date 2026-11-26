@@ -25,8 +25,8 @@ export function ExamHub() {
     <>
       <section aria-labelledby="exams-h" className="exam-hub">
         <p className="eyebrow">Practice examinations</p>
-        <h1 id="exams-h">Test yourself, grade by grade</h1>
-        <p className="lede-small">A full paper for each grade, made fresh every time from the whole syllabus. Use practice mode to learn from every question, or a mock examination to see what you can do on your own. These are our own practice assessments: not ABRSM papers, marks or results.</p>
+        <h2 id="exams-h" className="h1">Test yourself, grade by grade</h2>
+        <p className="lede-small">Examinations: test yourself across a whole grade. A full paper for each grade, made fresh every time from the whole syllabus. Use practice mode to learn from every question, or a mock examination to see what you can do on your own. These are our own practice assessments: not ABRSM papers, marks or results.</p>
         <ul className="exam-grid">
           {data.grades.map((g) => (
             <li key={g.grade} className="card exam-card" data-grade={g.grade} data-testid={`exam-${g.grade}`}>

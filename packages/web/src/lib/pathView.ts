@@ -13,6 +13,8 @@ export interface NodeView {
   openable: boolean;
   /** Label for the primary action, if any. */
   action: string | null;
+  /** Opened through Explore ahead of the guided path (and its earlier lessons are not all done yet). */
+  explored: boolean;
 }
 
 const SHAPE: Record<CourseNode["type"], Shape> = {
@@ -56,16 +58,41 @@ export function describeNode(node: CourseNode, p: NodeProgress | undefined): Nod
     : status === "completed" ? "Practise again"
     : status === "review_available" ? "Review"
     : null;
-  return { shape, status, statusLabel: STATUS_LABEL[status], kindLabel: KIND[shape], openable, action };
+  return { shape, status, statusLabel: STATUS_LABEL[status], kindLabel: KIND[shape], openable, action, explored: Boolean(p?.outOfSequence) };
 }
 
 export function nodeAriaLabel(node: CourseNode, v: NodeView): string {
-  return `${v.kindLabel}: ${node.title}. ${v.statusLabel}. About ${node.estimatedMinutes} minutes.`;
+  return `${v.kindLabel}: ${node.title}. ${v.statusLabel}${v.explored ? ", explored ahead of your path" : ""}. About ${node.estimatedMinutes} minutes.`;
 }
 
-/** Why a locked node is locked, in words the learner can act on. */
-export function lockReason(p: NodeProgress | undefined, titleOf: (id: string) => string): string {
-  const need = (p?.lockedBy ?? []).map(titleOf);
+const quote = (titles: string[]) => titles.map((t) => `“${t}”`).join(" and ");
+
+/**
+ * Why a locked node is locked, in words the learner can act on. With the learner's progress (`nodes`), a prerequisite already completed
+ * through Explore is not named as something to finish: the message names the guided lesson(s) it is still waiting for, and says the
+ * explored lesson will count then.
+ */
+/** The guided steps that really stand in the way, following prerequisites already completed through Explore back to what is missing. */
+export function missingSteps(ids: string[], nodes?: Record<string, NodeProgress | undefined>): { need: string[]; explored: string[] } {
+  const need: string[] = [];
+  const explored: string[] = [];
+  const seen = new Set<string>();
+  const visit = (id: string) => {
+    if (seen.has(id)) return;
+    seen.add(id);
+    const q = nodes?.[id];
+    if (q?.state === "completed" && q.outOfSequence) {
+      explored.push(id);
+      for (const w of q.waitingFor ?? []) visit(w);
+    } else need.push(id);
+  };
+  for (const id of ids) visit(id);
+  return { need, explored };
+}
+
+export function lockReason(p: NodeProgress | undefined, titleOf: (id: string) => string, nodes?: Record<string, NodeProgress | undefined>): string {
+  const { need, explored } = missingSteps(p?.lockedBy ?? [], nodes);
   if (!need.length) return "Finish the earlier lessons first.";
-  return `Finish ${need.map((t) => `“${t}”`).join(" and ")} first.`;
+  const base = `Finish ${quote(need.map(titleOf))} first.`;
+  return explored.length ? `${base} ${quote(explored.map(titleOf))}, which you've already explored, will count then.` : base;
 }

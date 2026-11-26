@@ -138,7 +138,15 @@ export async function playNodeInBrowser(page, S, userId, nodeId, opts = {}) {
     n++;
     const view = await get(page, `/api/nodes/${nodeId}/session`);
     const st = view.items.find((x) => x.item.id === it.itemId);
-    if (st?.answered && view.firstAttemptOnly) { await page.getByRole("button", { name: /Continue|Finish/ }).click().catch(() => {}); continue; }
+    if (st?.answered && view.firstAttemptOnly) {
+      // Answered elsewhere (a suite can give some answers through the API first). The player skips answered questions only when it opens
+      // (`resumeAt`), so one in the middle of a run is shown again with "Check" and no "Continue". Reopen it, as a learner on a second device
+      // would: it resumes at the first unanswered question. (Clicking a "Continue" that does not exist, with the error swallowed, stalled the
+      // Grade 5 assessment journey whenever its random paper had fewer than 14 choice questions.)
+      await page.reload();
+      await page.getByRole("button", { name: /Let's go|Continue/ }).click();
+      continue;
+    }
     const q = page.locator("section.question");
     await q.waitFor();
     // Wait until THIS question's prompt is on screen. After "Continue" the previous question's section can still be in the DOM for a moment, and

@@ -5,7 +5,7 @@ import { describeNode, lockReason } from "../lib/pathView";
 const node = (type: CourseNode["type"], playable = true): CourseNode => ({
   id: "X", type, unitId: "U", title: "T", objective: "O", optional: false, estimatedMinutes: 5, contentVersion: 1, playable, playKind: playable ? "lesson" : null, sessionKind: null, practiceOnly: false,
 });
-const p = (state: NodeProgress["state"], extra: Partial<NodeProgress> = {}): NodeProgress => ({ state, lockedBy: [], completedAt: null, reviewAvailable: false, replayOpen: false, ...extra });
+const p = (state: NodeProgress["state"], extra: Partial<NodeProgress> = {}): NodeProgress => ({ state, lockedBy: [], completedAt: null, reviewAvailable: false, replayOpen: false, outOfSequence: false, waitingFor: [], ...extra });
 
 describe("describeNode", () => {
   it.each([
@@ -39,5 +39,17 @@ describe("describeNode", () => {
     expect(lockReason(p("locked", { lockedBy: ["A"] }), t)).toBe("Finish “Notes” first.");
     expect(lockReason(p("locked", { lockedBy: ["A", "B"] }), t)).toBe("Finish “Notes” and “Rests” first.");
     expect(lockReason(undefined, t)).toBe("Finish the earlier lessons first.");
+  });
+
+  it("never asks the learner to finish a lesson they already completed through Explore: names what it waits for instead", () => {
+    const nodes = { A: p("available"), B: p("completed", { outOfSequence: true, waitingFor: ["A"] }) };
+    const names = (id: string) => ({ A: "Notes", B: "Rests" })[id] ?? id;
+    expect(lockReason(p("locked", { lockedBy: ["B"] }), names, nodes)).toBe("Finish “Notes” first. “Rests”, which you've already explored, will count then.");
+    // a chain of explored lessons is followed back to the real missing step
+    const chain = { ...nodes, C: p("completed", { outOfSequence: true, waitingFor: ["B"] }) };
+    expect(lockReason(p("locked", { lockedBy: ["C"] }), (id) => id, chain)).toBe("Finish “A” first. “C” and “B”, which you've already explored, will count then.");
+    // without progress the old wording is unchanged
+    expect(lockReason(p("locked", { lockedBy: ["B"] }), names)).toBe("Finish “Rests” first.");
+    expect(describeNode(node("lesson"), p("completed", { outOfSequence: true })).explored).toBe(true);
   });
 });

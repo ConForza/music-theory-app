@@ -24,10 +24,11 @@ export function Step({ title, children, eyebrow }: { title: string; children: Re
   );
 }
 
-export function Intro({ lesson, title, minutes, onNext, resumed }: { lesson: LearnerLesson; title: string; minutes: number; onNext: () => void; resumed: boolean }) {
+export function Intro({ lesson, title, minutes, onNext, resumed, notice }: { lesson: LearnerLesson; title: string; minutes: number; onNext: () => void; resumed: boolean; notice?: ReactNode }) {
   return (
     <>
       <Step title={title} eyebrow={resumed ? "Welcome back" : "Today's goal"}>
+        {notice}
         <p className="lede-small">{lesson.objective.statement}</p>
         <h2 className="h3">By the end you'll be able to:</h2>
         <ul className="checklist">
@@ -301,7 +302,10 @@ export function Done({
   nextId,
   error,
   onRetry,
+  backTo,
 }: {
+  /** Where the primary action returns to, when the lesson was opened from somewhere other than the path (a practice question). */
+  backTo?: { to: string; label: string };
   lesson: LearnerLesson;
   summary: (CompletionSummary & { alreadyComplete: boolean }) | null;
   nextTitle: string | null;
@@ -338,7 +342,7 @@ export function Done({
         <p className="muted small">Progress saved.</p>
       </Step>
       <ActionBar>
-        <Link className="btn btn-primary btn-large" to="/learn" autoFocus>Back to the path</Link>
+        <Link className="btn btn-primary btn-large" to={backTo?.to ?? "/learn"} autoFocus>{backTo?.label ?? "Back to the path"}</Link>
         {nextId && nextId !== lesson.nodeId && <Link className="btn btn-ghost" to={`/lesson/${nextId}`}>Next: {nextTitle}</Link>}
       </ActionBar>
     </>
