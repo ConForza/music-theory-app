@@ -152,7 +152,7 @@ export interface RequestOptions {
   /** Give up after this long (default 20s) so a stalled connection becomes an error the learner can retry. */
   timeoutMs?: number;
   /** If the private-preview gate blocks this request, the action to show as pending when the tester comes back (`?pending=`). */
-  previewReturn?: "signout";
+  previewReturn?: SignOutIntent;
 }
 
 async function request<T>(method: string, path: string, body?: unknown, opts: RequestOptions = {}): Promise<T> {
@@ -258,24 +258,56 @@ async function retrying<T>(sc: IdentityScope, fn: () => Promise<T>, tries = 3): 
 
 const L = (id: string) => `/api/lessons/${encodeURIComponent(id)}`;
 
+/** Whether a sign-out also leaves the private preview, and so what is still pending if the preview gate blocks it. */
+export type SignOutIntent = "signout" | "leave-preview";
+
+let authChain: Promise<unknown> = Promise.resolve();
+/**
+ * Run one change of "who is signed in on this browser" at a time: sign-in, registration (with its lost-reply recovery), guest creation,
+ * sign-out and account deletion. Each of these sets or clears the session cookie, and the browser keeps whichever cookie ARRIVES last, so
+ * two in flight at once could let a slower, older one undo a newer explicit sign-out or sign-in (review of the PWA PR). Holding the section
+ * until the response, and with it the cookie, has been received means each change starts from the cookie the previous one left. Across tabs
+ * this uses the Web Locks API (one lock per origin); without it, changes are queued within the tab. Every request has a timeout, so a
+ * stalled one releases the section. Not re-entrant: inside `fn`, use `rawAuth`, never the locked `api` calls.
+ */
+export function authExclusive<T>(fn: () => Promise<T>): Promise<T> {
+  const locks = typeof navigator !== "undefined" ? (navigator as Navigator & { locks?: { request: (name: string, cb: () => Promise<T>) => Promise<T> } }).locks : undefined;
+  if (locks?.request) return locks.request("mtp-auth", fn);
+  const run = authChain.then(fn, fn);
+  authChain = run.catch(() => undefined);
+  return run;
+}
+
+/** The identity-changing requests themselves, unlocked: only for use inside `authExclusive`. */
+export const rawAuth = {
+  me: (signal?: AbortSignal) => request<Me>("GET", "/api/me", undefined, { signal }),
+  guest: () => request<Me>("POST", "/api/auth/guest", {}),
+  register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
+  login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }) => request<Me>("POST", "/api/auth/login", b),
+  logout: (intent: SignOutIntent = "signout") => request<{ ok: true }>("POST", "/api/auth/logout", {}, { previewReturn: intent }),
+  deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me", undefined, { scope }),
+};
+
 export const api = {
   // Identity calls: they start or end a scope, so they are not bound to one.
   me: (signal?: AbortSignal) => request<Me>("GET", "/api/me", undefined, { signal }),
-  guest: () => request<Me>("POST", "/api/auth/guest", {}),
+  // Everything that changes who is signed in runs one at a time (see authExclusive).
+  guest: (): Promise<Me> => authExclusive(() => rawAuth.guest()),
   // Not auto-retried: the form decides, after checking who is signed in (see AccountForm). A retry from the same
   // session is still safe, because the server answers it with the same account instead of creating another.
-  register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
+  register: (b: { email: string; password: string; displayName: string }): Promise<Me> => authExclusive(() => rawAuth.register(b)),
   // `onlyIfSignedOut`: the registration form's recovery after a lost reply; the server refuses it (409 signed_in) if a different learner
   // is signed in on this device by then, so it can never replace them.
-  login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }) => request<Me>("POST", "/api/auth/login", b),
-  // If the private-preview gate blocks it, the learner is NOT signed out: the preview sign-in page brings them back with the sign-out pending.
-  logout: () => request<{ ok: true }>("POST", "/api/auth/logout", {}, { previewReturn: "signout" }),
+  login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }): Promise<Me> => authExclusive(() => rawAuth.login(b)),
+  // If the private-preview gate blocks it, the learner is NOT signed out: the preview sign-in page brings them back with the action
+  // (`intent`) still pending.
+  logout: (intent: SignOutIntent = "signout"): Promise<{ ok: true }> => authExclusive(() => rawAuth.logout(intent)),
   course: () => request<CourseView>("GET", "/api/course"),
   // Everything below acts on the current learner's data and is bound to the learner who started it.
   patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
     request<Me>("PATCH", "/api/me/profile", b, { scope }),
   exportData: () => request<unknown>("GET", "/api/me/export", undefined, { scope }),
-  deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me", undefined, { scope }),
+  deleteAccount: (): Promise<{ ok: true }> => authExclusive(() => rawAuth.deleteAccount()),
   progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal, scope }),
   // `explore`: open a written lesson ahead of the guided path (flexible learning). The server decides what that means for unlocking.
   lesson: (id: string, explore = false) => request<OpenedLesson>("GET", `${L(id)}${explore ? "?explore=1" : ""}`, undefined, { scope }),

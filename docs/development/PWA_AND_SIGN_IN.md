@@ -21,17 +21,20 @@ still an online app: no lessons, answers or progress work offline.
   in `sessions`), and the server's row is what counts.
 * **Cookie lifetime vs renewal** (changed after review). The cookie is issued once with the session's **absolute** lifetime (365 days for a
   registered learner, the fixed 60 days for a guest). Renewal only moves the server's `expires_at`, is written only after a request has
-  **succeeded**, and never needs to reach the browser. So a failed, redirected or lost response cannot leave the browser holding a shorter
+  **succeeded**, and never needs to reach the browser. The write is conditional on the row as it is then: still live (a slow request
+  cannot revive a token that expired or was signed out while it ran) and at least a day older than the new end (overlapping requests
+  renew once). So a failed, redirected or lost response cannot leave the browser holding a shorter
   cookie than the server's session, and a late response can never overwrite a cookie set by a newer sign-in or sign-out. A cookie that
   outlives its session is useless: the server rejects the token.
 * **Sessions from before this change** have a cookie that ends 60 days after sign-in (`cookie_expires_at` is NULL, added by migration 012).
-  On their renewal (successful responses only) the same token is re-sent with the absolute lifetime; if that reply is lost, the next daily
-  renewal sends it again. Worst case for such a session is the old behaviour: sign in again at its original 60-day mark.
+  They are honoured unchanged until that original end and are not renewed (changed after re-review: upgrading their cookie would mean
+  setting a cookie on ordinary responses, which a lost or late reply can undo). The learner's next sign-in starts a session under the new
+  policy. So an existing learner signs in once more at most 60 days after their last sign-in, exactly as before this PR, and never again
+  while they keep using the app.
 * **Guests not changed.** Guest expiry and retention are owner decisions (docs/PRIVACY_PLAN.md); this PR does not touch them. Retention's
   "no usable session" rule is unaffected.
 * Code: `packages/api/src/auth.ts` (`resolveSession`, `commitRenewal`, `upgradeGuestWithSession`, `SESSION_DAYS`, `SESSION_MAX_DAYS`),
-  `app.ts` dispatcher. Existing sessions start renewing on their next successful use, so **existing learners are not signed out by this
-  change**.
+  `app.ts` dispatcher. **Existing learners are not signed out by this change**; their current session simply runs to its original end.
 
 ## 2. Security decisions
 
@@ -45,6 +48,12 @@ still an online app: no lessons, answers or progress work offline.
   using `onlyIfSignedOut`: the server refuses it (`409 signed_in`) if a different learner signed in on this device in between, so recovery
   can never replace someone else's session. It never swaps a guest session that still works. Covered by `followup.test.tsx` and
   `session-persistence.test.ts` (including a registration paused mid-request while the guest signs out).
+* **One sign-in change at a time** (re-review). Sign-in, registration (with its check and recovery), guest creation, sign-out and account
+  deletion each set or clear the session cookie, and the browser keeps whichever cookie arrives last. The client therefore runs them one
+  at a time: each holds an exclusive section until its response, and so its cookie, has been received. Across tabs this is the Web Locks
+  API (one `mtp-auth` lock per origin; Safari 15.4+, Chromium, Firefox); without it, changes queue within the tab. So a conversion or
+  recovery reply still in transit can no longer overwrite a sign-out or a sign-in made meanwhile: the explicit action waits for it, then
+  runs on top of it. Every request has a 20 s timeout, so a stalled one releases the section. (`pwa.test.tsx`, both held-reply orders.)
 * **Nothing secret in client storage.** No password, token or credential is written to `localStorage`, `sessionStorage`, IndexedDB or any
   cache (asserted in unit and browser tests). `localStorage` still holds only theme, motion and an "install hint dismissed" date.
 * **Password storage is the platform's job**: the forms are built so Apple Passwords and other managers can save and fill them (below);
@@ -58,7 +67,11 @@ still an online app: no lessons, answers or progress work offline.
   signed out (review P2), on top of the existing guard against explicit sign-in/out.
 * **Sign-out blocked by the preview gate**: if preview access has ended, the gate answers `preview_required` before the learner's sign-out
   can run. That is shown as "you are still signed in", never as success; the preview sign-in page brings the tester back to the same page
-  with `?pending=signout`, which shows "You haven't been signed out yet" and a **Finish signing out** button (review P2).
+  with `?pending=signout`, which shows "You haven't been signed out yet" and a **Finish signing out** button (review P2). The combined
+  "sign out and leave the preview" comes back as `?pending=leave-preview` and resumes both actions (**Finish signing out and leave the
+  preview**), ending with neither session on the device (re-review).
+* **Start-up**: while the first load is still deciding who is signed in, foreground/reconnect re-checks wait for it, so a failed re-check
+  can never leave the app on "Opening" (re-review).
 
 ## 3. Private-preview gate (replaces the Basic prompt)
 
@@ -73,7 +86,8 @@ credentials* (the Manifest spec's default), so a gate in front of every path ref
   enter **the same tester name and password** they were already given (`MTP_PREVIEW_ACCESS` is unchanged, so existing invitations keep
   working).
 * A correct entry creates a **preview session**: random 256-bit token, cookie `mtp_preview` (`HttpOnly`, `SameSite=Lax`, `Secure` with
-  `MTP_SECURE_COOKIES=1`), stored only as a SHA-256 hash. 60 days from last use (renewed server-side, at most daily), never beyond 180
+  `MTP_SECURE_COOKIES=1`), stored only as a SHA-256 hash. 60 days from last use (renewed server-side, at most daily, and only after a
+  successful response: a rejected or failed request never extends it), never beyond 180
   days. As for learners, the cookie is issued once with the 180-day absolute lifetime and renewal never needs to reach the browser. So a
   tester enters the preview password roughly once per device (and inside the installed app only if its sign-in didn't carry over).
 * **Separate from learner sign-in**: the preview session identifies no learner and opens no account; learner sign-out keeps it; a

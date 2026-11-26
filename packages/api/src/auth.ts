@@ -89,8 +89,9 @@ export function findByEmail(db: Db, email: string): (User & { passwordHash: stri
  * browser with a shorter cookie than the server's session, and a late response can never overwrite a cookie set by a newer sign-in or
  * sign-out. A cookie that outlives its session is useless: the server rejects the token.
  *
- * Sessions created before this policy carry a cookie that ends 60 days after sign-in (`cookie_expires_at` is NULL). Their cookie is upgraded
- * to the absolute limit when they are renewed, on a successful response only; if that response is lost, the next daily renewal sends it again.
+ * Sessions created before this policy carry a cookie that ends 60 days after sign-in (`cookie_expires_at` is NULL). They are honoured,
+ * unchanged, until that original end and are not renewed: their cookie could not follow a renewal without setting a cookie on ordinary
+ * responses, which a lost or late reply can undo (review of the PWA PR). The learner's next sign-in starts a session under this policy.
  */
 export const SESSION_MAX_DAYS = 365;
 /** A session is renewed at most this often, so an active learner costs one extra write a day, not one per request. */
@@ -124,7 +125,7 @@ export interface ResolvedSession {
   expiresAt: string;
   /** Set when this session is due for renewal. Nothing is written until `commitRenewal`, after the request has succeeded. */
   renewTo?: string;
-  /** The session was created before cookies carried the absolute limit: a renewal also re-sends its cookie. */
+  /** The session was created before cookies carried the absolute limit: honoured to its original end, never renewed. */
   legacyCookie: boolean;
   /** When the session's absolute limit is reached (registered learners). */
   capAt: string;
@@ -140,7 +141,7 @@ export function resolveSession(db: Db, token: string | undefined, at: Date = new
   const user = toUser(r);
   const cap = new Date(r.s_created).getTime() + SESSION_MAX_DAYS * DAY_MS;
   const base = { user, token, expiresAt: r.s_expires, legacyCookie: r.s_cookie === null, capAt: new Date(cap).toISOString() };
-  if (user.isGuest) return base;
+  if (user.isGuest || base.legacyCookie) return base;
   const next = Math.min(at.getTime() + SESSION_DAYS * DAY_MS, cap);
   // Due only when the last renewal is at least a day old and the new end is actually later.
   if (next - new Date(r.s_expires).getTime() < SESSION_RENEW_EVERY_MS) return base;
@@ -148,14 +149,18 @@ export function resolveSession(db: Db, token: string | undefined, at: Date = new
 }
 
 /**
- * Apply a renewal found by `resolveSession`, once the request has succeeded. Returns the Max-Age to re-send for a session whose cookie
- * predates the absolute-limit policy, or null when the browser's cookie needs nothing (the usual case).
+ * Apply a renewal found by `resolveSession`, once the request has succeeded. The write is conditional on the row AS IT IS NOW (review of
+ * the PWA PR): the session must still be live at the moment of the write (a slow request can never revive a token that expired, or was
+ * signed out, while it ran), and its stored end must be at least a day older than the new one (two overlapping requests renew once, not
+ * twice). The absolute limit is already applied in `renewTo`. Returns whether the session was renewed. Never sets a cookie.
  */
-export function commitRenewal(db: Db, s: ResolvedSession, at: Date = new Date()): number | null {
-  if (!s.renewTo) return null;
-  const res = db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ? AND expires_at < ?").run(s.renewTo, sha256(s.token), s.renewTo);
-  if (res.changes !== 1 || !s.legacyCookie) return null; // ended meanwhile (signed out), or a modern cookie that already lasts long enough
-  return Math.max(0, Math.floor((new Date(s.capAt).getTime() - at.getTime()) / 1000));
+export function commitRenewal(db: Db, s: ResolvedSession, at: Date = new Date()): boolean {
+  if (!s.renewTo) return false;
+  const notAfter = new Date(new Date(s.renewTo).getTime() - SESSION_RENEW_EVERY_MS).toISOString();
+  const res = db
+    .prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ? AND expires_at > ? AND expires_at <= ? AND cookie_expires_at IS NOT NULL")
+    .run(s.renewTo, sha256(s.token), at.toISOString(), notAfter);
+  return res.changes === 1;
 }
 
 /**

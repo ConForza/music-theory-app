@@ -281,6 +281,43 @@ try {
     await ctx.close();
   });
 
+  await test("re-review: an interrupted 'sign out and leave the preview' resumes as both actions; the device ends with neither session", async () => {
+    const { ctx, page } = await open(appState);
+    await page.goto("/settings");
+    const leave = page.getByRole("button", { name: "Sign out and leave the preview on this device" });
+    await leave.waitFor();
+    const learnerToken = (await ctx.cookies()).find((c) => c.name === "mtp_session").value;
+    await ctx.clearCookies({ name: "mtp_preview" });
+    await leave.click();
+    await page.waitForURL(/\/preview\/signin\?next=%2Fsettings%3Fpending%3Dleave-preview$/);
+    await page.getByLabel("Tester name").fill("tester1");
+    await page.getByLabel("Preview password").fill(tester.password);
+    await page.getByRole("button", { name: "Open the preview" }).click();
+    await page.waitForURL(/\/settings\?pending=leave-preview$/);
+    await page.getByRole("button", { name: "Finish signing out and leave the preview" }).click();
+    await page.waitForURL(/\/preview\/signin$/);
+    const status = await page.evaluate(async () => (await fetch("/preview/session")).status);
+    assert.equal(status, 401, "the device's preview session is gone");
+    const previewNow = (await ctx.cookies()).find((c) => c.name === "mtp_preview");
+    assert.ok(!previewNow || !previewNow.value, "no preview cookie left");
+    // The learner token is dead too (checked with Basic preview credentials so the gate lets the request reach the app).
+    const basic = "Basic " + Buffer.from(`tester1:${tester.password}`).toString("base64");
+    const me = await fetch(`${base}/api/me`, { headers: { cookie: `mtp_session=${learnerToken}`, authorization: basic } });
+    assert.equal(me.status, 401);
+    assert.equal((await me.json()).error.code, "unauthenticated");
+    // Restore both for the next test.
+    await page.getByLabel("Tester name").fill("tester1");
+    await page.getByLabel("Preview password").fill(tester.password);
+    await page.getByRole("button", { name: "Open the preview" }).click();
+    await page.goto("/signin");
+    await page.getByLabel("Email").fill("ada@example.com");
+    await page.getByLabel("Password").fill("correct horse battery");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("navigation", { name: "Main" }).waitFor();
+    appState = await ctx.storageState();
+    await ctx.close();
+  });
+
   await test("signing out ends the learner session for good; the next launch shows the welcome page, the preview stays", async () => {
     const { ctx, page } = await open(appState);
     await page.goto("/settings");

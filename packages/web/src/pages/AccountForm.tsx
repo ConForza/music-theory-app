@@ -1,5 +1,5 @@
 import { useRef, useState, type FormEvent } from "react";
-import { api, ApiFailure, type Me } from "../api/client";
+import { ApiFailure, authExclusive, rawAuth, type Me } from "../api/client";
 import { isUncertain, saveFailure } from "../lib/errors";
 import { useApp } from "../state/app";
 
@@ -28,7 +28,7 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
   /** After a reply we could not read: is the learner now signed in to the account we just asked for? */
   async function sessionAfterDoubt(): Promise<Me | null> {
     try {
-      const m = await api.me();
+      const m = await rawAuth.me();
       doubt.current = m.user.isGuest ? "guest" : "unknown";
       return !m.user.isGuest && m.user.email === email.trim().toLowerCase() ? m : null;
     } catch (e) {
@@ -37,9 +37,18 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
     }
   }
 
-  async function createAccount(): Promise<Me> {
+  /**
+   * The registration and, if its reply is lost, the check and recovery sign-in that follow, all inside ONE exclusive section (see
+   * authExclusive): no sign-out or other sign-in on this browser, in this tab or another, can run between the check and the recovery, or
+   * have its cookie overwritten by a slower reply from here.
+   */
+  function createAccount(): Promise<Me> {
+    return authExclusive(createAccountExclusive);
+  }
+
+  async function createAccountExclusive(): Promise<Me> {
     try {
-      return await api.register({ displayName, email, password });
+      return await rawAuth.register({ displayName, email, password });
     } catch (err) {
       if (isUncertain(err)) {
         const found = await sessionAfterDoubt();
@@ -50,7 +59,7 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
         if (startedAsGuest.current && doubt.current === "none") {
           try {
             // Conditional on the server: refused if a different learner signed in on this device after the check above.
-            return await api.login({ email, password, onlyIfSignedOut: true });
+            return await rawAuth.login({ email, password, onlyIfSignedOut: true });
           } catch {
             /* not confirmed: say so below */
           }
@@ -67,7 +76,7 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
         if (found) return found;
         if (doubt.current === "none") {
           try {
-            return await api.login({ email, password, onlyIfSignedOut: true });
+            return await rawAuth.login({ email, password, onlyIfSignedOut: true });
           } catch {
             /* not theirs: fall through to the plain "already registered" message */
           }

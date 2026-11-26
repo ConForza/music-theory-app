@@ -344,3 +344,77 @@ describe("review of the PWA PR: session reads and sign-out", () => {
     expect(screen.queryByRole("button", { name: /leave the preview/ })).toBeNull();
   });
 });
+
+describe("re-review of the PWA PR: one sign-in change at a time, startup, combined sign-out", () => {
+  it("P1: a guest conversion whose reply is still in flight cannot undo a sign-out made meanwhile: the sign-out waits, then wins", async () => {
+    const s = startApi();
+    await api.guest();
+    const held = s.hold(/POST \/api\/auth\/register/);
+    const converting = api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await waitFor(() => expect(held.seen()).toBe(1)); // the server has converted the guest; its reply (and cookie) is in transit
+    const signingOut = api.logout();
+    await new Promise((r) => setTimeout(r, 30));
+    expect(s.calls).not.toContain("POST /api/auth/logout"); // not sent while the conversion's cookie is still on its way
+    held.release();
+    await converting;
+    await signingOut;
+    expect(s.cookie()).toBe("");
+    await expect(api.me()).rejects.toMatchObject({ status: 401 }); // signed out, not revived as the converted learner
+  });
+
+  it("P1: an automatic recovery sign-in still in flight cannot overwrite an explicit sign-in as someone else", async () => {
+    const s = startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.logout();
+    await api.register({ email: "bob@example.com", password: "correct horse", displayName: "Bob" });
+    await api.logout();
+    const { authExclusive, rawAuth } = await import("../api/client");
+    const held = s.hold(/POST \/api\/auth\/login/);
+    const recovering = authExclusive(() => rawAuth.login({ email: "ada@example.com", password: "correct horse", onlyIfSignedOut: true }));
+    await waitFor(() => expect(held.seen()).toBe(1));
+    const bob = api.login({ email: "bob@example.com", password: "correct horse" });
+    await new Promise((r) => setTimeout(r, 30));
+    expect(s.calls.filter((c) => c === "POST /api/auth/login")).toHaveLength(1); // Bob's sign-in waits for the recovery to land
+    held.release();
+    await recovering;
+    await bob;
+    expect((await api.me()).user.email).toBe("bob@example.com"); // the explicit, later sign-in is the one that holds
+  });
+
+  it("every sign-in change still completes on its own: guest, register, sign-in, sign-out and account deletion each resolve (no self-deadlock)", async () => {
+    const s = startApi();
+    const within = <T,>(p: Promise<T>) => Promise.race([p, new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timed out: the exclusive section never released")), 3000))]);
+    await within(api.guest());
+    await within(api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" }));
+    await within(api.logout());
+    await within(api.login({ email: "ada@example.com", password: "correct horse" }));
+    await within(api.deleteAccount());
+    expect(s.cookie()).toBe("");
+    await expect(api.login({ email: "ada@example.com", password: "correct horse" })).rejects.toMatchObject({ status: 401 });
+  });
+
+  it("P2: a reconnect while the first load is still in flight does not leave the app stuck on 'Opening'", async () => {
+    const s = startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    const held = s.hold(/GET \/api\/me/);
+    renderApp("/");
+    await waitFor(() => expect(held.seen()).toBe(1));
+    s.setOffline(true);
+    act(() => void window.dispatchEvent(new Event("online"))); // a re-check that would fail
+    await new Promise((r) => setTimeout(r, 30));
+    s.setOffline(false);
+    held.release();
+    await waitFor(() => expect(screen.getByRole("navigation", { name: "Main" })).toBeInTheDocument(), { timeout: 10000 });
+  });
+
+  it("P2: an interrupted 'sign out and leave the preview' comes back as that same combined action", async () => {
+    startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    renderApp("/settings?pending=leave-preview");
+    expect(await screen.findByText(/finish signing out and leaving the preview on this device/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Finish signing out and leave the preview" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Finish signing out" })).toBeNull();
+  });
+});

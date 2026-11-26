@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { ApiFailure, previewStatus } from "../api/client";
+import { ApiFailure, previewStatus, type SignOutIntent } from "../api/client";
 import { useApp } from "../state/app";
 
 /**
@@ -14,7 +14,9 @@ export function SignOutButton({ offerLeavePreview = false }: { offerLeavePreview
   const { signOut } = useApp();
   const nav = useNavigate();
   const { search } = useLocation();
-  const pending = new URLSearchParams(search).get("pending") === "signout";
+  // What was interrupted by the preview gate: a learner sign-out, or the combined "sign out and leave the preview" (review of the PWA PR).
+  const pendingParam = new URLSearchParams(search).get("pending");
+  const pending: SignOutIntent | null = pendingParam === "signout" || pendingParam === "leave-preview" ? pendingParam : null;
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [preview, setPreview] = useState(false);
@@ -32,7 +34,7 @@ export function SignOutButton({ offerLeavePreview = false }: { offerLeavePreview
     setBusy(true);
     setError(null);
     try {
-      await signOut();
+      await signOut(leavePreview ? "leave-preview" : "signout");
       if (leavePreview) {
         // The gate ends this device's preview session and shows its sign-in page. The form lives outside React: signing out may already
         // be taking this page away.
@@ -58,14 +60,15 @@ export function SignOutButton({ offerLeavePreview = false }: { offerLeavePreview
     <div className="signout">
       {pending && !error && (
         <p className="callout card" role="alert">
-          <strong>You haven't been signed out yet.</strong> Your preview access was renewed; tap below to finish signing out.
+          <strong>You haven't been signed out yet.</strong> Your preview access was renewed; tap below to finish
+          {pending === "leave-preview" ? " signing out and leaving the preview on this device." : " signing out."}
         </p>
       )}
       {error && <p className="form-error" role="alert">{error}</p>}
-      <button type="button" className={pending ? "btn btn-primary" : "btn btn-quiet"} onClick={() => void go(false)} disabled={busy}>
-        {pending ? "Finish signing out" : error ? "Try signing out again" : "Sign out"}
+      <button type="button" className={pending ? "btn btn-primary" : "btn btn-quiet"} onClick={() => void go(pending === "leave-preview")} disabled={busy}>
+        {pending === "leave-preview" ? "Finish signing out and leave the preview" : pending ? "Finish signing out" : error ? "Try signing out again" : "Sign out"}
       </button>
-      {preview && (
+      {preview && pending !== "leave-preview" && (
         <>
           <button type="button" className="btn btn-quiet" onClick={() => void go(true)} disabled={busy}>
             Sign out and leave the preview on this device

@@ -2,6 +2,7 @@
  * Private-preview gate (issue #24, PWA brief): a browser sign-in form and a server-validated preview session replace the HTTP Basic
  * challenge, so an installed Home Screen app is not asked for preview credentials on every launch. Everything stays invite-only.
  */
+import { createHash } from "node:crypto";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import type { AddressInfo } from "node:net";
 import { tmpdir } from "node:os";
@@ -355,5 +356,29 @@ describe("review follow-ups", () => {
     t += (PREVIEW_SESSION_DAYS + 1) * DAY;
     expect(runRetention(db, retentionPolicyFromEnv({}), { now: new Date(t) }).expiredPreviewSessionsRemoved).toBe(1);
     expect((db.prepare("SELECT COUNT(*) AS n FROM preview_sessions").get() as { n: number }).n).toBe(0);
+  });
+});
+
+describe("re-review: preview renewal only after a successful response", () => {
+  it("a rejected (cross-origin) or failed request does not extend an aged preview session; a successful one does", async () => {
+    const db = openDb(":memory:");
+    let t = Date.now();
+    await withServer(alice.entry, async ({ get, signIn }) => {
+      const cookie = pair(previewCookieOf(await signIn("alice", alice.password)));
+      const token = cookie.split("=")[1]!;
+      const exp = () => (db.prepare("SELECT expires_at FROM preview_sessions WHERE token_hash = ?").get(createHash("sha256").update(token).digest("hex")) as { expires_at: string }).expires_at;
+      t += 20 * DAY;
+      const before = exp();
+      // Cross-origin sign-in post: 403 from the gate.
+      expect((await signIn("alice", alice.password, { cookie, origin: "https://evil.example" })).status).toBe(403);
+      // An API request that fails (unknown route) and one refused for its method.
+      expect((await get("/api/no-such-thing", { headers: { cookie } })).status).toBe(404);
+      expect((await get("/api/health", { method: "POST", headers: { cookie, "content-type": "application/json" }, body: "{}" })).status).toBe(405);
+      // The sign-in page visited while signed in (a redirect, nothing served by the app).
+      expect((await get("/preview/signin", { headers: { cookie } })).status).toBe(303);
+      expect(exp()).toBe(before);
+      expect((await get("/learn", { headers: { cookie } })).status).toBe(200);
+      expect(new Date(exp()).getTime()).toBeGreaterThan(new Date(before).getTime() + 15 * DAY);
+    }, { db, now: () => new Date(t) });
   });
 });

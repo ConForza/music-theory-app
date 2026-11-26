@@ -122,6 +122,7 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       const url = new URL(req.url ?? "/", `${proto}://${host}`);
       let response: Response | undefined;
       const extraCookies: string[] = [];
+      let afterSuccess: (() => void) | undefined;
       if (opts.gate) {
         const decision = await opts.gate.check({
           method: req.method ?? "GET",
@@ -133,7 +134,10 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
           remoteAddress: req.socket.remoteAddress,
           body: () => readBody(req, 8192).then((b) => b.toString("utf8")),
         });
-        if (decision.pass) extraCookies.push(...decision.cookies);
+        if (decision.pass) {
+          extraCookies.push(...decision.cookies);
+          afterSuccess = decision.afterSuccess;
+        }
         else response = decision.response;
       }
       if (response) {
@@ -145,6 +149,8 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       } else {
         response = new Response("Not found", { status: 404 });
       }
+      // The preview session is renewed only for a request that succeeded (never for a rejected or failed one).
+      if (afterSuccess && response.status < 400) afterSuccess();
       const out: Record<string, string | string[]> = { ...secure, ...(opts.gate ? { "x-robots-tag": "noindex" } : {}) };
       response.headers.forEach((v, k) => {
         if (k !== "set-cookie") out[k] = v;

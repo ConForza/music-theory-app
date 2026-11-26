@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { api, ApiFailure, endIdentityScope, type CourseView, type EngagementSnapshot, type Me, type Overview, type Settings } from "../api/client";
+import { api, ApiFailure, endIdentityScope, type SignOutIntent, type CourseView, type EngagementSnapshot, type Me, type Overview, type Settings } from "../api/client";
 import { setSoundEnabled } from "../lib/audio";
 
 type Load<T> = { status: "loading" } | { status: "error"; error: ApiFailure } | { status: "ready"; data: T };
@@ -17,7 +17,8 @@ interface AppState {
   reloadAll: () => void;
   /** Resolves with the saved profile, rejects (and shows nothing as saved) if the server did not confirm it. */
   updateProfile: (patch: Parameters<typeof api.patchProfile>[0], opts?: { optimistic?: boolean }) => Promise<Me>;
-  signOut: () => Promise<void>;
+  /** `leave-preview`: the caller will also end the device's preview session; if the gate blocks the sign-out, that is what stays pending. */
+  signOut: (intent?: SignOutIntent) => Promise<void>;
 }
 
 const Ctx = createContext<AppState | null>(null);
@@ -76,6 +77,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // `confirmed` is what the server last told us. `pending` are edits shown optimistically while they are in flight; they
   // are layered over `confirmed` and removed the moment their request settles, so a failed save simply disappears.
   const [confirmed, setConfirmed] = useState<Me | null | undefined>(undefined);
+  const confirmedNow = useRef<Me | null | undefined>(undefined); // `confirmed`, readable from event handlers
+  useEffect(() => {
+    confirmedNow.current = confirmed;
+  }, [confirmed]);
   const [pending, setPending] = useState<Array<{ id: number; patch: ProfilePatch }>>([]);
   const [meError, setMeError] = useState<ApiFailure | null>(null);
   const [course, setCourse] = useState<Load<CourseView>>({ status: "loading" });
@@ -166,6 +171,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (lastCheck.current === 0) lastCheck.current = Date.now(); // the initial load has just checked; `pageshow` also fires then
     const revalidate = (force: boolean) => {
+      // While the first load is still deciding who is signed in, it alone settles that (with its own error handling and retry); a re-check
+      // here would supersede it and, if it failed, leave the app on "Opening" with nothing to show (review of the PWA PR).
+      if (confirmedNow.current === undefined && !meError) return;
       if (meError) {
         reloadAll();
         return;
@@ -284,9 +292,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // to the caller, who keeps the learner signed in and shows a retry: the cookie still works until logout succeeds.
   // A `preview_required` 401 comes from the private-preview gate BEFORE the server could sign the learner out: that is a blocked sign-out,
   // not a success (review P2). It is thrown like any failure; the preview sign-in page brings the tester back with the sign-out pending.
-  const signOut = useCallback(async () => {
+  const signOut = useCallback(async (intent: SignOutIntent = "signout") => {
     try {
-      await api.logout();
+      await api.logout(intent);
     } catch (e) {
       if (!(e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required")) throw e;
     }

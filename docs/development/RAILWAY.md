@@ -31,7 +31,7 @@
 
 The gate sits in front of **every** route (web app, assets, `/robots.txt`, all `/api/*`), separate from learner accounts. Since the PWA brief a
 tester signs in on a small **preview sign-in page** (`/preview/signin`) with their tester name and password, which creates an HttpOnly preview
-session cookie (about once per device, and once inside an installed Home Screen app); there is no HTTP Basic prompt any more. Open without it:
+session cookie (about once per device; an installed Home Screen app may open already signed in, or ask once more); there is no HTTP Basic prompt any more. Open without it:
 `GET /api/health` (read-only, returns `{ok, curriculumVersion}`, what Railway's healthcheck needs), the sign-in page, and the installation
 metadata (manifest and icons). Guest, registration, login and student routes are not reachable without preview access. Responses carry
 `X-Robots-Tag: noindex`. Full design, revocation and tests: `docs/development/PWA_AND_SIGN_IN.md`.

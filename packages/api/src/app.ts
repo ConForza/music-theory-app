@@ -562,13 +562,10 @@ export function createApp(opts: AppOptions) {
         },
       };
       const data = await route.handler(ctx);
-      // Renewal is written only once the request has succeeded, and only if the handler did not set or clear the session cookie itself
-      // (sign-in, registration, sign-out, account deletion: its cookie must win). Modern cookies already last to the session's absolute limit,
-      // so nothing is sent; a session from before that change gets its cookie upgraded here (see auth.ts).
-      if (session && !cookies.some((c) => c.startsWith(`${COOKIE}=`))) {
-        const legacyMaxAge = auth.commitRenewal(db, session);
-        if (legacyMaxAge) cookies.push(sessionCookie(session.token, legacyMaxAge));
-      }
+      // Renewal is written only once the request has succeeded, and never sets a cookie: the cookie already lasts to the session's absolute
+      // limit (see auth.ts). A handler that ended the session (sign-out, account deletion) leaves nothing to renew: the conditional write
+      // finds no live row.
+      if (session) auth.commitRenewal(db, session);
       for (const c of cookies) headers.append("set-cookie", c);
       return new Response(JSON.stringify(data), { status: 200, headers });
     } catch (e) {

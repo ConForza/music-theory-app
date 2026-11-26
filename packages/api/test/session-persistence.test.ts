@@ -105,24 +105,60 @@ describe("registered learner sessions renew while used (bounded)", () => {
     expect(resolveSession(db, token, new Date(t0 + 30 * DAY + SESSION_DAYS * DAY + 1000))).toBeUndefined();
   });
 
-  it("a session from before this change (60-day cookie) gets its cookie upgraded to the absolute limit on a successful renewal, and again next day if that reply was lost", async () => {
+  it("re-review: a session from before this change (60-day cookie) is honoured to its original end, never renewed, and no response sets a cookie", async () => {
+    const { client, db } = setup();
+    const c = client();
+    await register(c);
+    const token = c.cookie.split("=")[1]!;
+    age(db, token, 59.75); // six hours left, as in the review
+    db.prepare("UPDATE sessions SET cookie_expires_at = NULL WHERE token_hash = ?").run(sha256(token)); // as migration 012 leaves old rows
+    const before = expiryOf(db, token);
+    for (let i = 0; i < 2; i++) {
+      const r = await c.get("/api/me"); // a lost reply and its retry alike
+      expect(r.status).toBe(200);
+      expect(r.headers.getSetCookie()).toHaveLength(0);
+    }
+    expect(expiryOf(db, token)).toBe(before); // still ends with its browser cookie
+    db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ?").run(new Date(Date.now() - 1000).toISOString(), sha256(token));
+    expect((await c.get("/api/me")).status).toBe(401);
+    // The next sign-in moves the learner to the renewable policy.
+    const li = await c.post("/api/auth/login", { email: "ada@example.com", password: "correct horse" });
+    expect(Number(/Max-Age=(\d+)/.exec(li.headers.getSetCookie()[0]!)![1])).toBe(SESSION_MAX_DAYS * 86400);
+  });
+
+  it("re-review: a slow request cannot revive a token that expired while it ran", () => {
+    const db = openDb(":memory:");
+    const u = createUser(db, { displayName: "ada", email: "a@example.com", passwordHash: "x" });
+    const t0 = Date.now();
+    const { token } = createSession(db, u.id, new Date(t0));
+    const end = expiryOf(db, token);
+    const seen = resolveSession(db, token, new Date(end - 1000)); // valid one second before its end, renewal due
+    expect(seen?.renewTo).toBeDefined();
+    expect(resolveSession(db, token, new Date(end + 1000))).toBeUndefined(); // expired meanwhile
+    expect(commitRenewal(db, seen!, new Date(end + 1000))).toBe(false); // the late commit changes nothing
+    expect(resolveSession(db, token, new Date(end + 2000))).toBeUndefined();
+  });
+
+  it("re-review: two overlapping requests renew once, not twice", () => {
+    const db = openDb(":memory:");
+    const u = createUser(db, { displayName: "ada", email: "a@example.com", passwordHash: "x" });
+    const t0 = Date.now();
+    const { token } = createSession(db, u.id, new Date(t0));
+    const a = resolveSession(db, token, new Date(t0 + 10 * DAY))!;
+    const b = resolveSession(db, token, new Date(t0 + 10 * DAY + 500))!;
+    expect(commitRenewal(db, a, new Date(t0 + 10 * DAY))).toBe(true);
+    expect(commitRenewal(db, b, new Date(t0 + 10 * DAY + 500))).toBe(false);
+    expect(expiryOf(db, token)).toBe(new Date(a.renewTo!).getTime());
+  });
+
+  it("re-review: sign-out on a request whose session was due for renewal leaves nothing to renew", async () => {
     const { client, db } = setup();
     const c = client();
     await register(c);
     const token = c.cookie.split("=")[1]!;
     age(db, token, 10);
-    db.prepare("UPDATE sessions SET cookie_expires_at = NULL WHERE token_hash = ?").run(sha256(token)); // as migration 012 leaves old rows
-    const r = await c.get("/api/me");
-    const set = r.headers.getSetCookie();
-    expect(set).toHaveLength(1);
-    expect(set[0]).toContain(`${COOKIE}=${token};`); // same token: no race with parallel requests
-    expect(Number(/Max-Age=(\d+)/.exec(set[0]!)![1])).toBeGreaterThan((SESSION_MAX_DAYS - 11) * 86400);
-    // That reply is "lost": the next daily renewal sends it again.
-    db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ?").run(new Date(Date.now() + (SESSION_DAYS - 2) * DAY).toISOString(), sha256(token));
-    expect((await c.get("/api/me")).headers.getSetCookie()).toHaveLength(1);
-    // A failed request never sends it.
-    db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ?").run(new Date(Date.now() + (SESSION_DAYS - 2) * DAY).toISOString(), sha256(token));
-    expect((await c.call("PATCH", "/api/me/profile", { selectedGrade: 99 })).headers.getSetCookie()).toHaveLength(0);
+    await c.post("/api/auth/logout");
+    expect(db.prepare("SELECT 1 FROM sessions WHERE token_hash = ?").get(sha256(token))).toBeUndefined();
   });
 });
 
@@ -182,12 +218,11 @@ describe("session fixation, sign-out and account switching", () => {
     expect((await replay.get("/api/me")).status).toBe(401);
   });
 
-  it("sign-out wins over a renewal on the same request (the cookie is cleared, not re-sent), even for a pre-change session", async () => {
+  it("sign-out on a request whose session was due for renewal clears the cookie and sends nothing else", async () => {
     const { client, db } = setup();
     const c = client();
     await register(c);
     age(db, c.cookie.split("=")[1]!, 10);
-    db.prepare("UPDATE sessions SET cookie_expires_at = NULL").run();
     const out = await c.post("/api/auth/logout");
     const set = out.headers.getSetCookie();
     expect(set).toHaveLength(1);
