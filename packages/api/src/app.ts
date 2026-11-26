@@ -7,7 +7,7 @@ import type { Db } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
-import { backfillPracticeExposure } from "./backfill.ts";
+import { backfillPracticeExposure, backfillVisibleIdentity } from "./backfill.ts";
 import { NodeRunService } from "./node-run.ts";
 import { PrepService } from "./prep.ts";
 import { RevisionService } from "./revision.ts";
@@ -160,6 +160,8 @@ export function createApp(opts: AppOptions) {
   });
   // One-time recovery for historical practice without exposure identities; idempotent on startup.
   backfillPracticeExposure(db, practice, clock);
+  // Review of PR #26 (P1): give earlier help records their order-insensitive identity too; idempotent on startup.
+  backfillVisibleIdentity(db, course, practice, clock);
   // Sign-in is limited per account (so one account cannot be guessed at) and, more loosely, per address. Registration is
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
   const loginLimiter = new RateLimiter(10);

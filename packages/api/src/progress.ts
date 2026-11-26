@@ -73,12 +73,17 @@ export class ProgressService {
         const grades = this.course.view.worlds.map((w) => {
       const required = this.course.nodes.filter((n) => n.grade === w.grade && !n.optional);
       const written = required.filter((n) => this.course.isPlayable(n.id));
-      const done = required.filter((n) => states.get(n.id)?.state === "completed");
+      // Guided progress counts only steps the guided path recognises. A lesson completed through Explore ahead of the path is a genuine
+      // completion (lesson totals, XP), reported separately until its earlier lessons are done (review of PR #26, finding 4).
+      const guidedDone = (id: string) => states.get(id)?.state === "completed" && !states.get(id)?.outOfSequence;
+      const exploredDone = (id: string) => states.get(id)?.state === "completed" && Boolean(states.get(id)?.outOfSequence);
+      const done = required.filter((n) => guidedDone(n.id));
       return {
         grade: w.grade,
         requiredNodes: required.length,
         writtenNodes: written.length,
         completedNodes: done.length,
+        exploredNodes: required.filter((n) => exploredDone(n.id)).length,
         nextNodeId: nextNodeForGrade(this.course, states, w.grade),
         units: w.units.map((u) => {
           const req = required.filter((n) => n.unitId === u.id);
@@ -86,7 +91,8 @@ export class ProgressService {
             unitId: u.id,
             requiredNodes: req.length,
             writtenNodes: req.filter((n) => this.course.isPlayable(n.id)).length,
-            completedNodes: req.filter((n) => states.get(n.id)?.state === "completed").length,
+            completedNodes: req.filter((n) => guidedDone(n.id)).length,
+            exploredNodes: req.filter((n) => exploredDone(n.id)).length,
           };
         }),
       };

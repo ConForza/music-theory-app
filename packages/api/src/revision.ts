@@ -26,7 +26,7 @@ import { isDue, type ConceptMastery } from "./mastery.ts";
 import { learnerTime } from "./mastery-service.ts";
 import { DEFAULT_PREP, type PrepConfig } from "./prep-config.ts";
 import type { PrepService } from "./prep.ts";
-import { questionKey } from "./question-key.ts";
+import { questionKey, visibleKey } from "./question-key.ts";
 import type { Candidate, SessionItem } from "./review.ts";
 import { placedGradeOf } from "./path-state.ts";
 import { taughtNodes } from "./taught.ts";
@@ -492,6 +492,7 @@ export class RevisionService {
           correct: graded.correct,
           itemId,
           questionKey: questionKey(r.item),
+          visibleKey: visibleKey(r.item),
           templateId: si.templateId,
           templateVersion: si.templateVersion,
           seed: si.seed,

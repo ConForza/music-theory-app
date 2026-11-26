@@ -26,8 +26,7 @@ import { tx } from "./db.ts";
 import type { Engagement } from "./engagement.ts";
 import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
-import { recordExposure } from "./mastery-service.ts";
-import { questionKey } from "./question-key.ts";
+import { exposeItem } from "./mastery-service.ts";
 import type { Candidate, SessionItem } from "./review.ts";
 
 export const TOPIC_PRACTICE_COUNTS = [5, 10, 20] as const;
@@ -113,7 +112,6 @@ function hash(s: string): number {
   }
   return h >>> 0;
 }
-const seedFor = (...parts: Array<string | number>) => hash(parts.join("|")) % 2 ** 31;
 
 export class TopicPracticeService {
   private catalogues = new Map<number, GradeCatalogue>();
@@ -236,9 +234,11 @@ export class TopicPracticeService {
   // ---- building a session -------------------------------------------------------------------------------------------------
 
   /**
-   * Interleave across areas (so neighbouring questions ask for different kinds of thinking), shuffled by the session id, then fill
-   * round-robin: each topic in turn, rotating through its question types, every question new to the session and, where the topic can
-   * still make one, new to the learner. Stops honestly when the topics run out of different questions.
+   * Interleave across areas (so neighbouring questions ask for different kinds of thinking), shuffled by the session id, then fill round-robin:
+   * each topic in turn, rotating through its question types. Questions come from the topic's sampled pools (`ReviewService.candidateQuestions`,
+   * warmed at start-up), so a start generates only the questions it keeps, with no seed search on the request thread (review of PR #26, P2).
+   * Identity is what the learner SEES (`visibleKey`): no two questions in a session look alike, and questions the learner has met (in either
+   * identity) come only after every new one. A topic that runs out of different questions simply stops; nothing is borrowed from another.
    */
   private build(userId: string, sessionId: string, grade: number, topics: Topic[], total: number): TopicItem[] {
     const byArea = new Map<string, Topic[]>();
@@ -246,43 +246,51 @@ export class TopicPracticeService {
     const queues = [...byArea.values()].map((q) => [...q].sort((a, b) => hash(`${sessionId}|${a.conceptId}`) - hash(`${sessionId}|${b.conceptId}`)));
     const ordered: Topic[] = [];
     while (queues.some((q) => q.length)) for (const q of queues) if (q.length) ordered.push(q.shift()!);
-    const plans = ordered.slice(0, Math.max(1, total)).map((t) => ({
-      t,
-      cands: [...this.candidates(t.conceptId, grade)].sort((a, b) => hash(`${sessionId}|${a.templateId}`) - hash(`${sessionId}|${b.templateId}`)),
-      seen: this.engagement.mastery.seenKeys(userId, t.conceptId),
-      // A small topic stops as soon as it has given every different question it has, instead of searching for more that do not exist.
-      limit: this.capacity(t.conceptId, grade),
-      got: 0,
-      made: 0,
-      misses: 0,
-      done: false,
-    }));
-    const items: TopicItem[] = [];
+    const shuffle = <T extends { visible: string }>(xs: T[]) => [...xs].sort((a, b) => hash(`${sessionId}|${a.visible}`) - hash(`${sessionId}|${b.visible}`));
+    const plans = ordered.slice(0, Math.max(1, total)).map((t) => {
+      const seen = this.engagement.mastery.seenKeys(userId, t.conceptId);
+      const types = [...this.candidates(t.conceptId, grade)]
+        .sort((a, b) => hash(`${sessionId}|${a.templateId}`) - hash(`${sessionId}|${b.templateId}`))
+        .map((cand) => {
+          const qs = this.engagement.review.candidateQuestions(t.conceptId, cand);
+          const met = (q: { key: string; visible: string }) => seen.has(q.key) || seen.has(q.visible);
+          return { cand, fresh: shuffle(qs.filter((q) => !met(q))), again: shuffle(qs.filter(met)) };
+        });
+      return { t, types, turn: 0 };
+    });
     const used = new Set<string>();
-    for (let round = 0; items.length < total && plans.some((p) => !p.done) && round < total * 3; round++) {
+    /** The topic's next question: the next question type in turn that still has a new one, before any it has already met; null when it has none. */
+    const next = (p: (typeof plans)[number]) => {
+      for (const pool of ["fresh", "again"] as const) {
+        for (let k = 0; k < p.types.length; k++) {
+          const ty = p.types[(p.turn + k) % p.types.length]!;
+          const list = ty[pool];
+          while (list.length && used.has(list[0]!.visible)) list.shift();
+          const q = list.shift();
+          if (q) {
+            p.turn = (p.turn + k + 1) % p.types.length;
+            return { cand: ty.cand, q };
+          }
+        }
+      }
+      return null;
+    };
+    const items: TopicItem[] = [];
+    let progress = true;
+    while (items.length < total && progress) {
+      progress = false;
       for (const p of plans) {
         if (items.length >= total) break;
-        if (p.done || !p.cands.length || (p.limit < MAX_COUNT && p.got >= p.limit)) {
-          p.done = true;
-          continue;
-        }
-        const cand = p.cands[p.made % p.cands.length]!;
-        const base = seedFor(sessionId, p.t.conceptId, cand.templateId, p.made);
-        p.made++;
-        // Prefer a question the learner has never met; otherwise any question not already in this session.
-        let gen = this.engagement.review.generateFor(cand, p.t.conceptId, base, new Set([...p.seen, ...used]));
-        if (!gen || used.has(questionKey(gen.item))) gen = this.engagement.review.generateFor(cand, p.t.conceptId, (base + 104729) % 2 ** 31, used);
+        const pick = next(p);
+        if (!pick) continue;
+        progress = true;
+        used.add(pick.q.visible);
+        // Reproduce the sampled question exactly (its seed already satisfies the topic's boundary); a generator that changed since the pool was
+        // sampled is skipped, never substituted.
+        const gen = this.engagement.review.generateFor(pick.cand, p.t.conceptId, pick.q.seed, new Set());
         const g = gen && parseGeneratedItemId(gen.item.id);
-        if (!gen || !g || used.has(questionKey(gen.item))) {
-          // Nothing new from this question type. Once every type of the topic has come up empty in a row (and once more), the topic has no
-          // further DIFFERENT questions to give, so it stops rather than repeating one.
-          if (++p.misses > p.cands.length) p.done = true;
-          continue;
-        }
-        p.misses = 0;
-        p.got++;
-        used.add(questionKey(gen.item));
-        items.push({ itemId: gen.item.id, kind: "review", conceptId: p.t.conceptId, nodeId: cand.nodeId, templateId: cand.templateId, templateVersion: gen.item.templateVersion, seed: gen.seed, fingerprint: g.fingerprint, lessonId: p.t.lessons[0]?.nodeId ?? null });
+        if (!gen || !g || gen.seed !== pick.q.seed) continue;
+        items.push({ itemId: gen.item.id, kind: "review", conceptId: p.t.conceptId, nodeId: pick.cand.nodeId, templateId: pick.cand.templateId, templateVersion: gen.item.templateVersion, seed: gen.seed, fingerprint: g.fingerprint, lessonId: p.t.lessons[0]?.nodeId ?? null });
       }
     }
     return items;
@@ -353,10 +361,19 @@ export class TopicPracticeService {
       if (changed) this.db.prepare("UPDATE topic_practice_sessions SET items = ? WHERE user_id = ? AND id = ?").run(JSON.stringify(items), userId, id);
     }
     const live = items.filter((i) => !i.stale);
+    // Every planned question went stale (its generator changed): the session cannot continue, so it is closed, answers kept, and says so
+    // (review of PR #26, finding 6) instead of offering an empty session forever.
+    const allStale = items.length > 0 && live.length === 0;
+    if (allStale && row.status === "open") {
+      this.db.prepare("UPDATE topic_practice_sessions SET status = 'abandoned', completed_at = ? WHERE user_id = ? AND id = ? AND status = 'open'").run(this.clock.now().toISOString(), userId, id);
+      row.status = "abandoned";
+    }
     const by = this.attemptsFor(userId, id);
     return {
       id: row.id,
       status: row.status,
+      /** The questions were updated since this session was planned, so it was closed. Start a new one for the same choice. */
+      allStale,
       grade: row.grade,
       scope: { kind: row.scope_kind, id: row.scope_id, label: this.label(row.grade, row.scope_kind, row.scope_id) },
       requested: row.requested,
@@ -391,7 +408,7 @@ export class TopicPracticeService {
     const at = this.clock.now().toISOString();
     tx(this.db, () => {
       this.db.prepare("INSERT OR IGNORE INTO topic_practice_hint_uses (user_id,session_id,item_id,level,created_at) VALUES (?,?,?,?,?)").run(userId, sessionId, itemId, level, at);
-      recordExposure(this.db, userId, questionKey(r.item), "practice-hint", at);
+      exposeItem(this.db, userId, r.item, "practice-hint", at);
     });
     return { hint: r.item.hints[level - 1]!, level };
   }
@@ -422,7 +439,7 @@ export class TopicPracticeService {
         .run(userId, attemptId, sessionId, itemId, si.conceptId, si.templateId, si.templateVersion, si.seed, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, k, at);
       // Formative: the learner sees the verdict, the explanation and (after repeated tries) the worked answer, so the question is exposed.
       // No mastery evidence, XP or activity is recorded.
-      recordExposure(this.db, userId, questionKey(r.item), "practice-attempt", at);
+      exposeItem(this.db, userId, r.item, "practice-attempt", at);
       return k;
     });
     return this.reply(r, graded.correct, graded.category, n, false, graded);
@@ -495,7 +512,8 @@ export class TopicPracticeService {
         questions: items.length,
         answered: answered.length,
         firstTryCorrect: answered.filter((i) => by.get(i.itemId)?.firstTry).length,
-        hintsUsed: [...by.values()].reduce((a, s) => a + s.hints, 0),
+        // Every hint shown, including on a question left unanswered (review of PR #26, finding 9).
+        hintsUsed: (this.db.prepare("SELECT COUNT(*) AS c FROM topic_practice_hint_uses WHERE user_id = ? AND session_id = ?").get(userId, sessionId) as { c: number }).c,
         finishedEarly: answered.length < items.length,
         concepts,
         mistakes,

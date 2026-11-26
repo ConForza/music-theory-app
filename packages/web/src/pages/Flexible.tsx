@@ -57,7 +57,9 @@ export function ExploreLessons() {
   const data = useCourseData();
   const [params, setParams] = useSearchParams();
   const guided = me!.profile.selectedGrade;
-  const grade = Math.min(5, Math.max(1, Number(params.get("grade")) || guided));
+  // Only the five whole grades; anything else (a mistyped link, "2.5") falls back to the learner's guided grade (review of PR #26, finding 8).
+  const asked = Number(params.get("grade"));
+  const grade = Number.isInteger(asked) && asked >= 1 && asked <= 5 ? asked : guided;
   if (data.status === "loading") return <Loading label="Loading lessons…" />;
   if (data.status === "error") return <ErrorState error={data.error} onRetry={reloadAll} />;
   const world = data.course.worlds[grade - 1]!;
@@ -290,11 +292,9 @@ function TopicRun({ sessionId }: { sessionId: string }) {
   if (load.status === "loading") return <Loading label="Getting your questions ready…" />;
   if (load.status === "error") return load.error.status === 401 ? <Navigate to="/welcome" replace /> : load.error.status === 404 ? <NotFoundView what="practice session" /> : <ErrorState error={load.error} onRetry={() => window.location.reload()} />;
   const s = load.session;
-  if (s.status === "abandoned" && !summary) {
-    return (
-      <div className="state" role="alert"><Icon name="info" size={36} /><h1>This practice session was closed</h1><p>You started another one. Your answers are saved.</p><Link className="btn btn-primary" to="/practice">Choose a topic</Link></div>
-    );
-  }
+  if (s.status === "abandoned" && !summary) return s.allStale ? <StaleSession s={s} /> : (
+    <div className="state" role="alert"><Icon name="info" size={36} /><h1>This practice session was closed</h1><p>You started another one. Your answers are saved.</p><Link className="btn btn-primary" to="/practice">Choose a topic</Link></div>
+  );
   const item = !summary && idx < total ? s.items[idx] : undefined;
   const next = () => { setIdx(idx + 1); window.scrollTo?.(0, 0); };
   return (
@@ -322,7 +322,7 @@ function TopicRun({ sessionId }: { sessionId: string }) {
               wrongAction={() => ({ label: "Move on", onClick: next })}
             />
             <div className="finish-early">
-              {item.lesson && <Link className="btn btn-quiet btn-small" to={`/lesson/${item.lesson.nodeId}?explore=1`}>Not sure? Learn it: {item.lesson.title}</Link>}
+              {item.lesson && <Link className="btn btn-quiet btn-small" to={`/lesson/${item.lesson.nodeId}?explore=1&from=${encodeURIComponent(`topic:${sessionId}`)}`}>Not sure? Learn it: {item.lesson.title}</Link>}
               <button type="button" className="btn btn-quiet btn-small" onClick={() => void finish()} disabled={saving}>Finish now</button>
             </div>
           </>
@@ -381,5 +381,22 @@ function TopicDone({ summary: s }: { summary: TopicSummary }) {
         <Link className="btn btn-ghost" to="/practice">Choose another topic</Link>
       </ActionBar>
     </>
+  );
+}
+
+/** Every question of the session was updated since it was planned (review of PR #26, finding 6): say so, and offer the same choice afresh. */
+function StaleSession({ s }: { s: TopicSession }) {
+  const { busy, note, start } = useTopicStarter();
+  return (
+    <div className="state" role="alert" data-testid="topic-stale">
+      <Icon name="info" size={36} />
+      <h1>These questions have been updated</h1>
+      <p>This practice session can't continue because its questions changed. Your answers are saved.</p>
+      <div className="row">
+        <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void start({ grade: s.grade, kind: s.scope.kind, id: s.scope.id, count: s.requested }, true)}>{busy ? "Getting questions…" : `Start ${s.scope.label} again`}</button>
+        <Link className="btn btn-ghost" to="/practice">Choose another topic</Link>
+      </div>
+      {note && <p role="status" className="form-error">{note}</p>}
+    </div>
   );
 }

@@ -111,7 +111,7 @@ export function Progress() {
               <div className="progress" role="progressbar" aria-label={`Grade ${w.grade} progress`} aria-valuemin={0} aria-valuemax={g.requiredNodes} aria-valuenow={g.completedNodes}>
                 <span style={{ width: `${(g.completedNodes / Math.max(1, g.requiredNodes)) * 100}%` }} />
               </div>
-              <p className="muted small">{g.completedNodes} of {g.requiredNodes} steps complete · {g.writtenNodes} ready to play</p>
+              <p className="muted small">{g.completedNodes} of {g.requiredNodes} steps complete{g.exploredNodes ? ` · ${g.exploredNodes} explored ahead` : ""} · {g.writtenNodes} ready to play</p>
               <details>
                 <summary>Units</summary>
                 <ul className="plain unit-mini">

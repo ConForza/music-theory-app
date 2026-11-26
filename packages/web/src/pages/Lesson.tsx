@@ -125,7 +125,10 @@ export function Lesson() {
   }
 
   const { lesson } = load;
-  const back = lesson.access.mode === "explore" || explore ? "/learn/explore" : "/learn";
+  // Opened from a practice question ("Not sure? Learn it"): closing or finishing goes back to that question (review of PR #26, finding 7).
+  const from = search.get("from");
+  const topicSession = from?.startsWith("topic:") ? from.slice("topic:".length) : null;
+  const back = topicSession ? `/practice/topic/${encodeURIComponent(topicSession)}` : lesson.access.mode === "explore" || explore ? `/learn/explore?grade=${nodeId.match(/^G([1-5])-/)?.[1] ?? ""}` : "/learn";
   const qIndex = idx - 3;
   const item = qIndex >= 0 && qIndex < lesson.items.length ? lesson.items[qIndex] : undefined;
 
@@ -140,7 +143,7 @@ export function Lesson() {
   return (
     <div className="player" data-step={idx}>
       <header className="player-bar">
-        <button type="button" className="icon-btn" aria-label="Close lesson. Your progress is saved." onClick={() => nav(back === "/learn/explore" ? `/learn/explore?grade=${node?.id.charAt(1) ?? ""}` : back)}>
+        <button type="button" className="icon-btn" aria-label="Close lesson. Your progress is saved." onClick={() => nav(back)}>
           <Icon name="close" />
         </button>
         <div className="progress" role="progressbar" aria-label="Lesson progress" aria-valuemin={0} aria-valuemax={total - 1} aria-valuenow={Math.min(idx, total - 1)}>
@@ -161,7 +164,7 @@ export function Lesson() {
             onCorrect={() => go(idx + 1)}
           />
         )}
-        {finishing && <Done lesson={lesson} summary={summary} nextId={summary?.nextNodeId ?? null} nextTitle={summary?.nextNodeId && data.status === "ready" ? data.titleOf(summary.nextNodeId) : null} error={doneError} onRetry={() => setFinishTry((a) => a + 1)} />}
+        {finishing && <Done backTo={topicSession ? { to: back, label: "Back to your practice" } : undefined} lesson={lesson} summary={summary} nextId={summary?.nextNodeId ?? null} nextTitle={summary?.nextNodeId && data.status === "ready" ? data.titleOf(summary.nextNodeId) : null} error={doneError} onRetry={() => setFinishTry((a) => a + 1)} />}
       </div>
     </div>
   );

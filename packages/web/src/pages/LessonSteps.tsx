@@ -302,7 +302,10 @@ export function Done({
   nextId,
   error,
   onRetry,
+  backTo,
 }: {
+  /** Where the primary action returns to, when the lesson was opened from somewhere other than the path (a practice question). */
+  backTo?: { to: string; label: string };
   lesson: LearnerLesson;
   summary: (CompletionSummary & { alreadyComplete: boolean }) | null;
   nextTitle: string | null;
@@ -339,7 +342,7 @@ export function Done({
         <p className="muted small">Progress saved.</p>
       </Step>
       <ActionBar>
-        <Link className="btn btn-primary btn-large" to="/learn" autoFocus>Back to the path</Link>
+        <Link className="btn btn-primary btn-large" to={backTo?.to ?? "/learn"} autoFocus>{backTo?.label ?? "Back to the path"}</Link>
         {nextId && nextId !== lesson.nodeId && <Link className="btn btn-ghost" to={`/lesson/${nextId}`}>Next: {nextTitle}</Link>}
       </ActionBar>
     </>

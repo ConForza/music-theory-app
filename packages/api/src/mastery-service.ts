@@ -4,6 +4,8 @@ import type { Clock } from "./clock.ts";
 import { addDays, localDate } from "./clock.ts";
 import { taughtNodes } from "./taught.ts";
 import { foldConcept, type ConceptMastery, type EvidenceRow, type EvidenceSource, type MasteryRules } from "./mastery.ts";
+import { questionKey as questionKeyOf, visibleKey as visibleKeyOf } from "./question-key.ts";
+import type { ExerciseItem } from "@mtp/curriculum";
 
 /** The learner's clock: the instant, their timezone and their local calendar date. */
 export interface LearnerTime {
@@ -20,10 +22,23 @@ export function learnerTime(db: Db, clock: Clock, userId: string): LearnerTime {
   return { at, iso: at.toISOString(), tz, date: localDate(at, tz) };
 }
 
-/** Record that a learner was shown a question outside counted evidence. Idempotent; keeps the earliest time. */
-export function recordExposure(db: Db, userId: string, questionKey: string, source: "practice-attempt" | "practice-hint", iso: string) {
-  db.prepare("INSERT OR IGNORE INTO question_exposure (user_id, question_key, source, occurred_at) VALUES (?,?,?,?)").run(userId, questionKey, source, iso);
+/**
+ * Record that a learner was shown a question outside counted evidence. Idempotent; keeps the earliest time. `visibleKey` (what the learner
+ * sees, whatever the option order) is stored beside the historical identity, so help is recognised when the same question comes back with
+ * its options reordered (review of PR #26, P1). Prefer `exposeItem`, which records both.
+ */
+export function recordExposure(db: Db, userId: string, questionKey: string, source: "practice-attempt" | "practice-hint", iso: string, visibleKey: string | null = null) {
+  db.prepare("INSERT OR IGNORE INTO question_exposure (user_id, question_key, source, occurred_at, visible_key) VALUES (?,?,?,?,?)").run(userId, questionKey, source, iso, visibleKey);
+  if (visibleKey) db.prepare("UPDATE question_exposure SET visible_key = ? WHERE user_id = ? AND question_key = ? AND source = ? AND visible_key IS NULL").run(visibleKey, userId, questionKey, source);
 }
+
+/** Record that a learner was shown this question with help (hint, feedback, worked answer), under both of its identities. */
+export function exposeItem(db: Db, userId: string, item: ExerciseItem, source: "practice-attempt" | "practice-hint", iso: string) {
+  recordExposure(db, userId, questionKeyOf(item), source, iso, visibleKeyOf(item));
+}
+
+/** Both identities of a question: the historical `questionKey` and the order-insensitive `visibleKey`. A record matches if either does. */
+export const identitiesOf = (item: ExerciseItem) => ({ questionKey: questionKeyOf(item), visibleKey: visibleKeyOf(item) });
 
 export interface NewEvidence {
   /** Source event id, unique per learner and concept: lesson:<attemptId> | review:<attemptId>. */
@@ -34,6 +49,8 @@ export interface NewEvidence {
   itemId: string;
   /** Seed-independent identity of what was asked (see question-key.ts). */
   questionKey: string;
+  /** What the learner saw, whatever the option order (`visibleKey`). Recorded so novelty is judged on either identity. */
+  visibleKey?: string | null;
   templateId: string;
   templateVersion: number;
   seed?: number | null;
@@ -51,6 +68,7 @@ interface DbRow {
   correct: number;
   item_id: string;
   question_key: string;
+  visible_key: string | null;
   fresh: number;
   template_id: string;
   template_version: number;
@@ -71,6 +89,7 @@ const toRow = (r: DbRow): EvidenceRow => ({
   correct: r.correct === 1,
   itemId: r.item_id,
   questionKey: r.question_key,
+  visibleKey: r.visible_key,
   fresh: r.fresh === 1,
   templateId: r.template_id,
   templateVersion: r.template_version,
@@ -100,23 +119,30 @@ export class MasteryService {
     const lt = learnerTime(this.db, this.clock, userId);
     const insert = this.db.prepare(
       `INSERT OR IGNORE INTO mastery_evidence
-        (user_id,id,concept_id,source,counts,correct,item_id,question_key,fresh,template_id,template_version,seed,node_id,session_id,mistake_category,content_version,curriculum_version,rules_version,timezone,local_date,occurred_at)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        (user_id,id,concept_id,source,counts,correct,item_id,question_key,fresh,template_id,template_version,seed,node_id,session_id,mistake_category,content_version,curriculum_version,rules_version,timezone,local_date,occurred_at,visible_key)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     );
     const counts = ev.source === "independent-step" || ev.source === "review-item";
     // Decided here, inside the caller's transaction, before this answer is written: commit order decides novelty.
-    const fresh = this.isFresh(userId, ev.questionKey) ? 1 : 0;
+    const fresh = this.isFresh(userId, ev.questionKey, ev.visibleKey) ? 1 : 0;
     for (const conceptId of ev.conceptIds) {
-      insert.run(userId, ev.id, conceptId, ev.source, counts ? 1 : 0, ev.correct ? 1 : 0, ev.itemId, ev.questionKey, fresh, ev.templateId, ev.templateVersion, ev.seed ?? null, ev.nodeId ?? null, ev.sessionId ?? null, ev.mistakeCategory ?? null, ev.contentVersion ?? null, this.course.version, this.rules.rulesVersion, lt.tz, lt.date, lt.iso);
+      insert.run(userId, ev.id, conceptId, ev.source, counts ? 1 : 0, ev.correct ? 1 : 0, ev.itemId, ev.questionKey, fresh, ev.templateId, ev.templateVersion, ev.seed ?? null, ev.nodeId ?? null, ev.sessionId ?? null, ev.mistakeCategory ?? null, ev.contentVersion ?? null, this.course.version, this.rules.rulesVersion, lt.tz, lt.date, lt.iso, ev.visibleKey ?? null);
       this.refresh(userId, conceptId, lt.date);
     }
     return ev.conceptIds;
   }
 
-  /** Earliest time each question identity was shown to this learner outside counted evidence. */
+  /** Earliest time each question identity (historical and visible) was shown to this learner outside counted evidence. */
   private exposures(userId: string): Map<string, string> {
-    const rows = this.db.prepare("SELECT question_key, MIN(occurred_at) AS at FROM question_exposure WHERE user_id = ? GROUP BY question_key").all(userId) as Array<{ question_key: string; at: string }>;
-    return new Map(rows.map((r) => [r.question_key, r.at]));
+    const out = new Map<string, string>();
+    const note = (k: string | null, at: string) => {
+      if (k && (!out.has(k) || out.get(k)! > at)) out.set(k, at);
+    };
+    for (const r of this.db.prepare("SELECT question_key, visible_key, occurred_at AS at FROM question_exposure WHERE user_id = ?").all(userId) as Array<{ question_key: string; visible_key: string | null; at: string }>) {
+      note(r.question_key, r.at);
+      note(r.visible_key, r.at);
+    }
+    return out;
   }
 
   private rowsFor(userId: string, conceptId?: string): DbRow[] {
@@ -147,24 +173,36 @@ export class MasteryService {
     return [...ids].sort().map((id) => this.refresh(userId, id, today));
   }
 
-  /** Would a correct first answer to this question earn distinct credit? Not if the learner has met it before, anywhere. */
-  isFresh(userId: string, questionKey: string): boolean {
-    return !this.seenAnywhere(userId, questionKey);
+  /** Would a correct first answer to this question earn distinct credit? Not if the learner has met it before, anywhere, under either identity. */
+  isFresh(userId: string, questionKey: string, visibleKey?: string | null): boolean {
+    return !this.seenAnywhere(userId, questionKey, visibleKey ?? questionKey);
   }
 
-  private seenAnywhere(userId: string, questionKey: string): boolean {
-    return Boolean(this.db.prepare("SELECT 1 FROM mastery_evidence WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey)) || Boolean(this.db.prepare("SELECT 1 FROM question_exposure WHERE user_id = ? AND question_key = ? LIMIT 1").get(userId, questionKey));
+  private seenAnywhere(userId: string, questionKey: string, visibleKey: string): boolean {
+    // A stored row matches when either of its identities equals either of the question's: legacy rows (visible_key NULL) still match by
+    // question_key exactly as before.
+    const match = "(question_key IN (?, ?) OR visible_key IN (?, ?))";
+    const args = [userId, questionKey, visibleKey, questionKey, visibleKey];
+    return Boolean(this.db.prepare(`SELECT 1 FROM mastery_evidence WHERE user_id = ? AND ${match} LIMIT 1`).get(...args)) || Boolean(this.db.prepare(`SELECT 1 FROM question_exposure WHERE user_id = ? AND ${match} LIMIT 1`).get(...args));
   }
 
-  /** Did this evidence row earn fresh status when it was recorded (and is it the first row for the question)? */
-  creditedFresh(userId: string, questionKey: string, evidenceId: string): boolean {
-    const first = this.db.prepare("SELECT id, fresh FROM mastery_evidence WHERE user_id = ? AND question_key = ? ORDER BY rowid LIMIT 1").get(userId, questionKey) as { id: string; fresh: number } | undefined;
+  /** Did this evidence row earn fresh status when it was recorded (and is it the first row for the question, under either identity)? */
+  creditedFresh(userId: string, questionKey: string, evidenceId: string, visibleKey?: string | null): boolean {
+    const v = visibleKey ?? questionKey;
+    const first = this.db.prepare("SELECT id, fresh FROM mastery_evidence WHERE user_id = ? AND (question_key IN (?, ?) OR visible_key IN (?, ?)) ORDER BY rowid LIMIT 1").get(userId, questionKey, v, questionKey, v) as { id: string; fresh: number } | undefined;
     return Boolean(first && first.id === evidenceId && first.fresh === 1);
   }
 
-  /** The question identities a learner has met (for a concept's evidence, plus anything seen in practice) so review can prefer new ones. */
+  /**
+   * The question identities a learner has met (for a concept's evidence, plus anything seen in practice) so review can prefer new ones. Holds
+   * both identities of every record; check a candidate with `metBefore`, which tries both of its identities.
+   */
   seenKeys(userId: string, conceptId: string): Set<string> {
-    const keys = new Set((this.db.prepare("SELECT DISTINCT question_key FROM mastery_evidence WHERE user_id = ? AND concept_id = ?").all(userId, conceptId) as Array<{ question_key: string }>).map((r) => r.question_key));
+    const keys = new Set<string>();
+    for (const r of this.db.prepare("SELECT DISTINCT question_key, visible_key FROM mastery_evidence WHERE user_id = ? AND concept_id = ?").all(userId, conceptId) as Array<{ question_key: string; visible_key: string | null }>) {
+      keys.add(r.question_key);
+      if (r.visible_key) keys.add(r.visible_key);
+    }
     for (const k of this.exposures(userId).keys()) keys.add(k);
     return keys;
   }
@@ -215,4 +253,9 @@ export class MasteryService {
       .reverse()
       .map((r) => ({ id: r.id, source: r.source, counted: r.counts === 1, correct: r.correct === 1, itemId: r.item_id, templateId: r.template_id, templateVersion: r.template_version, seed: r.seed, mistakeCategory: r.mistake_category, localDate: r.local_date, rulesVersion: r.rules_version }));
   }
+}
+
+/** Is this question in a set of identities (from `seenKeys`, `helpedKeys`…) under either of its own identities? */
+export function metBefore(keys: Set<string>, item: ExerciseItem): boolean {
+  return keys.has(questionKeyOf(item)) || keys.has(visibleKeyOf(item));
 }

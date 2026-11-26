@@ -21,7 +21,7 @@ import type { Db } from "./db.ts";
 import { tx } from "./db.ts";
 import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
-import { learnerTime, recordExposure } from "./mastery-service.ts";
+import { exposeItem, learnerTime } from "./mastery-service.ts";
 import type { NodeRunService } from "./node-run.ts";
 import { questionKey, visibleKey } from "./question-key.ts";
 import {
@@ -61,7 +61,12 @@ export interface PlannedPrepItem {
   /** Placement: which probe (grade) the question belongs to. */
   stage?: number;
   questionKey: string;
-  /** True when the learner had already been shown this exact question with help or with its answer: it can never be independent evidence. */
+  /**
+   * What the learner sees, whatever the option order (`visibleKey`). Planned since the review of PR #26 (P1); papers planned earlier lack it
+   * and it is then derived from the question when needed. Help recorded under either identity makes the question coached.
+   */
+  visibleKey?: string;
+  /** True when the learner had already been shown this question (under either identity) with help or with its answer: it can never be independent evidence. */
   coached: boolean;
 }
 
@@ -229,17 +234,30 @@ export class PrepService {
       for (const r of this.db.prepare(sql).all(userId) as Array<{ k: string }>) keys.add(r.k);
     };
     add("SELECT question_key AS k FROM question_exposure WHERE user_id = ?");
+    add("SELECT visible_key AS k FROM question_exposure WHERE user_id = ? AND visible_key IS NOT NULL");
     add("SELECT DISTINCT question_key AS k FROM mastery_evidence WHERE user_id = ? AND source IN ('guided-step','hinted-step','retry-after-reveal','remedial-step')");
+    add("SELECT DISTINCT visible_key AS k FROM mastery_evidence WHERE user_id = ? AND visible_key IS NOT NULL AND source IN ('guided-step','hinted-step','retry-after-reveal','remedial-step')");
     for (const r of this.db.prepare("SELECT items FROM prep_attempts WHERE user_id = ? AND status = 'complete'").all(userId) as Array<{ items: string }>) {
-      for (const it of JSON.parse(r.items) as PlannedPrepItem[]) keys.add(it.questionKey);
+      for (const it of JSON.parse(r.items) as PlannedPrepItem[]) {
+        keys.add(it.questionKey);
+        if (it.visibleKey) keys.add(it.visibleKey);
+      }
     }
     return keys;
   }
   /** Every identity the learner has met in independent work, so a new attempt prefers questions that are new to them. */
   private metKeys(userId: string): Set<string> {
     const keys = new Set<string>();
-    for (const r of this.db.prepare("SELECT DISTINCT question_key AS k FROM mastery_evidence WHERE user_id = ?").all(userId) as Array<{ k: string }>) keys.add(r.k);
-    for (const r of this.db.prepare("SELECT items FROM prep_attempts WHERE user_id = ?").all(userId) as Array<{ items: string }>) for (const it of JSON.parse(r.items) as PlannedPrepItem[]) keys.add(it.questionKey);
+    for (const r of this.db.prepare("SELECT DISTINCT question_key AS k, visible_key AS v FROM mastery_evidence WHERE user_id = ?").all(userId) as Array<{ k: string; v: string | null }>) {
+      keys.add(r.k);
+      if (r.v) keys.add(r.v);
+    }
+    for (const r of this.db.prepare("SELECT items FROM prep_attempts WHERE user_id = ?").all(userId) as Array<{ items: string }>) {
+      for (const it of JSON.parse(r.items) as PlannedPrepItem[]) {
+        keys.add(it.questionKey);
+        if (it.visibleKey) keys.add(it.visibleKey);
+      }
+    }
     return keys;
   }
 
@@ -272,7 +290,8 @@ export class PrepService {
       const gradeOutcomeIds = new Set([...this.course.ix.outcomes.values()].filter((o) => o.grade <= scopeGrade).map((o) => o.id));
       const outcomeIds = [...new Set(credited.flatMap((c) => this.course.ix.concepts.get(c)?.outcomeIds ?? []).filter((o) => gradeOutcomeIds.has(o)))];
       const key = questionKey(got.item);
-      used.add(visibleKey(got.item));
+      const visible = visibleKey(got.item);
+      used.add(visible);
       used.add(`q:${key}`);
       used.add(contentKey(got.item));
       return {
@@ -289,7 +308,8 @@ export class PrepService {
         scopeGrade,
         ...(stage !== undefined ? { stage } : {}),
         questionKey: key,
-        coached: helped.has(key),
+        visibleKey: visible,
+        coached: helped.has(key) || helped.has(visible),
       };
     }
     return null;
@@ -490,7 +510,7 @@ export class PrepService {
     const at = this.clock.now().toISOString();
     tx(this.db, () => {
       this.db.prepare("INSERT OR IGNORE INTO prep_hint_uses (user_id,attempt_id,item_id,level,created_at) VALUES (?,?,?,?,?)").run(userId, attemptId, itemId, level, at);
-      recordExposure(this.db, userId, questionKey(r.item), "practice-hint", at);
+      exposeItem(this.db, userId, r.item, "practice-hint", at);
     });
     return { hint: r.item.hints[level - 1]!, level };
   }
@@ -525,7 +545,7 @@ export class PrepService {
         .prepare("INSERT INTO prep_responses (user_id,id,attempt_id,item_id,template_id,template_version,seed,response,correct,mistake_category,hints_used,attempt_number,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")
         .run(userId, commandId, attemptId, itemId, si.templateId, si.templateVersion, si.seed, JSON.stringify(response), graded.correct ? 1 : 0, graded.category, hints, n, lt.iso);
       // Practice mode shows feedback, so the question is now one the learner has seen with help: it can never again be fresh independent evidence.
-      if (!blind) recordExposure(this.db, userId, questionKey(r.item), "practice-attempt", lt.iso);
+      if (!blind) exposeItem(this.db, userId, r.item, "practice-attempt", lt.iso);
       const more = row.kind === "placement" ? this.advancePlacement(userId, cur) : false;
       return { n, more };
     });
@@ -637,13 +657,30 @@ export class PrepService {
     const note = (k: string, at: string) => {
       if (!helpedAt.has(k) || helpedAt.get(k)! > at) helpedAt.set(k, at);
     };
-    for (const r of this.db.prepare("SELECT question_key AS k, occurred_at AS at FROM question_exposure WHERE user_id = ?").all(userId) as Array<{ k: string; at: string }>) note(r.k, r.at);
-    for (const r of this.db.prepare("SELECT question_key AS k, occurred_at AS at FROM mastery_evidence WHERE user_id = ? AND source IN ('guided-step','hinted-step','retry-after-reveal','remedial-step')").all(userId) as Array<{ k: string; at: string }>) note(r.k, r.at);
-    for (const r of this.db.prepare("SELECT items, completed_at AS at FROM prep_attempts WHERE user_id = ? AND status = 'complete' AND id <> ?").all(userId, attemptId) as Array<{ items: string; at: string }>) {
-      for (const it of JSON.parse(r.items) as PlannedPrepItem[]) note(it.questionKey, r.at);
+    // Every identity of every record of help (review of PR #26, P1): practice can show a question with its options reordered, which the historical
+    // identity of an older template distinguishes but the learner does not.
+    for (const r of this.db.prepare("SELECT question_key AS k, visible_key AS v, occurred_at AS at FROM question_exposure WHERE user_id = ?").all(userId) as Array<{ k: string; v: string | null; at: string }>) {
+      note(r.k, r.at);
+      if (r.v) note(r.v, r.at);
     }
+    for (const r of this.db.prepare("SELECT question_key AS k, visible_key AS v, occurred_at AS at FROM mastery_evidence WHERE user_id = ? AND source IN ('guided-step','hinted-step','retry-after-reveal','remedial-step')").all(userId) as Array<{ k: string; v: string | null; at: string }>) {
+      note(r.k, r.at);
+      if (r.v) note(r.v, r.at);
+    }
+    for (const r of this.db.prepare("SELECT items, completed_at AS at FROM prep_attempts WHERE user_id = ? AND status = 'complete' AND id <> ?").all(userId, attemptId) as Array<{ items: string; at: string }>) {
+      for (const it of JSON.parse(r.items) as PlannedPrepItem[]) {
+        note(it.questionKey, r.at);
+        if (it.visibleKey) note(it.visibleKey, r.at);
+      }
+    }
+    const earliest = (a?: string, b?: string) => (a === undefined ? b : b === undefined ? a : a < b ? a : b);
     for (const si of planned) {
-      const h = helpedAt.get(si.questionKey);
+      // A paper planned before visible identities existed: derive it from the question (still reproducible from its stored seed).
+      const visible = si.visibleKey ?? (() => {
+        const r = this.resolve(si);
+        return r ? visibleKey(r.item) : undefined;
+      })();
+      const h = earliest(helpedAt.get(si.questionKey), visible ? helpedAt.get(visible) : undefined);
       const a = answeredAt.get(si.itemId);
       if (h !== undefined && (a === undefined || h <= a)) out.add(si.itemId);
     }

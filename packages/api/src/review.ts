@@ -21,7 +21,7 @@ import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { isDue, type ConceptMastery } from "./mastery.ts";
 import { learnerTime, type LearnerTime, type MasteryService } from "./mastery-service.ts";
-import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
+import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "./question-key.ts";
 import { taughtNodes } from "./taught.ts";
 import { REVIEW_NODE, type XpService } from "./xp.ts";
 
@@ -57,6 +57,8 @@ export interface Candidate {
   templateId: string;
   scope: MusicScope;
 }
+
+const SHARED_POOLS = new WeakMap<Course, Map<string, Array<{ key: string; visible: string; seed: number }>>>();
 
 const seedFor = (sessionId: string, conceptId: string, templateId: string, salt = ""): number => (hashString(`${sessionId}|${conceptId}|${templateId}|${salt}`) >>> 0) % 2 ** 31;
 
@@ -125,7 +127,7 @@ export class ReviewService {
       const item = this.generate(c, seed);
       if (!item) continue;
       if (constraint && !satisfies(item, constraint)) continue;
-      if (avoid.has(questionKey(item))) {
+      if (avoid.has(questionKey(item)) || avoid.has(visibleKey(item))) {
         fallback ??= { item, seed };
         continue;
       }
@@ -135,21 +137,44 @@ export class ReviewService {
   }
 
   private poolCache = new Map<string, Map<string, string>>();
-  /** Distinct question identities one candidate (concept, template, teaching scope) can produce. Independent of who is asking, so it can be filled before any request. */
-  private candidatePool = new Map<string, string[]>();
-  private candidateKeys(conceptId: string, c: Candidate): string[] {
+  /**
+   * Every distinct question one candidate (concept, template, teaching scope) can produce, found by sampling seeds 0-299: its historical
+   * identity, its visible identity and the first seed that makes it. Independent of who is asking, so `warmPools` fills it before any request.
+   */
+  private get candidatePool(): Map<string, Array<{ key: string; visible: string; seed: number }>> {
+    // Content-determined (course, concept, template, scope), so shared by every service on the same loaded curriculum: one per process in
+    // production, and one warm-up per test file instead of one per test app.
+    let m = SHARED_POOLS.get(this.course);
+    if (!m) SHARED_POOLS.set(this.course, (m = new Map()));
+    return m;
+  }
+  private candidateEntries(conceptId: string, c: Candidate): Array<{ key: string; visible: string; seed: number }> {
     const id = `${this.course.version}|${conceptId}|${c.templateId}|${JSON.stringify(c.scope)}`;
     const hit = this.candidatePool.get(id);
     if (hit) return hit;
     const constraint = this.constraints.get(conceptId);
-    const keys = new Set<string>();
+    const byKey = new Map<string, { key: string; visible: string; seed: number }>();
     for (let seed = 0; seed < 300; seed++) {
       const item = this.generate(c, seed);
-      if (item && (!constraint || satisfies(item, constraint))) keys.add(questionKey(item));
+      if (!item || (constraint && !satisfies(item, constraint))) continue;
+      const key = questionKey(item);
+      if (!byKey.has(key)) byKey.set(key, { key, visible: visibleKey(item), seed });
     }
-    const out = [...keys];
+    const out = [...byKey.values()];
     this.candidatePool.set(id, out);
     return out;
+  }
+  private candidateKeys(conceptId: string, c: Candidate): string[] {
+    return this.candidateEntries(conceptId, c).map((e) => e.key);
+  }
+  /**
+   * The different questions a learner would SEE from one candidate (review of PR #26, P2: the same question with its options reordered is one
+   * question), each with a seed that reproduces it inside the candidate's scope and concept boundary. Sampled once (warmed at start-up), so a
+   * session can be planned from it without walking seeds on the request thread.
+   */
+  candidateQuestions(conceptId: string, c: Candidate): Array<{ key: string; visible: string; seed: number }> {
+    const seen = new Set<string>();
+    return this.candidateEntries(conceptId, c).filter((e) => !seen.has(e.visible) && Boolean(seen.add(e.visible)));
   }
   /**
    * Every distinct question (by identity) a concept can be asked inside its teaching boundary today, found by sampling
@@ -171,7 +196,7 @@ export class ReviewService {
 
   private cappedCount = new Map<string, number>();
   /**
-   * How many DIFFERENT questions (by identity), up to `cap`, a concept can be asked within these lessons' teaching scopes. Reads the
+   * How many DIFFERENT questions (as the learner sees them), up to `cap`, a concept can be asked within these lessons' teaching scopes. Reads the
    * warmed per-candidate pools when they exist (production warms them at start-up); otherwise samples seeds only until `cap` distinct
    * questions are found, so a large pool costs a few generations and only a genuinely small one is sampled in full. Cached.
    */
@@ -181,14 +206,15 @@ export class ReviewService {
     const hit = this.cappedCount.get(id);
     if (hit !== undefined) return hit;
     const constraint = this.constraints.get(conceptId);
+    // Counted by what the learner SEES (`visibleKey`): two questions that differ only in option order are one question to them.
     const keys = new Set<string>();
     for (const c of cands) {
       const warm = this.candidatePool.get(`${this.course.version}|${conceptId}|${c.templateId}|${JSON.stringify(c.scope)}`);
-      if (warm) for (const k of warm) keys.add(k);
+      if (warm) for (const e of warm) keys.add(e.visible);
       else {
         for (let seed = 0; seed < 300 && keys.size < cap; seed++) {
           const item = this.generate(c, seed);
-          if (item && (!constraint || satisfies(item, constraint))) keys.add(questionKey(item));
+          if (item && (!constraint || satisfies(item, constraint))) keys.add(visibleKey(item));
         }
       }
       if (keys.size >= cap) break;
@@ -426,6 +452,7 @@ export class ReviewService {
           correct: graded.correct,
           itemId,
           questionKey: questionKey(r.item),
+          visibleKey: visibleKey(r.item),
           templateId: si.templateId,
           templateVersion: si.templateVersion,
           seed: si.seed,
@@ -474,7 +501,7 @@ export class ReviewService {
       replayed,
       kind: si.kind,
       /** True only for the first answer to a review question the learner had never met: the one that earns distinct evidence. */
-      counted: si.kind === "review" && attemptNumber === 1 && this.mastery.creditedFresh(userId, questionKey(r.item), `review:${attemptId}`),
+      counted: si.kind === "review" && attemptNumber === 1 && this.mastery.creditedFresh(userId, questionKey(r.item), `review:${attemptId}`, visibleKey(r.item)),
       remedialItemId: !correct && si.kind === "review" ? remedial?.itemId ?? null : null,
       nextDueDate: m?.nextDueDate ?? null,
     };

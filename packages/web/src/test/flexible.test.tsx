@@ -11,8 +11,10 @@ vi.mock("../lib/audio", async (orig) => ({ ...(await orig<typeof import("../lib/
 // Production samples every topic's question pool before it listens (startup.ts), so the Practice page's first load is fast. Do the same once
 // for this file's shared curriculum instead of making the first test pay for it.
 beforeAll(() => {
-  startApi({ real: true }).app.topics.overview("warm-up");
-}, 120_000);
+  const { app } = startApi({ real: true });
+  app.engagement.review.warmPools();
+  app.topics.overview("warm-up");
+}, 300_000);
 
 beforeEach(() => {
   window.scrollTo = () => undefined;
@@ -45,7 +47,7 @@ describe("Practise a topic", () => {
     await user.click(within(picker).getByRole("radio", { name: "5 questions" }));
     await user.click(within(picker).getByRole("button", { name: "Start: Six sharps" }));
     expect(await screen.findByText(/Grade 5 · Six sharps · Question 1 of 5/)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Not sure\? Learn it:/ })).toHaveAttribute("href", expect.stringMatching(/^\/lesson\/G5-U3-L01\?explore=1$/));
+    expect(screen.getByRole("link", { name: /Not sure\? Learn it:/ })).toHaveAttribute("href", expect.stringMatching(/^\/lesson\/G5-U3-L01\?explore=1&from=topic%3A[0-9a-f-]+$/));
     await user.click(screen.getByRole("button", { name: "Finish now" }));
     const done = await screen.findByTestId("topic-summary");
     expect(within(done).getByRole("heading", { name: "Stopped early, and that's fine" })).toBeInTheDocument();
@@ -119,6 +121,40 @@ describe("Explore lessons", () => {
     const next = document.querySelector('[data-node="G1-U1-L03"]') as HTMLElement;
     expect(next).toHaveTextContent(/Finish “.+” first\. “.+”, which you've already explored, will count then\./);
   }, 60_000);
+
+  it("a malformed grade in the Explore address falls back to the guided grade instead of breaking the page (review finding 8)", async () => {
+    await guest(2);
+    renderApp("/learn/explore?grade=2.5");
+    expect(await screen.findByRole("heading", { level: 2, name: /^Grade 2:/ })).toBeInTheDocument();
+  }, 30_000);
+
+  it("with only explored lessons in a grade, Learn says what the guided path is waiting for, never that the grade is done (review finding 4)", async () => {
+    const h = await guest(5);
+    for (const node of ["G5-U2-L02", "G5-U2-L03"]) {
+      await api.lesson(node, true);
+      await api.start(node, true);
+      for (const it of h.course.authoredItems(node)) {
+        const scope = h.course.scopeFor(node, it);
+        const response = it.answer.kind === "pitch" && inputFor(h.course.ix, it, scope).kind === "pitch-letter" ? { kind: "pitch-letter" as const, letter: it.answer.accepted[0]!.charAt(0) as "A" } : canonicalResponse(h.course.ix, it, scope);
+        await api.attempt(node, crypto.randomUUID(), it.id, response as never);
+      }
+      await api.complete(node);
+    }
+    renderApp("/learn");
+    const card = await screen.findByTestId("guided-blocked");
+    expect(card).toHaveTextContent(/Your Grade 5 path continues after earlier steps/);
+    expect(card).toHaveTextContent(/2 lessons you completed here through Explore will count then/);
+    expect(screen.queryByText(/every ready lesson/)).toBeNull();
+  }, 60_000);
+
+  it("closing a lesson opened from a practice question returns to that practice session (review finding 7)", async () => {
+    await guest(1);
+    const user = userEvent.setup();
+    renderApp(`/lesson/G1-U1-L03?explore=1&from=${encodeURIComponent("topic:not-a-session")}`);
+    await user.click(await screen.findByRole("button", { name: /Close lesson/ }));
+    // the practice route answers (this test's session id does not exist, so it is the practice player's not-found page, not Explore)
+    expect(await screen.findByRole("heading", { name: /can't find that practice session/ })).toBeInTheDocument();
+  }, 30_000);
 
   it("a locked lesson opened from the guided path offers to explore it instead", async () => {
     await guest(1);

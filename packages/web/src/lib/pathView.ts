@@ -72,7 +72,8 @@ const quote = (titles: string[]) => titles.map((t) => `“${t}”`).join(" and "
  * through Explore is not named as something to finish: the message names the guided lesson(s) it is still waiting for, and says the
  * explored lesson will count then.
  */
-export function lockReason(p: NodeProgress | undefined, titleOf: (id: string) => string, nodes?: Record<string, NodeProgress | undefined>): string {
+/** The guided steps that really stand in the way, following prerequisites already completed through Explore back to what is missing. */
+export function missingSteps(ids: string[], nodes?: Record<string, NodeProgress | undefined>): { need: string[]; explored: string[] } {
   const need: string[] = [];
   const explored: string[] = [];
   const seen = new Set<string>();
@@ -85,7 +86,12 @@ export function lockReason(p: NodeProgress | undefined, titleOf: (id: string) =>
       for (const w of q.waitingFor ?? []) visit(w);
     } else need.push(id);
   };
-  for (const id of p?.lockedBy ?? []) visit(id);
+  for (const id of ids) visit(id);
+  return { need, explored };
+}
+
+export function lockReason(p: NodeProgress | undefined, titleOf: (id: string) => string, nodes?: Record<string, NodeProgress | undefined>): string {
+  const { need, explored } = missingSteps(p?.lockedBy ?? [], nodes);
   if (!need.length) return "Finish the earlier lessons first.";
   const base = `Finish ${quote(need.map(titleOf))} first.`;
   return explored.length ? `${base} ${quote(explored.map(titleOf))}, which you've already explored, will count then.` : base;

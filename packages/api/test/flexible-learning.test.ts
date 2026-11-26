@@ -9,18 +9,22 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { canonicalResponse, wrongResponse } from "@mtp/engine";
 import { DatabaseSync } from "node:sqlite";
 import { migrate } from "../src/db.ts";
-import { questionKey } from "../src/question-key.ts";
+import { questionKey, visibleKey } from "../src/question-key.ts";
+import { exposeItem } from "../src/mastery-service.ts";
+import { VISIBLE_IDENTITY_BACKFILL } from "../src/backfill.ts";
 import { Client, correctResponse, playLesson, realCourse } from "./helpers.ts";
 import { boot, completeGrades, learner, protectedCounts } from "./prep-helpers.ts";
 
 const course = realCourse();
 
-// Production samples every topic's question pool before it listens (startup.ts warms the review pools), so the topic-practice overview
-// answers in about 30 ms. Tests do not warm them, so the capacities (shared per loaded curriculum) are filled once here rather than inside
-// whichever test happens to ask first, where a slow CI runner can take longer than the per-test timeout.
+// Production samples every topic's question pool before it listens (startup.ts warms the review pools), so the topic-practice overview answers
+// in about 30 ms and a session starts in well under 100 ms. Do the same once for this file (the pools are shared per loaded curriculum) rather
+// than inside whichever test happens to ask first, where a slow CI runner can take longer than the per-test timeout.
 beforeAll(() => {
-  boot().app.topics.overview("warm-up");
-}, 180_000);
+  const { app } = boot();
+  app.engagement.review.warmPools();
+  app.topics.overview("warm-up");
+}, 300_000);
 const id = () => crypto.randomUUID();
 const lessonsOf = (unitId: string) => course.nodes.filter((n) => n.unitId === unitId && n.type === "lesson").map((n) => n.id);
 
@@ -63,7 +67,10 @@ describe("Explore lessons: free access to any written lesson", () => {
     for (const n of course.nodes.filter((x) => x.id !== "G5-U4-L02")) expect(s[n.id]!.state).not.toBe("completed");
     const prog = (await c.get("/api/progress")).body;
     expect(prog.totals.lessonsCompleted).toBe(1);
-    expect(prog.grades.map((g: { completedNodes: number }) => g.completedNodes)).toEqual([0, 0, 0, 0, 1]);
+    // guided progress does not count it yet; it is reported separately (review of PR #26, finding 4)
+    expect(prog.grades.map((g: { completedNodes: number }) => g.completedNodes)).toEqual([0, 0, 0, 0, 0]);
+    expect(prog.grades.map((g: { exploredNodes: number }) => g.exploredNodes)).toEqual([0, 0, 0, 0, 1]);
+    expect(prog.grades[4].units.find((u: { unitId: string }) => u.unitId === "G5-U4")).toMatchObject({ completedNodes: 0, exploredNodes: 1 });
   });
 
   it("the guided path still enforces its prerequisites: without Explore a locked lesson is 403, as before", async () => {
@@ -171,9 +178,10 @@ describe("existing learners: migration 010 is additive", () => {
     const old = new DatabaseSync(":memory:");
     old.exec("PRAGMA foreign_keys = ON;");
     migrate(old, dir);
+    // the upgrade applies only the flexible-learning migrations, then the app starts on it (as main.ts does: migrate, then serve)
+    expect(migrate(old, src)).toEqual(["010_flexible_learning.sql", "011_exposure_identity.sql"]);
     const { app } = boot({ db: old });
     const { c, userId } = await learner(app);
-    expect(migrate(old, src)).toEqual(["010_flexible_learning.sql"]);
     // a learner who finished Grade 1 under the guided path
     completeGrades(app, old, userId, 1);
     const s = await states(c);
@@ -388,5 +396,127 @@ describe("Practise a topic: any grade, area, unit or topic, no lesson first", ()
     expect((await c.post("/api/auth/register", { email: "flex@example.com", password: "correct horse battery", displayName: "flex" })).status).toBe(200);
     expect((await states(c))["G4-U2-L01"]!.state).toBe("completed");
     expect((await c.get(`/api/topic-practice/sessions/${s.id}`)).status).toBe(200);
+  });
+});
+
+describe("review of PR #26, P1: help on a reordered copy of a question makes it coached", () => {
+  it("help after a mock opens and before its first answer, on the same question with its options reordered, is never independent", async () => {
+    const { db, app } = boot();
+    const { c, userId } = await learner(app);
+    const id = (await c.post("/api/exams/1/start", { mode: "mock", seed: 42 })).body.id as string;
+    const items = app.prep.internalItems(userId, id);
+    // A question whose historical identity depends on option order (an older template, e.g. the minim-rest question).
+    const reorder = (it: (typeof items)[number]["item"]) => ({ ...it, answer: { ...(it.answer as { options: unknown[] }), options: [...(it.answer as { options: unknown[] }).options].reverse() } }) as typeof it;
+    const target = items.find((x) => x.item.answer.kind === "choice" && questionKey(reorder(x.item)) !== questionKey(x.item) && visibleKey(reorder(x.item)) === visibleKey(x.item));
+    expect(target, "a paper with an order-sensitive choice question").toBeTruthy();
+    expect(target!.planned.coached).toBe(false);
+    // Topic practice (or the practice lab) shows the learner the reordered copy with its answer, after the paper was planned.
+    await c.post("/api/test/clock", { advanceMinutes: 1 });
+    exposeItem(db, userId, reorder(target!.item), "practice-attempt", app.clock.now().toISOString());
+    await c.post("/api/test/clock", { advanceMinutes: 1 });
+    for (const it of items) await c.post(`/api/prep/attempts/${id}/answers`, { attemptId: id2(), itemId: it.item.id, response: canonicalResponse(course.ix, it.item, it.scope) });
+    const s = (await c.post(`/api/prep/attempts/${id}/complete`, {})).body;
+    expect(s.coachedQuestions).toBe(1);
+    const entry = s.review.find((r: { itemId?: string; independent: boolean }, i: number) => (r.itemId ?? items[i]!.item.id) === target!.item.id);
+    expect(entry.independent).toBe(false);
+    expect(s.independentCorrect).toBe(items.length - 1);
+    // and a review or revision answer to that question would not be fresh evidence either
+    expect(app.engagement.mastery.isFresh(userId, questionKey(target!.item), visibleKey(target!.item))).toBe(false);
+  }, 60_000);
+
+  it("a later mock avoids, or flags, a question already seen with help under its visible identity", async () => {
+    const { db, app } = boot();
+    const { c, userId } = await learner(app);
+    const first = (await c.post("/api/exams/1/start", { mode: "mock", seed: 7 })).body.id as string;
+    const planned = app.prep.internalItems(userId, first);
+    await c.post(`/api/prep/attempts/${first}/abandon`);
+    const reorder = (it: (typeof planned)[number]["item"]) => ({ ...it, answer: { ...(it.answer as { options: unknown[] }), options: [...(it.answer as { options: unknown[] }).options].reverse() } }) as typeof it;
+    for (const it of planned.filter((x) => x.item.answer.kind === "choice")) exposeItem(db, userId, reorder(it.item), "practice-hint", app.clock.now().toISOString());
+    const next = (await c.post("/api/exams/1/start", { mode: "mock", seed: 7 })).body.id as string;
+    for (const it of app.prep.internalItems(userId, next)) {
+      if (it.planned.coached) continue;
+      expect(planned.some((p) => p.item.answer.kind === "choice" && visibleKey(p.item) === visibleKey(it.item)), it.item.id).toBe(false);
+    }
+  }, 60_000);
+
+  it("every new record of help carries the visible identity", async () => {
+    const { db, app } = boot();
+    const { c, userId } = await learner(app);
+    const s = await startTopic(c, { grade: 1, kind: "area", id: "rhythm", count: 5 });
+    const it = app.topics.internalItems(userId, s.id)[0]!;
+    await c.post(`/api/topic-practice/sessions/${s.id}/attempts`, { attemptId: id2(), itemId: it.itemId, response: canonicalResponse(course.ix, it.item, it.scope) });
+    const row = db.prepare("SELECT visible_key FROM question_exposure WHERE user_id = ? AND question_key = ?").get(userId, questionKey(it.item)) as { visible_key: string };
+    expect(row.visible_key).toBe(visibleKey(it.item));
+  });
+});
+const id2 = () => crypto.randomUUID();
+
+describe("review of PR #26, P2: identity is what the learner sees, and a start does no seed search", () => {
+  it("20-question sessions on topics with reorderable options never show the same question twice, and match the advertised count", async () => {
+    const { app } = boot();
+    const { c, userId } = await learner(app);
+    const ov = (await c.get("/api/topic-practice")).body;
+    const advertised = (g: number, id: string) => ov.grades[g - 1].areas.flatMap((a: { topics: Array<{ conceptId: string; available: number | null }> }) => a.topics).find((t: { conceptId: string }) => t.conceptId === id).available;
+    for (const [grade, id] of [[1, "c.rhythm.rests"], [3, "c.rhythm.demisemiquavers"], [1, "c.metre.bar-completion"], [2, "c.scales.minor-melodic-preview"]] as const) {
+      const s = await startTopic(c, { grade, kind: "topic", id, count: 20 });
+      const items = app.topics.internalItems(userId, s.id);
+      const visible = new Set(items.map((x) => visibleKey(x.item)));
+      expect(visible.size, id).toBe(items.length);
+      const a = advertised(grade, id);
+      expect(items.length, id).toBe(a === null ? 20 : a);
+    }
+  });
+
+  it("with warmed pools, starting a large score-reading topic is quick (it generated in a seed search of up to 300 per question before)", async () => {
+    const { app } = boot();
+    const { c } = await learner(app);
+    const t0 = performance.now();
+    for (let i = 0; i < 3; i++) await startTopic(c, { grade: 5, kind: "topic", id: "c.voices.satb-scores", count: 20 });
+    // Measured about 50 ms a start locally (2.2-3.5 s before); the bound leaves room for a slow CI runner.
+    expect((performance.now() - t0) / 3).toBeLessThan(1500);
+  });
+});
+
+describe("review of PR #26: stale sessions and hint counts", () => {
+  it("a session whose every question went stale is closed and says so, and is no longer offered to resume (finding 6)", async () => {
+    const { db, app } = boot();
+    const { c, userId } = await learner(app);
+    const s = await startTopic(c, { grade: 2, kind: "area", id: "rhythm", count: 5 });
+    // model a generator update: every planned fingerprint no longer reproduces
+    const row = db.prepare("SELECT items FROM topic_practice_sessions WHERE user_id = ? AND id = ?").get(userId, s.id) as { items: string };
+    const items = (JSON.parse(row.items) as Array<{ fingerprint: string }>).map((i) => ({ ...i, fingerprint: "0000000000" }));
+    db.prepare("UPDATE topic_practice_sessions SET items = ? WHERE user_id = ? AND id = ?").run(JSON.stringify(items), userId, s.id);
+    const v = (await c.get(`/api/topic-practice/sessions/${s.id}`)).body;
+    expect(v).toMatchObject({ status: "abandoned", allStale: true, items: [] });
+    expect((await c.get("/api/topic-practice")).body.open).toBeNull();
+  });
+
+  it("the summary counts every hint shown, including on a question left unanswered (finding 9)", async () => {
+    const { app } = boot();
+    const { c, userId } = await learner(app);
+    const s = await startTopic(c, { grade: 3, kind: "area", id: "intervals", count: 5 });
+    const it = app.topics.internalItems(userId, s.id).find((x) => x.item.hints.length > 0)!;
+    await c.post(`/api/topic-practice/sessions/${s.id}/hint`, { itemId: it.itemId, level: 1 });
+    const sum = (await c.post(`/api/topic-practice/sessions/${s.id}/complete`)).body;
+    expect(sum).toMatchObject({ answered: 0, hintsUsed: 1 });
+  });
+});
+
+describe("review of PR #26, P1: earlier help records are given their visible identity once", () => {
+  it("the backfill fills practice-lab exposures recorded before migration 011, and is idempotent", async () => {
+    const { db, app } = boot();
+    const { c, userId } = await learner(app);
+    const gen = (await c.post("/api/practice/generate", { templateId: "t.g1.rest", seed: 11 })).body;
+    await c.post("/api/practice/hint", { itemId: gen.id, level: 1 });
+    // as a database upgraded from before migration 011 would hold it
+    db.prepare("UPDATE question_exposure SET visible_key = NULL WHERE user_id = ?").run(userId);
+    db.prepare("DELETE FROM data_backfills WHERE name = ?").run(VISIBLE_IDENTITY_BACKFILL);
+    const { backfillVisibleIdentity } = await import("../src/backfill.ts");
+    const r = backfillVisibleIdentity(db, course, app.practice, app.clock);
+    expect(r.ran).toBe(true);
+    expect(r.exposures).toBe(1);
+    const row = db.prepare("SELECT visible_key FROM question_exposure WHERE user_id = ?").get(userId) as { visible_key: string | null };
+    expect(row.visible_key).toBe(visibleKey(app.practice.resolve(gen.id).item));
+    expect(backfillVisibleIdentity(db, course, app.practice, app.clock).ran).toBe(false);
   });
 });

@@ -36,6 +36,14 @@ await test("Explore: a fresh learner opens a Grade 5 lesson ahead of the path, c
   const ctx = await newCtx();
   const { page } = await guest(ctx);
   await page.goto("/learn");
+  // Review of PR #26, finding 5: both new entry points are on screen when Learn first opens, without scrolling.
+  const learnWays = page.locator(".learn-ways");
+  await learnWays.waitFor();
+  await page.waitForTimeout(600); // any page-load scroll would have happened by now
+  const box = await learnWays.boundingBox();
+  const vh = page.viewportSize().height;
+  assert.ok(box && box.y >= 0 && box.y + box.height <= vh, `Explore and Practise are in view on first load (y=${box?.y}, viewport ${vh})`);
+  assert.equal(await page.evaluate(() => window.scrollY), 0);
   await page.getByRole("link", { name: /Explore lessons/ }).click();
   await page.getByRole("heading", { level: 1, name: "Explore lessons" }).waitFor();
   await page.getByRole("radio", { name: "Grade 5" }).click();
@@ -135,6 +143,11 @@ await test("Practise a topic: Grade 5 -> Keys and scales -> a topic -> 5 questio
   const before = new Set(items.map((x) => questionKey(x.item)));
   const again = S.app.topics.internalItems(userId, second).map((x) => questionKey(x.item));
   assert.equal(again.filter((k) => before.has(k)).length, 0, "practise again brings different questions");
+  // "Not sure? Learn it" opens the lesson, and closing it comes back to this practice question (review finding 7)
+  await page.getByRole("link", { name: /Not sure\? Learn it/ }).click();
+  await page.getByRole("button", { name: /Close lesson/ }).click();
+  await page.waitForURL((u) => u.pathname.endsWith(`/practice/topic/${second}`));
+  await page.getByText(/Six flats · Question 1 of 5/).waitFor();
   // finish early, from the first question
   await page.getByRole("button", { name: "Finish now" }).click();
   await page.getByRole("heading", { name: "Stopped early, and that's fine" }).waitFor();

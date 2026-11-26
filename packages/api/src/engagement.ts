@@ -10,7 +10,7 @@ import type { Clock } from "./clock.ts";
 import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
 import { REVEAL_AFTER_WRONG } from "./grade.ts";
-import { loadConstraints, questionKey, satisfies, type ReviewConstraint } from "./question-key.ts";
+import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "./question-key.ts";
 import { taughtNodes } from "./taught.ts";
 import { explainMastery, isDue, rulesFrom, type ConceptMastery, type EvidenceSource } from "./mastery.ts";
 import { MasteryService, learnerTime, type LearnerTime } from "./mastery-service.ts";
@@ -98,6 +98,7 @@ export class Engagement {
       correct: f.correct,
       itemId: f.item.id,
       questionKey: questionKey(f.item),
+      visibleKey: visibleKey(f.item),
       templateId: f.item.templateId,
       templateVersion: f.item.templateVersion,
       nodeId: f.nodeId,

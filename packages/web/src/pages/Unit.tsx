@@ -23,7 +23,7 @@ export function Unit() {
       <div className="progress" role="progressbar" aria-label="Unit progress" aria-valuemin={0} aria-valuemax={gp.requiredNodes} aria-valuenow={gp.completedNodes}>
         <span style={{ width: `${(gp.completedNodes / Math.max(1, gp.requiredNodes)) * 100}%` }} />
       </div>
-      <p className="muted small">{gp.completedNodes} of {gp.requiredNodes} steps complete{gp.writtenNodes < gp.requiredNodes ? ` · ${gp.writtenNodes} ready to play` : ""}</p>
+      <p className="muted small">{gp.completedNodes} of {gp.requiredNodes} steps complete{gp.exploredNodes ? ` · ${gp.exploredNodes} explored ahead, counted once the steps before them are done` : ""}{gp.writtenNodes < gp.requiredNodes ? ` · ${gp.writtenNodes} ready to play` : ""}</p>
       <ol className="unit-list">
         {nodes.map((n) => {
           const p = data.progress.nodes[n.id];

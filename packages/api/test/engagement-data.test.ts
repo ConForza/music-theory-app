@@ -108,7 +108,7 @@ describe("persistence and migration", () => {
     db.prepare("INSERT INTO profiles (user_id,experience,selected_grade,onboarded,settings,updated_at) VALUES ('u1','new',1,1,'{}',?)").run(t);
     db.prepare("INSERT INTO lesson_progress (user_id,node_id,run,run_open,phase,content_version,curriculum_version,started_at,updated_at,completed_at,completed_content_version) VALUES ('u1',?,1,0,'questions',2,'0.2.1',?,?,?,2)").run(LESSON, t, t, t);
     db.prepare("INSERT INTO attempts (user_id,id,node_id,run,item_id,template_id,template_version,content_version,curriculum_version,evidence,response,correct,mistake_category,hints_used,attempt_number,created_at) VALUES ('u1','a1',?,1,'i.g1-u3-l03.independent-1','t.g1.note-read',1,2,'0.2.1','independent','{}',1,NULL,0,1,?)").run(LESSON, t);
-    expect(migrate(db, src)).toEqual(["003_progression.sql", "004_question_exposure.sql", "005_evidence_novelty.sql", "006_backfill_novelty.sql", "007_node_sessions.sql", "008_data_backfills.sql", "009_prep.sql", "010_flexible_learning.sql"]);
+    expect(migrate(db, src)).toEqual(["003_progression.sql", "004_question_exposure.sql", "005_evidence_novelty.sql", "006_backfill_novelty.sql", "007_node_sessions.sql", "008_data_backfills.sql", "009_prep.sql", "010_flexible_learning.sql", "011_exposure_identity.sql"]);
     expect(migrate(db, src)).toEqual([]); // repeatable
     expect(db.prepare("SELECT timezone, daily_goal FROM profiles WHERE user_id = 'u1'").get()).toEqual({ timezone: "UTC", daily_goal: 1 });
     expect(db.prepare("SELECT COUNT(*) AS n FROM attempts").get()).toEqual({ n: 1 });
@@ -135,9 +135,12 @@ describe("persistence and migration", () => {
     old.exec("DROP TABLE data_backfills");
     old.exec("DROP TABLE question_exposure");
     old.exec("ALTER TABLE mastery_evidence DROP COLUMN fresh");
-    old.exec("DELETE FROM schema_migrations WHERE version IN ('004_question_exposure.sql', '005_evidence_novelty.sql', '006_backfill_novelty.sql', '008_data_backfills.sql')");
+    // 011 extends question_exposure and mastery_evidence, so a database from before 004 has not applied it either.
+    old.exec("DROP INDEX mastery_evidence_visible");
+    old.exec("ALTER TABLE mastery_evidence DROP COLUMN visible_key");
+    old.exec("DELETE FROM schema_migrations WHERE version IN ('004_question_exposure.sql', '005_evidence_novelty.sql', '006_backfill_novelty.sql', '008_data_backfills.sql', '011_exposure_identity.sql')");
     expect(() => old.prepare("SELECT 1 FROM question_exposure").get()).toThrow(/no such table/);
-    expect(migrate(old, src)).toEqual(["004_question_exposure.sql", "005_evidence_novelty.sql", "006_backfill_novelty.sql", "008_data_backfills.sql"]);
+    expect(migrate(old, src)).toEqual(["004_question_exposure.sql", "005_evidence_novelty.sql", "006_backfill_novelty.sql", "008_data_backfills.sql", "011_exposure_identity.sql"]);
     expect(migrate(old, src)).toEqual([]);
     const next = createApp({ db: old, course, clock: new ManualClock(new Date("2026-03-02T12:00:00Z")) });
     const c2 = new Client(next);
