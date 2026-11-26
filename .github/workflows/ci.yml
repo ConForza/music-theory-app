@@ -29,7 +29,7 @@ jobs:
   # Each browser shard starts independently of curriculum and has its own runner,
   # built app, Chromium and temporary SQLite database. Shards cover the same real-browser
   # suites as the serial npm run e2e command (the ten earlier suites plus Brief 10's
-  # placement, practice-examination and revision journeys, and the flexible-learning journey, in the `prep` shard).
+  # placement, practice-examination and revision journeys, the flexible-learning journey and the PWA / preview sign-in journey, in the `prep` shard).
   browser_shard:
     name: browser / ${{ matrix.shard }}
     runs-on: ubuntu-latest
