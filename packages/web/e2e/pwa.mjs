@@ -219,7 +219,7 @@ try {
     await page.getByRole("button", { name: "Open the preview" }).click();
     await page.getByRole("navigation", { name: "Main" }).waitFor();
     await ctx.clearCookies({ name: "mtp_preview" });
-    await page.getByRole("link", { name: "Progress" }).click();
+    await page.getByRole("link", { name: "Progress", exact: true }).click();
     await page.waitForURL(/\/preview\/signin\?next=%2Fprogress/);
     await page.getByLabel("Tester name").fill("tester1");
     await page.getByLabel("Preview password").fill(tester.password);
