@@ -4,13 +4,17 @@ import type { Me } from "../api/client";
 import { dismissInstallHint, installHintDismissed, promptInstall, useInstallMode, type InstallMode } from "../lib/install";
 import { Icon, Logo } from "./Icon";
 
-/** Guest progress lives in this browser's sign-in only: an installed app starts with its own, empty sign-in. */
+/**
+ * A guest has no password, so a guest whose sign-in does not come across to the installed app (Safari may copy it at installation, but
+ * that is not guaranteed) has no way back to their progress there. Registering first protects it.
+ */
 function GuestNote({ me }: { me: Me | null | undefined }) {
   if (!me?.user.isGuest) return null;
   return (
     <p className="install-guest">
-      <strong>You're learning as a guest.</strong> The app on your Home Screen keeps its own sign-in, so it can't see guest progress from
-      this browser. <Link to="/profile">Create a free account</Link> first, then sign in once in the app and everything comes with you.
+      <strong>You're learning as a guest.</strong> The app on your Home Screen keeps its own sign-in. It may start signed in, but if it
+      doesn't, a guest has no password to get back in. <Link to="/profile">Create a free account</Link> first so your progress is safe,
+      then sign in in the app if it asks.
     </p>
   );
 }
@@ -20,8 +24,8 @@ function IosSteps() {
     <ol className="install-steps">
       <li>In Safari, tap the <strong>Share</strong> button <ShareGlyph /> (on newer iPhones it may be inside the <strong>•••</strong> menu).</li>
       <li>Choose <strong>Add to Home Screen</strong>. You may need to scroll down or tap <strong>View More</strong>.</li>
-      <li>Tap <strong>Add</strong>, then open <strong>Theory Path</strong> from your Home Screen.</li>
-      <li>Sign in once inside the app. Passwords can fill in your details, and you'll stay signed in after that.</li>
+      <li>If you see <strong>Open as Web App</strong>, leave it switched on. Tap <strong>Add</strong>, then open <strong>Theory Path</strong> from your Home Screen.</li>
+      <li>If the app asks you to sign in, do it once: Passwords can fill in your details, and you'll stay signed in after that.</li>
     </ol>
   );
 }
@@ -96,7 +100,7 @@ export function InstallGuide({ me }: { me: Me | null | undefined }) {
               <li><strong>iPhone or iPad:</strong> open this page in Safari, tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>.</li>
             </ul>
           )}
-          <p className="muted small">The installed app keeps its own sign-in, separate from this browser, so you'll sign in once more inside it.</p>
+          <p className="muted small">The installed app keeps its own sign-in, separate from this browser. It may open already signed in; if not, sign in once inside it.</p>
           <GuestNote me={me} />
         </>
       )}

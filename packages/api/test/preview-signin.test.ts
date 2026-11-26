@@ -136,7 +136,8 @@ describe("tester sign-in", () => {
       expect(set).toMatch(/HttpOnly/);
       expect(set).toMatch(/Secure/);
       expect(set).toMatch(/SameSite=Lax/);
-      expect(Number(/Max-Age=(\d+)/.exec(set)![1])).toBe(PREVIEW_SESSION_DAYS * 86400);
+      // The cookie lasts to the absolute limit; the server's 60-day idle window decides whether it still works.
+      expect(Number(/Max-Age=(\d+)/.exec(set)![1])).toBe(PREVIEW_MAX_DAYS * 86400);
       const token = pair(set).split("=")[1]!;
       // Stored only as a hash, with no learner identity.
       const rows = db.prepare("SELECT * FROM preview_sessions").all() as Array<Record<string, string>>;
@@ -247,7 +248,7 @@ describe("persistence and revocation", () => {
     }, { db });
   });
 
-  it("a session is renewed by use at most daily, ends after 60 idle days, and never outlives 180 days", async () => {
+  it("a session is renewed by use (server-side, at most daily), ends after 60 idle days, and never outlives 180 days", async () => {
     const db = openDb(":memory:");
     let t = Date.now();
     const now = () => new Date(t);
@@ -255,14 +256,10 @@ describe("persistence and revocation", () => {
       const cookie = pair(previewCookieOf(await signIn("alice", alice.password)));
       expect((await get("/learn", { headers: { cookie } })).headers.getSetCookie()).toHaveLength(0); // fresh: nothing to renew
       t += 30 * DAY;
-      // A long-cached static asset never carries the renewal cookie; the next page does.
-      const asset = await get("/assets/app.js", { headers: { cookie } });
-      expect(asset.status).toBe(200);
-      expect(asset.headers.get("cache-control")).toContain("immutable");
-      expect(asset.headers.getSetCookie()).toHaveLength(0);
-      const renewed = await get("/learn", { headers: { cookie } });
-      expect(renewed.status).toBe(200);
-      expect(Number(/Max-Age=(\d+)/.exec(previewCookieOf(renewed)!)![1])).toBe(PREVIEW_SESSION_DAYS * 86400);
+      // Renewal is server-side only: no response ever carries a renewal cookie (review P2), and the session still works 85 days in.
+      for (const p of ["/assets/app.js", "/learn", "/preview/signin?next=%2Flearn"]) expect((await get(p, { headers: { cookie } })).headers.getSetCookie(), p).toHaveLength(0);
+      t += 55 * DAY; // 85 days after sign-in, 55 after the last use: still inside the renewed idle window
+      expect((await get("/learn", { headers: { cookie } })).status).toBe(200);
       t += (PREVIEW_SESSION_DAYS + 1) * DAY; // unused for longer than the idle window
       expect((await get("/learn", { headers: { cookie } })).status).toBe(303);
       // Used every week: still ends at the absolute limit.
@@ -306,5 +303,57 @@ describe("preview access and learner accounts stay separate", () => {
       expect((await get("/api/me", { headers: { cookie: both } })).status).toBe(401); // learner signed out...
       expect((await get("/learn", { headers: { cookie: preview } })).status).toBe(200); // ...preview kept
     });
+  });
+});
+
+describe("review follow-ups", () => {
+  it("a sign-in form over the transport limit is answered 413 on both sides of it, never 500", async () => {
+    await withServer(alice.entry, async ({ get, base }) => {
+      for (const size of [4100, 9000, 200_000]) {
+        const r = await get("/preview/signin", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded", origin: base.replace("http:", "https:") }, body: `username=${"a".repeat(size)}` }).catch(() => null);
+        // A very large body may also be cut off by the server closing the connection after its 413.
+        if (size < 100_000) expect(r?.status, String(size)).toBe(413);
+        else if (r) expect(r.status, String(size)).toBe(413);
+      }
+    });
+  });
+
+  it("protected static files are never shared-cacheable: private, revalidated through the gate, 304 when unchanged", async () => {
+    await withServer(alice.entry, async ({ get, signIn }) => {
+      const cookie = pair(previewCookieOf(await signIn("alice", alice.password)));
+      const first = await get("/assets/app.js", { headers: { cookie } });
+      expect(first.status).toBe(200);
+      expect(first.headers.get("cache-control")).toBe("private, no-cache");
+      const etag = first.headers.get("etag")!;
+      expect(etag).toMatch(/^W\//);
+      const again = await get("/assets/app.js", { headers: { cookie, "if-none-match": etag } });
+      expect(again.status).toBe(304);
+      // Without preview access the revalidation is refused, so no cached copy is confirmed.
+      expect((await get("/assets/app.js", { headers: { "if-none-match": etag } })).status).toBe(401);
+    });
+  });
+
+  it("the preview status endpoint tells the app whether to offer 'leave the preview', and nothing about the tester", async () => {
+    await withServer(alice.entry, async ({ get, signIn }) => {
+      const out = await get("/preview/session");
+      expect(out.status).toBe(401);
+      expect(await out.json()).toEqual({ preview: true, signedIn: false, viaSession: false });
+      const cookie = pair(previewCookieOf(await signIn("alice", alice.password)));
+      const body = await (await get("/preview/session", { headers: { cookie } })).json();
+      expect(body).toEqual({ preview: true, signedIn: true, viaSession: true });
+      expect(JSON.stringify(body)).not.toContain("alice");
+    });
+  });
+
+  it("expired preview sessions are removed by the daily housekeeping", async () => {
+    const { runRetention, retentionPolicyFromEnv } = await import("../src/retention.ts");
+    const db = openDb(":memory:");
+    let t = Date.now();
+    await withServer(alice.entry, async ({ signIn }) => {
+      await signIn("alice", alice.password);
+    }, { db, now: () => new Date(t) });
+    t += (PREVIEW_SESSION_DAYS + 1) * DAY;
+    expect(runRetention(db, retentionPolicyFromEnv({}), { now: new Date(t) }).expiredPreviewSessionsRemoved).toBe(1);
+    expect((db.prepare("SELECT COUNT(*) AS n FROM preview_sessions").get() as { n: number }).n).toBe(0);
   });
 });

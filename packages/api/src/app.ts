@@ -242,13 +242,13 @@ export function createApp(opts: AppOptions) {
     }
     const passwordHash = await auth.hashPassword(body.password);
     if (ctx.user?.isGuest) {
-      // Upgrade in place: the guest's progress stays attached to the same learner. The privilege changes (a guest session becomes a
-      // registered learner's), so the session is replaced: the guest token stops working and the learner gets a fresh, renewable one.
+      // Upgrade in place: the guest's progress stays attached to the same learner. The privilege changes, so the guest session is replaced.
+      // The guest identity was read before the body and the slow hash, so it is checked again, and the guest token consumed, in the same
+      // transaction as the upgrade: a registration that raced a sign-out or sign-in is refused rather than reviving a session.
       // If this reply is lost the old cookie no longer signs in; the form then signs in with the details just typed (see AccountForm).
-      const user = auth.upgradeGuest(db, ctx.user.id, { displayName: body.displayName, email: body.email, passwordHash });
-      const s = auth.rotateSession(db, ctx.token, user.id);
-      ctx.cookies.push(sessionCookie(s.token, s.maxAgeSeconds));
-      ctx.token = s.token;
+      const { user, session } = auth.upgradeGuestWithSession(db, ctx.token, ctx.user.id, { displayName: body.displayName, email: body.email, passwordHash });
+      ctx.cookies.push(sessionCookie(session.token, session.maxAgeSeconds));
+      ctx.token = session.token;
       return me(user, ctx.token);
     }
     const user = auth.createUser(db, { displayName: body.displayName, email: body.email, passwordHash });
@@ -257,13 +257,19 @@ export function createApp(opts: AppOptions) {
   });
 
   route("POST", "/api/auth/login", false, async (ctx) => {
-    const body = parse(z.object({ email: Email, password: z.string().min(1).max(128) }).strict(), await ctx.body());
+    // `onlyIfSignedOut`: the registration form's recovery after a lost reply. It may sign in only if this device has no live session (or
+    // already has this very account's); it must never replace a different learner who signed in meanwhile.
+    const body = parse(z.object({ email: Email, password: z.string().min(1).max(128), onlyIfSignedOut: z.boolean().optional() }).strict(), await ctx.body());
     loginIpLimiter.check(`loginip:${ctx.client}`);
     loginLimiter.check(`login:${body.email}`);
     const found = auth.findByEmail(db, body.email);
     // Same error and similar work whether or not the account exists.
     const ok = found?.passwordHash ? await auth.verifyPassword(body.password, found.passwordHash) : (await auth.hashPassword(body.password), false);
     if (!found || !ok) throw new ApiError(401, "bad_credentials", "That email and password don't match.");
+    if (body.onlyIfSignedOut && ctx.user) {
+      if (ctx.user.id === found.id) return me(ctx.user, ctx.token);
+      throw new ApiError(409, "signed_in", "Someone else is signed in on this device. Sign out first, then sign in.");
+    }
     if (ctx.token) auth.destroySession(db, ctx.token);
     startSession(ctx, found.id);
     const { passwordHash: _omit, ...user } = found;
@@ -556,9 +562,13 @@ export function createApp(opts: AppOptions) {
         },
       };
       const data = await route.handler(ctx);
-      // A renewed session is sent again with its new lifetime, unless the handler itself set or cleared the session cookie (sign-in,
-      // registration, sign-out, account deletion): its cookie is the one that must win.
-      if (session?.renewedMaxAgeSeconds && token && !cookies.some((c) => c.startsWith(`${COOKIE}=`))) cookies.push(sessionCookie(token, session.renewedMaxAgeSeconds));
+      // Renewal is written only once the request has succeeded, and only if the handler did not set or clear the session cookie itself
+      // (sign-in, registration, sign-out, account deletion: its cookie must win). Modern cookies already last to the session's absolute limit,
+      // so nothing is sent; a session from before that change gets its cookie upgraded here (see auth.ts).
+      if (session && !cookies.some((c) => c.startsWith(`${COOKIE}=`))) {
+        const legacyMaxAge = auth.commitRenewal(db, session);
+        if (legacyMaxAge) cookies.push(sessionCookie(session.token, legacyMaxAge));
+      }
       for (const c of cookies) headers.append("set-cookie", c);
       return new Response(JSON.stringify(data), { status: 200, headers });
     } catch (e) {

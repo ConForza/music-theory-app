@@ -39,6 +39,7 @@ metadata (manifest and icons). Guest, registration, login and student routes are
 * **Invite**: `npm run preview:invite -w @mtp/api -- alice` prints a random 192-bit password (show it to the tester once, via a private channel) and an entry `alice:<sha256>`. Append the entry to `MTP_PREVIEW_ACCESS` (comma-separated) in Railway and deploy. Only hashes are stored; no credentials are in Git, and none ever go in a URL.
 * **Revoke**: remove that tester's entry and deploy. When the new process starts, the credentials stop working and **every preview session issued to that tester is invalidated and deleted** (sessions are tied to the exact entry, so re-issuing a tester's password also ends their old sessions). Learner sessions inside the app are unaffected, but the tester can no longer reach it.
 * **Adults and internal testers only.** No children until the age/privacy notice, consent arrangements and data-location decisions are approved. No production WMF data.
+* Shared devices: learner sign-out keeps the device's preview access; Settings offers **Sign out and leave the preview on this device** to end both.
 * Existing invitations keep working unchanged (same `MTP_PREVIEW_ACCESS` entries). Scripts may still send them as `Authorization: Basic` (`curl -u name:password`); browsers are never challenged.
 
 Message to send testers with their password:

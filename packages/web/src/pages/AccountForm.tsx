@@ -49,7 +49,8 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
         // A guest whose session still works ("guest") is never swapped, and a failed sign-in falls through to the honest message.
         if (startedAsGuest.current && doubt.current === "none") {
           try {
-            return await api.login({ email, password });
+            // Conditional on the server: refused if a different learner signed in on this device after the check above.
+            return await api.login({ email, password, onlyIfSignedOut: true });
           } catch {
             /* not confirmed: say so below */
           }
@@ -66,7 +67,7 @@ export function RegisterForm({ onDone, submitLabel = "Create account" }: { onDon
         if (found) return found;
         if (doubt.current === "none") {
           try {
-            return await api.login({ email, password });
+            return await api.login({ email, password, onlyIfSignedOut: true });
           } catch {
             /* not theirs: fall through to the plain "already registered" message */
           }

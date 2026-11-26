@@ -272,3 +272,75 @@ describe("web app manifest and icons", () => {
     expect(offline).toContain('href=""'); // "Try again" reloads the page that failed
   });
 });
+
+describe("review of the PWA PR: session reads and sign-out", () => {
+  it("P2: an older foreground check answering late cannot bring back a learner a newer check found signed out", async () => {
+    const s = startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    renderApp("/settings");
+    await screen.findByRole("heading", { name: "Settings" });
+    // Check A: the server answers "Ada" but the reply is held in transit.
+    const held = s.hold(/GET \/api\/me/);
+    act(() => void window.dispatchEvent(new Event("online")));
+    await waitFor(() => expect(held.seen()).toBe(1));
+    // The session ends (signed out elsewhere); check B answers 401 first.
+    s.db.exec("DELETE FROM sessions");
+    act(() => void window.dispatchEvent(new Event("online")));
+    expect(await screen.findByRole("link", { name: "I already have an account" })).toBeInTheDocument();
+    // A's stale "Ada" finally arrives: it must not restore her.
+    held.release();
+    await new Promise((r) => setTimeout(r, 50));
+    expect(screen.getByRole("link", { name: "I already have an account" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Settings" })).toBeNull();
+  });
+
+  it("P2: a sign-out blocked by the preview gate is not a sign-out; the learner stays signed in and returns with it pending", async () => {
+    const s = startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    const inner = globalThis.fetch;
+    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = String(input);
+      if (url.endsWith("/api/auth/logout")) return new Response(JSON.stringify({ error: { code: "preview_required", message: "preview" } }), { status: 401 });
+      return inner(input, init);
+    }) as typeof fetch;
+    const realLocation = window.location;
+    const assign = vi.fn();
+    Object.defineProperty(window, "location", { configurable: true, value: { pathname: "/settings", search: "", assign } });
+    const { resetPreviewRedirectForTests } = await import("../api/client");
+    resetPreviewRedirectForTests();
+    try {
+      renderApp("/settings");
+      fireEvent.click(await screen.findByRole("button", { name: "Sign out" }));
+      expect(await screen.findByText(/preview access has ended, so you are still signed in/)).toBeInTheDocument();
+      expect(assign).toHaveBeenCalledWith("/preview/signin?next=%2Fsettings%3Fpending%3Dsignout");
+      expect(screen.getByRole("heading", { name: "Settings" })).toBeInTheDocument();
+      expect(s.cookie()).toMatch(/^mtp_session=/); // the learner session was never ended
+    } finally {
+      Object.defineProperty(window, "location", { configurable: true, value: realLocation });
+      globalThis.fetch = inner;
+      resetPreviewRedirectForTests();
+    }
+  });
+
+  it("coming back from the preview sign-in with the sign-out pending says so and offers to finish it", async () => {
+    startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    renderApp("/settings?pending=signout");
+    expect(await screen.findByText(/You haven't been signed out yet/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Finish signing out" }));
+    expect(await screen.findByRole("link", { name: "I already have an account" })).toBeInTheDocument();
+  });
+
+  it("'leave the preview' is offered only where there is a preview gate", async () => {
+    startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    renderApp("/settings");
+    await screen.findByRole("heading", { name: "Settings" });
+    await new Promise((r) => setTimeout(r, 50));
+    expect(screen.queryByRole("button", { name: /leave the preview/ })).toBeNull();
+  });
+});

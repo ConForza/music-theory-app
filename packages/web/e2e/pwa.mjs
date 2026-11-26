@@ -229,11 +229,63 @@ try {
     await ctx.close();
   });
 
+  await test("review P2: a sign-out blocked by expired preview access leaves the learner signed in and comes back pending", async () => {
+    const { ctx, page } = await open(appState);
+    await page.goto("/settings");
+    await page.getByRole("heading", { name: "Settings" }).waitFor();
+    await ctx.clearCookies({ name: "mtp_preview" });
+    await page.getByRole("button", { name: "Sign out", exact: true }).click();
+    await page.waitForURL(/\/preview\/signin\?next=%2Fsettings%3Fpending%3Dsignout$/);
+    await page.getByLabel("Tester name").fill("tester1");
+    await page.getByLabel("Preview password").fill(tester.password);
+    await page.getByRole("button", { name: "Open the preview" }).click();
+    await page.waitForURL(/\/settings\?pending=signout$/);
+    await page.getByText("You haven't been signed out yet").waitFor();
+    const still = await page.evaluate(async () => (await fetch("/api/me")).status);
+    assert.equal(still, 200, "the learner was never signed out by the blocked request");
+    await page.getByRole("button", { name: "Finish signing out" }).click();
+    await page.waitForURL(/\/welcome$/);
+    assert.equal(await page.evaluate(async () => (await fetch("/api/me")).status), 401);
+    // Sign back in for the next test.
+    await page.goto("/signin");
+    await page.getByLabel("Email").fill("ada@example.com");
+    await page.getByLabel("Password").fill("correct horse battery");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("navigation", { name: "Main" }).waitFor();
+    appState = await ctx.storageState();
+    await ctx.close();
+  });
+
+  await test("shared device: 'Sign out and leave the preview' ends both the learner and the preview session", async () => {
+    const { ctx, page, problems } = await open(appState);
+    await page.goto("/settings");
+    const leave = page.getByRole("button", { name: "Sign out and leave the preview on this device" });
+    await leave.waitFor();
+    const before = Object.fromEntries((await ctx.cookies()).map((c) => [c.name, c.value]));
+    await leave.click();
+    await page.waitForURL(/\/preview\/signin$/);
+    const cookie = `mtp_session=${before.mtp_session}; mtp_preview=${before.mtp_preview}`;
+    assert.equal((await fetch(`${base}/api/me`, { headers: { cookie } })).status, 401, "both old tokens are dead");
+    assert.equal((await (await fetch(`${base}/api/me`, { headers: { cookie } })).json()).error.code, "preview_required");
+    assert.deepEqual(problems, []);
+    // Restore both for the next test.
+    await page.getByLabel("Tester name").fill("tester1");
+    await page.getByLabel("Preview password").fill(tester.password);
+    await page.getByRole("button", { name: "Open the preview" }).click();
+    await page.goto("/signin");
+    await page.getByLabel("Email").fill("ada@example.com");
+    await page.getByLabel("Password").fill("correct horse battery");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("navigation", { name: "Main" }).waitFor();
+    appState = await ctx.storageState();
+    await ctx.close();
+  });
+
   await test("signing out ends the learner session for good; the next launch shows the welcome page, the preview stays", async () => {
     const { ctx, page } = await open(appState);
     await page.goto("/settings");
     const before = (await ctx.cookies()).find((c) => c.name === "mtp_session").value;
-    await page.getByRole("button", { name: "Sign out" }).click();
+    await page.getByRole("button", { name: "Sign out", exact: true }).click();
     await page.waitForURL(/\/welcome$/);
     const replay = await fetch(`${base}/api/me`, { headers: { cookie: `mtp_session=${before}; mtp_preview=${(await ctx.cookies()).find((c) => c.name === "mtp_preview").value}` } });
     assert.equal(replay.status, 401, "the old learner token no longer works anywhere");

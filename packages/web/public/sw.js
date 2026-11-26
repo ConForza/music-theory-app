@@ -9,7 +9,8 @@
  *
  * Bump VERSION when offline.html or offline.css change; old caches are deleted on activation.
  */
-const VERSION = "offline-v1";
+const PREFIX = "mtp-offline-";
+const VERSION = `${PREFIX}v1`;
 const OFFLINE_URL = "/offline.html";
 const OFFLINE_ASSETS = [OFFLINE_URL, "/offline.css"];
 
@@ -26,7 +27,8 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
+      // Only this worker's own older caches; anything else on the origin is left alone.
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith(PREFIX) && k !== VERSION).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });

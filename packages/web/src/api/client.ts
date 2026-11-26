@@ -151,6 +151,8 @@ export interface RequestOptions {
   signal?: AbortSignal;
   /** Give up after this long (default 20s) so a stalled connection becomes an error the learner can retry. */
   timeoutMs?: number;
+  /** If the private-preview gate blocks this request, the action to show as pending when the tester comes back (`?pending=`). */
+  previewReturn?: "signout";
 }
 
 async function request<T>(method: string, path: string, body?: unknown, opts: RequestOptions = {}): Promise<T> {
@@ -168,14 +170,14 @@ async function request<T>(method: string, path: string, body?: unknown, opts: Re
     else sig.addEventListener("abort", onAbort, { once: true });
   }
   try {
-    return await send<T>(method, path, body, ctl.signal, () => timedOut);
+    return await send<T>(method, path, body, ctl.signal, () => timedOut, opts.previewReturn);
   } finally {
     clearTimeout(timer);
     for (const sig of signals) sig.removeEventListener("abort", onAbort);
   }
 }
 
-async function send<T>(method: string, path: string, body: unknown, signal: AbortSignal, timedOut: () => boolean): Promise<T> {
+async function send<T>(method: string, path: string, body: unknown, signal: AbortSignal, timedOut: () => boolean, previewReturn?: string): Promise<T> {
   const fail = () =>
     timedOut()
       ? new ApiFailure(0, "timeout", "The server took too long to respond. Check your connection and try again.")
@@ -209,7 +211,7 @@ async function send<T>(method: string, path: string, body: unknown, signal: Abor
   if (!res.ok) {
     const e = (data as { error?: { code?: string; message?: string } } | undefined)?.error;
     const { code, message, ...rest } = e ?? {};
-    if (res.status === 401 && code === "preview_required") toPreviewSignIn();
+    if (res.status === 401 && code === "preview_required") toPreviewSignIn(previewReturn);
     throw new ApiFailure(res.status, code ?? "error", message ?? "Something went wrong. Please try again.", rest);
   }
   return data as T;
@@ -220,10 +222,13 @@ let leavingForPreviewSignIn = false;
  * The private-preview gate no longer recognises this device (its preview session expired, or the tester's invitation was withdrawn).
  * That is not a learner sign-in problem, so go to the gate's own sign-in page, coming back here afterwards. Only once per page.
  */
-function toPreviewSignIn() {
+function toPreviewSignIn(pending?: string) {
   if (leavingForPreviewSignIn || typeof window === "undefined") return;
   leavingForPreviewSignIn = true;
-  const here = window.location.pathname + window.location.search;
+  const params = new URLSearchParams(window.location.search);
+  if (pending) params.set("pending", pending);
+  const query = params.toString();
+  const here = window.location.pathname + (query ? `?${query}` : "");
   window.location.assign(`/preview/signin?next=${encodeURIComponent(here)}`);
 }
 
@@ -260,8 +265,11 @@ export const api = {
   // Not auto-retried: the form decides, after checking who is signed in (see AccountForm). A retry from the same
   // session is still safe, because the server answers it with the same account instead of creating another.
   register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
-  login: (b: { email: string; password: string }) => request<Me>("POST", "/api/auth/login", b),
-  logout: () => request<{ ok: true }>("POST", "/api/auth/logout", {}),
+  // `onlyIfSignedOut`: the registration form's recovery after a lost reply; the server refuses it (409 signed_in) if a different learner
+  // is signed in on this device by then, so it can never replace them.
+  login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }) => request<Me>("POST", "/api/auth/login", b),
+  // If the private-preview gate blocks it, the learner is NOT signed out: the preview sign-in page brings them back with the sign-out pending.
+  logout: () => request<{ ok: true }>("POST", "/api/auth/logout", {}, { previewReturn: "signout" }),
   course: () => request<CourseView>("GET", "/api/course"),
   // Everything below acts on the current learner's data and is bound to the learner who started it.
   patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
@@ -382,3 +390,20 @@ export const api = {
     return retrying(sc, () => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `${L(id)}/complete`, {}, { scope: sc }));
   },
 };
+
+/** The private preview this device is signed in to, if the deployment has one (the gate answers; elsewhere this is the app's HTML). */
+export async function previewStatus(): Promise<{ preview: boolean; signedIn: boolean }> {
+  try {
+    const res = await fetch("/preview/session", { credentials: "same-origin" });
+    if (!(res.headers.get("content-type") ?? "").includes("application/json")) return { preview: false, signedIn: false };
+    const b = (await res.json()) as { preview?: boolean; signedIn?: boolean };
+    return { preview: b.preview === true, signedIn: b.signedIn === true };
+  } catch {
+    return { preview: false, signedIn: false };
+  }
+}
+
+/** For tests only. */
+export function resetPreviewRedirectForTests() {
+  leavingForPreviewSignIn = false;
+}

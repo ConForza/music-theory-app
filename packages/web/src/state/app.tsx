@@ -87,6 +87,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // asynchronous result started under an older epoch is discarded instead of being committed.
   const identity = useRef<{ userId: string | null; epoch: number }>({ userId: null, epoch: 0 });
   const sessionGen = useRef(0); // bumped by every explicit sign-in/out so a slow initial /api/me cannot undo it
+  // Every read of "who is signed in" (the first load and the foreground re-checks) takes a number; only the latest read may commit, so an
+  // older answer arriving late can never bring back a learner a newer answer signed out, or the reverse (review P2).
+  const meRead = useRef(0);
   const progressCtl = useRef<AbortController | null>(null);
   const progressSeq = useRef(0);
   const writeQueue = useRef<Promise<unknown>>(Promise.resolve());
@@ -126,12 +129,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let live = true;
     const gen = sessionGen.current;
-    const current = () => live && sessionGen.current === gen;
+    const seq = ++meRead.current;
+    const current = () => live && sessionGen.current === gen && meRead.current === seq;
     setMeError(null);
     api.me().then(
       (m) => current() && commit(m),
       (e: unknown) => {
         if (!current()) return;
+        // The preview gate, not the learner's session: the page is on its way to the preview sign-in, so claim nothing about the learner.
+        if (e instanceof ApiFailure && e.code === "preview_required") return;
         if (e instanceof ApiFailure && e.status === 401) commit(null);
         else {
           setMeError(failure(e, "Could not reach the server."));
@@ -167,10 +173,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (!force && Date.now() - lastCheck.current < 60_000) return;
       lastCheck.current = Date.now();
       const gen = sessionGen.current;
+      const seq = ++meRead.current;
+      const current = () => sessionGen.current === gen && meRead.current === seq;
       api.me().then(
-        (m) => sessionGen.current === gen && commit(m),
+        (m) => current() && commit(m),
         (e: unknown) => {
-          if (sessionGen.current === gen && e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required") commit(null);
+          if (current() && e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required") commit(null);
         },
       );
     };
@@ -274,11 +282,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Only report signed-out once the server has invalidated the session (or says there is none). A failure is thrown
   // to the caller, who keeps the learner signed in and shows a retry: the cookie still works until logout succeeds.
+  // A `preview_required` 401 comes from the private-preview gate BEFORE the server could sign the learner out: that is a blocked sign-out,
+  // not a success (review P2). It is thrown like any failure; the preview sign-in page brings the tester back with the sign-out pending.
   const signOut = useCallback(async () => {
     try {
       await api.logout();
     } catch (e) {
-      if (!(e instanceof ApiFailure && e.status === 401)) throw e;
+      if (!(e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required")) throw e;
     }
     setMe(null);
   }, [setMe]);

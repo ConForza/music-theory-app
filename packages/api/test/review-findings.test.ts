@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { DatabaseSync } from "node:sqlite";
 import { createApp } from "../src/app.ts";
 import { ReviewService } from "../src/review.ts";
-import { COOKIE, createSession, createUser } from "../src/auth.ts";
+import { COOKIE, createUser, sha256 } from "../src/auth.ts";
 import { ManualClock } from "../src/clock.ts";
 import { describe, expect, it } from "vitest";
 import { join } from "node:path";
@@ -488,7 +488,9 @@ describe("historical practice exposure (Brief 03 databases)", () => {
     db.exec("PRAGMA foreign_keys = ON;");
     expect(migrate(db, join(dir, "m"))).toEqual(["001_init.sql", "002_practice.sql"]);
     const user = createUser(db as never, { displayName: "Guest" });
-    const token = createSession(db as never, user.id).token;
+    // A session as Brief 03's code wrote it (that schema has no later columns), so it is the kind an upgrade really meets.
+    const token = "brief03-session-token";
+    db.prepare("INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?,?,?,?)").run(sha256(token), user.id, new Date().toISOString(), new Date(Date.now() + 60 * 86400_000).toISOString());
     const tpl = "t.g1.note-read";
     const want = lineKeys(tpl);
     const practised = new Map<string, string>();

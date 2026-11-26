@@ -42,6 +42,7 @@ const DAY_MS = 86400_000;
 export const SIGNIN_PATH = "/preview/signin";
 export const SIGNOUT_PATH = "/preview/signout";
 const STYLE_PATH = "/preview/style.css";
+export const STATUS_PATH = "/preview/session";
 
 /** Installation metadata a browser fetches without cookies (the manifest request omits credentials) or before the tester signs in. */
 export const PUBLIC_INSTALL_PATHS: ReadonlySet<string> = new Set([
@@ -165,22 +166,25 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
     return verify(decoded.slice(0, i), decoded.slice(i + 1));
   }
 
-  /** The valid preview session behind a cookie token (renewing it at most daily), or undefined. */
-  function session(token: string | undefined, mayRenew: boolean): { renewCookie?: string } | undefined {
-    if (!token || token.length > 200) return undefined;
+  /**
+   * Whether a cookie token is a valid preview session, renewing its server-side end at most daily. The cookie itself already lasts to the
+   * session's absolute limit (set once at sign-in), so renewal never has to reach the browser: a redirect, a failed or lost response can't
+   * leave the browser with a shorter cookie than the server's session.
+   */
+  function session(token: string | undefined): boolean {
+    if (!token || token.length > 200) return false;
     const hash = sha256hex(token);
     const at = now();
     const r = db.prepare("SELECT tester, access_fingerprint, created_at, expires_at FROM preview_sessions WHERE token_hash = ? AND expires_at > ?").get(hash, at.toISOString()) as
       | { tester: string; access_fingerprint: string; created_at: string; expires_at: string }
       | undefined;
-    if (!r) return undefined;
+    if (!r) return false;
     // The row was found by the token's hash; this only asks whether its invitation is still the current one (not a secret comparison).
-    if (current.get(r.tester) !== r.access_fingerprint) return undefined;
+    if (current.get(r.tester) !== r.access_fingerprint) return false;
     const cap = new Date(r.created_at).getTime() + PREVIEW_MAX_DAYS * DAY_MS;
     const next = Math.min(at.getTime() + PREVIEW_SESSION_DAYS * DAY_MS, cap);
-    if (!mayRenew || next - new Date(r.expires_at).getTime() < DAY_MS) return {};
-    db.prepare("UPDATE preview_sessions SET expires_at = ? WHERE token_hash = ?").run(new Date(next).toISOString(), hash);
-    return { renewCookie: cookie(token, Math.floor((next - at.getTime()) / 1000)) };
+    if (next - new Date(r.expires_at).getTime() >= DAY_MS) db.prepare("UPDATE preview_sessions SET expires_at = ? WHERE token_hash = ?").run(new Date(next).toISOString(), hash);
+    return true;
   }
 
   function issue(name: string, oldToken: string | undefined): string {
@@ -196,7 +200,8 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
         new Date(at.getTime() + PREVIEW_SESSION_DAYS * DAY_MS).toISOString(),
       );
     });
-    return cookie(token, PREVIEW_SESSION_DAYS * 86400);
+    // The cookie lasts to the absolute limit; the server's 60-day idle window decides whether it still works.
+    return cookie(token, PREVIEW_MAX_DAYS * 86400);
   }
 
   const noStore = { "cache-control": "no-store", "x-robots-tag": "noindex" };
@@ -244,9 +249,8 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
         return { pass: false, response: new Response(STYLE, { status: 200, headers: { "content-type": "text/css; charset=utf-8", "cache-control": "no-cache" } }) };
       }
       const token = cookieHeader(req.header("cookie"), PREVIEW_COOKIE);
-      // Renew only on pages and API calls (never cached), so a Set-Cookie never rides on a publicly cacheable static asset.
-      const s = session(token, !looksLikeAsset(path));
-      const authed = s !== undefined || basicOk(req.header("authorization"));
+      const viaSession = session(token);
+      const authed = viaSession || basicOk(req.header("authorization"));
 
       if (path === SIGNIN_PATH) {
         if (method === "POST") return { pass: false, response: await signIn(req, token) };
@@ -261,7 +265,11 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
         return { pass: false, response: redirect(SIGNIN_PATH, [clear()]) };
       }
       if (PUBLIC_INSTALL_PATHS.has(path) && (method === "GET" || method === "HEAD")) return { pass: true, cookies: [] };
-      if (authed) return { pass: true, cookies: s?.renewCookie ? [s.renewCookie] : [] };
+      if (path === STATUS_PATH && method === "GET") {
+        // Lets the app offer "leave the private preview" only where there is one. Says nothing about who the tester is.
+        return { pass: false, response: new Response(JSON.stringify({ preview: true, signedIn: authed, viaSession }), { status: authed ? 200 : 401, headers: { ...noStore, "content-type": "application/json; charset=utf-8" } }) };
+      }
+      if (authed) return { pass: true, cookies: [] };
 
       if (path.startsWith("/api/")) {
         const body = JSON.stringify({ error: { code: "preview_required", message: "This private preview needs its tester sign-in on this device.", signIn: SIGNIN_PATH } });

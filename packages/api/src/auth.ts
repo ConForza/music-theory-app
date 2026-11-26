@@ -73,73 +73,115 @@ export function findByEmail(db: Db, email: string): (User & { passwordHash: stri
   return r ? { ...toUser(r), passwordHash: r.ph } : undefined;
 }
 
-export function createSession(db: Db, userId: string): { token: string; maxAgeSeconds: number } {
-  const token = randomBytes(32).toString("base64url");
-  const created = new Date();
-  const expires = new Date(created.getTime() + SESSION_DAYS * 86400_000);
-  db.prepare("INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?,?,?,?)").run(
-    sha256(token),
-    userId,
-    created.toISOString(),
-    expires.toISOString(),
-  );
-  return { token, maxAgeSeconds: SESSION_DAYS * 86400 };
-}
-
-export function userForToken(db: Db, token: string | undefined): User | undefined {
-  return resolveSession(db, token)?.user;
-}
-
 /**
  * Session lifetime policy (PWA brief, "persistent learner authentication"):
  *
  *  - Every sign-in starts a session that ends SESSION_DAYS (60) after it was last renewed: an idle window, not a fixed term.
- *  - A REGISTERED learner's session is renewed while it is used: at most once a day, a request moves the end to SESSION_DAYS from now.
- *    It is never renewed past SESSION_MAX_DAYS (365) after the sign-in that created it; after that the learner signs in once more
+ *  - A REGISTERED learner's session is renewed while it is used: at most once a day, a successful request moves the end to SESSION_DAYS
+ *    from now. It is never renewed past SESSION_MAX_DAYS (365) after the sign-in that created it; after that the learner signs in once more
  *    (password manager AutoFill makes that one tap). So a session is never valid indefinitely, and an unused one still ends after 60 days.
  *  - A GUEST's session is never renewed: guests keep the fixed 60 days they have always had (retention is an owner decision; the app
  *    already warns guests before it ends). Registering turns that guest into a registered learner with a new session.
  *  - Expiry is always the server's stored value; revocation (sign-out, account deletion) deletes the row, so the cookie stops working at once.
+ *
+ * The COOKIE's lifetime is fixed when the session is created: the absolute limit (365 days for a registered learner, the fixed 60 days for
+ * a guest). Renewal changes only the server's row and never needs to reach the browser, so a failed, lost or late response cannot leave the
+ * browser with a shorter cookie than the server's session, and a late response can never overwrite a cookie set by a newer sign-in or
+ * sign-out. A cookie that outlives its session is useless: the server rejects the token.
+ *
+ * Sessions created before this policy carry a cookie that ends 60 days after sign-in (`cookie_expires_at` is NULL). Their cookie is upgraded
+ * to the absolute limit when they are renewed, on a successful response only; if that response is lost, the next daily renewal sends it again.
  */
 export const SESSION_MAX_DAYS = 365;
 /** A session is renewed at most this often, so an active learner costs one extra write a day, not one per request. */
 export const SESSION_RENEW_EVERY_MS = 86400_000;
 const DAY_MS = 86400_000;
 
+/** Start a session for a learner. Returns the token and the cookie's Max-Age (the session's absolute limit). */
+export function createSession(db: Db, userId: string, at: Date = new Date()): { token: string; maxAgeSeconds: number } {
+  const guest = (db.prepare("SELECT is_guest FROM users WHERE id = ?").get(userId) as { is_guest: number } | undefined)?.is_guest === 1;
+  const token = randomBytes(32).toString("base64url");
+  const expires = new Date(at.getTime() + SESSION_DAYS * DAY_MS);
+  const cookieDays = guest ? SESSION_DAYS : SESSION_MAX_DAYS;
+  const cookieUntil = new Date(at.getTime() + cookieDays * DAY_MS);
+  db.prepare("INSERT INTO sessions (token_hash, user_id, created_at, expires_at, cookie_expires_at) VALUES (?,?,?,?,?)").run(
+    sha256(token),
+    userId,
+    at.toISOString(),
+    expires.toISOString(),
+    cookieUntil.toISOString(),
+  );
+  return { token, maxAgeSeconds: cookieDays * 86400 };
+}
+
+export function userForToken(db: Db, token: string | undefined): User | undefined {
+  return resolveSession(db, token)?.user;
+}
+
 export interface ResolvedSession {
   user: User;
+  token: string;
   expiresAt: string;
-  /** Set when this request renewed the session: send the cookie again with this Max-Age so the browser keeps it as long as the server. */
-  renewedMaxAgeSeconds?: number;
+  /** Set when this session is due for renewal. Nothing is written until `commitRenewal`, after the request has succeeded. */
+  renewTo?: string;
+  /** The session was created before cookies carried the absolute limit: a renewal also re-sends its cookie. */
+  legacyCookie: boolean;
+  /** When the session's absolute limit is reached (registered learners). */
+  capAt: string;
 }
 
-/** Find the learner behind a session token, renewing a registered learner's session as described above. */
+/** Find the learner behind a session token. Read only: see `commitRenewal`. */
 export function resolveSession(db: Db, token: string | undefined, at: Date = new Date()): ResolvedSession | undefined {
   if (!token) return undefined;
-  const hash = sha256(token);
   const r = db
-    .prepare("SELECT u.*, s.created_at AS s_created, s.expires_at AS s_expires FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ? AND s.expires_at > ?")
-    .get(hash, at.toISOString()) as (UserRow & { s_created: string; s_expires: string }) | undefined;
+    .prepare("SELECT u.*, s.created_at AS s_created, s.expires_at AS s_expires, s.cookie_expires_at AS s_cookie FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ? AND s.expires_at > ?")
+    .get(sha256(token), at.toISOString()) as (UserRow & { s_created: string; s_expires: string; s_cookie: string | null }) | undefined;
   if (!r) return undefined;
   const user = toUser(r);
-  if (user.isGuest) return { user, expiresAt: r.s_expires };
-  const nowMs = at.getTime();
-  const current = new Date(r.s_expires).getTime();
   const cap = new Date(r.s_created).getTime() + SESSION_MAX_DAYS * DAY_MS;
-  const next = Math.min(nowMs + SESSION_DAYS * DAY_MS, cap);
-  // Renew only when the last renewal is at least a day old and the new end is actually later.
-  if (next - current < SESSION_RENEW_EVERY_MS) return { user, expiresAt: r.s_expires };
-  const expiresAt = new Date(next).toISOString();
-  db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ? AND expires_at < ?").run(expiresAt, hash, expiresAt);
-  return { user, expiresAt, renewedMaxAgeSeconds: Math.floor((next - nowMs) / 1000) };
+  const base = { user, token, expiresAt: r.s_expires, legacyCookie: r.s_cookie === null, capAt: new Date(cap).toISOString() };
+  if (user.isGuest) return base;
+  const next = Math.min(at.getTime() + SESSION_DAYS * DAY_MS, cap);
+  // Due only when the last renewal is at least a day old and the new end is actually later.
+  if (next - new Date(r.s_expires).getTime() < SESSION_RENEW_EVERY_MS) return base;
+  return { ...base, renewTo: new Date(next).toISOString() };
 }
 
-/** Swap the caller's session for a fresh one for the same learner (a change of privilege, e.g. guest to registered): the old token stops working. */
-export function rotateSession(db: Db, oldToken: string | undefined, userId: string): { token: string; maxAgeSeconds: number } {
+/**
+ * Apply a renewal found by `resolveSession`, once the request has succeeded. Returns the Max-Age to re-send for a session whose cookie
+ * predates the absolute-limit policy, or null when the browser's cookie needs nothing (the usual case).
+ */
+export function commitRenewal(db: Db, s: ResolvedSession, at: Date = new Date()): number | null {
+  if (!s.renewTo) return null;
+  const res = db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ? AND expires_at < ?").run(s.renewTo, sha256(s.token), s.renewTo);
+  if (res.changes !== 1 || !s.legacyCookie) return null; // ended meanwhile (signed out), or a modern cookie that already lasts long enough
+  return Math.max(0, Math.floor((new Date(s.capAt).getTime() - at.getTime()) / 1000));
+}
+
+/**
+ * Turn a guest into a registered learner, atomically with the session it is asked from (a change of privilege, so the session is
+ * replaced). Inside ONE transaction, after the slow password hash: the presented guest token must still be a live session of that same
+ * guest; it is consumed, the account is upgraded in place (progress stays attached), and a new session is created. A registration that
+ * raced a sign-out, a sign-in or the session's expiry is refused with `session_ended` and changes nothing.
+ */
+export function upgradeGuestWithSession(
+  db: Db,
+  token: string | undefined,
+  userId: string,
+  opts: { displayName: string; email: string; passwordHash: string },
+): { user: User; session: { token: string; maxAgeSeconds: number } } {
+  const ended = () => new ApiError(401, "session_ended", "Your guest session ended before your account could be created. Please try again.");
+  if (!token) throw ended();
   return tx(db, () => {
-    const s = createSession(db, userId);
-    destroySession(db, oldToken);
-    return s;
+    const at = new Date();
+    const live = db
+      .prepare("SELECT 1 FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ? AND s.user_id = ? AND s.expires_at > ? AND u.is_guest = 1")
+      .get(sha256(token), userId, at.toISOString());
+    if (!live) throw ended();
+    if (db.prepare("SELECT 1 FROM users WHERE email = ?").get(opts.email)) throw new ApiError(409, "email_taken", "That email is already registered. Try signing in.");
+    if (db.prepare("DELETE FROM sessions WHERE token_hash = ?").run(sha256(token)).changes !== 1) throw ended();
+    const user = upgradeGuest(db, userId, opts);
+    return { user, session: createSession(db, userId, at) };
   });
 }
 

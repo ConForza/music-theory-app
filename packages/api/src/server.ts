@@ -19,12 +19,15 @@ const TYPES: Record<string, string> = {
   ".txt": "text/plain; charset=utf-8",
 };
 
+/** A request body over the transport limit: answered 413, never as a server error. */
+export class BodyTooLarge extends Error {}
+
 async function readBody(req: IncomingMessage, limit = 1_000_000): Promise<Buffer<ArrayBuffer>> {
   const chunks: Buffer[] = [];
   let size = 0;
   for await (const c of req) {
     size += (c as Buffer).length;
-    if (size > limit) throw new Error("body too large");
+    if (size > limit) throw new BodyTooLarge("body too large");
     chunks.push(c as Buffer);
   }
   return Buffer.concat(chunks) as Buffer<ArrayBuffer>;
@@ -138,7 +141,7 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       } else if (url.pathname.startsWith("/api/")) {
         response = await app.fetch(await toRequest(req, `${proto}://${host}`), { remoteAddress: req.socket.remoteAddress });
       } else if (staticDir) {
-        response = serveStatic(staticDir, url.pathname);
+        response = serveStatic(staticDir, url.pathname, { gated: !!opts.gate, ifNoneMatch: req.headers["if-none-match"] });
       } else {
         response = new Response("Not found", { status: 404 });
       }
@@ -151,6 +154,11 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       res.writeHead(response.status, out);
       res.end(Buffer.from(await response.arrayBuffer()));
     } catch (e) {
+      if (e instanceof BodyTooLarge) {
+        res.writeHead(413, { ...secure, "content-type": "text/plain; charset=utf-8", "cache-control": "no-store", connection: "close" });
+        res.end("Request too large.");
+        return;
+      }
       console.error(e);
       res.writeHead(500, { ...secure, "content-type": "text/plain" });
       res.end("Internal error");
@@ -158,8 +166,18 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
   });
 }
 
-function serveStatic(root: string, pathname: string): Response {
-  const rel = normalize(decodeURIComponent(pathname)).replace(/^(\.\.[/\\])+/, "");
+/**
+ * Static files. Without the preview gate: hashed assets are cached for a year, everything else is revalidated. With the gate, every
+ * protected response is `private, no-cache` with an ETag, so neither a shared cache nor the browser reuses it without asking the server,
+ * and the gate (which runs first) decides each time: a revoked tester gets 401, not a cached copy. Unchanged files cost a 304.
+ */
+function serveStatic(root: string, pathname: string, o: { gated?: boolean; ifNoneMatch?: string } = {}): Response {
+  let rel: string;
+  try {
+    rel = normalize(decodeURIComponent(pathname)).replace(/^(\.\.[/\\])+/, "");
+  } catch {
+    return new Response("Bad request", { status: 400 });
+  }
   let file = join(root, rel);
   if (!file.startsWith(root)) return new Response("Forbidden", { status: 403 });
   // Only real asset types are 404 when missing; any other path (e.g. /practice/s.scales) is an app route.
@@ -170,10 +188,10 @@ function serveStatic(root: string, pathname: string): Response {
     if (!existsSync(file)) return new Response("Web app not built. Run `npm run build -w @mtp/web`.", { status: 503 });
   }
   const immutable = file.includes(`${join(root, "assets")}`);
-  return new Response(readFileSync(file), {
-    headers: {
-      "content-type": TYPES[extname(file)] ?? "application/octet-stream",
-      "cache-control": immutable ? "public, max-age=31536000, immutable" : "no-cache",
-    },
-  });
+  const st = statSync(file);
+  const etag = `W/"${st.size.toString(16)}-${Math.floor(st.mtimeMs).toString(16)}"`;
+  const cacheControl = o.gated ? "private, no-cache" : immutable ? "public, max-age=31536000, immutable" : "no-cache";
+  const headers = { "content-type": TYPES[extname(file)] ?? "application/octet-stream", "cache-control": cacheControl, etag };
+  if (o.ifNoneMatch && o.ifNoneMatch.split(",").map((t) => t.trim()).includes(etag)) return new Response(null, { status: 304, headers });
+  return new Response(readFileSync(file), { headers });
 }

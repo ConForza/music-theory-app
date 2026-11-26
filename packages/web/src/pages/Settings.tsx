@@ -168,7 +168,7 @@ export function Settings() {
         </div>
       </section>
 
-      <SignOutButton />
+      <SignOutButton offerLeavePreview />
       <p className="fine-print">Music Theory Path is independent and not affiliated with or endorsed by ABRSM. Practice material is not an official examination.</p>
     </div>
   );
