@@ -20,8 +20,9 @@ const dbPath = resolve(process.env.MTP_DB ?? resolve(here, "../data/mtp.sqlite")
 mkdirSync(dirname(dbPath), { recursive: true });
 const staticDir = process.env.MTP_STATIC_DIR ?? resolve(here, "../../web/dist");
 
+const db = openDb(dbPath);
 const app = createApp({
-  db: openDb(dbPath),
+  db,
   // Browser suites for earlier briefs pin the content of their era (MTP_CONTENT_ROOT); production always serves the shipped content.
   course: loadCourse(process.env.NODE_ENV !== "production" ? process.env.MTP_CONTENT_ROOT || undefined : undefined),
   secureCookies: process.env.MTP_SECURE_COOKIES === "1",
@@ -34,8 +35,17 @@ const app = createApp({
   ...(/^[1-9]\d{0,5}$/.test(process.env.MTP_GUEST_CREATIONS_PER_15_MIN ?? "") ? { guestCreationsPer15Min: Number(process.env.MTP_GUEST_CREATIONS_PER_15_MIN) } : {}),
 });
 const secure = process.env.MTP_SECURE_COOKIES === "1";
-// Private preview: MTP_PREVIEW_GATE=1 puts every route except read-only /api/health behind per-tester credentials (see preview-gate.ts).
-const gate = process.env.MTP_PREVIEW_GATE === "1" ? createPreviewGate(process.env.MTP_PREVIEW_ACCESS) : undefined;
+// Private preview: MTP_PREVIEW_GATE=1 puts every route except /api/health, the tester sign-in page and installation metadata behind an
+// invited tester's preview session (see preview-gate.ts).
+const gate =
+  process.env.MTP_PREVIEW_GATE === "1"
+    ? createPreviewGate(process.env.MTP_PREVIEW_ACCESS, {
+        db,
+        secureCookies: secure,
+        allowedOrigins: (process.env.MTP_ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
+        trustedProxyHops: Number(process.env.MTP_TRUST_PROXY_HOPS ?? 0) || 0,
+      })
+    : undefined;
 if (gate) console.log(`Preview access gate ON: ${gate.testers} invited tester(s).${gate.testers === 0 ? " Nobody can sign in." : ""}`);
 startServer({
   app,

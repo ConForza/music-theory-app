@@ -87,13 +87,60 @@ export function createSession(db: Db, userId: string): { token: string; maxAgeSe
 }
 
 export function userForToken(db: Db, token: string | undefined): User | undefined {
+  return resolveSession(db, token)?.user;
+}
+
+/**
+ * Session lifetime policy (PWA brief, "persistent learner authentication"):
+ *
+ *  - Every sign-in starts a session that ends SESSION_DAYS (60) after it was last renewed: an idle window, not a fixed term.
+ *  - A REGISTERED learner's session is renewed while it is used: at most once a day, a request moves the end to SESSION_DAYS from now.
+ *    It is never renewed past SESSION_MAX_DAYS (365) after the sign-in that created it; after that the learner signs in once more
+ *    (password manager AutoFill makes that one tap). So a session is never valid indefinitely, and an unused one still ends after 60 days.
+ *  - A GUEST's session is never renewed: guests keep the fixed 60 days they have always had (retention is an owner decision; the app
+ *    already warns guests before it ends). Registering turns that guest into a registered learner with a new session.
+ *  - Expiry is always the server's stored value; revocation (sign-out, account deletion) deletes the row, so the cookie stops working at once.
+ */
+export const SESSION_MAX_DAYS = 365;
+/** A session is renewed at most this often, so an active learner costs one extra write a day, not one per request. */
+export const SESSION_RENEW_EVERY_MS = 86400_000;
+const DAY_MS = 86400_000;
+
+export interface ResolvedSession {
+  user: User;
+  expiresAt: string;
+  /** Set when this request renewed the session: send the cookie again with this Max-Age so the browser keeps it as long as the server. */
+  renewedMaxAgeSeconds?: number;
+}
+
+/** Find the learner behind a session token, renewing a registered learner's session as described above. */
+export function resolveSession(db: Db, token: string | undefined, at: Date = new Date()): ResolvedSession | undefined {
   if (!token) return undefined;
+  const hash = sha256(token);
   const r = db
-    .prepare(
-      "SELECT u.* FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ? AND s.expires_at > ?",
-    )
-    .get(sha256(token), now()) as UserRow | undefined;
-  return r ? toUser(r) : undefined;
+    .prepare("SELECT u.*, s.created_at AS s_created, s.expires_at AS s_expires FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ? AND s.expires_at > ?")
+    .get(hash, at.toISOString()) as (UserRow & { s_created: string; s_expires: string }) | undefined;
+  if (!r) return undefined;
+  const user = toUser(r);
+  if (user.isGuest) return { user, expiresAt: r.s_expires };
+  const nowMs = at.getTime();
+  const current = new Date(r.s_expires).getTime();
+  const cap = new Date(r.s_created).getTime() + SESSION_MAX_DAYS * DAY_MS;
+  const next = Math.min(nowMs + SESSION_DAYS * DAY_MS, cap);
+  // Renew only when the last renewal is at least a day old and the new end is actually later.
+  if (next - current < SESSION_RENEW_EVERY_MS) return { user, expiresAt: r.s_expires };
+  const expiresAt = new Date(next).toISOString();
+  db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ? AND expires_at < ?").run(expiresAt, hash, expiresAt);
+  return { user, expiresAt, renewedMaxAgeSeconds: Math.floor((next - nowMs) / 1000) };
+}
+
+/** Swap the caller's session for a fresh one for the same learner (a change of privilege, e.g. guest to registered): the old token stops working. */
+export function rotateSession(db: Db, oldToken: string | undefined, userId: string): { token: string; maxAgeSeconds: number } {
+  return tx(db, () => {
+    const s = createSession(db, userId);
+    destroySession(db, oldToken);
+    return s;
+  });
 }
 
 /** How many days before a guest's sign-in ends the app starts warning them (a display setting, not a retention policy). */

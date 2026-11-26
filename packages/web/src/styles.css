@@ -628,3 +628,28 @@ html:has(.player) { scroll-padding-top: 80px; scroll-padding-bottom: 150px; }
 .topic-choice.is-selected .topic-small { color: inherit; }
 .segmented label.is-disabled span { opacity: 0.45; border-style: dashed; }
 .segmented label.is-disabled input { cursor: not-allowed; }
+
+/* Installable app (PWA brief) ------------------------------------------------------------------------------------------------ */
+/* The page colour also fills the rubber-band overscroll area and the space behind the status bar. */
+html { background: var(--bg); }
+/* Landscape on a notched iPhone: keep content clear of the sensor housing and rounded corners on either side. */
+.main, .player { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+.welcome, .onboarding, .connection-problem { padding-left: max(1.25rem, env(safe-area-inset-left)); padding-right: max(1.25rem, env(safe-area-inset-right)); }
+.tabs ul { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+@media (min-width: 860px) { .tabs { padding-left: max(0.9rem, env(safe-area-inset-left)); } .tabs ul { padding: 0; } }
+/* Native-feeling taps: no 300 ms double-tap delay or accidental zoom on controls. */
+button, .btn, .tab, a, label, input, select, summary { touch-action: manipulation; }
+/* Installed app: the page itself never scrolls sideways, and the bottom tabs don't bounce with the content. */
+@media (display-mode: standalone) {
+  html, body { overscroll-behavior-x: none; }
+  body { overflow-x: clip; }
+}
+.connection-problem { min-height: 100dvh; padding-top: max(2rem, env(safe-area-inset-top)); padding-bottom: max(2rem, env(safe-area-inset-bottom)); }
+.install-hint-row { display: flex; gap: 0.9rem; align-items: center; margin-bottom: 0.6rem; }
+.install-hint-row h2 { margin: 0 0 0.15rem; }
+.install-hint-row p { margin: 0; }
+.install-hint-row svg { flex: none; }
+.install-later { margin: 0.5rem 0 0; }
+.install-steps { padding-left: 1.3rem; margin: 0.4rem 0 0.8rem; display: grid; gap: 0.4rem; }
+.install-guest { background: var(--brand-soft); border-radius: 12px; padding: 0.6rem 0.8rem; font-size: 0.95rem; }
+.share-glyph { vertical-align: -3px; color: var(--brand-strong); }

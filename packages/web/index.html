@@ -4,16 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12131c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f6fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#11121b" media="(prefers-color-scheme: dark)" />
     <meta name="description" content="Music Theory Path: short, friendly lessons that take you from your first notes to Grade 5 theory." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Installable web app (PWA brief). The manifest and icons are readable before the preview sign-in, as browsers fetch them without cookies. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="application-name" content="Music Theory Path" />
+    <meta name="apple-mobile-web-app-title" content="Theory Path" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
     <title>Music Theory Path</title>
     <script>
       // Apply the saved theme before first paint to avoid a flash.
       try {
         var t = localStorage.getItem("mtp.theme");
-        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+        if (t === "light" || t === "dark") {
+          document.documentElement.dataset.theme = t;
+          // The status bar / browser chrome follows the chosen theme, not only the device's.
+          var metas = document.querySelectorAll('meta[name="theme-color"]');
+          for (var i = 0; i < metas.length; i++) metas[i].setAttribute("content", t === "dark" ? "#11121b" : "#f4f6fb");
+        }
         var m = localStorage.getItem("mtp.motion");
         if (m === "reduce" || m === "full") document.documentElement.dataset.motion = m;
       } catch (e) {}

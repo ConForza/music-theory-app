@@ -127,7 +127,14 @@ function parseCookies(header: string | null): Record<string, string> {
   const out: Record<string, string> = {};
   for (const part of (header ?? "").split(";")) {
     const i = part.indexOf("=");
-    if (i > 0) out[part.slice(0, i).trim()] = decodeURIComponent(part.slice(i + 1).trim());
+    if (i <= 0) continue;
+    const raw = part.slice(i + 1).trim();
+    // A malformed value (e.g. a lone "%") is kept as sent rather than failing the whole request; it then simply matches no session.
+    try {
+      out[part.slice(0, i).trim()] = decodeURIComponent(raw);
+    } catch {
+      out[part.slice(0, i).trim()] = raw;
+    }
   }
   return out;
 }
@@ -235,8 +242,13 @@ export function createApp(opts: AppOptions) {
     }
     const passwordHash = await auth.hashPassword(body.password);
     if (ctx.user?.isGuest) {
-      // Upgrade in place: the guest's progress stays attached to the same learner.
+      // Upgrade in place: the guest's progress stays attached to the same learner. The privilege changes (a guest session becomes a
+      // registered learner's), so the session is replaced: the guest token stops working and the learner gets a fresh, renewable one.
+      // If this reply is lost the old cookie no longer signs in; the form then signs in with the details just typed (see AccountForm).
       const user = auth.upgradeGuest(db, ctx.user.id, { displayName: body.displayName, email: body.email, passwordHash });
+      const s = auth.rotateSession(db, ctx.token, user.id);
+      ctx.cookies.push(sessionCookie(s.token, s.maxAgeSeconds));
+      ctx.token = s.token;
       return me(user, ctx.token);
     }
     const user = auth.createUser(db, { displayName: body.displayName, email: body.email, passwordHash });
@@ -520,7 +532,8 @@ export function createApp(opts: AppOptions) {
         }
       }
       const token = parseCookies(req.headers.get("cookie"))[COOKIE];
-      const user = auth.userForToken(db, token);
+      const session = auth.resolveSession(db, token);
+      const user = session?.user;
       if (route.needsAuth && !user) throw new ApiError(401, "unauthenticated", "Please sign in to continue.");
       if (user) db.prepare("UPDATE users SET last_seen_at = ? WHERE id = ?").run(new Date().toISOString(), user.id);
       const ctx: Ctx = {
@@ -543,6 +556,9 @@ export function createApp(opts: AppOptions) {
         },
       };
       const data = await route.handler(ctx);
+      // A renewed session is sent again with its new lifetime, unless the handler itself set or cleared the session cookie (sign-in,
+      // registration, sign-out, account deletion): its cookie is the one that must win.
+      if (session?.renewedMaxAgeSeconds && token && !cookies.some((c) => c.startsWith(`${COOKIE}=`))) cookies.push(sessionCookie(token, session.renewedMaxAgeSeconds));
       for (const c of cookies) headers.append("set-cookie", c);
       return new Response(JSON.stringify(data), { status: 200, headers });
     } catch (e) {

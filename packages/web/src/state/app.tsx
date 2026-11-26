@@ -35,12 +35,28 @@ export function applySettings(s: Settings) {
   if (s.motion === "system") delete root.dataset.motion;
   else root.dataset.motion = s.motion;
   setSoundEnabled(s.sound);
+  syncThemeColor(s.theme);
   try {
     localStorage.setItem("mtp.theme", s.theme);
     localStorage.setItem("mtp.motion", s.motion);
   } catch {
     /* storage can be unavailable (private mode); the server copy is authoritative */
   }
+}
+
+/** Light and dark page backgrounds (styles.css --bg), used for the status bar and browser chrome. */
+const THEME_COLORS = { light: "#f4f6fb", dark: "#11121b" } as const;
+/**
+ * Keep the status bar / browser chrome in step with the app's theme. "Match my device" restores the two media-specific colours; an
+ * explicit choice uses its own colour whatever the device is set to (otherwise a dark app would sit under a light status bar).
+ */
+export function syncThemeColor(theme: Settings["theme"]) {
+  const metas = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]');
+  metas.forEach((m) => {
+    const media = m.getAttribute("media") ?? "";
+    const own = media.includes("dark") ? THEME_COLORS.dark : THEME_COLORS.light;
+    m.setAttribute("content", theme === "system" ? own : THEME_COLORS[theme]);
+  });
 }
 
 type ProfilePatch = Parameters<typeof api.patchProfile>[0];
@@ -127,6 +143,48 @@ export function AppProvider({ children }: { children: ReactNode }) {
       live = false;
     };
   }, [commit, tick]);
+
+  /**
+   * When the app comes back to the foreground (an installed app is often resumed rather than relaunched) or the connection returns,
+   * check quietly that the sign-in is still valid. A 401 means the session ended (expired, signed out elsewhere, account deleted): the
+   * learner is shown as signed out. A network failure changes nothing: being offline never signs anyone out. If the first load had
+   * failed, everything is simply loaded again.
+   */
+  const reloadAll = useCallback(() => {
+    // After a failed first load nobody is known to be signed in or out: show "loading" while retrying, never a moment of "signed out"
+    // (which would send the learner to the welcome page).
+    if (meError) setConfirmed(undefined);
+    setTick((t) => t + 1);
+  }, [meError]);
+  const lastCheck = useRef(0);
+  useEffect(() => {
+    if (lastCheck.current === 0) lastCheck.current = Date.now(); // the initial load has just checked; `pageshow` also fires then
+    const revalidate = (force: boolean) => {
+      if (meError) {
+        reloadAll();
+        return;
+      }
+      if (!force && Date.now() - lastCheck.current < 60_000) return;
+      lastCheck.current = Date.now();
+      const gen = sessionGen.current;
+      api.me().then(
+        (m) => sessionGen.current === gen && commit(m),
+        (e: unknown) => {
+          if (sessionGen.current === gen && e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required") commit(null);
+        },
+      );
+    };
+    const onVisible = () => document.visibilityState === "visible" && revalidate(false);
+    const onOnline = () => revalidate(true);
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("pageshow", onVisible);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("pageshow", onVisible);
+    };
+  }, [commit, meError, reloadAll]);
 
   useEffect(() => {
     let live = true;
@@ -226,8 +284,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [setMe]);
 
   const value = useMemo<AppState>(
-    () => ({ me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll: () => setTick((t) => t + 1), updateProfile, signOut }),
-    [me, meError, course, progress, engagement, setMe, refreshProgress, updateProfile, signOut],
+    () => ({ me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll, updateProfile, signOut }),
+    [me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll, updateProfile, signOut],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

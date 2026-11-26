@@ -179,7 +179,7 @@ describe("existing learners: migration 010 is additive", () => {
     old.exec("PRAGMA foreign_keys = ON;");
     migrate(old, dir);
     // the upgrade applies only the flexible-learning migrations, then the app starts on it (as main.ts does: migrate, then serve)
-    expect(migrate(old, src)).toEqual(["010_flexible_learning.sql", "011_exposure_identity.sql"]);
+    expect(migrate(old, src)).toEqual(["010_flexible_learning.sql", "011_exposure_identity.sql", "012_preview_sessions.sql"]);
     const { app } = boot({ db: old });
     const { c, userId } = await learner(app);
     // a learner who finished Grade 1 under the guided path

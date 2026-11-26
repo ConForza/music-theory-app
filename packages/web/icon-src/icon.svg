@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Music Theory Path app icon (original artwork). Full-bleed: the platform applies its own mask/rounding. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15b3a3"/>
+      <stop offset="1" stop-color="#0a6b62"/>
+    </linearGradient>
+    <linearGradient id="flag" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#ffc23d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- the stave, which doubles as a path -->
+  <g stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity=".34">
+    <path d="M96 196h320M96 268h320M96 340h320"/>
+  </g>
+  <!-- an eighth note: white head, golden stem and flag -->
+  <path d="M290 318V128c62 10 106 46 106 104" stroke="url(#flag)" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="228" cy="330" rx="76" ry="56" transform="rotate(-20 228 330)" fill="#ffffff"/>
+</svg>

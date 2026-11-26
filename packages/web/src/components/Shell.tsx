@@ -76,6 +76,25 @@ export function ErrorState({ error, onRetry, title = "We couldn't load that" }: 
   );
 }
 
+/**
+ * The server could not be reached when the app opened (offline, or the server is restarting). Shown instead of the welcome or sign-in
+ * screens, so being offline never looks like being signed out and never leads anyone to start again as a new learner.
+ */
+export function ConnectionProblem({ error, onRetry }: { error: ApiFailure | Error; onRetry: () => void }) {
+  const offline = error instanceof ApiFailure ? error.isNetwork : false;
+  return (
+    <main className="state state-error connection-problem" id="main" tabIndex={-1} role="alert">
+      <Icon name="warn" size={36} />
+      <h1>{offline ? "You're offline" : "We couldn't reach Music Theory Path"}</h1>
+      <p>{offline ? "Music Theory Path needs an internet connection for lessons and practice." : "The server didn't answer. It may be restarting; this usually takes about a minute."}</p>
+      <p>Your progress and sign-in are safe on this device. Nothing has been lost.</p>
+      <div className="row">
+        <button type="button" className="btn btn-primary" onClick={onRetry}>Try again</button>
+      </div>
+    </main>
+  );
+}
+
 export function NotFoundView({ what = "page" }: { what?: string }) {
   return (
     <div className="state" role="alert">

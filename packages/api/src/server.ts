@@ -3,7 +3,7 @@ import { createServer, type IncomingMessage, type Server } from "node:http";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import type { App } from "./app.ts";
-import { GATE_REALM, type PreviewGate } from "./preview-gate.ts";
+import type { PreviewGate } from "./preview-gate.ts";
 
 const TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -19,18 +19,23 @@ const TYPES: Record<string, string> = {
   ".txt": "text/plain; charset=utf-8",
 };
 
-async function toRequest(req: IncomingMessage, origin: string): Promise<Request> {
+async function readBody(req: IncomingMessage, limit = 1_000_000): Promise<Buffer<ArrayBuffer>> {
   const chunks: Buffer[] = [];
   let size = 0;
   for await (const c of req) {
     size += (c as Buffer).length;
-    if (size > 1_000_000) throw new Error("body too large");
+    if (size > limit) throw new Error("body too large");
     chunks.push(c as Buffer);
   }
+  return Buffer.concat(chunks) as Buffer<ArrayBuffer>;
+}
+
+async function toRequest(req: IncomingMessage, origin: string): Promise<Request> {
+  const raw = await readBody(req);
   const method = req.method ?? "GET";
   const headers = new Headers();
   for (const [k, v] of Object.entries(req.headers)) if (v !== undefined) headers.set(k, Array.isArray(v) ? v.join(", ") : v);
-  const body = method === "GET" || method === "HEAD" || chunks.length === 0 ? undefined : Buffer.concat(chunks);
+  const body = method === "GET" || method === "HEAD" || raw.length === 0 ? undefined : raw;
   return new Request(new URL(req.url ?? "/", origin), { method, headers, body });
 }
 
@@ -41,7 +46,7 @@ export interface HttpOptions {
   trustedProxyHops?: number;
   /** "app" (default): this process sets the security headers on every response. "proxy": a reverse proxy is configured to set them, so the app sends none. */
   securityHeaders?: "app" | "proxy";
-  /** Private preview (issue #24): when given, every request except read-only /api/health needs an invited tester's credentials. */
+  /** Private preview (issue #24, PWA brief): when given, every request except the gate's open resources needs an invited tester's preview session. */
   gate?: PreviewGate;
 }
 
@@ -112,13 +117,25 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       const host = req.headers.host ?? "localhost";
       const proto = publicScheme(req.headers["x-forwarded-proto"], opts);
       const url = new URL(req.url ?? "/", `${proto}://${host}`);
-      let response: Response;
-      if (opts.gate && !opts.gate.allows(req.method ?? "GET", url.pathname, req.headers.authorization)) {
-        res.writeHead(401, { ...secure, "www-authenticate": GATE_REALM, "cache-control": "no-store", "x-robots-tag": "noindex", "content-type": "text/plain; charset=utf-8" });
-        res.end("Private preview: invited testers only.");
-        return;
+      let response: Response | undefined;
+      const extraCookies: string[] = [];
+      if (opts.gate) {
+        const decision = await opts.gate.check({
+          method: req.method ?? "GET",
+          url,
+          header: (name) => {
+            const v = req.headers[name];
+            return Array.isArray(v) ? v.join(", ") : v;
+          },
+          remoteAddress: req.socket.remoteAddress,
+          body: () => readBody(req, 8192).then((b) => b.toString("utf8")),
+        });
+        if (decision.pass) extraCookies.push(...decision.cookies);
+        else response = decision.response;
       }
-      if (url.pathname.startsWith("/api/")) {
+      if (response) {
+        /* answered by the gate */
+      } else if (url.pathname.startsWith("/api/")) {
         response = await app.fetch(await toRequest(req, `${proto}://${host}`), { remoteAddress: req.socket.remoteAddress });
       } else if (staticDir) {
         response = serveStatic(staticDir, url.pathname);
@@ -129,7 +146,7 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       response.headers.forEach((v, k) => {
         if (k !== "set-cookie") out[k] = v;
       });
-      const cookies = response.headers.getSetCookie();
+      const cookies = [...response.headers.getSetCookie(), ...extraCookies];
       if (cookies.length) out["set-cookie"] = cookies;
       res.writeHead(response.status, out);
       res.end(Buffer.from(await response.arrayBuffer()));

@@ -209,9 +209,22 @@ async function send<T>(method: string, path: string, body: unknown, signal: Abor
   if (!res.ok) {
     const e = (data as { error?: { code?: string; message?: string } } | undefined)?.error;
     const { code, message, ...rest } = e ?? {};
+    if (res.status === 401 && code === "preview_required") toPreviewSignIn();
     throw new ApiFailure(res.status, code ?? "error", message ?? "Something went wrong. Please try again.", rest);
   }
   return data as T;
+}
+
+let leavingForPreviewSignIn = false;
+/**
+ * The private-preview gate no longer recognises this device (its preview session expired, or the tester's invitation was withdrawn).
+ * That is not a learner sign-in problem, so go to the gate's own sign-in page, coming back here afterwards. Only once per page.
+ */
+function toPreviewSignIn() {
+  if (leavingForPreviewSignIn || typeof window === "undefined") return;
+  leavingForPreviewSignIn = true;
+  const here = window.location.pathname + window.location.search;
+  window.location.assign(`/preview/signin?next=${encodeURIComponent(here)}`);
 }
 
 /**

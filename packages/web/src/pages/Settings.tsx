@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { api, ApiFailure, type Settings as SettingsT } from "../api/client";
 import { SignOutButton } from "../components/SignOutButton";
+import { InstallGuide } from "../components/InstallApp";
 import { saveFailure } from "../lib/errors";
 import { useApp } from "../state/app";
 
@@ -147,6 +148,8 @@ export function Settings() {
         </form>
         <p className="muted small">Reminder notifications are off, and there are none to turn on yet.</p>
       </section>
+
+      <InstallGuide me={me} />
 
       <section className="card" aria-labelledby="data-h">
         <h2 id="data-h">Your data</h2>
