@@ -71,6 +71,29 @@ describe("musically significant distinctions are kept", () => {
     expect(words([{ kind: "tuplet", actual: 5, events: Array.from({ length: 5 }, () => n("semiquaver")) }])).toBe("a quintuplet of five semiquavers");
   });
 
+  it("keeps a tie and a beam when the tie crosses into or out of a beamed group (first review of PR #30, P1)", () => {
+    const beamedAfterTie = [n("crotchet", { tieToNext: true }), ...beamed(n("quaver"), n("quaver"))];
+    const flagsAfterTie = [n("crotchet", { tieToNext: true }), n("quaver"), n("quaver")];
+    expect(words(beamedAfterTie, true)).toBe("a crotchet tied into the first of two beamed quavers");
+    expect(words(flagsAfterTie, true)).toBe("a crotchet tied to a quaver followed by a quaver");
+    expect(words(beamedAfterTie, true)).not.toBe(words(flagsAfterTie, true));
+    expect(words([...beamed(n("quaver"), n("quaver", { tieToNext: true })), n("crotchet")], true)).toBe("two quavers beamed together, the last tied to a crotchet");
+    expect(words([...beamed(n("quaver"), n("quaver", { tieToNext: true })), ...beamed(n("quaver"), n("quaver"))], true)).toBe("two quavers beamed together, the last tied into the first of two beamed quavers");
+    expect(words(beamed(n("quaver", { tieToNext: true }), n("quaver")), true)).toBe("a beamed group (a quaver tied to the next note and a quaver)");
+    expect(words([n("minim", { tieToNext: true }), n("crotchet", { tieToNext: true }), ...beamed(n("quaver"), n("quaver"))], true)).toBe("a minim tied to a crotchet tied into the first of two beamed quavers");
+    expect(words([n("crotchet", { tieToNext: true }), triplet(n("quaver"), n("quaver"), n("quaver"))])).toBe("a crotchet tied into the first note of a triplet of three quavers");
+    // units joined by a tie are never counted together with their neighbours
+    expect(words([n("crotchet"), n("crotchet"), n("crotchet", { tieToNext: true }), ...beamed(n("quaver"), n("quaver"))], true)).toBe("two crotchets followed by a crotchet tied into the first of two beamed quavers");
+  });
+
+  it("merges tuplets only when their ratio and inner beaming match, and says an unusual ratio in full (first review of PR #30, P3)", () => {
+    const t = (normal: number, ...evs: E[]): E => ({ kind: "tuplet", actual: evs.length, normal, events: evs });
+    expect(words([t(2, n("quaver"), n("quaver"), n("quaver")), t(4, n("quaver"), n("quaver"), n("quaver"))])).toBe("a triplet of three quavers followed by three quavers in the time of four");
+    expect(words([t(3, n("quaver"), n("quaver"), n("quaver"), n("quaver")), t(3, n("quaver"), n("quaver"), n("quaver"), n("quaver"))])).toBe("two groups of four quavers in the time of three");
+    expect(words([t(2, ...beamed(n("quaver"), n("quaver"), n("quaver"))), t(2, n("quaver"), n("quaver"), n("quaver"))])).toBe("a triplet of three quavers followed by a triplet of three quavers");
+    expect(words([t(3, n("quaver"), n("quaver"))])).toBe("a duplet of two quavers");
+  });
+
   it("names a whole-bar rest as such", () => {
     expect(words([r("semibreve", { wholeBar: true })])).toBe("a whole-bar rest");
   });

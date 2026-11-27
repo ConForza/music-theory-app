@@ -172,7 +172,10 @@ export const inversionFacts5: Gen = (c): any => {
   if (mode === "figures") {
     const ids: Array<[string, string]> = [["5/3", "5/3 (five-three)"], ["6/3", "6/3 (six-three)"], ["6/4", "6/4 (six-four)"], ["6/5", "6/5 (six-five)"]];
     return {
-      prompt: `Chord ${roman} in ${INV_WORD[inv]} can also be shown with figures instead of a letter. Which figures show ${INV_WORD[inv]}?`,
+      ...reworded(
+        `Which figures, used instead of a letter, show chord ${roman} in ${INV_WORD[inv]}?`,
+        `Chord ${roman} in ${INV_WORD[inv]} can also be shown with figures instead of a letter. Which figures show ${INV_WORD[inv]}?`,
+      ),
       answer: choiceAnswer(shuffled(c, ids), INV_FIG[inv], Object.fromEntries(ids.filter(([id]) => id !== INV_FIG[inv]).map(([id]) => [id, ["inversion-misread", id === "5/3" ? "5/3 stands for root position: a 5th and a 3rd above the bass." : id === "6/5" ? "6/5 is not a triad position: it belongs to chords of four notes." : `The figures give the intervals above the bass: ${INV_FIG[inv].replace("/", " and ")} for ${INV_WORD[inv]}.`]]))),
       hints: ["The figures name the intervals above the lowest note: root position 5/3, first inversion 6/3, second inversion 6/4."],
     };

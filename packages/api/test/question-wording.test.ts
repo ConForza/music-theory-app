@@ -36,6 +36,8 @@ function everyItem(seeds = 3): ExerciseItem[] {
       }
     }
   for (const l of curriculum!.lessons) out.push(...l.content.guided, ...l.content.independent);
+  // the Practice Lab's fixed sets are learner-facing too (first review of PR #30)
+  for (const s of curriculum!.showcase) out.push(...(s.content.items as ExerciseItem[]));
   return out;
 }
 const items = everyItem();
@@ -64,20 +66,23 @@ describe("question identity is unchanged by the wording audit", () => {
   });
 });
 
-describe("lessons touched by the audit changed only in what learners read", () => {
-  // Fixture: for each lesson the audit touched, a hash of the pre-audit file (main at 94754cb) with its learner-facing wording removed.
+describe("lessons and Practice Lab sets touched by the audit changed only in what learners read", () => {
+  // Fixture: for each lesson the audit touched, and every Practice Lab set ("showcase|<set id>"), a hash of the pre-audit file (main at 94754cb)
+  // with its learner-facing wording (prompts, hints and text descriptions) removed. Question identity, which reads some descriptions, is pinned above.
   const was = JSON.parse(readFileSync(join(here, "fixtures/lessons-before-wording-audit.json"), "utf8")) as Record<string, string>;
-  const WORDING = new Set(["prompt", "legacyPrompt", "questionAlternative"]);
+  const WORDING = new Set(["prompt", "legacyPrompt", "questionAlternative", "textAlternative", "hints"]);
   const strip = (o: unknown): unknown =>
     Array.isArray(o) ? o.map(strip) : o && typeof o === "object" ? Object.fromEntries(Object.keys(o).filter((k) => !WORDING.has(k)).sort().map((k) => [k, strip((o as Record<string, unknown>)[k])])) : o;
-  const wordingFree = (id: string) => createHash("sha256").update(JSON.stringify(strip(curriculum!.lessons.find((l) => l.content.lessonId === id)!.content))).digest("hex").slice(0, 16);
-  // Re-authoring also corrected one stale description in this lesson: note 3 is in the space above the ledger line, not on it.
-  const DESCRIPTION_CORRECTED = ["G1-U3-L06"];
+  const contentOf = (key: string) =>
+    key.startsWith("showcase|") ? curriculum!.showcase.find((x) => x.content.id === key.slice(9))!.content : curriculum!.lessons.find((l) => l.content.lessonId === key)!.content;
+  const wordingFree = (key: string) => createHash("sha256").update(JSON.stringify(strip(contentOf(key)))).digest("hex").slice(0, 16);
+  it.each(Object.keys(was))("%s", (key) => expect(wordingFree(key)).toBe(was[key]));
 
-  it.each(Object.keys(was).filter((id) => !DESCRIPTION_CORRECTED.includes(id)))("%s", (id) => expect(wordingFree(id)).toBe(was[id]));
-
-  it("every edited prompt in a lesson keeps the wording it was published with", () => {
+  it("every edited prompt in a lesson or Practice Lab set keeps the wording it was published with", () => {
     for (const l of curriculum!.lessons) for (const it of [...l.content.guided, ...l.content.independent]) if (it.legacyPrompt) expect(it.legacyPrompt, it.id).not.toBe(it.prompt);
+    const lab = curriculum!.showcase.flatMap((x) => x.content.items as ExerciseItem[]);
+    expect(lab.filter((it) => it.legacyPrompt).length).toBeGreaterThanOrEqual(12);
+    for (const it of lab) if (it.legacyPrompt) expect(it.legacyPrompt, it.id).not.toBe(it.prompt);
   });
 });
 

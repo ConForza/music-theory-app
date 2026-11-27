@@ -96,9 +96,12 @@ export const tenorFacts: Gen = (c): any => {
     const inst = alto ? "viola" : c.rng.pick(["cello", "bassoon", "tenor trombone"]);
     const opts: Array<[string, string]> = [["alto", "the alto clef"], ["tenor", "the tenor clef"]];
     return {
-      prompt: `A part for the ${inst} is written in a C clef. Which one is more likely for the ${inst} (the tenor clef is used for its higher notes)?`,
+      ...reworded(
+        `Which C clef is normally used for the ${inst}?`,
+        `A part for the ${inst} is written in a C clef. Which one is more likely for the ${inst} (the tenor clef is used for its higher notes)?`,
+      ),
       answer: choiceAnswer(opts, alto ? "alto" : "tenor", { [alto ? "tenor" : "alto"]: ["clef-confusion", alto ? "The viola's own clef is the alto clef." : `The ${inst} reads the tenor clef for its higher notes; the alto clef belongs to the viola.`] }),
-      hints: ["The viola is the alto-clef instrument. The cello, bassoon and tenor trombone use the tenor clef."],
+      hints: ["The viola reads the alto clef (and the treble clef for its highest notes). The cello, bassoon and tenor trombone read the bass clef and use the tenor clef for their higher notes."],
     };
   }
   const orders: Array<[string, string]> = [["tatb", "treble, alto, tenor, bass"], ["tbta", "treble, tenor, alto, bass"], ["btat", "bass, tenor, alto, treble"], ["atbt", "alto, treble, tenor, bass"]];
@@ -428,9 +431,12 @@ export const intervalFacts5: Gen = (c): any => {
   const alts = [...new Set(["d", "m", "M", "P", "A"].map((q) => `${q}${iv2.number}`).filter((x) => { try { parseInterval(x); return x !== code2; } catch { return false; } }))].slice(0, 3);
   const movedName = pretty(F(moved).replace(/\d$/, ""));
   return {
-    prompt: `${lowName} up to ${upName} is ${an(qualWord(code))}. The upper note is now ${dir > 0 ? "raised" : "lowered"} by a semitone, to ${movedName}. What is the interval now? Chromatic semitone: the letter name stays the same, so the number does not change.`,
+    ...reworded(
+      `${lowName} up to ${upName} is ${an(qualWord(code))}. The upper note is now ${dir > 0 ? "raised" : "lowered"} by a semitone, to ${movedName}. What is the interval now?`,
+      `${lowName} up to ${upName} is ${an(qualWord(code))}. The upper note is now ${dir > 0 ? "raised" : "lowered"} by a semitone, to ${movedName}. What is the interval now? Chromatic semitone: the letter name stays the same, so the number does not change.`,
+    ),
     answer: choiceAnswer(shuffled(c, [code2, ...alts].map((x) => [x, qualWord(x)] as [string, string])), code2, Object.fromEntries(alts.map((x) => [x, [x[0] === (dir > 0 ? "d" : "A") ? "augmented-diminished-swap" : "quality-from-wrong-key", `The number stays ${iv2.number}. Raising the upper note makes the interval larger and lowering it makes it smaller: move one step along diminished – minor – major – augmented (perfect intervals sit between diminished and augmented).`]]))),
-    hints: ["Larger by a semitone: minor to major, major or perfect to augmented. Smaller: major to minor, minor or perfect to diminished."],
+    hints: ["A chromatic semitone keeps the letter name, so the number of the interval does not change; only its quality does.", "Larger by a semitone: minor to major, major or perfect to augmented. Smaller: major to minor, minor or perfect to diminished."],
   };
 };
 

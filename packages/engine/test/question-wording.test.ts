@@ -29,20 +29,23 @@ function sample(templateId: string, perBinding = 25): ExerciseItem[] {
   return out;
 }
 const words = (s: string) => s.trim().split(/\s+/).length;
+const unpitched = (evs: any[]) => evs.map(({ pitch: _p, ...e }) => e);
 
 describe("t.g5.bar-complete: the reported 7/4 question", () => {
   const items = sample("t.g5.bar-complete");
+  const unitOf = (ts: string) => (ts.endsWith("/8") ? "quaver" : "crotchet");
 
   it("asks for the action and the constraints only: the given notes are not listed one by one", () => {
     expect(items.length).toBeGreaterThan(40);
     for (const it of items) {
-      expect(it.prompt).toMatch(/^Complete this [57]\/[48] bar using notes or rests, following a \d( \+ \d)+ grouping\. (One beat remains|[A-Z][a-z]+ beats remain)\. Do not cross group boundaries\.$/);
-      expect(it.prompt).not.toMatch(/then a|already begins/);
+      expect(it.prompt).toMatch(/^Complete this [57]\/[48] bar using notes or rests, following a \d( \+ \d)+ grouping\. [A-Z][a-z]+ (crotchet|quaver)(s'|'s) worth remains\. Do not cross group boundaries\.$/);
+      expect(it.prompt).not.toMatch(/then a|already begins|beats? remain/);
       expect(it.legacyPrompt).toMatch(/already begins with/);
     }
   });
 
-  it("still states exactly the time signature, grouping and remaining beats the marking uses", () => {
+  it("states the time signature, grouping and what remains in the bar's own unit (first review of PR #30: in 7/8 five quavers are not five beats)", () => {
+    let eighths = 0;
     for (const it of items) {
       const a = A(it);
       expect(it.prompt).toContain(`${a.timeSignature} bar`);
@@ -50,19 +53,55 @@ describe("t.g5.bar-complete: the reported 7/4 question", () => {
       const { top, bottom } = music.parseTimeSignature(a.timeSignature);
       const given = music.totalLength(a.given);
       const left = top - (given.n / given.d) * bottom;
-      expect(it.prompt).toContain(left === 1 ? "One beat remains" : `${music.sentenceStart(music.countWord(left))} beats remain`);
+      const unit = unitOf(a.timeSignature);
+      expect(it.prompt).toContain(`${music.sentenceStart(music.countWord(left))} ${unit}${left === 1 ? "'s" : "s'"} worth remains`);
+      if (bottom === 8) eighths++;
     }
+    expect(eighths).toBeGreaterThan(5);
   });
 
-  it("pins the screenshot's case word for word", () => {
-    const it = items.find((x) => A(x).timeSignature === "7/4" && A(x).groupPattern.join("+") === "2+3+2" && /then a crotchet/.test(x.legacyPrompt ?? ""));
-    expect(it?.prompt).toMatch(/^Complete this 7\/4 bar using notes or rests, following a 2 \+ 3 \+ 2 grouping\. (Two|Four) beats remain\. Do not cross group boundaries\.$/);
+  describe("the authored item from the screenshot (i.g5-u1-l02.ind-3)", () => {
+    const lesson = curriculum!.lessons.find((l) => l.content.lessonId === "G5-U1-L02")!.content;
+    const item = [...lesson.guided, ...lesson.independent].find((x) => x.id === "i.g5-u1-l02.ind-3")!;
+    const node = ix.nodeById.get("G5-U1-L02")!;
+    const scope = effectiveScope(ix, node, node.exercises.find((b) => b.templateId === "t.g5.bar-complete")!);
+    const n = (value: string, dots = 0) => ({ kind: "note", duration: { value, dots } });
+    const r = (value: string) => ({ kind: "rest", duration: { value, dots: 0 } });
+    const grade = (tail: unknown[]) => gradeItem(ix, item, { kind: "rhythm", measures: [{ events: [...unpitched(A(item).given), ...tail] }] } as never, scope).correct;
+
+    it("reads exactly as reworded, and keeps its first wording for identity", () => {
+      expect(item.prompt).toBe("Complete this 7/4 bar using notes or rests, following a 2 + 3 + 2 grouping. Two crotchets' worth remains. Do not cross group boundaries.");
+      expect(item.legacyPrompt).toBe("Complete this bar of 7/4 with notes or rests so that it follows a grouping of 2 + 3 + 2. The bar already begins with a quaver, then a quaver, then a quaver, then a quaver, then a crotchet, then a quaver, then a quaver, then a quaver, then a quaver. Two more beats are needed; no note may join two groups.");
+    });
+
+    it("marks as before: every rule-compliant ending is right, a short or long bar is wrong", () => {
+      for (const ok of [[n("minim")], [r("minim")], [n("crotchet"), n("crotchet")], [n("crotchet"), r("crotchet")]]) expect(grade(ok), JSON.stringify(ok)).toBe(true);
+      for (const bad of [[n("crotchet")], [n("minim", 1)], []]) expect(grade(bad), JSON.stringify(bad)).toBe(false);
+    });
+
+    it("its given notes are described in the answer editor in natural words, beamed as the editor beams them", () => {
+      // the editor beams by the named grouping (RhythmEditors.beamBar), so the four quavers of the first group share one beam
+      const named = music.metreStructures("7/4").find((x) => x.pattern?.join("+") === "2+3+2")!;
+      const shown = music.autoBeam(unpitched(A(item).given).map(({ beam: _b, ...e }: any) => e), named);
+      expect(music.barsInWords([shown as never], { beams: true })).toBe("Bar 1: four quavers beamed together, a crotchet and four quavers beamed together.");
+    });
+  });
+
+  it("rejects a note that crosses a group boundary (3 + 2 + 2)", () => {
+    const item = items.find((x) => A(x).timeSignature === "7/4" && A(x).groupPattern.join("+") === "3+2+2" && music.equals(music.totalLength(A(x).given), music.frac(3, 4)))!;
+    expect(item).toBeDefined();
+    const node = ix.nodes.find((nd) => nd.exercises.some((b) => b.templateId === "t.g5.bar-complete"))!;
+    const scope = effectiveScope(ix, node, node.exercises.find((b) => b.templateId === "t.g5.bar-complete")!);
+    const grade = (tail: unknown[]) => gradeItem(ix, item, { kind: "rhythm", measures: [{ events: [...unpitched(A(item).given), ...tail] }] } as never, scope).correct;
+    expect(grade([{ kind: "note", duration: { value: "minim", dots: 0 } }, { kind: "note", duration: { value: "minim", dots: 0 } }])).toBe(true);
+    expect(grade([{ kind: "note", duration: { value: "minim", dots: 1 } }, { kind: "note", duration: { value: "crotchet", dots: 0 } }])).toBe(false);
   });
 });
 
 describe("generated wording across Grades 1-5", () => {
   const reworded = [
-    "t.g1.bar-complete", "t.g1.scale-build", "t.g1.scale-gap", "t.g1.note-write", "t.g1.accidental-write",
+    // (accidental writing now states its ledger-line range, as the first review of PR #30 asked, so it is no shorter than before)
+    "t.g1.bar-complete", "t.g1.scale-build", "t.g1.scale-gap", "t.g1.note-write",
     "t.g2.bar-complete", "t.g2.scale-build-minor", "t.g2.scale-gap",
     "t.g3.bar-complete", "t.g3.ledger-count", "t.g3.scale-gap",
     "t.g4.double-dot-bar", "t.g4.same-pitch", "t.g4.octave-transpose-alto", "t.g4.term-use", "t.g4.alto-write",

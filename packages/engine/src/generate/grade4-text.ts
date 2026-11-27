@@ -44,12 +44,18 @@ export function keySignatureText(key: string): string {
 /** A full description of one stave. `lead` names the stave ("An alto-clef melody"); the rest is read off the fragment. */
 export function describeStave(f: NotationFragment, lead?: string): string {
   const clef = f.clef as Clef;
-  const bars = f.measures.map((m, i) => `${f.measures.length > 1 ? `Bar ${i + 1}: ` : ""}${(m.events ?? m.voices?.[0]?.events ?? []).map((e) => eventWords(clef, e)).join("; ")}.`);
+  // Every voice is described, with its stem direction: that is how a reader tells the voices on a shared stave apart (first review of PR #30:
+  // the SATB question described only the first voice of each stave, so the note marked x could be missing). The voice is never named.
+  const voiceWords = (v: { stem?: string; events: NotationEvent[] }, k: number, all: number) =>
+    `${all === 2 ? (k === 0 ? "Upper voice" : "Lower voice") : `Voice ${k + 1}`}${v.stem && v.stem !== "auto" ? ` (stems ${v.stem})` : ""}: ${v.events.map((e) => eventWords(clef, e)).join("; ")}`;
+  const bars = f.measures.map(
+    (m, i) => `${f.measures.length > 1 ? `Bar ${i + 1}: ` : ""}${m.voices ? m.voices.map((v, k, all) => voiceWords(v, k, all.length)).join(". ") : (m.events ?? []).map((e) => eventWords(clef, e)).join("; ")}.`,
+  );
   const head = `${lead ?? `${/^[aeiou]/.test(clef) ? "An" : "A"} ${clef}-clef stave`}${f.showKeySignature && f.key ? `, ${keySignatureText(f.key)}` : ""}${f.timeSignature ? `, ${f.timeSignature}` : ""}${f.tempoText ? `, marked ${f.tempoText}` : ""}.`;
   return `${head} ${bars.join(" ")}`;
 }
 
 export function describeScore(s: NotationScore, lead: string): NotationScore {
-  const staves = s.staves.map((st) => ({ ...st, music: { ...st.music, textAlternative: describeStave(st.music, `${st.label} stave`) } }));
+  const staves = s.staves.map((st) => ({ ...st, music: { ...st.music, textAlternative: describeStave(st.music, /stave$/i.test(st.label) ? st.label : `${st.label} stave`) } }));
   return { ...s, staves, textAlternative: `${lead} ${staves.map((x) => x.music.textAlternative).join(" ")}` };
 }

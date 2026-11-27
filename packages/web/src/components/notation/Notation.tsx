@@ -1,4 +1,4 @@
-import { useId, useMemo, type KeyboardEvent, type ReactNode } from "react";
+import { useMemo, type KeyboardEvent, type ReactNode } from "react";
 import type { NotationFragment, NotationScore } from "@mtp/curriculum";
 import { layoutFragment, layoutScore, systemStart, type LaidEvent, type StaveLayout } from "./layout";
 import { G } from "./glyphs";
@@ -25,7 +25,10 @@ export interface NotationProps {
   /** Extra SVG drawn on top, in staff-space coordinates (used by editors). */
   overlay?: (layout: StaveLayout) => ReactNode;
   caption?: string;
-  /** Hide the visually-hidden text description (when the parent already provides one). */
+  /**
+   * false: the parent announces the description itself (an answer editor's live meter), so the picture takes a short name instead of the
+   * description and it is announced in one place only.
+   */
   describe?: boolean;
   /** Minimum bar width in staff spaces (for empty or nearly empty staves). */
   minWidth?: number;
@@ -88,29 +91,25 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
 
 /** Read-only (or tap-to-hear) notation for one stave in any clef, or a rhythm line. */
 export function Notation({ fragment, size = "normal", highlight, marks, onActivate, overlay, caption, describe = true, minWidth, labels }: NotationProps) {
-  const desc = useId();
   const layout = useMemo(() => layoutFragment(fragment, minWidth ? { minWidth } : {}), [fragment, minWidth]);
   const px = PX[size];
   const h = layout.bottom - layout.top;
   return (
     <figure className={`notation notation-${size}`}>
-      <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)" aria-describedby={describe ? desc : undefined}>
-        <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px, fragment.presentation === "rhythm-line" ? RHYTHM_MIN_SCALE : MIN_SCALE)} role={onActivate ? "group" : "img"} aria-label={fragment.textAlternative} className="notation-svg fit">
+      {/* One reading surface: the picture's own name is the description. The focusable scrolling group keeps only its short label (first
+          review of PR #30: the same text was also its aria-describedby and a hidden paragraph). */}
+      <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)">
+        <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px, fragment.presentation === "rhythm-line" ? RHYTHM_MIN_SCALE : MIN_SCALE)} role={onActivate ? "group" : "img"} aria-label={describe ? fragment.textAlternative : "Your answer, drawn as notation (its description follows)"} className="notation-svg fit">
           <StaveSvg layout={layout} highlight={highlight} marks={marks} onActivate={onActivate} overlay={overlay} px={px} labels={labels} />
         </svg>
       </div>
       {caption && <figcaption className="notation-caption">{caption}</figcaption>}
-      {/* The description is the picture's own name (the svg's aria-label) and, for a keyboard user who tabs to the scrolling group, that group's
-          description. Hidden from the reading order, so a screen reader reading the page through does not hear it a third time; aria-describedby
-          still reads hidden text. */}
-      {describe && <p id={desc} className="visually-hidden" aria-hidden="true">{fragment.textAlternative}</p>}
     </figure>
   );
 }
 
 /** Several staves (short score, open score, transposing parts) aligned bar by bar, with a brace (grand staff) or bracket and labels. */
 export function ScoreView({ score, size = "normal", highlight }: { score: NotationScore; size?: keyof typeof PX; highlight?: string[] }) {
-  const desc = useId();
   const sl = useMemo(() => layoutScore(score), [score]);
   const px = PX[size];
   const first = sl.staves[0]!;
@@ -120,7 +119,7 @@ export function ScoreView({ score, size = "normal", highlight }: { score: Notati
   const w = sl.width - start.left;
   return (
     <figure className="notation notation-score">
-      <div className="notation-scroll" tabIndex={0} role="group" aria-label="Score (scrolls sideways if wide)" aria-describedby={desc}>
+      <div className="notation-scroll" tabIndex={0} role="group" aria-label="Score (scrolls sideways if wide)">
         <svg viewBox={`${start.left} ${top} ${w} ${height}`} style={fit(w * px)} role="img" aria-label={score.textAlternative} className="notation-svg fit">
           <Primitives ev={{ glyphs: [], lines: [start.line, ...sl.connectors], paths: [], texts: [] }} />
           {start.brace && <text x={start.brace.x} y={start.brace.y} className="n-smufl n-glyph" fontSize={start.brace.size}>{G.brace}</text>}
@@ -133,7 +132,6 @@ export function ScoreView({ score, size = "normal", highlight }: { score: Notati
         </svg>
       </div>
       <figcaption className="notation-caption">Staves from the top: {score.staves.map((s) => s.label).join(", ")}</figcaption>
-      <p id={desc} className="visually-hidden" aria-hidden="true">{score.textAlternative}</p>
     </figure>
   );
 }

@@ -324,7 +324,7 @@ export const chordRoot: Gen = (c): any => {
   const score = toScore(keyText, ps, null, null, `A chord of ${ps.length} notes in ${keyText}, written on the treble and bass staves.`);
   return {
     ...reworded(
-      `This chord is made from the notes of one triad in ${kw(keyText)}. Is it in root position, and which note is its root?`,
+      `This chord is made from the notes of one triad in ${kw(keyText)}.`,
       `This chord is made from the notes of one triad in ${kw(keyText)}. Answer both questions: is it in root position, and which note is its root?`,
     ),
     score,

@@ -158,7 +158,8 @@ function legacyStartText(evs: Ev[]): string {
   const w = (e: Ev) => (e.kind === "tuplet" ? "a group" : `a ${e.duration.dots ? "dotted " : ""}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`);
   return evs.map(w).join(", then ");
 }
-const beatsLeft = (k: number) => (k === 1 ? "One beat remains" : `${music.sentenceStart(WORDS[k]!)} beats remain`);
+/** What is left to write, in the bar's own unit ("Five quavers' worth remains"): in 7/8 grouped 2 + 2 + 3, five quavers are two felt groups, not five beats. */
+const leftInUnits = (ts: string, k: number) => `${music.sentenceStart(WORDS[k]!)} ${unitName(ts)}${k === 1 ? "'s" : "s'"} worth remains`;
 
 /** x/4: beam each pair of quavers that makes up one split crotchet; nothing is beamed across a group. */
 function withUnitBeams(events: Ev[]): Ev[] {
@@ -345,11 +346,11 @@ export const barComplete5: Gen = (c): any => {
     // The given notes are drawn in the answer stave and described to screen readers there, so the prompt does not list them. The beats that
     // remain stay in the prompt: in a challenge or assessment the bar meter no longer says what is missing.
     ...reworded(
-      `Complete this ${ts} bar using notes or rests, following a ${P.join(" + ")} grouping. ${beatsLeft(leftUnits)}. Do not cross group boundaries.`,
+      `Complete this ${ts} bar using notes or rests, following a ${P.join(" + ")} grouping. ${leftInUnits(ts, leftUnits)}. Do not cross group boundaries.`,
       `Complete this bar of ${ts} with notes or rests so that it follows a grouping of ${P.join(" + ")}. The bar already begins with ${legacyStartText(given)}. ${leftUnits === 1 ? "One more beat is" : `${WORDS[leftUnits]?.[0]!.toUpperCase()}${WORDS[leftUnits]!.slice(1)} more beats are`} needed; no note may join two groups.`,
     ),
     answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given, accepted: [[{ events: evs, barline: "final" }]], acceptAnyRuleCompliant: true, groupPattern: P },
-    hints: [`Fill the last ${left.map((x) => String(x)).join(" + ")} beat${leftUnits === 1 ? "" : "s"} group by group; a note or rest may not cross from one group into the next.`],
+    hints: [`Fill the remaining ${left.map((x) => String(x)).join(" + ")} ${unitName(ts)}${leftUnits === 1 ? "" : "s"} group by group; a note or rest may not cross from one group into the next.`],
   };
 };
 

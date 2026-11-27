@@ -194,7 +194,7 @@ const noteWrite: Gen = (c) => {
   answer.accepted = valid.map(F);
   return {
     ...reworded(
-      `Write ${nameOf({ step, alter })} in the ${clef} clef, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave (no ledger lines)"}. Any octave is correct.`,
+      `Write ${nameOf({ step, alter })} in the ${clef} clef, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave (no ledger lines)"}. Any octave that fits is correct.`,
       `Write ${nameOf({ step, alter })} in the ${clef} clef. ${max ? `You may use up to ${max} ledger line${max > 1 ? "s" : ""}.` : "Keep it on the stave (no ledger lines)."} Any ${nameOf({ step, alter })} that fits is correct.`,
     ),
     answer,

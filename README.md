@@ -6,7 +6,7 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 ## Question wording audit
 
-Every question family in Grades 1-5 was audited for clarity and length: 42 templates were reworded (the reported 7/4 bar-completion prompt went from 63 words to 24), rhythms are now put into words by one shared formatter (`music.rhythmInWords`: "four quavers, a crotchet and four quavers"), and a duplicated screen-reader announcement was removed. Reworded questions keep their first wording in `legacyPrompt`, which question identity reads, so no learner's mastery or exposure history moves (pinned by a fixture of every question identity). Findings, before/after wording, mobile measurements and questions for a teacher: [docs/curriculum/QUESTION_WORDING_AUDIT.md](docs/curriculum/QUESTION_WORDING_AUDIT.md).
+Every question family in Grades 1-5 was audited for clarity and length: 45 templates and 12 Practice Lab questions were reworded (the reported 7/4 bar-completion prompt went from 63 words to 25), rhythms are now put into words by one shared formatter (`music.rhythmInWords`: "four quavers, a crotchet and four quavers"), and notation now has one screen-reader reading surface, with every voice of a shared stave described. Reworded questions keep their first wording in `legacyPrompt`, which question identity reads, so no learner's mastery or exposure history moves (pinned by a fixture of every question identity). Findings, before/after wording, mobile measurements and questions for a teacher: [docs/curriculum/QUESTION_WORDING_AUDIT.md](docs/curriculum/QUESTION_WORDING_AUDIT.md).
 
 ## Flexible learning (Explore lessons and Practise a topic)
 

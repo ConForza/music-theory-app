@@ -44,3 +44,27 @@ describe("the grouping editor says what is beamed", () => {
     expect(live()).toBe(before);
   });
 });
+
+/**
+ * First review of PR #30, P1: in the bar builder, a crotchet tied into two quavers that the editor beams together was described exactly as the same
+ * notes with no beam ("a crotchet tied to a quaver followed by a quaver"), so a screen-reader user could not check the grouping they had written.
+ */
+describe("the bar builder describes a tie into a beamed group", () => {
+  it("names both the tie and the beam in the live description", async () => {
+    const user = userEvent.setup();
+    const input = { kind: "rhythm-builder", mode: "rewrite", timeSignature: "4/4", bars: 1, given: [], values: ["minim", "crotchet", "quaver"], maxDots: 1, rests: true, ties: true, tuplets: [] } as unknown as ItemInput;
+    function Harness() {
+      const [v, setV] = useState<LearnerResponse | null>(null);
+      return <AnswerInput input={input} value={v} onChange={setV} disabled={false} />;
+    }
+    const { container } = render(<Harness />);
+    const live = () => container.querySelector(".bar-meter .visually-hidden")!.textContent;
+    await user.click(screen.getByRole("button", { name: "Add a crotchet" }));
+    await user.click(screen.getByRole("button", { name: "Tie last note to next" }));
+    await user.click(screen.getByRole("button", { name: "Add a quaver" }));
+    await user.click(screen.getByRole("button", { name: "Add a quaver" }));
+    expect(live()).toBe("Bar 1: a crotchet tied into the first of two beamed quavers.");
+    // and the same notes without a tie read differently again
+    expect(describeBars([[{ kind: "note", duration: { value: "crotchet", dots: 0 } }, q("begin"), q("end")] as never])).toBe("Bar 1: a crotchet followed by two quavers beamed together.");
+  });
+});

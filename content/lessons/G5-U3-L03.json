@@ -114,7 +114,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "C up to A♯ is an augmented 6th. The upper note is now lowered by a semitone, to A. What is the interval now? Chromatic semitone: the letter name stays the same, so the number does not change.",
+      "prompt": "C up to A♯ is an augmented 6th. The upper note is now lowered by a semitone, to A. What is the interval now?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -155,6 +155,7 @@
       },
       "hints": [
         "Larger by a semitone: minor to major, major or perfect to augmented.",
+        "A chromatic semitone keeps the letter name, so the number of the interval does not change; only its quality does.",
         "Larger by a semitone: minor to major, major or perfect to augmented. Smaller: major to minor, minor or perfect to diminished."
       ],
       "feedback": {
@@ -167,7 +168,8 @@
           "augmented-diminished-swap": "Larger by a semitone: diminished, minor, major, augmented."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "C up to A♯ is an augmented 6th. The upper note is now lowered by a semitone, to A. What is the interval now? Chromatic semitone: the letter name stays the same, so the number does not change."
     },
     {
       "id": "i.g5-u3-l03.guided-2",

@@ -165,10 +165,10 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | note-read (U3-L03) | 2 | Name this note. _Shown: A treble-clef stave with one semibreve on the 5th line._ | The note is F. |
 | note-read (U3-L03) | 3 | Name this note. _Shown: A treble-clef stave with one semibreve on the 1st space._ | The note is F. |
 | note-read (U3-L03) | 4 | Name this note. _Shown: A treble-clef stave with one semibreve on the 3rd space._ | The note is C. |
-| note-write (U3-L03) | 1 | Write F in the treble clef, on the stave (no ledger lines). Any octave is correct. | F can go at F4 or F5. |
-| note-write (U3-L03) | 2 | Write B in the treble clef, on the stave (no ledger lines). Any octave is correct. | B can go at B4. |
-| note-write (U3-L03) | 3 | Write B in the treble clef, on the stave (no ledger lines). Any octave is correct. | B can go at B4. |
-| note-write (U3-L03) | 4 | Write E in the treble clef, on the stave (no ledger lines). Any octave is correct. | E can go at E4 or E5. |
+| note-write (U3-L03) | 1 | Write F in the treble clef, on the stave (no ledger lines). Any octave that fits is correct. | F can go at F4 or F5. |
+| note-write (U3-L03) | 2 | Write B in the treble clef, on the stave (no ledger lines). Any octave that fits is correct. | B can go at B4. |
+| note-write (U3-L03) | 3 | Write B in the treble clef, on the stave (no ledger lines). Any octave that fits is correct. | B can go at B4. |
+| note-write (U3-L03) | 4 | Write E in the treble clef, on the stave (no ledger lines). Any octave that fits is correct. | E can go at E4 or E5. |
 | note-place (U3-L03) | 1 | Write G on a line of the treble-clef stave. | G can go at G4. |
 | note-place (U3-L03) | 2 | Write E in a space of the treble-clef stave. | E can go at E5. |
 | note-place (U3-L03) | 3 | Write C in a space of the treble-clef stave. | C can go at C5. |
@@ -189,10 +189,10 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | accidental-read (U4-L02) | 2 | Name this note, including its sharp or flat. _Shown: A bass-clef stave with one semibreve on the 5th space, with a flat sign in front of it._ | The note is B♭. |
 | accidental-read (U4-L02) | 3 | Name this note, including its sharp or flat. _Shown: A treble-clef stave with one semibreve on the 2nd space, with a sharp sign in front of it._ | The note is A♯. |
 | accidental-read (U4-L02) | 4 | Name this note, including its sharp or flat. _Shown: A bass-clef stave with one semibreve on the 2nd space, with a sharp sign in front of it._ | The note is C♯. |
-| accidental-write (U4-L02) | 1 | Write D♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | D♯ can go at D♯2 or D♯3 or D♯4. |
-| accidental-write (U4-L02) | 2 | Write A♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | A♯ can go at A♯2 or A♯3. |
-| accidental-write (U4-L02) | 3 | Write F♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | F♯ can go at F♯2 or F♯3. |
-| accidental-write (U4-L02) | 4 | Write G♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | G♯ can go at G♯2 or G♯3. |
+| accidental-write (U4-L02) | 1 | Write D♯ in the bass clef, with the sharp sign in front of the note, using up to 1 ledger line. Any octave that fits is correct. | D♯ can go at D♯2 or D♯3 or D♯4. |
+| accidental-write (U4-L02) | 2 | Write A♯ in the bass clef, with the sharp sign in front of the note, using up to 1 ledger line. Any octave that fits is correct. | A♯ can go at A♯2 or A♯3. |
+| accidental-write (U4-L02) | 3 | Write F♯ in the bass clef, with the sharp sign in front of the note, using up to 1 ledger line. Any octave that fits is correct. | F♯ can go at F♯2 or F♯3. |
+| accidental-write (U4-L02) | 4 | Write G♯ in the bass clef, with the sharp sign in front of the note, using up to 1 ledger line. Any octave that fits is correct. | G♯ can go at G♯2 or G♯3. |
 | accidental-state (U4-L03) | 1 | What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it. _Shown: treble clef, key signature: none, 4/4. Bar 1: E 4th space with a sharp sign, E 4th space with a natural sign, D 4th line, E 4th space (marked *)._ | The note is E. |
 | accidental-state (U4-L03) | 2 | What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it. _Shown: treble clef, key signature: none, 2/4. Bar 1: A 2nd space with a flat sign, A 1st ledger line above the stave (marked *)._ | The note is A. |
 | accidental-state (U4-L03) | 3 | What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it. _Shown: bass clef, key signature: none, 3/4. Bar 1: G 4th space with a flat sign, D 3rd line, G 1st line (marked *)._ | The note is G. |

@@ -8,14 +8,20 @@
  * described here: these helpers are for rhythm, where every note is drawn on one line.
  */
 
-/** The structural part of a notation or rhythm-response event that the words depend on. */
+/**
+ * The structural part of a notation or rhythm-response event that the words depend on. RHYTHM ONLY: pitch, accidentals and articulations are
+ * not read, so two notes that differ only in those are described (and merged) as the same. Use it for rhythm lines and rhythm answers, never
+ * for pitched music.
+ */
 export interface WordEvent {
   kind: string;
   duration?: { value: string; dots?: number };
   beam?: string;
   tieToNext?: boolean;
   wholeBar?: boolean;
+  /** Tuplets: how many notes are written, and in the time of how many. */
   actual?: number;
+  normal?: number;
   events?: WordEvent[];
 }
 
@@ -39,7 +45,13 @@ export function durationInWords(value: string, dots = 0, opts: { rest?: boolean;
 }
 
 const TUPLET_NAMES: Record<number, string> = { 2: "duplet", 3: "triplet", 5: "quintuplet", 6: "sextuplet", 7: "septuplet", 9: "nonuplet" };
-export const tupletName = (actual: number): string => TUPLET_NAMES[actual] ?? `group of ${actual}`;
+/** The usual ratio for each named tuplet (a duplet takes the time of three, a triplet of two, …). */
+const TUPLET_NORMAL: Record<number, number> = { 2: 3, 3: 2, 5: 4, 6: 4, 7: 4, 9: 8 };
+/** The tuplet's name when it has the usual ratio ("triplet"), else null: a group with any other ratio is described by its ratio. */
+export function tupletName(actual: number, normal?: number): string | null {
+  const named = TUPLET_NAMES[actual];
+  return named && (normal === undefined || TUPLET_NORMAL[actual] === normal) ? named : null;
+}
 
 type Unit =
   | { type: "single"; ev: WordEvent }
@@ -48,8 +60,17 @@ type Unit =
   | { type: "tuplet"; ev: WordEvent };
 
 const plainKey = (e: WordEvent) => `${e.kind}|${e.duration?.value}|${e.duration?.dots ?? 0}|${e.wholeBar ? "bar" : ""}|${e.tieToNext ? "tie" : ""}`;
-const unitKey = (u: Unit): string | null =>
-  u.type === "single" ? `s:${plainKey(u.ev)}` : u.type === "beam" ? `b:${u.members.map(plainKey).join(",")}` : u.type === "tuplet" ? `t:${u.ev.actual}:${(u.ev.events ?? []).map(plainKey).join(",")}` : null;
+const unitKey = (u: Unit): string =>
+  u.type === "single"
+    ? `s:${plainKey(u.ev)}`
+    : u.type === "beam"
+      ? `b:${u.members.map(plainKey).join(",")}`
+      : u.type === "tuplet"
+        ? `t:${u.ev.actual}:${u.ev.normal ?? ""}:${(u.ev.events ?? []).map((e) => `${plainKey(e)}/${e.beam ?? ""}`).join(",")}`
+        : `c:${u.members.map(plainKey).join(",")}`;
+const lastOf = (u: Unit): WordEvent => (u.type === "single" || u.type === "tuplet" ? u.ev : u.members[u.members.length - 1]!);
+/** The unit's last note is tied on into the next unit (a tie across a beam group or tuplet boundary). */
+const tiesOut = (u: Unit) => u.type !== "tuplet" && lastOf(u).kind !== "rest" && Boolean(lastOf(u).tieToNext);
 
 /** One plain note or rest, `n` times: "a dotted minim", "two quaver rests", "a whole-bar rest". */
 function plainWords(e: WordEvent, n: number): string {
@@ -59,7 +80,13 @@ function plainWords(e: WordEvent, n: number): string {
   const tie = e.tieToNext ? " tied to the next note" : "";
   return `${n === 1 ? article(w) : countWord(n)} ${w}${tie}`;
 }
+const inBeam = (e: WordEvent | undefined) => e?.beam === "begin" || e?.beam === "continue" || e?.beam === "end";
 
+/**
+ * Beam groups and tuplets are units first; a tie chain only joins notes outside them. A tie that crosses into or out of a group is kept as a
+ * link between units (see rhythmInWords), so neither the beam nor the tie is lost (first review of PR #30: a crotchet tied to the first of two
+ * beamed quavers read exactly like the same notes without the beam).
+ */
 function unitsOf(events: WordEvent[], beams: boolean): Unit[] {
   const out: Unit[] = [];
   for (let i = 0; i < events.length; i++) {
@@ -73,11 +100,12 @@ function unitsOf(events: WordEvent[], beams: boolean): Unit[] {
         if (members[members.length - 1]!.beam === "end") break;
       }
       out.push(members.length > 1 ? { type: "beam", members } : { type: "single", ev: e });
-    } else if (e.tieToNext && e.kind !== "rest" && i + 1 < events.length && events[i + 1]!.kind !== "tuplet") {
+    } else {
+      const free = (x: WordEvent | undefined) => x !== undefined && x.kind !== "tuplet" && !(beams && inBeam(x));
       const members = [e];
-      while (members[members.length - 1]!.tieToNext && i + 1 < events.length && events[i + 1]!.kind !== "tuplet") members.push(events[++i]!);
-      out.push({ type: "tie", members });
-    } else out.push({ type: "single", ev: e });
+      while (members[members.length - 1]!.tieToNext && members[members.length - 1]!.kind !== "rest" && free(events[i + 1])) members.push(events[++i]!);
+      out.push(members.length > 1 ? { type: "tie", members } : { type: "single", ev: e });
+    }
   }
   return out;
 }
@@ -92,27 +120,48 @@ const runs = (events: WordEvent[]): Array<{ e: WordEvent; n: number }> => {
   }
   return out;
 };
+const uniformNotes = (r: Array<{ e: WordEvent; n: number }>) => r.length === 1 && r[0]!.e.kind === "note" && !r[0]!.e.tieToNext && Boolean(r[0]!.e.duration);
+const valuesOf = (r: { e: WordEvent; n: number }) => durationInWords(r.e.duration!.value, r.e.duration!.dots ?? 0, { plural: r.n > 1 });
 
-function unitWords(u: Unit, n: number): string {
-  if (u.type === "single") return plainWords(u.ev, n);
+/**
+ * A unit in words, `n` times. `as`: "whole" names it on its own; "target" names it as the end of a tie from the unit before ("the first of two
+ * beamed quavers"). The tie out of a unit's last note is described by the caller, so it is left out here.
+ */
+function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole"): string {
+  const own = (m: WordEvent, k: number, list: WordEvent[]) => (k === list.length - 1 ? { ...m, tieToNext: false } : m);
+  if (u.type === "single") return plainWords({ ...u.ev, tieToNext: false }, n);
   if (u.type === "tie") return u.members.map((m) => plainWords({ ...m, tieToNext: false }, 1)).join(" tied to ");
   if (u.type === "beam") {
-    const r = runs(u.members);
-    const uniform = r.length === 1 && !r[0]!.e.tieToNext && r[0]!.e.kind === "note" && r[0]!.e.duration;
-    if (uniform) {
-      const value = durationInWords(r[0]!.e.duration!.value, r[0]!.e.duration!.dots ?? 0, { plural: true });
+    const r = runs(u.members.map(own));
+    if (uniformNotes(r)) {
+      const value = valuesOf(r[0]!);
+      if (as === "target") return `the first of ${countWord(r[0]!.n)} beamed ${value}`;
       if (n === 1) return `${countWord(r[0]!.n)} ${value} beamed together`;
       return r[0]!.n === 2 ? `${countWord(n)} pairs of beamed ${value}` : `${countWord(n)} groups of ${countWord(r[0]!.n)} beamed ${value}`;
     }
     const inner = listInWords(r.map((x) => plainWords(x.e, x.n)));
+    if (as === "target") return `the first note of a beamed group (${inner})`;
     return n === 1 ? `a beamed group (${inner})` : `${countWord(n)} beamed groups, each (${inner})`;
   }
-  const name = tupletName(u.ev.actual ?? 3);
-  const inner = u.ev.events ?? [];
-  const r = runs(inner);
-  const uniform = r.length === 1 && r[0]!.e.kind === "note" && !r[0]!.e.tieToNext && r[0]!.e.duration;
-  const contents = uniform ? `of ${countWord(r[0]!.n)} ${durationInWords(r[0]!.e.duration!.value, r[0]!.e.duration!.dots ?? 0, { plural: r[0]!.n > 1 })}` : `(${listInWords(r.map((x) => plainWords(x.e, x.n)))})`;
-  return n === 1 ? `${withArticle(name)} ${contents}` : `${countWord(n)} ${name}s${uniform ? ` ${contents} each` : `, each ${contents}`}`;
+  const r = runs(u.ev.events ?? []);
+  const uniform = uniformNotes(r);
+  const name = tupletName(u.ev.actual ?? 3, u.ev.normal);
+  const listed = `(${listInWords(r.map((x) => plainWords(x.e, x.n)))})`;
+  let one: string;
+  let many: string;
+  if (name) {
+    // "a triplet of three quavers", "two triplets of three quavers each"
+    const contents = uniform ? `of ${countWord(r[0]!.n)} ${valuesOf(r[0]!)}` : listed;
+    one = `${withArticle(name)} ${contents}`;
+    many = `${countWord(n)} ${name}s${uniform ? ` ${contents} each` : `, each ${contents}`}`;
+  } else {
+    // any other ratio says it: "four quavers in the time of three", "two groups of four quavers in the time of three"
+    const time = u.ev.normal === undefined ? "" : ` in the time of ${countWord(u.ev.normal)}`;
+    one = uniform ? `${countWord(r[0]!.n)} ${valuesOf(r[0]!)}${time}` : `a group${time} ${listed}`;
+    many = uniform ? `${countWord(n)} groups of ${countWord(r[0]!.n)} ${valuesOf(r[0]!)}${time}` : `${countWord(n)} groups${time}, each ${listed}`;
+  }
+  if (as === "target") return `the first note of ${one}`;
+  return n === 1 ? one : many;
 }
 
 /**
@@ -124,10 +173,26 @@ export function rhythmInWords(events: WordEvent[], opts: { beams?: boolean } = {
   const units = unitsOf(events, opts.beams ?? false);
   const parts: string[] = [];
   for (let i = 0; i < units.length; ) {
-    const key = unitKey(units[i]!);
+    const u = units[i]!;
+    if (tiesOut(u) && i + 1 < units.length) {
+      // a tie across a group boundary links this unit to the next one: "a crotchet tied into the first of two beamed quavers",
+      // "two quavers beamed together, the last tied to a crotchet"
+      let text = unitWords(u, 1);
+      let k = i;
+      while (tiesOut(units[k]!) && k + 1 < units.length) {
+        const next = units[k + 1]!;
+        const join = next.type === "single" || next.type === "tie" ? "tied to" : "tied into";
+        text += units[k]!.type === "beam" ? `, the last ${join} ${unitWords(next, 1, "target")}` : ` ${join} ${unitWords(next, 1, "target")}`;
+        k++;
+      }
+      parts.push(text);
+      i = k + 1;
+      continue;
+    }
+    const key = unitKey(u);
     let n = 1;
-    while (key !== null && i + n < units.length && unitKey(units[i + n]!) === key) n++;
-    parts.push(unitWords(units[i]!, n));
+    while (i + n < units.length && unitKey(units[i + n]!) === key && !tiesOut(units[i + n - 1]!)) n++;
+    parts.push(unitWords(u, n));
     i += n;
   }
   return listInWords(parts, true);

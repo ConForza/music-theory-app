@@ -132,7 +132,7 @@ export const doubleWrite: Gen = (c): any => {
   answer.accepted = valid.map(F);
   return {
     ...reworded(
-      `Write ${pcLabel({ step, alter })} in the ${clef} clef, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave"}. Any octave is correct.`,
+      `Write ${pcLabel({ step, alter })} in the ${clef} clef, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave"}. Any octave that fits is correct.`,
       `Write ${pcLabel({ step, alter })} in the ${clef} clef. ${max ? `You may use up to ${max} ledger line${max > 1 ? "s" : ""}.` : "Keep it on the stave."} Any ${pcLabel({ step, alter })} that fits is correct.`,
     ),
     answer,

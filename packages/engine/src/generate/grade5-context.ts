@@ -188,7 +188,10 @@ export const ornamentFigure5: Gen = (c): any => {
   const f = frag("treble", [{ events: fig.map((p, i) => note(p, "semiquaver", { beam: i === 0 ? "begin" : i === fig.length - 1 ? "end" : "continue" })) }], "A figure.", { key: keyText, showKeySignature: true });
   const others = signs.filter((x) => x !== sign);
   return {
-    prompt: `A composer has written out an ornament on the note ${nm(main)} as these notes: ${fig.map(nm).join(", ")}. Which sign could replace the written-out notes?`,
+    ...reworded(
+      `An ornament on ${nm(main)} is written out as ${fig.map(nm).join(", ")}. Which sign could replace these notes?`,
+      `A composer has written out an ornament on the note ${nm(main)} as these notes: ${fig.map(nm).join(", ")}. Which sign could replace the written-out notes?`,
+    ),
     music: f,
     answer: choiceAnswer(shuffled(c, signs.map((x) => [x, cap(x.replace("-", " "))] as [string, string])), sign, Object.fromEntries(others.map((x) => [x, [x.includes("mordent") && sign.includes("mordent") ? "upper-lower-mordent-swap" : sign === "turn" || x === "turn" ? "turn-inverted" : "trill-mordent-confusion", `The figure is ${fig.length} notes around ${nm(main)}: ${sign.includes("mordent") ? "the extra note is " + (sign === "upper-mordent" ? "above" : "below") : sign === "turn" ? "above, then below" : "an alternation with the note above"}, which is not ${x.replace("-", " ")}.`]]))),
     hints: ["Find the main note, then see where the extra notes go: above, below, or both, and how often."],

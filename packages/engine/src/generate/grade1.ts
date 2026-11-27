@@ -661,7 +661,7 @@ export const accidentalWrite: Gen = (c) => {
   answer.accepted = valid.map((q) => music.formatPitch(q));
   return {
     ...reworded(
-      `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef, with the ${alter === 1 ? "sharp" : "flat"} sign in front of the note. Any octave is correct.`,
+      `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef, with the ${alter === 1 ? "sharp" : "flat"} sign in front of the note, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave (no ledger lines)"}. Any octave that fits is correct.`,
       `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef. Put the ${alter === 1 ? "sharp" : "flat"} sign in front of the note. Any ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} that fits is correct.`,
     ),
     answer,
