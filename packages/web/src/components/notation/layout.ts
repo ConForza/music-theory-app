@@ -83,8 +83,18 @@ export interface StaveLayout {
   events: LaidEvent[];
   /** Positions of the left edge of each bar's content (for overlays such as bar-line pickers). */
   barX: number[];
-  /** Width of each bar from its left edge to the ink of its bar-line's first mark (so staves of a score can share bar-lines). */
-  barWidths: number[];
+  /** Each bar's boundary: how wide the bar is, and how much room its bar-line takes (so the staves of a score can share boundaries). */
+  boundaries: BarBoundary[];
+}
+
+/** One bar's boundary, in staff spaces. */
+export interface BarBoundary {
+  /** From the bar's left edge to the ink of its bar-line's first mark. */
+  width: number;
+  /** From that first mark to the bar-line's anchor (its main stroke): see BARLINE_LEAD. */
+  lead: number;
+  /** From the anchor to the left edge of the next bar: see BARLINE_TRAIL. */
+  trail: number;
 }
 
 /** Least clear space, in staff spaces, between the rightmost ink of a bar (notehead, flag, dot or rest) and the first mark of its bar-line. */
@@ -96,7 +106,15 @@ export const BARLINE_CLEARANCE = 0.8;
  * the music instead of being drawn back over the last note.
  */
 const THIN = ENGRAVING.thinBarline / 2;
-export const BARLINE_LEAD: Record<NonNullable<Measure["barline"]>, number> = { single: THIN, final: 0.6 + THIN, double: 0.5 + THIN, "repeat-end": 1.15, "repeat-start": ENGRAVING.thickBarline / 2 };
+/** Repeat dots (radius 0.25) sit Bravura's repeatBarlineDotSeparation (0.16) clear of the thin line, which is 0.6 from the thick one. */
+const DOT_R = 0.25;
+const REPEAT_DOT = 0.6 + THIN + 0.16 + DOT_R;
+export const BARLINE_LEAD: Record<NonNullable<Measure["barline"]>, number> = { single: THIN, final: 0.6 + THIN, double: 0.5 + THIN, "repeat-end": REPEAT_DOT + DOT_R, "repeat-start": ENGRAVING.thickBarline / 2 };
+/**
+ * From a bar-line's anchor to the start of the next bar: the bar-line's marks right of the anchor (the thick line of a final bar-line or end
+ * repeat, the thin line and dots of a start repeat) plus the usual 1.2 before the next bar's music.
+ */
+export const BARLINE_TRAIL: Record<NonNullable<Measure["barline"]>, number> = { single: 1.2, double: 1.2, final: 1.6, "repeat-end": 1.6, "repeat-start": REPEAT_DOT + DOT_R + 1.2 };
 
 const y = (pos: number) => -pos / 2;
 const ORDW = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
@@ -176,8 +194,11 @@ export interface LayoutOptions {
   prefix?: number;
   /** Width of the bars when there are none (empty stave for editors). */
   minWidth?: number;
-  /** Least width of each bar, to its bar-line (used by scores so every stave puts each bar-line in the same place). */
-  barWidths?: number[];
+  /**
+   * The boundaries the whole system has agreed on (the widest of every stave's), so each stave puts each bar-line's main stroke, and the
+   * start of the next bar, in the same place even when the staves' bar-lines differ (a double above a single).
+   */
+  system?: BarBoundary[];
 }
 
 /** Lay out one stave. */
@@ -232,7 +253,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
   const slots = opts.slots ?? collectSlots(f);
   const barCap = f.timeSignature ? music.barCapacity(music.parseTimeSignature(f.timeSignature)) : undefined;
   const barX: number[] = [];
-  const barWidths: number[] = [];
+  const boundaries: BarBoundary[] = [];
   /** Outer (right) edge of the last bar's bar-line, when that bar-line closes the stave. */
   let closedAt: number | null = null;
   let noteCounter = 0;
@@ -252,6 +273,8 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     // Where the slots end; the bar-line goes here unless the drawn music reaches further (see after the voices).
     const slotEnd = Math.max(sx, x + (opts.minWidth ?? 0)) + 0.4;
     let inkRight = x;
+    // Whole-bar rests are centred once the bar's boundary is known (it may be widened for another stave).
+    const wholeRests: Array<{ ev: LaidEvent; w: number }> = [];
     const ink = (right: number) => {
       inkRight = Math.max(inkRight, right);
     };
@@ -300,6 +323,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
           ev.x = rx;
           ev.glyphs.push({ x: rx, y: y(restPos), ch: rg.ch, cls: "n-glyph" });
           ink(rx + INK_WIDTH.rest[whole && e.duration.value !== "breve" ? "semibreve" : e.duration.value]);
+          if (whole) wholeRests.push({ ev, w: INK_WIDTH.rest[e.duration.value === "breve" ? "breve" : "semibreve"] });
           for (let d = 0; d < (e.duration.dots ?? 0); d++) {
             ev.glyphs.push({ x: rx + 1.5 + d * 0.5, y: y(5), ch: G.dot, cls: "n-glyph" });
             ink(rx + 1.5 + d * 0.5 + WIDTH.dot);
@@ -549,31 +573,40 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     // Bar-line: after the slots, and never closer to the music than the clearance. Marks drawn left of the anchor (the thin line of a
     // final or double bar-line, the dots of an end repeat) take their room here too, instead of overlapping the last note or rest.
     const bl = m.barline ?? (bi === f.measures.length - 1 && f.measures.length > 1 ? "final" : "single");
+    // A one-bar fragment with no bar-line given ends open (as in the stave editors): nothing is drawn, so the music needs no clearance.
+    const drawn = bl !== "single" || m.barline === "single" || f.measures.length > 1;
+    const sys = opts.system?.[bi];
     // (slotEnd − THIN keeps a single bar-line exactly where the slots put it whenever the music already clears it.)
-    const barlineStart = Math.max(slotEnd - THIN, inkRight + BARLINE_CLEARANCE, x + (opts.barWidths?.[bi] ?? 0));
-    barWidths.push(barlineStart - x);
-    x = barlineStart + BARLINE_LEAD[bl];
+    const barlineStart = Math.max(slotEnd - THIN, drawn ? inkRight + BARLINE_CLEARANCE : -Infinity, x + (sys?.width ?? 0));
+    boundaries.push({ width: barlineStart - x, lead: BARLINE_LEAD[bl], trail: BARLINE_TRAIL[bl] });
+    for (const { ev, w } of wholeRests) {
+      const d = (x + barlineStart) / 2 - w / 2 - ev.x;
+      ev.x += d;
+      for (const g of ev.glyphs) g.x += d;
+      for (const t of ev.texts) t.x += d;
+    }
+    // The anchor (main stroke) and the next bar's start follow the system's widest bar-line, so the staves of a score stay aligned.
+    const ax = barlineStart + Math.max(BARLINE_LEAD[bl], sys?.lead ?? 0);
     const y1 = rhythm ? y(6) : y(8);
     const y2 = rhythm ? y(2) : y(0);
+    const dots = (cx: number) => `M${cx},${y(5)} m-0.25,0 a0.25,0.25 0 1,0 0.5,0 a0.25,0.25 0 1,0 -0.5,0 M${cx},${y(3)} m-0.25,0 a0.25,0.25 0 1,0 0.5,0 a0.25,0.25 0 1,0 -0.5,0`;
     if (bl === "final" || bl === "repeat-end") {
-      if (bl === "repeat-end") {
-        fixed.paths.push({ d: `M${x - 0.9},${y(5)} m-0.25,0 a0.25,0.25 0 1,0 0.5,0 a0.25,0.25 0 1,0 -0.5,0 M${x - 0.9},${y(3)} m-0.25,0 a0.25,0.25 0 1,0 0.5,0 a0.25,0.25 0 1,0 -0.5,0`, fill: true, cls: "n-beam" });
-      }
-      fixed.lines.push({ x1: x - 0.6, x2: x - 0.6, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
-      fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thickBarline, cls: "n-line" });
-      if (bi === f.measures.length - 1) closedAt = x + ENGRAVING.thickBarline / 2;
-      x += 0.4;
+      if (bl === "repeat-end") fixed.paths.push({ d: dots(ax - REPEAT_DOT), fill: true, cls: "n-beam" });
+      fixed.lines.push({ x1: ax - 0.6, x2: ax - 0.6, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
+      fixed.lines.push({ x1: ax, x2: ax, y1, y2, w: ENGRAVING.thickBarline, cls: "n-line" });
+      if (bi === f.measures.length - 1) closedAt = ax + ENGRAVING.thickBarline / 2;
     } else if (bl === "double") {
-      fixed.lines.push({ x1: x - 0.5, x2: x - 0.5, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
-      fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
-      if (bi === f.measures.length - 1) closedAt = x + ENGRAVING.thinBarline / 2;
+      fixed.lines.push({ x1: ax - 0.5, x2: ax - 0.5, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
+      fixed.lines.push({ x1: ax, x2: ax, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
+      if (bi === f.measures.length - 1) closedAt = ax + ENGRAVING.thinBarline / 2;
     } else if (bl === "repeat-start") {
-      fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thickBarline, cls: "n-line" });
-      fixed.lines.push({ x1: x + 0.6, x2: x + 0.6, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
-    } else if (f.measures.length > 1 || bi < f.measures.length - 1) {
-      fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
+      fixed.lines.push({ x1: ax, x2: ax, y1, y2, w: ENGRAVING.thickBarline, cls: "n-line" });
+      fixed.lines.push({ x1: ax + 0.6, x2: ax + 0.6, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
+      fixed.paths.push({ d: dots(ax + REPEAT_DOT), fill: true, cls: "n-beam" });
+    } else if (drawn) {
+      fixed.lines.push({ x1: ax, x2: ax, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
     }
-    x += 1.2;
+    x = ax + Math.max(BARLINE_TRAIL[bl], sys?.trail ?? 0);
   });
 
   // A tempo word (e.g. "Andante") is printed above the first bar, where a real score puts it.
@@ -594,7 +627,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     top = Math.min(top, -6.5);
     bottom = Math.max(bottom, 1.5);
   }
-  return { width, staffEnd, top: top - 0.8, bottom: bottom + 0.8, lines, fixed, events, barX, barWidths };
+  return { width, staffEnd, top: top - 0.8, bottom: bottom + 0.8, lines, fixed, events, barX, boundaries };
 }
 
 export interface ScoreLayout {
@@ -622,22 +655,29 @@ export function isGrandStaff(score: NotationScore): boolean {
 export function layoutScore(score: NotationScore): ScoreLayout {
   const slots = mergeSlots(score.staves.map((s) => collectSlots(s.music)));
   const prefix = Math.max(...score.staves.map((s) => prefixWidth(s.music)));
-  // Each stave may need a wider bar (a flag or rest at its end); a second pass gives every stave the widest, so bar-lines line up.
-  const first = score.staves.map((s) => layoutFragment(s.music, { slots, prefix: prefix + 3.5 }).barWidths);
-  const barWidths = Array.from({ length: Math.max(...first.map((w) => w.length)) }, (_, bi) => Math.max(...first.map((w) => w[bi] ?? 0)));
+  // Each stave may need a wider bar (a flag or rest at its end) or a wider bar-line (a double above a single); a second pass gives every
+  // stave the widest of each, so every bar-line's main stroke and every bar's music line up across the system.
+  const first = score.staves.map((s) => layoutFragment(s.music, { slots, prefix: prefix + 3.5 }).boundaries);
+  const widest = (bi: number, k: keyof BarBoundary) => Math.max(...first.map((b) => b[bi]?.[k] ?? 0));
+  const system = Array.from({ length: Math.max(...first.map((b) => b.length)) }, (_, bi) => ({ width: widest(bi, "width"), lead: widest(bi, "lead"), trail: widest(bi, "trail") }));
   let offset = 0;
   const staves = score.staves.map((s) => {
-    const layout = layoutFragment(s.music, { slots, prefix: prefix + 3.5, barWidths });
+    const layout = layoutFragment(s.music, { slots, prefix: prefix + 3.5, system });
     const top = offset - layout.top;
     offset = top + layout.bottom + 1.5;
     return { id: s.id, label: s.label, offset: top, layout };
   });
-  // Piano music: each bar-line runs on from the bottom line of the upper stave to the top line of the lower one.
+  // Piano music: each bar-line runs on from the bottom line of the upper stave to the top line of the lower one. Only strokes that both
+  // staves draw (same place, same weight) are joined, so a double bar-line above a single one joins at the single line alone.
   const grand = isGrandStaff(score);
   const connectors: Line[] = [];
   if (grand) {
     const [upper, lower] = staves;
-    for (const ln of upper!.layout.fixed.lines.filter((l) => l.x1 === l.x2)) connectors.push({ ...ln, y1: upper!.offset, y2: lower!.offset - 4 });
+    const strokes = (l: StaveLayout) => l.fixed.lines.filter((ln) => ln.x1 === ln.x2);
+    const below = strokes(lower!.layout);
+    for (const ln of strokes(upper!.layout)) {
+      if (below.some((b) => Math.abs(b.x1 - ln.x1) < 1e-9 && b.w === ln.w)) connectors.push({ ...ln, y1: upper!.offset, y2: lower!.offset - 4 });
+    }
   }
   return { width: Math.max(...staves.map((s) => s.layout.width)), staves, height: offset, grand, connectors };
 }

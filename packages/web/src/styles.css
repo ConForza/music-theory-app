@@ -439,7 +439,12 @@ g[role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset
 .bar-meter.is-full { border-color: var(--good); background: var(--good-soft); color: var(--good); }
 .bar-meter.is-over { border-color: var(--danger); color: var(--danger); }
 .bar-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.5rem; }
+/*
+ * A palette column holds the widest symbol it can show, a semiquaver with two dots (0.8em of ink at the symbol's 2.6rem, so 2.1rem; 2.2rem
+ * with room to spare), plus the card's side padding and borders. At normal text size that is under 72px; with enlarged text the columns
+ * grow (and wrap into fewer) instead of letting the dots run past the card's edge.
+ */
+.palette { --palette-col: max(72px, calc(2.2rem + 0.6rem + 6px)); display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--palette-col), 1fr)); gap: 0.5rem; }
 .palette-btn { overflow: visible; min-width: 0; appearance: none; font: inherit; display: grid; justify-items: center; gap: 0.1rem; min-height: 76px; padding: 0.4rem 0.3rem; border-radius: 14px; border: 2px solid var(--line-strong); background: var(--surface); color: var(--ink); box-shadow: 0 3px 0 var(--line-strong); cursor: pointer; }
 .palette-btn:active { transform: translateY(2px); }
 .palette-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }

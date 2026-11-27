@@ -6,6 +6,8 @@
 import { describe, expect, it } from "vitest";
 import type { NotationScore } from "@mtp/curriculum";
 import { isGrandStaff, layoutScore, systemStart } from "../components/notation/layout.ts";
+import { ENGRAVING } from "../components/notation/glyphs.ts";
+import { braceWidthPerSpace } from "./notation-ink.ts";
 
 const N = (pitch: string, value = "minim") => ({ kind: "note", pitch, duration: { value, dots: 0 } });
 const music = (clef: string, a: string, b: string) => ({ clef, timeSignature: "2/4", textAlternative: "x", measures: [{ events: [N(a)] }, { events: [N(b)] }] });
@@ -65,7 +67,8 @@ describe("the start of the system", () => {
       // the stave lines start at the opening line
       expect(start.line.x1).toBe(0.2);
       expect(start.groupRight).toBeLessThan(start.line.x1 - start.line.w / 2 - 0.3);
-      if (start.brace) expect(start.brace.x + (0.328 / 4) * start.brace.size).toBeCloseTo(start.groupRight, 9);
+      // the brace's ink (its width from the font's metadata) ends a clear gap before the opening line's ink
+      if (start.brace) expect(start.line.x1 - start.line.w / 2 - (start.brace.x + braceWidthPerSpace * start.brace.size)).toBeGreaterThanOrEqual(0.3);
       if (start.bracket) {
         // the bracket's vertical stroke ends at groupRight; its hooks reach right only above the top stave and below the bottom one
         const nums = [...start.bracket.d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])] as const);
@@ -78,4 +81,42 @@ describe("the start of the system", () => {
       expect(start.left).toBeLessThan(start.brace ? start.brace.x : start.groupRight - start.bracket!.w);
     });
   }
+});
+
+describe("staves whose bar-lines differ (a double above a single, an end repeat above a single)", () => {
+  const bars = (clef: string, pitch: string, lines: Array<string | undefined>) => ({
+    clef, timeSignature: "2/4", textAlternative: "x",
+    measures: lines.map((barline, i) => ({ events: [N(pitch, "crotchet"), N(pitch, i === 1 ? "quaver" : "crotchet"), ...(i === 1 ? [N(pitch, "quaver")] : [])], ...(barline ? { barline } : {}) })),
+  });
+  const mixed = {
+    textAlternative: "x",
+    staves: [
+      { id: "u", label: "Upper", music: bars("treble", "B4", ["double", "repeat-end", undefined]) },
+      { id: "l", label: "Lower", music: bars("bass", "D3", ["single", "single", undefined]) },
+    ],
+  } as unknown as NotationScore;
+  const sl = layoutScore(mixed);
+  const [upper, lower] = sl.staves.map((s) => s.layout);
+
+  it("keep every bar's simultaneous notes, and every bar's start, in line", () => {
+    expect(lower!.barX).toEqual(upper!.barX);
+    for (const ev of upper!.events) {
+      const other = lower!.events.find((e) => e.bar === ev.bar && e.index === ev.index)!;
+      expect(other.x, `bar ${ev.bar + 1}, note ${ev.index + 1}`).toBeCloseTo(ev.x, 9);
+    }
+  });
+  it("put each bar-line's main stroke in the same place on both staves", () => {
+    const main = (l: typeof upper, bar: number) => Math.max(...l!.fixed.lines.filter((ln) => ln.x1 === ln.x2 && ln.x1 > l!.barX[bar]! && ln.x1 < (l!.barX[bar + 1] ?? Infinity)).map((ln) => ln.x1));
+    for (const bar of [0, 1, 2]) expect(main(lower, bar)).toBeCloseTo(main(upper, bar), 9);
+  });
+  it("join only the strokes both staves draw", () => {
+    // after bar 1 the double's right line meets the single; after bar 2 the end repeat's thick line does not match the thin single, so it
+    // is not joined; the final bar-lines match stroke for stroke
+    const joined = sl.connectors.map((c) => c.w);
+    expect(joined).toEqual([ENGRAVING.thinBarline, ENGRAVING.thinBarline, ENGRAVING.thickBarline]);
+    for (const c of sl.connectors) {
+      expect(upper!.fixed.lines.some((ln) => ln.x1 === c.x1 && ln.w === c.w)).toBe(true);
+      expect(lower!.fixed.lines.some((ln) => Math.abs(ln.x1 - c.x1) < 1e-9 && ln.w === c.w)).toBe(true);
+    }
+  });
 });

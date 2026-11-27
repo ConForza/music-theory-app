@@ -6,31 +6,9 @@
 import { describe, expect, it } from "vitest";
 import type { NotationFragment } from "@mtp/curriculum";
 import { BARLINE_CLEARANCE, layoutFragment, layoutScore, type StaveLayout } from "../components/notation/layout.ts";
-import { ENGRAVING, G, INK_WIDTH, WIDTH } from "../components/notation/glyphs.ts";
+import { ENGRAVING } from "../components/notation/glyphs.ts";
 import { rhythmFragment } from "../components/exercise/RhythmEditors.tsx";
-
-// Ink width of every glyph that can end a bar, looked up by character (the test measures what is drawn, not how layout reasons about it).
-const INK = new Map<string, number>([
-  [G.noteheadBlack, WIDTH.noteheadBlack], [G.noteheadHalf, WIDTH.noteheadBlack], [G.noteheadWhole, WIDTH.noteheadWhole], [G.dot, WIDTH.dot],
-  [G.flag8thUp, INK_WIDTH.flagUp.quaver!], [G.flag16thUp, INK_WIDTH.flagUp.semiquaver!], [G.flag32ndUp, INK_WIDTH.flagUp.demisemiquaver!],
-  [G.flag8thDown, INK_WIDTH.flagDown.quaver!], [G.flag16thDown, INK_WIDTH.flagDown.semiquaver!], [G.flag32ndDown, INK_WIDTH.flagDown.demisemiquaver!],
-  [G.restWhole, INK_WIDTH.rest.semibreve], [G.restHalf, INK_WIDTH.rest.minim], [G.restQuarter, INK_WIDTH.rest.crotchet],
-  [G.rest8th, INK_WIDTH.rest.quaver], [G.rest16th, INK_WIDTH.rest.semiquaver], [G.rest32nd, INK_WIDTH.rest.demisemiquaver],
-]);
-
-/** Rightmost ink of a bar's events, and the left edge of the first bar-line mark after that bar. */
-function gapBeforeBarline(l: StaveLayout, bar: number): number {
-  const evs = l.events.filter((e) => e.bar === bar);
-  const right = Math.max(...evs.flatMap((e) => [...e.glyphs.map((g) => g.x + (INK.get(g.ch) ?? 0)), ...e.lines.map((ln) => Math.max(ln.x1, ln.x2) + ln.w / 2)]));
-  const start = l.barX[bar]!;
-  const end = l.barX[bar + 1] ?? Infinity;
-  const marks = [
-    ...l.fixed.lines.filter((ln) => ln.x1 === ln.x2 && ln.x1 > start && ln.x1 < end).map((ln) => ln.x1 - ln.w / 2),
-    // the dots of an end repeat: "M<x>,<y> m-0.25,0 …" (radius 0.25)
-    ...l.fixed.paths.flatMap((p) => [...p.d.matchAll(/M(-?[\d.]+),[^m]*m-0\.25/g)].map((m) => Number(m[1]) - 0.25)).filter((x) => x > start && x < end),
-  ];
-  return Math.min(...marks) - right;
-}
+import { barlineMarks, gapBeforeBarline, INK } from "./notation-ink.ts";
 
 const n = (value: string, beam?: string, dots = 0) => ({ kind: "note", duration: { value, dots }, ...(beam ? { beam } : {}) });
 const r = (value: string, dots = 0) => ({ kind: "rest", duration: { value, dots } });
@@ -70,8 +48,8 @@ describe("space before the bar-line", () => {
 
   it("leaves bars whose music already clears the bar-line exactly as wide as before", () => {
     const l = layoutFragment({ presentation: "stave", clef: "treble", timeSignature: "2/4", textAlternative: "x", measures: [{ events: [{ kind: "note", pitch: "B4", duration: { value: "crotchet", dots: 0 } }, { kind: "note", pitch: "B4", duration: { value: "crotchet", dots: 0 } }] }] } as unknown as NotationFragment);
-    // two crotchet slots (3.4 each) and the 0.4 lead-out
-    expect(l.barWidths[0]! + 0.08).toBeCloseTo(7.2, 6); // the single bar-line line stays centred on the slots' end
+    // two crotchet slots (3.4 each) and the 0.4 lead-out; the single bar-line's stroke stays centred on the slots' end
+    expect(l.boundaries[0]!.width + ENGRAVING.thinBarline / 2).toBeCloseTo(7.2, 6);
   });
 
   it("the staves of a score keep their bar-lines aligned when only one stave ends a bar with a flag", () => {
@@ -125,5 +103,71 @@ describe("stave lines at the end of the music", () => {
     const l = layoutFragment(twoBars());
     const thick = l.fixed.lines.find((ln) => ln.w === ENGRAVING.thickBarline)!;
     expect(l.staffEnd).toBeCloseTo(thick.x1 + ENGRAVING.thickBarline / 2, 9);
+  });
+});
+
+const stave = (measures: unknown[], clef = "treble") => ({ presentation: "stave", clef, timeSignature: "2/4", textAlternative: "x", measures }) as unknown as NotationFragment;
+const P = (pitch: string, value: string, dots = 0) => ({ kind: "note", pitch, duration: { value, dots } });
+
+describe("open fragments (one bar, no bar-line given)", () => {
+  it("draw no bar-line and are not widened for one", () => {
+    // a flagged quaver and a quaver rest take the same slot; with nothing drawn after them, the flag must not widen the fragment
+    // (G4 takes an up-stem, whose flag reaches furthest right)
+    const flag = layoutFragment(stave([{ events: [P("G4", "quaver")] }]));
+    const rest = layoutFragment(stave([{ events: [{ kind: "rest", duration: { value: "quaver", dots: 0 } }] }]));
+    expect(flag.fixed.lines.filter((ln) => ln.x1 === ln.x2)).toEqual([]);
+    expect(flag.width).toBeCloseTo(rest.width, 9);
+  });
+  it("still clear an explicit single bar-line (and draw it)", () => {
+    const l = layoutFragment(stave([{ events: [P("G4", "quaver")], barline: "single" }]));
+    expect(barlineMarks(l, 0)).toHaveLength(1);
+    expect(gapBeforeBarline(l, 0)).toBeGreaterThanOrEqual(BARLINE_CLEARANCE - 1e-9);
+  });
+});
+
+describe("repeat bar-lines", () => {
+  it("an end repeat's dots sit 0.16 staff spaces clear of its thin line", () => {
+    const l = layoutFragment(stave([{ events: [P("B4", "minim")], barline: "repeat-end" }, { events: [P("B4", "minim")] }]));
+    const thin = l.fixed.lines.find((ln) => ln.w === ENGRAVING.thinBarline)!;
+    const dots = l.fixed.paths.flatMap((p) => [...p.d.matchAll(/M(-?[\d.]+),[^m]*m-0\.25/g)].map((m) => Number(m[1])));
+    expect(dots).toHaveLength(2);
+    for (const cx of dots) expect(thin.x1 - thin.w / 2 - (cx + 0.25)).toBeCloseTo(0.16, 9);
+  });
+  it("a start repeat draws its dots to the right of its thin line, clear of the next bar's music and accidentals", () => {
+    const l = layoutFragment(stave([{ events: [P("B4", "minim")], barline: "repeat-start" }, { events: [P("F#5", "minim")] }]));
+    const thin = l.fixed.lines.find((ln) => ln.w === ENGRAVING.thinBarline && ln.x1 < l.barX[1]!)!;
+    const dots = l.fixed.paths.flatMap((p) => [...p.d.matchAll(/M(-?[\d.]+),[^m]*m-0\.25/g)].map((m) => Number(m[1])));
+    expect(dots).toHaveLength(2);
+    // Bravura's repeatBarlineDotSeparation: 0.16 staff spaces between the thin line and the dots
+    for (const cx of dots) expect(cx - 0.25 - (thin.x1 + thin.w / 2)).toBeCloseTo(0.16, 9);
+    // the next bar's first ink (here the sharp in front of its note) starts after the dots
+    const next = l.events.find((e) => e.bar === 1)!;
+    const firstInk = Math.min(...next.glyphs.map((g) => g.x));
+    expect(firstInk).toBeGreaterThan(Math.max(...dots) + 0.25);
+  });
+});
+
+describe("whole-bar rests", () => {
+  it("are centred between the bar's start and its bar-line, as finally resolved in a score", () => {
+    const rest = { events: [{ kind: "rest", duration: { value: "minim", dots: 0 }, wholeBar: true }] };
+    const control = layoutScore({ textAlternative: "x", staves: [
+      { id: "a", label: "Upper", music: stave([rest, { events: [P("B4", "minim")] }]) },
+      { id: "b", label: "Lower", music: stave([{ events: [P("C3", "crotchet"), P("D3", "crotchet")] }, { events: [P("G2", "minim")] }], "bass") },
+    ] } as never);
+    // the lower stave's last note is a flagged quaver this time: the shared bar-line moves right, and the rest must follow to stay centred
+    const wide = layoutScore({ textAlternative: "x", staves: [
+      { id: "a", label: "Upper", music: stave([rest, { events: [P("B4", "minim")] }]) },
+      { id: "b", label: "Lower", music: stave([{ events: [P("C3", "crotchet"), P("D3", "quaver"), P("B2", "quaver")] }, { events: [P("G2", "minim")] }], "bass") },
+    ] } as never);
+    const centre = (sl: ReturnType<typeof layoutScore>) => {
+      const l = sl.staves[0]!.layout;
+      const g = l.events.find((e) => e.bar === 0 && e.rest)!.glyphs[0]!;
+      return { rest: g.x + INK.get(g.ch)! / 2, bar: (l.barX[0]! + Math.min(...barlineMarks(l, 0))) / 2 };
+    };
+    expect(Math.min(...barlineMarks(wide.staves[0]!.layout, 0))).toBeGreaterThan(Math.min(...barlineMarks(control.staves[0]!.layout, 0)) + 0.5);
+    for (const sl of [control, wide]) {
+      const c = centre(sl);
+      expect(c.rest).toBeCloseTo(c.bar, 6);
+    }
   });
 });

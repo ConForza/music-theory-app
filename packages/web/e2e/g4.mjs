@@ -11,6 +11,7 @@ import assert from "node:assert/strict";
 import { chromium, devices } from "playwright";
 import { answerOnScreen, axe, completeEarlier, finishViaApi, get, guest, noOverflow, playLessonInBrowser, playNodeInBrowser, playReviewInBrowser, post, selectGrade, serve, shot } from "./g4lib.mjs";
 import { canonicalResponse, generateItem, inputFor } from "@mtp/engine";
+import { checkEveryPaletteSymbol } from "./palette.mjs";
 import { effectiveScope } from "@mtp/curriculum";
 
 const S = await serve({ waive: false });
@@ -536,6 +537,28 @@ await test("tuplet accessibility: duplet notes are named duplets (Grade 4) and t
   const tin = tnames.filter((n) => /in a (duplet|triplet|tuplet) group/.test(n));
   assert.ok(tin.length >= 3 && tin.every((n) => /in a triplet group/.test(n)), `triplet notes are announced as triplets: ${JSON.stringify(tnames)}`);
   await g2.ctx.close();
+});
+
+await test("bar-builder palette with double dots: every note and rest symbol sits inside its card (430px at 200% text, phone, desktop)", async () => {
+  // the first bar builder in G4-U1-L02 that offers double dots (its third question)
+  const lesson = "G4-U1-L02";
+  const items = S.course.authoredItems(lesson);
+  const inputOf = (it) => inputFor(S.course.ix, it, S.course.scopeFor(lesson, it));
+  const k = items.findIndex((it) => inputOf(it).kind === "rhythm-builder" && inputOf(it).maxDots === 2);
+  assert.ok(k >= 0, "the lesson has a bar builder with double dots");
+  const input = inputOf(items[k]);
+  const big = () => document.addEventListener("DOMContentLoaded", () => (document.documentElement.style.fontSize = "200%"));
+  for (const [profile, init] of [[{ viewport: { width: 430, height: 932 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }, big], [profiles.iphone, null], [profiles.desktop, null]]) {
+    const { ctx, page, userId } = await grade4Learner(profile, {}, init);
+    await finishViaApi(S, page, userId, predecessor(lesson).id);
+    await playLessonInBrowser(page, S, lesson, { stopAfter: k });
+    await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+    await page.locator(".palette-btn").first().waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    await checkEveryPaletteSymbol(page, assert, input);
+    await noOverflow(page, "bar builder with double dots");
+    await ctx.close();
+  }
 });
 
 await browser.close();
