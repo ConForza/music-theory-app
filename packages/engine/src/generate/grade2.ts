@@ -12,7 +12,7 @@
  * rests, triplets). The engine's own gates (checkItem, solvability) run on every draft in addition.
  */
 import { deriveScale, music, type Measure, type NotationEvent } from "@mtp/curriculum";
-import { GENERATORS, frag, maxLedger, melodyIn, n, nameOf, note, pretty, r, rhythmLine, valueWord, type Gen } from "./families.ts";
+import { GENERATORS, frag, maxLedger, melodyIn, n, nameOf, note, pretty, r, reworded, rhythmLine, valueWord, type Gen } from "./families.ts";
 import { barJudge as barJudgeG1, codes, geom, keyWord, keysIn, noteId, noteLabel, spelledOptions, type Diagnoses } from "./grade1.ts";
 
 type Pitch = music.Pitch;
@@ -192,22 +192,8 @@ export const tripletFacts: Gen = (c) => {
  */
 const word = (e: NotationEvent): string => (e.kind === "tuplet" ? `a triplet (${e.events.map(word).join(", ")})` : valueWord(e));
 export const describeBars = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(word).join(", ")}.`).join(" ");
-export const describeBeamed = (ms: Measure[]) =>
-  ms
-    .map((m, i) => {
-      const parts: string[] = [];
-      let group: string[] | null = null;
-      for (const e of m.events ?? []) {
-        const beam = e.kind === "tuplet" ? undefined : (e as { beam?: string }).beam;
-        if (beam === "begin") group = [word(e)];
-        else if (group && (beam === "continue" || beam === "end")) {
-          group.push(word(e));
-          if (beam === "end") { parts.push(`${group.length} beamed together (${group.join(", ")})`); group = null; }
-        } else parts.push(word(e));
-      }
-      return `Bar ${i + 1}: ${parts.join(", ")}.`;
-    })
-    .join(" ");
+/** For questions: beamed groups and triplets in natural words, each group closed so a listener can tell where it ends. */
+export const describeBeamed = (ms: Measure[]) => music.barsInWords(ms.map((m) => m.events ?? []), { beams: true });
 /** A rhythm line whose descriptions close each triplet group. */
 export const rl = (measures: Measure[], extra: Parameters<typeof rhythmLine>[1] = {}) => ({ ...rhythmLine(measures, extra), textAlternative: describeBars(measures), questionAlternative: describeBeamed(measures) });
 
@@ -639,7 +625,10 @@ export const scaleGap: Gen = (c) => {
     }
     const name = form === "major" ? `scale of ${keyWord(keyText)}` : `${noteLabel(key.tonic)} harmonic minor scale`;
     return {
-      prompt: `This is the ${name}, going up. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      ...reworded(
+        `This is the ${name}, going up, with one note replaced by a rest. Which note is missing?`,
+        `This is the ${name}, going up. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      ),
       music: frag(clef, [{ events: notes.map((p, i) => (i === gap ? r("semibreve") : note(p))) }], `A ${clef}-clef stave with eight semibreves going up a scale of ${keyText}${form === "harmonic" ? " (harmonic minor)" : ""}, with one note replaced by a rest. The other notes are ${notes.filter((_, i) => i !== gap).map(nameOf).join(", ")}.`, { showKeySignature: false }),
       answer: { kind: "choice", options, correctOptionIds: [noteId(missing)], diagnoses: dg },
       hints: [form === "major" ? "Major scale pattern: tone, tone, semitone, tone, tone, tone, semitone." : "Harmonic minor: the notes of the key signature, with the 7th raised by a semitone.", "A scale uses each letter name once, in order."],

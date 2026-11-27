@@ -365,7 +365,7 @@ describe("Unit 2: double accidentals, enharmonics, clefs", () => {
       expect(a.clef).not.toBe(from);
       expect(a.accepted).toEqual([music.formatPitch(shown)]);
       expect(music.ledgerLines(a.clef, P(a.accepted[0]!))).toBeLessThanOrEqual(2);
-      expect(i.prompt).toMatch(/exactly the same/);
+      expect(i.prompt).toMatch(/at the same pitch/);
     }
     for (const i of items("G4-U2-L04", "t.g4.clef-position", 200)) {
       const from = i.music!.clef as music.Clef;

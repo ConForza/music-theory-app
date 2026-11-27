@@ -378,7 +378,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This is the E harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the E harmonic minor scale, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -505,7 +505,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the E harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g2-u4-l04.guided-3",
@@ -513,7 +514,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write the D harmonic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the D harmonic minor scale, descending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -553,7 +554,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the D harmonic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     }
   ],
   "independent": [
@@ -563,7 +565,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the D harmonic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the D harmonic minor scale, ascending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -603,7 +605,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the D harmonic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g2-u4-l04.ind-2",
@@ -611,7 +614,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the D harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the D harmonic minor scale, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -726,7 +729,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the D harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g2-u4-l04.ind-3",
@@ -796,7 +800,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the D harmonic minor scale, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the D harmonic minor scale, descending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -836,7 +840,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the D harmonic minor scale, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g2-u4-l04.ind-5",
@@ -844,7 +849,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the D harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the D harmonic minor scale, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -959,7 +964,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the D harmonic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g2-u4-l04.ind-6",

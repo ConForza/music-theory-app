@@ -297,7 +297,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "A note has been written with a double flat. Later in the same bar the same note must be plain again, with no sharp or flat at all. Which sign is written before it?",
+      "prompt": "A note has a double flat. Later in the same bar, that note must be plain, with no sharp or flat. Which sign is written before it?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -353,7 +353,8 @@
           "double-carried-over": "An accidental lasts only to the barline; then the key signature applies again."
         },
         "fallback": "Not quite. Go through the bar from the start, tracking each accidental."
-      }
+      },
+      "legacyPrompt": "A note has been written with a double flat. Later in the same bar the same note must be plain again, with no sharp or flat at all. Which sign is written before it?"
     }
   ],
   "independent": [
@@ -417,7 +418,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write B𝄪 in the bass clef. You may use up to 2 ledger lines. Any B𝄪 that fits is correct.",
+      "prompt": "Write B𝄪 in the bass clef, using up to 2 ledger lines. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
@@ -449,7 +450,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write B𝄪 in the bass clef. You may use up to 2 ledger lines. Any B𝄪 that fits is correct."
     },
     {
       "id": "i.g4-u2-l01.ind-3",
@@ -714,7 +716,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write G𝄫 in the treble clef. You may use up to 2 ledger lines. Any G𝄫 that fits is correct.",
+      "prompt": "Write G𝄫 in the treble clef, using up to 2 ledger lines. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "treble",
@@ -746,7 +748,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write G𝄫 in the treble clef. You may use up to 2 ledger lines. Any G𝄫 that fits is correct."
     }
   ],
   "recap": [

@@ -13,7 +13,7 @@
  *  - partly silent beats and a two-beat note starting mid-bar in 12/8 or 12/4 are never asked (as in Grade 3).
  */
 import { music, type Measure, type NotationEvent } from "@mtp/curriculum";
-import { n, r, randomBar, rhythmLine, type Gen } from "./families.ts";
+import { n, r, randomBar, reworded, rhythmLine, type Gen } from "./families.ts";
 import { codes } from "./grade1.ts";
 import { ORD, cap, diag, optsOf } from "./grade2.ts";
 
@@ -255,7 +255,10 @@ export const doubleDotBar: Gen = (c): any => {
   const missing = learnerPart.map((e) => (e.kind === "note" ? `${unit(e.duration.value, e.duration.dots ?? 0)}` : "")).join(", ");
   void missing;
   return {
-    prompt: `Complete this bar of ${ts} with one note. The bar already holds a double-dotted note, written first. Use a note, not a rest.`,
+    ...reworded(
+      `Complete this ${ts} bar with one note (not a rest) after the double-dotted note.`,
+      `Complete this bar of ${ts} with one note. The bar already holds a double-dotted note, written first. Use a note, not a rest.`,
+    ),
     answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given: shown, accepted: [[{ events: full }]], acceptAnyRuleCompliant: false },
     hints: [`Add up what is written (a ${unit(pickc.v, 2)} is longer than it looks), then work out what is left in the bar.`],
   };

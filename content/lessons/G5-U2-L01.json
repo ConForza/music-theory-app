@@ -271,7 +271,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write F in the tenor clef. You may use up to 2 ledger lines. Any F that fits is correct.",
+      "prompt": "Write F in the tenor clef, using up to 2 ledger lines. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "tenor",
@@ -303,7 +303,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write F in the tenor clef. You may use up to 2 ledger lines. Any F that fits is correct."
     }
   ],
   "independent": [
@@ -366,7 +367,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write D♭ in the tenor clef. You may use up to 2 ledger lines. Any D♭ that fits is correct.",
+      "prompt": "Write D♭ in the tenor clef, using up to 2 ledger lines. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "tenor",
@@ -397,7 +398,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write D♭ in the tenor clef. You may use up to 2 ledger lines. Any D♭ that fits is correct."
     },
     {
       "id": "i.g5-u2-l01.ind-3",
@@ -518,7 +520,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write A♯ in the tenor clef. You may use up to 2 ledger lines. Any A♯ that fits is correct.",
+      "prompt": "Write A♯ in the tenor clef, using up to 2 ledger lines. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "tenor",
@@ -550,7 +552,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write A♯ in the tenor clef. You may use up to 2 ledger lines. Any A♯ that fits is correct."
     },
     {
       "id": "i.g5-u2-l01.ind-6",

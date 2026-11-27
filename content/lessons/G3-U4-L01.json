@@ -453,7 +453,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This is the E melodic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the E melodic minor scale, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -581,7 +581,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the E melodic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g3-u4-l01.guided-3",
@@ -589,7 +590,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write the E melodic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the E melodic minor scale, descending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -629,7 +630,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the E melodic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     }
   ],
   "independent": [
@@ -779,7 +781,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the A melodic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the A melodic minor scale, descending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -819,7 +821,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the A melodic minor scale, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g3-u4-l01.ind-3",
@@ -827,7 +830,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the A melodic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the A melodic minor scale, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -954,7 +957,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the A melodic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g3-u4-l01.ind-4",
@@ -1016,7 +1020,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the E melodic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the E melodic minor scale, ascending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -1056,7 +1060,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the E melodic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g3-u4-l01.ind-6",
@@ -1064,7 +1069,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the E melodic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the E melodic minor scale, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -1192,7 +1197,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the E melodic minor scale, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     }
   ],
   "recap": [

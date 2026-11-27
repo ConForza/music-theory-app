@@ -177,7 +177,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The key signature shows 2 sharps (B minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.",
+      "prompt": "The key signature has 2 sharps (B minor) and applies to both notes. Name the interval from the lower note to the higher: quality and number.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -232,7 +232,8 @@
           "ignored-key-signature": "The key signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 2 sharps (B minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave."
     },
     {
       "id": "i.g5-u3-l07.guided-2",
@@ -240,7 +241,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The key signature shows 5 flats (B♭ minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.",
+      "prompt": "The key signature has 5 flats (B♭ minor) and applies to both notes. Name the interval from the lower note to the higher: quality and number.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -296,7 +297,8 @@
           "ignored-key-signature": "The key signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 5 flats (B♭ minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave."
     },
     {
       "id": "i.g5-u3-l07.guided-3",
@@ -304,7 +306,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The key signature shows 3 flats (C minor). Write the note that is a perfect 4th above the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one.",
+      "prompt": "The key signature has 3 flats (C minor). Write the note that is a perfect 4th above the note shown. The key signature applies, so add a sharp, flat or natural only where the note needs one.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -352,7 +354,8 @@
           "accidental-not-applied": "The note needs a sharp, flat or natural sign in front of it: check what the key signature gives that letter."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 3 flats (C minor). Write the note that is a perfect 4th above the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one."
     }
   ],
   "independent": [
@@ -362,7 +365,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The key signature shows 2 flats (G minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.",
+      "prompt": "The key signature has 2 flats (G minor) and applies to both notes. Name the interval from the lower note to the higher: quality and number.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -417,7 +420,8 @@
           "ignored-key-signature": "The key signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 2 flats (G minor). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave."
     },
     {
       "id": "i.g5-u3-l07.ind-2",
@@ -425,7 +429,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The key signature shows 1 flat (F major). Write the note that is a minor 3rd below the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one.",
+      "prompt": "The key signature has 1 flat (F major). Write the note that is a minor 3rd below the note shown. The key signature applies, so add a sharp, flat or natural only where the note needs one.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -473,7 +477,8 @@
           "accidental-not-applied": "The note needs a sharp, flat or natural sign in front of it: check what the key signature gives that letter."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 1 flat (F major). Write the note that is a minor 3rd below the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one."
     },
     {
       "id": "i.g5-u3-l07.ind-3",
@@ -481,7 +486,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The key signature shows 6 sharps (F♯ major). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.",
+      "prompt": "The key signature has 6 sharps (F♯ major) and applies to both notes. Name the interval from the lower note to the higher: quality and number.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -537,7 +542,8 @@
           "ignored-key-signature": "The key signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 6 sharps (F♯ major). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave."
     },
     {
       "id": "i.g5-u3-l07.ind-4",
@@ -545,7 +551,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The key signature shows 3 sharps (A major). Write the note that is an augmented 4th above the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one.",
+      "prompt": "The key signature has 3 sharps (A major). Write the note that is an augmented 4th above the note shown. The key signature applies, so add a sharp, flat or natural only where the note needs one.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -593,7 +599,8 @@
           "accidental-not-applied": "The note needs a sharp, flat or natural sign in front of it: check what the key signature gives that letter."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 3 sharps (A major). Write the note that is an augmented 4th above the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one."
     },
     {
       "id": "i.g5-u3-l07.ind-5",
@@ -601,7 +608,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The key signature shows 6 sharps (F♯ major). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.",
+      "prompt": "The key signature has 6 sharps (F♯ major) and applies to both notes. Name the interval from the lower note to the higher: quality and number.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -656,7 +663,8 @@
           "ignored-key-signature": "The key signature changes every note of its letters unless a sign in front of the note says otherwise: work out each note first."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 6 sharps (F♯ major). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave."
     },
     {
       "id": "i.g5-u3-l07.ind-6",
@@ -664,7 +672,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The key signature shows 1 flat (F major). Write the note that is a perfect 5th below the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one.",
+      "prompt": "The key signature has 1 flat (F major). Write the note that is a perfect 5th below the note shown. The key signature applies, so add a sharp, flat or natural only where the note needs one.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -712,7 +720,8 @@
           "accidental-not-applied": "The note needs a sharp, flat or natural sign in front of it: check what the key signature gives that letter."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "The key signature shows 1 flat (F major). Write the note that is a perfect 5th below the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one."
     }
   ],
   "recap": [

@@ -218,7 +218,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write D♯ in the bass clef. Put the sharp sign in front of the note. Any D♯ that fits is correct.",
+      "prompt": "Write D♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
@@ -250,7 +250,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write D♯ in the bass clef. Put the sharp sign in front of the note. Any D♯ that fits is correct."
     }
   ],
   "independent": [
@@ -314,7 +315,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write A♯ in the bass clef. Put the sharp sign in front of the note. Any A♯ that fits is correct.",
+      "prompt": "Write A♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
@@ -345,7 +346,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write A♯ in the bass clef. Put the sharp sign in front of the note. Any A♯ that fits is correct."
     },
     {
       "id": "i.g1-u4-l02.ind-3",
@@ -407,7 +409,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write F♯ in the bass clef. Put the sharp sign in front of the note. Any F♯ that fits is correct.",
+      "prompt": "Write F♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
@@ -438,7 +440,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write F♯ in the bass clef. Put the sharp sign in front of the note. Any F♯ that fits is correct."
     },
     {
       "id": "i.g1-u4-l02.ind-5",
@@ -500,7 +503,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write G♯ in the bass clef. Put the sharp sign in front of the note. Any G♯ that fits is correct.",
+      "prompt": "Write G♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
@@ -531,7 +534,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write G♯ in the bass clef. Put the sharp sign in front of the note. Any G♯ that fits is correct."
     }
   ],
   "recap": [

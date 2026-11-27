@@ -237,7 +237,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This note is written in the treble clef. Write the note that sounds exactly the same, in the alto clef. (Same pitch, not an octave higher or lower.)",
+      "prompt": "Write this treble-clef note at the same pitch in the alto clef (not an octave higher or lower).",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -288,7 +288,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "This note is written in the treble clef. Write the note that sounds exactly the same, in the alto clef. (Same pitch, not an octave higher or lower.)"
     },
     {
       "id": "i.g4-u2-l04.guided-3",
@@ -381,7 +382,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This note is written in the bass clef. Write the note that sounds exactly the same, in the alto clef. (Same pitch, not an octave higher or lower.)",
+      "prompt": "Write this bass-clef note at the same pitch in the alto clef (not an octave higher or lower).",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -432,7 +433,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "This note is written in the bass clef. Write the note that sounds exactly the same, in the alto clef. (Same pitch, not an octave higher or lower.)"
     },
     {
       "id": "i.g4-u2-l04.ind-2",
@@ -523,7 +525,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This note is written in the alto clef. Write the note that sounds exactly the same, in the treble clef. (Same pitch, not an octave higher or lower.)",
+      "prompt": "Write this alto-clef note at the same pitch in the treble clef (not an octave higher or lower).",
       "music": {
         "presentation": "stave",
         "clef": "alto",
@@ -574,7 +576,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "This note is written in the alto clef. Write the note that sounds exactly the same, in the treble clef. (Same pitch, not an octave higher or lower.)"
     },
     {
       "id": "i.g4-u2-l04.ind-4",
@@ -665,7 +668,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This note is written in the alto clef. Write the note that sounds exactly the same, in the bass clef. (Same pitch, not an octave higher or lower.)",
+      "prompt": "Write this alto-clef note at the same pitch in the bass clef (not an octave higher or lower).",
       "music": {
         "presentation": "stave",
         "clef": "alto",
@@ -716,7 +719,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "This note is written in the alto clef. Write the note that sounds exactly the same, in the bass clef. (Same pitch, not an octave higher or lower.)"
     },
     {
       "id": "i.g4-u2-l04.ind-6",

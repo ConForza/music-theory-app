@@ -23,7 +23,7 @@ import { ApiError } from "./errors.ts";
 import { gradeResponse, revealSolution, type Response } from "./grade.ts";
 import { exposeItem, learnerTime } from "./mastery-service.ts";
 import type { NodeRunService } from "./node-run.ts";
-import { questionKey, visibleKey } from "./question-key.ts";
+import { identityPrompt, questionKey, visibleKey } from "./question-key.ts";
 import {
   LEVEL_LABEL,
   examBlueprint,
@@ -188,7 +188,7 @@ export interface PlacementSummary {
 export function contentKey(item: ExerciseItem): string {
   const a = item.answer as { kind: string; options?: Array<{ id: string; label: string }>; correctOptionIds?: string[] };
   const correct = a.options && a.correctOptionIds ? a.options.filter((o) => a.correctOptionIds!.includes(o.id)).map((o) => o.label).sort() : a;
-  return `c:${JSON.stringify([item.prompt, item.music ?? null, (item as { score?: unknown }).score ?? null, correct])}`;
+  return `c:${JSON.stringify([identityPrompt(item), item.music ?? null, (item as { score?: unknown }).score ?? null, correct])}`;
 }
 
 const seedOf = (...parts: Array<string | number>) => (hashString(parts.join("|")) >>> 0) % 2 ** 31;

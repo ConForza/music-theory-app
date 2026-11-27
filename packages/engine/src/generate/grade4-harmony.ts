@@ -11,7 +11,7 @@
  * written pitches (`intervalBetween`), never from a table of degrees.
  */
 import { deriveScale, music, type Measure, type NotationEvent } from "@mtp/curriculum";
-import { fits, frag, maxLedger, nameOf, note, pretty, type Gen } from "./families.ts";
+import { fits, frag, maxLedger, nameOf, note, pretty, reworded, type Gen } from "./families.ts";
 import type { Diagnoses } from "./grade1.ts";
 import { ORD, cap, diag, optsOf, posText } from "./grade2.ts";
 
@@ -323,7 +323,10 @@ export const chordRoot: Gen = (c): any => {
   const pcsAll = triadPcs(keyText, roman);
   const score = toScore(keyText, ps, null, null, `A chord of ${ps.length} notes in ${keyText}, written on the treble and bass staves.`);
   return {
-    prompt: `This chord is made from the notes of one triad in ${kw(keyText)}. Answer both questions: is it in root position, and which note is its root?`,
+    ...reworded(
+      `This chord is made from the notes of one triad in ${kw(keyText)}. Is it in root position, and which note is its root?`,
+      `This chord is made from the notes of one triad in ${kw(keyText)}. Answer both questions: is it in root position, and which note is its root?`,
+    ),
     score,
     answer: {
       kind: "composite",

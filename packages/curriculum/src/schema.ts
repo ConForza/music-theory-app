@@ -1083,6 +1083,12 @@ export const ExerciseItem = z
     seed: z.number().int().nullable(),
     evidence: z.enum(["learning", "independent"]),
     prompt: NonEmpty,
+    /**
+     * The wording this question was first published with, kept only where the prompt has since been edited (the question-wording audit).
+     * Question identity (exposure, fresh-evidence credit, review boundaries) reads it in place of `prompt`, so an edit of wording cannot
+     * disturb stored mastery history. Never shown to a learner.
+     */
+    legacyPrompt: NonEmpty.optional(),
     music: NotationFragment.optional(),
     /** Multi-stave music (e.g. SATB or a short score) for score-observation items. */
     score: NotationScore.optional(),

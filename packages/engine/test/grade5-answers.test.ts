@@ -346,7 +346,7 @@ describe("Unit 3: transposing instruments", () => {
       expect(out.length).toBe(src.length);
       out.forEach((o, i) => { const want = move(src[i]!, sign * dl, sign * ds); expect(name(o) + o.oct, `${it.id} note ${i + 1}`).toBe(name(want) + want.oct); });
       // the prompt's direction and the derivation agree: concert -> written goes up, written -> concert goes down
-      expect(/concert pitch \(the pitch that sounds\)\. Write it as/.test(it.prompt) ? "up" : "down").toBe(a.derivation.direction);
+      expect(/^This melody is at concert pitch\. Transpose it up/.test(it.prompt) ? "up" : "down").toBe(a.derivation.direction);
       // the key signature moves by the interval: up a tone is +2 fifths, up a minor 3rd is -3 fifths, up a perfect 5th is +1
       const fifthsShift = ({ M2: 2, m3: -3, P5: 1 } as Record<string, number>)[a.derivation.interval]! * sign;
       expect([fifthsShift, fifthsShift - 12, fifthsShift + 12], `${it.id} ${it.music!.key} -> ${a.key}`).toContain(fifths(a.key) - fifths(it.music!.key!));

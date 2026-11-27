@@ -125,7 +125,7 @@
           }
         ],
         "textAlternative": "Two bars of 5/8. The first is grouped three then two; the second is grouped two then three.",
-        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 2 beamed together (quaver, quaver). Bar 2: 2 beamed together (quaver, quaver), 3 beamed together (quaver, quaver, quaver).",
+        "questionAlternative": "Bar 1: three quavers beamed together followed by two quavers beamed together. Bar 2: two quavers beamed together followed by three quavers beamed together.",
         "timeSignature": "5/8"
       },
       "caption": "The same five quavers: 3 + 2 in the first bar, 2 + 3 in the second."
@@ -200,7 +200,7 @@
           }
         ],
         "textAlternative": "Two bars of 5/4: a dotted minim then a minim (3 + 2), then three crotchets and a minim (3 + 2).",
-        "questionAlternative": "Bar 1: dotted minim, minim. Bar 2: crotchet, crotchet, crotchet, minim.",
+        "questionAlternative": "Bar 1: a dotted minim followed by a minim. Bar 2: three crotchets followed by a minim.",
         "timeSignature": "5/4"
       },
       "caption": "In 5/4 the groups are shown by note lengths: nothing crosses from beat 3 into beat 4."
@@ -291,7 +291,7 @@
         }
       ],
       "textAlternative": "A bar of 7/8: three quavers, then two, then two.",
-      "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver), 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver).",
+      "questionAlternative": "Bar 1: three quavers beamed together followed by two pairs of beamed quavers.",
       "timeSignature": "7/8"
     },
     "steps": [
@@ -434,7 +434,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, quaver, quaver, quaver, quaver, quaver. Bar 2: crotchet, semiquaver, semiquaver, quaver, quaver, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, 3 beamed together (quaver, quaver, quaver), 2 beamed together (quaver, quaver). Bar 2: crotchet, 4 beamed together (semiquaver, semiquaver, quaver, quaver), crotchet.",
+        "questionAlternative": "Bar 1: a crotchet, three quavers beamed together and two quavers beamed together. Bar 2: a crotchet, a beamed group (two semiquavers and two quavers) and a crotchet.",
         "timeSignature": "7/8"
       },
       "answer": {
@@ -609,7 +609,7 @@
           }
         ],
         "textAlternative": "Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, quaver, quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver.",
-        "questionAlternative": "Bar 1: 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver), 3 beamed together (quaver, quaver, quaver), 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver).",
+        "questionAlternative": "Bar 1: four semiquavers beamed together, three quavers beamed together and four semiquavers beamed together.",
         "timeSignature": "7/8"
       },
       "answer": {
@@ -752,7 +752,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Complete this bar of 5/4 with notes or rests so that it follows a grouping of 2 + 3. The bar already begins with a quaver, then a quaver, then a quaver, then a quaver. Three more beats are needed; no note may join two groups.",
+      "prompt": "Complete this 5/4 bar using notes or rests, following a 2 + 3 grouping. Three beats remain. Do not cross group boundaries.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -884,7 +884,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 5/4 with notes or rests so that it follows a grouping of 2 + 3. The bar already begins with a quaver, then a quaver, then a quaver, then a quaver. Three more beats are needed; no note may join two groups."
     }
   ],
   "independent": [
@@ -980,7 +981,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, quaver, quaver, quaver. Bar 2: quaver, quaver, quaver, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, quaver, 2 beamed together (quaver, quaver). Bar 2: 3 beamed together (quaver, quaver, quaver), crotchet.",
+        "questionAlternative": "Bar 1: a crotchet, a quaver and two quavers beamed together. Bar 2: three quavers beamed together followed by a crotchet.",
         "timeSignature": "5/8"
       },
       "answer": {
@@ -1138,7 +1139,7 @@
           }
         ],
         "textAlternative": "Bar 1: quaver, quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver.",
-        "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver), 5 beamed together (semiquaver, semiquaver, quaver, semiquaver, semiquaver).",
+        "questionAlternative": "Bar 1: two quavers beamed together, a beamed group (two semiquavers and a quaver) and a beamed group (two semiquavers, a quaver and two semiquavers).",
         "timeSignature": "7/8"
       },
       "answer": {
@@ -1272,7 +1273,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 7/4 with notes or rests so that it follows a grouping of 2 + 3 + 2. The bar already begins with a quaver, then a quaver, then a quaver, then a quaver, then a crotchet, then a quaver, then a quaver, then a quaver, then a quaver. Two more beats are needed; no note may join two groups.",
+      "prompt": "Complete this 7/4 bar using notes or rests, following a 2 + 3 + 2 grouping. Two beats remain. Do not cross group boundaries.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -1485,7 +1486,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 7/4 with notes or rests so that it follows a grouping of 2 + 3 + 2. The bar already begins with a quaver, then a quaver, then a quaver, then a quaver, then a crotchet, then a quaver, then a quaver, then a quaver, then a quaver. Two more beats are needed; no note may join two groups."
     },
     {
       "id": "i.g5-u1-l02.ind-4",
@@ -1586,7 +1588,7 @@
           }
         ],
         "textAlternative": "Bar 1: quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
-        "questionAlternative": "Bar 1: 4 beamed together (quaver, quaver, semiquaver, semiquaver), 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver), crotchet.",
+        "questionAlternative": "Bar 1: a beamed group (two quavers and two semiquavers), four semiquavers beamed together and a crotchet.",
         "timeSignature": "7/8"
       },
       "answer": {
@@ -1702,7 +1704,7 @@
           }
         ],
         "textAlternative": "Bar 1: quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver.",
-        "questionAlternative": "Bar 1: quaver, semiquaver, semiquaver, quaver, quaver, semiquaver, semiquaver.",
+        "questionAlternative": "Bar 1: a quaver, two semiquavers, two quavers and two semiquavers.",
         "timeSignature": "5/8"
       },
       "answer": {
@@ -1808,7 +1810,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 7/4 with notes or rests so that it follows a grouping of 3 + 2 + 2. The bar already begins with a quaver, then a quaver, then a minim. Four more beats are needed; no note may join two groups.",
+      "prompt": "Complete this 7/4 bar using notes or rests, following a 3 + 2 + 2 grouping. Four beats remain. Do not cross group boundaries.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -1941,7 +1943,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 7/4 with notes or rests so that it follows a grouping of 3 + 2 + 2. The bar already begins with a quaver, then a quaver, then a minim. Four more beats are needed; no note may join two groups."
     }
   ],
   "recap": [

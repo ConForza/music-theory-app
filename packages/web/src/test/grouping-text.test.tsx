@@ -18,10 +18,10 @@ describe("the grouping editor says what is beamed", () => {
   it("describeBars names beamed groups, so beaming changes the words", () => {
     const flags = describeBars([[q(), q(), q(), q()]]);
     const beamed = describeBars([[q("begin"), q("end"), q("begin"), q("end")]]);
-    expect(flags).toBe("Bar 1: quaver, quaver, quaver, quaver.");
-    expect(beamed).toBe("Bar 1: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver).");
+    expect(flags).toBe("Bar 1: four quavers.");
+    expect(beamed).toBe("Bar 1: two pairs of beamed quavers.");
     expect(beamed).not.toBe(flags);
-    expect(describeBars([[q("begin"), q("continue"), q("continue"), q("end")]])).toBe("Bar 1: 4 beamed together (quaver, quaver, quaver, quaver).");
+    expect(describeBars([[q("begin"), q("continue"), q("continue"), q("end")]])).toBe("Bar 1: four quavers beamed together.");
   });
 
   it("joining two notes in the editor changes the live description, and separating them restores it", async () => {
@@ -34,11 +34,11 @@ describe("the grouping editor says what is beamed", () => {
     const { container } = render(<Harness />);
     const live = () => container.querySelector(".grouping-editor p.visually-hidden")!.textContent;
     const before = live();
-    expect(before).toBe("Bar 1: quaver, quaver, quaver, quaver.");
+    expect(before).toBe("Bar 1: four quavers.");
     await user.click(screen.getByRole("button", { name: "Beam note 1 to note 2" }));
-    expect(live()).toBe("Bar 1: 2 beamed together (quaver, quaver), quaver, quaver.");
+    expect(live()).toBe("Bar 1: two quavers beamed together followed by two quavers.");
     await user.click(screen.getByRole("button", { name: "Beam note 3 to note 4" }));
-    expect(live()).toBe("Bar 1: 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver).");
+    expect(live()).toBe("Bar 1: two pairs of beamed quavers.");
     await user.click(screen.getByRole("button", { name: "Beam note 1 to note 2" }));
     await user.click(screen.getByRole("button", { name: "Beam note 3 to note 4" }));
     expect(live()).toBe(before);

@@ -184,8 +184,8 @@ describe("t.g5.transpose-judge", () => {
   it("the truth named by the answer (no mistake, the key signature, or one numbered note) matches what the lower stave shows", () => {
     const seen = { ok: 0, key: 0, note: 0 };
     for (const it of items("G5-U3-L06", "t.g5.transpose-judge", 300)) {
-      const iv = Object.keys(IV).find((k) => it.prompt.includes(`a ${k} lower than written`))!;
-      const dir = /transposed it (up|down)/.exec(it.prompt)![1]!;
+      const iv = Object.keys(IV).find((k) => it.prompt.includes(` a ${k} `))!;
+      const dir = /transposed (?:the top stave|this .+ part) (up|down)/.exec(it.prompt)![1]!;
       const [dl, ds] = IV[iv]!;
       const sign = dir === "up" ? 1 : -1;
       const staves = (it as any).score.staves as any[];

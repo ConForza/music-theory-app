@@ -112,7 +112,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note B. Which ornament sign could replace the pair?",
+      "prompt": "The notes marked A and B are a written-out ornament on B. Which ornament sign could replace them?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -199,7 +199,8 @@
           "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
         },
         "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
-      }
+      },
+      "legacyPrompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note B. Which ornament sign could replace the pair?"
     },
     {
       "id": "i.g5-u5-l02.guided-2",
@@ -307,7 +308,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note A♭. Which ornament sign could replace the pair?",
+      "prompt": "The notes marked A and B are a written-out ornament on A♭. Which ornament sign could replace them?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -394,7 +395,8 @@
           "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
         },
         "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
-      }
+      },
+      "legacyPrompt": "The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note A♭. Which ornament sign could replace the pair?"
     }
   ],
   "independent": [
@@ -504,7 +506,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note G. Which ornament sign could replace the group?",
+      "prompt": "The beamed group starting at the note marked A is a written-out ornament on G. Which ornament sign could replace it?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -591,7 +593,8 @@
           "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
         },
         "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
-      }
+      },
+      "legacyPrompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note G. Which ornament sign could replace the group?"
     },
     {
       "id": "i.g5-u5-l02.ind-3",
@@ -699,7 +702,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B♭. Which ornament sign could replace the group?",
+      "prompt": "The beamed group starting at the note marked A is a written-out ornament on B♭. Which ornament sign could replace it?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -785,7 +788,8 @@
           "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
         },
         "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
-      }
+      },
+      "legacyPrompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B♭. Which ornament sign could replace the group?"
     },
     {
       "id": "i.g5-u5-l02.ind-5",
@@ -893,7 +897,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B♭. Which ornament sign could replace the group?",
+      "prompt": "The beamed group starting at the note marked A is a written-out ornament on B♭. Which ornament sign could replace it?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -979,7 +983,8 @@
           "trill-mordent-confusion": "A trill keeps alternating for the length of the note; a mordent is just one quick alternation."
         },
         "fallback": "Not quite. Compare the shape of the sign with each ornament's pattern."
-      }
+      },
+      "legacyPrompt": "The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note B♭. Which ornament sign could replace the group?"
     }
   ],
   "recap": [

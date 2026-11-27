@@ -542,7 +542,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Name this note. (It is written in the treble clef.)",
+      "prompt": "Name this note in the treble clef.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -616,7 +616,8 @@
           "accidental-ignored": "The letter is right, but check for a sharp, flat or natural — in the key signature or in front of the note."
         },
         "fallback": "Not quite. Start from the clef and count from a note you know."
-      }
+      },
+      "legacyPrompt": "Name this note. (It is written in the treble clef.)"
     },
     {
       "id": "i.g3-u3-l01.ind-4",

@@ -15,7 +15,7 @@
  * line, except the half-bar rest of 12/8 on beat 1 or 3 (an extension of the 4/4 rule, OPEN_QUESTIONS Q25).
  */
 import { deriveScale, music, type Measure, type NotationEvent } from "@mtp/curriculum";
-import { frag, maxLedger, n, nameOf, note, pretty, r, rhythmLine, valueWord, type Gen } from "./families.ts";
+import { frag, maxLedger, n, nameOf, note, pretty, r, reworded, rhythmLine, valueWord, type Gen } from "./families.ts";
 import { codes, keyWord, keysIn, noteId, noteLabel, spelledOptions, type Diagnoses } from "./grade1.ts";
 import { ORD, cap, clefsOf, degreeNote, diag, keyFacts, optsOf, posText, rl, triadNotes } from "./grade2.ts";
 
@@ -606,7 +606,10 @@ export const ledgerCount: Gen = (c) => {
   const ids = [p.step, ...near.filter((x) => x !== p.step), ...c.rng.shuffle(letters.filter((x) => !near.includes(x)))].slice(0, 4);
   const flipped = music.naturalAt(clef === "treble" ? "bass" : "treble", pos);
   return {
-    prompt: `Name this note. (It is written in the ${clef} clef.)`,
+    ...reworded(
+      `Name this note in the ${clef} clef.`,
+      `Name this note. (It is written in the ${clef} clef.)`,
+    ),
     music: shown,
     answer: { kind: "choice", options: c.rng.shuffle(ids.map((x) => ({ id: x, label: x }))), correctOptionIds: [p.step], diagnoses: Object.fromEntries(ids.filter((x) => x !== p.step).map((x) => [x, diag(x === flipped.step ? "clef-confusion" : near.includes(x) ? "off-by-step" : "ledger-miscount", x === flipped.step ? `That would be the name in the ${clef === "treble" ? "bass" : "treble"} clef. In the ${clef} clef this position is ${p.step}.` : `Count from the nearest line or space you know in the ${clef} clef, step by step: the note is ${p.step}.`)])) },
     hints: [`In the ${clef} clef the top line is ${nameOf(music.naturalAt(clef, 8))} and the bottom line ${nameOf(music.naturalAt(clef, 0))}. Count on from there, one line or space at a time.`],
@@ -806,7 +809,10 @@ export const scaleGap3: Gen = (c) => {
     }
     const name = key.mode === "major" ? `scale of ${keyWord(keyText)}` : `${noteLabel(key.tonic)} ${form} minor scale`;
     return {
-      prompt: `This is the ${name}, ${dir === "ascending" ? "going up" : "coming down"}. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      ...reworded(
+        `This is the ${name}, ${dir === "ascending" ? "going up" : "coming down"}, with one note replaced by a rest. Which note is missing?`,
+        `This is the ${name}, ${dir === "ascending" ? "going up" : "coming down"}. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      ),
       music: frag(clef, [{ events: notes.map((p, i) => (i === gap ? r("semibreve") : note(p))) }], `A ${clef}-clef stave with eight semibreves ${dir === "ascending" ? "going up" : "coming down"} a scale of ${keyText}${key.mode === "minor" ? ` (${form} minor)` : ""}, with one note replaced by a rest. The other notes are ${notes.filter((_, i) => i !== gap).map(nameOf).join(", ")}.`, { showKeySignature: false }),
       answer: { kind: "choice", options, correctOptionIds: [noteId(missing)], diagnoses: dg },
       hints: [key.mode === "major" ? "Major scale pattern: tone, tone, semitone, tone, tone, tone, semitone." : form === "harmonic" ? "Harmonic minor: the notes of the key signature with the 7th raised." : "Melodic minor: going up the 6th and 7th are raised; coming down they are not.", "A scale uses each letter name once, in order."],

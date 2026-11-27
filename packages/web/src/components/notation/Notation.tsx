@@ -94,13 +94,16 @@ export function Notation({ fragment, size = "normal", highlight, marks, onActiva
   const h = layout.bottom - layout.top;
   return (
     <figure className={`notation notation-${size}`}>
-      <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)" aria-describedby={desc}>
+      <div className="notation-scroll" tabIndex={0} role="group" aria-label="Music notation (scrolls sideways if wide)" aria-describedby={describe ? desc : undefined}>
         <svg viewBox={`0 ${layout.top} ${layout.width} ${h}`} style={fit(layout.width * px, fragment.presentation === "rhythm-line" ? RHYTHM_MIN_SCALE : MIN_SCALE)} role={onActivate ? "group" : "img"} aria-label={fragment.textAlternative} className="notation-svg fit">
           <StaveSvg layout={layout} highlight={highlight} marks={marks} onActivate={onActivate} overlay={overlay} px={px} labels={labels} />
         </svg>
       </div>
       {caption && <figcaption className="notation-caption">{caption}</figcaption>}
-      {describe && <p id={desc} className="visually-hidden">{fragment.textAlternative}</p>}
+      {/* The description is the picture's own name (the svg's aria-label) and, for a keyboard user who tabs to the scrolling group, that group's
+          description. Hidden from the reading order, so a screen reader reading the page through does not hear it a third time; aria-describedby
+          still reads hidden text. */}
+      {describe && <p id={desc} className="visually-hidden" aria-hidden="true">{fragment.textAlternative}</p>}
     </figure>
   );
 }
@@ -130,7 +133,7 @@ export function ScoreView({ score, size = "normal", highlight }: { score: Notati
         </svg>
       </div>
       <figcaption className="notation-caption">Staves from the top: {score.staves.map((s) => s.label).join(", ")}</figcaption>
-      <p id={desc} className="visually-hidden">{score.textAlternative}</p>
+      <p id={desc} className="visually-hidden" aria-hidden="true">{score.textAlternative}</p>
     </figure>
   );
 }

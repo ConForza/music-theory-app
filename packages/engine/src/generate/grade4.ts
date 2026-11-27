@@ -3,7 +3,7 @@
  * for that template id, which is safe because no Grade 4 content was playable before this brief, so no stored question identity
  * exists for a Grade 4 template. Grade 1-3 generators are never touched.
  */
-import { GENERATORS, type Gen } from "./families.ts";
+import { GENERATORS, reworded, type Gen } from "./families.ts";
 import { describeScore, describeStave } from "./grade4-text.ts";
 import { breveBar, breveFacts, doubleDotBar, doubleDotFacts, dupletFacts, dupletRead, groupingJudge4, metreFacts4, timeSigRead4 } from "./grade4-rhythm.ts";
 import { doubleRead, altoFacts, chromaticJudge, clefPosition, degreeName, doubleCancel, doubleFacts, doubleName, doubleWrite, enharmonicLetter, enharmonicPick, keyFacts4, octavePickAlto, samePitch4, scaleSpot } from "./grade4-pitch.ts";
@@ -35,7 +35,8 @@ const octaveAlto: Gen = (c) => {
   const to = d.answer.clef;
   if (from !== "alto" && to !== "alto") return null;
   if (from === to) return null;
-  return (altoWords(d) ? d : { ...d, prompt: `${d.prompt} (The original melody is in the alto clef.)` }) as never;
+  if (altoWords(d)) return d as never;
+  return { ...d, ...reworded(d.prompt.replace("Write this melody", "Write this alto-clef melody"), `${d.prompt} (The original melody is in the alto clef.)`) } as never;
 };
 
 /** Every stave a Grade 4 generator draws is described from the notation it really contains (grade4-text.ts), not from what the generator meant to draw. */

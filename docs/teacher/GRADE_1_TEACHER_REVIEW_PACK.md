@@ -137,10 +137,10 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | time-signature (U2-L02) | 2 | Add the time signature to this rhythm. _Shown: Bar 1: semiquaver, semiquaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver, quaver, quaver. Bar 2: minim, crotchet._ | The time signature is 3/4. |
 | time-signature (U2-L02) | 3 | Add the time signature to this rhythm. _Shown: Bar 1: crotchet, semiquaver, semiquaver, quaver, dotted quaver, semiquaver. Bar 2: semiquaver, semiquaver, quaver, quaver, quaver, quaver, semiquaver, semiquaver._ | The time signature is 3/4. |
 | time-signature (U2-L02) | 4 | Add the time signature to this rhythm. _Shown: Bar 1: quaver, quaver, crotchet. Bar 2: quaver, quaver, quaver, semiquaver, semiquaver._ | The time signature is 2/4. |
-| bar-complete (U2-L03) | 1 | Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| bar-complete (U2-L03) | 2 | Complete this bar of 3/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| bar-complete (U2-L03) | 3 | Complete this bar of 3/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| bar-complete (U2-L03) | 4 | Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
+| bar-complete (U2-L03) | 1 | Complete this 4/4 bar with notes or rests, keeping the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
+| bar-complete (U2-L03) | 2 | Complete this 3/4 bar with notes or rests, keeping the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
+| bar-complete (U2-L03) | 3 | Complete this 3/4 bar with notes or rests, keeping the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
+| bar-complete (U2-L03) | 4 | Complete this 4/4 bar with notes or rests, keeping the beats clear. | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | grouping (U2-L04) | 1 | These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear. _Shown: Bar 1: semiquaver, semiquaver, quaver, dotted quaver, semiquaver, crotchet, quaver, quaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | grouping (U2-L04) | 2 | These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear. _Shown: Bar 1: quaver, quaver, dotted quaver, semiquaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | grouping (U2-L04) | 3 | These notes are grouped in a way that hides the beats. Join and split the beams so each beat is clear. _Shown: Bar 1: semiquaver, semiquaver, semiquaver, semiquaver, quaver, semiquaver, semiquaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
@@ -149,10 +149,10 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | bar-fix (U2-L05) | 2 | This bar uses a tie where a single note would do. Rewrite the bar so that it sounds the same but is written clearly. _Shown: Bar 1: crotchet tied to, crotchet._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | bar-fix (U2-L05) | 3 | The rests in this bar hide a beat. Rewrite the bar so that it sounds the same and every beat can be seen. _Shown: Bar 1: crotchet, minim rest, quaver, quaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
 | bar-fix (U2-L05) | 4 | The rests in this bar hide a beat. Rewrite the bar so that it sounds the same and every beat can be seen. _Shown: Bar 1: minim rest, quaver, quaver._ | Any answer that fills the bar exactly and keeps every beat clear is correct; the example shown is one of them. |
-| keyboard (U3-L01) | 1 | Find E on the keyboard. Any E is correct. | The note is E. |
-| keyboard (U3-L01) | 2 | Find C on the keyboard. Any C is correct. | The note is C. |
-| keyboard (U3-L01) | 3 | Find B on the keyboard. Any B is correct. | The note is B. |
-| keyboard (U3-L01) | 4 | Find A on the keyboard. Any A is correct. | The note is A. |
+| keyboard (U3-L01) | 1 | Find E on the keyboard. Any octave is correct. | The note is E. |
+| keyboard (U3-L01) | 2 | Find C on the keyboard. Any octave is correct. | The note is C. |
+| keyboard (U3-L01) | 3 | Find B on the keyboard. Any octave is correct. | The note is B. |
+| keyboard (U3-L01) | 4 | Find A on the keyboard. Any octave is correct. | The note is A. |
 | letter-names (U3-L01) | 1 | Start on the highlighted key, A. Move 2 white keys to the right. Which letter do you reach? _Shown: A piano keyboard with A highlighted._ | The answer is “C”. |
 | letter-names (U3-L01) | 2 | Start on the highlighted key, F. Move 3 white keys to the right. Which letter do you reach? _Shown: A piano keyboard with F highlighted._ | The answer is “B”. |
 | letter-names (U3-L01) | 3 | Which letter name belongs to the highlighted key? _Shown: A piano keyboard with one white key highlighted._ | The answer is “F”. |
@@ -165,18 +165,18 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | note-read (U3-L03) | 2 | Name this note. _Shown: A treble-clef stave with one semibreve on the 5th line._ | The note is F. |
 | note-read (U3-L03) | 3 | Name this note. _Shown: A treble-clef stave with one semibreve on the 1st space._ | The note is F. |
 | note-read (U3-L03) | 4 | Name this note. _Shown: A treble-clef stave with one semibreve on the 3rd space._ | The note is C. |
-| note-write (U3-L03) | 1 | Write F in the treble clef. Keep it on the stave (no ledger lines). Any F that fits is correct. | F can go at F4 or F5. |
-| note-write (U3-L03) | 2 | Write B in the treble clef. Keep it on the stave (no ledger lines). Any B that fits is correct. | B can go at B4. |
-| note-write (U3-L03) | 3 | Write B in the treble clef. Keep it on the stave (no ledger lines). Any B that fits is correct. | B can go at B4. |
-| note-write (U3-L03) | 4 | Write E in the treble clef. Keep it on the stave (no ledger lines). Any E that fits is correct. | E can go at E4 or E5. |
+| note-write (U3-L03) | 1 | Write F in the treble clef, on the stave (no ledger lines). Any octave is correct. | F can go at F4 or F5. |
+| note-write (U3-L03) | 2 | Write B in the treble clef, on the stave (no ledger lines). Any octave is correct. | B can go at B4. |
+| note-write (U3-L03) | 3 | Write B in the treble clef, on the stave (no ledger lines). Any octave is correct. | B can go at B4. |
+| note-write (U3-L03) | 4 | Write E in the treble clef, on the stave (no ledger lines). Any octave is correct. | E can go at E4 or E5. |
 | note-place (U3-L03) | 1 | Write G on a line of the treble-clef stave. | G can go at G4. |
 | note-place (U3-L03) | 2 | Write E in a space of the treble-clef stave. | E can go at E5. |
 | note-place (U3-L03) | 3 | Write C in a space of the treble-clef stave. | C can go at C5. |
 | note-place (U3-L03) | 4 | Write A in a space of the treble-clef stave. | A can go at A4. |
-| middle-c-find (U3-L06) | 1 | Which of these notes is middle C? _Shown: Four bass-clef notes in a row: note 1 on a ledger line above the stave; note 2 in the 4th space; note 3 on a ledger line above the stave; note 4 on the 5th line._ | The answer is “Note 1”. |
-| middle-c-find (U3-L06) | 2 | Which of these notes is middle C? _Shown: Four bass-clef notes in a row: note 1 on a ledger line above the stave; note 2 on the 5th line; note 3 on the 4th line; note 4 in the 3rd space._ | The answer is “Note 1”. |
-| middle-c-find (U3-L06) | 3 | Which of these notes is middle C? _Shown: Four bass-clef notes in a row: note 1 on the 5th line; note 2 on a ledger line above the stave; note 3 in the 3rd space; note 4 in the 4th space._ | The answer is “Note 2”. |
-| middle-c-find (U3-L06) | 4 | Which of these notes is middle C? _Shown: Four treble-clef notes in a row: note 1 on the 1st line; note 2 on a ledger line below the stave; note 3 in the 1st space; note 4 on the 2nd line._ | The answer is “Note 2”. |
+| middle-c-find (U3-L06) | 1 | Which of these notes is middle C? _Shown: Four bass-clef notes in a row: note 1 on the 1st ledger line above the stave; note 2 in the 4th space; note 3 in the space above the 1st ledger line above the stave; note 4 on the 5th line._ | The answer is “Note 1”. |
+| middle-c-find (U3-L06) | 2 | Which of these notes is middle C? _Shown: Four bass-clef notes in a row: note 1 on the 1st ledger line above the stave; note 2 on the 5th line; note 3 on the 4th line; note 4 in the 3rd space._ | The answer is “Note 1”. |
+| middle-c-find (U3-L06) | 3 | Which of these notes is middle C? _Shown: Four bass-clef notes in a row: note 1 on the 5th line; note 2 on the 1st ledger line above the stave; note 3 in the 3rd space; note 4 in the 4th space._ | The answer is “Note 2”. |
+| middle-c-find (U3-L06) | 4 | Which of these notes is middle C? _Shown: Four treble-clef notes in a row: note 1 on the 1st line; note 2 on the 1st ledger line below the stave; note 3 in the 1st space; note 4 on the 2nd line._ | The answer is “Note 2”. |
 | middle-c-facts (U3-L06) | 1 | How many ledger lines does middle C need in the bass clef? | The answer is “1”. |
 | middle-c-facts (U3-L06) | 2 | Is middle C higher or lower than the bottom line of the treble stave? | The answer is “Lower”. |
 | middle-c-facts (U3-L06) | 3 | In which clef is middle C written on a ledger line above the stave? | The answer is “Bass clef”. |
@@ -189,10 +189,10 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | accidental-read (U4-L02) | 2 | Name this note, including its sharp or flat. _Shown: A bass-clef stave with one semibreve on the 5th space, with a flat sign in front of it._ | The note is B♭. |
 | accidental-read (U4-L02) | 3 | Name this note, including its sharp or flat. _Shown: A treble-clef stave with one semibreve on the 2nd space, with a sharp sign in front of it._ | The note is A♯. |
 | accidental-read (U4-L02) | 4 | Name this note, including its sharp or flat. _Shown: A bass-clef stave with one semibreve on the 2nd space, with a sharp sign in front of it._ | The note is C♯. |
-| accidental-write (U4-L02) | 1 | Write D♯ in the bass clef. Put the sharp sign in front of the note. Any D♯ that fits is correct. | D♯ can go at D♯2 or D♯3 or D♯4. |
-| accidental-write (U4-L02) | 2 | Write A♯ in the bass clef. Put the sharp sign in front of the note. Any A♯ that fits is correct. | A♯ can go at A♯2 or A♯3. |
-| accidental-write (U4-L02) | 3 | Write F♯ in the bass clef. Put the sharp sign in front of the note. Any F♯ that fits is correct. | F♯ can go at F♯2 or F♯3. |
-| accidental-write (U4-L02) | 4 | Write G♯ in the bass clef. Put the sharp sign in front of the note. Any G♯ that fits is correct. | G♯ can go at G♯2 or G♯3. |
+| accidental-write (U4-L02) | 1 | Write D♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | D♯ can go at D♯2 or D♯3 or D♯4. |
+| accidental-write (U4-L02) | 2 | Write A♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | A♯ can go at A♯2 or A♯3. |
+| accidental-write (U4-L02) | 3 | Write F♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | F♯ can go at F♯2 or F♯3. |
+| accidental-write (U4-L02) | 4 | Write G♯ in the bass clef, with the sharp sign in front of the note. Any octave is correct. | G♯ can go at G♯2 or G♯3. |
 | accidental-state (U4-L03) | 1 | What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it. _Shown: treble clef, key signature: none, 4/4. Bar 1: E 4th space with a sharp sign, E 4th space with a natural sign, D 4th line, E 4th space (marked *)._ | The note is E. |
 | accidental-state (U4-L03) | 2 | What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it. _Shown: treble clef, key signature: none, 2/4. Bar 1: A 2nd space with a flat sign, A 1st ledger line above the stave (marked *)._ | The note is A. |
 | accidental-state (U4-L03) | 3 | What is the note marked *? Give its letter name and any sharp, flat or natural that applies to it. _Shown: bass clef, key signature: none, 3/4. Bar 1: G 4th space with a flat sign, D 3rd line, G 1st line (marked *)._ | The note is G. |
@@ -209,14 +209,14 @@ See `GRADE_1_COMPLETION_AUDIT.md` sections 2-4 for outcome-to-lesson, outcome-to
 | step-size (U5-L01) | 2 | Is the step from the first note up to the second note a tone or a semitone? _Shown: A treble-clef stave with two notes: the first in the 4th space, and the second on the 5th line._ | The answer is “A semitone”. |
 | step-size (U5-L01) | 3 | Is the step from the first note up to the second note a tone or a semitone? _Shown: A treble-clef stave with two notes: the first in the 3rd space with a sharp sign, and the second on the 4th line._ | The answer is “A semitone”. |
 | step-size (U5-L01) | 4 | Is the step from the first note up to the second note a tone or a semitone? _Shown: A bass-clef stave with two notes: the first on the 2nd line, and the second in the 2nd space with a sharp sign._ | The answer is “A tone”. |
-| scale-build (U5-L02) | 1 | Write the scale of C major, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is C3, D3, E3, F3, G3, A3, B3, C4. |
-| scale-build (U5-L02) | 2 | Write the scale of C major, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is C3, D3, E3, F3, G3, A3, B3, C4. |
-| scale-build (U5-L02) | 3 | Write the scale of C major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is C4, B3, A3, G3, F3, E3, D3, C3. |
-| scale-build (U5-L02) | 4 | Write the scale of C major, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you. | The scale is C4, D4, E4, F4, G4, A4, B4, C5. |
-| scale-gap (U5-L02) | 1 | This is the scale of C major, going up. One note is missing and is shown as a rest. Which note belongs in the gap? _Shown: A bass-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, D, F, G, A, B, C._ | The answer is “E”. |
-| scale-gap (U5-L02) | 2 | This is the scale of C major, going up. One note is missing and is shown as a rest. Which note belongs in the gap? _Shown: A bass-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, D, E, F, A, B, C._ | The answer is “G”. |
-| scale-gap (U5-L02) | 3 | This is the scale of C major, going up. One note is missing and is shown as a rest. Which note belongs in the gap? _Shown: A treble-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, E, F, G, A, B, C._ | The answer is “D”. |
-| scale-gap (U5-L02) | 4 | This is the scale of C major, going up. One note is missing and is shown as a rest. Which note belongs in the gap? _Shown: A treble-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, D, E, F, G, A, C._ | The answer is “B”. |
+| scale-build (U5-L02) | 1 | Write the scale of C major, ascending, in the bass clef, using accidentals instead of a key signature. | The scale is C3, D3, E3, F3, G3, A3, B3, C4. |
+| scale-build (U5-L02) | 2 | Write the scale of C major, ascending, in the bass clef, using accidentals instead of a key signature. | The scale is C3, D3, E3, F3, G3, A3, B3, C4. |
+| scale-build (U5-L02) | 3 | Write the scale of C major, descending, in the bass clef, using accidentals instead of a key signature. | The scale is C4, B3, A3, G3, F3, E3, D3, C3. |
+| scale-build (U5-L02) | 4 | Write the scale of C major, ascending, in the treble clef, using accidentals instead of a key signature. | The scale is C4, D4, E4, F4, G4, A4, B4, C5. |
+| scale-gap (U5-L02) | 1 | This is the scale of C major, going up, with one note replaced by a rest. Which note is missing? _Shown: A bass-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, D, F, G, A, B, C._ | The answer is “E”. |
+| scale-gap (U5-L02) | 2 | This is the scale of C major, going up, with one note replaced by a rest. Which note is missing? _Shown: A bass-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, D, E, F, A, B, C._ | The answer is “G”. |
+| scale-gap (U5-L02) | 3 | This is the scale of C major, going up, with one note replaced by a rest. Which note is missing? _Shown: A treble-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, E, F, G, A, B, C._ | The answer is “D”. |
+| scale-gap (U5-L02) | 4 | This is the scale of C major, going up, with one note replaced by a rest. Which note is missing? _Shown: A treble-clef stave with eight semibreves going up a scale of C major, with one note replaced by a rest. The other notes are C, D, E, F, G, A, C._ | The answer is “B”. |
 | key-signature (U5-L05) | 1 | Name the major key with this key signature. | This is the key signature of F major. |
 | key-signature (U5-L05) | 2 | Name the major key with this key signature. | This is the key signature of F major. |
 | key-signature (U5-L05) | 3 | Name the major key with this key signature. | This is the key signature of F major. |

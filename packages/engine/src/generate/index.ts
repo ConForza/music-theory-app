@@ -100,6 +100,7 @@ function finish(ix: CurriculumIndex, t: ExerciseTemplate, seed: number, d: Draft
     seed,
     evidence,
     prompt: d.prompt,
+    ...(d.legacyPrompt && d.legacyPrompt !== d.prompt ? { legacyPrompt: d.legacyPrompt } : {}),
     ...(d.music ? { music: d.music } : {}),
     ...(d.score ? { score: d.score } : {}),
     answer: d.answer,

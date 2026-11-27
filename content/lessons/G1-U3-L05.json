@@ -597,7 +597,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write F in the bass clef. Keep it on the stave (no ledger lines). Any F that fits is correct.",
+      "prompt": "Write F in the bass clef, on the stave (no ledger lines). Any octave is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "bass",
@@ -629,7 +629,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write F in the bass clef. Keep it on the stave (no ledger lines). Any F that fits is correct."
     }
   ],
   "recap": [

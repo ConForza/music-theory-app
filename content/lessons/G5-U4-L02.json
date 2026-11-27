@@ -283,7 +283,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write chord iib of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord iib of F major in the treble clef, in first inversion (the 3rd as the lowest note), using exactly 4 notes, one of them doubled. Any spacing is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -338,7 +338,8 @@
           "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
         },
         "fallback": "Not quite. Find the root first, then the bass note."
-      }
+      },
+      "legacyPrompt": "Write chord iib of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct."
     }
   ],
   "independent": [
@@ -477,7 +478,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord iia of F major in the bass clef, in root position (the root of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord iia of F major in the bass clef, in root position (the root as the lowest note), using exactly 4 notes, one of them doubled. Any spacing is correct.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -532,7 +533,8 @@
           "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
         },
         "fallback": "Not quite. Find the root first, then the bass note."
-      }
+      },
+      "legacyPrompt": "Write chord iia of F major in the bass clef, in root position (the root of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct."
     },
     {
       "id": "i.g5-u4-l02.ind-4",
@@ -669,7 +671,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord iic of D♯ minor in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct.",
+      "prompt": "Write chord iic of D♯ minor in the treble clef, in second inversion (the 5th as the lowest note), using exactly 4 notes, one of them doubled. In a minor key this triad is diminished. Any spacing is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -724,7 +726,8 @@
           "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
         },
         "fallback": "Not quite. Find the root first, then the bass note."
-      }
+      },
+      "legacyPrompt": "Write chord iic of D♯ minor in the treble clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). In a minor key this triad is diminished. Any spacing is correct."
     }
   ],
   "recap": [

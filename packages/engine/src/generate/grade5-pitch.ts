@@ -15,7 +15,7 @@
  * (the book says not every possibility can be covered by the word "doubly").
  */
 import { deriveScale, music, type AnswerSpec, type Measure } from "@mtp/curriculum";
-import { frag, type Gen } from "./families.ts";
+import { frag, reworded, type Gen } from "./families.ts";
 import { KEYS_G5, NEW_KEYS, F, P, WORDS, an, cap, choiceAnswer, clefsIn, family5, fitsIn, keyWords, keysIn, melodyIn5, withChromaticNote, nameOfPc, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
 const { parseKey, formatKey, transpose, parseInterval, intervalBetween, staffPosition, naturalAt, describeInterval } = music;
@@ -591,9 +591,14 @@ export const instrumentTranspose5: Gen = (c): any => {
   const ivCode = `${iv.quality}${iv.number}`;
   const f = melodyFrag("treble", mel, keyText, {}, { tempoText: c.rng.pick(["Andante", "Moderato", "Allegretto"]) });
   return {
-    prompt: toWritten
-      ? `This melody is at concert pitch (the pitch that sounds). Write it as the part for a ${label}, which sounds a ${ivText(inst)} lower than written: transpose it up a ${ivText(inst)}, and give it its new key signature.`
-      : `This melody is the written part for a ${label}, which sounds a ${ivText(inst)} lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a ${ivText(inst)}, and give it its new key signature.`,
+    ...reworded(
+      toWritten
+        ? `This melody is at concert pitch. Transpose it up a ${ivText(inst)} to give the part for ${an(label)}, with the new key signature.`
+        : `This is the written part for ${an(label)}. Transpose it down a ${ivText(inst)} to concert pitch, with the new key signature.`,
+      toWritten
+        ? `This melody is at concert pitch (the pitch that sounds). Write it as the part for a ${label}, which sounds a ${ivText(inst)} lower than written: transpose it up a ${ivText(inst)}, and give it its new key signature.`
+        : `This melody is the written part for a ${label}, which sounds a ${ivText(inst)} lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a ${ivText(inst)}, and give it its new key signature.`,
+    ),
     music: f,
     answer: { kind: "pitch-sequence", clef: "treble", key: newText, accepted: [out.map(F)], derivation: { rule: "transpose", interval: ivCode, direction: dir, sourceKey: keyText } },
     hints: [`First find the new key: ${keyWords(keyText)} ${dir} a ${ivText(inst)} is ${keyWords(newText)}. Then move every note by the same interval. A note that is not in the key moves to the note that is the same interval from the new key's tonic.`],

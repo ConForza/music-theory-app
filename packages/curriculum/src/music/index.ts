@@ -11,3 +11,4 @@ export * from "./ornaments.ts";
 export * from "./transposing.ts";
 export * from "./vocabulary.ts";
 export * from "./vocabulary-book.ts";
+export * from "./describe.ts";

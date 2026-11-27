@@ -295,7 +295,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write chord IVc of C♯ minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct.",
+      "prompt": "Write chord IVc of C♯ minor in the bass clef, in second inversion (the 5th as the lowest note), using exactly 3 notes. Any spacing is correct.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -349,7 +349,8 @@
           "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
         },
         "fallback": "Not quite. Find the root first, then the bass note."
-      }
+      },
+      "legacyPrompt": "Write chord IVc of C♯ minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 3 notes. Any spacing is correct."
     }
   ],
   "independent": [
@@ -427,7 +428,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord Vb of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord Vb of F major in the treble clef, in first inversion (the 3rd as the lowest note), using exactly 4 notes, one of them doubled. Any spacing is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -482,7 +483,8 @@
           "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
         },
         "fallback": "Not quite. Find the root first, then the bass note."
-      }
+      },
+      "legacyPrompt": "Write chord Vb of F major in the treble clef, in first inversion (the 3rd of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct."
     },
     {
       "id": "i.g5-u4-l01.ind-3",
@@ -617,7 +619,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write chord Vc of A minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct.",
+      "prompt": "Write chord Vc of A minor in the bass clef, in second inversion (the 5th as the lowest note), using exactly 4 notes, one of them doubled. Any spacing is correct.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -672,7 +674,8 @@
           "note-missing": "One of the notes doesn't belong. A triad has a root, a 3rd and a 5th."
         },
         "fallback": "Not quite. Find the root first, then the bass note."
-      }
+      },
+      "legacyPrompt": "Write chord Vc of A minor in the bass clef, in second inversion (the 5th of the chord is the lowest note), using exactly 4 notes (one note of the chord is written twice). Any spacing is correct."
     },
     {
       "id": "i.g5-u4-l01.ind-6",

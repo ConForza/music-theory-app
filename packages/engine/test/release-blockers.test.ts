@@ -115,7 +115,7 @@ describe("Grade 2 note grouping (t.g2.note-grouping): the question can be told f
     for (const i of items) {
       const a = i.answer as { accepted: Array<Array<{ events?: unknown[] }>> };
       const q = i.music!.questionAlternative!;
-      expect(q).toMatch(/beamed together|^Bar 1: [^()]*\.$/);
+      expect(q).toMatch(/beamed|^Bar 1: [^()]*\.$/);
       const asked = (m: unknown[]) => JSON.stringify((m as Array<{ events: Array<{ beam?: string }> }>).map((x) => x.events.map((e) => e.beam ?? "")));
       expect(asked(i.music!.measures as never)).not.toBe(asked(a.accepted[0] as never));
     }

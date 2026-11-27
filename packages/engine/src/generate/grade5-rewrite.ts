@@ -11,7 +11,7 @@
  * and decided to keep this optional enrichment: mapped only to the Grade 4 time-signature outcome, and no assessment blueprint may name it.
  */
 import { music } from "@mtp/curriculum";
-import { n, r, rhythmLine, type Gen } from "./families.ts";
+import { n, r, rhythmLine, reworded, type Gen } from "./families.ts";
 import type { Ctx, Ev } from "./grade5-lib.ts";
 
 type NV = music.NoteValue;
@@ -62,7 +62,10 @@ export const rewriteMetre5: Gen = (c: Ctx): any => {
   const shown = toCompound ? simpleBar : compoundBar;
   const answer = toCompound ? compoundBar : simpleBar;
   return {
-    prompt: `This bar is written in ${from}, where the beat is a ${beatName(from)}. Rewrite it in ${to}, where the beat is a ${beatName(to)}. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as ${to} requires.`,
+    ...reworded(
+      `Rewrite this ${from} bar in ${to}, so that each ${beatName(from)} beat becomes a ${beatName(to)} beat. Every note and rest keeps its share of the beat. Beam the notes as ${to} requires.`,
+      `This bar is written in ${from}, where the beat is a ${beatName(from)}. Rewrite it in ${to}, where the beat is a ${beatName(to)}. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as ${to} requires.`,
+    ),
     music: rhythmLine([{ events: shown, barline: "final" }], { timeSignature: from }),
     answer: { kind: "rhythm", task: "regroup", timeSignature: to, fromTimeSignature: from, accepted: [[{ events: answer, barline: "final" }]], acceptAnyRuleCompliant: true },
     hints: [`Compare the beats: in ${from} a beat is a ${beatName(from)} and in ${to} it is a ${beatName(to)}. Write each note or rest as the same share of its beat as before. The bar adds up to a different total of note values (more quavers in compound time), but it has the same number of beats and lasts just as long: that is correct.`],
