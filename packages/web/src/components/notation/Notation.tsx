@@ -54,7 +54,7 @@ export function StaveSvg({ layout, highlight = [], marks, onActivate, overlay, o
   void px;
   return (
     <g transform={`translate(0 ${offsetY})`}>
-      {layout.lines.map((p) => <line key={p} x1={0.2} x2={layout.width - 0.2} y1={-p / 2} y2={-p / 2} strokeWidth={0.13} className="n-line" />)}
+      {layout.lines.map((p) => <line key={p} x1={0.2} x2={layout.staffEnd} y1={-p / 2} y2={-p / 2} strokeWidth={0.13} className="n-line" />)}
       <Primitives ev={layout.fixed} />
       {layout.events.map((ev) => {
         const lit = highlight.includes(ev.id) || ev.pitches.some((p) => highlight.includes(p));

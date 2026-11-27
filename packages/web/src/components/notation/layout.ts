@@ -74,6 +74,8 @@ export interface LaidEvent {
 
 export interface StaveLayout {
   width: number;
+  /** Where the stave lines stop: at the outer edge of a closing final, double or end-repeat bar-line, so they never run on past it. */
+  staffEnd: number;
   top: number;
   bottom: number;
   lines: number[];
@@ -231,6 +233,8 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
   const barCap = f.timeSignature ? music.barCapacity(music.parseTimeSignature(f.timeSignature)) : undefined;
   const barX: number[] = [];
   const barWidths: number[] = [];
+  /** Outer (right) edge of the last bar's bar-line, when that bar-line closes the stave. */
+  let closedAt: number | null = null;
   let noteCounter = 0;
   // Pending ties and slurs (by voice) that close on a later event.
   const tieFrom = new Map<number, Array<{ x: number; pos: number; up: boolean; pitch: string }>>();
@@ -557,10 +561,12 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
       }
       fixed.lines.push({ x1: x - 0.6, x2: x - 0.6, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
       fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thickBarline, cls: "n-line" });
+      if (bi === f.measures.length - 1) closedAt = x + ENGRAVING.thickBarline / 2;
       x += 0.4;
     } else if (bl === "double") {
       fixed.lines.push({ x1: x - 0.5, x2: x - 0.5, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
       fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
+      if (bi === f.measures.length - 1) closedAt = x + ENGRAVING.thinBarline / 2;
     } else if (bl === "repeat-start") {
       fixed.lines.push({ x1: x, x2: x, y1, y2, w: ENGRAVING.thickBarline, cls: "n-line" });
       fixed.lines.push({ x1: x + 0.6, x2: x + 0.6, y1, y2, w: ENGRAVING.thinBarline, cls: "n-line" });
@@ -580,13 +586,15 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     barX.forEach((bx, i) => fixed.texts.push({ x: bx, y: -7.4, text: String(i + 1), cls: "n-barno", anchor: "start" }));
     top = Math.min(top, -8.8);
   }
-  const width = x + 0.4;
+  // A closing bar-line ends the stave: the lines stop at its outer edge, with the same small margin after it as before the clef.
+  const staffEnd = closedAt ?? x + 0.2;
+  const width = closedAt === null ? x + 0.4 : closedAt + 0.2;
   const lines = rhythm ? [4] : [0, 2, 4, 6, 8];
   if (rhythm) {
     top = Math.min(top, -6.5);
     bottom = Math.max(bottom, 1.5);
   }
-  return { width, top: top - 0.8, bottom: bottom + 0.8, lines, fixed, events, barX, barWidths };
+  return { width, staffEnd, top: top - 0.8, bottom: bottom + 0.8, lines, fixed, events, barX, barWidths };
 }
 
 export interface ScoreLayout {
