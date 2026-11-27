@@ -289,25 +289,67 @@ await test("preferences: dark mode, reduced motion, 200% text at 320px, and soun
   await ctx.close();
 });
 
-await test("enlarged text at 320px: the note palette of a bar builder is never clipped", async () => {
-  // the first lesson question (in Unit 2) that uses the bar builder
+/**
+ * Palette buttons whose music symbol inks outside the button's border (a stem or flag crossing the rounded edge), measured from the real
+ * glyph: its baseline (a zero-size probe) and the ink above and below it that the browser reports for the symbol's own font.
+ */
+const paletteInkOutside = (page) =>
+  page.evaluate(() =>
+    [...document.querySelectorAll(".palette-btn")].filter((btn) => {
+      const sym = btn.querySelector(".smufl-inline");
+      const probe = document.createElement("span");
+      probe.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline";
+      sym.appendChild(probe);
+      const baseline = probe.getBoundingClientRect().bottom;
+      probe.remove();
+      const ctx = document.createElement("canvas").getContext("2d");
+      const cs = getComputedStyle(sym);
+      ctx.font = `${cs.fontSize} ${cs.fontFamily}`;
+      const m = ctx.measureText(sym.textContent);
+      const box = btn.getBoundingClientRect();
+      const border = parseFloat(getComputedStyle(btn).borderTopWidth);
+      const label = btn.querySelector(".palette-name").getBoundingClientRect();
+      return baseline - m.actualBoundingBoxAscent < box.top + border + 2 || baseline + m.actualBoundingBoxDescent > label.top;
+    }).map((b) => b.textContent));
+
+/** The first Grade 1 lesson question (in Unit 2) that uses the bar builder, opened in the browser. */
+async function openBarBuilder(profile, init = null) {
   const lesson = S.course.nodes.filter((n) => n.grade === 1 && n.type === "lesson").find((n) => S.course.authoredItems(n.id).some((it) => inputFor(S.course.ix, it, S.course.scopeFor(n.id, it)).kind === "rhythm-builder"));
   assert.ok(lesson, "a lesson with a bar builder exists");
   const items = S.course.authoredItems(lesson.id);
   const k = items.findIndex((it) => inputFor(S.course.ix, it, S.course.scopeFor(lesson.id, it)).kind === "rhythm-builder");
-  const init = () => document.addEventListener("DOMContentLoaded", () => (document.documentElement.style.fontSize = "200%"));
-  const ctx = await ctxFor(profiles["phone-320"]);
+  const ctx = await ctxFor(profile);
   const { page, userId } = await guest(ctx);
-  await page.addInitScript(init);
+  if (init) await page.addInitScript(init);
   const prev = S.course.nodes.filter((n) => n.grade === 1)[S.course.nodes.filter((n) => n.grade === 1).findIndex((n) => n.id === lesson.id) - 1];
   if (prev) await finishViaApi(S, page, userId, prev.id);
   await playLessonInBrowser(page, S, lesson.id, { stopAfter: k });
   await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
   await page.locator(".palette-btn").first().waitFor();
+  await page.evaluate(() => document.fonts.ready);
+  return { ctx, page };
+}
+
+await test("enlarged text at 320px: the note palette of a bar builder is never clipped", async () => {
+  const { ctx, page } = await openBarBuilder(profiles["phone-320"], () => document.addEventListener("DOMContentLoaded", () => (document.documentElement.style.fontSize = "200%")));
   const clipped = await page.evaluate(() => [...document.querySelectorAll(".palette-btn")].filter((b) => b.scrollWidth > b.clientWidth + 1 || [...b.children].some((c) => c.getBoundingClientRect().right > b.getBoundingClientRect().right + 1 || c.getBoundingClientRect().left < b.getBoundingClientRect().left - 1)).map((b) => b.textContent));
   assert.deepEqual(clipped, [], "no palette button clips its symbol or name");
   await noOverflow(page, "bar builder at 200% text");
+  assert.deepEqual(await paletteInkOutside(page), [], "no note symbol crosses its button's border or label at 200% text");
   await ctx.close();
+});
+
+await test("bar-builder palette: every note and rest symbol sits inside its button (phone and desktop)", async () => {
+  for (const profile of [profiles.iphone, profiles.desktop]) {
+    const { ctx, page } = await openBarBuilder(profile);
+    assert.deepEqual(await paletteInkOutside(page), [], "no note stem or flag crosses its button's border");
+    const rests = page.getByRole("button", { name: "Rests" });
+    if (await rests.count()) {
+      await rests.click();
+      assert.deepEqual(await paletteInkOutside(page), [], "no rest crosses its button's border or label");
+    }
+    await ctx.close();
+  }
 });
 
 await browser.close();

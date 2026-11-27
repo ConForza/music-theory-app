@@ -61,6 +61,17 @@ export const WIDTH = {
   doubleFlat: 1.644,
   clef: 2.8,
   timeSig: 1.9,
+  dot: 0.4,
+};
+
+/**
+ * Horizontal ink extent (staff spaces, from metadata.json glyphBBoxes) of the glyphs that can be the rightmost thing in a bar, so the
+ * layout can keep a bar-line clear of them: flags hang to the right of the stem and the shorter rests are wider than a notehead.
+ */
+export const INK_WIDTH = {
+  flagUp: { quaver: 1.056, semiquaver: 1.116, demisemiquaver: 1.044 } as Partial<Record<music.NoteValue, number>>,
+  flagDown: { quaver: 1.224, semiquaver: 1.164, demisemiquaver: 1.092 } as Partial<Record<music.NoteValue, number>>,
+  rest: { breve: 0.5, semibreve: 1.128, minim: 1.128, crotchet: 1.08, quaver: 0.988, semiquaver: 1.28, demisemiquaver: 1.452 } as Record<music.NoteValue, number>,
 };
 
 export const ENGRAVING = { stemThickness: 0.12, beamThickness: 0.5, beamSpacing: 0.25, legerExtension: 0.4, staffLineThickness: 0.13, thinBarline: 0.16, thickBarline: 0.5 };

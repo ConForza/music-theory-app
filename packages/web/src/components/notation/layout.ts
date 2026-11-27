@@ -9,7 +9,7 @@
  */
 import * as music from "@mtp/curriculum/music";
 import type { Measure, NotationEvent, NotationFragment, NotationScore } from "@mtp/curriculum";
-import { ARTIC_GLYPH, ARTIC_GLYPH_BELOW, BEAMS, CLEF_GLYPH, ENGRAVING, FLAGS, G, ORNAMENT_GLYPH, restGlyph, SIGN_GLYPH, WIDTH } from "./glyphs";
+import { ARTIC_GLYPH, ARTIC_GLYPH_BELOW, BEAMS, CLEF_GLYPH, ENGRAVING, FLAGS, G, INK_WIDTH, ORNAMENT_GLYPH, restGlyph, SIGN_GLYPH, WIDTH } from "./glyphs";
 
 type Inner = Exclude<NotationEvent, { kind: "tuplet" }>;
 type Clef = music.Clef;
@@ -81,7 +81,20 @@ export interface StaveLayout {
   events: LaidEvent[];
   /** Positions of the left edge of each bar's content (for overlays such as bar-line pickers). */
   barX: number[];
+  /** Width of each bar from its left edge to the ink of its bar-line's first mark (so staves of a score can share bar-lines). */
+  barWidths: number[];
 }
+
+/** Least clear space, in staff spaces, between the rightmost ink of a bar (notehead, flag, dot or rest) and the first mark of its bar-line. */
+export const BARLINE_CLEARANCE = 0.8;
+/**
+ * How far a bar-line's ink reaches LEFT of the point it is drawn at: half a thin line for a single bar-line; a final bar-line is anchored on
+ * its thick line with the thin line 0.6 before it, a double one on its right-hand line, an end repeat on its thick line with the thin line
+ * and dots before that, a start repeat on its thick line. The bar reserves this room in front of the anchor, so the bar-line starts after
+ * the music instead of being drawn back over the last note.
+ */
+const THIN = ENGRAVING.thinBarline / 2;
+export const BARLINE_LEAD: Record<NonNullable<Measure["barline"]>, number> = { single: THIN, final: 0.6 + THIN, double: 0.5 + THIN, "repeat-end": 1.15, "repeat-start": ENGRAVING.thickBarline / 2 };
 
 const y = (pos: number) => -pos / 2;
 const ORDW = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
@@ -161,6 +174,8 @@ export interface LayoutOptions {
   prefix?: number;
   /** Width of the bars when there are none (empty stave for editors). */
   minWidth?: number;
+  /** Least width of each bar, to its bar-line (used by scores so every stave puts each bar-line in the same place). */
+  barWidths?: number[];
 }
 
 /** Lay out one stave. */
@@ -215,6 +230,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
   const slots = opts.slots ?? collectSlots(f);
   const barCap = f.timeSignature ? music.barCapacity(music.parseTimeSignature(f.timeSignature)) : undefined;
   const barX: number[] = [];
+  const barWidths: number[] = [];
   let noteCounter = 0;
   // Pending ties and slurs (by voice) that close on a later event.
   const tieFrom = new Map<number, Array<{ x: number; pos: number; up: boolean; pitch: string }>>();
@@ -229,7 +245,12 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
       slotX.set(s.key, sx);
       sx += s.width;
     }
-    const barEnd = Math.max(sx, x + (opts.minWidth ?? 0)) + 0.4;
+    // Where the slots end; the bar-line goes here unless the drawn music reaches further (see after the voices).
+    const slotEnd = Math.max(sx, x + (opts.minWidth ?? 0)) + 0.4;
+    let inkRight = x;
+    const ink = (right: number) => {
+      inkRight = Math.max(inkRight, right);
+    };
     const voices = voicesOf(m);
     const multi = voices.length > 1;
 
@@ -271,10 +292,14 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
           const whole = e.wholeBar || (barCap && music.equals(t.dur, barCap) && voices.length === 1 && tl.length === 1);
           const rg = restGlyph(whole && e.duration.value !== "breve" ? "semibreve" : e.duration.value);
           const restPos = multi ? rg.pos + (vi % 2 === 0 ? 2 : -2) : rhythm ? (e.duration.value === "semibreve" ? 6 : 4) : rg.pos;
-          const rx = whole ? (x + barEnd) / 2 - 0.6 : nx;
+          const rx = whole ? (x + slotEnd) / 2 - 0.6 : nx;
           ev.x = rx;
           ev.glyphs.push({ x: rx, y: y(restPos), ch: rg.ch, cls: "n-glyph" });
-          for (let d = 0; d < (e.duration.dots ?? 0); d++) ev.glyphs.push({ x: rx + 1.5 + d * 0.5, y: y(5), ch: G.dot, cls: "n-glyph" });
+          ink(rx + INK_WIDTH.rest[whole && e.duration.value !== "breve" ? "semibreve" : e.duration.value]);
+          for (let d = 0; d < (e.duration.dots ?? 0); d++) {
+            ev.glyphs.push({ x: rx + 1.5 + d * 0.5, y: y(5), ch: G.dot, cls: "n-glyph" });
+            ink(rx + 1.5 + d * 0.5 + WIDTH.dot);
+          }
           ev.label = `${whole ? "whole-bar" : VALUE_NAME(e)} rest`;
           ev.positionLabel = ev.label;
           if (e.articulations?.includes("fermata")) ev.glyphs.push({ x: rx - 0.6, y: y(Math.max(10, restPos + 4)), ch: G.fermataAbove, cls: "n-glyph" });
@@ -302,6 +327,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
           const p = ps[ni]!;
           const hx = nx + (shifted.has(ni) ? (up ? hw - 0.06 : -(hw - 0.06)) : 0);
           ev.glyphs.push({ x: hx, y: y(p), ch: head, cls: "n-head" });
+          ink(hx + hw);
           ev.pitches.push(n.pitch);
           ev.noteIndex.push(noteCounter++);
           // Ledger lines.
@@ -320,7 +346,11 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
           }
           // Dots.
           const dotPos = p % 2 === 0 ? p + 1 : p;
-          for (let d = 0; d < (e.duration.dots ?? 0); d++) ev.glyphs.push({ x: nx + hw + 0.35 + d * 0.5 + (shifted.size && up ? hw : 0), y: y(dotPos), ch: G.dot, cls: "n-glyph" });
+          for (let d = 0; d < (e.duration.dots ?? 0); d++) {
+            const dx = nx + hw + 0.35 + d * 0.5 + (shifted.size && up ? hw : 0);
+            ev.glyphs.push({ x: dx, y: y(dotPos), ch: G.dot, cls: "n-glyph" });
+            ink(dx + WIDTH.dot);
+          }
         });
         const hi = Math.max(...ps);
         const lo = Math.min(...ps);
@@ -338,7 +368,10 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
         if (hasStem && !g) {
           ev.lines.push({ x1: stemX, x2: stemX, y1: baseY, y2: tipY, w: ENGRAVING.stemThickness, cls: "n-stem" });
           const flag = FLAGS[value];
-          if (flag) ev.glyphs.push({ x: stemX - ENGRAVING.stemThickness / 2, y: tipY, ch: up ? flag[0] : flag[1], cls: "n-glyph" });
+          if (flag) {
+            ev.glyphs.push({ x: stemX - ENGRAVING.stemThickness / 2, y: tipY, ch: up ? flag[0] : flag[1], cls: "n-glyph" });
+            ink(stemX - ENGRAVING.stemThickness / 2 + ((up ? INK_WIDTH.flagUp : INK_WIDTH.flagDown)[value] ?? 0));
+          }
           reach(tipY);
         }
         // Articulations (note side opposite the stem) and fermata above the stave.
@@ -426,7 +459,10 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
           for (const l of members) {
             l.ev.lines.push({ x1: l.stemX, x2: l.stemX, y1: l.headY[0], y2: l.tipY, w: ENGRAVING.stemThickness, cls: "n-stem" });
             const flag = FLAGS[l.t.e.duration.value];
-            if (flag) l.ev.glyphs.push({ x: l.stemX, y: l.tipY, ch: l.up ? flag[0] : flag[1], cls: "n-glyph" });
+            if (flag) {
+              l.ev.glyphs.push({ x: l.stemX, y: l.tipY, ch: l.up ? flag[0] : flag[1], cls: "n-glyph" });
+              ink(l.stemX + ((l.up ? INK_WIDTH.flagUp : INK_WIDTH.flagDown)[l.t.e.duration.value] ?? 0));
+            }
           }
           continue;
         }
@@ -458,6 +494,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
         };
         const owner = first.ev;
         owner.paths.push({ d: beamPath(first.stemX - 0.06, last.stemX + 0.06, 0), fill: true, cls: "n-beam" });
+        ink(last.stemX + 0.06);
         for (let level = 1; level < maxBeams; level++) {
           let k = 0;
           while (k < members.length) {
@@ -505,9 +542,13 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
       }
     });
 
-    // Bar-line.
-    x = barEnd;
+    // Bar-line: after the slots, and never closer to the music than the clearance. Marks drawn left of the anchor (the thin line of a
+    // final or double bar-line, the dots of an end repeat) take their room here too, instead of overlapping the last note or rest.
     const bl = m.barline ?? (bi === f.measures.length - 1 && f.measures.length > 1 ? "final" : "single");
+    // (slotEnd − THIN keeps a single bar-line exactly where the slots put it whenever the music already clears it.)
+    const barlineStart = Math.max(slotEnd - THIN, inkRight + BARLINE_CLEARANCE, x + (opts.barWidths?.[bi] ?? 0));
+    barWidths.push(barlineStart - x);
+    x = barlineStart + BARLINE_LEAD[bl];
     const y1 = rhythm ? y(6) : y(8);
     const y2 = rhythm ? y(2) : y(0);
     if (bl === "final" || bl === "repeat-end") {
@@ -545,7 +586,7 @@ export function layoutFragment(f: NotationFragment, opts: LayoutOptions = {}): S
     top = Math.min(top, -6.5);
     bottom = Math.max(bottom, 1.5);
   }
-  return { width, top: top - 0.8, bottom: bottom + 0.8, lines, fixed, events, barX };
+  return { width, top: top - 0.8, bottom: bottom + 0.8, lines, fixed, events, barX, barWidths };
 }
 
 export interface ScoreLayout {
@@ -558,9 +599,12 @@ export interface ScoreLayout {
 export function layoutScore(score: NotationScore): ScoreLayout {
   const slots = mergeSlots(score.staves.map((s) => collectSlots(s.music)));
   const prefix = Math.max(...score.staves.map((s) => prefixWidth(s.music)));
+  // Each stave may need a wider bar (a flag or rest at its end); a second pass gives every stave the widest, so bar-lines line up.
+  const first = score.staves.map((s) => layoutFragment(s.music, { slots, prefix: prefix + 3.5 }).barWidths);
+  const barWidths = Array.from({ length: Math.max(...first.map((w) => w.length)) }, (_, bi) => Math.max(...first.map((w) => w[bi] ?? 0)));
   let offset = 0;
   const staves = score.staves.map((s) => {
-    const layout = layoutFragment(s.music, { slots, prefix: prefix + 3.5 });
+    const layout = layoutFragment(s.music, { slots, prefix: prefix + 3.5, barWidths });
     const top = offset - layout.top;
     offset = top + layout.bottom + 1.5;
     return { id: s.id, label: s.label, offset: top, layout };
