@@ -99,7 +99,7 @@ describe("accounts and sessions", () => {
     await c.post("/api/lessons/G1-U3-L03/start");
     const exp = await c.get("/api/me/export");
     expect(exp.body.lessonProgress).toHaveLength(1);
-    expect((await c.call("DELETE", "/api/me")).status).toBe(200);
+    expect((await c.call("DELETE", "/api/me", { userId: (await c.get("/api/me")).body.user.id })).status).toBe(200);
     expect((await c.get("/api/me")).status).toBe(401);
     for (const t of ["users", "sessions", "profiles", "lesson_progress", "attempts", "hint_uses"]) {
       expect((db.prepare(`SELECT COUNT(*) AS n FROM ${t}`).get() as { n: number }).n, t).toBe(0);

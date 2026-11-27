@@ -285,7 +285,8 @@ export const rawAuth = {
   register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
   login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }) => request<Me>("POST", "/api/auth/login", b),
   logout: (intent: SignOutIntent = "signout") => request<{ ok: true }>("POST", "/api/auth/logout", {}, { previewReturn: intent }),
-  deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me", undefined, { scope }),
+  // `userId`: the learner the confirmation was shown for. The server deletes nobody if the session now belongs to someone else.
+  deleteAccount: (userId: string) => request<{ ok: true }>("DELETE", "/api/me", { userId }, { scope }),
 };
 
 export const api = {
@@ -307,7 +308,8 @@ export const api = {
   patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
     request<Me>("PATCH", "/api/me/profile", b, { scope }),
   exportData: () => request<unknown>("GET", "/api/me/export", undefined, { scope }),
-  deleteAccount: (): Promise<{ ok: true }> => authExclusive(() => rawAuth.deleteAccount()),
+  // Bound to the learner whose confirmation was shown: queued behind a sign-in in another tab, it must not delete that newer learner.
+  deleteAccount: (userId: string): Promise<{ ok: true }> => authExclusive(() => rawAuth.deleteAccount(userId)),
   progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal, scope }),
   // `explore`: open a written lesson ahead of the guided path (flexible learning). The server decides what that means for unlocking.
   lesson: (id: string, explore = false) => request<OpenedLesson>("GET", `${L(id)}${explore ? "?explore=1" : ""}`, undefined, { scope }),

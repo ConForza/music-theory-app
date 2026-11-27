@@ -343,3 +343,28 @@ describe("review P1: a guest registration that races a sign-out or sign-in", () 
     expect((await fresh.post("/api/auth/login", { email: "ada@example.com", password: "correct horse", onlyIfSignedOut: true })).body.user.email).toBe("ada@example.com");
   });
 });
+
+describe("re-review 3 (P1): account deletion names the learner it was confirmed for", () => {
+  it("deletes nobody when the request carries another learner's session (a sign-in in another tab), and deletes only the named learner otherwise", async () => {
+    const { client, db } = setup();
+    const c = client();
+    const ada = (await register(c, "ada")).body.user.id as string;
+    await c.post("/api/auth/logout");
+    const bob = (await register(c, "bob")).body.user.id as string; // Bob signed in "in another tab": the cookie is now his
+    const wrong = await c.call("DELETE", "/api/me", { userId: ada }); // Ada's confirmation arrives with Bob's cookie
+    expect(wrong.status).toBe(409);
+    expect(wrong.body.error.code).toBe("account_changed");
+    expect(wrong.headers.getSetCookie()).toHaveLength(0);
+    const count = () => (db.prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n;
+    expect(count()).toBe(2);
+    expect((await c.get("/api/me")).body.user.id).toBe(bob); // Bob still signed in
+    // Without a named learner, nothing happens either.
+    expect((await c.call("DELETE", "/api/me")).status).toBe(400);
+    expect((await c.call("DELETE", "/api/me", { userId: "not-a-uuid" })).status).toBe(400);
+    expect(count()).toBe(2);
+    // Naming the signed-in learner deletes exactly that learner.
+    expect((await c.call("DELETE", "/api/me", { userId: bob })).status).toBe(200);
+    expect(count()).toBe(1);
+    expect(db.prepare("SELECT 1 FROM users WHERE id = ?").get(ada)).toBeDefined();
+  });
+});

@@ -590,7 +590,7 @@ describe("privacy and isolation between learners", () => {
     expect(exp.prepResponses).toHaveLength(1);
     for (const k of ["prepHintUses", "placementStarts", "revisionSessions", "revisionAttempts"]) expect(exp).toHaveProperty(k);
     // deleting A removes A's exam data and leaves B's
-    expect((await a.c.call("DELETE", "/api/me")).status).toBe(200);
+    expect((await a.c.call("DELETE", "/api/me", { userId: (await a.c.get("/api/me")).body.user.id })).status).toBe(200);
     expect(db.prepare("SELECT COUNT(*) AS c FROM prep_attempts WHERE user_id = ?").get(a.userId)).toEqual({ c: 0 });
     expect(db.prepare("SELECT COUNT(*) AS c FROM prep_responses WHERE user_id = ?").get(a.userId)).toEqual({ c: 0 });
     expect(db.prepare("SELECT COUNT(*) AS c FROM prep_attempts WHERE user_id = ?").get(b.userId)).toEqual({ c: 1 });

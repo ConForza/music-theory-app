@@ -318,6 +318,36 @@ try {
     await ctx.close();
   });
 
+  await test("re-review 3 (P1): two tabs: Ada confirms deletion while Bob signs in in the other tab; nobody is deleted", async () => {
+    const basic = "Basic " + Buffer.from(`tester1:${tester.password}`).toString("base64");
+    const api = (path, body, cookie) => fetch(`${base}${path}`, { method: "POST", headers: { authorization: basic, origin: base, "content-type": "application/json", ...(cookie ? { cookie } : {}) }, body: JSON.stringify(body) });
+    // Bob's account exists and is set up.
+    const reg = await api("/api/auth/register", { email: "bob@example.com", password: "correct horse battery", displayName: "Bob" });
+    const bobCookie = reg.headers.getSetCookie().find((c) => c.startsWith("mtp_session=")).split(";")[0];
+    await fetch(`${base}/api/me/profile`, { method: "PATCH", headers: { authorization: basic, origin: base, "content-type": "application/json", cookie: bobCookie }, body: JSON.stringify({ onboarded: true, experience: "new", selectedGrade: 1 }) });
+    const { ctx, page: tabA, problems } = await open(appState);
+    await tabA.goto("/settings");
+    await tabA.getByRole("button", { name: "Delete my data…" }).click();
+    await tabA.getByRole("alertdialog").waitFor();
+    // Tab B, same browser: Bob signs in while Ada's confirmation is open in tab A.
+    const tabB = await ctx.newPage();
+    await tabB.goto("/welcome");
+    const signedIn = await tabB.evaluate(async () => (await fetch("/api/auth/login", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: "bob@example.com", password: "correct horse battery" }) })).status);
+    assert.equal(signedIn, 200);
+    await tabA.getByRole("button", { name: "Yes, delete everything" }).click();
+    await tabA.getByText("A different account is now signed in on this device, so nothing was deleted").waitFor();
+    await tabA.getByRole("button", { name: "Show who is signed in" }).click();
+    await tabA.waitForFunction(() => document.querySelector('input[maxlength="30"]')?.value === "Bob"); // Settings now shows Bob
+    for (const email of ["ada@example.com", "bob@example.com"]) {
+      assert.equal((await api("/api/auth/login", { email, password: "correct horse battery" })).status, 200, `${email} still exists`);
+    }
+    assert.deepEqual(problems, []);
+    // Back to Ada for the next test.
+    await tabA.evaluate(async () => { await fetch("/api/auth/login", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: "ada@example.com", password: "correct horse battery" }) }); });
+    appState = await ctx.storageState();
+    await ctx.close();
+  });
+
   await test("signing out ends the learner session for good; the next launch shows the welcome page, the preview stays", async () => {
     const { ctx, page } = await open(appState);
     await page.goto("/settings");

@@ -341,7 +341,14 @@ export function createApp(opts: AppOptions) {
     };
   });
 
-  route("DELETE", "/api/me", true, (ctx) => {
+  // Deleting an account names the learner the confirmation was shown for. The session cookie is per browser, so a request confirmed in one
+  // tab can reach the server after another tab signed someone else in; it must then delete nobody (review of the PWA PR), not whoever the
+  // cookie now belongs to.
+  route("DELETE", "/api/me", true, async (ctx) => {
+    const body = parse(z.object({ userId: Uuid }).strict(), await ctx.body());
+    if (body.userId !== ctx.user!.id) {
+      throw new ApiError(409, "account_changed", "A different account is now signed in on this device, so nothing was deleted. Check who is signed in, then try again.");
+    }
     auth.deleteUser(db, ctx.user!.id);
     ctx.cookies.push(clearCookie());
     return { ok: true };

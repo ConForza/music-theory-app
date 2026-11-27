@@ -256,7 +256,7 @@ describe("export and deletion still cover everything, including Brief 10 data", 
     const exported = new Set(Object.values(ex.body).filter(Array.isArray).flat().length ? Object.keys(ex.body) : []);
     expect(exported.size).toBeGreaterThan(15);
     const otherRows = rowsOf(db, other.userId);
-    expect((await L.c.call("DELETE", "/api/me")).status).toBe(200);
+    expect((await L.c.call("DELETE", "/api/me", { userId: (await L.c.get("/api/me")).body.user.id })).status).toBe(200);
     expect(rowsOf(db, L.userId)).toEqual({});
     expect((db.prepare("SELECT COUNT(*) AS c FROM users WHERE id = ?").get(L.userId) as { c: number }).c).toBe(0);
     expect(rowsOf(db, other.userId)).toEqual(otherRows);

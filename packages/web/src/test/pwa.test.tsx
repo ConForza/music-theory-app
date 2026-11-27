@@ -388,7 +388,7 @@ describe("re-review of the PWA PR: one sign-in change at a time, startup, combin
     await within(api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" }));
     await within(api.logout());
     await within(api.login({ email: "ada@example.com", password: "correct horse" }));
-    await within(api.deleteAccount());
+    await within(api.deleteAccount((await api.me()).user.id));
     expect(s.cookie()).toBe("");
     await expect(api.login({ email: "ada@example.com", password: "correct horse" })).rejects.toMatchObject({ status: 401 });
   });
@@ -416,5 +416,40 @@ describe("re-review of the PWA PR: one sign-in change at a time, startup, combin
     expect(await screen.findByText(/finish signing out and leaving the preview on this device/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Finish signing out and leave the preview" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Finish signing out" })).toBeNull();
+  });
+});
+
+describe("re-review 3 (P1): a queued account deletion can only delete the learner it was confirmed for", () => {
+  it("Ada confirms deletion while Bob signs in in another tab: nothing is deleted, the app says why and shows who is signed in", async () => {
+    const s = startApi();
+    await api.register({ email: "bob@example.com", password: "correct horse", displayName: "Bob" });
+    await api.logout();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    renderApp("/settings");
+    fireEvent.click(await screen.findByRole("button", { name: "Delete my data…" }));
+    expect(screen.getByRole("alertdialog")).toHaveTextContent(/Delete your account and all progress/);
+    // Another tab of the same browser signs Bob in: the shared cookie is now Bob's, this tab still shows Ada.
+    const { rawAuth } = await import("../api/client");
+    await rawAuth.login({ email: "bob@example.com", password: "correct horse" });
+    fireEvent.click(screen.getByRole("button", { name: "Yes, delete everything" }));
+    expect(await screen.findByText(/A different account is now signed in on this device, so nothing was deleted/)).toBeInTheDocument();
+    const users = (s.db.prepare("SELECT email FROM users ORDER BY email").all() as Array<{ email: string }>).map((u) => u.email);
+    expect(users).toEqual(["ada@example.com", "bob@example.com"]); // nobody deleted
+    expect((await api.me()).user.email).toBe("bob@example.com"); // Bob still signed in
+    // The explanation stays until the learner asks to see who is signed in now.
+    fireEvent.click(screen.getByRole("button", { name: "Show who is signed in" }));
+    await waitFor(() => expect(screen.queryByText(/so nothing was deleted/)).toBeNull());
+  });
+
+  it("the normal case still deletes the signed-in learner", async () => {
+    const s = startApi();
+    await api.register({ email: "ada@example.com", password: "correct horse", displayName: "Ada" });
+    await api.patchProfile({ onboarded: true });
+    renderApp("/settings");
+    fireEvent.click(await screen.findByRole("button", { name: "Delete my data…" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, delete everything" }));
+    expect(await screen.findByRole("link", { name: "Get started" })).toBeInTheDocument();
+    expect((s.db.prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n).toBe(0);
   });
 });

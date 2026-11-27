@@ -54,6 +54,13 @@ still an online app: no lessons, answers or progress work offline.
   API (one `mtp-auth` lock per origin; Safari 15.4+, Chromium, Firefox); without it, changes queue within the tab. So a conversion or
   recovery reply still in transit can no longer overwrite a sign-out or a sign-in made meanwhile: the explicit action waits for it, then
   runs on top of it. Every request has a 20 s timeout, so a stalled one releases the section. (`pwa.test.tsx`, both held-reply orders.)
+* **Deletion names the learner** (re-review 3). Because deletion may wait its turn behind a sign-in from another tab, "delete whoever is
+  signed in when it runs" could delete the wrong learner. Settings records the learner ID shown when the confirmation opens, and
+  `DELETE /api/me` now requires that ID in its body (`{ "userId": … }`); the server deletes nothing and answers `409 account_changed` if
+  it is not the signed-in learner. Settings then says that a different account is signed in and nothing was deleted, and offers to show
+  who it is. The Settings page is also keyed by learner, so a different account never inherits the previous one's form. Covered by
+  `session-persistence.test.ts`, `pwa.test.tsx` (Ada confirms while Bob signs in in another tab) and the two-tab Chromium journey in
+  `e2e/pwa.mjs`.
 * **Nothing secret in client storage.** No password, token or credential is written to `localStorage`, `sessionStorage`, IndexedDB or any
   cache (asserted in unit and browser tests). `localStorage` still holds only theme, motion and an "install hint dismissed" date.
 * **Password storage is the platform's job**: the forms are built so Apple Passwords and other managers can save and fill them (below);

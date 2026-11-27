@@ -89,7 +89,7 @@ describe("accounts, isolation, export and deletion", () => {
     for (const k of ["xpLedger", "dailyActivity", "achievements", "masteryEvidence", "conceptMastery", "reviewSessions", "reviewAttempts"]) expect(exp[k].length, k).toBeGreaterThan(0);
     expect(exp.profile).toMatchObject({ timezone: "UTC", dailyGoal: 1 });
     for (const t of NEW_TABLES) expect(count(db, t, uid), t).toBeGreaterThan(0);
-    expect((await c.call("DELETE", "/api/me")).status).toBe(200);
+    expect((await c.call("DELETE", "/api/me", { userId: (await c.get("/api/me")).body.user.id })).status).toBe(200);
     for (const t of NEW_TABLES) expect(count(db, t, uid), t).toBe(0);
   });
 });
