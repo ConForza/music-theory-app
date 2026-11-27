@@ -1,0 +1,74 @@
+name: Deploy to Railway
+
+# Manual only. Nothing deploys on merge or push. Run it from
+# GitHub -> Actions -> "Deploy to Railway" -> Run workflow (Branch: main).
+# Setup, backups, verification and rollback: docs/development/RAILWAY.md
+on:
+  workflow_dispatch:
+    inputs:
+      database_backup:
+        description: "Database backup. Release with migrations? Take and verify a backup first, then choose confirmed-verified."
+        type: choice
+        required: true
+        default: not-confirmed
+        options:
+          - not-confirmed
+          - confirmed-verified
+
+# No token permissions by default; each job asks for what it needs.
+permissions: {}
+
+# One deployment at a time. A second request WAITS (it never cancels the one running). GitHub keeps at most one
+# waiting run per group: a third request replaces the second waiting one, which is harmless for a manual deploy.
+concurrency:
+  group: railway-production-deploy
+  cancel-in-progress: false
+
+jobs:
+  # Runs with no secrets and no environment, so a wrong branch fails loudly (a skipped job would look like success).
+  guard:
+    name: Only main can be deployed
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require main
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          if [ "$REF" != "refs/heads/main" ]; then
+            echo "::error title=Wrong branch::Refusing to deploy '$REF'. Choose 'main' in the Branch picker and run the workflow again."
+            exit 1
+          fi
+
+  deploy:
+    name: Deploy main to Railway
+    needs: guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    # The `production` environment holds the Railway token and IDs and must be limited to the main branch
+    # (Settings -> Environments -> production -> Deployment branches: main). See the runbook.
+    environment: production
+    permissions:
+      contents: read
+      actions: read # read the CI run for this exact commit
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }} # pin the exact commit this run was started on
+          fetch-depth: 0 # full history: "is it on main" and "did migrations change" checks
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify, deploy, monitor and smoke-test
+        # The script has no npm dependencies. Credentials exist only in this step's environment; inputs are passed as
+        # environment variables, never interpolated into shell code.
+        env:
+          RAILWAY_PROJECT_TOKEN: ${{ secrets.RAILWAY_PROJECT_TOKEN }}
+          RAILWAY_PROJECT_ID: ${{ vars.RAILWAY_PROJECT_ID }}
+          RAILWAY_SERVICE_ID: ${{ vars.RAILWAY_SERVICE_ID }}
+          RAILWAY_ENVIRONMENT_ID: ${{ vars.RAILWAY_ENVIRONMENT_ID }}
+          RAILWAY_PUBLIC_URL: ${{ vars.RAILWAY_PUBLIC_URL }}
+          DATABASE_BACKUP: ${{ inputs.database_backup }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/railway-deploy.mjs

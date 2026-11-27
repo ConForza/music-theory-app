@@ -17,7 +17,7 @@
     "validate:release": "npm run validate:release -w @mtp/curriculum",
     "docs:generate": "npm run docs:generate -w @mtp/curriculum",
     "docs:check": "npm run docs:check -w @mtp/curriculum",
-    "check": "npm run typecheck && npm run lint && npm run validate && npm run docs:check && npm test && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run validate && npm run docs:check && npm test && npm run test:deploy && npm run build",
     "bundle": "npm run bundle -w @mtp/curriculum",
     "lint": "eslint .",
     "build": "npm run build -w @mtp/web",
@@ -25,7 +25,8 @@
     "start": "npm run start -w @mtp/api",
     "e2e": "npm run e2e -w @mtp/web",
     "signoff:matrix": "node scripts/signoff-matrix.mjs",
-    "signoff:matrix:check": "node scripts/signoff-matrix.mjs --check"
+    "signoff:matrix:check": "node scripts/signoff-matrix.mjs --check",
+    "test:deploy": "node --test scripts/railway-deploy.test.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
