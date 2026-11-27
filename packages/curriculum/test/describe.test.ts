@@ -94,6 +94,27 @@ describe("musically significant distinctions are kept", () => {
     expect(words([t(3, n("quaver"), n("quaver"))])).toBe("a duplet of two quavers");
   });
 
+  it("reads a tie that has not reached its next note yet, and a tie over the bar-line (second review of PR #30, P2)", () => {
+    expect(words([n("crotchet", { tieToNext: true })], true)).toBe("a crotchet tied to the next note");
+    expect(words([n("minim"), n("crotchet", { tieToNext: true })], true)).toBe("a minim followed by a crotchet tied to the next note");
+    expect(words(beamed(n("quaver"), n("quaver", { tieToNext: true })), true)).toBe("two quavers beamed together, the last tied to the next note");
+    expect(music.barsInWords([[n("minim"), n("crotchet", { tieToNext: true })], [n("crotchet"), n("minim")]], { beams: true })).toBe(
+      "Bar 1: a minim followed by a crotchet tied over the bar-line. Bar 2: a crotchet followed by a minim.",
+    );
+    // the tie is never silently dropped, so starting one always changes the words
+    expect(words([n("crotchet", { tieToNext: true })], true)).not.toBe(words([n("crotchet")], true));
+  });
+
+  it("describes the beam inside a tuplet when beams are read (second review of PR #30, P3)", () => {
+    const tb: E = { kind: "tuplet", actual: 3, normal: 2, events: beamed(n("quaver"), n("quaver"), n("quaver")) };
+    const tf: E = { kind: "tuplet", actual: 3, normal: 2, events: [n("quaver"), n("quaver"), n("quaver")] };
+    expect(words([tb], true)).toBe("a triplet of three beamed quavers");
+    expect(words([tf], true)).toBe("a triplet of three quavers");
+    expect(words([tb, tf], true)).toBe("a triplet of three beamed quavers followed by a triplet of three quavers");
+    const partly: E = { kind: "tuplet", actual: 3, normal: 2, events: [...beamed(n("quaver"), n("quaver")), n("quaver")] };
+    expect(words([partly], true)).toBe("a triplet (two quavers beamed together followed by a quaver)");
+  });
+
   it("names a whole-bar rest as such", () => {
     expect(words([r("semibreve", { wholeBar: true })])).toBe("a whole-bar rest");
   });

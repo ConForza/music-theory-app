@@ -266,7 +266,9 @@ export function BarlineEditor({ input, value, onChange, disabled }: { input: Ext
           <span>End with a double bar-line</span>
         </label>
       )}
-      <p className="hint-line" aria-live="polite">{after.size ? `${after.size} bar-line${after.size === 1 ? "" : "s"} placed in ${input.timeSignature}.` : `Count the beats of ${input.timeSignature} and tap the gaps where each bar ends.`}</p>
+      {/* The picture takes a short name (describe={false}), so the whole rhythm, split where the learner's bar-lines are, is read here, and again
+          after every change (second review of PR #30: the last note had no text equivalent and placed bar-lines were not read back). */}
+      <p className="hint-line" aria-live="polite">{after.size ? `${after.size} bar-line${after.size === 1 ? "" : "s"} placed in ${input.timeSignature}.` : `Count the beats of ${input.timeSignature} and tap the gaps where each bar ends.`} <span className="visually-hidden">{display.textAlternative}</span></p>
     </div>
   );
 }

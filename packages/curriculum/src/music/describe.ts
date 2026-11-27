@@ -127,7 +127,7 @@ const valuesOf = (r: { e: WordEvent; n: number }) => durationInWords(r.e.duratio
  * A unit in words, `n` times. `as`: "whole" names it on its own; "target" names it as the end of a tie from the unit before ("the first of two
  * beamed quavers"). The tie out of a unit's last note is described by the caller, so it is left out here.
  */
-function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole"): string {
+function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole", beams = false): string {
   const own = (m: WordEvent, k: number, list: WordEvent[]) => (k === list.length - 1 ? { ...m, tieToNext: false } : m);
   if (u.type === "single") return plainWords({ ...u.ev, tieToNext: false }, n);
   if (u.type === "tie") return u.members.map((m) => plainWords({ ...m, tieToNext: false }, 1)).join(" tied to ");
@@ -143,22 +143,27 @@ function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole"): string
     if (as === "target") return `the first note of a beamed group (${inner})`;
     return n === 1 ? `a beamed group (${inner})` : `${countWord(n)} beamed groups, each (${inner})`;
   }
-  const r = runs(u.ev.events ?? []);
-  const uniform = uniformNotes(r);
+  const inner = u.ev.events ?? [];
+  const r = runs(inner);
+  // Beams inside a tuplet are read too when beams are (second review of PR #30): a triplet of three beamed quavers is not three separate ones.
+  const beamedInner = beams && inner.some((e) => inBeam(e));
+  const allOneBeam = beamedInner && inner.length > 1 && inner[0]!.beam === "begin" && inner[inner.length - 1]!.beam === "end" && inner.slice(1, -1).every((e) => e.beam === "continue");
+  const uniform = uniformNotes(r) && (!beamedInner || allOneBeam);
   const name = tupletName(u.ev.actual ?? 3, u.ev.normal);
-  const listed = `(${listInWords(r.map((x) => plainWords(x.e, x.n)))})`;
+  const listed = beamedInner && !allOneBeam ? `(${rhythmInWords(inner, { beams: true })})` : `(${listInWords(r.map((x) => plainWords(x.e, x.n)))})`;
+  const valuesOfTuplet = (x: { e: WordEvent; n: number }) => `${allOneBeam ? "beamed " : ""}${valuesOf(x)}`;
   let one: string;
   let many: string;
   if (name) {
     // "a triplet of three quavers", "two triplets of three quavers each"
-    const contents = uniform ? `of ${countWord(r[0]!.n)} ${valuesOf(r[0]!)}` : listed;
+    const contents = uniform ? `of ${countWord(r[0]!.n)} ${valuesOfTuplet(r[0]!)}` : listed;
     one = `${withArticle(name)} ${contents}`;
     many = `${countWord(n)} ${name}s${uniform ? ` ${contents} each` : `, each ${contents}`}`;
   } else {
     // any other ratio says it: "four quavers in the time of three", "two groups of four quavers in the time of three"
     const time = u.ev.normal === undefined ? "" : ` in the time of ${countWord(u.ev.normal)}`;
-    one = uniform ? `${countWord(r[0]!.n)} ${valuesOf(r[0]!)}${time}` : `a group${time} ${listed}`;
-    many = uniform ? `${countWord(n)} groups of ${countWord(r[0]!.n)} ${valuesOf(r[0]!)}${time}` : `${countWord(n)} groups${time}, each ${listed}`;
+    one = uniform ? `${countWord(r[0]!.n)} ${valuesOfTuplet(r[0]!)}${time}` : `a group${time} ${listed}`;
+    many = uniform ? `${countWord(n)} groups of ${countWord(r[0]!.n)} ${valuesOfTuplet(r[0]!)}${time}` : `${countWord(n)} groups${time}, each ${listed}`;
   }
   if (as === "target") return `the first note of ${one}`;
   return n === 1 ? one : many;
@@ -169,21 +174,27 @@ function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole"): string
  * ("four quavers beamed together", "a beamed group (a dotted quaver, a semiquaver and a quaver)") so a listener hears the grouping as a
  * sighted reader sees it; without, beams are ignored. Two parts read "A followed by B".
  */
-export function rhythmInWords(events: WordEvent[], opts: { beams?: boolean } = {}): string {
-  const units = unitsOf(events, opts.beams ?? false);
+export function rhythmInWords(events: WordEvent[], opts: { beams?: boolean; tieOverBarline?: boolean } = {}): string {
+  const beams = opts.beams ?? false;
+  const units = unitsOf(events, beams);
   const parts: string[] = [];
   for (let i = 0; i < units.length; ) {
     const u = units[i]!;
-    if (tiesOut(u) && i + 1 < units.length) {
+    if (tiesOut(u)) {
       // a tie across a group boundary links this unit to the next one: "a crotchet tied into the first of two beamed quavers",
       // "two quavers beamed together, the last tied to a crotchet"
-      let text = unitWords(u, 1);
+      let text = unitWords(u, 1, "whole", beams);
       let k = i;
       while (tiesOut(units[k]!) && k + 1 < units.length) {
         const next = units[k + 1]!;
         const join = next.type === "single" || next.type === "tie" ? "tied to" : "tied into";
-        text += units[k]!.type === "beam" ? `, the last ${join} ${unitWords(next, 1, "target")}` : ` ${join} ${unitWords(next, 1, "target")}`;
+        text += units[k]!.type === "beam" ? `, the last ${join} ${unitWords(next, 1, "target", beams)}` : ` ${join} ${unitWords(next, 1, "target", beams)}`;
         k++;
+      }
+      // the last note still ties on: to a note not written yet, or over the bar-line into the next bar (second review of PR #30)
+      if (tiesOut(units[k]!) && k + 1 >= units.length) {
+        const end = opts.tieOverBarline ? "over the bar-line" : "to the next note";
+        text += units[k]!.type === "beam" ? `, the last tied ${end}` : ` tied ${end}`;
       }
       parts.push(text);
       i = k + 1;
@@ -191,8 +202,8 @@ export function rhythmInWords(events: WordEvent[], opts: { beams?: boolean } = {
     }
     const key = unitKey(u);
     let n = 1;
-    while (i + n < units.length && unitKey(units[i + n]!) === key && !tiesOut(units[i + n - 1]!)) n++;
-    parts.push(unitWords(u, n));
+    while (i + n < units.length && unitKey(units[i + n]!) === key && !tiesOut(units[i + n]!)) n++;
+    parts.push(unitWords(u, n, "whole", beams));
     i += n;
   }
   return listInWords(parts, true);
@@ -200,4 +211,4 @@ export function rhythmInWords(events: WordEvent[], opts: { beams?: boolean } = {
 
 /** Several bars: "Bar 1: four quavers beamed together followed by a minim. Bar 2: empty." */
 export const barsInWords = (bars: WordEvent[][], opts: { beams?: boolean } = {}): string =>
-  bars.map((b, i) => `Bar ${i + 1}: ${b.length ? rhythmInWords(b, opts) : "empty"}.`).join(" ");
+  bars.map((b, i) => `Bar ${i + 1}: ${b.length ? rhythmInWords(b, { ...opts, tieOverBarline: (bars[i + 1]?.length ?? 0) > 0 }) : "empty"}.`).join(" ");

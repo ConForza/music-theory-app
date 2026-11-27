@@ -9,6 +9,7 @@ import { chromium, devices } from "playwright";
 import { answerOnScreen, axe, finishViaApi, get, guest, noOverflow, playLessonInBrowser, playNodeInBrowser, playReviewInBrowser, post, serve, shot } from "./g1lib.mjs";
 import { checkEveryPaletteSymbol, paletteInkOutside } from "./palette.mjs";
 import { canonicalResponse, inputFor } from "@mtp/engine";
+import { music } from "@mtp/curriculum";
 
 const S = await serve();
 const browser = await chromium.launch();
@@ -323,6 +324,45 @@ await test("bar-builder palette: every note and rest symbol sits inside its butt
     await checkEveryPaletteSymbol(page, assert, input);
     await ctx.close();
   }
+});
+
+// Second review of PR #30, P1: the bar-line editor's picture has a short name, so the editor itself must read the whole rhythm (the last note included)
+// and read it back, split into bars, after every bar-line the learner places. Checked in the real accessibility tree, through the keyboard.
+await test("bar-line placement reads the whole rhythm and the learner's bars in the accessibility tree", async () => {
+  const ctx = await ctxFor(profiles.iphone);
+  const { page } = await guest(ctx);
+  const items = S.course.authoredItems("G1-U2-L01");
+  const k = items.findIndex((it) => it.id === "i.g1-u2-l01.guided-2");
+  assert.ok(k > 0, "the lesson has its bar-line question");
+  await page.goto("/lesson/G1-U2-L01?explore=1");
+  await page.getByRole("button", { name: /Let's go|Continue/ }).click();
+  if (await page.getByRole("heading", { name: "Here's the idea" }).isVisible().catch(() => false)) {
+    await page.getByRole("button", { name: "Next" }).click();
+    await page.getByRole("button", { name: "Try some questions" }).click();
+  }
+  for (let q = 0; q < k; q++) {
+    await page.getByText(new RegExp(`Question ${q + 1} of ${items.length}`)).waitFor();
+    const scope = S.course.scopeFor("G1-U2-L01", items[q]);
+    await answerOnScreen(page, S, items[q], scope, canonicalResponse(S.course.ix, items[q], scope));
+    await page.locator(".feedback").getByText("Correct!").waitFor();
+    await page.getByRole("button", { name: "Continue" }).click();
+  }
+  await page.getByText(new RegExp(`Question ${k + 1} of ${items.length}`)).waitFor();
+  const input = inputFor(S.course.ix, items[k], S.course.scopeFor("G1-U2-L01", items[k]));
+  assert.equal(input.kind, "barlines");
+  const tree = async () => (await page.locator("section.question").ariaSnapshot()).replace(/\s+/g, " ");
+  const whole = music.barsInWords([input.events], { beams: true });
+  assert.ok((await tree()).includes(whole), `the whole rhythm is in the tree: ${whole}`);
+  // place a bar-line with the keyboard after note 4, and hear the bars read back
+  const gap = page.getByRole("button", { name: /^Bar-line after note 4 / });
+  await gap.focus();
+  await page.keyboard.press("Enter");
+  const split = music.barsInWords(music.splitAt(input.events, [4]), { beams: true });
+  await page.waitForFunction((t) => (document.querySelector(".barline-editor .hint-line")?.textContent ?? "").includes(t), split);
+  const now = await tree();
+  assert.ok(now.includes("1 bar-line placed in"), "the placed bar-line is announced");
+  assert.ok(now.includes(split), `the learner's bars are read back: ${split}`);
+  await ctx.close();
 });
 
 await browser.close();

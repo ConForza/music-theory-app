@@ -89,7 +89,7 @@ Three layers are kept apart:
 Checks made:
 
 * **Nothing a screen-reader user relied on was removed.** Where a prompt stopped listing notes (`g5.bar-complete`, `g5.division-write`), the same notes are in the answer editor's description, in the same place as the meter.
-* **One reading surface.** Static notation is described once, as the picture's own name; the focusable scrolling group keeps only its short label (it previously also carried the description as `aria-describedby` and as a hidden paragraph). In an answer editor the picture takes a short name ("Your answer, drawn as notation (its description follows)") and the live meter is the one place the description is announced, and re-announced after each change.
+* **One reading surface.** Static notation is described once, as the picture's own name; the focusable scrolling group keeps only its short label (it previously also carried the description as `aria-describedby` and as a hidden paragraph). In an answer editor the picture takes a short name ("Your answer, drawn as notation (its description follows)") and the editor's live text (the bar builder's meter, the bar-line editor's status line, the grouping editor's description) is the one place the whole rhythm is announced, and re-announced after each change; a rendered test checks every such editor.
 * **Every voice of a shared stave is described** (first review; a defect older than this work): the SATB question described only the first voice of each stave, so the note marked x could be missing. Each voice is now described with its stem direction ("Upper voice (stems up): …. Lower voice (stems down): a note marked x …"), which is how a sighted reader tells them apart, without naming the voice part.
 * **Descriptions do not give answers away.** Consolidation adds no information that the list did not already hold (a sighted learner sees the same groups). A test checks that a time-signature question's description never names the time signature asked for, and the existing release-blocker test that a grouping question's description differs from the grouping asked for still passes.
 * The stored `textAlternative` of the Brief 04 rhythm questions is part of their identity and keeps its exact form; only a double-dotted note's words were corrected ("double-dotted minim", not "dotted dotted minim"), which no Brief 04 question contains.
@@ -241,6 +241,16 @@ Practice Lab prompts reworded:
 | `s.clefs-and-transposition` | This melody is at concert pitch. Write it as it would appear in a part for horn in F, which sounds a perfect 5th lower than written: transpose it up a perfect 5th, with the new key signature. | This melody is at concert pitch. Transpose it up a perfect 5th to give the part for a horn in F, with the new key signature. |
 | `s.terms-and-ornaments` | These written-out notes could be replaced by one ornament sign on the main note. Which ornament is it? | Which ornament sign on the main note could replace these written-out notes? |
 
+
+The second review (of the follow-up) confirmed those fixes and found three more, introduced by the follow-up itself:
+
+| Finding | What changed |
+|---|---|
+| **P1.** The bar-line editor gave its picture the short name but had no live description, so its last note had no text equivalent and placed bar-lines were never read back | The editor's live line now reads the whole rhythm, split where the learner's bar-lines are ("1 bar-line placed in 3/4. Bar 1: three crotchets. Bar 2: a minim followed by two quavers."). A rendered test requires every editor that uses the short name to read the whole rhythm live, and the Grade 1 browser journey checks the real accessibility tree of `G1-U2-L01` question 2 before and after a keyboard edit (it fails without the fix). |
+| **P2.** A tie on the last note was dropped: starting a tie did not change the live description, and a tie into the next bar was lost | A tie still waiting for its next note reads "a crotchet tied to the next note"; a tie into the next bar reads "tied over the bar-line". Re-authoring restored this in a Grade 1 lesson description ("three crotchets followed by a crotchet tied over the bar-line"). |
+| **P3.** Beams inside a tuplet were compared but not described | "a triplet of three beamed quavers" when the group is beamed; a partly beamed group is listed by its beams. Re-authoring added this to five lesson descriptions. |
+
+The written-out ornament prompt still names its notes ("An ornament on F♯ is written out as G, F♯, E, F♯."): the question tests recognising the ornament, not reading the pitches, so the names stay as support.
 Left for separate work, as the review agreed: the layout defects in section 10 and the missing `main` landmark on the lesson player that axe reports on both revisions (a best-practice rule, not one the WCAG journeys run).
 
 ## 12. Validation
