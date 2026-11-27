@@ -27,9 +27,12 @@ export function SignIn() {
   return (
     <main className="onboarding" id="main" tabIndex={-1}>
       <div className="auth-head"><Logo size={56} /><h1>Welcome back</h1></div>
-      <form className="form" onSubmit={submit} noValidate>
-        <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" inputMode="email" required /></label>
-        <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required /></label>
+      {/* Password managers (Apple Passwords, browser and third-party managers): a real form with stable names and ids, the email marked as
+          the account's username, and current-password, so saved details are offered with AutoFill (and the device's Face ID or Touch ID).
+          method="post": if the form were ever submitted natively, the password must never end up in the address. */}
+      <form className="form" id="signin-form" name="signin" method="post" action="/signin" onSubmit={submit} noValidate>
+        <label>Email<input id="signin-email" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" inputMode="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} required /></label>
+        <label>Password<input id="signin-password" name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required /></label>
         {error && <p className="form-error" role="alert">{error}</p>}
         <button className="btn btn-primary btn-large" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
       </form>

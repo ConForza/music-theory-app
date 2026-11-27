@@ -7,7 +7,8 @@ Brief 02 builds the mechanisms; the legal decisions below are for the owner befo
 * No public profiles, followers, leaderboards, adverts or third-party analytics. Reminder notifications are off and not offered yet.
 * Export (`GET /api/me/export`) and deletion (`DELETE /api/me`, cascading) from Settings.
 * Brief 10 adds `prep_attempts`, `prep_responses`, `prep_hint_uses`, `placement_starts`, `revision_sessions` and `revision_attempts`: the practice-examination and placement questions (as seeds), the learner's raw answers, hints, results, where they chose to start, and revision sessions. All are keyed to the learner with `ON DELETE CASCADE`, included in the export, never shown to anyone else, and never used for rankings or leaderboards (there are none). The optional extra-time setting is stored in the learner's own settings and is never part of a score or shown with a result.
-* Session cookie is first-party, `HttpOnly`, `SameSite=Lax`.
+* Session cookie is first-party, `HttpOnly`, `SameSite=Lax`. A registered learner's session ends 60 days after last use (renewed at most daily while used) and never more than 365 days after signing in; a guest's session is unchanged (fixed 60 days). See `docs/development/PWA_AND_SIGN_IN.md`.
+* Private preview: a separate `mtp_preview` cookie (`HttpOnly`, `SameSite=Lax`) records only that an invited tester's device passed the preview gate; it identifies no learner and holds no learning data. Stored as a hash with the tester name from `MTP_PREVIEW_ACCESS`.
 
 **Added in the final release hardening (technical controls only; none of these is a policy decision)**
 * Guest accounts: at most 60 new guest accounts per client address per 15 minutes (per process, in memory). The address is the TCP peer, or the entry our own proxies appended when `MTP_TRUST_PROXY_HOPS` is set; a client-supplied `X-Forwarded-For` cannot change it.

@@ -127,7 +127,14 @@ function parseCookies(header: string | null): Record<string, string> {
   const out: Record<string, string> = {};
   for (const part of (header ?? "").split(";")) {
     const i = part.indexOf("=");
-    if (i > 0) out[part.slice(0, i).trim()] = decodeURIComponent(part.slice(i + 1).trim());
+    if (i <= 0) continue;
+    const raw = part.slice(i + 1).trim();
+    // A malformed value (e.g. a lone "%") is kept as sent rather than failing the whole request; it then simply matches no session.
+    try {
+      out[part.slice(0, i).trim()] = decodeURIComponent(raw);
+    } catch {
+      out[part.slice(0, i).trim()] = raw;
+    }
   }
   return out;
 }
@@ -235,8 +242,13 @@ export function createApp(opts: AppOptions) {
     }
     const passwordHash = await auth.hashPassword(body.password);
     if (ctx.user?.isGuest) {
-      // Upgrade in place: the guest's progress stays attached to the same learner.
-      const user = auth.upgradeGuest(db, ctx.user.id, { displayName: body.displayName, email: body.email, passwordHash });
+      // Upgrade in place: the guest's progress stays attached to the same learner. The privilege changes, so the guest session is replaced.
+      // The guest identity was read before the body and the slow hash, so it is checked again, and the guest token consumed, in the same
+      // transaction as the upgrade: a registration that raced a sign-out or sign-in is refused rather than reviving a session.
+      // If this reply is lost the old cookie no longer signs in; the form then signs in with the details just typed (see AccountForm).
+      const { user, session } = auth.upgradeGuestWithSession(db, ctx.token, ctx.user.id, { displayName: body.displayName, email: body.email, passwordHash });
+      ctx.cookies.push(sessionCookie(session.token, session.maxAgeSeconds));
+      ctx.token = session.token;
       return me(user, ctx.token);
     }
     const user = auth.createUser(db, { displayName: body.displayName, email: body.email, passwordHash });
@@ -245,13 +257,19 @@ export function createApp(opts: AppOptions) {
   });
 
   route("POST", "/api/auth/login", false, async (ctx) => {
-    const body = parse(z.object({ email: Email, password: z.string().min(1).max(128) }).strict(), await ctx.body());
+    // `onlyIfSignedOut`: the registration form's recovery after a lost reply. It may sign in only if this device has no live session (or
+    // already has this very account's); it must never replace a different learner who signed in meanwhile.
+    const body = parse(z.object({ email: Email, password: z.string().min(1).max(128), onlyIfSignedOut: z.boolean().optional() }).strict(), await ctx.body());
     loginIpLimiter.check(`loginip:${ctx.client}`);
     loginLimiter.check(`login:${body.email}`);
     const found = auth.findByEmail(db, body.email);
     // Same error and similar work whether or not the account exists.
     const ok = found?.passwordHash ? await auth.verifyPassword(body.password, found.passwordHash) : (await auth.hashPassword(body.password), false);
     if (!found || !ok) throw new ApiError(401, "bad_credentials", "That email and password don't match.");
+    if (body.onlyIfSignedOut && ctx.user) {
+      if (ctx.user.id === found.id) return me(ctx.user, ctx.token);
+      throw new ApiError(409, "signed_in", "Someone else is signed in on this device. Sign out first, then sign in.");
+    }
     if (ctx.token) auth.destroySession(db, ctx.token);
     startSession(ctx, found.id);
     const { passwordHash: _omit, ...user } = found;
@@ -323,7 +341,14 @@ export function createApp(opts: AppOptions) {
     };
   });
 
-  route("DELETE", "/api/me", true, (ctx) => {
+  // Deleting an account names the learner the confirmation was shown for. The session cookie is per browser, so a request confirmed in one
+  // tab can reach the server after another tab signed someone else in; it must then delete nobody (review of the PWA PR), not whoever the
+  // cookie now belongs to.
+  route("DELETE", "/api/me", true, async (ctx) => {
+    const body = parse(z.object({ userId: Uuid }).strict(), await ctx.body());
+    if (body.userId !== ctx.user!.id) {
+      throw new ApiError(409, "account_changed", "A different account is now signed in on this device, so nothing was deleted. Check who is signed in, then try again.");
+    }
     auth.deleteUser(db, ctx.user!.id);
     ctx.cookies.push(clearCookie());
     return { ok: true };
@@ -520,7 +545,8 @@ export function createApp(opts: AppOptions) {
         }
       }
       const token = parseCookies(req.headers.get("cookie"))[COOKIE];
-      const user = auth.userForToken(db, token);
+      const session = auth.resolveSession(db, token);
+      const user = session?.user;
       if (route.needsAuth && !user) throw new ApiError(401, "unauthenticated", "Please sign in to continue.");
       if (user) db.prepare("UPDATE users SET last_seen_at = ? WHERE id = ?").run(new Date().toISOString(), user.id);
       const ctx: Ctx = {
@@ -543,6 +569,10 @@ export function createApp(opts: AppOptions) {
         },
       };
       const data = await route.handler(ctx);
+      // Renewal is written only once the request has succeeded, and never sets a cookie: the cookie already lasts to the session's absolute
+      // limit (see auth.ts). A handler that ended the session (sign-out, account deletion) leaves nothing to renew: the conditional write
+      // finds no live row.
+      if (session) auth.commitRenewal(db, session);
       for (const c of cookies) headers.append("set-cookie", c);
       return new Response(JSON.stringify(data), { status: 200, headers });
     } catch (e) {

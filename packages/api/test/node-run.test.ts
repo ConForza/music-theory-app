@@ -132,7 +132,7 @@ describe("account export and deletion cover the new tables", () => {
     expect(exp.nodeSessions.length).toBeGreaterThan(0);
     expect(exp.nodeAttempts.length).toBeGreaterThan(0);
     expect(exp.assessmentResults.length).toBe(1);
-    expect((await c.call("DELETE", "/api/me")).status).toBe(200);
+    expect((await c.call("DELETE", "/api/me", { userId: (await c.get("/api/me")).body.user.id })).status).toBe(200);
     for (const t of ["node_sessions", "node_attempts", "assessment_results"]) {
       expect((db.prepare(`SELECT COUNT(*) AS n FROM ${t} WHERE user_id = ?`).get(userId) as { n: number }).n).toBe(0);
     }

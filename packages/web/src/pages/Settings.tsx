@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { api, ApiFailure, type Settings as SettingsT } from "../api/client";
 import { SignOutButton } from "../components/SignOutButton";
+import { InstallGuide } from "../components/InstallApp";
 import { saveFailure } from "../lib/errors";
 import { useApp } from "../state/app";
 
@@ -21,8 +22,14 @@ function Segmented<T extends string>({ legend, value, options, onChange }: { leg
   );
 }
 
+/** One learner's settings. Keyed by learner, so a different account signing in on this device never inherits the last one's form. */
 export function Settings() {
-  const { me, updateProfile, setMe } = useApp();
+  const { me } = useApp();
+  return <LearnerSettings key={me!.user.id} />;
+}
+
+function LearnerSettings() {
+  const { me, updateProfile, setMe, reloadAll } = useApp();
   const nav = useNavigate();
   const s = me!.profile.settings;
   const [name, setName] = useState(me!.user.displayName);
@@ -31,7 +38,11 @@ export function Settings() {
   const confirmedName = useRef(me!.user.displayName); // the last nickname the server confirmed
   confirmedName.current = me!.user.displayName;
   const [msg, setMsg] = useState<string | null>(null);
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  // The learner the deletion confirmation was opened for (null when it is closed). The request names this learner, never "whoever is
+  // signed in by then": another tab may sign someone else in while the confirmation is open (review of the PWA PR).
+  const [confirmDeleteFor, setConfirmDeleteFor] = useState<string | null>(null);
+  const [accountChanged, setAccountChanged] = useState<string | null>(null);
+  const confirmDelete = confirmDeleteFor !== null && confirmDeleteFor === me!.user.id;
 
   const [saving, setSaving] = useState(0);
   const [failures, setFailures] = useState<Record<string, { message: string; retry: () => void }>>({});
@@ -73,12 +84,22 @@ export function Settings() {
   }
 
   async function remove() {
+    const target = confirmDeleteFor;
+    if (!target || target !== me!.user.id) {
+      setConfirmDeleteFor(null);
+      setAccountChanged("A different account is now signed in on this device, so nothing was deleted. Check who is signed in, then try again.");
+      return;
+    }
     try {
-      await api.deleteAccount();
+      await api.deleteAccount(target);
       setMe(null);
       nav("/welcome", { replace: true });
     } catch (e) {
-      setMsg(e instanceof ApiFailure ? e.message : "Couldn't delete your data.");
+      setConfirmDeleteFor(null);
+      // The account on this device changed in another tab: say so and leave the explanation on screen; switching to the other learner
+      // straight away would replace this page before it could be read.
+      if (e instanceof ApiFailure && e.code === "account_changed") setAccountChanged(e.message);
+      else setMsg(e instanceof ApiFailure ? e.message : "Couldn't delete your data.");
     }
   }
 
@@ -86,6 +107,12 @@ export function Settings() {
     <div className="page">
       <h1>Settings</h1>
       {msg && <p className="form-error" role="alert">{msg}</p>}
+      {accountChanged && (
+        <div className="form-error" role="alert">
+          <p>{accountChanged}</p>
+          <button type="button" className="btn btn-ghost btn-small" onClick={reloadAll}>Show who is signed in</button>
+        </div>
+      )}
       {failureList.map(([key, f]) => (
         <div key={key} className="form-error" role="alert">
           <p>{f.message}</p>
@@ -148,24 +175,26 @@ export function Settings() {
         <p className="muted small">Reminder notifications are off, and there are none to turn on yet.</p>
       </section>
 
+      <InstallGuide me={me} />
+
       <section className="card" aria-labelledby="data-h">
         <h2 id="data-h">Your data</h2>
         <p>Download everything we hold about you, or delete it for good.</p>
         <div className="row">
           <button className="btn btn-ghost" onClick={download}>Download my data</button>
           {!confirmDelete ? (
-            <button className="btn btn-danger-quiet" onClick={() => setConfirmDelete(true)}>Delete my data…</button>
+            <button className="btn btn-danger-quiet" onClick={() => setConfirmDeleteFor(me!.user.id)}>Delete my data…</button>
           ) : (
             <div role="alertdialog" aria-labelledby="del-h" className="confirm">
               <p id="del-h"><strong>Delete your account and all progress?</strong> This can't be undone.</p>
               <button className="btn btn-danger" onClick={remove}>Yes, delete everything</button>
-              <button className="btn btn-quiet" onClick={() => setConfirmDelete(false)}>Keep my account</button>
+              <button className="btn btn-quiet" onClick={() => setConfirmDeleteFor(null)}>Keep my account</button>
             </div>
           )}
         </div>
       </section>
 
-      <SignOutButton />
+      <SignOutButton offerLeavePreview />
       <p className="fine-print">Music Theory Path is independent and not affiliated with or endorsed by ABRSM. Practice material is not an official examination.</p>
     </div>
   );

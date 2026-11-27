@@ -25,6 +25,7 @@ export default tseslint.config(
   },
   { files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.node } },
   { files: ["packages/web/e2e/**"], languageOptions: { globals: { ...globals.node, ...globals.browser } } },
+  { files: ["packages/web/public/sw.js"], languageOptions: { globals: globals.serviceworker } },
   // Brief 01 code is unchanged by Brief 02; keep its existing style.
   { files: ["packages/curriculum/**"], rules: { "no-useless-assignment": "off" } },
 );

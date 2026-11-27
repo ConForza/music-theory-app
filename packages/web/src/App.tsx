@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
 import { RequireAuth, PublicOnly } from "./components/Guards";
-import { Loading, NotFoundView, Shell } from "./components/Shell";
+import { ConnectionProblem, Loading, NotFoundView, Shell } from "./components/Shell";
 import { Grades } from "./pages/Grades";
 import { Learn } from "./pages/Learn";
 import { Lesson } from "./pages/Lesson";
@@ -24,8 +24,10 @@ import { useParams } from "react-router";
 
 /** The front door: wait to learn who is signed in, then go to their path or the welcome page. */
 function Home() {
-  const { me } = useApp();
-  if (me === undefined) return <Loading />;
+  const { me, meError, reloadAll } = useApp();
+  if (me === undefined) return <Loading label="Opening Music Theory Path…" />;
+  // Offline or server unreachable at launch: say so, rather than showing the welcome page as if the learner were signed out.
+  if (meError) return <ConnectionProblem error={meError} onRetry={reloadAll} />;
   return <Navigate to={me ? "/learn" : "/welcome"} replace />;
 }
 

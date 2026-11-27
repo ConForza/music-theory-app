@@ -29,14 +29,18 @@
 
 ## Testers: invite and revoke
 
-The gate is HTTP Basic authentication in front of **every** route (web app, assets, `/robots.txt`, all `/api/*`), separate from learner accounts. Only
-`GET /api/health` is open (read-only, returns `{ok, curriculumVersion}`), which is what Railway's healthcheck needs; guest, registration, login and
-student routes are not reachable without credentials. Responses carry `X-Robots-Tag: noindex`.
+The gate sits in front of **every** route (web app, assets, `/robots.txt`, all `/api/*`), separate from learner accounts. Since the PWA brief a
+tester signs in on a small **preview sign-in page** (`/preview/signin`) with their tester name and password, which creates an HttpOnly preview
+session cookie (about once per device; an installed Home Screen app may open already signed in, or ask once more); there is no HTTP Basic prompt any more. Open without it:
+`GET /api/health` (read-only, returns `{ok, curriculumVersion}`, what Railway's healthcheck needs), the sign-in page, and the installation
+metadata (manifest and icons). Guest, registration, login and student routes are not reachable without preview access. Responses carry
+`X-Robots-Tag: noindex`. Full design, revocation and tests: `docs/development/PWA_AND_SIGN_IN.md`.
 
 * **Invite**: `npm run preview:invite -w @mtp/api -- alice` prints a random 192-bit password (show it to the tester once, via a private channel) and an entry `alice:<sha256>`. Append the entry to `MTP_PREVIEW_ACCESS` (comma-separated) in Railway and deploy. Only hashes are stored; no credentials are in Git, and none ever go in a URL.
-* **Revoke**: remove that tester's entry and deploy. Credentials stop working when the new process starts (a deploy restarts the service; learner sessions inside the app are unaffected, but the tester can no longer reach it).
+* **Revoke**: remove that tester's entry and deploy. When the new process starts, the credentials stop working and **every preview session issued to that tester is invalidated and deleted** (sessions are tied to the exact entry, so re-issuing a tester's password also ends their old sessions). Learner sessions inside the app are unaffected, but the tester can no longer reach it.
 * **Adults and internal testers only.** No children until the age/privacy notice, consent arrangements and data-location decisions are approved. No production WMF data.
-* Browsers cache Basic credentials until closed; use a private window to test revocation.
+* Shared devices: learner sign-out keeps the device's preview access; Settings offers **Sign out and leave the preview on this device** to end both.
+* Existing invitations keep working unchanged (same `MTP_PREVIEW_ACCESS` entries). Scripts may still send them as `Authorization: Basic` (`curl -u name:password`); browsers are never challenged.
 
 Message to send testers with their password:
 
@@ -94,9 +98,9 @@ like a deploy (stop, then warm-up), so expect occasional brief downtime.
 
 Record the deployed commit SHA, region, and results.
 
-1. Uninvited: `curl -i https://<domain>/`, `/api/me`, `POST /api/auth/guest` → 401; `/api/health` → 200 and nothing else open. Invited: the browser prompts; login/guest works; a revoked entry is refused after redeploy.
+1. Uninvited: `curl -i https://<domain>/` → 303 to `/preview/signin`; `/api/me`, `POST /api/auth/guest` → 401 `preview_required`; `/api/health` → 200; `/manifest.webmanifest` and the icons → 200; nothing else open. Invited: the preview sign-in page accepts the tester's details once; login/guest works; a revoked entry is refused (and its saved session ends) after redeploy. `curl -u name:password https://<domain>/api/course` → 200.
 2. HTTPS and headers: browser dev tools show CSP, `X-Frame-Options: DENY`, HSTS; a POST from the real origin succeeds; no console CSP violations; Bravura music font, stave rendering and WebAudio sound work.
-3. iPhone and desktop: an early lesson and a Grade 5 lesson, review, placement, practice/mock exam, explanation and marking, export/delete, logout.
+3. iPhone and desktop: run the real-device checklist in `PWA_AND_SIGN_IN.md` §10 (install, one-time sign-ins, relaunch, offline); an early lesson and a Grade 5 lesson, review, placement, practice/mock exam, explanation and marking, export/delete, logout.
 4. Persistence: complete a lesson, trigger a redeploy, confirm the account and progress remain; check the deploy log shows the old process stopped first.
 5. Backup: take an app backup, verify it, restore it into a **disposable** copy (`restore` to a different path) and open it.
 6. Healthcheck timing: log the exact Railway start-up time and the memory peak.
@@ -105,7 +109,7 @@ Record the deployed commit SHA, region, and results.
 
 | Confirmed (tested in this repo) | Unverified, needs Railway / owner |
 |---|---|
-| Gate denies web app, assets, all API incl. guest/register/login, HEAD/POST on health; allows only `GET /api/health`; fails closed; spoofed headers ignored | Railpack's build installs devDependencies for the Vite build and keeps `tsx` at runtime (`tsx` is now a runtime dependency to cover the latter) |
+| Gate denies web app, assets, all API incl. guest/register/login, HEAD/POST on health; allows only `GET /api/health`, the preview sign-in page and the exact install-metadata paths; preview sessions survive redeploys and end on revocation; fails closed; spoofed headers ignored | Railpack's build installs devDependencies for the Vite build and keeps `tsx` at runtime (`tsx` is now a runtime dependency to cover the latter) |
 | App refuses to start on Railway without volume / `MTP_DB` on it / gate | Field names in `railway.json` against Railway's current schema (dashboard shows config-as-code overrides) |
 | Warm-up then listen; 200 only when ready; SIGTERM drains and exits 0; WAL files checkpointed away on clean stop | Hobby warm-up time, memory and CPU; healthcheck host handling by Railway |
 | `VACUUM INTO` backup of an uncheckpointed WAL database, verification, restore, refusal of corrupt backups | Region available on Hobby; volume placement; volume permissions (`RAILWAY_RUN_UID`) |

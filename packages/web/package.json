@@ -27,7 +27,8 @@
     "e2e:prep-flows": "node --import tsx e2e/prep-flows.mjs",
     "e2e:hardening": "node --import tsx e2e/hardening.mjs",
     "e2e:flexible": "node --import tsx e2e/flexible.mjs",
-    "e2e:prep": "npm run e2e:prep-exams && npm run e2e:prep-flows && npm run e2e:hardening && npm run e2e:flexible"
+    "e2e:prep": "npm run e2e:prep-exams && npm run e2e:prep-flows && npm run e2e:hardening && npm run e2e:flexible && npm run e2e:pwa",
+    "e2e:pwa": "node --import tsx e2e/pwa.mjs"
   },
   "devDependencies": {
     "@mtp/api": "0.1.0",

@@ -7,6 +7,7 @@ import { LearningPath } from "../components/LearningPath";
 import { describeNode, lockReason } from "../lib/pathView";
 import { useApp, useCourseData } from "../state/app";
 import { QuickReviewCard } from "./Revise";
+import { InstallHint } from "../components/InstallApp";
 
 export const prefersReducedMotion = () =>
   document.documentElement.dataset.motion === "reduce" ||
@@ -57,6 +58,8 @@ export function Learn() {
       )}
 
       {data.progress.totals.lessonsCompleted > 0 && <QuickReviewCard />}
+      {/* Only after a first finished lesson, so installing never interrupts someone's first steps. */}
+      {data.progress.totals.lessonsCompleted > 0 && <InstallHint me={me} />}
 
       {next && v ? (
         <section className="next-card" aria-labelledby="next-h">

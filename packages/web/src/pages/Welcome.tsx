@@ -1,9 +1,11 @@
 import { Link } from "react-router";
 import { Logo } from "../components/Icon";
+import { ConnectionProblem } from "../components/Shell";
 import { useApp } from "../state/app";
 
 export function Welcome() {
-  const { me } = useApp();
+  const { me, meError, reloadAll } = useApp();
+  if (meError) return <ConnectionProblem error={meError} onRetry={reloadAll} />;
   return (
     <main className="welcome" id="main" tabIndex={-1}>
       <div className="welcome-hero">

@@ -151,6 +151,8 @@ export interface RequestOptions {
   signal?: AbortSignal;
   /** Give up after this long (default 20s) so a stalled connection becomes an error the learner can retry. */
   timeoutMs?: number;
+  /** If the private-preview gate blocks this request, the action to show as pending when the tester comes back (`?pending=`). */
+  previewReturn?: SignOutIntent;
 }
 
 async function request<T>(method: string, path: string, body?: unknown, opts: RequestOptions = {}): Promise<T> {
@@ -168,14 +170,14 @@ async function request<T>(method: string, path: string, body?: unknown, opts: Re
     else sig.addEventListener("abort", onAbort, { once: true });
   }
   try {
-    return await send<T>(method, path, body, ctl.signal, () => timedOut);
+    return await send<T>(method, path, body, ctl.signal, () => timedOut, opts.previewReturn);
   } finally {
     clearTimeout(timer);
     for (const sig of signals) sig.removeEventListener("abort", onAbort);
   }
 }
 
-async function send<T>(method: string, path: string, body: unknown, signal: AbortSignal, timedOut: () => boolean): Promise<T> {
+async function send<T>(method: string, path: string, body: unknown, signal: AbortSignal, timedOut: () => boolean, previewReturn?: string): Promise<T> {
   const fail = () =>
     timedOut()
       ? new ApiFailure(0, "timeout", "The server took too long to respond. Check your connection and try again.")
@@ -209,9 +211,25 @@ async function send<T>(method: string, path: string, body: unknown, signal: Abor
   if (!res.ok) {
     const e = (data as { error?: { code?: string; message?: string } } | undefined)?.error;
     const { code, message, ...rest } = e ?? {};
+    if (res.status === 401 && code === "preview_required") toPreviewSignIn(previewReturn);
     throw new ApiFailure(res.status, code ?? "error", message ?? "Something went wrong. Please try again.", rest);
   }
   return data as T;
+}
+
+let leavingForPreviewSignIn = false;
+/**
+ * The private-preview gate no longer recognises this device (its preview session expired, or the tester's invitation was withdrawn).
+ * That is not a learner sign-in problem, so go to the gate's own sign-in page, coming back here afterwards. Only once per page.
+ */
+function toPreviewSignIn(pending?: string) {
+  if (leavingForPreviewSignIn || typeof window === "undefined") return;
+  leavingForPreviewSignIn = true;
+  const params = new URLSearchParams(window.location.search);
+  if (pending) params.set("pending", pending);
+  const query = params.toString();
+  const here = window.location.pathname + (query ? `?${query}` : "");
+  window.location.assign(`/preview/signin?next=${encodeURIComponent(here)}`);
 }
 
 /**
@@ -240,21 +258,58 @@ async function retrying<T>(sc: IdentityScope, fn: () => Promise<T>, tries = 3): 
 
 const L = (id: string) => `/api/lessons/${encodeURIComponent(id)}`;
 
+/** Whether a sign-out also leaves the private preview, and so what is still pending if the preview gate blocks it. */
+export type SignOutIntent = "signout" | "leave-preview";
+
+let authChain: Promise<unknown> = Promise.resolve();
+/**
+ * Run one change of "who is signed in on this browser" at a time: sign-in, registration (with its lost-reply recovery), guest creation,
+ * sign-out and account deletion. Each of these sets or clears the session cookie, and the browser keeps whichever cookie ARRIVES last, so
+ * two in flight at once could let a slower, older one undo a newer explicit sign-out or sign-in (review of the PWA PR). Holding the section
+ * until the response, and with it the cookie, has been received means each change starts from the cookie the previous one left. Across tabs
+ * this uses the Web Locks API (one lock per origin); without it, changes are queued within the tab. Every request has a timeout, so a
+ * stalled one releases the section. Not re-entrant: inside `fn`, use `rawAuth`, never the locked `api` calls.
+ */
+export function authExclusive<T>(fn: () => Promise<T>): Promise<T> {
+  const locks = typeof navigator !== "undefined" ? (navigator as Navigator & { locks?: { request: (name: string, cb: () => Promise<T>) => Promise<T> } }).locks : undefined;
+  if (locks?.request) return locks.request("mtp-auth", fn);
+  const run = authChain.then(fn, fn);
+  authChain = run.catch(() => undefined);
+  return run;
+}
+
+/** The identity-changing requests themselves, unlocked: only for use inside `authExclusive`. */
+export const rawAuth = {
+  me: (signal?: AbortSignal) => request<Me>("GET", "/api/me", undefined, { signal }),
+  guest: () => request<Me>("POST", "/api/auth/guest", {}),
+  register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
+  login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }) => request<Me>("POST", "/api/auth/login", b),
+  logout: (intent: SignOutIntent = "signout") => request<{ ok: true }>("POST", "/api/auth/logout", {}, { previewReturn: intent }),
+  // `userId`: the learner the confirmation was shown for. The server deletes nobody if the session now belongs to someone else.
+  deleteAccount: (userId: string) => request<{ ok: true }>("DELETE", "/api/me", { userId }, { scope }),
+};
+
 export const api = {
   // Identity calls: they start or end a scope, so they are not bound to one.
   me: (signal?: AbortSignal) => request<Me>("GET", "/api/me", undefined, { signal }),
-  guest: () => request<Me>("POST", "/api/auth/guest", {}),
+  // Everything that changes who is signed in runs one at a time (see authExclusive).
+  guest: (): Promise<Me> => authExclusive(() => rawAuth.guest()),
   // Not auto-retried: the form decides, after checking who is signed in (see AccountForm). A retry from the same
   // session is still safe, because the server answers it with the same account instead of creating another.
-  register: (b: { email: string; password: string; displayName: string }) => request<Me>("POST", "/api/auth/register", b),
-  login: (b: { email: string; password: string }) => request<Me>("POST", "/api/auth/login", b),
-  logout: () => request<{ ok: true }>("POST", "/api/auth/logout", {}),
+  register: (b: { email: string; password: string; displayName: string }): Promise<Me> => authExclusive(() => rawAuth.register(b)),
+  // `onlyIfSignedOut`: the registration form's recovery after a lost reply; the server refuses it (409 signed_in) if a different learner
+  // is signed in on this device by then, so it can never replace them.
+  login: (b: { email: string; password: string; onlyIfSignedOut?: boolean }): Promise<Me> => authExclusive(() => rawAuth.login(b)),
+  // If the private-preview gate blocks it, the learner is NOT signed out: the preview sign-in page brings them back with the action
+  // (`intent`) still pending.
+  logout: (intent: SignOutIntent = "signout"): Promise<{ ok: true }> => authExclusive(() => rawAuth.logout(intent)),
   course: () => request<CourseView>("GET", "/api/course"),
   // Everything below acts on the current learner's data and is bound to the learner who started it.
   patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
     request<Me>("PATCH", "/api/me/profile", b, { scope }),
   exportData: () => request<unknown>("GET", "/api/me/export", undefined, { scope }),
-  deleteAccount: () => request<{ ok: true }>("DELETE", "/api/me", undefined, { scope }),
+  // Bound to the learner whose confirmation was shown: queued behind a sign-in in another tab, it must not delete that newer learner.
+  deleteAccount: (userId: string): Promise<{ ok: true }> => authExclusive(() => rawAuth.deleteAccount(userId)),
   progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal, scope }),
   // `explore`: open a written lesson ahead of the guided path (flexible learning). The server decides what that means for unlocking.
   lesson: (id: string, explore = false) => request<OpenedLesson>("GET", `${L(id)}${explore ? "?explore=1" : ""}`, undefined, { scope }),
@@ -369,3 +424,20 @@ export const api = {
     return retrying(sc, () => request<CompletionSummary & { alreadyComplete: boolean }>("POST", `${L(id)}/complete`, {}, { scope: sc }));
   },
 };
+
+/** The private preview this device is signed in to, if the deployment has one (the gate answers; elsewhere this is the app's HTML). */
+export async function previewStatus(): Promise<{ preview: boolean; signedIn: boolean }> {
+  try {
+    const res = await fetch("/preview/session", { credentials: "same-origin" });
+    if (!(res.headers.get("content-type") ?? "").includes("application/json")) return { preview: false, signedIn: false };
+    const b = (await res.json()) as { preview?: boolean; signedIn?: boolean };
+    return { preview: b.preview === true, signedIn: b.signedIn === true };
+  } catch {
+    return { preview: false, signedIn: false };
+  }
+}
+
+/** For tests only. */
+export function resetPreviewRedirectForTests() {
+  leavingForPreviewSignIn = false;
+}

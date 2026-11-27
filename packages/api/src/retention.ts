@@ -46,6 +46,8 @@ export interface RetentionReport {
   expiredSessionsFound: number;
   /** How many of them were removed (0 in a dry run). */
   expiredSessionsRemoved: number;
+  /** Expired private-preview sessions removed (they can never be used again and hold no learner data). */
+  expiredPreviewSessionsRemoved: number;
   guests: {
     /** "off": no period configured. "dry-run": counted only. "delete": eligible accounts were deleted. */
     mode: "off" | "dry-run" | "delete";
@@ -76,8 +78,9 @@ export function runRetention(db: Db, policy: RetentionPolicy, opts: { now?: Date
   const dryRun = opts.dryRun ?? false;
   const expired = (db.prepare("SELECT COUNT(*) AS c FROM sessions WHERE expires_at <= ?").get(iso) as { c: number }).c;
   if (!dryRun && expired > 0) db.prepare("DELETE FROM sessions WHERE expires_at <= ?").run(iso);
+  const previewRemoved = dryRun ? 0 : Number(db.prepare("DELETE FROM preview_sessions WHERE expires_at <= ?").run(iso).changes);
 
-  const report: RetentionReport = { at: iso, expiredSessionsFound: expired, expiredSessionsRemoved: dryRun ? 0 : expired, guests: { mode: "off", inactiveDays: policy.guestInactiveDays, eligible: 0, deleted: 0, deferred: 0 }, ...(policy.problem ? { problem: policy.problem } : {}) };
+  const report: RetentionReport = { at: iso, expiredSessionsFound: expired, expiredSessionsRemoved: dryRun ? 0 : expired, expiredPreviewSessionsRemoved: previewRemoved, guests: { mode: "off", inactiveDays: policy.guestInactiveDays, eligible: 0, deleted: 0, deferred: 0 }, ...(policy.problem ? { problem: policy.problem } : {}) };
   const days = policy.guestInactiveDays;
   if (days === null || !Number.isInteger(days) || days < 1) return report;
 
@@ -108,5 +111,5 @@ export function describeRetention(r: RetentionReport): string {
       : g.mode === "dry-run"
         ? `guest accounts: DRY RUN, ${g.eligible} inactive for ${g.inactiveDays} days would be deleted (none were)`
         : `guest accounts: ${g.deleted} inactive for ${g.inactiveDays} days deleted${g.deferred ? `, ${g.deferred} left for the next run` : ""}`;
-  return `Retention: ${r.expiredSessionsRemoved} of ${r.expiredSessionsFound} expired sessions removed; ${guest}${r.problem ? `; WARNING: ${r.problem}` : ""}`;
+  return `Retention: ${r.expiredSessionsRemoved} of ${r.expiredSessionsFound} expired sessions removed${r.expiredPreviewSessionsRemoved ? `, ${r.expiredPreviewSessionsRemoved} expired preview sessions removed` : ""}; ${guest}${r.problem ? `; WARNING: ${r.problem}` : ""}`;
 }

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { api, ApiFailure, endIdentityScope, type CourseView, type EngagementSnapshot, type Me, type Overview, type Settings } from "../api/client";
+import { api, ApiFailure, endIdentityScope, type SignOutIntent, type CourseView, type EngagementSnapshot, type Me, type Overview, type Settings } from "../api/client";
 import { setSoundEnabled } from "../lib/audio";
 
 type Load<T> = { status: "loading" } | { status: "error"; error: ApiFailure } | { status: "ready"; data: T };
@@ -17,7 +17,8 @@ interface AppState {
   reloadAll: () => void;
   /** Resolves with the saved profile, rejects (and shows nothing as saved) if the server did not confirm it. */
   updateProfile: (patch: Parameters<typeof api.patchProfile>[0], opts?: { optimistic?: boolean }) => Promise<Me>;
-  signOut: () => Promise<void>;
+  /** `leave-preview`: the caller will also end the device's preview session; if the gate blocks the sign-out, that is what stays pending. */
+  signOut: (intent?: SignOutIntent) => Promise<void>;
 }
 
 const Ctx = createContext<AppState | null>(null);
@@ -35,12 +36,28 @@ export function applySettings(s: Settings) {
   if (s.motion === "system") delete root.dataset.motion;
   else root.dataset.motion = s.motion;
   setSoundEnabled(s.sound);
+  syncThemeColor(s.theme);
   try {
     localStorage.setItem("mtp.theme", s.theme);
     localStorage.setItem("mtp.motion", s.motion);
   } catch {
     /* storage can be unavailable (private mode); the server copy is authoritative */
   }
+}
+
+/** Light and dark page backgrounds (styles.css --bg), used for the status bar and browser chrome. */
+const THEME_COLORS = { light: "#f4f6fb", dark: "#11121b" } as const;
+/**
+ * Keep the status bar / browser chrome in step with the app's theme. "Match my device" restores the two media-specific colours; an
+ * explicit choice uses its own colour whatever the device is set to (otherwise a dark app would sit under a light status bar).
+ */
+export function syncThemeColor(theme: Settings["theme"]) {
+  const metas = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]');
+  metas.forEach((m) => {
+    const media = m.getAttribute("media") ?? "";
+    const own = media.includes("dark") ? THEME_COLORS.dark : THEME_COLORS.light;
+    m.setAttribute("content", theme === "system" ? own : THEME_COLORS[theme]);
+  });
 }
 
 type ProfilePatch = Parameters<typeof api.patchProfile>[0];
@@ -60,6 +77,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // `confirmed` is what the server last told us. `pending` are edits shown optimistically while they are in flight; they
   // are layered over `confirmed` and removed the moment their request settles, so a failed save simply disappears.
   const [confirmed, setConfirmed] = useState<Me | null | undefined>(undefined);
+  const confirmedNow = useRef<Me | null | undefined>(undefined); // `confirmed`, readable from event handlers
+  useEffect(() => {
+    confirmedNow.current = confirmed;
+  }, [confirmed]);
   const [pending, setPending] = useState<Array<{ id: number; patch: ProfilePatch }>>([]);
   const [meError, setMeError] = useState<ApiFailure | null>(null);
   const [course, setCourse] = useState<Load<CourseView>>({ status: "loading" });
@@ -71,6 +92,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // asynchronous result started under an older epoch is discarded instead of being committed.
   const identity = useRef<{ userId: string | null; epoch: number }>({ userId: null, epoch: 0 });
   const sessionGen = useRef(0); // bumped by every explicit sign-in/out so a slow initial /api/me cannot undo it
+  // Every read of "who is signed in" (the first load and the foreground re-checks) takes a number; only the latest read may commit, so an
+  // older answer arriving late can never bring back a learner a newer answer signed out, or the reverse (review P2).
+  const meRead = useRef(0);
   const progressCtl = useRef<AbortController | null>(null);
   const progressSeq = useRef(0);
   const writeQueue = useRef<Promise<unknown>>(Promise.resolve());
@@ -110,12 +134,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let live = true;
     const gen = sessionGen.current;
-    const current = () => live && sessionGen.current === gen;
+    const seq = ++meRead.current;
+    const current = () => live && sessionGen.current === gen && meRead.current === seq;
     setMeError(null);
     api.me().then(
       (m) => current() && commit(m),
       (e: unknown) => {
         if (!current()) return;
+        // The preview gate, not the learner's session: the page is on its way to the preview sign-in, so claim nothing about the learner.
+        if (e instanceof ApiFailure && e.code === "preview_required") return;
         if (e instanceof ApiFailure && e.status === 401) commit(null);
         else {
           setMeError(failure(e, "Could not reach the server."));
@@ -127,6 +154,53 @@ export function AppProvider({ children }: { children: ReactNode }) {
       live = false;
     };
   }, [commit, tick]);
+
+  /**
+   * When the app comes back to the foreground (an installed app is often resumed rather than relaunched) or the connection returns,
+   * check quietly that the sign-in is still valid. A 401 means the session ended (expired, signed out elsewhere, account deleted): the
+   * learner is shown as signed out. A network failure changes nothing: being offline never signs anyone out. If the first load had
+   * failed, everything is simply loaded again.
+   */
+  const reloadAll = useCallback(() => {
+    // After a failed first load nobody is known to be signed in or out: show "loading" while retrying, never a moment of "signed out"
+    // (which would send the learner to the welcome page).
+    if (meError) setConfirmed(undefined);
+    setTick((t) => t + 1);
+  }, [meError]);
+  const lastCheck = useRef(0);
+  useEffect(() => {
+    if (lastCheck.current === 0) lastCheck.current = Date.now(); // the initial load has just checked; `pageshow` also fires then
+    const revalidate = (force: boolean) => {
+      // While the first load is still deciding who is signed in, it alone settles that (with its own error handling and retry); a re-check
+      // here would supersede it and, if it failed, leave the app on "Opening" with nothing to show (review of the PWA PR).
+      if (confirmedNow.current === undefined && !meError) return;
+      if (meError) {
+        reloadAll();
+        return;
+      }
+      if (!force && Date.now() - lastCheck.current < 60_000) return;
+      lastCheck.current = Date.now();
+      const gen = sessionGen.current;
+      const seq = ++meRead.current;
+      const current = () => sessionGen.current === gen && meRead.current === seq;
+      api.me().then(
+        (m) => current() && commit(m),
+        (e: unknown) => {
+          if (current() && e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required") commit(null);
+        },
+      );
+    };
+    const onVisible = () => document.visibilityState === "visible" && revalidate(false);
+    const onOnline = () => revalidate(true);
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("pageshow", onVisible);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("pageshow", onVisible);
+    };
+  }, [commit, meError, reloadAll]);
 
   useEffect(() => {
     let live = true;
@@ -216,18 +290,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Only report signed-out once the server has invalidated the session (or says there is none). A failure is thrown
   // to the caller, who keeps the learner signed in and shows a retry: the cookie still works until logout succeeds.
-  const signOut = useCallback(async () => {
+  // A `preview_required` 401 comes from the private-preview gate BEFORE the server could sign the learner out: that is a blocked sign-out,
+  // not a success (review P2). It is thrown like any failure; the preview sign-in page brings the tester back with the sign-out pending.
+  const signOut = useCallback(async (intent: SignOutIntent = "signout") => {
     try {
-      await api.logout();
+      await api.logout(intent);
     } catch (e) {
-      if (!(e instanceof ApiFailure && e.status === 401)) throw e;
+      if (!(e instanceof ApiFailure && e.status === 401 && e.code !== "preview_required")) throw e;
     }
     setMe(null);
   }, [setMe]);
 
   const value = useMemo<AppState>(
-    () => ({ me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll: () => setTick((t) => t + 1), updateProfile, signOut }),
-    [me, meError, course, progress, engagement, setMe, refreshProgress, updateProfile, signOut],
+    () => ({ me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll, updateProfile, signOut }),
+    [me, meError, course, progress, engagement, setMe, refreshProgress, reloadAll, updateProfile, signOut],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
