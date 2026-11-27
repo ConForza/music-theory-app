@@ -177,7 +177,7 @@ export function RhythmBuilder({ input, value, onChange, disabled, exam = false }
       <div className="palette" role="group" aria-label={rest ? "Add a rest" : "Add a note"}>
         {input.values.map((v) => (
           <button key={v} type="button" className="palette-btn" onClick={() => add(v)} disabled={disabled} aria-label={`Add a ${dots === 2 ? "double-dotted " : dots ? "dotted " : ""}${v}${rest ? " rest" : ""}`}>
-            <span className="smufl-inline" aria-hidden="true">{rest ? restGlyph(v).ch : NOTE_GLYPH[v]}{dots ? G.dot.repeat(dots) : ""}</span>
+            <span className={`smufl-inline${rest ? " is-rest" : ""}`} aria-hidden="true">{rest ? restGlyph(v).ch : NOTE_GLYPH[v]}{dots ? G.dot.repeat(dots) : ""}</span>
             <span className="palette-name">{v}</span>
           </button>
         ))}
