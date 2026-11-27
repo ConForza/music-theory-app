@@ -1,6 +1,6 @@
 import { useId, useMemo, type KeyboardEvent, type ReactNode } from "react";
 import type { NotationFragment, NotationScore } from "@mtp/curriculum";
-import { layoutFragment, layoutScore, type LaidEvent, type StaveLayout } from "./layout";
+import { layoutFragment, layoutScore, systemStart, type LaidEvent, type StaveLayout } from "./layout";
 import { G } from "./glyphs";
 import "./notation.css";
 import "./font";
@@ -105,27 +105,23 @@ export function Notation({ fragment, size = "normal", highlight, marks, onActiva
   );
 }
 
-/** Several staves (short score, open score, transposing parts) aligned bar by bar, with a brace or bracket and labels. */
+/** Several staves (short score, open score, transposing parts) aligned bar by bar, with a brace (grand staff) or bracket and labels. */
 export function ScoreView({ score, size = "normal", highlight }: { score: NotationScore; size?: keyof typeof PX; highlight?: string[] }) {
   const desc = useId();
   const sl = useMemo(() => layoutScore(score), [score]);
   const px = PX[size];
   const first = sl.staves[0]!;
-  const last = sl.staves[sl.staves.length - 1]!;
-  const yTop = first.offset - 4;
-  const yBottom = last.offset;
   const top = first.offset + first.layout.top;
   const height = sl.height - top;
+  const start = systemStart(sl);
+  const w = sl.width - start.left;
   return (
     <figure className="notation notation-score">
       <div className="notation-scroll" tabIndex={0} role="group" aria-label="Score (scrolls sideways if wide)" aria-describedby={desc}>
-        <svg viewBox={`-0.5 ${top} ${sl.width + 0.5} ${height}`} style={fit((sl.width + 0.5) * px)} role="img" aria-label={score.textAlternative} className="notation-svg fit">
-          <line x1={0.2} x2={0.2} y1={yTop} y2={yBottom} strokeWidth={0.16} className="n-line" />
-          {sl.staves.length === 2 ? (
-            <text x={-0.4} y={yBottom} className="n-smufl n-glyph" fontSize={yBottom - yTop}>{G.brace}</text>
-          ) : (
-            <path d={`M1.2,${yTop - 0.6} Q0.6,${yTop - 0.2} 0.7,${yTop} L0.7,${yBottom} Q0.6,${yBottom + 0.2} 1.2,${yBottom + 0.6}`} className="n-bracket" fill="none" strokeWidth={0.5} />
-          )}
+        <svg viewBox={`${start.left} ${top} ${w} ${height}`} style={fit(w * px)} role="img" aria-label={score.textAlternative} className="notation-svg fit">
+          <Primitives ev={{ glyphs: [], lines: [start.line, ...sl.connectors], paths: [], texts: [] }} />
+          {start.brace && <text x={start.brace.x} y={start.brace.y} className="n-smufl n-glyph" fontSize={start.brace.size}>{G.brace}</text>}
+          {start.bracket && <path d={start.bracket.d} className="n-bracket" fill="none" strokeWidth={start.bracket.w} />}
           {sl.staves.map((s) => (
             <g key={s.id}>
               <StaveSvg layout={s.layout} offsetY={s.offset} highlight={highlight} px={px} />

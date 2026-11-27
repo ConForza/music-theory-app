@@ -601,6 +601,21 @@ export interface ScoreLayout {
   width: number;
   staves: Array<{ id: string; label: string; offset: number; layout: StaveLayout }>;
   height: number;
+  /** A keyboard-style grand staff: joined by a brace, with every bar-line drawn through the gap between the staves. */
+  grand: boolean;
+  /** The parts of the bar-lines that cross the gap between the staves of a grand staff (empty otherwise). */
+  connectors: Line[];
+}
+
+/**
+ * Is this score a keyboard-style grand staff (piano music, or a short score written like it)? Exactly two staves, treble above bass, and
+ * neither names an instrument. Other scores are separate parts (a flute above the piano's left hand) or separate melodies set side by side
+ * to compare (an original and a copy in another clef, a concert-pitch melody and a transposition): those are bracketed, and each stave keeps
+ * its own bar-lines.
+ */
+export function isGrandStaff(score: NotationScore): boolean {
+  const [upper, lower] = score.staves;
+  return score.staves.length === 2 && upper!.music.clef === "treble" && lower!.music.clef === "bass" && !upper!.instrument && !lower!.instrument;
 }
 
 /** Several staves sharing horizontal spacing, bar by bar, so simultaneous notes line up. */
@@ -617,7 +632,42 @@ export function layoutScore(score: NotationScore): ScoreLayout {
     offset = top + layout.bottom + 1.5;
     return { id: s.id, label: s.label, offset: top, layout };
   });
-  return { width: Math.max(...staves.map((s) => s.layout.width)), staves, height: offset };
+  // Piano music: each bar-line runs on from the bottom line of the upper stave to the top line of the lower one.
+  const grand = isGrandStaff(score);
+  const connectors: Line[] = [];
+  if (grand) {
+    const [upper, lower] = staves;
+    for (const ln of upper!.layout.fixed.lines.filter((l) => l.x1 === l.x2)) connectors.push({ ...ln, y1: upper!.offset, y2: lower!.offset - 4 });
+  }
+  return { width: Math.max(...staves.map((s) => s.layout.width)), staves, height: offset, grand, connectors };
+}
+
+/** The vertical line that starts every system, where the stave lines begin. */
+const SYSTEM_X = 0.2;
+const SYSTEM_LINE_W = 0.16;
+/** Clear space between a brace or bracket and the system's opening line, so it never sits on the staves. */
+const GROUP_GAP = 0.35;
+/** Bravura's brace is 0.328 staff spaces wide at the size where it is 4 staff spaces tall (metadata.json glyphBBoxes). */
+const BRACE_WIDTH_PER_SPACE = 0.328 / 4;
+const BRACKET_W = 0.5;
+
+/**
+ * The marks at the start of a system: the opening line through every stave, and to its LEFT a brace (grand staff) or a bracket (separate
+ * parts). Nothing of the brace or bracket reaches the stave lines; a bracket's hooks curl over the top and under the bottom stave, clear of them.
+ */
+export function systemStart(sl: ScoreLayout): { line: Line; brace?: { x: number; y: number; size: number }; bracket?: { d: string; w: number }; groupRight: number; left: number } {
+  const yTop = sl.staves[0]!.offset - 4;
+  const yBottom = sl.staves[sl.staves.length - 1]!.offset;
+  const line: Line = { x1: SYSTEM_X, x2: SYSTEM_X, y1: yTop, y2: yBottom, w: SYSTEM_LINE_W, cls: "n-line" };
+  const groupRight = SYSTEM_X - SYSTEM_LINE_W / 2 - GROUP_GAP;
+  if (sl.grand) {
+    const size = yBottom - yTop;
+    const x = groupRight - BRACE_WIDTH_PER_SPACE * size;
+    return { line, brace: { x, y: yBottom, size }, groupRight, left: x - 0.3 };
+  }
+  const bx = groupRight - BRACKET_W / 2;
+  const d = `M${SYSTEM_X + 0.5},${yTop - 1} Q${bx},${yTop - 0.8} ${bx},${yTop - 0.1} L${bx},${yBottom + 0.1} Q${bx},${yBottom + 0.8} ${SYSTEM_X + 0.5},${yBottom + 1}`;
+  return { line, bracket: { d, w: BRACKET_W }, groupRight, left: bx - BRACKET_W / 2 - 0.3 };
 }
 
 /** Exact sounding timeline (seconds) for playback, from the same events that are drawn. */
