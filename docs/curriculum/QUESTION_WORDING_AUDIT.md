@@ -200,4 +200,9 @@ No font size, spacing or layout was changed to achieve this: every gain comes fr
 
 ## 11. Validation
 
-VALIDATION
+| Step | Result |
+|---|---|
+| `npm run check`: typecheck, lint, curriculum validation, generated docs check, all unit tests, deploy tests, production build | Passed. API 662 tests, curriculum 444, engine 1,908, web 210, deploy 47; build succeeds. `validate` prints only the existing release-gate notices (no teacher sign-off yet). |
+| `npm run e2e`: every browser journey (foundation, follow-up, Brief 03/04, Grades 1–5, terminology, practice exams, revision and placement, hardening, flexible learning, PWA) | Passed: 232 journeys, 0 failures. |
+| New tests | `packages/curriculum/test/describe.test.ts` (consolidation, singular and plural, notes and rests, dots, ties, tuplets, beams, articles); `packages/engine/test/question-wording.test.ts` (generated wording and constraints across Grades 1–5, marking still correct, descriptions that do not give answers away); `packages/api/test/question-wording.test.ts` (identity of every binding and lesson unchanged, audited lessons differ only in wording, prompt hygiene across all grades). |
+| Updated tests | Tests that parsed the old wording (G4 same pitch, G5 transposition direction, G5 transposition check, G2 grouping descriptions, web grouping descriptions). The terminology test's byte-identity check now exempts the lessons this audit touched; the new wording-only check covers them. |
