@@ -1,5 +1,7 @@
 # Railway private preview: setup and runbook (issue #24)
 
+**Letting your own students in:** follow [docs/release/STUDENT_RELEASE.md](../release/STUDENT_RELEASE.md) (class codes, privacy notice, automatic backups, password resets).
+
 **Status: private preview, deployed on Railway Hobby** at <https://mtpcurriculum-production.up.railway.app/> (invited adults and internal testers only).
 Hosting is Railway Hobby (decided 16 Nov 2026); other hosts are out of scope. **Deployments are manual and never automatic**: merging a PR does not deploy.
 To ship `main`, run **[Deploy to Railway](https://github.com/ConForza/music-theory-app/actions/workflows/deploy-railway.yml)** (see "Manual deployment" below).
@@ -15,6 +17,7 @@ The setup checklist is kept as the record of how the service was provisioned; st
 | One service, one replica, region, volume `/data`, auto-deploy off | **Railway service settings** (OWNER) | see checklist |
 | Manual deployment (CI check, backup rule, deploy, verify) | **Code**: `.github/workflows/deploy-railway.yml`, `scripts/railway-deploy.mjs` | see "Manual deployment" |
 | `MTP_DB=/data/mtp.sqlite`, `MTP_PREVIEW_GATE=1`, `MTP_PREVIEW_ACCESS`, `MTP_SECURE_COOKIES=1`, `MTP_ALLOWED_ORIGINS`, `RAILWAY_DEPLOYMENT_OVERLAP_SECONDS=0`, `RAILWAY_DEPLOYMENT_DRAINING_SECONDS=20` | **Railway variables** (OWNER) | secrets only in `MTP_PREVIEW_ACCESS` (hashes, no passwords) |
+| Student release (see [STUDENT_RELEASE.md](../release/STUDENT_RELEASE.md)) | **Railway variables** (OWNER) | `MTP_BACKUP_DIR=/data/backups` (verified backups before any migration and daily; start-up refuses if they cannot work), optional `MTP_BACKUP_KEEP` (days, default 14), `MTP_ERASURE_LOG_DAYS` (default 400); then `MTP_PRIVACY_OPERATOR`, `MTP_PRIVACY_CONTACT`, `MTP_PRIVACY_NOTICE_APPROVED=YYYY-MM-DD/<revision>`, `MTP_SECURE_COOKIES=1` and `MTP_AUDIENCE=students`. Recovery: `MTP_RESTORE_FROM=<backup file name>` (one-shot restore before the database opens). Optional `MTP_REGISTRATIONS_PER_15_MIN` |
 | Never set | | `MTP_WARM_POOLS=0`, `MTP_GUEST_RETENTION_APPROVED`, `MTP_SHOW_READINESS`, `MTP_TRUST_PROXY_HOPS` (until verified, below), `MTP_TEST_CLOCK` |
 
 ## Setup checklist (OWNER, in the Railway dashboard)
@@ -156,7 +159,7 @@ Read the **outcome** at the top of the run summary (table above); it says what i
 Two different things, never mixed up:
 
 1. **Roll back code (safe, normal)**: Railway dashboard → service → **Deployments** → open the last good deployment → **Redeploy** (or *Rollback*, if your dashboard offers it). It restarts old code on the **same `/data` volume**; learner data is not reverted. Because migrations are forward-only, this is safe only if no migration shipped since that deployment; if one did (**migration 010** is one: see `docs/architecture/FLEXIBLE_LEARNING.md` §5a), prefer fixing forward. A rollback done in the dashboard is outside the workflow's checks: afterwards run the smoke test in the section below by hand.
-2. **Restore data (rare, deliberate, owner-led)**: restores a backup over `/data/mtp.sqlite` and **discards learner activity since that backup**. Only for corruption or a bad migration. **There is currently no rehearsed way to do this in production** (see "Backups and restore"); treat it as an owner-led recovery operation until that procedure exists. Announce it. Never use it to roll back a deploy.
+2. **Restore data (rare, deliberate, owner-led)**: restores a backup over `/data/mtp.sqlite` and **discards learner activity since that backup**. Only for corruption or a bad migration. With automatic backups on, set `MTP_RESTORE_FROM=<file name in /data/backups>` and deploy: the app restores before it opens the database (no second writer), keeps the replaced database as a snapshot, ends every sign-in session and re-applies logged deletions ([STUDENT_RELEASE.md](../release/STUDENT_RELEASE.md#6-if-something-goes-wrong-restoring)). Rehearse it on staging first. Announce it. Never use it to roll back a deploy.
 
 **The deploy workflow only moves forward.** It refuses when the live commit is not an ancestor of the release (a rollback or divergent history), even with a confirmed backup, because the database may already be ahead of the code. Rolling back is a deliberate dashboard action (step 1); and because it bypasses the workflow's checks, run the smoke-test list below by hand afterwards.
 

@@ -338,10 +338,10 @@ describe("review follow-ups", () => {
     await withServer(alice.entry, async ({ get, signIn }) => {
       const out = await get("/preview/session");
       expect(out.status).toBe(401);
-      expect(await out.json()).toEqual({ preview: true, signedIn: false, viaSession: false });
+      expect(await out.json()).toEqual({ preview: true, signedIn: false, viaSession: false, audience: "testers" });
       const cookie = pair(previewCookieOf(await signIn("alice", alice.password)));
       const body = await (await get("/preview/session", { headers: { cookie } })).json();
-      expect(body).toEqual({ preview: true, signedIn: true, viaSession: true });
+      expect(body).toEqual({ preview: true, signedIn: true, viaSession: true, audience: "testers" });
       expect(JSON.stringify(body)).not.toContain("alice");
     });
   });

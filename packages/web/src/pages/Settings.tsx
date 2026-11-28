@@ -22,6 +22,44 @@ function Segmented<T extends string>({ legend, value, options, onChange }: { leg
   );
 }
 
+/**
+ * Change password (student release): a learner given a temporary password by their teacher replaces it here. Real form fields with
+ * current-password / new-password, so password managers offer to update the saved entry.
+ */
+function ChangePassword() {
+  const [current, setCurrent] = useState("");
+  const [next, setNext] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<{ ok: boolean; text: string } | null>(null);
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setResult(null);
+    try {
+      await api.changePassword({ currentPassword: current, newPassword: next });
+      setCurrent("");
+      setNext("");
+      setResult({ ok: true, text: "Password changed. Other devices signed in to this account have been signed out." });
+    } catch (err) {
+      setResult({ ok: false, text: err instanceof ApiFailure ? err.message : "We couldn't change your password. Please try again." });
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <section className="card" aria-labelledby="pw-h">
+      <h2 id="pw-h">Change password</h2>
+      <form className="form" name="change-password" method="post" action="/settings" onSubmit={submit} noValidate>
+        <label>Current password<input id="pw-current" name="current-password" type="password" autoComplete="current-password" value={current} onChange={(e) => setCurrent(e.target.value)} required /></label>
+        <label>New password<input id="pw-new" name="new-password" type="password" autoComplete="new-password" minLength={8} maxLength={128} value={next} onChange={(e) => setNext(e.target.value)} aria-describedby="pw-new-help" required /></label>
+        <p id="pw-new-help" className="muted small">At least 8 characters. If your teacher gave you a temporary password, change it here.</p>
+        {result && <p className={result.ok ? "callout" : "form-error"} role={result.ok ? "status" : "alert"}>{result.text}</p>}
+        <button className="btn btn-ghost" disabled={busy || !current || next.length < 8}>{busy ? "Changing…" : "Change password"}</button>
+      </form>
+    </section>
+  );
+}
+
 /** One learner's settings. Keyed by learner, so a different account signing in on this device never inherits the last one's form. */
 export function Settings() {
   const { me } = useApp();
@@ -175,11 +213,13 @@ function LearnerSettings() {
         <p className="muted small">Reminder notifications are off, and there are none to turn on yet.</p>
       </section>
 
+      {!me!.user.isGuest && <ChangePassword />}
+
       <InstallGuide me={me} />
 
       <section className="card" aria-labelledby="data-h">
         <h2 id="data-h">Your data</h2>
-        <p>Download everything we hold about you, or delete it for good.</p>
+        <p>Download everything we hold about you, or delete it for good. <a href="/privacy">Read the privacy notice</a>.</p>
         <div className="row">
           <button className="btn btn-ghost" onClick={download}>Download my data</button>
           {!confirmDelete ? (

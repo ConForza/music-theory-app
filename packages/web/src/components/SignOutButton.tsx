@@ -20,11 +20,17 @@ export function SignOutButton({ offerLeavePreview = false }: { offerLeavePreview
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [preview, setPreview] = useState(false);
+  // The student release words the device's access as a class code, not a tester invitation.
+  const [students, setStudents] = useState(false);
 
   useEffect(() => {
     if (!offerLeavePreview) return;
     let live = true;
-    void previewStatus().then((s) => live && setPreview(s.preview && s.signedIn));
+    void previewStatus().then((s) => {
+      if (!live) return;
+      setPreview(s.preview && s.signedIn);
+      setStudents(s.students);
+    });
     return () => {
       live = false;
     };
@@ -71,9 +77,11 @@ export function SignOutButton({ offerLeavePreview = false }: { offerLeavePreview
       {preview && pending !== "leave-preview" && (
         <>
           <button type="button" className="btn btn-quiet" onClick={() => void go(true)} disabled={busy}>
-            Sign out and leave the preview on this device
+            {students ? "Sign out and remove the class code from this device" : "Sign out and leave the preview on this device"}
           </button>
-          <p className="muted small">Use this on a shared device: the next person will need their own tester name and password.</p>
+          <p className="muted small">
+            {students ? "Use this on a shared device: the next person will need to type the class code again." : "Use this on a shared device: the next person will need their own tester name and password."}
+          </p>
         </>
       )}
     </div>

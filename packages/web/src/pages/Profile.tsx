@@ -48,7 +48,7 @@ export function Profile() {
 
       <section className="card" aria-labelledby="privacy-h">
         <h2 id="privacy-h">Your data</h2>
-        <p>We keep only a nickname, your sign-in details and your lesson answers. There are no public profiles, leaderboards or adverts, and you can download or delete everything in Settings.</p>
+        <p>We keep only a nickname, your sign-in details and your lesson answers. There are no public profiles, leaderboards or adverts, and you can download or delete everything in Settings. <a href="/privacy">Read the privacy notice</a>.</p>
       </section>
 
       <SignOutButton />

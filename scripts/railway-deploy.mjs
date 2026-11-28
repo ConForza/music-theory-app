@@ -523,8 +523,23 @@ export async function smokeTests(ctx, cfg) {
       if (r.status !== 200 || !(r.headers.get("content-type") ?? "").startsWith("image/")) return `icon ${icon.src} returned HTTP ${r.status}`;
     }
   });
+  // Student release (MTP_AUDIENCE=students): the gate says so on its open status endpoint. Then children may be signing in, so the
+  // privacy notice must be the approved one (never the draft) and the sign-in page must be the class-code form.
+  let students = false;
+  await check("Student release: approved privacy notice and class-code sign-in", async () => {
+    const res = await get(ctx, cfg, "/preview/session");
+    const body = await res.json().catch(() => null);
+    students = body?.audience === "students";
+    if (!students) return;
+    const notice = await get(ctx, cfg, "/privacy");
+    const html = await notice.text();
+    if (notice.status !== 200) return `the privacy notice returned HTTP ${notice.status}`;
+    if (html.includes("Draft.") || !/Approved on [^<]*Notice revision [0-9a-f]{8}/.test(html)) return "the privacy notice is not an approved revision (it shows Draft)";
+    const signIn = await get(ctx, cfg, "/preview/signin");
+    if (signIn.status !== 200 || !(await signIn.text()).includes("Class code")) return `the sign-in page is not the class-code form (HTTP ${signIn.status})`;
+  });
   if (problems.length) throw new DeployError(`Smoke tests failed: ${problems.join(" | ")}`, "smoke", "verification-failed");
-  return "Passed: HTTPS, preview gate active, learner API rejected, manifest and icons available";
+  return `Passed: HTTPS, preview gate active, learner API rejected, manifest and icons available${students ? ", student release with an approved privacy notice and class-code sign-in" : ""}`;
 }
 
 // ---------------------------------------------------------------------------------------------------------------- summary

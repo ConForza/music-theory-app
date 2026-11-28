@@ -18,6 +18,13 @@ Brief 02 builds the mechanisms; the legal decisions below are for the owner befo
 * Export (`GET /api/me/export`) and deletion (`DELETE /api/me`) are tested against every table that holds a learner's rows, including the Brief 10 tables.
 * Security response headers, including a Content-Security-Policy that allows no third-party script, style, font, image or connection: see `docs/development/DEPLOYMENT.md`.
 
+**Added for the student release** (`docs/release/STUDENT_RELEASE.md`; mechanisms and a draft text, not legal decisions)
+* A privacy notice at `/privacy`, readable without signing in, with a part for students and a part for parents (`packages/api/src/privacy.ts`). It is written from what the code does. The owner approves one exact **revision** of it (`MTP_PRIVACY_NOTICE_APPROVED=YYYY-MM-DD/<revision>`, a real date not in the future); any change to the wording, operator, contact, host, backup period or guest period produces a new revision and the page shows **Draft** again. `MTP_AUDIENCE=students` refuses to start without an approved revision.
+* Automatic backups (`MTP_BACKUP_DIR`): every snapshot, of every kind, is deleted after `MTP_BACKUP_KEEP` days (default 14), which bounds how long a deleted account survives in these backups. Copies the owner takes off Railway must be deleted on the same schedule.
+* An erasure log (`erasures.log` next to the database; hashed account ids and times only, kept `MTP_ERASURE_LOG_DAYS`, default 400): each self-service deletion is logged before it happens and re-applied at every start-up and by every restore, so restoring a backup cannot revive an erased learner. A restore also ends every sign-in session.
+* The export (`GET /api/me/export`) now includes lesson and practice hint records; a test checks every table holding a learner's rows is exported (sign-in sessions excepted).
+* Class codes give a class or family access; nothing in them identifies a learner.
+
 **These controls do not make the product legally compliant.** They are mechanisms. Whether they are sufficient, and what the product may lawfully do with children's data, are decisions for the owner with appropriate legal advice.
 
 ## Retention controls (implemented, disabled pending the owner's policy)

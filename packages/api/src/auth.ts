@@ -204,6 +204,19 @@ export function destroySession(db: Db, token: string | undefined) {
   if (token) db.prepare("DELETE FROM sessions WHERE token_hash = ?").run(sha256(token));
 }
 
+/** Whether the account's stored password hash is still `hash` (each hash has its own salt, so it doubles as the credential's version). */
+export function passwordHashIs(db: Db, userId: string, hash: string | null): boolean {
+  const r = db.prepare("SELECT password_hash AS h FROM users WHERE id = ? AND is_guest = 0").get(userId) as { h: string | null } | undefined;
+  return !!r && r.h !== null && r.h === hash;
+}
+
+/** Store a new password hash and end the account's sessions, except `keepToken`'s (the device that made the change). Call inside tx. */
+export function setPassword(db: Db, userId: string, hash: string, keepToken?: string) {
+  db.prepare("UPDATE users SET password_hash = ? WHERE id = ? AND is_guest = 0").run(hash, userId);
+  if (keepToken) db.prepare("DELETE FROM sessions WHERE user_id = ? AND token_hash <> ?").run(userId, sha256(keepToken));
+  else db.prepare("DELETE FROM sessions WHERE user_id = ?").run(userId);
+}
+
 export function deleteUser(db: Db, userId: string) {
   // ON DELETE CASCADE removes sessions, profile, progress, attempts and hint records.
   db.prepare("DELETE FROM users WHERE id = ?").run(userId);

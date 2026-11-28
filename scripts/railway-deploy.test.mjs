@@ -591,6 +591,31 @@ test("smoke tests: gate off, open learner API or missing manifest fail the run, 
   }
 });
 
+test("smoke tests: in the student release, the privacy notice must be approved and the sign-in page the class-code form", async () => {
+  const approved = '<p class="rev">Approved on 1 November 2026. Notice revision 1a2b3c4d.</p>';
+  const students = {
+    "/preview/session": () => json({ preview: true, signedIn: false, viaSession: false, audience: "students" }, 401),
+    "/privacy": () => new Response(`<h1>Privacy notice</h1>${approved}`, { status: 200 }),
+    "/preview/signin": () => new Response('<label for="preview-password">Class code</label>', { status: 200 }),
+  };
+  const ok = await run({ site: students });
+  assert.match(ok.r.smoke, /student release with an approved privacy notice/);
+  const cases = {
+    "draft notice": { ...students, "/privacy": () => new Response('<p class="draft">Draft.</p><p class="rev">Notice revision 1a2b3c4d.</p>', { status: 200 }) },
+    "notice missing": { ...students, "/privacy": () => new Response("no", { status: 404 }) },
+    "testers' form": { ...students, "/preview/signin": () => new Response("<label>Tester name</label>", { status: 200 }) },
+  };
+  for (const [name, site] of Object.entries(cases)) {
+    const { r } = await run({ site });
+    assert.equal(r.phase, "smoke", name);
+    assert.equal(r.kind, "verification-failed", name);
+  }
+  // The testers' preview (no audience, or an older build without the status field) needs none of this.
+  const testers = await run({ site: { "/preview/session": () => json({ preview: true, signedIn: false, viaSession: false, audience: "testers" }, 401) } });
+  assert.doesNotMatch(testers.r.smoke, /student release/);
+  assert.match(testers.r.smoke, /Passed/);
+});
+
 // ------------------------------------------------------------------------------------------------------------------ output
 
 test("main() never prints credentials, writes one summary, and exits non-zero on failure", async () => {

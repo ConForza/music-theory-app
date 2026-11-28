@@ -4,6 +4,8 @@ import { COOKIE, RateLimiter } from "./auth.ts";
 import { clientKey } from "./net.ts";
 import type { Course } from "./course.ts";
 import type { Db } from "./db.ts";
+import { tx } from "./db.ts";
+import type { ErasureLog } from "./erasures.ts";
 import { ApiError } from "./errors.ts";
 import { PHASES, ProgressService } from "./progress.ts";
 import { PracticeService } from "./practice.ts";
@@ -69,6 +71,13 @@ export interface AppOptions {
    * far below what an automated loop needs). Counted per process; see docs/development/DEPLOYMENT.md.
    */
   guestCreationsPer15Min?: number;
+  /** New accounts one client address may register per 15 minutes (default 20). A class registering from one school network may need more. */
+  registrationsPer15Min?: number;
+  /**
+   * Where account deletions are logged (student release, erasures.ts) so a restored backup cannot bring an erased learner back. When
+   * given, a deletion is logged durably BEFORE it happens, and nothing is deleted if the log cannot be written.
+   */
+  erasures?: ErasureLog;
   /** Expose POST /api/test/clock so browser journeys can move time forward. For tests only; never enable in production. */
   testClock?: boolean;
 }
@@ -173,7 +182,7 @@ export function createApp(opts: AppOptions) {
   // limited per address with headroom for a classroom or household sharing one; the caps are per process.
   const loginLimiter = new RateLimiter(10);
   const loginIpLimiter = new RateLimiter(60);
-  const registerLimiter = new RateLimiter(20);
+  const registerLimiter = new RateLimiter(opts.registrationsPer15Min ?? 20);
   // Guest accounts need no email or password, so creating them is limited per address as registration is (audit #19: 300 from one address in 1.4 s).
   const guestLimiter = new RateLimiter(opts.guestCreationsPer15Min ?? 60);
   const routes: Route[] = [];
@@ -270,10 +279,38 @@ export function createApp(opts: AppOptions) {
       if (ctx.user.id === found.id) return me(ctx.user, ctx.token);
       throw new ApiError(409, "signed_in", "Someone else is signed in on this device. Sign out first, then sign in.");
     }
-    if (ctx.token) auth.destroySession(db, ctx.token);
-    startSession(ctx, found.id);
+    // The password was checked against the hash read before the slow scrypt step. A reset or change may have committed meanwhile (and
+    // ended every session); the session is issued only if the stored hash is still the one verified, checked in the same transaction.
+    const issued = tx(db, () => {
+      if (!auth.passwordHashIs(db, found.id, found.passwordHash)) return false;
+      if (ctx.token) auth.destroySession(db, ctx.token);
+      startSession(ctx, found.id);
+      return true;
+    });
+    if (!issued) throw new ApiError(401, "bad_credentials", "That email and password don't match.");
     const { passwordHash: _omit, ...user } = found;
     return me(user, ctx.token);
+  });
+
+  // Change password (student release): a learner given a temporary password by their teacher replaces it. Every other session of the
+  // account ends; this device stays signed in. Refused if the password changed since it was checked (a concurrent reset).
+  route("POST", "/api/me/password", true, async (ctx) => {
+    const body = parse(z.object({ currentPassword: z.string().min(1).max(128), newPassword: Password }).strict(), await ctx.body());
+    const user = ctx.user!;
+    if (user.isGuest || !user.email) throw new ApiError(400, "bad_request", "Guests have no password. Create an account to set one.");
+    loginLimiter.check(`login:${user.email}`);
+    const found = auth.findByEmail(db, user.email);
+    if (!found?.passwordHash || found.id !== user.id || !(await auth.verifyPassword(body.currentPassword, found.passwordHash))) {
+      throw new ApiError(401, "bad_credentials", "Your current password isn't right.");
+    }
+    const next = await auth.hashPassword(body.newPassword);
+    const changed = tx(db, () => {
+      if (!auth.passwordHashIs(db, user.id, found.passwordHash)) return false;
+      auth.setPassword(db, user.id, next, ctx.token);
+      return true;
+    });
+    if (!changed) throw new ApiError(409, "password_changed", "Your password was changed somewhere else just now. Sign in again.");
+    return { ok: true };
   });
 
   route("POST", "/api/auth/logout", false, (ctx) => {
@@ -313,7 +350,9 @@ export function createApp(opts: AppOptions) {
       profile: profileOf(id),
       lessonProgress: all("SELECT * FROM lesson_progress WHERE user_id = ?"),
       attempts: all("SELECT * FROM attempts WHERE user_id = ? ORDER BY created_at"),
+      hintUses: all("SELECT * FROM hint_uses WHERE user_id = ? ORDER BY rowid"),
       practiceAttempts: all("SELECT * FROM practice_attempts WHERE user_id = ? ORDER BY created_at"),
+      practiceHintUses: all("SELECT * FROM practice_hint_uses WHERE user_id = ? ORDER BY rowid"),
       // Brief 05: server-built practice, review, challenge and assessment runs and their results.
       nodeSessions: all("SELECT * FROM node_sessions WHERE user_id = ? ORDER BY started_at"),
       nodeAttempts: all("SELECT * FROM node_attempts WHERE user_id = ? ORDER BY created_at"),
@@ -349,6 +388,8 @@ export function createApp(opts: AppOptions) {
     if (body.userId !== ctx.user!.id) {
       throw new ApiError(409, "account_changed", "A different account is now signed in on this device, so nothing was deleted. Check who is signed in, then try again.");
     }
+    // Logged first and durably (erasures.ts): if the log cannot be written, nothing is deleted and the learner sees an error.
+    opts.erasures?.record(ctx.user!.id);
     auth.deleteUser(db, ctx.user!.id);
     ctx.cookies.push(clearCookie());
     return { ok: true };

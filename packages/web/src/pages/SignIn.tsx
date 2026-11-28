@@ -36,6 +36,7 @@ export function SignIn() {
         {error && <p className="form-error" role="alert">{error}</p>}
         <button className="btn btn-primary btn-large" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
       </form>
+      <p className="fine-print">Forgotten your password? Ask your teacher, or the person who gave you access, to reset it.</p>
       <p className="fine-print">New here? <Link to="/onboarding">Get started</Link></p>
     </main>
   );
