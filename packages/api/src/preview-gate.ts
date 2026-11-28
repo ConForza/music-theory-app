@@ -70,9 +70,12 @@ export interface GateRequest {
  */
 export type GateDecision = { pass: true; cookies: string[]; afterSuccess?: () => void } | { pass: false; response: Response };
 
+export type Audience = "testers" | "students";
+
 export interface PreviewGate {
   /** Number of testers currently allowed. */
   testers: number;
+  audience: Audience;
   check(req: GateRequest): Promise<GateDecision>;
 }
 
@@ -83,6 +86,12 @@ export interface GateOptions {
   /** Origins allowed to post the sign-in form besides the request's own (MTP_ALLOWED_ORIGINS). */
   allowedOrigins?: string[];
   trustedProxyHops?: number;
+  /**
+   * Who signs in (MTP_AUDIENCE). "testers" (default): the adult preview, tester name and password. "students": the student release, where
+   * a learner types only the CLASS CODE their teacher gave them (see newClassCode); wording is written for children and parents. The
+   * mechanism is the same in both: the same entries, sessions, revocation and rate limits; a tester's password still works as a code.
+   */
+  audience?: Audience;
   /** For tests. */
   now?: () => Date;
 }
@@ -98,6 +107,25 @@ export function newInvite(name: string): { name: string; password: string; entry
   if (!/^[a-z0-9][a-z0-9._-]{0,31}$/i.test(name)) throw new Error("Tester name: letters, digits, '.', '_' or '-', up to 32 characters.");
   const password = randomBytes(24).toString("base64url");
   return { name, password, entry: `${name}:${hashPassword(password)}` };
+}
+
+/**
+ * Class codes are typed by children, often on a phone: 16 characters from an alphabet without look-alikes (no 0/O, 1/I/L), shown in
+ * groups of four (`K7QM-3PXA-R9TD-H2WN`), 80 random bits. Case, spaces and hyphens are ignored when typed.
+ */
+const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+export function normaliseClassCode(code: string): string {
+  return code.toUpperCase().replace(/[\s-]+/g, "");
+}
+
+/** A fresh class (or family) code: the code to hand to students once, and the entry to add to MTP_PREVIEW_ACCESS. */
+export function newClassCode(name: string): { name: string; code: string; entry: string } {
+  if (!/^[a-z0-9][a-z0-9._-]{0,31}$/i.test(name)) throw new Error("Class name: letters, digits, '.', '_' or '-', up to 32 characters.");
+  // Rejection sampling keeps every character equally likely (31 symbols; 16 characters is just over 79 bits).
+  let raw = "";
+  while (raw.length < 16) for (const b of randomBytes(32)) if (b < 248 && raw.length < 16) raw += CODE_ALPHABET[b % 31];
+  const code = raw.match(/.{4}/g)!.join("-");
+  return { name, code, entry: `${name}:${hashPassword(normaliseClassCode(code))}` };
 }
 
 export function parseAccess(value: string | undefined): Map<string, Buffer> {
@@ -136,6 +164,8 @@ const looksLikeAsset = (pathname: string) => /\.(js|css|svg|json|png|ico|webmani
 export function createPreviewGate(access: string | undefined, opts: GateOptions): PreviewGate {
   const testers = parseAccess(access);
   const { db } = opts;
+  const audience: Audience = opts.audience ?? "testers";
+  const students = audience === "students";
   const now = opts.now ?? (() => new Date());
   const current = new Map([...testers].map(([name, hash]) => [name, fingerprint(name, hash)]));
 
@@ -154,11 +184,25 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
     `${PREVIEW_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${opts.secureCookies ? "; Secure" : ""}`;
   const clear = () => `${PREVIEW_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${opts.secureCookies ? "; Secure" : ""}`;
 
-  /** Constant-time check of a name and password against the invitations; an unknown name still costs one hash. */
+  /**
+   * Constant-time check of a name and password against the invitations; an unknown name still costs the hashes. The secret matches as
+   * typed (tester passwords are case-sensitive) or in class-code form (case, spaces and hyphens ignored).
+   */
+  function matches(want: Buffer, exact: Buffer, code: Buffer): boolean {
+    return timingSafeEqual(exact, want) || timingSafeEqual(code, want);
+  }
+  const digests = (password: string) => [Buffer.from(sha256hex(password), "hex"), Buffer.from(sha256hex(normaliseClassCode(password)), "hex")] as const;
   function verify(name: string, password: string): boolean {
     const want = testers.get(name);
-    const got = Buffer.from(sha256hex(password), "hex");
-    return want !== undefined && timingSafeEqual(got, want);
+    const [exact, code] = digests(password);
+    return want !== undefined && matches(want, exact, code);
+  }
+  /** Students mode: the code alone. Every entry is compared (no early exit), and the entry it belongs to is returned. */
+  function entryForCode(password: string): string | undefined {
+    const [exact, code] = digests(password);
+    let found: string | undefined;
+    for (const [name, want] of testers) if (matches(want, exact, code) && found === undefined) found = name;
+    return found;
   }
 
   function basicOk(authorization: string | undefined): boolean {
@@ -224,7 +268,7 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
     return new Response(null, { status: 303, headers: h });
   };
   const page = (status: number, next: string, error?: string) =>
-    new Response(signInPage(next, error), { status, headers: { ...noStore, "content-type": "text/html; charset=utf-8" } });
+    new Response(signInPage(next, audience, error), { status, headers: { ...noStore, "content-type": "text/html; charset=utf-8" } });
 
   const sameOrigin = (req: GateRequest) => {
     const origin = req.header("origin");
@@ -241,19 +285,29 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
     const name = (form.get("username") ?? "").trim().slice(0, 64);
     const password = (form.get("password") ?? "").slice(0, 256);
     const next = safeNext(form.get("next"));
+    // Students type only a code; a name, when sent (scripts, the testers' form), is still checked against its own entry.
+    const codeOnly = students && !name;
     try {
       ipLimiter.check(`pv-ip:${clientKey(new Headers({ "x-forwarded-for": req.header("x-forwarded-for") ?? "" }), req.remoteAddress, opts.trustedProxyHops ?? 0)}`);
-      nameLimiter.check(`pv-name:${name.toLowerCase()}`);
+      if (!codeOnly) nameLimiter.check(`pv-name:${name.toLowerCase()}`);
     } catch (e) {
       if (e instanceof ApiError) return page(429, next, "Too many attempts. Please wait a few minutes and try again.");
       throw e;
     }
-    if (!name || !password || !verify(name, password)) return page(401, next, "That tester name and password don't match an invitation. Check the message you were sent and try again.");
+    if (codeOnly) {
+      const entry = password ? entryForCode(password) : undefined;
+      if (!entry) return page(401, next, "That class code didn't work. Check the code your teacher gave you and try again.");
+      return redirect(next, [issue(entry, token)]);
+    }
+    if (!name || !password || !verify(name, password)) {
+      return page(401, next, students ? "That class code didn't work. Check the code your teacher gave you and try again." : "That tester name and password don't match an invitation. Check the message you were sent and try again.");
+    }
     return redirect(next, [issue(name, token)]);
   }
 
   return {
     testers: testers.size,
+    audience,
     async check(req) {
       const { method, url } = req;
       const path = url.pathname;
@@ -281,18 +335,19 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
       if (PUBLIC_INSTALL_PATHS.has(path) && (method === "GET" || method === "HEAD")) return { pass: true, cookies: [] };
       if (path === STATUS_PATH && method === "GET") {
         // Lets the app offer "leave the private preview" only where there is one. Says nothing about who the tester is.
-        return { pass: false, response: new Response(JSON.stringify({ preview: true, signedIn: authed, viaSession }), { status: authed ? 200 : 401, headers: { ...noStore, "content-type": "application/json; charset=utf-8" } }) };
+        return { pass: false, response: new Response(JSON.stringify({ preview: true, signedIn: authed, viaSession, audience }), { status: authed ? 200 : 401, headers: { ...noStore, "content-type": "application/json; charset=utf-8" } }) };
       }
       if (authed) return { pass: true, cookies: [], ...(live ? { afterSuccess: live.renew } : {}) };
 
       if (path.startsWith("/api/")) {
-        const body = JSON.stringify({ error: { code: "preview_required", message: "This private preview needs its tester sign-in on this device.", signIn: SIGNIN_PATH } });
+        const message = students ? "This app needs its class code on this device." : "This private preview needs its tester sign-in on this device.";
+        const body = JSON.stringify({ error: { code: "preview_required", message, signIn: SIGNIN_PATH } });
         return { pass: false, response: new Response(body, { status: 401, headers: { ...noStore, "content-type": "application/json; charset=utf-8" } }) };
       }
       if ((method === "GET" || method === "HEAD") && !looksLikeAsset(path)) {
         return { pass: false, response: redirect(`${SIGNIN_PATH}?next=${encodeURIComponent(safeNext(path + url.search))}`) };
       }
-      return { pass: false, response: new Response("Private preview: invited testers only.", { status: 401, headers: { ...noStore, "content-type": "text/plain; charset=utf-8" } }) };
+      return { pass: false, response: new Response(students ? "Students with a class code only." : "Private preview: invited testers only.", { status: 401, headers: { ...noStore, "content-type": "text/plain; charset=utf-8" } }) };
     },
   };
 }
@@ -300,7 +355,8 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
 /** The app's mark, drawn inline so the sign-in page needs no protected asset. */
 const LOGO = `<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0b7f74"/><g stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".55"><path d="M10 22h44M10 31h44M10 40h44"/></g><ellipse cx="25" cy="40" rx="8" ry="6" transform="rotate(-20 25 40)" fill="#fff"/><path d="M32 38V15c8 1 14 5 14 12" stroke="#ffd166" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 
-function signInPage(next: string, error?: string): string {
+function signInPage(next: string, audience: Audience, error?: string): string {
+  const students = audience === "students";
   return `<!doctype html>
 <html lang="en-GB">
 <head>
@@ -317,23 +373,33 @@ function signInPage(next: string, error?: string): string {
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Theory Path">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Private preview · Music Theory Path</title>
+<title>${students ? "Sign in" : "Private preview"} · Music Theory Path</title>
 <link rel="stylesheet" href="${STYLE_PATH}">
 </head>
 <body>
 <main>
-<div class="head">${LOGO}<h1>Music Theory Path</h1><p class="tag">Private preview for invited testers</p></div>
+<div class="head">${LOGO}<h1>Music Theory Path</h1><p class="tag">${students ? "For students with a class code" : "Private preview for invited testers"}</p></div>
 <form method="post" action="${SIGNIN_PATH}" name="preview-signin">
 <input type="hidden" name="next" value="${esc(next)}">
-<label for="preview-username">Tester name</label>
+${
+  students
+    ? `<label for="preview-password">Class code</label>
+<input id="preview-password" name="password" type="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" required maxlength="64" placeholder="ABCD-EFGH-JKMN-PQRS">`
+    : `<label for="preview-username">Tester name</label>
 <input id="preview-username" name="username" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required maxlength="32">
 <label for="preview-password">Preview password</label>
-<input id="preview-password" name="password" type="password" autocomplete="current-password" required maxlength="256">
+<input id="preview-password" name="password" type="password" autocomplete="current-password" required maxlength="256">`
+}
 ${error ? `<p class="error" role="alert">${esc(error)}</p>` : ""}
-<button type="submit">Open the preview</button>
+<button type="submit">${students ? "Start learning" : "Open the preview"}</button>
 </form>
-<p class="note">Use the tester name and password from your invitation. You'll normally need them only once on each device. If you add the app to your Home Screen it may open already signed in, or ask for them once more. Your learner account (or guest progress) is separate: you'll sign in to it on the next screen.</p>
-<p class="note">Draft content for adult testers only. Not affiliated with or endorsed by ABRSM.</p>
+${
+  students
+    ? `<p class="note">Your teacher gave you a class code. You'll normally need it only once on each device. Next you'll make your own account, so your progress is saved.</p>
+<p class="note"><a href="/privacy">Privacy notice for students and parents</a> · Not affiliated with or endorsed by ABRSM.</p>`
+    : `<p class="note">Use the tester name and password from your invitation. You'll normally need them only once on each device. If you add the app to your Home Screen it may open already signed in, or ask for them once more. Your learner account (or guest progress) is separate: you'll sign in to it on the next screen.</p>
+<p class="note">Draft content for adult testers only. Not affiliated with or endorsed by ABRSM.</p>`
+}
 </main>
 </body>
 </html>`;
@@ -350,4 +416,4 @@ label{font-weight:700;margin-top:.4rem}
 input{font:inherit;font-size:1rem;min-height:48px;padding:.6rem .8rem;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
 input:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
 button{font:inherit;font-weight:800;min-height:52px;margin-top:.8rem;border:0;border-radius:16px;background:var(--brand);color:var(--on-brand);box-shadow:0 5px 0 var(--brand-strong);cursor:pointer;touch-action:manipulation}
-.error{color:var(--bad);font-weight:700;margin:.4rem 0 0}.note{color:var(--muted);font-size:.9rem;margin:1rem 0 0}`;
+.error{color:var(--bad);font-weight:700;margin:.4rem 0 0}a{color:var(--brand)}.note{color:var(--muted);font-size:.9rem;margin:1rem 0 0}`;

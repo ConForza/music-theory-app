@@ -4,6 +4,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import type { App } from "./app.ts";
 import type { PreviewGate } from "./preview-gate.ts";
+import { privacyResponse, type PrivacySettings } from "./privacy.ts";
 
 const TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -51,6 +52,8 @@ export interface HttpOptions {
   securityHeaders?: "app" | "proxy";
   /** Private preview (issue #24, PWA brief): when given, every request except the gate's open resources needs an invited tester's preview session. */
   gate?: PreviewGate;
+  /** The privacy notice at /privacy (student release). Served before the gate, so parents can read it without a class code. */
+  privacy?: PrivacySettings;
 }
 
 /**
@@ -123,7 +126,9 @@ export function createHttpServer(app: App, staticDir?: string, opts: HttpOptions
       let response: Response | undefined;
       const extraCookies: string[] = [];
       let afterSuccess: (() => void) | undefined;
-      if (opts.gate) {
+      // The privacy notice is public on purpose (a parent reads it before deciding); it holds nothing about any learner.
+      if (opts.privacy) response = privacyResponse(url.pathname, req.method ?? "GET", opts.privacy) ?? undefined;
+      if (opts.gate && !response) {
         const decision = await opts.gate.check({
           method: req.method ?? "GET",
           url,

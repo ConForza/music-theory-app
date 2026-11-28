@@ -1,5 +1,7 @@
 # Railway private preview: setup and runbook (issue #24)
 
+**Letting your own students in:** follow [docs/release/STUDENT_RELEASE.md](../release/STUDENT_RELEASE.md) (class codes, privacy notice, automatic backups, password resets).
+
 **Status: private preview, deployed on Railway Hobby** at <https://mtpcurriculum-production.up.railway.app/> (invited adults and internal testers only).
 Hosting is Railway Hobby (decided 16 Nov 2026); other hosts are out of scope. **Deployments are manual and never automatic**: merging a PR does not deploy.
 To ship `main`, run **[Deploy to Railway](https://github.com/ConForza/music-theory-app/actions/workflows/deploy-railway.yml)** (see "Manual deployment" below).
@@ -15,6 +17,7 @@ The setup checklist is kept as the record of how the service was provisioned; st
 | One service, one replica, region, volume `/data`, auto-deploy off | **Railway service settings** (OWNER) | see checklist |
 | Manual deployment (CI check, backup rule, deploy, verify) | **Code**: `.github/workflows/deploy-railway.yml`, `scripts/railway-deploy.mjs` | see "Manual deployment" |
 | `MTP_DB=/data/mtp.sqlite`, `MTP_PREVIEW_GATE=1`, `MTP_PREVIEW_ACCESS`, `MTP_SECURE_COOKIES=1`, `MTP_ALLOWED_ORIGINS`, `RAILWAY_DEPLOYMENT_OVERLAP_SECONDS=0`, `RAILWAY_DEPLOYMENT_DRAINING_SECONDS=20` | **Railway variables** (OWNER) | secrets only in `MTP_PREVIEW_ACCESS` (hashes, no passwords) |
+| Student release (see [STUDENT_RELEASE.md](../release/STUDENT_RELEASE.md)) | **Railway variables** (OWNER) | `MTP_BACKUP_DIR=/data/backups` (automatic verified backups: before any migration, and daily), optional `MTP_BACKUP_KEEP` (days, default 14); then `MTP_PRIVACY_OPERATOR`, `MTP_PRIVACY_CONTACT`, `MTP_PRIVACY_NOTICE_APPROVED=YYYY-MM-DD` and `MTP_AUDIENCE=students` (class-code sign-in; refuses to start until the others are set) |
 | Never set | | `MTP_WARM_POOLS=0`, `MTP_GUEST_RETENTION_APPROVED`, `MTP_SHOW_READINESS`, `MTP_TRUST_PROXY_HOPS` (until verified, below), `MTP_TEST_CLOCK` |
 
 ## Setup checklist (OWNER, in the Railway dashboard)

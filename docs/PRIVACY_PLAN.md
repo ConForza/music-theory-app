@@ -18,6 +18,11 @@ Brief 02 builds the mechanisms; the legal decisions below are for the owner befo
 * Export (`GET /api/me/export`) and deletion (`DELETE /api/me`) are tested against every table that holds a learner's rows, including the Brief 10 tables.
 * Security response headers, including a Content-Security-Policy that allows no third-party script, style, font, image or connection: see `docs/development/DEPLOYMENT.md`.
 
+**Added for the student release** (`docs/release/STUDENT_RELEASE.md`; mechanisms and a draft text, not legal decisions)
+* A privacy notice at `/privacy`, readable without signing in, with a part for students and a part for parents (`packages/api/src/privacy.ts`). It is written from what the code does, shows a **Draft** banner until the owner sets `MTP_PRIVACY_NOTICE_APPROVED`, and states the guest retention period only once deletion is approved and the backup period only when automatic backups are on. `MTP_AUDIENCE=students` refuses to start without the operator's name, a contact email and that approval date.
+* Automatic backups (`MTP_BACKUP_DIR`): every snapshot is deleted after `MTP_BACKUP_KEEP` days (default 14; the newest of each kind is kept regardless), which bounds how long a deleted account survives in a backup.
+* Class codes give a class or family access; nothing in them identifies a learner.
+
 **These controls do not make the product legally compliant.** They are mechanisms. Whether they are sufficient, and what the product may lawfully do with children's data, are decisions for the owner with appropriate legal advice.
 
 ## Retention controls (implemented, disabled pending the owner's policy)

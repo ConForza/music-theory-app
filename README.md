@@ -4,6 +4,10 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 > **Not affiliated with or endorsed by ABRSM.** The app teaches towards the published ABRSM Grades 1–5 theory syllabus. Its practice assessments are not official examinations.
 
+## Student release (letting your own students in)
+
+The preview can now be switched to **students** (`MTP_AUDIENCE=students`): a one-field **class-code** sign-in written for children (`npm run preview:invite -w @mtp/api -- --class <name>`), a **privacy notice** at `/privacy` that parents can read before signing in, **automatic verified backups** before any migration and daily (`MTP_BACKUP_DIR`), and a teacher-run **password reset** (`npm run account:reset-password -w @mtp/api -- <email>`). The student audience refuses to start until the gate, an approved notice and backups are configured. Step-by-step runbook, decisions and a parent letter: [docs/release/STUDENT_RELEASE.md](docs/release/STUDENT_RELEASE.md).
+
 ## Question wording audit
 
 Every question family in Grades 1-5 was audited for clarity and length: 45 templates and 12 Practice Lab questions were reworded (the reported 7/4 bar-completion prompt went from 63 words to 25), rhythms are now put into words by one shared formatter (`music.rhythmInWords`: "four quavers, a crotchet and four quavers"), and notation now has one screen-reader reading surface, with every voice of a shared stave described. Reworded questions keep their first wording in `legacyPrompt`, which question identity reads, so no learner's mastery or exposure history moves (pinned by a fixture of every question identity). Findings, before/after wording, mobile measurements and questions for a teacher: [docs/curriculum/QUESTION_WORDING_AUDIT.md](docs/curriculum/QUESTION_WORDING_AUDIT.md).

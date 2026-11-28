@@ -179,7 +179,7 @@ function LearnerSettings() {
 
       <section className="card" aria-labelledby="data-h">
         <h2 id="data-h">Your data</h2>
-        <p>Download everything we hold about you, or delete it for good.</p>
+        <p>Download everything we hold about you, or delete it for good. <a href="/privacy">Read the privacy notice</a>.</p>
         <div className="row">
           <button className="btn btn-ghost" onClick={download}>Download my data</button>
           {!confirmDelete ? (

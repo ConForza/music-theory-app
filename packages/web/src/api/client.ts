@@ -426,14 +426,14 @@ export const api = {
 };
 
 /** The private preview this device is signed in to, if the deployment has one (the gate answers; elsewhere this is the app's HTML). */
-export async function previewStatus(): Promise<{ preview: boolean; signedIn: boolean }> {
+export async function previewStatus(): Promise<{ preview: boolean; signedIn: boolean; students: boolean }> {
   try {
     const res = await fetch("/preview/session", { credentials: "same-origin" });
-    if (!(res.headers.get("content-type") ?? "").includes("application/json")) return { preview: false, signedIn: false };
-    const b = (await res.json()) as { preview?: boolean; signedIn?: boolean };
-    return { preview: b.preview === true, signedIn: b.signedIn === true };
+    if (!(res.headers.get("content-type") ?? "").includes("application/json")) return { preview: false, signedIn: false, students: false };
+    const b = (await res.json()) as { preview?: boolean; signedIn?: boolean; audience?: string };
+    return { preview: b.preview === true, signedIn: b.signedIn === true, students: b.audience === "students" };
   } catch {
-    return { preview: false, signedIn: false };
+    return { preview: false, signedIn: false, students: false };
   }
 }
 
