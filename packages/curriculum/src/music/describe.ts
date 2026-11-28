@@ -150,7 +150,8 @@ function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole", beams =
   const allOneBeam = beamedInner && inner.length > 1 && inner[0]!.beam === "begin" && inner[inner.length - 1]!.beam === "end" && inner.slice(1, -1).every((e) => e.beam === "continue");
   const uniform = uniformNotes(r) && (!beamedInner || allOneBeam);
   const name = tupletName(u.ev.actual ?? 3, u.ev.normal);
-  const listed = beamedInner && !allOneBeam ? `(${rhythmInWords(inner, { beams: true })})` : `(${listInWords(r.map((x) => plainWords(x.e, x.n)))})`;
+  // a mixed group under one beam says so (third review of PR #30): "a triplet beamed together (a quaver, a semiquaver and a dotted quaver)"
+  const listed = beamedInner && !allOneBeam ? `(${rhythmInWords(inner, { beams: true })})` : `${allOneBeam ? "beamed together " : ""}(${listInWords(r.map((x) => plainWords(x.e, x.n)))})`;
   const valuesOfTuplet = (x: { e: WordEvent; n: number }) => `${allOneBeam ? "beamed " : ""}${valuesOf(x)}`;
   let one: string;
   let many: string;
@@ -162,7 +163,7 @@ function unitWords(u: Unit, n: number, as: "whole" | "target" = "whole", beams =
   } else {
     // any other ratio says it: "four quavers in the time of three", "two groups of four quavers in the time of three"
     const time = u.ev.normal === undefined ? "" : ` in the time of ${countWord(u.ev.normal)}`;
-    one = uniform ? `${countWord(r[0]!.n)} ${valuesOfTuplet(r[0]!)}${time}` : `a group${time} ${listed}`;
+    one = uniform ? `${countWord(r[0]!.n)} ${valuesOfTuplet(r[0]!)}${time}` : `a group${time}${allOneBeam ? "," : ""} ${listed}`;
     many = uniform ? `${countWord(n)} groups of ${countWord(r[0]!.n)} ${valuesOfTuplet(r[0]!)}${time}` : `${countWord(n)} groups${time}, each ${listed}`;
   }
   if (as === "target") return `the first note of ${one}`;

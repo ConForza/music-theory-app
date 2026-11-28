@@ -111,6 +111,14 @@ describe("musically significant distinctions are kept", () => {
     expect(words([tb], true)).toBe("a triplet of three beamed quavers");
     expect(words([tf], true)).toBe("a triplet of three quavers");
     expect(words([tb, tf], true)).toBe("a triplet of three beamed quavers followed by a triplet of three quavers");
+    // a mixed-value group under one beam says so too (third review of PR #30)
+    const mixed = [n("quaver"), n("semiquaver"), n("quaver", { dots: 1 })];
+    const mixedBeamed: E = { kind: "tuplet", actual: 3, normal: 2, events: beamed(...mixed) };
+    const mixedFlags: E = { kind: "tuplet", actual: 3, normal: 2, events: mixed };
+    expect(words([mixedBeamed], true)).toBe("a triplet beamed together (a quaver, a semiquaver and a dotted quaver)");
+    expect(words([mixedFlags], true)).toBe("a triplet (a quaver, a semiquaver and a dotted quaver)");
+    expect(words([mixedBeamed, mixedBeamed], true)).toBe("two triplets, each beamed together (a quaver, a semiquaver and a dotted quaver)");
+    expect(words([mixedBeamed], false)).toBe("a triplet (a quaver, a semiquaver and a dotted quaver)");
     const partly: E = { kind: "tuplet", actual: 3, normal: 2, events: [...beamed(n("quaver"), n("quaver")), n("quaver")] };
     expect(words([partly], true)).toBe("a triplet (two quavers beamed together followed by a quaver)");
   });

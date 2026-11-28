@@ -68,9 +68,9 @@ describe("question identity is unchanged by the wording audit", () => {
 
 describe("lessons and Practice Lab sets touched by the audit changed only in what learners read", () => {
   // Fixture: for each lesson the audit touched, and every Practice Lab set ("showcase|<set id>"), a hash of the pre-audit file (main at 94754cb)
-  // with its learner-facing wording (prompts, hints and text descriptions) removed. Question identity, which reads some descriptions, is pinned above.
+  // with its learner-facing wording (prompts, hints, feedback and text descriptions) removed. Question identity, which reads some descriptions, is pinned above.
   const was = JSON.parse(readFileSync(join(here, "fixtures/lessons-before-wording-audit.json"), "utf8")) as Record<string, string>;
-  const WORDING = new Set(["prompt", "legacyPrompt", "questionAlternative", "textAlternative", "hints"]);
+  const WORDING = new Set(["prompt", "legacyPrompt", "questionAlternative", "textAlternative", "hints", "feedback"]);
   const strip = (o: unknown): unknown =>
     Array.isArray(o) ? o.map(strip) : o && typeof o === "object" ? Object.fromEntries(Object.keys(o).filter((k) => !WORDING.has(k)).sort().map((k) => [k, strip((o as Record<string, unknown>)[k])])) : o;
   const contentOf = (key: string) =>

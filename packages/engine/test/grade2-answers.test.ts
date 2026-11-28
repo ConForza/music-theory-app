@@ -200,7 +200,7 @@ describe("Brief 06 review fixes", () => {
   it("triplet descriptions close the group, so a screen-reader user can tell where it ends", () => {
     for (const i of items("G2-U1-L05", "t.g2.triplet-mixed")) {
       expect(i.music!.textAlternative).toMatch(/a triplet \(.+\)/);
-      expect(i.music!.questionAlternative).toMatch(/a triplet \(.+\)/);
+      expect(i.music!.questionAlternative).toMatch(/a triplet (beamed together )?\(.+\)/);
     }
   });
   it("melody interval questions never mark the tonic, and offer 2nd to 7th", () => {

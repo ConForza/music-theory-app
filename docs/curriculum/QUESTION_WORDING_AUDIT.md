@@ -50,7 +50,7 @@ New module `packages/curriculum/src/music/describe.ts` (exported as `music.rhyth
 * the engine's question descriptions for every rhythm line (`describeRhythmWithBeams`, `describeBeamed`), so all 1,818 sampled rhythm descriptions changed in one place;
 * the web rhythm editors' live description (`describeBars`), so the bar a learner builds is described in the same words as the bars they read.
 
-Rules: consecutive events merge only when nothing musical tells them apart (kind, value, dots, tie, beam, tuplet ratio and inner beaming). Beam groups and tuplets are units; a tie that crosses into or out of one is kept as a link ("a crotchet tied into the first of two beamed quavers", "two quavers beamed together, the last tied to a crotchet"), and units joined by a tie are never merged. Tuplets keep their name and contents; one with an unusual ratio says it ("four quavers in the time of three"). Two parts read "A followed by B" (an order in time), three or more "A, B and C". It is for rhythm only: pitch, accidentals and articulations are not read.
+Rules: consecutive events merge only when nothing musical tells them apart (kind, value, dots, tie, beam, tuplet ratio and inner beaming). Beam groups and tuplets are units; a tie that crosses into or out of one is kept as a link ("a crotchet tied into the first of two beamed quavers", "two quavers beamed together, the last tied to a crotchet"), and units joined by a tie are never merged. Tuplets keep their name and contents, including their beams ("a triplet of three beamed quavers", "a triplet beamed together (a quaver, a semiquaver and a dotted quaver)"); one with an unusual ratio says it ("four quavers in the time of three"). Two parts read "A followed by B" (an order in time), three or more "A, B and C". It is for rhythm only: pitch, accidentals and articulations are not read.
 
 The stored `textAlternative` of a rhythm line (`describeRhythm`, `valueWord`, Grade 2 `describeBars`) is **not** routed through it: for the Brief 04 templates that text is part of question identity, so it keeps its earlier form. Learners in a question hear `questionAlternative`, which is.
 
@@ -251,6 +251,13 @@ The second review (of the follow-up) confirmed those fixes and found three more,
 | **P3.** Beams inside a tuplet were compared but not described | "a triplet of three beamed quavers" when the group is beamed; a partly beamed group is listed by its beams. Re-authoring added this to five lesson descriptions. |
 
 The written-out ornament prompt still names its notes ("An ornament on F♯ is written out as G, F♯, E, F♯."): the question tests recognising the ornament, not reading the pitches, so the names stay as support.
+
+The third review approved the PR with two non-blocking comments, both fixed afterwards:
+
+| Finding | What changed |
+|---|---|
+| **P3.** A single beam over a mixed-value tuplet was not described | "a triplet beamed together (a quaver, a semiquaver and a dotted quaver)"; tests compare the same notes with and without the beam. |
+| **P3** (older than this work). Practice Lab "Building bars" questions 3 and 4 praised the stock example ("Three quavers in the time of two fill a crotchet beat") whatever valid triplet or duplet the learner wrote | The success messages describe any valid answer: "Yes! Your triplet fits three notes into the time of two, and the bar adds up exactly." (and likewise for the duplet). Feedback is not part of question identity. |
 Left for separate work, as the review agreed: the layout defects in section 10 and the missing `main` landmark on the lesson player that axe reports on both revisions (a best-practice rule, not one the WCAG journeys run).
 
 ## 12. Validation
