@@ -5,9 +5,9 @@ import { fileURLToPath } from "node:url";
 
 export type Db = DatabaseSync;
 
-const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), "../migrations");
+export const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), "../migrations");
 
-const migrationFiles = (dir: string) => readdirSync(dir).filter((f) => /^\d{3}_.+\.sql$/.test(f)).sort();
+export const migrationFiles = (dir: string) => readdirSync(dir).filter((f) => /^\d{3}_.+\.sql$/.test(f)).sort();
 
 /** Open (and migrate) a SQLite database. Use ":memory:" in tests. */
 export function openDb(path = ":memory:"): Db {

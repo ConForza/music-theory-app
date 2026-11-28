@@ -2,14 +2,16 @@
  * The privacy notice (student release): a plain page at /privacy, readable WITHOUT signing in (parents read it before handing over a class
  * code), with a short part for students and a fuller part for parents and carers.
  *
- * The text below describes what this code actually does. The owner fills in who runs the service and how to contact them, and states
- * that they have read and approved the notice (MTP_PRIVACY_NOTICE_APPROVED=YYYY-MM-DD); the student release refuses to start until they
- * have (config.ts#studentReleaseProblem). Until then the page shows a DRAFT banner. Changing how data is handled means changing this text
- * in the same pull request, and the owner re-approving it with a new date.
+ * The text below describes what this code actually does. The owner fills in who runs the service and how to contact them, reads the
+ * page, and approves THAT TEXT: MTP_PRIVACY_NOTICE_APPROVED=YYYY-MM-DD/<revision>, where the revision (shown at the foot of the page) is a
+ * fingerprint of the exact wording as filled in from the settings. Any change to the wording, the operator, contact, hosting, backup period
+ * or guest period gives a new revision, so the old approval no longer applies: the page shows DRAFT again and the student release refuses
+ * to start (config.ts#studentReleaseProblem) until the new text is approved. The date must be a real date, not in the future.
  *
- * It is a starting point written from the code, not legal advice: the lawful basis, children's-code assessment and retention choices are
- * the owner's (docs/PRIVACY_PLAN.md, docs/release/STUDENT_RELEASE.md).
+ * It is a starting point written from the code, not legal advice: the lawful basis, children's-code assessment, processor and transfer
+ * terms and retention choices are the owner's (docs/PRIVACY_PLAN.md, docs/release/STUDENT_RELEASE.md).
  */
+import { createHash } from "node:crypto";
 import { backupSettingsFromEnv } from "./backups.ts";
 import { retentionPolicyFromEnv } from "./retention.ts";
 
@@ -21,21 +23,33 @@ export interface PrivacySettings {
   operator: string | null;
   /** How to reach them about data: an email address. */
   contact: string | null;
-  /** The date (YYYY-MM-DD) the owner approved this text; null shows the draft banner. */
-  approvedOn: string | null;
   /** Where the data is hosted, as shown to readers. */
   hosting: string;
   /** Days an automatic backup is kept (null: automatic backups are off). */
   backupDays: number | null;
   /** Days after which an inactive guest's data is deleted, when the owner has approved deletion; null otherwise. */
   guestDays: number | null;
+  /** The date (YYYY-MM-DD) the owner approved THIS revision of the text; null shows the draft banner. */
+  approvedOn: string | null;
+  /** Why an approval that was given does not apply (bad date, future date, another revision); null when approved or none given. */
+  approvalProblem: string | null;
+}
+type Content = Omit<PrivacySettings, "approvedOn" | "approvalProblem">;
+
+/** A real calendar date in YYYY-MM-DD form (not 2026-02-30), or null. */
+function realDate(v: string): Date | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return null;
+  const d = new Date(`${v}T00:00:00Z`);
+  return Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== v ? null : d;
 }
 
-const DATE = /^\d{4}-\d{2}-\d{2}$/;
+/** The fingerprint of the notice's wording as filled in from these settings (everything but the approval itself). */
+export function noticeRevision(s: Content): string {
+  return createHash("sha256").update(noticeBody(s)).digest("hex").slice(0, 8);
+}
 
-export function privacySettingsFromEnv(env: Record<string, string | undefined>): PrivacySettings {
+export function privacySettingsFromEnv(env: Record<string, string | undefined>, now = new Date()): PrivacySettings {
   const clean = (v: string | undefined) => (v && v.trim() ? v.trim().slice(0, 200) : null);
-  const approved = clean(env.MTP_PRIVACY_NOTICE_APPROVED);
   let backupDays: number | null;
   try {
     backupDays = backupSettingsFromEnv(env)?.keep ?? null;
@@ -43,55 +57,57 @@ export function privacySettingsFromEnv(env: Record<string, string | undefined>):
     backupDays = null; // a malformed backup setting stops start-up elsewhere
   }
   const retention = retentionPolicyFromEnv(env);
-  return {
+  const content: Content = {
     operator: clean(env.MTP_PRIVACY_OPERATOR),
     contact: clean(env.MTP_PRIVACY_CONTACT),
-    approvedOn: approved && DATE.test(approved) ? approved : null,
-    hosting: clean(env.MTP_PRIVACY_HOSTING) ?? "Railway, in its EU West (Amsterdam) region",
+    hosting: clean(env.MTP_PRIVACY_HOSTING) ?? "Railway Corporation (a US company), in its EU West (Amsterdam) region",
     backupDays,
     guestDays: retention.deleteGuests ? retention.guestInactiveDays : null,
   };
+  const revision = noticeRevision(content);
+  const approved = clean(env.MTP_PRIVACY_NOTICE_APPROVED);
+  let approvedOn: string | null = null;
+  let approvalProblem: string | null = null;
+  if (approved) {
+    const m = /^(\S+)\/([0-9a-f]{8})$/.exec(approved);
+    const date = m ? realDate(m[1]!) : null;
+    if (!m) approvalProblem = `"${approved}" is not in the form YYYY-MM-DD/${revision}`;
+    else if (!date) approvalProblem = `"${m[1]}" is not a real date`;
+    else if (date.getTime() > now.getTime()) approvalProblem = `${m[1]} is in the future`;
+    else if (m[2] !== revision) approvalProblem = `it approves revision ${m[2]}, but the notice is now revision ${revision} (its text or settings changed): read it again and approve the new revision`;
+    else approvedOn = m[1]!;
+  }
+  return { ...content, approvedOn, approvalProblem };
 }
 
 /** What is missing before the notice can be shown to students (empty when ready). */
-export function privacyProblems(s: PrivacySettings, env: Record<string, string | undefined>): string[] {
+export function privacyProblems(s: PrivacySettings): string[] {
   const out: string[] = [];
   if (!s.operator) out.push("MTP_PRIVACY_OPERATOR (who runs the service, as parents should see it)");
   if (!s.contact || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.contact)) out.push("MTP_PRIVACY_CONTACT (an email address parents can write to about their child's data)");
-  if (!s.approvedOn) out.push(`MTP_PRIVACY_NOTICE_APPROVED (the date, YYYY-MM-DD, you read and approved ${PRIVACY_PATH}${env.MTP_PRIVACY_NOTICE_APPROVED ? `; "${env.MTP_PRIVACY_NOTICE_APPROVED}" is not a date` : ""})`);
+  if (!s.approvedOn) {
+    const rev = noticeRevision(s);
+    out.push(`MTP_PRIVACY_NOTICE_APPROVED=<the date you approved it>/${rev}, after reading ${PRIVACY_PATH} (revision ${rev})${s.approvalProblem ? `; the current value does not apply: ${s.approvalProblem}` : ""}`);
+  }
   return out;
 }
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 const longDate = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
-export function privacyPage(s: PrivacySettings): string {
+/** The notice's wording, filled in from the settings: everything the owner approves (no banner, no approval date, no revision). */
+function noticeBody(s: Content): string {
   const who = s.operator ? esc(s.operator) : "[the person or studio running this service]";
   const mail = s.contact ? `<a href="mailto:${esc(s.contact)}">${esc(s.contact)}</a>` : "[contact email]";
   const backups =
     s.backupDays !== null
-      ? `We keep automatic backup copies of the database so a mistake can be put right. Each copy is deleted after ${s.backupDays} days, so information you delete is gone from the backups too within ${s.backupDays} days.`
+      ? `We keep automatic backup copies of the database so a mistake can be put right. Each copy is deleted after ${s.backupDays} days, so information you delete is gone from these backups within ${s.backupDays} days. If we ever have to restore a backup, accounts deleted after it was taken are deleted again before the app is used.`
       : "Backup copies of the database may be taken before updates; they are deleted when no longer needed.";
   const guests =
     s.guestDays !== null
       ? `A guest's progress (used without an account) is deleted after ${s.guestDays} days without use.`
       : "A guest's progress (used without an account) stays until you ask us to delete it. Guest access on a device ends after 60 days.";
-  return `<!doctype html>
-<html lang="en-GB">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
-<meta name="robots" content="noindex">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<title>Privacy notice · Music Theory Path</title>
-<link rel="stylesheet" href="${PRIVACY_STYLE_PATH}">
-</head>
-<body>
-<main>
-${s.approvedOn ? "" : `<p class="draft" role="note"><strong>Draft.</strong> This notice has not been approved by the person running this service yet.</p>`}
-<h1>Privacy notice</h1>
-<p class="lead">Music Theory Path is run by ${who}. ${s.approvedOn ? `This notice was last updated on ${longDate(s.approvedOn)}.` : ""}</p>
+  return `<p class="lead">Music Theory Path is run by ${who}.</p>
 
 <section aria-labelledby="students">
 <h2 id="students">For students</h2>
@@ -100,7 +116,7 @@ ${s.approvedOn ? "" : `<p class="draft" role="note"><strong>Draft.</strong> This
 <li>Only you can see your progress. There are no leaderboards, no public profiles and no chatting.</li>
 <li>There are no adverts, and we don't sell or share your information.</li>
 <li>Use a nickname if you like: it doesn't have to be your real name.</li>
-<li>You can download everything we keep, or delete your account, at any time in <strong>Settings</strong> → <strong>Your data</strong>.</li>
+<li>You can download a copy of your account and learning records, or delete your account, at any time in <strong>Settings</strong> → <strong>Your data</strong>.</li>
 <li>If something worries you, talk to your parent, carer or teacher.</li>
 </ul>
 </section>
@@ -124,7 +140,7 @@ ${s.approvedOn ? "" : `<p class="draft" role="note"><strong>Draft.</strong> This
 <p>Only to provide the course: to save progress, mark answers, choose review questions and show the learner their own results. We never use it for advertising, profiling for marketing, or selling, and we do not send marketing email.</p>
 
 <h3>Where it is kept, and who else handles it</h3>
-<p>The app and its database are hosted by ${esc(s.hosting)}. Like any website, the hosting provider's systems see a device's internet address in order to deliver pages. No other company receives learners' information.</p>
+<p>The app and its database are hosted by ${esc(s.hosting)}. The host stores the data for us (as our "processor") and may not use it for its own purposes. Like any website, the host's systems see a device's internet address in order to deliver pages. No other company receives learners' information.</p>
 
 <h3>How long we keep it</h3>
 <ul>
@@ -134,12 +150,32 @@ ${s.approvedOn ? "" : `<p class="draft" role="note"><strong>Draft.</strong> This
 </ul>
 
 <h3>Your rights</h3>
-<p>You can ask to see, download, correct or delete your child's information, or object to how we use it. Learners can download a copy or delete their account themselves in <strong>Settings</strong> → <strong>Your data</strong>; deleting removes every learning record. For anything else, write to ${mail}.</p>
+<p>You can ask to see, download, correct or delete your child's information, or object to how we use it. Learners can download a copy of their account and learning records, or delete their account, themselves in <strong>Settings</strong> → <strong>Your data</strong>; deleting removes every learning record. For anything else, write to ${mail}; we will check the request comes from the account's parent or carer before acting on it.</p>
 <p>If you are unhappy with how we have handled information, please tell us first. You can also complain to the Information Commissioner's Office (ICO): <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk/make-a-complaint</a> or 0303 123 1113.</p>
 
 <h3>About the course</h3>
 <p>Music Theory Path teaches towards the ABRSM Grades 1–5 music theory syllabus. It is not affiliated with or endorsed by ABRSM, and its practice examinations are not official examinations.</p>
-</section>
+</section>`;
+}
+
+export function privacyPage(s: PrivacySettings): string {
+  return `<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Privacy notice · Music Theory Path</title>
+<link rel="stylesheet" href="${PRIVACY_STYLE_PATH}">
+</head>
+<body>
+<main>
+${s.approvedOn ? "" : `<p class="draft" role="note"><strong>Draft.</strong> This notice has not been approved by the person running this service yet.</p>`}
+<h1>Privacy notice</h1>
+${noticeBody(s)}
+<p class="rev">${s.approvedOn ? `Approved on ${longDate(s.approvedOn)}. ` : ""}Notice revision ${noticeRevision(s)}.</p>
 <p class="back"><a href="/">Back to the app</a></p>
 </main>
 </body>
@@ -154,7 +190,7 @@ main{max-width:42rem;margin:0 auto;padding:max(1.5rem,env(safe-area-inset-top)) 
 h1{font-size:1.8rem;margin:.5rem 0}.lead{color:var(--muted)}
 section{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:.25rem 1.25rem 1rem;margin:1.25rem 0}
 h2{font-size:1.35rem}h3{font-size:1.05rem;margin:1.25rem 0 .25rem}ul{padding-left:1.25rem}li{margin:.35rem 0}
-a{color:var(--brand)}.draft{background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:.75rem 1rem}.back{margin-top:1.5rem}`;
+a{color:var(--brand)}.draft{background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:.75rem 1rem}.back{margin-top:1.5rem}.rev{color:var(--muted);font-size:.85rem}`;
 
 export function privacyResponse(path: string, method: string, s: PrivacySettings): Response | null {
   if (method !== "GET" && method !== "HEAD") return null;

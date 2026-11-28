@@ -1,5 +1,27 @@
+import { existsSync, realpathSync } from "node:fs";
+import { basename, dirname, resolve, sep } from "node:path";
 import { backupSettingsFromEnv, type BackupSettings } from "./backups.ts";
+import { accessProblems } from "./preview-gate.ts";
 import { privacyProblems, privacySettingsFromEnv } from "./privacy.ts";
+
+/** A path with `..` resolved and any symbolic links in its existing part followed: where a write would really land. */
+export function realLocation(path: string): string {
+  let head = resolve(path);
+  const tail: string[] = [];
+  while (!existsSync(head) && dirname(head) !== head) {
+    tail.unshift(basename(head));
+    head = dirname(head);
+  }
+  const real = existsSync(head) ? realpathSync(head) : head;
+  return tail.length ? resolve(real, ...tail) : real;
+}
+
+/** Whether `path` really lies strictly inside `root` (after resolving `..` and symbolic links on both). */
+export function isInside(path: string, root: string): boolean {
+  const p = realLocation(path);
+  const r = realLocation(root);
+  return p !== r && p.startsWith(r.endsWith(sep) ? r : r + sep);
+}
 
 /**
  * The test clock moves the server's notion of "now" and is only for automated tests. It needs BOTH the explicit flag and an
@@ -20,14 +42,15 @@ export function railwayProblem(env: Record<string, string | undefined>): string 
   const mount = env.RAILWAY_VOLUME_MOUNT_PATH?.replace(/\/+$/, "");
   if (!mount) return "Running on Railway without a mounted volume (RAILWAY_VOLUME_MOUNT_PATH is unset). Attach a volume at /data before starting.";
   if (!env.MTP_DB) return `MTP_DB is not set. On Railway set MTP_DB=${mount}/mtp.sqlite so the database lives on the volume.`;
-  if (!env.MTP_DB.startsWith(`${mount}/`)) return `MTP_DB (${env.MTP_DB}) is outside the volume mount ${mount}; it would be lost on the next deploy.`;
+  if (!isInside(env.MTP_DB, mount)) return `MTP_DB (${env.MTP_DB}) is outside the volume mount ${mount}; it would be lost on the next deploy.`;
   return null;
 }
 
 /**
  * The student release (MTP_AUDIENCE=students) lets children in, so it refuses to start until the owner's prerequisites are in place: the
  * access gate (students come in with a class code), an approved privacy notice naming who runs the service and how to reach them, and
- * automatic backups (on Railway, on the volume, and HTTPS cookies). Returns every problem at once, or null when fine.
+ * automatic backups (on Railway, on the volume), HTTPS-only cookies, and an access list with no malformed or ambiguous entry. Returns every
+ * problem at once, or null when fine.
  */
 export function studentReleaseProblem(env: Record<string, string | undefined>): string | null {
   const audience = env.MTP_AUDIENCE?.trim() || "testers";
@@ -35,7 +58,9 @@ export function studentReleaseProblem(env: Record<string, string | undefined>): 
   if (audience === "testers") return null;
   const missing: string[] = [];
   if (env.MTP_PREVIEW_GATE !== "1") missing.push("MTP_PREVIEW_GATE=1 (students sign in with a class code)");
-  missing.push(...privacyProblems(privacySettingsFromEnv(env), env));
+  missing.push(...accessProblems(env.MTP_PREVIEW_ACCESS).map((p) => `MTP_PREVIEW_ACCESS: ${p}`));
+  if (env.MTP_SECURE_COOKIES !== "1") missing.push("MTP_SECURE_COOKIES=1 (the student release is served over HTTPS only)");
+  missing.push(...privacyProblems(privacySettingsFromEnv(env)));
   let backups: BackupSettings | null = null;
   try {
     backups = backupSettingsFromEnv(env);
@@ -45,8 +70,7 @@ export function studentReleaseProblem(env: Record<string, string | undefined>): 
   }
   if (env.RAILWAY_ENVIRONMENT_ID) {
     const mount = env.RAILWAY_VOLUME_MOUNT_PATH?.replace(/\/+$/, "");
-    if (backups && mount && !backups.dir.startsWith(`${mount}/`)) missing.push(`MTP_BACKUP_DIR inside the volume (${mount}/backups); ${backups.dir} would be lost on the next deploy`);
-    if (env.MTP_SECURE_COOKIES !== "1") missing.push("MTP_SECURE_COOKIES=1");
+    if (backups && mount && !isInside(backups.dir, mount)) missing.push(`MTP_BACKUP_DIR inside the volume (${mount}/backups); ${backups.dir} would be lost on the next deploy`);
   }
   return missing.length ? `The student release (MTP_AUDIENCE=students) cannot start yet. Set: ${missing.join("; ")}.` : null;
 }

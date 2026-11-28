@@ -1,29 +1,32 @@
 /**
- * Reset a learner's password (student release). The app has no "forgot password" email, so a child who forgets theirs asks the teacher,
- * who runs this from the Railway dashboard's Console, in the app directory:
+ * Reset a learner's password (student release). The app sends no "forgot password" email, so a child who forgets asks the teacher.
+ * First confirm the request through a contact you already know (the parent's usual email or phone, not a new address), then, in the
+ * Railway dashboard's Console, in the app directory:
  *
- *   npm run account:reset-password -- learner@example.org            prints a new random password to pass on
- *   npm run account:reset-password -- learner@example.org 'chosen1'  sets one the family chose (8-128 characters)
+ *   npm run account:reset-password -- parent@example.org
  *
- * It changes only that account's password hash and signs that account out on every device. Progress is untouched. It never creates an
- * account, never touches a guest, and never runs migrations (it opens the live database directly, waiting briefly for the app's lock:
- * one small transaction, which SQLite makes safe alongside the running app). Prints no personal data beyond the email you typed.
+ * It sets a new random TEMPORARY password, prints it once, and signs that account out on every device. Give it to the parent privately;
+ * the learner signs in with it and changes it at once in Settings → Change password (sessions started with the temporary password end
+ * when it is changed). No password is ever accepted on the command line (it would show in npm's banner, the shell history and the
+ * process list). Progress is untouched; it never creates an account, never touches a guest and never runs migrations. It opens the live
+ * database directly for one small transaction, which SQLite makes safe alongside the running app; a sign-in that was checking the old
+ * password at that moment is refused (app.ts re-checks the stored hash before issuing a session).
  */
 import { randomBytes } from "node:crypto";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { hashPassword } from "../src/auth.ts";
+import { hashPassword, setPassword } from "../src/auth.ts";
 
 const ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789";
 export function newTemporaryPassword(): string {
   let s = "";
-  while (s.length < 12) for (const b of randomBytes(24)) if (b < 248 && s.length < 12) s += ALPHABET[b % 31];
+  while (s.length < 16) for (const b of randomBytes(32)) if (b < 248 && s.length < 16) s += ALPHABET[b % 31];
   return s.match(/.{4}/g)!.join("-");
 }
 
-export async function resetPassword(dbFile: string, email: string, password: string): Promise<{ sessionsEnded: number }> {
+export async function resetPassword(dbFile: string, email: string): Promise<{ password: string; sessionsEnded: number }> {
   const address = email.trim().toLowerCase();
-  if (password.length < 8 || password.length > 128) throw new Error("The password must be 8 to 128 characters.");
+  const password = newTemporaryPassword();
   const hash = await hashPassword(password);
   const db = new DatabaseSync(dbFile);
   try {
@@ -32,10 +35,10 @@ export async function resetPassword(dbFile: string, email: string, password: str
     try {
       const user = db.prepare("SELECT id FROM users WHERE email = ? AND is_guest = 0").get(address) as { id: string } | undefined;
       if (!user) throw new Error(`No account uses ${address}. Check the spelling (guests have no email and cannot be reset).`);
-      db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hash, user.id);
-      const ended = db.prepare("DELETE FROM sessions WHERE user_id = ?").run(user.id).changes;
+      const sessions = (db.prepare("SELECT COUNT(*) AS c FROM sessions WHERE user_id = ?").get(user.id) as { c: number }).c;
+      setPassword(db, user.id, hash);
       db.exec("COMMIT");
-      return { sessionsEnded: Number(ended) };
+      return { password, sessionsEnded: sessions };
     } catch (e) {
       db.exec("ROLLBACK");
       throw e;
@@ -46,17 +49,17 @@ export async function resetPassword(dbFile: string, email: string, password: str
 }
 
 async function main(argv: string[]): Promise<number> {
-  const [email, chosen] = argv;
-  if (!email) {
-    console.error("Usage: npm run account:reset-password -- <email> [new-password]");
+  const [email, extra] = argv;
+  if (!email || extra !== undefined) {
+    console.error("Usage: npm run account:reset-password -- <email>\n(A password is never accepted here; a temporary one is generated and shown once.)");
     return 2;
   }
   const dbFile = resolve(process.env.MTP_DB ?? "data/mtp.sqlite");
-  const password = chosen ?? newTemporaryPassword();
   try {
-    const r = await resetPassword(dbFile, email, password);
+    const r = await resetPassword(dbFile, email);
     console.log(`Password reset for ${email.trim().toLowerCase()}; signed out on ${r.sessionsEnded} device session(s).`);
-    if (!chosen) console.log(`New password: ${password}   (pass it to the learner or their parent privately; it is not shown again)`);
+    console.log(`Temporary password: ${r.password}`);
+    console.log("Give it to the parent privately. The learner should sign in and change it straight away in Settings → Change password.");
     return 0;
   } catch (e) {
     console.error((e as Error).message);

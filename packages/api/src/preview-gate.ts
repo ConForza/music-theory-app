@@ -137,8 +137,35 @@ export function parseAccess(value: string | undefined): Map<string, Buffer> {
   return out;
 }
 
-/** Ties a session to one exact entry: a removed or re-issued tester no longer matches. */
-const fingerprint = (name: string, hash: Buffer) => sha256hex(`mtp-preview-v1:${name}:${hash.toString("hex")}`);
+/**
+ * Problems with an access list that the student release refuses to start with (the testers' preview keeps its lenient legacy parsing and
+ * only logs these): an entry that is not `name:<64 hex>`, a name used twice (the later one would silently replace the earlier), a secret
+ * shared by two entries (a code alone could not tell which class it belongs to), or no entry at all.
+ */
+export function accessProblems(value: string | undefined): string[] {
+  const out: string[] = [];
+  const names = new Set<string>();
+  const hashes = new Set<string>();
+  const items = (value ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+  if (items.length === 0) out.push("no class code entries (nobody could sign in)");
+  items.forEach((raw, i) => {
+    const m = /^([A-Za-z0-9][A-Za-z0-9._-]{0,31}):([0-9a-f]{64})$/.exec(raw);
+    if (!m) return void out.push(`entry ${i + 1} is not name:<64 lower-case hex characters>`);
+    if (names.has(m[1]!.toLowerCase())) out.push(`the name "${m[1]}" is used more than once`);
+    if (hashes.has(m[2]!)) out.push(`entry ${i + 1} ("${m[1]}") has the same code as an earlier entry`);
+    names.add(m[1]!.toLowerCase());
+    hashes.add(m[2]!);
+  });
+  return out;
+}
+
+/**
+ * Ties a session to one exact entry AND to the audience it was issued for: a removed or re-issued entry no longer matches, and switching
+ * MTP_AUDIENCE between testers and students ends every session issued under the other audience. The testers' form is the original one,
+ * so sessions issued before the student release keep working in the testers' preview.
+ */
+const fingerprint = (name: string, hash: Buffer, audience: Audience) =>
+  sha256hex(audience === "students" ? `mtp-preview-v1:students:${name}:${hash.toString("hex")}` : `mtp-preview-v1:${name}:${hash.toString("hex")}`);
 
 /** A same-site path to return to after signing in; anything else (another site, the gate's own pages, the API) becomes "/". */
 export function safeNext(v: string | null | undefined): string {
@@ -167,7 +194,7 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
   const audience: Audience = opts.audience ?? "testers";
   const students = audience === "students";
   const now = opts.now ?? (() => new Date());
-  const current = new Map([...testers].map(([name, hash]) => [name, fingerprint(name, hash)]));
+  const current = new Map([...testers].map(([name, hash]) => [name, fingerprint(name, hash, audience)]));
 
   // Start-up: forget sessions of testers who were removed or re-issued, and expired ones. Revocation therefore also deletes the rows.
   tx(db, () => {
@@ -185,11 +212,14 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
   const clear = () => `${PREVIEW_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${opts.secureCookies ? "; Secure" : ""}`;
 
   /**
-   * Constant-time check of a name and password against the invitations; an unknown name still costs the hashes. The secret matches as
-   * typed (tester passwords are case-sensitive) or in class-code form (case, spaces and hyphens ignored).
+   * Constant-time check of a name and password against the invitations; an unknown name still costs the hashes. In the testers' preview
+   * the secret must match exactly as typed (the original behaviour). In the student release it may also match in class-code form (case,
+   * spaces and hyphens ignored); an adult tester's entry still works there, typed exactly, as a code.
    */
   function matches(want: Buffer, exact: Buffer, code: Buffer): boolean {
-    return timingSafeEqual(exact, want) || timingSafeEqual(code, want);
+    const a = timingSafeEqual(exact, want);
+    const b = timingSafeEqual(code, want);
+    return a || (students && b);
   }
   const digests = (password: string) => [Buffer.from(sha256hex(password), "hex"), Buffer.from(sha256hex(normaliseClassCode(password)), "hex")] as const;
   function verify(name: string, password: string): boolean {
@@ -205,7 +235,9 @@ export function createPreviewGate(access: string | undefined, opts: GateOptions)
     return found;
   }
 
+  /** HTTP Basic (for scripts) exists only in the testers' preview: in the student release the rate-limited form is the only way in. */
   function basicOk(authorization: string | undefined): boolean {
+    if (students) return false;
     const m = /^Basic ([A-Za-z0-9+/=]+)$/.exec(authorization ?? "");
     if (!m) return false;
     const decoded = Buffer.from(m[1]!, "base64").toString("utf8");
@@ -357,6 +389,8 @@ const LOGO = `<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"
 
 function signInPage(next: string, audience: Audience, error?: string): string {
   const students = audience === "students";
+  // After a failed attempt the field takes focus and names the error, so a screen reader announces it on the new page.
+  const invalid = error ? ` autofocus aria-invalid="true" aria-describedby="preview-error"` : "";
   return `<!doctype html>
 <html lang="en-GB">
 <head>
@@ -384,18 +418,19 @@ function signInPage(next: string, audience: Audience, error?: string): string {
 ${
   students
     ? `<label for="preview-password">Class code</label>
-<input id="preview-password" name="password" type="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" required maxlength="64" placeholder="ABCD-EFGH-JKMN-PQRS">`
+<input id="preview-password" name="password" type="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" required maxlength="64" placeholder="ABCD-EFGH-JKMN-PQRS"${invalid}>`
     : `<label for="preview-username">Tester name</label>
 <input id="preview-username" name="username" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required maxlength="32">
 <label for="preview-password">Preview password</label>
-<input id="preview-password" name="password" type="password" autocomplete="current-password" required maxlength="256">`
+<input id="preview-password" name="password" type="password" autocomplete="current-password" required maxlength="256"${invalid}>`
 }
-${error ? `<p class="error" role="alert">${esc(error)}</p>` : ""}
+${error ? `<p class="error" id="preview-error" role="alert">${esc(error)}</p>` : ""}
 <button type="submit">${students ? "Start learning" : "Open the preview"}</button>
 </form>
 ${
   students
-    ? `<p class="note">Your teacher gave you a class code. You'll normally need it only once on each device. Next you'll make your own account, so your progress is saved.</p>
+    ? `<p class="note"><strong>Step 1 of 2.</strong> Type the class code your teacher gave you. You'll normally need it only once on each device.</p>
+<p class="note"><strong>Step 2.</strong> Make your own account, or sign in to it, so your progress is saved. Forgotten your account password? Ask your teacher.</p>
 <p class="note"><a href="/privacy">Privacy notice for students and parents</a> · Not affiliated with or endorsed by ABRSM.</p>`
     : `<p class="note">Use the tester name and password from your invitation. You'll normally need them only once on each device. If you add the app to your Home Screen it may open already signed in, or ask for them once more. Your learner account (or guest progress) is separate: you'll sign in to it on the next screen.</p>
 <p class="note">Draft content for adult testers only. Not affiliated with or endorsed by ABRSM.</p>`

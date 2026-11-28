@@ -308,6 +308,8 @@ export const api = {
   patchProfile: (b: Partial<Omit<Profile, "settings">> & { displayName?: string; settings?: Partial<Settings> }) =>
     request<Me>("PATCH", "/api/me/profile", b, { scope }),
   exportData: () => request<unknown>("GET", "/api/me/export", undefined, { scope }),
+  // Replace the password (e.g. a temporary one from the teacher). The server ends the account's other sessions; this device stays signed in.
+  changePassword: (b: { currentPassword: string; newPassword: string }) => request<{ ok: true }>("POST", "/api/me/password", b, { scope }),
   // Bound to the learner whose confirmation was shown: queued behind a sign-in in another tab, it must not delete that newer learner.
   deleteAccount: (userId: string): Promise<{ ok: true }> => authExclusive(() => rawAuth.deleteAccount(userId)),
   progress: (signal?: AbortSignal) => request<Overview>("GET", "/api/progress", undefined, { signal, scope }),

@@ -6,7 +6,7 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 ## Student release (letting your own students in)
 
-The preview can now be switched to **students** (`MTP_AUDIENCE=students`): a one-field **class-code** sign-in written for children (`npm run preview:invite -w @mtp/api -- --class <name>`), a **privacy notice** at `/privacy` that parents can read before signing in, **automatic verified backups** before any migration and daily (`MTP_BACKUP_DIR`), and a teacher-run **password reset** (`npm run account:reset-password -w @mtp/api -- <email>`). The student audience refuses to start until the gate, an approved notice and backups are configured. Step-by-step runbook, decisions and a parent letter: [docs/release/STUDENT_RELEASE.md](docs/release/STUDENT_RELEASE.md).
+The preview can now be switched to **students** (`MTP_AUDIENCE=students`): a one-field **class-code** sign-in written for children (`npm run preview:invite -w @mtp/api -- --class <name>`), a **privacy notice** at `/privacy` approved revision by revision, **automatic verified backups** before any migration and daily with strict expiry (`MTP_BACKUP_DIR`), an **erasure log** so a restore cannot revive a deleted account, a one-shot **restore at start-up** (`MTP_RESTORE_FROM`), a teacher-run **password reset** with in-app **change password**, and student-mode deploy smoke checks. The student audience refuses to start until its prerequisites are configured. Runbook, owner decisions, staging rehearsal and a parent letter: [docs/release/STUDENT_RELEASE.md](docs/release/STUDENT_RELEASE.md).
 
 ## Question wording audit
 
