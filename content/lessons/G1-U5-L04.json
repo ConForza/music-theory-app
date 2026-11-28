@@ -301,7 +301,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the scale of F major, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -415,7 +415,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g1-u5-l04.guided-2",
@@ -423,7 +424,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write the scale of F major, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of F major, ascending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -464,7 +465,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of F major, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     }
   ],
   "independent": [
@@ -474,7 +476,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the scale of F major, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of F major, ascending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -515,7 +517,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of F major, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g1-u5-l04.ind-2",
@@ -523,7 +526,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the scale of F major, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -637,7 +640,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g1-u5-l04.ind-3",
@@ -645,7 +649,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the scale of F major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of F major, descending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -686,7 +690,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of F major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g1-u5-l04.ind-4",
@@ -694,7 +699,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the scale of F major, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -808,7 +813,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     },
     {
       "id": "i.g1-u5-l04.ind-5",
@@ -816,7 +822,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the scale of F major, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of F major, descending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -857,7 +863,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of F major, descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g1-u5-l04.ind-6",
@@ -865,7 +872,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?",
+      "prompt": "This is the scale of F major, going up, with one note replaced by a rest. Which note is missing?",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -991,7 +998,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "This is the scale of F major, going up. One note is missing and is shown as a rest. Which note belongs in the gap?"
     }
   ],
   "recap": [

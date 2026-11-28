@@ -13,7 +13,7 @@
  * Scope kept deliberately small: simple intervals within an octave, no double accidentals, at most two ledger lines, keys of 1-6 accidentals.
  */
 import { music } from "@mtp/curriculum";
-import { frag, type Gen } from "./families.ts";
+import { frag, reworded, type Gen } from "./families.ts";
 import { F, KEYS_G5, an, clefsIn, fitsIn, keyWords, keysIn, note, pretty, type Clef, type Ctx, type Pitch } from "./grade5-lib.ts";
 
 const { parseKey, intervalBetween, transpose, parseInterval, signatureAlter, keySignature } = music;
@@ -109,7 +109,10 @@ export const intervalKeyIdentify5: Gen = (c): any => {
   const { key, clef, lower, upper, code } = p;
   const f = frag(clef, [{ events: [note(lower, "semibreve"), note(upper, "semibreve")] }], `Two semibreves in the ${clef} clef in ${key}: ${pretty(F(lower))} then ${pretty(F(upper))}.`, { key, showKeySignature: true });
   return {
-    prompt: `The key signature shows ${sigWords(key)} (${keyWords(key)}). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.`,
+    ...reworded(
+      `The key signature has ${sigWords(key)} (${keyWords(key)}) and applies to both notes. Name the interval from the lower note to the higher: quality and number.`,
+      `The key signature shows ${sigWords(key)} (${keyWords(key)}). Name the interval between these two notes, from the lower to the higher: give its quality and its number. Remember that the key signature applies to every note on the stave.`,
+    ),
     music: f,
     answer: { kind: "interval", task: "identify", key, lower: F(lower), upper: F(upper), acceptedIntervals: [code] },
     hints: ["First work out what each note really is: the key signature changes every note of that letter unless a sign in front of the note cancels it or changes it again. Then count the letter names for the number and compare with the major scale of the lower note for the quality."],
@@ -137,7 +140,10 @@ export const intervalKeyBuild5: Gen = (c): any => {
     if (needsSign !== wantSign && attempt < 30) continue;
     const dir = down ? "below" : "above";
     return {
-      prompt: `The key signature shows ${sigWords(keyText)} (${keyWords(keyText)}). Write the note that is ${an(qualWord(code))} ${dir} the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one.`,
+      ...reworded(
+        `The key signature has ${sigWords(keyText)} (${keyWords(keyText)}). Write the note that is ${an(qualWord(code))} ${dir} the note shown. The key signature applies, so add a sharp, flat or natural only where the note needs one.`,
+        `The key signature shows ${sigWords(keyText)} (${keyWords(keyText)}). Write the note that is ${an(qualWord(code))} ${dir} the note shown. Write it on the stave: the key signature applies, so add a sharp, flat or natural only where the note needs one.`,
+      ),
       music: frag(clef, [{ events: [note(start, "semibreve")] }], `A semibreve ${pretty(F(start))}${signText(start)} in the ${clef} clef in ${keyText}.`, { key: keyText, showKeySignature: true }),
       answer: { kind: "interval", task: "build", key: keyText, lower: F(start), target: code, direction: down ? "down" : "up", acceptedPitches: [F(goal)] },
       hints: [`Count ${code.slice(1)} letter names ${down ? "down" : "up"} from the note shown (counting it as 1) to find the letter. Then decide the accidental that gives the quality, and compare it with what the key signature already gives that letter.`],

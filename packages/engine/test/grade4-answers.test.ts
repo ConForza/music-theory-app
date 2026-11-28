@@ -365,7 +365,7 @@ describe("Unit 2: double accidentals, enharmonics, clefs", () => {
       expect(a.clef).not.toBe(from);
       expect(a.accepted).toEqual([music.formatPitch(shown)]);
       expect(music.ledgerLines(a.clef, P(a.accepted[0]!))).toBeLessThanOrEqual(2);
-      expect(i.prompt).toMatch(/exactly the same/);
+      expect(i.prompt).toMatch(/at the same pitch/);
     }
     for (const i of items("G4-U2-L04", "t.g4.clef-position", 200)) {
       const from = i.music!.clef as music.Clef;
@@ -608,7 +608,9 @@ describe("Unit 4: intervals and triads", () => {
       const [pos, root] = parts(i);
       expect((pos!.answer as { correctOptionIds: string[] }).correctOptionIds[0]).toBe(id.inversion === "a" ? "yes" : "no");
       expect((root!.answer as { correctOptionIds: string[] }).correctOptionIds[0]).toBe(music.formatPitchClass(music.triad(key, id.roman)[0]!));
-      expect(i.prompt).toContain("root position");
+      // the parent gives the key and chord; each question is asked once, in its labelled part (first review of PR #30)
+      expect(pos!.prompt).toContain("root position");
+      expect(i.prompt).not.toContain("root position");
     }
     for (const i of items("G4-U4-L05", "t.g4.chord-in-passage", 150)) {
       const key = music.parseKey(plain(/passage is in (.+?)(?: \(|\.)/.exec(i.prompt)![1]!));

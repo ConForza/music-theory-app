@@ -325,7 +325,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This melody is the written part for a horn in F, which sounds a perfect 5th lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a perfect 5th, and give it its new key signature.",
+      "prompt": "This is the written part for a horn in F. Transpose it down a perfect 5th to concert pitch, with the new key signature.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -440,7 +440,8 @@
           "enharmonic-respelling": "Move every letter by the same number of steps."
         },
         "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
-      }
+      },
+      "legacyPrompt": "This melody is the written part for a horn in F, which sounds a perfect 5th lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a perfect 5th, and give it its new key signature."
     }
   ],
   "independent": [
@@ -450,7 +451,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This melody is the written part for a trumpet in B♭, which sounds a major 2nd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a major 2nd, and give it its new key signature.",
+      "prompt": "This is the written part for a trumpet in B♭. Transpose it down a major 2nd to concert pitch, with the new key signature.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -575,7 +576,8 @@
           "enharmonic-respelling": "Move every letter by the same number of steps."
         },
         "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
-      }
+      },
+      "legacyPrompt": "This melody is the written part for a trumpet in B♭, which sounds a major 2nd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a major 2nd, and give it its new key signature."
     },
     {
       "id": "i.g5-u3-l06.ind-2",
@@ -646,7 +648,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This melody is the written part for a clarinet in A, which sounds a minor 3rd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a minor 3rd, and give it its new key signature.",
+      "prompt": "This is the written part for a clarinet in A. Transpose it down a minor 3rd to concert pitch, with the new key signature.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -752,7 +754,8 @@
           "enharmonic-respelling": "Move every letter by the same number of steps."
         },
         "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
-      }
+      },
+      "legacyPrompt": "This melody is the written part for a clarinet in A, which sounds a minor 3rd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a minor 3rd, and give it its new key signature."
     },
     {
       "id": "i.g5-u3-l06.ind-4",
@@ -823,7 +826,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This melody is the written part for a trumpet in B♭, which sounds a major 2nd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a major 2nd, and give it its new key signature.",
+      "prompt": "This is the written part for a trumpet in B♭. Transpose it down a major 2nd to concert pitch, with the new key signature.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -947,7 +950,8 @@
           "enharmonic-respelling": "Move every letter by the same number of steps."
         },
         "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
-      }
+      },
+      "legacyPrompt": "This melody is the written part for a trumpet in B♭, which sounds a major 2nd lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a major 2nd, and give it its new key signature."
     },
     {
       "id": "i.g5-u3-l06.ind-6",
@@ -955,7 +959,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This melody is the written part for a cor anglais (in F), which sounds a perfect 5th lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a perfect 5th, and give it its new key signature.",
+      "prompt": "This is the written part for a cor anglais (in F). Transpose it down a perfect 5th to concert pitch, with the new key signature.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -1071,7 +1075,8 @@
           "enharmonic-respelling": "Move every letter by the same number of steps."
         },
         "fallback": "Not quite. Transpose the key first, then each note, then check accidentals."
-      }
+      },
+      "legacyPrompt": "This melody is the written part for a cor anglais (in F), which sounds a perfect 5th lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a perfect 5th, and give it its new key signature."
     }
   ],
   "recap": [

@@ -210,7 +210,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The melody notes marked A and B come at a cadence point in F major. Choose a chord for each (I, ii, IV or V) so that A and B make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct.",
+      "prompt": "In F major, choose a chord (I, ii, IV or V) for each of the melody notes A and B so that they make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -329,7 +329,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "The melody notes marked A and B come at a cadence point in F major. Choose a chord for each (I, ii, IV or V) so that A and B make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct."
     },
     {
       "id": "i.g5-u4-l06.guided-2",
@@ -337,7 +338,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "The melody notes marked A and B come at a cadence point in D major. Which pair of chords, with each chord containing its melody note, makes an imperfect cadence?",
+      "prompt": "In D major, which pair of chords makes an imperfect cadence at the melody notes A and B? Each chord must contain its melody note.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -422,7 +423,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "The melody notes marked A and B come at a cadence point in D major. Which pair of chords, with each chord containing its melody note, makes an imperfect cadence?"
     },
     {
       "id": "i.g5-u4-l06.guided-3",
@@ -430,7 +432,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "In D major, B and C make a perfect cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)",
+      "prompt": "In D major, B and C make a perfect cadence, and A is the approach chord before it. Choose a chord (I, ii, IV or V) for each of A, B and C that contains its melody note; at A, any chord that fits is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -559,7 +561,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "In D major, B and C make a perfect cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)"
     }
   ],
   "independent": [
@@ -569,7 +572,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The melody notes marked A and B come at a cadence point in G major. Choose a chord for each (I, ii, IV or V) so that A and B make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct.",
+      "prompt": "In G major, choose a chord (I, ii, IV or V) for each of the melody notes A and B so that they make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -688,7 +691,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "The melody notes marked A and B come at a cadence point in G major. Choose a chord for each (I, ii, IV or V) so that A and B make an imperfect cadence. Each chord must contain its melody note; any pair that works is correct."
     },
     {
       "id": "i.g5-u4-l06.ind-2",
@@ -696,7 +700,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes a perfect cadence?",
+      "prompt": "In G major, which pair of chords makes a perfect cadence at the melody notes A and B? Each chord must contain its melody note.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -781,7 +785,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "The melody notes marked A and B come at a cadence point in G major. Which pair of chords, with each chord containing its melody note, makes a perfect cadence?"
     },
     {
       "id": "i.g5-u4-l06.ind-3",
@@ -789,7 +794,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The melody notes marked A and B come at a cadence point in C major. Choose a chord for each (I, ii, IV or V) so that A and B make a plagal cadence. Each chord must contain its melody note; any pair that works is correct.",
+      "prompt": "In C major, choose a chord (I, ii, IV or V) for each of the melody notes A and B so that they make a plagal cadence. Each chord must contain its melody note; any pair that works is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -907,7 +912,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "The melody notes marked A and B come at a cadence point in C major. Choose a chord for each (I, ii, IV or V) so that A and B make a plagal cadence. Each chord must contain its melody note; any pair that works is correct."
     },
     {
       "id": "i.g5-u4-l06.ind-4",
@@ -915,7 +921,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "In F major, B and C make a perfect cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)",
+      "prompt": "In F major, B and C make a perfect cadence, and A is the approach chord before it. Choose a chord (I, ii, IV or V) for each of A, B and C that contains its melody note; at A, any chord that fits is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -1044,7 +1050,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "In F major, B and C make a perfect cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)"
     },
     {
       "id": "i.g5-u4-l06.ind-5",
@@ -1052,7 +1059,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "The melody notes marked A and B come at a cadence point in F major. Choose a chord for each (I, ii, IV or V) so that A and B make a plagal cadence. Each chord must contain its melody note; any pair that works is correct.",
+      "prompt": "In F major, choose a chord (I, ii, IV or V) for each of the melody notes A and B so that they make a plagal cadence. Each chord must contain its melody note; any pair that works is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -1170,7 +1177,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "The melody notes marked A and B come at a cadence point in F major. Choose a chord for each (I, ii, IV or V) so that A and B make a plagal cadence. Each chord must contain its melody note; any pair that works is correct."
     },
     {
       "id": "i.g5-u4-l06.ind-6",
@@ -1178,7 +1186,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "In C major, B and C make a perfect cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)",
+      "prompt": "In C major, B and C make a perfect cadence, and A is the approach chord before it. Choose a chord (I, ii, IV or V) for each of A, B and C that contains its melody note; at A, any chord that fits is correct.",
       "music": {
         "presentation": "stave",
         "clef": "treble",
@@ -1306,7 +1314,8 @@
           "wrong-key": "Check the key signature and the final note — then build the chords in that key."
         },
         "fallback": "Not quite. For each marked note, list the chords that contain it, then choose a pair that makes a cadence."
-      }
+      },
+      "legacyPrompt": "In C major, B and C make a perfect cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)"
     }
   ],
   "recap": [

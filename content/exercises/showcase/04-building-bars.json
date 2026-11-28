@@ -25,7 +25,8 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Complete this bar of 3/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 3/4 bar with notes or rests, keeping the beats clear.",
+      "legacyPrompt": "Complete this bar of 3/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -119,7 +120,8 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Complete this bar of 6/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 6/8 bar with notes or rests, keeping the beats clear.",
+      "legacyPrompt": "Complete this bar of 6/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -276,7 +278,7 @@
         "A triplet of three quavers fills one crotchet beat."
       ],
       "feedback": {
-        "correct": "Yes! Three quavers in the time of two fill a crotchet beat.",
+        "correct": "Yes! Your triplet fits three notes into the time of two, and the bar adds up exactly.",
         "mistakes": {
           "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
           "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",
@@ -344,7 +346,7 @@
         "A duplet of two quavers fills one dotted-crotchet beat."
       ],
       "feedback": {
-        "correct": "Correct. Two quavers in the time of three fill a dotted-crotchet beat.",
+        "correct": "Correct. Your duplet fits two notes into the time of three, and the bar adds up exactly.",
         "mistakes": {
           "tuplet-total-wrong": "A tuplet still fills a fixed amount of time. Check which beat it replaces.",
           "tuplet-number-wrong": "Count the notes that share the beat — that's the number to write over the group.",

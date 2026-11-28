@@ -345,7 +345,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write D in the alto clef. You may use up to 2 ledger lines. Any D that fits is correct.",
+      "prompt": "Write D in the alto clef, using up to 2 ledger lines. Any octave that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "alto",
@@ -377,7 +377,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write D in the alto clef. You may use up to 2 ledger lines. Any D that fits is correct."
     }
   ],
   "independent": [
@@ -440,7 +441,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write E in the alto clef. You may use up to 2 ledger lines. Any E that fits is correct.",
+      "prompt": "Write E in the alto clef, using up to 2 ledger lines. Any octave that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "alto",
@@ -472,7 +473,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write E in the alto clef. You may use up to 2 ledger lines. Any E that fits is correct."
     },
     {
       "id": "i.g4-u2-l03.ind-3",
@@ -596,7 +598,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write D♭ in the alto clef. You may use up to 2 ledger lines. Any D♭ that fits is correct.",
+      "prompt": "Write D♭ in the alto clef, using up to 2 ledger lines. Any octave that fits is correct.",
       "answer": {
         "kind": "staff-position",
         "clef": "alto",
@@ -628,7 +630,8 @@
           "accidental-missing": "The position is right, but the note needs its sharp, flat or natural."
         },
         "fallback": "Not quite. Find a reference note and count lines and spaces from it."
-      }
+      },
+      "legacyPrompt": "Write D♭ in the alto clef. You may use up to 2 ledger lines. Any D♭ that fits is correct."
     },
     {
       "id": "i.g4-u2-l03.ind-6",

@@ -37,34 +37,13 @@ export function rhythmFragment(bars: REv[][], ts: string | null, finalBar = true
 }
 
 /**
- * The words for what is drawn, INCLUDING the beams: a run of joined notes reads "2 beamed together (quaver, semiquaver)". Without this the
- * description of a grouping question was the same before and after the learner joined or split any beam, so a screen-reader user could not
- * tell what they had done (educational review of PR #18, Grade 2 note grouping).
+ * The words for what is drawn, INCLUDING the beams: a run of joined notes reads "four quavers beamed together", a mixed group "a beamed group
+ * (a dotted quaver and a semiquaver)". Without the beams the description of a grouping question was the same before and after the learner
+ * joined or split any beam, so a screen-reader user could not tell what they had done (educational review of PR #18, Grade 2 note grouping).
+ * The wording is shared with the question descriptions (music.barsInWords), so the bar a learner builds is described as the bars they read.
  */
 export function describeBars(bars: REv[][]): string {
-  return bars
-    .map((b, i) => {
-      const parts: string[] = [];
-      let group: string[] | null = null;
-      for (const e of b) {
-        if (e.kind === "tuplet") {
-          parts.push(`${e.actual === 3 ? "triplet" : e.actual === 2 ? "duplet" : `group of ${e.actual}`} (${e.events.map(words).join(", ")})`);
-          continue;
-        }
-        const beam = (e as Inner).beam;
-        if (beam === "begin") group = [words(e)];
-        else if (group && (beam === "continue" || beam === "end")) {
-          group.push(words(e));
-          if (beam === "end") {
-            parts.push(`${group.length} beamed together (${group.join(", ")})`);
-            group = null;
-          }
-        } else parts.push(words(e));
-      }
-      if (group) parts.push(`${group.length} beamed together (${group.join(", ")})`);
-      return `Bar ${i + 1}: ${b.length ? parts.join(", ") : "empty"}.`;
-    })
-    .join(" ");
+  return music.barsInWords(bars as unknown as music.WordEvent[][], { beams: true });
 }
 
 /** Beam a bar by its time signature; in irregular time by the grouping the question names (7/8 as 2+3+2 is not 7/8 as 2+2+3). */
@@ -287,7 +266,9 @@ export function BarlineEditor({ input, value, onChange, disabled }: { input: Ext
           <span>End with a double bar-line</span>
         </label>
       )}
-      <p className="hint-line" aria-live="polite">{after.size ? `${after.size} bar-line${after.size === 1 ? "" : "s"} placed in ${input.timeSignature}.` : `Count the beats of ${input.timeSignature} and tap the gaps where each bar ends.`}</p>
+      {/* The picture takes a short name (describe={false}), so the whole rhythm, split where the learner's bar-lines are, is read here, and again
+          after every change (second review of PR #30: the last note had no text equivalent and placed bar-lines were not read back). */}
+      <p className="hint-line" aria-live="polite">{after.size ? `${after.size} bar-line${after.size === 1 ? "" : "s"} placed in ${input.timeSignature}.` : `Count the beats of ${input.timeSignature} and tap the gaps where each bar ends.`} <span className="visually-hidden">{display.textAlternative}</span></p>
     </div>
   );
 }

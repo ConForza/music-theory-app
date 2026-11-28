@@ -8,7 +8,7 @@
  */
 import { buildIndex, effectiveScope, loadCurriculum, type CurriculumIndex, type ExerciseItem, type NotationFragment, type OrderedNode } from "@mtp/curriculum";
 import { frag, generateItem, note, plainNote, plainRest, rhythmLine } from "@mtp/engine";
-import { loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "../../src/question-key.ts";
+import { identityPrompt, loadConstraints, questionKey, satisfies, visibleKey, type ReviewConstraint } from "../../src/question-key.ts";
 
 export type Frag = NotationFragment;
 export type Block = { text: string } | { tip: string } | { music: Frag; caption: string };
@@ -78,7 +78,8 @@ export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided
     } catch {
       continue;
     }
-    if (p.when && !p.when(item)) continue;
+    // Spec filters were written against the wording questions were first published with, so they read it (a later wording edit picks the same seeds).
+    if (p.when && !p.when({ ...item, prompt: identityPrompt(item) })) continue;
     // The question must sit inside the boundary of at least one concept this lesson teaches.
     if (own.length && !own.some((c) => !a.constraints.get(c) || satisfies(item, a.constraints.get(c)!))) continue;
     // A lesson never asks the same question twice: independent questions must differ from every earlier question (guided included),
@@ -88,8 +89,11 @@ export function pickItem(a: Author, node: OrderedNode, p: Pick, section: "guided
     if (a.used.has(key) && seed < 20000) continue; // and, where the pool allows, not one met in an earlier lesson either
     a.used.add(key);
     inLesson.add(visibleKey(item));
+    // An authored prompt replaces the generated one, wording and identity together (it was never published with the generator's wording).
+    const { legacyPrompt, ...generated } = item;
     return {
-      ...item,
+      ...generated,
+      ...(legacyPrompt && !p.prompt ? { legacyPrompt } : {}),
       id: `i.${node.id.toLowerCase()}.${section === "guided" ? "guided" : "ind"}-${n}`,
       seed: null,
       prompt: p.prompt ?? item.prompt,

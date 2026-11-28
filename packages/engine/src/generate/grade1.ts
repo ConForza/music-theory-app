@@ -13,7 +13,7 @@
 import { deriveScale, music, type AnswerSpec, type Measure, type NotationEvent, type NotationFragment } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
 import { fits } from "./families.ts";
-import { GENERATORS, frag, maxLedger, nameOf, n, note, pretty, r, randomBar, rhythmLine, tsOf, type Gen } from "./families.ts";
+import { GENERATORS, frag, maxLedger, nameOf, n, note, pretty, r, randomBar, reworded, rhythmLine, tsOf, type Gen } from "./families.ts";
 
 const { naturalAt, parsePitch: P, staffPosition } = music;
 type Pitch = music.Pitch;
@@ -660,7 +660,10 @@ export const accidentalWrite: Gen = (c) => {
   if (!valid.length) return null;
   answer.accepted = valid.map((q) => music.formatPitch(q));
   return {
-    prompt: `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef. Put the ${alter === 1 ? "sharp" : "flat"} sign in front of the note. Any ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} that fits is correct.`,
+    ...reworded(
+      `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef, with the ${alter === 1 ? "sharp" : "flat"} sign in front of the note, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave (no ledger lines)"}. Any octave that fits is correct.`,
+      `Write ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} in the ${clef} clef. Put the ${alter === 1 ? "sharp" : "flat"} sign in front of the note. Any ${pretty(`${step}${alter === 1 ? "#" : "b"}`)} that fits is correct.`,
+    ),
     answer,
     hints: [`Find ${step} first, then add a ${alter === 1 ? "sharp" : "flat"} sign directly in front of the note.`],
   };
@@ -819,7 +822,10 @@ export const scaleGap: Gen = (c) => {
     const { options, diagnoses } = spelledOptions(c, missing, keyText);
     if (options.length < 3) return null;
     return {
-      prompt: `This is the scale of ${keyWord(keyText)}, going up. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      ...reworded(
+        `This is the scale of ${keyWord(keyText)}, going up, with one note replaced by a rest. Which note is missing?`,
+        `This is the scale of ${keyWord(keyText)}, going up. One note is missing and is shown as a rest. Which note belongs in the gap?`,
+      ),
       music: frag(clef, [{ events }], `A ${clef}-clef stave with eight semibreves going up a scale of ${keyText}, with one note replaced by a rest. The other notes are ${notes.filter((_, i) => i !== gap).map(nameOf).join(", ")}.`, { showKeySignature: false }),
       answer: { kind: "choice", options, correctOptionIds: [noteId(missing)], diagnoses },
       hints: ["Major scale pattern: tone, tone, semitone, tone, tone, tone, semitone.", "A scale uses each letter name once, in order."],

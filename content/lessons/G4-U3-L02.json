@@ -364,7 +364,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write the scale of D♭ major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of D♭ major, descending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -404,7 +404,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of D♭ major, descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g4-u3-l02.guided-3",
@@ -446,7 +447,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the B♭ harmonic minor scale, ascending then descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the B♭ harmonic minor scale, ascending then descending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -493,7 +494,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the B♭ harmonic minor scale, ascending then descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g4-u3-l02.ind-2",
@@ -731,7 +733,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the scale of D♭ major, ascending then descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of D♭ major, ascending then descending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -778,7 +780,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of D♭ major, ascending then descending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g4-u3-l02.ind-6",

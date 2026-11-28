@@ -71,7 +71,7 @@
           }
         ],
         "textAlternative": "Two bars of 2/2, each with two minims.",
-        "questionAlternative": "Bar 1: minim, minim. Bar 2: minim, minim.",
+        "questionAlternative": "Bar 1: two minims. Bar 2: two minims.",
         "timeSignature": "2/2"
       },
       "caption": "2/2: two minim beats in every bar. A whole bar lasts as long as a semibreve."
@@ -134,7 +134,7 @@
           }
         ],
         "textAlternative": "Two bars of 3/2: three minims, then a semibreve and a minim.",
-        "questionAlternative": "Bar 1: minim, minim, minim. Bar 2: semibreve, minim.",
+        "questionAlternative": "Bar 1: three minims. Bar 2: a semibreve followed by a minim.",
         "timeSignature": "3/2"
       },
       "caption": "3/2: three minim beats. 4/2 is the same idea with four minim beats in a bar."
@@ -194,7 +194,7 @@
         }
       ],
       "textAlternative": "One bar of 3/2: a minim, two crotchets and a minim.",
-      "questionAlternative": "Bar 1: minim, crotchet, crotchet, minim.",
+      "questionAlternative": "Bar 1: a minim, two crotchets and a minim.",
       "timeSignature": "3/2"
     },
     "steps": [
@@ -493,7 +493,7 @@
           }
         ],
         "textAlternative": "Bar 1: minim, quaver, quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: quaver, semiquaver, semiquaver, quaver, quaver, quaver, quaver, semiquaver, semiquaver, quaver.",
-        "questionAlternative": "Bar 1: minim, 2 beamed together (quaver, quaver), 4 beamed together (semiquaver, semiquaver, semiquaver, semiquaver). Bar 2: 3 beamed together (quaver, semiquaver, semiquaver), 2 beamed together (quaver, quaver), 2 beamed together (quaver, quaver), 3 beamed together (semiquaver, semiquaver, quaver)."
+        "questionAlternative": "Bar 1: a minim, two quavers beamed together and four semiquavers beamed together. Bar 2: a beamed group (a quaver and two semiquavers), two pairs of beamed quavers and a beamed group (two semiquavers and a quaver)."
       },
       "answer": {
         "kind": "time-signature",
@@ -704,7 +704,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, quaver, quaver, dotted quaver, semiquaver, semiquaver, semiquaver, quaver. Bar 2: minim, crotchet, dotted quaver, semiquaver.",
-        "questionAlternative": "Bar 1: crotchet, 2 beamed together (quaver, quaver), 2 beamed together (dotted quaver, semiquaver), 3 beamed together (semiquaver, semiquaver, quaver). Bar 2: minim, crotchet, 2 beamed together (dotted quaver, semiquaver)."
+        "questionAlternative": "Bar 1: a crotchet, two quavers beamed together, a beamed group (a dotted quaver and a semiquaver) and a beamed group (two semiquavers and a quaver). Bar 2: a minim, a crotchet and a beamed group (a dotted quaver and a semiquaver)."
       },
       "answer": {
         "kind": "time-signature",
@@ -733,7 +733,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 3/2. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 3/2 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -812,7 +812,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 3/2. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     },
     {
       "id": "i.g2-u1-l01.ind-4",
@@ -879,7 +880,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 3/2. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 3/2 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -933,7 +934,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 3/2. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     },
     {
       "id": "i.g2-u1-l01.ind-6",
@@ -1074,7 +1076,7 @@
           }
         ],
         "textAlternative": "Bar 1: minim, quaver, quaver, crotchet. Bar 2: minim, quaver, quaver, quaver, minim. Bar 3: minim, quaver, quaver, crotchet, minim.",
-        "questionAlternative": "Bar 1: minim, quaver, quaver, crotchet. Bar 2: minim, quaver, quaver, quaver, minim. Bar 3: minim, quaver, quaver, crotchet, minim."
+        "questionAlternative": "Bar 1: a minim, two quavers and a crotchet. Bar 2: a minim, three quavers and a minim. Bar 3: a minim, two quavers, a crotchet and a minim."
       },
       "answer": {
         "kind": "choice",

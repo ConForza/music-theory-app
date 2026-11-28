@@ -13,7 +13,7 @@
  * soprano; wholly below the tenor's lowest note, a bass); OPEN_QUESTIONS Q34.
  */
 import { music, type Measure } from "@mtp/curriculum";
-import { frag, type Gen } from "./families.ts";
+import { frag, reworded, type Gen } from "./families.ts";
 import { CAD_KEYS, CAD_PAIRS, CAD_TYPES, cadencePhrase, voicings, type ChordSpec } from "./grade5-harmony.ts";
 import { F, choiceAnswer, diag, fitsIn, keyWords, keysIn, melodyIn5, note, pretty, scaleDegrees, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
@@ -64,7 +64,10 @@ export const ornamentReplace5: Gen = (c): any => {
     const values = [{ value: gv[0], dots: gv[1] }, { value: mv[0], dots: mv[1] }];
     if (music.classifyWrittenOut(main, written, values) !== sign) return null;
     return {
-      prompt: `The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the pair?`,
+      ...reworded(
+        `The notes marked A and B are a written-out ornament on ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace them?`,
+        `The two notes marked A and B (the bracketed pair of an exam paper) are the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the pair?`,
+      ),
       music: frag(clef, [{ events, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts3 }),
       answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: written.map(F), writtenOutValues: values, accepted: [sign] },
       hints: ["An appoggiatura usually takes half the value of the main note, so the two notes are equal in length. An acciaccatura is a very short note squeezed in before a much longer main note. In both cases the sign is a small note written before the main note; for the other ornaments the sign is usually written above the main note."],
@@ -93,7 +96,10 @@ export const ornamentReplace5: Gen = (c): any => {
   if (music.checkBarAnyPattern(full as unknown as music.REvent[], ts).issues.some((x) => x.code === "bar-overfull" || x.code === "bar-underfull")) return null;
   const f = frag(clef, [{ events: full, barline: "final" }], "A bar.", { key: keyText, showKeySignature: true, timeSignature: ts });
   return {
-    prompt: `The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the group?`,
+    ...reworded(
+      `The beamed group starting at the note marked A is a written-out ornament on ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace it?`,
+      `The beamed group of short notes at the start of this bar (starting at the note marked A) is the written-out version of one ornament on the note ${pretty(F(main).replace(/\d$/, ""))}. Which ornament sign could replace the group?`,
+    ),
     music: f,
     answer: { kind: "ornament-sign", task: "replace-written-out", mainNote: F(main), writtenOut: fig.map(([p]) => F(p)), accepted: [sign] },
     hints: ["Find the main note, then see whether the extra notes go above it, below it, or both, and how many times they alternate."],
@@ -182,7 +188,10 @@ export const ornamentFigure5: Gen = (c): any => {
   const f = frag("treble", [{ events: fig.map((p, i) => note(p, "semiquaver", { beam: i === 0 ? "begin" : i === fig.length - 1 ? "end" : "continue" })) }], "A figure.", { key: keyText, showKeySignature: true });
   const others = signs.filter((x) => x !== sign);
   return {
-    prompt: `A composer has written out an ornament on the note ${nm(main)} as these notes: ${fig.map(nm).join(", ")}. Which sign could replace the written-out notes?`,
+    ...reworded(
+      `An ornament on ${nm(main)} is written out as ${fig.map(nm).join(", ")}. Which sign could replace these notes?`,
+      `A composer has written out an ornament on the note ${nm(main)} as these notes: ${fig.map(nm).join(", ")}. Which sign could replace the written-out notes?`,
+    ),
     music: f,
     answer: choiceAnswer(shuffled(c, signs.map((x) => [x, cap(x.replace("-", " "))] as [string, string])), sign, Object.fromEntries(others.map((x) => [x, [x.includes("mordent") && sign.includes("mordent") ? "upper-lower-mordent-swap" : sign === "turn" || x === "turn" ? "turn-inverted" : "trill-mordent-confusion", `The figure is ${fig.length} notes around ${nm(main)}: ${sign.includes("mordent") ? "the extra note is " + (sign === "upper-mordent" ? "above" : "below") : sign === "turn" ? "above, then below" : "an alternation with the note above"}, which is not ${x.replace("-", " ")}.`]]))),
     hints: ["Find the main note, then see where the extra notes go: above, below, or both, and how often."],

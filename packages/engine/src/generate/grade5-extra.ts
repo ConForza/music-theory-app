@@ -12,7 +12,7 @@
  * Every answer is computed with the rule functions in `@mtp/curriculum`, never typed per question; the tests recompute them independently.
  */
 import { music, type Measure } from "@mtp/curriculum";
-import { n, r, rhythmLine, frag, type Gen } from "./families.ts";
+import { n, r, rhythmLine, frag, reworded, type Gen } from "./families.ts";
 import { ALL_REGULAR, timeSigRead4 } from "./grade4-rhythm.ts";
 import { timeSigIrregular } from "./grade5-rhythm.ts";
 import { INST_LABEL, instIn, ivText, melodyFrag } from "./grade5-pitch.ts";
@@ -338,7 +338,10 @@ export const clefMinor5: Gen = (c): any => {
   };
   const ids = letters.map((l) => l.toLowerCase());
   return {
-    prompt: "The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it?",
+    ...reworded(
+      "The same eight notes, with the same accidentals, are written on three staves, each with a different clef and no key signature. On which stave do they make an ascending minor scale (harmonic or melodic)?",
+      "The same eight notes are written on three staves. Each stave has a different clef and no key signature. The accidentals are the same on every stave. Only one of the clefs makes the notes an ascending minor scale (harmonic or melodic form). Which stave is it?",
+    ),
     score: { staves: order.map(stave), textAlternative: "The same eight notes on three staves with three different clefs." },
     answer: choiceAnswer(ids.map((id, i) => [id, `Stave ${letters[i]}`] as [string, string]), ids[at]!, Object.fromEntries(ids.filter((_, i) => i !== at).map((id) => [id, ["clef-confusion", "In this clef the notes get different letter names, and the pattern of tones and semitones is not that of a minor scale."] as [string, string]]))),
     hints: ["Name the notes in each clef. A scale uses each letter name once in order (A B C D E F G A, say). Then check the semitones. Every minor scale has a semitone between its 2nd and 3rd notes. The harmonic form also has semitones from the 5th to the 6th and from the 7th to the 8th notes, with a step of three semitones from the 6th to the 7th; the ascending melodic form has only the 2nd to 3rd and 7th to 8th."],
@@ -397,7 +400,10 @@ export const transposeJudge5: Gen = (c): any => {
   const who = toWritten ? "concert pitch" : `the written part for the ${label}`;
   const target = toWritten ? `the written part for the ${label}` : "concert pitch";
   return {
-    prompt: `The top stave is ${who}. A pupil has transposed it ${dir} a ${ivText(inst)} to give ${target} (the ${label} sounds a ${ivText(inst)} lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true?`,
+    ...reworded(
+      toWritten ? `A pupil has transposed the top stave up a ${ivText(inst)} for the ${label}. Which statement about the pupil's version is true?` : `A pupil has transposed this ${label} part down a ${ivText(inst)} to concert pitch. Which statement about the pupil's version is true?`,
+      `The top stave is ${who}. A pupil has transposed it ${dir} a ${ivText(inst)} to give ${target} (the ${label} sounds a ${ivText(inst)} lower than written). Look at the lower stave carefully, noting that the notes are numbered. Which statement is true?`,
+    ),
     score: { staves: [{ id: "given", label: toWritten ? "Concert pitch (given)" : `Written for the ${label} (given)`, music: given }, { id: "pupil", label: toWritten ? `Pupil's version, written for the ${label}` : "Pupil's version, concert pitch", music: proposed }], textAlternative: "A melody and a pupil's transposition of it." },
     answer: choiceAnswer(opts.map((id) => [id, labelOf(id)] as [string, string]), truthId, Object.fromEntries(opts.filter((id) => id !== truthId).map((id) => [id, ["transposition-check", id === "ok" ? "There is a mistake: check each note against the interval, and the key signature against the new key." : id === "key" ? `The key signature is right: ${keyWords(keyText)} ${dir} a ${ivText(inst)} is ${keyWords(newText)}.` : "That note is right: it is the original note moved by the interval."] as [string, string]]))),
     hints: [`Find the new key first: ${keyWords(keyText)} ${dir} a ${ivText(inst)} is ${keyWords(newText)}. Then move each note by the same interval and compare.`],

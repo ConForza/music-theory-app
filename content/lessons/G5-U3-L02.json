@@ -500,7 +500,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Write the scale of G♭ major, ascending then descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the scale of G♭ major, ascending then descending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -547,7 +547,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the scale of G♭ major, ascending then descending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     }
   ],
   "independent": [
@@ -557,7 +558,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the E♭ melodic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the E♭ melodic minor scale, ascending, in the treble clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "treble",
@@ -597,7 +598,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the E♭ melodic minor scale, ascending, in the treble clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g5-u3-l02.ind-2",
@@ -800,7 +802,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write the E♭ harmonic minor scale, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you.",
+      "prompt": "Write the E♭ harmonic minor scale, ascending, in the bass clef, using accidentals instead of a key signature.",
       "answer": {
         "kind": "pitch-sequence",
         "clef": "bass",
@@ -840,7 +842,8 @@
           "wrong-direction-or-octave": "Check whether the question asks for ascending or descending, and which octave to start on."
         },
         "fallback": "Not quite. Write one note per letter name first, then check the tones and semitones."
-      }
+      },
+      "legacyPrompt": "Write the E♭ harmonic minor scale, ascending, in the bass clef. Use accidentals instead of a key signature. The first note is written for you."
     },
     {
       "id": "i.g5-u3-l02.ind-5",

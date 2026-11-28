@@ -13,7 +13,7 @@
  */
 import { deriveScale, music, type NotationEvent } from "@mtp/curriculum";
 import { staffTargets } from "../graders/pitch.ts";
-import { fits, frag, maxLedger, nameOf, note, pretty, type Gen } from "./families.ts";
+import { fits, frag, maxLedger, nameOf, note, pretty, reworded, type Gen } from "./families.ts";
 import type { Diagnoses } from "./grade1.ts";
 import { ORD, cap, diag, posText, optsOf } from "./grade2.ts";
 
@@ -131,7 +131,10 @@ export const doubleWrite: Gen = (c): any => {
   if (!valid.length) return null;
   answer.accepted = valid.map(F);
   return {
-    prompt: `Write ${pcLabel({ step, alter })} in the ${clef} clef. ${max ? `You may use up to ${max} ledger line${max > 1 ? "s" : ""}.` : "Keep it on the stave."} Any ${pcLabel({ step, alter })} that fits is correct.`,
+    ...reworded(
+      `Write ${pcLabel({ step, alter })} in the ${clef} clef, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave"}. Any octave that fits is correct.`,
+      `Write ${pcLabel({ step, alter })} in the ${clef} clef. ${max ? `You may use up to ${max} ledger line${max > 1 ? "s" : ""}.` : "Keep it on the stave."} Any ${pcLabel({ step, alter })} that fits is correct.`,
+    ),
     answer,
     hints: [`First put the note on its line or space for the letter ${step}. Then add the sign: ${alter > 0 ? "𝄪 for a double sharp" : "𝄫 for a double flat"}.`],
   };
@@ -144,7 +147,10 @@ export const doubleCancel: Gen = (c): any => {
   const sharp = c.rng.chance(0.5);
   if (mode === "sign") {
     return {
-      prompt: `A note has been written with a double ${sharp ? "sharp" : "flat"}. Later in the same bar the same note must be plain again, with no sharp or flat at all. Which sign is written before it?`,
+      ...reworded(
+        `A note has a double ${sharp ? "sharp" : "flat"}. Later in the same bar, that note must be plain, with no sharp or flat. Which sign is written before it?`,
+        `A note has been written with a double ${sharp ? "sharp" : "flat"}. Later in the same bar the same note must be plain again, with no sharp or flat at all. Which sign is written before it?`,
+      ),
       answer: { kind: "choice", options: [{ id: "natural", label: "♮ (natural)" }, { id: "sharp", label: "♯ (sharp)" }, { id: "flat", label: "♭ (flat)" }, { id: sharp ? "double-flat" : "double-sharp", label: sharp ? "𝄫 (double flat)" : "𝄪 (double sharp)" }], correctOptionIds: ["natural"], diagnoses: { sharp: diag("cancel-wrong-sign", `A ${sharp ? "sharp" : "flat"} would leave the note altered. To make it plain, cancel the alteration with a natural sign.`), flat: diag("cancel-wrong-sign", "A flat would lower the note. To make it plain, cancel the alteration with a natural sign."), [sharp ? "double-flat" : "double-sharp"]: diag("cancel-wrong-sign", "That is another double sign, which alters the note again. A natural sign cancels the alteration.") } },
       hints: ["A natural sign cancels any earlier sharp, flat, double sharp or double flat on that note."],
     };
@@ -333,7 +339,10 @@ export const samePitch4: Gen = (c): any => {
   if (!fits(from, [p], max) || !fits(to, [p], max)) return null;
   const answer = { kind: "staff-position" as const, clef: to, target: { step: p.step, alter: p.alter, position: "any" as const, maxLedgerLines: max, octave: p.octave }, accepted: [F(p)], octaveSensitive: true };
   return {
-    prompt: `This note is written in the ${from} clef. Write the note that sounds exactly the same, in the ${to} clef. (Same pitch, not an octave higher or lower.)`,
+    ...reworded(
+      `Write this ${from}-clef note at the same pitch in the ${to} clef (not an octave higher or lower).`,
+      `This note is written in the ${from} clef. Write the note that sounds exactly the same, in the ${to} clef. (Same pitch, not an octave higher or lower.)`,
+    ),
     music: frag(from, [{ events: [note(p)] }], `${cap(articleClef(from))} clef stave with one semibreve ${posText(staffPosition(from, p))}${p.alter ? `, with a ${SIGN_WORD[p.alter]} sign` : ""}.`, { showKeySignature: false }),
     answer,
     hints: ["First name the note and its octave in the clef you can read. Then find that exact pitch in the new clef."],

@@ -78,7 +78,7 @@
           }
         ],
         "textAlternative": "Two bars of 3/8: three beamed quavers, then a crotchet and a quaver.",
-        "questionAlternative": "Bar 1: 3 beamed together (quaver, quaver, quaver). Bar 2: crotchet, quaver.",
+        "questionAlternative": "Bar 1: three quavers beamed together. Bar 2: a crotchet followed by a quaver.",
         "timeSignature": "3/8"
       },
       "caption": "3/8: three quaver beats. A crotchet fills two of them."
@@ -121,7 +121,7 @@
           }
         ],
         "textAlternative": "One bar of 3/4: three crotchets.",
-        "questionAlternative": "Bar 1: crotchet, crotchet, crotchet.",
+        "questionAlternative": "Bar 1: three crotchets.",
         "timeSignature": "3/4"
       },
       "caption": "For comparison, 3/4 also has three beats in a bar, but each beat is a crotchet. A bar of 3/8 is shorter: its three beats are only quavers."
@@ -165,7 +165,7 @@
         }
       ],
       "textAlternative": "One bar of 3/8: a crotchet and a quaver.",
-      "questionAlternative": "Bar 1: crotchet, quaver.",
+      "questionAlternative": "Bar 1: a crotchet followed by a quaver.",
       "timeSignature": "3/8"
     },
     "steps": [
@@ -389,7 +389,7 @@
           }
         ],
         "textAlternative": "Bar 1: quaver, semiquaver, semiquaver, semiquaver, semiquaver. Bar 2: quaver, quaver rest, semiquaver, semiquaver.",
-        "questionAlternative": "Bar 1: quaver, 2 beamed together (semiquaver, semiquaver), 2 beamed together (semiquaver, semiquaver). Bar 2: quaver, quaver rest, 2 beamed together (semiquaver, semiquaver)."
+        "questionAlternative": "Bar 1: a quaver followed by two pairs of beamed semiquavers. Bar 2: a quaver, a quaver rest and two semiquavers beamed together."
       },
       "answer": {
         "kind": "time-signature",
@@ -550,7 +550,7 @@
           }
         ],
         "textAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: semiquaver, semiquaver, quaver rest, quaver rest.",
-        "questionAlternative": "Bar 1: quaver, quaver, quaver. Bar 2: 2 beamed together (semiquaver, semiquaver), quaver rest, quaver rest."
+        "questionAlternative": "Bar 1: three quavers. Bar 2: two semiquavers beamed together followed by two quaver rests."
       },
       "answer": {
         "kind": "time-signature",
@@ -578,7 +578,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 3/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 3/8 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -640,7 +640,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 3/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     },
     {
       "id": "i.g2-u1-l02.ind-4",
@@ -707,7 +708,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 3/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 3/8 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -785,7 +786,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 3/8. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     },
     {
       "id": "i.g2-u1-l02.ind-6",
@@ -870,7 +872,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, quaver, crotchet. Bar 2: crotchet, quaver. Bar 3: crotchet, semiquaver.",
-        "questionAlternative": "Bar 1: crotchet, quaver, crotchet. Bar 2: crotchet, quaver. Bar 3: crotchet, semiquaver."
+        "questionAlternative": "Bar 1: a crotchet, a quaver and a crotchet. Bar 2: a crotchet followed by a quaver. Bar 3: a crotchet followed by a semiquaver."
       },
       "answer": {
         "kind": "choice",

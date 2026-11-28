@@ -4,6 +4,10 @@ A Duolingo-inspired, mobile-first course that teaches music theory from **Grade 
 
 > **Not affiliated with or endorsed by ABRSM.** The app teaches towards the published ABRSM Grades 1–5 theory syllabus. Its practice assessments are not official examinations.
 
+## Question wording audit
+
+Every question family in Grades 1-5 was audited for clarity and length: 45 templates and 12 Practice Lab questions were reworded (the reported 7/4 bar-completion prompt went from 63 words to 25), rhythms are now put into words by one shared formatter (`music.rhythmInWords`: "four quavers, a crotchet and four quavers"), and notation now has one screen-reader reading surface, with every voice of a shared stave described. Reworded questions keep their first wording in `legacyPrompt`, which question identity reads, so no learner's mastery or exposure history moves (pinned by a fixture of every question identity). Findings, before/after wording, mobile measurements and questions for a teacher: [docs/curriculum/QUESTION_WORDING_AUDIT.md](docs/curriculum/QUESTION_WORDING_AUDIT.md).
+
 ## Flexible learning (Explore lessons and Practise a topic)
 
 Two routes alongside the unchanged guided path: **Explore lessons** opens any written lesson in any grade and order (advice about foundations instead of a lock), and **Practise a topic** starts 5, 10 or 20 fresh questions on any grade, area, unit or topic with no lesson required first. Explored completions are genuine but never open a unit's practice, checkpoint or the grade assessment until the lessons before them are done; topic practice is formative (no XP, mastery, completion or readiness) and records exposure so mock-examination independence holds. Rules, safeguards, decisions, limitations and the manual iPhone checklist: [docs/architecture/FLEXIBLE_LEARNING.md](docs/architecture/FLEXIBLE_LEARNING.md). Browser journey: `npm run build && npm run e2e:flexible -w @mtp/web`.

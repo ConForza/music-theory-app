@@ -61,7 +61,7 @@
           }
         ],
         "textAlternative": "A bar of 4/4: a crotchet, two crotchet rests and a crotchet.",
-        "questionAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest, crotchet.",
+        "questionAlternative": "Bar 1: a crotchet, two crotchet rests and a crotchet.",
         "timeSignature": "4/4"
       },
       "caption": "Beats two and three are silent, so each gets its own crotchet rest."
@@ -103,7 +103,7 @@
           }
         ],
         "textAlternative": "A bar of 4/4 where one minim rest covers beats two and three.",
-        "questionAlternative": "Bar 1: crotchet, minim rest, crotchet.",
+        "questionAlternative": "Bar 1: a crotchet, a minim rest and a crotchet.",
         "timeSignature": "4/4"
       },
       "caption": "A minim rest across beats 2 and 3 hides the half-way point of the bar, so avoid it."
@@ -181,7 +181,7 @@
         }
       ],
       "textAlternative": "Two bars of 4/4. The first has a minim rest then two crotchets. The second has a crotchet, a crotchet rest and a minim.",
-      "questionAlternative": "Bar 1: minim rest, crotchet, crotchet. Bar 2: crotchet, crotchet rest, minim.",
+      "questionAlternative": "Bar 1: a minim rest followed by two crotchets. Bar 2: a crotchet, a crotchet rest and a minim.",
       "timeSignature": "4/4"
     },
     "steps": [
@@ -285,7 +285,7 @@
           }
         ],
         "textAlternative": "Bar 1: minim rest, crotchet. Bar 2: minim rest, quaver, quaver. Bar 3: crotchet rest, crotchet rest, crotchet.",
-        "questionAlternative": "Bar 1: minim rest, crotchet. Bar 2: minim rest, 2 beamed together (quaver, quaver). Bar 3: crotchet rest, crotchet rest, crotchet.",
+        "questionAlternative": "Bar 1: a minim rest followed by a crotchet. Bar 2: a minim rest followed by two quavers beamed together. Bar 3: two crotchet rests followed by a crotchet.",
         "timeSignature": "3/4"
       },
       "answer": {
@@ -340,7 +340,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 2/4 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -394,7 +394,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     }
   ],
   "independent": [
@@ -497,7 +498,7 @@
           }
         ],
         "textAlternative": "Bar 1: minim rest, quaver, quaver. Bar 2: crotchet, crotchet rest, crotchet rest. Bar 3: quaver, quaver, minim rest.",
-        "questionAlternative": "Bar 1: minim rest, 2 beamed together (quaver, quaver). Bar 2: crotchet, crotchet rest, crotchet rest. Bar 3: 2 beamed together (quaver, quaver), minim rest.",
+        "questionAlternative": "Bar 1: a minim rest followed by two quavers beamed together. Bar 2: a crotchet followed by two crotchet rests. Bar 3: two quavers beamed together followed by a minim rest.",
         "timeSignature": "3/4"
       },
       "answer": {
@@ -552,7 +553,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 2/4 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -607,7 +608,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 2/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     },
     {
       "id": "i.g1-u2-l06.ind-3",
@@ -688,7 +690,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest. Bar 2: crotchet, minim rest. Bar 3: minim rest, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, crotchet rest, crotchet rest. Bar 2: crotchet, minim rest. Bar 3: minim rest, crotchet.",
+        "questionAlternative": "Bar 1: a crotchet followed by two crotchet rests. Bar 2: a crotchet followed by a minim rest. Bar 3: a minim rest followed by a crotchet.",
         "timeSignature": "3/4"
       },
       "answer": {
@@ -789,7 +791,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, minim rest, quaver, quaver.",
-        "questionAlternative": "Bar 1: crotchet, minim rest, 2 beamed together (quaver, quaver).",
+        "questionAlternative": "Bar 1: a crotchet, a minim rest and two quavers beamed together.",
         "timeSignature": "4/4"
       },
       "answer": {
@@ -941,7 +943,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, minim rest. Bar 2: crotchet rest, crotchet rest, crotchet. Bar 3: minim rest, crotchet.",
-        "questionAlternative": "Bar 1: crotchet, minim rest. Bar 2: crotchet rest, crotchet rest, crotchet. Bar 3: minim rest, crotchet.",
+        "questionAlternative": "Bar 1: a crotchet followed by a minim rest. Bar 2: two crotchet rests followed by a crotchet. Bar 3: a minim rest followed by a crotchet.",
         "timeSignature": "3/4"
       },
       "answer": {
@@ -996,7 +998,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.",
+      "prompt": "Complete this 4/4 bar with notes or rests, keeping the beats clear.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -1058,7 +1060,8 @@
           "rest-grouping": "Each silent beat (or part-beat) normally gets its own rest. Split the silence along the beats."
         },
         "fallback": "Not quite. Check the beat total first, then how the notes are grouped."
-      }
+      },
+      "legacyPrompt": "Complete this bar of 4/4. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear."
     }
   ],
   "recap": [

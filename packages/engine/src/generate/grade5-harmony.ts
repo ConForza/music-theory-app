@@ -15,7 +15,7 @@
  * question accepts every pair of chords that contains the melody notes and makes the named cadence (never a single "right" sequence).
  */
 import { music } from "@mtp/curriculum";
-import { frag, type Gen } from "./families.ts";
+import { frag, reworded, type Gen } from "./families.ts";
 import { KEYS_G5, F, choiceAnswer, fitsIn, keyWords, keysIn, nameOfPc, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
 const { parseKey, triad, identifyTriad, romanDegree, classifyCadence, samePitchClassSpelling, diatonicNumber, staffPosition } = music;
@@ -127,7 +127,10 @@ export const chordBuild5: Gen = (c): any => {
   const empty = frag(clef, [{ events: [{ kind: "rest", duration: { value: "semibreve", dots: 0 }, wholeBar: true } as Ev] }], "An empty stave.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
     music: { ...empty, textAlternative: `An empty ${clef}-clef stave with the key signature of ${keyWords(keyText)}: write the chord on it.` },
-    prompt: `Write chord ${roman}${inv} of ${keyWords(keyText)} in the ${clef} clef, in ${INV_WORD[inv]} (${bassWord} of the chord is the lowest note), using exactly ${voices} notes${voices === 4 ? " (one note of the chord is written twice)" : ""}.${q === "diminished" ? " In a minor key this triad is diminished." : ""} Any spacing is correct.`,
+    ...reworded(
+      `Write chord ${roman}${inv} of ${keyWords(keyText)} in the ${clef} clef, in ${INV_WORD[inv]} (${bassWord} as the lowest note), using exactly ${voices} notes${voices === 4 ? ", one of them doubled" : ""}.${q === "diminished" ? " In a minor key this triad is diminished." : ""} Any spacing is correct.`,
+      `Write chord ${roman}${inv} of ${keyWords(keyText)} in the ${clef} clef, in ${INV_WORD[inv]} (${bassWord} of the chord is the lowest note), using exactly ${voices} notes${voices === 4 ? " (one note of the chord is written twice)" : ""}.${q === "diminished" ? " In a minor key this triad is diminished." : ""} Any spacing is correct.`,
+    ),
     answer: { kind: "chord", task: "build", key: keyText, target: { roman: roman as "I", inversion: inv }, acceptedVoicings: [sorted.map(F)], voices },
     hints: [`Chord ${roman} is built on degree ${romanDegree(roman)}. Write its three notes, but put ${bassWord} lowest.`],
   };
@@ -169,7 +172,10 @@ export const inversionFacts5: Gen = (c): any => {
   if (mode === "figures") {
     const ids: Array<[string, string]> = [["5/3", "5/3 (five-three)"], ["6/3", "6/3 (six-three)"], ["6/4", "6/4 (six-four)"], ["6/5", "6/5 (six-five)"]];
     return {
-      prompt: `Chord ${roman} in ${INV_WORD[inv]} can also be shown with figures instead of a letter. Which figures show ${INV_WORD[inv]}?`,
+      ...reworded(
+        `Which figures, used instead of a letter, show chord ${roman} in ${INV_WORD[inv]}?`,
+        `Chord ${roman} in ${INV_WORD[inv]} can also be shown with figures instead of a letter. Which figures show ${INV_WORD[inv]}?`,
+      ),
       answer: choiceAnswer(shuffled(c, ids), INV_FIG[inv], Object.fromEntries(ids.filter(([id]) => id !== INV_FIG[inv]).map(([id]) => [id, ["inversion-misread", id === "5/3" ? "5/3 stands for root position: a 5th and a 3rd above the bass." : id === "6/5" ? "6/5 is not a triad position: it belongs to chords of four notes." : `The figures give the intervals above the bass: ${INV_FIG[inv].replace("/", " and ")} for ${INV_WORD[inv]}.`]]))),
       hints: ["The figures name the intervals above the lowest note: root position 5/3, first inversion 6/3, second inversion 6/4."],
     };
@@ -451,7 +457,10 @@ export const cadenceChords5: Gen = (c): any => {
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   const typeWord = type === "imperfect" ? "an imperfect" : `a ${type}`;
   return {
-    prompt: `The melody notes marked A and B come at a cadence point in ${keyWords(keyText)}. Choose a chord for each (I, ii, IV or V) so that A and B make ${typeWord} cadence. Each chord must contain its melody note; any pair that works is correct.`,
+    ...reworded(
+      `In ${keyWords(keyText)}, choose a chord (I, ii, IV or V) for each of the melody notes A and B so that they make ${typeWord} cadence. Each chord must contain its melody note; any pair that works is correct.`,
+      `The melody notes marked A and B come at a cadence point in ${keyWords(keyText)}. Choose a chord for each (I, ii, IV or V) so that A and B make ${typeWord} cadence. Each chord must contain its melody note; any pair that works is correct.`,
+    ),
     music: f,
     answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(A)], accepted: okA as never }, { label: "B", melodyPitches: [F(B)], accepted: okB as never }], cadences: [{ labels: ["A", "B"], acceptedTypes: [type] }] },
     hints: ["List the chords that contain each melody note, then pick a pair that makes the cadence: V–I perfect, IV–I plagal, ending on V imperfect."],
@@ -483,7 +492,10 @@ export const chordChoice5: Gen = (c): any => {
   const typeWord = type === "imperfect" ? "an imperfect" : `a ${type}`;
   const f = frag("treble", [{ events: [note(A, "minim", { label: "A" }), note(B, "minim", { label: "B" })], barline: "final" }], "A two-note melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
-    prompt: `The melody notes marked A and B come at a cadence point in ${keyWords(keyText)}. Which pair of chords, with each chord containing its melody note, makes ${typeWord} cadence?`,
+    ...reworded(
+      `In ${keyWords(keyText)}, which pair of chords makes ${typeWord} cadence at the melody notes A and B? Each chord must contain its melody note.`,
+      `The melody notes marked A and B come at a cadence point in ${keyWords(keyText)}. Which pair of chords, with each chord containing its melody note, makes ${typeWord} cadence?`,
+    ),
     music: f,
     answer: choiceAnswer(shuffled(c, [right, ...picks].map((p) => [lab(p), lab(p)] as [string, string])), lab(right), Object.fromEntries(picks.map((p) => [lab(p), [music.triadContains(key, p[0], A) && music.triadContains(key, p[1], B) ? "cadence-misnamed" : "chord-lacks-melody-note", music.triadContains(key, p[0], A) && music.triadContains(key, p[1], B) ? `${lab(p)} contains both melody notes but makes ${classifyCadence(p[0], p[1]) ? `a ${classifyCadence(p[0], p[1])} cadence` : "no cadence"}, not ${typeWord} one.` : `Chord ${music.triadContains(key, p[0], A) ? p[1] : p[0]} does not contain its melody note (${music.triadContains(key, p[0], A) ? nameOfPc(B) : nameOfPc(A)}).`]]))),
     hints: ["Check each chord contains its melody note, then check the pair makes the cadence named."],
@@ -540,7 +552,10 @@ export const approachChord5: Gen = (c): any => {
   // 3 lead-in crotchets + A (crotchet) = bar 1; B and C (minims) = bar 2
   const f = frag("treble", [{ events: events.slice(0, 4) }, { events: events.slice(4), barline: "final" }], "A melody.", { key: keyText, showKeySignature: true, timeSignature: "4/4" });
   return {
-    prompt: `In ${keyWords(keyText)}, B and C make ${type === "imperfect" ? "an" : "a"} ${type} cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)`,
+    ...reworded(
+      `In ${keyWords(keyText)}, B and C make ${type === "imperfect" ? "an" : "a"} ${type} cadence, and A is the approach chord before it. Choose a chord (I, ii, IV or V) for each of A, B and C that contains its melody note; at A, any chord that fits is correct.`,
+      `In ${keyWords(keyText)}, B and C make ${type === "imperfect" ? "an" : "a"} ${type} cadence. The chord at A comes BEFORE the cadence chords: it is an approach chord. Choose a chord for each of A, B and C (I, ii, IV or V), each containing its melody note, so that B and C make the cadence. (The approach chord may be any of I, ii, IV or V that fits the melody note.)`,
+    ),
     music: f,
     answer: { kind: "chord-progression", key: keyText, points: [{ label: "A", melodyPitches: [F(pts[0]!)], accepted: okA as never }, { label: "B", melodyPitches: [F(pts[1]!)], accepted: okB as never }, { label: "C", melodyPitches: [F(pts[2]!)], accepted: okC as never }], cadences: [{ labels: ["B", "C"], acceptedTypes: [type] }] },
     hints: ["First choose the cadence chords for B and C. Then pick a chord for A that contains its melody note and is different from the chord at B: a cadence needs two different chords."],

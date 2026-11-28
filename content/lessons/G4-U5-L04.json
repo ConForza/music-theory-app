@@ -188,7 +188,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "In the middle of a piece for piano, a bar is marked “sotto voce”. What should the player do?",
+      "prompt": "Halfway through a piano piece, a bar is marked “sotto voce”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -239,7 +239,8 @@
           "wrong-category": "Check which group each belongs to."
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
+      },
+      "legacyPrompt": "In the middle of a piece for piano, a bar is marked “sotto voce”. What should the player do?"
     },
     {
       "id": "i.g4-u5-l04.guided-3",
@@ -367,7 +368,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "In the middle of a piece for piano, a bar is marked “sopra”. What should the player do?",
+      "prompt": "Halfway through a piano piece, a bar is marked “sopra”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -418,7 +419,8 @@
           "wrong-category": "Check which group each belongs to."
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
+      },
+      "legacyPrompt": "In the middle of a piece for piano, a bar is marked “sopra”. What should the player do?"
     },
     {
       "id": "i.g4-u5-l04.ind-3",
@@ -485,7 +487,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Your teacher asks you to play a new piece. The first line of music is marked “facile”. What should the player do?",
+      "prompt": "The first line of a new piece is marked “facile”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -536,7 +538,8 @@
           "wrong-category": "Check which group each belongs to."
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
+      },
+      "legacyPrompt": "Your teacher asks you to play a new piece. The first line of music is marked “facile”. What should the player do?"
     },
     {
       "id": "i.g4-u5-l04.ind-5",
@@ -603,7 +606,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Your teacher asks you to play a new piece. The first line of music is marked “appassionato”. What should the player do?",
+      "prompt": "The first line of a new piece is marked “appassionato”. What should the player do?",
       "answer": {
         "kind": "choice",
         "options": [
@@ -654,7 +657,8 @@
           "wrong-category": "Check which group each belongs to."
         },
         "fallback": "Not quite. Read the explanation, then try a similar question."
-      }
+      },
+      "legacyPrompt": "Your teacher asks you to play a new piece. The first line of music is marked “appassionato”. What should the player do?"
     }
   ],
   "recap": [

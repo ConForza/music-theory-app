@@ -9,7 +9,7 @@
  * clefs are "normally used" clefs, as the book words them; transposing instruments are Grade 5 and are never asked.
  */
 import { music, type Measure, type NotationEvent } from "@mtp/curriculum";
-import { fits, frag, maxLedger, nameOf, note, pretty, type Gen } from "./families.ts";
+import { fits, frag, maxLedger, nameOf, note, pretty, reworded, type Gen } from "./families.ts";
 import type { Diagnoses } from "./grade1.ts";
 import { ORD, cap, diag, optsOf, posText } from "./grade2.ts";
 
@@ -304,22 +304,23 @@ export const terms4: Gen = (c): any => {
 };
 
 /** t.g4.term-use: the direction is met in a score and the learner says what it asks of the player. The situation never states the meaning
- *  (that would give the answer away); the terms that share a meaning are never both options. */
-const WHERE = [
-  "You are playing a violin part and, at the start of the first phrase, the composer has written",
-  "In the middle of a piece for piano, a bar is marked",
-  "At the end of a song you are accompanying you see",
-  "A conductor points to a passage in your part, which carries the direction",
-  "Your teacher asks you to play a new piece. The first line of music is marked",
-  "The score for this passage says",
+ *  (that would give the answer away); the terms that share a meaning are never both options. Each situation is [as read today, as first
+ *  published]: the first wordings mixed "you" with "the player" and padded the question, and question identity still reads them. */
+const WHERE: Array<[string, string]> = [
+  ["A violin part begins with the direction", "You are playing a violin part and, at the start of the first phrase, the composer has written"],
+  ["Halfway through a piano piece, a bar is marked", "In the middle of a piece for piano, a bar is marked"],
+  ["Near the end of a song, the piano accompaniment is marked", "At the end of a song you are accompanying you see"],
+  ["A passage in an orchestral part is marked", "A conductor points to a passage in your part, which carries the direction"],
+  ["The first line of a new piece is marked", "Your teacher asks you to play a new piece. The first line of music is marked"],
+  ["The score for this passage says", "The score for this passage says"],
 ];
 export const termUse4: Gen = (c): any => {
   const target = c.rng.pick(T);
   const picks = termOptions(c, target);
   if (picks.length < 3) return null;
-  const where = c.rng.pick(WHERE);
+  const [where, firstWhere] = c.rng.pick(WHERE);
   return {
-    prompt: `${where} “${target.term}”. What should the player do?`,
+    ...reworded(`${where} “${target.term}”. What should the player do?`, `${firstWhere} “${target.term}”. What should the player do?`),
     answer: { kind: "choice", options: c.rng.shuffle([target, ...picks].map((t) => ({ id: t.id, label: cap(t.meaning) }))), correctOptionIds: [target.id], diagnoses: Object.fromEntries(picks.map((t) => [t.id, diag(t.category === target.category ? "confused-similar-term" : "wrong-category", `${cap(t.meaning)} is what “${t.term}” asks. Check the word again.`)])) as Diagnoses },
     hints: [`“${target.term}” is an Italian direction of the kind: ${target.category.replace(/-/g, " ")}.`],
   };

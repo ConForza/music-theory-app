@@ -116,7 +116,7 @@
           }
         ],
         "textAlternative": "A bar of 5/4: a quintuplet of five semiquavers, then four crotchets.",
-        "questionAlternative": "Bar 1: a group of 5 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet, crotchet, crotchet, crotchet.",
+        "questionAlternative": "Bar 1: a quintuplet of five beamed semiquavers followed by four crotchets.",
         "timeSignature": "5/4"
       },
       "caption": "Five semiquavers take the time of one crotchet, so the bar still adds up to five crotchets."
@@ -253,7 +253,7 @@
         }
       ],
       "textAlternative": "A bar of 5/4: a nonuplet of nine demisemiquavers, then two minims.",
-      "questionAlternative": "Bar 1: a group of 9 of demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, minim, minim.",
+      "questionAlternative": "Bar 1: a nonuplet of nine beamed demisemiquavers followed by two minims.",
       "timeSignature": "5/4"
     },
     "steps": [
@@ -425,7 +425,7 @@
           }
         ],
         "textAlternative": "Bar 1: dotted minim, a group of 6 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
-        "questionAlternative": "Bar 1: dotted minim, a group of 6 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
+        "questionAlternative": "Bar 1: a dotted minim, a sextuplet of six beamed semiquavers and a crotchet.",
         "timeSignature": "5/4"
       },
       "answer": {
@@ -631,7 +631,7 @@
           }
         ],
         "textAlternative": "Bar 1: quaver, crotchet, a group of 5 of demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, quaver.",
-        "questionAlternative": "Bar 1: quaver, crotchet, a group of 5 of demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, demisemiquaver, quaver.",
+        "questionAlternative": "Bar 1: a quaver, a crotchet, a quintuplet of five beamed demisemiquavers and a quaver.",
         "timeSignature": "5/8"
       },
       "answer": {
@@ -693,7 +693,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Finish this bar of 5/4, which already begins with a dotted minim, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group.",
+      "prompt": "Complete this 5/4 bar with a nonuplet: 9 equal semiquavers, beamed together and played in the time of one minim. Mark the group with the nonuplet sign.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -829,7 +829,8 @@
           "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
         },
         "fallback": "Not quite. Ask: how many notes, in the time of how many?"
-      }
+      },
+      "legacyPrompt": "Finish this bar of 5/4, which already begins with a dotted minim, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group."
     },
     {
       "id": "i.g5-u1-l03.ind-3",
@@ -979,7 +980,7 @@
           }
         ],
         "textAlternative": "Bar 1: dotted minim, a group of 5 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
-        "questionAlternative": "Bar 1: dotted minim, a group of 5 of semiquaver, semiquaver, semiquaver, semiquaver, semiquaver, crotchet.",
+        "questionAlternative": "Bar 1: a dotted minim, a quintuplet of five beamed semiquavers and a crotchet.",
         "timeSignature": "5/4"
       },
       "answer": {
@@ -1041,7 +1042,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Finish this bar of 5/4, which already begins with a minim, then a crotchet, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group.",
+      "prompt": "Complete this 5/4 bar with a nonuplet: 9 equal semiquavers, beamed together and played in the time of one minim. Mark the group with the nonuplet sign.",
       "answer": {
         "kind": "rhythm",
         "task": "complete-bar",
@@ -1193,7 +1194,8 @@
           "tuplet-ignored": "A tuplet group is squeezed into the time of fewer notes: work out how long the whole group lasts."
         },
         "fallback": "Not quite. Ask: how many notes, in the time of how many?"
-      }
+      },
+      "legacyPrompt": "Finish this bar of 5/4, which already begins with a minim, then a crotchet, with a nonuplet: 9 equal semiquavers, beamed together, played in the time of one minim. Choose the nonuplet sign for the group."
     },
     {
       "id": "i.g5-u1-l03.ind-6",

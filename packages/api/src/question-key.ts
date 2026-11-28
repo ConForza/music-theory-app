@@ -5,6 +5,12 @@ import type { ExerciseItem } from "@mtp/curriculum";
 import { music } from "@mtp/curriculum";
 
 /**
+ * The wording identity reads: a reworded question keeps the prompt it was first published with (`legacyPrompt`), so a wording edit never
+ * turns a question the learner has met into a "new" one, and never moves it into or out of a concept's review boundary.
+ */
+export const identityPrompt = (item: Pick<ExerciseItem, "prompt" | "legacyPrompt">): string => item.legacyPrompt ?? item.prompt;
+
+/**
  * A stable identity for *what is being asked*, independent of seed, session and item id. Two generated questions with
  * different seeds that show the same music and expect the same answer share a key, so they cannot both be "fresh
  * first-ever" evidence. Ids and seeds are stripped; everything the learner sees or must answer is kept.
@@ -20,6 +26,7 @@ const strip = (v: unknown, alt = false): unknown =>
                 k !== "id" &&
                 k !== "seed" &&
                 k !== "diagnoses" &&
+                k !== "legacyPrompt" &&
                 k !== "questionAlternative" &&
                 !(alt && k === "textAlternative"),
             )
@@ -178,7 +185,7 @@ export function questionKey(item: ExerciseItem): string {
     strip(
       {
         t: item.templateId,
-        p: item.prompt,
+        p: identityPrompt(item),
         m: item.music ?? null,
         s: item.score ?? null,
         a: answer,
@@ -212,7 +219,7 @@ export function visibleKey(item: ExerciseItem): string {
     strip(
       {
         t: item.templateId,
-        p: item.prompt,
+        p: identityPrompt(item),
         m: item.music ?? null,
         s: item.score ?? null,
         a: answer,
@@ -351,7 +358,7 @@ function keyOf(item: ExerciseItem): string | undefined {
     /^[A-G][b#]? (major|minor)$/.test(right)
   )
     return right;
-  const text = item.prompt.replace(/♯/g, "#").replace(/♭/g, "b");
+  const text = identityPrompt(item).replace(/♯/g, "#").replace(/♭/g, "b");
   const harmonic = /\b([A-G][b#]?) (?:harmonic|melodic) minor\b/.exec(text);
   if (harmonic) return `${harmonic[1]} minor`;
   const m = /\b([A-G][b#]?) (major|minor)\b/.exec(text);
@@ -374,19 +381,19 @@ function timeSignaturesOf(item: ExerciseItem): string[] {
   if (accepted.length) return accepted;
   if (a.correctOptionIds?.[0] && TS.test(a.correctOptionIds[0]))
     return [a.correctOptionIds[0]];
-  const m = /\b(\d{1,2}\/\d{1,2})\b/.exec(item.prompt)?.[1];
+  const m = /\b(\d{1,2}\/\d{1,2})\b/.exec(identityPrompt(item))?.[1];
   return m ? [m] : [];
 }
 
 /** True when the question satisfies every part of the constraint (pitch fields need written pitches to judge). */
 export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
-  if (c.promptMentions?.some((w) => item.prompt.includes(w))) return true;
+  if (c.promptMentions?.some((w) => identityPrompt(item).includes(w))) return true;
   if (
     c.promptIncludes &&
-    !c.promptIncludes.some((w) => item.prompt.includes(w))
+    !c.promptIncludes.some((w) => identityPrompt(item).includes(w))
   )
     return false;
-  if (c.promptExcludes?.some((w) => item.prompt.includes(w))) return false;
+  if (c.promptExcludes?.some((w) => identityPrompt(item).includes(w))) return false;
   if (c.timeSignatures) {
     if (!timeSignaturesOf(item).some((t) => c.timeSignatures!.includes(t)))
       return false;
@@ -451,7 +458,7 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
       .correctOptionIds?.[0];
     if (right) found.push(right);
     // no chord named in the answer (for example "which notes make chord IV?"): the chord the prompt names
-    if (!found.some((r) => /^[IV]+$/.test(r))) for (const m of item.prompt.matchAll(/\bchord (VII|VI|IV|V|III|II|I|ii)\b/g)) found.push(m[1]!);
+    if (!found.some((r) => /^[IV]+$/.test(r))) for (const m of identityPrompt(item).matchAll(/\bchord (VII|VI|IV|V|III|II|I|ii)\b/g)) found.push(m[1]!);
     if (!found.some((r) => c.romans!.includes(r))) return false;
   }
   if (c.clefs) {
@@ -468,14 +475,14 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
       const other = a.upper ?? a.acceptedPitches?.[0];
       if (!a.lower || !other) return false;
       if (!music.isChromaticPairOfPitches(music.parsePitch(a.lower), music.parsePitch(other))) return false;
-    } else if (!/semitone|same sound/i.test(item.prompt)) return false;
+    } else if (!/semitone|same sound/i.test(identityPrompt(item))) return false;
   }
   if (c.compoundInterval) {
     const a = item.answer as { kind?: string; acceptedIntervals?: string[]; target?: string };
     if (a.kind === "interval") {
       const codes = [...(a.acceptedIntervals ?? []), ...(a.target ? [a.target] : [])];
       if (!codes.some((x) => x.startsWith("c") || Number(x.replace(/\D/g, "")) > 8)) return false;
-    } else if (!/compound|octave and|12th|10th|11th|13th|14th|15th/i.test(item.prompt)) return false;
+    } else if (!/compound|octave and|12th|10th|11th|13th|14th|15th/i.test(identityPrompt(item))) return false;
   }
   if (c.inversions) {
     const found: string[] = [];
@@ -491,7 +498,7 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
     walk(item.answer);
     if (found.length) {
       if (!found.some((x) => c.inversions!.includes(x))) return false;
-    } else if (!/inversion|6\/3|6\/4|lowest note|bass/i.test(item.prompt)) return false;
+    } else if (!/inversion|6\/3|6\/4|lowest note|bass/i.test(identityPrompt(item))) return false;
   }
   if (c.nonEmptySignature) {
     const a = item.answer as { kind?: string; accidentals?: unknown[] };
@@ -520,7 +527,7 @@ export function satisfies(item: ExerciseItem, c: ReviewConstraint): boolean {
     const answered: string[] = [];
     collectPitches(item.answer, answered);
     const answeredDouble = answered.some((x) => /^[A-G](bb|x)/.test(x));
-    const bare = !item.music && /double|𝄪|𝄫/i.test(item.prompt);
+    const bare = !item.music && /double|𝄪|𝄫/i.test(identityPrompt(item));
     if (!printed && !answeredDouble && !bare) return false;
   }
   if (c.termIds) {

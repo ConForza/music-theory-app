@@ -18,6 +18,8 @@ export interface GenCtx {
 }
 export interface Draft {
   prompt: string;
+  /** The earlier wording of a reworded prompt: question identity hashes it in place of `prompt` (see ExerciseItem.legacyPrompt). */
+  legacyPrompt?: string;
   music?: NotationFragment;
   score?: NotationScore;
   answer: AnswerSpec;
@@ -27,6 +29,11 @@ export interface Draft {
   correct?: string;
 }
 export type Gen = (ctx: GenCtx) => Draft | null;
+/**
+ * A prompt whose wording was edited after it was published (the question-wording audit): the learner reads `prompt`, while question identity
+ * keeps reading the first wording, so stored mastery and exposure history still match the same question.
+ */
+export const reworded = (prompt: string, legacyPrompt: string): Pick<Draft, "prompt" | "legacyPrompt"> => ({ prompt, legacyPrompt });
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -81,31 +88,19 @@ export function frag(clef: Clef, measures: Measure[], text: string, extra: Parti
 
 export const valueWord = (e: NotationEvent): string => {
   if (e.kind === "tuplet") return `a ${e.actual === 3 ? "triplet" : e.actual === 2 ? "duplet" : `group of ${e.actual}`} of ${e.events.map(valueWord).join(", ")}`;
-  const v = `${"dotted ".repeat(e.duration.dots ?? 0)}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`;
+  const v = `${e.duration.dots === 2 ? "double-dotted " : e.duration.dots ? "dotted " : ""}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`;
   return `${v}${e.kind !== "rest" && e.tieToNext ? " tied to" : ""}`;
 };
+/**
+ * The stored description of a rhythm line. Its wording is part of the identity of the Brief 04 questions (question-key.ts), so it stays
+ * as it was; what a learner hears in a question is `describeRhythmWithBeams` (the fragment's `questionAlternative`).
+ */
 export const describeRhythm = (ms: Measure[]) => ms.map((m, i) => `Bar ${i + 1}: ${(m.events ?? []).map(valueWord).join(", ")}.`).join(" ");
-/** For questions: notes joined by a beam are described as one "beamed together" group, so the printed grouping is not lost to a screen reader. */
-export const describeRhythmWithBeams = (ms: Measure[]) =>
-  ms
-    .map((m, i) => {
-      const parts: string[] = [];
-      let group: string[] | null = null;
-      for (const e of m.events ?? []) {
-        const beam = (e as { beam?: string }).beam;
-        if (beam === "begin") group = [valueWord(e)];
-        else if (group && (beam === "continue" || beam === "end")) {
-          group.push(valueWord(e));
-          if (beam === "end") {
-            parts.push(`${group.length} beamed together (${group.join(", ")})`);
-            group = null;
-          }
-        } else parts.push(valueWord(e));
-      }
-      if (group) parts.push(`${group.length} beamed together (${group.join(", ")})`);
-      return `Bar ${i + 1}: ${parts.join(", ")}.`;
-    })
-    .join(" ");
+/**
+ * For questions: the rhythm in natural words ("four quavers beamed together followed by a minim"), with notes joined by a beam named as one
+ * group so the printed grouping is not lost to a screen reader (music.rhythmInWords).
+ */
+export const describeRhythmWithBeams = (ms: Measure[]) => music.barsInWords(ms.map((m) => m.events ?? []), { beams: true });
 
 // Beat fillers: a list of value sequences that fill one beat of the given length (all within scope).
 function beatFills(beat: music.Fraction, sc: MusicScope, compound: boolean): NotationEvent[][] {
@@ -198,7 +193,10 @@ const noteWrite: Gen = (c) => {
   if (!valid.length) return null;
   answer.accepted = valid.map(F);
   return {
-    prompt: `Write ${nameOf({ step, alter })} in the ${clef} clef. ${max ? `You may use up to ${max} ledger line${max > 1 ? "s" : ""}.` : "Keep it on the stave (no ledger lines)."} Any ${nameOf({ step, alter })} that fits is correct.`,
+    ...reworded(
+      `Write ${nameOf({ step, alter })} in the ${clef} clef, ${max ? `using up to ${max} ledger line${max > 1 ? "s" : ""}` : "on the stave (no ledger lines)"}. Any octave that fits is correct.`,
+      `Write ${nameOf({ step, alter })} in the ${clef} clef. ${max ? `You may use up to ${max} ledger line${max > 1 ? "s" : ""}.` : "Keep it on the stave (no ledger lines)."} Any ${nameOf({ step, alter })} that fits is correct.`,
+    ),
     answer,
     hints: [`In the ${clef} clef the bottom line is ${FC(naturalAt(clef, 0))}. Count up one letter for each line and space until you reach ${step}.`],
   };
@@ -233,7 +231,7 @@ const keyboard: Gen = (c) => {
   if (!black) {
     const step = c.rng.pick(music.STEPS);
     const ref = `${step}4`;
-    return { prompt: `Find ${step} on the keyboard. Any ${step} is correct.`, answer: { kind: "pitch", reference: ref, relation: "same", accepted: [ref], octaveSensitive: false, spellingSensitive: true }, hints: [`Look for the groups of two and three black keys. ${step === "C" ? "C is just to the left of a group of two black keys." : step === "F" ? "F is just to the left of a group of three black keys." : "Find C (left of the two black keys) and count up the white keys."}`] };
+    return { ...reworded(`Find ${step} on the keyboard. Any octave is correct.`, `Find ${step} on the keyboard. Any ${step} is correct.`), answer: { kind: "pitch", reference: ref, relation: "same", accepted: [ref], octaveSensitive: false, spellingSensitive: true }, hints: [`Look for the groups of two and three black keys. ${step === "C" ? "C is just to the left of a group of two black keys." : step === "F" ? "F is just to the left of a group of three black keys." : "Find C (left of the two black keys) and count up the white keys."}`] };
   }
   const pair = c.rng.pick(BLACK);
   const which = c.rng.int(0, 1);
@@ -364,7 +362,10 @@ const scaleBuild: Gen = (c) => {
     if (!fits(clef, notes, max)) continue;
     const scaleName = form === "major" ? `scale of ${keyName(keyText)}` : `${nameOf(key.tonic)} ${form} minor scale`;
     return {
-      prompt: `Write the ${scaleName}, ${direction.replace("-", " then ")}, in the ${clef} clef. Use accidentals instead of a key signature. The first note is written for you.`,
+      ...reworded(
+        `Write the ${scaleName}, ${direction.replace("-", " then ")}, in the ${clef} clef, using accidentals instead of a key signature.`,
+        `Write the ${scaleName}, ${direction.replace("-", " then ")}, in the ${clef} clef. Use accidentals instead of a key signature. The first note is written for you.`,
+      ),
       answer: { kind: "pitch-sequence", clef, key: keyText, accepted: [notes.map(F)], derivation: { rule: "scale", key: keyText, form, direction, start: F(start) } },
       hints: [form === "major" ? "Major pattern: tone, tone, semitone, tone, tone, tone, semitone." : form === "harmonic" ? "Harmonic minor: the key-signature notes with the 7th raised a semitone, going up and coming down." : "Melodic minor raises the 6th and 7th going up, and lowers them again coming down."],
     };
@@ -479,7 +480,11 @@ const interval: Gen = (c) => {
     if (build) {
       const target = withQuality ? ivCode : String(number);
       return {
-        prompt: withQuality ? `Write a note above ${nameOf(lower)} to make a ${QUAL_WORD[iv.quality]} ${ORD(number)}.` : `Write a note above ${nameOf(lower)} to make a ${ORD(number)} in ${keyName(keyText)}.`,
+        // "an octave", never "a octave"
+        ...reworded(
+          withQuality ? `Write a note above ${nameOf(lower)} to make ${music.withArticle(`${QUAL_WORD[iv.quality]} ${ORD(number)}`)}.` : `Write a note above ${nameOf(lower)} to make ${music.withArticle(ORD(number))} in ${keyName(keyText)}.`,
+          withQuality ? `Write a note above ${nameOf(lower)} to make a ${QUAL_WORD[iv.quality]} ${ORD(number)}.` : `Write a note above ${nameOf(lower)} to make a ${ORD(number)} in ${keyName(keyText)}.`,
+        ),
         music: frag(clef, [{ events: [note(lower)] }], `A semibreve ${nameOf(lower)} in the ${clef} clef.`),
         answer: { kind: "interval", task: "build", key: keyText, lower: F(lower), target, direction: "up", acceptedPitches: withQuality ? [F(upper)] : uppers.map(F) },
         hints: [`Count ${number} letter names up from ${nameOf(lower)}, counting ${nameOf(lower)} as 1.`],
@@ -734,7 +739,10 @@ const barBuilder: Gen = (c) => {
     return rest as NotationEvent;
   })];
   return {
-    prompt: `Complete this bar of ${ts}. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.`,
+    ...reworded(
+      `Complete this ${ts} bar with notes or rests, keeping the beats clear.`,
+      `Complete this bar of ${ts}. Keep what is given at the start, then add notes or rests so the bar adds up exactly. Keep the beats clear.`,
+    ),
     answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given, accepted: [[{ events: full }]], acceptAnyRuleCompliant: true },
     hints: [`${ts} has ${music.describeMetre(music.metreStructure(ts))} in each bar.`],
   };

@@ -15,7 +15,7 @@
  * (the book says not every possibility can be covered by the word "doubly").
  */
 import { deriveScale, music, type AnswerSpec, type Measure } from "@mtp/curriculum";
-import { frag, type Gen } from "./families.ts";
+import { frag, reworded, type Gen } from "./families.ts";
 import { KEYS_G5, NEW_KEYS, F, P, WORDS, an, cap, choiceAnswer, clefsIn, family5, fitsIn, keyWords, keysIn, melodyIn5, withChromaticNote, nameOfPc, note, pretty, shuffled, type Clef, type Ctx, type Ev, type Pitch } from "./grade5-lib.ts";
 
 const { parseKey, formatKey, transpose, parseInterval, intervalBetween, staffPosition, naturalAt, describeInterval } = music;
@@ -96,9 +96,12 @@ export const tenorFacts: Gen = (c): any => {
     const inst = alto ? "viola" : c.rng.pick(["cello", "bassoon", "tenor trombone"]);
     const opts: Array<[string, string]> = [["alto", "the alto clef"], ["tenor", "the tenor clef"]];
     return {
-      prompt: `A part for the ${inst} is written in a C clef. Which one is more likely for the ${inst} (the tenor clef is used for its higher notes)?`,
+      ...reworded(
+        `Which C clef is normally used for the ${inst}?`,
+        `A part for the ${inst} is written in a C clef. Which one is more likely for the ${inst} (the tenor clef is used for its higher notes)?`,
+      ),
       answer: choiceAnswer(opts, alto ? "alto" : "tenor", { [alto ? "tenor" : "alto"]: ["clef-confusion", alto ? "The viola's own clef is the alto clef." : `The ${inst} reads the tenor clef for its higher notes; the alto clef belongs to the viola.`] }),
-      hints: ["The viola is the alto-clef instrument. The cello, bassoon and tenor trombone use the tenor clef."],
+      hints: ["The viola reads the alto clef (and the treble clef for its highest notes). The cello, bassoon and tenor trombone read the bass clef and use the tenor clef for their higher notes."],
     };
   }
   const orders: Array<[string, string]> = [["tatb", "treble, alto, tenor, bass"], ["tbta", "treble, tenor, alto, bass"], ["btat", "bass, tenor, alto, treble"], ["atbt", "alto, treble, tenor, bass"]];
@@ -428,9 +431,12 @@ export const intervalFacts5: Gen = (c): any => {
   const alts = [...new Set(["d", "m", "M", "P", "A"].map((q) => `${q}${iv2.number}`).filter((x) => { try { parseInterval(x); return x !== code2; } catch { return false; } }))].slice(0, 3);
   const movedName = pretty(F(moved).replace(/\d$/, ""));
   return {
-    prompt: `${lowName} up to ${upName} is ${an(qualWord(code))}. The upper note is now ${dir > 0 ? "raised" : "lowered"} by a semitone, to ${movedName}. What is the interval now? Chromatic semitone: the letter name stays the same, so the number does not change.`,
+    ...reworded(
+      `${lowName} up to ${upName} is ${an(qualWord(code))}. The upper note is now ${dir > 0 ? "raised" : "lowered"} by a semitone, to ${movedName}. What is the interval now?`,
+      `${lowName} up to ${upName} is ${an(qualWord(code))}. The upper note is now ${dir > 0 ? "raised" : "lowered"} by a semitone, to ${movedName}. What is the interval now? Chromatic semitone: the letter name stays the same, so the number does not change.`,
+    ),
     answer: choiceAnswer(shuffled(c, [code2, ...alts].map((x) => [x, qualWord(x)] as [string, string])), code2, Object.fromEntries(alts.map((x) => [x, [x[0] === (dir > 0 ? "d" : "A") ? "augmented-diminished-swap" : "quality-from-wrong-key", `The number stays ${iv2.number}. Raising the upper note makes the interval larger and lowering it makes it smaller: move one step along diminished – minor – major – augmented (perfect intervals sit between diminished and augmented).`]]))),
-    hints: ["Larger by a semitone: minor to major, major or perfect to augmented. Smaller: major to minor, minor or perfect to diminished."],
+    hints: ["A chromatic semitone keeps the letter name, so the number of the interval does not change; only its quality does.", "Larger by a semitone: minor to major, major or perfect to augmented. Smaller: major to minor, minor or perfect to diminished."],
   };
 };
 
@@ -591,9 +597,14 @@ export const instrumentTranspose5: Gen = (c): any => {
   const ivCode = `${iv.quality}${iv.number}`;
   const f = melodyFrag("treble", mel, keyText, {}, { tempoText: c.rng.pick(["Andante", "Moderato", "Allegretto"]) });
   return {
-    prompt: toWritten
-      ? `This melody is at concert pitch (the pitch that sounds). Write it as the part for a ${label}, which sounds a ${ivText(inst)} lower than written: transpose it up a ${ivText(inst)}, and give it its new key signature.`
-      : `This melody is the written part for a ${label}, which sounds a ${ivText(inst)} lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a ${ivText(inst)}, and give it its new key signature.`,
+    ...reworded(
+      toWritten
+        ? `This melody is at concert pitch. Transpose it up a ${ivText(inst)} to give the part for ${an(label)}, with the new key signature.`
+        : `This is the written part for ${an(label)}. Transpose it down a ${ivText(inst)} to concert pitch, with the new key signature.`,
+      toWritten
+        ? `This melody is at concert pitch (the pitch that sounds). Write it as the part for a ${label}, which sounds a ${ivText(inst)} lower than written: transpose it up a ${ivText(inst)}, and give it its new key signature.`
+        : `This melody is the written part for a ${label}, which sounds a ${ivText(inst)} lower than written. Write it at concert pitch (the pitch that sounds): transpose it down a ${ivText(inst)}, and give it its new key signature.`,
+    ),
     music: f,
     answer: { kind: "pitch-sequence", clef: "treble", key: newText, accepted: [out.map(F)], derivation: { rule: "transpose", interval: ivCode, direction: dir, sourceKey: keyText } },
     hints: [`First find the new key: ${keyWords(keyText)} ${dir} a ${ivText(inst)} is ${keyWords(newText)}. Then move every note by the same interval. A note that is not in the key moves to the note that is the same interval from the new key's tonic.`],

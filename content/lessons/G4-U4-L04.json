@@ -169,7 +169,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This chord is made from the notes of one triad in B♭ minor. Answer both questions: is it in root position, and which note is its root?",
+      "prompt": "This chord is made from the notes of one triad in B♭ minor.",
       "score": {
         "staves": [
           {
@@ -317,7 +317,8 @@
           "root-confused-with-bass": "The root is the bottom of the stack of thirds."
         },
         "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
-      }
+      },
+      "legacyPrompt": "This chord is made from the notes of one triad in B♭ minor. Answer both questions: is it in root position, and which note is its root?"
     },
     {
       "id": "i.g4-u4-l04.guided-2",
@@ -627,7 +628,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This chord is made from the notes of one triad in D♭ major. Answer both questions: is it in root position, and which note is its root?",
+      "prompt": "This chord is made from the notes of one triad in D♭ major.",
       "score": {
         "staves": [
           {
@@ -778,7 +779,8 @@
           "root-confused-with-bass": "The root is the bottom of the stack of thirds."
         },
         "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
-      }
+      },
+      "legacyPrompt": "This chord is made from the notes of one triad in D♭ major. Answer both questions: is it in root position, and which note is its root?"
     },
     {
       "id": "i.g4-u4-l04.ind-4",
@@ -939,7 +941,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This chord is made from the notes of one triad in F major. Answer both questions: is it in root position, and which note is its root?",
+      "prompt": "This chord is made from the notes of one triad in F major.",
       "score": {
         "staves": [
           {
@@ -1086,7 +1088,8 @@
           "root-confused-with-bass": "The root is the bottom of the stack of thirds."
         },
         "fallback": "Not quite. Find the bar the question mentions, then answer one part at a time."
-      }
+      },
+      "legacyPrompt": "This chord is made from the notes of one triad in F major. Answer both questions: is it in root position, and which note is its root?"
     }
   ],
   "recap": [

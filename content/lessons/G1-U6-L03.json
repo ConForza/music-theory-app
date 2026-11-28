@@ -393,7 +393,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Write a note above G to make a octave in G major.",
+      "prompt": "Write a note above G to make an octave in G major.",
       "music": {
         "presentation": "stave",
         "clef": "bass",
@@ -440,7 +440,8 @@
           "augmented-diminished-swap": "Is the interval a semitone bigger or smaller than the major/perfect version? Bigger means augmented; smaller means diminished (or minor)."
         },
         "fallback": "Not quite. Count the letter names first, then compare with the major scale on the lower note."
-      }
+      },
+      "legacyPrompt": "Write a note above G to make a octave in G major."
     },
     {
       "id": "i.g1-u6-l03.ind-4",

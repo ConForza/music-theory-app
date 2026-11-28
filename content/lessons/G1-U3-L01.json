@@ -331,7 +331,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "Find F on the keyboard. Any F is correct.",
+      "prompt": "Find F on the keyboard. Any octave is correct.",
       "answer": {
         "kind": "pitch",
         "reference": "F4",
@@ -354,7 +354,8 @@
           "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
         },
         "fallback": "Not quite. Find the nearest group of black keys and count from there."
-      }
+      },
+      "legacyPrompt": "Find F on the keyboard. Any F is correct."
     },
     {
       "id": "i.g1-u3-l01.guided-3",
@@ -431,7 +432,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Find D on the keyboard. Any D is correct.",
+      "prompt": "Find D on the keyboard. Any octave is correct.",
       "answer": {
         "kind": "pitch",
         "reference": "D4",
@@ -454,7 +455,8 @@
           "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
         },
         "fallback": "Not quite. Find the nearest group of black keys and count from there."
-      }
+      },
+      "legacyPrompt": "Find D on the keyboard. Any D is correct."
     },
     {
       "id": "i.g1-u3-l01.ind-2",
@@ -539,7 +541,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "Find B on the keyboard. Any B is correct.",
+      "prompt": "Find B on the keyboard. Any octave is correct.",
       "answer": {
         "kind": "pitch",
         "reference": "B4",
@@ -562,7 +564,8 @@
           "enharmonic-spelling": "That key is right, but here the note needs a different name. Think about which letter the question asks for."
         },
         "fallback": "Not quite. Find the nearest group of black keys and count from there."
-      }
+      },
+      "legacyPrompt": "Find B on the keyboard. Any B is correct."
     },
     {
       "id": "i.g1-u3-l01.ind-4",

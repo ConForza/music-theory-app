@@ -57,7 +57,7 @@
           }
         ],
         "textAlternative": "A bar of 2/4: a crotchet, then two beamed quavers.",
-        "questionAlternative": "Bar 1: crotchet, 2 beamed together (quaver, quaver).",
+        "questionAlternative": "Bar 1: a crotchet followed by two quavers beamed together.",
         "timeSignature": "2/4"
       },
       "caption": "2/4: a whole beat, then a beat divided into two halves."
@@ -102,7 +102,7 @@
           }
         ],
         "textAlternative": "A bar of 6/8: a dotted crotchet, then two beamed dotted quavers.",
-        "questionAlternative": "Bar 1: dotted crotchet, 2 beamed together (dotted quaver, dotted quaver).",
+        "questionAlternative": "Bar 1: a dotted crotchet followed by two dotted quavers beamed together.",
         "timeSignature": "6/8"
       },
       "caption": "6/8: the same shares of the beat. Every value has gained a dot."
@@ -152,7 +152,7 @@
         }
       ],
       "textAlternative": "A bar of 2/4: two beamed quavers, then a crotchet.",
-      "questionAlternative": "Bar 1: 2 beamed together (quaver, quaver), crotchet.",
+      "questionAlternative": "Bar 1: two quavers beamed together followed by a crotchet.",
       "timeSignature": "2/4"
     },
     "steps": [
@@ -173,7 +173,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "learning",
-      "prompt": "This bar is written in 9/8, where the beat is a dotted crotchet. Rewrite it in 3/4, where the beat is a crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 3/4 requires.",
+      "prompt": "Rewrite this 9/8 bar in 3/4, so that each dotted crotchet beat becomes a crotchet beat. Every note and rest keeps its share of the beat. Beam the notes as 3/4 requires.",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -236,7 +236,7 @@
           }
         ],
         "textAlternative": "Bar 1: dotted quaver, dotted semiquaver, dotted semiquaver, dotted crotchet, dotted quaver rest, dotted quaver.",
-        "questionAlternative": "Bar 1: 3 beamed together (dotted quaver, dotted semiquaver, dotted semiquaver), dotted crotchet, dotted quaver rest, dotted quaver.",
+        "questionAlternative": "Bar 1: a beamed group (a dotted quaver and two dotted semiquavers), a dotted crotchet, a dotted quaver rest and a dotted quaver.",
         "timeSignature": "9/8"
       },
       "answer": {
@@ -322,7 +322,8 @@
           "bar-underfull": "Count the beats of the new time signature."
         },
         "fallback": "Not quite. Mark where each beat starts, then regroup."
-      }
+      },
+      "legacyPrompt": "This bar is written in 9/8, where the beat is a dotted crotchet. Rewrite it in 3/4, where the beat is a crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 3/4 requires."
     }
   ],
   "independent": [
@@ -332,7 +333,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This bar is written in 12/8, where the beat is a dotted crotchet. Rewrite it in 4/4, where the beat is a crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 4/4 requires.",
+      "prompt": "Rewrite this 12/8 bar in 4/4, so that each dotted crotchet beat becomes a crotchet beat. Every note and rest keeps its share of the beat. Beam the notes as 4/4 requires.",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -422,7 +423,7 @@
           }
         ],
         "textAlternative": "Bar 1: dotted crotchet, dotted semiquaver, dotted semiquaver, dotted quaver, dotted quaver, dotted semiquaver, dotted semiquaver, dotted quaver rest, dotted quaver.",
-        "questionAlternative": "Bar 1: dotted crotchet, 3 beamed together (dotted semiquaver, dotted semiquaver, dotted quaver), 3 beamed together (dotted quaver, dotted semiquaver, dotted semiquaver), dotted quaver rest, dotted quaver.",
+        "questionAlternative": "Bar 1: a dotted crotchet, a beamed group (two dotted semiquavers and a dotted quaver), a beamed group (a dotted quaver and two dotted semiquavers), a dotted quaver rest and a dotted quaver.",
         "timeSignature": "12/8"
       },
       "answer": {
@@ -535,7 +536,8 @@
           "bar-underfull": "Count the beats of the new time signature."
         },
         "fallback": "Not quite. Mark where each beat starts, then regroup."
-      }
+      },
+      "legacyPrompt": "This bar is written in 12/8, where the beat is a dotted crotchet. Rewrite it in 4/4, where the beat is a crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 4/4 requires."
     },
     {
       "id": "i.g5-u1-e1.ind-2",
@@ -543,7 +545,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This bar is written in 4/4, where the beat is a crotchet. Rewrite it in 12/8, where the beat is a dotted crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 12/8 requires.",
+      "prompt": "Rewrite this 4/4 bar in 12/8, so that each crotchet beat becomes a dotted crotchet beat. Every note and rest keeps its share of the beat. Beam the notes as 12/8 requires.",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -587,7 +589,7 @@
           }
         ],
         "textAlternative": "Bar 1: minim, crotchet, quaver rest, quaver.",
-        "questionAlternative": "Bar 1: minim, crotchet, quaver rest, quaver.",
+        "questionAlternative": "Bar 1: a minim, a crotchet, a quaver rest and a quaver.",
         "timeSignature": "4/4"
       },
       "answer": {
@@ -654,7 +656,8 @@
           "bar-underfull": "Count the beats of the new time signature."
         },
         "fallback": "Not quite. Mark where each beat starts, then regroup."
-      }
+      },
+      "legacyPrompt": "This bar is written in 4/4, where the beat is a crotchet. Rewrite it in 12/8, where the beat is a dotted crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 12/8 requires."
     },
     {
       "id": "i.g5-u1-e1.ind-3",
@@ -662,7 +665,7 @@
       "templateVersion": 1,
       "seed": null,
       "evidence": "independent",
-      "prompt": "This bar is written in 3/4, where the beat is a crotchet. Rewrite it in 9/8, where the beat is a dotted crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 9/8 requires.",
+      "prompt": "Rewrite this 3/4 bar in 9/8, so that each crotchet beat becomes a dotted crotchet beat. Every note and rest keeps its share of the beat. Beam the notes as 9/8 requires.",
       "music": {
         "presentation": "rhythm-line",
         "clef": "treble",
@@ -706,7 +709,7 @@
           }
         ],
         "textAlternative": "Bar 1: crotchet, crotchet, quaver rest, quaver.",
-        "questionAlternative": "Bar 1: crotchet, crotchet, quaver rest, quaver.",
+        "questionAlternative": "Bar 1: two crotchets, a quaver rest and a quaver.",
         "timeSignature": "3/4"
       },
       "answer": {
@@ -773,7 +776,8 @@
           "bar-underfull": "Count the beats of the new time signature."
         },
         "fallback": "Not quite. Mark where each beat starts, then regroup."
-      }
+      },
+      "legacyPrompt": "This bar is written in 3/4, where the beat is a crotchet. Rewrite it in 9/8, where the beat is a dotted crotchet. Every note and rest keeps its share of its beat, so the music moves at the same beat speed. Beam the notes as 9/8 requires."
     }
   ],
   "recap": [

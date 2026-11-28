@@ -16,7 +16,7 @@
  * single unit (a part of a group is not asked).
  */
 import { music, type Measure } from "@mtp/curriculum";
-import { n, r, rhythmLine, type Gen } from "./families.ts";
+import { n, r, reworded, rhythmLine, type Gen } from "./families.ts";
 import { WORDS, choiceAnswer, diag, type Ctx, type Ev } from "./grade5-lib.ts";
 
 const { frac, mul, add, valueFor, parseTimeSignature } = music;
@@ -153,11 +153,13 @@ export const timeSigIrregular: Gen = (c): any => {
 };
 const measuresOf = (bars: Ev[][]): Measure[] => bars.map((events, i) => ({ events, ...(i === bars.length - 1 ? { barline: "final" as const } : {}) }));
 
-/** The events of a given start of a bar, in words ("a dotted minim, then a quaver and a quaver"). */
-function startText(evs: Ev[]): string {
-  const w = (e: Ev) => (e.kind === "tuplet" ? "a group" : `${e.kind === "rest" ? "a " : "a "}${e.duration.dots ? "dotted " : ""}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`);
+/** The wording these prompts were first published with ("a quaver, then a quaver, …"): question identity still reads it. */
+function legacyStartText(evs: Ev[]): string {
+  const w = (e: Ev) => (e.kind === "tuplet" ? "a group" : `a ${e.duration.dots ? "dotted " : ""}${e.duration.value}${e.kind === "rest" ? " rest" : ""}`);
   return evs.map(w).join(", then ");
 }
+/** What is left to write, in the bar's own unit ("Five quavers' worth remains"): in 7/8 grouped 2 + 2 + 3, five quavers are two felt groups, not five beats. */
+const leftInUnits = (ts: string, k: number) => `${music.sentenceStart(WORDS[k]!)} ${unitName(ts)}${k === 1 ? "'s" : "s'"} worth remains`;
 
 /** x/4: beam each pair of quavers that makes up one split crotchet; nothing is beamed across a group. */
 function withUnitBeams(events: Ev[]): Ev[] {
@@ -341,9 +343,14 @@ export const barComplete5: Gen = (c): any => {
   const left = P.slice(givenGroups);
   const leftUnits = left.reduce((a, b) => a + b, 0);
   return {
-    prompt: `Complete this bar of ${ts} with notes or rests so that it follows a grouping of ${P.join(" + ")}. The bar already begins with ${startText(given)}. ${leftUnits === 1 ? "One more beat is" : `${WORDS[leftUnits]?.[0]!.toUpperCase()}${WORDS[leftUnits]!.slice(1)} more beats are`} needed; no note may join two groups.`,
+    // The given notes are drawn in the answer stave and described to screen readers there, so the prompt does not list them. The beats that
+    // remain stay in the prompt: in a challenge or assessment the bar meter no longer says what is missing.
+    ...reworded(
+      `Complete this ${ts} bar using notes or rests, following a ${P.join(" + ")} grouping. ${leftInUnits(ts, leftUnits)}. Do not cross group boundaries.`,
+      `Complete this bar of ${ts} with notes or rests so that it follows a grouping of ${P.join(" + ")}. The bar already begins with ${legacyStartText(given)}. ${leftUnits === 1 ? "One more beat is" : `${WORDS[leftUnits]?.[0]!.toUpperCase()}${WORDS[leftUnits]!.slice(1)} more beats are`} needed; no note may join two groups.`,
+    ),
     answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given, accepted: [[{ events: evs, barline: "final" }]], acceptAnyRuleCompliant: true, groupPattern: P },
-    hints: [`Fill the last ${left.map((x) => String(x)).join(" + ")} beat${leftUnits === 1 ? "" : "s"} group by group; a note or rest may not cross from one group into the next.`],
+    hints: [`Fill the remaining ${left.map((x) => String(x)).join(" + ")} ${unitName(ts)}${leftUnits === 1 ? "" : "s"} group by group; a note or rest may not cross from one group into the next.`],
   };
 };
 
@@ -486,7 +493,10 @@ export const divisionWrite5: Gen = (c): any => {
   if (b.bar[b.bar.length - 1] !== b.group) return null;
   if (!b.before.length) return null;
   return {
-    prompt: `Finish this bar of ${ts}, which already begins with ${startText(b.before)}, with a ${d.word}: ${d.actual} equal ${d.value}s, beamed together, played in the time of one ${d.of}${d.of === "minim" ? "" : ""}. Choose the ${d.word} sign for the group.`,
+    ...reworded(
+      `Complete this ${ts} bar with a ${d.word}: ${d.actual} equal ${d.value}s, beamed together and played in the time of one ${d.of}. Mark the group with the ${d.word} sign.`,
+      `Finish this bar of ${ts}, which already begins with ${legacyStartText(b.before)}, with a ${d.word}: ${d.actual} equal ${d.value}s, beamed together, played in the time of one ${d.of}${d.of === "minim" ? "" : ""}. Choose the ${d.word} sign for the group.`,
+    ),
     answer: { kind: "rhythm", task: "complete-bar", timeSignature: ts, given: b.before, accepted: [[{ events: b.bar, barline: "final" }]], acceptAnyRuleCompliant: false },
     hints: [`The group of ${d.actual} ${d.value}s fills exactly the time of one ${d.of}. Add it with the tuplet button, then add the ${d.actual} notes.`],
   };
